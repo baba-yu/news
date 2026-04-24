@@ -48,4 +48,35 @@
 
 - **SGLang CVE-2026-5760**（chat_template / GGUF 経由 Jinja2 SSTI で CVSS 9.8 RCE）と **Pipecat CVE-2025-62373**（pickle deserialization で CVSS 9.8 RCE、Python 音声マルチモーダル会話エージェントフレームワーク）— ローカル AI エージェントランタイムが悪性モデル / payload で RCE される経路が 2 つ同時出現。参照: [SGLang 2026 Q2 Roadmap](https://github.com/sgl-project/sglang/issues/22949) / [vuln.today](https://vuln.today/)
 - **10 件 in-the-wild Indirect Prompt Injection** が Web コンテンツ汚染 / RAG / HTML コメント処理で新規ペイロード群、ローカル LLM が取り込むコンテキスト経由で悪性挙動を誘発。参照: [Infosecurity Magazine](https://www.infosecurity-magazine.com/news/researchers-10-wild-indirect/)
-- 重要な追加 — **Exabeam が「AI Insider 脅威」カテゴリを新設**、ChatGPT / Copilot / Gemini 横断で「AI エージェントが credentials / privilege を持つ insider として振る舞う」ことを前提に dynamic baselining で挙動検知する枠組みを本格商用化。ユーザ予測の「malware 化するローカル LLM」への市場側の対応レイヤ（Agent Behavior Analytics）が整備され始めている。参照: [SiliconANGLE - Exabeam expands ABA across ChatGPT, Copilot, Gemini](https://siliconangle.com/2026/04/01/exabeam-expands-agent-behavior-analytics-secure-ai-agents-across-chatg
+- 重要な追加 — **Exabeam が「AI Insider 脅威」カテゴリを新設**、ChatGPT / Copilot / Gemini 横断で「AI エージェントが credentials / privilege を持つ insider として振る舞う」ことを前提に dynamic baselining で挙動検知する枠組みを本格商用化。ユーザ予測の「malware 化するローカル LLM」への市場側の対応レイヤ（Agent Behavior Analytics）が整備され始めている。参照: [SiliconANGLE - Exabeam expands ABA across ChatGPT, Copilot, Gemini](https://siliconangle.com/2026/04/01/exabeam-expands-agent-behavior-analytics-secure-ai-agents-across-chatgpt-copilot-gemini/)
+- **Levo.ai の runtime-first / eBPF ベースのエージェント監視** は、ローカルで動く AI エージェント / MCP サーバ / LLM アプリの幻覚 / 安全でないツール使用 / 権限集約 / transitive trust 漏洩 / ポリシー違反をリアルタイム検知 — malware 的挙動のローカル検知インフラが現れている。参照: [UptimeRobot - AI Agent Monitoring 2026](https://uptimerobot.com/knowledge-hub/monitoring/ai-agent-monitoring-best-practices-tools-and-metrics/)
+
+ユーザ予測通り「ローカル LLM 実行層が malware 動作のホストになる」という構図が検知側 / 規制側の双方で認識され、プロダクト化が一斉に進行している段階。
+
+### 2. 「RL / LLM による実世界現象の予測性能向上が広範化」
+
+本日の報告内にこのユーザ予測の **直接的** な実証（スケジュールドタスク型 LLM forecasting の強化学習改善）はまだ見当たらない。隣接領域:
+
+- **Anthropic Claude Code 品質ポストモーテム** は LLM ハーネスパラメータ（reasoning effort / idle 時 thinking クリア / verbosity 削減 prompt）が推論・予測性能を左右することの公式確認。ハーネス側微調整の効果が再定量化された点は forecasting 改善の土台。参照: [Anthropic - April 23 postmortem](https://www.anthropic.com/engineering/april-23-postmortem)
+- **GPT-5.5 / GPT-5.5 Pro**（SWE-bench 88.7% / 幻覚 -60% / マルチステップ planning / tool use / self-check 特化）は tool を回しながら計画 / 検証する構造で、スケジュールタスク型推論の延長。参照: [OpenAI - Introducing GPT-5.5](https://openai.com/index/introducing-gpt-5-5/)
+- **Galileo AI Luna-2 evaluators + Galileo Signals** は本番トレース数百万件を走査して agent drift を自動特定 + prompt engineering / retrieval strategy の具体修正案を提示 — LLM の**自己改善型評価 / 修正ループ**の商用化。これは本予測の「RL / LLM ベースの forecasting 性能向上」の近隣位置。参照: [Maxim - Top 5 AI Agent Observability Platforms 2026](https://www.getmaxim.ai/articles/top-5-ai-agent-observability-platforms-in-2026/)
+
+ただし「予測ベンチマークを RL で回して LLM 予測を鍛える」本線製品 / 研究の動きは今日は未出。
+
+### 3. 「電力高騰 + 計算資源逼迫で AI SaaS の値上げが広範化（料金体系変化が先行）」
+
+本日の報告はこのユーザ予測に **最も強い相関**:
+
+- **GPT-5.5 API 価格は GPT-5.4 比 2 倍**（「より賢く、より token 効率的」と正当化するが実質値上げ）。参照: [TechCrunch - GPT-5.5 super app](https://techcrunch.com/2026/04/23/openai-chatgpt-gpt-5-5-ai-model-superapp/)
+- **Alphabet 2026 capex ガイダンス $175-185B**（2025 の $91.4B のほぼ 2 倍）、AI 計算資源投資の倍速化。参照: [Armchair Trader - Alphabet Q1 2026 preview](https://www.thearmchairtrader.com/us-stock-market-news/alphabet-q1-2026-earnings-preview/)
+- **Tesla 2026 capex $25B 超**、Optimus / Cybercab / FSD 最優先。参照: [TechCrunch - Tesla Q1 revenue](https://techcrunch.com/2026/04/22/tesla-q1-revenue-rises-driven-by-ev-sales-and-fsd-subscriptions/)
+- **ServiceNow -18% / YTD -45% / IBM / Salesforce / Workday / Oracle 連鎖下落**、「AI displace on legacy SaaS」独立テーマ化は、AI 機能付き SaaS の値上げ余地圧迫 / Legacy SaaS の構造崩れ両面で料金体系変化を示唆。参照: [CNBC - Software stocks plunge](https://www.cnbc.com/2026/04/23/software-stocks-plunge-on-servicenow-ibm-results-ai-fears-escalate.html)
+- 追加観察 — **Keycard が $38M シード + Series A 調達**、**Okta Showcase 2026 で secure agentic enterprise 新設計図発表**、**Zenity が Fortune Cyber 60 選出** など、エージェント identity / behavior 系ベンダへの資本流入が活発。これは「AI 機能付き SaaS 全体のコスト構造転嫁経路」の一部（セキュリティ層の新規ライン追加による ARR 上乗せ）。参照: [Yahoo Finance - Keycard CRN Cloud Watch 10](https://finance.yahoo.com/news/keycard-named-top-cloud-computing-163000905.html) / [Okta Newsroom - Showcase 2026](https://www.okta.com/newsroom/press-releases/showcase-2026/)
+
+ユーザ予測通り **「料金体系変化が先行」** の兆候が GPT-5.5 の 2x 価格で顕在化。DeepSeek V4 側の価格破壊が同時進行している二極構造（フロンティア値上げ / 準フロンティア暴落）、かつエージェントセキュリティ層で新規 SaaS 請求ラインが追加される構造変化も観察される。電力コスト（グリッド / 原子力 / 地熱）に関する直接報道は本日は未掲載。
+
+---
+
+## References
+
+本検証で使用したリンクは全て `report/news-20260424.md` 内に既出。追加調査は実施していない。
