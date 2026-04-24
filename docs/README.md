@@ -5,7 +5,7 @@ Static GitHub Pages dashboard. No build step.
 ## Preview locally
 
 ```
-cd pages
+cd docs
 python -m http.server 8000
 # open http://localhost:8000/
 ```
@@ -15,7 +15,7 @@ JSON is blocked by some browsers under `file://` — use `http.server` if blank.
 
 ## Deploy to GitHub Pages
 
-Serve this `pages/` directory as the site root (Settings → Pages → Source → `main` / `/pages`).
+Serve this `docs/` directory as the site root (Settings → Pages → Source → `main` / `/docs`).
 The backend export layer writes `data/manifest.json`, `data/graph-tech.json`, and
 `data/graph-business.json`; this frontend consumes them at runtime.
 

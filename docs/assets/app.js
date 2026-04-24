@@ -1,7 +1,7 @@
 /* ============================================================
  * Future Prediction Theme Intelligence Dashboard
  * Vanilla JS (ES module). D3 v7 loaded globally via <script>.
- * Contract: pages/data/manifest.json + pages/data/graph-<scope>.json
+ * Contract: docs/data/manifest.json + docs/data/graph-<scope>.json
  * ============================================================ */
 
 (function () {
