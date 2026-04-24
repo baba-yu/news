@@ -1,0 +1,27 @@
+# Future Prediction Dashboard (frontend)
+
+Static GitHub Pages dashboard. No build step.
+
+## Preview locally
+
+```
+cd pages
+python -m http.server 8000
+# open http://localhost:8000/
+```
+
+Opening `index.html` directly via `file://` also works for most features, but `fetch()` on
+JSON is blocked by some browsers under `file://` — use `http.server` if blank.
+
+## Deploy to GitHub Pages
+
+Serve this `pages/` directory as the site root (Settings → Pages → Source → `main` / `/pages`).
+The backend export layer writes `data/manifest.json`, `data/graph-tech.json`, and
+`data/graph-business.json`; this frontend consumes them at runtime.
+
+## Files
+
+- `index.html` — shell + fixed top-right menu + detail panel markup.
+- `assets/app.js` — D3 v7 force simulation, canvas renderer, interactions.
+- `assets/styles.css` — cold palette per UI spec §8.
+- `data/*.json` — sample data so the page renders before the backend runs.
