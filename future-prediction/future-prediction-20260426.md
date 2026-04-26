@@ -71,4 +71,4 @@
 本日の報告で **直接対応する事例は新規なし**。ただし関連する基盤動向:
 
 - **SGLang + Miles の Day-0 verified RL 訓練パイプライン（Apr 25 LMSYS 公式）** — DeepSeek V4 launch 当日に **R3 + indexer replay の Step-0 train-inference diff 0.02-0.03 / Tilelang FP8/BF16 rollout / Hopper/Blackwell/Grace Blackwell 並列対応** の verified RL を提供。RL 訓練インフラの民主化が一気に進行、エンドユーザが「予測タスクを RL で改善する」ための前提条件（Day-0 verified RL の標準化）が整いつつある。参照: [LMSYS Org - DeepSeek-V4 on Day 0](https://www.lmsys.org/blog/2026-04-25-deepseek-v4/)
-- 本日報告内に「現実世界の予測タスクを RL / LLM で改善する事例」（このスケジュールタスク自身を含む）の直接事例は出現せず、ユーザ予測（普及）の検証は別途進行が必要。
+- 本日報告内に「現実世界の予測タスクを RL / LLM で改善する事例」（このスケジュールタスク自身を含む）の直接事例は出現

@@ -43,4 +43,4 @@ Confirmed reasonable thresholds from this snapshot:
 - **No Dormant entries yet** — earliest prediction (4/19) is only 7 days old, well below 14d quiet threshold. First eligible dormant entrants likely arrive after 2 weekly cycles (need to drop to relevance ≤ 2 for two consecutive pings).
 - **Today's 4/26 predictions** treated as New / Hot equivalent — they will be evaluated for the first time by tomorrow's daily prediction-validation job.
 
-Continue emitting this debug file for the next 1-2 Sunday cycles to confirm the Hot/Warm/Lukewarm cutoffs hold up against real data and to verify the first Dormant entrant arrives correctly.
+Continue emitting this debug file for the next 1-2 Sunday cycles to confirm the Hot/Warm/Lukewarm cutoffs hold up against real data and to verify 
