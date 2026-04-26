@@ -78,4 +78,4 @@ Relevance 2 の「1-bit ネイティブ学習」「Headless Everything」「GGUF
 
 ユーザー予測 1（悪性ローカル LLM のマルウェア化）は本日分では直接事例は薄いが、Mythos の「危険モデル × アクセス制御破綻」が準備段階を完成。ユーザー予測 2（RL/LLM による予測/最適化の普及）は ml-intern のような決定的事例は出ていないが、OpenAI Workspace Agents / Microsoft Foundry RFT グローバル展開により**供給側のプラットフォーム整備が 3 社並列で完了**した日。
 
-一方、「1-bit ネイティブ学習」「Headless Everything」「GGUF 署名検証」の 3 予測は、本日の Qwen3.6-27B Dense 登場 / GUI 自動化強化 / 署名検証未アナウンスにより**進展停滞または反対方向**。特に Qwen3.6-27B Dense が 1-bit ルートより先に「ローカル実用域でフロンティア迫る」を達成した点は、「1-bit ネイティブが唯一の量子化代替」という予測の前提が**Dense × 長 context で側面から突破された**ことを示唆する。
+一方、「1-bit ネイティブ学習」「Headless Everything」「GGUF 署名検証」の 3 予測は、本日の Qwen3.6-27B Dense 登場 / GUI 自動化強化 / 署名検証未アナウンスにより**進展停滞または反対方向**。特に Qwen3.6-27B Dense が 1-bit ルートより先に「ローカル実用域でフロンティア迫る」を達成した点は、「1-bit ネイティブが唯一の量子化代替」という予測の前提が
