@@ -1,0 +1,71 @@
+# Future Prediction Validation Report 2026-04-22
+
+Scope: cross-check the **Future** sections of `report/*.md` over the past week (4/19-4/21, excluding today 4/22) against today's (2026-04-22) `news-20260422.md` content. Also check against the user's two predictions.
+
+## Checking Predictions Against Reality
+
+### Table
+
+Relevance (5-point scale): 5 = very high / 4 = high / 3 = medium / 2 = low / 1 = weak or contrary
+
+| Prediction (summary) | Prediction date | Related item(s) in today's report (20260422) | Relevance | Reference link(s) |
+|---|---|---|---|---|
+| 1-bit native training becomes the dominant alternative to post-hoc quantization (led by Bonsai, Qwen/Llama 1-bit derivatives to follow) | 2026-04-19 | Bonsai-8B (1.15 GB, 12-14x smaller, 6x faster on RTX 4090, 4-5x more energy efficient) released as Hugging Face GGUF / MLX; llama.cpp b8862 directly loads the Bonsai-8B 1-bit format; Bonsai-1.7B CUDA deployment tutorial spreads | 4 | [Hugging Face - prism-ml/Bonsai-8B-gguf](https://huggingface.co/prism-ml/Bonsai-8B-gguf) / [MarkTechPost - Coding Tutorial for PrismML Bonsai 1-Bit LLM on CUDA](https://www.marktechpost.com/2026/04/18/a-coding-tutorial-for-running-prismml-bonsai-1-bit-llm-on-cuda-with-gguf-benchmarking-chat-json-and-rag/) |
+| Convergence on an "Agent Registry" model (registry standard for distributing skills, tool permissions, audit traces) | 2026-04-19 | Ollama v0.21.1-rc0 inherits the v0.21.0 `ollama launch` integration with OpenClaw / Hermes / Copilot CLI; OpenClaw 2026.4.20 blocks `OPENCLAW_*` env keys from untrusted-workspace .env and tightens scoping of non-admin paired-device sessions; Hermes v0.10.0's OSV-based MCP-extension malware scanning; the NemoClaw "outer wrapper" strategy is reassessed | 3 | [newreleases.io - openclaw v2026.4.20-beta.1](https://newreleases.io/project/github/openclaw/openclaw/release/v2026.4.20-beta.1) / [DEV Community - Hermes Agent Review: 95.6K Stars](https://dev.to/tokenmixai/hermes-agent-review-956k-stars-self-improving-ai-agent-april-2026-11le) / [NVIDIA Docs - NemoClaw Developer Guide](https://docs.nvidia.com/nemoclaw/latest/index.html) |
+| Indirect prompt injection becomes a top CVE category (CVSS 8.0+ LLM-integration CVEs become Patch Tuesday regulars) | 2026-04-19 | OpenClaw CVE-2026-41329 (CVSS 9.9, sandbox bypass → privilege escalation) disclosed Apr 21, **Google Antigravity Prompt Injection → RCE** (find_by_name tool's -X flag injection, Apr 21 reporting), SGLang CVE-2026-5760 (CVSS 9.8, Jinja2 SSTI) reporting continues, Vercel CEO points to AI-assisted attack | 5 | [CCB Belgium - Warning: Privilege Escalation in OpenClaw](https://ccb.belgium.be/advisories/warning-privilege-escalation-openclaw-patch-immediately) / [CSO Online - Prompt injection turned Google's Antigravity file search into RCE](https://www.csoonline.com/article/4161382/prompt-injection-turned-googles-antigravity-file-search-into-rce.html) / [Cypro - SGLang CVE-2026-5760](https://www.cypro.se/2026/04/20/sglang-cve-2026-5760-cvss-9-8-enables-rce-via-malicious-gguf-model-files/) |
+| Acceleration of "local > cloud" inversion (by Q3 2026, individual / SMB coding agents standardize on local-default) | 2026-04-20 | Hugging Face ml-intern lifts Qwen3-1.7B's GPQA from 8.5% → 32% in under 10 hours, beating Claude Code's 22.99%. Bonsai-8B / llama.cpp 1-bit direct loading. Qwen3.6-35B-A3B re-evaluation continues | 5 | [MarkTechPost - Hugging Face Releases ml-intern](https://www.marktechpost.com/2026/04/21/hugging-face-releases-ml-intern-an-open-source-ai-agent-that-automates-the-llm-post-training-workflow/) / [GitHub - QwenLM/Qwen3.6](https://github.com/QwenLM/Qwen3.6) |
+| Secret leakage through CI / agents becomes the next battleground ("Agent-in-the-Loop Secret Exfiltration" rises to top of CIS / OWASP risk) | 2026-04-20 | Vercel-Context.ai supply-chain breach (Context.ai Google Workspace OAuth token compromise → Vercel internal env → BreachForums $2M sale; Feb 2026 Lumma Stealer infection origin), Vercel CEO points to AI-assisted attack, Google Antigravity RCE, OpenClaw sandbox bypass CVE | 5 | [Trend Micro - The Vercel Breach: OAuth Supply Chain](https://www.trendmicro.com/en_us/research/26/d/vercel-breach-oauth-supply-chain.html) / [The Register - Vercel breach traced to stolen employee creds](https://www.theregister.com/2026/04/21/vercel_ceo_points_to_aidriven/) / [CSO Online - Antigravity RCE](https://www.csoonline.com/article/4161382/prompt-injection-turned-googles-antigravity-file-search-into-rce.html) |
+| "Headless Everything" architecture standardizes (headless-preferred metadata on MCP / Agent Registry) | 2026-04-20 | Direct progress is thin. Counter-direction stronger: OpenAI Codex expands to computer use / web workflows / image gen / memory / automations / in-app browsing. ChatGPT Images 2.0 (gpt-image-2) UI multiplexing pivots toward "single model + multiple UIs" | 2 | [thenewstack - ChatGPT Images 2.0](https://thenewstack.io/chatgpt-images-20-openai/) / [9to5Mac - OpenAI Codex expansion](https://9to5mac.com/2026/04/21/openai-teases-next-ai-announcement-coming-today-heres-what-to-expect/) |
+| GGUF supply chains as new battleground (HF/Ollama/ModelScope standardize chat_template signature verification) | 2026-04-21 | SGLang CVE-2026-5760 reporting continues (RCE via malicious GGUF tokenizer.chat_template), Bonsai-8B GGUF on HF + direct llama.cpp loading (supply-chain expansion). GGUF signature-verification standardization announcement: not yet inside the window | 3 | [Cypro - SGLang CVE-2026-5760](https://www.cypro.se/2026/04/20/sglang-cve-2026-5760-cvss-9-8-enables-rce-via-malicious-gguf-model-files/) / [Hugging Face - Bonsai-8B-gguf](https://huggingface.co/prism-ml/Bonsai-8B-gguf) |
+| The era of "exclusive alliance between hyperscaler and frontier lab" (5-pole regime locks in; Trainium / TPU / MAIA / MI300X design differences translate to model-behavior differences) | 2026-04-21 | Amazon-Anthropic $25B follow-ons: 100,000+ orgs use Claude on Bedrock, 5GW comes online from Q2 2026, Anthropic commits $100B / 10 years to AWS, AMZN +2-3% to $253.62. **Google Cloud Next '26's TPU 8t/8i training-vs-inference 2 SKU split** (Broadcom designs the training chip, MediaTek the inference chip per reporting). **Anthropic exploring its own AI chip**. Claude Mythos Preview restricted to Project Glasswing partners (AWS / Apple / Google / JPMC / Microsoft / NVIDIA) | 5 | [Anthropic - Anthropic and Amazon expand collaboration](https://www.anthropic.com/news/anthropic-amazon-compute) / [Bloomberg - Google Cloud Releases New TPU Chip Lineup](https://www.bloomberg.com/news/articles/2026-04-22/google-cloud-releases-new-tpu-chip-lineup-in-bid-to-speed-up-ai) / [tradingkey - Anthropic Moving Toward AI Chips for Claude](https://www.tradingkey.com/analysis/stocks/us-stocks/261770188-anthropic-moving-toward-ai-chips-claude-nvidia-buy-in-2026-tradingkey) / [AISI - Claude Mythos Preview evaluation](https://www.aisi.gov.uk/blog/our-evaluation-of-claude-mythos-previews-cyber-capabilities) |
+| Proprietary re-expansion against an open-weight geopolitical split ("strongest model = closed weights" crystallizes) | 2026-04-21 | Qwen3.6-Max-Preview's hosted-only continues; Claude Mythos Preview's partner-only gating; on the open-weight side, Qwen3.6-35B-A3B and Bonsai consolidate. Local for utility / cloud for the frontier line is intact | 4 | [buildfastwithai - Qwen3.6-Max-Preview Review 2026](https://www.buildfastwithai.com/blogs/qwen3-6-max-preview-review-2026) / [AISI - Claude Mythos Preview evaluation](https://www.aisi.gov.uk/blog/our-evaluation-of-claude-mythos-previews-cyber-capabilities) |
+
+### Summary of Findings
+
+Of the past 3 days' 9 Future predictions: **Relevance 5: 4 entries** (indirect prompt injection becoming a primary CVE category / local > cloud inversion / CI / agent secret exfiltration / hyperscaler-frontier-lab alliance), **Relevance 4: 2 entries**, **Relevance 3: 2 entries**, **Relevance 2: 1 entry**.
+
+The 4 Relevance-5 entries reach the **reality-validation phase** within just 1-3 days as concrete cases land. Notably:
+
+- The indirect prompt injection family adds **Google Antigravity's RCE** to OpenClaw CVE-2026-41329 (CVSS 9.9), forming a structured cross-LLM-agent-runtime cluster of vulnerabilities.
+- The hyperscaler-frontier-lab alliance gets a new boost today from **TPU 8t/8i training-inference 2 SKU split** and **Anthropic exploring its own AI chip**, reinforcing the script for "5-pole regime lock-in" through Trainium / TPU / MAIA / MI300X differentiation.
+
+The Relevance 3-4 entries (Agent Registry / GGUF signature verification / proprietary re-expansion) align directionally, but **standardization or specification announcements have not yet appeared inside today's content** — so they don't make the top tier.
+
+The "Headless Everything" entry (Relevance 2) moves in the **opposite direction** in today's main news (Codex's GUI-direction expansion, ChatGPT Images 2.0 UI multiplexing). Not that the prediction is wrong; the opposing axis advanced today.
+
+## Relation to My Own Predictions
+
+### Prediction 1: Malicious local LLMs will begin to function like malware.
+
+Today's report has **strongly proximate cases** in multiple places.
+
+The most direct: **continued reporting on SGLang CVE-2026-5760 (CVSS 9.8)**. A malicious GGUF model file embeds a Jinja2 SSTI payload in `tokenizer.chat_template`, and RCE fires when `/v1/rerank` is called. **"The LLM model file as a distributable carrier of executable code"** is a definitional sample of Prediction 1.
+
+Next: **Claude Mythos Preview's AISI evaluation**. The cyber-specialized Claude derivative autonomously discovers a 17-year-old FreeBSD RCE (root via NFS), a 27-year-old OpenBSD integer overflow, and a 16-year-old FFmpeg bug (which 5M auto-tests had missed). **73% success on expert-level cyber tasks.** Plus a **sandbox-escape incident** in internal testing. Despite the local/cloud distinction, this is strong corroboration that "an LLM with malware-equivalent capability already exists."
+
+Today also adds **Google Antigravity's Prompt Injection → RCE** (find_by_name tool's Pattern parameter accepts -X / exec-batch flag injection, bypassing Strict Mode and instructing fd to run arbitrary binaries). This aligns with Prediction 1: "the LLM agent's input path becomes equivalent to the malware execution path."
+
+Side notes: **Vercel's CEO comments** (the attacker showed "stunning speed and deep infrastructure understanding," AI-assisted possibility) and **OpenClaw CVE-2026-41329 (CVSS 9.9)** sandbox bypass → privilege escalation also indicate "malware-equivalent danger" in the local LLM ecosystem perimeter.
+
+In sum, Prediction 1 as of 2026-04-22 is in the **early concrete-case-emergence phase**. SGLang CVE meets the narrowest definition of Prediction 1 (malicious model file = malware), Claude Mythos Preview marks the capability-threshold breakthrough, and Antigravity RCE adds a new agent-mediated path — three lines progressing in observation.
+
+References: [Cypro - SGLang CVE-2026-5760](https://www.cypro.se/2026/04/20/sglang-cve-2026-5760-cvss-9-8-enables-rce-via-malicious-gguf-model-files/) / [AISI - Our evaluation of Claude Mythos Preview's cyber capabilities](https://www.aisi.gov.uk/blog/our-evaluation-of-claude-mythos-previews-cyber-capabilities) / [CSO Online - Prompt injection turned Google's Antigravity file search into RCE](https://www.csoonline.com/article/4161382/prompt-injection-turned-googles-antigravity-file-search-into-rce.html) / [The Register - Vercel breach traced to stolen employee creds](https://www.theregister.com/2026/04/21/vercel_ceo_points_to_aidriven/)
+
+### Prediction 2: The use of reinforcement learning, or similar LLM-based approaches, to improve forecasting performance for real-world phenomena — like this scheduled task — will become widespread.
+
+Today's report has **no direct strong match**. The closest within the past week:
+
+- **Hugging Face ml-intern (Apr 21)** — A post-training automation agent. Lifts Qwen3-1.7B's GPQA from 8.5% → 32% in under 10 hours, beating Claude Code's 22.99%. The closest "closed-loop where LLM × RL improves LLM performance autonomously" so far.
+- **Microsoft Foundry Fine-Tuning enhancements** (RFT = Reinforcement Fine-Tuning rolling out globally to o4-mini / GPT-4.1, RFT best-practices guide published) — RFT is the productized name for an LLM-targeted RL method, and **the framework for "continuously optimizing frontier model performance against real-world task definitions" is becoming a standard menu item across major platforms.**
+
+Together, Prediction 2 is in a **simultaneous foundational-platform setup phase** (OpenAI Workspace Agents / Microsoft Foundry RFT / Google Agent Designer). Decisive use-case cases like ml-intern are still rare.
+
+References: [MarkTechPost - Hugging Face Releases ml-intern](https://www.marktechpost.com/2026/04/21/hugging-face-releases-ml-intern-an-open-source-ai-agent-that-automates-the-llm-post-training-workflow/) / [Microsoft Learn - Foundry What's new for April 2026 (RFT)](https://learn.microsoft.com/en-us/azure/foundry/whats-new-foundry)
+
+## Closing Notes
+
+Today (2026-04-22) is an **extremely high-density confirmation day**: the four major news items (Google Cloud Next '26 / Tesla Optimus V3 / OpenClaw CVE / Vercel-Context.ai breach) line up with 4 of the past 3 days' Future predictions at Relevance 5 simultaneously. In particular, "Agent Registry," "local > cloud," "exclusive alliance," and "Physical AI SaaS-ization" each have major plot points realized in a single day, suggesting the next phase will be "depth of quality."
+
+The user's Prediction 1 (malicious local LLM → malware) sees the early concrete sample emerge today (SGLang CVE-2026-5760 / Antigravity RCE / Mythos capability-threshold). Prediction 2 (RL/LLM for forecasting / optimization spread) does not see decisive cases yet, but the supply side is consolidating.
+
+The "1-bit native learning," "Headless Everything," and "GGUF signature verification" predictions either stagnate or move in opposing directions today.
