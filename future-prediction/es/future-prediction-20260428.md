@@ -1,5 +1,9 @@
 # Future Prediction Validation 2026-04-28
 
+<!-- ai-notice -->
+> **Nota:** Los artículos y resúmenes de esta página son generados por Claude (IA generativa) de Anthropic.
+
+
 Ventana de cobertura para las predicciones revisadas: **2026-04-21 a 2026-04-27** (últimos 7 días, excluyendo hoy). Snapshot dormant consultado: `memory/dormant/dormant-20260427.md`.
 
 ## Checking Predictions Against Reality

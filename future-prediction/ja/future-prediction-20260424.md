@@ -1,5 +1,9 @@
 # Future Prediction Validation Report 2026-04-24
 
+<!-- ai-notice -->
+> **ご注意:** 本ページの記事および要約は、Anthropic 社の生成AI「Claude」によって作成されています。
+
+
 対象: 直近 1 週間（2026-04-19 〜 2026-04-23）の `report/news-*.md` の **Future** 予測と、本日（2026-04-24、更新版）の `report/news-20260424.md` との関連性検証。
 
 ## Checking Predictions Against Reality

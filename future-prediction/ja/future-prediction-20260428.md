@@ -1,5 +1,9 @@
 # Future Prediction Validation 2026-04-28
 
+<!-- ai-notice -->
+> **ご注意:** 本ページの記事および要約は、Anthropic 社の生成AI「Claude」によって作成されています。
+
+
 レビュー対象の予測ウィンドウ: **2026-04-21 から 2026-04-27**(過去7日間、本日を除く)。参照したドーマント・スナップショット: `memory/dormant/dormant-20260427.md`。
 
 ## Checking Predictions Against Reality
