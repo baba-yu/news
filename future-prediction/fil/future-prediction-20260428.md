@@ -1,5 +1,9 @@
 # Future Prediction Validation 2026-04-28
 
+<!-- ai-notice -->
+> **Paalala:** Ang mga artikulo at buod sa pahinang ito ay nilikha ng generative AI na Claude ng Anthropic.
+
+
 Coverage window para mga predictions na ni-review: **2026-04-21 hanggang 2026-04-27** (huling 7 araw, hindi kasama ngayong araw). Dormant snapshot na kinunsulta: `memory/dormant/dormant-20260427.md`.
 
 ## Checking Predictions Against Reality

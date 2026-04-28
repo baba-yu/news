@@ -1,5 +1,9 @@
 # Future Prediction Validation Report 2026-04-27
 
+<!-- ai-notice -->
+> **ご注意:** 本ページの記事および要約は、Anthropic 社の生成AI「Claude」によって作成されています。
+
+
 スコープ:過去1週間(2026-04-20〜2026-04-26、本日を除く)の `report/en/news-*.md` の **Future** セクションを、本日(2026-04-27)の `report/en/news-20260427.md` に対して照合する。週末2026-04-26時点のドーマントプール・スナップショットは空(ブートストラップ実行)であるため、ドーマント行は追加しない。
 
 ## Checking Predictions Against Reality

@@ -1,5 +1,9 @@
 # Future Prediction Validation Report 2026-04-27
 
+<!-- ai-notice -->
+> **Paalala:** Ang mga artikulo at buod sa pahinang ito ay nilikha ng generative AI na Claude ng Anthropic.
+
+
 Saklaw: i-cross-check ang mga **Future** section ng `report/en/news-*.md` sa nakalipas na linggo (2026-04-20 hanggang 2026-04-26, hindi kasama ngayong araw) laban sa `report/en/news-20260427.md` ngayong araw (2026-04-27). Ang dormant pool snapshot para sa linggong nagtapos noong 2026-04-26 ay walang laman (bootstrap run), kaya walang dormant rows na idinagdag.
 
 ## Checking Predictions Against Reality

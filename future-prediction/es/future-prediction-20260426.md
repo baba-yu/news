@@ -1,5 +1,9 @@
 # Future Prediction Validation Report 2026-04-26
 
+<!-- ai-notice -->
+> **Nota:** Los artículos y resúmenes de esta página son generados por Claude (IA generativa) de Anthropic.
+
+
 Alcance: contrastar las secciones **Future** de `report/en/news-*.md` de la última semana (2026-04-19 a 2026-04-25, sin incluir hoy) con el reporte de hoy (2026-04-26) `report/en/news-20260426.md`. El snapshot del dormant pool para la semana que termina el 2026-04-26 está vacío (ejecución bootstrap), por lo que no se añaden filas dormant.
 
 ## Checking Predictions Against Reality
