@@ -86,6 +86,10 @@
       "panel.reasoning.so_that":  "So that",
       "panel.reasoning.landing":  "Landing",
       "panel.reasoning.target":   "Target",
+      "panel.bridge.supports": "supports",
+      "panel.bridge.signal":   "Signal",
+      "panel.bridge.reason":   "Reason",
+      "panel.bridge.gap":      "Remaining gap",
       "panel.5w1h.who":    "Who",
       "panel.5w1h.what":   "What",
       "panel.5w1h.where":  "Where",
@@ -99,6 +103,13 @@
       "view.probe":            "PROBE",
       "probe.tab.predictions": "PREDICTIONS",
       "probe.tab.news":        "NEWS",
+      "timeline.back":             "← BACK",
+      "timeline.open_in_observatory": "OPEN IN OBSERVATORY",
+      "timeline.notfound":         "Prediction not found in the current scope.",
+      "timeline.detail.placeholder": "Click a point or window on the timeline to see details.",
+      "timeline.detail.open_this":   "Open this prediction's timeline →",
+      "panel.open_in_probe":     "→ PROBE",
+      "panel.open_in_probe.tip": "Open this prediction's timeline in PROBE",
     },
     ja: {
       "scope.mix":      "MIX",
@@ -164,6 +175,10 @@
       "panel.reasoning.so_that":  "着地",
       "panel.reasoning.landing":  "着地点",
       "panel.reasoning.target":   "目標期間",
+      "panel.bridge.supports": "支持",
+      "panel.bridge.signal":   "シグナル",
+      "panel.bridge.reason":   "理由",
+      "panel.bridge.gap":      "残るギャップ",
       "panel.5w1h.who":    "誰が",
       "panel.5w1h.what":   "何を",
       "panel.5w1h.where":  "どこで",
@@ -177,6 +192,13 @@
       "view.probe":            "探査",
       "probe.tab.predictions": "PREDICTIONS",
       "probe.tab.news":        "NEWS",
+      "timeline.back":             "← 一覧に戻る",
+      "timeline.open_in_observatory": "観測で開く",
+      "timeline.notfound":         "現在のスコープに該当する予測が見つかりません。",
+      "timeline.detail.placeholder": "タイムライン上のポイントまたは期間をクリックすると詳細が表示されます。",
+      "timeline.detail.open_this":   "この予測のタイムラインを開く →",
+      "panel.open_in_probe":     "→ 探査",
+      "panel.open_in_probe.tip": "この予測のタイムラインを探査で開く",
     },
     es: {
       "scope.mix":      "MIX",
@@ -242,6 +264,10 @@
       "panel.reasoning.so_that":  "Para que",
       "panel.reasoning.landing":  "Aterrizaje",
       "panel.reasoning.target":   "Ventana objetivo",
+      "panel.bridge.supports": "apoya",
+      "panel.bridge.signal":   "Señal",
+      "panel.bridge.reason":   "Razón",
+      "panel.bridge.gap":      "Brecha restante",
       "panel.5w1h.who":    "Quién",
       "panel.5w1h.what":   "Qué",
       "panel.5w1h.where":  "Dónde",
@@ -255,6 +281,13 @@
       "view.probe":            "PROBE",
       "probe.tab.predictions": "PREDICTIONS",
       "probe.tab.news":        "NEWS",
+      "timeline.back":             "← VOLVER",
+      "timeline.open_in_observatory": "ABRIR EN OBSERVATORY",
+      "timeline.notfound":         "No se encontró la predicción en el alcance actual.",
+      "timeline.detail.placeholder": "Haz clic en un punto o ventana de la línea de tiempo para ver los detalles.",
+      "timeline.detail.open_this":   "Abrir la línea de tiempo de esta predicción →",
+      "panel.open_in_probe":     "→ PROBE",
+      "panel.open_in_probe.tip": "Abrir la línea de tiempo de esta predicción en PROBE",
     },
     fil: {
       "scope.mix":      "MIX",
@@ -320,6 +353,10 @@
       "panel.reasoning.so_that":  "Upang",
       "panel.reasoning.landing":  "Landing",
       "panel.reasoning.target":   "Target na window",
+      "panel.bridge.supports": "sumusuporta sa",
+      "panel.bridge.signal":   "Senyales",
+      "panel.bridge.reason":   "Dahilan",
+      "panel.bridge.gap":      "Natitirang puwang",
       "panel.5w1h.who":    "Sino",
       "panel.5w1h.what":   "Ano",
       "panel.5w1h.where":  "Saan",
@@ -333,6 +370,13 @@
       "view.probe":            "PROBE",
       "probe.tab.predictions": "PREDICTIONS",
       "probe.tab.news":        "NEWS",
+      "timeline.back":             "← BUMALIK",
+      "timeline.open_in_observatory": "BUKSAN SA OBSERVATORY",
+      "timeline.notfound":         "Hindi natagpuan ang hula sa kasalukuyang saklaw.",
+      "timeline.detail.placeholder": "I-click ang isang point o window sa timeline upang makita ang mga detalye.",
+      "timeline.detail.open_this":   "Buksan ang timeline ng hulang ito →",
+      "panel.open_in_probe":     "→ PROBE",
+      "panel.open_in_probe.tip": "Buksan sa PROBE ang timeline ng hulang ito",
     },
   };
 
@@ -353,6 +397,105 @@
       return sub[loc] || sub.en || node[field] || "";
     }
     return (node && node[field]) || "";
+  }
+  // Pull a locale-aware ELI14 string from a prediction's detail block.
+  // The graph's reasoning_locales fan-out is keyed by reasoning field
+  // first (because/given/so_that/landing/eli14) then by locale, e.g.
+  //   detail.reasoning_locales.eli14.ja
+  // Falls back to the EN locale, then the legacy non-locale field.
+  function localizedEli14(detail) {
+    const loc = state.locale || "en";
+    const rl = detail && detail.reasoning_locales;
+    if (rl && rl.eli14) {
+      if (rl.eli14[loc]) return rl.eli14[loc];
+      if (rl.eli14.en)   return rl.eli14.en;
+    }
+    return (detail && detail.reasoning && detail.reasoning.eli14) || "";
+  }
+
+  // Parse common freeform "when" strings (task.when on a need's task)
+  // into a [start, end] date range. The data pipeline currently
+  // doesn't backfill structured task.target_start_date /
+  // target_end_date fields, so this is a pragmatic stopgap until
+  // those land — see design/FIXME.md.
+  // Recognised patterns:
+  //   "Q[1-4] YYYY"         → that quarter's calendar range
+  //   "H[1-2] YYYY"         → that half's calendar range
+  //   "YYYY-MM-DD"          → that single day (zero-width window)
+  //   "YYYY"                → that whole calendar year
+  // Returns null when nothing parses, so the caller can fall back.
+  function parseFreeformWhen(text) {
+    if (!text) return null;
+    const s = String(text);
+    const fmt = (y, m, d) => {
+      const date = new Date(Date.UTC(y, m, d));
+      return date.toISOString().slice(0, 10);
+    };
+    // Q-style quarter
+    const qm = s.match(/Q([1-4])\s+(\d{4})/i);
+    if (qm) {
+      const q = parseInt(qm[1], 10);
+      const y = parseInt(qm[2], 10);
+      const startMonth = (q - 1) * 3;
+      return { start: fmt(y, startMonth, 1), end: fmt(y, startMonth + 3, 0) };
+    }
+    // Half-year
+    const hm = s.match(/H([12])\s+(\d{4})/i);
+    if (hm) {
+      const h = parseInt(hm[1], 10);
+      const y = parseInt(hm[2], 10);
+      const startMonth = (h - 1) * 6;
+      return { start: fmt(y, startMonth, 1), end: fmt(y, startMonth + 6, 0) };
+    }
+    // YYYY-MM-DD
+    const dm = s.match(/(\d{4})-(\d{2})-(\d{2})/);
+    if (dm) {
+      const date = `${dm[1]}-${dm[2]}-${dm[3]}`;
+      return { start: date, end: date };
+    }
+    // Bare 4-digit year (within plausible range)
+    const ym = s.match(/(?<!\d)(\d{4})(?!\d)/);
+    if (ym) {
+      const y = parseInt(ym[1], 10);
+      if (y >= 2000 && y <= 2100) {
+        return { start: fmt(y, 0, 1), end: fmt(y, 12, 0) };
+      }
+    }
+    return null;
+  }
+  // Build a CATEGORY → THEME breadcrumb list for the timeline meta
+  // section. Mirrors the OBSERVATORY panel's lineage rows but produces
+  // a flat <ul> string (no fancy layout) suitable for inline meta.
+  function renderTimelineLineage(node) {
+    if (!node || node.type !== "prediction") return "";
+    const parents = (node.parent_ids || []).map(nodeById).filter(Boolean);
+    if (!parents.length) return "";
+    const seenTheme = new Set();
+    const rows = parents.map((p) => {
+      const theme = p.type === "theme"
+        ? p
+        : ((p.parent_ids || []).map(nodeById).find((x) => x && x.type === "theme") || null);
+      const cat = theme
+        ? ((theme.parent_ids || []).map(nodeById).find((x) => x && x.type === "category") || null)
+        : null;
+      const themeKey = theme ? theme.id : `__no_theme__${p.id}`;
+      if (seenTheme.has(themeKey)) return "";
+      seenTheme.add(themeKey);
+      const catLabel = cat
+        ? (nodeLabel(cat, "short_label") || nodeLabel(cat, "label") || cat.id)
+        : "—";
+      const themeLabel = theme
+        ? (nodeLabel(theme, "short_label") || nodeLabel(theme, "label") || theme.id)
+        : "—";
+      const targetId = (theme && theme.id) || p.id;
+      return `<li class="tl-lineage-row" data-goto="${escapeHTML(targetId)}">
+        <span class="tl-lineage-cat">${escapeHTML(catLabel)}</span>
+        <span class="tl-lineage-sep" aria-hidden="true">→</span>
+        <span class="tl-lineage-theme">${escapeHTML(themeLabel)}</span>
+      </li>`;
+    }).filter(Boolean).join("");
+    if (!rows) return "";
+    return `<ul class="tl-lineage-list">${rows}</ul>`;
   }
   // Base URL used to turn report/validation paths into GitHub article links.
   // Change this if you fork the repo.
@@ -465,6 +608,17 @@
     // Only meaningful when state.view === "probe". Not persisted — each
     // session re-enters PROBE on PREDICTIONS by default.
     probeTab: "predictions",
+
+    // When set, PROBE/PREDICTIONS replaces the table with a timeline
+    // for this prediction id. Cleared by the timeline's Back button or
+    // by switching to NEWS. Persists across OBSERVATORY ↔ PROBE
+    // toggling so "Open in OBSERVATORY" round-trips don't lose it.
+    probeTimelinePred: null,
+
+    // Index of the timeline event currently selected (highlighted +
+    // shown in the detail strip below the canvas). null = nothing
+    // selected; cleared when a different prediction's timeline opens.
+    timelineSelectedIdx: null,
 
     // Active snapshot date (YYYYMMDD) or null when on live data.
     // Persisted in localStorage so a refresh keeps the user's history view.
@@ -1777,6 +1931,22 @@
     if (snapSel) {
       snapSel.addEventListener("change", () => selectSnapshot(snapSel.value));
     }
+    // PROBE per-section settings menu — hamburger toggle, close button,
+    // mirrored snapshot select, Esc to close, click-on-backdrop to close.
+    const probeSnap = document.getElementById("probe-snap-select");
+    if (probeSnap) {
+      probeSnap.addEventListener("change", () => selectSnapshot(probeSnap.value));
+    }
+    document.querySelectorAll(".probe-menu-btn").forEach((btn) => {
+      btn.addEventListener("click", () => toggleProbeMenu());
+    });
+    const probeMenuClose = document.querySelector(".probe-menu-close");
+    if (probeMenuClose) probeMenuClose.addEventListener("click", () => toggleProbeMenu(false));
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      const panel = document.getElementById("probe-menu-panel");
+      if (panel && !panel.hidden) toggleProbeMenu(false);
+    });
     const catAll   = document.getElementById("cat-all");
     const catNone  = document.getElementById("cat-none");
     const catFocus = document.getElementById("cat-focus");
@@ -1827,6 +1997,19 @@
       scheduleDraw();
     });
     document.getElementById("panel-back").addEventListener("click", navigateBack);
+    // "Open in PROBE" shortcut from the OBSERVATORY detail panel.
+    // Sets the timeline target then flips to PROBE/PREDICTIONS, which
+    // dispatches into renderPredictionTimeline on next render.
+    const panelProbe = document.getElementById("panel-probe");
+    if (panelProbe) {
+      panelProbe.addEventListener("click", () => {
+        const predId = panelProbe.dataset.predId;
+        if (!predId) return;
+        state.probeTab = "predictions";
+        state.probeTimelinePred = predId;
+        setView("probe");
+      });
+    }
   }
 
   /* ---------------- Node click / focus ---------------- */
@@ -2163,9 +2346,11 @@
     m('.menu-btn.tab[data-scope="mix"]',      "scope.mix");
     m('.menu-btn.tab[data-scope="tech"]',     "scope.tech");
     m('.menu-btn.tab[data-scope="business"]', "scope.business");
-    m('.menu-btn.win[data-window="7d"]',  "window.7d");
-    m('.menu-btn.win[data-window="30d"]', "window.30d");
-    m('.menu-btn.win[data-window="90d"]', "window.90d");
+    // Window buttons exist in both #top-menu and #probe-menu-panel,
+    // so retranslate every copy on locale change.
+    mAll('.menu-btn.win[data-window="7d"]',  "window.7d");
+    mAll('.menu-btn.win[data-window="30d"]', "window.30d");
+    mAll('.menu-btn.win[data-window="90d"]', "window.90d");
     m('.menu-btn.heat[data-heat="attention"]',   "heat.attention");
     m('.menu-btn.heat[data-heat="realization"]', "heat.realization");
     m('.menu-btn.heat[data-heat="grass"]',       "heat.grass");
@@ -2185,11 +2370,16 @@
     if (catAll) catAll.textContent = localeStr("cat.all");
     const catNone = document.getElementById("cat-none");
     if (catNone) catNone.textContent = localeStr("cat.none");
-    // Snap label + LIVE option
+    // Snap label + LIVE option (top-menu copy + probe-menu copy)
     const snapLbl = document.querySelector('.snap-group .menu-lbl');
     if (snapLbl) snapLbl.textContent = localeStr("snap.label");
-    const liveOpt = document.querySelector('#snap-select option[value="live"]');
-    if (liveOpt) liveOpt.textContent = localeStr("snap.live");
+    const probeSnapLbl = document.querySelector('.probe-menu-snap-lbl');
+    if (probeSnapLbl) probeSnapLbl.textContent = localeStr("snap.label");
+    const probeLangLbl = document.querySelector('.probe-menu-lang-lbl');
+    if (probeLangLbl) probeLangLbl.textContent = localeStr("lang.label");
+    document.querySelectorAll('select.menu-select option[value="live"]').forEach((opt) => {
+      opt.textContent = localeStr("snap.live");
+    });
     // Hint strip
     const hints = document.querySelectorAll("#hint-strip span");
     if (hints.length >= 5) {
@@ -2210,6 +2400,12 @@
     if (panelBack) panelBack.title = localeStr("panel.back");
     const panelClose = document.getElementById("panel-close");
     if (panelClose) panelClose.setAttribute("aria-label", localeStr("panel.close"));
+    const panelProbe = document.getElementById("panel-probe");
+    if (panelProbe) {
+      panelProbe.textContent = localeStr("panel.open_in_probe");
+      panelProbe.title = localeStr("panel.open_in_probe.tip");
+      panelProbe.setAttribute("aria-label", localeStr("panel.open_in_probe.tip"));
+    }
     // Tool hint in current state
     const toolHint = document.getElementById("hint-tool");
     if (toolHint) {
@@ -2250,13 +2446,19 @@
   async function loadSnapshotIndex() {
     const group = document.querySelector(".snap-group");
     const sel = document.getElementById("snap-select");
+    const probeSel = document.getElementById("probe-snap-select");
+    const probeSection = document.querySelector(".probe-snap-section");
     if (!group || !sel) return;
+    const setHidden = (hidden) => {
+      group.hidden = hidden;
+      if (probeSection) probeSection.hidden = hidden;
+    };
     try {
       const r = await fetch(`${LIVE_DATA_DIR}/snapshots/index.json`, { cache: "no-store" });
       if (!r.ok) throw new Error("no snapshots");
       const data = await r.json();
       const list = Array.isArray(data) ? data : (data.snapshots || []);
-      if (!list.length) { group.hidden = true; return; }
+      if (!list.length) { setHidden(true); return; }
       // Append options (newest first if array of strings sorts that way).
       for (const entry of list) {
         const date = (typeof entry === "string") ? entry : (entry.date || entry.id);
@@ -2265,23 +2467,35 @@
         opt.value = String(date);
         opt.textContent = String(date);
         sel.appendChild(opt);
+        if (probeSel) {
+          const opt2 = document.createElement("option");
+          opt2.value = String(date);
+          opt2.textContent = String(date);
+          probeSel.appendChild(opt2);
+        }
       }
-      group.hidden = false;
+      setHidden(false);
       // Restore the persisted snapshot selection if present.
       if (state.snapshotDate) {
         sel.value = state.snapshotDate;
+        if (probeSel) probeSel.value = state.snapshotDate;
       }
     } catch (_) {
       // No snapshots manifest — hide the group entirely.
-      group.hidden = true;
+      setHidden(true);
     }
   }
 
   async function selectSnapshot(value) {
     const sel = document.getElementById("snap-select");
+    const probeSel = document.getElementById("probe-snap-select");
     const isLive = !value || value === "live";
     state.snapshotDate = isLive ? null : value;
     DATA_DIR = isLive ? LIVE_DATA_DIR : `${LIVE_DATA_DIR}/snapshots/${value}`;
+    // Sync the two snapshot selects so changing one mirrors into the other.
+    const synced = isLive ? "live" : value;
+    if (sel && sel.value !== synced) sel.value = synced;
+    if (probeSel && probeSel.value !== synced) probeSel.value = synced;
     saveState();
     // Update meta-sub style hint.
     const sub = document.getElementById("meta-sub");
@@ -2296,9 +2510,46 @@
       rebuildSimulation();
       updateMetaHeader();
       setStatus("");
+      // Re-render whichever PROBE sub-tab is active so its data
+      // reflects the new snapshot. Without this, snapshot changes
+      // updated DATA_DIR + the GRAPH but PROBE views kept showing
+      // pre-change rows (filters and prediction lookups still pointed
+      // at the previous graph cache).
+      if (state.view === "probe") {
+        if (state.probeTab === "predictions") await renderListView();
+        else if (state.probeTab === "news")   await renderEvidenceView();
+      }
     } catch (e) {
       setStatus("snapshot load failed: " + (e && e.message ? e.message : e), true);
     }
+  }
+
+  // ----- PROBE settings slide-in panel (hamburger menu in alt-view-head) -----
+
+  // Open / close the slide-in panel that hosts the locale + snapshot
+  // controls inside PROBE. Defers the .open class one frame so the
+  // CSS transform transition has a frame to interpolate from.
+  function toggleProbeMenu(force) {
+    const panel = document.getElementById("probe-menu-panel");
+    if (!panel) return;
+    const isOpen = !panel.hidden && panel.classList.contains("open");
+    const willOpen = (typeof force === "boolean") ? force : !isOpen;
+    if (willOpen) {
+      panel.hidden = false;
+      panel.setAttribute("aria-hidden", "false");
+      requestAnimationFrame(() => panel.classList.add("open"));
+    } else {
+      panel.classList.remove("open");
+      panel.setAttribute("aria-hidden", "true");
+      // Match the CSS transition duration so the panel fully slides
+      // off-screen before [hidden] removes it from the layout.
+      setTimeout(() => {
+        if (!panel.classList.contains("open")) panel.hidden = true;
+      }, 240);
+    }
+    document.querySelectorAll(".probe-menu-btn").forEach((b) => {
+      b.setAttribute("aria-expanded", String(willOpen));
+    });
   }
 
   function selectHeatMetric(metric) {
@@ -2361,6 +2612,15 @@
 
     // Stream I: prediction-tab click wiring (no-op when n.type !== prediction)
     attachPredictionTabHandlers(body);
+
+    // Open-in-PROBE shortcut: only meaningful for prediction nodes,
+    // since PROBE/PREDICTIONS is the only PROBE tab that has a
+    // per-prediction timeline. Hidden otherwise (and on mobile via CSS).
+    const probeBtn = document.getElementById("panel-probe");
+    if (probeBtn) {
+      probeBtn.hidden = n.type !== "prediction";
+      probeBtn.dataset.predId = n.type === "prediction" ? n.id : "";
+    }
 
     el.classList.add("open");
     el.setAttribute("aria-hidden", "false");
@@ -2605,7 +2865,7 @@
     const hasReasoning =
       reasoning.because || reasoning.given || reasoning.so_that
       || reasoning.landing;
-    const bridges = (detail && detail.bridges) || [];
+    const bridges = filterDisplayBridges((detail && detail.bridges) || []);
     const hasBridges = bridges.length > 0;
     const needs = (detail && detail.needs) || [];
     const hasNeeds = needs.length > 0;
@@ -2655,9 +2915,6 @@
     const chainNarrative = readings.chain_narrative || "";
     const downstream = readings.downstream || [];
     const upstream = readings.upstream || [];
-    const counterNarrative = readings.counter_narrative || "";
-    const counterClusters = readings.counter_clusters || [];
-    const counterEvidence = readings.counter_evidence || [];
     const relationNarrative = readings.relation_narrative || "";
     const relations = readings.relations || [];
 
@@ -2681,11 +2938,18 @@
 
     const chainItem = (c) => {
       const win = formatTargetWindow(c.target_start_date, c.target_end_date);
+      const title = c.title || c.short_label || c.prediction_id || "—";
+      // The title carries data-goto so click → openProbeTimeline in
+      // the timeline view, or → handleNodeClick (OBSERVATORY panel)
+      // when this same body is rendered in the right slide-in panel.
+      const titleHtml = c.prediction_id
+        ? `<span class="readings-chain-target is-link" data-goto="${escapeHTML(c.prediction_id)}" title="Open this prediction">${escapeHTML(title)}</span>`
+        : `<span class="readings-chain-target">${escapeHTML(title)}</span>`;
       return `
       <li class="readings-chain-item">
         <span class="readings-chain-strength" title="chain confidence">${(c.strength || 0).toFixed(2)}</span>
         <span class="readings-chain-arrow">──►</span>
-        <span class="readings-chain-target">${escapeHTML(c.title || c.short_label || c.prediction_id || "—")}</span>
+        ${titleHtml}
         ${win ? `<span class="readings-chain-window" title="lands">${escapeHTML(win)}</span>` : ""}
         ${c.notes ? `<div class="readings-chain-notes">${escapeHTML(c.notes)}</div>` : ""}
       </li>
@@ -2715,40 +2979,6 @@
         <div class="readings-chain-block">
           <h4 class="readings-chain-h">Strengthened by upstream landing:</h4>
           <ul class="readings-chain-list readings-chain-list-up">${upstream.map(chainItem).join("")}</ul>
-        </div>` : ""}
-      ${counterNarrative ? `<p class="readings-narrative readings-counter-narrative">${escapeHTML(counterNarrative)}</p>` : ""}
-      ${counterClusters.length ? `
-        <table class="readings-table readings-counter-table">
-          <thead>
-            <tr>
-              <th>Counter-cluster theme</th>
-              <th>Week</th>
-              <th title="Contradicting items in pool / cluster total">Density</th>
-              <th>Trend</th>
-            </tr>
-          </thead>
-          <tbody>${counterClusters.map((c) => `
-            <tr class="readings-row">
-              <td class="readings-theme">${escapeHTML(c.theme_label || "—")}</td>
-              <td class="readings-week">${escapeHTML(c.week_bucket || "—")}</td>
-              <td class="readings-density">
-                <span class="readings-pool readings-counter-pool">${c.size_in_pool}</span>
-                <span class="readings-slash">/</span>
-                <span class="readings-total">${c.cluster_total}</span>
-              </td>
-              <td class="readings-trend-cell">${trendBadge(c.trend)}</td>
-            </tr>`).join("")}</tbody>
-        </table>` : ""}
-      ${counterEvidence.length ? `
-        <div class="readings-counter-evidence-block">
-          <h4 class="readings-chain-h">Counter-evidence items:</h4>
-          <ul class="readings-counter-list">
-            ${counterEvidence.map((e) => `
-              <li class="readings-counter-item">
-                <span class="readings-counter-week">${escapeHTML(e.week_bucket || "—")}</span>
-                <span class="readings-counter-title">${escapeHTML(e.title || e.evidence_id || "—")}</span>
-              </li>`).join("")}
-          </ul>
         </div>` : ""}
       ${relationNarrative ? `<p class="readings-narrative readings-relation-narrative">${escapeHTML(relationNarrative)}</p>` : ""}
       ${relations.length ? `
@@ -2860,25 +3090,97 @@
     `;
   }
 
+  // Bridge text is a writer-enforced single paragraph in the form:
+  //   "<lead>. Reason: <reason>. Coherence N/5. Remaining gap: <gap>."
+  // The "Reason:" marker is locale-dependent (Reason | Razón | 理由),
+  // "Coherence N/5" and "Remaining gap:" stay in English across locales.
+  // We split each bridge into structured fields for rendering instead
+  // of dumping the whole paragraph as markdown.
+  function parseBridgeText(raw) {
+    const out = { lead: "", reason: "", coherence: null, remainingGap: "" };
+    if (!raw) return out;
+    const text = String(raw).trim();
+    const stripTail = (s) => s.replace(/[.。]\s*$/, "").trim();
+
+    const cohRe = /\s*Coherence\s+(\d+)\s*\/\s*5\s*[.。]?\s*/i;
+    const cm = text.match(cohRe);
+    let head = text;
+    let tail = "";
+    if (cm) {
+      out.coherence = parseInt(cm[1], 10);
+      head = text.slice(0, cm.index);
+      tail = text.slice(cm.index + cm[0].length);
+    }
+
+    const reasonRe = /(?:Reason|Razón|理由)\s*[:：]\s*/;
+    const rm = head.match(reasonRe);
+    if (rm) {
+      out.lead = stripTail(head.slice(0, rm.index));
+      out.reason = stripTail(head.slice(rm.index + rm[0].length));
+    } else {
+      out.lead = stripTail(head);
+    }
+
+    const gapRe = /(?:Remaining\s+gap)\s*[:：]\s*/i;
+    const gm = tail.match(gapRe);
+    if (gm) {
+      out.remainingGap = stripTail(tail.slice(gm.index + gm[0].length));
+    }
+    return out;
+  }
+
+  function pickBridgeLocaleText(b) {
+    const bag = (b && b.text_locales) || {};
+    return bag[state.locale] || bag.en || (b && b.text) || "";
+  }
+
+  // Bridges with no real link to the prediction's reasoning components
+  // (dimension `none` AND coherence ≤ 1) are noise from days the writer
+  // looked at the prediction but found nothing to attach. Hide them
+  // from the Bridge tab and the "has bridges" list filter — the
+  // timeline still shows them as a re-citation log.
+  function filterDisplayBridges(bridges) {
+    return (bridges || []).filter((b) => {
+      const dim = b && b.dimension;
+      if (dim && dim !== "none") return true;
+      const parsed = parseBridgeText(pickBridgeLocaleText(b));
+      return typeof parsed.coherence === "number" && parsed.coherence >= 2;
+    });
+  }
+
   function renderBridgesTabBody(bridges) {
-    const pickText = (b) => {
-      const bag = b.text_locales || {};
-      return bag[state.locale] || bag.en || b.text || "";
-    };
     return `
       <ul class="bridges-list">
         ${bridges.map((b) => {
           const win = formatTargetWindow(b.target_start_date, b.target_end_date);
+          const parsed = parseBridgeText(pickBridgeLocaleText(b));
+          const hasParse = parsed.reason || parsed.remainingGap || typeof parsed.coherence === "number";
+          const fieldRow = (label, val) => val
+            ? `<div class="bridge-row">
+                 <span class="bridge-key">${label}</span>
+                 <span class="bridge-val md-body">${renderMarkdown(val)}</span>
+               </div>`
+            : "";
+          const body = hasParse
+            ? `<div class="bridge-fields">
+                 ${fieldRow(localeStr("panel.bridge.signal"), parsed.lead)}
+                 ${fieldRow(localeStr("panel.bridge.reason"), parsed.reason)}
+                 ${fieldRow(localeStr("panel.bridge.gap"), parsed.remainingGap)}
+               </div>`
+            : `<div class="bridge-text md-body">${renderMarkdown(pickBridgeLocaleText(b))}</div>`;
           return `
           <li class="bridge-item">
             <div class="bridge-meta">
               <span class="bridge-date">${escapeHTML(b.date || "—")}</span>
               ${b.dimension && b.dimension !== "none"
-                ? `<span class="bridge-dim">supports <code>${escapeHTML(b.dimension)}</code></span>`
+                ? `<span class="bridge-dim">${localeStr("panel.bridge.supports")} <code>${escapeHTML(b.dimension)}</code></span>`
+                : ""}
+              ${typeof parsed.coherence === "number"
+                ? `<span class="bridge-coh">Coherence ${parsed.coherence}/5</span>`
                 : ""}
               ${win ? `<span class="bridge-target" title="${localeStr("tooltip.bridge_target")}">→ ${escapeHTML(win)}</span>` : ""}
             </div>
-            <div class="bridge-text md-body">${renderMarkdown(pickText(b))}</div>
+            ${body}
           </li>`;}).join("")}
       </ul>
     `;
@@ -3168,8 +3470,7 @@
         ${list.map((e) => {
           const title = escapeHTML(e.title || e.source_name || e.url || "(untitled)");
           const url   = e.url ? escapeHTML(e.url) : "";
-          const dir   = e.support_direction ? `<span class="rtype">${escapeHTML(e.support_direction)}</span>` : "";
-          return `<li>${dir}${url ? `<a href="${url}" target="_blank" rel="noreferrer noopener">${title}</a>` : title}</li>`;
+          return `<li>${url ? `<a href="${url}" target="_blank" rel="noreferrer noopener">${title}</a>` : title}</li>`;
         }).join("")}
       </ul>
     `;
@@ -3611,6 +3912,12 @@
         dp.setAttribute("aria-hidden", "true");
         document.body.classList.remove("panel-open");
       }
+    } else {
+      // Close the PROBE settings panel when leaving PROBE — it has no
+      // anchor in OBSERVATORY (no hamburger visible) and would otherwise
+      // float orphaned over the canvas.
+      const pmp = document.getElementById("probe-menu-panel");
+      if (pmp && !pmp.hidden) toggleProbeMenu(false);
     }
     updateProbeTabButtons();
     if (showPredictions) renderListView();
@@ -3629,7 +3936,25 @@
   function setProbeTab(tab) {
     if (tab !== "predictions" && tab !== "news") return;
     state.probeTab = tab;
+    // NEWS doesn't render a timeline, so dropping back to NEWS clears
+    // any open prediction timeline. Going from NEWS to PREDICTIONS
+    // restores whatever timeline state was there before (if any).
+    if (tab === "news") state.probeTimelinePred = null;
     setView("probe");
+  }
+
+  function openProbeTimeline(predId) {
+    state.probeTimelinePred = predId;
+    if (state.view === "probe" && state.probeTab === "predictions") {
+      renderListView();
+    }
+  }
+
+  function closeProbeTimeline() {
+    state.probeTimelinePred = null;
+    if (state.view === "probe" && state.probeTab === "predictions") {
+      renderListView();
+    }
   }
 
   // Stream G LIST: full predictions list with cascading filters
@@ -3639,12 +3964,25 @@
   // of that scope's graph if it isn't already cached.
   async function renderListView() {
     const body = document.getElementById("list-body");
+    const view = document.getElementById("list-view");
     if (!body) return;
+    // Timeline mode owns the whole PROBE body when a prediction is
+    // selected. The .alt-view-head (toggle + filters) is hidden via
+    // CSS while .is-timeline is set on #list-view.
+    if (state.probeTimelinePred) {
+      if (view) view.classList.add("is-timeline");
+      renderPredictionTimeline(body, state.probeTimelinePred);
+      return;
+    }
+    if (view) view.classList.remove("is-timeline");
+    if (state._timelineResizeHandler) {
+      window.removeEventListener("resize", state._timelineResizeHandler);
+      state._timelineResizeHandler = null;
+    }
     const scopeSel = document.getElementById("list-scope");
     const catSel = document.getElementById("list-category");
     const themeSel = document.getElementById("list-theme");
     const statusSel = document.getElementById("list-status");
-    const winSel = document.getElementById("list-window");
     const bridgeChk = document.getElementById("list-has-bridge");
     if (!scopeSel) return;
 
@@ -3673,7 +4011,11 @@
     const catFilter = catSel.value;
     const themeFilter = themeSel.value;
     const statusFilter = statusSel.value;
-    const windowFilter = winSel.value || state.windowId;
+    // Window now lives in the PROBE settings hamburger and writes
+    // straight to state.windowId — same value the OBSERVATORY graph
+    // reads, so toggling 7d/30d/90d in PROBE flows through to every
+    // metric-by-window reader without a parallel filter.
+    const windowFilter = state.windowId || "30d";
     const hasBridge = !!bridgeChk.checked;
 
     let preds = (g.nodes || []).filter((n) => n.type === "prediction");
@@ -3686,20 +4028,62 @@
       });
     }
     if (hasBridge) {
-      preds = preds.filter((n) => ((n.detail && n.detail.bridges) || []).length > 0);
+      preds = preds.filter((n) => filterDisplayBridges((n.detail && n.detail.bridges) || []).length > 0);
     }
 
-    preds.sort((a, b) => {
-      const ac = a.category_id || "";
-      const bc = b.category_id || "";
-      if (ac !== bc) return ac.localeCompare(bc);
-      const at = a.theme_id || "";
-      const bt = b.theme_id || "";
-      if (at !== bt) return at.localeCompare(bt);
-      const ar = (a.metrics_by_window && a.metrics_by_window[windowFilter] && a.metrics_by_window[windowFilter].realization_score) || 0;
-      const br = (b.metrics_by_window && b.metrics_by_window[windowFilter] && b.metrics_by_window[windowFilter].realization_score) || 0;
-      return br - ar;
-    });
+    if (!state.listSort) state.listSort = { col: "default", dir: "desc" };
+    const sort = state.listSort;
+    const lastEvOf = (n) => {
+      const ev = (n.detail && n.detail.evidence) || [];
+      return ev.length ? (ev[0].validation_date || "") : "";
+    };
+    const STATUS_RANK = {
+      supported: 4, weakly_supported: 3, mixed: 2, no_signal: 1, contradicted: 0,
+    };
+    const valOf = (n) => {
+      const m = (n.metrics_by_window && n.metrics_by_window[windowFilter]) || {};
+      switch (sort.col) {
+        case "scope":    return (n.scope_id || "").toLowerCase();
+        case "category": {
+          const c = nodeById(n.category_id);
+          return ((c && (nodeLabel(c, "short_label") || nodeLabel(c, "label"))) || n.category_id || "").toLowerCase();
+        }
+        case "theme": {
+          const t = nodeById(n.theme_id);
+          return ((t && (nodeLabel(t, "short_label") || nodeLabel(t, "label"))) || n.theme_id || "").toLowerCase();
+        }
+        case "status":   return STATUS_RANK[m.status] != null ? STATUS_RANK[m.status] : -1;
+        case "realiz":   return typeof m.realization_score === "number" ? m.realization_score : -Infinity;
+        case "last_ev":  return lastEvOf(n);
+        default:         return null;
+      }
+    };
+    if (sort.col === "default") {
+      preds.sort((a, b) => {
+        const ac = a.category_id || "";
+        const bc = b.category_id || "";
+        if (ac !== bc) return ac.localeCompare(bc);
+        const at = a.theme_id || "";
+        const bt = b.theme_id || "";
+        if (at !== bt) return at.localeCompare(bt);
+        const ar = (a.metrics_by_window && a.metrics_by_window[windowFilter] && a.metrics_by_window[windowFilter].realization_score) || 0;
+        const br = (b.metrics_by_window && b.metrics_by_window[windowFilter] && b.metrics_by_window[windowFilter].realization_score) || 0;
+        return br - ar;
+      });
+    } else {
+      preds.sort((a, b) => {
+        const av = valOf(a), bv = valOf(b);
+        const aMissing = av == null || av === "" || av === -Infinity;
+        const bMissing = bv == null || bv === "" || bv === -Infinity;
+        if (aMissing && bMissing) return 0;
+        if (aMissing) return 1;
+        if (bMissing) return -1;
+        let r;
+        if (typeof av === "string") r = av.localeCompare(bv);
+        else r = av < bv ? -1 : av > bv ? 1 : 0;
+        return sort.dir === "desc" ? -r : r;
+      });
+    }
 
     if (!preds.length) {
       body.innerHTML = `<p class="muted">No predictions match the current filters.</p>`;
@@ -3720,45 +4104,39 @@
         nodeLabel(n, "title") || detail.title_clean || nodeLabel(n, "label"),
         detail.prediction_summary || "",
       );
-      const eli = (detail.reasoning && detail.reasoning.eli14) || "";
+      // PREDICTION column: prefer the locale-aware ELI14 explanation
+      // when present, fall back to the prediction title. Both render
+      // with identical typography so rows look uniform regardless of
+      // which source supplied the text.
+      const predText = localizedEli14(detail) || title;
       const status = m.status || "no_signal";
       const real = (typeof m.realization_score === "number")
         ? m.realization_score.toFixed(2) : "—";
-      const contradiction =
-        (typeof m.contradiction_signal === "number" && m.contradiction_signal) ||
-        (typeof detail.latest_contradiction_score === "number" && detail.latest_contradiction_score) ||
-        0;
-      const isContradicted = status === "contradicted" || contradiction >= 0.60;
       const evidence = (detail.evidence || []);
       const lastEv = evidence.length ? (evidence[0].validation_date || "") : "";
       return `<tr data-goto="${escapeHTML(n.id)}">
         <td class="cell-scope">${escapeHTML(n.scope_id || targetScope)}</td>
         <td class="cell-category">${escapeHTML(catLabel)}</td>
         <td class="cell-theme">${escapeHTML(themeLabel)}</td>
-        <td class="cell-title">${escapeHTML(title)}</td>
-        <td class="cell-eli">${escapeHTML(eli)}</td>
+        <td class="cell-prediction" title="${escapeHTML(predText)}"><span class="clamp-2">${escapeHTML(predText)}</span></td>
         <td class="cell-status status-${escapeHTML(status)}">${escapeHTML(status)}</td>
         <td class="cell-real">${real}</td>
-        <td class="cell-contradicts">${isContradicted ? "✗" : ""}</td>
         <td class="cell-last-ev">${escapeHTML(lastEv)}</td>
-        <td class="cell-open"><button type="button" class="open-in-graph" title="Open in graph">&rarr;</button></td>
       </tr>`;
     }).join("");
 
+    const arrow = (col) => sort.col === col ? (sort.dir === "asc" ? " ↑" : " ↓") : "";
     body.innerHTML = `
       <table class="list-table">
         <thead>
           <tr>
-            <th>Scope</th>
-            <th>Category</th>
-            <th>Theme</th>
-            <th>Title</th>
-            <th>ELI14</th>
-            <th>Status</th>
-            <th>Realiz.</th>
-            <th>×</th>
-            <th>Last evidence</th>
-            <th></th>
+            <th class="sortable" data-list-sort="scope">Scope${arrow("scope")}</th>
+            <th class="sortable" data-list-sort="category">Category${arrow("category")}</th>
+            <th class="sortable" data-list-sort="theme">Theme${arrow("theme")}</th>
+            <th>Prediction</th>
+            <th class="sortable" data-list-sort="status">Status${arrow("status")}</th>
+            <th class="sortable" data-list-sort="realiz">Realiz.${arrow("realiz")}</th>
+            <th class="sortable" data-list-sort="last_ev">Last evidence${arrow("last_ev")}</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -3766,94 +4144,1084 @@
       <p class="muted">${preds.length} predictions match${preds.length > cap ? ` (showing first ${cap})` : ""}.</p>
     `;
 
+    // Row click opens the per-prediction timeline within PROBE —
+    // primary navigation for predictions. OBSERVATORY is for the
+    // structural graph; PROBE is for the time view.
     body.querySelectorAll("tr[data-goto]").forEach((row) => {
       row.addEventListener("click", () => {
         const id = row.dataset.goto;
-        const target = nodeById(id);
-        if (!target) return;
-        // If the row's scope differs from the current GRAPH scope,
-        // switch the GRAPH scope first so the node actually exists in
-        // the rendered simulation when we click into it.
-        const rowScope = target.scope_id;
-        if (rowScope && rowScope !== state.scopeId) {
-          state.scopeId = rowScope;
-          updateScopeButtons(state.scopeId);
-          loadScopeGraph(state.scopeId).then(() => {
-            rebuildCategoryFilters();
-            rebuildSimulation();
-            setView("graph");
-            const t2 = nodeById(id);
-            if (t2) handleNodeClick(t2);
-          });
-          return;
+        if (!nodeById(id)) return;
+        openProbeTimeline(id);
+      });
+    });
+
+    // Header click cycles sort. Same column flips direction; a
+    // different column starts at its useful default — alpha cols
+    // start asc (A→Z), numeric / score / status / date cols start
+    // desc (latest first / strongest first).
+    body.querySelectorAll("th.sortable").forEach((th) => {
+      th.addEventListener("click", () => {
+        const col = th.dataset.listSort;
+        if (state.listSort.col === col) {
+          state.listSort.dir = state.listSort.dir === "asc" ? "desc" : "asc";
+        } else {
+          state.listSort.col = col;
+          const ascDefault = ["scope", "category", "theme"].includes(col);
+          state.listSort.dir = ascDefault ? "asc" : "desc";
         }
-        setView("graph");
-        handleNodeClick(target);
+        renderListView();
       });
     });
   }
 
+  /* ---------------- PROBE / Prediction timeline ---------------- */
+
+  // Strip markdown bold + leading/trailing decoration from a prediction's
+  // raw title so it reads cleanly as a single header.
+  function predictionTitleClean(node) {
+    const detail = (node && node.detail) || {};
+    const t =
+      detail.title_clean ||
+      detail.title ||
+      node.title ||
+      node.short_label ||
+      node.label ||
+      node.id;
+    return String(t).replace(/\*\*/g, "").replace(/^[*"\s]+|[*"\s]+$/g, "").trim();
+  }
+
+  // Track keys the timeline draws, in vertical order. Kept in English
+  // labels for v1 — these are technical row headers, not body copy.
+  // The self/start/target info now lives in the timeline header text
+  // instead of its own track row, so the rendered timeline is reserved
+  // for downstream context (bridges/needs/downstream/upstream).
+  const TIMELINE_TRACKS = [
+    { key: "bridge",     label: "Bridges" },
+    { key: "need",       label: "Needs" },
+    { key: "downstream", label: "Downstream" },
+    { key: "upstream",   label: "Upstream" },
+  ];
+
+  // Convert a node + its readings into a flat list of plottable events.
+  // Each event is { track, kind: "point"|"window", date|start+end,
+  // label, sub?, anchor }. The anchor maps the event to a section of
+  // the inline panel body so click→scroll lands on the matching item.
+  function timelineEventsFor(node) {
+    const events = [];
+    const detail = (node && node.detail) || {};
+
+    // Track: bridges (re-citation events; some carry a target window too)
+    (detail.bridges || []).forEach((b, bIdx) => {
+      const anchor = `bridge-${bIdx}`;
+      if (b.date) {
+        events.push({
+          track: "bridge", kind: "point",
+          date: b.date,
+          label: b.dimension ? `Bridge · ${b.dimension}` : "Bridge",
+          sub: (b.text_locales && b.text_locales[state.locale]) || b.text || "",
+          anchor,
+        });
+      }
+      if (b.target_start_date && b.target_end_date) {
+        events.push({
+          track: "bridge", kind: "window",
+          start: b.target_start_date, end: b.target_end_date,
+          label: "Bridge target",
+          sub: `${b.target_start_date} → ${b.target_end_date}`,
+          anchor,
+        });
+      }
+    });
+
+    // Track: needs (target windows on the need + nested task)
+    (detail.needs || []).forEach((n, nIdx) => {
+      const actor = (n.actor_locales && n.actor_locales[state.locale]) || n.actor || "Need";
+      const anchor = `need-${nIdx}`;
+      const hasNeedWindow = n.target_start_date && n.target_end_date;
+      const task = n.task || {};
+      const hasTaskWindow = task.target_start_date && task.target_end_date;
+      if (hasNeedWindow) {
+        events.push({
+          track: "need", kind: "window",
+          start: n.target_start_date, end: n.target_end_date,
+          label: actor,
+          sub: (n.outcome_locales && n.outcome_locales[state.locale]) || n.outcome || "",
+          anchor,
+        });
+      }
+      if (hasTaskWindow) {
+        events.push({
+          track: "need", kind: "window",
+          start: task.target_start_date, end: task.target_end_date,
+          label: `Task · ${(task.what_locales && task.what_locales[state.locale]) || task.what || ""}`,
+          sub: actor,
+          anchor,
+        });
+      }
+      // No structured target window? Fall back to parsing the freeform
+      // task.when string ("Q2 2026 contract cycles", "by Q3 2026",
+      // "2026-09-30") into a date range. The schema *has* the
+      // target_start_date / target_end_date fields, but the data
+      // pipeline today leaves them null and parks the timing in
+      // task.when as natural language — see design/FIXME.md for the
+      // backfill task.
+      if (!hasNeedWindow && !hasTaskWindow) {
+        const whenText = (task.when_locales && task.when_locales.en) || task.when || "";
+        const parsed = parseFreeformWhen(whenText);
+        const taskWhat = (task.what_locales && task.what_locales[state.locale]) || task.what || "";
+        const sub = taskWhat
+          || (n.outcome_locales && n.outcome_locales[state.locale])
+          || n.outcome
+          || "";
+        if (parsed) {
+          events.push({
+            track: "need", kind: "window",
+            start: parsed.start, end: parsed.end,
+            label: actor,
+            sub: sub ? `${sub} · ${whenText}` : whenText,
+            anchor,
+          });
+        } else if (detail.prediction_date) {
+          // Last-ditch fallback: anchor a point at the prediction's
+          // own proposal date so the NEEDS row still surfaces.
+          events.push({
+            track: "need", kind: "point",
+            date: detail.prediction_date,
+            label: actor,
+            sub,
+            anchor,
+          });
+        }
+      }
+    });
+
+    // Tracks: downstream + upstream readings
+    const r = detail.readings || {};
+    (r.downstream || []).forEach((d, dIdx) => {
+      const anchor = `downstream-${dIdx}`;
+      if (d.pred_date) {
+        events.push({
+          track: "downstream", kind: "point",
+          date: d.pred_date,
+          label: d.short_label || d.title || d.prediction_id,
+          sub: d.notes || "",
+          predId: d.prediction_id,
+          anchor,
+        });
+      }
+      if (d.target_start_date && d.target_end_date) {
+        events.push({
+          track: "downstream", kind: "window",
+          start: d.target_start_date, end: d.target_end_date,
+          label: d.short_label || d.prediction_id,
+          sub: d.notes || "",
+          predId: d.prediction_id,
+          anchor,
+        });
+      }
+    });
+    (r.upstream || []).forEach((u, uIdx) => {
+      const anchor = `upstream-${uIdx}`;
+      if (u.pred_date) {
+        events.push({
+          track: "upstream", kind: "point",
+          date: u.pred_date,
+          label: u.short_label || u.title || u.prediction_id,
+          sub: u.notes || "",
+          predId: u.prediction_id,
+          anchor,
+        });
+      }
+      if (u.target_start_date && u.target_end_date) {
+        events.push({
+          track: "upstream", kind: "window",
+          start: u.target_start_date, end: u.target_end_date,
+          label: u.short_label || u.prediction_id,
+          sub: u.notes || "",
+          predId: u.prediction_id,
+          anchor,
+        });
+      }
+    });
+
+    return events;
+  }
+
+  // Smooth-scroll the inline panel body to the item matching a
+  // timeline event's anchor. No-ops when the anchor isn't found
+  // (e.g. an event whose underlying entry was filtered out by the
+  // panel's display rules).
+  function scrollToTimelineAnchor(anchorKey) {
+    const target = document.querySelector(`[data-tl-anchor="${anchorKey}"]`);
+    if (!target) return;
+    const scroller = document.querySelector("#list-view.is-timeline > .list-body");
+    if (scroller) {
+      // Compute target position relative to the scroller, account for
+      // the sticky timeline-head pinned at top:0 of the scroller.
+      const stickyHead = scroller.querySelector(".timeline-head");
+      const stickyOffset = stickyHead ? stickyHead.offsetHeight : 0;
+      const r = target.getBoundingClientRect();
+      const sR = scroller.getBoundingClientRect();
+      const top = scroller.scrollTop + (r.top - sR.top) - stickyOffset - 12;
+      scroller.scrollTo({ top, behavior: "smooth" });
+    } else {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    // Brief highlight pulse so the user sees where they landed.
+    target.classList.add("tl-anchor-flash");
+    setTimeout(() => target.classList.remove("tl-anchor-flash"), 1200);
+  }
+
+  // Render the prediction timeline into the PROBE/PREDICTIONS body.
+  // Replaces the table; CSS hides the .alt-view-head (toggle + filters)
+  // while #list-view.is-timeline is set.
+  function renderPredictionTimeline(body, predId) {
+    const node = nodeById(predId);
+    if (!node) {
+      body.innerHTML = `
+        <div class="timeline-head">
+          <button class="timeline-back" data-action="back" type="button">${escapeHTML(localeStr("timeline.back"))}</button>
+        </div>
+        <p class="muted">${escapeHTML(localeStr("timeline.notfound"))}</p>
+      `;
+      body.querySelector('[data-action="back"]').addEventListener("click", closeProbeTimeline);
+      return;
+    }
+
+    const events = timelineEventsFor(node);
+    // Reset selection when entering a (different) prediction's timeline.
+    if (state._timelineEventsPredId !== predId) {
+      state.timelineSelectedIdx = null;
+    }
+    state._timelineEventsPredId = predId;
+
+    // The timeline page is now structured top-down by user attention:
+    //   1. Claim — the prediction in plain language (ELI14 if present)
+    //   2. Timeline — the visualisation
+    //   3. Metrics — Hit rate / Attention tiles + daily-precision chart
+    //   4. Technical summary — Stream K body, expanded
+    //   5+. Reasoning / Needs / Bridge / Readings / meta — drill-down
+    //
+    // Each detail-section reuses the OBSERVATORY tab body renderer so
+    // locale fan-out + markdown formatting stay in one place; the
+    // surrounding chrome (header, ordering) is bespoke for this view.
+    const detail = node.detail || {};
+    const m = metricsFor(node, state.windowId);
+    const claimText = localizedEli14(detail) || predictionTitleClean(node);
+    const reasoning = (detail && detail.reasoning) || {};
+    const hasReasoning =
+      reasoning.because || reasoning.given || reasoning.so_that || reasoning.landing;
+    const bridges = filterDisplayBridges((detail && detail.bridges) || []);
+    const needs = (detail && detail.needs) || [];
+    const readings = (detail && detail.readings) || {};
+    const hasReadings = (readings.clusters || []).length > 0
+      || (readings.downstream || []).length > 0
+      || (readings.upstream   || []).length > 0;
+
+    const reasoningHTML = hasReasoning
+      ? renderReasoningTabBody(reasoning, detail)
+      : `<p class="muted">${localeStr("panel.tab.reasoning.empty")}</p>`;
+    const bridgesHTML = bridges.length
+      ? renderBridgesTabBody(bridges)
+      : `<p class="muted">${localeStr("panel.tab.bridge.empty")}</p>`;
+    const needsHTML = needs.length
+      ? renderNeedsTabBody(needs)
+      : `<p class="muted">${localeStr("panel.tab.needs.empty")}</p>`;
+    const readingsHTML = hasReadings
+      ? renderReadingsTabBody(readings)
+      : `<p class="muted">${localeStr("panel.tab.readings.empty")}</p>`;
+
+    // Technical summary — short-form synopsis. Prefers the Stream K
+    // summary; falls back to the long body for predictions that
+    // predate Stream K so the section is never empty when there's
+    // any descriptive text to show.
+    const summaryByLocale = (detail && detail.summary_short_locales) || {};
+    const streamK = summaryByLocale[state.locale]
+      || summaryByLocale.en
+      || detail.summary_short
+      || "";
+    const fullDescription = nodeLabel(node, "description") || detail.description || "";
+    const technicalText = streamK || fullDescription;
+    // FULL PREDICTION is the long-form body in its own collapsed slot.
+    // Suppress when the technical summary already IS the full body —
+    // no point duplicating the same paragraph behind a toggle.
+    const showFullPrediction = !!fullDescription
+      && fullDescription.trim() !== technicalText.trim();
+
+    // Metric tiles
+    const attTip  = "How often this topic was cited (frequency × relevance) in the window";
+    const realTip = "Weighted mean observed relevance (0.65 * new + 0.35 * continuing)";
+    const hitTile = metricTile(localeStr("panel.realization"), m.realization_score, undefined, realTip);
+    const attTile = metricTile(localeStr("panel.attention"),   m.attention_score,   undefined, attTip);
+    const activityChart = renderActivityChart(m);
+    const activityHeader = renderGrassStripHeader(m);
+
+    // Bottom meta block — date, source/validation reports, lineage.
+    const lineageRows = renderTimelineLineage(node);
+    const metaBits = [];
+    if (detail.prediction_date) {
+      metaBits.push(`<p class="muted">prediction date: ${escapeHTML(detail.prediction_date)}</p>`);
+    }
+    if (detail.source_report_path) {
+      const url = REPO_BLOB_URL + detail.source_report_path;
+      metaBits.push(`<p class="muted">${localeStr("panel.source_report")}: <a href="${escapeHTML(url)}" target="_blank" rel="noreferrer noopener">${escapeHTML(detail.source_report_path)}</a></p>`);
+    }
+
+    body.innerHTML = `
+      <div class="timeline-head">
+        <div class="timeline-title-block">
+          <div class="timeline-title" title="${escapeHTML(predictionTitleClean(node))}">${escapeHTML(predictionTitleClean(node))}</div>
+          ${detail.prediction_date ? `<div class="timeline-dates">Proposed ${escapeHTML(detail.prediction_date)}${detail.target_start_date && detail.target_end_date ? ` · Target ${escapeHTML(detail.target_start_date)} → ${escapeHTML(detail.target_end_date)}` : ""}</div>` : ""}
+        </div>
+        <button class="timeline-back" data-action="back" type="button">${escapeHTML(localeStr("timeline.back"))}</button>
+        <button class="timeline-graph" data-action="graph" type="button">${escapeHTML(localeStr("timeline.open_in_observatory"))}</button>
+      </div>
+
+      <p class="tl-claim">${escapeHTML(claimText)}</p>
+
+      <section class="tl-section tl-mt-section">
+        <h3 class="tl-section-h">Metrics and Timeline</h3>
+        <div class="mt-block">
+          <div class="mt-metrics">
+            ${hitTile}
+            ${attTile}
+            <div class="mt-precision">
+              <div class="mt-precision-head">${escapeHTML(activityHeader)}</div>
+              ${activityChart}
+            </div>
+          </div>
+          <div class="mt-timeline">
+            <div class="timeline-canvas-wrap"><svg class="timeline-svg" role="img" aria-label="Prediction timeline"></svg></div>
+          </div>
+        </div>
+      </section>
+
+      ${technicalText ? `
+        <section class="tl-section">
+          <h3 class="tl-section-h">Technical summary</h3>
+          <div class="md-body">${renderMarkdown(technicalText)}</div>
+        </section>
+      ` : ""}
+
+      ${showFullPrediction ? `
+        <section class="tl-section tl-fullpred-section">
+          <details class="tl-fullpred">
+            <summary class="tl-section-h tl-fullpred-summary">Full prediction</summary>
+            <div class="md-body tl-fullpred-body">${renderMarkdown(fullDescription)}</div>
+          </details>
+        </section>
+      ` : ""}
+
+      <section class="tl-section" data-tab-body="reasoning">
+        <h3 class="tl-section-h">${escapeHTML(localeStr("panel.tab.reasoning"))}</h3>
+        ${reasoningHTML}
+      </section>
+
+      <section class="tl-section" data-tab-body="needs">
+        <h3 class="tl-section-h">${escapeHTML(localeStr("panel.tab.needs"))}</h3>
+        ${needsHTML}
+      </section>
+
+      <section class="tl-section" data-tab-body="bridge">
+        <h3 class="tl-section-h">${escapeHTML(localeStr("panel.tab.bridge"))}</h3>
+        ${bridgesHTML}
+      </section>
+
+      <section class="tl-section" data-tab-body="readings">
+        <h3 class="tl-section-h">${escapeHTML(localeStr("panel.tab.readings"))}</h3>
+        ${readingsHTML}
+      </section>
+
+      ${(lineageRows || metaBits.length) ? `
+        <section class="tl-section tl-meta-section">
+          ${lineageRows}
+          ${metaBits.join("")}
+        </section>
+      ` : ""}
+    `;
+
+    // Forward [data-goto] clicks. For prediction nodes (the title of
+    // an upstream / downstream chain item) we stay in PROBE and open
+    // that prediction's own timeline. Other targets — typically theme
+    // / category lineage breadcrumbs — bounce out to OBSERVATORY's
+    // detail panel via handleNodeClick.
+    body.querySelectorAll(".tl-section [data-goto]").forEach((el) => {
+      el.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        const id = el.dataset.goto;
+        if (!id) return;
+        const target = nodeById(id);
+        if (!target) return;
+        if (target.type === "prediction") {
+          openProbeTimeline(id);
+        } else {
+          handleNodeClick(target);
+        }
+      });
+    });
+
+    // Tag bridges / needs / downstream / upstream items with their
+    // data-tl-anchor so timeline event clicks can scroll-into-view.
+    body.querySelectorAll(".bridges-list > li").forEach((li, i) => {
+      li.dataset.tlAnchor = `bridge-${i}`;
+    });
+    body.querySelectorAll(".needs-list > li").forEach((li, i) => {
+      li.dataset.tlAnchor = `need-${i}`;
+    });
+    body.querySelectorAll(".readings-chain-list:not(.readings-chain-list-up) > li").forEach((li, i) => {
+      li.dataset.tlAnchor = `downstream-${i}`;
+    });
+    body.querySelectorAll(".readings-chain-list-up > li").forEach((li, i) => {
+      li.dataset.tlAnchor = `upstream-${i}`;
+    });
+
+    body.querySelector('[data-action="back"]').addEventListener("click", closeProbeTimeline);
+    body.querySelector('[data-action="graph"]').addEventListener("click", () => {
+      // Persist timeline state — when the user toggles back to PROBE,
+      // the same timeline reopens. Only the explicit Back button clears it.
+      setView("graph");
+      handleNodeClick(node);
+    });
+
+    drawTimelineSVG(body.querySelector(".timeline-canvas-wrap"), events, node);
+
+    // Re-fit on viewport resize while this timeline is open.
+    if (state._timelineResizeHandler) {
+      window.removeEventListener("resize", state._timelineResizeHandler);
+    }
+    state._timelineResizeHandler = () => {
+      const wrap = document.querySelector(".timeline-canvas-wrap");
+      if (wrap) drawTimelineSVG(wrap, events, node);
+    };
+    window.addEventListener("resize", state._timelineResizeHandler);
+  }
+
+  // Compute the effective time-span for an event: zero-width for
+  // points, [start, end] for windows. Used by the lane packer.
+  function _eventSpan(e) {
+    if (e.kind === "window") {
+      return [new Date(e.start).getTime(), new Date(e.end).getTime()];
+    }
+    const t = new Date(e.date).getTime();
+    return [t, t];
+  }
+  // "Reference date" used to rank events when a cluster overflows the
+  // 3-lane budget — newer events keep their lane, older ones get folded
+  // into a +N badge. End of the span is "newest" for a window; the
+  // event's own date for a point.
+  function _eventRefDate(e) {
+    if (e.kind === "window") return new Date(e.end).getTime();
+    return new Date(e.date).getTime();
+  }
+
+  // Per-track lane assignment. Builds clusters of overlapping events,
+  // gives each cluster's three newest entries lane 0/1/2, folds the
+  // rest into overflow groups anchored at each cluster's mid-point.
+  // Mutates events with .lane (0..2) or .overflow=true; returns the
+  // overflow groups for badge rendering.
+  function packTimelineLanes(events, tracks, maxLanes) {
+    const overflowGroups = [];
+    const trackMaxLane = new Map();
+    for (const t of tracks) {
+      const trackEvents = events.filter((e) => e.track === t.key);
+      if (!trackEvents.length) {
+        trackMaxLane.set(t.key, 0);
+        continue;
+      }
+      // Annotate spans + ref dates once.
+      for (const e of trackEvents) {
+        const sp = _eventSpan(e);
+        e._spanStart = sp[0];
+        e._spanEnd   = sp[1];
+        e._refTime   = _eventRefDate(e);
+        e.lane       = undefined;
+        e.overflow   = false;
+      }
+      // Cluster by overlap (sweep over span starts).
+      const sorted = trackEvents.slice().sort((a, b) => a._spanStart - b._spanStart);
+      const clusters = [];
+      let cur = null;
+      for (const e of sorted) {
+        if (!cur || e._spanStart > cur.maxEnd) {
+          cur = { events: [e], maxEnd: e._spanEnd, minStart: e._spanStart };
+          clusters.push(cur);
+        } else {
+          cur.events.push(e);
+          cur.maxEnd = Math.max(cur.maxEnd, e._spanEnd);
+        }
+      }
+      // Assign lanes per-cluster: 3 newest by ref date go to 0/1/2,
+      // rest spill into overflow.
+      let maxLaneUsed = 0;
+      for (const c of clusters) {
+        const byRef = c.events.slice().sort((a, b) => b._refTime - a._refTime);
+        byRef.forEach((e, i) => {
+          if (i < maxLanes) {
+            e.lane = i;
+            if (i > maxLaneUsed) maxLaneUsed = i;
+          } else {
+            e.overflow = true;
+          }
+        });
+        const overflow = byRef.slice(maxLanes);
+        if (overflow.length) {
+          overflowGroups.push({
+            track: t.key,
+            anchorTime: (c.minStart + c.maxEnd) / 2,
+            events: overflow,
+          });
+        }
+      }
+      trackMaxLane.set(t.key, maxLaneUsed);
+    }
+    return { overflowGroups, trackMaxLane };
+  }
+
+  function drawTimelineSVG(wrap, events, node) {
+    const svgEl = wrap.querySelector("svg");
+    if (!svgEl) return;
+    const svg = d3.select(svgEl);
+    svg.selectAll("*").remove();
+
+    const tracks = TIMELINE_TRACKS;
+    const LANE_GAP = 10;
+    const margin = { top: 12, right: 32, bottom: 30, left: 132 };
+    const MAX_LANES = 3;
+    // Buffer below the last track's centerline so lane 2 (+LANE_GAP)
+    // doesn't crash into the date axis on a 3-lane upstream cluster.
+    const bottomLaneBuffer = LANE_GAP + 4;
+    // Stretch trackHeight to fill the wrap (which itself stretches to
+    // match the metrics column on the left via grid align-items:
+    // stretch). 36px is the natural minimum — anything taller is just
+    // bonus breathing room when the metrics stack happens to be tall.
+    const NATURAL_TRACK_HEIGHT = 36;
+    const wrapHeight = wrap.clientHeight || 0;
+    const availableInner = wrapHeight - margin.top - margin.bottom - bottomLaneBuffer;
+    const trackHeight = Math.max(
+      NATURAL_TRACK_HEIGHT,
+      Math.floor(availableInner / tracks.length)
+    );
+    const innerHeight = tracks.length * trackHeight + bottomLaneBuffer;
+    const width = Math.max(360, wrap.clientWidth);
+    const height = innerHeight + margin.top + margin.bottom;
+    svg.attr("width", width).attr("height", height);
+
+    // Lane assignment (mutates events with .lane / .overflow).
+    const { overflowGroups, trackMaxLane } = packTimelineLanes(events, tracks, MAX_LANES);
+
+    // Pull the prediction's own target window so we can highlight
+    // when it's supposed to land. Drawn as a tinted background
+    // rectangle behind the tracks, with a "Target" label on the
+    // top-right of the rectangle.
+    const targetStart = node && node.detail && node.detail.target_start_date;
+    const targetEnd   = node && node.detail && node.detail.target_end_date;
+    const hasTarget   = !!(targetStart && targetEnd);
+
+    // Compute time domain. Always extend the right edge to "today" so
+    // the dashed today guide has somewhere to live even when the
+    // prediction has no future events. Fall back to a 30-day window
+    // around today when the prediction has no dates at all.
+    const today = new Date();
+    const dates = [];
+    for (const e of events) {
+      if (e.date)  dates.push(new Date(e.date));
+      if (e.start) dates.push(new Date(e.start));
+      if (e.end)   dates.push(new Date(e.end));
+    }
+    if (hasTarget) {
+      dates.push(new Date(targetStart));
+      dates.push(new Date(targetEnd));
+    }
+    let minD, maxD;
+    if (dates.length) {
+      minD = d3.min(dates);
+      maxD = d3.max(dates);
+    } else {
+      minD = new Date(today.getTime() - 14 * 86400000);
+      maxD = today;
+    }
+    if (maxD < today) maxD = today;
+    if (minD.getTime() === maxD.getTime()) {
+      // Zero-width domain: pad ±7d so the single event isn't pinned to the edge.
+      minD = new Date(minD.getTime() - 7 * 86400000);
+      maxD = new Date(maxD.getTime() + 7 * 86400000);
+    }
+    const span = Math.max(1, maxD - minD);
+    const pad = span * 0.05;
+    const xScale = d3.scaleTime()
+      .domain([new Date(minD.getTime() - pad), new Date(maxD.getTime() + pad)])
+      .range([0, width - margin.left - margin.right]);
+
+    const yMid = (i) => i * trackHeight + trackHeight / 2;
+    // Lane Y offsets within a track. The spread depends on how many
+    // lanes are *actually used* in that track — a track with a single
+    // event sits on the centerline (no offset), 2-event clusters
+    // straddle the line, only 3-event clusters fan out to the full
+    // ±LANE_GAP. This keeps the rare overflow case readable without
+    // floating single events above the line.
+    const laneY = (mid, lane, maxLaneInTrack) => {
+      if (lane == null || !maxLaneInTrack) return mid;
+      if (maxLaneInTrack === 1) {
+        return mid + (lane - 0.5) * LANE_GAP;
+      }
+      // maxLaneInTrack >= 2 → full 3-lane spread
+      return mid + (lane - 1) * LANE_GAP;
+    };
+
+    const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Target-window highlight. A full-height tinted rect spanning the
+    // prediction's target_start_date → target_end_date, with a small
+    // "Target" tag at the top-right corner. Drawn before the track
+    // lines so the lines stay visible across the rect; before events
+    // so glyphs sit on top.
+    if (hasTarget) {
+      const tx1 = xScale(new Date(targetStart));
+      const tx2 = xScale(new Date(targetEnd));
+      const tw = Math.max(2, tx2 - tx1);
+      g.append("rect")
+        .attr("class", "tl-target-band")
+        .attr("x", tx1).attr("y", 0)
+        .attr("width", tw).attr("height", innerHeight);
+      // Label
+      const labelText = "Target";
+      const labelPadX = 6, labelPadY = 2;
+      const labelGroup = g.append("g").attr("class", "tl-target-label");
+      const labelTxt = labelGroup.append("text")
+        .attr("class", "tl-target-label-text")
+        .attr("text-anchor", "end")
+        .attr("dominant-baseline", "hanging")
+        .text(labelText);
+      let lbbox = { width: 36, height: 12 };
+      try { lbbox = labelTxt.node().getBBox(); } catch (_) { /* SSR */ }
+      labelGroup.insert("rect", "text")
+        .attr("class", "tl-target-label-bg")
+        .attr("x", tx2 - lbbox.width - labelPadX * 2)
+        .attr("y", 2)
+        .attr("width", lbbox.width + labelPadX * 2)
+        .attr("height", lbbox.height + labelPadY * 2)
+        .attr("rx", 3);
+      labelTxt
+        .attr("x", tx2 - labelPadX)
+        .attr("y", 2 + labelPadY);
+    }
+
+    // Track gridlines + labels
+    tracks.forEach((t, i) => {
+      const y = yMid(i);
+      g.append("line")
+        .attr("class", "tl-track-line")
+        .attr("x1", 0).attr("x2", width - margin.left - margin.right)
+        .attr("y1", y).attr("y2", y);
+      g.append("text")
+        .attr("class", "tl-track-label")
+        .attr("x", -12).attr("y", y)
+        .attr("text-anchor", "end")
+        .attr("dominant-baseline", "middle")
+        .text(t.label);
+    });
+
+    // X axis (dates) at the bottom
+    const xAxis = d3.axisBottom(xScale)
+      .ticks(Math.max(4, Math.floor((width - margin.left - margin.right) / 110)))
+      .tickFormat(d3.timeFormat("%Y-%m-%d"));
+    g.append("g")
+      .attr("class", "tl-x-axis")
+      .attr("transform", `translate(0,${innerHeight})`)
+      .call(xAxis);
+
+    // Today guide (vertical dashed line) when in domain
+    if (today >= xScale.domain()[0] && today <= xScale.domain()[1]) {
+      g.append("line")
+        .attr("class", "tl-today")
+        .attr("x1", xScale(today)).attr("x2", xScale(today))
+        .attr("y1", 0).attr("y2", innerHeight);
+    }
+
+    // Plot events. Each one is clickable: click selects it (highlight
+    // + scroll the inline panel body to the matching anchor). Pre-existing
+    // tooltips on <title> stay so hover still gives a quick preview.
+    // Overflow events are skipped here — they render as +N badges below.
+    const trackIdx = new Map(tracks.map((t, i) => [t.key, i]));
+    const selectedIdx = state.timelineSelectedIdx;
+    const onSelect = (idx) => {
+      state.timelineSelectedIdx = idx;
+      svgEl.querySelectorAll(".tl-pt, .tl-bar").forEach((el) => {
+        el.classList.toggle("is-selected", String(idx) === el.getAttribute("data-evt-idx"));
+      });
+      // Scroll the inline panel body to the matching anchor (set by
+      // post-processing in renderPredictionTimeline). Falls back to
+      // a no-op when the anchor isn't present (e.g. an event whose
+      // entry was filtered out of the panel — shouldn't happen but
+      // shouldn't throw either).
+      const e = events[idx];
+      if (e && e.anchor) scrollToTimelineAnchor(e.anchor);
+    };
+    events.forEach((e, idx) => {
+      if (e.overflow) return;
+      const i = trackIdx.get(e.track);
+      if (i == null) return;
+      const y = laneY(yMid(i), e.lane, trackMaxLane.get(e.track) || 0);
+      const isSelected = idx === selectedIdx;
+      if (e.kind === "point") {
+        const cx = xScale(new Date(e.date));
+        const r = e.primary ? 6 : 4;
+        const node = g.append("circle")
+          .attr("class", `tl-pt tl-pt-${e.track}${e.primary ? " is-primary" : ""}${isSelected ? " is-selected" : ""}`)
+          .attr("data-evt-idx", String(idx))
+          .attr("cx", cx).attr("cy", y).attr("r", r)
+          .style("cursor", "pointer")
+          .on("click", () => onSelect(idx));
+        node.append("title").text(`${e.label}\n${e.date}${e.sub ? "\n\n" + e.sub : ""}`);
+      } else if (e.kind === "window") {
+        const x1 = xScale(new Date(e.start));
+        const x2 = xScale(new Date(e.end));
+        const w = Math.max(2, x2 - x1);
+        const h = e.primary ? 12 : 8;
+        const node = g.append("rect")
+          .attr("class", `tl-bar tl-bar-${e.track}${e.primary ? " is-primary" : ""}${isSelected ? " is-selected" : ""}`)
+          .attr("data-evt-idx", String(idx))
+          .attr("x", x1).attr("y", y - h / 2)
+          .attr("width", w).attr("height", h)
+          .attr("rx", 3)
+          .style("cursor", "pointer")
+          .on("click", () => onSelect(idx));
+        node.append("title").text(`${e.label}\n${e.start} → ${e.end}${e.sub ? "\n\n" + e.sub : ""}`);
+      }
+    });
+
+    // +N overflow badges. One per overflow group, anchored at the
+    // group's mid-time and the track's lane-2 row. Click opens a
+    // modal listing all events in the group. We force maxLaneInTrack
+    // to MAX_LANES-1 here so the badge always sits on the bottom row
+    // — the very fact that we're rendering overflow proves the cluster
+    // filled all 3 lanes.
+    for (const og of overflowGroups) {
+      const i = trackIdx.get(og.track);
+      if (i == null) continue;
+      const y = laneY(yMid(i), MAX_LANES - 1, MAX_LANES - 1);
+      const cx = xScale(new Date(og.anchorTime));
+      const label = "+" + og.events.length;
+      const padX = 4, padY = 2;
+      const badge = g.append("g")
+        .attr("class", `tl-overflow tl-overflow-${og.track}`)
+        .style("cursor", "pointer")
+        .on("click", () => openTimelineOverflowModal(og, events, onSelect));
+      const rect = badge.append("rect").attr("rx", 8);
+      const text = badge.append("text")
+        .attr("class", "tl-overflow-text")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .text(label);
+      // Size the rect around the rendered text width. Browser must
+      // measure text first; fall back to a heuristic in headless tests.
+      let bbox = { width: 18, height: 12 };
+      try { bbox = text.node().getBBox(); } catch (_) { /* SSR / jsdom */ }
+      rect
+        .attr("x", cx - bbox.width / 2 - padX)
+        .attr("y", y - bbox.height / 2 - padY)
+        .attr("width", bbox.width + padX * 2)
+        .attr("height", bbox.height + padY * 2);
+      text.attr("x", cx).attr("y", y);
+      badge.append("title").text(`${og.events.length} more event${og.events.length === 1 ? "" : "s"} — click to choose`);
+    }
+  }
+
+  // Modal popup listing a track's overflow events. Click an entry to
+  // select it (same handler as a glyph click). Closes on outside click
+  // or Esc. Lives at body level so it overlays the timeline body.
+  function openTimelineOverflowModal(group, events, onSelect) {
+    closeTimelineOverflowModal(); // dismiss any previous instance
+    const overlay = document.createElement("div");
+    overlay.className = "tl-overflow-overlay";
+    overlay.id = "tl-overflow-overlay";
+    const trackLabel = (TIMELINE_TRACKS.find((t) => t.key === group.track) || {}).label || group.track;
+    const itemHTML = group.events.map((e) => {
+      const idx = events.indexOf(e);
+      const dateLine = e.kind === "point" ? e.date : `${e.start} → ${e.end}`;
+      return `<button class="tl-overflow-item" type="button" data-evt-idx="${idx}">
+        <span class="tl-overflow-item-date">${escapeHTML(dateLine)}</span>
+        <span class="tl-overflow-item-label">${escapeHTML(e.label || "")}</span>
+      </button>`;
+    }).join("");
+    overlay.innerHTML = `
+      <div class="tl-overflow-modal" role="dialog" aria-label="Timeline overflow">
+        <div class="tl-overflow-head">
+          <span class="tl-overflow-track tl-track-${escapeHTML(group.track)}">${escapeHTML(trackLabel)}</span>
+          <span class="tl-overflow-count">${group.events.length} event${group.events.length === 1 ? "" : "s"}</span>
+          <button class="tl-overflow-close" type="button" aria-label="Close">&times;</button>
+        </div>
+        <div class="tl-overflow-list">${itemHTML}</div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    overlay.addEventListener("click", (ev) => {
+      if (ev.target === overlay) closeTimelineOverflowModal();
+    });
+    overlay.querySelector(".tl-overflow-close").addEventListener("click", closeTimelineOverflowModal);
+    overlay.querySelectorAll(".tl-overflow-item").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = parseInt(btn.dataset.evtIdx, 10);
+        if (!Number.isNaN(idx)) {
+          onSelect(idx);
+        }
+        closeTimelineOverflowModal();
+      });
+    });
+    document.addEventListener("keydown", _timelineOverflowEscHandler);
+  }
+  function _timelineOverflowEscHandler(ev) {
+    if (ev.key === "Escape") closeTimelineOverflowModal();
+  }
+  function closeTimelineOverflowModal() {
+    const el = document.getElementById("tl-overflow-overlay");
+    if (el) el.remove();
+    document.removeEventListener("keydown", _timelineOverflowEscHandler);
+  }
+
+  // Populate both #list-category and #news-category. PREDICTIONS and
+  // NEWS share filter state through synced widgets, so the option set
+  // must match in both selects (otherwise switching tabs would orphan
+  // a chosen category that doesn't exist on the other side).
   function populateListCategoryOptions(g, currentValue) {
-    const sel = document.getElementById("list-category");
-    if (!sel) return;
+    const sels = [
+      document.getElementById("list-category"),
+      document.getElementById("news-category"),
+    ].filter(Boolean);
+    if (!sels.length) return;
     const cats = (g.nodes || []).filter((n) => n.type === "category");
     cats.sort((a, b) => (nodeLabel(a, "label") || a.id).localeCompare(nodeLabel(b, "label") || b.id));
-    const prev = currentValue || sel.value;
-    sel.innerHTML = `<option value="">all</option>` + cats.map((c) =>
+    const html = `<option value="">all</option>` + cats.map((c) =>
       `<option value="${escapeHTML(c.id)}">${escapeHTML(nodeLabel(c, "label") || c.id)}</option>`
     ).join("");
-    if (prev && cats.some((c) => c.id === prev)) sel.value = prev;
+    for (const sel of sels) {
+      const prev = currentValue || sel.value;
+      sel.innerHTML = html;
+      if (prev && cats.some((c) => c.id === prev)) sel.value = prev;
+    }
   }
 
   function populateListThemeOptions(g, categoryFilter, currentValue) {
-    const sel = document.getElementById("list-theme");
-    if (!sel) return;
+    const sels = [
+      document.getElementById("list-theme"),
+      document.getElementById("news-theme"),
+    ].filter(Boolean);
+    if (!sels.length) return;
     let themes = (g.nodes || []).filter((n) => n.type === "theme");
     if (categoryFilter) {
       themes = themes.filter((t) => (t.parent_ids || []).includes(categoryFilter));
     }
     themes.sort((a, b) => (nodeLabel(a, "label") || a.id).localeCompare(nodeLabel(b, "label") || b.id));
-    const prev = currentValue || sel.value;
-    sel.innerHTML = `<option value="">all</option>` + themes.map((t) =>
+    const html = `<option value="">all</option>` + themes.map((t) =>
       `<option value="${escapeHTML(t.id)}">${escapeHTML(nodeLabel(t, "label") || t.id)}</option>`
     ).join("");
-    if (prev && themes.some((t) => t.id === prev)) sel.value = prev;
+    for (const sel of sels) {
+      const prev = currentValue || sel.value;
+      sel.innerHTML = html;
+      if (prev && themes.some((t) => t.id === prev)) sel.value = prev;
+    }
   }
 
   async function renderEvidenceView() {
     const body = document.getElementById("evidence-body");
     if (!body) return;
+
+    // Read the news-side filter widgets — these mirror the PREDICTIONS
+    // filters via attachAltViewHandlers, so the values are equivalent
+    // regardless of which side the user just changed.
+    const newsScopeSel = document.getElementById("news-scope");
+    const newsCatSel   = document.getElementById("news-category");
+    const newsThemeSel = document.getElementById("news-theme");
+    const newsStatusSel= document.getElementById("news-status");
+    const newsBridgeChk= document.getElementById("news-has-bridge");
+
+    // First open: align scope with whatever GRAPH/PREDICTIONS is using.
+    if (newsScopeSel && !newsScopeSel.value) newsScopeSel.value = state.scopeId || "mix";
+
+    const targetScope = (newsScopeSel && newsScopeSel.value) || state.scopeId || "mix";
+
+    // Make sure the scope graph is loaded — needed both for filter
+    // option population and for locale-aware prediction labels in the
+    // expanded detail rows below.
+    if (!state.graphsByScope.has(targetScope)) {
+      body.innerHTML = `<p class="muted">Loading ${escapeHTML(targetScope)}…</p>`;
+      try {
+        await loadScopeGraph(targetScope);
+      } catch (e) {
+        body.innerHTML = `<p class="muted">failed to load scope: ${escapeHTML(targetScope)}</p>`;
+        return;
+      }
+    }
+    const g = state.graphsByScope.get(targetScope);
+    if (g) {
+      // currentGraph() reads state.scopeId, so flip it briefly to the
+      // news-side scope when populating + during prediction lookups
+      // (otherwise nodeById would miss preds that live in another
+      // scope graph the user happens to have open in OBSERVATORY).
+      // We do not mutate state.scopeId here to avoid disturbing the
+      // GRAPH render; instead we use this graph directly.
+      populateListCategoryOptions(g, newsCatSel ? newsCatSel.value : "");
+      populateListThemeOptions(g,
+        newsCatSel ? newsCatSel.value : "",
+        newsThemeSel ? newsThemeSel.value : "");
+    }
+
     body.innerHTML = `<p class="muted">Loading evidence-reverse.json…</p>`;
     const data = await loadEvidenceReverse();
     if (!data.evidence || !data.evidence.length) {
       body.innerHTML = `<p class="muted">evidence-reverse.json not yet generated. Run <code>app/skills/build_evidence_reverse.py</code>.</p>`;
       return;
     }
+
+    const catFilter    = newsCatSel    ? newsCatSel.value    : "";
+    const themeFilter  = newsThemeSel  ? newsThemeSel.value  : "";
+    const statusFilter = newsStatusSel ? newsStatusSel.value : "";
+    // Window comes from state.windowId (driven by the PROBE settings
+    // hamburger) so it stays consistent with the inline panel body's
+    // metricsFor lookup and the OBSERVATORY graph.
+    const windowFilter = state.windowId || "30d";
+    const hasBridge    = !!(newsBridgeChk && newsBridgeChk.checked);
+
+    // Look up a prediction by ID inside the news-side scope graph
+    // ONLY. Membership in g IS the scope filter — graph-mix.json keeps
+    // each prediction's original scope_id (e.g. "tech"), so checking
+    // n.scope_id === targetScope would wrongly reject every mix-scope
+    // row. Falling back to other loaded graphs is also wrong here:
+    // it would leak tech / business preds into a "mix" filter.
+    const scopedPred = (id) => {
+      if (g && g._index) return g._index.get(id) || null;
+      return null;
+    };
+
+    // Cross-scope lookup used solely for rendering the localised label
+    // when a prediction is not in the active scope graph (e.g. the
+    // user has cycled scopes and the graph cache still holds a copy).
+    // Never used for filter decisions — just label fallback so we
+    // don't show a raw ID in the expanded detail row.
+    const predAnywhere = (id) => {
+      const inScope = scopedPred(id);
+      if (inScope) return inScope;
+      for (const [, g2] of state.graphsByScope) {
+        if (g2 === g) continue;
+        if (g2._index) {
+          const found = g2._index.get(id);
+          if (found) return found;
+        }
+      }
+      return null;
+    };
+
+    // Apply all filters to a prediction node. Mirrors the predicate
+    // used by renderListView — same field checks, no scope_id check
+    // (scope membership is enforced by scopedPred above).
+    const predMatches = (n) => {
+      if (!n || n.type !== "prediction") return false;
+      if (catFilter   && n.category_id !== catFilter)   return false;
+      if (themeFilter && n.theme_id    !== themeFilter) return false;
+      if (statusFilter) {
+        const m = (n.metrics_by_window && n.metrics_by_window[windowFilter]) || {};
+        if (m.status !== statusFilter) return false;
+      }
+      if (hasBridge) {
+        if (filterDisplayBridges((n.detail && n.detail.bridges) || []).length === 0) return false;
+      }
+      return true;
+    };
+
+    // Tag each evidence with its filtered linked-prediction set, drop
+    // rows where nothing matches. Pre-compute the matched score sum so
+    // sort callers don't recompute each time.
+    const filtered = [];
+    for (const e of data.evidence) {
+      const matched = (e.linked_predictions || []).filter((p) => predMatches(scopedPred(p.prediction_id)));
+      if (!matched.length) continue;
+      const matchedScore = matched.reduce((acc, p) => acc + (p.score || 0), 0);
+      filtered.push({ ...e, _matched: matched, _matched_score: matchedScore });
+    }
+
+    if (!filtered.length) {
+      body.innerHTML = `<p class="muted">No news matches the current filters.</p>`;
+      return;
+    }
+
+    if (!state.newsSort) state.newsSort = { col: "total_score", dir: "desc" };
+    const sort = state.newsSort;
+
+    // Sort within the top-100-by-(matched)influence slice rather than across all 200,
+    // so picking "title A→Z" doesn't drag low-influence rows up over the cap.
+    filtered.sort((a, b) => (b._matched_score - a._matched_score));
+    const rows = filtered.slice(0, 100);
+    const valOf = (e) => {
+      switch (sort.col) {
+        case "title":             return (e.title || "").toLowerCase();
+        case "reported_at":       return e.reported_at || "";
+        case "predictions_count": return e._matched.length;
+        case "total_score":       return e._matched_score;
+        default:                  return 0;
+      }
+    };
+    rows.sort((a, b) => {
+      const av = valOf(a), bv = valOf(b);
+      const aMissing = av == null || av === "";
+      const bMissing = bv == null || bv === "";
+      if (aMissing && bMissing) return 0;
+      if (aMissing) return 1;
+      if (bMissing) return -1;
+      let r;
+      if (typeof av === "string") r = av.localeCompare(bv);
+      else r = av < bv ? -1 : av > bv ? 1 : 0;
+      return sort.dir === "desc" ? -r : r;
+    });
+
+    const arrow = (col) => sort.col === col ? (sort.dir === "asc" ? " ↑" : " ↓") : "";
+    const PRED_TIP =
+      "Number of unique predictions matching the current filters that this news has been cited by " +
+      "in the last 90 days. All citations are 'support' — the contradict axis is retired in this pipeline.";
+    const TOTAL_TIP =
+      "Sum of time-decayed relevance across the matching predictions linked to this news " +
+      "(relatedness × exp(-age/τ_source), summed). Higher = more influential evidence right now. " +
+      "Different from a prediction's hit rate.";
+
+    // Build the localised label for a single linked prediction. Falls
+    // back to the snapshot-time label baked into evidence-reverse.json
+    // when the prediction is missing from any loaded scope graph.
+    const predLabel = (p) => {
+      const n = predAnywhere(p.prediction_id);
+      if (!n) return p.prediction_short_label || p.prediction_summary || p.prediction_id;
+      const dedicated = nodeLabel(n, "title") || (n.detail && n.detail.title_clean) || "";
+      const fullText  = nodeLabel(n, "summary") || (n.detail && n.detail.prediction_summary) || nodeLabel(n, "label") || "";
+      const base = dedicated || nodeLabel(n, "label") || p.prediction_short_label || p.prediction_summary || p.prediction_id;
+      return cleanPredictionTitle(base, fullText);
+    };
+
     body.innerHTML = `
       <table class="list-table">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Source</th>
-            <th>Predictions</th>
-            <th>Total score</th>
+            <th class="sortable" data-news-sort="title">Title${arrow("title")}</th>
+            <th class="sortable" data-news-sort="reported_at">Reported${arrow("reported_at")}</th>
+            <th class="sortable" data-news-sort="predictions_count" title="${escapeHTML(PRED_TIP)}">Prediction reach${arrow("predictions_count")}</th>
+            <th class="sortable" data-news-sort="total_score" title="${escapeHTML(TOTAL_TIP)}">Influence${arrow("total_score")}</th>
           </tr>
         </thead>
         <tbody>
-          ${data.evidence.slice(0, 100).map((e) => `
+          ${rows.map((e) => `
             <tr class="ev-row">
               <td>${e.url ? `<a href="${escapeHTML(e.url)}" target="_blank" rel="noreferrer noopener">${escapeHTML(e.title || e.url)}</a>` : escapeHTML(e.title || "(untitled)")}</td>
-              <td>${escapeHTML(e.source_type || "—")}</td>
-              <td>${e.linked_predictions.length}</td>
-              <td>${e.total_score.toFixed(2)}</td>
+              <td>${escapeHTML(e.reported_at || "—")}</td>
+              <td>${e._matched.length}</td>
+              <td>${e._matched_score.toFixed(2)}</td>
             </tr>
             <tr class="ev-detail" hidden>
               <td colspan="4">
                 <ul class="ev-pred-list">
-                  ${e.linked_predictions.slice(0, 12).map((p) => `
+                  ${e._matched.slice()
+                    .sort((a, b) => (b.prediction_date || "").localeCompare(a.prediction_date || ""))
+                    .slice(0, 12)
+                    .map((p) => `
                     <li>
-                      <span class="ev-dir ${escapeHTML(p.support_direction)}">${escapeHTML(p.support_direction)}</span>
-                      <span class="ev-pred-title" data-goto="${escapeHTML(p.prediction_id)}">${escapeHTML(p.prediction_short_label || p.prediction_summary || p.prediction_id)}</span>
+                      <span class="ev-pred-date">${escapeHTML(p.prediction_date || "—")}</span>
+                      <span class="ev-pred-title" data-goto="${escapeHTML(p.prediction_id)}">${escapeHTML(predLabel(p))}</span>
                       <span class="ev-score">${p.score.toFixed(2)}</span>
                     </li>`).join("")}
                 </ul>
@@ -3862,6 +5230,20 @@
         </tbody>
       </table>
     `;
+    // Header click cycles sort. Same column flips direction; a different
+    // column starts at its useful default (titles A→Z, others high-first).
+    body.querySelectorAll("th.sortable").forEach((th) => {
+      th.addEventListener("click", () => {
+        const col = th.dataset.newsSort;
+        if (state.newsSort.col === col) {
+          state.newsSort.dir = state.newsSort.dir === "asc" ? "desc" : "asc";
+        } else {
+          state.newsSort.col = col;
+          state.newsSort.dir = col === "title" ? "asc" : "desc";
+        }
+        renderEvidenceView();
+      });
+    });
     body.querySelectorAll(".ev-row").forEach((row) => {
       row.addEventListener("click", () => {
         const next = row.nextElementSibling;
@@ -3874,11 +5256,12 @@
       el.addEventListener("click", (ev) => {
         ev.stopPropagation();
         const id = el.dataset.goto;
-        const target = nodeById(id);
-        if (target) {
-          setView("graph");
-          handleNodeClick(target);
-        }
+        if (!id || !nodeById(id)) return;
+        // Open this prediction's PROBE timeline (mirrors the panel
+        // "→ PROBE" button), not the OBSERVATORY graph view.
+        state.probeTab = "predictions";
+        state.probeTimelinePred = id;
+        setView("probe");
       });
     });
   }
@@ -3892,31 +5275,68 @@
     document.querySelectorAll(".probe-tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => setProbeTab(btn.dataset.probeTab));
     });
-    // Re-render PREDICTIONS when any of its filters change. Scope and Category
-    // changes also clear downstream selections so cascading stays sane.
+
+    // Re-render whichever PROBE sub-tab is currently active. PREDICTIONS
+    // and NEWS share filter widget values, so a change in either side
+    // affects the visible view immediately.
     const reRender = () => {
-      if (state.view === "probe" && state.probeTab === "predictions") renderListView();
+      if (state.view !== "probe") return;
+      if (state.probeTab === "predictions") renderListView();
+      else if (state.probeTab === "news")   renderEvidenceView();
     };
-    const onChange = (id, fn) => {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener("change", fn);
+
+    // Mirror a single field's value across the two filter sets. Used
+    // after any change so the inactive view's widget already reflects
+    // the new state when the user flips to it.
+    const FIELDS = ["scope", "category", "theme", "status"];
+    const syncFromPrefix = (srcPrefix) => {
+      const dstPrefix = srcPrefix === "list" ? "news" : "list";
+      for (const f of FIELDS) {
+        const src = document.getElementById(`${srcPrefix}-${f}`);
+        const dst = document.getElementById(`${dstPrefix}-${f}`);
+        if (src && dst && dst.value !== src.value) dst.value = src.value;
+      }
+      const sChk = document.getElementById(`${srcPrefix}-has-bridge`);
+      const dChk = document.getElementById(`${dstPrefix}-has-bridge`);
+      if (sChk && dChk && dChk.checked !== sChk.checked) dChk.checked = sChk.checked;
     };
-    onChange("list-scope", () => {
-      const cat = document.getElementById("list-category");
-      const theme = document.getElementById("list-theme");
-      if (cat) cat.value = "";
-      if (theme) theme.value = "";
-      reRender();
-    });
-    onChange("list-category", () => {
-      const theme = document.getElementById("list-theme");
-      if (theme) theme.value = "";
-      reRender();
-    });
-    onChange("list-theme",     reRender);
-    onChange("list-status",    reRender);
-    onChange("list-window",    reRender);
-    onChange("list-has-bridge", reRender);
+
+    // Reset cascading children on both sides at once so a scope change
+    // can't leave the inactive view holding a category that no longer
+    // exists in the new scope's graph.
+    const clearOnBothSides = (...keys) => {
+      for (const prefix of ["list", "news"]) {
+        for (const k of keys) {
+          const el = document.getElementById(`${prefix}-${k}`);
+          if (!el) continue;
+          if (el.type === "checkbox") el.checked = false;
+          else el.value = "";
+        }
+      }
+    };
+
+    const bindPair = (field, onChangeExtra) => {
+      for (const prefix of ["list", "news"]) {
+        const id = `${prefix}-${field}`;
+        const el = document.getElementById(id);
+        if (!el) continue;
+        el.addEventListener("change", () => {
+          if (onChangeExtra) onChangeExtra();
+          syncFromPrefix(prefix);
+          reRender();
+        });
+      }
+    };
+
+    bindPair("scope",      () => clearOnBothSides("category", "theme"));
+    bindPair("category",   () => clearOnBothSides("theme"));
+    bindPair("theme");
+    bindPair("status");
+    bindPair("has-bridge");
+    // "window" is no longer in the filter row — it lives in the PROBE
+    // settings hamburger and writes directly to state.windowId via
+    // selectWindow(), which itself triggers the relevant PROBE
+    // sub-tab re-render.
   }
 
   /* ---------------- Boot ---------------- */

@@ -342,15 +342,62 @@ body.panel-open #meta-header {
   border-radius: 4px;
   padding: 4px;
 }
-/* Thin cold-palette scrollbar inside menus */
-.category-filters::-webkit-scrollbar { width: 6px; }
-.category-filters::-webkit-scrollbar-track { background: transparent; }
-.category-filters::-webkit-scrollbar-thumb {
+/* Thin cold-palette scrollbar shared across every scrollable surface
+   in the app: the category filter list in the side menu, the PROBE
+   body, the EVIDENCE body, and the right-side detail panel. The
+   default OS scrollbar fights with the dark cold-temperature theme,
+   so we override both the WebKit pseudo-elements and Firefox's
+   scrollbar-* shorthand. */
+.category-filters,
+.list-body,
+.evidence-body,
+.panel-body,
+.timeline-canvas-wrap,
+.timeline-detail {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(130, 170, 210, 0.25) transparent;
+}
+.category-filters::-webkit-scrollbar,
+.list-body::-webkit-scrollbar,
+.evidence-body::-webkit-scrollbar,
+.panel-body::-webkit-scrollbar,
+.timeline-canvas-wrap::-webkit-scrollbar,
+.timeline-detail::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.category-filters::-webkit-scrollbar-track,
+.list-body::-webkit-scrollbar-track,
+.evidence-body::-webkit-scrollbar-track,
+.panel-body::-webkit-scrollbar-track,
+.timeline-canvas-wrap::-webkit-scrollbar-track,
+.timeline-detail::-webkit-scrollbar-track {
+  background: transparent;
+}
+.category-filters::-webkit-scrollbar-thumb,
+.list-body::-webkit-scrollbar-thumb,
+.evidence-body::-webkit-scrollbar-thumb,
+.panel-body::-webkit-scrollbar-thumb,
+.timeline-canvas-wrap::-webkit-scrollbar-thumb,
+.timeline-detail::-webkit-scrollbar-thumb {
   background: rgba(130, 170, 210, 0.25);
   border-radius: 3px;
 }
-.category-filters::-webkit-scrollbar-thumb:hover {
+.category-filters::-webkit-scrollbar-thumb:hover,
+.list-body::-webkit-scrollbar-thumb:hover,
+.evidence-body::-webkit-scrollbar-thumb:hover,
+.panel-body::-webkit-scrollbar-thumb:hover,
+.timeline-canvas-wrap::-webkit-scrollbar-thumb:hover,
+.timeline-detail::-webkit-scrollbar-thumb:hover {
   background: rgba(24, 199, 216, 0.45);
+}
+.category-filters::-webkit-scrollbar-corner,
+.list-body::-webkit-scrollbar-corner,
+.evidence-body::-webkit-scrollbar-corner,
+.panel-body::-webkit-scrollbar-corner,
+.timeline-canvas-wrap::-webkit-scrollbar-corner,
+.timeline-detail::-webkit-scrollbar-corner {
+  background: transparent;
 }
 .menu-btn.cat-filter {
   padding: 5px 8px;
@@ -551,11 +598,23 @@ body.panel-open #meta-header {
 
 .panel-head {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 20px 20px 14px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--panel-border);
+}
+/* Top row of the panel head: action buttons. Lives above the title
+   so a multi-line prediction title never crashes into the close /
+   back / probe controls. Right-aligned so it visually anchors to
+   the same edge as the panel itself. */
+.panel-head-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.panel-head-meta {
+  min-width: 0;
 }
 .panel-type {
   font-size: 10px;
@@ -570,18 +629,12 @@ body.panel-open #meta-header {
   font-weight: 600;
   line-height: 1.25;
   color: var(--text-main);
-  max-width: 320px;
   word-break: break-word;
 }
 .panel-subtitle {
   margin-top: 6px;
   font-size: 12px;
   color: var(--text-muted);
-}
-.panel-head-btns {
-  display: flex;
-  gap: 4px;
-  align-items: center;
 }
 .panel-head-btn {
   border: 0;
@@ -602,6 +655,28 @@ body.panel-open #meta-header {
   cursor: default;
 }
 #panel-close { font-size: 24px; }
+/* Open-in-PROBE pill button. Sits between Back and Close in the
+   actions row. Hidden until a Prediction node is selected, hidden
+   on responsive breakpoints alongside the OBSERVATORY/PROBE switch. */
+.panel-head-probe {
+  border: 1px solid var(--panel-border);
+  background: rgba(10, 22, 38, 0.78);
+  color: var(--menu-active);
+  font: inherit;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+.panel-head-probe:hover {
+  color: var(--text-main);
+  border-color: var(--menu-active);
+  background: rgba(24, 199, 216, 0.12);
+}
+.panel-head-probe[hidden] { display: none; }
 
 .panel-body {
   overflow-y: auto;
@@ -840,6 +915,9 @@ body.panel-open #meta-header {
      viewport. */
   #meta-header .view-toggle { display: none; }
   #meta-header .meta-sub    { display: none; }
+  /* PROBE itself isn't reachable from mobile, so the Open-in-PROBE
+     shortcut in the right detail panel hides too. */
+  #panel-probe              { display: none !important; }
 }
 
 /* ------------------------------------------------------------
@@ -968,11 +1046,20 @@ body.panel-open #meta-header {
   display: none;
 }
 
-/* Stream C reasoning trace — labelled rows under the Reasoning tab. */
+/* Stream C reasoning trace — labelled rows under the Reasoning tab.
+   Each row is its own grid (key on the left, value on the right) so
+   the four reasoning fields (because / given / so_that / landing)
+   stack vertically rather than collapsing into a 2-up grid where the
+   long bodies steal each other's column width. */
 .reasoning-trace {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.reasoning-row {
   display: grid;
   grid-template-columns: minmax(72px, max-content) 1fr;
-  gap: 6px 12px;
+  gap: 12px;
   align-items: baseline;
 }
 .reasoning-trace .reasoning-key {
@@ -1013,6 +1100,35 @@ body.panel-open #meta-header {
   padding: 1px 5px;
   border-radius: 3px;
   font-size: 11px;
+}
+.bridges-list .bridge-coh {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--panel-border);
+  color: var(--text-main);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.bridges-list .bridge-fields {
+  display: grid;
+  grid-template-columns: minmax(96px, max-content) 1fr;
+  gap: 6px 12px;
+  align-items: baseline;
+  margin-top: 6px;
+}
+.bridges-list .bridge-row {
+  display: contents;
+}
+.bridges-list .bridge-key {
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.bridges-list .bridge-val {
+  color: var(--text-main);
+  min-width: 0;
 }
 
 /* Full prediction text now lives in a collapsed disclosure under the
@@ -1126,27 +1242,51 @@ body.alt-view-mode {
      Slightly extra room so the toggle doesn't crowd content when the
      title row wraps on narrow viewports. */
   padding: 72px 22px 24px;
-  overflow: auto;
+  /* Body owns its own scroll so the head + table column header stay
+     anchored at the top while only the rows scroll past. */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   z-index: 5;
   color: var(--text-main);
 }
 .alt-view[hidden] { display: none; }
 .alt-view-head {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
   margin-bottom: 12px;
+  flex-shrink: 0;
+  /* Reserve room on the right edge for the global #probe-menu-toggle
+     hamburger (pinned at top:14px right:14px) so wrapping filter rows
+     never crash into the icon. 56px ≈ 36px button + 16px viewport gutter
+     + a 4px breathing margin. */
+  padding-right: 56px;
+}
+/* The body region scrolls independently of .alt-view-head so the
+   PREDICTIONS / NEWS toggle and filter row stay pinned. The
+   inner .list-table thead (already position:sticky; top:0) sticks
+   to the top of this scroll container. min-height:0 is the flexbox
+   incantation that lets a flex child actually shrink below content
+   size and get a scrollbar. */
+.list-body,
+.evidence-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
 }
 
 /* PREDICTIONS ⇆ NEWS sub-toggle inside PROBE. Mirrors .view-toggle styling
    but lives in the alt-view header rather than the meta-header. */
 .probe-tab-toggle {
-  align-self: flex-start;
   display: inline-flex;
   background: rgba(10, 22, 38, 0.78);
   border: 1px solid var(--panel-border);
   border-radius: 999px;
   padding: 2px;
+  flex-shrink: 0;
 }
 .probe-tab-btn {
   border: 0;
@@ -1169,32 +1309,200 @@ body.alt-view-mode {
   color: var(--menu-active-text);
 }
 
+/* PROBE settings hamburger. The shared button styles below are used
+   by the global fixed-position #probe-menu-toggle (pinned at the
+   top-right of the viewport, on the same row as the page title). The
+   button is hidden by default and surfaced only in PROBE mode. */
+.probe-menu-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--panel-border);
+  background: var(--menu-bg);
+  color: var(--text-main);
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+.probe-menu-btn:hover {
+  background: rgba(24, 199, 216, 0.12);
+  border-color: rgba(24, 199, 216, 0.4);
+}
+.probe-menu-btn .bars {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 16px;
+}
+.probe-menu-btn .bars span {
+  display: block;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+/* Body-level hamburger that pins to the global top-right corner.
+   Hidden by default; revealed only in PROBE mode so it sits on the
+   same row as the page title without colliding with #top-menu-stack
+   (which itself hides under body.alt-view-mode). */
+#probe-menu-toggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  display: none;
+  box-shadow: var(--shadow-deep);
+  backdrop-filter: blur(6px);
+}
+body.alt-view-mode #probe-menu-toggle {
+  display: inline-flex;
+}
+
+/* Slide-in panel from the right. Mirrors #detail-panel motion so the
+   transition feels native to the rest of the app, but lives at z=25
+   to sit above the alt-view (z=5). Hidden by default; opened by
+   adding .open after un-hiding so the transform animation runs. */
+#probe-menu-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(280px, 100vw);
+  background: var(--panel-bg);
+  border-left: 1px solid var(--panel-border);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  transform: translateX(105%);
+  transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-main);
+}
+#probe-menu-panel[hidden] { display: none; }
+#probe-menu-panel.open { transform: translateX(0); }
+
+.probe-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--panel-border);
+}
+.probe-menu-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.probe-menu-close {
+  border: 1px solid var(--panel-border);
+  background: var(--menu-bg);
+  color: var(--text-main);
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.probe-menu-close:hover {
+  border-color: rgba(24, 199, 216, 0.4);
+  background: rgba(24, 199, 216, 0.12);
+}
+.probe-menu-body {
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.probe-menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.probe-menu-section .menu-lbl {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+.probe-menu-langs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.probe-menu-langs .menu-btn.lang {
+  border-radius: 0;
+  min-width: 0;
+}
+.probe-menu-windows {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.probe-menu-windows .menu-btn.win {
+  border-radius: 0;
+  min-width: 0;
+}
+.probe-menu-section.probe-snap-section .menu-select {
+  width: 100%;
+}
+.probe-menu-section.probe-snap-section[hidden] {
+  display: none;
+}
+
 .alt-view-head > p.muted {
   margin: 0;
 }
+/* Compact filter row. Sized so the PREDICTIONS / NEWS toggle and the
+   six filter widgets stay on a single line at typical desktop widths
+   instead of wrapping into a second row. The flex-wrap: wrap fallback
+   still kicks in below ~720px viewport so genuinely narrow screens
+   don't get clipped. */
 .list-filters {
   display: flex;
-  gap: 14px;
+  gap: 6px 10px;
   align-items: center;
   margin: 0;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   flex-wrap: wrap;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 .list-filters label {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  min-width: 0;
+  flex-shrink: 1;
 }
 .list-filters select {
   background: rgba(10, 22, 38, 0.7);
   color: var(--text-main);
   border: 1px solid var(--panel-border);
   border-radius: 3px;
-  padding: 3px 6px;
+  padding: 2px 4px;
   font-family: inherit;
-  font-size: 12px;
-  max-width: 240px;
+  font-size: 11px;
+  max-width: 140px;
+  min-width: 0;
+  flex-shrink: 1;
 }
 .list-filters input[type="checkbox"] {
   accent-color: var(--menu-active);
@@ -1203,6 +1511,7 @@ body.alt-view-mode {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
 }
 
 .list-table {
@@ -1226,17 +1535,22 @@ body.alt-view-mode {
   text-transform: uppercase;
   color: var(--text-muted);
 }
+.list-table thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+.list-table thead th.sortable:hover {
+  color: var(--menu-active);
+}
+.list-table thead th[title] {
+  text-decoration: underline dotted rgba(143, 168, 194, 0.45);
+  text-underline-offset: 3px;
+}
 .list-table tbody tr {
   cursor: pointer;
 }
 .list-table tbody tr:hover {
   background: rgba(24, 199, 216, 0.06);
-}
-.list-table .eli,
-.list-table .cell-eli {
-  color: var(--text-muted);
-  font-style: italic;
-  max-width: 320px;
 }
 .list-table .cell-scope,
 .list-table .cell-category,
@@ -1245,9 +1559,24 @@ body.alt-view-mode {
   font-size: 12px;
   color: var(--text-muted);
 }
-.list-table .cell-title {
-  max-width: 360px;
+/* PREDICTION column. Shows the locale-aware ELI14 explanation when a
+   prediction has one, otherwise the title — both rendered identically
+   so the reader sees a uniform body text per row regardless of source. */
+.list-table .cell-prediction {
+  max-width: 480px;
+  min-width: 220px;
   font-weight: 500;
+  color: var(--text-main);
+}
+/* Line-clamp lives on this child wrapper rather than the <td>
+   itself. Setting display:-webkit-box directly on a table cell
+   removes its table-cell layout role in some browsers, collapsing
+   adjacent columns to zero width. */
+.list-table .clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .list-table .cell-status {
   font-size: 11px;
@@ -1264,31 +1593,594 @@ body.alt-view-mode {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
-.list-table .cell-contradicts {
-  text-align: center;
-  color: var(--contradict);
-  font-weight: 600;
+
+/* ---- PROBE / Prediction timeline ----
+   When #list-view.is-timeline is set the toggle + filter row hide and
+   #list-body owns the entire PROBE area: [head bar] + [SVG canvas]. */
+#list-view.is-timeline > .alt-view-head { display: none; }
+#list-view.is-timeline > .list-body {
+  display: flex;
+  flex-direction: column;
 }
-.list-table .cell-open {
-  text-align: center;
+/* Timeline page = scrollable column. Head sticks to the top of the
+   scroller so the title + back/observatory buttons stay reachable
+   while the user is deep in the inline detail body. */
+#list-view.is-timeline > .list-body {
+  overflow: auto;
 }
-.list-table .open-in-graph {
-  background: transparent;
-  color: var(--menu-active);
+.timeline-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--bg-0);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  padding: 8px 0 12px;
+  border-bottom: 1px solid var(--panel-border);
+  margin-bottom: 14px;
+}
+.timeline-back,
+.timeline-graph {
+  background: rgba(10, 22, 38, 0.78);
+  color: var(--text-muted);
   border: 1px solid var(--panel-border);
-  border-radius: 3px;
-  padding: 2px 8px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  padding: 5px 14px;
   cursor: pointer;
-  font-family: inherit;
-  font-size: 13px;
-  line-height: 1;
+  transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
+  flex-shrink: 0;
 }
-.list-table .open-in-graph:hover {
+.timeline-back:hover,
+.timeline-graph:hover {
+  color: var(--text-main);
+  border-color: var(--menu-active);
+  background: rgba(24, 199, 216, 0.12);
+}
+.timeline-title-block {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.timeline-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.timeline-dates {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Timeline canvas takes its natural height (SVG height set per
+   render). The whole .list-body is the single scroll container, so
+   the canvas just lives inline above the inline panel body. */
+.timeline-canvas-wrap {
+  flex: 0 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Claim — the prediction in plain language, sits right under the
+   header. Larger than body copy so the reader's eye lands here first. */
+.tl-claim {
+  margin: 4px 0 22px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-main);
+  letter-spacing: 0.01em;
+}
+
+/* Bespoke section block used by every detail-section in the timeline
+   view (Timeline / Metrics / Technical summary / Reasoning / Needs /
+   Bridge / Readings / meta). */
+.tl-section {
+  margin-bottom: 28px;
+}
+.tl-meta-section {
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--panel-border);
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* "Metrics and Timeline" block: vertical metric stack on the left
+   (Hit Rate / Attention / Daily precision), big timeline canvas on
+   the right. The timeline column is given the larger fr so the
+   prediction-time visualisation always dominates. Collapses to a
+   single stacked column on narrow viewports. */
+.mt-block {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) minmax(0, 2fr);
+  gap: 18px;
+  /* Default grid behaviour (align-items: stretch) is what we want —
+     the timeline cell stretches to match the metrics stack on the
+     left, and drawTimelineSVG then scales trackHeight so the SVG
+     fills that stretched cell instead of leaving empty space below. */
+}
+.mt-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mt-metrics .metric {
+  margin: 0;
+}
+/* Daily precision tile: chart wrapped with its own labelled head so
+   the user sees what the chart represents (was an unlabeled SVG
+   block before). */
+.mt-precision {
+  background: rgba(16, 35, 58, 0.6);
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mt-precision-head {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.mt-precision .activity-chart {
+  margin: 0;
+}
+.mt-timeline {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.mt-timeline .timeline-canvas-wrap {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 200px;
+}
+.mt-timeline .timeline-svg {
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 720px) {
+  .mt-block {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FULL PREDICTION block — collapsed by default. <summary> reuses the
+   .tl-section-h type styling so the heading reads consistently with
+   every other section header; a small ▸ caret hints expandability. */
+.tl-fullpred {
+  margin: 0;
+}
+.tl-fullpred-summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+.tl-fullpred-summary::-webkit-details-marker { display: none; }
+.tl-fullpred-summary::before {
+  content: "▸";
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: transform 140ms ease;
+  display: inline-block;
+}
+.tl-fullpred[open] .tl-fullpred-summary::before {
+  transform: rotate(90deg);
+}
+.tl-fullpred-summary:hover {
+  color: var(--menu-active);
+}
+.tl-fullpred-body {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--panel-border);
+}
+
+/* CATEGORY → THEME breadcrumb list shown in the meta section. */
+.tl-lineage-list {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tl-lineage-row {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.tl-lineage-row:hover {
+  color: var(--menu-active);
+}
+.tl-lineage-cat,
+.tl-lineage-theme {
+  white-space: nowrap;
+}
+.tl-lineage-sep {
+  opacity: 0.6;
+}
+.tl-section-h {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+/* Anchor flash: brief highlight when a timeline event scrolls a panel
+   item into view, so the user sees where they landed. */
+.tl-anchor-flash {
+  animation: tl-anchor-pulse 1100ms ease-out;
+}
+@keyframes tl-anchor-pulse {
+  0%   { background: rgba(24, 199, 216, 0.30); box-shadow: 0 0 0 4px rgba(24, 199, 216, 0.20); }
+  100% { background: transparent; box-shadow: 0 0 0 0 transparent; }
+}
+
+/* In PROBE / alt-view mode the OBSERVATORY detail-panel-open transform
+   on #meta-header / #top-menu-stack is irrelevant — the meta-header
+   should stay anchored top-left and the menu stack is hidden anyway.
+   Force these to neutral so opening the PROBE settings hamburger
+   doesn't trigger the OBSERVATORY's title-slide animation. */
+body.alt-view-mode #meta-header {
+  transform: none !important;
+  transition: none;
+}
+body.alt-view-mode #top-menu-stack {
+  transform: none !important;
+  transition: none;
+}
+.timeline-svg {
+  display: block;
+  font: inherit;
+}
+.timeline-svg .tl-track-line {
+  stroke: rgba(130, 170, 210, 0.12);
+  stroke-width: 1;
+}
+.timeline-svg .tl-track-label {
+  fill: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.timeline-svg .tl-x-axis path,
+.timeline-svg .tl-x-axis line {
+  stroke: rgba(130, 170, 210, 0.25);
+}
+.timeline-svg .tl-x-axis text {
+  fill: var(--text-muted);
+  font-size: 10.5px;
+}
+.timeline-svg .tl-today {
+  stroke: var(--menu-active);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.55;
+}
+/* Target window highlight: tinted band across the timeline tracks
+   marking when the prediction is supposed to land. */
+.timeline-svg .tl-target-band {
+  fill: rgba(255, 184, 77, 0.10);
+  stroke: rgba(255, 184, 77, 0.45);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+.timeline-svg .tl-target-label-bg {
+  fill: rgba(255, 184, 77, 0.85);
+  stroke: var(--heat-3);
+  stroke-width: 1;
+}
+.timeline-svg .tl-target-label-text {
+  fill: rgba(7, 17, 31, 0.95);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+.timeline-svg .tl-pt {
+  fill: var(--heat-2);
+  stroke: rgba(7, 17, 31, 0.9);
+  stroke-width: 1.5;
+  cursor: default;
+}
+.timeline-svg .tl-pt-bridge    { fill: var(--heat-3); }
+.timeline-svg .tl-pt-need      { fill: var(--heat-2); }
+.timeline-svg .tl-pt-downstream{ fill: #6ec1ff; }
+.timeline-svg .tl-pt-upstream  { fill: #c8b6ff; }
+.timeline-svg .tl-pt.is-primary { stroke: var(--heat-core); stroke-width: 2; }
+.timeline-svg .tl-bar {
+  fill: rgba(24, 199, 216, 0.30);
+  stroke: rgba(24, 199, 216, 0.6);
+  stroke-width: 1;
+}
+.timeline-svg .tl-bar-bridge    { fill: rgba(255, 184, 77, 0.30); stroke: var(--heat-3); }
+.timeline-svg .tl-bar-need      { fill: rgba(110, 193, 255, 0.25); stroke: #6ec1ff; }
+.timeline-svg .tl-bar-downstream{ fill: rgba(110, 193, 255, 0.20); stroke: #6ec1ff; }
+.timeline-svg .tl-bar-upstream  { fill: rgba(200, 182, 255, 0.20); stroke: #c8b6ff; }
+.timeline-svg .tl-bar.is-primary { stroke-width: 1.5; }
+
+/* +N overflow badges. One per cluster of >3 overlapping events on a
+   given track. Pill styling so they read as "click to expand" rather
+   than as a regular event glyph. Track-tinted to keep the cluster's
+   identity. */
+.timeline-svg .tl-overflow rect {
+  fill: rgba(10, 22, 38, 0.92);
+  stroke: rgba(130, 170, 210, 0.55);
+  stroke-width: 1;
+}
+.timeline-svg .tl-overflow:hover rect {
+  fill: rgba(24, 199, 216, 0.18);
+  stroke: var(--menu-active);
+}
+.timeline-svg .tl-overflow-text {
+  fill: var(--text-main);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+.timeline-svg .tl-overflow-bridge     rect { stroke: var(--heat-3); }
+.timeline-svg .tl-overflow-need       rect { stroke: #6ec1ff; }
+.timeline-svg .tl-overflow-downstream rect { stroke: #6ec1ff; }
+.timeline-svg .tl-overflow-upstream   rect { stroke: #c8b6ff; }
+
+/* Selected glyph: stronger outline + halo so it's obvious which event
+   the detail strip below corresponds to. */
+.timeline-svg .tl-pt.is-selected {
+  stroke: var(--heat-core);
+  stroke-width: 3;
+  filter: drop-shadow(0 0 4px rgba(255, 243, 196, 0.55));
+}
+.timeline-svg .tl-bar.is-selected {
+  stroke: var(--heat-core);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px rgba(255, 243, 196, 0.55));
+}
+
+/* Detail strip below the timeline canvas. Empty state is muted text;
+   when an event is selected it shows: track chip + dates + (optional)
+   "Open this prediction" button on row 1, then label + sub on rows 2-3. */
+.timeline-detail {
+  flex-shrink: 0;
+  border-top: 1px solid var(--panel-border);
+  margin-top: 12px;
+  padding: 12px 4px 4px;
+  font-size: 12.5px;
+  color: var(--text-main);
+  max-height: 220px;
+  overflow: auto;
+}
+.timeline-detail[data-empty="true"] {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.timeline-detail p.muted {
+  margin: 0;
+}
+.timeline-detail-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.timeline-detail-track {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  background: rgba(24, 199, 216, 0.14);
+  color: var(--menu-active);
+  border: 1px solid rgba(24, 199, 216, 0.35);
+}
+.timeline-detail-track.tl-track-bridge     { background: rgba(255, 184, 77, 0.12); color: var(--heat-3); border-color: rgba(255, 184, 77, 0.35); }
+.timeline-detail-track.tl-track-need       { background: rgba(110, 193, 255, 0.10); color: #6ec1ff; border-color: rgba(110, 193, 255, 0.35); }
+.timeline-detail-track.tl-track-downstream { background: rgba(110, 193, 255, 0.10); color: #6ec1ff; border-color: rgba(110, 193, 255, 0.35); }
+.timeline-detail-track.tl-track-upstream   { background: rgba(200, 182, 255, 0.10); color: #c8b6ff; border-color: rgba(200, 182, 255, 0.35); }
+.timeline-detail-date {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.timeline-detail-open {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--menu-active);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+.timeline-detail-open:hover {
   background: rgba(24, 199, 216, 0.12);
   border-color: var(--menu-active);
 }
+.timeline-detail-label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-main);
+}
+.timeline-detail-sub {
+  color: var(--text-muted);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Description / reasoning area below the detail strip. Takes whatever
+   vertical space the canvas + detail haven't claimed; scrolls
+   internally when the content is taller. Currently a placeholder —
+   wire up locale-aware reasoning blocks here. */
+.timeline-description {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 14px;
+  padding: 14px 4px 6px;
+  border-top: 1px solid var(--panel-border);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text-main);
+  overflow: auto;
+}
+.timeline-description p.muted {
+  margin: 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* +N overflow modal. Centered overlay listing every event a cluster's
+   3-lane budget couldn't display. Click an entry → it becomes the
+   selected timeline event (same handler as a glyph click). */
+.tl-overflow-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 17, 31, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: tl-overflow-fade 140ms ease-out;
+}
+@keyframes tl-overflow-fade { from { opacity: 0; } to { opacity: 1; } }
+.tl-overflow-modal {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-deep);
+  width: min(520px, 92vw);
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.tl-overflow-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--panel-border);
+}
+.tl-overflow-track {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  background: rgba(24, 199, 216, 0.14);
+  color: var(--menu-active);
+  border: 1px solid rgba(24, 199, 216, 0.35);
+}
+.tl-overflow-track.tl-track-bridge     { background: rgba(255, 184, 77, 0.12); color: var(--heat-3); border-color: rgba(255, 184, 77, 0.35); }
+.tl-overflow-track.tl-track-need       { background: rgba(110, 193, 255, 0.10); color: #6ec1ff; border-color: rgba(110, 193, 255, 0.35); }
+.tl-overflow-track.tl-track-downstream { background: rgba(110, 193, 255, 0.10); color: #6ec1ff; border-color: rgba(110, 193, 255, 0.35); }
+.tl-overflow-track.tl-track-upstream   { background: rgba(200, 182, 255, 0.10); color: #c8b6ff; border-color: rgba(200, 182, 255, 0.35); }
+.tl-overflow-count {
+  flex: 1 1 auto;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.tl-overflow-close {
+  border: 1px solid var(--panel-border);
+  background: var(--menu-bg);
+  color: var(--text-main);
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+.tl-overflow-close:hover {
+  border-color: rgba(24, 199, 216, 0.4);
+  background: rgba(24, 199, 216, 0.12);
+}
+.tl-overflow-list {
+  overflow: auto;
+  padding: 6px 0;
+}
+.tl-overflow-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--panel-border);
+  padding: 10px 16px;
+  cursor: pointer;
+  font: inherit;
+  color: var(--text-main);
+  transition: background 120ms ease;
+}
+.tl-overflow-item:last-child { border-bottom: 0; }
+.tl-overflow-item:hover {
+  background: rgba(24, 199, 216, 0.08);
+}
+.tl-overflow-item-date {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.tl-overflow-item-label {
+  font-size: 12.5px;
+  color: var(--text-main);
+}
 
 /* Evidence reverse view */
+/* Lock column widths so a long expanded detail row (colspan=4) can't
+   stretch the parent table — auto layout otherwise rebalances columns
+   when any row expands and the header visibly jumps. */
+#evidence-body .list-table { table-layout: fixed; }
+#evidence-body .list-table th:nth-child(2),
+#evidence-body .list-table tbody tr:not(.ev-detail) td:nth-child(2) { width: 130px; }
+#evidence-body .list-table th:nth-child(3),
+#evidence-body .list-table tbody tr:not(.ev-detail) td:nth-child(3) { width: 160px; }
+#evidence-body .list-table th:nth-child(4),
+#evidence-body .list-table tbody tr:not(.ev-detail) td:nth-child(4) { width: 110px; }
+#evidence-body .list-table tbody tr:not(.ev-detail) td:nth-child(1) {
+  overflow-wrap: anywhere;
+}
 .ev-row { background: rgba(24, 199, 216, 0.02); }
 .ev-detail .ev-pred-list {
   list-style: none;
@@ -1302,19 +2194,16 @@ body.alt-view-mode {
   padding: 3px 0;
   font-size: 12.5px;
 }
-.ev-dir {
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 1px 6px;
-  border-radius: 3px;
-  color: var(--menu-active-text);
+.ev-pred-date {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  font-size: 11px;
 }
-.ev-dir.support    { background: rgba(82, 199, 152, 0.85); }
-.ev-dir.contradict { background: rgba(199, 75, 216, 0.85); }
-.ev-dir.neutral    { background: rgba(143, 168, 194, 0.55); }
 .ev-pred-title {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
   cursor: pointer;
   text-decoration: underline dotted rgba(143, 168, 194, 0.5);
 }
@@ -1527,6 +2416,17 @@ body.alt-view-mode {
   color: var(--text-main);
   word-break: break-word;
 }
+/* Clickable variant — prediction title links to the target's own
+   PROBE timeline (or OBSERVATORY panel from the right slide-in). */
+.readings-chain-target.is-link {
+  cursor: pointer;
+  color: var(--menu-active);
+  border-bottom: 1px dashed transparent;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.readings-chain-target.is-link:hover {
+  border-bottom-color: var(--menu-active);
+}
 .readings-chain-notes {
   flex: 1 1 100%;
   font-size: 11px;
@@ -1534,52 +2434,6 @@ body.alt-view-mode {
   margin-left: 28px;
   margin-top: 2px;
   font-style: italic;
-}
-
-/* Stream F (Step 3) counter-cluster — pushback evidence + cluster
-   density. Visually orange-tinted to distinguish from the
-   support-side cluster table. */
-.readings-counter-narrative {
-  margin-top: 16px;
-  background: rgba(220, 90, 60, 0.08);
-  border-left-color: #d97759;
-  color: var(--text-main);
-}
-.readings-counter-table {
-  margin-top: 6px;
-}
-.readings-counter-pool {
-  color: #d97759;
-  font-weight: 500;
-}
-.readings-counter-evidence-block {
-  margin-top: 8px;
-}
-.readings-counter-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.readings-counter-item {
-  padding: 4px 8px;
-  border-left: 2px solid #d97759;
-  background: rgba(220, 90, 60, 0.05);
-  border-radius: 3px;
-  margin-bottom: 3px;
-  font-size: 12px;
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-}
-.readings-counter-week {
-  flex: 0 0 auto;
-  font-variant-numeric: tabular-nums;
-  color: var(--text-muted);
-  font-size: 11px;
-}
-.readings-counter-title {
-  color: var(--text-main);
-  word-break: break-word;
 }
 
 /* Stream F (Step 4) P↔P relations — structural relationships
