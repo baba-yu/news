@@ -1,5 +1,8 @@
 # Future Prediction Validation 2026-05-02
 
+<!-- ai-notice -->
+> **ご注意:** 本ページの記事および要約は、Anthropic 社の生成AI「Claude」によって作成されています。
+
 対象ウィンドウ:`report/en/news-20260425.md` から `news-20260501.md` までの予測(本日を除く直近7日間)。本日のニュースレポート:`report/en/news-20260502.md`。
 
 ## Checking Predictions Against Reality
@@ -30,6 +33,60 @@
 | Mag 7 super-week + $700B 2026 capex + AAPL +$100B buyback combination cements 2026 as the year AI-capex disclosure splits — by Q4 2026 ≥1 Big-3 hyperscaler publishes audited monthly AI-business KPIs in 10-Q footnote | 2026-05-01 | 20260502 — Mag 7 super-week が綺麗に閉じる;AAPL Q2 record 決算 + Q3 ガイダンス +14-17%(コンセンサス9.5%対比)+ $100B 自社株買い + 4% 増配;2026年Big Tech AI capex 7,000億ドル;Microsoft Agent 365 が M365 E7 SKU 込み $15/user/月で価格設定(初の per-user agent-control-plane 価格、開示先例の単位);Cerebras IPO 5月中旬;AMD 5/5 決算($9.8B +/- $300M、+32% YoY 中央値) | 4 | [The Motley Fool - May 1 close](https://www.fool.com/coverage/stock-market-today/2026/05/01/stock-market-today-may-1-apple-jumps-after-record-quarter-and-100-billion-share-buyback/), [Microsoft Tech Community - Agent 365 May 2026](https://techcommunity.microsoft.com/blog/agent-365-blog/what%E2%80%99s-new-in-agent-365-may-2026/4516340), [Stock Maven - Cerebras IPO 2026](https://stockmaven.com/cerebras-ipo-2026/), [AMD IR - AMD May 5](https://ir.amd.com/news-events/press-releases/detail/1282/amd-to-report-fiscal-first-quarter-2026-financial-results) |
 | Powell's stay-through-2028 + Apr 29 8-4 dissent + May 1 Apr-jobs print at front of May 15 Chair handoff window shifts 2026 monetary-policy market psychology to institutional-volatility | 2026-05-01 | 20260502 — **訂正:** 4月雇用統計は5/1には公開されない(本予測の "5/1 4月雇用統計" 部分は誤った公開日想定に基づいていた);BLS スケジュールによる実際の予定公開は **5/8(金)午前8:30 ET**;5/1 のマクロテープは Q2 決算消化 + イラン制裁であり、4月雇用統計ではなかった。Powell-on-Board through 2028 + Warsh Senate Banking 承認部分は無傷。 | 3 | [BLS - Schedule of Releases](https://www.bls.gov/schedule/news_release/empsit.htm), [PBS - Powell stays on Board](https://www.pbs.org/newshour/show/powell-says-he-will-stay-on-fed-board-after-chair-term-ends-addressing-trumps-attacks) |
 | 20260420-3 "Headless Everything" architecture standardizes (browserless, screen-less UI, API-only agent UI, MCP metadata, Agent Registry, Simon Willison, GUI-driving agents) | 2026-04-20 | 20260502 — [REVIVED] via Layer 1 keyword 'Simon Willison'(News > Other Standout Topics で一致:「Simon Willison 5/1 weblog — inat-sightings.html iNaturalist データを取得する小さな JS アプリ」)+ Layer 1 keyword 'GUI agent'(News > LLM Workflow > Agent Skills で一致:arxiv 2604.27776 WindowsWorld プロセス中心の GUI エージェントベンチマーク)+ Layer 2 セマンティック一致(Microsoft Agent 365 "agent inventory" サーフェス → Agent-Registry 隣接の管理プリミティブ)。混合方向のシグナル:agent-inventory は Agent-Registry を進める;WindowsWorld GUI エージェントベンチマークは反証(headless ではなく GUI への研究投資);Simon Willison weblog は headless ではなく軽量 HTML。 | 2 | [Simon Willison's Weblog](https://simonwillison.net/), [arXiv - WindowsWorld](https://arxiv.org/abs/2604.27776), [Microsoft Tech Community - Agent 365 May 2026](https://techcommunity.microsoft.com/blog/agent-365-blog/what%E2%80%99s-new-in-agent-365-may-2026/4516340) |
+
+## Bridge
+
+**Bridge (Pred ID #1):** 本日のペンタゴン7社調達シグナル + 7,000億ドル2026 capexテープ + BofA $1.3T 予測が予測の `landing` コンポーネント(フロンティア研究所×ハイパースケーラ独占性が具体的契約に表面化)を支持。Reason: 5/1のペンタゴン分裂 + Anthropic Opus 4.7の4経路展開が最も明確な集団ポスチャだが、独占的キャパシティ契約の発表はまだ。Coherence 3/5. Remaining gap: フロンティア研究所×Tier-1クラウドの独占性に関する正式開示が未だ。
+
+**Bridge (Pred ID #2):** 本日のApptronik幹部採用波 + Figure 03 1/hour 自律夜間運用 + Tesla / Boston Dynamics / SoftBank Roze 軌跡が予測の `landing` コンポーネント(評価プリミティブとしての生産ライン記録)を支持。Reason: 第3走者の商業展開が4ベンダーで可視化、OEM採用記録が登場し始めた。Coherence 4/5. Remaining gap: 評価基準を制度化するIROS / GTCリーグテーブルの公表は未だ。
+
+**Bridge (Pred ID #3):** 本日のMicrosoft Agent 365 GA $15/userでテナントレベルMCPサーバ allow/block + CSAI MITRE-CNA + ATT&CK v19 named techniques + CSA Identityブログが予測の `so_that` コンポーネント(予測されたMCP Gateway / MCP Firewall企業プリミティブ出荷)を支持。Reason: Agent 365は予測が名付けたコントロールプレーン本体を、Q3より4ヶ月早く出荷。Coherence 5/5. Remaining gap: クロスベンダー同等(AWS / GCP相当)とOWASP MCP Top 10公表。
+
+**Bridge (Pred ID #4):** 本日のペンタゴン7社分裂 + Anthropic Opus 4.7のClaude/API/Bedrock/Vertex/Foundry展開 + OpenAI on Bedrockプレビューが予測の `landing` コンポーネント(マルチフロンティアベンダーがマルチランタイムを置換)を支持。Reason: 可視化された展開トポロジは資金源形状で、Anthropicが独占的に4経路全てに展開。Coherence 4/5. Remaining gap: 資金源と提供トポロジを結ぶ10-Qレベルの開示は未だ。
+
+**Bridge (Pred ID #5):** 本日のSGLang CVE-2026-5760の5/2未パッチ + LiteLLM CVE-2026-42208 + Spring AI CVE-2026-40967 + UTT/IBM Langflow 5/1波 + ATT&CK v19 named techniques + CSAI MITRE-CNA継続が `because`(推論サーバCVEクラスが予定通り形成)を支持。Reason: クロスサーバクラスタ + named-techniqueインフラが収斂中。Coherence 5/5. Remaining gap: NVDが推論サーバ固有のCWE / カテゴリでまだタグ付けしていない。
+
+**Bridge (Pred ID #6):** 本日のDeepSeek V4 Pro/Flash + Qwen 3.6 + Kimi K2.6 + GLM-5.1 + Bonsai-8B + Foundry Local + Unsloth 2026.4.8が `because`(コンシューマGPU対応オープンウェイト・スタックが成熟)を支持。Reason: オープンウェイト・スタックがコンシューマハードウェア価格でGPT-5.4をSWE-Bench Pro超え。Coherence 4/5. Remaining gap: エンタープライズ開発ツールベンダーから「デフォルト≥30%ローカルファースト切替」テレメトリの公表が未だ。
+
+**Bridge (Pred ID #7):** 本日のMag-7スーパーウィーク終了 + AAPL Q3ガイダンス +14-17% + 7,000億ドルcapex + Cerebras IPO 5月中旬が `landing`(Q3ハイパースケーラcapex階層開示)を支持。Reason: 集団テープがAI-capex-on-faithを追認するが、トークンマージン基準ゲートはまだ可視化されない。Coherence 3/5. Remaining gap: ハイパースケーラからper-token-margin-gated capexの開示が未だ。
+
+**Bridge (Pred ID #8):** 本日のCSAI MITRE-CNA + ATT&CK v19 + NIST CAISI RFI + CISA KEV 5/1(Linux Copy Fail)が `because`(規制プリミティブの形成)を支持。Reason: 発行者権限 + named-technique足場がMITRE + CSA + NIST全体で整備済み。Coherence 4/5. Remaining gap: CISA / NISTがKEVと別の推論サーバ / agentic-CIサブカタログをまだ公表していない。
+
+**Bridge (Pred ID #9):** 本日のCSA Identity in the Age of AI(5/1) + Microsoft Agent 365 Entra/Purview/Intune/Defenderサブストレートが `given`(エージェント=第一級アイデンティティ足場)を支持。Reason: 操作的サブストレート・プリミティブが企業コントロールプレーン層で形成中。Coherence 2/5. Remaining gap: 本日のニュースに米州法令や立法草案活動なし。
+
+**Bridge (Pred ID #10):** 本日はMS-OpenAIリセットとOpenAI on Bedrockプレビュー継続を超える新規契約再編なし;dimension `none`。Reason: 予測はQ4の二件目修正シグナルを期待するが未着地。Coherence 1/5. Remaining gap: 二件目のフロンティア研究所×ハイパースケーラ契約の公開修正なし。
+
+**Bridge (Pred ID #11):** 本日のSGLang CVE-2026-5760未パッチ + クロスサーバクラスのvLLM/LMDeploy/Spring AI/LiteLLM波及 + CSAI MITRE-CNA + CISA KEV(Linux Copy Fail)が `because`(OWASPクラス形成)を支持。Reason: named-technique + 未パッチCVE先例がロック済み。Coherence 4/5. Remaining gap: OWASP LLM Top 10 v2026未公表;CISA KEV 5/1追加はLinuxカーネル、AI-infra固有ではない。
+
+**Bridge (Pred ID #12):** 本日の7,000億ドルcapex + AAPL +$100B自社株買い + Q3 +14-17%ガイダンス + Big Tech Q1 capex >$130B + BofA $1.3T 2026チップ予測が `because`(集団capex圧)を支持。Reason: 開示先例拡大(AAPL Q3)が操作的集団シグナルだが、マージン基準capex行はまだ。Coherence 4/5. Remaining gap: ハイパースケーラからper-token-margin-gated capexの開示が未だ。
+
+**Bridge (Pred ID #13):** 本日のSGLang TurboQuant #21419 in-tree + #23134 fused-Triton + llama.cpp #20969 + PolyKV + NVIDIA kvpress + arxiv波(CodeComp / CacheFlow / TokenDance / TTKV) + vLLM v0.20.0 + Unsloth 2026.4.8が `landing`(スタック横断デプロイメントノブ露出)を支持。Reason: TurboQuant代替集合がリズムに乗って拡大中。Coherence 5/5. Remaining gap: TGI + Ollama + TensorRT-LLMが明示的`--kv-cache-dtype`フラグなし。
+
+**Bridge (Pred ID #14):** 本日のOpenAI売上テープ(Sacra推定$25B annualized、$2B/月ランレート、広告パイロット$100M) + AAPL Q2 print AIサービス行なし + Cerebras IPO 5月中旬が `because`(開示書き換え圧構築)を支持。Reason: 開示先例ギャップがコホートレベルでまだ可視化。Coherence 3/5. Remaining gap: フロンティア研究所から監査済み月次売上 + WAU開示リズムの公表が未だ。
+
+**Bridge (Pred ID #15):** 本日のATT&CK v19 named techniques継続 + CSAI MITRE-CNA + Microsoft Agent 365 tools-management allow/block + arxiv BenchGuardが `so_that`(サブマトリクス着地)を支持。Reason: マトリクス層は出荷済み;allow/blockプリミティブが強制サーフェス。Coherence 4/5. Remaining gap: 主要スキルマーケットプレイスから署名+来歴ゲートの強制施行が未だ。
+
+**Bridge (Pred ID #16):** 本日のATT&CK v19 named-techniques + CSAI MITRE-CNA継続 + Microsoft Agent 365 + Agent Harness Survey preprintが `landing`(マトリクス部分が出荷済み)を支持。Reason: ATT&CK v19が予測が要求するnamed-technique付録の操作的実体。Coherence 4/5. Remaining gap: NIST AI-RMF付録未公表;主要マーケットプレイスから署名+来歴ゲートの出荷が未だ。
+
+**Bridge (Pred ID #17):** 本日の生態系全カバレッジ(SGLang TurboQuant in-tree、llama.cpp #20969、PolyKV、NVIDIA kvpress、arxiv波、Unsloth、Foundry Local GA継続)が `landing`(スタック横断統一圧縮KVキャッシュ・デプロイメントノブ)を支持。Reason: クロススタック収斂がSGLang + llama.cpp + vLLM + arxivリサーチで可視化。Coherence 4/5. Remaining gap: Foundry LocalがWindows MLに紐づく native TurboQuant統合をまだ出荷していない。
+
+**Bridge (Pred ID #18):** 本日のOpenAI売上テープ + AAPL Q3ガイダンス +14-17% + サービス別AI行なし + Cerebras IPO 5月中旬が `because`(開示書き換え力が形成)を支持。Reason: AAPL Q3ガイダンスが可視化開示先例の拡大、OpenAI売上形が依然不透明。Coherence 3/5. Remaining gap: SECや買い手側からのAI売上開示フレームワークの公表が未だ。
+
+**Bridge (Pred ID #19):** 本日のPowell 5/15超 在任継続 + Warsh上院銀行委承認 + Powell任期2028までの留任が `because`(市場心理の転換)を支持。Reason: "shadow chair"フレーミングから正式Boardマージナルスイングへの構造変化が公的に交渉中。Coherence 4/5. Remaining gap: WarshチェアマンでのDissent投票数がまだ印字されず;≤2 dissent norm予測は未観測。
+
+**Bridge (Pred ID #20):** 本日のCSAI MITRE-CNA継続 + ATT&CK v19 named techniques + SGLang/LiteLLM/Spring AI継続 + UTT/IBM Langflow 5/1波 + Microsoft Agent 365 allow/blockが `because`(CNA発行サブコーパス形成)を支持。Reason: 発行者権限 + named-technique語彙 + クロスCVEクラスタが予測のトポロジに収斂。Coherence 4/5. Remaining gap: ≥50エージェント特異CVEsはまだ集計されていない;マーケットプレイスから署名+来歴ゲートの強制施行が未だ。
+
+**Bridge (Pred ID #21):** 本日のAnthropic Opus 4.7 Claude/API/Bedrock/Vertex/Foundry展開 + AWS AgentCore Node.js + 14リージョンGA + Codex CLI 0.128.0 model-provider-discovery + MS Foundry Agent Framework 1.0 GAが `landing`(frontier-on-every-cloud着地)を支持。Reason: Anthropicが独占的に4ホスティング経路全てに出荷、予測パターンの直接ミラー。Coherence 5/5. Remaining gap: 4経路全体での標準化SLAフィールド開示の同時並行が未だ。
+
+**Bridge (Pred ID #22):** 本日のMicrosoft Agent 365 $15/user(per-userエージェント制御開示単位) + AAPL Q3ガイダンス +14-17% + Cerebras IPO 5月中旬が `because`(per-user開示先例)を支持。Reason: $15/userは初の開示先例単位としてのper-userエージェント制御プレーン価格。Coherence 3/5. Remaining gap: Big-3ハイパースケーラからの監査済み月次AI-KPI 10-Q脚注公表が未だ。
+
+**Bridge (Pred ID #23):** 本日の明示的訂正(4月雇用統計が5/1ではなく5/8公開)が予測の `landing` コンポーネント(5/1印字フレーミング)を部分的に無効化;Powell-on-Board through 2028 + Warsh上院銀行委承認部分は維持。Reason: 日付アンカーが誤りだが構造的部分は無傷。Coherence 2/5. Remaining gap: 4月雇用統計が5/8に着地、翌日書きでタイミング部分を再アンカー必要。
+
+**Bridge (Pred ID #24):** 本日のSimon Willison weblog(軽量HTML、headlessではない) + arxiv 2604.27776 WindowsWorld GUI エージェントベンチマーク(反証) + Microsoft Agent 365 "agent inventory" サーフェス(Agent-Registry隣接)が混合方向;dimension `none`。Reason: 反証(GUIリサーチ、軽量HTML)と弱支持(agent-inventoryプリミティブ)に分かれるシグナル。Coherence 1/5. Remaining gap: 収斂的なheadlessアーキテクチャ標準化シグナルが未だ。
+
+## Summary (Plain Language)
+
+本日:Microsoft Agent 365 GA、ペンタゴン-Anthropic分裂、S&P最高値。エージェントコントロールプレーンとAIインフラセキュリティ予測が強く確認。4月雇用統計の公開が5/1から5/8へ。
 
 ## Summary of Findings
 
