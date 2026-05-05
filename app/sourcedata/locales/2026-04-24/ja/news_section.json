@@ -1,0 +1,816 @@
+{
+  "date": "2026-04-24",
+  "sections": [
+    {
+      "category": "LLM Workflow > OpenClaw / NemoClaw / Hermes Agents",
+      "bullets": [
+        {
+          "body": "**OpenClaw v2026.4.22（Apr 23 リリース）** — xAI プロバイダに画像生成 / TTS / STT 追加（grok-imagine-image / grok-imagine-image-pro、参照画像編集、6 ライブボイス、MP3 / WAV / PCM / G.711、grok-stt、リアルタイム Voice Call 転写）、Models/auth で `openclaw models auth login` が既定モデルの追加に変更（OpenAI Codex 再認証で他プロバイダの alias / per-model params が消える現象を解消）、Gateway/Linux で子プロセス（supervisor / PTY / MCP stdio / browser）を `/bin/sh` shim で包んで OOM score 分離、Moonshot Kimi K2.6 の OpenAI 互換 transport でネイティブ tool_call ID を厳格サニタイズしない修正（マルチターン agentic フロー 2-3 ラウンド後の破綻を解消）、pi 同梱 0.68.1 更新で OpenCode Go カタログを pi 経由提供（kimi-k2.6 / Qwen / GLM / MiMo / MiniMax 更新）、tokenjuice を opt-in プラグインとして同梱（Pi 埋め込み実行時の exec / bash 結果の圧縮）。",
+          "citations": [
+            {
+              "label": "Patchbot - Patch Notes for OpenClaw",
+              "url": "https://patchbot.io/ai/openclaw"
+            }
+          ]
+        },
+        {
+          "body": "**OpenClaw v2026.4.22 on GitHub（Apr 23 13:56 タグ）** — リリースタグおよびアセット。",
+          "citations": [
+            {
+              "label": "NewReleases.io - openclaw/openclaw v2026.4.22",
+              "url": "https://newreleases.io/project/github/openclaw/openclaw/release/v2026.4.22"
+            }
+          ]
+        },
+        {
+          "body": "**Hermes Agent（Nous Research）** — v0.10.0（Apr 16）以降、3 日ウィンドウ内にメジャーリリースなし。採用事例（118 bundled skills、15+ messaging integrations、95,600 GitHub stars → 103,000+）が拡散中。",
+          "citations": [
+            {
+              "label": "Hermes Agent - Nous Research",
+              "url": "https://hermes-agent.nousresearch.com/"
+            }
+          ]
+        },
+        {
+          "body": "**NemoClaw（NVIDIA）** — 3 日ウィンドウ内に新規メジャー更新なし。Omniverse デベロッパが Isaac Sim と組み合わせ、Nova Carter 自律ロボットを自然言語指示で操縦するデモが広がる（「move two meters forward」→ Python スクリプト生成）。",
+          "citations": [
+            {
+              "label": "Medium - NVIDIA Launches NemoClaw: What AI Builders and Tech Leaders Need to Know",
+              "url": "https://medium.com/@omoboyevictor97/nvidia-launches-nemoclaw-what-ai-builders-and-tech-leaders-need-to-know-before-they-adopt-it-2533d9a068bb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "LLM Workflow > OpenAI / Anthropic ツール",
+      "bullets": [
+        {
+          "body": "**OpenAI GPT-5.5 + GPT-5.5 Pro 公開（Apr 23）** — ChatGPT Plus / Pro / Business / Enterprise、Codex 全面展開。SWE-bench 88.7%、MMLU 92.4%、幻覚が GPT-5.4 比で 60% 減少。NVIDIA GB200 NVL72 ラックで運用、API 価格は GPT-5.4 比 2 倍だが「よりインテリジェント、token 効率でおつり」とのポジショニング。マルチステップ planning / tool use / self-check に特化。",
+          "citations": []
+        },
+        {
+          "body": "**OpenAI GPT-5.5 公式（Apr 23）** — モデル系譜と位置付け。",
+          "citations": [
+            {
+              "label": "9to5Mac - OpenAI upgrades ChatGPT and Codex with GPT-5.5",
+              "url": "https://9to5mac.com/2026/04/23/openai-upgrades-chatgpt-and-codex-with-gpt-5-5-a-new-class-of-intelligence-for-real-work/"
+            }
+          ]
+        },
+        {
+          "body": "**NVIDIA 発表：GPT-5.5 Codex を GB200 NVL72 で運用（Apr 23）** — OpenAI Codex のフロンティアモデルを NVIDIA インフラで運用する技術解説。",
+          "citations": [
+            {
+              "label": "NVIDIA Blog - OpenAI's New GPT-5.5 Powers Codex on NVIDIA Infrastructure",
+              "url": "https://blogs.nvidia.com/blog/openai-codex-gpt-5-5-ai-agents/"
+            }
+          ]
+        },
+        {
+          "body": "**Anthropic Claude Code 品質低下ポストモーテム（Apr 23）** — 3/4「reasoning effort high→medium」デフォルト変更（→4/7 revert）、3/26 導入の「idle 1h 後に thinking クリア」処理が毎ターン発火するバグ（→修正）、4/16 verbosity 削減 system prompt（→4/20 revert）の 3 件が複合し Sonnet 4.6 / Opus 4.6 の知性低下を引き起こしたと結論。v2.1.116 で全修正、4/23 に全サブスクの使用制限をリセット。",
+          "citations": [
+            {
+              "label": "Dataworldbank - Anthropic reveals changes to Claude's harnesses and operating instructions caused degradation",
+              "url": "https://www.dataworldbank.net/2026/04/23/mystery-solved-anthropic-reveals-changes-to-claudes-harnesses-and-operating-instructions-likely-caused-degradation/"
+            }
+          ]
+        },
+        {
+          "body": "**Claude Code 品質ポストモーテム（AIToolly、Apr 24）** — 3 件の技術課題の詳細。",
+          "citations": [
+            {
+              "label": "AIToolly - Anthropic Fixes Claude Code Quality and Reasoning Issues",
+              "url": "https://aitoolly.com/ai-news/article/2026-04-24-anthropic-addresses-claude-code-quality-degradation-reports-and-implements-fixes-for-sonnet-and-opus"
+            }
+          ]
+        },
+        {
+          "body": "**Claude Code 品質ポストモーテム（GIGAZINE、Apr 24）** — 使用制限リセットに関する日本語解説。",
+          "citations": [
+            {
+              "label": "GIGAZINE - Anthropic reports findings regarding decline in Claude's quality",
+              "url": "https://gigazine.net/gsc_news/en/20260424-anthropic-claude-code-quality/"
+            }
+          ]
+        },
+        {
+          "body": "**Simon Willison による GPT-5.5 所感（Apr 23）** — Codex と ChatGPT Paid tier に展開済み、「速くて効いて、極めて能力の高いモデル」との評価。",
+          "citations": [
+            {
+              "label": "Simon Willison - It's a big one (weekly)",
+              "url": "https://simonwillison.net/2026/Apr/24/weekly/"
+            }
+          ]
+        },
+        {
+          "body": "**Simon Willison による Claude Code 品質報告（Apr 24）** — 「過去 2 ヶ月の品質低下報告は実体のある問題だった」という Anthropic の公式回答への言及。",
+          "citations": [
+            {
+              "label": "Simon Willison - An update on recent Claude Code quality reports",
+              "url": "https://simonwillison.net/2026/Apr/24/recent-claude-code-quality-reports/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > vLLM",
+      "bullets": [
+        {
+          "body": "**vLLM v0.19.1（Apr 18 公開）継続、Apr 23-24 は GitHub Issue / PR ベースのコミュニティ活動** — 3 日ウィンドウ内に新規バージョン発表なし。kyleliang-nv / rdwj / deveringham / Rodmundur / AndreasKaratzas からの feature request / bug report、torch.compile 関連の Apr 24 活動が継続。v0.20 は Transformers v5 全アーキ対応、投機的デコード / MoE ルーティング最適化が計画中。",
+          "citations": [
+            {
+              "label": "vLLM Forums - Latest topics",
+              "url": "https://discuss.vllm.ai/latest"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > SGLang",
+      "bullets": [
+        {
+          "body": "**v0.5.10.post1（Apr 8 最新安定）継続** — 3 日ウィンドウ内で新規リリースなし。CVE-2026-5760（Jinja2 SSTI 経由 RCE、CVSS 9.8）の注意喚起継続、2026 Q2 ロードマップ（Issue #22949）更新あり。",
+          "citations": [
+            {
+              "label": "SGLang GitHub - 2026 Q2 Roadmap",
+              "url": "https://github.com/sgl-project/sglang/issues/22949"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > AWS Bedrock",
+      "bullets": [
+        {
+          "body": "**Amazon Bedrock AgentCore Managed Harness 詳細仕様（Apr 23）** — 3 API 呼び出しで稼働、推論 / ツール選択 / アクション実行 / 応答ストリーミングをフルマネージド、**filesystem persistence（preview）** で中断→再開、**AgentCore CLI** で init / local test / deploy / monitor のライフサイクル統合、**pre-built coding skills** で repo 読み / test 実行 / code 解析を即差し込み。Preview 提供地域は US West (Oregon) / US East (N. Virginia) / Asia Pacific (Sydney) / Europe (Frankfurt)。",
+          "citations": [
+            {
+              "label": "24AI - Amazon Bedrock AgentCore gets managed harness: a working agent in just three API calls",
+              "url": "https://24-ai.news/en/vijest/2026-04-23/bedrock-agentcore-managed-harness/"
+            }
+          ]
+        },
+        {
+          "body": "**AWS Bedrock AgentCore / CLI / Skills 解説（Techzine、Apr 22 継続）** — Gemini Enterprise Agent Platform / OpenAI Workspace Agents との Agent Control Plane 競争ポジション再確認。",
+          "citations": [
+            {
+              "label": "Techzine Global - AWS Bedrock AgentCore gets managed harness and CLI for AI agents",
+              "url": "https://www.techzine.eu/news/infrastructure/140725/aws-bedrock-agentcore-gets-managed-harness-and-cli-for-ai-agents/"
+            }
+          ]
+        },
+        {
+          "body": "**Classmethod 日本語解説（Apr 23）** — Bedrock AgentCore Managed Harness の preview リリース解説。",
+          "citations": [
+            {
+              "label": "Classmethod DevelopersIO - Amazon Bedrock AgentCore Managed Harness preview",
+              "url": "https://dev.classmethod.jp/en/articles/bedrock-agentcore-managed-harness-preview/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > Google Gemini Enterprise Agent Platform",
+      "bullets": [
+        {
+          "body": "**Google Cloud Next '26 Day 3（Apr 24、8:30AM-2:30PM）** — Agentic Data Cloud（クロスクラウド Lakehouse + Knowledge Catalog）と Agentic Defense（Google Threat Intelligence × Wiz Cloud & AI Security）を追加公開。Workspace の Skills（請求書の自動比較 / 差分抽出など）、Meet の自動議事 / アクション抽出「Take Notes For Me」を拡充。TPU 8i が inference 最適化 / 1,152 TPU / SRAM 3x を強調。",
+          "citations": [
+            {
+              "label": "Google Cloud Blog - Welcome to Google Cloud Next26",
+              "url": "https://cloud.google.com/blog/topics/google-cloud-next/welcome-to-google-cloud-next26"
+            }
+          ]
+        },
+        {
+          "body": "**TechRadar ライブカバレッジ（Apr 22-24）** — Google Cloud Next '26 の全発表詳報。",
+          "citations": [
+            {
+              "label": "TechRadar - Google Cloud Next 2026 live",
+              "url": "https://www.techradar.com/pro/live/google-cloud-next-2026"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > DeepSeek（新規フロンティア）",
+      "bullets": [
+        {
+          "body": "**DeepSeek V4 Preview：V4-Pro / V4-Flash 公開（Apr 24）** — V4-Pro: 1.6T 総パラメータ / 49B active、V4-Flash: 284B 総 / 13B active。ネイティブ **1M token context**、**Hybrid Attention Architecture** で 1M context 時の推論 FLOPs を V3.2 の 27%、KV キャッシュを 10% に削減。Hugging Face にオープンウェイトで両方公開、DeepSeek API / chat.deepseek.com 経由でも利用可。コーディング / 数学ベンチで他オープンモデルを制圧、world knowledge は Gemini 3.1-Pro に次ぐ 2 位と自己評価、GPT-5.4 / Gemini 3.1-Pro に対する差は「3-6 ヶ月」。",
+          "citations": []
+        },
+        {
+          "body": "**Simon Willison：DeepSeek V4—ほぼフロンティア、価格はその一部（Apr 24）** — GPT-5.4 / Gemini 3.1-Pro に肉薄する性能を 1 桁以上安い API 価格で提供する構図への評価、pelican bench 含む速報レビュー。",
+          "citations": [
+            {
+              "label": "Simon Willison - DeepSeek V4—almost on the frontier, a fraction of the price",
+              "url": "https://simonwillison.net/2026/Apr/24/deepseek-v4/"
+            }
+          ]
+        },
+        {
+          "body": "**Bloomberg：DeepSeek、1 年前の「AI 衝撃」後の最新フラッグシップを発表（Apr 24）** — V4 Preview の戦略的位置づけ。",
+          "citations": []
+        },
+        {
+          "body": "**DeepSeek V4-Pro / Flash API 価格とコンテキスト拡張（Apr 24）** — Flash $0.14 / $0.28 per M tokens、Pro $0.145 cache hit / $1.74 cache miss / $3.48 output per M tokens。",
+          "citations": [
+            {
+              "label": "Phemex News - DeepSeek V4 API Launches with Price Cuts and Expanded Context",
+              "url": "https://phemex.com/news/article/deepseek-v4-api-unveils-v4pro-and-v4flash-with-price-reductions-and-expanded-context-75497"
+            }
+          ]
+        },
+        {
+          "body": "**DeepSeek V4 The Next Web（Apr 24）** — 1 年ぶりのフラッグシップ更新と戦略解説。",
+          "citations": [
+            {
+              "label": "TheNextWeb - DeepSeek returns with V4-Pro and V4-Flash",
+              "url": "https://thenextweb.com/news/deepseek-v4-pro-flash-launch-open-source"
+            }
+          ]
+        },
+        {
+          "body": "**Hugging Face に DeepSeek-V4-Pro 公開** — オープンウェイトで直接ダウンロード可。",
+          "citations": [
+            {
+              "label": "Hugging Face - deepseek-ai/DeepSeek-V4-Pro",
+              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro"
+            }
+          ]
+        },
+        {
+          "body": "**AndroidSage：DeepSeek V4 リリース解説（Apr 24）** — 消費者向け記事での位置付け。",
+          "citations": [
+            {
+              "label": "AndroidSage - DeepSeek V4 Released: A Better AI Alternative to ChatGPT",
+              "url": "https://www.androidsage.com/2026/04/24/deepseek-v4-released-a-better-ai-alternative-to-chatgpt/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Qwen",
+      "bullets": [
+        {
+          "body": "**0G Foundation × Alibaba Cloud Qwen 提携（Apr 23）** — オンチェーンで自律 AI エージェントが Qwen モデルを直接呼び出し可能に。token ベース呼び出しでアカウント管理不要、プログラマブル / トークン化 AI インフラへの転換。",
+          "citations": [
+            {
+              "label": "GlobeNewswire - 0G to Make Alibaba's Qwen wModels Accessible to AI Agents via Blockchain Integration",
+              "url": "https://www.globenewswire.com/news-release/2026/04/23/3279551/0/en/0g-to-make-alibaba-s-qwen-wmodels-accessible-to-ai-agents-via-blockchain-integration.html"
+            }
+          ]
+        },
+        {
+          "body": "**Qwen3.6-27B（Apr 22 公開）3 日ウィンドウ内継続拡散** — AIBase 中国語解説を追加、1M context と Claude Code 級のコーディング性能を強調。",
+          "citations": [
+            {
+              "label": "AIBase - Qwen 3.6 Officially Released: 1 Million Long Context, Competing with Claude Code",
+              "url": "https://www.aibase.com/news/26810"
+            }
+          ]
+        },
+        {
+          "body": "**Qwen3.6-35B-A3B の実ハードウェア要件ガイド（2026）** — GPU / VRAM のローカル運用要件を整理。",
+          "citations": [
+            {
+              "label": "Compute Market - Qwen 3.6-35B-A3B Local Hardware Guide",
+              "url": "https://www.compute-market.com/blog/qwen-3-6-local-hardware-guide-2026"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Tencent Hunyuan（新規オープンソース）",
+      "bullets": [
+        {
+          "body": "**Tencent Hunyuan Hy3 Preview 公開 + オープンソース化（Apr 23）** — 中国 AI ラボのオープン重みフロンティアに Alibaba / DeepSeek に加え Tencent が合流。DeepSeek V4 の前日に公開されたことで、中国勢 3 社がほぼ同週にオープン重みを投入する構図。",
+          "citations": [
+            {
+              "label": "Threads - MiniMax 2026 TODOs on Hugging Face",
+              "url": "https://www.threads.com/@naveed_ullah600/post/DTIBhkPjELi/minimax-just-published-their-2026-todos-on-hugging-face-big-signals-about-where-"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Bonsai（1-bit LLM / 最適化）",
+      "bullets": [
+        {
+          "body": "**PrismML Bonsai-8B MLX 1-bit 公開** — Apple Silicon MLX ランタイムで 1-bit フォーマット直接ロード、Mac mini M2 / M3 / M4 で 8B 級性能を 1.15GB 実装。",
+          "citations": [
+            {
+              "label": "Hugging Face - prism-ml/Bonsai-8B-mlx-1bit",
+              "url": "https://huggingface.co/prism-ml/Bonsai-8B-mlx-1bit"
+            }
+          ]
+        },
+        {
+          "body": "**PrismML stealth 解除詳報（The Register、4 月）** — 1-bit LLM の技術レビュー、Bonsai がクラウド依存から AI を解放する文脈。",
+          "citations": [
+            {
+              "label": "The Register - PrismML debuts 1-bit LLM in bid to free AI from the cloud",
+              "url": "https://www.theregister.com/2026/04/04/prismml_1bit_llm/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > llama.cpp",
+      "bullets": [
+        {
+          "body": "**llama.cpp Apr 24 03:00 UTC 公式リリース** — CLI の冗長サンプリング変数削除（issue #20429 対応）を含むコード整理リリース。source code archive は Apr 23 タイムスタンプ。",
+          "citations": [
+            {
+              "label": "GitHub - ggml-org/llama.cpp releases",
+              "url": "https://github.com/ggml-org/llama.cpp/"
+            }
+          ]
+        },
+        {
+          "body": "**llama-cpp-binaries v0.123.0（Apr 23 01:27 UTC）** — CUDA 版等全バイナリ一式配布。",
+          "citations": [
+            {
+              "label": "GitHub - oobabooga/llama-cpp-binaries releases",
+              "url": "https://github.com/oobabooga/llama-cpp-binaries/releases"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > Ollama",
+      "bullets": [
+        {
+          "body": "**Ollama v0.21.2（Apr 24 リリース）** — OpenClaw 統合バンドル、web 検索プラグイン同梱、macOS / Linux / Windows 全インストーラとバイナリ配布。`ollama launch` による OpenClaw / Hermes / GitHub Copilot CLI 統合を継続。",
+          "citations": [
+            {
+              "label": "Localaimaster - Ollama Latest Version & Changelog",
+              "url": "https://localaimaster.com/blog/ollama-version-history"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > Azure Foundry Local",
+      "bullets": [
+        {
+          "body": "**Foundry Local GA（Apr 9）継続 + Fine-Tuning 機能強化（Apr 2026）** — 3 日ウィンドウ内に新規大型発表なし。RFT Global Training（o4-mini）、GPT-4.1 model grader、Foundry Labs の 4 月アップデート継続展開中。",
+          "citations": [
+            {
+              "label": "Microsoft Foundry Blog - What's New in Microsoft Foundry Fine-Tuning April 2026",
+              "url": "https://devblogs.microsoft.com/foundry/whats-new-in-foundry-finetune-april-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security",
+      "bullets": [
+        {
+          "body": "**Anthropic Project Glasswing の 40+ 組織参加（4 月継続、Apr 24 時点）** — AWS / Apple / Broadcom / Cisco / CrowdStrike / Google / JPMorganChase / Linux Foundation / Microsoft / NVIDIA / Palo Alto Networks をローンチ・パートナーに、40+ 組織に拡張。Anthropic は $100M Mythos クレジット + $4M オープンソースセキュリティ組織寄付をコミット。OpenBSD 27 年級の zero-day を含む「数千件の zero-day」を自動発見済みと主張。",
+          "citations": [
+            {
+              "label": "Anthropic - Project Glasswing",
+              "url": "https://www.anthropic.com/glasswing"
+            }
+          ]
+        },
+        {
+          "body": "**Prompt Injection 攻撃の事例と対策（4 月）** — クレデンシャル / 内部資料の窃取、権限外アクションの実行、instruction の長期的毒化の 3 類型で実被害が拡大。",
+          "citations": [
+            {
+              "label": "Security Boulevard - AI Prompt Injection Attacks: Examples & Prevention",
+              "url": "https://securityboulevard.com/2026/04/ai-prompt-injection-attacks-examples-prevention-grip/"
+            }
+          ]
+        },
+        {
+          "body": "**Apple iOS 26.4.2 / 18.7.8 で CVE-2026-28950 を修正（Apr 23）** — 通知システムでの削除指示無視による情報残留。",
+          "citations": [
+            {
+              "label": "Xloggs - Breaking News Cyber Threats 2026-04-23",
+              "url": "https://www.xloggs.com/2026/04/23/breaking-news-cyber-threats-2026-04-23-0800-pdt/"
+            }
+          ]
+        },
+        {
+          "body": "**China-linked GopherWhisper APT の対モンゴル攻撃（Apr 23 報道）** — モンゴル政府機関を標的とした新規 APT グループの確認。",
+          "citations": [
+            {
+              "label": "Xloggs - Breaking News Cyber Threats 2026-04-23 (03:00 PDT)",
+              "url": "https://www.xloggs.com/2026/04/23/breaking-news-cyber-threats-2026-04-23-0300-pdt/"
+            }
+          ]
+        },
+        {
+          "body": "**Google Antigravity の Pattern parameter prompt injection → RCE（Pillar Security、4 月報道）** — find_by_name ツール引数に flag 注入で最制限モードでも任意コード実行。",
+          "citations": [
+            {
+              "label": "Cloud Security Alliance - Antigravity Sandbox Escape: Prompt Injection and Native Tool Abuse",
+              "url": "https://labs.cloudsecurityalliance.org/research/csa-research-note-agentic-ide-prompt-injection-sandbox-escap/"
+            }
+          ]
+        },
+        {
+          "body": "**10 件の in-the-wild Indirect Prompt Injection 新出（Infosecurity Magazine、4 月）** — Web コンテンツ汚染でクローラ / RAG / HTML コメント処理を破壊する新規ペイロード群。",
+          "citations": [
+            {
+              "label": "Infosecurity Magazine - Researchers Uncover 10 In-the-Wild Indirect Prompt Injection Attacks",
+              "url": "https://www.infosecurity-magazine.com/news/researchers-10-wild-indirect/"
+            }
+          ]
+        },
+        {
+          "body": "**Capsule Security による Copilot Studio / Salesforce Agentforce indirect prompt injection（4 月）** — CVE-2026-21520 (CVSS 7.5) の詳細、PipeLeak（Salesforce 版）を同時に報告。",
+          "citations": [
+            {
+              "label": "VentureBeat - Microsoft patched a Copilot Studio prompt injection",
+              "url": "https://venturebeat.com/security/microsoft-salesforce-copilot-agentforce-prompt-injection-cve-agent-remediation-playbook"
+            }
+          ]
+        },
+        {
+          "body": "**Mercor データ流出の集団訴訟化（Apr 22）** — 4TB / 候補者プロフィール / 面接録音 / 顔生体情報 / API キー / 雇用主データが TeamPCP により LiteLLM CI/CD 経由で流出。7+ クラスアクション提訴、Meta が利用停止。",
+          "citations": []
+        },
+        {
+          "body": "**Mercor 流出データと Anthropic Mythos Preview 侵入の関連（Proofpoint、4 月）** — 流出した命名規則 / 社内情報が Anthropic Mythos Preview 未認可アクセスの手掛かりに使われた経路の分析。",
+          "citations": [
+            {
+              "label": "Proofpoint - Anthropic Leak & Mercor Attack: Enterprise AI Security Risks",
+              "url": "https://www.proofpoint.com/us/blog/threat-insight/mercor-anthropic-ai-security-incidents"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > Solutions: Zero-trust Access Control for Agentic AI",
+      "bullets": [
+        {
+          "body": "**Keycard：AI エージェント特化の Control Plane（2025-10 $38M シード + Series A で stealth 解除、2026 Q1-Q2 に製品 / M&A 拡張）** — Andreessen Horowitz / boldstart / Acrew Capital がリード。創業陣は Snyk（Ian Livingstone / Matthew Creager）+ Auth0 Chief Architect / Passport.js 作者（Jared Hanson）の「identity のプロ」布陣。**workload attestation（SPIFFE / k8s SA / cloud instance ID / mTLS）+ user / device / task の composite identity** を構築、**静的シークレット / API キーを dynamic / task-scoped / revocable なトークンに置換**、エージェントは raw secret を見ない設計。全ツール呼び出し / データアクセスの tamper-resistant audit。CRN 「2026 watch 10 クラウドコンピューティングスタートアップ」選出。2026-03 に **Anchor.dev 買収**（コーディングエージェントの runtime セキュリティ拡張）、**Runebook 買収**（SDK エコシステム拡張）、**Smallstep 提携**で verified infrastructure への runtime セキュリティアンカー。",
+          "citations": [
+            {
+              "label": "Keycard - The Control Plane for Autonomous Agents",
+              "url": "https://www.keycard.ai/"
+            }
+          ]
+        },
+        {
+          "body": "**Keycard：Anchor.dev 買収で coding エージェントを governable に（Apr 2026）** — 「コーディングエージェントは本質的に ungovernable」という問題認識のもと、実行時のアイデンティティ / 権限強制を buildtime〜runtime で閉じる設計。",
+          "citations": [
+            {
+              "label": "Keycard Blog - Coding Agents Are Ungovernable, We're Fixing That: Keycard acquires Anchor.dev",
+              "url": "https://www.keycard.ai/blog/keycard-acquires-anchor-dev"
+            }
+          ]
+        },
+        {
+          "body": "**Keycard × Smallstep：AI エージェントランタイムセキュリティを検証済みインフラにアンカー（Mar 23 2026）** — workload identity を cryptographic に検証済みのインフラ層と結合、中央集中ではなく分散アンカーで信頼チェーンを形成。",
+          "citations": [
+            {
+              "label": "GlobeNewswire - Keycard and Smallstep Anchor AI Agent Runtime Security to Verified Infrastructure",
+              "url": "https://www.globenewswire.com/news-release/2026/03/23/3260574/0/en/Keycard-and-Smallstep-Anchor-AI-Agent-Runtime-Security-to-Verified-Infrastructure.html"
+            }
+          ]
+        },
+        {
+          "body": "**Keycard：CRN 2026 Cloud Computing Watch 10 社選出** — AI エージェント identity / access problem の代表的ソリューションとして認知。",
+          "citations": []
+        },
+        {
+          "body": "**Okta：Okta for AI Agents（2026-04-30 GA 予定）** — AI エージェントを「第一級 identity」として中央ディレクトリに登録、オーナー割当・ライフサイクル管理・ポリシー適用を人間ユーザ同等に扱う新製品。Sanctioned / Shadow AI エージェントの継続的ディスカバリ、ツール呼び出し / 認可判断 / アクセス試行ログの SIEM 転送、universal logout によるランタイム強制をカバー。Apr 30 から GA。",
+          "citations": [
+            {
+              "label": "Okta Blog - Every Agent Needs an Identity: Introducing Okta for AI Agents",
+              "url": "https://www.okta.com/blog/ai/okta-ai-agents-early-access-announcement/"
+            }
+          ]
+        },
+        {
+          "body": "**Okta Showcase 2026：secure agentic enterprise の新設計図** — エージェント identity を中心に据えたエンタープライズ改造方針を Showcase 2026 で発表、Fortune の分析（Apr 13）は「企業は AI エージェントを従業員並みに扱い始めたが、企業構造はまだソフトウェア扱いのまま」と指摘。",
+          "citations": [
+            {
+              "label": "Okta Newsroom - Okta announces new blueprint for the secure agentic enterprise",
+              "url": "https://www.okta.com/newsroom/press-releases/showcase-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Cisco：Zero Trust Access を agentic AI ワークフォースに拡張** — Duo IAM を拡張、MCP ポリシー強制、Secure Access に intent-aware monitoring を追加、identity / access / runtime behavior の 3 点を単一アーキテクチャで governance。ハードコードクレデンシャル / 過剰権限 / 予測不能挙動への対抗を主 UVP に据える。",
+          "citations": [
+            {
+              "label": "Cisco Newsroom - Cisco Reimagines Security for the Agentic Workforce",
+              "url": "https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2026/m03/cisco-reimagines-security-for-the-agentic-workforce.html"
+            }
+          ]
+        },
+        {
+          "body": "**Cisco Solution Brief：Zero Trust for Your Agentic AI Workforce** — Duo IAM + MCP policy + Secure Access の具体構成と導入ガイド。",
+          "citations": [
+            {
+              "label": "Cisco - Zero Trust for Your Agentic AI Workforce Solution Brief",
+              "url": "https://www.cisco.com/c/en/us/solutions/collateral/artificial-intelligence/security/zero-trust-agentic-ai-sb.html"
+            }
+          ]
+        },
+        {
+          "body": "**Microsoft：Zero Trust for AI リファレンスアーキテクチャ（RSAC 2026）** — データ取込 / モデル学習 / デプロイ / エージェント挙動までの AI ライフサイクル全体に Zero Trust を拡張、アーキテクチャ / ワークショップ / 評価ツール / プラクティス記事を同時更新。",
+          "citations": [
+            {
+              "label": "Microsoft Security Blog - Announcing Zero Trust for AI",
+              "url": "https://www.microsoft.com/en-us/security/blog/2026/03/19/new-tools-and-guidance-announcing-zero-trust-for-ai/"
+            }
+          ]
+        },
+        {
+          "body": "**Microsoft：Secure agentic AI end-to-end（Apr 継続）** — エージェント開発〜運用までのエンドツーエンドセキュリティ戦略、Entra Agent ID / Purview / Defender for AI の連携を明示。",
+          "citations": [
+            {
+              "label": "Microsoft Security Blog - Secure agentic AI end-to-end",
+              "url": "https://www.microsoft.com/en-us/security/blog/2026/03/20/secure-agentic-ai-end-to-end/"
+            }
+          ]
+        },
+        {
+          "body": "**Cloud Security Alliance：Agentic Trust Framework（ATF）** — ベンダ中立のオープン governance 仕様、Zero Trust 原則を自律 AI エージェントに適用する実装可能なフレームワーク、既存ツール / インフラで採用可能。",
+          "citations": [
+            {
+              "label": "CSA - The Agentic Trust Framework: Zero Trust Governance for AI Agents",
+              "url": "https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents"
+            }
+          ]
+        },
+        {
+          "body": "**Wiz：AI Application Protection Platform（AI-APP、RSAC 2026）** — Google Cloud 傘下の Wiz が code-to-runtime で AI アプリケーションを防御、visibility / risk analysis / runtime protection を graph ベースの単一プラットフォームに統合。",
+          "citations": [
+            {
+              "label": "SecurityWeek - RSAC 2026 Conference Announcements Summary (Day 1)",
+              "url": "https://www.securityweek.com/rsac-2026-conference-announcements-summary-day-1/"
+            }
+          ]
+        },
+        {
+          "body": "**CrowdStrike：AI エージェント discovery / shadow AI governance / runtime threat detection 拡張（RSAC 2026）** — エンドポイントから SaaS / browser / cloud まで、エージェントが触れる全面に対応。Anthropic Project Glasswing のローンチパートナー 12 社の一角。",
+          "citations": []
+        },
+        {
+          "body": "**Palo Alto Networks：agentic AI 向け security innovation 群（RSAC 2026）** — 企業が agentic AI を安全にデプロイ / AI 駆動ワークフローを拡張するための新機能一式。Project Glasswing ローンチパートナー。",
+          "citations": [
+            {
+              "label": "VentureBeat - CrowdStrike, Cisco and Palo Alto Networks all shipped agentic SOC tools at RSAC 2026",
+              "url": "https://venturebeat.com/security/rsac-2026-agentic-soc-agent-telemetry-security-gap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > Solutions: Monitor and Manage AI Agent Behavior",
+      "bullets": [
+        {
+          "body": "**Exabeam Agent Behavior Analytics（ABA）が Google Cloud Agent エコシステムに拡張（Apr 22）** — Google Agent Development Kit（ADK）で構築されたエージェントと Google Agent Gateway との統合フレームワークを発表、agent-to-agent 対話 / workflow 関係マップ / 分散システム横断の異常検知を提供。OWASP Agentic Top 10 の 10 カテゴリ全てに対応。**2026 Google Cloud Partner of the Year Award for Security: Analytics & Operations** を同時受賞。",
+          "citations": [
+            {
+              "label": "SiliconANGLE - Exabeam extends Agent Behavior Analytics to Google Cloud's agent ecosystem",
+              "url": "https://siliconangle.com/2026/04/22/exabeam-extends-agent-behavior-analytics-google-clouds-agent-ecosystem/"
+            }
+          ]
+        },
+        {
+          "body": "**Exabeam 公式解説（Apr 2026）** — 「エージェントは人間の代理で動く新しい insider 型」と定義、dynamic baselining によるユーザと代理エージェントの統合行動プロファイルを構築、逸脱を検知フローに直結。",
+          "citations": [
+            {
+              "label": "Exabeam Blog - Securing the Agentic Enterprise With Behavioral Analytics",
+              "url": "https://www.exabeam.com/blog/company-news/whats-new-in-new-scale-april-2026-securing-the-agentic-enterprise-with-behavioral-analytics/"
+            }
+          ]
+        },
+        {
+          "body": "**Exabeam Partner of the Year 2026 受賞（Apr 21）** — Google Cloud との共同顧客向けにセキュリティオペレーション加速を評価。",
+          "citations": [
+            {
+              "label": "BusinessWire - Exabeam Wins 2026 Google Cloud Partner of the Year Award for Security",
+              "url": "https://www.businesswire.com/news/home/20260421369565/en/Exabeam-Wins-2026-Google-Cloud-Partner-of-the-Year-Award-for-Security-Analytics-Operations"
+            }
+          ]
+        },
+        {
+          "body": "**Exabeam、ChatGPT / Copilot / Gemini 横断で Agent Behavior Analytics を拡張（Apr 1）** — 「AI Insider 脅威」カテゴリを新設、主要 LLM アシスタント全面で挙動検知。",
+          "citations": [
+            {
+              "label": "SiliconANGLE - Exabeam expands Agent Behavior Analytics to secure AI agents across ChatGPT, Copilot and Gemini",
+              "url": "https://siliconangle.com/2026/04/01/exabeam-expands-agent-behavior-analytics-secure-ai-agents-across-chatgpt-copilot-gemini/"
+            }
+          ]
+        },
+        {
+          "body": "**Zenity：Gartner Hype Cycle for Agentic AI 2026 に 2 カテゴリ掲載 + Fortune Cyber 60 選出** — ビルドタイム〜ランタイムでエージェントの発見・評価・ポリシー適用を提供、FedRAMP In Process ステータスで連邦調達を準備中。AI Observability 製品は agent trace 全階層の挙動可視化を提供。",
+          "citations": [
+            {
+              "label": "BusinessWire - Zenity Named in Two Categories in the 2026 Gartner Hype Cycle for Agentic AI",
+              "url": "https://www.businesswire.com/news/home/20260415309905/en/Zenity-Named-in-Two-Categories-in-the-2026-Gartner-Hype-Cycle-for-Agentic-AI"
+            }
+          ]
+        },
+        {
+          "body": "**Zenity AI Observability プラットフォーム** — 大規模スケールでエージェント挙動を監視、ポリシー違反・データ流出・権限集約を検出。",
+          "citations": [
+            {
+              "label": "Zenity - AI Observability Platform",
+              "url": "https://zenity.io/platform/ai-observability"
+            }
+          ]
+        },
+        {
+          "body": "**Zenity FedRAMP In Process 到達** — 連邦機関向け AI エージェントセキュリティを前提に設計。",
+          "citations": [
+            {
+              "label": "Zenity Newsroom - Zenity Achieves FedRAMP In Process Status",
+              "url": "https://zenity.io/company-overview/newsroom/company-news/zenity-achieves-fedramp-in-process-status-for-ai-agent-security"
+            }
+          ]
+        },
+        {
+          "body": "**Arize AX：エージェント観測エンタープライズ基盤** — Agent Graph visualization で「どのステップがどの理由で壊れたか」を決定レベルで可視化、instrumentation のプロプラエタリ実装負担をゼロに抑える設計。",
+          "citations": [
+            {
+              "label": "Arize - Best AI Observability Tools for Autonomous Agents in 2026",
+              "url": "https://arize.com/blog/best-ai-observability-tools-for-autonomous-agents-in-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Braintrust：AI Observability プラットフォーム** — エージェントトレース捕捉、自動評価、リアルタイム監視、コスト解析。Notion / Stripe / Vercel / Airtable / Instacart / Zapier が利用中。",
+          "citations": [
+            {
+              "label": "Braintrust - Best AI observability tools: A buyer's guide to monitoring AI agents in production 2026",
+              "url": "https://www.braintrust.dev/articles/best-ai-observability-tools-2026"
+            }
+          ]
+        },
+        {
+          "body": "**Braintrust：Top 5 Agent Observability 2026 レビュー** — エージェント信頼性確保のための観測ツール 5 選、競合比較を含む。",
+          "citations": [
+            {
+              "label": "Braintrust - 5 best AI agent observability tools for agent reliability in 2026",
+              "url": "https://www.braintrust.dev/articles/best-ai-agent-observability-tools-2026"
+            }
+          ]
+        },
+        {
+          "body": "**Galileo AI：Luna-2 evaluators + Galileo Signals** — 数百万件の本番トレースを走査して agent drift を自動特定、prompt engineering / retrieval strategy の具体修正案を提示する failure mode 自動分析。",
+          "citations": [
+            {
+              "label": "Maxim - Top 5 AI Agent Observability Platforms in 2026",
+              "url": "https://www.getmaxim.ai/articles/top-5-ai-agent-observability-platforms-in-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Fiddler：エンタープライズ AI ガバナンス / 階層トレーシング** — アプリケーションレベルから個別 span まで hierarchical traces、顧客環境内での evaluation / guardrail 実行で data control / compliance 要件に適合。規制業界の監査可能性要件に強い。",
+          "citations": [
+            {
+              "label": "Levo.ai - Top 10 AI Monitoring Tools 2026",
+              "url": "https://www.levo.ai/resources/blogs/top-ai-monitoring-tools"
+            }
+          ]
+        },
+        {
+          "body": "**Levo.ai：runtime-first / eBPF ベースのエージェント監視** — AI エージェント / MCP サーバ / LLM アプリ / API / センシティブデータフロー全面を eBPF で計装、幻覚・安全でないツール使用・権限集約・transitive trust 漏洩・ポリシー違反をリアルタイム検知。",
+          "citations": [
+            {
+              "label": "UptimeRobot - AI Agent Monitoring: Best Practices, Tools & Metrics for 2026",
+              "url": "https://uptimerobot.com/knowledge-hub/monitoring/ai-agent-monitoring-best-practices-tools-and-metrics/"
+            }
+          ]
+        },
+        {
+          "body": "**LangSmith（LangChain）：AI Agent & LLM Observability** — LangChain スタック内でエージェントチェインとツール呼び出しを詳細ロギング、eval / prompt management を単一プラットフォームに集約。",
+          "citations": [
+            {
+              "label": "LangSmith homepage",
+              "url": "https://www.langchain.com/langsmith"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "CVE（CVSS 8.0 以上）",
+      "bullets": [
+        {
+          "body": "**CVE-2026-31177** — ToToLink A3300R、CVSS **9.8**、認証不要 RCE。",
+          "citations": []
+        },
+        {
+          "body": "**CVE-2026-39087** — Ntfy parseActions、CVSS **9.8**、RCE。",
+          "citations": []
+        },
+        {
+          "body": "**CVE-2026-23751** — Kofax Capture、CVSS **9.8**、認証不要の読み取り／書き込み + SMB coercion。",
+          "citations": []
+        },
+        {
+          "body": "**CVE-2026-40472** — hackage-server、CVSS **9.9**、保存型 XSS。",
+          "citations": []
+        },
+        {
+          "body": "**CVE-2026-39987** — Marimo Pre-Auth RCE、Apr 23 に CISA KEV 追加。連邦機関期限は May 7。",
+          "citations": []
+        },
+        {
+          "body": "**Pipecat CVE-2025-62373** — Python マルチモーダル会話エージェントフレームワーク、pickle デシリアライゼーション経由の RCE、CVSS **9.8**。",
+          "citations": []
+        },
+        {
+          "body": "**CVE-2026-5760**（継続）— SGLang、CVSS 9.8、GGUF 経由の Jinja2 SSTI。",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "Hardware",
+      "bullets": [
+        {
+          "body": "**Intel Q1 2026 決算：調整後 EPS $0.29 / 売上 $13.58B のブローアウト、+20%（Apr 23）** — EPS $0.01 / 売上 $12.42B 予想を両軸で大幅上回り。Non-GAAP 粗利率 41%、ガイダンス上限を +650 bps 上回る。データセンター売上 $5.1B（+22% YoY）、AI 関連が売上の 60%、+40% YoY。6 四半期連続のガイダンス超過。Intel 18A プロセス立ち上げが主要ドライバ。",
+          "citations": []
+        },
+        {
+          "body": "**NVIDIA Vera Rubin プラットフォーム量産継続** — 6 チップ + Groq 3 LPU セットが量産入り。複数のクラウドプロバイダがインスタンスを順次展開。",
+          "citations": [
+            {
+              "label": "NVIDIA Developer Blog - Inside the NVIDIA Rubin Platform",
+              "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Physical AI",
+      "bullets": [
+        {
+          "body": "**Siemens × Humanoid HMND 01 Alpha、Erlangen で 8 時間量産（Apr 23）** — NVIDIA Physical AI + KinetIQ + Siemens Xcelerator を統合。60 totes/h、稼働 8h+、ピック&プレース成功率 90% 超。デモではなく実生産ラインで稼働。",
+          "citations": [
+            {
+              "label": "Siemens Press - Siemens and Humanoid bring Physical AI to the factory floor",
+              "url": "https://press.siemens.com/global/en/pressrelease/siemens-and-humanoid-bring-physical-ai-factory-floor-deploying-humanoids-industrial"
+            }
+          ]
+        },
+        {
+          "body": "**TheNextWeb：Siemens × NVIDIA Humanoid トライアル（Apr 23）** — トライアルの詳細解説。",
+          "citations": [
+            {
+              "label": "TheNextWeb - Siemens and Humanoid Nvidia humanoid",
+              "url": "https://thenextweb.com/news/siemens-nvidia-humanoid-robot-erlangen-factory-trial"
+            }
+          ]
+        },
+        {
+          "body": "**Tesla Optimus Q1 2026 結果 + V3 量産確定（Apr 22-23）** — 売上 $22.4B（+16% YoY）/ EPS $0.41 で予想超過、2026 年 capex ガイダンスは公式に $25B 超。Fremont ラインで Optimus V3 を年 100 万台体制で準備、IR 資料には Giga Texas での 1,000 万台規模の第二工場計画。",
+          "citations": [
+            {
+              "label": "Inc. - Elon Musk Optimus timeline",
+              "url": "https://www.inc.com/leila-sheridan/elon-musk-launch-window-tesla-optimus/91335230"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Stock Prices and Corporate Activity",
+      "bullets": [
+        {
+          "body": "**Intel Q1 2026 +20% beat（Apr 23）** — Hardware セクション参照。",
+          "citations": []
+        },
+        {
+          "body": "**Anthropic Q1 2026 annualized revenue $30B 超（Apr 22）** — 2025 年末の $9B から 3 倍超。OpenAI の $25B を上回る。マルチベンダーのコンピュート契約（TPU / Broadcom / Google Cloud）が急伸を支える。",
+          "citations": []
+        },
+        {
+          "body": "**ServiceNow -18%、過去最大の単日下落（Apr 23）** — Apr 22 の -12 〜 -14% が Apr 23 に -18% へ拡大、年初来 -45%。「AI が既存のワークフロー SaaS を置き換える」懸念が Salesforce / Workday / Oracle / IBM へ波及し、独立したテーマに発展。",
+          "citations": []
+        },
+        {
+          "body": "**OpenAI GPT-5.5 + Workspace Agents、コンシューマ向け AI を日次売上 $1B へ** — アナリストノートの試算による OpenAI の売上ベース推計。 ---",
+          "citations": []
+        }
+      ]
+    }
+  ]
+}

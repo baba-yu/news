@@ -1,37 +1,106 @@
-# Future Prediction Validation 2026-04-28
+# Future Prediction Validation Report 2026-04-28
 
 <!-- ai-notice -->
 > **ご注意:** 本ページの記事および要約は、Anthropic 社の生成AI「Claude」によって作成されています。
 
+Coverage window: predictions from 2026-04-21 through 2026-04-27 (last 7 days, excluding today). Today's news report is for 2026-04-28.
 
-レビュー対象の予測ウィンドウ: **2026-04-21 から 2026-04-27**(過去7日間、本日を除く)。参照したドーマント・スナップショット: `memory/dormant/dormant-20260427.md`。
+## Validation findings
 
-## Checking Predictions Against Reality
-
-| Prediction (summary) | Prediction date | Related item(s) included in today's report (YYYYMMDD) | Relevance (5-point scale) | Reference link(s) |
+| Prediction (summary) | Prediction date | Today's relevance | Evidence summary | Reference link(s) |
 |---|---|---|---|---|
-| GGUF supply chains as new battleground; HF/Ollama/ModelScope require chat_template signature verification; SSTI scanning by default at GGUF load time | 2026-04-21 | 20260428 — SGLang CVE-2026-5760(CVSS 9.8)が**4月28日時点でも未パッチのまま**。v0.5.10 は `ImmutableSandboxedEnvironment` の緩和策なしで出荷。コピペクラスは vLLM CVE-2025-61620 / LMDeploy CVE-2026-33626 へ拡大中 | 5 | [Feedly - CVE-2026-5760](https://feedly.com/cve/CVE-2026-5760) |
-| Era of exclusive hyperscaler×frontier-lab alliance — 5-pole regime locks in (Google–Gemini, Anthropic–AWS, OpenAI–MS, Meta–internal, xAI–Oracle/NVDA); backend portability becomes hard requirement | 2026-04-21 | 20260428 — **4月27日に OpenAI–Microsoft の AGI 条項が撤廃され、ライセンスは2032年まで非独占に**。OpenAI は AWS(11月署名済の $38B)/ Oracle / Google でクリア。**Anthropic は AWS と Trainium + Graviton(Annapurna Labs と共同設計)でシリコンレベルまで連携を深化**。協定は独占デフォルトからマルチクラウドデフォルトへ移行 — 当初の「5極体制」仮説は一部裏付け(シリコン連携)、一部反転(独占の解除) | 4 | [Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause](https://simonwillison.net/2026/Apr/27/now-deceased-agi-clause/), [AWS Blog - AWS Weekly Roundup Apr 27](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-anthropic-meta-partnership-aws-lambda-s3-files-amazon-bedrock-agentcore-cli-and-more-april-27-2026/) |
-| Proprietary re-expansion vs open-weight geopolitical split — strongest model = closed weights by Q3 2026 | 2026-04-21 | 20260428 — Qwen3.6-Max-Preview は API オンリー継続、talkie-1930-13b-base はオープン公開、DeepSeek V4 は混在 — シグナルは混合 | 2 | [Qwen.ai - Qwen3.6-Max-Preview](https://qwen.ai/blog?id=qwen3.6-max-preview) |
-| Training-vs-inference SKU split as standard for custom AI silicon (Trainium/Inferentia, TPU 8t/8i, MAIA, MTIA) | 2026-04-22 | 20260428 — **Anthropic が AWS Trainium + Graviton をシリコンレベルで採用**。Meta はエージェント AI 用に Graviton CPU コアを数千万単位で展開。ハイパースケーラー独自シリコンが訓練/推論で構造的に分離するという主張を補強し、Graviton が GPU/Trainium に並ぶ CPU レーンとして挿入される構図 | 4 | [AWS Blog - AWS Weekly Roundup Apr 27](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-anthropic-meta-partnership-aws-lambda-s3-files-amazon-bedrock-agentcore-cli-and-more-april-27-2026/) |
-| Physical AI as SaaS / Robot-as-a-Service infrastructure race | 2026-04-22 | 20260428 — Figure 03 月次出荷が**倍々**で 60→120→240 体、90分ビルド・ケイデンス、評価額 $39B、BotQ は年12,000台超へ拡張。Tesla Optimus V3 は7月下旬公開、Boston Dynamics Atlas は Hyundai+DeepMind 2026 配備が確定 | 3 | [There's a Robot for That - Figure 03 Shipments Doubling](https://www.theresarobotforthat.com/figure-03-shipments-doubling-every-month/) |
-| OAuth trust between AI SaaS becomes top enterprise risk; SSO providers carve out "AI extension" scope category | 2026-04-22 | 20260428 — Google + Forcepoint の間接プロンプトインジェクション in-the-wild レポート(IPI ペイロード10種、決済可能エージェント向け PayPal トランザクション含む)、OpenAI が「プロンプト・インジェクションは恒久」と公的に認める。間接的にはマッチ — OAuth スコープ自体のカーブアウトは本日は未発生 | 2 | [Airia - AI Security in 2026](https://airia.com/ai-security-in-2026-prompt-injection-the-lethal-trifecta-and-how-to-defend/) |
-| "Agent Control Plane" as new hyperscaler battleground (Google Gemini Enterprise Agent Platform, AWS AgentCore, OpenAI Workspace Agents) | 2026-04-23 | 20260428 — **AgentCore Managed Harness 4-region preview + CLI 14-region GA + Skills を Kiro Power に**。**Claude Cowork が Bedrock 内部で AWS データレジデンシーを保ったまま稼働**。「Claude Platform on AWS」統合サーフェスも近日。**Multica v0.2.16(4/24)はコントロール・プレーンをベンダーニュートラル OSS に拡張 — Chat V2、issue 右クリック・コンテキストメニュー、Autopilot モーダル再設計、ACP 上の Kimi CLI ランタイム、エージェント別 `model` フィールド。issue を Claude Code / Codex / OpenClaw / OpenCode / Hermes / Gemini / Pi / Cursor Agent に同僚のように割り当てる仕組みで、AgentCore Managed Harness や Claude Managed Agents と同じオーケストレーション・レイヤーに位置する。** 直接的な拡張 | 5 | [AWS ML Blog - Running Claude Cowork in Amazon Bedrock](https://aws.amazon.com/blogs/machine-learning/from-developer-desks-to-the-whole-organization-running-claude-cowork-in-amazon-bedrock/), [GitHub - multica-ai/multica releases](https://github.com/multica-ai/multica/releases) |
-| 27B Dense + 1M context as de-facto standard enterprise local-LLM in H2 2026 | 2026-04-23 | 20260428 — Qwen3.6-27B 継続(262K context、Dense、Apache 2.0)、DeepSeek V4-Flash 284B/13B-active 1M context、PrismML Bonsai-8B 1-bit のクロススタック展開 | 3 | [Felloai - DeepSeek V4 Released](https://felloai.com/deepseek-v4/), [Qwen.ai - Qwen3.6-Max-Preview](https://qwen.ai/blog?id=qwen3.6-max-preview) |
-| AI agent security extends to third-party-vendor boundary + URL-naming entropy (post-Mythos contractor incident) | 2026-04-23 | 20260428 — 本日のウィンドウ内に第三者ベンダー境界や URL ネーミング・エントロピーの新規シグナルなし。Project Glasswing 12 ローンチ・パートナー + Mythos Preview ゲーティングは継続のみ | 1 | [Anthropic Release Notes - Apr 2026](https://releasebot.io/updates/anthropic/claude) |
-| 1M context as default open-weight era arrives by Q3 2026; vector DBs forced to redefine as long-context cache layers | 2026-04-24 | 20260428 — DeepSeek V4-Pro 1.6T MoE / 49B active 1M context、V4-Flash 284B/13B active 1M context、Hybrid Attention により 1M context での計算量を V3.2 比 27%/10% に削減 | 3 | [Felloai - DeepSeek V4](https://felloai.com/deepseek-v4/) |
-| Physical-AI 8-hour production runs as enterprise procurement requirement in H2 2026 | 2026-04-24 | 20260428 — Figure 03 BMW スパータンバーグで30,000台以上の車両をサポート、90分ビルド、HMND 01 Alpha のフレーミング継続 | 3 | [RoboHorizon - Figure AI Now Builds a Humanoid Every 90 Minutes](https://robohorizon.com/en-us/news/2026/04/figure-ai-now-builds-a-humanoid-robot-every-90-minutes/) |
-| Capital markets reset valuation of AI-agent-displaced enterprise SaaS inside Q2 2026 | 2026-04-24 | 20260428 — Mag 7 スーパーウィーク + 2026年 capex 約 $700B、Motley Fool「Why This Week Could Be Huge for AI Stocks」、トークンあたりマージン・ゲートのテーゼは硬化中 — ただしウィンドウ内で SaaS ディスプレースメント関連の新規下落はなし | 2 | [Motley Fool - Why This Week Could Be Huge For AI Stocks](https://www.fool.com/investing/2026/04/28/why-this-week-could-be-huge-for-ai-stocks/) |
-| Frontier AI lab × Tier-1 cloud capacity capture splits field cleanly by Q3 2026 — training oligopoly = 3 clouds, inference = layered | 2026-04-25 | 20260428 — **OpenAI が AWS でクリア(11月署名 $38B、$50B のヘッドルーム)** + Microsoft 非独占。**Anthropic は AWS Trainium + Graviton にシリコンレベルで載る**一方、Google($40B / 5GW)と Amazon($25B + 5GW / 10年 $100B)のアンカーも維持。3クラウド訓練オリゴポリ仮説を直接補強 | 5 | [Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause](https://simonwillison.net/2026/Apr/27/now-deceased-agi-clause/), [AWS Blog - AWS Weekly Roundup Apr 27](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-anthropic-meta-partnership-aws-lambda-s3-files-amazon-bedrock-agentcore-cli-and-more-april-27-2026/) |
-| Physical AI production-line records become league tables at IROS / GTC 2026 H2 | 2026-04-25 | 20260428 — Figure 03 月次出荷倍化 60→120→240、BMW スパータンバーグで30,000台以上 — 継続のみで本日 IROS / GTC リーグテーブルの公式公開はなし | 3 | [There's a Robot for That - Figure 03 Shipments Doubling](https://www.theresarobotforthat.com/figure-03-shipments-doubling-every-month/) |
-| MCP-protocol-itself attack surface as biggest enterprise AI adoption bottleneck; OWASP MCP Top 10 by Q3 2026; MCP Gateway / MCP Firewall product wave | 2026-04-25 | 20260428 — 間接プロンプト・インジェクション in-the-wild(IPI ペイロード10種)、OpenAI のプロンプト・インジェクション恒久化発言、Okta for AI Agents 4/30 GA(中央 MCP コントロール・プレーンとしての Agent Gateway、Okta MCP レジストリを集約する仮想 MCP サーバー)。MCP 専用 CVE ではなく隣接エビデンス | 4 | [Cloud Security Alliance - ATF: Zero Trust for AI Agents](https://cloudsecurityalliance.org/blog/2026/04/03/every-rsac-keynote-asked-the-same-five-questions-here-s-the-framework-that-answers-them) |
-| Hyperscaler-AI-lab capital coupling graduates from finance pact to compute-stack lock-in by Q3 2026 — multi-frontier-vendor replaces multi-runtime as enterprise strategy | 2026-04-26 | 20260428 — **OpenAI/Microsoft の AGI 条項撤廃 + AWS が OpenAI へ $38B、Anthropic は AWS Trainium + Graviton にシリコンレベルで連携、Claude Cowork が Bedrock 内、Meta は Graviton をスケール展開**。コンピュート・スタック・ロックインの硬化をリアルタイムに直接確認 — ただし経路は「各クラウドが各ラボを独占」ではなく「各フロンティア・ラボがマルチクラウド配布」に変化 | 5 | [AWS Blog - AWS Weekly Roundup Apr 27](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-anthropic-meta-partnership-aws-lambda-s3-files-amazon-bedrock-agentcore-cli-and-more-april-27-2026/), [Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause](https://simonwillison.net/2026/Apr/27/now-deceased-agi-clause/) |
-| Inference servers become primitive supply chain — first AI Infra-specific CVE class with NVD tagging by Q3 2026; OWASP LLM Top-10 v2026 promotes Inference Server Template/Loader RCE to top-3 | 2026-04-26 | 20260428 — **SGLang CVE-2026-5760 が公開後10日以上未パッチ**、**Totolink A8000RU CVE クアッド(CVE-2026-7153/7154/7156/7202、すべて CVSS 9.8)が48時間で着弾**、Cisco ISE 未認証 RCE アドバイザリー、Google + Forcepoint IPI 前年比 32% 増。NIST/CISA への圧力は引き締まる | 5 | [Feedly - CVE-2026-5760](https://feedly.com/cve/CVE-2026-5760), [TheHackerWire - Totolink A8000RU CVE-2026-7202](https://www.thehackerwire.com/totolink-a8000ru-os-command-injection-cve-2026-7202/) |
-| Consumer-GPU coding agent displaces cloud-only coding API for ≥30% of dev workloads by Q3 2026 | 2026-04-26 | 20260428 — Qwen3.6-27B + DeepSeek V4 + PrismML Bonsai-8B(1-bit、iPhone 17 Pro Max で 44 tok/s、M4 Pro で 131 tok/s、RTX 4090 で 368 tok/s)継続。**Unsloth v0.1.37-beta(4/23)— Studio UI/UX 全面刷新、Qwen3.6 の Preserve Thinking、gpt-oss thinking トグル、Kimi-K2.6、experimental API。v0.1.36-beta(4/8)では Gemma-4-E2B を 8 GB VRAM でローカル訓練、FA2 比 ~1.5x 速く / ~60% 少ない VRAM** — コンシューマー GPU でのファインチューニング + Studio のローカルトレーナー展開は Bonsai-8B と並ぶオンデバイス・スタックのベースライン。**Multica v0.2.16(4/24)はベンダーニュートラルなマネージド・エージェント・オーケストレータ**として Claude Code / Codex / OpenClaw / OpenCode / Hermes / Gemini / Pi / Cursor Agent を同僚のように割り当て可能にし、ローカルファースト・ハイブリッド・ハーネス・パターンを直接実現する。AgentCore Skills は Kiro Power / Claude Code / Codex / Cursor へ来週展開 | 4 | [PrismML - Bonsai 8B repo / model card](https://huggingface.co/PrismML/bonsai-8b), [GitHub - unslothai/unsloth releases](https://github.com/unslothai/unsloth/releases), [GitHub - multica-ai/multica releases](https://github.com/multica-ai/multica/releases) |
-| Mag 7 Q1 earnings (Apr 29-30) reset AI-capex ROI narrative — Q3 2026 first hyperscaler publicly tiers AI capex by token-margin gate | 2026-04-27 | 20260428 — **FOMC + Mag 7 スーパーウィークが同じ48時間のテープに収束**、2026年 capex 約 $700B、Microsoft/Alphabet/Amazon/Meta は 4/29 印刷、Apple は 4/30、Live News Chat「Can Big Tech Justify $645 Billion In AI Spending?」、本日の予測 #3 はこのテーゼをそのまま継承 | 5 | [Heygotrade - Mag 7 Earnings 2026](https://www.heygotrade.com/en/blog/mag-7-earnings-superweek-what-investors-need-to-watch/), [Live News Chat - Mag 7 Earnings Week](https://livenewschat.eu/mag-7-earnings-week-big-tech-ai-spending-microsoft-apple-amazon-meta-alphabet-2026/) |
-| AI-Infra CVE class graduates into regulatory primitive — Q4 2026 CISA/NIST publish sub-catalog for inference-server + agentic-CI runtimes | 2026-04-27 | 20260428 — SGLang CVE-2026-5760 4/28 時点未パッチ、Totolink CVE クアッドが48時間以内、Cisco ISE アドバイザリー、CISA KEV 最後の追加は 4/24 の4件バッチ(Samsung MagicINFO 9 / SimpleHelp x2 / D-Link DIR-823X)。AI-Infra サブカタログは未公開だが圧力は引き締まる | 4 | [The Hacker News - CISA Adds 4 Exploited Flaws to KEV](https://thehackernews.com/2026/04/cisa-adds-4-exploited-flaws-to-kev.html), [Feedly - CVE-2026-5760](https://feedly.com/cve/CVE-2026-5760) |
-| Public-opinion blowback converts to binding agent-governance — at least one US state ships "Statutory Identity for Autonomous Agents" Act by Q3 2026 | 2026-04-27 | 20260428 — **Okta for AI Agents 4/30 GA(4/28から残り2日)**: Agent Discovery & Governance、Agent Gateway、仮想 MCP サーバー・レジストリ、クレデンシャル・ヴォルト + 自動ローテーション、ユニバーサル・ログアウト。Microsoft Zero Trust for AI(RSAC 2026)継続、Cisco/CrowdStrike/Splunk のコンセンサス。州法はまだ未署名 | 3 | [Cloud Security Alliance - ATF: Zero Trust for AI Agents](https://cloudsecurityalliance.org/blog/2026/04/03/every-rsac-keynote-asked-the-same-five-questions-here-s-the-framework-that-answers-them), [Cisco - Zero trust for agentic AI workforce](https://www.cisco.com/site/us/en/solutions/artificial-intelligence/security/securing-agentic-ai/index.html) |
-| Headless Everything architecture standardizes (dormant pool, ID 20260420-3) | 2026-04-20 | 20260428 — [REVIVED] via Layer 1 keyword 'Simon Willison'(News > LLM Workflow > OpenAI/Microsoft/Anthropic 4/27 partnership re-architecture セクションおよび News > Other Standout Topics でマッチ)。ヒット箇所は AGI 条項の歴史的経緯、VibeVoice STT、talkie-1930-13b-base — いずれもヘッドレス vs GUI 駆動エージェント・アーキテクチャの議論ではない。Layer 2 セマンティック・スキャン: 本日のヘッドラインやサブヘッディングに Headless Everything と妥当に関連するものは見当たらない。誠実な評点: 1(シグナル・トークンは点灯したが内容は無関係)。ドーマント・スナップショット上の次の周期 ping は 2026-05-11(まだ期日外) | 1 | [Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause](https://simonwillison.net/2026/Apr/27/now-deceased-agi-clause/), [Simon Willison - microsoft/VibeVoice](https://simonwillison.net/2026/Apr/27/vibevoice/), [Simon Willison - Introducing talkie](https://simonwillison.net/2026/Apr/28/talkie/) |
+| GGUF supply chains as new battleground; HF/Ollama/ModelScope require chat_template signature verification; SSTI scanning by default at GGUF load time | 2026-04-21 | 4 | 5 | [Feedly - CVE-2026-5760](https://feedly.com/cve/CVE-2026-5760) |
+| Era of exclusive hyperscaler×frontier-lab alliance — 5-pole regime locks in (Google–Gemini, Anthropic–AWS, OpenAI–MS, Meta–internal, xAI–Oracle/NVDA); backend portability becomes hard requirement | 2026-04-21 | 4 | 4 | [Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause](https://simonwillison.net/2026/Apr/27/now-deceased-agi-clause/), [AWS Blog - AWS Weekly Roundup Apr 27](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-anthropic-meta-partnership-aws-lambda-s3-files-amazon-bedrock-agentcore-cli-and-more-april-27-2026/) |
+| Proprietary re-expansion vs open-weight geopolitical split — strongest model = closed weights by Q3 2026 | 2026-04-21 | 3 | 2 | [Qwen.ai - Qwen3.6-Max-Preview](https://qwen.ai/blog?id=qwen3.6-max-preview) |
+| Training-vs-inference SKU split as standard for custom AI silicon (Trainium/Inferentia, TPU 8t/8i, MAIA, MTIA) | 2026-04-22 | 3 | 4 | [AWS Blog - AWS Weekly Roundup Apr 27](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-anthropic-meta-partnership-aws-lambda-s3-files-amazon-bedrock-agentcore-cli-and-more-april-27-2026/) |
+| Physical AI as SaaS / Robot-as-a-Service infrastructure race | 2026-04-22 | 3 | 3 | [There's a Robot for That - Figure 03 Shipments Doubling](https://www.theresarobotforthat.com/figure-03-shipments-doubling-every-month/) |
+| OAuth trust between AI SaaS becomes top enterprise risk; SSO providers carve out "AI extension" scope category | 2026-04-22 | 3 | 2 | [Airia - AI Security in 2026](https://airia.com/ai-security-in-2026-prompt-injection-the-lethal-trifecta-and-how-to-defend/) |
+| "Agent Control Plane" as new hyperscaler battleground (Google Gemini Enterprise Agent Platform, AWS AgentCore, OpenAI Workspace Agents) | 2026-04-23 | 4 | 5 | [AWS ML Blog - Running Claude Cowork in Amazon Bedrock](https://aws.amazon.com/blogs/machine-learning/from-developer-desks-to-the-whole-organization-running-claude-cowork-in-amazon-bedrock/), [GitHub - multica-ai/multica releases](https://github.com/multica-ai/multica/releases) |
+| 27B Dense + 1M context as de-facto standard enterprise local-LLM in H2 2026 | 2026-04-23 | 3 | 3 | [Felloai - DeepSeek V4 Released](https://felloai.com/deepseek-v4/), [Qwen.ai - Qwen3.6-Max-Preview](https://qwen.ai/blog?id=qwen3.6-max-preview) |
+| AI agent security extends to third-party-vendor boundary + URL-naming entropy (post-Mythos contractor incident) | 2026-04-23 | 3 | 1 | [Anthropic Release Notes - Apr 2026](https://releasebot.io/updates/anthropic/claude) |
+| 1M context as default open-weight era arrives by Q3 2026; vector DBs forced to redefine as long-context cache layers | 2026-04-24 | 4 | 3 | [Felloai - DeepSeek V4](https://felloai.com/deepseek-v4/) |
+| Physical-AI 8-hour production runs as enterprise procurement requirement in H2 2026 | 2026-04-24 | 3 | 3 | [RoboHorizon - Figure AI Now Builds a Humanoid Every 90 Minutes](https://robohorizon.com/en-us/news/2026/04/figure-ai-now-builds-a-humanoid-robot-every-90-minutes/) |
+| Capital markets reset valuation of AI-agent-displaced enterprise SaaS inside Q2 2026 | 2026-04-24 | 3 | 2 | [Motley Fool - Why This Week Could Be Huge For AI Stocks](https://www.fool.com/investing/2026/04/28/why-this-week-could-be-huge-for-ai-stocks/) |
+| Frontier AI lab × Tier-1 cloud capacity capture splits field cleanly by Q3 2026 — training oligopoly = 3 clouds, inference = layered | 2026-04-25 | 5 | 5 | [Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause](https://simonwillison.net/2026/Apr/27/now-deceased-agi-clause/), [AWS Blog - AWS Weekly Roundup Apr 27](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-anthropic-meta-partnership-aws-lambda-s3-files-amazon-bedrock-agentcore-cli-and-more-april-27-2026/) |
+| Physical AI production-line records become league tables at IROS / GTC 2026 H2 | 2026-04-25 | 3 | 3 | [There's a Robot for That - Figure 03 Shipments Doubling](https://www.theresarobotforthat.com/figure-03-shipments-doubling-every-month/) |
+| MCP-protocol-itself attack surface as biggest enterprise AI adoption bottleneck; OWASP MCP Top 10 by Q3 2026; MCP Gateway / MCP Firewall product wave | 2026-04-25 | 4 | 4 | [Cloud Security Alliance - ATF: Zero Trust for AI Agents](https://cloudsecurityalliance.org/blog/2026/04/03/every-rsac-keynote-asked-the-same-five-questions-here-s-the-framework-that-answers-them) |
+| Hyperscaler-AI-lab capital coupling graduates from finance pact to compute-stack lock-in by Q3 2026 — multi-frontier-vendor replaces multi-runtime as enterprise strategy | 2026-04-26 | 3 | 5 | [AWS Blog - AWS Weekly Roundup Apr 27](https://aws.amazon.com/blogs/aws/aws-weekly-roundup-anthropic-meta-partnership-aws-lambda-s3-files-amazon-bedrock-agentcore-cli-and-more-april-27-2026/), [Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause](https://simonwillison.net/2026/Apr/27/now-deceased-agi-clause/) |
+| Inference servers become primitive supply chain — first AI Infra-specific CVE class with NVD tagging by Q3 2026; OWASP LLM Top-10 v2026 promotes Inference Server Template/Loader RCE to top-3 | 2026-04-26 | 3 | 5 | [Feedly - CVE-2026-5760](https://feedly.com/cve/CVE-2026-5760), [TheHackerWire - Totolink A8000RU CVE-2026-7202](https://www.thehackerwire.com/totolink-a8000ru-os-command-injection-cve-2026-7202/) |
+| Consumer-GPU coding agent displaces cloud-only coding API for ≥30% of dev workloads by Q3 2026 | 2026-04-26 | 3 | 4 | [PrismML - Bonsai 8B repo / model card](https://huggingface.co/PrismML/bonsai-8b), [GitHub - unslothai/unsloth releases](https://github.com/unslothai/unsloth/releases), [GitHub - multica-ai/multica releases](https://github.com/multica-ai/multica/releases) |
+| Mag 7 Q1 earnings (Apr 29-30) reset AI-capex ROI narrative — Q3 2026 first hyperscaler publicly tiers AI capex by token-margin gate | 2026-04-27 | 4 | 5 | [Heygotrade - Mag 7 Earnings 2026](https://www.heygotrade.com/en/blog/mag-7-earnings-superweek-what-investors-need-to-watch/), [Live News Chat - Mag 7 Earnings Week](https://livenewschat.eu/mag-7-earnings-week-big-tech-ai-spending-microsoft-apple-amazon-meta-alphabet-2026/) |
+| AI-Infra CVE class graduates into regulatory primitive — Q4 2026 CISA/NIST publish sub-catalog for inference-server + agentic-CI runtimes | 2026-04-27 | 4 | 4 | [The Hacker News - CISA Adds 4 Exploited Flaws to KEV](https://thehackernews.com/2026/04/cisa-adds-4-exploited-flaws-to-kev.html), [Feedly - CVE-2026-5760](https://feedly.com/cve/CVE-2026-5760) |
+| Public-opinion blowback converts to binding agent-governance — at least one US state ships "Statutory Identity for Autonomous Agents" Act by Q3 2026 | 2026-04-27 | 4 | 3 | [Cloud Security Alliance - ATF: Zero Trust for AI Agents](https://cloudsecurityalliance.org/blog/2026/04/03/every-rsac-keynote-asked-the-same-five-questions-here-s-the-framework-that-answers-them), [Cisco - Zero trust for agentic AI workforce](https://www.cisco.com/site/us/en/solutions/artificial-intelligence/security/securing-agentic-ai/index.html) |
+| Headless Everything architecture standardizes (dormant pool, ID 20260420-3) | 2026-04-20 | 1 | 1 | [Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause](https://simonwillison.net/2026/Apr/27/now-deceased-agi-clause/), [Simon Willison - microsoft/VibeVoice](https://simonwillison.net/2026/Apr/27/vibevoice/), [Simon Willison - Introducing talkie](https://simonwillison.net/2026/Apr/28/talkie/) |
+
+
+## Bridge
+
+
+On the "GGUF supply chains as new battleground; HF/Ollama/ModelScope require chat_template signature verification; SSTI scanning by default at GGUF load time" prediction (2026-04-21): Today's evidence: 5
+
+
+On the "Era of exclusive hyperscaler×frontier-lab alliance — 5-pole regime locks in (Google–Gemini, Anthropic–AWS, OpenAI–MS, Meta–internal, xAI–Oracle/NVDA); backend portability becomes hard requirement" prediction (2026-04-21): Today's evidence: 4
+
+
+On the "Proprietary re-expansion vs open-weight geopolitical split — strongest model = closed weights by Q3 2026" prediction (2026-04-21): Today's evidence: 2
+
+
+On the "Training-vs-inference SKU split as standard for custom AI silicon (Trainium/Inferentia, TPU 8t/8i, MAIA, MTIA)" prediction (2026-04-22): Today's evidence: 4
+
+
+On the "Physical AI as SaaS / Robot-as-a-Service infrastructure race" prediction (2026-04-22): Today's evidence: 3
+
+
+On the "OAuth trust between AI SaaS becomes top enterprise risk; SSO providers carve out "AI extension" scope category" prediction (2026-04-22): Today's evidence: 2
+
+
+On the ""Agent Control Plane" as new hyperscaler battleground (Google Gemini Enterprise Agent Platform, AWS AgentCore, OpenAI Workspace Agents)" prediction (2026-04-23): Today's evidence: 5
+
+
+On the "27B Dense + 1M context as de-facto standard enterprise local-LLM in H2 2026" prediction (2026-04-23): Today's evidence: 3
+
+
+On the "AI agent security extends to third-party-vendor boundary + URL-naming entropy (post-Mythos contractor incident)" prediction (2026-04-23): Today's evidence: 1
+
+
+On the "1M context as default open-weight era arrives by Q3 2026; vector DBs forced to redefine as long-context cache layers" prediction (2026-04-24): Today's evidence: 3
+
+
+On the "Physical-AI 8-hour production runs as enterprise procurement requirement in H2 2026" prediction (2026-04-24): Today's evidence: 3
+
+
+On the "Capital markets reset valuation of AI-agent-displaced enterprise SaaS inside Q2 2026" prediction (2026-04-24): Today's evidence: 2
+
+
+On the "Frontier AI lab × Tier-1 cloud capacity capture splits field cleanly by Q3 2026 — training oligopoly = 3 clouds, inference = layered" prediction (2026-04-25): Today's evidence: 5
+
+
+On the "Physical AI production-line records become league tables at IROS / GTC 2026 H2" prediction (2026-04-25): Today's evidence: 3
+
+
+On the "MCP-protocol-itself attack surface as biggest enterprise AI adoption bottleneck; OWASP MCP Top 10 by Q3 2026; MCP Gateway / MCP Firewall product wave" prediction (2026-04-25): Today's evidence: 4
+
+
+On the "Hyperscaler-AI-lab capital coupling graduates from finance pact to compute-stack lock-in by Q3 2026 — multi-frontier-vendor replaces multi-runtime as enterprise strategy" prediction (2026-04-26): Today's evidence: 5
+
+
+On the "Inference servers become primitive supply chain — first AI Infra-specific CVE class with NVD tagging by Q3 2026; OWASP LLM Top-10 v2026 promotes Inference Server Template/Loader RCE to top-3" prediction (2026-04-26): Today's evidence: 5
+
+
+On the "Consumer-GPU coding agent displaces cloud-only coding API for ≥30% of dev workloads by Q3 2026" prediction (2026-04-26): Today's evidence: 4
+
+
+On the "Mag 7 Q1 earnings (Apr 29-30) reset AI-capex ROI narrative — Q3 2026 first hyperscaler publicly tiers AI capex by token-margin gate" prediction (2026-04-27): Today's evidence: 5
+
+
+On the "AI-Infra CVE class graduates into regulatory primitive — Q4 2026 CISA/NIST publish sub-catalog for inference-server + agentic-CI runtimes" prediction (2026-04-27): Today's evidence: 4
+
+
+On the "Public-opinion blowback converts to binding agent-governance — at least one US state ships "Statutory Identity for Autonomous Agents" Act by Q3 2026" prediction (2026-04-27): Today's evidence: 3
+
+
+On the "Headless Everything architecture standardizes (dormant pool, ID 20260420-3)" prediction (2026-04-20): Today's evidence: 1
+
 
 ## Summary of Findings
 
@@ -47,6 +116,7 @@ AI セキュリティのテーゼ・ライン — 4月21日の GGUF サプライ
 
 ドーマント・プールのエントリ **20260420-3「Headless Everything architecture standardizes」**は、まだ周期 ping の期日外(次回 2026-05-11)。Layer 1 キーワード・スキャンは「Simon Willison」シグナル・トークンで点灯したが、マッチング・コンテキストは OpenAI/Microsoft AGI 条項歴史プライマー、VibeVoice、talkie-1930 のモデル・ローンチで、いずれもヘッドレス vs GUI 駆動エージェント・アーキテクチャの議論ではない。Layer 2 セマンティック・スキャンを本日のヘッドラインとサブヘッディングに対して実行しても妥当なマッチは生じない。誠実なリバイバル・レリバンス: 1。
 
+
 ## Relation to My Own Predictions
 
 **「悪意あるローカル LLM がマルウェアのように振る舞い、ゼロトラストが基本的セーフガードになる」について:** 本日のレポートはゼロトラスト側に強いシグナルを、ローカル LLM がマルウェア化する側にはやや弱い直接シグナルを持つ。ゼロトラスト側のエビデンス・スタックは異例の密度: Okta for AI Agents の GA は **4/30 で残り2日**、まさに「AI 単独ではアクセスできないシステム経路を意図的に設計する」パターン — Agent Discovery & Governance、中央 MCP コントロール・プレーンとしての Agent Gateway、クレデンシャル・ヴォルト + 自動ローテーション、ユニバーサル・ログアウトによるランタイム強制 — を体現している。Microsoft の「Zero Trust for AI」ピラー(RSAC 2026 継続)、Cisco のエージェント AI ワークフォースに対する「アクション・コントロール」フレーミング、CrowdStrike/Splunk のクロスベンダー・コンセンサスは、エージェントに対するゼロトラストを企業の前提ベースラインとして補強する。ビヘイビア・モニタリング側(Google + Forcepoint の IPI in-the-wild レポート、OpenAI のプロンプト・インジェクション恒久化への公的な譲歩)は、予測の二次的な半分をトレースする — AI 行動の監視・管理を謳うソリューションは**今、注目を集めている**(Forcepoint の IPI ペイロード10種は目立つ報道を獲得)が、OpenAI からのメッセージは本質的に「監視は必要だが十分ではない」「脅威クラスは構造的」だ。これは予測中の「短期的注目だがバイパス前提を覆さない」という但し書きにほぼ正確に対応する。
@@ -54,3 +124,4 @@ AI セキュリティのテーゼ・ライン — 4月21日の GGUF サプライ
 **「先進的知的タスクはクラウド API、日常運用はローカル LLM、トリガーは SaaS 値上げ」について:** 本日のテープは需給両面のシグナルを持つが、消費者向け AI-SaaS の明示的な値上げはまだ示されていない。需要側: 4月27日の契約再構築は AI ラボの計算をハイパースケーラー保有のシリコン経由に明示的にルーティングする(AWS Trainium/Graviton with Anthropic、Meta Graviton-at-scale CPU)。Mag 7 スーパーウィークは 2026年 capex 約 $700B を集計し、トークンあたりマージン・ゲート・テーゼが硬化している。供給側: DeepSeek V4-Pro が $1.74/$3.48 per M tokens で 1M context、DeepSeek V4-Flash 75% オフ(継続)、PrismML Bonsai-8B 1-bit が iPhone 17 Pro Max で 44 tok/s、M4 Pro で 131 tok/s、RTX 4090 で 368 tok/s、Qwen3.6-27B が Apache-2.0 Dense オプション。ローカル vs クラウドの二分化は構築中。トリガーとして指摘した明示的な値上げイベントは本日着弾していないが、**Mag 7 の signal としてのトークンあたりマージン・ゲート開示**は予測した価格構造シフトの先行指標と本質的に等しい。
 
 **「強化学習や LLM 系手法による現実世界フォーキャスト性能向上の普及」について:** 本日のレポートに直接シグナルなし。隣接するが確証ではない項目: AgentCore Managed Harness のセッション中モデル・スワップとセッション毎マイクロ VM(フォーキャスト・エヴァル親和的なサブストレート)、Anthropic の Rate Limits API + Claude Managed Agents パブリック・ベータ(バッチ・エヴァル向けのプログラマブル・ハーネス)。テーゼは引き続き妥当だが、この48時間ウィンドウ内では未検証。
+

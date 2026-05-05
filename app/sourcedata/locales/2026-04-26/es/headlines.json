@@ -1,0 +1,51 @@
+{
+  "date": "2026-04-26",
+  "technical": [
+    {
+      "lead": "Google compromete hasta 40.000 M$ en Anthropic el 24/4",
+      "body": "10.000 M$ iniciales en efectivo a una valoración de 350.000 M$, 30.000 M$ adicionales sujetos a hitos, más 5 GW de capacidad de Google Cloud durante 5 años — — Bloomberg adelanta el acuerdo el 24/4: 10.000 M$ ahora con — valoración de 350.000 M$ — más hasta 30.000 M$ adicionales atados a objetivos, con — Google Cloud entregando 5 GW de cómputo durante 5 años**. Aterriza días después del compromiso de 25.000 M$ de Amazon. Los tres laboratorios frontera (Anthropic / OpenAI / Thinking Machines Lab) tienen ahora un padrino hyperscaler en su tabla de capitalización.******",
+      "citations": []
+    },
+    {
+      "lead": "DeepSeek V4 aterriza con memoria 9,5x menor + co-tuning con Huawei Ascend; el artículo Bloomberg-CCTV del 26/4 confirma el giro a chips domésticos",
+      "body": "DeepSeek V4-Pro (1,6 T MoE / 49 B activos) y V4-Flash llegan con — Hybrid Attention — que recorta memoria — 9,5x-13,7x vs V3.2** y contexto de 1 M tokens. La nota del 26/4 de Bloomberg vía cuenta social afiliada a CCTV confirma que el cambio de calendario de V4 vino impulsado por **el ajuste específico de hardware Huawei Ascend**. V4-Pro a 1,74 $ / 3,48 $ por M de tokens — **~7x más barato que Claude Opus 4.7** con calidad clase GPT-5.4 / Opus 4.6.******",
+      "citations": [
+        {
+          "label": "gHacks - DeepSeek Releases V4 Models With 9.5x Lower Memory Requirements and Huawei Ascend Support",
+          "url": "https://www.ghacks.net/2026/04/26/deepseek-releases-v4-models-with-9-5x-lower-memory-requirements-and-huawei-ascend-support/"
+        }
+      ]
+    },
+    {
+      "lead": "SGLang CVE-2026-5760 (CVSS 9.8)",
+      "body": "RCE vía chat_template GGUF malicioso (Jinja2 SSTI), PoC público + CERT/CC VU#915947 — — Un fichero GGUF manipulado con un payload Jinja2 SSTI en `tokenizer.chat_template` + frase disparadora del reranker Qwen3 activa la ruta vulnerable en `entrypoints/openai/serving_rerank.py`; al recibir `/v1/rerank`, SGLang renderiza la plantilla con `jinja2.Environment()` → ejecución arbitraria de código. — PoC público en `github.com/Stuub/SGLang-0.5.9-RCE` — , CERT/CC VU#915947 emitido, mitigación recomendada `ImmutableSandboxedEnvironment`. Los servidores de inferencia AI quedan confirmados como — el segundo primitivo de infraestructura AI weaponizado tras el SSRF de LMDeploy**.******",
+      "citations": [
+        {
+          "label": "The Hacker News - SGLang CVE-2026-5760 (CVSS 9.8) Enables RCE via Malicious GGUF Model Files",
+          "url": "https://thehackernews.com/2026/04/sglang-cve-2026-5760-cvss-98-enables.html"
+        }
+      ]
+    },
+    {
+      "lead": "Qwen3.6-27B (22/4, tracción del 23/4 al 26/4)",
+      "body": "Apache 2.0, denso 27B supera al MoE 397B-A17B en coding (SWE-bench Verified 77,2 % vs 76,2 %, Terminal-Bench 2.0 59,3 igualando a Claude Opus 4.5), 40 tok/s en RTX 3090 — — El equipo Qwen de Alibaba revierte la dirección MoE con un — 27B totalmente denso + visión — que corre en — ~16,8 GB VRAM con Q4_K_M** sobre RTX 3090 / Mac Apple Silicon, contexto 262K (extensible a 1 M) y nuevo mecanismo de **Thinking Preservation**. Pesos BF16 + FP8 fina en HuggingFace. Establece la nueva base para \"agente de coding en una sola GPU\".******",
+      "citations": [
+        {
+          "label": "MarkTechPost - Alibaba Qwen Team Releases Qwen3.6-27B",
+          "url": "https://www.marktechpost.com/2026/04/22/alibaba-qwen-team-releases-qwen3-6-27b-a-dense-open-weight-model-outperforming-397b-moe-on-agentic-coding-benchmarks/"
+        }
+      ]
+    },
+    {
+      "lead": "Microsoft ASP.NET Core CVE-2026-40372 (CVSS 9.1)",
+      "body": "parche de emergencia OOB para fallo de forja de cookies con privilegio SYSTEM en DataProtection 10.0.0-10.0.6 — — Un bug en `ManagedAuthenticatedEncryptor` calcula la etiqueta de validación HMAC en un offset incorrecto; un cifrado con etiqueta HMAC todo a cero se acepta como válido. Permite — forjar cookies de autenticación, manipular tokens antiforgery y descifrar payloads protegidos — — suplantación hasta nivel SYSTEM. Corregido en `Microsoft.AspNetCore.DataProtection 10.0.7`. Publicado dentro del Patch Tuesday del 14/4; promovido como OOB ampliamente entre el 22/4 y el 25/4. Requiere — rotar el key ring de DataProtection + auditar tokens de larga duración emitidos durante la ventana vulnerable**.******",
+      "citations": [
+        {
+          "label": "The Hacker News - Microsoft Patches Critical ASP.NET Core CVE-2026-40372 Privilege Escalation Bug",
+          "url": "https://thehackernews.com/2026/04/microsoft-patches-critical-aspnet-core.html"
+        }
+      ]
+    }
+  ],
+  "plain": []
+}

@@ -1,0 +1,51 @@
+{
+  "date": "2026-04-26",
+  "technical": [
+    {
+      "lead": "Nag-commit ang Google ng hanggang $40B sa Anthropic noong Apr 24",
+      "body": "$10B na inisyal na cash sa $350B valuation, plus $30B na nakatali sa milestones, kasama ang 5GW na Google Cloud capacity sa loob ng 5 taon — — Inilabas ng Bloomberg ang deal noong Apr 24: $10B ngayon sa — $350B valuation — plus hanggang $30B pa kapag naabot ang performance targets, kasama ang — paghahatid ng Google Cloud ng 5GW compute capacity sa loob ng 5 taon**. Ilang araw lang matapos ang $25B commitment ng Amazon. Ang tatlong frontier labs (Anthropic / OpenAI / Thinking Machines Lab) ay may hyperscaler underwriter na sa kani-kanilang cap table.******",
+      "citations": []
+    },
+    {
+      "lead": "Lumabas ang DeepSeek V4 na may 9.5x mas mababang memory + Huawei Ascend co-tuning; kinumpirma ng Apr 26 Bloomberg-CCTV piece ang shift sa domestic chips",
+      "body": "Lumabas ang DeepSeek V4-Pro (1.6T MoE / 49B active) at V4-Flash kasama ang — Hybrid Attention — na nagbabawas ng memory ng — 9.5x-13.7x kumpara sa V3.2** at 1M-token context. Kinumpirma ng Apr 26 Bloomberg piece sa CCTV-affiliated social account na ang V4 timeline shift ay dahil sa **hardware-specific tuning para sa Huawei Ascend**. Ang V4-Pro ay nagkakahalaga ng $1.74 / $3.48 per M tokens — **mga 7x mas mura kumpara sa Claude Opus 4.7** sa GPT-5.4 / Opus 4.6-class quality.******",
+      "citations": [
+        {
+          "label": "gHacks - DeepSeek Releases V4 Models With 9.5x Lower Memory Requirements and Huawei Ascend Support",
+          "url": "https://www.ghacks.net/2026/04/26/deepseek-releases-v4-models-with-9-5x-lower-memory-requirements-and-huawei-ascend-support/"
+        }
+      ]
+    },
+    {
+      "lead": "SGLang CVE-2026-5760 (CVSS 9.8)",
+      "body": "RCE sa pamamagitan ng malicious GGUF chat_template (Jinja2 SSTI), public PoC + CERT/CC VU#915947 — — Ang ginawang malicious GGUF model file na may Jinja2 SSTI payload sa `tokenizer.chat_template` + Qwen3 reranker trigger phrase ay aktibong nag-trigger sa vulnerable path sa `entrypoints/openai/serving_rerank.py`; sa `/v1/rerank` request, ni-render ng SGLang ang template gamit ang `jinja2.Environment()` → arbitrary code execution. — Public PoC sa `github.com/Stuub/SGLang-0.5.9-RCE` — , inisyu ang CERT/CC VU#915947, at inirerekomenda ang `ImmutableSandboxedEnvironment` bilang fix. Kinumpirma na ang AI inference servers bilang — pangalawang weaponized AI-infra primitive matapos ang LMDeploy SSRF**.******",
+      "citations": [
+        {
+          "label": "The Hacker News - SGLang CVE-2026-5760 (CVSS 9.8) Enables RCE via Malicious GGUF Model Files",
+          "url": "https://thehackernews.com/2026/04/sglang-cve-2026-5760-cvss-98-enables.html"
+        }
+      ]
+    },
+    {
+      "lead": "Qwen3.6-27B (Apr 22, sumigla Apr 23-26)",
+      "body": "Apache 2.0 dense 27B na nakahihigit sa 397B-A17B MoE sa coding (SWE-bench Verified 77.2% vs 76.2%, Terminal-Bench 2.0 59.3 katumbas ng Claude Opus 4.5), 40 tok/s sa RTX 3090 — — Binaligtad ng Qwen team ng Alibaba ang MoE direction sa pamamagitan ng — fully dense 27B + vision — na gumagana sa — Q4_K_M ~16.8 GB VRAM** sa RTX 3090 / Apple Silicon Mac, may 262K context (extensible hanggang 1M), at bagong **Thinking Preservation** mechanism. Ang BF16 + fine-grained FP8 weights ay nasa HuggingFace. Naglatag ng bagong baseline para sa \"single-GPU coding agent\".******",
+      "citations": [
+        {
+          "label": "MarkTechPost - Alibaba Qwen Team Releases Qwen3.6-27B",
+          "url": "https://www.marktechpost.com/2026/04/22/alibaba-qwen-team-releases-qwen3-6-27b-a-dense-open-weight-model-outperforming-397b-moe-on-agentic-coding-benchmarks/"
+        }
+      ]
+    },
+    {
+      "lead": "Microsoft ASP.NET Core CVE-2026-40372 (CVSS 9.1)",
+      "body": "out-of-band emergency patch para sa cookie-forging SYSTEM-privilege flaw sa DataProtection 10.0.0-10.0.6 — — May bug sa `ManagedAuthenticatedEncryptor` na nagko-compute ng HMAC validation tag sa maling offset; ang ciphertext na may all-zero HMAC tag ay maling tinatanggap bilang valid. Pinapahintulutan nito ang — forging ng authentication cookies, manipulation ng antiforgery tokens, at decryption ng protected payloads — — full impersonation hanggang sa SYSTEM. Naayos sa `Microsoft.AspNetCore.DataProtection 10.0.7`. Inilabas bilang bahagi ng Apr 14 Patch Tuesday; OOB malawakang ipinaalam Apr 22-25. Kailangan ng — pagpapalit ng DataProtection key ring + audit ng long-lived tokens na inisyu sa loob ng vulnerable window**.******",
+      "citations": [
+        {
+          "label": "The Hacker News - Microsoft Patches Critical ASP.NET Core CVE-2026-40372 Privilege Escalation Bug",
+          "url": "https://thehackernews.com/2026/04/microsoft-patches-critical-aspnet-core.html"
+        }
+      ]
+    }
+  ],
+  "plain": []
+}
