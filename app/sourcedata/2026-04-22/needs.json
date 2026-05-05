@@ -1,0 +1,123 @@
+{
+  "date": "2026-04-22",
+  "by_prediction": {
+    "prediction.36f4ab773b39713e": [
+      {
+        "actor": "hyperscaler in-house silicon product manager (Microsoft MAIA, Meta MTIA, Google TPU teams)",
+        "job": "ship a publicly differentiated training-vs-inference SKU pair on the same accelerator family before H1 2027",
+        "outcome": "publicly announced dual-track SKU lineup (training SKU + inference SKU) with native FP4 / MXFP4 inference SKU and committed roadmap dates",
+        "motivation": "matching Google's TPU 8t / 8i and AWS Trainium / Inferentia split is now table stakes; any hyperscaler shipping a single-architecture chip cedes $/query competitiveness to dual-track rivals",
+        "task": {
+          "who": "in-house silicon PM + accelerator architect + GTM cloud-AI lead + corporate communications",
+          "what": "lock dual-SKU roadmap, tape out inference-SKU FP4 / MXFP4 silicon, prepare GA announcement",
+          "where": "internal silicon roadmap reviews + foundry tape-out runs + Cloud Next-style launch keynote",
+          "when": "May 2026 to H1 2027",
+          "why": "single-architecture accelerators lose $/query competition once rivals ship inference-tuned SKUs",
+          "how": "shared physical IP base + inference-only FP4 / MXFP4 datapath fork + dedicated SKU-level pricing + cloud-native scheduler integration"
+        }
+      },
+      {
+        "actor": "inference-runtime kernel engineer at vLLM / TensorRT-LLM / SGLang / hyperscaler Bedrock-and-Vertex teams",
+        "job": "ship native FP4 / MXFP4 kernels and SKU-aware scheduling so inference-tuned silicon delivers the projected $/query peak",
+        "outcome": "production FP4 / MXFP4 kernels and routing logic that dispatch workloads to the inference SKU by default and deliver measurable $/query improvement",
+        "motivation": "without first-class FP4 kernels and scheduler awareness, inference-tuned SKUs underperform their nameplate, breaking the dual-track economics story",
+        "task": {
+          "who": "runtime kernel team + scheduler/routing eng + perf-engineering lead + cloud platform integration",
+          "what": "implement FP4 / MXFP4 kernels + SKU-aware scheduling + benchmark $/query improvement",
+          "where": "vLLM / TRT-LLM / SGLang main branches + Bedrock / Vertex serving stack + perf-bench harness",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "FP4 throughput is the gating factor for the $/query peak claim",
+          "how": "MXFP4 microscaling kernels + per-SKU dispatch policy + capacity-aware autoscaler + public benchmark publication"
+        }
+      },
+      {
+        "actor": "enterprise-AI procurement architect at Fortune-500 model-buying organizations",
+        "job": "renegotiate hyperscaler accelerator contracts to specify inference-SKU vs training-SKU capacity separately so $/query competition is captured commercially",
+        "outcome": "executed multi-cloud capacity contracts with explicit inference-SKU $/query SLOs and training-SKU per-hour rates as separate line items",
+        "motivation": "single-line accelerator pricing hides inference-SKU savings; splitting the contract is the only way to capture the $/query peak in actual TCO",
+        "task": {
+          "who": "AI platform architect + cloud procurement + finance + vendor management",
+          "what": "draft and sign contracts breaking out inference-SKU $/query SLO from training-SKU per-hour rate",
+          "where": "vendor-management RFPs + cloud commit negotiations + internal architecture review board",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "$/query peak only translates to enterprise savings if procurement contracts split SKU pricing",
+          "how": "RFP scoring + multi-cloud commit splits + reserved-capacity covenants + workload-routing audit"
+        }
+      }
+    ],
+    "prediction.8b1d0c5ea8a8550e": [
+      {
+        "actor": "Physical-AI / Robot-as-a-Service product manager at hyperscaler robotics teams (AWS Robotics, NVIDIA Isaac / Cosmos, Hyundai-DEEPX RaaS)",
+        "job": "ship a productized RaaS offering pricing per-robot training + sim-sync + policy-update compute as a metered cloud line item before Q3 2026",
+        "outcome": "GA RaaS offering with per-robot metered cloud-compute SKU + standardized enterprise contract template line items",
+        "motivation": "first-mover capture of the robot-control compute primitive locks in the durable recurring-revenue position before commodity robot OEMs build their own clouds",
+        "task": {
+          "who": "RaaS product manager + cloud-platform engineering + enterprise sales + contract templates / legal",
+          "what": "package training + sim-sync + policy-update compute into a metered per-robot SKU with enterprise contract clauses",
+          "where": "hyperscaler product console + enterprise-contract templates + partner integration program",
+          "when": "May 2026 to Q3 2026",
+          "why": "without a productized SKU, per-robot compute stays bundled and uncapturable as recurring revenue",
+          "how": "metered API gateway + sim-environment hosting + policy update CI/CD + per-robot identity / billing"
+        }
+      },
+      {
+        "actor": "robot manufacturer software-platform lead pivoting from hardware sale to fleet-management SaaS (Neura, Hyundai Robotics, humanoid-shipping startups)",
+        "job": "transition revenue model from one-time robot sale to subscription fleet-management software with cloud-routed policy updates by Q3 2026",
+        "outcome": "GA fleet-management SaaS with active subscription contracts attaching cloud-policy delivery + telemetry + remote-diagnostics SLAs to deployed robots",
+        "motivation": "robot hardware commoditizes; only fleet-management software with recurring revenue preserves margin as units scale into the millions",
+        "task": {
+          "who": "robot OEM software platform lead + fleet-management product manager + cloud partnerships + sales transformation",
+          "what": "build fleet-management SaaS, integrate cloud RaaS partner, transition contracts to subscription model",
+          "where": "robot-OEM software platform + partner cloud (AWS / NVIDIA Isaac) + customer renewal pipeline",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "hardware-only revenue collapses once cloud-trained robots commoditize the moving compute endpoint",
+          "how": "OTA policy delivery + fleet telemetry + remote diagnostics + subscription billing + RaaS partner integration"
+        }
+      }
+    ],
+    "prediction.c850d46b059e600c": [
+      {
+        "actor": "SSO / IdP product manager at Okta, Microsoft Entra ID, and Google Workspace identity",
+        "job": "carve out a dedicated AI-extension OAuth scope category in admin consoles before Q3 2026 so administrators can block AI integrations wholesale",
+        "outcome": "GA admin-console policy category labeled \"AI extension\" with default-deny / allowlist controls covering OAuth scopes requested by AI SaaS apps",
+        "motivation": "post-Vercel-Context.ai breach, admins can no longer accept Allow-All OAuth defaults; identity vendors that ship the AI-extension category first capture the compliance budget",
+        "task": {
+          "who": "IdP product manager + identity engineering + policy-engine team + admin UX + customer compliance",
+          "what": "ship admin-policy category for AI-extension OAuth scopes with default-deny and audit logging",
+          "where": "Okta / Entra ID / Workspace admin consoles + OAuth consent flow + audit log",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "AI-extension OAuth scopes are the new top breach path between SaaS apps",
+          "how": "OAuth scope tagging + AI-app catalog classifier + admin policy templates + audit pipeline"
+        }
+      },
+      {
+        "actor": "CASB / SSPM product manager at Netskope, Palo Alto, Microsoft Defender for Cloud Apps, and Wing Security",
+        "job": "ship a standalone \"data volume read by AI integrations\" metric in CASB / SSPM dashboards by Q3 2026 so security teams can quantify and cap AI-app reach",
+        "outcome": "GA CASB / SSPM dashboard metric isolating AI-integration read volume per app and per data domain, with anomaly alerting",
+        "motivation": "Vercel-Context.ai shows existing OAuth-app read volume is invisible to security teams; whichever CASB / SSPM ships the AI-integration metric first becomes the post-incident default",
+        "task": {
+          "who": "CASB / SSPM product manager + telemetry engineering + threat-intel team + dashboard UX",
+          "what": "instrument and surface AI-integration read volume as a first-class CASB / SSPM dashboard metric",
+          "where": "CASB / SSPM telemetry pipeline + dashboard + alerting rules + customer compliance reports",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "AI-integration data exfil volumes are invisible inside aggregate OAuth telemetry today",
+          "how": "OAuth log enrichment + AI-app classifier + per-app volume aggregation + anomaly alerting + compliance report templates"
+        }
+      },
+      {
+        "actor": "enterprise CISO + identity governance lead at Fortune-500 customers of Google Workspace / Microsoft 365",
+        "job": "publish and enforce an internal AI-OAuth governance policy that restricts personal AI SaaS connections to corporate tenants before Q3 2026",
+        "outcome": "ratified internal AI-OAuth governance standard + enforced admin-console policy banning Allow-All AI extension installs and requiring per-app review",
+        "motivation": "92% of CISOs lack visibility into AI identities (Cybersecurity Insiders survey); after the Vercel-Context.ai breach, boards demand a written policy and an enforcement gate, not an aspirational guideline",
+        "task": {
+          "who": "CISO + identity governance lead + IT operations + legal / compliance + business-unit liaisons",
+          "what": "draft AI-OAuth governance policy + configure SSO admin policy + roll out per-app review workflow",
+          "where": "internal security policy repository + SSO / IdP admin console + change-management ticketing",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "the Vercel-Context.ai breach pattern reproduces wherever Allow-All AI OAuth defaults remain",
+          "how": "written governance standard + admin-console allowlist + risk-tier review workflow + quarterly attestation + CASB telemetry feed"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "date": "2026-04-22",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.4bd551bfc1cca138",
+        "short_label": "1-bit native training becomes the dominant alternative to post-hoc quantization (led by Bonsai, Qwen/Llama 1-bit derivatives to follow)",
+        "prediction_date": "2026-04-19"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "本日のウィンドウでは既存のBonsai-8B GGUFと4月18日のPrismML CUDAチュートリアルが再露出されただけで、新規の1-bitネイティブ学習のローンチも、Qwen / Llamaの1-bit派生モデルも登場していない。",
+      "reference_links": [
+        {
+          "label": "Hugging Face - prism-ml/Bonsai-8B-gguf",
+          "url": "https://huggingface.co/prism-ml/Bonsai-8B-gguf"
+        },
+        {
+          "label": "MarkTechPost - PrismML Bonsai 1-Bit LLMをCUDAで動かすコーディングチュートリアル",
+          "url": "https://www.marktechpost.com/2026/04/18/a-coding-tutorial-for-running-prismml-bonsai-1-bit-llm-on-cuda-with-gguf-benchmarking-chat-json-and-rag/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Bonsai-8Bの継続的な可視性(1.15 GB、12〜14倍小さく、RTX 4090で6倍高速)は前提となる観測を生かし続けているが、本ウィンドウでは新たな1-bitネイティブ学習のローンチもQwenまたはLlamaの1-bit派生も加わっておらず、根底の主張は新たな加速なしに継続している。",
+        "coherence": 2,
+        "remaining_gap": "別のラボがゼロから1-bitのチェックポイントをリリースするか、Qwen / Llamaの1-bitフォークが登場することで、この潮流を確認する必要がある。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c08481a657991ec8",
+        "short_label": "Convergence on an \"Agent Registry\" model (registry standard for distributing skills, tool permissions, audit traces)",
+        "prediction_date": "2026-04-19"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "OpenClaw 2026.4.20-betaがスコーピングと信頼できないワークスペース鍵のブロックを強化し、NemoClawのガイダンスが再確認され、Hermes Agent Tool GatewayがOSVベースのMCPマルウェアスキャンを追加したが、ベンダー横断のレジストリ仕様や共有アーティファクトフォーマットは登場していない。",
+      "reference_links": [
+        {
+          "label": "newreleases.io - openclaw v2026.4.20-beta.1",
+          "url": "https://newreleases.io/project/github/openclaw/openclaw/release/v2026.4.20-beta.1"
+        },
+        {
+          "label": "DEV Community - Hermes Agentレビュー: 95.6Kスター",
+          "url": "https://dev.to/tokenmixai/hermes-agent-review-956k-stars-self-improving-ai-agent-april-2026-11le"
+        },
+        {
+          "label": "NVIDIA Docs - NemoClaw開発者ガイド",
+          "url": "https://docs.nvidia.com/nemoclaw/latest/index.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "ベンダー個別のエージェントランタイムは並行して成熟し続けている:OpenClawはスコーピングを強化し、NemoClawはエンタープライズラッパーとして定着し、HermesはMCP OAuth 2.1とOSVマルウェアスキャンを備えたTool Gatewayを出荷した。構造的力学の主張は依然として成立しているが、共有レジストリのアーティファクトフォーマットはまだベンダーをまたいで現れていない。",
+        "coherence": 2,
+        "remaining_gap": "OpenClaw、NemoClaw、Hermesをまたぐマルチベンダー仕様のドラフト、または可搬なスキル / ツール権限アーティファクトフォーマットが必要だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.995feb039ef043c1",
+        "short_label": "Indirect prompt injection becomes a top CVE category (CVSS 8.0+ LLM-integration CVEs become Patch Tuesday regulars)",
+        "prediction_date": "2026-04-19"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "24時間以内に互いを補強する3件の事案が出現した:OpenClaw CVE-2026-41329(CVSS 9.9のサンドボックス回避)、Google Antigravityのfd -X フラグ経由のプロンプトインジェクションからRCEへの転化、そしてSGLang CVE-2026-5760(CVSS 9.8)の継続報告 — いずれもLLM連携系のコードパスがPatch Tuesday級の深刻度に達していることを示している。",
+      "reference_links": [
+        {
+          "label": "CCB Belgium - 警告: OpenClawの権限昇格",
+          "url": "https://ccb.belgium.be/advisories/warning-privilege-escalation-openclaw-patch-immediately"
+        },
+        {
+          "label": "CSO Online - プロンプトインジェクションがGoogle Antigravityのファイル検索をRCEに変えた",
+          "url": "https://www.csoonline.com/article/4161382/prompt-injection-turned-googles-antigravity-file-search-into-rce.html"
+        },
+        {
+          "label": "Cypro - SGLang CVE-2026-5760",
+          "url": "https://www.cypro.se/2026/04/20/sglang-cve-2026-5760-cvss-9-8-enables-rce-via-malicious-gguf-model-files/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "ウィンドウ内で同時にCVSS 9.8+のLLM連携CVEが3件着地した — OpenClawサンドボックス回避、AntigravityのプロンプトインジェクションRCE、そして継続中のSGLang SSTI — まさに予測が想定するPatch Tuesday級の頻度であり、CCB Belgiumも緊急アドバイザリを発行している。",
+        "coherence": 4,
+        "remaining_gap": "週次でクラスタ化された開示にとどまらず、月次のPatch Tuesdayロールアップで複数のLLM連携CVEがまとめて列挙されることを確認する必要がある。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4bd33db2ea06e5b4",
+        "short_label": "Acceleration of \"local > cloud\" inversion (by Q3 2026, individual / SMB coding agents standardize on local-default)",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Hugging Faceのml-internが10時間未満でQwen3-1.7BのGPQAを8.5%から32%まで引き上げ、Claude Codeの22.99%を上回った;Qwen3.6のGitHubリポジトリと、llama.cpp b8862上のBonsai-8B 1-bit GGUFは、ローカル実行可能なコーディングエージェントの限界を押し広げ続けている。",
+      "reference_links": [
+        {
+          "label": "MarkTechPost - Hugging Faceがml-internをリリース",
+          "url": "https://www.marktechpost.com/2026/04/21/hugging-face-releases-ml-intern-an-open-source-ai-agent-that-automates-the-llm-post-training-workflow/"
+        },
+        {
+          "label": "GitHub - QwenLM/Qwen3.6",
+          "url": "https://github.com/QwenLM/Qwen3.6"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "ml-internが10時間未満でQwen3-1.7BのGPQAを8.5%から32%まで引き上げ、Claude Codeの22.99%を上回ったことは、ローカルなポストトレーニングが信頼できるコーディングエージェント品質を生み出すことの直接的な証拠であり、エッジモデルが実用的なエージェント品質基準に到達するという前提を補強する。",
+        "coherence": 4,
+        "remaining_gap": "ローカルベンチマークの改善ではなく、主要なIDEまたはコーディングエージェントベンダーがlocal-defaultの設定フラグを出荷することが必要だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Secret leakage through CI / agents becomes the next battleground (\"Agent-in-the-Loop Secret Exfiltration\" rises to top of CIS / OWASP risk)",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "VercelはContext.aiから盗まれたGoogle Workspace OAuthトークンが起点となったサプライチェーン侵害を確認し、CEOはAI支援によるスピードに言及している;Antigravityのfd経由のプロンプトインジェクションからRCEへの転化は、別の角度から同じagent-in-the-loop型の窃取形を示している。",
+      "reference_links": [
+        {
+          "label": "Trend Micro - Vercel侵害: OAuthサプライチェーン",
+          "url": "https://www.trendmicro.com/en_us/research/26/d/vercel-breach-oauth-supply-chain.html"
+        },
+        {
+          "label": "The Register - Vercel侵害は盗まれた従業員認証情報に遡る",
+          "url": "https://www.theregister.com/2026/04/21/vercel_ceo_points_to_aidriven/"
+        },
+        {
+          "label": "CSO Online - Antigravity RCE",
+          "url": "https://www.csoonline.com/article/4161382/prompt-injection-turned-googles-antigravity-file-search-into-rce.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Context.aiのOAuthトークン経由でVercelが確認したサプライチェーン侵害 — CEOがAI支援による攻撃者の速度を指摘 — と、AntigravityのプロンプトインジェクションからRCEへの転化のいずれもがagent-in-the-loop型の窃取形を実体化させ、CI / エージェントを漏洩した認証情報に結び付ける前提に具体的な現実世界の侵害事例を与えている。",
+        "coherence": 4,
+        "remaining_gap": "ベンダー側のインシデント報告だけでなく、CISまたはOWASPがこのカテゴリを明示的に名指しで掲載することが必要だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4bbf8ec79bafedd1",
+        "short_label": "\"Headless Everything\" architecture standardizes (headless-preferred metadata on MCP / Agent Registry)",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "OpenAIのCodexアップデートはMCPメタデータよりもコンピュータ操作、ターミナル、SSH devbox、アプリ内ブラウジングを強調しており、ChatGPT Images 2.0は2K解像度でのネイティブ推論を出荷している。いずれもレジストリ側のheadless-preferredメタデータの動向を進めていない。",
+      "reference_links": [
+        {
+          "label": "thenewstack - ChatGPT Images 2.0",
+          "url": "https://thenewstack.io/chatgpt-images-20-openai/"
+        },
+        {
+          "label": "9to5Mac - OpenAI Codex拡張",
+          "url": "https://9to5mac.com/2026/04/21/openai-teases-next-ai-announcement-coming-today-heres-what-to-expect/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "本日のヘッドラインとなったエージェントの動きはGUI操作とビジュアル系である:Codexはターミナル、SSH devbox、アプリ内ブラウジングへ拡張し、ChatGPT Images 2.0はサービスコールメタデータよりも2K解像度の推論を優先している。いずれもレジストリ側のheadless-preferredメタデータの動向を進めておらず、予測は支持も反証もされないままだ。",
+        "coherence": 2,
+        "remaining_gap": "headless-preferredセマンティクスを担う具体的なMCPまたはエージェントレジストリのサーバーメタデータフィールドが必要だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.082b0a07077870dd",
+        "short_label": "GGUF supply chains as new battleground (HF/Ollama/ModelScope standardize chat_template signature verification)",
+        "prediction_date": "2026-04-21"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "SGLang CVE-2026-5760はウィンドウ内で再現を続けており、緩和策として `ImmutableSandboxedEnvironment` が推奨されている。Bonsai-8BはHugging Face上のヘッドラインとなる1-bit GGUFであり続けている。いずれのハブもランタイムも、署名検証のデフォルト有効化やデフォルトサンドボックスローディングを発表していない。",
+      "reference_links": [
+        {
+          "label": "Cypro - SGLang CVE-2026-5760",
+          "url": "https://www.cypro.se/2026/04/20/sglang-cve-2026-5760-cvss-9-8-enables-rce-via-malicious-gguf-model-files/"
+        },
+        {
+          "label": "Hugging Face - Bonsai-8B-gguf",
+          "url": "https://huggingface.co/prism-ml/Bonsai-8B-gguf"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "SGLang CVE-2026-5760の継続報告と、明示的に推奨されるImmutableSandboxedEnvironmentによる緩和策は、GGUFのchat_templateがロード時に実行可能コードを運ぶという構造的事実を強化しているが、いずれのハブもサービングランタイムも、署名検証のデフォルト有効化やサンドボックスローディングを発表していない。",
+        "coherence": 3,
+        "remaining_gap": "Hugging Face、Ollama Library、またはvLLM / Bedrockによる、署名検証またはSSTIスキャンをデフォルトでオンにする明示的なポリシースイッチが必要だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.af6de8a1d9fd7731",
+        "short_label": "The era of \"exclusive alliance between hyperscaler and frontier lab\" (5-pole regime locks in; Trainium / TPU / MAIA / MI300X design differences translate to model-behavior differences)",
+        "prediction_date": "2026-04-21"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "4月21〜22日のAnthropic-AWS契約拡大($100B / 10年、5 GW Trainium、Amazonによる$25B出資、AMZN +2〜3%で$253.62)に加え、Anthropicが独自AIチップを模索している報道、設計パートナーとしてBroadcomとMediaTekを伴うGoogleのTPU 8t / 8i分割 — いずれも5極のハイパースケーラ-ラボ-シリコンの構図を結晶化させている。",
+      "reference_links": [
+        {
+          "label": "Anthropic - AnthropicとAmazonが連携を拡大",
+          "url": "https://www.anthropic.com/news/anthropic-amazon-compute"
+        },
+        {
+          "label": "tradingkey - AnthropicがClaude向けAIチップへ動く",
+          "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/261770188-anthropic-moving-toward-ai-chips-claude-nvidia-buy-in-2026-tradingkey"
+        },
+        {
+          "label": "AISI - Claude Mythos Previewの評価",
+          "url": "https://www.aisi.gov.uk/blog/our-evaluation-of-claude-mythos-previews-cyber-capabilities"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Anthropic-AWS契約の$100B / 10年、5 GW Trainium、Amazonによる$25Bの出資への拡大、Anthropicによる独自シリコンの模索、そしてBroadcomとMediaTekを設計パートナーとするGoogleのTPU 8t / 8i分割は、5極体制の前提となる協調設計型排他性を直接実体化させており、AMZNの2〜3%の上昇は長期視野のAWSコミットを織り込んでいる。",
+        "coherence": 5,
+        "remaining_gap": "Meta社内とxAI-Oracle/NVDAの極における同等規模での明確なロックインと、本番規模で採用されるランタイム非依存のバックエンド可搬性層が必要だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b60e425d646be753",
+        "short_label": "Proprietary re-expansion against an open-weight geopolitical split (\"strongest model = closed weights\" crystallizes)",
+        "prediction_date": "2026-04-21"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Qwen3.6-Max-Previewのホスト限定提供は、エージェント型コーディング / 世界知識 / 指示追従において有意なデルタを伴って継続している;AISIによるMythos Previewの評価がProject Glasswing限定アクセス(AWS / Apple / Google / JPMC / Microsoft / NVIDIA)でウィンドウ内に着地し、段階的ゲーティングによるクローズド層の構図を補強している。",
+      "reference_links": [
+        {
+          "label": "buildfastwithai - Qwen3.6-Max-Previewレビュー 2026",
+          "url": "https://www.buildfastwithai.com/blogs/qwen3-6-max-preview-review-2026"
+        },
+        {
+          "label": "AISI - Claude Mythos Previewの評価",
+          "url": "https://www.aisi.gov.uk/blog/our-evaluation-of-claude-mythos-previews-cyber-capabilities"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Qwen3.6-Max-Previewのホスト限定姿勢と統計的に有意なエージェント型コーディングのデルタ、加えてProject Glasswingパートナー限定アクセス(AWS / Apple / Google / JPMC / Microsoft / NVIDIA)下でのAISIによるMythos Preview評価は、フロンティアラボがトップ層モデルを段階的なクローズドアクセスでゲーティングし、オープンウェイトのリリースペースを35B-A3Bクラスにとどめるという前提を直接延伸している。",
+        "coherence": 4,
+        "remaining_gap": "2026年Q3より前に、3つ目のフロンティアラボがAPI限定のフラッグシップリリースを公に確認することが必要だ。"
+      }
+    }
+  ]
+}

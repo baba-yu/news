@@ -153,7 +153,7 @@
       "meta.sub.window":   "ウィンドウ",
       "meta.sub.report":   "レポート",
       "meta.sub.build":    "ビルド",
-      "title":             "予測インテリジェンス",
+      "title":             "AI未来予測空間",
       "ai.notice":         "本ページの記事および要約は、Anthropic 社の生成AI「Claude」によって作成されています。",
       "panel.tab.reasoning": "Reasoning",
       "panel.tab.bridge":    "Bridge",
@@ -188,17 +188,17 @@
       "tooltip.need_window":   "Need の期限ウィンドウ",
       "tooltip.task_runway":   "タスク実行ウィンドウ",
       "tooltip.bridge_target": "Bridge の目標ウィンドウ",
-      "view.observatory":      "観測",
-      "view.probe":            "探査",
+      "view.observatory":      "観察",
+      "view.probe":            "探索",
       "probe.tab.predictions": "PREDICTIONS",
       "probe.tab.news":        "NEWS",
       "timeline.back":             "← 一覧に戻る",
-      "timeline.open_in_observatory": "観測で開く",
+      "timeline.open_in_observatory": "観察で開く",
       "timeline.notfound":         "現在のスコープに該当する予測が見つかりません。",
       "timeline.detail.placeholder": "タイムライン上のポイントまたは期間をクリックすると詳細が表示されます。",
       "timeline.detail.open_this":   "この予測のタイムラインを開く →",
-      "panel.open_in_probe":     "→ 探査",
-      "panel.open_in_probe.tip": "この予測のタイムラインを探査で開く",
+      "panel.open_in_probe":     "→ 探索",
+      "panel.open_in_probe.tip": "この予測のタイムラインを探索で開く",
     },
     es: {
       "scope.mix":      "MIX",
@@ -398,19 +398,19 @@
     }
     return (node && node[field]) || "";
   }
-  // Pull a locale-aware ELI14 string from a prediction's detail block.
+  // Pull a locale-aware plain language string from a prediction's detail block.
   // The graph's reasoning_locales fan-out is keyed by reasoning field
-  // first (because/given/so_that/landing/eli14) then by locale, e.g.
-  //   detail.reasoning_locales.eli14.ja
+  // first (because/given/so_that/landing/plain_language) then by locale, e.g.
+  //   detail.reasoning_locales.plain_language.ja
   // Falls back to the EN locale, then the legacy non-locale field.
-  function localizedEli14(detail) {
+  function localizedPlainLanguage(detail) {
     const loc = state.locale || "en";
     const rl = detail && detail.reasoning_locales;
-    if (rl && rl.eli14) {
-      if (rl.eli14[loc]) return rl.eli14[loc];
-      if (rl.eli14.en)   return rl.eli14.en;
+    if (rl && rl.plain_language) {
+      if (rl.plain_language[loc]) return rl.plain_language[loc];
+      if (rl.plain_language.en)   return rl.plain_language.en;
     }
-    return (detail && detail.reasoning && detail.reasoning.eli14) || "";
+    return (detail && detail.reasoning && detail.reasoning.plain_language) || "";
   }
 
   // Parse common freeform "when" strings (task.when on a need's task)
@@ -468,15 +468,15 @@
   // a flat <ul> string (no fancy layout) suitable for inline meta.
   function renderTimelineLineage(node) {
     if (!node || node.type !== "prediction") return "";
-    const parents = (node.parent_ids || []).map(nodeById).filter(Boolean);
+    const parents = (node.parent_ids || []).map(lookupProbeNode).filter(Boolean);
     if (!parents.length) return "";
     const seenTheme = new Set();
     const rows = parents.map((p) => {
       const theme = p.type === "theme"
         ? p
-        : ((p.parent_ids || []).map(nodeById).find((x) => x && x.type === "theme") || null);
+        : ((p.parent_ids || []).map(lookupProbeNode).find((x) => x && x.type === "theme") || null);
       const cat = theme
-        ? ((theme.parent_ids || []).map(nodeById).find((x) => x && x.type === "category") || null)
+        ? ((theme.parent_ids || []).map(lookupProbeNode).find((x) => x && x.type === "category") || null)
         : null;
       const themeKey = theme ? theme.id : `__no_theme__${p.id}`;
       if (seenTheme.has(themeKey)) return "";
@@ -817,6 +817,29 @@
     const g = currentGraph();
     if (!g) return null;
     return g._index ? g._index.get(id) : null;
+  }
+
+  // Look up a node by ID, preferring the PROBE list-scope graph (the
+  // user's filter on the PREDICTIONS / NEWS list) over the OBSERVATORY
+  // graph (state.scopeId). The two can diverge — list-scope drives
+  // which graph the rows came from, state.scopeId drives the canvas —
+  // and using the wrong graph here makes nodeById return null for any
+  // category / theme / prediction that lives outside state.scopeId's
+  // graph, which silently swallows row clicks and shows raw IDs in
+  // place of localised labels. Same intent as scopedPred() inside
+  // renderEvidenceView, generalised so the timeline and lineage
+  // renderers can share it.
+  function lookupProbeNode(id) {
+    const sel = document.getElementById("list-scope");
+    const sc = (sel && sel.value) || state.scopeId;
+    if (sc) {
+      const g = state.graphsByScope.get(sc);
+      if (g && g._index) {
+        const n = g._index.get(id);
+        if (n) return n;
+      }
+    }
+    return nodeById(id);
   }
 
   function indexGraph(graph) {
@@ -2760,31 +2783,31 @@
         || detail.summary
         || nodeLabel(n, "summary")
         || "";
-      // 3-tier prediction pane: title → ELI14 (default visible,
+      // 3-tier prediction pane: title → plain language (default visible,
       // 14-year-old level, ≤25 words) → collapsed full body.
       //
-      //   Tier 1 (ELI14): the writer's plain-language one-sentence
-      //     summary. Lives in `predictions.eli14` (Stream C). EN-only
+      //   Tier 1 (plain language): the writer's plain-language one-sentence
+      //     summary. Lives in `predictions.plain_language` (Stream C). EN-only
       //     today; locale fan-out is a Phase X follow-up. This is
       //     the "what is this prediction in one breath" slot.
       //
       //   Tier 2 (Stream K Summary, optional secondary): a longer
       //     technical synopsis (≤ 300 chars). When present, rendered
-      //     under the ELI14 in smaller text — the audience is the
-      //     technical reader who wants more than ELI14 but doesn't
+      //     under the plain language in smaller text — the audience is the
+      //     technical reader who wants more than plain language but doesn't
       //     want to expand the full body. Locale-aware.
       //
       //   Tier 3 (Full body): the long-form prose, collapsed in a
-      //     <details>. Locale-aware. Auto-opens when neither ELI14
+      //     <details>. Locale-aware. Auto-opens when neither plain language
       //     nor Stream K is present (legacy items).
       //
       // Mid-tier slot priority for the visible-by-default text:
-      //   ELI14 → Stream K Summary (locale-aware) → "" (empty).
+      //   plain language → Stream K Summary (locale-aware) → "" (empty).
       const reasoningLocales = (detail && detail.reasoning_locales) || {};
       const reasoningForMid = (detail && detail.reasoning) || {};
-      const eli14Bag = reasoningLocales.eli14 || {};
+      const plainLangBag = reasoningLocales.plain_language || {};
       const _midLoc = state.locale || "en";
-      const eli14Text = eli14Bag[_midLoc] || eli14Bag.en || reasoningForMid.eli14 || "";
+      const plainLangText = plainLangBag[_midLoc] || plainLangBag.en || reasoningForMid.plain_language || "";
       const midByLocale = (detail && detail.summary_short_locales) || {};
       const streamKSummary = midByLocale[state.locale]
         || midByLocale.en
@@ -2793,7 +2816,7 @@
       // Whichever block has content drives the auto-open behavior of
       // the bottom <details> (open only when there's no mid-tier
       // content at all).
-      const midSummary = eli14Text || streamKSummary;
+      const midSummary = plainLangText || streamKSummary;
       // Phase 3: prediction-level target window. Pulled from
       // `detail.target_start_date` / `target_end_date` (backfilled
       // from reasoning_landing). Renders below the mid-tier summary.
@@ -2801,7 +2824,7 @@
         detail.target_start_date, detail.target_end_date
       );
       // Stream I (Phase 2): four-tab right pane
-      //   Reasoning  — Stream C reasoning_* + eli14
+      //   Reasoning  — Stream C reasoning_* + plain_language
       //   Bridge     — Stream D validation-time bridge paragraphs
       //   Needs      — Stream E (driver-side actor + 5W1H task)
       //   Readings   — Stream F (cluster + chain + counter + relations)
@@ -2811,12 +2834,12 @@
       // clicks don't have to re-render the whole panel.
       const tabsHtml = renderPredictionTabs(detail);
       extras = `
-        ${eli14Text ? `
-          <div class="prediction-eli14">${escapeHTML(eli14Text)}</div>
+        ${plainLangText ? `
+          <div class="prediction-plain-language">${escapeHTML(plainLangText)}</div>
         ` : ""}
         ${streamKSummary ? `
-          <details class="prediction-summary-mid${eli14Text ? "" : " open"}" ${eli14Text ? "" : "open"}>
-            <summary class="prediction-summary-mid-toggle">${eli14Text ? localeStr("panel.summary.toggle.more") : localeStr("panel.summary.toggle.summary")}</summary>
+          <details class="prediction-summary-mid${plainLangText ? "" : " open"}" ${plainLangText ? "" : "open"}>
+            <summary class="prediction-summary-mid-toggle">${plainLangText ? localeStr("panel.summary.toggle.more") : localeStr("panel.summary.toggle.summary")}</summary>
             <div class="prediction-summary-mid-body md-body">${renderMarkdown(streamKSummary)}</div>
           </details>
         ` : ""}
@@ -2859,7 +2882,7 @@
   function renderPredictionTabs(detail) {
     const reasoning = (detail && detail.reasoning) || {};
     // The Reasoning tab now shows because / given / so_that / landing
-    // (the structural 4). ELI14 lives in the mid-tier slot above the
+    // (the structural 4). plain language lives in the mid-tier slot above the
     // tabs, not here, so it doesn't count toward the tab's "has
     // content" check.
     const hasReasoning =
@@ -3065,7 +3088,7 @@
         ? `<div class="reasoning-row"><span class="reasoning-key">${escapeHTML(label)}</span><span class="reasoning-val">${escapeHTML(v)}</span></div>`
         : "";
     };
-    // ELI14 is now promoted to the prediction pane's mid-tier
+    // plain language is now promoted to the prediction pane's mid-tier
     // (visible by default above the tabs). The Reasoning tab focuses
     // on the structural 4 fields — because / given / so_that /
     // landing — so we don't duplicate the simple line here.
@@ -3608,7 +3631,7 @@
   /* ---------------- Stream A: glossary hover ---------------- */
 
   // Loads docs/data/glossary.json once at boot. Active rows with a
-  // filled `one_liner_eli14` get registered into state.glossaryMap +
+  // filled `quick_def` get registered into state.glossaryMap +
   // state.glossaryPattern. annotateGlossary() then wraps the first
   // occurrence of each term inside any rendered markdown body in
   // `<abbr title="…">…</abbr>` so the dashboard's hover behavior
@@ -3621,7 +3644,7 @@
       const terms = (data && data.terms) || [];
       const map = new Map();
       for (const e of terms) {
-        if (!e || !e.one_liner_eli14) continue;
+        if (!e || !e.quick_def) continue;
         const all = [e.term, ...(Array.isArray(e.aliases) ? e.aliases : [])];
         for (const t of all) {
           if (!t || typeof t !== "string") continue;
@@ -3687,13 +3710,13 @@
         }
         const abbr = document.createElement("abbr");
         // Per-locale lookup with EN fallback. Export side already
-        // fans NULLs out to EN so entry.eli14[loc] / entry.why[loc]
+        // fans NULLs out to EN so entry.quick_def_locales[loc] / entry.why[loc]
         // never returns null/undefined for a registered active term.
         // Older builds that predate the fan-out fall back to the
         // legacy flat fields.
         const loc = state.locale || "en";
-        const eli = (entry.eli14 && (entry.eli14[loc] || entry.eli14.en))
-          || entry.one_liner_eli14
+        const eli = (entry.quick_def_locales && (entry.quick_def_locales[loc] || entry.quick_def_locales.en))
+          || entry.quick_def
           || "";
         const why = (entry.why && (entry.why[loc] || entry.why.en))
           || entry.why_it_matters
@@ -4045,11 +4068,11 @@
       switch (sort.col) {
         case "scope":    return (n.scope_id || "").toLowerCase();
         case "category": {
-          const c = nodeById(n.category_id);
+          const c = lookupProbeNode(n.category_id);
           return ((c && (nodeLabel(c, "short_label") || nodeLabel(c, "label"))) || n.category_id || "").toLowerCase();
         }
         case "theme": {
-          const t = nodeById(n.theme_id);
+          const t = lookupProbeNode(n.theme_id);
           return ((t && (nodeLabel(t, "short_label") || nodeLabel(t, "label"))) || n.theme_id || "").toLowerCase();
         }
         case "status":   return STATUS_RANK[m.status] != null ? STATUS_RANK[m.status] : -1;
@@ -4094,8 +4117,8 @@
     const rows = preds.slice(0, cap).map((n) => {
       const detail = n.detail || {};
       const m = (n.metrics_by_window && n.metrics_by_window[windowFilter]) || {};
-      const cat = nodeById(n.category_id);
-      const theme = nodeById(n.theme_id);
+      const cat = lookupProbeNode(n.category_id);
+      const theme = lookupProbeNode(n.theme_id);
       const catLabel = cat ? (nodeLabel(cat, "short_label") || nodeLabel(cat, "label") || cat.id)
                            : (n.category_id || "—");
       const themeLabel = theme ? (nodeLabel(theme, "short_label") || nodeLabel(theme, "label") || theme.id)
@@ -4104,11 +4127,11 @@
         nodeLabel(n, "title") || detail.title_clean || nodeLabel(n, "label"),
         detail.prediction_summary || "",
       );
-      // PREDICTION column: prefer the locale-aware ELI14 explanation
+      // PREDICTION column: prefer the locale-aware plain language explanation
       // when present, fall back to the prediction title. Both render
       // with identical typography so rows look uniform regardless of
       // which source supplied the text.
-      const predText = localizedEli14(detail) || title;
+      const predText = localizedPlainLanguage(detail) || title;
       const status = m.status || "no_signal";
       const real = (typeof m.realization_score === "number")
         ? m.realization_score.toFixed(2) : "—";
@@ -4150,7 +4173,7 @@
     body.querySelectorAll("tr[data-goto]").forEach((row) => {
       row.addEventListener("click", () => {
         const id = row.dataset.goto;
-        if (!nodeById(id)) return;
+        if (!lookupProbeNode(id)) return;
         openProbeTimeline(id);
       });
     });
@@ -4376,7 +4399,7 @@
   // Replaces the table; CSS hides the .alt-view-head (toggle + filters)
   // while #list-view.is-timeline is set.
   function renderPredictionTimeline(body, predId) {
-    const node = nodeById(predId);
+    const node = lookupProbeNode(predId);
     if (!node) {
       body.innerHTML = `
         <div class="timeline-head">
@@ -4396,7 +4419,7 @@
     state._timelineEventsPredId = predId;
 
     // The timeline page is now structured top-down by user attention:
-    //   1. Claim — the prediction in plain language (ELI14 if present)
+    //   1. Claim — the prediction in plain language (plain language if present)
     //   2. Timeline — the visualisation
     //   3. Metrics — Hit rate / Attention tiles + daily-precision chart
     //   4. Technical summary — Stream K body, expanded
@@ -4407,7 +4430,7 @@
     // surrounding chrome (header, ordering) is bespoke for this view.
     const detail = node.detail || {};
     const m = metricsFor(node, state.windowId);
-    const claimText = localizedEli14(detail) || predictionTitleClean(node);
+    const claimText = localizedPlainLanguage(detail) || predictionTitleClean(node);
     const reasoning = (detail && detail.reasoning) || {};
     const hasReasoning =
       reasoning.because || reasoning.given || reasoning.so_that || reasoning.landing;
@@ -4550,7 +4573,7 @@
         ev.stopPropagation();
         const id = el.dataset.goto;
         if (!id) return;
-        const target = nodeById(id);
+        const target = lookupProbeNode(id);
         if (!target) return;
         if (target.type === "prediction") {
           openProbeTimeline(id);

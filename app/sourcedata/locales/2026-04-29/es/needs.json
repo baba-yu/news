@@ -1,0 +1,137 @@
+{
+  "date": "2026-04-29",
+  "by_prediction": {
+    "prediction.f960d058dc42c7c6": [
+      {
+        "actor": "ingeniero de kernel de inference-runtime en vLLM / SGLang / TGI / Ollama / llama.cpp / NVIDIA TensorRT-LLM",
+        "job": "aterrizar un flag --kv-cache-dtype turboquant (o equivalente) de primera clase en la rama main con TurboQuant + al menos una alternativa cableada a traves de kernels fusionados de decode / extend antes del Q4 2026",
+        "outcome": "flag mergeado en main-branch exponiendo TurboQuant + KVTC / kvpress / TriAttention con paridad de throughput documentada (>=93% bf16) y una pagina publica de benchmark",
+        "motivation": "sin soporte de kernel + flag de primera clase, el despliegue de cache-comprimido se queda como opt-in experimental y los hyperscalers no pueden tierar precios por token sobre el; el runtime que envie la palanca pulida primero gana el default de long-context",
+        "task": {
+          "who": "equipo de ingenieria de kernel + leads de scheduler / dispatcher + benchmark / perf-eng + release-engineering",
+          "what": "implementar kernels fusionados Triton / CUDA decode + extend para TurboQuant + alternativa, exponer flag --kv-cache-dtype, enviar suite de benchmark",
+          "where": "ramas main de vLLM / SGLang / TGI / Ollama / llama.cpp / TensorRT-LLM + harness perf-bench",
+          "when": "mayo 2026 a Q4 2026",
+          "why": "los tiers de precios de cache-comprimido dependen de paridad de throughput de kernel-fusionado de grado-produccion",
+          "how": "rotacion MSE-FWHT + cuantizador Lloyd-Max de 3-bit + lecturas de atencion empacadas de 4-bit + publicacion de benchmark per-engine"
+        }
+      },
+      {
+        "actor": "product manager de precios por token de Bedrock / Azure / Vertex de hyperscaler",
+        "job": "empaquetar un tier de precios opt-in de cache-comprimido que pricee workloads de contexto largo a una tasa por token 5-6x mas baja antes del Q4 2026",
+        "outcome": "entrada de price-list GA para un tier opt-in de cache-comprimido con tasas por token publicadas y un flag de capacidad customer-facing",
+        "motivation": "la cinta de capex Mag-7 esta siendo repreciada contra margen por token; introducir un tier de precios de cache-comprimido es la forma mas barata de defender la velocidad de salida de ingresos de IA sin desacelerar el build-out de GPU",
+        "task": {
+          "who": "PM de precios de plataforma + planeacion de capacidad + finanzas / modelado-de-margen + equipo de API customer-facing",
+          "what": "modelar + pricear + GA un tier opt-in de cache-comprimido en Bedrock / Azure-OpenAI / Vertex con tasa por token + SLA",
+          "where": "price list de Bedrock / Azure / Vertex + consola de cliente + modelo de planeacion de capacidad",
+          "when": "Q3 2026 a Q4 2026",
+          "why": "el lenguaje de divulgacion de capex gateado por margen-por-token requiere una palanca de precios desacoplada del crecimiento crudo de GPU",
+          "how": "modelo interno de capacidad + schedule de precios escalonados + toggle de consola + playbook de onboarding de cliente"
+        }
+      },
+      {
+        "actor": "Google Research + mantenedor de port de comunidad (MLX, Triton, vLLM, SGLang) enviando el lanzamiento Python TurboQuant oficial + comunitario",
+        "job": "enviar el paquete oficial Python TurboQuant del Q2 2026 y mantener los ports de comunidad (MLX, Triton, vLLM, SGLang, llama.cpp) feature-aligned durante el runway",
+        "outcome": "lanzamiento oficial Python TurboQuant de Google + ports de comunidad mantenidos a traves de todos los runtimes de inferencia importantes con suite de tests de paridad",
+        "motivation": "sin una implementacion de referencia autoritativa y ports de comunidad feature-aligned, los mantenedores de runtime no pueden comprometerse a una interfaz estable de flag --kv-cache-dtype",
+        "task": {
+          "who": "autores de TurboQuant de Google Research + mantenedores de port de comunidad (MLX, Triton, vLLM, SGLang)",
+          "what": "publicar Python TurboQuant oficial + mantener paridad de port de comunidad + suite de tests de paridad",
+          "where": "GitHub de Google Research + repos de comunidad MLX / Triton / vLLM / SGLang + lanzamiento de codigo abierto de ICLR",
+          "when": "Q2 2026 a Q4 2026",
+          "why": "interfaz estable de runtime-flag requiere una referencia autoritativa + ports de comunidad probados",
+          "how": "referencia de rotacion MSE-FWHT + referencia de cuantizador Lloyd-Max + fixtures de test de paridad + codigo del paper ICLR-2026"
+        }
+      }
+    ],
+    "prediction.0ed37d30935303df": [
+      {
+        "actor": "investor-relations de OpenAI / Anthropic / xAI + lead de finanzas",
+        "job": "disenar y enviar una cadencia auditada de divulgacion mensual de ingresos + WAU con un dashboard publico (o carta de inversionista equivalente al 8-K) antes del Q3 2026",
+        "outcome": "primera cadencia auditada de divulgacion mensual de ingresos + WAU de laboratorio fundacional yendo en vivo con acceso publico para inversionistas + analistas",
+        "motivation": "la filtracion del WSJ del 28 de abril hizo de la economia narrativa de IA un riesgo de re-rating; el laboratorio que publique ingresos auditados + WAU primero defunde la presion de los analistas y bloquea la forma de divulgacion que los competidores deben seguir",
+        "task": {
+          "who": "CFO + investor relations + finance ops + auditor externo + general counsel",
+          "what": "parar dashboard de ingresos mensuales auditados + WAU, establecer cadencia de publicacion, preparar template de carta de inversionista",
+          "where": "sitio de investor-relations de la empresa + engagement de firma de auditoria + revision mensual de finanzas de junta",
+          "when": "mayo 2026 a Q3 2026",
+          "why": "la divulgacion tangible de economia-de-IA ahora es la demanda explicita del mercado, no narrativa",
+          "how": "feed de ingresos atestados por auditor + instrumentacion de WAU + cadencia de publicacion mensual + template de carta de inversionista"
+        }
+      },
+      {
+        "actor": "equipo de reporte financiero + drafting de 10-Q de Microsoft / Amazon / Google Cloud",
+        "job": "redactar y publicar una divulgacion de margen por token de Bedrock / Azure-OpenAI / Vertex separada de los ingresos crudos de nube en notas al pie del 10-Q para el Q3 2026",
+        "outcome": "nota al pie del 10-Q de hyperscaler Big-3 con margen por token de plataforma-de-IA desglosado de los ingresos totales de nube + comentario en llamada de resultados anclando la linea",
+        "motivation": "la quiebra de la cinta del trade-de-IA del 28 de abril pone el capex de hyperscaler sobre el eje de margen-por-token; la primera nube en publicar el desglose reformula el estandar de divulgacion y reclama autoridad narrativa",
+        "task": {
+          "who": "controller + investor relations + segment-finance + auditoria externa + CFO de plataforma de nube",
+          "what": "disenar definicion de segmento para margen por token de plataforma de IA, instrumentar la metrica, redactar nota al pie del 10-Q, preparar lenguaje de llamada de resultados",
+          "where": "notas al pie del 10-Q + script de llamada de resultados + sesiones de trabajo de reporte de segmento",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "super-week de Mag-7 + cinta del fallo de ingresos del WSJ ahora requieren claridad de divulgacion, no fe en capex",
+          "how": "reorganizacion de segment-finance + feeds de telemetria por token + schedule de margen atestado por auditor + template de nota al pie del 10-Q"
+        }
+      },
+      {
+        "actor": "staff de finanzas corporativas de la SEC + lead de analista sell-side en bancos bulge-bracket importantes",
+        "job": "emitir cartas de comentario follow-on y notas de presion de analistas que codifiquen ingresos mensuales + WAU + margen por token como la divulgacion baseline esperada para laboratorios fundacionales y nubes de plataforma-IA antes del Q3 2026",
+        "outcome": "patron de carta de comentario de la SEC + consenso de presion de analistas sell-side que nombra la reescritura de divulgacion de ingresos de IA como el baseline esperado de aqui en adelante",
+        "motivation": "sin un push coordinado SEC + analistas, los laboratorios y nubes individuales pueden estancarse en la divulgacion; presion alineada hace de la reescritura el default en lugar de algo aislado",
+        "task": {
+          "who": "Division de Finanzas Corporativas de la SEC + leads de analistas sell-side bulge-bracket + PMs buy-side de track de IA",
+          "what": "redactar cartas de comentario follow-on, publicar notas de presion de analistas nombrando ingresos mensuales + WAU + margen por token como divulgaciones esperadas",
+          "where": "pipeline de cartas de comentario de SEC EDGAR + notas de research sell-side + memos trimestrales de track de IA buy-side",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "ausente alineacion de regulador + analistas, los laboratorios y nubes individuales pueden retrasar la reescritura",
+          "how": "template de carta de comentario de SEC + guia de estilo de nota de analista + outreach a PM buy-side + mensajeria de conferencia trimestral"
+        }
+      }
+    ],
+    "prediction.08513eaa976c5c5b": [
+      {
+        "actor": "analista de grupo de trabajo de seguridad-de-agente MITRE / NIST + lead de red-team de laboratorio frontier",
+        "job": "publicar una sub-matriz de amenazas de agent-skills cubriendo envenenamiento de skills + indirect-prompt-injection-via-skill + cadenas de privilegio entre-skills antes del H2 2026",
+        "outcome": "sub-matriz de agent-skills publicamente disponible estilo MITRE-ATT&CK o liderada por NIST usada como la referencia canonica por mercados de skills + equipos de seguridad empresarial",
+        "motivation": "los hallazgos de mercado de ClawHavoc + Cisco muestran que la superficie de ataque de agent-skills ahora es de grado-produccion; sin una matriz de amenazas canonica, vendors y clientes no pueden alinearse sobre que defender",
+        "task": {
+          "who": "grupo de trabajo de seguridad-de-agente MITRE / NIST + leads de red-team de laboratorio frontier + contrapartes de seguridad de vendor de mercado",
+          "what": "redactar + publicar sub-matriz de amenazas de agent-skills con IDs de tecnica cubriendo envenenamiento, IPI-via-skill, cadenas de privilegio entre-skills",
+          "where": "GitHub de MITRE ATT&CK + pipeline de publicacion de NIST + sesiones de revision de grupo de trabajo",
+          "when": "mayo 2026 a H2 2026",
+          "why": "ningun lenguaje de amenaza canonico existe todavia para la superficie de ataque de mercado de skills + agent-runtime",
+          "how": "schema de ID de tecnica ATT&CK + cadencia de revision de grupo de trabajo + alineacion de vendor de mercado + publicacion de caso de test de adversary-emulation"
+        }
+      },
+      {
+        "actor": "ingeniero de plataforma de mercado de skills en skills de Anthropic / ClawHub / Multica / Hermes / skills de Hugging Face",
+        "job": "enviar firma + atestacion de procedencia obligatoria como una puerta en publish-time para al menos un mercado de skills importante antes del H2 2026",
+        "outcome": "requerimiento GA de mercado de que todas las skills recien publicadas lleven un manifiesto firmado + atestacion de procedencia + inputs de build rastreables, con skills sin firmar bloqueadas en publicacion",
+        "motivation": "las 1,184 skills envenenadas de ClawHavoc muestran que el flow de publicacion-sin-firma es la brecha estructural; el mercado que gatee la publicacion sobre firma + procedencia primero se convierte en el default confiable para procurement empresarial",
+        "task": {
+          "who": "ingenieria de plataforma de mercado + revision de seguridad + developer-relations + infraestructura de identidad / firma",
+          "what": "enviar pipeline de manifiesto-firmado + atestacion de procedencia, bloquear publicacion sin firmar, documentar developer-flow",
+          "where": "API de publicacion del mercado + tooling de firma del developer + integracion de proveedor de identidad + UX del mercado",
+          "when": "Q2 2026 a H2 2026",
+          "why": "el flow actual de publicacion permitir-todo es la brecha estructural raiz detras de los ataques de cadena-de-suministro clase-ClawHavoc",
+          "how": "firma estilo-Sigstore + procedencia estilo-SLSA + atestacion de proveedor de identidad + puerta de policy en publish-time"
+        }
+      },
+      {
+        "actor": "CISO empresarial + equipo de plataforma-IA en adoptantes de mercado Fortune-500",
+        "job": "publicar y aplicar una policy interna de procurement-de-AI-skills que requiera skills firmadas + con procedencia atestada antes del despliegue a agentes de produccion para H2 2026",
+        "outcome": "estandar ratificado de procurement-de-AI-skills + control aplicado en el mirror de mercado corporativo que bloquea skills sin firmar de alcanzar agentes de produccion",
+        "motivation": "el hallazgo de prompt-injection del 36% de Cisco a traves del mercado de OpenClaw muestra que los controles del lado-procurement no pueden depender solo de operadores de mercado; policy interna + puerta tecnica son requeridos para defundir el riesgo de cadena-de-suministro",
+        "task": {
+          "who": "CISO + ingenieria de plataforma-IA + identidad / gobernanza + procurement + enlaces de business-unit",
+          "what": "redactar estandar de procurement-de-AI-skills, configurar mirror de mercado para requerir skills firmadas + con procedencia atestada, entrenar developers",
+          "where": "repo interno de policy de seguridad + mirror de mercado corporativo + consola de admin de identidad / SSO + workflow de procurement",
+          "when": "Q3 2026 a H2 2026",
+          "why": "los controles del lado-mercado solos no pueden garantizar la ausencia de skills envenenadas en despliegues empresariales",
+          "how": "policy escrita de procurement + puerta de policy de mirror-de-mercado + claves de firma identity-bound + revision de atestacion por-despliegue"
+        }
+      }
+    ]
+  }
+}

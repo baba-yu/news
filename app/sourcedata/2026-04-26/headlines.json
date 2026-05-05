@@ -1,0 +1,51 @@
+{
+  "date": "2026-04-26",
+  "technical": [
+    {
+      "lead": "Google commits up to $40B to Anthropic on Apr 24",
+      "body": "$10B initial cash at $350B valuation, plus $30B milestone-tied + 5GW Google Cloud capacity over 5 years — — Bloomberg breaks the deal Apr 24: $10B now at a — $350B valuation — plus up to $30B more on performance targets, with — Google Cloud delivering 5GW of compute capacity over 5 years**. Lands days after Amazon's $25B commitment. Three frontier labs (Anthropic / OpenAI / Thinking Machines Lab) now each have a hyperscaler underwriter on the cap table.******",
+      "citations": []
+    },
+    {
+      "lead": "DeepSeek V4 lands with 9.5x lower memory + Huawei Ascend co-tuning, Apr 26 Bloomberg-CCTV piece confirms domestic-chip pivot",
+      "body": "DeepSeek V4-Pro (1.6T MoE / 49B active) and V4-Flash ship with — Hybrid Attention — cutting memory — 9.5x-13.7x vs V3.2** and a 1M-token context. Apr 26 Bloomberg piece via CCTV social account confirms the V4 timeline shift was driven by **Huawei Ascend hardware-specific tuning**. V4-Pro priced at $1.74 / $3.48 per M tokens — **~7x cheaper than Claude Opus 4.7** at GPT-5.4 / Opus 4.6-class quality.******",
+      "citations": [
+        {
+          "label": "gHacks - DeepSeek Releases V4 Models With 9.5x Lower Memory Requirements and Huawei Ascend Support",
+          "url": "https://www.ghacks.net/2026/04/26/deepseek-releases-v4-models-with-9-5x-lower-memory-requirements-and-huawei-ascend-support/"
+        }
+      ]
+    },
+    {
+      "lead": "SGLang CVE-2026-5760 (CVSS 9.8)",
+      "body": "RCE via malicious GGUF chat_template (Jinja2 SSTI), public PoC + CERT/CC VU#915947 — — A crafted GGUF model file with a Jinja2 SSTI payload in `tokenizer.chat_template` + Qwen3 reranker trigger phrase activates the vulnerable path in `entrypoints/openai/serving_rerank.py`; on `/v1/rerank` request, SGLang renders the template via `jinja2.Environment()` → arbitrary code execution. — Public PoC at `github.com/Stuub/SGLang-0.5.9-RCE` — , CERT/CC VU#915947 issued, recommended fix `ImmutableSandboxedEnvironment`. AI inference servers now confirmed as a — post-LMDeploy SSRF, second weaponized AI-infra primitive**.******",
+      "citations": [
+        {
+          "label": "The Hacker News - SGLang CVE-2026-5760 (CVSS 9.8) Enables RCE via Malicious GGUF Model Files",
+          "url": "https://thehackernews.com/2026/04/sglang-cve-2026-5760-cvss-98-enables.html"
+        }
+      ]
+    },
+    {
+      "lead": "Qwen3.6-27B (Apr 22, traction Apr 23-26)",
+      "body": "Apache 2.0 dense 27B beats 397B-A17B MoE on coding (SWE-bench Verified 77.2% vs 76.2%, Terminal-Bench 2.0 59.3 matches Claude Opus 4.5), 40 tok/s on RTX 3090 — — Alibaba's Qwen team reverses MoE direction with a — fully dense 27B + vision — that runs at — Q4_K_M ~16.8 GB VRAM** on RTX 3090 / M-series Mac, with a 262K context (extensible to 1M) and a new **Thinking Preservation** mechanism. BF16 + fine-grained FP8 weights on HuggingFace. Sets a new \"single-GPU coding agent\" baseline.******",
+      "citations": [
+        {
+          "label": "MarkTechPost - Alibaba Qwen Team Releases Qwen3.6-27B: A Dense Open-Weight Model Outperforming 397B MoE on Agentic Coding Benchmarks",
+          "url": "https://www.marktechpost.com/2026/04/22/alibaba-qwen-team-releases-qwen3-6-27b-a-dense-open-weight-model-outperforming-397b-moe-on-agentic-coding-benchmarks/"
+        }
+      ]
+    },
+    {
+      "lead": "Microsoft ASP.NET Core CVE-2026-40372 (CVSS 9.1)",
+      "body": "out-of-band emergency patch for cookie-forging SYSTEM-privilege flaw in DataProtection 10.0.0-10.0.6 — — A bug in `ManagedAuthenticatedEncryptor` computes the HMAC validation tag at an incorrect offset; a ciphertext with an all-zero HMAC tag is incorrectly accepted as valid. Enables — forging authentication cookies, manipulating antiforgery tokens, and decrypting protected payloads — — full impersonation up to SYSTEM. Fixed in `Microsoft.AspNetCore.DataProtection 10.0.7`. Published as part of Apr 14 Patch Tuesday; OOB widely re-promoted Apr 22-25. Requires — rotating DataProtection key ring + auditing long-lived tokens issued during the vulnerable window**.******",
+      "citations": [
+        {
+          "label": "The Hacker News - Microsoft Patches Critical ASP.NET Core CVE-2026-40372 Privilege Escalation Bug",
+          "url": "https://thehackernews.com/2026/04/microsoft-patches-critical-aspnet-core.html"
+        }
+      ]
+    }
+  ],
+  "plain": []
+}

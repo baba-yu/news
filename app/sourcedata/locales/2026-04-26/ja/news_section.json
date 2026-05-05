@@ -1,0 +1,616 @@
+{
+  "date": "2026-04-26",
+  "sections": [
+    {
+      "category": "LLM Workflow > OpenClaw / NemoClaw / Hermes Agents",
+      "bullets": [
+        {
+          "body": "**OpenClaw v2026.4.25-beta 系列 (4/26、beta.3 → beta.7+) — 音声応答 / TTS 強化、チャット スコープの auto-TTS、ペルソナ、6 新規 TTS プロバイダ** — v2026.4.24 stable (4/25) 後、24 時間未満のベータ ケイデンス。v2026.4.25-beta.3 (4/26 13:00) → beta.4 (4/26 13:24) → beta.7+。**チャットスコープ auto-TTS コントロール + ペルソナ + agent / アカウント単位の上書き** に加え、新プロバイダ統合: **Azure Speech / Xiaomi / Local CLI / Inworld / Volcengine / ElevenLabs v3**。音声応答がプロダクション形成へ。",
+          "citations": [
+            {
+              "label": "Release Alert - openclaw/openclaw releases tracker",
+              "url": "https://releasealert.dev/github/openclaw/openclaw"
+            }
+          ]
+        },
+        {
+          "body": "**OpenClaw v2026.4.24 stable 振り返り (4/25)** — Google Meet 参加機能のバンドル、Gemini Live 音声ブリッジ、ブラウザ自動化の深掘り、モデルカタログ高速化、軽量プラグイン起動、Google Meet バンドル参加プラグイン (個人 Google 認証付き)、Chrome/Twilio リアルタイム セッション、ペアノード Chrome サポート、artifact / 出席エクスポート、既存の Meet タブのリカバリー ツーリングなどを搭載。",
+          "citations": [
+            {
+              "label": "OpenClaw Release Notes - April 2026 Latest Updates",
+              "url": "https://releasebot.io/updates/openclaw"
+            }
+          ]
+        },
+        {
+          "body": "**Hermes Agent — 4/23-26 期間内に新規リリースなし** — v0.10.0 (4/16) 以降の Nous Research の活動継続。ツールゲートウェイ ランタイム パターンが拡散中。",
+          "citations": [
+            {
+              "label": "Hermes Agent Release Tracker",
+              "url": "https://releasebot.io/updates/nousresearch/hermes-agent"
+            }
+          ]
+        },
+        {
+          "body": "**NemoClaw — 4/23-26 期間内に主要更新なし** — GTC 2026 で発表された NVIDIA OpenShell + サンドボックス / ポリシー制御は継続的に展開中。",
+          "citations": [
+            {
+              "label": "The Agent Wars: OpenClaw, NemoClaw, Hermes & the Rise of Agentic AI",
+              "url": "https://prateeksinghphd.in/agentic.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "LLM Workflow > OpenAI / Anthropic tools",
+      "bullets": [
+        {
+          "body": "**Claude Code v2.1.118 / v2.1.119 / v2.1.120 24 時間リグレッション クラスター (4/24-25)** — v2.1.118 で Sonnet 4.6 のデフォルトが「xhigh」へ。24 時間以内に v2.1.119 + v2.1.120 が **8 件のリグレッション** を出荷: リトラクト級の auto-update 破損、サイレント model swap、resume 時クラッシュ 2 件、UI 重複バグ、WSL2 限定 `/mcp` フリーズ、CLAUDE.md 無視リグレッション、`sandbox.excludedCommands` 約束破棄、macOS worktree ハング。サバイバルチェックリストは v2.1.117 へのロールバックを推奨。",
+          "citations": [
+            {
+              "label": "GitHub Gist - Claude Code v2.1.119/v2.1.120 Survival Checklist",
+              "url": "https://gist.github.com/yurukusa/a866b4cd2976486156a00c190c39cef6"
+            }
+          ]
+        },
+        {
+          "body": "**4/23 Claude Code リグレッション に対する Anthropic エンジニアリング ポストモーテム** — 2 つの異なる品質リグレッションを特定: **3/4 推論努力カット**と **4/16 verbosity プロンプト問題**、両方とも 4/20 v2.1.116 で修正。Claude Code + Agent SDK + Cowork mode が数週間にわたり影響を受けていたことを文書化。",
+          "citations": [
+            {
+              "label": "The Register - Anthropic admits it dumbed down Claude with 'upgrades'",
+              "url": "https://www.theregister.com/2026/04/23/anthropic_says_it_has_fixed/"
+            }
+          ]
+        },
+        {
+          "body": "**OpenAI GPT-5.5 / GPT-5.5 Pro: API 公開 4/24 (ChatGPT / Codex 公開 4/23)** — ChatGPT Plus / Pro / Business / Enterprise + Codex は 4/23、API は 4/24。Input $5.00 / Output $30.00 per M tokens (GPT-5.4 比 **2 倍**)、GPT-5.5 Pro は $30 / $180 per M tokens。**Codex は出力トークンを ~40% 削減**して「タスクあたりコストでトークン単価上昇を相殺」。",
+          "citations": [
+            {
+              "label": "Apidog - GPT-5.5 Pricing: Full Breakdown of API, Codex, and ChatGPT Costs",
+              "url": "https://apidog.com/blog/gpt-5-5-pricing/"
+            }
+          ]
+        },
+        {
+          "body": "**Simon Willison: GPT-5.5 プロンプト ガイド (4/25)** — 旧モデル比 GPT-5.5 のプロンプト差異の実用的な書き起こし。",
+          "citations": [
+            {
+              "label": "Simon Willison - GPT-5.5 prompting guide",
+              "url": "https://simonwillison.net/2026/Apr/25/gpt-5-5-prompting-guide/"
+            }
+          ]
+        },
+        {
+          "body": "**GitHub に free-claude-code 出現 (4/26)** — Anthropic API キーなしでターミナル + VSCode + Discord から Claude Code クラスの機能にアクセスできるオープンソース プロジェクト。",
+          "citations": [
+            {
+              "label": "AIToolly - Free Claude Code: Use Claude CLI & VSCode Without API Keys",
+              "url": "https://aitoolly.com/ai-news/article/2026-04-26-free-claude-code-new-open-source-project-enables-terminal-and-vscode-integration-without-anthropic-a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (serving infrastructure) > vLLM",
+      "bullets": [
+        {
+          "body": "**4/23-26 期間内に主要リリースなし** — v0.19.1 (4/18) を継承。Gemma 4 完全対応、speculative decoding × async scheduling のゼロバブル オーバーラップ、Model Runner V2 piecewise CUDA-graphs の成熟がロック済み。v0.20 は未公開のまま。",
+          "citations": [
+            {
+              "label": "vLLM Releases",
+              "url": "https://github.com/vllm-project/vllm/releases"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (serving infrastructure) > SGLang",
+      "bullets": [
+        {
+          "body": "**CVE-2026-5760 (CVSS 9.8) — 公開 PoC + CERT/CC VU#915947 発行** — 細工された GGUF モデルファイルの `tokenizer.chat_template` に Jinja2 SSTI ペイロード + Qwen3 リランカー起動フレーズを仕込むと、`entrypoints/openai/serving_rerank.py` の脆弱パスが発動。`/v1/rerank` で SGLang が `jinja2.Environment()` を使ってテンプレートをレンダリング → 任意コード実行。 **PoC は `github.com/Stuub/SGLang-0.5.9-RCE`**、推奨修正は `ImmutableSandboxedEnvironment`。llama-cpp-python の CVE-2024-34359 (「Llama Drama」) と同一脆弱性クラス。",
+          "citations": [
+            {
+              "label": "GitHub - Stuub/SGLang-0.5.9-RCE Proof of Concept",
+              "url": "https://github.com/Stuub/SGLang-0.5.9-RCE"
+            }
+          ]
+        },
+        {
+          "body": "**CERT/CC VU#915947 — 調整プロセスでパッチ未取得** — 調整プロセス中に SGLang 側の応答および上流パッチは得られず。",
+          "citations": [
+            {
+              "label": "CERT/CC - VU#915947 SGLang chat-template RCE",
+              "url": "https://kb.cert.org/vuls/id/915947"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (serving infrastructure) > AWS Bedrock",
+      "bullets": [
+        {
+          "body": "**AWS Bedrock AgentCore Browser の OS レベル操作継続 (4/22 発表、4/23-26 で勢い拡大)** — AgentCore Browser ツールが OS レベル操作 (ファイルアップロード / OS ダイアログ処理 / マルチウィンドウ切り替え) を獲得。AgentCore CLI は **AWS CDK ネイティブ**、Terraform 対応近日。Coding Skills は Kiro Power で出荷、Claude Code / Codex / Cursor は来週。Managed Harness は 4 リージョンプレビュー、CLI は 14 リージョン GA、追加課金なし。",
+          "citations": [
+            {
+              "label": "AWS Blog - Get to your first working agent in minutes",
+              "url": "https://aws.amazon.com/blogs/machine-learning/get-to-your-first-working-agent-in-minutes-announcing-new-features-in-amazon-bedrock-agentcore/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (serving infrastructure) > Google Cloud",
+      "bullets": [
+        {
+          "body": "**Google × Anthropic 400 億ドル / 5GW 取引 (4/24)** — 評価額 3,500 億ドルで現金 100 億ドル + マイルストーン連動 300 億ドル + **5 年で Google Cloud 5GW の演算キャパシティ**、追加 GW 提供のオプションあり。事前段階で Google の出資はすでに 30 億ドル超 / ~14% 持分。",
+          "citations": []
+        },
+        {
+          "body": "**Google × Thinking Machines Lab マルチビリオン GB300 取引継続 (4/22 発表)** — Mira Murati の TML が Google Cloud A4X Max (NVIDIA GB300) を採用、トレーニング / 提供で 2 倍。Anthropic、Meta に続くフロンティア 3 社目、Google AI Hypercomputer 戦略の中核。",
+          "citations": [
+            {
+              "label": "9to5Google - Google investing up to $40 billion in Anthropic, the company behind Claude",
+              "url": "https://9to5google.com/2026/04/24/google-anthropic-investment-40-billion/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > DeepSeek",
+      "bullets": [
+        {
+          "body": "**DeepSeek V4-Pro / V4-Flash 公開 + オープンソース化 (4/24)** — V4 = 284B MoE / 13B アクティブ、V4-Pro = 1.6T MoE / 49B アクティブ。Hybrid Attention で推論計算と KV キャッシュを圧縮、**メモリは V3.2 比 9.5〜13.7 倍削減**、コンテキスト 1M トークン。V4 価格: $0.14 / $0.28 per M tokens、V4-Pro 価格: $1.74 / $3.48 per M tokens — **Claude Opus 4.7 比で約 7 分の 1**。",
+          "citations": [
+            {
+              "label": "gHacks - DeepSeek Releases V4 Models With 9.5x Lower Memory Requirements and Huawei Ascend Support",
+              "url": "https://www.ghacks.net/2026/04/26/deepseek-releases-v4-models-with-9-5x-lower-memory-requirements-and-huawei-ascend-support/"
+            }
+          ]
+        },
+        {
+          "body": "**DeepSeek V4 ローンチ延期 (Bloomberg 経由 CCTV ソーシャル、4/26)** — V4 タイムラインシフトの解釈は **CCTV 系ソーシャル メディア アカウント** が出典で、DeepSeek が Nvidia ファースト ローンチではなく **Huawei Ascend 統合を優先**したとし、基本的な互換性を超えてハードウェア固有チューニングに踏み込んだとされる。",
+          "citations": []
+        },
+        {
+          "body": "**CNN: 中国の AI 新興 DeepSeek が新モデルを投下 (4/24)** — V4 リリース文脈とグローバル AI 競争の振り返り。",
+          "citations": [
+            {
+              "label": "CNN Business - China's AI upstart DeepSeek drops new model",
+              "url": "https://www.cnn.com/2026/04/24/tech/chinas-ai-deepseek-v4-intl-hnk"
+            }
+          ]
+        },
+        {
+          "body": "**Al Jazeera: DeepSeek が世界テクノロジー業界を揺るがしてから 1 年後の最新モデル発表 (4/24)** — V4 の地域メディア独自の枠組み。",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Qwen / Tencent / Other Chinese LLMs",
+      "bullets": [
+        {
+          "body": "**Qwen3.6-27B (4/22、4/23-26 で勢い拡大) — Dense 27B + ビジョン、SWE-bench Verified で 397B-A17B MoE を上回る (77.2% vs 76.2%)** — Apache 2.0、コンテキスト 262K (1M まで拡張可)、新 **Thinking Preservation** 機構。 **Q4_K_M ~16.8 GB VRAM**、**RTX 3090 で 40 tok/s** / Apple Silicon Mac。 **Terminal-Bench 2.0 = 59.3 (Claude Opus 4.5 と並ぶ、Qwen3.6-35B-A3B 51.5 を上回る)**。",
+          "citations": [
+            {
+              "label": "Hugging Face - Qwen/Qwen3.6-27B",
+              "url": "https://huggingface.co/Qwen/Qwen3.6-27B"
+            }
+          ]
+        },
+        {
+          "body": "**Qwen3.6-27B Will-it-Run-AI VRAM ガイド (4/25)** — コンシューマ GPU 価格帯でのシングル GPU コーディング性能を定量化したハードウェア固有ランナー ガイド。",
+          "citations": [
+            {
+              "label": "Will It Run AI - Qwen3.6-27B VRAM Requirements",
+              "url": "https://willitrunai.com/blog/qwen-3-6-27b-vram-requirements"
+            }
+          ]
+        },
+        {
+          "body": "**buildfastwithai: 27B モデルが 397B をコーディングで撃破 (4/22)** — SWE-bench Verified、SkillsBench、Terminal-Bench スコアを含む詳細レビュー。",
+          "citations": [
+            {
+              "label": "buildfastwithai - Qwen3.6-27B Review",
+              "url": "https://www.buildfastwithai.com/blogs/qwen3-6-27b-review-2026"
+            }
+          ]
+        },
+        {
+          "body": "**Qwen3.6-35B-A3B MoE Will-it-Run-AI ガイド (2026/04)** — 姉妹となる MoE バリアント向けハードウェア ガイド。",
+          "citations": [
+            {
+              "label": "Will It Run AI - Qwen3.6-35B-A3B VRAM Requirements",
+              "url": "https://willitrunai.com/blog/qwen-3-6-vram-requirements"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Bonsai / Optimization",
+      "bullets": [
+        {
+          "body": "**2026/04 Local LLM ハードウェア ガイド更新** — 8B / 32B / 70B の Mac mini M4 / RTX 5090 / RTX 6000 Pro Blackwell / 96GB Spark 上の実機性能。Bonsai クラスの 1-bit モデルの位置づけも掲載。",
+          "citations": [
+            {
+              "label": "PromptQuorum - Local LLMs 2026: Ollama, LM Studio, Models & Hardware Guide",
+              "url": "https://www.promptquorum.com/local-llms"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (local inference runtimes) > llama.cpp",
+      "bullets": [
+        {
+          "body": "**ビルド b8936 (4/26 08:54 UTC) と b8937 (4/26 09:28 UTC) — 1 時間以内ケイデンス** — 直近数日続いた「窓内非リリース」パターンを破り、1 時間以内に 2 ビルドが着地。GGUF 量子化、MCP クライアント拡張、WebGPU バックエンドの活動が継続。",
+          "citations": [
+            {
+              "label": "GitHub - ggml-org/llama.cpp Releases",
+              "url": "https://github.com/ggml-org/llama.cpp/releases"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (local inference runtimes) > Ollama",
+      "bullets": [
+        {
+          "body": "**Ollama v0.21.2 stable (4/24)** — OpenClaw / web-search プラグイン同梱が継続。`ollama launch` 経由の OpenClaw / Hermes / GitHub Copilot CLI 統合は安定。",
+          "citations": [
+            {
+              "label": "Ollama Releases",
+              "url": "https://github.com/ollama/ollama/releases"
+            }
+          ]
+        },
+        {
+          "body": "**Ollama MLX バックエンド 4/23 深掘り (Sebastian Gingter)** — MLX 高速化を定量化: **Ollama on M5 Max で Qwen3.5-35B-A3B + NVFP4 が prefill 1.57 倍 / decode 1.93 倍**。32GB RAM 搭載 Mac は依然対象外。",
+          "citations": [
+            {
+              "label": "NVIDIA Developer Blog - Open Source AI Tool Upgrades Speed Up LLM and Diffusion Models on NVIDIA RTX PCs",
+              "url": "https://developer.nvidia.com/blog/open-source-ai-tool-upgrades-speed-up-llm-and-diffusion-models-on-nvidia-rtx-pcs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (local inference runtimes) > Foundry Local",
+      "bullets": [
+        {
+          "body": "**4/23-26 期間内に主要発表なし — MLX 対応は依然 Open Issue `microsoft/Foundry-Local#329`** — RFT Global Training (o4-mini)、GPT-4.1 model grader、Foundry Labs 4 月更新が継続展開。Apple Silicon ユーザーは MLX を待ち続ける。",
+          "citations": [
+            {
+              "label": "Mastering Azure Foundry Local",
+              "url": "https://spknowledge.com/2025/10/29/mastering-azure-foundry-local-powerful-features-comparison-with-ollama-other-local-llm-tools/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > CVE / KEV / Threat Intelligence (CVSS ≥ 8.0)",
+      "bullets": [
+        {
+          "body": "**CISA が 4/25 に KEV へ 4 件追加 (Samsung MagicINFO 9 / SimpleHelp x2 / D-Link DIR-823X)、連邦修復期限 5/8** — CVE-2024-7399 (Samsung MagicINFO 9 Path Traversal、CVSS 8.8、Mirai ボットネット展開と関連)、CVE-2024-57726 (SimpleHelp Missing Authorization、CVSS 9.9)、CVE-2024-57728 (SimpleHelp Path Traversal、CVSS 7.2)、CVE-2025-29635 (D-Link DIR-823X Command Injection) を「実環境で活用中」として追加。FCEB は **2026-05-08** までに修復、D-Link は使用停止。",
+          "citations": [
+            {
+              "label": "The Hacker News - CISA Adds 8 Exploited Flaws to KEV, Sets April-May 2026 Federal Deadlines",
+              "url": "https://thehackernews.com/2026/04/cisa-adds-8-exploited-flaws-to-kev-sets.html"
+            }
+          ]
+        },
+        {
+          "body": "**SGLang CVE-2026-5760 (CVSS 9.8) GGUF chat_template (Jinja2 SSTI) RCE、公開 PoC + CERT/CC VU#915947** — SGLang 章で詳述。AI 推論サーバが **LMDeploy SSRF に続く第 2 の AI インフラ武器化プリミティブ** として確定。",
+          "citations": [
+            {
+              "label": "The Hacker News - SGLang CVE-2026-5760 (CVSS 9.8) Enables RCE via Malicious GGUF Model Files",
+              "url": "https://thehackernews.com/2026/04/sglang-cve-2026-5760-cvss-98-enables.html"
+            }
+          ]
+        },
+        {
+          "body": "**Pillar Security: Antigravity プロンプト インジェクション サンドボックス エスケープ (`find_by_name -X` 経由、Google パッチ済み、バグバウンティ支払い済み)** — `find_by_name` の Pattern パラメータが `fd` に `-X` (exec-batch) フラグを差し込み、エージェントがネイティブ ツール呼び出しとして扱うため Secure Mode を回避 → ワークスペース ファイルに対する任意バイナリ実行。初期報告 2026/01/07、Google 修正は 2 月中旬。",
+          "citations": [
+            {
+              "label": "Pillar Security - Prompt Injection leads to RCE and Sandbox Escape in Antigravity",
+              "url": "https://www.pillar.security/blog/prompt-injection-leads-to-rce-and-sandbox-escape-in-antigravity"
+            }
+          ]
+        },
+        {
+          "body": "**Microsoft ASP.NET Core CVE-2026-40372 (CVSS 9.1) — `Microsoft.AspNetCore.DataProtection 10.0.7` の OOB 緊急パッチ** — `ManagedAuthenticatedEncryptor` が HMAC 検証タグを誤ったオフセットで計算するバグ。全ゼロ HMAC を持つ暗号文が誤って有効と判定。**認証 Cookie の偽造、antiforgery トークン改ざん、保護ペイロードの復号** — SYSTEM 権限までのなりすまし。緩和策: DataProtection キー リング再生成 + 脆弱期間中に発行された長期トークンの監査。",
+          "citations": [
+            {
+              "label": "eSecurity Planet - CVE-2026-40372: Microsoft Patches ASP.NET Core Privilege Escalation Vulnerability",
+              "url": "https://www.esecurityplanet.com/threats/cve-2026-40372-microsoft-patches-asp-net-core-privilege-escalation-vulnerability/"
+            }
+          ]
+        },
+        {
+          "body": "**simple-git CVE-2026-6951 (CVSS 9.8) — 広く展開された CI/CD 依存に対する RCE (4/26 表面化)** — simple-git Node.js ライブラリの致命的 RCE。無数の CI/CD パイプライン、開発ツール群に組み込まれた基盤依存。Cyble は同じ開示ウィンドウで Microsoft / Adobe / Apache / JetBrains 製品に影響する 31 件の高優先度脆弱性を併記。",
+          "citations": [
+            {
+              "label": "Cyble - Weekly Vulnerabilities Surge Signals Rising Risk For 2026",
+              "url": "https://cyble.com/blog/weekly-vulnerabilities-surge-trend-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE Brief 4/26 デイリー集計 — 19 件の活用中 + 1 件の致命的 + 31 件の高優先度** — KEV 掲載 19 件 (Microsoft Office / Exchange / SharePoint / Adobe Acrobat / Apache ActiveMQ / JetBrains TeamCity / SimpleHelp) で活用が継続中。",
+          "citations": [
+            {
+              "label": "CVE Brief - April 26, 2026",
+              "url": "https://cvebrief.com/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > Solutions: Zero-Trust Access Control for Agentic AI",
+      "bullets": [
+        {
+          "body": "**Okta for AI Agents — 4/30 GA、Showcase 2026 で「セキュアな agentic enterprise のブループリント」発表** — GA 直前、Okta は 3 つの問いを軸にブループリントを公開: **エージェントはどこにいるのか、何に接続できるのか、何ができるのか**。機能: Sanctioned + シャドウ エージェントの Discovery & Governance、**Agent Gateway を中央 MCP コントロール プレーン** (仮想 MCP サーバが Okta MCP レジストリを集約)、認証情報のボールト化 + 自動ローテーション、Universal Logout を介したランタイム制御。CEO Todd McKinnon 曰く「会社にとって最も重要な製品」。",
+          "citations": [
+            {
+              "label": "Okta Newsroom - Okta announces new blueprint for the secure agentic enterprise",
+              "url": "https://www.okta.com/newsroom/press-releases/showcase-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Okta: Every Agent Needs an Identity (EA 段階)** — AI エージェントを人間 / サービス アカウントと並ぶファースト クラスのアイデンティティとして中央ディレクトリに登録する「エージェント アズ ファースト クラス アイデンティティ」モデルの GA 前枠組み。",
+          "citations": [
+            {
+              "label": "Okta Blog - Every Agent Needs an Identity: Introducing Okta for AI Agents in Early Access",
+              "url": "https://www.okta.com/blog/ai/okta-ai-agents-early-access-announcement/"
+            }
+          ]
+        },
+        {
+          "body": "**Cross App Access: A Protocol for AI and App Security** — Okta による AI エージェント / アプリ間接続セキュリティ プロトコル、Agent Gateway アーキテクチャの中核。",
+          "citations": [
+            {
+              "label": "Okta Identity 101 - Cross App Access",
+              "url": "https://www.okta.com/identity-101/cross-app-access-securing-ai-agent-and-app-to-app-connections/"
+            }
+          ]
+        },
+        {
+          "body": "**MCP Security Explained: Guide to Zero Trust for Agentic AI** — TrueFoundry の 4/2026 解説、Agentic AI / MCP コントロール プレーンへのゼロ トラスト適用。",
+          "citations": [
+            {
+              "label": "TrueFoundry - MCP Security Explained: Guide to Zero Trust for Agentic AI",
+              "url": "https://www.truefoundry.com/blog/mcp-security"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > Solutions: Monitor and Manage AI Agent Behavior",
+      "bullets": [
+        {
+          "body": "**野生での Indirect Prompt Injection — 2025/11-2026/2 で前年同期比 32% 増、Google Online Security Blog 4/24** — Google の一次研究が **悪性プロンプト インジェクション コンテンツの 32% 増加**を web 全体クロールで定量化、**実証された IPI 攻撃 10 件** を文書化、脅威を「GitHub コメント」から **「オープンウェブ」** に一般化。",
+          "citations": [
+            {
+              "label": "The Hacker News - Google Patches Antigravity IDE Flaw Enabling Prompt Injection Code Execution",
+              "url": "https://thehackernews.com/2026/04/google-patches-antigravity-ide-flaw.html"
+            }
+          ]
+        },
+        {
+          "body": "**CSO Online: プロンプト インジェクションが Google Antigravity のファイル検索を RCE に変えた** — exec-batch フラグ インジェクションが Antigravity の Secure Mode 境界をすり抜けた経緯を実務者向けに分析。",
+          "citations": [
+            {
+              "label": "CSO Online - Prompt injection turned Google's Antigravity file search into RCE",
+              "url": "https://www.csoonline.com/article/4161382/prompt-injection-turned-googles-antigravity-file-search-into-rce.html"
+            }
+          ]
+        },
+        {
+          "body": "**Cloud Security Alliance Lab Space: Antigravity Sandbox Escape: Prompt Injection and Native Tool Abuse** — CSA による「agentic-IDE プロンプト インジェクション サンドボックス エスケープ」パターンの業界向け研究ノート。",
+          "citations": [
+            {
+              "label": "Cloud Security Alliance - Agentic IDE Prompt Injection Sandbox Escape",
+              "url": "https://labs.cloudsecurityalliance.org/research/csa-research-note-agentic-ide-prompt-injection-sandbox-escap/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Hardware (chips / platforms)",
+      "bullets": [
+        {
+          "body": "**NVIDIA は 4/24 の史上最高値 ($208.27、+4.3%) 後、$5.12T 時価総額を維持。FY27 Q1 決算は 5/20、コンセンサスは 3 桁 EPS 成長 / 売上 +77% YoY** — Wall Street スタンス: 「Own It, Don't Trade It」。Intel Q1 2026 ビート (EPS $0.29 vs $0.01、売上 $13.6B +7% YoY) が触媒で、4/24 に +24%、終値 $82.57 — 1987 年以来の単日最大。",
+          "citations": [
+            {
+              "label": "Motley Fool - Stock Market Today, April 24: Nvidia Surges on Soaring AI Chip Demand",
+              "url": "https://www.fool.com/coverage/stock-market-today/2026/04/24/stock-market-today-april-24-nvidia-surges-on-soaring-ai-chip-demand/"
+            }
+          ]
+        },
+        {
+          "body": "**AMD は 4/24 まで MTD +45%、4/24 単日で +13.90% (終値 $347.77)、Q1 2026 決算 5/5** — 予想: 売上 $9.84B、EPS YoY +33%。Intel ビート + NVIDIA $5T セクター連鎖が加速。iShares 半導体 ETF MTD 4/24 まで +40.4%。",
+          "citations": [
+            {
+              "label": "IndexBox - Nvidia Stock Gains 19% in April as Semiconductor ETF Rises 40.4%",
+              "url": "https://www.indexbox.io/blog/nvidia-and-semiconductor-stocks-surge-in-april-2026-amid-ai-spending-and-chip-shortages/"
+            }
+          ]
+        },
+        {
+          "body": "**NVIDIA Hannover Messe 2026 閉幕 — Industrial AI Cloud (Deutsche Telekom) 稼働、GB300 + Jetson Thor が工場展開** — ヨーロッパ最大級の AI 「ファクトリー」、ドイツで Nvidia インフラ上に構築、Agile Robots / Siemens / SAP / PhysicsX / Wandelbots 参加。",
+          "citations": [
+            {
+              "label": "Robotics & Automation News - Nvidia and partners showcase AI-driven manufacturing systems at Hannover Messe 2026",
+              "url": "https://roboticsandautomationnews.com/2026/04/20/nvidia-and-partners-showcase-ai-driven-manufacturing-systems-at-hannover-messe-2026/100766/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Physical AI / Humanoid Robotics",
+      "bullets": [
+        {
+          "body": "**Tesla Earth Day (4/25) + Optimus Plant Cube プレゼント、米国フラッグシップ ストアで実施** — FSD (Supervised) デモドライブ参加者に Optimus V3 が育てた限定 Plant Cube。Tesla アドバイザーによる EV + 家庭用エネルギー + Optimus 「グリーン リビング」スタックの説明会。4/22 Electrek が Optimus V3 量産タイムラインのシフトを別途確認。",
+          "citations": [
+            {
+              "label": "MediaPost - Tesla Earth Day Campaign Targets Humans, Humanoids Too",
+              "url": "https://www.mediapost.com/publications/article/414491/tesla-plans-earth-day-celebration.html"
+            }
+          ]
+        },
+        {
+          "body": "**BMW Plant Leipzig AEON ヒューマノイド トライアル 2026/04 開始 + Physical AI Center of Competence 開所** — Spartanburg Figure 02 の実績 (10 ヶ月で X3 30,000 台、90,000 部品、1,250 時間稼働) を基盤。Hexagon Robotics の AEON (22 センサ / 自己交換式バッテリー / 4 層 Physical AI / 20 デモで自律行動学習) は夏季パイロットを目指す。",
+          "citations": [
+            {
+              "label": "BMW Group - First humanoid robot introduced in Plant Leipzig",
+              "url": "https://www.bmwgroup.com/en/news/general/2026/humanoid-robot-in-leipzig.html"
+            }
+          ]
+        },
+        {
+          "body": "**Hannover Messe 2026 が Physical AI を初の中心テーマに据えて 4/24 閉幕 — Agile ONE、HMND 01 Alpha、Apptronik Apollo、Agility Digit、Zoomlion Robot Ops** — 来場 130,000 人 / 出展 4,000 / 講演 1,600。Zoomlion が embodied-intelligence OS の Robot Ops をデビュー。Industrial AI Cloud (Deutsche Telekom × Nvidia) がデジタル ツイン / リアルタイム フィジクス アプリ向けに稼働。",
+          "citations": [
+            {
+              "label": "Agile Robots - Humanoid Agile ONE embodies Physical AI at Hannover Messe 2026",
+              "url": "https://www.agile-robots.com/en/news/detail/humanoid-agile-one-embodies-physical-ai-at-hannover-messe-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Manila Times: ヒューマノイドが研究所から工場床へ移行、2030 年代半ばまでに 4 兆ドル市場 (4/25)** — BMW / Tesla / Siemens の工場展開と紐づくマクロな枠組み。",
+          "citations": [
+            {
+              "label": "Manila Times - Humanoid robots are about to move from labs to factory floors",
+              "url": "https://www.manilatimes.net/2026/04/25/business/science-technology/humanoid-robots-are-about-to-move-from-labs-to-factory-floors-poised-to-become-a-4-trillion-market/2327996"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Stock Prices and Corporate Activity",
+      "bullets": [
+        {
+          "body": "**Google × Anthropic 400 億ドル / 5GW 取引 (4/24)** — 上述。Anthropic 年間ランレート売上は **$30B** (2025 年末 ~$9B 比)。Yahoo Finance によれば Google の事前出資は既に $3B+、~14% 持分。",
+          "citations": []
+        },
+        {
+          "body": "**NVIDIA $5.12T 時価総額 + AMD +13.9% + Nasdaq / S&P 500 史上最高値 (4/24)** — 上述、前回からの持ち越し。",
+          "citations": [
+            {
+              "label": "Motley Fool - Stock Market Today, April 24",
+              "url": "https://www.fool.com/coverage/stock-market-today/2026/04/24/stock-market-today-april-24-nvidia-surges-on-soaring-ai-chip-demand/"
+            }
+          ]
+        },
+        {
+          "body": "**Intel Q1 2026 決算: EPS $0.29 vs 予想 $0.01、売上 $13.6B (+7% YoY)、4/24 終値 +24% で $82.57 — 1987 年以来の単日最大** — データセンタ +22% で $5.1B、AI-CPU 牽引。**$14B / 49% Apollo Ireland fab 買い戻し** で全体像が完成。",
+          "citations": [
+            {
+              "label": "ARTVOICE - NVIDIA Stock Is Approaching An All Time High",
+              "url": "https://artvoice.com/2026/04/24/nvidia-stock-is-approaching-an-all-time-high-and-here-is-what-finally-pushed-it-there/"
+            }
+          ]
+        },
+        {
+          "body": "**Tesla Q1 2026 持ち越し: 売上 $22.38B、non-GAAP EPS $0.41、capex は $25B 超に上方修正、株価は $373.60 (-3.59%) で下落** — capex 修正は AI / Optimus / robotaxi / チップ ファブへの投資加速を示唆。",
+          "citations": [
+            {
+              "label": "PYMNTS - Google Doubles Down on Anthropic With New $40 Billion Investment",
+              "url": "https://www.pymnts.com/news/investment-tracker/2026/google-doubles-down-on-anthropic-with-new-40-billion-investment/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Meet up event related to AI in Bay Area SV",
+      "bullets": [
+        {
+          "body": "**AI Tinkerers SF: Building Software Factories — Kiro & B-Capital VIP ディナー (4/29)** — 来週のフラッグシップ イベント、テーマは Kiro Power の SDK + B-Capital の VC 視点で「ソフトウェア ファクトリー」を構築する。招待制 VIP ディナー。",
+          "citations": [
+            {
+              "label": "AI Tinkerers - San Francisco",
+              "url": "https://sf.aitinkerers.org/"
+            }
+          ]
+        },
+        {
+          "body": "**AI Dev 26 x SF (4/28-29) @ Pier 48** — 3,000 人超の AI Developer Conference。中心テーマは「GenAI 時代のエージェンティック AI とソフトウェア エンジニアリング」、ハンズオン ワークショップ + デモ。",
+          "citations": [
+            {
+              "label": "AI Tinkerers - San Francisco events feed",
+              "url": "https://sf.aitinkerers.org/events"
+            }
+          ]
+        },
+        {
+          "body": "**SF Bay Area AI Meetup Group: 4/30 9:00-11:00 PT — Iterative Subspace Sampling による Zero-Shot Coreset Selection (オンライン)** — データ効率トレーニングに関する研究トーク。",
+          "citations": [
+            {
+              "label": "SF Bay Area AI Meetup Group",
+              "url": "https://www.meetup.com/sf-bay-area-ai-meetup-group/"
+            }
+          ]
+        },
+        {
+          "body": "**Cerebral Valley Events カレンダー — 4 月末 - 5 月 2026** — SF AI ビルダー / ファウンダー イベントのキュレーション。",
+          "citations": [
+            {
+              "label": "Cerebral Valley Events",
+              "url": "https://cerebralvalley.ai/events"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Other Standout Topics",
+      "bullets": [
+        {
+          "body": "**4/23 Claude Code リグレッション に対する Anthropic エンジニアリング ポストモーテム** — 3/4 推論カット + 4/16 verbosity プロンプト問題、両方 4/20 v2.1.116 で修正。Claude Code + Agent SDK + Cowork mode が数週間影響。",
+          "citations": [
+            {
+              "label": "The Register - Anthropic admits it dumbed down Claude with 'upgrades'",
+              "url": "https://www.theregister.com/2026/04/23/anthropic_says_it_has_fixed/"
+            }
+          ]
+        },
+        {
+          "body": "**NIST が記録的な CVE 増加に対応する NVD 運用更新を発表 (4 月)** — 記録的な CVE 公開ペースに合わせて NVD 運用を見直し。AI 駆動の評価支援とパートナーシップ拡張を発表。",
+          "citations": [
+            {
+              "label": "NIST - NIST Updates NVD Operations to Address Record CVE Growth",
+              "url": "https://www.nist.gov/news-events/news/2026/04/nist-updates-nvd-operations-address-record-cve-growth"
+            }
+          ]
+        },
+        {
+          "body": "**Google Online Security Blog: 2025/11 - 2026/2 で Indirect Prompt Injection コンテンツが前年同期比 32% 増加** — 業界規模の脅威クラス シフトを定量化、実証された IPI 攻撃 10 件を文書化。",
+          "citations": [
+            {
+              "label": "The Hacker News - Google Patches Antigravity IDE Flaw",
+              "url": "https://thehackernews.com/2026/04/google-patches-antigravity-ide-flaw.html"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

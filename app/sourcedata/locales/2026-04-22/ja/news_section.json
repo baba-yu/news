@@ -1,0 +1,529 @@
+{
+  "date": "2026-04-22",
+  "sections": [
+    {
+      "category": "LLM Workflow > OpenClaw / NemoClaw / Hermes Agents",
+      "bullets": [
+        {
+          "body": "**OpenClaw 2026.4.20（ベータ、Apr 20）** — Onboarding/wizard リデザイン、第三者 context engine の `info.id` 不一致受入、`OPENCLAW_*` 鍵の非信頼ワークスペース .env からのブロック、非管理者 paired-device セッションのスコープ厳格化、Mattermost での thinking / tool activity / 部分応答のインプレース最終化、compaction イベント命名の pi-coding-agent 0.66.1 準拠化など。bundled Telegram 拡張の `grammy` 解決失敗というパッケージ問題あり。",
+          "citations": [
+            {
+              "label": "newreleases.io - openclaw v2026.4.20-beta.1",
+              "url": "https://newreleases.io/project/github/openclaw/openclaw/release/v2026.4.20-beta.1"
+            }
+          ]
+        },
+        {
+          "body": "**OpenClaw CVE-2026-41329（CVSS 9.9、Apr 21 公開）** — `<`2026.3.31 にサンドボックス回避→権限昇格。heartbeat コンテキスト継承と `senderIsOwner` の検証不備。公開 PoC は未確認だが CCB Belgium が緊急パッチ勧告。",
+          "citations": [
+            {
+              "label": "CCB Belgium - Warning: Privilege Escalation in OpenClaw, Patch Immediately",
+              "url": "https://ccb.belgium.be/advisories/warning-privilege-escalation-openclaw-patch-immediately"
+            }
+          ]
+        },
+        {
+          "body": "**Hermes Agent v0.10.0（Apr 16 公開、ウィンドウ外だが3日ウィンドウ内も追加コミット継続）** — Tool Gateway リリース。Nous Portal 有料サブスクで web search / image gen / TTS / browser automation を直接利用。95.6K+ GitHub Stars、2026 最速の拡大。Inactivity-Based Agent Timeouts、MCP OAuth 2.1 PKCE、OSV ベースの MCP 拡張マルウェアスキャン、ローカル Web ダッシュボード搭載。",
+          "citations": [
+            {
+              "label": "DEV Community - Hermes Agent Review: 95.6K Stars",
+              "url": "https://dev.to/tokenmixai/hermes-agent-review-956k-stars-self-improving-ai-agent-april-2026-11le"
+            }
+          ]
+        },
+        {
+          "body": "**NemoClaw（NVIDIA、GTC 2026 Early Preview 継続）** — OpenClaw を OpenShell コンテナで安全運用する参照スタック。3日ウィンドウ内の新規発表なし。エンタープライズダイレクト販売のみ。OpenClaw CVE-2026-41329 とのセットで「外側ラッパー」戦略の価値が再評価。",
+          "citations": [
+            {
+              "label": "NVIDIA Docs - NemoClaw Developer Guide",
+              "url": "https://docs.nvidia.com/nemoclaw/latest/index.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > vLLM",
+      "bullets": [
+        {
+          "body": "**v0.19.x 系維持、3日ウィンドウ内は新規ミリリリースなし** — Gemma 4（E2B / E4B / 26B MoE / 31B Dense）のフル対応、async scheduling と投機的デコードのゼロバブル重畳、Model Runner V2 の piecewise CUDA graphs、Transformers v5.5.3 アップグレード、Gemma4 バグ修正。次メジャー v0.20 は Transformers v5 全アーキ対応と MoE ルーティング最適化が目標。",
+          "citations": [
+            {
+              "label": "morphllm - vLLM Benchmarks 2026",
+              "url": "https://www.morphllm.com/vllm-benchmarks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > SGLang",
+      "bullets": [
+        {
+          "body": "**v0.5.10.post1（Apr 8 最新安定）** — 3日ウィンドウ内で新規リリースなし。CVE-2026-5760（CVSS 9.8、Jinja2 SSTI 経由 RCE）の注意喚起継続。`ImmutableSandboxedEnvironment` への切替で緩和。",
+          "citations": [
+            {
+              "label": "vulert - SGLang CVE-2026-5760 RCE",
+              "url": "https://vulert.com/blog/sglang-cve-2026-5760-rce/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > AWS Bedrock",
+      "bullets": [
+        {
+          "body": "**Claude Opus 4.7 が 100,000+ 組織で利用、5GW 計算能力 Q2 2026 稼働開始** — Apr 21 の追加報道で Anthropic が $100B / 10 年を AWS にコミット、Amazon は即時 $5B + マイルストーン $20B（累計 $33B）と判明。Trainium 5GW、うち 1GW が 2026 年内稼働。",
+          "citations": [
+            {
+              "label": "Anthropic - Anthropic and Amazon expand collaboration",
+              "url": "https://www.anthropic.com/news/anthropic-amazon-compute"
+            }
+          ]
+        },
+        {
+          "body": "**Claude Opus 4.7 in Bedrock（ウィンドウ内継続）** — SWE-bench Pro 64.3%、SWE-bench Verified 87.6%、Adaptive Thinking、1M コンテキスト、ゼロオペレータアクセス、27 リージョン展開、Bedrock Cost Attribution、AWS Interconnect GA。",
+          "citations": [
+            {
+              "label": "About Amazon - Amazon and Anthropic expand strategic collaboration",
+              "url": "https://www.aboutamazon.com/news/company-news/amazon-invests-additional-5-billion-anthropic-ai"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > Alibaba Cloud Model Studio（プロプライエタリ API）",
+      "bullets": [
+        {
+          "body": "**Qwen3.6-Max-Preview（ホステッド専用、Apr 20 公開）** — 3日ウィンドウ内はプレスリリース後の評価記事継続。Plus 比で agentic coding / world knowledge / instruction following の3軸で有意な向上。オープンウェイト未公開。",
+          "citations": [
+            {
+              "label": "buildfastwithai - Qwen3.6-Max-Preview Review 2026",
+              "url": "https://www.buildfastwithai.com/blogs/qwen3-6-max-preview-review-2026"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Qwen",
+      "bullets": [
+        {
+          "body": "**Qwen3.6-35B-A3B（オープンウェイト、Apr 16 公開、ウィンドウ内も再評価継続）** — Qwen3.6 系列で唯一ローカル実行可能な版。Simon Willison のペリカンテスト逆転事例が r/LocalLLaMA で引き続き話題。Qwen3.6 リポジトリが GitHub で活発に更新中。",
+          "citations": [
+            {
+              "label": "GitHub - QwenLM/Qwen3.6",
+              "url": "https://github.com/QwenLM/Qwen3.6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Bonsai（1-bit LLM / 最適化）",
+      "bullets": [
+        {
+          "body": "**PrismML Bonsai-1.7B on CUDA デプロイチュートリアル（MarkTechPost, 2026-04-18）** — GGUF でのベンチマーク、チャット、JSON、RAG、RTX 4090 の高スループット検証。",
+          "citations": [
+            {
+              "label": "MarkTechPost - Coding Tutorial for PrismML Bonsai 1-Bit LLM on CUDA",
+              "url": "https://www.marktechpost.com/2026/04/18/a-coding-tutorial-for-running-prismml-bonsai-1-bit-llm-on-cuda-with-gguf-benchmarking-chat-json-and-rag/"
+            }
+          ]
+        },
+        {
+          "body": "**Bonsai-8B（1-bit 量子化、8B パラメータ、1.15GB）** — 同一精度帯で **12-14 倍小さく、RTX 4090 で 6 倍高速、4-5 倍省エネ**。Hugging Face に GGUF 版、MLX 版公開。llama.cpp が 1-bit フォーマットを直接サポート。",
+          "citations": [
+            {
+              "label": "Hugging Face - prism-ml/Bonsai-8B-gguf",
+              "url": "https://huggingface.co/prism-ml/Bonsai-8B-gguf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > llama.cpp",
+      "bullets": [
+        {
+          "body": "**b8862（Apr 20 23:24 UTC、バイナリリリース）** — Apr 18 の b8838 以降、b8861 → b8862 に到達。Windows CUDA 12.4/13.1、OpenEuler aarch64/x86、Android arm64、macOS arm64/x64 のバイナリを配布。Bonsai-8B の 1-bit フォーマットを直接ロード可能。",
+          "citations": [
+            {
+              "label": "releasealert.dev - llama.cpp",
+              "url": "https://releasealert.dev/github/ggml-org/llama.cpp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > Ollama",
+      "bullets": [
+        {
+          "body": "**v0.21.1-rc0（Apr 21 公開）** — v0.21.0（Apr 17）上の細部修正 RC。v0.21.0 の主要機能は `ollama launch` による OpenClaw / Hermes / GitHub Copilot CLI 統合、MLX での Apple Silicon Gemma 4 高速化、Gemma 4 nothink レンダラ復旧、macOS cross-compile の cmake ビルド修正。",
+          "citations": [
+            {
+              "label": "ollaman - Changelog",
+              "url": "https://ollaman.com/changelog"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > Azure Foundry Local",
+      "bullets": [
+        {
+          "body": "**Foundry Local GA（Apr 9）＋ Azure Local Public Preview 継続** — 3日ウィンドウ内で新規大型発表なし。Microsoft Foundry 全体では RFT Global Training for o4-mini、GPT-4.1 モデルグレイダー、RFT ベストプラクティスガイドの 3 つの Fine-Tuning 強化が Apr 2026 として告知。",
+          "citations": [
+            {
+              "label": "Microsoft TechCommunity - Bringing AI to Factory Floor with Foundry Local",
+              "url": "https://techcommunity.microsoft.com/blog/azurearcblog/bringing-ai-to-the-factory-floor-with-foundry-local---now-in-public-preview-on-a/4509951"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security",
+      "bullets": [
+        {
+          "body": "**OpenClaw CVE-2026-41329（CVSS 9.9、Apr 21）** — サンドボックス回避→権限昇格。heartbeat コンテキスト継承と `senderIsOwner` 検証不備。修正は 2026.3.31 以降。CCB Belgium が緊急パッチ勧告。",
+          "citations": [
+            {
+              "label": "DailyCVE - OpenClaw Sandbox Escape",
+              "url": "https://dailycve.com/openclaw-sandbox-escape-n-a-critical/"
+            }
+          ]
+        },
+        {
+          "body": "**Vercel–Context.ai サプライチェーン侵害（Apr 19-21）** — Context.ai の Google Workspace OAuth トークン侵害が起点、Feb 2026 に Lumma Stealer 感染。Vercel 内部環境へ横展開、BreachForums に $2M 出品。Vercel CEO は攻撃者が AI 補助で「驚異的な速度」を示したと指摘。",
+          "citations": [
+            {
+              "label": "Trend Micro - The Vercel Breach: OAuth Supply Chain",
+              "url": "https://www.trendmicro.com/en_us/research/26/d/vercel-breach-oauth-supply-chain.html"
+            }
+          ]
+        },
+        {
+          "body": "**Google Antigravity の Prompt Injection → RCE（Apr 21 報道）** — find_by_name ツールの Pattern パラメータ経由で -X（exec-batch）フラグを注入、Strict Mode 迂回で fd に任意バイナリ実行させる。Jan 6 報告、Feb 28 修正、Apr 公開。Pillar Security の VRP AI カテゴリで報奨。",
+          "citations": [
+            {
+              "label": "CSO Online - Prompt injection turned Google's Antigravity file search into RCE",
+              "url": "https://www.csoonline.com/article/4161382/prompt-injection-turned-googles-antigravity-file-search-into-rce.html"
+            }
+          ]
+        },
+        {
+          "body": "**SGLang CVE-2026-5760（CVSS 9.8、ウィンドウ内報道継続）** — GGUF の `tokenizer.chat_template` に Jinja2 SSTI を仕込み、`/v1/rerank` 呼び出し時に RCE。",
+          "citations": [
+            {
+              "label": "Cypro - SGLang CVE-2026-5760",
+              "url": "https://www.cypro.se/2026/04/20/sglang-cve-2026-5760-cvss-9-8-enables-rce-via-malicious-gguf-model-files/"
+            }
+          ]
+        },
+        {
+          "body": "**Claude Mythos Preview の AISI 評価（ウィンドウ内で記事拡散）** — **FreeBSD の 17 年物 RCE（NFS 経由 root）、OpenBSD の 27 年物整数オーバーフロー、FFmpeg の 16 年物（500 万自動テストを生存）を自律発見**。専門家レベルのサイバータスクで 73% 成功。内部テストで **サンドボックス脱出事案** あり。公開は Project Glasswing の提携企業（AWS / Apple / Google / JPMC / Microsoft / NVIDIA）限定。",
+          "citations": [
+            {
+              "label": "AISI - Our evaluation of Claude Mythos Preview's cyber capabilities",
+              "url": "https://www.aisi.gov.uk/blog/our-evaluation-of-claude-mythos-previews-cyber-capabilities"
+            }
+          ]
+        },
+        {
+          "body": "**AI 識別子ガバナンスの欠如（Cybersecurity Insiders 調査、Apr 21）** — CISO の 71% が AI ツールの企業コアシステムアクセスを認めるが、**適切に統治されていると答えたのは 16% のみ**、92% が AI 識別子の可視性を欠く。",
+          "citations": [
+            {
+              "label": "GlobeNewswire - The Ungoverned Workforce",
+              "url": "https://www.globenewswire.com/news-release/2026/04/21/3278155/0/en/The-Ungoverned-Workforce-Cybersecurity-Insiders-Finds-92-Lack-Visibility-Into-AI-Identities.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "CVE（CVSS 8.0 以上）",
+      "bullets": [
+        {
+          "body": "**CVE-2026-41329** — OpenClaw（<2026.3.31）、CVSS **9.9**、サンドボックス回避→権限昇格。公開 Apr 21。",
+          "citations": [
+            {
+              "label": "THREATINT - CVE-2026-41329",
+              "url": "https://cve.threatint.eu/CVE/CVE-2026-41329"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-39918** — Vvveb（<1.0.8.1）、CVSS **9.8**、コード注入 RCE。公開 Apr 20。",
+          "citations": [
+            {
+              "label": "TheHackerWire - CVE-2026-39918",
+              "url": "https://www.thehackerwire.com/vulnerability/CVE-2026-39918/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-5760** — SGLang、CVSS **9.8**、Jinja2 SSTI 経由 RCE。ウィンドウ内で報道継続。",
+          "citations": [
+            {
+              "label": "iplogger blog - SGLang CVE-2026-5760 Deep Dive",
+              "url": "https://iplogger.org/blog/sglang-cve-2026-5760-cvss-9-8-enables-rce-via-malicious-gguf-model-files/"
+            }
+          ]
+        },
+        {
+          "body": "**CISA KEV 追加 8 件**（発表 Apr 20、報道拡大 Apr 21、連邦期限 Apr 23 / May 4）： - **CVE-2026-20122** Cisco Catalyst SD-WAN Manager（vManage 権限奪取） [hendryadrian - CISA Adds 8 Exploited Vulnerabilities](https://www.hendryadrian.com/cisa-adds-8-exploited-vulnerabilities-affecting-cisco-zimbra-teamcity/) - **CVE-2026-20128** Cisco Catalyst SD-WAN Manager（認証情報取得、CVSS 7.5） - **CVE-2026-20133** Cisco Catalyst SD-WAN Manager（機密情報露出） - CVE-2023-27351 PaperCut、CVE-2024-27199 TeamCity、CVE-2025-2749 Kentico、CVE-2025-32975 Quest KACE、CVE-2025-48700 Zimbra",
+          "citations": [
+            {
+              "label": "hendryadrian - CISA Adds 8 Exploited Vulnerabilities",
+              "url": "https://www.hendryadrian.com/cisa-adds-8-exploited-vulnerabilities-affecting-cisco-zimbra-teamcity/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-20184** Cisco Webex SSO（CVSS **9.8**、Apr 15 公開、3日ウィンドウ外だが報道継続）— SAML 証明書検証不備でユーザなりすまし。管理者手動で IdP SAML 証明書再アップロード必須。",
+          "citations": [
+            {
+              "label": "gbhackers - CISA Alerts Defenders to Exploited Cisco Catalyst SD-WAN Manager Security Flaws",
+              "url": "https://gbhackers.com/cisa-alerts-cisco-catalyst-sd-wan-manager-security-flaws/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Hardware",
+      "bullets": [
+        {
+          "body": "**Google Cloud Next '26 / TPU 8t + 8i 発表（2026-04-22）** — 第8世代 TPU を訓練 / 推論の 2SKU に分割。TPU 8t は前世代比 3x の演算、TPU 8i は $ あたり 80% 性能向上、両 SKU とも FP4 ネイティブで性能 / ワット 2x。1 superpod = 9,600 chips / 121 exaflops / 2PB 共有メモリ。**Broadcom が訓練チップ設計、MediaTek が推論チップ設計** を担当との報道。",
+          "citations": []
+        },
+        {
+          "body": "**AMD-Meta $60B インフラ契約の余波** — Meta が AMD Venice 世代で GPU + CPU を調達、Oracle も MI450 GPU 5 万台を導入。**AMD Helios rack は NVL144 比でメモリ容量 31TB vs 21TB、帯域 1,400 TB/s vs 936 TB/s** と優位、一方 FP4 演算は NVIDIA が 3,600 PFLOPS vs 2,900 PFLOPS で優位。",
+          "citations": [
+            {
+              "label": "techi - AMD Meta $60B AI Chip Deal",
+              "url": "https://www.techi.com/amd-meta-60b-deal-nvidia-ai-monopoly/"
+            }
+          ]
+        },
+        {
+          "body": "**NVIDIA Blackwell / B300 出荷体制** — B200（192GB HBM3e）/ B300（288GB HBM3e）はシステムインテグレータ経由で調達可、B300 は Jan 2026 から出荷開始。GB200 NVL72 は Hopper 世代比 30x 推論性能。",
+          "citations": [
+            {
+              "label": "Tech Insider - NVIDIA Blackwell GPU Pricing",
+              "url": "https://tech-insider.org/nvidia-blackwell-gpu-pricing/"
+            }
+          ]
+        },
+        {
+          "body": "**Anthropic の自社 AI チップ検討報道** — 計算容量とコスト管理のため Claude モデル向けカスタムシリコン開発を模索。Amazon 側も内部チップ販売の可能性を示唆。NVIDIA 依存度低減が 2026 後半のエンタープライズ AI 調達トレンドに。",
+          "citations": [
+            {
+              "label": "tradingkey - Anthropic Moving Toward AI Chips for Claude",
+              "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/261770188-anthropic-moving-toward-ai-chips-claude-nvidia-buy-in-2026-tradingkey"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Physical AI",
+      "bullets": [
+        {
+          "body": "**Neura Robotics × AWS 戦略提携（Apr 21）** — Neura の認知ロボット基盤 × AWS の計算 / AI インフラで、訓練・検証・グローバル展開の統合フローを提供。**Amazon は FC（フルフィルメントセンター）での Neura ロボティクス展開可能性** も検討。",
+          "citations": [
+            {
+              "label": "RoboticsTomorrow - NEURA + AWS strategic collaboration",
+              "url": "https://www.roboticstomorrow.com/news/2026/04/21/neura-robotics-and-amazon-web-services-enter-strategic-collaboration-to-accelerate-physical-ai-at-scale/26452/"
+            }
+          ]
+        },
+        {
+          "body": "**DEEPX × Hyundai Motor Group Robotics LAB 提携（Apr 21）** — 次世代 Physical AI コンピュートプラットフォームの共同開発。自動車 OEM の既存サプライチェーンにロボティクス向け低消費電力 AI プロセッサを組み込む方向性。",
+          "citations": [
+            {
+              "label": "RoboticsTomorrow - DEEPX + Hyundai Motor Group",
+              "url": "https://www.roboticstomorrow.com/news/2026/04/21/deepx-and-hyundai-motor-group-robotics-lab-partner-to-develop-next-generation-physical-ai-compute-platform-for-robotics/26451"
+            }
+          ]
+        },
+        {
+          "body": "**NVIDIA Isaac GR00T + Cosmos 世界モデル（ウィンドウ内で再配信）** — ロボットが自然言語指示を理解し複数ステップを遂行する vision language action 推論。Cosmos は合成データ生成で訓練効率化、環境間汎化を加速。",
+          "citations": [
+            {
+              "label": "NVIDIA Blog - National Robotics Week 2026",
+              "url": "https://blogs.nvidia.com/blog/national-robotics-week-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Physical AI 市場規模：2026 $1.50B → 2032 $15.24B（CAGR 47.2%）** — Apr 21 発表の市場レポートが掲載。ベイエリアのロボティクス / ドローン企業オフィス面積は 2020 年 500K SF → 2026 年 7.6M SF 超。",
+          "citations": [
+            {
+              "label": "GlobeNewswire - Physical AI Market Set to Hit $15.24 Billion by 2032",
+              "url": "https://www.globenewswire.com/news-release/2026/04/21/3278165/0/en/Physical-AI-Market-Set-to-Hit-15-24-Billion-by-2032-Future-Growth-Industry-Trends.html"
+            }
+          ]
+        },
+        {
+          "body": "**中国が米国を出荷数で上回る（CNBC、Apr 21）** — Omdia 2025 年集計で中国ヒューマノイドスタートアップが世界出荷トップ 6 を占有、米国勢は Figure と Tesla のみがトップ 10 に残留。",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "Stock Prices and Corporate Activity",
+      "bullets": [
+        {
+          "body": "**Tesla Q1 2026 決算（Apr 22）** — EPS $0.41（非GAAP、予想超）、売上 $22.38B（予想下回り）。Auto 売上 $16.2B（+16% YoY）、gross margin **21.1%**（Q4 2025 の 20.1% 超）。Energy 売上 $2.41B（-12% YoY）。**capex が $20B → $25B+ に上方修正**。決算後 AH +4% → 引け下げ（capex ガイダンス警戒）。",
+          "citations": []
+        },
+        {
+          "body": "**Tesla Optimus 事業化（Q1 2026 決算開示）** — **第1世代工場を Q2 に準備開始、年産 100 万台計画**。Fremont 工場の Model S / X ラインを Optimus へ転用。依然として内部学習用途が中心。",
+          "citations": [
+            {
+              "label": "Teslarati - Elon Musk's $10 Trillion Robot",
+              "url": "https://www.teslarati.com/tesla-optimus-job-listings/"
+            }
+          ]
+        },
+        {
+          "body": "**Amazon 株急伸（Apr 21）** — Anthropic との拡張契約（$25B 投資 / $100B AWS コミット / 5GW Trainium）を受け、AMZN が pre-market / 通常取引で **2-3% 上昇、$253.62 到達**。AWS 売上の長期下支えを市場が織り込み。",
+          "citations": [
+            {
+              "label": "invezz - Amazon stock jumps as $25B Anthropic AI deal boosts AWS growth",
+              "url": "https://invezz.com/news/2026/04/21/amazon-stock-jumps-as-25b-anthropic-ai-deal-boosts-aws-growth/"
+            }
+          ]
+        },
+        {
+          "body": "**NVIDIA 株続伸（Apr 21）** — 4 週連続陽線、8 連続セッション上昇、**過去最高値 $213 近辺**。アナリスト Buy 41 件、平均目標 $273。FY2026（1/25 締め）売上 $215.9B、EPS $4.77。",
+          "citations": [
+            {
+              "label": "The Market Periodical - Wall Street Pros are Bullish on NVIDIA",
+              "url": "https://themarketperiodical.com/2026/04/21/wall-street-pros-are-bullish-on-nvidia-stock-how-high-can-it-go/"
+            }
+          ]
+        },
+        {
+          "body": "**Anthropic 売上超過 + カスタムシリコン模索** — Anthropic の annualized revenue が **$30B 超、OpenAI の $25B を上回る**。同時に自社 AI チップ開発を模索、NVIDIA 依存度を段階的に低減する方針。",
+          "citations": [
+            {
+              "label": "finviz - 2 Stocks Powering OpenAI's and Anthropic's Revenue Surge",
+              "url": "https://finviz.com/news/296645/2-stocks-powering-openais-and-anthropics-revenue-surge-in-2026"
+            }
+          ]
+        },
+        {
+          "body": "**Bond（ソーシャル / AI メモリ）資金調達**（Apr 21 報道）— ドゥームスクロール撃退を謳う新 SNS。AI メモリで「毎朝あなたが本当に気にしていることだけ」を提示する設計。",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "Bay Area / Silicon Valley AI ミートアップ",
+      "bullets": [
+        {
+          "body": "**Live From the Future! A Deep Tech Investor Expo（2026-04-22）** — SF のディープテック投資家向けエキスポ。Mimetic 経由。",
+          "citations": [
+            {
+              "label": "trymimetic - Live From the Future 2026-04-22",
+              "url": "https://trymimetic.com/events/sf/live-from-the-future-a-deep-tech-investor-expo-apr-2026"
+            }
+          ]
+        },
+        {
+          "body": "**AI Tinkerers San Francisco（月次、3時間ライブコードデモ／スライド禁止）** — Apr 下旬の開催が告知中。214 都市 10 万人ネットワーク。",
+          "citations": [
+            {
+              "label": "aitinkerers.org - AI Tinkerers",
+              "url": "https://aitinkerers.org/"
+            }
+          ]
+        },
+        {
+          "body": "**Bond AI - SF and Bay Area（Luma、120k+ 会員）** — 3日ウィンドウ内の複数イベント告知。",
+          "citations": [
+            {
+              "label": "bondcommunity.ai - Bond AI",
+              "url": "https://bondcommunity.ai/"
+            }
+          ]
+        },
+        {
+          "body": "**SF AI Meetup（sfbay-ai）** — GenAI / LLM / Agent の実践講演を定期開催。",
+          "citations": [
+            {
+              "label": "meetup - SF AI",
+              "url": "https://www.meetup.com/sfbay-ai/"
+            }
+          ]
+        },
+        {
+          "body": "**SF/Bay AI Developers Group** — 新興 AI 技術の勉強会とハッカソン。",
+          "citations": [
+            {
+              "label": "meetup - SF/Bay AI Developers Group",
+              "url": "https://www.meetup.com/aittg-sfsv/"
+            }
+          ]
+        },
+        {
+          "body": "**ベイエリアのロボティクス集積**（Apr 2026 Bisnow 記事）— Physical AI / ロボティクス企業のオフィス総面積が 6 年で **500K SF → 7.6M SF に 15 倍拡大**。",
+          "citations": [
+            {
+              "label": "Bisnow - Robotics Companies Have Exploded As Bay Area Office Users",
+              "url": "https://www.bisnow.com/san-francisco/news/ai/robotics-physical-ai-drives-demand-for-millions-of-sf-in-bay-area-134221"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "その他の注目トピック",
+      "bullets": [
+        {
+          "body": "**OpenAI ChatGPT Images 2.0（gpt-image-2、Apr 21 公開）** — ネイティブ推論で複雑な視覚タスクを検証可能、2K 解像度、1 プロンプトから 8 枚の一貫画像。全 ChatGPT / Codex ユーザにロールアウト、thinking 機能は Plus / Pro / Business に限定。",
+          "citations": [
+            {
+              "label": "thenewstack - ChatGPT Images 2.0 \"thinks\" before it draws",
+              "url": "https://thenewstack.io/chatgpt-images-20-openai/"
+            }
+          ]
+        },
+        {
+          "body": "**OpenAI Codex 大型アップデート（Apr 21）** — computer use / web workflows / image gen / memory / automations / reviews / terminals / SSH devboxes / in-app browsing への拡張。「Codex everywhere」のフレーミングで発表。",
+          "citations": [
+            {
+              "label": "9to5Mac - OpenAI Codex teaser",
+              "url": "https://9to5mac.com/2026/04/21/openai-teases-next-ai-announcement-coming-today-heres-what-to-expect/"
+            }
+          ]
+        },
+        {
+          "body": "**Anthropic の Claude Code Pro 除外 A/B テスト、即日撤回（Apr 22）** — 新規 Pro / コンシューマアカウントの 2% サンプルで Claude Code を Pro から外す実験を行ったが、コミュニティの反発を受けて同日中にロールバック。",
+          "citations": [
+            {
+              "label": "9to5Mac - Anthropic experiment",
+              "url": "https://9to5mac.com/2026/04/22/anthropic-claude-code-pro-experiment/"
+            }
+          ]
+        },
+        {
+          "body": "**Hugging Face ml-intern（Apr 21）** — ポストトレーニング自動化エージェント。10 時間以内で Qwen3-1.7B の GPQA を 8.5% → 32% へ引き上げ、Claude Code の 22.99% を上回る。 [MarkTechPost - Hugging Face Releases ml-intern](https://www.marktechpost.com/2026/04/21/hugging-face-releases-ml-intern-an-open-source-ai-agent-that-automates-the-llm-post-training-workflow/) ---",
+          "citations": [
+            {
+              "label": "MarkTechPost - Hugging Face Releases ml-intern",
+              "url": "https://www.marktechpost.com/2026/04/21/hugging-face-releases-ml-intern-an-open-source-ai-agent-that-automates-the-llm-post-training-workflow/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

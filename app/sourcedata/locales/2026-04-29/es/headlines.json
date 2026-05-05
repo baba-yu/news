@@ -1,0 +1,56 @@
+{
+  "date": "2026-04-29",
+  "technical": [
+    {
+      "lead": "El reporte del WSJ del 28-abr sobre incumplimiento de ingresos de OpenAI rompió el tape de la AI-trade",
+      "body": "Oracle ‑4%, AMD ‑3%, Broadcom ‑4%, SoftBank ‑10%; S&P ‑0,49% a 7.138,80, Nasdaq ‑0,9% a 24.663,80; FOMC del 29-abr (la última de Powell) + reportes de MSFT/GOOGL/AMZN/META convergen en un mismo bloque de 24h — — El WSJ reporta que OpenAI — incumplió múltiples objetivos mensuales de ingresos — a comienzos de 2026 y se quedó corta del objetivo interno de 1.000 millones de WAU al cierre del año, mientras Anthropic le ganaba terreno en código y enterprise. La CFO Sarah Friar habría advertido a colegas que el financiamiento de cómputo podría ajustarse sin reaceleración. OpenAI replicó (\"ridículo\"). La caída del 28-abr es — la primera grieta material en el tape \"capex AI por fe\" — desde el 17-abr y aterriza la hora antes de que MSFT/GOOGL/AMZN/META publiquen Q1 hoy (29-abr after close) y de la conferencia final de Powell a las 14:30 ET. Tasas mantenidas en 3,50–3,75% (consenso 100%); capex AI agregado Mag 7 2026 ~700 mil millones USD.********",
+      "citations": [
+        {
+          "label": "NBC News - Tech stocks slide following report on OpenAI missing key targets",
+          "url": "https://www.nbcnews.com/tech/tech-news/tech-stocks-slide-report-openai-missing-key-targets-rcna342466"
+        }
+      ]
+    },
+    {
+      "lead": "Ola de CVE el 28-abr: Milesight AIOT default-SSL-key (CVE-2026-32644, CVSS 9.8) + triple Totolink A8000RU (7240/7242/7243, todas 9.8) + KEV de CISA suma ConnectWise ScreenConnect CVE-2024-1708 y Windows Shell CVE-2026-32202 con plazo federal del 12-may; SGLang CVE-2026-5760 sigue sin parchear",
+      "body": "En un solo día (28-abr) se publican — cuatro RCE 9.8 — : cámaras Milesight con claves SSL privadas hardcoded, más tres CVE adicionales de inyección de comandos OS contra el firmware Totolink A8000RU 7.1cu.643_b20200521 (extendiendo la ola del 27–28 a más de 7 CVE distintos en 72h). El KEV de CISA del mismo día incluye la travesía de path de ConnectWise ScreenConnect, encadenada con CVE-2024-1709 (bypass de auth, CVSS 10.0) durante 14+ meses, y la falla de spoofing en Windows Shell explotada por APT28 desde diciembre 2025. La primitiva SSTI de GGUF en SGLang (CVSS 9.8) — sigue sin upstream patch — a más de 10 días de la divulgación.********",
+      "citations": [
+        {
+          "label": "CISA - Adds Two Known Exploited Vulnerabilities to Catalog (Apr 28)",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/04/28/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+        }
+      ]
+    },
+    {
+      "lead": "Cristaliza la ola de utilidades de compresión de KV-cache en 27–29 abr",
+      "body": "Google TurboQuant 6x compresión / 8x atención más rápida (ICLR 2026, 23–25 abr Río); SGLang PR #21419 aterriza el `--kv-cache-dtype turboquant` de 3–4 bits; paper PolyKV en arxiv del 27-abr; comunidad apila kvpress + KVTC + ChunkKV — — El método rotación-FWHT-MSE + Lloyd-Max 3,5 bits de TurboQuant — iguala FP16 en LongBench/Needle-in-Haystack — sin reentrenar; el implementador oficial de Google llega en Q2 2026 pero — los ports de comunidad ya están circulando — (MLX, Triton, vLLM/SGLang). El PR #21419 de SGLang cablea `--kv-cache-dtype turboquant` como ciudadano de primera clase (la implementación inicial tenía un bug de hot-path en dequant — la corrección #23134 alcanza 93–105% del throughput bf16). **PolyKV (arxiv 2604.24971, 27-abr)** introduce un pool de KV asimétricamente comprimido y compartido para inferencia multi-agente, con keys int8 + values 3-bit TurboQuant-MSE inyectados vía HF DynamicCache. NVIDIA `kvpress` llega a Decoding-Press; KVTC (20x) + PackKV (15.30x V) + TriAttention (10.7x) cierran el stack.********",
+      "citations": [
+        {
+          "label": "Google Research - TurboQuant: Redefining AI efficiency with extreme compression",
+          "url": "https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/"
+        }
+      ]
+    },
+    {
+      "lead": "AI Dev 26 SF abre hoy (28–29 abr) en Pier 48",
+      "body": "3.000+ devs, hosteado por Andrew Ng; Novita Sandbox lanza el 28-abr para asegurar OpenClaw/Hermes/sistemas autónomos; Multica v0.2.18 (27-abr); la campaña ClawHavoc se cuantifica en 1.184 skills maliciosos + el hallazgo de Cisco del 36% de prompt-injection en marketplace — — La cumbre de dos días de DeepLearning.AI corre en Pier 48 Mission Bay con tracks en — Agentic AI, Context Engineering, Multimodal AI Apps, AI Governance, Coding-with-AI — + AI Startup Track; speakers de Google DeepMind, Oracle, AMD, Arm, Neo4j, LangChain, LandingAI, Replit, AI21. 28-abr: — Novita AI lanza un Sandbox gestionado — — despliegues NovitaClaw gestionados, Sandbox Skills para OpenClaw, runtimes Hermes-compatible, configuraciones de nodo persistentes. **Multica v0.2.18** (27-abr) extiende la base v0.2.16 de Chat V2 + menús contextuales con click derecho. **ClawHavoc** cuantificado en **1.184 skills maliciosos** en ClawHub con memoria autoborrable tras instalación (keynote de Kurtz, análisis de Antiy + Koi Security).********",
+      "citations": [
+        {
+          "label": "PR Newswire - Novita AI Launches Sandbox to Secure OpenClaw, Hermes Agent, and Autonomous Systems",
+          "url": "https://www.prnewswire.com/news-releases/novita-ai-launches-sandbox-to-secure-openclaw-hermes-agent-and-autonomous-systems-302755870.html"
+        }
+      ]
+    },
+    {
+      "lead": "Corpus2Skill (arxiv 2604.14572, 27-abr)",
+      "body": "RAG que destila el corpus en un árbol de skills y supera a RAPTOR, retrieval denso y agentic RAG en WixQA sin índice de embeddings; la ola de externalización \"skills/harness\" continúa con la encuesta arxiv 2604.08224 (24-abr) — — Corpus2Skill compila offline un corpus de documentos en un directorio jerárquico de skills; el agente recibe una vista de pájaro, baja por ramas temáticas vía resúmenes cada vez más finos y obtiene los documentos completos por ID. — Mejor calidad en cada métrica de WixQA — sin DB vectorial al servir. Hace pareja con la encuesta del 24-abr — \"Externalization in LLM Agents\" — (arxiv 2604.08224) que enmarca el movimiento weights → prompts → infraestructura skills/harness/protocol como el patrón dominante de diseño en 2026 — el mismo arco que mueve el repo de 17 skills de Anthropic, los skills de OpenClaw, AgentCore Managed Harness y la superficie orchestrator de Multica.********",
+      "citations": [
+        {
+          "label": "arXiv - Don't Retrieve, Navigate: Distilling Enterprise Knowledge into Navigable Agent Skills for QA and RAG (Corpus2Skill, 2604.14572)",
+          "url": "https://arxiv.org/abs/2604.14572"
+        }
+      ]
+    }
+  ],
+  "plain": []
+}

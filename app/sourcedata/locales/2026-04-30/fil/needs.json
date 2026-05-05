@@ -1,0 +1,181 @@
+{
+  "date": "2026-04-30",
+  "by_prediction": {
+    "prediction.fe9e46055f4a05b9": [
+      {
+        "actor": "MITRE ATT&CK / NIST AI-RMF technical editor na nagpapanatili ng agent-skills threat catalogue extension",
+        "job": "I-draft at ipadala ang agent-skills threat sub-matrix bilang first-class ATT&CK extension o AI-RMF appendix na sumasaklaw sa skill poisoning, IPI-via-skill, at cross-skill privilege chains.",
+        "outcome": "Pampublikong ATT&CK v20 sub-matrix o NIST AI-RMF appendix na nagpapangalan sa agent-skills threat techniques kasabay ng v19 base set.",
+        "motivation": "Itinakda ng MITRE ATT&CK Mobile noong 2017 at ATLAS noong 2021 ang precedent na sinumang editor ang unang magpapadala ng catalogue extension ay nagde-define ng canonical taxonomy at nag-lalock ng downstream tooling alignment.",
+        "task": {
+          "who": "MITRE ATT&CK content team + NIST AI-RMF working group + inimbitahang industry contributors (Anthropic Cybersecurity-Skills authors, Cisco RSAC team)",
+          "what": "ilathala ang skill-marketplace-poisoning sub-matrix na may pinangalanang techniques + reference detections",
+          "where": "attack.mitre.org + nist.gov/ai-rmf + GitHub draft repos na may pampublikong review window",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "ang v19 named-techniques wave ay lumilikha ng bukas na slot na pinanalunan ng editor na may unang publication",
+          "how": "ATT&CK technique-template + Anthropic-Cybersecurity-Skills 754-control mapping + RSAC 2026 prompt-injection telemetry"
+        }
+      },
+      {
+        "actor": "skill-marketplace platform engineer sa Anthropic skills repo / ClawHub / Multica / Hermes / Hugging Face",
+        "job": "Ipatupad ang ipinatutupad na signed + provenance-attested publishing gate na humaharang sa unsigned o unattested skills mula sa pampublikong marketplace.",
+        "outcome": "GA release notes na nag-aanunsyo ng signing requirement + provenance attestation bilang publish-blocking gate, na may signed-skills-only browse mode.",
+        "motivation": "Ang 1,184 malicious ClawHub skills ng ClawHavoc + 36% prompt-injection rate ng Cisco ay ginagawa ang signing-as-default na tanging enterprise-acceptable distribution shape; ang unang marketplace na magpapadala ng gate ay nag-lalock ng enterprise procurement preference.",
+        "task": {
+          "who": "marketplace platform team + supply-chain-security lead + key-management infrastructure",
+          "what": "ipatupad ang publish-time signature verification + provenance attestation check + reject-on-failure",
+          "where": "marketplace publish API + CDN gating layer + customer-facing browse UI",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "ang paglilinis ng 1,184 malicious-skill backlog at pagpigil sa susunod na batch ay procurement-blocking issue na ngayon",
+          "how": "Sigstore / cosign signing + SLSA Level-3 provenance + skill-author key registry"
+        }
+      },
+      {
+        "actor": "CISA / NIST regulator na nagdi-draft ng agent-skills attestation mandate",
+        "job": "Maglathala ng binding guidance document o alert na nag-mamandato ng signed + provenance-attested distribution para sa agent skills na ginagamit ng federal-customer enterprises.",
+        "outcome": "CISA alert o NIST SP companion na nagpapangalan sa agent-skill signing bilang required control sa systems na gumagamit ng third-party skills.",
+        "motivation": "Apr 23-29 Google +32% IPI uptick + 1,184 malicious skills ng ClawHavoc ay nagpapakita ng parehong governance-gap arc na nagluwal ng ATT&CK Mobile at ATLAS; ang regulator inaction ay hinahayaan ang enterprise-customer pressure na pumilit ng mandate mula sa marketplace side muna.",
+        "task": {
+          "who": "CISA emerging-technology threat-analysis team + NIST AI Safety Institute + interagency working group",
+          "what": "i-draft at ilathala ang skill-distribution attestation guidance na may enforcement timeline",
+          "where": "cisa.gov/news-events/alerts + nist.gov/ai + Federal Register notice",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "ang marketplace-side mandates ay kulang sa federal-procurement backing nang walang regulator alert",
+          "how": "CISA KEV alert template + NIST SP 800-series companion + FedRAMP control alignment"
+        }
+      }
+    ],
+    "prediction.81e3e9b9a80e4cb7": [
+      {
+        "actor": "Microsoft Foundry Local product team na nagdadagdag ng TurboQuant integration na nakatali sa WinML execution providers",
+        "job": "Ilantad ang TurboQuant compressed-KV-cache flag sa Foundry Catalog at magpadala ng hardware-matched WinML execution providers na auto-enable sa supported devices.",
+        "outcome": "Foundry Local release notes na nag-aanunsyo ng native TurboQuant integration bilang Windows-default optimization na may one-click Catalog toggle.",
+        "motivation": "Ang Foundry Local ay ang nawawalang enterprise-Windows entry point para sa compressed-cache utility wave; sinumang team ang unang naglalantad ng flag ay nagtatakda ng Windows-default deployment shape para sa memory-bandwidth-bound long-context workloads.",
+        "task": {
+          "who": "Foundry Local platform engineering + WinML EP team + Catalog model-curation team",
+          "what": "isama ang TurboQuant kernels sa likod ng Catalog toggle at i-validate ang cross-EP behavior sa supported NPUs/GPUs",
+          "where": "Foundry Local native library + Foundry Catalog + WinML execution-provider tree",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "ang 5-6x memory-bandwidth cost cut ay hindi nakikita ng end-developer kung ipalalantad ito ng Foundry bilang Catalog default",
+          "how": "TurboQuant Triton/MLX port + WinML EP adaptor + Catalog metadata schema"
+        }
+      },
+      {
+        "actor": "open-source inference-stack maintainer para sa vLLM / SGLang / TGI / Ollama / llama.cpp / NVIDIA TensorRT-LLM",
+        "job": "Ipalapag ang unified --kv-cache-dtype flag (o katumbas) na naglalantad ng TurboQuant + hindi bababa sa isang alternatibo bilang first-class deployment knob.",
+        "outcome": "Stable release na may dokumentadong compressed-KV-cache flag na sumasaklaw sa TurboQuant + KVTC / kvpress / TriAttention, na may regression-tested throughput parity vs FP16 baselines.",
+        "motivation": "Nakakuha na ng 93-105% bf16 throughput ang SGLang PR #21419 / #23134 sa fused-Triton-decode rewrite; ang maintainer pool na unang naglalapag ng unified flag ay nagtatakda ng cross-stack convention na minamana ng bawat downstream serving harness.",
+        "task": {
+          "who": "stack-maintainer core team + kernel-perf engineer + serving-API owner",
+          "what": "i-wire ang compressed-KV-cache dtype sa scheduler + paged-KV manager + serving CLI",
+          "where": "vLLM / SGLang / TGI / Ollama / llama.cpp / TRT-LLM main repos at release branches",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "ang Mag 7 capex tape ay nagbibigay ng gantimpala sa stacks na unang nagpapadala ng per-token-cost-cutting flag",
+          "how": "TurboQuant fused-Triton kernels + paged-KV cache manager + dtype-aware attention"
+        }
+      },
+      {
+        "actor": "hyperscaler inference-pricing product manager sa AWS Bedrock / Azure OpenAI / Google Vertex",
+        "job": "I-define ang opt-in compressed-KV-cache pricing tier upang ang memory-bandwidth-bound workloads ay magruta papunta sa TurboQuant-class storage sa nakapaskil na mas mababang per-token rate.",
+        "outcome": "Pampublikong pricing-tier announcement na nagga-gate ng Bedrock / Azure / Vertex per-token rates sa opt-in compressed-cache mode na may nailathalang margin floor.",
+        "motivation": "Ang per-token-margin gating ay ang lever na hiniling ng public markets; sinumang Big-3 hyperscaler na unang magpapadala ng compressed-cache pricing tier ay kumikita ng disclosure-precedent credit.",
+        "task": {
+          "who": "hyperscaler inference-product PM + serving-platform team + finance / IR liaison",
+          "what": "magtayo ng opt-in compressed-cache SKU na may dokumentadong price/throughput envelope",
+          "where": "Bedrock / Azure OpenAI / Vertex pricing pages + 10-Q footnote draft",
+          "when": "Mayo hanggang Q4 2026",
+          "why": "ang Mag 7 capex tape ay humihingi ng per-token-margin disclosure; ang compressed-cache pricing ay ang pinakamalinaw na unang instrumento",
+          "how": "TurboQuant integration + per-tenant cost telemetry + finance-grade SKU separation"
+        }
+      }
+    ],
+    "prediction.4d71e1d1457066ec": [
+      {
+        "actor": "foundation-lab finance + investor-relations leader sa OpenAI / Anthropic / xAI",
+        "job": "Magtayo ng audited monthly revenue o WAU disclosure cadence na nagpapakasiya sa SEC + buyside pressure nang hindi nakompromiso ang customer concentration secrecy.",
+        "outcome": "Pampublikong IR page o quarterly filing companion na naglalathala ng audited monthly revenue / WAU sa fixed cadence.",
+        "motivation": "Pinilit ng Apr 28 WSJ revenue-miss ang AI-capex-on-faith tape na sumira; ang foundation lab na unang magpapadala ng audited monthly numbers ay nagde-define ng disclosure shape na dapat tugmaan ng mga competitor at kumikita ng financing-cost premium discount.",
+        "task": {
+          "who": "lab CFO + IR team + outside auditor + general counsel",
+          "what": "i-istraktura ang monthly revenue / WAU dashboard + audit attestation + cadence policy",
+          "where": "lab IR page + 10-K / 8-K equivalent + Big-4 audit deliverables",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "ginawa ng WSJ tape na hindi nasusustento ang narrative-only disclosure; itinakda ng first mover ang template",
+          "how": "AICPA SOC-style attestation framework + reproducible revenue-recognition pipeline + WAU instrumentation"
+        }
+      },
+      {
+        "actor": "Big-3 hyperscaler external-reporting controller sa AWS Bedrock / Microsoft Azure-OpenAI / Google Vertex",
+        "job": "Magdisenyo at ilathala ang Bedrock / Azure-OpenAI / Vertex per-token-margin sa 10-Q footnotes na hiwalay mula sa raw cloud revenue.",
+        "outcome": "10-Q footnote na naglalathala ng AI-platform per-token margin bilang discrete figure na mahihiwalay mula sa underlying cloud-infrastructure revenue.",
+        "motivation": "Tahasang binanggit na ng Microsoft ang explicit $37B AI run-rate (+123%) — ang unang hyperscaler na naglagay ng per-AI-business single-line sa kanyang headline release — at ang susunod na hakbang sa ilalim ng SEC + analyst pressure ay ang per-token-margin separation sa footnotes.",
+        "task": {
+          "who": "hyperscaler external-reporting controller + segment-finance team + audit-committee chair",
+          "what": "i-draft ang footnote schema na naghihiwalay sa Bedrock / Azure-OpenAI / Vertex per-token margin mula sa raw cloud revenue",
+          "where": "10-Q footnote + analyst-day deck + segment-reconciliation appendix",
+          "when": "Mayo hanggang Q3 2026 earnings cycles",
+          "why": "ang $37B run-rate ng MSFT ay ang precedent; ang per-token-margin ang susunod na pampublikong lever",
+          "how": "internal AI-platform cost-allocation + segment-reporting policy + auditor sign-off"
+        }
+      },
+      {
+        "actor": "SEC corporation-finance staffer na namumuno sa AI-revenue disclosure interpretive guidance",
+        "job": "Mag-isyu ng interpretive guidance o Dear-CFO letter na naghihikayat sa registrants na ilathala ang per-AI-business run-rate, monthly revenue, at per-token margin sa MD&A.",
+        "outcome": "SEC corp-fin guidance o Dear-CFO letter na nagpapangalan sa AI-revenue disclosure expectations at sumisipi sa Microsoft $37B run-rate disclosure bilang template.",
+        "motivation": "Ipinakita ng Apr 28 selloff (Oracle -4%, AMD -3%, Broadcom -4%, SoftBank -10%) ang AI-capex-on-faith tape risk sa retail investors; ang staff guidance ang lowest-friction lever na hawak ng SEC bago ang formal rulemaking.",
+        "task": {
+          "who": "SEC Division of Corporation Finance staff + Office of Chief Accountant + commissioner advisory",
+          "what": "i-draft at i-isyu ang interpretive guidance + sample MD&A language",
+          "where": "sec.gov/divisions/corpfin + Dear-CFO letter distribution + commissioner statement",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "ang Cerebras IPO sa kalagitnaan ng Mayo ay nag-iipon ng registrant-side disclosure pressure sa masikip na kalendaryo",
+          "how": "SEC interpretive-release template + comment-letter program + AICPA coordination"
+        }
+      }
+    ],
+    "prediction.9fce1997ef699a48": [
+      {
+        "actor": "Federal Reserve Chair Warsh's incoming communications team",
+        "job": "I-reset ang FOMC framing sa ilalim ng bagong Chair upang ang dissent posture ay sumaayos sa rate calls habang pinananatili ang marginal-vote signal ni Powell sa Fed-investigation governance.",
+        "outcome": "Unang Warsh-led FOMC press conference + statement na muling nag-aanchor sa dissent norm sa ≤2 dissenters at tahasang naghihiwalay sa rate framing mula sa governance posture.",
+        "motivation": "Ang Apr 29 8-4 dissent (highest since Oct-1992) ay hindi nasusustento bilang steady-state framing; ang papasok na Chair ay dapat sumaayos sa rate-call dissent upang ibalik ang forward-guidance volatility sa normal envelope.",
+        "task": {
+          "who": "incoming Chair communications team + FOMC secretary + Board legal staff",
+          "what": "i-draft ang Chair-handover statement + FOMC framing reset + media briefing",
+          "where": "federalreserve.gov press conferences + FOMC statement + Board press office",
+          "when": "Mayo 15 pasulong hanggang Q4 2026",
+          "why": "ang 1992 precedent comparison ay dapat lumipat mula anomalya pabalik sa makasaysayang curiosity",
+          "how": "press-conference Q&A discipline + statement-language harmonization + dissent-management protocol"
+        }
+      },
+      {
+        "actor": "financial press structural-analysis editor sa WSJ / FT / Bloomberg na sumasaklaw sa Fed governance",
+        "job": "Itatag ang 1992-precedent comparison bilang structural reference point sa coverage ng bagong Fed governance regime, na naghihiwalay sa rate framing mula sa institutional risk.",
+        "outcome": "Paulit-ulit na framing sa front-page Fed coverage na nagdi-distinguish sa rate-vote signal ni Powell mula sa kanyang Fed-investigation governance signal.",
+        "motivation": "Pinepresyo ng mga merkado ang forward-guidance volatility nang hiwalay mula sa institutional risk lamang kapag itinatag ng press ang conceptual separation bilang standard; ang editor na unang magpapadala ng framing ay nagiging canonical reference.",
+        "task": {
+          "who": "financial press structural-analysis editor + Fed-watcher reporter + Op-Ed contributor pool",
+          "what": "ilathala ang framing piece + ongoing column na nag-aanchor sa 1992 precedent + Powell-Board-vote tracker",
+          "where": "WSJ / FT / Bloomberg front-page + Opinion pages + market-newsletter products",
+          "when": "Mayo hanggang Q4 2026",
+          "why": "ang 1992 comparison ay kasalukuyang curiosity; ang paggawa nito sa structural reference ay humuhubog sa downstream analyst framing",
+          "how": "historical archive research + Fed-governor interview series + dissent-history dataset"
+        }
+      },
+      {
+        "actor": "institutional-investor rates strategist na bumubuo ng dual-axis 2026-2027 forecast model",
+        "job": "Maglathala ng rates strategy framework na nagpepresyo ng mas maliit na forward-guidance volatility sa ilalim ni Warsh habang nagpepresyo ng mas malaking institutional-risk premium sa Fed mismo.",
+        "outcome": "Buyside research piece na naghihiwalay ng rate-path volatility mula sa Fed-institutional-risk premium at nagpepresyo sa bawat isa nang hiwalay sa 2-year at 10-year curves.",
+        "motivation": "Ang Powell-stays-on-Board ay nagko-convert sa May-15 handoff narrative mula \"Powell exits\" patungong \"Powell remains as the marginal governance vote\"; ang strategist na unang nakakukuha sa dual-axis pricing ay kumikita ng flow advantage sa susunod na investigation-related move.",
+        "task": {
+          "who": "rates strategy team + macro economist + curve-modeling quant",
+          "what": "ilathala ang dual-axis forecast model + investigation-trigger sensitivity analysis",
+          "where": "buyside research portal + institutional client briefings + roadshow",
+          "when": "Mayo hanggang Q4 2026",
+          "why": "ang Warsh-led FOMC ay sumasaayos sa rate dissent habang ang Powell-on-Board ay nagtataas ng governance-risk pricing — pareho dapat presyuhin nang hiwalay",
+          "how": "term-structure model + governance-risk indicator (investigation milestones) + Fed-funds futures cross-check"
+        }
+      }
+    ]
+  }
+}

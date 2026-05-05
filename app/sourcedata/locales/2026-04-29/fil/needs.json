@@ -1,0 +1,137 @@
+{
+  "date": "2026-04-29",
+  "by_prediction": {
+    "prediction.f960d058dc42c7c6": [
+      {
+        "actor": "inference-runtime kernel engineer sa vLLM / SGLang / TGI / Ollama / llama.cpp / NVIDIA TensorRT-LLM",
+        "job": "i-land ang first-class --kv-cache-dtype turboquant (o katumbas) flag sa main branch kasama ang TurboQuant + kahit isang alternatibo na nakawira sa fused decode / extend kernels bago ang Q4 2026",
+        "outcome": "merged main-branch flag na naglalabas ng TurboQuant + KVTC / kvpress / TriAttention na may documented throughput parity (>=93% bf16) at public benchmark page",
+        "motivation": "kung walang first-class kernel + flag support, ang compressed-cache deployment ay mananatiling experimental opt-in at ang hyperscalers ay hindi makakapag-tier ng per-token pricing dito; sinumang runtime ang unang maglabas ng polished knob ay mananalo sa long-context default",
+        "task": {
+          "who": "kernel engineering team + scheduler / dispatcher leads + benchmark / perf-eng + release-engineering",
+          "what": "i-implement ang fused Triton / CUDA decode + extend kernels para sa TurboQuant + alternatibo, ilabas ang --kv-cache-dtype flag, maglabas ng benchmark suite",
+          "where": "vLLM / SGLang / TGI / Ollama / llama.cpp / TensorRT-LLM main branches + perf-bench harness",
+          "when": "Mayo 2026 hanggang Q4 2026",
+          "why": "ang compressed-cache pricing tiers ay nakadepende sa production-grade fused-kernel throughput parity",
+          "how": "MSE-FWHT rotation + 3-bit Lloyd-Max quantizer + packed 4-bit attention reads + per-engine benchmark publication"
+        }
+      },
+      {
+        "actor": "hyperscaler Bedrock / Azure / Vertex per-token pricing product manager",
+        "job": "ipakete ang compressed-cache opt-in pricing tier na nagpe-presyo sa long-context workloads sa 5-6x na mas mababang per-token rate bago ang Q4 2026",
+        "outcome": "GA price-list entry para sa opt-in compressed-cache tier na may inilathalang per-token rates at customer-facing capacity flag",
+        "motivation": "ang Mag-7 capex tape ay nire-reprice laban sa per-token margin; ang pag-iintroduce ng compressed-cache pricing tier ay ang pinakamurang paraan upang ipagtanggol ang AI-revenue exit velocity nang hindi pinapabagal ang GPU build-outs",
+        "task": {
+          "who": "platform pricing PM + capacity planning + finance / margin-modeling + customer-facing API team",
+          "what": "i-model + i-presyo + i-GA ang compressed-cache opt-in tier sa Bedrock / Azure-OpenAI / Vertex na may per-token rate + SLA",
+          "where": "Bedrock / Azure / Vertex price list + customer console + capacity-planning model",
+          "when": "Q3 2026 hanggang Q4 2026",
+          "why": "ang per-token-margin-gated capex disclosure language ay nangangailangan ng pricing lever na hiwalay sa raw GPU growth",
+          "how": "internal capacity model + tiered pricing schedule + console toggle + customer onboarding playbook"
+        }
+      },
+      {
+        "actor": "Google Research + community port maintainer (MLX, Triton, vLLM, SGLang) na naglalabas ng official + community TurboQuant Python release",
+        "job": "ilabas ang official Q2 2026 Python TurboQuant package at panatilihing feature-aligned ang community ports (MLX, Triton, vLLM, SGLang, llama.cpp) sa runway",
+        "outcome": "official Google TurboQuant Python release + maintained community ports sa lahat ng major inference runtimes na may parity test suite",
+        "motivation": "kung walang authoritative reference implementation at feature-aligned community ports, ang runtime maintainers ay hindi makakapag-commit sa stable --kv-cache-dtype flag interface",
+        "task": {
+          "who": "Google Research TurboQuant authors + community port maintainers (MLX, Triton, vLLM, SGLang)",
+          "what": "ilathala ang official Python TurboQuant + panatilihin ang community port parity + parity-test suite",
+          "where": "Google Research GitHub + MLX / Triton / vLLM / SGLang community repos + ICLR open code release",
+          "when": "Q2 2026 hanggang Q4 2026",
+          "why": "ang stable runtime-flag interface ay nangangailangan ng authoritative reference + tested community ports",
+          "how": "MSE-FWHT rotation reference + Lloyd-Max quantizer reference + parity test fixtures + ICLR-2026 paper code drop"
+        }
+      }
+    ],
+    "prediction.0ed37d30935303df": [
+      {
+        "actor": "OpenAI / Anthropic / xAI investor-relations + finance lead",
+        "job": "magdisenyo at maglabas ng audited monthly-revenue + WAU disclosure cadence kasama ang public dashboard (o 8-K-equivalent investor letter) bago ang Q3 2026",
+        "outcome": "unang audited foundation-lab monthly-revenue + WAU disclosure cadence na nag-go-live na may public access para sa investors + analysts",
+        "motivation": "ang Apr 28 WSJ leak ay ginawa ang narrative AI economics na re-rating risk; ang lab na unang naglathala ng audited revenue + WAU ay nagde-defuse ng analyst pressure at ni-lo-lock ang disclosure shape na susundin ng mga kakumpitensya",
+        "task": {
+          "who": "CFO + investor relations + finance ops + external auditor + general counsel",
+          "what": "itayo ang audited monthly revenue + WAU dashboard, itakda ang publication cadence, ihanda ang investor-letter template",
+          "where": "company investor-relations site + audit-firm engagement + monthly board-finance review",
+          "when": "Mayo 2026 hanggang Q3 2026",
+          "why": "ang tangible AI-economics disclosure ay ngayon ang tahasang demand ng market, hindi narrative",
+          "how": "auditor-attested revenue feed + WAU instrumentation + monthly publication cadence + investor-letter template"
+        }
+      },
+      {
+        "actor": "Microsoft / Amazon / Google Cloud financial-reporting + 10-Q drafting team",
+        "job": "i-draft at ilathala ang Bedrock / Azure-OpenAI / Vertex per-token-margin disclosure na hiwalay sa raw cloud revenue sa 10-Q footnotes pagsapit ng Q3 2026",
+        "outcome": "Big-3 hyperscaler 10-Q footnote na may per-token AI-platform margin na hiwalay sa total cloud revenue + earnings-call commentary na nag-aangkla sa linya",
+        "motivation": "ang Apr 28 AI-trade tape crack ay naglalagay ng hyperscaler capex sa per-token-margin axis; ang unang cloud na maglathala ng breakdown ay nagre-reframe sa disclosure standard at binabawi ang narrative authority",
+        "task": {
+          "who": "controller + investor relations + segment-finance + external audit + cloud platform CFO",
+          "what": "magdisenyo ng segment definition para sa AI platform per-token margin, i-instrument ang metric, i-draft ang 10-Q footnote, ihanda ang earnings-call language",
+          "where": "10-Q footnotes + earnings-call script + segment-reporting working sessions",
+          "when": "Q2 2026 hanggang Q3 2026",
+          "why": "ang Mag-7 super-week + WSJ revenue-miss tape ay ngayon nangangailangan ng disclosure clarity, hindi capex faith",
+          "how": "segment-finance reorganization + per-token telemetry feeds + auditor-attested margin schedule + 10-Q footnote template"
+        }
+      },
+      {
+        "actor": "SEC corporation finance staff + sell-side analyst lead sa major bulge-bracket banks",
+        "job": "maglabas ng follow-on comment letters at analyst-pressure notes na nagko-codify ng monthly-revenue + WAU + per-token margin bilang inaasahang baseline disclosure para sa foundation labs at AI-platform clouds bago ang Q3 2026",
+        "outcome": "SEC comment letter pattern + sell-side analyst-pressure consensus na nagpapangalan sa AI-revenue disclosure rewrite bilang inaasahang baseline pasulong",
+        "motivation": "kung walang coordinated SEC + analyst push, ang individual labs at clouds ay maaaring mag-stall sa disclosure; ang aligned pressure ay nagpapagawa sa rewrite na default sa halip na one-off",
+        "task": {
+          "who": "SEC Division of Corporation Finance + bulge-bracket sell-side analyst leads + buy-side AI-track PMs",
+          "what": "i-draft ang follow-on comment letters, ilathala ang analyst-pressure notes na nagpapangalan sa monthly-revenue + WAU + per-token margin bilang inaasahang disclosures",
+          "where": "SEC EDGAR comment-letter pipeline + sell-side research notes + buy-side AI-track quarterly memos",
+          "when": "Q2 2026 hanggang Q3 2026",
+          "why": "kung walang regulator + analyst alignment, ang individual labs at clouds ay maaaring mag-delay ng rewrite",
+          "how": "SEC comment-letter template + analyst-note style guide + buy-side PM outreach + quarterly conference messaging"
+        }
+      }
+    ],
+    "prediction.08513eaa976c5c5b": [
+      {
+        "actor": "MITRE / NIST agent-security working group analyst + frontier-lab red-team lead",
+        "job": "ilathala ang agent-skills threat sub-matrix na sumasaklaw sa skill poisoning + indirect-prompt-injection-via-skill + cross-skill privilege chains bago ang H2 2026",
+        "outcome": "publicly available MITRE-ATT&CK-style o NIST-led agent-skills sub-matrix na ginagamit bilang canonical reference ng skill marketplaces + enterprise security teams",
+        "motivation": "ang marketplace findings ng ClawHavoc + Cisco ay nagpapakita na ang agent-skills attack surface ay ngayon production-grade; kung walang canonical threat-matrix, ang vendors at customers ay hindi makakapag-align sa kung ano ang kailangang ipagtanggol laban",
+        "task": {
+          "who": "MITRE / NIST agent-security working group + frontier-lab red-team leads + marketplace-vendor security counterparts",
+          "what": "i-draft + ilathala ang agent-skills threat sub-matrix kasama ang technique IDs na sumasaklaw sa poisoning, IPI-via-skill, cross-skill privilege chains",
+          "where": "MITRE ATT&CK GitHub + NIST publication pipeline + working-group review sessions",
+          "when": "Mayo 2026 hanggang H2 2026",
+          "why": "walang canonical threat language pa para sa skill-marketplace + agent-runtime attack surface",
+          "how": "ATT&CK technique-ID schema + working-group review cadence + marketplace-vendor alignment + adversary-emulation test case publication"
+        }
+      },
+      {
+        "actor": "skill marketplace platform engineer sa Anthropic skills / ClawHub / Multica / Hermes / Hugging Face skills",
+        "job": "maglabas ng enforced signing + provenance attestation bilang publish-time gate para sa kahit isang major skill marketplace bago ang H2 2026",
+        "outcome": "GA marketplace requirement na lahat ng bagong inilathalang skills ay may signed manifest + provenance attestation + traceable build inputs, kasama ang unsigned skills na naka-block sa publish",
+        "motivation": "ang 1,184 poisoned skills ng ClawHavoc ay nagpapakita na ang unsigned-publish flow ay ang structural gap; ang marketplace na unang nag-gate ng publish sa signature + provenance ay nagiging trusted default para sa enterprise procurement",
+        "task": {
+          "who": "marketplace platform engineering + security review + developer-relations + identity / signing infrastructure",
+          "what": "ilabas ang signed-manifest + provenance attestation pipeline, i-block ang unsigned publish, i-document ang developer-flow",
+          "where": "marketplace publish API + developer signing tooling + identity provider integration + marketplace UX",
+          "when": "Q2 2026 hanggang H2 2026",
+          "why": "ang kasalukuyang allow-all publish flow ay ang root structural gap sa likod ng ClawHavoc-class supply-chain attacks",
+          "how": "Sigstore-style signing + SLSA-style provenance + identity provider attestation + publish-time policy gate"
+        }
+      },
+      {
+        "actor": "enterprise CISO + AI platform team sa Fortune-500 marketplace adopters",
+        "job": "ilathala at i-enforce ang internal AI-skills-procurement policy na nagre-require ng signed + provenance-attested skills bago ang deployment sa production agents pagsapit ng H2 2026",
+        "outcome": "ratified AI-skills-procurement standard + enforced control sa corporate marketplace mirror na nagba-block ng unsigned skills mula sa pag-abot sa production agents",
+        "motivation": "ang 36% prompt-injection finding ng Cisco sa kabuuan ng OpenClaw marketplace ay nagpapakita na ang procurement-side controls ay hindi maaaring umasa sa marketplace operators lamang; ang internal policy + technical gate ay kinakailangan upang i-defuse ang supply-chain risk",
+        "task": {
+          "who": "CISO + AI platform engineering + identity / governance + procurement + business-unit liaisons",
+          "what": "i-draft ang AI-skills-procurement standard, i-configure ang marketplace mirror upang i-require ang signed + provenance-attested skills, i-train ang developers",
+          "where": "internal security policy repo + corporate marketplace mirror + identity / SSO admin console + procurement workflow",
+          "when": "Q3 2026 hanggang H2 2026",
+          "why": "ang marketplace-side controls lamang ay hindi makakaginarantiya ng kawalan ng poisoned skills sa enterprise deployments",
+          "how": "written procurement policy + marketplace-mirror policy gate + identity-bound signing keys + per-deployment attestation review"
+        }
+      }
+    ]
+  }
+}

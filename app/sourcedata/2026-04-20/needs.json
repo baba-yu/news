@@ -1,0 +1,151 @@
+{
+  "date": "2026-04-20",
+  "by_prediction": {
+    "prediction.4bbf8ec79bafedd1": [
+      {
+        "actor": "MCP specification maintainer + Agent Registry schema editor (Anthropic MCP working group, registry operators publishing the canonical server index)",
+        "job": "extend MCP server-metadata + Agent Registry record schema with a 'headless-preferred' / transport-preference field through H2 2026",
+        "outcome": "ratified MCP spec PR + Agent Registry schema bump exposing a queryable 'headless-preferred' metadata flag on server records",
+        "motivation": "registries become useless if agents cannot route around brittle GUI-driving paths; codifying the preference closes the agent-routing ambiguity",
+        "task": {
+          "who": "MCP spec working-group editors + Agent Registry schema maintainers + reference-server authors",
+          "what": "draft + ratify 'headless-preferred' metadata field in MCP + registry record schema",
+          "where": "modelcontextprotocol GitHub repo + Agent Registry schema PRs + spec working-group meetings",
+          "when": "May 2026 to H2 2026",
+          "why": "Willison thesis crystallizes routing ambiguity that registries must resolve",
+          "how": "RFC-style spec PR + reference implementation + registry schema migration"
+        }
+      },
+      {
+        "actor": "agent-platform product manager (Anthropic Claude in Chrome, OpenAI agent runtime, hyperscaler agent-platform PMs shipping browser-operating + headless agents)",
+        "job": "wire transport-preference logic into agent runtimes so agents read the new MCP / registry 'headless-preferred' flag and route accordingly through H2 2026",
+        "outcome": "shipped agent-runtime release notes + docs explicitly honoring the headless-preferred flag with a published routing-policy default",
+        "motivation": "user-visible latency and reliability gaps between headless and GUI-driving paths force PMs to publish a default that prefers headless when both exist",
+        "task": {
+          "who": "agent-runtime PMs + agent-orchestration eng leads + DevRel docs writers",
+          "what": "implement transport-preference router honoring 'headless-preferred' metadata",
+          "where": "agent-runtime repos + platform release notes + developer documentation surfaces",
+          "when": "Q2 to H2 2026",
+          "why": "browser-operating brittleness erodes agent SLAs vs headless paths",
+          "how": "router policy + telemetry on transport choice + A/B against GUI fallback"
+        }
+      },
+      {
+        "actor": "headless-API service maintainer (SaaS vendors publishing MCP servers + REST/JSON-RPC endpoints; e.g. Linear, GitHub, Stripe, Notion API teams)",
+        "job": "publish MCP server records flagged 'headless-preferred' alongside any browser-driving fallback, so registry consumers route to the API by default through H2 2026",
+        "outcome": "MCP server registry entries set 'headless-preferred=true' + companion docs steering agents to API surface over web UI scraping",
+        "motivation": "API-traffic monetization, support cost, and reliability metrics all favor headless calls over agents driving the web UI of the same product",
+        "task": {
+          "who": "platform API team + DevRel + MCP server authors at the SaaS vendor",
+          "what": "ship MCP server record with headless-preferred metadata + deprecate GUI-driving guidance",
+          "where": "vendor MCP server repo + Agent Registry submission + API docs portal",
+          "when": "Q2 to H2 2026",
+          "why": "API path is cheaper, faster, more reliable, and easier to rate-limit than scraping",
+          "how": "MCP server SDK + registry submission tooling + docs deprecation banner"
+        }
+      }
+    ],
+    "prediction.4bd33db2ea06e5b4": [
+      {
+        "actor": "open-weight edge-model lab research lead (Qwen / Bonsai-class small-model trainer)",
+        "job": "Ship sub-40B agentic coding models that clear the SWE-bench bar local hardware can actually run.",
+        "outcome": "Public release of an open-weight coding model with >70% SWE-bench Verified at <40B params on commodity GPUs.",
+        "motivation": "Whoever owns the default edge coding model captures the developer-tooling distribution layer before hyperscalers close it.",
+        "task": {
+          "who": "small-model pretraining + RL post-training team",
+          "what": "distill + RL-tune sub-40B MoE on agentic coding traces",
+          "where": "in-house GPU cluster with SWE-bench Verified eval harness",
+          "when": "Q2-Q3 2026 runway",
+          "why": "edge-runnable accuracy is the gate to local-default adoption",
+          "how": "Qwen3.6-style MoE-A3B + verifier-augmented RL"
+        }
+      },
+      {
+        "actor": "local-first coding-agent product manager (IDE / CLI tooling vendor)",
+        "job": "Ship a routing layer that runs sub-40B locally by default and overflows to cloud only on hard tasks.",
+        "outcome": "GA release of a coding agent whose default config pins inference local with a measured cloud-overflow tail.",
+        "motivation": "Privacy-conscious SMB buyers and solo devs are demanding cost-bounded agents with no per-token cloud bill.",
+        "task": {
+          "who": "agent runtime + product engineering team",
+          "what": "build local-first router with cloud-overflow fallback policy",
+          "where": "VS Code / JetBrains / CLI agent runtime",
+          "when": "Q2-Q3 2026 runway",
+          "why": "default local routing is what makes the inversion visible to users",
+          "how": "llama.cpp / Ollama / MLX backends + capability-tier router"
+        }
+      },
+      {
+        "actor": "edge inference-runtime engineer (CUDA / Metal / ROCm kernel author)",
+        "job": "Push small-model decode throughput on consumer GPUs into the hundreds of tok/s on real coding workloads.",
+        "outcome": "Open-source runtime release hitting Bonsai-class 600+ tok/s on a single consumer CUDA card.",
+        "motivation": "Local throughput parity with cloud APIs is the technical precondition for displacing cloud as the default.",
+        "task": {
+          "who": "inference kernel + quantization engineering team",
+          "what": "ship fused-attention + speculative-decode kernels for sub-2B models",
+          "where": "open-source runtime repo with CUDA / Metal backends",
+          "when": "Q2-Q3 2026 runway",
+          "why": "tok/s parity removes the last latency excuse to stay cloud",
+          "how": "FlashAttention-3 + INT4 quant + draft-model speculative decode"
+        }
+      }
+    ],
+    "prediction.4ecb84808c9acc3f": [
+      {
+        "actor": "supply-chain security researcher at an application-security firm or independent lab",
+        "job": "Publish reproducible PoCs of indirect prompt injection in CI runners that exfiltrate secrets via Claude Code / Gemini CLI / Copilot.",
+        "outcome": "Public write-ups + CVE-equivalent advisories that cite cross-vendor reproduction and frame the class as a distinct supply-chain category.",
+        "motivation": "Establish the new threat class under their attribution before vendors patch quietly, capturing citation share and conference-track slots.",
+        "task": {
+          "who": "appsec research team + CI-platform reverse engineers + responsible-disclosure coordinator",
+          "what": "build cross-vendor PoC harness exfiltrating secrets via PR/issue-borne prompt injection",
+          "where": "GitHub Actions runners + vendor coding-agent installs + disclosure blog + Black Hat / DEF CON track",
+          "when": "May to Q3 2026",
+          "why": "anchor the Agent-in-the-Loop class label before vendor framing drowns it",
+          "how": "indirect-prompt-injection harness + GitHub Actions test repos + responsible-disclosure pipeline"
+        }
+      },
+      {
+        "actor": "CIS Benchmarks / OWASP Top 10 risk-list editorial maintainer",
+        "job": "Draft and circulate a new top-list entry naming Agent-in-the-Loop Secret Exfiltration as a distinct supply-chain category.",
+        "outcome": "Published CIS / OWASP risk-list entry with control mappings, threat description, and mitigation guidance referencing the cross-vendor PoCs.",
+        "motivation": "Keep the Top 10 / CIS Controls relevant as AI coding agents reshape the CI threat surface; cement editorial authority for the new class.",
+        "task": {
+          "who": "OWASP project leads + CIS Benchmarks working group + community reviewers",
+          "what": "draft category entry, run public comment cycle, ratify into next list revision",
+          "where": "OWASP project mailing list + CIS Benchmarks workbench + GitHub draft repos + AppSec EU / Global summit sessions",
+          "when": "May to Q3 2026",
+          "why": "ratify the category in the next list revision before fragmented vendor names take hold",
+          "how": "RFC-style draft + public comment period + working-group vote"
+        }
+      },
+      {
+        "actor": "GitHub Actions platform security product manager",
+        "job": "Ship sandbox + secret-scoping mitigations that constrain coding agents triggered by untrusted PR / issue text in CI runners.",
+        "outcome": "Default-on policy reducing token + deploy-key blast radius for agent-driven workflows, plus public advisory acknowledging the class.",
+        "motivation": "Avoid being named as the carrier surface in the new top-list entry; preserve the platform as the default agent-CI substrate.",
+        "task": {
+          "who": "Actions platform security PM + runner engineering + Advanced Security + product comms",
+          "what": "ship scoped-token defaults, agent-aware permissions, and public threat-model advisory",
+          "where": "GitHub Actions runner + Advanced Security console + GitHub Blog + changelog",
+          "when": "May to Q3 2026",
+          "why": "shrink agent blast radius before CIS / OWASP entries name the platform pattern",
+          "how": "OIDC-scoped tokens + per-job permission caps + agent-context detection signals"
+        }
+      },
+      {
+        "actor": "AI coding-agent vendor security team (Claude Code / Gemini CLI / Copilot)",
+        "job": "Harden agent CLIs against indirect prompt injection so untrusted PR / issue text cannot coerce secret exfiltration in CI.",
+        "outcome": "Released agent versions with prompt-injection guardrails, secret-redaction defaults, and documented threat model citing the CI scenario.",
+        "motivation": "Avoid being the named exfiltration vector in CIS / OWASP entries; protect enterprise CI deals tied to procurement security review.",
+        "task": {
+          "who": "agent-CLI security engineers + tool-use safety team + trust-and-safety + developer-advocate liaison",
+          "what": "ship prompt-injection mitigations + secret-redaction + restricted tool-use defaults in CI mode",
+          "where": "Claude Code / Gemini CLI / Copilot release branches + vendor security advisories + docs site",
+          "when": "May to Q3 2026",
+          "why": "remove the cross-vendor reproduction signal that anchors the new category",
+          "how": "input-content filtering + capability sandboxing + scoped-credential APIs + CI-mode defaults"
+        }
+      }
+    ]
+  }
+}

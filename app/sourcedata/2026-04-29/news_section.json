@@ -1,0 +1,613 @@
+{
+  "date": "2026-04-29",
+  "sections": [
+    {
+      "category": "LLM Workflow > Corpus2Skill / \"Skills as a navigable artifact\"",
+      "bullets": [
+        {
+          "body": "**Corpus2Skill (arxiv 2604.14572, Apr 27) — distill-corpus-into-skill-tree RAG that beats dense retrieval / RAPTOR / agentic RAG on WixQA, no vector DB at serve time** — Compiles a document corpus offline into a hierarchical skill directory: iterative document clustering + LLM-written summaries at each level + tree of navigable skill files. At serve time the agent receives a bird's-eye view, drills into topic branches via progressively finer summaries, and retrieves full documents by ID. **Highest quality on every WixQA metric** vs flat retrieval / RAPTOR / multi-turn agentic RAG. Skill directory is human-inspectable so the agent can reason about where to look, backtrack, and combine evidence across branches.",
+          "citations": [
+            {
+              "label": "arXiv - Don't Retrieve, Navigate: Distilling Enterprise Knowledge into Navigable Agent Skills for QA and RAG (Corpus2Skill)",
+              "url": "https://arxiv.org/abs/2604.14572"
+            }
+          ]
+        },
+        {
+          "body": "**Externalization in LLM Agents (arxiv 2604.08224, Apr 24) — survey framing weights → prompts → skills/harness/protocol as the 2026 design pattern** — Recent history of LLM agents understood as a progressive movement outward from the model: capabilities first treated as properties of weights, then prompts/context, now infrastructure. The canonical 2026 framing for Anthropic's 17-skill repo, ClawHub, Multica, AgentCore Managed Harness, Hermes Agent.",
+          "citations": [
+            {
+              "label": "arXiv - Externalization in LLM Agents (2604.08224)",
+              "url": "https://arxiv.org/abs/2604.08224"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "LLM Workflow > OpenClaw / NemoClaw / Hermes Agents",
+      "bullets": [
+        {
+          "body": "**Hermes Agent v0.11.0 \"Interface\" — adoption Apr 27-29; Ink-based React TUI, native AWS Bedrock, GPT-5.5 via Codex OAuth, 5 new inference paths, 17th messaging platform (QQBot)** — Carry-forward; pluggable transport architecture under every provider. Novita Sandbox Apr 28 ships first-class Hermes-compatible runtimes.",
+          "citations": [
+            {
+              "label": "GitHub - NousResearch/hermes-agent",
+              "url": "https://github.com/nousresearch/hermes-agent"
+            }
+          ]
+        },
+        {
+          "body": "**OpenClaw v2026.4.25-beta train continues Apr 27-29** — Voice-stack hardening, browser-automation safe-tab URLs, CDP-native role-snapshot fallback. Novita Sandbox Apr 28 ships Sandbox Skills for OpenClaw as a first-class deployment target.",
+          "citations": [
+            {
+              "label": "OpenClaw Releases",
+              "url": "https://github.com/openclaw/openclaw/releases"
+            }
+          ]
+        },
+        {
+          "body": "**Multica v0.2.18 (Apr 27) — superseding v0.2.16 (Apr 24); orchestrator-skills surface deepens** — v0.2.16 baseline: Chat V2 dedicated sidebar, right-click context menus on issues, in-app feedback flow, redesigned Autopilot modal. v0.2.18 ships in the same window as Apr 27's OpenAI/Microsoft AGI-clause unwind and the Apr 28 Novita Sandbox launch. Open-source, vendor-neutral, self-hosted; sits alongside AgentCore Managed Harness + Claude Managed Agents in the orchestration layer.",
+          "citations": [
+            {
+              "label": "GitHub - multica-ai/multica releases",
+              "url": "https://github.com/multica-ai/multica/releases"
+            }
+          ]
+        },
+        {
+          "body": "**Novita Sandbox launches Apr 28 — managed NovitaClaw deployments + Sandbox Skills for OpenClaw + Hermes-compatible runtimes + persistent-node configs** — First commercial mitigation product purpose-built for the OpenClaw + Hermes + autonomous-agent threat surface. Counterpart to AgentCore microVM isolation but skill-marketplace-aware; positioned against ClawHavoc + Cisco's 36% prompt-injection finding.",
+          "citations": [
+            {
+              "label": "PR Newswire - Novita AI Launches Sandbox to Secure OpenClaw, Hermes Agent, and Autonomous Systems",
+              "url": "https://www.prnewswire.com/news-releases/novita-ai-launches-sandbox-to-secure-openclaw-hermes-agent-and-autonomous-systems-302755870.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Optimization (KV-Cache Compression)",
+      "bullets": [
+        {
+          "body": "**Google TurboQuant (ICLR 2026, Apr 23-25 Rio; Research blog Apr 24-29 traction) — 3.5-bit-per-value KV-cache compression matching FP16 on LongBench / Needle-in-a-Haystack with no retraining; 6x compression, 8x faster attention** — Algorithm: MSE-driven Fast Walsh-Hadamard rotation + 3-bit Lloyd-Max quantization of the rotated cache. Google official Python implementation targeted Q2 2026; community impls in MLX + Triton + vLLM + SGLang already circulating.",
+          "citations": [
+            {
+              "label": "Google Research - TurboQuant: Redefining AI efficiency with extreme compression",
+              "url": "https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/"
+            }
+          ]
+        },
+        {
+          "body": "**SGLang TurboQuant integration — PR #21419 in-tree (`--kv-cache-dtype turboquant`); follow-up #23134 fused-Triton-decode/extend kernel rewrite hits 93-105% bf16 throughput vs ~1% on the original implementation** — First-class deployment knob for compressed-cache inference; original PR had a hot-path full-pool dequant bug that crushed throughput, fix issue #23134 reads packed 4-bit KV directly during attention.",
+          "citations": [
+            {
+              "label": "GitHub Issue - SGLang #23134 TurboQuant fused Triton kernels",
+              "url": "https://github.com/sgl-project/sglang/issues/23134"
+            }
+          ]
+        },
+        {
+          "body": "**PolyKV (arxiv 2604.24971, Apr 27) — shared asymmetrically-compressed KV-pool for multi-agent LLM inference; int8 keys + TurboQuant-MSE 3-bit values via HF DynamicCache injection** — Writes a compressed cache once and injects into N independent agent contexts. Asymmetric compression preserves softmax stability (keys at int8) while squeezing values harder (3-bit FWHT-rotated Lloyd-Max). The first published multi-agent KV-cache architecture grounded on TurboQuant.",
+          "citations": [
+            {
+              "label": "arXiv - PolyKV: A Shared Asymmetrically-Compressed KV Cache Pool for Multi-Agent LLM Inference",
+              "url": "https://arxiv.org/abs/2604.24971"
+            }
+          ]
+        },
+        {
+          "body": "**NVIDIA kvpress — Decoding-Press maturity; ExpectedAttentionPress with configurable compression ratios (0.7 / 0.5); AIME25 + Math500 + LongBench benchmarks; post_init_from_model hook** — Open-source LLM-KV-cache-compression-made-easy framework. Multiple compression methods + benchmarks built on Hugging Face transformers; recent releases add decoding-phase compression.",
+          "citations": [
+            {
+              "label": "GitHub - NVIDIA/kvpress",
+              "url": "https://github.com/NVIDIA/kvpress"
+            }
+          ]
+        },
+        {
+          "body": "**TriAttention (MIT + NVIDIA + Zhejiang U, Apr 11) — 10.7x KV-cache compression that matches full attention at 25% higher throughput** — Carry-forward into the Apr 27-29 utility-wave window.",
+          "citations": [
+            {
+              "label": "Dev Journal - TriAttention: MIT and NVIDIA's 10.7x KV Cache Compression",
+              "url": "https://earezki.com/ai-news/2026-04-11-researchers-from-mit-nvidia-and-zhejiang-university-propose-triattention-a-kv-cache-compression-method-that-matches-full-attention-at-25-higher-throughput/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Optimization (KV-Cache Compression) > vLLM",
+      "bullets": [
+        {
+          "body": "**vLLM v0.20.0 path: CUDA 13.0 default + PyTorch 2.11 + Python 3.14 support; transformers v5 compatibility wave (PR #30566)** — Carry-forward; ships on torch 2.11 for CUDA. The default image (`vllm/vllm-openai:v0.20.0`) and PyPI wheel both move to CUDA 13.0.",
+          "citations": [
+            {
+              "label": "vLLM Releases",
+              "url": "https://github.com/vllm-project/vllm/releases"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Optimization (KV-Cache Compression) > SGLang",
+      "bullets": [
+        {
+          "body": "**SGLang CVE-2026-5760 (CVSS 9.8) — still unpatched into Apr 29; cross-server copy-paste class widening to vLLM (CVE-2025-61620) / LMDeploy (CVE-2026-33626)** — Maintainer-coordination yielded no fix more than 10 days post-disclosure; v0.5.10 ships exploitable. PoC `github.com/Stuub/SGLang-0.5.9-RCE` continues to circulate; CERT/CC VU#915947 active.",
+          "citations": [
+            {
+              "label": "The Hacker News - SGLang CVE-2026-5760 (CVSS 9.8) Enables RCE via Malicious GGUF Model Files",
+              "url": "https://thehackernews.com/2026/04/sglang-cve-2026-5760-cvss-98-enables.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Optimization (KV-Cache Compression) > AWS Bedrock",
+      "bullets": [
+        {
+          "body": "**AgentCore Managed Harness (4-region preview), CLI (14-region GA), Skills on Kiro Power, Claude Cowork in Bedrock — Apr 27 deepening into Apr 28-29** — Carry-forward; the Apr 27 partnership pact (silicon-level Trainium/Graviton co-engineering with Anthropic; Meta Graviton-at-scale CPU agentic-AI) anchors the Mag 7 super-week tape into AWS prints today.",
+          "citations": [
+            {
+              "label": "AWS Blog - AWS Weekly Roundup Apr 27",
+              "url": "https://aws.amazon.com/blogs/aws/aws-weekly-roundup-anthropic-meta-partnership-aws-lambda-s3-files-amazon-bedrock-agentcore-cli-and-more-april-27-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Models > DeepSeek",
+      "bullets": [
+        {
+          "body": "**DeepSeek V4 Pro / V4 Flash continue traction Apr 27-29; first DeepSeek release optimized for Huawei Ascend chips** — Pro: 1.6T MoE / 49B active. Flash: 284B / 13B active. 1M context. Hybrid Attention reduces compute to 27% (Pro) / 10% (Flash) of V3.2 in 1M-context. Pricing: V4 Flash $0.14 / $0.28 per M tokens; V4 Pro $0.145 / $3.48 per M tokens.",
+          "citations": [
+            {
+              "label": "Felloai - DeepSeek V4 Released: Everything You Need to Know",
+              "url": "https://felloai.com/deepseek-v4/"
+            }
+          ]
+        },
+        {
+          "body": "**Fortune Apr 24-27 traction: \"DeepSeek unveils V4 model with rock-bottom prices and close integration with Huawei's chips\"** — Frames V4 + the Western/Chinese open-weight catch-up dynamic into a months-to-days gap.",
+          "citations": [
+            {
+              "label": "Renovateqr - Chinese AI Models in April 2026: DeepSeek V4, Kimi K2.6, Qwen 3.6, and Image Generation",
+              "url": "https://renovateqr.com/blog/chinese-ai-models-april-2026"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Models > Qwen / Tencent / Other Chinese LLMs",
+      "bullets": [
+        {
+          "body": "**Qwen3.6-Max-Preview + Qwen3.6-27B + Qwen3.6-35B-A3B carry-forward Apr 27-29** — Anchors the Qwen3.6 family alongside the DeepSeek V4 release; SWE-bench Pro / SkillsBench / SciCode top scores; 260K-token context; preserve_thinking mode for agentic workflows.",
+          "citations": [
+            {
+              "label": "Qwen.ai - Qwen3.6-Max-Preview",
+              "url": "https://qwen.ai/blog?id=qwen3.6-max-preview"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Models > Bonsai / Optimization",
+      "bullets": [
+        {
+          "body": "**PrismML 1-bit Bonsai-8B carry-forward Apr 27-29; iPhone 17 Pro Max 44 tok/s, M4 Pro Mac 131 tok/s, RTX 4090 368 tok/s; 1.15 GB total file** — Native 1-bit training (not PTQ); 14x size reduction; 4-5x energy-per-word reduction; CUDA / Metal / Android / CPU. Cross-stack on-device deployment baseline; pairs with TurboQuant + Unsloth as the on-device optimization stack.",
+          "citations": [
+            {
+              "label": "PrismML - Bonsai 8B repo / model card",
+              "url": "https://huggingface.co/PrismML/bonsai-8b"
+            }
+          ]
+        },
+        {
+          "body": "**Unsloth v0.1.37-beta — Studio UI/UX overhaul + Preserve Thinking toggle for Qwen3.6 + gpt-oss thinking toggle + Linux CUDA latest llama.cpp prebuilt + Kimi-K2.6 + experimental API; v0.1.36-beta (Apr 8) Gemma-4-E2B 8 GB VRAM training, ~1.5x faster, ~60% less VRAM than FA2** — Cumulative carry-forward into Apr 29; the standing on-device fine-tuning baseline alongside Bonsai-8B + TurboQuant.",
+          "citations": [
+            {
+              "label": "GitHub - unslothai/unsloth releases",
+              "url": "https://github.com/unslothai/unsloth/releases"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (local inference runtimes) > llama.cpp",
+      "bullets": [
+        {
+          "body": "**llama.cpp build cadence continues Apr 28-29 — sub-day macOS ARM64/x64, Android, OpenEuler, CUDA binaries; llama-cpp-python 0.3.21 carry-forward** — TurboQuant discussion thread #20969 active in `ggml-org/llama.cpp`; community evaluation of 3.5-bit KV-cache compression for the on-device target.",
+          "citations": [
+            {
+              "label": "GitHub Discussion - llama.cpp #20969 TurboQuant Extreme KV Cache Quantization",
+              "url": "https://github.com/ggml-org/llama.cpp/discussions/20969"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (local inference runtimes) > Ollama",
+      "bullets": [
+        {
+          "body": "**Ollama v0.21.3-rc0 carry-forward Apr 27-29 — `max` think-parameter + improved OpenAI response mapping for reasoning effort** — Builds on v0.21.2 (Apr 23) Kimi K2.6 + Gemma 4 MLX path. Native OpenClaw web-search plugin remains bundled.",
+          "citations": [
+            {
+              "label": "Release Alert - ollama/ollama Releases tracker",
+              "url": "https://releasealert.dev/github/ollama/ollama"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (local inference runtimes) > Foundry Local",
+      "bullets": [
+        {
+          "body": "**Foundry Local — GA carry-forward (Apr 9 launch); MAI-Transcribe-1 + GPT-4.1 model graders + RFT Global Training (o4-mini)** — Cross-platform local AI on Windows / macOS / Android / on-prem Azure Local. MLX support remains an open issue (`microsoft/Foundry-Local#329`).",
+          "citations": [
+            {
+              "label": "Microsoft Foundry Blog - What's new in Microsoft Foundry March 2026",
+              "url": "https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-mar-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > CVE / KEV / Threat Intelligence (CVSS ≥ 8.0)",
+      "bullets": [
+        {
+          "body": "**CVE-2026-32644 Milesight AIOT Cameras Default SSL Private Keys (CVSS 9.8, Apr 28)** — Hard-coded default SSL private keys paired with Milesight-issued certificates compromise confidentiality + integrity of all encrypted traffic for affected firmware.",
+          "citations": [
+            {
+              "label": "TheHackerWire - Milesight AIOT Cameras: Default SSL Private Keys (CVE-2026-32644)",
+              "url": "https://www.thehackerwire.com/milesight-aiot-cameras-default-ssl-private-keys-cve-2026-32644/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-7240 Totolink A8000RU Critical Remote Command Injection (CVSS 9.8, Apr 28)** — Same firmware base 7.1cu.643_b20200521; remote unauthenticated arbitrary OS command.",
+          "citations": [
+            {
+              "label": "TheHackerWire - Totolink A8000RU Critical Remote Command Injection (CVE-2026-7240)",
+              "url": "https://www.thehackerwire.com/totolink-a8000ru-critical-remote-command-injection-cve-2026-7240/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-7243 Totolink A8000RU OS Command Injection (CVSS 9.8, Apr 28)** — Same firmware base; public PoC.",
+          "citations": [
+            {
+              "label": "TheHackerWire - Totolink A8000RU OS Command Injection (CVE-2026-7243)",
+              "url": "https://www.thehackerwire.com/totolink-a8000ru-os-command-injection-cve-2026-7243/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-7242 Totolink A8000RU OS Command Injection (CVSS 9.8, Apr 28)** — Carry-into the A8000RU 9.8 wave (now 7+ distinct CVEs in 72h Apr 27-28).",
+          "citations": [
+            {
+              "label": "TheHackerWire - Totolink A8000RU Critical OS Command Injection (Apr 28)",
+              "url": "https://www.thehackerwire.com/totolink-a8000ru-critical-os-command-injection-2/"
+            }
+          ]
+        },
+        {
+          "body": "**CISA KEV Apr 28 — adds CVE-2024-1708 ConnectWise ScreenConnect Path Traversal + CVE-2026-32202 Windows Shell Protection-Mechanism-Failure spoofing; May-12 federal deadline** — ConnectWise CVE-2024-1708 has been chained with CVE-2024-1709 (auth bypass, CVSS 10.0) for 14+ months. Windows Shell CVE-2026-32202 stems from an incomplete patch for CVE-2026-21510 and was exploited as a zero-day by APT28 since December 2025 in attacks targeting Ukraine + EU.",
+          "citations": [
+            {
+              "label": "CISA - Adds Two Known Exploited Vulnerabilities to Catalog (Apr 28)",
+              "url": "https://www.cisa.gov/news-events/alerts/2026/04/28/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+            }
+          ]
+        },
+        {
+          "body": "**SGLang CVE-2026-5760 (CVSS 9.8) — still unpatched into Apr 29; cross-server copy-paste class** — vLLM CVE-2025-61620, LMDeploy CVE-2026-33626 share the same Jinja2/SSTI shape.",
+          "citations": [
+            {
+              "label": "The Hacker News - SGLang CVE-2026-5760 (CVSS 9.8) Enables RCE via Malicious GGUF Model Files",
+              "url": "https://thehackernews.com/2026/04/sglang-cve-2026-5760-cvss-98-enables.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > Solutions: Zero-Trust Access Control for Agentic AI",
+      "bullets": [
+        {
+          "body": "**Novita Sandbox launches Apr 28 — first commercial agent-runtime sandbox purpose-built for OpenClaw + Hermes + autonomous systems** — Managed NovitaClaw deployments, Sandbox Skills for OpenClaw, Hermes-compatible runtimes, persistent-node configs for long-running workflows. Skill-marketplace-aware threat-model; positioned against ClawHavoc + Cisco's 36% prompt-injection finding.",
+          "citations": [
+            {
+              "label": "PR Newswire - Novita AI Launches Sandbox",
+              "url": "https://www.prnewswire.com/news-releases/novita-ai-launches-sandbox-to-secure-openclaw-hermes-agent-and-autonomous-systems-302755870.html"
+            }
+          ]
+        },
+        {
+          "body": "**Okta for AI Agents — GA Apr 30 (countdown: 1 day from Apr 29)** — Agent Discovery & Governance, Agent Gateway as central MCP control plane (virtual MCP server aggregating Okta MCP registry), credential vaulting + auto-rotation, runtime enforcement via universal logout. Carry-forward into the Apr 30 GA event.",
+          "citations": [
+            {
+              "label": "Cloud Security Alliance - ATF: Zero Trust for AI Agents",
+              "url": "https://cloudsecurityalliance.org/blog/2026/04/03/every-rsac-keynote-asked-the-same-five-questions-here-s-the-framework-that-answers-them"
+            }
+          ]
+        },
+        {
+          "body": "**Microsoft Zero Trust for AI carry-forward — RSAC 2026 Zero Trust Workshop AI pillar + reference architecture** — Cross-vendor consensus from RSAC 2026 (Cisco's \"action control,\" CrowdStrike, Splunk) reinforces zero-trust-for-agents as the assumed baseline into Apr 29.",
+          "citations": [
+            {
+              "label": "Cisco - Zero trust for the agentic AI workforce",
+              "url": "https://www.cisco.com/site/us/en/solutions/artificial-intelligence/security/securing-agentic-ai/index.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > Solutions: Monitor and Manage AI Agent Behavior",
+      "bullets": [
+        {
+          "body": "**ClawHavoc quantified Apr 27-29 — 1,184 malicious skills published in OpenClaw's ClawHub since Jan 27, 2026; campaign named by Koi Security on Feb 1; Kurtz RSAC keynote on self-erasing-after-install memory; Antiy Labs full analysis** — First documented supply-chain attack on an AI-agent ecosystem. Defines a new threat-class: skill-marketplace-poisoning.",
+          "citations": [
+            {
+              "label": "Cyberpress - ClawHavoc Poisons OpenClaw's ClawHub With 1,184 Malicious Skills",
+              "url": "https://cyberpress.org/clawhavoc-poisons-openclaws-clawhub-with-1184-malicious-skills/"
+            }
+          ]
+        },
+        {
+          "body": "**Cisco RSAC 2026 finding — 36% of skills in the OpenClaw marketplace contain detectable prompt injection** — Independent corroboration of skill-marketplace risk. Frames the agentic-AI marketplace governance gap that Novita Sandbox + signed-skill provenance proposals will compete to fill.",
+          "citations": [
+            {
+              "label": "VentureBeat - RSAC 2026 shipped five agent identity frameworks and left three critical gaps open",
+              "url": "https://venturebeat.com/security/rsac-2026-agent-identity-frameworks-three-gaps"
+            }
+          ]
+        },
+        {
+          "body": "**Indirect-prompt-injection in the wild Apr 24-27 — Google + Forcepoint document 10 fresh IPI payloads + OpenAI publicly concedes prompt-injection class is permanent** — Carry-forward; impacts any agent that browses + summarizes, indexes for RAG, processes metadata/HTML comments, or moderates ad content.",
+          "citations": [
+            {
+              "label": "Airia - AI Security in 2026: Prompt Injection, the Lethal Trifecta, and How to Defend",
+              "url": "https://airia.com/ai-security-in-2026-prompt-injection-the-lethal-trifecta-and-how-to-defend/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Hardware (chips / platforms)",
+      "bullets": [
+        {
+          "body": "**Apr 28 selloff: Oracle -4%, AMD -3%, Broadcom -4%, Nvidia + TSMC down on the WSJ OpenAI-revenue-miss report; SoftBank -10% in Asia trade Apr 29 morning** — Material reversal of the Apr 27 NVDA fresh 52-week high (+4%) and AMD ATH ($352.99) carry-forward narrative. The Apr 28 single-day move is the first material crack in the AI-capex-on-faith tape since Apr 17.",
+          "citations": [
+            {
+              "label": "SiliconANGLE - Chip stocks drop on report OpenAI missed ChatGPT growth targets",
+              "url": "https://siliconangle.com/2026/04/28/chip-stocks-drop-report-openai-missed-chatgpt-growth-targets/"
+            }
+          ]
+        },
+        {
+          "body": "**Cerebras IPO mid-May window confirmed at $22B-$25B — $20B+ / 750MW OpenAI deal through 2028; underwriters Morgan Stanley / Citi / Barclays / UBS** — Concentration risk on G42 (24%) + MBZUAI (62%) into the new sceptical-revenue tape. Apr 28 OpenAI-miss WSJ report adds a second concentration overhang for the IPO window.",
+          "citations": [
+            {
+              "label": "SEC - Cerebras S-1 (April 2026)",
+              "url": "https://www.sec.gov/Archives/edgar/data/2021728/000162828026025762/cerebras-sx1april2026.htm"
+            }
+          ]
+        },
+        {
+          "body": "**Intel CEO Lip-Bu Tan: \"the CPU is reinserting itself as the indispensable foundation of the AI era\" (investor-call carry-forward)** — CPU/agentic-AI workload primitive thesis carries into AWS Graviton-at-scale Meta deployment + Trainium-Anthropic silicon-level co-engineering.",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "Physical AI / Humanoid Robotics",
+      "bullets": [
+        {
+          "body": "**Tesla Optimus V3 reveal carry-forward — Q1 Update Letter confirms late-July / early-August reveal; Fremont Model S/X line conversion to 1M-pilot-line; Texas 5.2M sq-ft Optimus expansion targeting 10M robots/year from 2027** — Public sales targeted end-2027 at $20K-$30K. Apr 22 Q1 earnings call carry-forward into Apr 27-29 framing.",
+          "citations": [
+            {
+              "label": "Basenor - Tesla Optimus V3 Reveal Set for Late July: What We Know",
+              "url": "https://www.basenor.com/blogs/news/tesla-optimus-v3-reveal-set-for-late-july-what-we-know"
+            }
+          ]
+        },
+        {
+          "body": "**Figure AI shipments-doubling carry-forward Apr 27-29 — 60 (Feb) → 120 (Mar) → 240 (Apr) Figure 03 units; 90-min build cadence; $39B valuation; BotQ scaling to 12,000+/year** — Production-ramp S-curve carry-forward.",
+          "citations": [
+            {
+              "label": "There's a Robot for That - Figure 03 Shipments Doubling Every Month",
+              "url": "https://www.theresarobotforthat.com/figure-03-shipments-doubling-every-month/"
+            }
+          ]
+        },
+        {
+          "body": "**Boston Dynamics Atlas — production-shipment carry-forward; Hyundai RMAC + Google DeepMind 2026 deployments; stacked 2026/2028/2030 industrial-deployment plan** — Validation/training → high-precision sequencing → complex assembly.",
+          "citations": [
+            {
+              "label": "Markman Capital Insight - The Quiet Inflection: What Humanoid Robots Actually Look Like in 2026",
+              "url": "https://markmancapitalinsight.substack.com/p/the-quiet-inflection-what-humanoid"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Stock Prices and Corporate Activity",
+      "bullets": [
+        {
+          "body": "**WSJ Apr 28 OpenAI revenue-miss report — multiple monthly revenue misses early-2026, missed internal 1B-WAU year-end goal, Anthropic gaining in coding/enterprise; CFO Sarah Friar warned compute-funding tightens without re-acceleration; OpenAI rebutted \"ridiculous\"** — The first material crack in the AI-capex-on-faith tape since Apr 17.",
+          "citations": [
+            {
+              "label": "Sherwood News - Technology stocks suffer after WSJ reports that OpenAI has missed key revenue and user targets",
+              "url": "https://sherwood.news/markets/openai-linked-stocks-suffer-after-wsj-reports-that-the-company-has-missed-key-revenue-and-user-targets/"
+            }
+          ]
+        },
+        {
+          "body": "**Apr 28 close: S&P 500 7,138.80 (-0.49%), Nasdaq 24,663.80 (-0.9%), Dow 49,141.90, Russell 2000 2,755.99 (-1.15%)** — Reversal of Apr 27's record close (S&P 7,173.91).",
+          "citations": [
+            {
+              "label": "TheStreet - Stock Market Today (Apr. 28, 2026): OpenAI revenue report sends Russell 2000, Nasdaq falling",
+              "url": "https://www.thestreet.com/latest-news/stock-market-today-apr-28-2026-updates"
+            }
+          ]
+        },
+        {
+          "body": "**Mag 7 super-week prints today + tomorrow — MSFT/GOOGL/AMZN/META Apr 29 after close, AAPL Apr 30; ~$700B 2026 capex aggregated; Microsoft FY26 Q3 consensus EPS $4.07 / rev $81.4B (Azure +37-38% cc); Alphabet Q1 EPS $2.63 / rev $106.89B (FY26 capex $175-$185B); Meta EPS $7.51 / rev $55.5B; Amazon EPS $2.11 / rev $177.2B** — All four Wednesday names + Apple Apr 30.",
+          "citations": [
+            {
+              "label": "The Motley Fool - 4 \"Magnificent Seven\" Companies Are About to Report Earnings -- All on the Same Day",
+              "url": "https://www.fool.com/investing/2026/04/28/4-magnificent-seven-companies-are-about-to-report/"
+            }
+          ]
+        },
+        {
+          "body": "**FOMC Apr 29 — Powell's last meeting; rates expected unchanged at 3.50%-3.75% (consensus 100%); statement at 2:00 PM ET, presser at 2:30 PM ET; Powell term ends May 15** — Inflation + Hormuz oil disruption keep Fed on hold both ways; next meeting June 17.",
+          "citations": [
+            {
+              "label": "Kiplinger - April Fed Meeting: Live Updates and Commentary",
+              "url": "https://www.kiplinger.com/news/live/fed-meeting-updates-and-commentary-april-2026"
+            }
+          ]
+        },
+        {
+          "body": "**Microsoft Q3 FY26 preview — $80.65B-$81.75B revenue guide; Azure +37-38% cc; Microsoft Cloud gross margin ~65%; FY26 capex ~$120B (~$37.5B single quarter for AI infrastructure)** — Investor focus: does Azure re-accelerate past 38% or extend the deceleration trend from 40% prior-year period.",
+          "citations": [
+            {
+              "label": "TradingKey - Microsoft Q3 2026 Earnings Preview",
+              "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/261828809-microsoft-q3-2026-earnings-report-tradingkey"
+            }
+          ]
+        },
+        {
+          "body": "**Alphabet Q1 2026 preview — rev consensus $106.89B (+19% YoY); EPS $2.63 (-6.4% YoY); Cloud consensus $18.4B (+49.6% YoY); FY26 capex $175B-$185B (up from $91.4B in 2025); free-cash-flow compression risk if op-cash-flow does not rise materially** — Capex disclosure is the single most-watched line for the broader AI supply chain.",
+          "citations": [
+            {
+              "label": "S&P Global - Alphabet earnings preview: Q1 2026",
+              "url": "https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/04/alphabet-earnings-preview-q1-2026"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Meet up event related to AI in Bay Area SV",
+      "bullets": [
+        {
+          "body": "**AI Dev 26 SF day-1 underway Apr 28 + day-2 Apr 29 at Pier 48 Mission Bay; 3,000+ devs; Andrew Ng-hosted; speakers from Google DeepMind, Oracle, AMD, Arm, Neo4j, LangChain, LandingAI, Replit, AI21** — Tracks: Agentic AI, Context Engineering, Multimodal AI Apps, AI Governance, Coding-with-AI; AI Startup Track; live demos. Hands-on workshops on agentic-AI, context engineering, RAG, model evaluation, AI safety in production.",
+          "citations": [
+            {
+              "label": "AI Dev 26 x SF — DeepLearning.AI",
+              "url": "https://ai-dev.deeplearning.ai/"
+            }
+          ]
+        },
+        {
+          "body": "**AI Tinkerers SF: \"Building Software Factories\" VIP Dinner with Kiro & B-Capital (Apr 29)** — Invite-only dinner pairs Kiro Power's SDK with B-Capital's VC perspective.",
+          "citations": [
+            {
+              "label": "AI21 - AI Dev 26 events page",
+              "url": "https://www.ai21.com/events/ai-dev-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Stanford Causal Science Conference: Frontiers in AI Evaluation (Apr 29, 12-6 PM PT, Simonyi Conference Center, CoDa)** — Stanford follow-up.",
+          "citations": [
+            {
+              "label": "Stanford HAI - News & Announcements",
+              "url": "https://hai.stanford.edu/news/announcements/"
+            }
+          ]
+        },
+        {
+          "body": "**AWS Builder Loft (525 Market St) Apr 29, 9:30 AM PT, ~482 attending** — Same-day AWS-hosted developer touchpoint.",
+          "citations": [
+            {
+              "label": "AWS Startups - AI meetup San Francisco: GenAI, LLMs, and ML #2",
+              "url": "https://aws.amazon.com/startups/events/ai-meetup-san-francisco-genai-llms-and-ml-2"
+            }
+          ]
+        },
+        {
+          "body": "**Hanwha AI Center (300 Grant Ave Suite 500) Apr 29, 5:30 PM PT, ~94 attending** — Korean conglomerate-backed AI center evening event.",
+          "citations": [
+            {
+              "label": "Meetup - Bay Area AI Meetup",
+              "url": "https://www.meetup.com/bay-area-ai-meetup/"
+            }
+          ]
+        },
+        {
+          "body": "**Cloud Security Alliance: Cloud Security LIVE 2026 Apr 28 — building trust in the age of AI-driven threats** — Same-day RSAC-aftermath event tying zero-trust-for-agents into the Apr 28 Novita Sandbox launch frame.",
+          "citations": [
+            {
+              "label": "CSA - Cloud Security LIVE 2026: AI Risk & Trust",
+              "url": "https://cloudsecurityalliance.org/blog/2026/04/28/cloud-security-live-2026-building-trust-in-the-age-of-ai-driven-threats"
+            }
+          ]
+        },
+        {
+          "body": "**SaaStr Annual 2026 + Deploy '26 (May 12-14) — first agent-deployment summit; 10,000+ attendees** — Scheduled follow-on.",
+          "citations": [
+            {
+              "label": "GrackerAI - AI Dev 26 x SF – Free Tickets",
+              "url": "https://gracker.ai/events/ai-dev-sf-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Other Standout Topics",
+      "bullets": [
+        {
+          "body": "**Western/Chinese open-weight catch-up dynamic into Apr 27-29 — DeepSeek V4, Qwen 3.6, Kimi K2.6, Moonshot narrowing the gap from \"months to days\"; Apr 28 OpenAI-revenue-miss WSJ report adds a tape catalyst** — Frame for the model-weights-as-commodity arc into Mag 7 super-week.",
+          "citations": [
+            {
+              "label": "Renovateqr - Chinese AI Models in April 2026: DeepSeek V4, Kimi K2.6, Qwen 3.6, and Image Generation",
+              "url": "https://renovateqr.com/blog/chinese-ai-models-april-2026"
+            }
+          ]
+        },
+        {
+          "body": "**Anthropic Claude updates carry-forward Apr 27-29 — Opus 4.7 GA (Apr 16), Claude Managed Agents public beta, Claude Design (Anthropic Labs visual outputs), `ant` CLI, Rate Limits API, Claude Mythos Preview gated to Project Glasswing partners** — Cross-stack shipping cadence holds into Mag-7-week + AI Dev 26 SF day-2.",
+          "citations": [
+            {
+              "label": "Anthropic Release Notes — Apr 2026 (Releasebot)",
+              "url": "https://releasebot.io/updates/anthropic/claude"
+            }
+          ]
+        },
+        {
+          "body": "**Hugging Face Spaces ships HF Buckets persistent storage + agent-trace dataset uploads + ZeroGPU over-quota credits + volume mounting (Apr 26-29)** — Carry-forward; agent traces from Claude Code / Codex / Pi upload directly to HF Datasets. ZeroGPU pre-paid credits ($1 / 10min) unlock past-quota for PRO.",
+          "citations": [
+            {
+              "label": "Hugging Face Hub - Releases",
+              "url": "https://github.com/huggingface/huggingface_hub/releases"
+            }
+          ]
+        },
+        {
+          "body": "**Hugging Face Transformers v5 — \"Simple model definitions powering the AI ecosystem\"** — Anchor framing for the v5 break + cross-server impact on vLLM / SGLang / TGI. The TurboQuant + KV-cache-compression utility wave layers on top of the v5 model-definition surface.",
+          "citations": [
+            {
+              "label": "Hugging Face Blog - Transformers v5: Simple model definitions powering the AI ecosystem",
+              "url": "https://huggingface.co/blog/transformers-v5"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

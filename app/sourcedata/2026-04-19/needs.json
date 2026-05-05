@@ -1,0 +1,151 @@
+{
+  "date": "2026-04-19",
+  "by_prediction": {
+    "prediction.4bd551bfc1cca138": [
+      {
+        "actor": "edge-LLM model researcher at an open-weights frontier lab",
+        "job": "Design a 1-bit-native training recipe for an open-weights mid-size LLM family, replicating the Bonsai 8B production-quality result.",
+        "outcome": "Public release of a 1-bit-native checkpoint in the Qwen or Llama family with quality matching its 4/8-bit post-quantized peer.",
+        "motivation": "Capturing the edge-LLM standard-recipe slot before competitors locks in citation share, downstream tooling, and hardware-vendor co-marketing.",
+        "task": {
+          "who": "pretraining research team + tokenizer/optimizer leads + evals team",
+          "what": "rerun pretraining with 1-bit weight parameterization and matched data budget",
+          "where": "internal training cluster + public model card + arXiv preprint",
+          "when": "May to Q3 2026",
+          "why": "ship a 1-bit derivative before the Bonsai recipe becomes the default",
+          "how": "ternary-weight or BitNet-style 1.58-bit training stack on H100/MI300 cluster"
+        }
+      },
+      {
+        "actor": "on-device inference runtime engineer at a mobile/edge runtime vendor",
+        "job": "Land production-grade 1-bit kernels and packed-weight loaders so 1-bit checkpoints run faster than their 4-bit-quantized peers on phone-class hardware.",
+        "outcome": "Release notes showing 1-bit checkpoints loading at sub-1.5 GB and beating 4-bit latency in the runtime's standard benchmark suite.",
+        "motivation": "Whichever runtime ships first-class 1-bit support becomes the default deployment target for the next wave of 1-bit derivatives.",
+        "task": {
+          "who": "kernel/perf engineers + model-loader maintainers + mobile QA",
+          "what": "implement packed-bit matmul kernels and integrate Bonsai-style loader",
+          "where": "llama.cpp / MLX / ExecuTorch / ONNX Runtime mobile codepaths",
+          "when": "May to Q3 2026",
+          "why": "make 1-bit the path of least resistance for downstream app developers",
+          "how": "ARM SME / Apple AMX / Adreno DP4A intrinsics + packed-weight format"
+        }
+      },
+      {
+        "actor": "open-weights model-family release maintainer (Qwen / Llama line steward)",
+        "job": "Publish a 1-bit-native derivative of the family's flagship sub-10B checkpoint alongside the existing 4/8-bit quantized variants.",
+        "outcome": "An official 1-bit checkpoint card on Hugging Face under the canonical org, with parity-grade evals and a sub-1.5 GB artifact.",
+        "motivation": "Defending the family's status as the default open-weights edge target; ceding 1-bit to a rival fragments the ecosystem around their releases.",
+        "task": {
+          "who": "release engineering + evals lead + community/partner-comms owner",
+          "what": "package 1-bit checkpoint, publish model card, coordinate runtime support",
+          "where": "Hugging Face org repo + family blog + partner runtime release notes",
+          "when": "May to Q3 2026",
+          "why": "match the Bonsai-set standard before third parties rebrand the family's weights",
+          "how": "internal 1-bit training run + standard family eval harness + HF release flow"
+        }
+      }
+    ],
+    "prediction.995feb039ef043c1": [
+      {
+        "actor": "LLM-integration vulnerability researcher (independent + AI-security firms like HiddenLayer, Lakera, Robust Intelligence)",
+        "job": "publish reproducible CVE-2025-53773-style indirect-prompt-injection PoCs against agentic coding tools and LLM-backed apps in the runway to Q3 2026",
+        "outcome": "steady stream of public PoCs that meet CNA disclosure bar and qualify for CVSS 8.0+ scoring on LLM-integration products",
+        "motivation": "establish indirect-prompt-injection as a named bug class with bounty-eligible payouts and conference-speaking visibility before the category saturates",
+        "task": {
+          "who": "AI red-team researchers + bug-bounty hunters + academic LLM-security labs",
+          "what": "craft + publish indirect-prompt-injection PoCs hitting RCE-from-untrusted-text paths",
+          "where": "GitHub PoC repos + arXiv + HackerOne + DEF CON AI Village + vendor disclosure portals",
+          "when": "April to Q3 2026",
+          "why": "+190% YoY successful-attack growth makes the category bounty-rich and citation-rich",
+          "how": "fuzzing PR bodies + issue templates + tool-call payloads against Copilot / Cursor / Claude Code / agentic IDEs"
+        }
+      },
+      {
+        "actor": "LLM-integration product security team (GitHub, Cursor, Anthropic, OpenAI, JetBrains, Microsoft, agentic-IDE vendors)",
+        "job": "ship monthly security patches addressing indirect-prompt-injection CVEs in LLM coding assistants and agent runtimes through Q3 2026",
+        "outcome": "recurring CVSS 8.0+ LLM-integration entries on the Microsoft Patch Tuesday rollup and parallel vendor advisories",
+        "motivation": "preserve enterprise procurement trust as agentic tools cross into privileged execution paths and CISOs demand monthly-cadence patch visibility",
+        "task": {
+          "who": "vendor PSIRT teams + LLM-integration product engineering + advisory authors",
+          "what": "triage, patch, and publish CVE advisories for indirect-prompt-injection flaws monthly",
+          "where": "Microsoft Security Response Center + GitHub Security Advisories + vendor PSIRT pages",
+          "when": "May to Q3 2026 (monthly Patch Tuesday cadence)",
+          "why": "CVE-2025-53773 RCE-from-PR-body reproduces trivially across the LLM-coding-assistant cohort",
+          "how": "input-provenance tagging + tool-call allowlisting + PR-body sandboxing + CVSS 8.0+ disclosure templates"
+        }
+      },
+      {
+        "actor": "MITRE CVE Numbering Authority intake + CWE maintainers + OWASP LLM Top 10 working group",
+        "job": "formalize indirect-prompt-injection as a named CWE entry and OWASP LLM Top 10 category so LLM-integration CVEs route consistently and score CVSS 8.0+",
+        "outcome": "stable CWE / OWASP taxonomy entry that anchors monthly Patch Tuesday LLM-integration CVE labeling by Q3 2026",
+        "motivation": "prevent CNA-side fragmentation that would otherwise hide the category in generic CWE-77 / CWE-94 buckets and obscure the trend",
+        "task": {
+          "who": "MITRE CNA editors + CWE content team + OWASP LLM Top 10 chairs",
+          "what": "publish CWE entry + OWASP LLM Top 10 update naming indirect-prompt-injection as a top category",
+          "where": "cwe.mitre.org + OWASP project repo + CVE list intake + Patch Tuesday advisory templates",
+          "when": "May to Q3 2026",
+          "why": "+190% YoY attack growth + CVE-2025-53773 reproducibility force a stable taxonomy slot",
+          "how": "draft CWE language + OWASP working-group review + coordinate with MSRC + GitHub Security advisory templates"
+        }
+      }
+    ],
+    "prediction.c08481a657991ec8": [
+      {
+        "actor": "hyperscaler agent-platform product manager (AWS Agent Registry team)",
+        "job": "Ship a managed registry service for distributing agent skills, tool permissions, and audit traces alongside MCP",
+        "outcome": "GA-tier Agent Registry with versioned artifacts, signed manifests, and audit-trace export to enterprise customers",
+        "motivation": "First mover defines the canonical agent-distribution shape and locks in enterprise platform stickiness",
+        "task": {
+          "who": "AWS Bedrock agents PM + service team + security/governance lead",
+          "what": "publish registry API spec, manifest schema, and signing policy",
+          "where": "AWS Agent Registry service + re:Invent / dev-day announcements",
+          "when": "Q2 to H2 2026",
+          "why": "lock canonical agent-distribution shape before rivals fragment it",
+          "how": "MCP-aligned manifest format + IAM-style permission scopes"
+        }
+      },
+      {
+        "actor": "enterprise-AI vendor governance lead (NemoClaw-style audit + guardrail product)",
+        "job": "Codify audit-log and guardrail policy schema as a registry-attachable artifact",
+        "outcome": "Reference guardrail/audit policy bundle that registries can attach to any agent artifact",
+        "motivation": "Govern agent sprawl before regulators force a less-favorable shape",
+        "task": {
+          "who": "vendor product + applied-security team + design-partner CISOs",
+          "what": "draft policy-bundle schema and publish reference implementation",
+          "where": "vendor SDK + design-partner pilot deployments",
+          "when": "Q2 to H2 2026",
+          "why": "registry-attachable policy is the only enterprise-acceptable shape",
+          "how": "OPA-style policy bundle + signed audit-trace export"
+        }
+      },
+      {
+        "actor": "self-learning agent platform engineer (Hermes Agent-style skill-acquisition team)",
+        "job": "Define a skill-artifact format so self-learned skills can be exported, versioned, and shared",
+        "outcome": "Skill-artifact spec with provenance, eval scores, and tool-permission requirements baked in",
+        "motivation": "Self-learned skills are worthless if they cannot be safely distributed across deployments",
+        "task": {
+          "who": "platform engineering + ML eval team + developer-relations",
+          "what": "publish skill-artifact format and a reference exporter",
+          "where": "agent SDK + open-source skill registry repo",
+          "when": "Q2 to H2 2026",
+          "why": "distribution path is what makes skill-acquisition commercially useful",
+          "how": "MCP-aligned manifest + eval-score attestations"
+        }
+      },
+      {
+        "actor": "open-source agent-framework maintainer (MCP / LangChain / equivalent)",
+        "job": "Extend MCP with registry-discovery, signed-artifact, and permission-scope primitives",
+        "outcome": "MCP spec extension covering registry endpoints, artifact signing, and tool-permission scopes",
+        "motivation": "Keep MCP central as the cross-vendor standard rather than ceding ground to proprietary registries",
+        "task": {
+          "who": "MCP spec working group + maintainer council + vendor representatives",
+          "what": "draft and ratify registry-discovery + signing extension",
+          "where": "MCP spec repo + working-group calls",
+          "when": "Q2 to H2 2026",
+          "why": "without it, hyperscaler registries fragment the agent ecosystem",
+          "how": "RFC process + reference implementations from multiple vendors"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,651 @@
+{
+  "date": "2026-04-27",
+  "sections": [
+    {
+      "category": "LLM Workflow > OpenClaw / NemoClaw / Hermes Agents",
+      "bullets": [
+        {
+          "body": "**Hermes Agent v0.11.0 \"Interface\" (23/04, tracción 25-27/04) — TUI React/Ink reescrita por completo, AWS Bedrock nativo, GPT-5.5 vía Codex OAuth, 1.556 commits / 761 PRs / 224.000 inserciones / 29 contribuyentes** — La mayor release de Hermes Agent hasta la fecha. **CLI interactiva basada en Ink** (`hermes --tui`) con backend Python JSON-RPC (`tui_gateway`); composer fijo; streaming en vivo con soporte de portapapeles OSC-52; teclas de picker estables; barra de estado con cronómetro por turno + rama git; confirmación de `/clear`; preset de tema claro; overlay de observabilidad de spawn de subagentes. **Arquitectura de transporte conectable bajo cada proveedor**; 5 nuevas rutas de inferencia; 17ª plataforma de mensajería (QQBot); AWS Bedrock nativo; GPT-5.5 vía Codex OAuth. **Shell hooks** (`pre_tool_call` / `post_tool_call` / `on_session_start`) sin necesidad de plugin Python. **Modo de entrega directa por webhook** (push sin LLM para alertas, monitoreo de uptime, streams de eventos). Subagentes con rol orquestador explícito + `max_spawn_depth` configurable; subagentes hermanos concurrentes comparten estado del sistema de archivos vía capa de coordinación. Pantalla dedicada para overrides por tarea de modelos auxiliares.",
+          "citations": []
+        },
+        {
+          "body": "**Guía de referencia Hermes Agent v0.11 — Ink TUI + Bedrock + GPT-5.5 deployment** — Resumen práctico de la superficie de v0.11.0 para auto-hosters en producción.",
+          "citations": [
+            {
+              "label": "Blake Crosley - Hermes Agent v0.11 Reference: Ink TUI + Bedrock + GPT-5.5",
+              "url": "https://blakecrosley.com/guides/hermes"
+            }
+          ]
+        },
+        {
+          "body": "**El tren OpenClaw v2026.4.25-beta sigue hasta el 27/04 — endurecimiento del stack de voz, URLs de tab seguras en automatización del navegador, fallback de snapshot de rol nativo en CDP, --background en imagen por CLI, override de modelo en canales de voz de Discord, preservación del registro de instalación en onboarding de plugins** — Cadencia beta sub-24h persiste desde 26/04 13:00 (beta.3) → 13:24 (beta.4) → beta.7+ hasta horario laboral del 27/04. La voz ya en forma productiva con auto-TTS por chat + personas + 6 proveedores de TTS (Azure Speech / Xiaomi / Local CLI / Inworld / Volcengine / ElevenLabs v3).",
+          "citations": [
+            {
+              "label": "newreleases.io - openclaw/openclaw v2026.4.25-beta.4",
+              "url": "https://newreleases.io/project/github/openclaw/openclaw/release/v2026.4.25-beta.4"
+            }
+          ]
+        },
+        {
+          "body": "**NemoClaw — sigue en early preview, NVIDIA OpenShell + arquitectura de seguridad de 5 capas** — NemoClaw disponible en early preview desde 16/03/2026; **5 capas apiladas entre el agente OpenClaw y el host**: runtime seguro NVIDIA OpenShell como broker de aplicación de políticas, ejecución sandbox, control de egreso de red, acceso de mínimo privilegio, ruteo de privacidad y verificación de intención.",
+          "citations": [
+            {
+              "label": "NVIDIA - Run Autonomous, Self-Evolving Agents More Safely with NVIDIA OpenShell",
+              "url": "https://developer.nvidia.com/blog/run-autonomous-self-evolving-agents-more-safely-with-nvidia-openshell/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "LLM Workflow > OpenAI / Anthropic tools",
+      "bullets": [
+        {
+          "body": "**Sam Altman acusa a Anthropic de \"marketing basado en el miedo\" por Mythos — el debate se intensifica 25-27/04** — Altman: \"Hemos construido una bomba, vamos a tirarla sobre tu cabeza. Te venderemos un refugio antibombas por 100 millones\". Llega semanas después de que Bloomberg confirmara que un foro privado de Discord accedió a Mythos vía un tercero contratista de Anthropic + adivinación de patrón de URL.",
+          "citations": [
+            {
+              "label": "Mezha - Sam Altman accuses Anthropic of using fear to market Mythos",
+              "url": "https://mezha.net/eng/bukvy/sam_altman_accuses/"
+            }
+          ]
+        },
+        {
+          "body": "**Project Glasswing — 12 socios fundadores + 40 orgs de infraestructura crítica** — Anthropic, AWS, Apple, Broadcom, Cisco, CrowdStrike, Google, JPMorganChase, Linux Foundation, Microsoft, NVIDIA, Palo Alto Networks.",
+          "citations": [
+            {
+              "label": "Via Satellite - Anthropic Launches Project Glasswing for Cybersecurity",
+              "url": "https://www.satellitetoday.com/cybersecurity/2026/04/12/anthropic-launches-project-glasswing/"
+            }
+          ]
+        },
+        {
+          "body": "**Riesgo antimonopolio en Project Glasswing (ProMarket, 22/04, tracción 25-27/04)** — Crítica al modelo \"AI Avengers\" donde la IA cibernética más capaz queda restringida a los mayores incumbentes — concentrando la capacidad defensiva y dejando fuera al longtail de código abierto.",
+          "citations": [
+            {
+              "label": "ProMarket - The Antitrust Risks of Anthropic's Project Glasswing and the 'AI Avengers'",
+              "url": "https://www.promarket.org/2026/04/22/the-antitrust-risks-of-anthropics-project-glasswing-and-the-ai-avengers/"
+            }
+          ]
+        },
+        {
+          "body": "**Simon Willison: \"Vibe coding SwiftUI apps is a lot of fun\" (27/04)** — Reporte práctico sobre desarrollo iterativo en SwiftUI asistido por LLM, enfocado en el flujo GPT-5.5 + Codex del 23-25/04.",
+          "citations": [
+            {
+              "label": "Simon Willison - Archive for 2026",
+              "url": "https://simonwillison.net/2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Simon Willison: \"DeepSeek V4 — almost on the frontier, a fraction of the price\" (24/04, canónico 25-27/04)** — La lectura de referencia para profesionales sobre la calidad de V4-Pro / V4-Flash frente a las flagships de Anthropic / OpenAI.",
+          "citations": [
+            {
+              "label": "Simon Willison - DeepSeek V4",
+              "url": "https://simonwillison.net/2026/apr/24/deepseek-v4/"
+            }
+          ]
+        },
+        {
+          "body": "**CNBC: el público se enfría con la IA y los centros de datos mientras Anthropic y OpenAI miran al IPO y la tecnología sigue gastando (15/04, tracción 25-27/04)** — Datos de opinión pública desde la ventana IPO: rechazo creciente + incidentes de ataques físicos (casa de Altman, 16/04) enmarcan la narrativa de capex.",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (serving infrastructure) > vLLM",
+      "bullets": [
+        {
+          "body": "**Sin release importante entre 25-27/04 — v0.19.1 (18/04) sigue vigente; el encuadre de v0.20 (despliegue amplio de Transformers v5, FA4 como backend MLA prefill por defecto, KV cache TurboQuant 2-bit, frontend de cuantización online, andamiaje de vLLM IR) sigue como anticipado** — Se espera que v0.20 amplíe la compatibilidad con Transformers v5 a todas las arquitecturas, profundice la madurez del speculative decoding y añada optimizaciones de ruteo MoE para Gemma 4 / DeepSeek V3. La misma ventana vio al proyecto vLLM enviar **v0.19.1** y continuar el trabajo en Gemma 4 + DeepSeek V3.2 + zero-bubble overlap de speculative decoding × scheduling asíncrono.",
+          "citations": [
+            {
+              "label": "vLLM Blog",
+              "url": "https://blog.vllm.ai/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (serving infrastructure) > SGLang",
+      "bullets": [
+        {
+          "body": "**CVE-2026-5760 (CVSS 9.8) — la coordinación de parche no produjo un fix upstream; v0.5.10 sale sin endurecimiento SSTI** — Estado al 27/04: la release SGLang 0.5.10 no incluye la mitigación recomendada `ImmutableSandboxedEnvironment`. **SGLang sigue siendo explotable con un GGUF chat_template manipulado + frase trigger del reranker Qwen3 contra `/v1/rerank`**. El PoC en `github.com/Stuub/SGLang-0.5.9-RCE` continúa circulando. CERT/CC VU#915947 sigue activo.",
+          "citations": [
+            {
+              "label": "Cyberpress - Hackers Could Weaponize GGUF Models to Achieve RCE on SGLang Inference Servers",
+              "url": "https://cyberpress.org/hackers-could-weaponize-gguf-models-to-achieve-rce-on-sglang-inference-servers/"
+            }
+          ]
+        },
+        {
+          "body": "**La misma clase de vulnerabilidad fue parcheada antes en vLLM (CVE-2025-61620, CVSS 6.5) a finales de 2025 — el encuadre de \"vulnerabilidad copy-paste\" ahora aplica de forma amplia** — La cobertura de proveedores 25-27/04 marca repetidamente esto como una **primitiva compartida de renderizado de plantillas** entre servidores de inferencia, reforzando el caso del \"subcatálogo CVE de IA-Infra\".",
+          "citations": [
+            {
+              "label": "CSO Online - Copy-paste vulnerability hits AI inference frameworks at Meta, Nvidia, and Microsoft",
+              "url": "https://www.csoonline.com/article/4090061/copy-paste-vulnerability-hit-ai-inference-frameworks-at-meta-nvidia-and-microsoft.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (serving infrastructure) > AWS Bedrock",
+      "bullets": [
+        {
+          "body": "**AgentCore Managed Harness (preview en 4 regiones), CLI (GA en 14 regiones), Coding Skills en Kiro Power continúan (anuncio 22/04, tracción 25-27/04)** — La preview de persistencia del filesystem externaliza el estado de sesión para resume; CDK-nativo hoy, Terraform pronto. Hermes Agent v0.11.0 (23/04) entrega **soporte AWS Bedrock nativo** como una de las 5 nuevas rutas de inferencia — cerrando una brecha de adopción importante.",
+          "citations": [
+            {
+              "label": "About Amazon - New Amazon Bedrock AgentCore capabilities power the next generation of AI agents",
+              "url": "https://www.aboutamazon.com/news/aws/aws-amazon-bedrock-agent-core-ai-agents"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (serving infrastructure) > Google Cloud",
+      "bullets": [
+        {
+          "body": "**Suite de defensa agente de Google Cloud — 3 nuevos agentes IA (Threat Hunting en preview, Detection Engineering, Third-Party Risk) + soporte de servidor MCP remoto en GA + integración con Wiz** — Showcase del 22/04 en Google Cloud Next; los agentes ayudan a los SOC a cazar proactivamente patrones de ataque novedosos y comportamientos de adversario sigilosos. La construcción de agentes de seguridad personalizados vía servidores MCP remotos ahora en GA.",
+          "citations": [
+            {
+              "label": "iTWire - Google Cloud unveils agentic defence innovations at Next 2026",
+              "url": "https://itwire.com/business-it-news/security/google-cloud-unveils-agentic-defence-innovations-at-next-2026.html"
+            }
+          ]
+        },
+        {
+          "body": "**Acuerdo Google × Anthropic 40.000 M USD / 5GW del 24/04 — continuación** — Tesis de acoplamiento de capital hyperscaler-AI lab confirmada en los Big-3.",
+          "citations": [
+            {
+              "label": "Google Cloud Blog - Next '26: Redefining security for the AI era",
+              "url": "https://cloud.google.com/blog/products/identity-security/next26-redefining-security-for-the-ai-era-with-google-cloud-and-wiz"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > DeepSeek",
+      "bullets": [
+        {
+          "body": "**DeepSeek V4-Pro / V4-Flash siguen ganando tracción 25-27/04 — la página de V4-Pro en Hugging Face está activa, la pieza de Simon Willison del 24/04 ancla el consenso práctico** — V4-Pro = 1,6 T MoE / 49 B activos; V4-Flash = 284 B / 13 B activos. Hybrid Attention reduce el cómputo a **27% (Pro)** / **10% (Flash)** del de V3.2 con contexto de 1 M, y la memoria a **10% (Pro)** / **7% (Flash)**. V4-Pro a $1,74 / $3,48 por M tokens.",
+          "citations": [
+            {
+              "label": "Hugging Face - deepseek-ai organization",
+              "url": "https://huggingface.co/deepseek-ai"
+            }
+          ]
+        },
+        {
+          "body": "**Contexto de la release de DeepSeek V4 — round-up de lanzamientos de modelos de abril 2026** — Round-up de la industria que posiciona a V4-Pro / V4-Flash entre los lanzamientos de clase frontera de finales de abril.",
+          "citations": [
+            {
+              "label": "Renovateqr - AI Models in April 2026: Every Major Release, Leak, and What Comes Next",
+              "url": "https://renovateqr.com/blog/ai-models-april-2026"
+            }
+          ]
+        },
+        {
+          "body": "**MIT Technology Review: \"Three reasons why DeepSeek's new model matters\" (24/04)** — Encuadre de \"trayectoria frontera con rezago de 3 a 6 meses\"; lente del pivote a Huawei Ascend.",
+          "citations": []
+        },
+        {
+          "body": "**Mean.ceo: \"New AI Model Releases News — April 2026 (Startup Edition)\"** — Round-up de mirada startup sobre la cascada V4 + Qwen3.6 + GPT-5.5.",
+          "citations": [
+            {
+              "label": "Mean.ceo - New AI Model Releases News, April 2026",
+              "url": "https://blog.mean.ceo/new-ai-model-releases-news-april-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**DEV Community: \"DeepSeek V4 Pro Just Dropped — Here's What Changed for AI Agents\"** — Mirada práctica sobre las mejoras del lado del agente y los patrones de despliegue.",
+          "citations": [
+            {
+              "label": "DEV - DeepSeek V4 Pro Just Dropped",
+              "url": "https://dev.to/_omqxansi_258d1166f7/deepseek-v4-pro-just-dropped-heres-what-changed-for-ai-agents-2208"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Qwen / Tencent / Other Chinese LLMs",
+      "bullets": [
+        {
+          "body": "**Qwen3.6-27B sigue ganando tracción 25-27/04 — la página oficial de investigación \"Flagship-Level Coding in a 27B Dense Model\" está activa** — Apache 2.0 dense 27B + visión; **contexto 262 K → 1 M**; Thinking Preservation; Q4_K_M ~16,8 GB de VRAM; 40 tok/s en RTX 3090.",
+          "citations": [
+            {
+              "label": "Qwen Research - Qwen3.6-27B: Flagship-Level Coding in a 27B Dense Model",
+              "url": "https://qwen.ai/research"
+            }
+          ]
+        },
+        {
+          "body": "**Deep dive práctico sobre la familia Qwen3.6 — round-up \"Best Qwen Models in 2026\"** — Explicación de Apidog de abril 2026 sobre el linaje de la familia Qwen3.6 (27B dense + 35B-A3B MoE + 397B-A17B MoE) y benchmarks.",
+          "citations": [
+            {
+              "label": "Apidog - Best Qwen Models in 2026",
+              "url": "https://apidog.com/blog/best-qwen-models/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Bonsai / Optimization",
+      "bullets": [
+        {
+          "body": "**PrismML 1-bit Bonsai-8B sigue 25-27/04 — corre nativamente en iPhone 17 Pro Max a 44 tok/s, M4 Pro Mac a 131 tok/s, RTX 4090 a 368 tok/s** — Entrenamiento nativo en 1-bit (no PTQ); archivo total de 1,15 GB; reducción de tamaño 14× con pérdida mínima de precisión; reducción de 4-5× en energía por palabra; funciona en CUDA / Metal / Android / CPU.",
+          "citations": [
+            {
+              "label": "Roborhythms - Bonsai 1-Bit LLM Is Running Locally on 1GB of RAM",
+              "url": "https://www.roborhythms.com/how-to-run-bonsai-1bit-llm-locally-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Bonsai 8B: el LLM 1-Bit que cabe en 1 GB — deep dive práctico** — Reseña de AlphaSignal sobre la historia de despliegue.",
+          "citations": [
+            {
+              "label": "AlphaSignal - Bonsai 8B: The 1-Bit LLM That Fits in 1 GB",
+              "url": "https://alphasignalai.substack.com/p/bonsai-8b-the-1-bit-llm-that-fits"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (local inference runtimes) > llama.cpp",
+      "bullets": [
+        {
+          "body": "**Continúa la cadencia sub-1h 26-27/04 — siguen aterrizando builds; nueva web UI minimalista para operaciones de modelo local anunciada el 27/04** — Tras b8936 (26/04 08:54 UTC) y b8937 (26/04 09:28 UTC), llama.cpp continúa la cadencia de builds hasta el 27/04. **Nueva web UI minimalista + eficiente** para operaciones de modelo local anunciada como alternativa más fluida frente a interacciones basadas en servidor.",
+          "citations": [
+            {
+              "label": "Weekly GitHub Report for Llama.cpp - April 06 to April 13, 2026",
+              "url": "https://buttondown.com/weekly-project-news/archive/weekly-github-report-for-llamacpp-april-06-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (local inference runtimes) > Ollama",
+      "bullets": [
+        {
+          "body": "**Ollama continúa la ruta Kimi K2.6 + Gemma 4 MLX tras v0.21.2 (24/04)** — `ollama install kimi-cli` habilita ejecución agente de horizonte largo en harness multi-agente; Gemma 4 vía runtime MLX text-only en Apple Silicon. El runner MLX añade logprobs para modelos compatibles; muestreo MLX más rápido + tokenización de prompt mejorada.",
+          "citations": [
+            {
+              "label": "Ollama Library — sorted newest",
+              "url": "https://ollama.com/library?sort=newest"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems (local inference runtimes) > Foundry Local",
+      "bullets": [
+        {
+          "body": "**Foundry Local GA confirmado (9/04/2026); MAI-Transcribe-1 + GPT-4.1 model graders + RFT Global Training (o4-mini) siguen desplegándose 25-27/04** — IA local multiplataforma: Windows, macOS, Android, on-prem Azure Local. Tres modelos MAI exclusivos en Foundry; **MAI-Transcribe-1 = 3,9% WER promedio en FLEURS con 50% menos coste GPU**. El soporte MLX sigue como issue abierto (`microsoft/Foundry-Local#329`).",
+          "citations": [
+            {
+              "label": "Microsoft Foundry Blog - From Local to Production: The Complete Developer Journey",
+              "url": "https://devblogs.microsoft.com/foundry/from-local-to-production-the-complete-developer-journey-for-building-composing-and-deploying-ai-agents/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > CVE / KEV / Threat Intelligence (CVSS ≥ 8.0)",
+      "bullets": [
+        {
+          "body": "**CVE-2026-7037 inyección de comandos OS en Totolink A8000RU (CVSS 9.8, 26/04) — PoC público disponible, atacante remoto manipula el argumento pptpPassThru** — RCE crítica en el firmware Totolink A8000RU 7.1cu.643_b20200521 que permite ejecución arbitraria de comandos OS en los dispositivos afectados; código de exploit en distribución pública.",
+          "citations": [
+            {
+              "label": "TheHackerWire - Totolink A8000RU CVE-2026-7037",
+              "url": "https://www.thehackerwire.com/totolink-a8000ru-remote-os-command-injection-cve-2026-7037/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-6951 RCE en simple-git (CVSS 9.8, 26/04) — dependencia fundacional de CI/CD en Node.js expuesta en innumerables pipelines** — RCE crítica en la librería Node.js `simple-git` ampliamente desplegada; embebida en muchos pipelines de CI/CD y herramientas de desarrollo. TheCyberThrone cubre el mismo round-up del catálogo CISA-KEV con 31 de alta prioridad + 19 explotadas activamente en la ventana de divulgación 20-25/04.",
+          "citations": [
+            {
+              "label": "TheCyberThrone - CISA Adds Eight Actively Exploited Vulnerabilities to KEV Catalog",
+              "url": "https://thecyberthrone.in/2026/04/21/cisa-adds-eight-actively-exploited-vulnerabilities-to-kev-catalog/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-33277 inyección de comandos OS en LogonTracer (CVSS 8.8, 27/04)** — Inyección de comandos OS de alta severidad en LogonTracer < v2.0.0 publicada el 27/04.",
+          "citations": [
+            {
+              "label": "TheHackerWire - LogonTracer OS Command Injection (CVE-2026-33277)",
+              "url": "https://www.thehackerwire.com/logontracer-os-command-injection-cve-2026-33277/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-42363 fuga de credenciales en GeoVision GV-IP Device Utility (CVSS 9.3, 27/04)** — Encriptación insuficiente en GeoVision GV-IP Device Utility 9.0.5 filtra credenciales mediante escucha de paquetes broadcast; control total del dispositivo.",
+          "citations": [
+            {
+              "label": "TheHackerWire - Critical Credential Leak in GeoVision GV-IP Device Utility",
+              "url": "https://www.thehackerwire.com/critical-credential-leak-in-geovision-gv-ip-device-utility/"
+            }
+          ]
+        },
+        {
+          "body": "**SGLang CVE-2026-5760 (CVSS 9.8) — la coordinación de parche no produjo un fix upstream; v0.5.10 sigue sin entregar la mitigación `ImmutableSandboxedEnvironment`** — Sigue como la primitiva canónica de IA-Infra post-LMDeploy. PoC público en `github.com/Stuub/SGLang-0.5.9-RCE`; CERT/CC VU#915947 activo.",
+          "citations": [
+            {
+              "label": "Cyberpress - Hackers Could Weaponize GGUF Models to Achieve RCE on SGLang",
+              "url": "https://cyberpress.org/hackers-could-weaponize-gguf-models-to-achieve-rce-on-sglang-inference-servers/"
+            }
+          ]
+        },
+        {
+          "body": "**OpenClaw CVE-2026-41329 escalada de privilegios por bypass de sandbox (CVSS 9.9) — parcheada en v2026.3.31** — Bypass por herencia de contexto en heartbeat + manipulación del parámetro `senderIsOwner`; los usuarios anteriores a v2026.3.31 están expuestos.",
+          "citations": [
+            {
+              "label": "TheHackerWire - CVE-2026-41329 vulnerability page",
+              "url": "https://www.thehackerwire.com/vulnerability/CVE-2026-41329/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > Solutions: Zero-Trust Access Control for Agentic AI",
+      "bullets": [
+        {
+          "body": "**Okta for AI Agents — GA el 30/04 (a 3 días del 27/04)** — Agent Discovery & Governance para agentes sancionados + en la sombra; Agent Gateway como plano central de control MCP (servidor MCP virtual que agrega el registro MCP de Okta); vault de credenciales + rotación automática; ejecución en runtime vía logout universal.",
+          "citations": [
+            {
+              "label": "Okta - Okta for AI Agents",
+              "url": "https://www.okta.com/products/govern-ai-agent-identity/"
+            }
+          ]
+        },
+        {
+          "body": "**El Zero-Trust MCP Gateway de Operant AI se suma a Okta Integration Network** — Conector multiplataforma para la arquitectura Agent Gateway.",
+          "citations": [
+            {
+              "label": "Operant - Zero Trust for AI Agents: Operant's MCP Gateway Comes to the Okta Integration Network",
+              "url": "https://www.operant.ai/art-kubed/zero-trust-for-ai-agents-operants-mcp-gateway-comes-to-the-okta-integration-network"
+            }
+          ]
+        },
+        {
+          "body": "**Salt Security 1H 2026 State of AI and API Security Report — el 48,9% de las orgs no puede monitorear el tráfico máquina-a-máquina de los agentes IA** — La encuesta a 300+ líderes de seguridad confirma el punto ciego estructural de la era agente. \"No puedes asegurar la IA sin asegurar las APIs que la impulsan\".",
+          "citations": [
+            {
+              "label": "Salt Security - The Era of Agentic Security Is Here",
+              "url": "https://salt.security/blog/the-era-of-agentic-security-is-here-key-findings-from-the-1h-2026-state-of-ai-and-api-security-report"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security > Solutions: Monitor and Manage AI Agent Behavior",
+      "bullets": [
+        {
+          "body": "**Google Online Security Blog: aumento del 32% interanual de inyecciones indirectas en la wild (nov 2025-feb 2026, tracción 25-27/04)** — Medida cuantitativa en la web abierta; 10 ataques IPI in-the-wild documentados. La inyección directa ahora <20% de los intentos en entornos enterprise; **la inyección indirecta >80%** (páginas web, PDFs, metadatos MCP, docs RAG, emails, memoria, código).",
+          "citations": [
+            {
+              "label": "Help Net Security - Indirect prompt injection is taking hold in the wild",
+              "url": "https://www.helpnetsecurity.com/2026/04/24/indirect-prompt-injection-in-the-wild/"
+            }
+          ]
+        },
+        {
+          "body": "**Suleiman Tawil: \"Prompt Injection Is Still the #1 AI Vulnerability in 2026 — And We're Running Out of Excuses\"** — Ensayo práctico que resume el estado del OWASP LLM01 hacia el 25-27/04.",
+          "citations": [
+            {
+              "label": "Medium - Prompt Injection Is Still the #1 AI Vulnerability in 2026",
+              "url": "https://medium.com/@stawils/prompt-injection-is-still-the-1-ai-vulnerability-in-2026-and-were-running-out-of-excuses-288e3e5cb303"
+            }
+          ]
+        },
+        {
+          "body": "**Disclosure de Pillar Security: escape de sandbox por inyección de prompt en Antigravity vía `find_by_name -X` (Google parcheó, bug bounty pagado) continúa** — Invocaciones de tools nativas saltan Secure Mode; un **tercer proveedor de CI agente** confirmado vulnerable a la clase de inyección de prompt estilo comentario.",
+          "citations": [
+            {
+              "label": "CyberScoop - Vuln in Google's Antigravity AI agent manager could escape sandbox",
+              "url": "https://cyberscoop.com/google-antigravity-pillar-security-agent-sandbox-escape-remote-code-execution/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Hardware (chips / platforms)",
+      "bullets": [
+        {
+          "body": "**NVIDIA mantiene capitalización de clase 5 B USD entrando a la semana de resultados de las Mag 7 — resultados FY27 Q1 el 20/05** — Cierre del 24/04 en 208,27 USD (+4,32%); rango de capitalización 5,06 B - 5,12 B USD. Postura de Wall Street: \"Own It, Don't Trade It\". La sesión de futuros del 27/04 abre con ligero tono risk-off por el desarrollo en Hormuz.",
+          "citations": []
+        },
+        {
+          "body": "**Resultados AMD Q1 2026 el 5/05 — segmento Data Center con guía sólida en EPYC + AI franchise** — Ingresos Q1 ~9.800 M USD ±300 M (~32% YoY en el punto medio); EPS YoY +33% esperado. Data Center previo en 5.380 M USD (+39% YoY) record; CEO Lisa Su: \"escalado rápido de nuestra franquicia AI de data center\".",
+          "citations": [
+            {
+              "label": "StartupHub.ai - AMD Sets Q1 2026 Earnings Date",
+              "url": "https://www.startuphub.ai/ai-news/semiconductors/2026/amd-sets-q1-2026-earnings-date"
+            }
+          ]
+        },
+        {
+          "body": "**Filing IPO de Cerebras del 17/04 (continúa 25-27/04) — objetivo 23.000 M USD, ticker CBRS, ventana de oferta a mediados de mayo** — Respaldado por el compromiso de OpenAI de comprar 20.000 M USD en chips + 1.000 M USD para construcción de data center de Cerebras.",
+          "citations": [
+            {
+              "label": "theaiinsider.tech - Cerebras Systems Files for IPO After $23B Valuation and OpenAI Deal",
+              "url": "https://theaiinsider.tech/2026/04/21/cerebras-systems-files-for-ipo-after-23b-valuation-and-openai-deal/"
+            }
+          ]
+        },
+        {
+          "body": "**Boston Dynamics: Atlas listo para producción continúa el despliegue 2026, slots de envío comprometidos por completo a Hyundai RMAC + Google DeepMind, inversión de 26.000 M USD en EE. UU. + plan de fábrica de 30.000 robots/año** — La expansión de capacidad de fabricación confirma al humanoide de fábrica como SKU enterprise serio.",
+          "citations": [
+            {
+              "label": "New Atlas - Atlas humanoid robots enter Hyundai factories for industrial use",
+              "url": "https://newatlas.com/ai-humanoids/boston-dynamics-production-atlas-hyundai/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Physical AI / Humanoid Robotics",
+      "bullets": [
+        {
+          "body": "**Tesla Optimus V3 — debut a mediados de año + producción julio-agosto (confirmación 23/04, tracción 25-27/04)** — 37 articulaciones, velocidad de marcha 1,2 m/s, objetivo industrial + doméstico. Líneas de producción de primera generación instalándose en Fremont; segunda generación en Gigafactory Texas para capacidad anual de 10 M unidades desde 2027.",
+          "citations": [
+            {
+              "label": "eWeek - Tesla Optimus Robot Launch Timeline Targets 2027 Scale",
+              "url": "https://www.eweek.com/robotics/tesla-optimus-robot-launch-timeline/"
+            }
+          ]
+        },
+        {
+          "body": "**Tesla retrasa la presentación del Optimus Gen 3 por \"toques finales\" (tracción 25-27/04)** — Musk en la llamada de resultados Q1 2026: la presentación de V3 será más cerca del inicio de producción, no antes.",
+          "citations": [
+            {
+              "label": "NotaTeslaApp - Tesla Delays Optimus Gen 3 Unveil for 'Finishing Touches'",
+              "url": "https://www.notateslaapp.com/news/3884/tesla-delays-optimus-gen-3-unveil-for-finishing-touches"
+            }
+          ]
+        },
+        {
+          "body": "**Boston Dynamics Atlas — los despliegues 2026 totalmente comprometidos (Google DeepMind + Hyundai RMAC), plan industrial escalonado 2026/2028/2030** — 2026 validación inicial / entrenamiento; 2028 secuenciado de alta precisión; 2030 ensamblaje complejo.",
+          "citations": [
+            {
+              "label": "Boston Dynamics - Atlas Humanoid Robot Product Page",
+              "url": "https://bostondynamics.com/products/atlas/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Stock Prices and Corporate Activity",
+      "bullets": [
+        {
+          "body": "**La semana de resultados de las Mag 7 abre el 27/04 — Alphabet / Amazon / Meta / Microsoft el 29/04; Apple el 30/04; Fed sin cambios** — Capex 2026 de Alphabet 175.000-185.000 M USD; Amazon ~200.000 M USD plan AWS-AI; Meta 115.000-135.000 M USD; Microsoft en watch de re-rating por rezago de Azure. **5 de 7 reportan en la semana más cargada de la temporada**.",
+          "citations": []
+        },
+        {
+          "body": "**Outlook bursátil semana 27/04-1/05: resultados Mag 7 + reunión Fed (sin cambios al 100%)** — Resultados Mag 7 + política Fed + comentarios de capex de IA conforman la cinta hasta mayo.",
+          "citations": []
+        },
+        {
+          "body": "**Yahoo Finance: el cierre de Hormuz sacude los mercados, resultados Mag 7 a la vista (27/04)** — Futuros S&P / Nasdaq / Dow ceden por el desarrollo nocturno del Estrecho de Ormuz.",
+          "citations": [
+            {
+              "label": "Yahoo Finance UK - Stock market today: S&P 500, Nasdaq, Dow futures slide as Hormuz closure rocks markets",
+              "url": "https://uk.finance.yahoo.com/news/stock-market-today-sp-500-nasdaq-dow-futures-slide-as-hormuz-closure-rocks-markets-mag-7-earnings-on-deck-232226134.html"
+            }
+          ]
+        },
+        {
+          "body": "**goMarkets: resultados US — el control de realidad de IA de Wall Street** — Encuadra la semana como \"premiar gasto por fe → exigir beneficio tangible\".",
+          "citations": [
+            {
+              "label": "goMarkets - US earnings: Meta, Amazon and Apple face Wall Street's AI reality check",
+              "url": "https://www.gomarkets.com/en-au/articles/us-earnings-wall-street-wants-answers-from-meta-amazon-and-apple"
+            }
+          ]
+        },
+        {
+          "body": "**Invezz: Meta y Microsoft reportan la semana próxima — vista de top analistas** — Meta consenso ~55.500 M USD ingresos / EPS 6,65 USD; Microsoft con Azure como lente de trigger de re-rating.",
+          "citations": [
+            {
+              "label": "Invezz - Meta, Microsoft earnings due next week",
+              "url": "https://invezz.com/news/2026/04/25/meta-microsoft-earnings-due-next-week-heres-what-top-analysts-say/"
+            }
+          ]
+        },
+        {
+          "body": "**Motley Fool: \"The Great Rotation Is Reversing and the Nasdaq Is Surging\" (27/04)** — Nasdaq +15% MoM en abril; el liderazgo en growth IA se reafirma tras la breve pausa de rotación a value.",
+          "citations": [
+            {
+              "label": "Motley Fool - The Great Rotation Is Reversing and the Nasdaq Is Surging",
+              "url": "https://www.fool.com/investing/2026/04/27/the-great-rotation-is-reversing-and-the-nasdaq-is/"
+            }
+          ]
+        },
+        {
+          "body": "**TipRanks: Próximas divisiones de acciones de la semana (27/04 - 1/05)** — Calendario inversor de splits corporativos que se cruzan con la semana de resultados Mag 7.",
+          "citations": [
+            {
+              "label": "TipRanks - Upcoming Stock Splits This Week",
+              "url": "https://www.tipranks.com/news/upcoming-stock-splits-this-week-april-27-to-may-1-2026-stay-invested"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Meet up event related to AI in Bay Area SV",
+      "bullets": [
+        {
+          "body": "**AI Dev 26 x SF (28-29/04) en Pier 48 — DeepLearning.AI + Andrew Ng + 3.000+ devs, evento técnico de 2 días** — Tracks: Agentic AI, Context Engineering, Multimodal AI Apps, AI Governance, Coding-with-AI; demos en vivo + workshops hands-on + AI Startup Track.",
+          "citations": [
+            {
+              "label": "AI Dev 26 x SF — DeepLearning.AI",
+              "url": "https://ai-dev.deeplearning.ai/"
+            }
+          ]
+        },
+        {
+          "body": "**AI Dev 26 x SF Eventbrite — ticketing + detalle de agenda** — 28-29/04, 7:00-18:00, Pier 48 Shed A.",
+          "citations": [
+            {
+              "label": "Eventbrite - AI Dev 26 x SF",
+              "url": "https://www.eventbrite.com/e/ai-dev-26-x-sf-the-ai-developer-conference-tickets-1969285167949"
+            }
+          ]
+        },
+        {
+          "body": "**AI Tinkerers SF: Building Software Factories — cena VIP con Kiro & B-Capital (29/04)** — Cena con invitación que junta el SDK de Kiro Power con la mirada VC de B-Capital sobre la tesis de \"fábrica de software\".",
+          "citations": [
+            {
+              "label": "Luma - SF Popular Events Calendar",
+              "url": "https://luma.com/sf"
+            }
+          ]
+        },
+        {
+          "body": "**Stanford Causal Science Conference: Frontiers in AI Evaluation (29/04, 12:00-18:00 PT, Simonyi Conference Center, CoDa)** — Evento de seguimiento de Stanford a la conferencia de Pier 48.",
+          "citations": [
+            {
+              "label": "Stanford HAI - Upcoming Events",
+              "url": "https://hai.stanford.edu/events"
+            }
+          ]
+        },
+        {
+          "body": "**Stanford CORES Symposium 2026 (5/05)** — Simposio académico-industria de Stanford Data Science.",
+          "citations": [
+            {
+              "label": "Stanford Data Science - Upcoming Events",
+              "url": "https://datascience.stanford.edu/events/upcoming-events"
+            }
+          ]
+        },
+        {
+          "body": "**SaaStr Annual 2026 (12-14/05) — SaaStr.Ai Summit + Deploy '26, primera cumbre de despliegue de agentes** — 10.000+ asistentes, track dedicado a agentes en producción.",
+          "citations": [
+            {
+              "label": "Crescendo AI - 10 Best AI Conferences and Summits in San Francisco | 2026",
+              "url": "https://www.crescendo.ai/blog/ai-conferences-and-summits-in-san-francisco"
+            }
+          ]
+        },
+        {
+          "body": "**AI DevSummit (27-28/05, South SF Conference Center) — cobertura de proveedores y ecosistema de AI Dev 26** — Foco en gestión de IA + ingeniería + envío de IA al mundo real.",
+          "citations": [
+            {
+              "label": "VKTR - DeepLearning AI Dev 26 San Francisco 2026",
+              "url": "https://www.vktr.com/events/conference/deeplearning-ai-dev-26-san-francisco-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Other Standout Topics",
+      "bullets": [
+        {
+          "body": "**AI Agent Marketplaces 2026: Discovery and Distribution — vista del paisaje** — Vista de mediados de 2026 sobre cómo los marketplaces de agentes IA están reformando la discovery y la distribución; Hugging Face Spaces como default open-source / research-leaning.",
+          "citations": [
+            {
+              "label": "DigitalApplied - AI Agent Marketplaces 2026: Discovery and Distribution",
+              "url": "https://www.digitalapplied.com/blog/ai-agent-marketplaces-2026-discovery-distribution"
+            }
+          ]
+        },
+        {
+          "body": "**Hugging Face MCP Server — el deep dive oficial sigue vigente** — Los asistentes IA compatibles con MCP se conectan directamente al Hub de Hugging Face para búsqueda de recursos + ejecución de tools comunitarias; Spaces es el default para agentes open-source / research-leaning.",
+          "citations": [
+            {
+              "label": "Hugging Face - Hugging Face MCP Server",
+              "url": "https://huggingface.co/docs/hub/agents-mcp"
+            }
+          ]
+        },
+        {
+          "body": "**AI Daily Post: tutorial de setup CUDA de PrismML Bonsai 1-Bit LLM — deep dive de abril 2026** — Walkthrough práctico hands-on para correr 1-bit Bonsai bajo CUDA + un demo MiniRAG para el tier de GPU consumo + on-device.",
+          "citations": [
+            {
+              "label": "AI Daily Post - PrismML Bonsai: 1-Bit LLM CUDA Setup for Local AI",
+              "url": "https://www.aidailypost.com/news/tutorial-shows-cuda-run-prismml-bonsai-1bit-llm-minirag-demo"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

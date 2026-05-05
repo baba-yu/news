@@ -1,0 +1,151 @@
+{
+  "date": "2026-04-19",
+  "by_prediction": {
+    "prediction.4bd551bfc1cca138": [
+      {
+        "actor": "investigador de modelos LLM en el borde en un laboratorio frontera de pesos abiertos",
+        "job": "Diseñar una receta de entrenamiento nativo de 1 bit para una familia de LLM de tamaño medio con pesos abiertos, replicando el resultado de calidad de producción de Bonsai 8B.",
+        "outcome": "Lanzamiento público de un punto de control nativo de 1 bit en la familia Qwen o Llama con calidad equivalente a su par post-cuantizado de 4/8 bits.",
+        "motivation": "Capturar el espacio de receta estándar para LLM en el borde antes que los competidores fija la cuota de citas, las herramientas posteriores y el co-marketing con proveedores de hardware.",
+        "task": {
+          "who": "equipo de investigación de preentrenamiento + responsables de tokenizador/optimizador + equipo de evaluación",
+          "what": "reejecutar el preentrenamiento con parametrización de pesos de 1 bit y presupuesto de datos equivalente",
+          "where": "clúster interno de entrenamiento + tarjeta pública del modelo + preprint en arXiv",
+          "when": "Mayo a Q3 2026",
+          "why": "lanzar un derivado de 1 bit antes de que la receta Bonsai se convierta en la opción predeterminada",
+          "how": "stack de entrenamiento de pesos ternarios o estilo BitNet 1,58 bits en clúster H100/MI300"
+        }
+      },
+      {
+        "actor": "ingeniero de runtime de inferencia en dispositivo en un proveedor de runtime móvil/borde",
+        "job": "Implementar kernels de 1 bit con calidad de producción y cargadores de pesos empaquetados para que los puntos de control de 1 bit se ejecuten más rápido que sus pares cuantizados de 4 bits en hardware tipo teléfono.",
+        "outcome": "Notas de lanzamiento que muestran puntos de control de 1 bit cargándose con menos de 1,5 GB y superando la latencia de 4 bits en la suite de benchmarks estándar del runtime.",
+        "motivation": "Cualquier runtime que ofrezca soporte de primera clase para 1 bit se convierte en el objetivo de despliegue predeterminado para la próxima ola de derivados de 1 bit.",
+        "task": {
+          "who": "ingenieros de kernel/rendimiento + mantenedores de cargador de modelos + QA móvil",
+          "what": "implementar kernels de matmul con bits empaquetados e integrar el cargador estilo Bonsai",
+          "where": "rutas de código móviles de llama.cpp / MLX / ExecuTorch / ONNX Runtime",
+          "when": "Mayo a Q3 2026",
+          "why": "hacer de 1 bit el camino de menor resistencia para los desarrolladores de aplicaciones posteriores",
+          "how": "intrínsecos ARM SME / Apple AMX / Adreno DP4A + formato de pesos empaquetados"
+        }
+      },
+      {
+        "actor": "mantenedor de lanzamientos de familia de modelos de pesos abiertos (responsable de la línea Qwen / Llama)",
+        "job": "Publicar un derivado nativo de 1 bit del punto de control insignia sub-10B de la familia junto con las variantes existentes cuantizadas de 4/8 bits.",
+        "outcome": "Una tarjeta oficial de punto de control de 1 bit en Hugging Face bajo la organización canónica, con evaluaciones de paridad y un artefacto de menos de 1,5 GB.",
+        "motivation": "Defender el estatus de la familia como objetivo predeterminado de pesos abiertos en el borde; ceder 1 bit a un rival fragmenta el ecosistema en torno a sus lanzamientos.",
+        "task": {
+          "who": "ingeniería de lanzamiento + responsable de evaluaciones + responsable de comunicaciones con la comunidad/socios",
+          "what": "empaquetar punto de control de 1 bit, publicar tarjeta del modelo, coordinar el soporte del runtime",
+          "where": "repositorio de la organización en Hugging Face + blog de la familia + notas de lanzamiento de runtime de socios",
+          "when": "Mayo a Q3 2026",
+          "why": "igualar el estándar establecido por Bonsai antes de que terceros renombren los pesos de la familia",
+          "how": "ejecución interna de entrenamiento de 1 bit + arnés estándar de evaluación de la familia + flujo de lanzamiento de HF"
+        }
+      }
+    ],
+    "prediction.995feb039ef043c1": [
+      {
+        "actor": "investigador de vulnerabilidades de integración de LLM (independiente + firmas de seguridad de IA como HiddenLayer, Lakera, Robust Intelligence)",
+        "job": "publicar PoC reproducibles al estilo de CVE-2025-53773 de inyección indirecta de prompts contra herramientas agénticas de codificación y aplicaciones respaldadas por LLM en el camino hacia Q3 2026",
+        "outcome": "flujo constante de PoC públicos que cumplen el listón de divulgación de CNA y califican para puntuación CVSS 8.0+ en productos de integración de LLM",
+        "motivation": "establecer la inyección indirecta de prompts como una clase de bug nombrada con pagos elegibles para bounty y visibilidad para charlas en conferencias antes de que la categoría se sature",
+        "task": {
+          "who": "investigadores de red-team de IA + cazadores de bug-bounty + laboratorios académicos de seguridad de LLM",
+          "what": "diseñar + publicar PoC de inyección indirecta de prompts que alcancen rutas de RCE desde texto no confiable",
+          "where": "repositorios de PoC en GitHub + arXiv + HackerOne + DEF CON AI Village + portales de divulgación de proveedores",
+          "when": "Abril a Q3 2026",
+          "why": "el crecimiento interanual de +190% en ataques exitosos hace que la categoría sea rica en bounty y rica en citas",
+          "how": "fuzzing de cuerpos de PR + plantillas de issues + cargas útiles de tool-call contra Copilot / Cursor / Claude Code / IDEs agénticos"
+        }
+      },
+      {
+        "actor": "equipo de seguridad de producto de integración de LLM (GitHub, Cursor, Anthropic, OpenAI, JetBrains, Microsoft, proveedores de IDE agéntico)",
+        "job": "publicar parches de seguridad mensuales que aborden CVE de inyección indirecta de prompts en asistentes de codificación con LLM y runtimes de agentes hasta Q3 2026",
+        "outcome": "entradas recurrentes de integración de LLM con CVSS 8.0+ en el recopilatorio Microsoft Patch Tuesday y avisos paralelos de proveedores",
+        "motivation": "preservar la confianza de adquisición empresarial mientras las herramientas agénticas cruzan a rutas de ejecución privilegiadas y los CISO exigen visibilidad de parches con cadencia mensual",
+        "task": {
+          "who": "equipos PSIRT de proveedores + ingeniería de producto de integración de LLM + autores de avisos",
+          "what": "triar, parchear y publicar avisos CVE para fallos de inyección indirecta de prompts mensualmente",
+          "where": "Microsoft Security Response Center + GitHub Security Advisories + páginas PSIRT de proveedores",
+          "when": "Mayo a Q3 2026 (cadencia mensual de Patch Tuesday)",
+          "why": "CVE-2025-53773 RCE-desde-cuerpo-de-PR se reproduce trivialmente en la cohorte de asistentes de codificación con LLM",
+          "how": "etiquetado de procedencia de entrada + listas blancas de tool-call + sandboxing de cuerpo de PR + plantillas de divulgación CVSS 8.0+"
+        }
+      },
+      {
+        "actor": "intake de la MITRE CVE Numbering Authority + mantenedores de CWE + grupo de trabajo OWASP LLM Top 10",
+        "job": "formalizar la inyección indirecta de prompts como una entrada CWE nombrada y categoría de OWASP LLM Top 10 para que los CVE de integración de LLM se enruten de forma consistente y puntúen CVSS 8.0+",
+        "outcome": "entrada estable en la taxonomía CWE / OWASP que ancla el etiquetado mensual de CVE de integración de LLM en Patch Tuesday para Q3 2026",
+        "motivation": "prevenir la fragmentación del lado de CNA que de otra forma ocultaría la categoría en cubos genéricos CWE-77 / CWE-94 y oscurecería la tendencia",
+        "task": {
+          "who": "editores CNA de MITRE + equipo de contenido CWE + presidentes de OWASP LLM Top 10",
+          "what": "publicar entrada CWE + actualización de OWASP LLM Top 10 nombrando la inyección indirecta de prompts como categoría principal",
+          "where": "cwe.mitre.org + repositorio del proyecto OWASP + intake de la lista CVE + plantillas de avisos de Patch Tuesday",
+          "when": "Mayo a Q3 2026",
+          "why": "el crecimiento interanual de ataques de +190% + la reproducibilidad de CVE-2025-53773 fuerzan un slot estable en la taxonomía",
+          "how": "redactar lenguaje CWE + revisión del grupo de trabajo OWASP + coordinar con MSRC + plantillas de avisos de seguridad de GitHub"
+        }
+      }
+    ],
+    "prediction.c08481a657991ec8": [
+      {
+        "actor": "product manager de plataforma de agentes de hyperscaler (equipo de AWS Agent Registry)",
+        "job": "Lanzar un servicio de registro gestionado para distribuir habilidades de agentes, permisos de herramientas y trazas de auditoría junto con MCP",
+        "outcome": "Agent Registry de nivel GA con artefactos versionados, manifiestos firmados y exportación de trazas de auditoría a clientes empresariales",
+        "motivation": "El primero en moverse define la forma canónica de distribución de agentes y fija la fidelidad de la plataforma empresarial",
+        "task": {
+          "who": "PM de agentes de AWS Bedrock + equipo de servicio + responsable de seguridad/gobernanza",
+          "what": "publicar especificación de la API de registro, esquema de manifiesto y política de firma",
+          "where": "servicio AWS Agent Registry + anuncios de re:Invent / dev-day",
+          "when": "Q2 a H2 2026",
+          "why": "fijar la forma canónica de distribución de agentes antes de que los rivales la fragmenten",
+          "how": "formato de manifiesto alineado con MCP + ámbitos de permiso al estilo IAM"
+        }
+      },
+      {
+        "actor": "responsable de gobernanza de proveedor de IA empresarial (producto de auditoría + barreras de seguridad al estilo NemoClaw)",
+        "job": "Codificar el esquema de política de registro de auditoría y barreras de seguridad como un artefacto adjuntable al registro",
+        "outcome": "Paquete de referencia de política de barreras/auditoría que los registros pueden adjuntar a cualquier artefacto de agente",
+        "motivation": "Gobernar la proliferación de agentes antes de que los reguladores fuercen una forma menos favorable",
+        "task": {
+          "who": "producto del proveedor + equipo de seguridad aplicada + CISO de socios de diseño",
+          "what": "redactar el esquema de paquete de políticas y publicar la implementación de referencia",
+          "where": "SDK del proveedor + despliegues piloto de socios de diseño",
+          "when": "Q2 a H2 2026",
+          "why": "una política adjuntable al registro es la única forma aceptable para empresas",
+          "how": "paquete de políticas estilo OPA + exportación firmada de trazas de auditoría"
+        }
+      },
+      {
+        "actor": "ingeniero de plataforma de agentes autoaprendices (equipo de adquisición de habilidades estilo Hermes Agent)",
+        "job": "Definir un formato de artefacto de habilidad para que las habilidades autoaprendidas puedan exportarse, versionarse y compartirse",
+        "outcome": "Especificación de artefacto de habilidad con procedencia, puntuaciones de evaluación y requisitos de permiso de herramienta integrados",
+        "motivation": "Las habilidades autoaprendidas no tienen valor si no pueden distribuirse de forma segura entre despliegues",
+        "task": {
+          "who": "ingeniería de plataforma + equipo de evaluación de ML + relaciones con desarrolladores",
+          "what": "publicar formato de artefacto de habilidad y un exportador de referencia",
+          "where": "SDK de agentes + repositorio de registro de habilidades de código abierto",
+          "when": "Q2 a H2 2026",
+          "why": "la ruta de distribución es lo que hace que la adquisición de habilidades sea comercialmente útil",
+          "how": "manifiesto alineado con MCP + atestaciones de puntuación de evaluación"
+        }
+      },
+      {
+        "actor": "mantenedor de framework de agentes de código abierto (MCP / LangChain / equivalente)",
+        "job": "Extender MCP con primitivas de descubrimiento de registros, artefactos firmados y ámbitos de permiso",
+        "outcome": "Extensión de la especificación MCP que cubre endpoints de registro, firma de artefactos y ámbitos de permiso de herramienta",
+        "motivation": "Mantener MCP central como estándar entre proveedores en lugar de ceder terreno a registros propietarios",
+        "task": {
+          "who": "grupo de trabajo de la especificación MCP + consejo de mantenedores + representantes de proveedores",
+          "what": "redactar y ratificar la extensión de descubrimiento de registros + firma",
+          "where": "repositorio de la especificación MCP + llamadas del grupo de trabajo",
+          "when": "Q2 a H2 2026",
+          "why": "sin ello, los registros de los hyperscalers fragmentan el ecosistema de agentes",
+          "how": "proceso RFC + implementaciones de referencia de múltiples proveedores"
+        }
+      }
+    ]
+  }
+}

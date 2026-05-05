@@ -1,0 +1,151 @@
+{
+  "date": "2026-04-20",
+  "by_prediction": {
+    "prediction.4bbf8ec79bafedd1": [
+      {
+        "actor": "MCP specification maintainer + Agent Registry schema editor (Anthropic MCP working group, registry operators na naglalathala ng canonical server index)",
+        "job": "palawakin ang MCP server-metadata + Agent Registry record schema gamit ang 'headless-preferred' / transport-preference field hanggang H2 2026",
+        "outcome": "ratified MCP spec PR + Agent Registry schema bump na naglalantad ng queryable 'headless-preferred' metadata flag sa server records",
+        "motivation": "ang mga registry ay nagiging walang-silbi kung hindi ma-route ng agents ang mga brittle GUI-driving paths; ang pag-codify ng preference ay nagsasara sa agent-routing ambiguity",
+        "task": {
+          "who": "MCP spec working-group editors + Agent Registry schema maintainers + reference-server authors",
+          "what": "mag-draft + i-ratify ang 'headless-preferred' metadata field sa MCP + registry record schema",
+          "where": "modelcontextprotocol GitHub repo + Agent Registry schema PRs + spec working-group meetings",
+          "when": "Mayo 2026 hanggang H2 2026",
+          "why": "nililinaw ng Willison thesis ang routing ambiguity na kailangang lutasin ng registries",
+          "how": "RFC-style spec PR + reference implementation + registry schema migration"
+        }
+      },
+      {
+        "actor": "agent-platform product manager (Anthropic Claude in Chrome, OpenAI agent runtime, hyperscaler agent-platform PMs na nag-ship ng browser-operating + headless agents)",
+        "job": "i-wire ang transport-preference logic sa agent runtimes upang basahin ng agents ang bagong MCP / registry 'headless-preferred' flag at mag-route nang naaayon hanggang H2 2026",
+        "outcome": "shipped agent-runtime release notes + docs na tahasang gumagalang sa headless-preferred flag na may published routing-policy default",
+        "motivation": "ang user-visible latency at reliability gaps sa pagitan ng headless at GUI-driving paths ay pumipilit sa PMs na maglathala ng default na mas pinipili ang headless kapag pareho silang umiiral",
+        "task": {
+          "who": "agent-runtime PMs + agent-orchestration eng leads + DevRel docs writers",
+          "what": "i-implement ang transport-preference router na gumagalang sa 'headless-preferred' metadata",
+          "where": "agent-runtime repos + platform release notes + developer documentation surfaces",
+          "when": "Q2 hanggang H2 2026",
+          "why": "ang browser-operating brittleness ay sumisira sa agent SLAs kumpara sa headless paths",
+          "how": "router policy + telemetry sa transport choice + A/B laban sa GUI fallback"
+        }
+      },
+      {
+        "actor": "headless-API service maintainer (SaaS vendors na naglalathala ng MCP servers + REST/JSON-RPC endpoints; hal. Linear, GitHub, Stripe, Notion API teams)",
+        "job": "maglathala ng MCP server records na flagged 'headless-preferred' kasabay ng anumang browser-driving fallback, upang ang registry consumers ay mag-route sa API nang default hanggang H2 2026",
+        "outcome": "MCP server registry entries na may 'headless-preferred=true' + companion docs na nag-stir sa agents papunta sa API surface kaysa sa web UI scraping",
+        "motivation": "ang API-traffic monetization, support cost, at reliability metrics ay lahat pumapabor sa headless calls kaysa sa agents na nag-drive ng web UI ng parehong product",
+        "task": {
+          "who": "platform API team + DevRel + MCP server authors sa SaaS vendor",
+          "what": "i-ship ang MCP server record na may headless-preferred metadata + i-deprecate ang GUI-driving guidance",
+          "where": "vendor MCP server repo + Agent Registry submission + API docs portal",
+          "when": "Q2 hanggang H2 2026",
+          "why": "ang API path ay mas mura, mas mabilis, mas reliable, at mas madaling i-rate-limit kaysa sa scraping",
+          "how": "MCP server SDK + registry submission tooling + docs deprecation banner"
+        }
+      }
+    ],
+    "prediction.4bd33db2ea06e5b4": [
+      {
+        "actor": "open-weight edge-model lab research lead (Qwen / Bonsai-class small-model trainer)",
+        "job": "Mag-ship ng sub-40B agentic coding models na lumalampas sa SWE-bench bar na talagang kayang patakbuhin ng local hardware.",
+        "outcome": "Public release ng isang open-weight coding model na may >70% SWE-bench Verified sa <40B params sa commodity GPUs.",
+        "motivation": "Sinumang nagmamay-ari ng default edge coding model ay kukuha ng developer-tooling distribution layer bago ito isara ng hyperscalers.",
+        "task": {
+          "who": "small-model pretraining + RL post-training team",
+          "what": "i-distill + i-RL-tune ang sub-40B MoE sa agentic coding traces",
+          "where": "in-house GPU cluster na may SWE-bench Verified eval harness",
+          "when": "Q2-Q3 2026 runway",
+          "why": "ang edge-runnable accuracy ay ang gate sa local-default adoption",
+          "how": "Qwen3.6-style MoE-A3B + verifier-augmented RL"
+        }
+      },
+      {
+        "actor": "local-first coding-agent product manager (IDE / CLI tooling vendor)",
+        "job": "Mag-ship ng routing layer na nagpapatakbo ng sub-40B locally nang default at nag-overflow sa cloud lamang sa mahihirap na tasks.",
+        "outcome": "GA release ng isang coding agent na ang default config ay nagpipindot ng inference local na may measured cloud-overflow tail.",
+        "motivation": "Ang privacy-conscious SMB buyers at solo devs ay humihiling ng cost-bounded agents na walang per-token cloud bill.",
+        "task": {
+          "who": "agent runtime + product engineering team",
+          "what": "magtayo ng local-first router na may cloud-overflow fallback policy",
+          "where": "VS Code / JetBrains / CLI agent runtime",
+          "when": "Q2-Q3 2026 runway",
+          "why": "ang default local routing ang gumagawa sa inversion na nakikita sa users",
+          "how": "llama.cpp / Ollama / MLX backends + capability-tier router"
+        }
+      },
+      {
+        "actor": "edge inference-runtime engineer (CUDA / Metal / ROCm kernel author)",
+        "job": "Itulak ang small-model decode throughput sa consumer GPUs papasok sa hundreds of tok/s sa real coding workloads.",
+        "outcome": "Open-source runtime release na umaabot sa Bonsai-class 600+ tok/s sa isang consumer CUDA card.",
+        "motivation": "Ang local throughput parity sa cloud APIs ang technical precondition para mapalitan ang cloud bilang default.",
+        "task": {
+          "who": "inference kernel + quantization engineering team",
+          "what": "i-ship ang fused-attention + speculative-decode kernels para sa sub-2B models",
+          "where": "open-source runtime repo na may CUDA / Metal backends",
+          "when": "Q2-Q3 2026 runway",
+          "why": "ang tok/s parity ay nag-aalis ng huling latency excuse para manatili sa cloud",
+          "how": "FlashAttention-3 + INT4 quant + draft-model speculative decode"
+        }
+      }
+    ],
+    "prediction.4ecb84808c9acc3f": [
+      {
+        "actor": "supply-chain security researcher sa isang application-security firm o independent lab",
+        "job": "Maglathala ng reproducible PoCs ng indirect prompt injection sa CI runners na nag-exfiltrate ng secrets sa pamamagitan ng Claude Code / Gemini CLI / Copilot.",
+        "outcome": "Public write-ups + CVE-equivalent advisories na bumabanggit sa cross-vendor reproduction at nagbibigay-balangkas sa class bilang isang distinct supply-chain category.",
+        "motivation": "Itatag ang bagong threat class sa ilalim ng kanilang attribution bago tahimik na mag-patch ang vendors, na kumukuha ng citation share at conference-track slots.",
+        "task": {
+          "who": "appsec research team + CI-platform reverse engineers + responsible-disclosure coordinator",
+          "what": "magtayo ng cross-vendor PoC harness na nag-exfiltrate ng secrets sa pamamagitan ng PR/issue-borne prompt injection",
+          "where": "GitHub Actions runners + vendor coding-agent installs + disclosure blog + Black Hat / DEF CON track",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "i-anchor ang Agent-in-the-Loop class label bago lumunod ito ng vendor framing",
+          "how": "indirect-prompt-injection harness + GitHub Actions test repos + responsible-disclosure pipeline"
+        }
+      },
+      {
+        "actor": "CIS Benchmarks / OWASP Top 10 risk-list editorial maintainer",
+        "job": "Mag-draft at mag-circulate ng bagong top-list entry na nagpapangalan sa Agent-in-the-Loop Secret Exfiltration bilang isang distinct supply-chain category.",
+        "outcome": "Published CIS / OWASP risk-list entry na may control mappings, threat description, at mitigation guidance na bumabanggit sa cross-vendor PoCs.",
+        "motivation": "Panatilihing relevant ang Top 10 / CIS Controls habang binabago ng AI coding agents ang CI threat surface; pagtibayin ang editorial authority para sa bagong class.",
+        "task": {
+          "who": "OWASP project leads + CIS Benchmarks working group + community reviewers",
+          "what": "mag-draft ng category entry, magpatakbo ng public comment cycle, i-ratify sa susunod na list revision",
+          "where": "OWASP project mailing list + CIS Benchmarks workbench + GitHub draft repos + AppSec EU / Global summit sessions",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "i-ratify ang category sa susunod na list revision bago kumapit ang fragmented vendor names",
+          "how": "RFC-style draft + public comment period + working-group vote"
+        }
+      },
+      {
+        "actor": "GitHub Actions platform security product manager",
+        "job": "Mag-ship ng sandbox + secret-scoping mitigations na nagpipigil sa coding agents na na-trigger ng untrusted PR / issue text sa CI runners.",
+        "outcome": "Default-on policy na nagpapababa ng token + deploy-key blast radius para sa agent-driven workflows, kasama ang public advisory na kumikilala sa class.",
+        "motivation": "Iwasan na mapangalanan bilang carrier surface sa bagong top-list entry; panatilihin ang platform bilang default agent-CI substrate.",
+        "task": {
+          "who": "Actions platform security PM + runner engineering + Advanced Security + product comms",
+          "what": "i-ship ang scoped-token defaults, agent-aware permissions, at public threat-model advisory",
+          "where": "GitHub Actions runner + Advanced Security console + GitHub Blog + changelog",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "paliitin ang agent blast radius bago pangalanan ng CIS / OWASP entries ang platform pattern",
+          "how": "OIDC-scoped tokens + per-job permission caps + agent-context detection signals"
+        }
+      },
+      {
+        "actor": "AI coding-agent vendor security team (Claude Code / Gemini CLI / Copilot)",
+        "job": "Patatagin ang agent CLIs laban sa indirect prompt injection upang ang untrusted PR / issue text ay hindi makapwersa ng secret exfiltration sa CI.",
+        "outcome": "Released agent versions na may prompt-injection guardrails, secret-redaction defaults, at documented threat model na bumabanggit sa CI scenario.",
+        "motivation": "Iwasan na maging named exfiltration vector sa CIS / OWASP entries; protektahan ang enterprise CI deals na nakatali sa procurement security review.",
+        "task": {
+          "who": "agent-CLI security engineers + tool-use safety team + trust-and-safety + developer-advocate liaison",
+          "what": "i-ship ang prompt-injection mitigations + secret-redaction + restricted tool-use defaults sa CI mode",
+          "where": "Claude Code / Gemini CLI / Copilot release branches + vendor security advisories + docs site",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "alisin ang cross-vendor reproduction signal na nag-aanchor sa bagong category",
+          "how": "input-content filtering + capability sandboxing + scoped-credential APIs + CI-mode defaults"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,411 @@
+{
+  "date": "2026-04-21",
+  "sections": [
+    {
+      "category": "LLM Workflow > OpenClaw / NemoClaw / Hermes Agents",
+      "bullets": [
+        {
+          "body": "**OpenClaw 2026.4.14 / 2026.4.15** — Apr 14 の 2026.4.14 に続き npm に **2026.4.15** が公開（約4日前）。Claude Opus 4.7 既定化、Gemini TTS、モデル認証ステータスカード、クラウドバック LanceDB メモリ、Copilot 埋め込み、プラグインパッケージング軽量化、**プロンプトインジェクション耐性強化**（設定への上書き攻撃対策）。3日ウィンドウ内はコミュニティレビュー追従が継続。",
+          "citations": [
+            {
+              "label": "Geek Metaverse - OpenClaw 2026.4.14 Prompt Injection-Proof",
+              "url": "https://www.geekmetaverse.com/openclaw-2026-4-14-the-security-update-that-stops-ai-from-hacking-the-config-prompt-injection-proof/"
+            }
+          ]
+        },
+        {
+          "body": "**Hermes Agent v0.10.0（Apr 16、ウィンドウ外だが波及継続）** — 118 スキル同梱、三層メモリ、6 メッセージング統合（Telegram / Discord / Slack / WhatsApp / Signal / email）、**閉ループ学習**（経験から再利用可能スキルを自動生成）。95.6K → 106.3K Stars へ拡大、Apr 21 時点の活発な追加コミット継続。",
+          "citations": [
+            {
+              "label": "Hermes Atlas - State of Hermes Agent April 2026",
+              "url": "https://hermesatlas.com/reports/state-of-hermes-april-2026"
+            }
+          ]
+        },
+        {
+          "body": "**NemoClaw（NVIDIA）** — OpenClaw を監査ログ / アクセス制御 / ガードレールで包む企業向けラッパー。ウィンドウ内の新規発表はなし。**NIM ベースの GPU 専有構成**が強み。",
+          "citations": [
+            {
+              "label": "Prateek Singh PhD - The Agent Wars: OpenClaw, NemoClaw, Hermes",
+              "url": "https://prateeksinghphd.in/agentic.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > vLLM",
+      "bullets": [
+        {
+          "body": "**v0.19.1（Apr 18、パッチ）** — v0.19.0 上に Transformers v5.5.4 アップグレードと Gemma4 バグ修正。v0.19.0 の主要機能（Gemma 4 フル対応 MoE / マルチモーダル / 推論 / ツール使用、Zero-Bubble Async Scheduling + 投機的デコード、Model Runner V2 成熟、ViT フル CUDA グラフ、Transformers v5 互換）は継承。3日ウィンドウ内は新規安定版なし。",
+          "citations": [
+            {
+              "label": "GitHub - vllm-project/vllm Releases",
+              "url": "https://github.com/vllm-project/vllm/releases"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > SGLang",
+      "bullets": [
+        {
+          "body": "**v0.5.10.post1（Apr 8 最新安定版）** — 3日ウィンドウ内に新規リリースなし。Piecewise CUDA Graph 既定化、Elastic EP（DeepSeek MoE 部分障害耐性）、HiSparse スパースアテンションが直近機能。",
+          "citations": [
+            {
+              "label": "PyPI - sglang",
+              "url": "https://pypi.org/project/sglang/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-5760（CVSS 9.8、ウィンドウ内で広報拡大）** — `serving_rerank.py` 内の `jinja2.Environment()` 利用が SSTI を許容。悪意ある GGUF の `tokenizer.chat_template` に Jinja2 ペイロードを埋め込み、`/v1/rerank` エンドポイント呼び出し時に RCE。Qwen3 リランカ検出ロジックをトリガに活用。対策は `ImmutableSandboxedEnvironment` への切替。",
+          "citations": [
+            {
+              "label": "The Hacker News - SGLang CVE-2026-5760",
+              "url": "https://thehackernews.com/2026/04/sglang-cve-2026-5760-cvss-98-enables.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > AWS Bedrock",
+      "bullets": [
+        {
+          "body": "**Claude Opus 4.7 が 27 AWS リージョンに拡大展開**。新世代推論エンジンでの動的キャパシティ割当、**Adaptive Thinking**（リクエスト複雑度に応じた推論トークン予算割当）、1M コンテキスト、ゼロオペレータアクセス。",
+          "citations": [
+            {
+              "label": "AWS Weekly Roundup - Claude Opus 4.7 in Amazon Bedrock (Apr 20)",
+              "url": "https://aws.amazon.com/blogs/aws/aws-weekly-roundup-claude-opus-4-7-in-amazon-bedrock-aws-interconnect-ga-and-more-april-20-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**Bedrock Cost Attribution** — API 呼び出しの IAM プリンシパル／セッションタグ単位で自動費用按分、CUR 2.0 に連携。チーム／プロジェクト／コストセンタ別の可視化に対応。",
+          "citations": [
+            {
+              "label": "AWS - Claude Opus 4.7 now available in Amazon Bedrock",
+              "url": "https://aws.amazon.com/about-aws/whats-new/2026/04/claude-opus-4.7-amazon-bedrock/"
+            }
+          ]
+        },
+        {
+          "body": "**AWS Interconnect GA** — マルチクラウドのプライベート接続と「ラストマイル」オプション。Anthropic–AWS 巨大契約の背骨となるインフラ。",
+          "citations": [
+            {
+              "label": "AWS Weekly Roundup - April 20, 2026",
+              "url": "https://aws.amazon.com/blogs/aws/aws-weekly-roundup-claude-opus-4-7-in-amazon-bedrock-aws-interconnect-ga-and-more-april-20-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > Alibaba Cloud Model Studio（プロプライエタリ API）",
+      "bullets": [
+        {
+          "body": "**Qwen3.6-Max-Preview（ホステッド専用、Apr 20 公開）** — SWE-bench Pro / SkillsBench / SciCode / Terminal-Bench 2.0 ほか **6 主要ベンチマークで首位**。260K コンテキスト、preserve_thinking、OpenAI / Anthropic 互換 API。Plus 比 SkillsBench +9.9、SciCode +10.8、Terminal-Bench 2.0 +3.8。**オープンウェイト未公開、API 提供のみ**で、ローカル実行不可。Alibaba Cloud Model Studio / Qwen Studio 経由。",
+          "citations": [
+            {
+              "label": "BiggoFinance - Alibaba Unveils Qwen3.6-Max-Preview",
+              "url": "https://finance.biggo.com/news/202604201225_Alibaba-Qwen-3-6-Max-Preview-Launch"
+            }
+          ]
+        },
+        {
+          "body": "**Qwen3.6-Plus（ホステッド専用、プロプライエタリ）** — SWE-bench Verified 78.8%、Terminal-Bench 2.0 61.6%、1M コンテキスト。BenchLM 総合スコア 77/100。こちらもローカル実行不可、API 限定。",
+          "citations": [
+            {
+              "label": "BuildFastWithAI - Qwen 3.6 Plus Preview",
+              "url": "https://www.buildfastwithai.com/blogs/qwen-3-6-plus-preview-review"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Qwen",
+      "bullets": [
+        {
+          "body": "**Qwen3.6-35B-A3B（オープンウェイト、Apr 16 公開）** — Qwen3.6 系列で **唯一のローカル実行可能版**。262K コンテキスト、SWE-bench Verified 73.4%、GPQA 86.0%、AIME 2026 92.7%。Simon Willison のペリカンテストで Claude Opus 4.7 を上回る実例が 3日ウィンドウ内でも再掲。Ollama / llama.cpp で Day-1 対応済み。",
+          "citations": [
+            {
+              "label": "Hacker News - Qwen3.6-35B-A3B: Agentic coding power, now open to all",
+              "url": "https://news.ycombinator.com/item?id=47792764"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Bonsai（1-bit LLM / 最適化）",
+      "bullets": [
+        {
+          "body": "**Bonsai-1.7B on CUDA デプロイガイド**（Dev|Journal, 2026-04-19）— GGUF でのベンチマーク、チャット、JSON 構造化出力、RAG までハンズオン。RTX 4090 で 674 tok/s（FP16 時 224 tok/s 比3倍）。3日ウィンドウの中心ドキュメント。",
+          "citations": [
+            {
+              "label": "Dev|Journal - Deploying PrismML Bonsai-1.7B on CUDA",
+              "url": "https://earezki.com/ai-news/2026-04-19-a-coding-tutorial-for-running-prismml-bonsai-1-bit-llm-on-cuda-with-gguf-benchmarking-chat-json-and-rag/"
+            }
+          ]
+        },
+        {
+          "body": "**WebGPU サポートの拡大** — ブラウザから直接 GPU 行列演算にアクセス。Bonsai 1.7B の 290MB 量子化版で実機検証事例が増加。",
+          "citations": [
+            {
+              "label": "n1n.ai - Local Inference Breakthrough: 1-bit Bonsai WebGPU",
+              "url": "https://explore.n1n.ai/blog/local-inference-breakthrough-webgpu-ollama-gemma4-2026-04-16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > llama.cpp",
+      "bullets": [
+        {
+          "body": "**b8838（Apr 18）** — `llama-cli --endpoint` でのリモートサーバ接続、Anthropic API プレフィックスキャッシュ修正、WebUI thinking モード改善、SHA-256 / Merkle ツリーによる検証可能推論サンプル（commit-and-open）。Apr 20-21 もサーバ API 整理のコミットが継続。",
+          "citations": [
+            {
+              "label": "GitHub - llama.cpp Release b8838",
+              "url": "https://github.com/ggml-org/llama.cpp/releases/tag/b8838"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > Ollama",
+      "bullets": [
+        {
+          "body": "**v0.21.0（Apr 17）** — `ollama launch` で **OpenClaw / Hermes / GitHub Copilot CLI の一括設定**、MLX による Apple Silicon の Gemma 4 パフォーマンス向上、Gemma 4 nothink レンダラ復旧、ROCm 7.2.1（Linux）、OpenClaw `--yes` 非対話モード修正。3日ウィンドウ内は新ストアリリースなし。",
+          "citations": [
+            {
+              "label": "GitHub - ollama/ollama Releases",
+              "url": "https://github.com/ollama/ollama/releases"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > Azure Foundry Local",
+      "bullets": [
+        {
+          "body": "3日ウィンドウ内で新規発表なし。企業向けオンデバイス推論の比較記事が継続。",
+          "citations": [
+            {
+              "label": "Knowledge Share - Mastering Azure Foundry Local",
+              "url": "https://spknowledge.com/2025/10/29/mastering-azure-foundry-local-powerful-features-comparison-with-ollama-other-local-llm-tools/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security",
+      "bullets": [
+        {
+          "body": "**SGLang CVE-2026-5760（CVSS 9.8）** — GGUF の `tokenizer.chat_template` に Jinja2 SSTI を仕込み、`/v1/rerank` 呼び出し時に RCE。Qwen3 リランカ検出ロジックを活用したトリガ設計。`ImmutableSandboxedEnvironment` 移行で緩和。",
+          "citations": [
+            {
+              "label": "CERT/CC VU#915947 - SGLang RCE",
+              "url": "https://kb.cert.org/vuls/id/915947"
+            }
+          ]
+        },
+        {
+          "body": "**Indirect Prompt Injection（IPI）の体系化**（Lakera 研究、Apr 20 公開）— Web ページ／PDF／MCP メタデータ／RAG ドキュメント／メール／メモリ／コードなど **AI システムが取り込むデータ全面** が攻撃面。信頼入力と非信頼入力を同一コンテキストに混在させる構造そのものが根本原因。",
+          "citations": [
+            {
+              "label": "Lakera - Indirect Prompt Injection",
+              "url": "https://www.lakera.ai/blog/indirect-prompt-injection"
+            }
+          ]
+        },
+        {
+          "body": "**CIS Report（Apr 1、ウィンドウ外だが参照継続）** — プロンプトインジェクションを LLM01 の最上位リスクに位置付け、実被害例として資格情報窃取・不正操作・持続感染を列挙。",
+          "citations": [
+            {
+              "label": "CIS - New CIS Report Warns Prompt Injection",
+              "url": "https://www.cisecurity.org/about-us/media/press-release/new-cis-report-warns-prompt-injection-attacks-pose-growing-risk-to-generative-ai"
+            }
+          ]
+        },
+        {
+          "body": "**GitHub Actions 経由の間接プロンプトインジェクション PoC**（継続）— Anthropic Claude Code Security Review、Gemini CLI Action、GitHub Copilot Agent の 3 製品で GITHUB_TOKEN 窃取の PoC。CVE 発行なしで静かに修正。",
+          "citations": [
+            {
+              "label": "SecurityWeek - Agents Vulnerable to Prompt Injection via Comments",
+              "url": "https://www.securityweek.com/claude-code-gemini-cli-github-copilot-agents-vulnerable-to-prompt-injection-via-comments/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "CVE（CVSS 8.0 以上）",
+      "bullets": [
+        {
+          "body": "**CVE-2026-5760** — SGLang、CVSS **9.8**、Jinja2 SSTI 経由 RCE。",
+          "citations": [
+            {
+              "label": "The Hacker News - SGLang CVE-2026-5760",
+              "url": "https://thehackernews.com/2026/04/sglang-cve-2026-5760-cvss-98-enables.html"
+            }
+          ]
+        },
+        {
+          "body": "**CISA KEV 追加（Apr 20、8件）**： - **CVE-2026-20122** Cisco Catalyst SD-WAN Manager Incorrect Use of Privileged APIs — vManage 権限奪取。 [CISA - Adds Eight Known Exploited Vulnerabilities](https://www.cisa.gov/news-events/alerts/2026/04/20/cisa-adds-eight-known-exploited-vulnerabilities-catalog) - **CVE-2026-20128** Cisco Catalyst SD-WAN Manager Storing Passwords in a Recoverable Format — DCA ユーザ昇格。CVSS 7.5（参考）。 [HelpNetSecurity - CISA flags another Cisco Catalyst SD-WAN Manager bug](https://www.helpnetsecurity.com/2026/04/21/cisa-flags-another-cisco-catalyst-sd-wan-manager-bug-as-exploited-cve-2026-20133/) - **CVE-2026-20133** Cisco Catalyst SD-WAN Manager Exposure of Sensitive Information。 [TheCyberExpress - CISA Adds 8 Flaws](https://thecyberexpress.com/cisa-kev-catalog-vulnerabilities/) - CVE-2023-27351（PaperCut NG/MF Improper Authentication）、CVE-2024-27199（JetBrains TeamCity Path Traversal）、CVE-2025-2749（Kentico Xperience Path Traversal）、CVE-2025-32975（Quest KACE Improper Authentication）、CVE-2025-48700（Synacor Zimbra XSS）も同時追加。連邦期限は Apr 23。",
+          "citations": [
+            {
+              "label": "CISA - Adds Eight Known Exploited Vulnerabilities",
+              "url": "https://www.cisa.gov/news-events/alerts/2026/04/20/cisa-adds-eight-known-exploited-vulnerabilities-catalog"
+            },
+            {
+              "label": "HelpNetSecurity - CISA flags another Cisco Catalyst SD-WAN Manager bug",
+              "url": "https://www.helpnetsecurity.com/2026/04/21/cisa-flags-another-cisco-catalyst-sd-wan-manager-bug-as-exploited-cve-2026-20133/"
+            },
+            {
+              "label": "TheCyberExpress - CISA Adds 8 Flaws",
+              "url": "https://thecyberexpress.com/cisa-kev-catalog-vulnerabilities/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-20184** Cisco Webex — 認証バイパスによるユーザなりすまし。2026年4月に緊急アドバイザリ発行、公開 PoC は未確認。",
+          "citations": [
+            {
+              "label": "Rankiteo - Cisco Webex Services Vulnerability",
+              "url": "https://blog.rankiteo.com/cis1776327928-cisco-vulnerability-april-2026/"
+            }
+          ]
+        },
+        {
+          "body": "**継続警戒**：CVE-2026-33824（Windows IKE, 9.8）、CVE-2026-33827（Windows TCP/IP, 8.1-9.8）、CVE-2026-33826（Windows AD, 8.0）、CVE-2026-32157（RDP Client, 8.8）、CVE-2026-35616（Fortinet FortiClient EMS 実戦悪用）。",
+          "citations": [
+            {
+              "label": "Tenable - Microsoft's April 2026 Patch Tuesday",
+              "url": "https://www.tenable.com/blog/microsofts-april-2026-patch-tuesday-addresses-163-cves-cve-2026-32201"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Bay Area / Silicon Valley AI ミートアップ",
+      "bullets": [
+        {
+          "body": "**AI Tinkerers San Francisco**（月次、ライブコードデモ、スライド禁止の 3 時間形式）。4月下旬の開催が告知中。",
+          "citations": [
+            {
+              "label": "AI Tinkerers San Francisco",
+              "url": "https://sf.aitinkerers.org/"
+            }
+          ]
+        },
+        {
+          "body": "**Bond AI - SF and Bay Area**（Luma、120k+ 会員、3日ウィンドウ内のイベントあり）。",
+          "citations": [
+            {
+              "label": "Luma - Bond AI SF",
+              "url": "https://luma.com/genai-sf"
+            }
+          ]
+        },
+        {
+          "body": "**SF AI Meetup**（sfbay-ai）— GenAI / LLM / Agent の実践講演を定期開催。",
+          "citations": [
+            {
+              "label": "Meetup - SF AI",
+              "url": "https://www.meetup.com/sfbay-ai/"
+            }
+          ]
+        },
+        {
+          "body": "**UNLOCK 2026（2026-04-22、1日サミット）** — AI × 創薬・ライフサイエンス特化。既に公式枠は埋まり waitlist 運用。",
+          "citations": [
+            {
+              "label": "Luma - UNLOCK 2026",
+              "url": "https://luma.com/unlock2026"
+            }
+          ]
+        },
+        {
+          "body": "**AgentCon San Francisco（2026-05-04 予告）** — AI エージェント特化の開発者カンファレンス。",
+          "citations": [
+            {
+              "label": "AI Tinkerers - AgentCon SF",
+              "url": "https://aitinkerers.org/events"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "その他の注目トピック",
+      "bullets": [
+        {
+          "body": "**Amazon が Anthropic に追加 $25B 投資（Apr 20 発表）** — 即時 $5B + マイルストーン $20B、Anthropic は 10 年で $100B 超を AWS へコミット。Trainium2/3 で **5 ギガワット規模**、うち 1GW は年内稼働。Project Rainier は約 50 万枚の Trainium2。",
+          "citations": [
+            {
+              "label": "About Amazon - Amazon and Anthropic expand strategic collaboration",
+              "url": "https://www.aboutamazon.com/news/company-news/amazon-invests-additional-5-billion-anthropic-ai"
+            }
+          ]
+        },
+        {
+          "body": "**Claude Design（Apr 17 公開、Anthropic Labs 研究プレビュー／ウィンドウ外だが波及継続）** — Claude Opus 4.7 を基盤に **プロトタイプ／スライド／ピッチ資料／ワンページャ** をプロンプトから生成。チームのデザインシステムをコードベース・デザインファイルから読み取って適用、Canva / PPTX / PDF / URL でエクスポート。Figma 対抗。",
+          "citations": [
+            {
+              "label": "Anthropic - Introducing Claude Design",
+              "url": "https://www.anthropic.com/news/claude-design-anthropic-labs"
+            }
+          ]
+        },
+        {
+          "body": "**Simon Willison (2026-04-18) \"Research: Claude system prompts as a git timeline\"** — Anthropic が公開する system prompt 履歴を **git log / diff / blame で追える形式** に変換。モデル別・リビジョン別にファイル化し、発表時刻ベースのコミットで可視化。",
+          "citations": [
+            {
+              "label": "Simon Willison - Research: Claude system prompts as a git timeline",
+              "url": "https://simonwillison.net/2026/Apr/18/extract-system-prompts/"
+            }
+          ]
+        },
+        {
+          "body": "**Simon Willison (2026-04-18) \"Changes in the system prompt between Claude Opus 4.6 and 4.7\"** — Trump 大統領注記の削除（Knowledge cutoff が 2026-01 に更新されたため）、`developer platform` → `Claude Platform` への改称など、Opus 4.6→4.7 差分の詳細分析。",
+          "citations": [
+            {
+              "label": "Simon Willison - Changes in the system prompt between Claude Opus 4.6 and 4.7",
+              "url": "https://simonwillison.net/2026/apr/18/opus-system-prompt/"
+            }
+          ]
+        },
+        {
+          "body": "**Simon Willison (2026-04-19) \"Headless everything for personal AI\"** — Personal AI は GUI マウス操作より headless を直接叩く方が速く確実、という設計指針。ブラウザ操作エージェントとの対立軸を提起。",
+          "citations": [
+            {
+              "label": "Simon Willison - Headless everything for personal AI",
+              "url": "https://simonwillison.net/2026/apr/19/headless-everything/"
+            }
+          ]
+        },
+        {
+          "body": "**Amazon Bedrock: Claude Mythos Preview** — ゲーテッドリサーチプレビュー。サイバーセキュリティ用途に特化した Claude 派生、公開アクセス制限付き。",
+          "citations": [
+            {
+              "label": "InfoQ - Anthropic Releases Claude Mythos Preview",
+              "url": "https://www.infoq.com/news/2026/04/anthropic-claude-mythos/"
+            }
+          ]
+        },
+        {
+          "body": "**MIT Technology Review \"10 Things That Matter in AI Right Now\"** 2026-04-21 公開予定。3日ウィンドウ最終日の業界総括記事として波及。 ---",
+          "citations": []
+        }
+      ]
+    }
+  ]
+}

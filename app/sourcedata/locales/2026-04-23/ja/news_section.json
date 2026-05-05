@@ -1,0 +1,682 @@
+{
+  "date": "2026-04-23",
+  "sections": [
+    {
+      "category": "LLM Workflow > OpenClaw / NemoClaw / Hermes Agents",
+      "bullets": [
+        {
+          "body": "**OpenClaw v2026.4.21（Apr 21 リリース）** — Apr 20 ベータに続く正式版。デフォルト画像生成プロバイダを **gpt-image-2** に切替、ツールメタデータで `2K` / `4K` サイズヒントを明示。`ax<N>` アクセシビリティツリー参照の即時検証、Slack スレッド alias 保持、ブラウザ自動化のタイムアウト削減、プラグイン依存解決の回復性、コマンド権限厳格化、npm install 警告整理。セキュリティ固定（前回の CVE-2026-41329 系の権限昇格穴塞ぎ）を含む安定化リリース。",
+          "citations": [
+            {
+              "label": "Efficient Coder - OpenClaw v2026.4.21 Release: Essential Security & Stability Upgrades",
+              "url": "https://www.xugj520.cn/en/archives/openclaw-2026-4-21-release-updates.html"
+            }
+          ]
+        },
+        {
+          "body": "**OpenClaw v2026.4.21 詳細：Docker E2E / npm 修復（Apr 21）** — OpenAI Image 2 サポート、Docker エンドツーエンドカバレッジ、npm プラグイン修復を含む。",
+          "citations": [
+            {
+              "label": "Blockchain News - OpenClaw v2026.4.21 Release Analysis",
+              "url": "https://blockchain.news/ainews/openclaw-v2026-4-21-release-openai-image-2-support-docker-e2e-coverage-and-npm-plugin-repair-latest-analysis"
+            }
+          ]
+        },
+        {
+          "body": "**Hermes Agent v0.10.0 継続（初報 Apr 16、ウィンドウ内は採用事例拡散）** — Nous Portal 有料サブスクで web search / image gen / TTS / browser automation を追加 API キーなしで利用可。3 日ウィンドウ内は新規メジャーリリースなし、採用事例の拡散が中心。",
+          "citations": []
+        },
+        {
+          "body": "**NemoClaw（NVIDIA、GTC 2026 Early Preview 継続）** — Apr 22 に「オープンソース貢献ガイド」記事が公開、参照実装としての安定度が上昇。OpenShell ランタイムで OpenClaw を安全に運用するリファレンススタック、Nemotron ローカルモデル統合。",
+          "citations": [
+            {
+              "label": "Frank's World of Data Science - Contributing to Open Source with NVIDIA NemoClaw",
+              "url": "https://www.franksworld.com/2026/04/22/contributing-to-open-source-with-nvidia-nemoclaw/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > vLLM",
+      "bullets": [
+        {
+          "body": "**v0.19.1（Apr 18 公開、ウィンドウ内はエコシステム反応継続）** — v0.19.0 + Transformers v5.5.4 + Gemma4 バグ修正のパッチリリース。3 日ウィンドウ内に新規ミリリリースなし。次メジャー v0.20 は Transformers v5 全アーキ対応、投機的デコード改善、MoE ルーティング最適化（Gemma 4 / DeepSeek V4）を計画中。",
+          "citations": [
+            {
+              "label": "vLLM - Previous Releases",
+              "url": "https://vllm.ai/releases"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > SGLang",
+      "bullets": [
+        {
+          "body": "**v0.5.10.post1（Apr 8 最新安定）** — 3 日ウィンドウ内で新規リリースなし。CVE-2026-5760（Jinja2 SSTI 経由 RCE、CVSS 9.8）の注意喚起継続。",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > AWS Bedrock",
+      "bullets": [
+        {
+          "body": "**AWS Bedrock AgentCore 新機能群（Apr 22）** — **Managed Harness（preview）** でモデル＋system prompt＋tools 定義のみでエージェントを即実行（オーケストレーションコード不要）。エージェントループ（推論 / ツール選択 / アクション実行 / 応答ストリーミング）を全マネージド。**AgentCore CLI** で Kiro / Claude Code / Codex / Cursor 向けプリビルド skills を利用可能。従来数日掛かっていたセットアップが数分化。",
+          "citations": [
+            {
+              "label": "AWS - Amazon Bedrock AgentCore adds new features to help developers build agents faster",
+              "url": "https://aws.amazon.com/about-aws/whats-new/2026/04/agentcore-new-features-to-build-agents-faster/"
+            }
+          ]
+        },
+        {
+          "body": "**AWS Bedrock AgentCore 解説（SiliconANGLE、Apr 22）** — Bedrock AgentCore を「Agent Control Plane」としてポジショニング、Google Gemini Enterprise Agent Platform / OpenAI Workspace Agents と並列の競合構図が明確化。",
+          "citations": [
+            {
+              "label": "SiliconANGLE - AWS accelerates AI agent development in Amazon Bedrock AgentCore",
+              "url": "https://siliconangle.com/2026/04/22/aws-accelerates-ai-agent-development-amazon-bedrock-agentcore/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（サービング基盤） > Google Gemini Enterprise Agent Platform（旧 Vertex AI）",
+      "bullets": [
+        {
+          "body": "**Gemini Enterprise Agent Platform 改称 + 統合（Apr 22）** — **Vertex AI を Gemini Enterprise Agent Platform にリブランド**、全 Vertex AI サービスとロードマップを当プラットフォーム経由で排他提供。Agent Designer、Inbox、long-running agents、Skills、Projects、Model Garden に Gemini 3.1 Pro / Gemini 3.1 Flash Image / Lyria 3 + Claude 含む 200+ モデル。",
+          "citations": [
+            {
+              "label": "Google Cloud - Introducing Gemini Enterprise Agent Platform",
+              "url": "https://cloud.google.com/blog/products/ai-machine-learning/introducing-gemini-enterprise-agent-platform"
+            }
+          ]
+        },
+        {
+          "body": "**新 Gemini Enterprise プラットフォーム概要（Apr 22）** — エージェント開発の単一プラットフォーム。A2A 本番版、マネージド MCP サーバ、Workspace Studio、AI control center / agent management / Workspace Studio controls の新ガバナンスで indirect prompt injection / 過剰共有 / データ漏洩リスクを低減。",
+          "citations": [
+            {
+              "label": "Google Cloud - The new Gemini Enterprise: one platform for agent development",
+              "url": "https://cloud.google.com/blog/products/ai-machine-learning/the-new-gemini-enterprise-one-platform-for-agent-development"
+            }
+          ]
+        },
+        {
+          "body": "**Google Cloud Next '26 全体総括（Apr 22）** — Google Workspace Studio（no-code agent builder）、Project Mariner（web-browsing agent）、マネージド MCP、A2A 本番版、Vertex AI 改称、Anthropic Claude を含む 200+ モデル、$750M パートナー基金。",
+          "citations": [
+            {
+              "label": "TheNextWeb - Google Cloud Next 2026: AI agents, A2A protocol, Workspace Studio",
+              "url": "https://thenextweb.com/news/google-cloud-next-ai-agents-agentic-era"
+            }
+          ]
+        },
+        {
+          "body": "**Workspace 10 追加発表（Apr 22）** — Workspace Studio、AI Control Center、Agent Management の詳細、Meet の real-time translation、Drive の AI search、などエージェント機能の全面強化。",
+          "citations": [
+            {
+              "label": "Google Workspace Blog - 10 more announcements for Workspace at Next 2026",
+              "url": "https://workspace.google.com/blog/product-announcements/10-more-announcements-workspace-at-next-2026"
+            }
+          ]
+        },
+        {
+          "body": "**$750M Agentic AI パートナー基金（Apr 22）** — Google Cloud がパートナーのエージェント AI 開発加速に向け $750M コミット。",
+          "citations": [
+            {
+              "label": "Google Cloud Press - Google Cloud Commits $750 Million to Accelerate Partners' Agentic AI Development",
+              "url": "https://www.googlecloudpresscorner.com/2026-04-22-Google-Cloud-Commits-750-Million-to-Accelerate-Partners-Agentic-AI-Development"
+            }
+          ]
+        },
+        {
+          "body": "**Sundar Pichai による Next '26 サマリ（Apr 22）** — Cloud Next のハイライトを CEO 自らブログで配信。",
+          "citations": [
+            {
+              "label": "Google Blog - Sundar Pichai shares news from Google Cloud Next 2026",
+              "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/cloud-next-2026-sundar-pichai/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Qwen",
+      "bullets": [
+        {
+          "body": "**Qwen3.6-27B 公開（Apache 2.0、Apr 22）** — 27B パラメータを全て毎回使う Dense。Gated DeltaNet（linear attention）+ 伝統的 self-attention のハイブリッドで長 context 時の KV キャッシュ支配を回避。Thinking Preservation 機構で思考と応答分離。**SWE-bench Verified 77.2%**（Qwen3.5-397B-A17B の 76.2% 超）、Terminal-Bench 59.3%（前 52.5%）、SkillsBench 48.2%（前 30.0%）。262K native context → 1M まで YaRN 等で延伸可。BF16 / FP8（block 128、fine-grained）版を Hugging Face と ModelScope に公開。",
+          "citations": [
+            {
+              "label": "MarkTechPost - Alibaba Qwen Team Releases Qwen3.6-27B",
+              "url": "https://www.marktechpost.com/2026/04/22/alibaba-qwen-team-releases-qwen3-6-27b-a-dense-open-weight-model-outperforming-397b-moe-on-agentic-coding-benchmarks/"
+            }
+          ]
+        },
+        {
+          "body": "**Qwen3.6-27B レビュー：27B Dense が 397B に勝つ（Apr 22）** — コーディング中心ベンチで 14x パラメータ差を逆転。MoE ルーティング複雑性なし、1 つのフォワードパスで全重みが活性化する設計優位性の実証。",
+          "citations": [
+            {
+              "label": "buildfastwithai - Qwen3.6-27B: 27B Model Beats 397B on Coding (2026)",
+              "url": "https://www.buildfastwithai.com/blogs/qwen3-6-27b-review-2026"
+            }
+          ]
+        },
+        {
+          "body": "**Qwen3.6-27B の RTX 4090 ローカル動作（Apr 22-23）** — GGUF Q4_K_M で VRAM 約 18GB、RTX 4090 1 枚でフラグシップ級コーディング実行。",
+          "citations": [
+            {
+              "label": "byteiota - Qwen3.6-27B: Flagship Coding on RTX 4090 Local",
+              "url": "https://byteiota.com/qwen3-6-27b-flagship-coding-on-rtx-4090-local/"
+            }
+          ]
+        },
+        {
+          "body": "**Simon Willison が Qwen3.6-27B を「27B Dense でフラグシップ級コーディング」と評価（Apr 22）** — ペリカンベンチ含む定性評価と共に取り上げ。",
+          "citations": [
+            {
+              "label": "Simon Willison - Qwen3.6-27B: Flagship-Level Coding in a 27B Dense Model",
+              "url": "https://simonwillison.net/2026/Apr/22/qwen36-27b/"
+            }
+          ]
+        },
+        {
+          "body": "**GIGAZINE 日本語解説（Apr 23）** — Claude Opus 4.5 近似性能をローカル PC で動作可能、誰でもダウンロード可能と報道。",
+          "citations": [
+            {
+              "label": "GIGAZINE - Qwen3.6-27B local PC release",
+              "url": "https://gigazine.net/gsc_news/en/20260423-qwen-3-6-27b/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM > Bonsai（1-bit LLM / 最適化）",
+      "bullets": [
+        {
+          "body": "**Bonsai-8B 1-bit LLM（ウィンドウ内はレビュー継続）** — 全重みが -1/+1 でネイティブ訓練。8B クラス性能を 1.15GB に圧縮、同精度帯比 12-14 倍小、RTX 4090 で 6 倍高速、省エネ 4-5 倍。CUDA / Metal / Android / CPU 対応。Bonsai 1.7B / 4B / 8B の 3 ラインナップ、Apache 2.0。",
+          "citations": [
+            {
+              "label": "Medium - New 1 bit LLM is here: Bonsai-8B",
+              "url": "https://medium.com/data-science-in-your-pocket/new-1-bit-llm-is-here-bonsai-8b-bc6074403e50"
+            }
+          ]
+        },
+        {
+          "body": "**Bonsai 1-bit デプロイガイド（ウィンドウ内継続）** — 実運用における CUDA / Metal / CPU デプロイ手順と性能測定。llama.cpp と MLX 両方からネイティブサポート。",
+          "citations": [
+            {
+              "label": "getdeploying - Bonsai 1-bit: An 8B LLM that fits in 1 GB",
+              "url": "https://getdeploying.com/guides/bonsai-1bit-llm"
+            }
+          ]
+        },
+        {
+          "body": "**Bonsai-8B は 1/14 サイズで 8B 級性能（Firethering）** — アーキテクチャ解説と性能検証、エンタープライズ向けローカル展開シナリオ。",
+          "citations": [
+            {
+              "label": "Firethering - Bonsai 8B: A 1-Bit LLM That Delivers 8B-Class Performance",
+              "url": "https://firethering.com/bonsai-8b-1bit-llm/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > llama.cpp",
+      "bullets": [
+        {
+          "body": "**ウィンドウ内継続更新（Apr 22-23）** — WebGPU 関連 PR（async tensor API / event API、#22099 系）を含む新ビルドが追加配布。`GGML_WEBGPU_DISABLE_FUSION` で kernel fusion の無効化対応、iOS 向け num_fused_ops パラメトライズ継続。Qwen3.6-27B / Bonsai-8B の 1-bit フォーマットいずれも直接ロード可能。",
+          "citations": [
+            {
+              "label": "llama.cpp - WebGPU PR approval process + call for maintainers",
+              "url": "https://github.com/ggml-org/llama.cpp/discussions/21189"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > Ollama",
+      "bullets": [
+        {
+          "body": "**v0.21.1 正式版確定（Apr 21）** — rc0 から同日中に正式化。`ollama launch` による OpenClaw / Hermes / GitHub Copilot CLI 統合、MLX Apple Silicon での Gemma 4 高速化、Gemma 4 nothink レンダラ修正、macOS cmake ビルド修正を継続サポート。3 日ウィンドウ内で新規大型発表なし。",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "Ecosystems（ローカル推論ランタイム） > Azure Foundry Local",
+      "bullets": [
+        {
+          "body": "**Foundry Local GA（Apr 9）＋ Azure Local Public Preview 継続** — Windows / Linux / macOS クロスプラットフォーム対応、Windows は Windows ML、macOS は Apple Silicon Metal ネイティブ。Azure Arc 拡張で Helm + Arc enabled K8s クラスタ一括ガバナンス。3 日ウィンドウ内で新規大型発表なし。",
+          "citations": [
+            {
+              "label": "Microsoft Foundry Blog - Foundry Local is now Generally Available",
+              "url": "https://devblogs.microsoft.com/foundry/foundry-local-ga/"
+            }
+          ]
+        },
+        {
+          "body": "**Microsoft Foundry 2026-04 更新（Apr 2026）** — Fine-Tuning 機能強化（RFT Global Training for o4-mini、GPT-4.1 モデルグレイダー、RFT ベストプラクティスガイド）、Foundry Labs の Apr 2026 アップデートを告知。",
+          "citations": [
+            {
+              "label": "Microsoft Learn - Microsoft Foundry docs: What's new for April 2026",
+              "url": "https://learn.microsoft.com/en-us/azure/foundry/whats-new-foundry"
+            }
+          ]
+        },
+        {
+          "body": "**Foundry Labs Apr 2026 アップデート** — エージェント基盤と評価ハーネスの新機能。",
+          "citations": [
+            {
+              "label": "Microsoft TechCommunity - What's new in Foundry Labs - April 2026",
+              "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/whats-new-in-foundry-labs---april-2026/4509714"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security",
+      "bullets": [
+        {
+          "body": "**Anthropic Claude Mythos Preview 未認可アクセス事案（Apr 21-22 報道）** — Anthropic 外注スタッフのクレデンシャル + Mercor データ流出 + Anthropic 命名規則推測の組み合わせで、Private Discord グループが Mythos エンドポイント URL を再構築して到達。サイバー攻撃には使わず「シンプルな Web サイト構築」等のテスト利用と主張。Anthropic 内部システム / 第三者ベンダ環境を超えた波及は確認されず。Mythos 自体は AISI 評価でサンドボックス脱出事案のあった能力モデル。",
+          "citations": []
+        },
+        {
+          "body": "**Mythos 事案続報：Euronews（Apr 22）** — Mythos は「公開するには危険すぎる」モデル、公開初日に未認可アクセス。",
+          "citations": [
+            {
+              "label": "Euronews - Hackers breach Anthropic's 'too dangerous to release' Mythos AI model",
+              "url": "https://www.euronews.com/next/2026/04/22/hackers-breach-anthropics-too-dangerous-to-release-mythos-ai-model-report"
+            }
+          ]
+        },
+        {
+          "body": "**Mythos 事案続報：CyberNews（Apr 22）** — Discord グループの侵入経路詳細：外注クレデンシャル + Mercor 流出データ + 命名規則再構築。",
+          "citations": [
+            {
+              "label": "CyberNews - Discord group accessed Anthropic's Mythos without authorization",
+              "url": "https://cybernews.com/security/anthropic-mythos-ai-unauthorized-access/"
+            }
+          ]
+        },
+        {
+          "body": "**Mythos 事案続報：The Decoder（Apr 22）** — 米政府 / AISI 関連の取扱いと同時進行での事案に焦点。",
+          "citations": [
+            {
+              "label": "The Decoder - Unauthorized users breach Anthropic's restricted Mythos AI model",
+              "url": "https://the-decoder.com/unauthorized-users-breach-anthropics-restricted-mythos-ai-model/"
+            }
+          ]
+        },
+        {
+          "body": "**Mythos 事案続報：CBS News（Apr 22）** — Anthropic 公式声明「investigating a report claiming unauthorised access through one of our third-party vendor environments」を掲載。",
+          "citations": []
+        },
+        {
+          "body": "**OpenAI / Anthropic / Google の敵対的 distillation 対策（継続）** — Apr 21 以降、DeepSeek / Moonshot AI / MiniMax を対象とした共同脅威情報共有が Frontier Model Forum で継続。Anthropic は 24,000 の不正アカウント + 16M Claude 交換を主張。",
+          "citations": []
+        },
+        {
+          "body": "**新規重大 CVE 多数（Apr 22 公開、詳細は次節）** — AI フレームワーク以外も Web / OAuth / CRM / 地理空間 / 仮想通貨ブロックまで広範に影響。",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "CVE（CVSS 8.0 以上）",
+      "bullets": [
+        {
+          "body": "**CVE-2026-34415** — Xerte Online Toolkits、CVSS **9.8**、不完全入力検証で未認証 PHP アップロード → RCE。公開 Apr 22。",
+          "citations": [
+            {
+              "label": "TheHackerWire - Xerte Online Toolkits RCE via Incomplete Input Validation",
+              "url": "https://www.thehackerwire.com/xerte-online-toolkits-rce-via-incomplete-input-validation-cve-2026-34415/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-33519** — Esri Portal for ArcGIS 11.4 / 11.5 / 12.0、CVSS **9.8**、Incorrect Authorization。公開 Apr 22。",
+          "citations": [
+            {
+              "label": "Sherlock Forensics - CVE-2026-33519",
+              "url": "https://www.sherlockforensics.com/blog/2026-04-22-cve-2026-33519.html"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-6356** — Web Application、CVSS **9.6**、Parameter Manipulation でユーザから Super Admin 権限昇格。公開 Apr 22。",
+          "citations": [
+            {
+              "label": "TheHackerWire - Web App Privilege Escalation via Parameter Manipulation",
+              "url": "https://www.thehackerwire.com/web-app-privilege-escalation-via-parameter-manipulation-cve-2026-6356/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-33471** — Nimiq（nimiq-block crate）、CVSS **9.6**、署名集約時の整数オーバーフローで skip block proof 検証迂回、悪意あるバリデータが偽造可能。公開 Apr 22。",
+          "citations": [
+            {
+              "label": "TheHackerWire - Nimiq nimiq-block Skip Block Proof Verification Bypass",
+              "url": "https://www.thehackerwire.com/nimiq-nimiq-block-skip-block-proof-verification-bypass-cve-2026-33471/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-41167** — Jellystat、CVSS **9.1**、SQL Injection → RCE。公開 Apr 22。",
+          "citations": [
+            {
+              "label": "TheHackerWire - Jellystat SQL Injection to RCE",
+              "url": "https://www.thehackerwire.com/jellystat-sql-injection-to-rce-cve-2026-41167/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-40575** — OAuth2 Proxy、CVSS **9.1**、X-Forwarded-Uri 経由の認証バイパス。公開 Apr 22。",
+          "citations": [
+            {
+              "label": "TheHackerWire - OAuth2 Proxy X-Forwarded-Uri Authentication Bypass",
+              "url": "https://www.thehackerwire.com/oauth2-proxy-x-forwarded-uri-authentication-bypass-cve-2026-40575/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-33656** — EspoCRM、CVSS **9.1**、認証済管理者による任意ファイル読込／書込。公開 Apr 22。",
+          "citations": [
+            {
+              "label": "TheHackerWire - EspoCRM Authenticated Admin File Read/Write",
+              "url": "https://www.thehackerwire.com/espocrm-authenticated-admin-file-read-write-cve-2026-33656/"
+            }
+          ]
+        },
+        {
+          "body": "**CVE-2026-33825** — Microsoft Defender Insufficient Granularity of Access Control。Apr 22 に **CISA KEV 追加**、アクセス制御粒度不足でポリシ迂回。",
+          "citations": [
+            {
+              "label": "CISA - CISA Adds One Known Exploited Vulnerability to Catalog (Apr 22)",
+              "url": "https://www.cisa.gov/news-events/alerts/2026/04/22/cisa-adds-one-known-exploited-vulnerability-catalog"
+            }
+          ]
+        },
+        {
+          "body": "**CISA KEV 既出 8 件の federal 期限進行**（Cisco Catalyst SD-WAN Manager / PaperCut / TeamCity / Kentico / KACE / Zimbra）— Cisco 系 3 件が **Apr 23 連邦期限**、残り 5 件が May 4 期限。",
+          "citations": [
+            {
+              "label": "CyberSecurityNews - CISA Warns of Cisco Catalyst SD-WAN Manager Vulnerabilities Exploited in Attacks",
+              "url": "https://cybersecuritynews.com/cisco-sd-wan-manager-vulnerabilities/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Hardware",
+      "bullets": [
+        {
+          "body": "**NVIDIA Vera Rubin プラットフォーム量産入り（記事拡散 Apr 22）** — Vera CPU / Rubin GPU / NVLink 6 Switch / ConnectX-9 SuperNIC / BlueField-4 DPU / Spectrum-6 Ethernet を含むフルスタックチップ群が量産入り。Rubin ベース製品は 2026 後半に提供、AWS / Google Cloud / Azure / OCI / CoreWeave / Lambda / Nebius / Nscale が Vera Rubin インスタンスを順次展開。",
+          "citations": [
+            {
+              "label": "NVIDIA Newsroom - NVIDIA Vera Rubin Opens Agentic AI Frontier",
+              "url": "https://nvidianews.nvidia.com/news/nvidia-vera-rubin-platform"
+            }
+          ]
+        },
+        {
+          "body": "**NVIDIA RTX AI Garage GTC 2026 / NemoClaw RTX PC / DGX Spark（Apr 継続）** — ローカル RTX PC / DGX Spark 上で最新オープンモデルと NemoClaw エージェントを実行するショーケース。",
+          "citations": [
+            {
+              "label": "NVIDIA Blog - GTC Spotlights NVIDIA RTX PCs and DGX Sparks",
+              "url": "https://blogs.nvidia.com/blog/rtx-ai-garage-gtc-2026-nemoclaw/"
+            }
+          ]
+        },
+        {
+          "body": "**Anthropic TPU 拡張（Google + Broadcom、Apr 22）** — 2027 開始で複数 GW 級の次世代 TPU を Broadcom が Google と共同で Anthropic に供給、Broadcom の AI カスタムシリコン事業は 2027 年末までに年 $100B 規模を目指す。Mizuho 試算では Broadcom が Anthropic から 2026 $21B / 2027 $42B 収益獲得。",
+          "citations": []
+        },
+        {
+          "body": "**Anthropic + Alphabet + Broadcom 詳細報道（Apr 22）** — Motley Fool が Alphabet / Broadcom 株への意味を詳解。",
+          "citations": [
+            {
+              "label": "The Motley Fool - Anthropic Just Announced Huge News for Alphabet and Broadcom",
+              "url": "https://www.fool.com/investing/2026/04/22/anthropic-just-announced-huge-news-for-alphabet-an/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Physical AI",
+      "bullets": [
+        {
+          "body": "**Hannover Messe 2026（Apr 22-23）で Physical AI 実演** — ドイツ Agile Robots の「ブルーアイ」ヒューマノイドが工具の箱詰め作業を実演、AI によるドイツ工場の生産性向上期待を象徴。",
+          "citations": [
+            {
+              "label": "BSS News - AI-powered robots offer new hope to German factories",
+              "url": "https://www.bssnews.net/news/380249"
+            }
+          ]
+        },
+        {
+          "body": "**Accenture × Vodafone Procure & Connect × SAP のヒューマノイド倉庫業務パイロット（Apr 22）** — Physical AI で倉庫オペレーションの効率・安全・労働モデル設計に新しい選択肢。",
+          "citations": [
+            {
+              "label": "Robotics Tomorrow - Accenture, Vodafone Procure & Connect and SAP Pilot Humanoid Robotics in Warehouse Operations",
+              "url": "https://www.roboticstomorrow.com/news/2026/04/22/accenture-vodafone-procure-connect-and-sap-pilot-humanoid-robotics-in-warehouse-operations/26460/"
+            }
+          ]
+        },
+        {
+          "body": "**Accenture パイロット詳報（ASSEMBLY、Apr 22）** — 実業界の実装段階にヒューマノイドが到達したと位置付け。",
+          "citations": [
+            {
+              "label": "ASSEMBLY Magazine - Humanoid Robots Move Into Real-World Industrial Tasks With Physical AI, Accenture Pilot Shows",
+              "url": "https://www.assemblymag.com/articles/100005-humanoid-robots-move-into-real-world-industrial-tasks-with-physical-ai-accenture-pilot-shows"
+            }
+          ]
+        },
+        {
+          "body": "**ヒューマノイドロボット市場：2026 $2.16B → 2035 $8.78B、2025 年に 610 件超の投資（GlobeNewswire、Apr 22）** — Precedence Research 試算。工業／消費者応用の両軸で成長。",
+          "citations": [
+            {
+              "label": "GlobeNewswire - Humanoid Robot Market Size Worth USD 8.78 Billion by 2035",
+              "url": "https://www.globenewswire.com/news-release/2026/04/22/3278870/0/en/Humanoid-Robot-Market-Size-Worth-USD-8-78-Billion-by-2035-Driven-by-AI-Advancements-and-Expanding-Industrial-and-Consumer-Applications.html"
+            }
+          ]
+        },
+        {
+          "body": "**Sony AI 卓球ロボットが高レベル人間を破る + 北京ハーフマラソンで Honor の「Lightning」が 50分26秒（Apr 継続報道）** — Physical AI の運動系制御が人間競技領域に到達。",
+          "citations": [
+            {
+              "label": "Artificial Intelligence News - Sony AI robot beats players as humanoid robot wins Beijing race",
+              "url": "https://www.artificialintelligence-news.com/news/sony-ai-robot-table-tennis-humanoid-robot-beijing-race/"
+            }
+          ]
+        },
+        {
+          "body": "**Tesla Optimus V3（Apr 22-23）** — 37 関節、歩行 1.2m/s、Fremont 生産は Model S/X ライン停止の 4 ヶ月後（7月末〜8月）開始予定。Giga Texas 第2 工場建設中、2027 年夏稼働予定。年産 100 万台→最終 10M 台（Texas）計画。",
+          "citations": [
+            {
+              "label": "TradingKey - Tesla Third-Generation Humanoid Robot Debut Mid-Year",
+              "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/261814739-tesla-third-generation-humanoid-robot-debut-mid-year-tradingkey"
+            }
+          ]
+        },
+        {
+          "body": "**Tesla Optimus 生産タイムライン（Electrek、Apr 22）** — Fremont の Model S / X ラインが 5 月早期に最終出荷、7-8 月に Optimus 量産。初期速度は「非常に遅い」とMusk が警告。",
+          "citations": [
+            {
+              "label": "Electrek - Tesla pushes Optimus V3 reveal later this year - again",
+              "url": "https://electrek.co/2026/04/22/tesla-optimus-production-fremont-model-sx-line/"
+            }
+          ]
+        },
+        {
+          "body": "**Tesla Texas 工場 Optimus 10M 台規模目標（The Robot Report）** — EV から robotics への事業重心シフト。",
+          "citations": [
+            {
+              "label": "The Robot Report - From EVs to robotics: Tesla targets 10M Optimus units with new Texas plant",
+              "url": "https://www.therobotreport.com/from-evs-to-robotics-tesla-targets-10m-optimus-units-with-new-texas-plant/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Stock Prices and Corporate Activity",
+      "bullets": [
+        {
+          "body": "**IBM Q1 2026 決算（Apr 22）** — 売上 $15.92B（予想 $15.61B 超）、EPS $1.91（予想 $1.81 超）、前年比 +9%。**z17 メインフレームが前年比 +51%**、Infrastructure 部門 +15% に $3.33B。フリーキャッシュフロー +13%。通期 +5% 超成長 + CF $1B 増のガイダンス。一方 Red Hat / Confluent 依存懸念で株価は好決算後下落。",
+          "citations": []
+        },
+        {
+          "body": "**IBM 株下落の背景（Benzinga、Apr 22）** — 決算ビートにも関わらず株価下落、AI / Red Hat 関連で市場期待が先行。",
+          "citations": [
+            {
+              "label": "Benzinga - IBM Shares Drop Despite Q1 Earnings Beat",
+              "url": "https://www.benzinga.com/markets/earnings/26/04/51985558/ibm-shares-drop-despite-q1-earnings-beat-details"
+            }
+          ]
+        },
+        {
+          "body": "**ServiceNow Q1 2026 決算（Apr 22）** — サブスク売上 $3,671M（+22% YoY、定常通貨 +19%）、$1M+ 顧客数 +130% YoY、$1M+ 取引 +30% YoY。**AI コミット 2026 年 $1.5B**（元 $1B ガイダンスから 50% 上方修正）。通期サブスク売上ガイダンス $15,735M-$15,775M（+22-22.5%）。一方、中東地域での on-premise 大型案件遅延で 75bps の向かい風、株価 **-12%（-14%）** に沈む。",
+          "citations": []
+        },
+        {
+          "body": "**ServiceNow 公式発表（Apr 22）** — プレスリリースと投資家資料。",
+          "citations": [
+            {
+              "label": "ServiceNow Newsroom - ServiceNow Reports First Quarter 2026 Financial Results",
+              "url": "https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-First-Quarter-2026-Financial-Results/default.aspx"
+            }
+          ]
+        },
+        {
+          "body": "**Tesla 2026 capex $25B 超 + Roadster / FSD 無監督版遅延（Apr 22-23）** — Q1 2026 決算（前回報道）を受け、capex $25B 超確定。Optimus 量産（7-8月）優先のため Roadster / 無監督 FSD / Cybercab の一部タイムラインが後倒し。",
+          "citations": [
+            {
+              "label": "The Next Web - Tesla raises 2026 capex to $25 billion",
+              "url": "https://thenextweb.com/news/tesla-25-billion-capex-2026-optimus-robotaxi-ai-chip-fab"
+            }
+          ]
+        },
+        {
+          "body": "**Tesla 決算サマリ（NPR、Apr 22）** — Tesla はお金を儲けているが大幅に支出を拡大する計画、Optimus / Robotaxi / AI への投資重心シフト。",
+          "citations": [
+            {
+              "label": "NPR - Tesla's making money. But it's planning to spend an awful lot more",
+              "url": "https://www.npr.org/2026/04/22/nx-s1-5791653/tesla-earnings-first-quarter-2026"
+            }
+          ]
+        },
+        {
+          "body": "**Intel Q1 2026 決算（Apr 23 引け後予定）** — 予想 EPS $0.01（+92% YoY）、売上 $12.39B（-2.2% YoY）。Data Center + AI 事業 $4.41B（+6.8% YoY）想定。Terafab AI チップ合弁と 18A プロセス進捗が焦点、YTD 株価 +78%。",
+          "citations": []
+        },
+        {
+          "body": "**Anthropic 年率売上 $30B 超（Apr 22 確定）** — 2025 年末 $9B から 3x 以上に拡大。OpenAI の $25B を上回る。TPU / Broadcom / Google Cloud の多重コンピュート契約が売上急伸を支える構図。",
+          "citations": []
+        },
+        {
+          "body": "**Bloomberg：Google の新 AI エージェントが OpenAI / Anthropic に挑戦（Apr 22）** — Cloud Next '26 で公開された Gemini Enterprise Agent Platform + Workspace 新機能が商業的圧力に直結。",
+          "citations": []
+        }
+      ]
+    },
+    {
+      "category": "Bay Area / Silicon Valley AI ミートアップ",
+      "bullets": [
+        {
+          "body": "**SF Bay Area AI Meetup Group：Recent Advancements in Image Generation and Understanding（2026-04-23 9:00 AM PST、オンライン）** — 画像生成・理解の最近の進展をテーマに Zoom 開催。",
+          "citations": [
+            {
+              "label": "Meetup - SF Bay Area AI Meetup Group",
+              "url": "https://www.meetup.com/sf-bay-area-ai-meetup-group/"
+            }
+          ]
+        },
+        {
+          "body": "**Google Cloud Next '26（2026-04-22〜24、ラスベガス）** — Google Cloud の年次カンファレンス、ベイエリアから多数の技術者・パートナーが参加。Gemini Enterprise Agent Platform、A2A、Workspace Studio 発表の現地場。",
+          "citations": [
+            {
+              "label": "Google Cloud Blog - Welcome to Google Cloud Next26",
+              "url": "https://cloud.google.com/blog/topics/google-cloud-next26"
+            }
+          ]
+        },
+        {
+          "body": "**SF Bay Area 開催の AI イベント複数（Apr 23-25、AICamp 他）** — AI Camp / Couchbase / Google 共催の SF AI イベントが Apr 23-24 に集中、Google Cloud Next 期間と重複。",
+          "citations": [
+            {
+              "label": "AICamp - SF AI Events",
+              "url": "https://www.aicamp.ai/event/eventsquery?city=US-San+Francisco"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "その他の注目トピック",
+      "bullets": [
+        {
+          "body": "**OpenAI Workspace Agents（Apr 22）** — Codex 駆動のチーム共有エージェント。ChatGPT Business / Enterprise / Edu / Teachers に research preview 展開。ファイル / コード / ツール / Slack / Salesforce と直接統合、組織パーミッション内でクラウド常駐。**May 6 まで無料、以降クレジット課金**。例：Software Reviewer（社内 IT 申請をレビューしチケット自動化）、Product Feedback Router、Weekly Metrics Reporter。",
+          "citations": [
+            {
+              "label": "OpenAI - Introducing workspace agents in ChatGPT",
+              "url": "https://openai.com/index/introducing-workspace-agents-in-chatgpt/"
+            }
+          ]
+        },
+        {
+          "body": "**Workspace Agents 解説（9to5Mac、Apr 22）** — Codex との統合と既存 Custom GPT からの進化ポジショニングを詳報。",
+          "citations": [
+            {
+              "label": "9to5Mac - OpenAI updates ChatGPT with Codex-powered 'workspace agents' for teams",
+              "url": "https://9to5mac.com/2026/04/22/openai-updates-chatgpt-with-codex-powered-workspace-agents-for-teams/"
+            }
+          ]
+        },
+        {
+          "body": "**Workspace Agents 解説（SiliconANGLE、Apr 22）** — 複雑なチームワークフロー自動化としての位置付け。",
+          "citations": [
+            {
+              "label": "SiliconANGLE - OpenAI subscribers get new 'workspace agents' to automate complex tasks",
+              "url": "https://siliconangle.com/2026/04/22/openai-subscribers-get-new-workspace-agents-automate-complex-tasks-across-teams/"
+            }
+          ]
+        },
+        {
+          "body": "**Workspace Agents 解説（Neowin、Apr 22）** — 自律実行モデルの詳細を図解付きで紹介。",
+          "citations": [
+            {
+              "label": "Neowin - OpenAI launches autonomous Workspace Agents in ChatGPT",
+              "url": "https://www.neowin.net/news/openai-launches-autonomous-workspace-agents-in-chatgpt/"
+            }
+          ]
+        },
+        {
+          "body": "**Toyota Woven City の AI 全面展開（Apr 22-23）** — Woven by Toyota が自社 AI モデルを Woven City 全域でデプロイ、人の直感・能力を「代替ではなく補完」する「カケザン（Kakezan = 掛け算）」アプローチ。Apr 23 に Toyota Woven City Challenge アクセラレータ最終ピッチ。",
+          "citations": [
+            {
+              "label": "Toyota Global - Toyota and Woven by Toyota Unveil New AI Technologies to Drive Kakezan",
+              "url": "https://global.toyota/en/newsroom/corporate/44256155.html"
+            }
+          ]
+        },
+        {
+          "body": "**Woven by Toyota 公式（Apr 22）** — Woven City 向け自社 AI モデルの詳細。 [Woven by Toyota - New AI Technologies](https://woven.toyota/en/news/20260422/) ---",
+          "citations": [
+            {
+              "label": "Woven by Toyota - New AI Technologies",
+              "url": "https://woven.toyota/en/news/20260422/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
