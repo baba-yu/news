@@ -1,6 +1,6 @@
 # Future タイトル一括 rename — 別セッション引継ぎ
 
-新ルール（[design/scheduled/1_daily_update-writer-rules.md §compose-prediction Field-level rules](design/scheduled/1_daily_update-writer-rules.md)）に従って、過去 corpus（2026-04-19 〜 2026-05-04 = 16 日 × 3 予測 = 48 件）の Future タイトルをリライトする。
+新ルール（[design/scheduled/1_daily_update-writer-rules.md §compose-prediction Field-level rules](design/scheduled/1_daily_update-writer-rules.md)）に従って、過去 corpus（2026-04-19 〜 2026-05-04、16 日分）の Future タイトルをリライトする。実機 corpus は 11 日 × 3 予測 + 4 日 × 4 予測 + 1 日 × 3 予測 = **52 件 EN**（当初の見積 48 件は誤り、4-pred 日が 4 日存在）。
 
 ## 背景（なぜやるか）
 
@@ -21,9 +21,9 @@
 ## スコープ（対象範囲）
 
 - **期間**: 2026-04-19 〜 2026-05-04（16 日分）
-- **件数**: 48 件（毎日 3 予測 × 16 日）
+- **件数**: 52 件 EN（11 日×3 + 4 日×4 + 1 日×3）+ 156 件ロケール（52×3）
 - **言語**: EN canonical → JA / ES / FIL fanout
-- **ID 不変**: `prediction_id` は SHA-1(`prediction_date` + `prediction_summary`) なので、**title だけ変えれば ID は保たれる**（[app/src/ingest.py:298](app/src/ingest.py#L298)）。`prediction_summary` は触らない。
+- **ID 不変**: `prediction_id` は SHA-1(`prediction_date` + `||` + **`body`**)[:16] で生成される（[app/skills/migrate_to_sourcedata.py:131](app/skills/migrate_to_sourcedata.py#L131) `_stable_prediction_id`）。`app/src/ingest.py:298` のパラメータ名は `prediction_summary` だが、実際に渡されるのは `body` フィールド（コードベースの terminology drift、migrate_to_sourcedata.py docstring に明記あり）。実機検証で 52/52 件が body-recipe にマッチ、summary-recipe には 0/52。**title だけ変えれば ID は保たれる**（body は触らない）。
 
 ## 変更対象ファイル（surface area）
 
@@ -33,8 +33,8 @@ renaming は **sourcedata JSON が単一の真実の源** で、そこから rer
 
 | ファイル | フィールド | 補足 |
 |---|---|---|
-| `app/sourcedata/<date>/predictions.json` | `predictions[].title` | 16 日 × 3 = 48 エントリ |
-| `app/sourcedata/locales/<date>/<L>/predictions.json` | `predictions[].title` | 16 × 3 × 3 = 144 エントリ（JA/ES/FIL） |
+| `app/sourcedata/<date>/predictions.json` | `predictions[].title` | 52 エントリ（日付ごとに 3 or 4 件）|
+| `app/sourcedata/locales/<date>/<L>/predictions.json` | `predictions[].title` | 156 エントリ（52 × 3 ロケール、JA/ES/FIL）|
 
 ### rerender で自動伝播
 
@@ -65,7 +65,7 @@ Sub-agent 1 件あたり：
 - **Output**: 新 `title`（≤80 chars、新規則準拠）一行のみ
 - **Reply contract**: `OK <pid> <new_title>` または `KEEP <pid>`（既に新規則準拠で書き換え不要のとき）または `FAIL <pid> <reason>`
 
-並列度：日付ごとに 3 sub-agent を fan out（compose-prediction と同じ shape）。16 日逐次 × 3 並列で 48 件 ≈ 16 ラウンド。
+並列度：日付ごとに 3 or 4 sub-agent を fan out（compose-prediction と同じ shape）。harness 上限 16 並列を想定し、5-6 日ずつバッチ × 4 ラウンドで 52 件カバー。
 
 実装場所案：
 - `app/skills/rename_future_titles.py` — orchestrator（dry-run / apply / 単一日付指定 / 全期間モード）
@@ -73,7 +73,7 @@ Sub-agent 1 件あたり：
 
 #### Dry-run モード必須
 
-48 件全部の `OLD → NEW` 比較表を吐く。ユーザー目視レビュー後に `--apply` で書き戻し。LLM の暴走防止。
+52 件全部の `OLD → NEW` 比較表を吐く。ユーザー目視レビュー後に `--apply` で書き戻し。LLM の暴走防止。
 
 ### Step 2. ロケール再翻訳
 
@@ -108,14 +108,14 @@ python -m app.src.cli export   # graph-{tech,business,mix}.json 一括再生成
 
 #### 自動
 
-- `python -m app.skills.daily_flow_check --date 2026-05-04 --strict` — 全バケット再検証（4 ロケール × 16 日分のファイル整合）
+- `python -m app.skills.daily_flow_check --date 2026-05-04 --strict` — 全バケット再検証（4 ロケール × 16 日分のファイル整合 = 64 ファイル）
 - `python -m app.skills.lint_markdown_clean report/` — 禁止トークン検出
 - `python -m app.skills.post_write_integrity --kind news` — markdown 整合性
 - 新規ユニットテスト案（必須）：
   - `app/tests/test_rename_future_titles.py`
     - sub-agent output schema バリデーション
     - dry-run idempotent
-    - apply 後の `prediction_id` 不変性（48 件全部について SHA-1 hash 再計算で照合）
+    - apply 後の `prediction_id` 不変性（52 件全部について SHA-1 hash 再計算で照合）
     - rerender 後の `## Future` リスト先頭が新 title になっている
 
 #### 目視
@@ -139,9 +139,9 @@ python -m app.src.cli export   # graph-{tech,business,mix}.json 一括再生成
 - このファイル末尾に「## 進捗ログ」を追記して `git commit`
 
 完了条件：
-- [ ] 48 件の dry-run レビュー完了
-- [ ] 48 件 EN 適用済 + commit
-- [ ] 144 件ロケール適用済 + commit
+- [ ] 52 件の dry-run レビュー完了
+- [ ] 52 件 EN 適用済 + commit
+- [ ] 156 件ロケール適用済 + commit
 - [ ] DB 再 ingest 完了 + commit
 - [ ] graph 再 export 完了 + commit
 - [ ] daily_flow_check / lint / post-write-integrity 全 green
