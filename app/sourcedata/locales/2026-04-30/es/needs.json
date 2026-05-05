@@ -1,0 +1,181 @@
+{
+  "date": "2026-04-30",
+  "by_prediction": {
+    "prediction.0a749c937fee6680": [
+      {
+        "actor": "editor técnico de MITRE ATT&CK / NIST AI-RMF que mantiene la extensión del catálogo de amenazas de agent-skills",
+        "job": "Redactar y enviar la sub-matriz de amenazas de agent-skills como extensión de primera clase de ATT&CK o apéndice de AI-RMF cubriendo skill poisoning, IPI-vía-skill y cadenas de privilegios cross-skill.",
+        "outcome": "Sub-matriz pública de ATT&CK v20 o apéndice de NIST AI-RMF que nombre técnicas de amenaza de agent-skills junto al set base de v19.",
+        "motivation": "MITRE ATT&CK Mobile en 2017 y ATLAS en 2021 sentaron el precedente de que cualquiera que sea el editor que envíe primero la extensión del catálogo define la taxonomía canónica y bloquea la alineación de tooling downstream.",
+        "task": {
+          "who": "equipo de contenido de MITRE ATT&CK + grupo de trabajo de NIST AI-RMF + contribuyentes industriales invitados (autores de Anthropic Cybersecurity-Skills, equipo Cisco RSAC)",
+          "what": "publicar sub-matriz de envenenamiento-de-marketplace-de-skills con técnicas nombradas + detecciones de referencia",
+          "where": "attack.mitre.org + nist.gov/ai-rmf + repos draft de GitHub con ventana de revisión pública",
+          "when": "May a Q3 2026",
+          "why": "la ola de técnicas-nombradas de v19 crea un slot abierto que gana el editor con la primera publicación",
+          "how": "template-de-técnica de ATT&CK + mapping de 754 controles de Anthropic-Cybersecurity-Skills + telemetría de prompt-injection de RSAC 2026"
+        }
+      },
+      {
+        "actor": "ingeniero de plataforma de marketplace de skills en repo de skills de Anthropic / ClawHub / Multica / Hermes / Hugging Face",
+        "job": "Implementar el gate obligatorio de publicación firmada + atestada con provenance que bloquea skills no firmadas o no atestadas de llegar al marketplace público.",
+        "outcome": "Notas de release GA anunciando requerimiento de firma + atestación de provenance como gate que bloquea publicación, con un modo de browse de solo-skills-firmadas.",
+        "motivation": "Los 1.184 skills maliciosos de ClawHavoc en ClawHub + la tasa del 36% de prompt-injection de Cisco hacen de la firma-por-defecto la única forma de distribución aceptable empresarialmente; el primer marketplace en enviar el gate bloquea la preferencia de procurement empresarial.",
+        "task": {
+          "who": "equipo de plataforma de marketplace + lead de seguridad de cadena de suministro + infraestructura de gestión de claves",
+          "what": "implementar verificación de firma en publicación + chequeo de atestación de provenance + reject-on-failure",
+          "where": "API de publicación del marketplace + capa de gating CDN + UI de browse orientada al cliente",
+          "when": "May a Q3 2026",
+          "why": "limpiar el backlog de 1.184 skills maliciosos y prevenir el siguiente lote es ahora un asunto que bloquea procurement",
+          "how": "firma con Sigstore / cosign + provenance SLSA Level-3 + registro de claves de skill-author"
+        }
+      },
+      {
+        "actor": "regulador de CISA / NIST redactando el mandato de atestación de agent-skills",
+        "job": "Publicar un documento de guía vinculante o alerta exigiendo distribución firmada + atestada con provenance para agent-skills consumidos por empresas con clientes federales.",
+        "outcome": "Alerta de CISA o NIST SP companion que nombre la firma de agent-skill como un control requerido sobre sistemas que consumen skills third-party.",
+        "motivation": "El alza del +32% en IPI de Google del 23-29 abr + los 1.184 skills maliciosos de ClawHavoc presentan el mismo arco de brecha-de-gobernanza que produjo ATT&CK Mobile y ATLAS; la inacción del regulador deja que la presión de cliente empresarial fuerce el mandato desde el lado del marketplace primero.",
+        "task": {
+          "who": "equipo de análisis-de-amenaza-de-tecnología-emergente de CISA + NIST AI Safety Institute + grupo de trabajo interagencias",
+          "what": "redactar y publicar guía de atestación de distribución de skills con timeline de cumplimiento",
+          "where": "cisa.gov/news-events/alerts + nist.gov/ai + aviso del Federal Register",
+          "when": "May a Q3 2026",
+          "why": "los mandatos del lado marketplace carecen de respaldo de procurement federal sin una alerta de regulador",
+          "how": "template de alerta CISA KEV + NIST SP 800-series companion + alineación de controles FedRAMP"
+        }
+      }
+    ],
+    "prediction.099c9c373747db82": [
+      {
+        "actor": "equipo de producto Microsoft Foundry Local agregando integración de TurboQuant atada a execution providers de WinML",
+        "job": "Exponer un flag de KV-cache comprimido TurboQuant en el Foundry Catalog y enviar execution providers de WinML adaptados al hardware que lo auto-habiliten en dispositivos soportados.",
+        "outcome": "Notas de release de Foundry Local anunciando integración nativa de TurboQuant como optimización por defecto en Windows con un toggle de un click en el Catalog.",
+        "motivation": "Foundry Local es el punto de entrada empresarial-Windows que faltaba para la ola de utilidad de cache comprimido; cualquiera que sea el equipo que exponga primero el flag fija la forma de despliegue por defecto en Windows para workloads long-context limitados por ancho de banda de memoria.",
+        "task": {
+          "who": "ingeniería de plataforma de Foundry Local + equipo de WinML EP + equipo de curación de modelos del Catalog",
+          "what": "integrar kernels de TurboQuant detrás de un toggle del Catalog y validar comportamiento cross-EP sobre NPUs/GPUs soportados",
+          "where": "librería nativa de Foundry Local + Foundry Catalog + árbol de execution-provider de WinML",
+          "when": "May a Q3 2026",
+          "why": "el recorte de 5-6x del costo de ancho de banda de memoria es invisible para los desarrolladores finales si Foundry lo expone como un default del Catalog",
+          "how": "port Triton/MLX de TurboQuant + adaptador WinML EP + schema de metadatos del Catalog"
+        }
+      },
+      {
+        "actor": "mantenedor de stack de inferencia open-source para vLLM / SGLang / TGI / Ollama / llama.cpp / NVIDIA TensorRT-LLM",
+        "job": "Aterrizar un flag unificado --kv-cache-dtype (o equivalente) que exponga TurboQuant + al menos una alternativa como un knob de despliegue de primera clase.",
+        "outcome": "Release estable con un flag documentado de KV-cache comprimido cubriendo TurboQuant + KVTC / kvpress / TriAttention, con paridad de throughput regression-tested vs baselines de FP16.",
+        "motivation": "El PR #21419 / #23134 de SGLang ya alcanzó 93-105% del throughput bf16 con la rescritura de fused-Triton-decode; el pool de mantenedores que aterrice un flag unificado primero fija la convención cross-stack que cada serving harness downstream hereda.",
+        "task": {
+          "who": "core team del mantenedor del stack + ingeniero de kernel-perf + dueño de la API de serving",
+          "what": "cablear el dtype de KV-cache comprimido a través del scheduler + paged-KV manager + CLI de serving",
+          "where": "repos main y branches de release de vLLM / SGLang / TGI / Ollama / llama.cpp / TRT-LLM",
+          "when": "May a Q3 2026",
+          "why": "el tape de capex Mag 7 premia a stacks que envíen primero el flag de recorte de costo-por-token",
+          "how": "kernels fused-Triton de TurboQuant + paged-KV cache manager + atención dtype-aware"
+        }
+      },
+      {
+        "actor": "product manager de pricing de inferencia de hyperscaler en AWS Bedrock / Azure OpenAI / Google Vertex",
+        "job": "Definir el tier de pricing opt-in de KV-cache comprimido para que workloads limitados por ancho de banda de memoria ruteen a almacenamiento clase TurboQuant a un rate por-token publicado más bajo.",
+        "outcome": "Anuncio público de tier de pricing que condiciona los rates por token de Bedrock / Azure / Vertex sobre modo opt-in de cache comprimido con un piso de margen publicado.",
+        "motivation": "El gating de margen-por-token es la palanca que los mercados públicos han pedido; cualquiera que sea el hyperscaler Big-3 que envíe primero el tier de pricing de cache comprimido se gana el crédito de precedente-de-disclosure.",
+        "task": {
+          "who": "PM de producto de inferencia del hyperscaler + equipo de plataforma de serving + liaison con finanzas / IR",
+          "what": "levantar un SKU opt-in de cache comprimido con envelope de price/throughput documentado",
+          "where": "páginas de pricing de Bedrock / Azure OpenAI / Vertex + draft de nota al pie del 10-Q",
+          "when": "May a Q4 2026",
+          "why": "el tape de capex Mag 7 demanda disclosure de margen-por-token; el pricing de cache comprimido es el primer instrumento más limpio",
+          "how": "integración de TurboQuant + telemetría de costo por tenant + separación de SKU grado-finanzas"
+        }
+      }
+    ],
+    "prediction.5336402340ace94c": [
+      {
+        "actor": "líder de finanzas + investor-relations de foundation-lab en OpenAI / Anthropic / xAI",
+        "job": "Levantar una cadencia auditada de revenue mensual o WAU de disclosure que satisfaga la presión SEC + buyside sin comprometer el secreto sobre concentración de clientes.",
+        "outcome": "Página de IR pública o companion de filing trimestral que publique revenue mensual / WAU auditado en una cadencia fija.",
+        "motivation": "La falta de revenue del WSJ del 28 abr forzó al tape de capex-IA-por-fe a fracturarse; el foundation lab que envíe primero números mensuales auditados define la forma de disclosure que los competidores deben igualar y se gana un descuento de prima de costo de financiamiento.",
+        "task": {
+          "who": "CFO del lab + equipo de IR + auditor externo + general counsel",
+          "what": "estructurar dashboard mensual de revenue / WAU + atestación de auditoría + política de cadencia",
+          "where": "página IR del lab + equivalente a 10-K / 8-K + entregables de auditoría Big-4",
+          "when": "May a Q3 2026",
+          "why": "el tape del WSJ hizo insostenible la disclosure solo-narrativa; el primero en moverse fija el template",
+          "how": "framework de atestación estilo AICPA SOC + pipeline reproducible de reconocimiento de revenue + instrumentación de WAU"
+        }
+      },
+      {
+        "actor": "controller externo-de-reporting de hyperscaler Big-3 en AWS Bedrock / Microsoft Azure-OpenAI / Google Vertex",
+        "job": "Diseñar y divulgar margen por-token de Bedrock / Azure-OpenAI / Vertex en notas al pie del 10-Q separado del revenue cloud crudo.",
+        "outcome": "Nota al pie del 10-Q que publique margen por-token de plataforma AI como una cifra discreta separable del revenue subyacente de infraestructura cloud.",
+        "motivation": "Microsoft ya citó un AI run-rate explícito de $37B (+123%) — el primer hyperscaler en poner una sola línea por-AI-business en su release principal — y el siguiente movimiento bajo presión SEC + analistas es separación de margen-por-token en las notas al pie.",
+        "task": {
+          "who": "controller externo-de-reporting del hyperscaler + equipo de finanzas-de-segmento + chair del comité de auditoría",
+          "what": "redactar schema de nota al pie separando margen por-token de Bedrock / Azure-OpenAI / Vertex del revenue cloud crudo",
+          "where": "nota al pie del 10-Q + deck de analyst-day + apéndice de reconciliación-de-segmento",
+          "when": "ciclos de earnings May a Q3 2026",
+          "why": "el run-rate de $37B de MSFT es el precedente; el margen-por-token es la próxima palanca pública",
+          "how": "asignación interna de costo de plataforma AI + política de segment-reporting + sign-off del auditor"
+        }
+      },
+      {
+        "actor": "staff de corporation-finance de la SEC liderando la guía interpretativa de disclosure de revenue de IA",
+        "job": "Emitir guía interpretativa o una carta Dear-CFO alentando a registrants a divulgar run-rate por-AI-business, revenue mensual y margen por-token en MD&A.",
+        "outcome": "Guía de SEC corp-fin o carta Dear-CFO nombrando expectativas de disclosure de revenue de IA y citando la disclosure del run-rate de $37B de Microsoft como template.",
+        "motivation": "El selloff del 28 abr (Oracle -4%, AMD -3%, Broadcom -4%, SoftBank -10%) demostró el riesgo del tape de capex-IA-por-fe a inversores minoristas; la guía del staff es la palanca de menor fricción que tiene la SEC antes de rulemaking formal.",
+        "task": {
+          "who": "staff de la SEC Division of Corporation Finance + Office of Chief Accountant + advisory de comisionado",
+          "what": "redactar y emitir guía interpretativa + lenguaje de muestra de MD&A",
+          "where": "sec.gov/divisions/corpfin + distribución de carta Dear-CFO + declaración de comisionado",
+          "when": "May a Q3 2026",
+          "why": "el IPO de Cerebras a mediados de mayo concentra la presión de disclosure del lado registrant en un calendario apretado",
+          "how": "template de interpretive-release de la SEC + programa de cartas de comentarios + coordinación con AICPA"
+        }
+      }
+    ],
+    "prediction.6532fd24077f4129": [
+      {
+        "actor": "equipo de comunicaciones entrante del Federal Reserve Chair Warsh",
+        "job": "Resetear el encuadre del FOMC bajo el nuevo Chair para que la postura de disenso se comprima en decisiones de tasas mientras se preserva la señal del voto marginal de Powell sobre gobernanza de la investigación a la Fed.",
+        "outcome": "Primera press conference + statement del FOMC bajo Warsh que re-anclen la norma de disenso a ≤2 disidentes y separe explícitamente el encuadre de tasas de la postura de gobernanza.",
+        "motivation": "El disenso 8-4 del 29 abr (mayor desde oct-1992) es insostenible como encuadre steady-state; el Chair entrante debe comprimir el disenso en decisiones de tasas para restaurar la volatilidad de forward-guidance a un envelope normal.",
+        "task": {
+          "who": "equipo de comunicaciones del Chair entrante + secretario del FOMC + staff legal de la Junta",
+          "what": "redactar declaración de handover del Chair + reset de encuadre del FOMC + briefing de medios",
+          "where": "press conferences en federalreserve.gov + FOMC statement + oficina de prensa de la Junta",
+          "when": "15 may en adelante hasta Q4 2026",
+          "why": "la comparación con el precedente de 1992 debe pasar de anomalía de vuelta a curiosidad histórica",
+          "how": "disciplina de Q&A en press-conference + harmonización de lenguaje de statement + protocolo de gestión de disenso"
+        }
+      },
+      {
+        "actor": "editor de structural-analysis de prensa financiera en WSJ / FT / Bloomberg cubriendo gobernanza de la Fed",
+        "job": "Establecer la comparación con el precedente de 1992 como un punto de referencia estructural en la cobertura del nuevo régimen de gobernanza de la Fed, separando el encuadre de tasas del riesgo institucional.",
+        "outcome": "Encuadre recurrente en la cobertura de portada de la Fed que distingue la señal de voto-de-tasas de Powell de su señal de gobernanza-de-investigación-a-la-Fed.",
+        "motivation": "Los mercados precian la volatilidad de forward-guidance separada del riesgo institucional sólo cuando la prensa establece la separación conceptual como estándar; el editor que envía el encuadre primero se vuelve la referencia canónica.",
+        "task": {
+          "who": "editor de structural-analysis de prensa financiera + reportero Fed-watcher + pool de contribuyentes de Op-Ed",
+          "what": "publicar pieza de encuadre + columna ongoing anclando el precedente 1992 + tracker del voto-en-Junta de Powell",
+          "where": "portada de WSJ / FT / Bloomberg + páginas de Opinion + productos de market-newsletter",
+          "when": "May a Q4 2026",
+          "why": "la comparación 1992 es actualmente una curiosidad; convertirla en una referencia estructural moldea el encuadre de analistas downstream",
+          "how": "investigación de archivo histórico + serie de entrevistas con Fed-governor + dataset de historial de disenso"
+        }
+      },
+      {
+        "actor": "estratega de tasas de inversor institucional construyendo el modelo dual-axis de pronóstico 2026-2027",
+        "job": "Publicar un framework de estrategia de tasas que precie menor volatilidad de forward-guidance bajo Warsh mientras precia una prima de riesgo institucional mayor sobre la propia Fed.",
+        "outcome": "Pieza de research del buyside que separa la volatilidad de path-de-tasas de la prima de riesgo institucional de la Fed y precia cada una por separado en curvas de 2 años y 10 años.",
+        "motivation": "Powell-se-queda-en-la-Junta convierte la narrativa del handoff del 15 may de \"Powell sale\" a \"Powell se queda como el voto marginal de gobernanza\"; el estratega que capture primero el pricing dual-axis se gana ventaja de flow en el próximo movimiento relacionado a investigación.",
+        "task": {
+          "who": "equipo de estrategia de tasas + economista macro + quant de modelado de curvas",
+          "what": "publicar modelo de pronóstico dual-axis + análisis de sensibilidad a investigation-trigger",
+          "where": "portal de research del buyside + briefings de cliente institucional + roadshow",
+          "when": "May a Q4 2026",
+          "why": "el FOMC liderado por Warsh comprime el disenso de tasas mientras Powell-en-la-Junta aumenta el pricing del riesgo de gobernanza — ambos deben preciarse por separado",
+          "how": "modelo de term-structure + indicador de governance-risk (milestones de investigación) + cross-check de Fed-funds futures"
+        }
+      }
+    ]
+  }
+}

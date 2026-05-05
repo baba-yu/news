@@ -1,0 +1,151 @@
+{
+  "date": "2026-04-19",
+  "by_prediction": {
+    "prediction.4bd551bfc1cca138": [
+      {
+        "actor": "edge-LLM model researcher sa isang open-weights frontier lab",
+        "job": "Mag-disenyo ng 1-bit-native training recipe para sa isang open-weights mid-size LLM family, ginagaya ang production-quality result ng Bonsai 8B.",
+        "outcome": "Public release ng isang 1-bit-native checkpoint sa Qwen o Llama family na may quality na katumbas ng 4/8-bit post-quantized peer nito.",
+        "motivation": "Ang pagkuha ng edge-LLM standard-recipe slot bago i-lock ng mga competitors ang citation share, downstream tooling, at hardware-vendor co-marketing.",
+        "task": {
+          "who": "pretraining research team + tokenizer/optimizer leads + evals team",
+          "what": "i-rerun ang pretraining gamit ang 1-bit weight parameterization at matched data budget",
+          "where": "internal training cluster + public model card + arXiv preprint",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "mag-ship ng 1-bit derivative bago maging default ang Bonsai recipe",
+          "how": "ternary-weight o BitNet-style 1.58-bit training stack sa H100/MI300 cluster"
+        }
+      },
+      {
+        "actor": "on-device inference runtime engineer sa isang mobile/edge runtime vendor",
+        "job": "Mag-land ng production-grade 1-bit kernels at packed-weight loaders para ang 1-bit checkpoints ay tumakbo nang mas mabilis kaysa sa kanilang 4-bit-quantized peers sa phone-class hardware.",
+        "outcome": "Release notes na nagpapakita ng 1-bit checkpoints na nag-loload sa sub-1.5 GB at tinatalo ang 4-bit latency sa standard benchmark suite ng runtime.",
+        "motivation": "Anumang runtime ang unang mag-ship ng first-class 1-bit support ay magiging default deployment target para sa susunod na wave ng 1-bit derivatives.",
+        "task": {
+          "who": "kernel/perf engineers + model-loader maintainers + mobile QA",
+          "what": "i-implement ang packed-bit matmul kernels at i-integrate ang Bonsai-style loader",
+          "where": "llama.cpp / MLX / ExecuTorch / ONNX Runtime mobile codepaths",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "gawing path of least resistance ang 1-bit para sa downstream app developers",
+          "how": "ARM SME / Apple AMX / Adreno DP4A intrinsics + packed-weight format"
+        }
+      },
+      {
+        "actor": "open-weights model-family release maintainer (Qwen / Llama line steward)",
+        "job": "Mag-publish ng 1-bit-native derivative ng flagship sub-10B checkpoint ng family kasama ng existing 4/8-bit quantized variants.",
+        "outcome": "Isang official 1-bit checkpoint card sa Hugging Face sa ilalim ng canonical org, na may parity-grade evals at sub-1.5 GB artifact.",
+        "motivation": "Pagtatanggol sa katayuan ng family bilang default open-weights edge target; ang pagbibigay ng 1-bit sa kalaban ay magdudulot ng fragmentation sa ecosystem na nakapaligid sa kanilang releases.",
+        "task": {
+          "who": "release engineering + evals lead + community/partner-comms owner",
+          "what": "i-package ang 1-bit checkpoint, i-publish ang model card, i-coordinate ang runtime support",
+          "where": "Hugging Face org repo + family blog + partner runtime release notes",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "matching ang Bonsai-set standard bago i-rebrand ng third parties ang weights ng family",
+          "how": "internal 1-bit training run + standard family eval harness + HF release flow"
+        }
+      }
+    ],
+    "prediction.995feb039ef043c1": [
+      {
+        "actor": "LLM-integration vulnerability researcher (independent + AI-security firms tulad ng HiddenLayer, Lakera, Robust Intelligence)",
+        "job": "mag-publish ng reproducible CVE-2025-53773-style indirect-prompt-injection PoCs laban sa agentic coding tools at LLM-backed apps sa runway papuntang Q3 2026",
+        "outcome": "tuloy-tuloy na stream ng public PoCs na umaabot sa CNA disclosure bar at qualified para sa CVSS 8.0+ scoring sa LLM-integration products",
+        "motivation": "i-establish ang indirect-prompt-injection bilang named bug class na may bounty-eligible payouts at conference-speaking visibility bago ma-saturate ang category",
+        "task": {
+          "who": "AI red-team researchers + bug-bounty hunters + academic LLM-security labs",
+          "what": "gumawa + mag-publish ng indirect-prompt-injection PoCs na tumatama sa RCE-from-untrusted-text paths",
+          "where": "GitHub PoC repos + arXiv + HackerOne + DEF CON AI Village + vendor disclosure portals",
+          "when": "Abril hanggang Q3 2026",
+          "why": "ang +190% YoY successful-attack growth ay gumagawa sa category na bounty-rich at citation-rich",
+          "how": "fuzzing PR bodies + issue templates + tool-call payloads laban sa Copilot / Cursor / Claude Code / agentic IDEs"
+        }
+      },
+      {
+        "actor": "LLM-integration product security team (GitHub, Cursor, Anthropic, OpenAI, JetBrains, Microsoft, agentic-IDE vendors)",
+        "job": "mag-ship ng monthly security patches na tumutugon sa indirect-prompt-injection CVEs sa LLM coding assistants at agent runtimes hanggang Q3 2026",
+        "outcome": "paulit-ulit na CVSS 8.0+ LLM-integration entries sa Microsoft Patch Tuesday rollup at parallel vendor advisories",
+        "motivation": "preserbahin ang enterprise procurement trust habang ang agentic tools ay tumatawid sa privileged execution paths at ang mga CISO ay humihingi ng monthly-cadence patch visibility",
+        "task": {
+          "who": "vendor PSIRT teams + LLM-integration product engineering + advisory authors",
+          "what": "i-triage, i-patch, at i-publish ang CVE advisories para sa indirect-prompt-injection flaws buwan-buwan",
+          "where": "Microsoft Security Response Center + GitHub Security Advisories + vendor PSIRT pages",
+          "when": "Mayo hanggang Q3 2026 (monthly Patch Tuesday cadence)",
+          "why": "Ang CVE-2025-53773 RCE-from-PR-body ay reproducible nang trivially sa LLM-coding-assistant cohort",
+          "how": "input-provenance tagging + tool-call allowlisting + PR-body sandboxing + CVSS 8.0+ disclosure templates"
+        }
+      },
+      {
+        "actor": "MITRE CVE Numbering Authority intake + CWE maintainers + OWASP LLM Top 10 working group",
+        "job": "i-formalize ang indirect-prompt-injection bilang named CWE entry at OWASP LLM Top 10 category para ang LLM-integration CVEs ay consistent ang pag-route at nag-score ng CVSS 8.0+",
+        "outcome": "stable CWE / OWASP taxonomy entry na nag-aanchor sa monthly Patch Tuesday LLM-integration CVE labeling pagsapit ng Q3 2026",
+        "motivation": "mapigilan ang CNA-side fragmentation na maaaring magtago sa category sa generic CWE-77 / CWE-94 buckets at malilihim ang trend",
+        "task": {
+          "who": "MITRE CNA editors + CWE content team + OWASP LLM Top 10 chairs",
+          "what": "mag-publish ng CWE entry + OWASP LLM Top 10 update na nagngangalan sa indirect-prompt-injection bilang top category",
+          "where": "cwe.mitre.org + OWASP project repo + CVE list intake + Patch Tuesday advisory templates",
+          "when": "Mayo hanggang Q3 2026",
+          "why": "Ang +190% YoY attack growth + reproducibility ng CVE-2025-53773 ay nagpipilit ng stable taxonomy slot",
+          "how": "i-draft ang CWE language + OWASP working-group review + i-coordinate sa MSRC + GitHub Security advisory templates"
+        }
+      }
+    ],
+    "prediction.c08481a657991ec8": [
+      {
+        "actor": "hyperscaler agent-platform product manager (AWS Agent Registry team)",
+        "job": "Mag-ship ng managed registry service para sa pag-distribute ng agent skills, tool permissions, at audit traces kasabay ng MCP",
+        "outcome": "GA-tier Agent Registry na may versioned artifacts, signed manifests, at audit-trace export sa enterprise customers",
+        "motivation": "Ang first mover ang nagde-define ng canonical agent-distribution shape at nag-lo-lock ng enterprise platform stickiness",
+        "task": {
+          "who": "AWS Bedrock agents PM + service team + security/governance lead",
+          "what": "mag-publish ng registry API spec, manifest schema, at signing policy",
+          "where": "AWS Agent Registry service + re:Invent / dev-day announcements",
+          "when": "Q2 hanggang H2 2026",
+          "why": "i-lock ang canonical agent-distribution shape bago ito ma-fragment ng mga rival",
+          "how": "MCP-aligned manifest format + IAM-style permission scopes"
+        }
+      },
+      {
+        "actor": "enterprise-AI vendor governance lead (NemoClaw-style audit + guardrail product)",
+        "job": "I-codify ang audit-log at guardrail policy schema bilang registry-attachable artifact",
+        "outcome": "Reference guardrail/audit policy bundle na maaaring i-attach ng registries sa anumang agent artifact",
+        "motivation": "Pamahalaan ang agent sprawl bago pilitin ng mga regulator ang less-favorable shape",
+        "task": {
+          "who": "vendor product + applied-security team + design-partner CISOs",
+          "what": "i-draft ang policy-bundle schema at mag-publish ng reference implementation",
+          "where": "vendor SDK + design-partner pilot deployments",
+          "when": "Q2 hanggang H2 2026",
+          "why": "ang registry-attachable policy ang tanging enterprise-acceptable shape",
+          "how": "OPA-style policy bundle + signed audit-trace export"
+        }
+      },
+      {
+        "actor": "self-learning agent platform engineer (Hermes Agent-style skill-acquisition team)",
+        "job": "I-define ang skill-artifact format para ang self-learned skills ay maaaring i-export, i-version, at ibahagi",
+        "outcome": "Skill-artifact spec na may provenance, eval scores, at tool-permission requirements na naka-baked in",
+        "motivation": "Ang self-learned skills ay walang halaga kung hindi ito ligtas na ma-distribute sa mga deployments",
+        "task": {
+          "who": "platform engineering + ML eval team + developer-relations",
+          "what": "mag-publish ng skill-artifact format at isang reference exporter",
+          "where": "agent SDK + open-source skill registry repo",
+          "when": "Q2 hanggang H2 2026",
+          "why": "ang distribution path ang nagpapaging commercially useful sa skill-acquisition",
+          "how": "MCP-aligned manifest + eval-score attestations"
+        }
+      },
+      {
+        "actor": "open-source agent-framework maintainer (MCP / LangChain / katumbas)",
+        "job": "Palawigin ang MCP gamit ang registry-discovery, signed-artifact, at permission-scope primitives",
+        "outcome": "MCP spec extension na sumasaklaw sa registry endpoints, artifact signing, at tool-permission scopes",
+        "motivation": "Panatilihing sentral ang MCP bilang cross-vendor standard sa halip na sumuko ng espasyo sa proprietary registries",
+        "task": {
+          "who": "MCP spec working group + maintainer council + vendor representatives",
+          "what": "i-draft at i-ratify ang registry-discovery + signing extension",
+          "where": "MCP spec repo + working-group calls",
+          "when": "Q2 hanggang H2 2026",
+          "why": "kung wala ito, fragmentin ng hyperscaler registries ang agent ecosystem",
+          "how": "RFC process + reference implementations mula sa maraming vendors"
+        }
+      }
+    ]
+  }
+}

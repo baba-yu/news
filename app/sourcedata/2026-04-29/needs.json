@@ -1,0 +1,137 @@
+{
+  "date": "2026-04-29",
+  "by_prediction": {
+    "prediction.f960d058dc42c7c6": [
+      {
+        "actor": "inference-runtime kernel engineer at vLLM / SGLang / TGI / Ollama / llama.cpp / NVIDIA TensorRT-LLM",
+        "job": "land a first-class --kv-cache-dtype turboquant (or equivalent) flag in the main branch with TurboQuant + at least one alternative wired through fused decode / extend kernels before Q4 2026",
+        "outcome": "merged main-branch flag exposing TurboQuant + KVTC / kvpress / TriAttention with documented throughput parity (>=93% bf16) and a public benchmark page",
+        "motivation": "without first-class kernel + flag support, compressed-cache deployment stays an experimental opt-in and hyperscalers cannot tier per-token pricing on it; whichever runtime ships the polished knob first wins the long-context default",
+        "task": {
+          "who": "kernel engineering team + scheduler / dispatcher leads + benchmark / perf-eng + release-engineering",
+          "what": "implement fused Triton / CUDA decode + extend kernels for TurboQuant + alternative, expose --kv-cache-dtype flag, ship benchmark suite",
+          "where": "vLLM / SGLang / TGI / Ollama / llama.cpp / TensorRT-LLM main branches + perf-bench harness",
+          "when": "May 2026 to Q4 2026",
+          "why": "compressed-cache pricing tiers depend on production-grade fused-kernel throughput parity",
+          "how": "MSE-FWHT rotation + 3-bit Lloyd-Max quantizer + packed 4-bit attention reads + per-engine benchmark publication"
+        }
+      },
+      {
+        "actor": "hyperscaler Bedrock / Azure / Vertex per-token pricing product manager",
+        "job": "package a compressed-cache opt-in pricing tier that prices long-context workloads at a 5-6x lower per-token rate before Q4 2026",
+        "outcome": "GA price-list entry for an opt-in compressed-cache tier with published per-token rates and a customer-facing capacity flag",
+        "motivation": "Mag-7 capex tape is being repriced against per-token margin; introducing a compressed-cache pricing tier is the cheapest way to defend AI-revenue exit velocity without slowing GPU build-outs",
+        "task": {
+          "who": "platform pricing PM + capacity planning + finance / margin-modeling + customer-facing API team",
+          "what": "model + price + GA a compressed-cache opt-in tier on Bedrock / Azure-OpenAI / Vertex with per-token rate + SLA",
+          "where": "Bedrock / Azure / Vertex price list + customer console + capacity-planning model",
+          "when": "Q3 2026 to Q4 2026",
+          "why": "per-token-margin-gated capex disclosure language requires a pricing lever decoupled from raw GPU growth",
+          "how": "internal capacity model + tiered pricing schedule + console toggle + customer onboarding playbook"
+        }
+      },
+      {
+        "actor": "Google Research + community port maintainer (MLX, Triton, vLLM, SGLang) shipping the official + community TurboQuant Python release",
+        "job": "ship the official Q2 2026 Python TurboQuant package and keep community ports (MLX, Triton, vLLM, SGLang, llama.cpp) feature-aligned during the runway",
+        "outcome": "official Google TurboQuant Python release + maintained community ports across all major inference runtimes with parity test suite",
+        "motivation": "without an authoritative reference implementation and feature-aligned community ports, runtime maintainers cannot commit to a stable --kv-cache-dtype flag interface",
+        "task": {
+          "who": "Google Research TurboQuant authors + community port maintainers (MLX, Triton, vLLM, SGLang)",
+          "what": "publish official Python TurboQuant + maintain community port parity + parity-test suite",
+          "where": "Google Research GitHub + MLX / Triton / vLLM / SGLang community repos + ICLR open code release",
+          "when": "Q2 2026 to Q4 2026",
+          "why": "stable runtime-flag interface requires an authoritative reference + tested community ports",
+          "how": "MSE-FWHT rotation reference + Lloyd-Max quantizer reference + parity test fixtures + ICLR-2026 paper code drop"
+        }
+      }
+    ],
+    "prediction.0ed37d30935303df": [
+      {
+        "actor": "OpenAI / Anthropic / xAI investor-relations + finance lead",
+        "job": "design and ship an audited monthly-revenue + WAU disclosure cadence with a public dashboard (or 8-K-equivalent investor letter) before Q3 2026",
+        "outcome": "first audited foundation-lab monthly-revenue + WAU disclosure cadence going live with public access for investors + analysts",
+        "motivation": "Apr 28 WSJ leak made narrative AI economics a re-rating risk; the lab that publishes audited revenue + WAU first defuses the analyst pressure and locks in the disclosure shape competitors must follow",
+        "task": {
+          "who": "CFO + investor relations + finance ops + external auditor + general counsel",
+          "what": "stand up audited monthly revenue + WAU dashboard, set publication cadence, prepare investor-letter template",
+          "where": "company investor-relations site + audit-firm engagement + monthly board-finance review",
+          "when": "May 2026 to Q3 2026",
+          "why": "tangible AI-economics disclosure is now the explicit market demand, not narrative",
+          "how": "auditor-attested revenue feed + WAU instrumentation + monthly publication cadence + investor-letter template"
+        }
+      },
+      {
+        "actor": "Microsoft / Amazon / Google Cloud financial-reporting + 10-Q drafting team",
+        "job": "draft and publish a Bedrock / Azure-OpenAI / Vertex per-token-margin disclosure separated from raw cloud revenue in 10-Q footnotes by Q3 2026",
+        "outcome": "Big-3 hyperscaler 10-Q footnote with per-token AI-platform margin broken out from total cloud revenue + earnings-call commentary anchoring the line",
+        "motivation": "Apr 28's AI-trade tape crack puts hyperscaler capex on the per-token-margin axis; the first cloud to publish the breakdown reframes the disclosure standard and reclaims narrative authority",
+        "task": {
+          "who": "controller + investor relations + segment-finance + external audit + cloud platform CFO",
+          "what": "design segment definition for AI platform per-token margin, instrument the metric, draft 10-Q footnote, prepare earnings-call language",
+          "where": "10-Q footnotes + earnings-call script + segment-reporting working sessions",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "Mag-7 super-week + WSJ revenue-miss tape now require disclosure clarity, not capex faith",
+          "how": "segment-finance reorganization + per-token telemetry feeds + auditor-attested margin schedule + 10-Q footnote template"
+        }
+      },
+      {
+        "actor": "SEC corporation finance staff + sell-side analyst lead at major bulge-bracket banks",
+        "job": "issue follow-on comment letters and analyst-pressure notes that codify monthly-revenue + WAU + per-token margin as the expected baseline disclosure for foundation labs and AI-platform clouds before Q3 2026",
+        "outcome": "SEC comment letter pattern + sell-side analyst-pressure consensus that names the AI-revenue disclosure rewrite as the expected baseline going forward",
+        "motivation": "without a coordinated SEC + analyst push, individual labs and clouds can stall on disclosure; aligned pressure makes the rewrite the default rather than a one-off",
+        "task": {
+          "who": "SEC Division of Corporation Finance + bulge-bracket sell-side analyst leads + buy-side AI-track PMs",
+          "what": "draft follow-on comment letters, publish analyst-pressure notes naming monthly-revenue + WAU + per-token margin as expected disclosures",
+          "where": "SEC EDGAR comment-letter pipeline + sell-side research notes + buy-side AI-track quarterly memos",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "absent regulator + analyst alignment, individual labs and clouds can delay the rewrite",
+          "how": "SEC comment-letter template + analyst-note style guide + buy-side PM outreach + quarterly conference messaging"
+        }
+      }
+    ],
+    "prediction.d07c196c9ff27ae5": [
+      {
+        "actor": "MITRE / NIST agent-security working group analyst + frontier-lab red-team lead",
+        "job": "publish an agent-skills threat sub-matrix covering skill poisoning + indirect-prompt-injection-via-skill + cross-skill privilege chains before H2 2026",
+        "outcome": "publicly available MITRE-ATT&CK-style or NIST-led agent-skills sub-matrix used as the canonical reference by skill marketplaces + enterprise security teams",
+        "motivation": "ClawHavoc + Cisco's marketplace findings show the agent-skills attack surface is now production-grade; without a canonical threat-matrix, vendors and customers cannot align on what to defend against",
+        "task": {
+          "who": "MITRE / NIST agent-security working group + frontier-lab red-team leads + marketplace-vendor security counterparts",
+          "what": "draft + publish agent-skills threat sub-matrix with technique IDs covering poisoning, IPI-via-skill, cross-skill privilege chains",
+          "where": "MITRE ATT&CK GitHub + NIST publication pipeline + working-group review sessions",
+          "when": "May 2026 to H2 2026",
+          "why": "no canonical threat language exists yet for skill-marketplace + agent-runtime attack surface",
+          "how": "ATT&CK technique-ID schema + working-group review cadence + marketplace-vendor alignment + adversary-emulation test case publication"
+        }
+      },
+      {
+        "actor": "skill marketplace platform engineer at Anthropic skills / ClawHub / Multica / Hermes / Hugging Face skills",
+        "job": "ship enforced signing + provenance attestation as a publish-time gate for at least one major skill marketplace before H2 2026",
+        "outcome": "GA marketplace requirement that all newly published skills carry a signed manifest + provenance attestation + traceable build inputs, with unsigned skills blocked at publish",
+        "motivation": "ClawHavoc's 1,184 poisoned skills show unsigned-publish flow is the structural gap; the marketplace that gates publish on signature + provenance first becomes the trusted default for enterprise procurement",
+        "task": {
+          "who": "marketplace platform engineering + security review + developer-relations + identity / signing infrastructure",
+          "what": "ship signed-manifest + provenance attestation pipeline, block unsigned publish, document developer-flow",
+          "where": "marketplace publish API + developer signing tooling + identity provider integration + marketplace UX",
+          "when": "Q2 2026 to H2 2026",
+          "why": "current allow-all publish flow is the root structural gap behind ClawHavoc-class supply-chain attacks",
+          "how": "Sigstore-style signing + SLSA-style provenance + identity provider attestation + publish-time policy gate"
+        }
+      },
+      {
+        "actor": "enterprise CISO + AI platform team at Fortune-500 marketplace adopters",
+        "job": "publish and enforce an internal AI-skills-procurement policy that requires signed + provenance-attested skills before deployment to production agents by H2 2026",
+        "outcome": "ratified AI-skills-procurement standard + enforced control in the corporate marketplace mirror that blocks unsigned skills from reaching production agents",
+        "motivation": "Cisco's 36% prompt-injection finding across the OpenClaw marketplace shows the procurement-side controls cannot rely on marketplace operators alone; internal policy + technical gate are required to defuse the supply-chain risk",
+        "task": {
+          "who": "CISO + AI platform engineering + identity / governance + procurement + business-unit liaisons",
+          "what": "draft AI-skills-procurement standard, configure marketplace mirror to require signed + provenance-attested skills, train developers",
+          "where": "internal security policy repo + corporate marketplace mirror + identity / SSO admin console + procurement workflow",
+          "when": "Q3 2026 to H2 2026",
+          "why": "marketplace-side controls alone cannot guarantee absence of poisoned skills in enterprise deployments",
+          "how": "written procurement policy + marketplace-mirror policy gate + identity-bound signing keys + per-deployment attestation review"
+        }
+      }
+    ]
+  }
+}

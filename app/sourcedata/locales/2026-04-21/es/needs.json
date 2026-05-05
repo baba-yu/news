@@ -1,0 +1,137 @@
+{
+  "date": "2026-04-21",
+  "by_prediction": {
+    "prediction.082b0a07077870dd": [
+      {
+        "actor": "PM de seguridad del hub de modelos + líder de ingeniería de trust-and-safety en Hugging Face / Ollama Library / ModelScope",
+        "job": "enviar una puerta de verificación de firma de model-card + chat_template o de renderizado de plantillas en sandbox para cada subida de GGUF antes del Q3 2026",
+        "outcome": "política de producción que bloquea model-cards no firmadas o chat_templates inseguros en la subida, con fallback de sandbox para artefactos heredados",
+        "motivation": "las consecuencias post-CVE de SGLang convierten a los hubs en el cuello de botella obvio; no filtrar las subidas invita a responsabilidad regulatoria y de RCE aguas abajo",
+        "task": {
+          "who": "ingeniería de trust-and-safety del hub + equipo del esquema de model-card + responsable de infraestructura de firmado criptográfico",
+          "what": "construir puerta de firma + renderizador de plantillas en sandbox para subidas de GGUF",
+          "where": "pipeline de subida del hub + repositorio del esquema de model-card + servicio de renderizado de chat_template",
+          "when": "Mayo 2026 al Q3 2026",
+          "why": "los archivos GGUF llevan plantillas ejecutables que pueden hacer RCE a los consumidores en la carga",
+          "how": "sigstore o claves de firmado nativas del hub + sandbox de jinja2 o lista de permitidos de AST de plantilla"
+        }
+      },
+      {
+        "actor": "ingeniero de seguridad de servidor de inferencia + gerente de producto en vLLM / AWS Bedrock / Microsoft Foundry Local",
+        "job": "cablear el escaneo de SSTI / inyección de plantillas en la ruta de carga de GGUF y enviarlo activado por defecto antes del Q3 2026",
+        "outcome": "escáner de SSTI activado por defecto en la ruta de código de carga de modelo que rechaza o pone en cuarentena los GGUFs cuyo chat_template contiene construcciones peligrosas de Jinja2",
+        "motivation": "los runtimes de servicio heredan el radio de impacto de RCE de cualquier GGUF malicioso que un inquilino suba; el escaneo desactivado por defecto ya no es defendible tras CVE-2026-5760",
+        "task": {
+          "who": "ingeniería de seguridad del runtime de inferencia + mantenedor del cargador de modelos + PM del tren de lanzamientos",
+          "what": "integrar escáner de SSTI de Jinja2 + política de plantillas seguras en el cargador de GGUF",
+          "where": "ruta de código de carga de modelo de vLLM / Bedrock / Foundry Local + valores por defecto de configuración de lanzamiento",
+          "when": "Q2 2026 al Q3 2026",
+          "why": "los GGUFs proporcionados por inquilinos pueden hacer RCE al host de servicio en la carga",
+          "how": "entorno sandbox de Jinja2 + detector de SSTI por recorrido de AST + lista de permitidos de plantillas firmadas"
+        }
+      },
+      {
+        "actor": "encargado de admisión de CVE + mantenedor de seguridad en SGLang y proyectos upstream de Jinja2 / herramientas de GGUF",
+        "job": "enviar análisis endurecido de chat_template + publicar avisos coordinados para que los hubs y los runtimes de servicio puedan converger en un contrato compartido de plantilla segura para el Q3 2026",
+        "outcome": "lanzamientos parcheados de SGLang + guía upstream que define el subconjunto seguro de Jinja2 para chat_templates que los hubs y servidores de inferencia pueden adoptar literalmente",
+        "motivation": "los parches fragmentados por proveedor dejan inconsistente la cadena de suministro de GGUF; solo un contrato upstream coordinado hace interoperables las puertas de hub + runtime",
+        "task": {
+          "who": "mantenedor de seguridad de SGLang + upstream de Jinja2 + colaboradores de la especificación GGUF / llama.cpp",
+          "what": "publicar lanzamientos parcheados + contrato de plantilla segura + avisos coordinados de CVE",
+          "where": "GitHub de SGLang + upstream de Jinja2 + discusiones de la especificación GGUF + canales CVE / GHSA",
+          "when": "Abril 2026 al Q3 2026",
+          "why": "sin un contrato upstream, las puertas de hub y runtime divergen y se les escapan variantes",
+          "how": "lanzamientos parcheados + valores por defecto de entorno sandbox + nota de especificación + aviso GHSA"
+        }
+      }
+    ],
+    "prediction.af6de8a1d9fd7731": [
+      {
+        "actor": "líder de alianza estratégica hyperscaler-laboratorio de frontera (AWS/Anthropic, Microsoft/OpenAI, Oracle/xAI)",
+        "job": "Negociar y ejecutar compromisos plurianuales exclusivos de cómputo en la nube co-diseñado en hardware que emparejen un hyperscaler con un laboratorio de frontera.",
+        "outcome": "Anuncio público de calidad 8-K de un contrato de capacidad y silicio multimillonario a 10 años que vincula al laboratorio con la familia de aceleradores de ese hyperscaler.",
+        "motivation": "El bloqueo first-mover del polo laboratorio-nube-chip asegura ingresos de entrenamiento a escala de década y fosos de utilización de aceleradores frente a emparejamientos rivales.",
+        "task": {
+          "who": "corp-dev del hyperscaler + GM de plataforma de IA + CFO/COO del laboratorio + asesoría externa",
+          "what": "redactar y firmar contrato de exclusividad plurianual de capacidad + co-diseño de silicio",
+          "where": "sesiones conjuntas de corp-dev + divulgación en earnings call + presentación 8-K",
+          "when": "Mayo 2026 al H1 2027",
+          "why": "fijar el polo laboratorio-nube-chip antes de que un hyperscaler rival supere la oferta en capacidad",
+          "how": "asignación de capacidad de Trainium/MAIA/TPU/MI300X + reparto de ingresos + MOU de coingeniería"
+        }
+      },
+      {
+        "actor": "mantenedor de portabilidad de backend agnóstico al runtime (MCP / LangChain / LiteLLM / framework de agentes vLLM)",
+        "job": "Enviar una abstracción estable de invocación de modelos y herramientas entre proveedores que permita a las apps cambiar entre los backends AWS-Anthropic, MS-OpenAI, Google-Gemini, xAI-Oracle sin reescribir código.",
+        "outcome": "Especificación de portabilidad de calidad 1.0 + adaptadores de referencia que cubren los 5 polos, adoptados por ≥2 proveedores de frameworks empresariales.",
+        "motivation": "Convertirse en la capa de portabilidad por defecto captura el espacio de developer-mindshare antes de que cualquier hyperscaler único agrupe un equivalente propietario.",
+        "task": {
+          "who": "mantenedores de código abierto + grupo de trabajo del protocolo + colaboradores de adaptadores",
+          "what": "estabilizar la especificación del protocolo y enviar adaptadores por polo con suite de pruebas de paridad",
+          "where": "repositorio de especificación en GitHub + SDKs de implementación de referencia + grupo de trabajo IETF/OpenSSF",
+          "when": "Mayo 2026 al Q1 2027",
+          "why": "los desarrolladores que reevalúan la portabilidad necesitan un objetivo creíble y neutral en cuanto a proveedor",
+          "how": "contrato JSON-RPC al estilo MCP + SDKs de adaptadores por proveedor + pruebas de conformidad"
+        }
+      },
+      {
+        "actor": "líder de BD/estrategia de laboratorio de frontera (Anthropic, OpenAI, xAI, Meta, Google DeepMind)",
+        "job": "Elegir y comprometerse con un único socio hyperscaler-y-silicio para la próxima generación de entrenamiento y estructurar el book-build de capacidad de largo horizonte en consecuencia.",
+        "outcome": "Contrato de capacidad plurianual firmado más hoja de ruta pública declarando la familia de aceleradores elegida como objetivo principal de entrenamiento del laboratorio.",
+        "motivation": "Asegurar silicio co-diseñado a escala multi-GW es la única vía viable para financiar la economía de clústeres de frontera bajo las curvas actuales de costo de entrenamiento.",
+        "task": {
+          "who": "BD/estrategia del laboratorio + líder de research-infra + finanzas + oficina del CEO",
+          "what": "seleccionar socio hyperscaler-silicio y comprometer la hoja de ruta de entrenamiento con ese acelerador",
+          "where": "revisión interna de estrategia de infraestructura + JBP con el socio + comunicado de prensa conjunto",
+          "when": "Mayo 2026 al H1 2027",
+          "why": "la economía del entrenamiento de frontera fuerza la consolidación en una sola línea de silicio co-diseñado",
+          "how": "asignación multi-GW de Trainium/TPU/MAIA/MI300X + dotación de personal de coingeniería + cláusula de capex"
+        }
+      }
+    ],
+    "prediction.b60e425d646be753": [
+      {
+        "actor": "líder de estrategia de producto de laboratorio de frontera en giros a pesos cerrados (equipo Qwen de Alibaba, gestión de lanzamientos de Anthropic Mythos / Claude, líderes de lanzamiento de nivel insignia de OpenAI)",
+        "job": "fijar la política de lanzamiento para que el próximo modelo de nivel de frontera salga solo API tras apertura escalonada, sin checkpoint de pesos abiertos, hasta el Q3 2026",
+        "outcome": "model card pública + política de acceso que declara explícitamente apertura solo API / preview escalonada sin pesos descargables para el nivel superior de la pila de modelos",
+        "motivation": "el cómputo de nivel de frontera y la sobrecarga de evaluación de seguridad hacen que el lanzamiento de pesos abiertos sea económicamente inviable y reputacionalmente arriesgado una vez que un modelo se considera líder de su clase",
+        "task": {
+          "who": "líder de producto de lanzamiento de modelo + comité de seguridad / RSP + equipo de licenciamiento comercial + responsables del programa de acceso de DevRel",
+          "what": "finalizar la política de lanzamiento solo API + niveles de apertura de preview escalonada para el próximo checkpoint insignia",
+          "where": "revisiones internas de preparación para lanzamiento + borradores de model-card + documentos de política de acceso publicados con el lanzamiento",
+          "when": "Q2 2026 al Q3 2026",
+          "why": "preservar el foso comercial + cumplir compromisos de RSP / seguridad sin una vía de escape de pesos abiertos",
+          "how": "programa de acceso API por niveles + apertura por lista de espera + cohortes de preview escalonada + política publicada de uso aceptable"
+        }
+      },
+      {
+        "actor": "mantenedor del ecosistema de pesos abiertos (equipo Llama de Meta, línea de pesos abiertos Qwen de Alibaba, laboratorio de pesos abiertos de nivel medio que publica los checkpoints de clase 35B-A3B / Bonsai)",
+        "job": "enviar y mantener la cadencia de pesos abiertos del nivel de producción 35B-A3B / Bonsai / Llama como la opción canónica de 'local para utilidad' hasta el Q3 2026",
+        "outcome": "checkpoints de pesos abiertos lanzados públicamente en la clase ~35B-A3B con licencias permisivas + recetas de inferencia de referencia que los posicionan para uso en producción on-device y autoalojado",
+        "motivation": "el apalancamiento del ecosistema, el developer-mindshare y el flywheel de fine-tuning aguas abajo favorecen mantener la cabeza de playa de pesos abiertos del nivel de producción incluso cuando la frontera se cierra",
+        "task": {
+          "who": "equipo de ingeniería de lanzamiento de modelos de pesos abiertos + líderes de investigación post-entrenamiento + equipo de licencias / política + relaciones con la comunidad / DevRel",
+          "what": "publicar checkpoints de pesos abiertos clase 35B-A3B / Bonsai + términos de licencia + pila de inferencia de referencia",
+          "where": "repositorio de modelo en Hugging Face + GitHub del laboratorio + blog del laboratorio + canales comunitarios (Discord, X, foros de desarrolladores)",
+          "when": "Q2 2026 al Q3 2026 (cadencia continua)",
+          "why": "anclar el nivel 'local para utilidad' para que el ecosistema abierto tenga un valor por defecto creíble de calidad de producción",
+          "how": "lanzamiento de pesos + tokenizador + suite de evaluación + scripts de fine-tune de referencia + licencia permisiva"
+        }
+      },
+      {
+        "actor": "arquitecto del lado comprador de IA empresarial que decide la división de despliegue cerrado-vs-abierto (CTO / responsable de plataforma de IA en grandes empresas y GSIs que eligen dónde se ejecuta cada carga de trabajo)",
+        "job": "publicar o ratificar una política interna de despliegue de frontera-cerrada-vs-utilidad-abierta que codifique API de frontera en la nube para las cargas de trabajo más difíciles + clase 35B-A3B local / autoalojada para todo lo demás, hasta el Q3 2026",
+        "outcome": "estándar de arquitectura interna + memorando de selección de proveedores que formaliza 'API en la nube para frontera, pesos abiertos autoalojados ~35B-A3B para utilidad' como la forma de despliegue por defecto",
+        "motivation": "el control de costos, las restricciones de residencia de datos / soberanía y los presupuestos de latencia fuerzan una división escrita en lugar de una selección ad-hoc de modelo por proyecto",
+        "task": {
+          "who": "arquitecto de plataforma de IA empresarial + líder de adquisiciones / gestión de proveedores + revisores de seguridad y gobernanza de datos",
+          "what": "codificar política de nivel de despliegue mapeando cargas de trabajo a API de frontera cerrada vs pesos abiertos autoalojados",
+          "where": "junta interna de revisión de arquitectura + memorandos de gestión de proveedores + documentos RFC del equipo de plataforma",
+          "when": "Q2 2026 al Q3 2026",
+          "why": "el giro a solo API de la frontera + el nivel abierto maduro ~35B-A3B hacen que la división sea desplegable y auditable",
+          "how": "registro de decisión de arquitectura + patrones de despliegue de referencia + lista de proveedores aprobados + benchmarks de costo / latencia"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "date": "2026-04-21",
+  "by_prediction": {
+    "prediction.082b0a07077870dd": [
+      {
+        "actor": "model-hub security PM + trust-and-safety eng lead at Hugging Face / Ollama Library / ModelScope",
+        "job": "ship a model-card + chat_template signature-verification or sandboxed-template-render gate for every GGUF upload before Q3 2026",
+        "outcome": "production policy that blocks unsigned model-cards or unsafe chat_templates at upload, with sandbox fallback for legacy artifacts",
+        "motivation": "post-SGLang-CVE fallout makes hubs the obvious choke point; failing to gate uploads invites regulatory and downstream-RCE liability",
+        "task": {
+          "who": "hub trust-and-safety eng + model-card schema team + cryptographic-signing infra owner",
+          "what": "build signature gate + sandboxed template renderer for GGUF uploads",
+          "where": "hub upload pipeline + model-card schema repo + chat_template render service",
+          "when": "May 2026 to Q3 2026",
+          "why": "GGUF files carry executable templates that can RCE consumers on load",
+          "how": "sigstore or hub-native signing keys + jinja2 sandbox or template AST allowlist"
+        }
+      },
+      {
+        "actor": "inference-server security eng + product manager at vLLM / AWS Bedrock / Microsoft Foundry Local",
+        "job": "wire SSTI / template-injection scanning into the GGUF load path and ship it on by default before Q3 2026",
+        "outcome": "default-on SSTI scanner in the model-load codepath that refuses or quarantines GGUFs whose chat_template contains dangerous Jinja2 constructs",
+        "motivation": "serving runtimes inherit RCE blast-radius from any malicious GGUF a tenant uploads; default-off scanning is no longer defensible after CVE-2026-5760",
+        "task": {
+          "who": "inference-runtime security eng + model-loader maintainer + release-train PM",
+          "what": "integrate Jinja2 SSTI scanner + safe-template policy into GGUF loader",
+          "where": "vLLM / Bedrock / Foundry Local model-load codepath + release config defaults",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "tenant-supplied GGUFs can RCE the serving host on load",
+          "how": "Jinja2 sandboxed environment + AST-walk SSTI detector + signed-template allowlist"
+        }
+      },
+      {
+        "actor": "CVE intake + security maintainer at SGLang and upstream Jinja2 / GGUF tooling projects",
+        "job": "ship hardened chat_template parsing + publish coordinated advisories so hubs and serving runtimes can converge on a shared safe-template contract by Q3 2026",
+        "outcome": "patched SGLang releases + upstream guidance defining the safe Jinja2 subset for chat_templates that hubs and inference servers can adopt verbatim",
+        "motivation": "fragmented per-vendor patches leave the GGUF supply chain inconsistent; only a coordinated upstream contract makes hub + runtime gating interoperable",
+        "task": {
+          "who": "SGLang security maintainer + Jinja2 upstream + GGUF spec / llama.cpp contributors",
+          "what": "publish patched releases + safe-template contract + coordinated CVE advisories",
+          "where": "SGLang GitHub + Jinja2 upstream + GGUF spec discussions + CVE / GHSA channels",
+          "when": "April 2026 to Q3 2026",
+          "why": "without an upstream contract, hub and runtime gates diverge and miss variants",
+          "how": "patched releases + sandboxed-environment defaults + spec note + GHSA advisory"
+        }
+      }
+    ],
+    "prediction.af6de8a1d9fd7731": [
+      {
+        "actor": "hyperscaler-frontier-lab strategic alliance lead (AWS/Anthropic, Microsoft/OpenAI, Oracle/xAI)",
+        "job": "Negotiate and execute multi-year hardware-codesigned exclusive cloud-compute commitments that pair one hyperscaler with one frontier lab.",
+        "outcome": "Public 8-K-grade announcement of a 10-year multi-billion-dollar capacity-and-silicon contract locking the lab to that hyperscaler's accelerator family.",
+        "motivation": "First-mover lock-in of the lab-cloud-chip pole secures decade-scale training-revenue and accelerator-utilization moats against rival pairings.",
+        "task": {
+          "who": "hyperscaler corp-dev + AI-platform GM + lab CFO/COO + outside counsel",
+          "what": "draft and sign multi-year capacity-plus-silicon-codesign exclusivity contract",
+          "where": "joint corp-dev sessions + earnings-call disclosure + 8-K filing",
+          "when": "May 2026 to H1 2027",
+          "why": "lock in lab-cloud-chip pole before rival hyperscaler outbids on capacity",
+          "how": "Trainium/MAIA/TPU/MI300X capacity allocation + revenue-share + co-engineering MOU"
+        }
+      },
+      {
+        "actor": "runtime-agnostic backend portability maintainer (MCP / LangChain / LiteLLM / vLLM agent-framework)",
+        "job": "Ship a stable cross-vendor model-and-tool-invocation abstraction that lets apps swap between AWS-Anthropic, MS-OpenAI, Google-Gemini, xAI-Oracle backends without code rewrites.",
+        "outcome": "1.0-grade portability spec + reference adapters covering all 5 poles, adopted by ≥2 enterprise framework vendors.",
+        "motivation": "Becoming the default portability layer captures the developer-mindshare slot before any single hyperscaler bundles a proprietary equivalent.",
+        "task": {
+          "who": "open-source maintainers + protocol working group + adapter contributors",
+          "what": "stabilize protocol spec and ship per-pole adapters with parity test suite",
+          "where": "GitHub spec repo + reference-implementation SDKs + IETF/OpenSSF working group",
+          "when": "May 2026 to Q1 2027",
+          "why": "developers reassessing portability need a credible vendor-neutral target",
+          "how": "MCP-style JSON-RPC contract + per-vendor adapter SDKs + conformance tests"
+        }
+      },
+      {
+        "actor": "frontier-lab BD/strategy lead (Anthropic, OpenAI, xAI, Meta, Google DeepMind)",
+        "job": "Choose and commit to a single hyperscaler-and-silicon partner for the next training generation and structure the long-horizon capacity book-build accordingly.",
+        "outcome": "Signed multi-year capacity contract plus public roadmap declaring the chosen accelerator family as the lab's primary training target.",
+        "motivation": "Securing co-designed silicon at multi-GW scale is the only viable path to fund frontier-cluster economics under current training-cost curves.",
+        "task": {
+          "who": "lab BD/strategy + research-infra lead + finance + CEO office",
+          "what": "select hyperscaler-silicon partner and commit training roadmap to that accelerator",
+          "where": "internal infra-strategy review + partner JBP + joint press release",
+          "when": "May 2026 to H1 2027",
+          "why": "frontier training economics force consolidation onto one codesigned silicon line",
+          "how": "multi-GW Trainium/TPU/MAIA/MI300X allocation + co-engineering staffing + capex covenant"
+        }
+      }
+    ],
+    "prediction.b60e425d646be753": [
+      {
+        "actor": "frontier-lab product strategy lead on closed-weight pivots (Alibaba Qwen team, Anthropic Mythos / Claude release management, OpenAI flagship-tier release leads)",
+        "job": "lock down release policy so the next frontier-tier model ships API-only behind staged gating, with no open-weight checkpoint, through Q3 2026",
+        "outcome": "public model card + access policy explicitly stating API-only / staged-preview gating with no downloadable weights for the top-of-stack model tier",
+        "motivation": "frontier-tier compute and safety-evaluation overhead make open-weight release uneconomic and reputationally risky once a model is judged class-leading",
+        "task": {
+          "who": "model-release product lead + safety / RSP committee + commercial-licensing team + DevRel access-program owners",
+          "what": "finalize API-only release policy + staged-preview gating tiers for the next flagship checkpoint",
+          "where": "internal release-readiness reviews + model-card drafts + access-policy docs published with the launch",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "preserve commercial moat + meet RSP / safety commitments without an open-weight escape hatch",
+          "how": "tiered API access program + waitlist gating + staged preview cohorts + published acceptable-use policy"
+        }
+      },
+      {
+        "actor": "open-weight ecosystem maintainer (Meta Llama team, Alibaba Qwen open-weight line, mid-tier open-weight lab publishing the 35B-A3B / Bonsai-class checkpoints)",
+        "job": "ship and maintain the 35B-A3B / Bonsai / Llama production-tier open-weight cadence as the canonical 'local for utility' option through Q3 2026",
+        "outcome": "publicly released open-weight checkpoints in the ~35B-A3B class with permissive licenses + reference inference recipes positioning them for on-device and self-hosted production use",
+        "motivation": "ecosystem leverage, developer mindshare, and downstream-fine-tune flywheel all favor maintaining the production-tier open-weight beachhead even as the frontier closes",
+        "task": {
+          "who": "open-weight model-release engineering team + post-training research leads + license / policy team + community-relations / DevRel",
+          "what": "publish 35B-A3B / Bonsai-class open-weight checkpoints + license terms + inference reference stack",
+          "where": "Hugging Face model repo + lab GitHub + lab blog + community channels (Discord, X, dev forums)",
+          "when": "Q2 2026 to Q3 2026 (rolling cadence)",
+          "why": "anchor the 'local for utility' tier so the open ecosystem has a credible production-grade default",
+          "how": "weight release + tokenizer + eval suite + reference fine-tune scripts + permissive license"
+        }
+      },
+      {
+        "actor": "enterprise AI buyer-side architect deciding closed-vs-open deployment split (CTO / head of AI platform at large enterprises and GSIs choosing where each workload runs)",
+        "job": "publish or ratify an internal closed-frontier-vs-open-utility deployment policy that codifies cloud frontier API for hardest workloads + 35B-A3B-class local / self-hosted for everything else, through Q3 2026",
+        "outcome": "internal architecture standard + vendor selection memo formalizing 'cloud API for frontier, self-hosted open-weight ~35B-A3B for utility' as the default deployment shape",
+        "motivation": "cost control, data-residency / sovereignty constraints, and latency budgets force a written split rather than ad-hoc model selection per project",
+        "task": {
+          "who": "enterprise AI platform architect + procurement / vendor-management lead + security + data-governance reviewers",
+          "what": "codify deployment-tier policy mapping workloads to closed-frontier API vs open-weight self-hosted",
+          "where": "internal architecture-review board + vendor-management memos + platform-team RFC docs",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "frontier API-only pivot + mature ~35B-A3B open tier make the split deployable and auditable",
+          "how": "architecture decision record + reference deployment patterns + approved-vendor list + cost / latency benchmarks"
+        }
+      }
+    ]
+  }
+}

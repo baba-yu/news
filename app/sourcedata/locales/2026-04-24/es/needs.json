@@ -1,0 +1,137 @@
+{
+  "date": "2026-04-24",
+  "by_prediction": {
+    "prediction.23c160efd9baa194": [
+      {
+        "actor": "lead de LLM de pesos abiertos en DeepSeek, Alibaba Qwen, Anthropic, OpenAI y Google",
+        "job": "enviar arquitecturas de contexto-1M-nativo (Hybrid Attention o equivalente) a pesos y APIs de producción antes del Q3 2026",
+        "outcome": "lanzamientos de modelos de pesos abiertos + API con contexto de 1M nativo, sub-30% de FLOPs y sub-15% de costo de caché KV vs la generación anterior, y cobertura de benchmarks públicos a contexto completo",
+        "motivation": "los primeros laboratorios que hagan el contexto de 1M nativo asequible bloquean el piso de pesos abiertos y obligan a los modelos de 32K-128K a salir del nivel de producción",
+        "task": {
+          "who": "ingeniería de entrenamiento de investigación + equipo de arquitectura de contexto largo + post-training + ingeniería de lanzamiento + evals",
+          "what": "diseñar y entrenar arquitecturas de contexto-1M-nativo y enviar checkpoints alineados post-entrenados a contexto completo",
+          "where": "cluster de entrenamiento interno + pipeline de post-training + superficie de Hugging Face / API + harness de benchmarks",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "los modelos de 32K-128K no pueden igualar la carga de trabajo agéntica / de documento largo que los lanzamientos de contexto de 1M ahora definen",
+          "how": "receta de contexto largo Hybrid Attention / linear-attention / sliding-window + entrenamiento FP8 + serving cache-aware + evals RULER / LongBench"
+        }
+      },
+      {
+        "actor": "ingeniero de plataforma RAG en plataformas de datos empresariales + agentes",
+        "job": "rediseñar pipelines RAG de búsqueda-luego-inserción-de-contexto a flujos de volcar-todo-más-poda-dinámica que exploten el contexto de 1M nativo antes del Q3 2026",
+        "outcome": "pipeline RAG en producción ingiriendo ventanas de contexto largo completo con lógica de poda dinámica, tradeoffs documentados de latencia / costo / calidad, y ruta de migración fuera de los predeterminados de retrieval por chunks",
+        "motivation": "los techos de retrieval por chunks limitan la calidad del agente una vez que los modelos de contexto de 1M son nativos; el equipo de plataforma que envíe primero el nuevo patrón libera roadmap de producto y fija la plantilla del cliente",
+        "task": {
+          "who": "ingeniero de plataforma RAG + ML aplicado + ingeniería de producto + confiabilidad de plataforma + customer success",
+          "what": "rediseñar las etapas de retrieval y ensamblaje de contexto a volcar-todo-más-poda-dinámica y ejecutar canaries de producción contra la línea base de chunks",
+          "where": "servicio RAG + capa vector / cache + runtime de agente + stack de observabilidad + despliegues piloto de cliente",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "los techos de búsqueda-luego-inserción limitan la calidad de razonamiento del agente comparados con los diseños nativos de volcar-y-podar de contexto de 1M",
+          "how": "serving de modelo de contexto largo + política de poda dinámica de contexto + capa de prompt-cache + SLOs de latencia / costo + canaries de rollout"
+        }
+      },
+      {
+        "actor": "product manager de base de datos vectorial en Pinecone, Weaviate, Qdrant y Milvus",
+        "job": "reposicionar la base de datos vectorial como una capa de optimización de caché de contexto largo en lugar de una primitiva de retrieval antes del Q3 2026",
+        "outcome": "superficie de producto en GA enfatizando la optimización de caché de contexto largo (offload de caché KV, prompt caching embedding-aware, retrieval-as-prune) con rutas de integración documentadas hacia runtimes de modelo de contexto de 1M",
+        "motivation": "si las bases de datos vectoriales se mantienen enmarcadas como retrieval solo de búsqueda, la propuesta de valor colapsa a medida que el contexto de 1M nativo se convierte en predeterminado; el primer proveedor que envíe la historia de capa de caché captura el gasto de contexto largo",
+        "task": {
+          "who": "product manager de base de datos vectorial + ingeniería de producto + investigación / ciencia aplicada + GTM empresarial + relaciones con desarrolladores",
+          "what": "reformular el producto como una capa de optimización de caché de contexto largo y enviar integraciones a runtimes de modelo de contexto de 1M",
+          "where": "plataforma de base de datos vectorial + SDKs de integración + arquitecturas de referencia + briefings al cliente + docs de desarrollador",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "el posicionamiento solo-de-búsqueda pierde cuota cuando el contexto de 1M nativo cambia RAG a flujos de volcar-y-podar",
+          "how": "primitivas de offload de caché KV + integraciones de prompt-cache + APIs de retrieval-as-prune + despliegues de referencia + publicaciones de benchmark"
+        }
+      }
+    ],
+    "prediction.6f0a6061c079c28e": [
+      {
+        "actor": "product manager de robótica humanoide en Siemens-Humanoid, Agile Robots, Tesla Optimus y Figure",
+        "job": "endurecer las plataformas humanoides para operación continua de 24h, MTBF de 1 semana, autonomía del 90%+, e integración MES / PLC antes de las RFPs empresariales del Q4 2026",
+        "outcome": "plataforma humanoide de producción con uptime documentado de 24h + MTBF de 1 semana + 90%+ de finalización autónoma + integración MES / PLC en líneas reales de cliente",
+        "motivation": "la barra de Erlangen de 8h x 60 totes/h x 90% restablece las compras empresariales; perder los nuevos cortes de RFP cede los contratos de flota auto / electrónica / logística al primer proveedor en la barra",
+        "task": {
+          "who": "product manager de robótica + ingeniería de control / percepción + ingeniería de confiabilidad + equipo de integración MES / PLC + lead de piloto del cliente",
+          "what": "extender las corridas de producción de 8h a 24h, elevar el MTBF a 1 semana, e integrar con los stacks MES / PLC del cliente en líneas en vivo",
+          "where": "pilotos de fábrica del cliente + lab de integración + celda de prueba de confiabilidad + sandbox de integración MES / PLC + respuestas a compras",
+          "when": "Q2 2026 a Q4 2026",
+          "why": "los cortes de RFP ahora referencian la barra de la línea de producción de Erlangen, no videos de demo; quedarse corto saca al proveedor de consideración",
+          "how": "stack NVIDIA Physical AI + framework estilo KinetIQ + sim de digital-twin + fleet management de clase Siemens Xcelerator + conectores MES / PLC + instrumentación de prueba de confiabilidad"
+        }
+      },
+      {
+        "actor": "lead de compras de manufactura en VW, Bosch, Mercedes, Foxconn, TSMC y Toyota",
+        "job": "integrar operación continua de 24h, MTBF de 1 semana, 90%+ de finalización autónoma, e integración MES / PLC en cortes de RFP de humanoides antes del H2 2026",
+        "outcome": "plantilla de RFP adoptada en compras de humanoides para línea de manufactura con los cuatro cortes como requisitos de facto y criterios de shortlist",
+        "motivation": "Erlangen demuestra que la barra de la línea de producción es alcanzable; los equipos de compras que pierdan la barra absorben el riesgo de integración OT downstream y pierden la narrativa de ahorro de costos frente a sus pares",
+        "task": {
+          "who": "lead de compras de manufactura + operaciones de planta + seguridad / cumplimiento + equipo de integración IT/OT + gestión de proveedores",
+          "what": "reescribir las RFPs de humanoides con los cuatro cortes y el eje de facilidad-de-inserción-en-entorno-OT como criterios primarios de puntuación",
+          "where": "organización de compras + sitios de prueba de integración de planta + proceso de cualificación de proveedores + plantillas de RFP",
+          "when": "Q2 2026 a H2 2026",
+          "why": "sin cortes explícitos de RFP, los proveedores se quedan en el posicionamiento de video de demo y el costo de integración OT cae en el cliente",
+          "how": "plantilla de RFP + rúbrica de puntuación de piloto de planta + protocolo de medición de MTBF + plan de prueba de integración MES / PLC + framework de atestación del proveedor"
+        }
+      },
+      {
+        "actor": "lead de plataforma de automatización industrial en NVIDIA Physical AI, Siemens Xcelerator y Rockwell Automation",
+        "job": "enviar kits de integración humanoide que hagan que la inserción en entorno OT sea el predeterminado antes del H2 2026",
+        "outcome": "kit de integración humanoide con adaptadores MES / PLC, primitivas de fleet management, cobertura de sim digital-twin, y patrones de despliegue certificados llegando a las fábricas del cliente",
+        "motivation": "la facilidad de inserción en entorno OT es el nuevo eje competitivo; el proveedor de plataforma cuyo kit cubra los cuatro cortes de RFP gana el pipeline de ingresos recurrentes cross-fleet",
+        "task": {
+          "who": "product manager de plataforma + ingeniería de control / runtime + equipo de integración + manager de ecosistema de partners + GTM industrial",
+          "what": "empaquetar adaptadores MES / PLC, fleet management, cobertura de sim, e instrumentación de confiabilidad en un kit de integración llave en mano",
+          "where": "SDK de plataforma + despliegues de fábrica de referencia + programa de certificación de partners + líneas piloto del cliente",
+          "when": "Q2 2026 a H2 2026",
+          "why": "sin integración OT empaquetada, los clientes absorben el costo de integración y caen de vuelta a las señales de compras de video de demo",
+          "how": "conectores MES / PLC + librerías de sim digital-twin + runtime de fleet management + instrumentación de confiabilidad + programa de certificación de partners"
+        }
+      }
+    ],
+    "prediction.11c2c648527fe212": [
+      {
+        "actor": "analista de equity research cubriendo SaaS empresarial en Morgan Stanley, Goldman Sachs, JPMorgan y Gartner",
+        "job": "reescribir el modelo de valoración de SaaS empresarial de asientos-por-ARPU a cuota-de-llamadas-a-API-tocadas-por-agentes dentro del Q2 2026",
+        "outcome": "nota de research publicada con el nuevo framework de valoración, lista de cobertura nombrada, targets degradados para nombres de clase Workday / Atlassian / Box / Smartsheet, y eje explícito Agent-native vs Legacy",
+        "motivation": "la peor caída de -18% de ServiceNow con caídas encadenadas de Salesforce / Workday / Oracle señala que el eje de desplazamiento ahora es consenso de mercado; los analistas tarde al modelo pierden credibilidad institucional",
+        "task": {
+          "who": "analista de equity research + estratega sectorial + equipo de data / quant + editor / publicación + cobertura de ventas",
+          "what": "construir la métrica de cuota-de-llamadas-a-API, ejecutar escenarios de desplazamiento, y publicar la reescritura con targets degradados",
+          "where": "plataforma de research + proveedores de datos + canal de acceso corporativo + distribución a clientes institucionales",
+          "when": "Q2 2026",
+          "why": "la matemática de ARPU-por-asientos ya no refleja cómo los agentes de IA redirigen los ingresos de SaaS; el analista que se queda atrás del modelo pierde la lectura institucional",
+          "how": "proveedores de telemetría de llamadas a API + entrevistas a clientes + reconstrucción DCF por escenario + publicación de degradación + tour de acceso corporativo"
+        }
+      },
+      {
+        "actor": "analista de market-research en Gartner, Forrester e IDC",
+        "job": "publicar un reporte Magic Quadrant / Wave con un eje explícito Agent-native vs Legacy SaaS dentro del Q2 2026",
+        "outcome": "Magic Quadrant / Wave con el eje Agent-native como primario, ubicaciones nombradas para los principales SaaS de workflow, y nota de metodología explicando el cambio de eje",
+        "motivation": "post caída de ServiceNow, los compradores empresariales necesitan un artefacto de comparación de proveedores alineado con la narrativa de desplazamiento; la firma que publique primero fija la plantilla de compras para los próximos dos ciclos de presupuesto",
+        "task": {
+          "who": "analista de market-research + equipo de metodología + programa de briefing al proveedor + editorial + ventas / cobertura",
+          "what": "redefinir la metodología con un eje Agent-native vs Legacy SaaS, ejecutar briefings al proveedor, y publicar ubicaciones",
+          "where": "plataforma de research + portal de briefing al proveedor + canal de publicación a clientes + eventos de Gartner / Forrester / IDC",
+          "when": "Q2 2026",
+          "why": "ausente un eje Agent-native, los compradores empresariales se quedan en ubicaciones MQ legacy y pierden el riesgo de desplazamiento",
+          "how": "revisión de metodología + ciclo de briefing al proveedor + entrevistas de referencia con clientes + eventos de analyst-day + publicación en plataforma de research"
+        }
+      },
+      {
+        "actor": "CEO y lead de IR de SaaS empresarial en Workday, Atlassian, Box y Smartsheet",
+        "job": "anticiparse a la próxima ola de re-ratings de -15%+ impulsadas por analistas publicando una narrativa de reposicionamiento Agent-native dentro del Q2 2026",
+        "outcome": "narrativa de earnings-call publicada + deck de investor-day + commit de roadmap de producto posicionando a la compañía como Agent-native con una métrica creíble de cuota de llamadas a API",
+        "motivation": "las caídas encadenadas de ServiceNow / IBM / Salesforce / Workday / Oracle señalan que los próximos 3-5 nombres absorben caídas del 15%+; la compañía que envíe un reposicionamiento Agent-native creíble antes de que llegue la degradación del analista evita la compresión múltiple duradera",
+        "task": {
+          "who": "CEO + CFO + lead de IR + chief product officer + comunicaciones + corporate development",
+          "what": "construir y publicar la narrativa de reposicionamiento Agent-native, la métrica de cuota-de-llamadas-a-API-de-agentes, y los commits de roadmap",
+          "where": "earnings calls + investor day + reuniones con analistas + roadmap de producto + acuerdos de cliente de referencia",
+          "when": "Q2 2026",
+          "why": "sin un reposicionamiento Agent-native explícito, las actualizaciones del consenso de analistas se quedan en el descuento por riesgo de desplazamiento y el múltiplo se comprime",
+          "how": "deck de investor-day + narrativa de earnings + compromisos de roadmap + briefings de analyst-day + anuncios de cliente de referencia"
+        }
+      }
+    ]
+  }
+}

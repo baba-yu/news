@@ -1,0 +1,181 @@
+{
+  "date": "2026-05-01",
+  "by_prediction": {
+    "prediction.4a4326cf3e1d6c3e": [
+      {
+        "actor": "Cloud Security Alliance / program manager de la CNA de CSAI Foundation",
+        "job": "Operacionalizar la CNA autorizada por MITRE para IA agéntica — intake, triage, emisión de IDs y política de cadencia de disclosure para CVEs específicas de agent-/skill-/harness-/sandbox.",
+        "outcome": "≥50 CVEs específicas de agent-/skill-/harness-/sandbox publicadas bajo la CNA de CSAI con cadencia pública de disclosure y taxonomía de referencia.",
+        "motivation": "El primer trimestre de pull (Q3 2026) define el vocabulario canónico de vulnerabilidades de IA-agéntica; la CNA que envíe la cadencia primero bloquea la referencia para procurement empresarial.",
+        "task": {
+          "who": "program manager de CNA de CSAI + analistas de intake-triage + liaison con MITRE",
+          "what": "operar intake / triage / emisión de ID de CVE + publicar política de cadencia de disclosure",
+          "where": "cloudsecurityalliance.org/csai-cna + canales de coordinación con MITRE + advisory feeds",
+          "when": "May a Q3 2026",
+          "why": "el primer trimestre de pull de la CNA define la taxonomía canónica y bloquea la alineación de tooling downstream",
+          "how": "template de intake CNA de MITRE + STAR for AI annex + cross-reference de especificación AARM"
+        }
+      },
+      {
+        "actor": "ingeniero de plataforma de marketplace de skills en Anthropic skills / ClawHub / Multica / Hermes / Hugging Face skills",
+        "job": "Implementar el gate obligatorio de publicación firmada + atestada con provenance que bloquea skills no firmadas o no atestadas antes de que lleguen al marketplace público.",
+        "outcome": "Notas de release GA anunciando firma + atestación de provenance como un gate que bloquea publicación con un modo de browse de solo-skills-firmadas.",
+        "motivation": "Los clientes empresariales no consumirán skills unsigned-by-default una vez que existe una CNA con el mandato explícito de IA-agente; el marketplace que envíe el gate primero gana la preferencia de procurement empresarial.",
+        "task": {
+          "who": "equipo de plataforma de marketplace + lead de seguridad de cadena de suministro + infraestructura de gestión de claves",
+          "what": "implementar verificación de firma en publicación + chequeo de atestación de provenance + reject-on-failure",
+          "where": "API de publicación del marketplace + capa de gating CDN + UI de browse orientada al cliente",
+          "when": "May a Q3 2026",
+          "why": "la transferencia de riesgo empresarial hace de unsigned-by-default un asunto que bloquea procurement",
+          "how": "firma con Sigstore / cosign + provenance SLSA Level-3 + registro de claves de skill-author"
+        }
+      },
+      {
+        "actor": "equipo de ingeniería de proveedor sandbox de runtime de agentes (Blaxel / Cloudflare / Daytona / E2B / Modal / Runloop / Vercel) integrado con OpenAI Agents SDK",
+        "job": "Endurecer la primitiva de ejecución sandbox a través de la integración de 7-proveedores de OpenAI Agents SDK para que las cadenas de privilegios per-skill y los exploits cross-skill estén contenidos en runtime.",
+        "outcome": "Notas de release públicas del proveedor sandbox documentando aislamiento per-skill, límites de capability-token y rutas de coordinación de disclosure de CVE con la CNA de CSAI.",
+        "motivation": "OpenAI Agents SDK del 30 abr + Novita Sandbox del 28 abr + agentes hospedados de Microsoft Foundry del 30 abr hacen del sandbox la primitiva por defecto — los proveedores que envían el aislamiento más duro primero bloquean el default de procurement multi-vendor.",
+        "task": {
+          "who": "equipo runtime del proveedor sandbox + security-engineering + partners de integración de OpenAI Agents SDK",
+          "what": "enviar aislamiento de capability per-skill + límites de capability-token + ruta de disclosure CSAI-CNA",
+          "where": "runtime del proveedor sandbox + adapter de OpenAI Agents SDK + notas de release del proveedor",
+          "when": "May a Q3 2026",
+          "why": "sandbox-as-primitive es ahora default a través del OpenAI stack; la diferenciación del proveedor es la fortaleza del aislamiento",
+          "how": "Firecracker microVM / filesystem efímero per-task + tokens capability-scoped + canal de advisory CSAI"
+        }
+      }
+    ],
+    "prediction.45543ce7f0afbc74": [
+      {
+        "actor": "product manager de service-availability de AWS Bedrock impulsando la estandarización de SLA cross-cloud para modelos frontera",
+        "job": "Definir y publicar SLAs por modelo de latencia / throughput / disponibilidad como una sola disclosure comparable a través del catálogo de modelos de Bedrock incluyendo el lanzamiento OpenAI-en-Bedrock del 28 abr.",
+        "outcome": "Página pública de SLA de Bedrock con latencia / throughput / disponibilidad por modelo comprometidos contra umbrales compensables, cubriendo modelos OpenAI + Anthropic + Meta + AI21 + Mistral.",
+        "motivation": "Bedrock tiene la selección de modelos más amplia y la postura de compliance empresarial más fuerte; el primer hyperscaler en publicar una disclosure de SLA por-modelo comparable fija la referencia de comparación de procurement y se gana el crédito del precedente de disclosure.",
+        "task": {
+          "who": "PM de service-availability de Bedrock + dueños SRE + legal empresarial + finanzas de segmento",
+          "what": "redactar matriz de SLA por modelo + lenguaje de umbral compensable + cadencia de publicación",
+          "where": "aws.amazon.com/bedrock/sla + consola Bedrock + addenda de contratos empresariales",
+          "when": "May a H2 2026",
+          "why": "el mundo post-exclusividad hace de \"modelo+SLA en cloud-of-record\" el nuevo eje de procurement",
+          "how": "telemetría interna de latencia / throughput / disponibilidad + atestación estilo AICPA SOC + separación de SKU finance-grade"
+        }
+      },
+      {
+        "actor": "lead de GTM / partnerships de Anthropic estructurando el deal espejo frontier-on-every-cloud",
+        "job": "Negociar y publicitar un deal paralelo de \"frontera en cada cloud\" a través de Bedrock + Vertex + Azure con disclosure de SLA paralelo que refleje el template OpenAI-en-Bedrock.",
+        "outcome": "Press release público anunciando disponibilidad del modelo frontera de Anthropic a través de los tres clouds Big-3 con disclosure de SLA correspondiente por cloud.",
+        "motivation": "El lenguaje no-exclusivo de Microsoft del 27 abr aplica explícitamente a \"productos OpenAI\", creando white-space para deals paralelos de Anthropic; el primer lab no-OpenAI en reflejar la forma cross-cloud captura el default de procurement post-exclusividad.",
+        "task": {
+          "who": "GTM de Anthropic + equipo de cloud-partnerships + finanzas + legal + sponsor ejecutivo",
+          "what": "negociar distribución cross-cloud + compromiso de SLA paralelo + coordinación de anuncio",
+          "where": "venues de joint-press de Anthropic + AWS + Google Cloud + Microsoft Azure",
+          "when": "May a H2 2026",
+          "why": "el white-space del lenguaje no-exclusivo OpenAI-only se cierra una vez que un lab competidor lo reclama",
+          "how": "acuerdo de distribución cross-cloud + addenda de SLA por cloud + press release coordinado"
+        }
+      },
+      {
+        "actor": "arquitecto de procurement empresarial en un comprador Fortune-500 impulsando selección model-and-SLA-on-cloud-of-record",
+        "job": "Establecer el framework de comparación model+SLA-on-cloud-of-record que convierte la disclosure de SLA del hyperscaler en un input de decisión de procurement.",
+        "outcome": "Estándar interno de procurement + template de RFP que requiere SLA de latencia / throughput / disponibilidad por modelo como un eje de scoring junto a la capability del modelo.",
+        "motivation": "El despliegue cross-cloud de frontera cambia la primera comparación del comprador de \"modelo\" a \"modelo+SLA en cloud-of-record\"; el comprador que publica el framework primero señala demanda a los hyperscalers y acelera la ola de disclosure.",
+        "task": {
+          "who": "arquitecto de procurement empresarial + AI center-of-excellence + equipo de cloud-strategy + finanzas",
+          "what": "redactar template de RFP de model+SLA + rúbrica de scoring + requerimiento de disclosure de proveedor",
+          "where": "portal de procurement empresarial + qualification de proveedor + comité de gobernanza de IA",
+          "when": "May a H2 2026",
+          "why": "la demanda de disclosure del lado-comprador es la función forzante para la estandarización de SLA del hyperscaler",
+          "how": "template de RFP + rúbrica de qualification de proveedor + junta de revisión de gobernanza de IA"
+        }
+      }
+    ],
+    "prediction.3a4bbac4bdf89b9b": [
+      {
+        "actor": "controller de external-reporting de Microsoft impulsando la nota al pie auditada de KPI mensual de AI-business en el 10-Q",
+        "job": "Operacionalizar una nota al pie auditada de KPI mensual de AI-business (run-rate, paid seats, deployed agents) para el próximo 10-Q de FY26 construyendo sobre la disclosure de línea-única del run-rate IA de $37B del 29 abr.",
+        "outcome": "Nota al pie de 10-Q que publica KPIs auditados mensuales de AI-business como una figura discreta separable del revenue cloud-infrastructure crudo, con sign-off del auditor.",
+        "motivation": "Microsoft ya citó un run-rate IA explícito de $37B (+123%) — el precedente de disclosure; el siguiente movimiento bajo presión SEC + buyside es la separación de nota al pie de KPI mensual, y enviarla primero bloquea la definición del template del cohorte.",
+        "task": {
+          "who": "controller de external-reporting de Microsoft + equipo de finanzas-de-segmento + chair del audit-committee + investor-relations",
+          "what": "diseñar schema de nota al pie de KPI mensual + atestación del auditor + integración del 10-Q",
+          "where": "nota al pie del 10-Q de Microsoft + deck del analyst-day + apéndice de reconciliación de segmento",
+          "when": "May a ciclos de earnings Q4 2026",
+          "why": "el run-rate de $37B de MSFT es el precedente; la separación de nota al pie de KPI mensual es la siguiente palanca pública",
+          "how": "asignación interna de costo de plataforma IA + política de segment-reporting + sign-off del auditor"
+        }
+      },
+      {
+        "actor": "controller financiero de cohorte S&P AI (Apple / Cerebras post-IPO / Broadcom) impulsando disclosure trimestral de margen por AI-business",
+        "job": "Establecer disclosure trimestral de margen por AI-business que sigue el precedente de KPI mensual de Microsoft con cadencia trimestral para el cohorte de IA más amplio.",
+        "outcome": "Reporte trimestral de earnings con una línea de margen por AI-business separada del revenue consolidado de services / hardware, auditada y con nota al pie.",
+        "motivation": "La línea récord de Services del 30 abr de Apple sin break de AI-services es exactamente el gap de disclosure que los mercados públicos están preciando; el seguidor del cohorte que envía primero gana un descuento de prima de costo de financiamiento y fuerza a peers a igualar.",
+        "task": {
+          "who": "controller / external-reporting + finanzas-de-segmento + IR + audit committee",
+          "what": "diseñar disclosure de margen por AI-business + atestación de auditoría + cadencia trimestral",
+          "where": "nota al pie del 10-Q + MD&A de earnings-call + entregables de auditoría Big-4",
+          "when": "May a ciclos de earnings Q4 2026",
+          "why": "buyside es función forzante; seguidor de cohorte sin disclosure enfrenta compresión de múltiplo",
+          "how": "asignación interna de costo de AI-business + política de segment-reporting + framework de atestación AICPA SOC"
+        }
+      },
+      {
+        "actor": "analista de equity-research del lado-buyside construyendo el modelo de scoring de template de disclosure de capex IA",
+        "job": "Publicar un framework de research que califique la calidad de disclosure de capex IA (run-rate, paid seats, deployed agents, margen por AI-business) y ate la compresión de múltiplo a gaps de disclosure.",
+        "outcome": "Nota de research del buyside que califica al cohorte Mag 7 + S&P AI sobre la calidad de disclosure de capex IA y proyecta compresión de múltiplo para nombres de baja-disclosure.",
+        "motivation": "El miss de revenue de OpenAI del WSJ del 28 abr + el reset mixto Mag 7 del 29 abr (META -7,5%, MSFT -3,8% en día de print) muestra que los mercados públicos ya precian diferenciales de calidad-de-disclosure; el analista que envía el framework de scoring primero se vuelve la referencia canónica y acelera el ciclo de disclosure.",
+        "task": {
+          "who": "analista de equity-research del buyside + especialista de sector + equipo quant",
+          "what": "construir rúbrica de scoring de disclosure + modelo de sensibilidad a compresión de múltiplo + publicación de framework",
+          "where": "portal de research institucional + briefings de cliente + notas de recap de earnings-season",
+          "when": "May a ciclos de earnings Q4 2026",
+          "why": "la demanda de calidad-de-disclosure del buyside es la palanca que tienen los mercados públicos antes de la rulemaking SEC formal",
+          "how": "análisis de empresas comparables + regresión de múltiplos-vs-disclosure + scoring de lenguaje de earnings-call"
+        }
+      }
+    ],
+    "prediction.9758f0dacc043eb0": [
+      {
+        "actor": "equipo entrante de comunicaciones del Chair Warsh de la Federal Reserve",
+        "job": "Resetear el framing del FOMC bajo el nuevo Chair de modo que la postura de disenso se comprima en decisiones de tasas (≤2 disidentes) mientras preserva la señal de voto-marginal de Powell sobre gobernanza de la investigación a la Fed.",
+        "outcome": "Primera conferencia de prensa + statement del FOMC liderado por Warsh que re-ancla la norma de disenso y separa explícitamente el framing de tasas del de la postura de gobernanza.",
+        "motivation": "El disenso 8-4 del 29 abr (el más alto desde oct-1992) es insostenible como framing steady-state; el Chair entrante debe comprimir el disenso de decisiones de tasas para restaurar la volatilidad de forward-guidance a un envelope normal antes del print de empleo del 1 may y dentro de Q3-Q4 2026.",
+        "task": {
+          "who": "equipo entrante de comunicaciones del Chair + secretario del FOMC + staff legal de la Board",
+          "what": "redactar statement de Chair-handover + reset de framing del FOMC + briefing a medios",
+          "where": "conferencias de prensa de federalreserve.gov + statement del FOMC + oficina de prensa de la Board",
+          "when": "15 may en adelante hasta Q4 2026",
+          "why": "la comparación con el precedente de 1992 debe moverse de anomalía de vuelta a curiosidad histórica",
+          "how": "disciplina Q&A de press-conference + harmonización de lenguaje de statement + protocolo de gestión de disenso"
+        }
+      },
+      {
+        "actor": "estratega de tasas de inversor-institucional construyendo el modelo de forecast 2026-2027 de eje-dual",
+        "job": "Publicar un framework de rates-strategy que precia menor volatilidad de forward-guidance bajo Warsh mientras precia una prima mayor de riesgo institucional sobre la propia Fed.",
+        "outcome": "Nota de research del buyside que separa la volatilidad del path de tasas de la prima de Fed-institutional-risk y precia cada una por separado en las curvas de 2-años y 10-años.",
+        "motivation": "Powell-permanece-en-Board convierte el handoff del 15 may de \"Powell sale\" a \"Powell permanece como el voto marginal de gobernanza\"; el estratega que captura el pricing de eje-dual primero se gana ventaja de flow en el siguiente movimiento relacionado con investigación y en el print de empleo del 1 may.",
+        "task": {
+          "who": "equipo de rates strategy + economista macro + quant de modelado de curva",
+          "what": "publicar modelo de forecast eje-dual + análisis de sensibilidad a investigation-trigger",
+          "where": "portal de research del buyside + briefings de cliente institucional + roadshow",
+          "when": "May a Q4 2026",
+          "why": "el FOMC liderado por Warsh comprime el disenso de tasas mientras Powell-en-Board incrementa el pricing de governance-risk — ambos deben ser preciados por separado",
+          "how": "modelo de term-structure + indicador de governance-risk (hitos de investigación) + cross-check de futuros de Fed-funds"
+        }
+      },
+      {
+        "actor": "estratega de capex IA del equity-market trackeando el impacto del señaling de Fed-Board en eventos de re-rating",
+        "job": "Construir el framework que re-precia eventos de re-rating de capex IA sobre el señaling de Fed-Board en lugar de sobre el lenguaje del statement del FOMC solo.",
+        "outcome": "Nota de sector-strategy que ata la compresión y expansión de múltiplo Mag 7 / capex IA a señales de gobernanza de Fed-Board, con estimaciones empíricas de sensibilidad.",
+        "motivation": "El tape mejor-mes-desde-2020 Mag 7 del 30 abr está parcialmente preciado sobre esperanzas de rate-cut que la postura de disenso del FOMC aún no ha validado; el estratega que surja la sensibilidad al Board-signaling primero explica el siguiente evento de re-rating antes del consenso.",
+        "task": {
+          "who": "equipo de equity-strategy + Fed-watcher + analista de sector de capex IA",
+          "what": "publicar framework de sensibilidad al Fed-Board-signaling para re-rating de capex IA",
+          "where": "portal de research del sell-side + briefings de cliente institucional + recap de earnings-season",
+          "when": "May a Q4 2026",
+          "why": "los múltiplos de capex IA ahora responden a las señales de gobernanza de la Board más que al lenguaje del statement del FOMC",
+          "how": "regresión event-study + tracker de Board-vote + modelo de sensibilidad de múltiplo de capex IA"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "date": "2026-04-24",
+  "by_prediction": {
+    "prediction.23c160efd9baa194": [
+      {
+        "actor": "open-weight LLM lead sa DeepSeek, Alibaba Qwen, Anthropic, OpenAI, at Google",
+        "job": "magpadala ng native-1M-context architectures (Hybrid Attention o katumbas) sa production weights at APIs bago ang Q3 2026",
+        "outcome": "open-weight + API model releases na may native 1M context, sub-30% FLOPs at sub-15% KV-cache cost laban sa nakaraang henerasyon, at public benchmark coverage sa full context",
+        "motivation": "ang unang labs na gawing abot-kaya ang native 1M context ay nag-lock-in ng open-weight floor at pumipilit sa 32K-128K models palabas ng production tier",
+        "task": {
+          "who": "research training engineering + long-context architecture team + post-training + release engineering + evals",
+          "what": "i-design at i-train ang native-1M-context architectures at magpadala ng aligned post-trained checkpoints sa full context",
+          "where": "internal training cluster + post-training pipeline + Hugging Face / API surface + benchmark harness",
+          "when": "Q2 2026 hanggang Q3 2026",
+          "why": "ang 32K-128K models ay hindi makakatugma sa agentic / long-document workload na tinukoy ngayon ng 1M-context releases",
+          "how": "Hybrid Attention / linear-attention / sliding-window long-context recipe + FP8 training + cache-aware serving + RULER / LongBench evals"
+        }
+      },
+      {
+        "actor": "RAG platform engineer sa enterprise data + agent platforms",
+        "job": "muling i-design ang RAG pipelines mula sa search-then-context-insert papunta sa dump-everything-plus-dynamic-prune workflows na sinasamantala ang native 1M context bago ang Q3 2026",
+        "outcome": "production RAG pipeline na nag-iingest ng full long-context windows na may dynamic prune logic, dokumentadong latency / cost / quality tradeoffs, at migration path mula sa chunked retrieval defaults",
+        "motivation": "ang chunked retrieval ceilings ay naglilimita sa agent quality kapag ang 1M-context models ay native; ang platform team na unang nagpapadala ng bagong pattern ay nagpapalaya ng product roadmap at nagtatakda ng customer template",
+        "task": {
+          "who": "RAG platform engineer + applied ML + product engineering + platform reliability + customer success",
+          "what": "muling i-design ang retrieval at context-assembly stages tungo sa dump-everything-plus-dynamic-prune at magpatakbo ng production canaries laban sa chunked baseline",
+          "where": "RAG service + vector / cache layer + agent runtime + observability stack + customer pilot deployments",
+          "when": "Q2 2026 hanggang Q3 2026",
+          "why": "ang search-then-insert ceilings ay naglilimita sa agent reasoning quality kumpara sa native 1M-context dump-and-prune designs",
+          "how": "long-context model serving + dynamic context-pruning policy + prompt-cache layer + latency / cost SLOs + rollout canaries"
+        }
+      },
+      {
+        "actor": "vector-DB product manager sa Pinecone, Weaviate, Qdrant, at Milvus",
+        "job": "muling iposisyon ang vector DB bilang long-context cache optimization layer sa halip na retrieval primitive bago ang Q3 2026",
+        "outcome": "GA product surface na nagdidiin sa long-context cache optimization (KV-cache offload, embedding-aware prompt caching, retrieval-as-prune) na may dokumentadong integration paths sa 1M-context model runtimes",
+        "motivation": "kung mananatili ang vector DBs bilang search-only retrieval, gumuguho ang value prop habang nagiging default ang native 1M context; alinmang vendor ang unang magpadala ng cache-layer story ay humahawak sa long-context spend",
+        "task": {
+          "who": "vector-DB product manager + product engineering + research / applied science + GTM enterprise + developer relations",
+          "what": "muling i-frame ang produkto bilang long-context cache optimization layer at magpadala ng integrations sa 1M-context model runtimes",
+          "where": "vector-DB platform + integration SDKs + reference architectures + customer briefings + developer docs",
+          "when": "Q2 2026 hanggang Q3 2026",
+          "why": "nawawalan ng share ang search-only positioning kapag ang native 1M context ay lumipat sa RAG sa dump-and-prune workflows",
+          "how": "KV-cache offload primitives + prompt-cache integrations + retrieval-as-prune APIs + reference deployments + benchmark publications"
+        }
+      }
+    ],
+    "prediction.6f0a6061c079c28e": [
+      {
+        "actor": "humanoid robotics product manager sa Siemens-Humanoid, Agile Robots, Tesla Optimus, at Figure",
+        "job": "patatagin ang humanoid platforms para sa 24h continuous operation, 1-week MTBF, 90%+ autonomy, at MES / PLC integration bago ang Q4 2026 enterprise RFPs",
+        "outcome": "production humanoid platform na may dokumentadong 24h uptime + 1-week MTBF + 90%+ autonomous completion + MES / PLC integration sa totoong customer lines",
+        "motivation": "ang 8h x 60 totes/h x 90% bar ng Erlangen ay nagre-reset sa enterprise procurement; ang pagkawala sa bagong RFP cuts ay nagbibigay sa unang vendor sa bar ng auto / electronics / logistics fleet contracts",
+        "task": {
+          "who": "robotics product manager + control / perception engineering + reliability engineering + MES / PLC integration team + customer pilot lead",
+          "what": "palawakin ang production runs mula 8h hanggang 24h, itaas ang MTBF sa 1 week, at i-integrate sa customer MES / PLC stacks sa live lines",
+          "where": "customer factory pilots + integration lab + reliability test cell + MES / PLC integration sandbox + procurement responses",
+          "when": "Q2 2026 hanggang Q4 2026",
+          "why": "ang RFP cuts ay tumutukoy na sa Erlangen production-line bar, hindi demo videos; ang pagkulang ay nagtutulak sa vendor palabas ng konsiderasyon",
+          "how": "NVIDIA Physical AI stack + KinetIQ-style framework + digital-twin sim + Siemens Xcelerator-class fleet management + MES / PLC connectors + reliability test instrumentation"
+        }
+      },
+      {
+        "actor": "manufacturing procurement lead sa VW, Bosch, Mercedes, Foxconn, TSMC, at Toyota",
+        "job": "isama ang 24h continuous operation, 1-week MTBF, 90%+ autonomous completion, at MES / PLC integration sa humanoid RFP cuts bago ang H2 2026",
+        "outcome": "RFP template na pinagtibay sa manufacturing-line humanoid procurement na may apat na cuts bilang de facto requirements at shortlist criteria",
+        "motivation": "ipinapakita ng Erlangen na maaabot ang production-line bar; ang procurement teams na hindi makaabot sa bar ay sumasalo ng downstream OT integration risk at nawawalan ng cost-savings narrative sa mga peers",
+        "task": {
+          "who": "manufacturing procurement lead + plant operations + safety / compliance + IT/OT integration team + supplier management",
+          "what": "muling isulat ang humanoid RFPs gamit ang apat na cuts at ang OT-environment-insertion-ease axis bilang primary scoring criteria",
+          "where": "procurement organization + plant integration test sites + supplier qualification process + RFP templates",
+          "when": "Q2 2026 hanggang H2 2026",
+          "why": "kung walang explicit RFP cuts, ang mga supplier ay babalik sa demo-video positioning at ang OT integration cost ay babagsak sa customer",
+          "how": "RFP template + plant-pilot scoring rubric + MTBF measurement protocol + MES / PLC integration test plan + supplier-attestation framework"
+        }
+      },
+      {
+        "actor": "industrial-automation platform lead sa NVIDIA Physical AI, Siemens Xcelerator, at Rockwell Automation",
+        "job": "magpadala ng humanoid integration kits na nagiging default ang OT-environment insertion bago ang H2 2026",
+        "outcome": "humanoid integration kit na may MES / PLC adapters, fleet-management primitives, digital-twin sim coverage, at certified deployment patterns na nagpapadala sa customer factories",
+        "motivation": "ang OT-environment insertion ease ang bagong competitive axis; ang platform vendor na ang kit ay sumasaklaw sa apat na RFP cuts ang mananalo sa cross-fleet recurring-revenue pipeline",
+        "task": {
+          "who": "platform product manager + control / runtime engineering + integration team + partner ecosystem manager + GTM industrial",
+          "what": "i-package ang MES / PLC adapters, fleet management, sim coverage, at reliability instrumentation sa turnkey integration kit",
+          "where": "platform SDK + reference factory deployments + partner certification program + customer pilot lines",
+          "when": "Q2 2026 hanggang H2 2026",
+          "why": "kung walang packaged OT integration, ang mga customer ay sumasalo ng integration cost at babalik sa demo-video procurement signals",
+          "how": "MES / PLC connectors + digital-twin sim libraries + fleet-management runtime + reliability instrumentation + partner certification program"
+        }
+      }
+    ],
+    "prediction.11c2c648527fe212": [
+      {
+        "actor": "equity research analyst na sumasaklaw sa enterprise SaaS sa Morgan Stanley, Goldman Sachs, JPMorgan, at Gartner",
+        "job": "muling isulat ang enterprise SaaS valuation model mula sa seats-times-ARPU papunta sa share-of-API-calls-touched-by-agents sa loob ng Q2 2026",
+        "outcome": "inilathala na research note na may bagong valuation framework, named coverage list, downgraded targets para sa Workday / Atlassian / Box / Smartsheet-class names, at explicit Agent-native vs Legacy axis",
+        "motivation": "ang worst-ever -18% drop ng ServiceNow na may chained Salesforce / Workday / Oracle falls ay nagpapahiwatig na ang displacement axis ay market-consensus na ngayon; ang mga analyst na huli sa modelo ay nawawalan ng institutional credibility",
+        "task": {
+          "who": "equity research analyst + sector strategist + data / quant team + editor / publishing + sales coverage",
+          "what": "buuin ang share-of-API-calls metric, magpatakbo ng displacement scenarios, at ilathala ang rewrite na may downgraded targets",
+          "where": "research platform + data vendors + corporate-access channel + institutional client distribution",
+          "when": "Q2 2026",
+          "why": "ang ARPU-times-seats math ay hindi na sumasalamin kung paano nire-reroute ng AI agents ang SaaS revenue; ang analyst na nahuhuli sa modelo ay nawawalan ng institutional read",
+          "how": "API-call telemetry vendors + customer interviews + scenario-DCF rebuild + downgrade publication + corporate-access tour"
+        }
+      },
+      {
+        "actor": "market-research analyst sa Gartner, Forrester, at IDC",
+        "job": "maglathala ng Magic Quadrant / Wave report na may explicit Agent-native vs Legacy SaaS axis sa loob ng Q2 2026",
+        "outcome": "Magic Quadrant / Wave na may Agent-native axis bilang primary, named placements para sa malalaking workflow SaaS, at methodology note na nagpapaliwanag sa axis shift",
+        "motivation": "pagkatapos ng ServiceNow drop, kailangan ng enterprise buyers ng vendor-comparison artifact na naka-align sa displacement narrative; ang firm na unang naglathala ay nagtatakda ng procurement template para sa susunod na dalawang budget cycles",
+        "task": {
+          "who": "market-research analyst + methodology team + vendor briefing program + editorial + sales / coverage",
+          "what": "muling tukuyin ang methodology na may Agent-native vs Legacy SaaS axis, magpatakbo ng vendor briefings, at ilathala ang placements",
+          "where": "research platform + vendor briefing portal + client publishing channel + Gartner / Forrester / IDC events",
+          "when": "Q2 2026",
+          "why": "kung walang Agent-native axis, ang mga enterprise buyers ay babalik sa legacy MQ placements at malalaktawan ang displacement risk",
+          "how": "methodology revision + vendor briefing cycle + customer-reference interviews + analyst-day events + research platform publication"
+        }
+      },
+      {
+        "actor": "enterprise SaaS CEO at IR lead sa Workday, Atlassian, Box, at Smartsheet",
+        "job": "i-preempt ang susunod na alon ng -15%+ analyst-driven re-ratings sa pamamagitan ng paglalathala ng Agent-native repositioning narrative sa loob ng Q2 2026",
+        "outcome": "inilathala na earnings-call narrative + investor-day deck + product-roadmap commit na nagpoposisyon sa kompanya bilang Agent-native na may credible API-call share metric",
+        "motivation": "ang chained falls ng ServiceNow / IBM / Salesforce / Workday / Oracle ay nagpapahiwatig na ang susunod na 3-5 names ay kukuha ng 15%+ drops; ang kompanya na nagpapadala ng credible Agent-native repositioning bago tumama ang analyst downgrade ay nakakaiwas sa lasting multiple compression",
+        "task": {
+          "who": "CEO + CFO + IR lead + chief product officer + communications + corporate development",
+          "what": "buuin at ilathala ang Agent-native repositioning narrative, ang share-of-agent-API-calls metric, at roadmap commits",
+          "where": "earnings calls + investor day + analyst meetings + product roadmap + customer reference deals",
+          "when": "Q2 2026",
+          "why": "kung walang explicit Agent-native repositioning, ang analyst consensus updates ay babalik sa displacement-risk discount at gumuguho ang multiple",
+          "how": "investor-day deck + earnings narrative + roadmap commitments + analyst-day briefings + reference-customer announcements"
+        }
+      }
+    ]
+  }
+}

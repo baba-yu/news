@@ -1,0 +1,151 @@
+{
+  "date": "2026-04-20",
+  "by_prediction": {
+    "prediction.4bbf8ec79bafedd1": [
+      {
+        "actor": "Mantenedor de la especificación MCP + editor del esquema de Agent Registry (grupo de trabajo MCP de Anthropic, operadores de registro que publican el índice canónico de servidores)",
+        "job": "extender el esquema de metadatos de servidor MCP + el esquema de registros de Agent Registry con un campo 'headless-preferred' / preferencia de transporte hasta H2 2026",
+        "outcome": "PR ratificado de la especificación MCP + actualización del esquema de Agent Registry que expone una bandera de metadatos 'headless-preferred' consultable en los registros de servidor",
+        "motivation": "los registros se vuelven inútiles si los agentes no pueden enrutarse alrededor de rutas frágiles de manejo de GUI; codificar la preferencia cierra la ambigüedad de enrutamiento de agentes",
+        "task": {
+          "who": "editores del grupo de trabajo de la especificación MCP + mantenedores del esquema de Agent Registry + autores de servidores de referencia",
+          "what": "redactar + ratificar el campo de metadatos 'headless-preferred' en el esquema de registros MCP + registry",
+          "where": "repositorio GitHub de modelcontextprotocol + PRs de esquema de Agent Registry + reuniones del grupo de trabajo de la especificación",
+          "when": "Mayo 2026 a H2 2026",
+          "why": "la tesis de Willison cristaliza la ambigüedad de enrutamiento que los registros deben resolver",
+          "how": "PR de especificación al estilo RFC + implementación de referencia + migración del esquema del registry"
+        }
+      },
+      {
+        "actor": "gerente de producto de plataforma de agentes (Anthropic Claude in Chrome, runtime de agentes de OpenAI, PMs de plataformas de agentes de hyperscalers que envían agentes operadores de navegador + headless)",
+        "job": "cablear lógica de preferencia de transporte en los runtimes de agentes para que los agentes lean la nueva bandera 'headless-preferred' de MCP / registry y enruten en consecuencia hasta H2 2026",
+        "outcome": "notas de versión y documentación enviadas del runtime de agentes que honran explícitamente la bandera headless-preferred con un valor por defecto de política de enrutamiento publicado",
+        "motivation": "las brechas de latencia y fiabilidad visibles para el usuario entre las rutas headless y de manejo de GUI obligan a los PMs a publicar un valor por defecto que prefiera headless cuando ambas existen",
+        "task": {
+          "who": "PMs del runtime de agentes + líderes de ingeniería de orquestación de agentes + redactores de documentación de DevRel",
+          "what": "implementar enrutador de preferencia de transporte que honra los metadatos 'headless-preferred'",
+          "where": "repositorios del runtime de agentes + notas de versión de la plataforma + superficies de documentación para desarrolladores",
+          "when": "Q2 a H2 2026",
+          "why": "la fragilidad de operar navegadores erosiona los SLAs de los agentes frente a las rutas headless",
+          "how": "política de enrutador + telemetría sobre la elección de transporte + A/B contra fallback de GUI"
+        }
+      },
+      {
+        "actor": "mantenedor de servicios de API headless (proveedores SaaS que publican servidores MCP + endpoints REST/JSON-RPC; p. ej. equipos de API de Linear, GitHub, Stripe, Notion)",
+        "job": "publicar registros de servidor MCP marcados como 'headless-preferred' junto con cualquier fallback de manejo de navegador, para que los consumidores del registry enruten a la API por defecto hasta H2 2026",
+        "outcome": "entradas de registro de servidor MCP que establecen 'headless-preferred=true' + documentación complementaria que dirige a los agentes a la superficie de API en lugar de raspado de UI web",
+        "motivation": "las métricas de monetización de tráfico de API, costo de soporte y fiabilidad favorecen las llamadas headless frente a agentes que manejan la UI web del mismo producto",
+        "task": {
+          "who": "equipo de API de la plataforma + DevRel + autores de servidores MCP en el proveedor SaaS",
+          "what": "enviar registro de servidor MCP con metadatos headless-preferred + obsoletar la guía de manejo de GUI",
+          "where": "repositorio de servidor MCP del proveedor + envío a Agent Registry + portal de documentación de API",
+          "when": "Q2 a H2 2026",
+          "why": "la ruta de API es más barata, rápida, fiable y fácil de limitar por tasa que el raspado",
+          "how": "SDK de servidor MCP + herramientas de envío al registry + banner de obsolescencia en la documentación"
+        }
+      }
+    ],
+    "prediction.4bd33db2ea06e5b4": [
+      {
+        "actor": "líder de investigación de un laboratorio de modelos abiertos en el borde (entrenador de modelos pequeños tipo Qwen / Bonsai)",
+        "job": "Enviar modelos de codificación agéntica sub-40B que superen el listón de SWE-bench que el hardware local puede ejecutar realmente.",
+        "outcome": "Lanzamiento público de un modelo de codificación de pesos abiertos con >70% en SWE-bench Verified con <40B parámetros en GPUs de consumo.",
+        "motivation": "Quien posea el modelo de codificación por defecto en el borde captura la capa de distribución de herramientas para desarrolladores antes de que los hyperscalers la cierren.",
+        "task": {
+          "who": "equipo de pre-entrenamiento de modelos pequeños + post-entrenamiento por RL",
+          "what": "destilar + ajustar por RL un MoE sub-40B sobre trazas de codificación agéntica",
+          "where": "clúster GPU interno con arnés de evaluación SWE-bench Verified",
+          "when": "ventana Q2-Q3 2026",
+          "why": "la precisión ejecutable en el borde es la puerta para la adopción local por defecto",
+          "how": "MoE-A3B al estilo Qwen3.6 + RL aumentado por verificador"
+        }
+      },
+      {
+        "actor": "gerente de producto de agentes de codificación local-first (proveedor de herramientas IDE / CLI)",
+        "job": "Enviar una capa de enrutamiento que ejecute sub-40B localmente por defecto y desborde a la nube solo en tareas difíciles.",
+        "outcome": "Lanzamiento GA de un agente de codificación cuya configuración por defecto fija la inferencia local con una cola medida de desbordamiento a la nube.",
+        "motivation": "Los compradores de pymes preocupados por la privacidad y los desarrolladores individuales exigen agentes con costo limitado sin factura de nube por token.",
+        "task": {
+          "who": "equipo de runtime de agentes + ingeniería de producto",
+          "what": "construir un enrutador local-first con política de fallback de desbordamiento a la nube",
+          "where": "runtime de agentes para VS Code / JetBrains / CLI",
+          "when": "ventana Q2-Q3 2026",
+          "why": "el enrutamiento local por defecto es lo que hace visible la inversión para los usuarios",
+          "how": "backends llama.cpp / Ollama / MLX + enrutador por nivel de capacidad"
+        }
+      },
+      {
+        "actor": "ingeniero de runtime de inferencia en el borde (autor de kernels CUDA / Metal / ROCm)",
+        "job": "Empujar el throughput de decodificación de modelos pequeños en GPUs de consumo a cientos de tok/s en cargas de trabajo reales de codificación.",
+        "outcome": "Lanzamiento de runtime de código abierto que alcanza 600+ tok/s al estilo Bonsai en una sola tarjeta CUDA de consumo.",
+        "motivation": "La paridad de throughput local con APIs en la nube es la precondición técnica para desplazar a la nube como opción por defecto.",
+        "task": {
+          "who": "equipo de ingeniería de kernels de inferencia + cuantización",
+          "what": "enviar kernels de fused-attention + decodificación especulativa para modelos sub-2B",
+          "where": "repositorio de runtime de código abierto con backends CUDA / Metal",
+          "when": "ventana Q2-Q3 2026",
+          "why": "la paridad de tok/s elimina la última excusa de latencia para quedarse en la nube",
+          "how": "FlashAttention-3 + cuantización INT4 + decodificación especulativa con modelo borrador"
+        }
+      }
+    ],
+    "prediction.4ecb84808c9acc3f": [
+      {
+        "actor": "investigador de seguridad de la cadena de suministro en una firma de seguridad de aplicaciones o laboratorio independiente",
+        "job": "Publicar PoCs reproducibles de inyección indirecta de prompts en runners de CI que exfiltren secretos a través de Claude Code / Gemini CLI / Copilot.",
+        "outcome": "Publicaciones públicas + avisos equivalentes a CVE que citen reproducción entre proveedores y enmarquen la clase como una categoría distinta de cadena de suministro.",
+        "motivation": "Establecer la nueva clase de amenaza bajo su atribución antes de que los proveedores parcheen silenciosamente, capturando la cuota de citaciones y los espacios en pistas de conferencias.",
+        "task": {
+          "who": "equipo de investigación de appsec + ingenieros inversos de plataformas CI + coordinador de divulgación responsable",
+          "what": "construir un arnés de PoC entre proveedores que exfiltre secretos mediante inyección de prompts en PR/issues",
+          "where": "runners de GitHub Actions + instalaciones de agentes de codificación de proveedores + blog de divulgación + pistas de Black Hat / DEF CON",
+          "when": "Mayo a Q3 2026",
+          "why": "anclar la etiqueta de clase Agente en el Bucle antes de que el encuadre de los proveedores la ahogue",
+          "how": "arnés de inyección indirecta de prompts + repositorios de prueba de GitHub Actions + canalización de divulgación responsable"
+        }
+      },
+      {
+        "actor": "mantenedor editorial de listas de riesgos de CIS Benchmarks / OWASP Top 10",
+        "job": "Redactar y circular una nueva entrada de lista principal nombrando a la Exfiltración de Secretos con Agente en el Bucle como categoría distinta de cadena de suministro.",
+        "outcome": "Entrada publicada en la lista de riesgos de CIS / OWASP con mapeos de controles, descripción de la amenaza y guía de mitigación referenciando los PoCs entre proveedores.",
+        "motivation": "Mantener relevantes el Top 10 / Controles CIS a medida que los agentes de codificación con IA reconfiguran la superficie de amenaza de CI; cimentar la autoridad editorial sobre la nueva clase.",
+        "task": {
+          "who": "líderes de proyecto de OWASP + grupo de trabajo de CIS Benchmarks + revisores de la comunidad",
+          "what": "redactar la entrada de categoría, ejecutar ciclo de comentarios públicos, ratificar en la próxima revisión de la lista",
+          "where": "lista de correo del proyecto OWASP + workbench de CIS Benchmarks + repositorios de borrador en GitHub + sesiones de cumbre AppSec EU / Global",
+          "when": "Mayo a Q3 2026",
+          "why": "ratificar la categoría en la próxima revisión de la lista antes de que se afiancen nombres fragmentados de proveedores",
+          "how": "borrador al estilo RFC + período de comentario público + voto del grupo de trabajo"
+        }
+      },
+      {
+        "actor": "gerente de producto de seguridad de la plataforma GitHub Actions",
+        "job": "Enviar mitigaciones de sandbox + alcance de secretos que limiten a los agentes de codificación activados por texto no confiable de PR / issues en runners de CI.",
+        "outcome": "Política activada por defecto que reduce el radio de impacto de tokens + claves de despliegue para flujos de trabajo dirigidos por agentes, además de un aviso público que reconoce la clase.",
+        "motivation": "Evitar ser nombrada como la superficie portadora en la nueva entrada de la lista principal; preservar la plataforma como sustrato por defecto de agente-CI.",
+        "task": {
+          "who": "PM de seguridad de la plataforma Actions + ingeniería de runners + Advanced Security + comunicaciones de producto",
+          "what": "enviar valores por defecto de tokens con alcance, permisos conscientes de agentes y aviso público de modelo de amenaza",
+          "where": "runner de GitHub Actions + consola de Advanced Security + GitHub Blog + changelog",
+          "when": "Mayo a Q3 2026",
+          "why": "reducir el radio de impacto del agente antes de que las entradas de CIS / OWASP nombren el patrón de la plataforma",
+          "how": "tokens con alcance OIDC + límites de permisos por trabajo + señales de detección del contexto de agente"
+        }
+      },
+      {
+        "actor": "equipo de seguridad de proveedor de agentes de codificación con IA (Claude Code / Gemini CLI / Copilot)",
+        "job": "Endurecer las CLIs de agentes contra la inyección indirecta de prompts para que el texto no confiable de PR / issues no pueda forzar la exfiltración de secretos en CI.",
+        "outcome": "Versiones de agentes lanzadas con guardrails contra inyección de prompts, valores por defecto de redacción de secretos y modelo de amenaza documentado citando el escenario de CI.",
+        "motivation": "Evitar ser el vector de exfiltración nombrado en las entradas de CIS / OWASP; proteger los acuerdos de CI empresariales vinculados a la revisión de seguridad de aprovisionamiento.",
+        "task": {
+          "who": "ingenieros de seguridad de CLI de agentes + equipo de seguridad de uso de herramientas + trust-and-safety + enlace de developer-advocate",
+          "what": "enviar mitigaciones de inyección de prompts + redacción de secretos + valores por defecto restringidos de uso de herramientas en modo CI",
+          "where": "ramas de lanzamiento de Claude Code / Gemini CLI / Copilot + avisos de seguridad del proveedor + sitio de documentación",
+          "when": "Mayo a Q3 2026",
+          "why": "eliminar la señal de reproducción entre proveedores que ancla la nueva categoría",
+          "how": "filtrado de contenido de entrada + sandboxing de capacidades + APIs de credenciales con alcance + valores por defecto en modo CI"
+        }
+      }
+    ]
+  }
+}

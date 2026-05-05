@@ -1,0 +1,137 @@
+{
+  "date": "2026-04-24",
+  "by_prediction": {
+    "prediction.23c160efd9baa194": [
+      {
+        "actor": "open-weight LLM lead at DeepSeek, Alibaba Qwen, Anthropic, OpenAI, and Google",
+        "job": "ship native-1M-context architectures (Hybrid Attention or equivalent) into production weights and APIs before Q3 2026",
+        "outcome": "open-weight + API model releases with native 1M context, sub-30% FLOPs and sub-15% KV-cache cost vs the prior generation, and public benchmark coverage at full context",
+        "motivation": "first labs to make native 1M context affordable lock in the open-weight floor and force 32K-128K models out of the production tier",
+        "task": {
+          "who": "research training engineering + long-context architecture team + post-training + release engineering + evals",
+          "what": "design and train native-1M-context architectures and ship aligned post-trained checkpoints at full context",
+          "where": "internal training cluster + post-training pipeline + Hugging Face / API surface + benchmark harness",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "32K-128K models cannot match the agentic / long-document workload that 1M-context releases now define",
+          "how": "Hybrid Attention / linear-attention / sliding-window long-context recipe + FP8 training + cache-aware serving + RULER / LongBench evals"
+        }
+      },
+      {
+        "actor": "RAG platform engineer at enterprise data + agent platforms",
+        "job": "redesign RAG pipelines from search-then-context-insert to dump-everything-plus-dynamic-prune workflows that exploit native 1M context before Q3 2026",
+        "outcome": "production RAG pipeline ingesting full long-context windows with dynamic prune logic, documented latency / cost / quality tradeoffs, and migration path off chunked retrieval defaults",
+        "motivation": "chunked retrieval ceilings limit agent quality once 1M-context models are native; the platform team that ships the new pattern first frees product roadmap and sets the customer template",
+        "task": {
+          "who": "RAG platform engineer + applied ML + product engineering + platform reliability + customer success",
+          "what": "redesign retrieval and context-assembly stages to dump-everything-plus-dynamic-prune and run production canaries against the chunked baseline",
+          "where": "RAG service + vector / cache layer + agent runtime + observability stack + customer pilot deployments",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "search-then-insert ceilings cap agent reasoning quality compared to native 1M-context dump-and-prune designs",
+          "how": "long-context model serving + dynamic context-pruning policy + prompt-cache layer + latency / cost SLOs + rollout canaries"
+        }
+      },
+      {
+        "actor": "vector-DB product manager at Pinecone, Weaviate, Qdrant, and Milvus",
+        "job": "reposition the vector DB as a long-context cache optimization layer rather than a retrieval primitive before Q3 2026",
+        "outcome": "GA product surface emphasizing long-context cache optimization (KV-cache offload, embedding-aware prompt caching, retrieval-as-prune) with documented integration paths into 1M-context model runtimes",
+        "motivation": "if vector DBs stay framed as search-only retrieval, the value prop collapses as native 1M context becomes default; whichever vendor ships the cache-layer story first holds the long-context spend",
+        "task": {
+          "who": "vector-DB product manager + product engineering + research / applied science + GTM enterprise + developer relations",
+          "what": "reframe the product as a long-context cache optimization layer and ship integrations to 1M-context model runtimes",
+          "where": "vector-DB platform + integration SDKs + reference architectures + customer briefings + developer docs",
+          "when": "Q2 2026 to Q3 2026",
+          "why": "search-only positioning loses share when native 1M context flips RAG to dump-and-prune workflows",
+          "how": "KV-cache offload primitives + prompt-cache integrations + retrieval-as-prune APIs + reference deployments + benchmark publications"
+        }
+      }
+    ],
+    "prediction.6f0a6061c079c28e": [
+      {
+        "actor": "humanoid robotics product manager at Siemens-Humanoid, Agile Robots, Tesla Optimus, and Figure",
+        "job": "harden humanoid platforms for 24h continuous operation, 1-week MTBF, 90%+ autonomy, and MES / PLC integration before Q4 2026 enterprise RFPs",
+        "outcome": "production humanoid platform with documented 24h uptime + 1-week MTBF + 90%+ autonomous completion + MES / PLC integration on real customer lines",
+        "motivation": "Erlangen's 8h x 60 totes/h x 90% bar resets enterprise procurement; missing the new RFP cuts cedes auto / electronics / logistics fleet contracts to the first vendor at the bar",
+        "task": {
+          "who": "robotics product manager + control / perception engineering + reliability engineering + MES / PLC integration team + customer pilot lead",
+          "what": "extend production runs from 8h to 24h, raise MTBF to 1 week, and integrate with customer MES / PLC stacks on live lines",
+          "where": "customer factory pilots + integration lab + reliability test cell + MES / PLC integration sandbox + procurement responses",
+          "when": "Q2 2026 to Q4 2026",
+          "why": "RFP cuts now reference the Erlangen production-line bar, not demo videos; falling short pushes the vendor out of consideration",
+          "how": "NVIDIA Physical AI stack + KinetIQ-style framework + digital-twin sim + Siemens Xcelerator-class fleet management + MES / PLC connectors + reliability test instrumentation"
+        }
+      },
+      {
+        "actor": "manufacturing procurement lead at VW, Bosch, Mercedes, Foxconn, TSMC, and Toyota",
+        "job": "fold 24h continuous operation, 1-week MTBF, 90%+ autonomous completion, and MES / PLC integration into humanoid RFP cuts before H2 2026",
+        "outcome": "RFP template adopted across manufacturing-line humanoid procurement with the four cuts as de facto requirements and shortlist criteria",
+        "motivation": "Erlangen demonstrates the production-line bar is reachable; procurement teams that miss the bar absorb downstream OT integration risk and lose the cost-savings narrative to peers",
+        "task": {
+          "who": "manufacturing procurement lead + plant operations + safety / compliance + IT/OT integration team + supplier management",
+          "what": "rewrite humanoid RFPs with the four cuts and the OT-environment-insertion-ease axis as primary scoring criteria",
+          "where": "procurement organization + plant integration test sites + supplier qualification process + RFP templates",
+          "when": "Q2 2026 to H2 2026",
+          "why": "without explicit RFP cuts, suppliers default to demo-video positioning and OT integration cost falls on the customer",
+          "how": "RFP template + plant-pilot scoring rubric + MTBF measurement protocol + MES / PLC integration test plan + supplier-attestation framework"
+        }
+      },
+      {
+        "actor": "industrial-automation platform lead at NVIDIA Physical AI, Siemens Xcelerator, and Rockwell Automation",
+        "job": "ship humanoid integration kits that make OT-environment insertion the default before H2 2026",
+        "outcome": "humanoid integration kit with MES / PLC adapters, fleet-management primitives, digital-twin sim coverage, and certified deployment patterns shipping into customer factories",
+        "motivation": "OT-environment insertion ease is the new competitive axis; the platform vendor whose kit covers the four RFP cuts wins the cross-fleet recurring-revenue pipeline",
+        "task": {
+          "who": "platform product manager + control / runtime engineering + integration team + partner ecosystem manager + GTM industrial",
+          "what": "package MES / PLC adapters, fleet management, sim coverage, and reliability instrumentation into a turnkey integration kit",
+          "where": "platform SDK + reference factory deployments + partner certification program + customer pilot lines",
+          "when": "Q2 2026 to H2 2026",
+          "why": "without packaged OT integration, customers absorb integration cost and fall back to demo-video procurement signals",
+          "how": "MES / PLC connectors + digital-twin sim libraries + fleet-management runtime + reliability instrumentation + partner certification program"
+        }
+      }
+    ],
+    "prediction.11c2c648527fe212": [
+      {
+        "actor": "equity research analyst covering enterprise SaaS at Morgan Stanley, Goldman Sachs, JPMorgan, and Gartner",
+        "job": "rewrite the enterprise SaaS valuation model from seats-times-ARPU to share-of-API-calls-touched-by-agents inside Q2 2026",
+        "outcome": "published research note with the new valuation framework, named coverage list, downgraded targets for Workday / Atlassian / Box / Smartsheet-class names, and explicit Agent-native vs Legacy axis",
+        "motivation": "ServiceNow's worst-ever -18% drop with chained Salesforce / Workday / Oracle falls signals the displacement axis is now market-consensus; analysts late to the model lose institutional credibility",
+        "task": {
+          "who": "equity research analyst + sector strategist + data / quant team + editor / publishing + sales coverage",
+          "what": "build the share-of-API-calls metric, run displacement scenarios, and publish the rewrite with downgraded targets",
+          "where": "research platform + data vendors + corporate-access channel + institutional client distribution",
+          "when": "Q2 2026",
+          "why": "ARPU-times-seats math no longer reflects how AI agents reroute SaaS revenue; the analyst who lags the model loses the institutional read",
+          "how": "API-call telemetry vendors + customer interviews + scenario-DCF rebuild + downgrade publication + corporate-access tour"
+        }
+      },
+      {
+        "actor": "market-research analyst at Gartner, Forrester, and IDC",
+        "job": "publish a Magic Quadrant / Wave report with an explicit Agent-native vs Legacy SaaS axis inside Q2 2026",
+        "outcome": "Magic Quadrant / Wave with the Agent-native axis as primary, named placements for major workflow SaaS, and methodology note explaining the axis shift",
+        "motivation": "post-ServiceNow drop, enterprise buyers need a vendor-comparison artifact aligned with the displacement narrative; the firm that publishes first sets the procurement template for the next two budget cycles",
+        "task": {
+          "who": "market-research analyst + methodology team + vendor briefing program + editorial + sales / coverage",
+          "what": "redefine the methodology with an Agent-native vs Legacy SaaS axis, run vendor briefings, and publish placements",
+          "where": "research platform + vendor briefing portal + client publishing channel + Gartner / Forrester / IDC events",
+          "when": "Q2 2026",
+          "why": "absent an Agent-native axis, enterprise buyers default to legacy MQ placements and miss the displacement risk",
+          "how": "methodology revision + vendor briefing cycle + customer-reference interviews + analyst-day events + research platform publication"
+        }
+      },
+      {
+        "actor": "enterprise SaaS CEO and IR lead at Workday, Atlassian, Box, and Smartsheet",
+        "job": "preempt the next wave of -15%+ analyst-driven re-ratings by publishing an Agent-native repositioning narrative inside Q2 2026",
+        "outcome": "published earnings-call narrative + investor-day deck + product-roadmap commit positioning the company as Agent-native with a credible API-call share metric",
+        "motivation": "ServiceNow / IBM / Salesforce / Workday / Oracle chained falls signal the next 3-5 names take 15%+ drops; the company that ships a credible Agent-native repositioning before the analyst downgrade hits avoids the lasting multiple compression",
+        "task": {
+          "who": "CEO + CFO + IR lead + chief product officer + communications + corporate development",
+          "what": "build and publish the Agent-native repositioning narrative, the share-of-agent-API-calls metric, and roadmap commits",
+          "where": "earnings calls + investor day + analyst meetings + product roadmap + customer reference deals",
+          "when": "Q2 2026",
+          "why": "without an explicit Agent-native repositioning, analyst consensus updates default to displacement-risk discount and the multiple compresses",
+          "how": "investor-day deck + earnings narrative + roadmap commitments + analyst-day briefings + reference-customer announcements"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "date": "2026-04-22",
+  "by_prediction": {
+    "prediction.36f4ab773b39713e": [
+      {
+        "actor": "gerente de producto de silicio interno de hyperscaler (equipos Microsoft MAIA, Meta MTIA, Google TPU)",
+        "job": "enviar un par de SKU entrenamiento-vs-inferencia diferenciados publicamente en la misma familia de aceleradores antes de H1 2027",
+        "outcome": "linea de SKU de doble pista anunciada publicamente (SKU de entrenamiento + SKU de inferencia) con SKU de inferencia FP4 / MXFP4 nativo y fechas de roadmap comprometidas",
+        "motivation": "igualar la division TPU 8t / 8i de Google y AWS Trainium / Inferentia es ahora apuesta minima; cualquier hyperscaler que envie un chip de arquitectura unica cede competitividad de $/consulta a rivales de doble pista",
+        "task": {
+          "who": "PM de silicio interno + arquitecto de aceleradores + lider GTM de cloud-AI + comunicaciones corporativas",
+          "what": "fijar roadmap de SKU dual, hacer tape out de silicio FP4 / MXFP4 de SKU de inferencia, preparar anuncio GA",
+          "where": "revisiones internas de roadmap de silicio + corridas de tape-out de fundicion + keynote de lanzamiento estilo Cloud Next",
+          "when": "mayo 2026 a H1 2027",
+          "why": "los aceleradores de arquitectura unica pierden la competencia de $/consulta una vez que los rivales envian SKU optimizados para inferencia",
+          "how": "base IP fisica compartida + bifurcacion de datapath FP4 / MXFP4 solo-inferencia + precios dedicados a nivel SKU + integracion de scheduler cloud-nativo"
+        }
+      },
+      {
+        "actor": "ingeniero de kernel de runtime de inferencia en equipos vLLM / TensorRT-LLM / SGLang / hyperscaler Bedrock-and-Vertex",
+        "job": "enviar kernels nativos FP4 / MXFP4 y scheduling consciente de SKU para que el silicio optimizado para inferencia entregue el pico proyectado de $/consulta",
+        "outcome": "kernels FP4 / MXFP4 de produccion y logica de enrutamiento que despachan cargas de trabajo al SKU de inferencia por defecto y entregan mejora medible de $/consulta",
+        "motivation": "sin kernels FP4 de primera clase y conciencia de scheduler, los SKU optimizados para inferencia rinden por debajo de su placa, rompiendo la historia economica de doble pista",
+        "task": {
+          "who": "equipo de kernel de runtime + ing de scheduler/enrutamiento + lider de perf-engineering + integracion de plataforma cloud",
+          "what": "implementar kernels FP4 / MXFP4 + scheduling consciente de SKU + mejora de $/consulta en benchmark",
+          "where": "ramas principales vLLM / TRT-LLM / SGLang + stack de servicio Bedrock / Vertex + arnes de perf-bench",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "el throughput FP4 es el factor limitante para la afirmacion del pico de $/consulta",
+          "how": "kernels MXFP4 de microscaling + politica de despacho por-SKU + autoscaler consciente de capacidad + publicacion de benchmark publico"
+        }
+      },
+      {
+        "actor": "arquitecto de adquisiciones de AI empresarial en organizaciones Fortune-500 que compran modelos",
+        "job": "renegociar contratos de aceleradores con hyperscalers para especificar capacidad de SKU-inferencia vs SKU-entrenamiento por separado para que la competencia de $/consulta se capture comercialmente",
+        "outcome": "contratos de capacidad multi-cloud ejecutados con SLO explicitos de $/consulta de SKU-inferencia y tarifas por hora de SKU-entrenamiento como lineas separadas",
+        "motivation": "los precios de aceleradores de linea unica ocultan los ahorros de SKU-inferencia; dividir el contrato es la unica forma de capturar el pico de $/consulta en TCO real",
+        "task": {
+          "who": "arquitecto de plataforma AI + adquisiciones cloud + finanzas + gestion de proveedores",
+          "what": "redactar y firmar contratos separando SLO de $/consulta de SKU-inferencia de tarifa por hora de SKU-entrenamiento",
+          "where": "RFP de gestion de proveedores + negociaciones de compromiso cloud + junta interna de revision de arquitectura",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "el pico de $/consulta solo se traduce en ahorros empresariales si los contratos de adquisicion separan los precios de SKU",
+          "how": "puntuacion RFP + divisiones de compromiso multi-cloud + convenios de capacidad reservada + auditoria de enrutamiento de cargas de trabajo"
+        }
+      }
+    ],
+    "prediction.8b1d0c5ea8a8550e": [
+      {
+        "actor": "gerente de producto de AI Fisica / Robot-as-a-Service en equipos de robotica de hyperscalers (AWS Robotics, NVIDIA Isaac / Cosmos, Hyundai-DEEPX RaaS)",
+        "job": "enviar una oferta RaaS productizada cobrando entrenamiento por robot + sim-sync + computo de actualizacion de politicas como linea cloud medida antes de Q3 2026",
+        "outcome": "oferta RaaS GA con SKU de computo cloud medido por robot + lineas de plantilla de contrato empresarial estandarizadas",
+        "motivation": "la captura de primer movimiento del primitivo de computo de control de robots bloquea la posicion de ingresos recurrentes durables antes de que los OEM de robots commodity construyan sus propias nubes",
+        "task": {
+          "who": "gerente de producto RaaS + ingenieria de plataforma cloud + ventas empresariales + plantillas de contrato / legal",
+          "what": "empaquetar entrenamiento + sim-sync + computo de actualizacion de politica en un SKU medido por robot con clausulas de contrato empresarial",
+          "where": "consola de producto de hyperscaler + plantillas de contrato empresarial + programa de integracion de socios",
+          "when": "mayo 2026 a Q3 2026",
+          "why": "sin un SKU productizado, el computo por robot permanece empaquetado y no capturable como ingresos recurrentes",
+          "how": "gateway API medido + hosting de entorno sim + CI/CD de actualizacion de politica + identidad / facturacion por robot"
+        }
+      },
+      {
+        "actor": "lider de plataforma de software del fabricante de robots pivotando de venta de hardware a SaaS de gestion de flotas (Neura, Hyundai Robotics, startups de envio de humanoides)",
+        "job": "transicionar el modelo de ingresos de venta unica de robot a software de gestion de flotas por suscripcion con actualizaciones de politica enrutadas en la nube para Q3 2026",
+        "outcome": "SaaS de gestion de flotas GA con contratos de suscripcion activos uniendo entrega de politica cloud + telemetria + SLA de diagnostico remoto a robots desplegados",
+        "motivation": "el hardware de robot se vuelve commodity; solo el software de gestion de flotas con ingresos recurrentes preserva el margen a medida que las unidades escalan a millones",
+        "task": {
+          "who": "lider de plataforma de software OEM de robots + gerente de producto de gestion de flotas + alianzas cloud + transformacion de ventas",
+          "what": "construir SaaS de gestion de flotas, integrar socio cloud RaaS, transicionar contratos a modelo de suscripcion",
+          "where": "plataforma de software OEM-robot + cloud socio (AWS / NVIDIA Isaac) + canalizacion de renovacion de clientes",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "los ingresos solo de hardware colapsan una vez que los robots entrenados en la nube convierten el endpoint de computo movil en commodity",
+          "how": "entrega OTA de politica + telemetria de flota + diagnostico remoto + facturacion por suscripcion + integracion de socio RaaS"
+        }
+      }
+    ],
+    "prediction.c850d46b059e600c": [
+      {
+        "actor": "gerente de producto SSO / IdP en Okta, Microsoft Entra ID, y Google Workspace identity",
+        "job": "delimitar una categoria dedicada de scope OAuth de extension AI en consolas de admin antes de Q3 2026 para que los administradores puedan bloquear masivamente las integraciones AI",
+        "outcome": "categoria de politica de consola de admin GA etiquetada como \"extension AI\" con controles de denegar-por-defecto / lista permitida cubriendo scopes OAuth solicitados por apps AI SaaS",
+        "motivation": "post-brecha Vercel-Context.ai, los administradores ya no pueden aceptar predeterminados Permitir-Todo de OAuth; los proveedores de identidad que envien la categoria de extension AI primero capturan el presupuesto de cumplimiento",
+        "task": {
+          "who": "gerente de producto IdP + ingenieria de identidad + equipo de motor de politicas + UX de admin + cumplimiento del cliente",
+          "what": "enviar categoria de politica de admin para scopes OAuth de extension AI con denegar-por-defecto y registro de auditoria",
+          "where": "consolas de admin Okta / Entra ID / Workspace + flujo de consentimiento OAuth + registro de auditoria",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "los scopes OAuth de extension AI son la nueva ruta principal de brecha entre apps SaaS",
+          "how": "etiquetado de scope OAuth + clasificador de catalogo de apps AI + plantillas de politica de admin + canalizacion de auditoria"
+        }
+      },
+      {
+        "actor": "gerente de producto CASB / SSPM en Netskope, Palo Alto, Microsoft Defender for Cloud Apps, y Wing Security",
+        "job": "enviar una metrica autonoma de \"volumen de datos leidos por integraciones AI\" en dashboards CASB / SSPM para Q3 2026 para que los equipos de seguridad puedan cuantificar y limitar el alcance de apps AI",
+        "outcome": "metrica de dashboard CASB / SSPM GA aislando el volumen de lectura de integracion AI por app y por dominio de datos, con alertas de anomalia",
+        "motivation": "Vercel-Context.ai muestra que el volumen de lectura existente de apps OAuth es invisible para los equipos de seguridad; cualquier CASB / SSPM que envie la metrica de integracion AI primero se convierte en el predeterminado post-incidente",
+        "task": {
+          "who": "gerente de producto CASB / SSPM + ingenieria de telemetria + equipo de inteligencia de amenazas + UX de dashboard",
+          "what": "instrumentar y exponer el volumen de lectura de integracion AI como metrica de dashboard CASB / SSPM de primera clase",
+          "where": "canalizacion de telemetria CASB / SSPM + dashboard + reglas de alerta + reportes de cumplimiento del cliente",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "los volumenes de exfiltracion de datos de integracion AI son invisibles dentro de la telemetria OAuth agregada hoy",
+          "how": "enriquecimiento de log OAuth + clasificador de apps AI + agregacion de volumen por app + alerta de anomalia + plantillas de reporte de cumplimiento"
+        }
+      },
+      {
+        "actor": "CISO empresarial + lider de gobernanza de identidad en clientes Fortune-500 de Google Workspace / Microsoft 365",
+        "job": "publicar y hacer cumplir una politica interna de gobernanza AI-OAuth que restrinja las conexiones personales de AI SaaS a tenants corporativos antes de Q3 2026",
+        "outcome": "estandar interno ratificado de gobernanza AI-OAuth + politica de consola de admin aplicada que prohibe instalaciones de extension AI Permitir-Todo y requiere revision por app",
+        "motivation": "92% de los CISO carecen de visibilidad de identidades AI (encuesta Cybersecurity Insiders); despues de la brecha Vercel-Context.ai, las juntas demandan una politica escrita y una puerta de aplicacion, no una guia aspiracional",
+        "task": {
+          "who": "CISO + lider de gobernanza de identidad + operaciones IT + legal / cumplimiento + enlaces de unidades de negocio",
+          "what": "redactar politica de gobernanza AI-OAuth + configurar politica de admin SSO + lanzar flujo de revision por app",
+          "where": "repositorio interno de politica de seguridad + consola de admin SSO / IdP + ticketing de gestion de cambios",
+          "when": "Q2 2026 a Q3 2026",
+          "why": "el patron de brecha Vercel-Context.ai se reproduce dondequiera que permanezcan los predeterminados Permitir-Todo de OAuth AI",
+          "how": "estandar de gobernanza escrito + lista permitida de consola de admin + flujo de revision por niveles de riesgo + atestacion trimestral + alimentacion de telemetria CASB"
+        }
+      }
+    ]
+  }
+}

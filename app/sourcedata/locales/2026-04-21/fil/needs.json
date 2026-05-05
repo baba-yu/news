@@ -1,0 +1,137 @@
+{
+  "date": "2026-04-21",
+  "by_prediction": {
+    "prediction.082b0a07077870dd": [
+      {
+        "actor": "model-hub security PM + trust-and-safety eng lead sa Hugging Face / Ollama Library / ModelScope",
+        "job": "mag-ship ng model-card + chat_template signature-verification o sandboxed-template-render gate para sa bawat GGUF upload bago ang Q3 2026",
+        "outcome": "production policy na bumablock sa unsigned model-cards o unsafe chat_templates sa upload, na may sandbox fallback para sa legacy artifacts",
+        "motivation": "ang post-SGLang-CVE fallout ay nagpapagawa sa hubs bilang malinaw na choke point; ang pagkabigo na i-gate ang uploads ay nag-iimbita ng regulatory at downstream-RCE liability",
+        "task": {
+          "who": "hub trust-and-safety eng + model-card schema team + cryptographic-signing infra owner",
+          "what": "magtayo ng signature gate + sandboxed template renderer para sa GGUF uploads",
+          "where": "hub upload pipeline + model-card schema repo + chat_template render service",
+          "when": "Mayo 2026 hanggang Q3 2026",
+          "why": "ang GGUF files ay nagdadala ng executable templates na maaaring mag-RCE sa consumers sa load",
+          "how": "sigstore o hub-native signing keys + jinja2 sandbox o template AST allowlist"
+        }
+      },
+      {
+        "actor": "inference-server security eng + product manager sa vLLM / AWS Bedrock / Microsoft Foundry Local",
+        "job": "i-wire ang SSTI / template-injection scanning sa GGUF load path at i-ship ito bilang on by default bago ang Q3 2026",
+        "outcome": "default-on SSTI scanner sa model-load codepath na tumatanggi o nagku-quarantine ng GGUFs na ang chat_template ay naglalaman ng mapanganib na Jinja2 constructs",
+        "motivation": "ang serving runtimes ay nagmamana ng RCE blast-radius mula sa anumang malicious GGUF na ina-upload ng tenant; ang default-off scanning ay hindi na maipagtatanggol pagkatapos ng CVE-2026-5760",
+        "task": {
+          "who": "inference-runtime security eng + model-loader maintainer + release-train PM",
+          "what": "i-integrate ang Jinja2 SSTI scanner + safe-template policy sa GGUF loader",
+          "where": "vLLM / Bedrock / Foundry Local model-load codepath + release config defaults",
+          "when": "Q2 2026 hanggang Q3 2026",
+          "why": "ang tenant-supplied GGUFs ay maaaring mag-RCE sa serving host sa load",
+          "how": "Jinja2 sandboxed environment + AST-walk SSTI detector + signed-template allowlist"
+        }
+      },
+      {
+        "actor": "CVE intake + security maintainer sa SGLang at upstream Jinja2 / GGUF tooling projects",
+        "job": "mag-ship ng hardened chat_template parsing + maglathala ng coordinated advisories upang ang hubs at serving runtimes ay makapagsama-sama sa isang shared safe-template contract pagsapit ng Q3 2026",
+        "outcome": "patched SGLang releases + upstream guidance na nag-de-define ng safe Jinja2 subset para sa chat_templates na maaaring i-adopt verbatim ng hubs at inference servers",
+        "motivation": "ang fragmented per-vendor patches ay nag-iiwan ng GGUF supply chain na inconsistent; tanging coordinated upstream contract lamang ang gumagawa ng hub + runtime gating na interoperable",
+        "task": {
+          "who": "SGLang security maintainer + Jinja2 upstream + GGUF spec / llama.cpp contributors",
+          "what": "maglathala ng patched releases + safe-template contract + coordinated CVE advisories",
+          "where": "SGLang GitHub + Jinja2 upstream + GGUF spec discussions + CVE / GHSA channels",
+          "when": "Abril 2026 hanggang Q3 2026",
+          "why": "kung walang upstream contract, ang hub at runtime gates ay magkakahiwalay at hindi maaabot ang variants",
+          "how": "patched releases + sandboxed-environment defaults + spec note + GHSA advisory"
+        }
+      }
+    ],
+    "prediction.af6de8a1d9fd7731": [
+      {
+        "actor": "hyperscaler-frontier-lab strategic alliance lead (AWS/Anthropic, Microsoft/OpenAI, Oracle/xAI)",
+        "job": "Mag-negotiate at mag-execute ng multi-year hardware-codesigned exclusive cloud-compute commitments na nagpapares ng isang hyperscaler sa isang frontier lab.",
+        "outcome": "Public 8-K-grade announcement ng 10-year multi-billion-dollar capacity-and-silicon contract na nag-lo-lock sa lab sa accelerator family ng hyperscaler na iyon.",
+        "motivation": "Ang first-mover lock-in ng lab-cloud-chip pole ay sumisiguro ng decade-scale training-revenue at accelerator-utilization moats laban sa rival pairings.",
+        "task": {
+          "who": "hyperscaler corp-dev + AI-platform GM + lab CFO/COO + outside counsel",
+          "what": "i-draft at pirmahan ang multi-year capacity-plus-silicon-codesign exclusivity contract",
+          "where": "joint corp-dev sessions + earnings-call disclosure + 8-K filing",
+          "when": "Mayo 2026 hanggang H1 2027",
+          "why": "i-lock in ang lab-cloud-chip pole bago tumalo ang rival hyperscaler sa capacity",
+          "how": "Trainium/MAIA/TPU/MI300X capacity allocation + revenue-share + co-engineering MOU"
+        }
+      },
+      {
+        "actor": "runtime-agnostic backend portability maintainer (MCP / LangChain / LiteLLM / vLLM agent-framework)",
+        "job": "Mag-ship ng stable cross-vendor model-and-tool-invocation abstraction na nagpapahintulot sa apps na mag-swap sa pagitan ng AWS-Anthropic, MS-OpenAI, Google-Gemini, xAI-Oracle backends nang walang code rewrites.",
+        "outcome": "1.0-grade portability spec + reference adapters na sumasaklaw sa lahat ng 5 poles, na inampon ng ≥2 enterprise framework vendors.",
+        "motivation": "Ang pagiging default portability layer ay sumasakop sa developer-mindshare slot bago mag-bundle ng proprietary equivalent ang anumang isang hyperscaler.",
+        "task": {
+          "who": "open-source maintainers + protocol working group + adapter contributors",
+          "what": "patatagin ang protocol spec at i-ship ang per-pole adapters na may parity test suite",
+          "where": "GitHub spec repo + reference-implementation SDKs + IETF/OpenSSF working group",
+          "when": "Mayo 2026 hanggang Q1 2027",
+          "why": "ang developers na muling tumatasa ng portability ay nangangailangan ng credible vendor-neutral target",
+          "how": "MCP-style JSON-RPC contract + per-vendor adapter SDKs + conformance tests"
+        }
+      },
+      {
+        "actor": "frontier-lab BD/strategy lead (Anthropic, OpenAI, xAI, Meta, Google DeepMind)",
+        "job": "Pumili at mag-commit sa isang hyperscaler-and-silicon partner para sa susunod na training generation at i-istruktura ang long-horizon capacity book-build nang naaayon.",
+        "outcome": "Signed multi-year capacity contract kasama ang public roadmap na nagdedeklara sa napiling accelerator family bilang primary training target ng lab.",
+        "motivation": "Ang pag-secure ng co-designed silicon sa multi-GW scale ay ang tanging viable path upang pondohan ang frontier-cluster economics sa ilalim ng kasalukuyang training-cost curves.",
+        "task": {
+          "who": "lab BD/strategy + research-infra lead + finance + CEO office",
+          "what": "piliin ang hyperscaler-silicon partner at i-commit ang training roadmap sa accelerator na iyon",
+          "where": "internal infra-strategy review + partner JBP + joint press release",
+          "when": "Mayo 2026 hanggang H1 2027",
+          "why": "ang frontier training economics ay pumipilit ng consolidation papasok sa isang codesigned silicon line",
+          "how": "multi-GW Trainium/TPU/MAIA/MI300X allocation + co-engineering staffing + capex covenant"
+        }
+      }
+    ],
+    "prediction.b60e425d646be753": [
+      {
+        "actor": "frontier-lab product strategy lead sa closed-weight pivots (Alibaba Qwen team, Anthropic Mythos / Claude release management, OpenAI flagship-tier release leads)",
+        "job": "i-lock down ang release policy upang ang susunod na frontier-tier model ay mag-ship na API-only sa likod ng staged gating, na walang open-weight checkpoint, hanggang Q3 2026",
+        "outcome": "public model card + access policy na malinaw na nagsasaad ng API-only / staged-preview gating na walang downloadable weights para sa top-of-stack model tier",
+        "motivation": "ang frontier-tier compute at safety-evaluation overhead ay ginagawang uneconomic at reputationally risky ang open-weight release sa sandaling hatulan ang model bilang class-leading",
+        "task": {
+          "who": "model-release product lead + safety / RSP committee + commercial-licensing team + DevRel access-program owners",
+          "what": "i-finalize ang API-only release policy + staged-preview gating tiers para sa susunod na flagship checkpoint",
+          "where": "internal release-readiness reviews + model-card drafts + access-policy docs na inilathala kasama ng launch",
+          "when": "Q2 2026 hanggang Q3 2026",
+          "why": "panatilihin ang commercial moat + tugunan ang RSP / safety commitments nang walang open-weight escape hatch",
+          "how": "tiered API access program + waitlist gating + staged preview cohorts + published acceptable-use policy"
+        }
+      },
+      {
+        "actor": "open-weight ecosystem maintainer (Meta Llama team, Alibaba Qwen open-weight line, mid-tier open-weight lab na naglalathala ng 35B-A3B / Bonsai-class checkpoints)",
+        "job": "mag-ship at mag-maintain ng 35B-A3B / Bonsai / Llama production-tier open-weight cadence bilang canonical 'local for utility' option hanggang Q3 2026",
+        "outcome": "publicly released open-weight checkpoints sa ~35B-A3B class na may permissive licenses + reference inference recipes na nagpoposisyon sa kanila para sa on-device at self-hosted production use",
+        "motivation": "ang ecosystem leverage, developer mindshare, at downstream-fine-tune flywheel ay lahat pumapabor sa pagpapanatili ng production-tier open-weight beachhead kahit na nagsasara ang frontier",
+        "task": {
+          "who": "open-weight model-release engineering team + post-training research leads + license / policy team + community-relations / DevRel",
+          "what": "maglathala ng 35B-A3B / Bonsai-class open-weight checkpoints + license terms + inference reference stack",
+          "where": "Hugging Face model repo + lab GitHub + lab blog + community channels (Discord, X, dev forums)",
+          "when": "Q2 2026 hanggang Q3 2026 (rolling cadence)",
+          "why": "i-anchor ang 'local for utility' tier upang ang open ecosystem ay magkaroon ng credible production-grade default",
+          "how": "weight release + tokenizer + eval suite + reference fine-tune scripts + permissive license"
+        }
+      },
+      {
+        "actor": "enterprise AI buyer-side architect na nagdedesisyon sa closed-vs-open deployment split (CTO / head of AI platform sa malalaking enterprises at GSIs na pumipili kung saan tumatakbo ang bawat workload)",
+        "job": "maglathala o mag-ratify ng internal closed-frontier-vs-open-utility deployment policy na nag-cocodify ng cloud frontier API para sa pinakamahihirap na workloads + 35B-A3B-class local / self-hosted para sa lahat ng iba pa, hanggang Q3 2026",
+        "outcome": "internal architecture standard + vendor selection memo na nag-fo-formalize ng 'cloud API para sa frontier, self-hosted open-weight ~35B-A3B para sa utility' bilang default deployment shape",
+        "motivation": "ang cost control, data-residency / sovereignty constraints, at latency budgets ay pumipilit ng written split sa halip na ad-hoc model selection bawat project",
+        "task": {
+          "who": "enterprise AI platform architect + procurement / vendor-management lead + security + data-governance reviewers",
+          "what": "i-codify ang deployment-tier policy na nagma-map ng workloads sa closed-frontier API vs open-weight self-hosted",
+          "where": "internal architecture-review board + vendor-management memos + platform-team RFC docs",
+          "when": "Q2 2026 hanggang Q3 2026",
+          "why": "ang frontier API-only pivot + mature ~35B-A3B open tier ay ginagawa ang split na deployable at auditable",
+          "how": "architecture decision record + reference deployment patterns + approved-vendor list + cost / latency benchmarks"
+        }
+      }
+    ]
+  }
+}

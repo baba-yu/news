@@ -3,12 +3,12 @@
   "validation_rows": [
     {
       "prediction_ref": {
-        "id": "prediction.040dfa70f677882e",
+        "id": "prediction.082b0a07077870dd",
         "short_label": "GGUF supply chains as new battleground; HF/Ollama/ModelScope require chat_template signature verification; SSTI scanning by default at GGUF load time",
         "prediction_date": "2026-04-21"
       },
-      "today_relevance": 4,
-      "evidence_summary": "5",
+      "today_relevance": 5,
+      "evidence_summary": "SGLang CVE-2026-5760 (CVSS 9.8、GGUF 経由の Jinja2 SSTI) は 4/28 時点でも未パッチであり、上流の `ImmutableSandboxedEnvironment` 緩和は入っていない。一方で公開 PoC は引き続き出回っており、4/27 の AWS Bedrock AgentCore + Claude Cowork のランディングは、ロードされた GGUF アーティファクトがスケールで実行される表面を一段と広げている。",
       "reference_links": [
         {
           "label": "Feedly - CVE-2026-5760",
@@ -16,20 +16,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 5",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "because",
+        "narrative": "SGLang の GGUF 由来の Jinja2 SSTI が公開後 10 日以上にわたって悪用可能なままであることは、予測の前提 — モデルファイルは実行可能なキャリアである — を今週の作動的欠陥とし、chat-template 検証をベースラインとする構造的原因を硬化させている。",
+        "coherence": 5,
+        "remaining_gap": "Hugging Face、Ollama、ModelScope はいまだ署名検証またはサンドボックス実行のロードマップを発表しておらず、ランディング側のアーティファクトは保留のままだ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.c2fc10ceb20acb69",
-        "short_label": "Era of exclusive hyperscaler×frontier-lab alliance — 5-pole regime locks in (Google–Gemini, Anthropic–AWS, OpenAI–MS, Meta–internal, xAI–Oracle/NVDA); backend portability becomes hard requirement",
+        "id": "prediction.af6de8a1d9fd7731",
+        "short_label": "Era of exclusive hyperscaler×frontier-lab alliance — 5-pole regime locks in (Google-Gemini, Anthropic-AWS, OpenAI-MS, Meta-internal, xAI-Oracle/NVDA); backend portability becomes hard requirement",
         "prediction_date": "2026-04-21"
       },
-      "today_relevance": 4,
-      "evidence_summary": "4",
+      "today_relevance": 5,
+      "evidence_summary": "4/27 の Microsoft / OpenAI 書き換えが AGI 条項を葬り、OpenAI を AWS ($38B / $50B のヘッドルーム) + Oracle + Google へクリアする一方、Anthropic は AWS Trainium / Graviton のシリコンレベル協同エンジニアリングへと深化し、Meta は数千万コアの Graviton をデプロイしている — 5 極体制はクリーンな排他性ブロックではなく、シリコン結合型のアライアンスとして再キャストされている。",
       "reference_links": [
         {
           "label": "Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause",
@@ -41,20 +41,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 4",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "given",
+        "narrative": "AWS-Anthropic がシリコン協同エンジニアリングまで降りていき、OpenAI がマルチクラウド配信を獲得することは、5 極テーゼが前提とする構造的力を鋭くする — ライセンス層での排他性が緩んでもなお、ハードウェア協同設計のアライアンスは束縛軸であり続けるため、バックエンドのポータビリティは一層厳しい要件となる。",
+        "coherence": 4,
+        "remaining_gap": "OpenAI の新たなマルチクラウド到達範囲は、排他性のフレーミングを部分的に切り崩している。5 極体制を完全に結晶化させるには、新鮮な xAI-Oracle / NVDA もしくは Meta 内製キャパシティのデータポイントが必要だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.f9909660d43b556e",
+        "id": "prediction.b60e425d646be753",
         "short_label": "Proprietary re-expansion vs open-weight geopolitical split — strongest model = closed weights by Q3 2026",
         "prediction_date": "2026-04-21"
       },
       "today_relevance": 3,
-      "evidence_summary": "2",
+      "evidence_summary": "Qwen3.6-Max-Preview は API 限定のポジショニングを保ち、Anthropic の Mythos プレビューは Project Glasswing パートナーへのゲーティングを継続する。一方で DeepSeek V4-Pro / V4-Flash は 100 万トークンあたり $1.74 / $3.48 の Hybrid Attention 価格で牽引を続け、中国側のオープン階層回廊を維持している。",
       "reference_links": [
         {
           "label": "Qwen.ai - Qwen3.6-Max-Preview",
@@ -62,20 +62,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 2",
+        "support_dimension": "given",
+        "narrative": "Qwen3.6-Max-Preview の API 限定スタンスと Mythos のゲーティングが、DeepSeek V4 のオープンウェイト価格攻勢に対して維持されることで、地政学的分断構造はそのまま保たれる — 西側のフラッグシップは独自アクセスをさらに引き締め、中国のオープン階層は広がっていく。",
         "coherence": 3,
-        "remaining_gap": "n/a"
+        "remaining_gap": "今ウィンドウでは新たなクローズドウェイト フラッグシップのゲーティング イベントは無く、独自側もロックステップで動いていることを確証するには、新規の Anthropic / OpenAI アクセス制限の発表が必要だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.d59dcfbd5434f670",
+        "id": "prediction.36f4ab773b39713e",
         "short_label": "Training-vs-inference SKU split as standard for custom AI silicon (Trainium/Inferentia, TPU 8t/8i, MAIA, MTIA)",
         "prediction_date": "2026-04-22"
       },
       "today_relevance": 3,
-      "evidence_summary": "4",
+      "evidence_summary": "4/27 の Anthropic-AWS 深化は、最先端の Anthropic モデルのトレーニングを Annapurna Labs とのシリコンレベル協同エンジニアリングのもと Trainium と Graviton CPU にコミットする。Meta は別途、エージェンティック AI の CPU ワークロード向けに数千万コアの Graviton をデプロイしている — シリコンの専門化は深化しているが、今ウィンドウでは MAIA / MTIA のデュアルトラック開示は無い。",
       "reference_links": [
         {
           "label": "AWS Blog - AWS Weekly Roundup Apr 27",
@@ -83,20 +83,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 4",
+        "support_dimension": "given",
+        "narrative": "AWS がトレーニングに Trainium、CPU 重めのエージェンティック ワークロードに Graviton を二重に賭けていくことは、予測が指す構造的力を補強する — ハイパースケーラの自社シリコンが差別化レイヤーであり、ワークロード特化型 SKU が次第にその作動的形状となっている。",
         "coherence": 3,
-        "remaining_gap": "n/a"
+        "remaining_gap": "Microsoft MAIA と Meta MTIA はいまだ TPU 8t / 8i を反映する明示的なデュアルトラック SKU 分割を開示しておらず、コホートの動きは未完了だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.64333039ebd8d852",
+        "id": "prediction.8b1d0c5ea8a8550e",
         "short_label": "Physical AI as SaaS / Robot-as-a-Service infrastructure race",
         "prediction_date": "2026-04-22"
       },
       "today_relevance": 3,
-      "evidence_summary": "3",
+      "evidence_summary": "Figure AI は Figure 03 の月次出荷を 240 台へとスケールさせ (2 月 60 -> 3 月 120 -> 4 月 240)、90 分のビルド ケイデンスと $39B の評価額、年 12,000+ 台へ向かう BotQ スケーリングを伴う。一方 Tesla は Fremont 量産に先立ち Optimus V3 のお披露目を 7 月下旬にステージしている — 量産ライン ケイデンスが今や支配的なフレームだ。",
       "reference_links": [
         {
           "label": "There's a Robot for That - Figure 03 Shipments Doubling",
@@ -104,20 +104,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 3",
+        "support_dimension": "given",
+        "narrative": "Figure 03 の倍増ケイデンスと Tesla Optimus V3 のステージングは、テーゼの商品化圧力側を前進させる — 単位ボリュームが着地すれば、フリート管理ソフトウェアこそが予測の支配を見込む反復売上レイヤーとなる。",
         "coherence": 3,
-        "remaining_gap": "n/a"
+        "remaining_gap": "ロボット 1 台あたりのクラウド計算価格に関する明示的開示はまだ表面化しておらず、キャリア側の SaaS 売上ラインは依然として欠けているデータポイントだ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.e27ad1a419dff8a0",
+        "id": "prediction.c850d46b059e600c",
         "short_label": "OAuth trust between AI SaaS becomes top enterprise risk; SSO providers carve out \"AI extension\" scope category",
         "prediction_date": "2026-04-22"
       },
       "today_relevance": 3,
-      "evidence_summary": "2",
+      "evidence_summary": "Okta for AI Agents の GA は 2 日後 (4/30) に着地し、Agent Discovery、中央 MCP コントロール プレーンとしての Agent Gateway、仮想 MCP サーバ レジストリ、認証情報の保管庫化 + 自動ローテーション、ユニバーサル ログアウトを搭載する。一方 Salt Security のデータは引き続き、組織の 48.9% がエージェント トラフィックを監視できないとフラグしている。",
       "reference_links": [
         {
           "label": "Airia - AI Security in 2026",
@@ -125,20 +125,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 2",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "so_that",
+        "narrative": "Okta の差し迫った AI-Agents GA が専用の Agent Gateway と仮想 MCP レジストリを伴うことは、予測が見込んだ作動的なスコープ切り出しそのものだ — 帰結側はテーゼが定めたタイムラインで実体化しつつある。",
+        "coherence": 4,
+        "remaining_gap": "Entra ID と Google Workspace はいまだ類似の AI 拡張スコープ カテゴリを出荷していない。これが業界パターンになるには既存大手の追随が必要だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.2dbc1117b7df0c1d",
+        "id": "prediction.99f1f0a5202acdbb",
         "short_label": "\"Agent Control Plane\" as new hyperscaler battleground (Google Gemini Enterprise Agent Platform, AWS AgentCore, OpenAI Workspace Agents)",
         "prediction_date": "2026-04-23"
       },
       "today_relevance": 4,
-      "evidence_summary": "5",
+      "evidence_summary": "AWS Bedrock AgentCore CLI は 14 リージョン GA に到達し、Managed Harness はセッション中のモデル スワップとセッション単位の microVM を伴う 4 リージョン プレビュー、Claude Cowork は AWS 常駐データのまま Bedrock 内部で着地、Skills は Kiro Power 上でライブ、そして Multica v0.2.16 はクラウド プラットフォームと並列するベンダー中立の管理エージェント オーケストレータを出荷している。",
       "reference_links": [
         {
           "label": "AWS ML Blog - Running Claude Cowork in Amazon Bedrock",
@@ -150,20 +150,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 5",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "so_that",
+        "narrative": "AgentCore CLI / Managed Harness の拡大に Bedrock 内部の Claude Cowork、そして Multica のベンダー中立オーケストレータが加わることで、予測が指すエージェント コントロール プレーンの形状へと収束している — 帰結側はハイパースケーラとオープン層の両方で同じウィンドウ内に実体化しつつある。",
+        "coherence": 4,
+        "remaining_gap": "Microsoft Entra ID は人間およびサービス アカウントと同等のファーストクラス SSO オブジェクトとしてエージェント識別子を昇格させていない。SSO 主張の 3 本目の脚は依然保留だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.2b92e7a6fd109d55",
+        "id": "prediction.bcace95fe3e753d1",
         "short_label": "27B Dense + 1M context as de-facto standard enterprise local-LLM in H2 2026",
         "prediction_date": "2026-04-23"
       },
       "today_relevance": 3,
-      "evidence_summary": "3",
+      "evidence_summary": "Qwen3.6-Max-Preview は 260K トークン コンテキストで SWE-bench Pro / SkillsBench / SciCode のトップ スコアを保持し、密 27B / 262K -> 1M バリアントとともにより広い Qwen3.6 ファミリを定礎する。一方 DeepSeek V4-Flash (284B / 13B アクティブ、1M コンテキスト) はオープンの中位層回廊を引き続き広げている。",
       "reference_links": [
         {
           "label": "Felloai - DeepSeek V4 Released",
@@ -175,20 +175,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 3",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "because",
+        "narrative": "RTX 4090 1 枚で動く Qwen3.6-27B 密 + 1M コンテキストは今や、トップに Qwen3.6-Max-Preview、オープン中位層に DeepSeek V4-Flash で挟まれている — 27B 密 × 1M を標準とする根底前提は固まっている。",
+        "coherence": 4,
+        "remaining_gap": "Mistral、Meta、DeepSeek、Google Gemma はいまだ姉妹となる 20-30B 密 × 1M の Apache / Llama 系モデルを出荷していない。パッケージを標準化させるコホートの動きは未完了だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.99b723923602f379",
+        "id": "prediction.5acccd6cae1f9b03",
         "short_label": "AI agent security extends to third-party-vendor boundary + URL-naming entropy (post-Mythos contractor incident)",
         "prediction_date": "2026-04-23"
       },
       "today_relevance": 3,
-      "evidence_summary": "1",
+      "evidence_summary": "Anthropic のリリース ノートは 4/26-28 の Mythos プレビューを Project Glasswing パートナーへのゲーティングのまま持ち越しており、それ以前の Mythos コントラクター + URL パターン リーク ナラティブは、より広い 4/27 のパートナーシップ再アーキテクチャ報道を通じて公衆の目に留まり続けている。",
       "reference_links": [
         {
           "label": "Anthropic Release Notes - Apr 2026",
@@ -196,20 +196,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 1",
+        "support_dimension": "because",
+        "narrative": "Mythos が厳選パートナー名簿へのゲーティングを保つことで、テーゼが想定したとおりに第三者ベンダー境界の障害モードが可視のままとなり、実務者側のナラティブが原因側の圧力を補強し続ける — 救済フレームワークはまだ出荷されていないが。",
         "coherence": 3,
-        "remaining_gap": "n/a"
+        "remaining_gap": "今ウィンドウではフロンティアラボのアクセス制御ポリシー更新も Frontier Model Forum のベースラインも発表されていない — 原因は声高だが、救済は静かなままだ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.60e13dd2a042aa5d",
+        "id": "prediction.23c160efd9baa194",
         "short_label": "1M context as default open-weight era arrives by Q3 2026; vector DBs forced to redefine as long-context cache layers",
         "prediction_date": "2026-04-24"
       },
       "today_relevance": 4,
-      "evidence_summary": "3",
+      "evidence_summary": "DeepSeek V4-Pro (1.6T MoE / 49B アクティブ) と V4-Flash (284B / 13B アクティブ) は、1M コンテキストの計算量を V3.2 比で 27% / 10% に削減する Hybrid Attention とともに 1M コンテキストへ持ち越されている。Anthropic Opus 4.7 は独自側のアンカーとして Bedrock 上の 1M コンテキストを継続している。",
       "reference_links": [
         {
           "label": "Felloai - DeepSeek V4",
@@ -217,20 +217,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 3",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "because",
+        "narrative": "DeepSeek V4 のはじめから組み込まれた 1M コンテキスト計算経済学と Bedrock 上の Opus 4.7 の 1M 上限は、ネイティブ 1M がオープン側と独自側の両表面でアドオン拡張ではなく床になっているという根底前提を補強する。",
+        "coherence": 4,
+        "remaining_gap": "ベクトル DB ベンダーはいまだ長文コンテキスト キャッシュ層として公にリポジショニングしておらず、テーゼの RAG-flip 側はまだ可視ではない。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.65d7e1483ef707d1",
+        "id": "prediction.6f0a6061c079c28e",
         "short_label": "Physical-AI 8-hour production runs as enterprise procurement requirement in H2 2026",
         "prediction_date": "2026-04-24"
       },
       "today_relevance": 3,
-      "evidence_summary": "3",
+      "evidence_summary": "Figure AI は Figure 03 の月次出荷を 90 分ビルド ケイデンスで 240 台へスケールさせ、30,000+ 台の車両を支える BMW Spartanburg パイロットを継続している。Tesla Optimus V3 のお披露目は 7 月下旬にステージされ、Texas 拡張から年最大 1,000 万台を狙う Fremont 量産がそれに続く。",
       "reference_links": [
         {
           "label": "RoboHorizon - Figure AI Now Builds a Humanoid Every 90 Minutes",
@@ -238,20 +238,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 3",
+        "support_dimension": "given",
+        "narrative": "Figure 03 の S 字曲線ケイデンスと Tesla の Optimus V3 ステージングは、デモから量産へという業界シフトを継続させ、H2 2026 RFP サイクルに先立って調達テーゼに必要な構造的力をフレーミングする。",
         "coherence": 3,
-        "remaining_gap": "n/a"
+        "remaining_gap": "大手メーカーの RFP はいまだ 24 時間連続稼働、1 週間の MTBF、90% 以上の自律完了といった項目を拘束的なカットに織り込んでいない — 調達テンプレートのリークが欠けているアーティファクトだ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.adbb9feea5ce415a",
+        "id": "prediction.11c2c648527fe212",
         "short_label": "Capital markets reset valuation of AI-agent-displaced enterprise SaaS inside Q2 2026",
         "prediction_date": "2026-04-24"
       },
       "today_relevance": 3,
-      "evidence_summary": "2",
+      "evidence_summary": "Mag 7 スーパーウィーク 4/28-30 と 4/28-29 FOMC が同じ 48 時間のテープへと崩れ込み、合算 2026 capex は約 $700B、S&P 500 は 4/27 に過去最高 7,173.91 で引け、Motley Fool の 4/28 記事は 2026 年最大の AI 株カタリストとしてそれをフレーミングする — ウォール街の AI コスト削減 vs 置換軸が支配的なナラティブだ。",
       "reference_links": [
         {
           "label": "Motley Fool - Why This Week Could Be Huge For AI Stocks",
@@ -259,20 +259,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 2",
+        "support_dimension": "landing",
+        "narrative": "Mag 7 決算と FOMC が同じテープに衝突し、実務者プレスが 2026 年の AI 株カタリストとしてフレーミングすることは、予測が定めた Q2 リセット ウィンドウとぴたり並ぶ — ランディング スロットは今や作動的なテープだ。",
         "coherence": 3,
-        "remaining_gap": "n/a"
+        "remaining_gap": "Workday、Atlassian、Box、Smartsheet の新たな 15%+ 下落はまだ刷られておらず、置換 SaaS コホートの次の名前のカスケードは依然保留だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.4280fe61357af92a",
+        "id": "prediction.81d3055dbb24f016",
         "short_label": "Frontier AI lab × Tier-1 cloud capacity capture splits field cleanly by Q3 2026 — training oligopoly = 3 clouds, inference = layered",
         "prediction_date": "2026-04-25"
       },
       "today_relevance": 5,
-      "evidence_summary": "5",
+      "evidence_summary": "4/27 の Microsoft / OpenAI 書き換えは OpenAI の全製品ラインを AWS ($38B + $50B のヘッドルーム)、Oracle、Google へクリアし、AWS は Anthropic を Trainium / Graviton のシリコン協同エンジニアリングまで深化させ、Bedrock 内部に Claude Cowork を着地させた — フロンティアラボ × Tier-1 のキャパシティ捕捉は今や三大手を横断してシリコン結合している。",
       "reference_links": [
         {
           "label": "Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause",
@@ -284,20 +284,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 5",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "given",
+        "narrative": "OpenAI が AWS にクリアされ、Anthropic が Trainium / Graviton でシリコン協同エンジニアリングまで降りていくことは、予測が依拠する構造的力を鋭くする — キャパシティ捕捉は 3 クラウドのトレーニング寡占へと硬化しており、推論はフィールドの残りの上でより広く層化する。",
+        "coherence": 5,
+        "remaining_gap": "Oracle Cloud、IBM、Coreweave はいまだ推論専門のスペシャリストとして公にリポジショニングしておらず、二層形状を確定させる落伍側の確認が欠けている。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.746214b846ea0927",
+        "id": "prediction.70ad45e258b72e8c",
         "short_label": "Physical AI production-line records become league tables at IROS / GTC 2026 H2",
         "prediction_date": "2026-04-25"
       },
       "today_relevance": 3,
-      "evidence_summary": "3",
+      "evidence_summary": "Figure 03 の月次出荷 240 台への倍増と BMW Spartanburg デプロイ、Boston Dynamics の Atlas Hyundai-RMAC 生産ケイデンス、Tesla Optimus V3 の年央ステージングが、4/26-28 を通じて生産ラインの記録を支配的なナラティブとして保ち続ける — IROS / GTC がランク付けすることになるリーグテーブル入力だ。",
       "reference_links": [
         {
           "label": "There's a Robot for That - Figure 03 Shipments Doubling",
@@ -305,20 +305,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 3",
+        "support_dimension": "because",
+        "narrative": "Figure 03 の S 字曲線に Atlas + Optimus のデプロイ ケイデンスを加えたものは、まさに予測が IROS / GTC リーグテーブルへの供給を見込む OEM 採用の生産記録そのものだ — 根底の経験的パイプラインは予定通り埋まっている。",
         "coherence": 3,
-        "remaining_gap": "n/a"
+        "remaining_gap": "いまだリーグテーブル形式の採用を確認したカンファレンス プログラム委員会は無く、IROS または GTC のトラック発表が欠けているアーティファクトのままだ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.c9f3909a75081417",
+        "id": "prediction.5094f95cbe8376d1",
         "short_label": "MCP-protocol-itself attack surface as biggest enterprise AI adoption bottleneck; OWASP MCP Top 10 by Q3 2026; MCP Gateway / MCP Firewall product wave",
         "prediction_date": "2026-04-25"
       },
-      "today_relevance": 4,
-      "evidence_summary": "4",
+      "today_relevance": 3,
+      "evidence_summary": "SGLang CVE-2026-5760 は 4/28 時点で公開 PoC とともに未パッチのまま; Cisco ISE の認証なし RCE アドバイザリと 4/27-28 の Totolink 4 連発が同じウィンドウに着地; Google + Forcepoint は野生における間接プロンプトインジェクションの前年比 32% 増と 10 件の野生のペイロードを文書化; Okta for AI Agents GA 4/30 は MCP コントロール プレーン リファレンスを出荷する。",
       "reference_links": [
         {
           "label": "Cloud Security Alliance - ATF: Zero Trust for AI Agents",
@@ -326,20 +326,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 4",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "so_that",
+        "narrative": "Okta の差し迫った Agent Gateway GA、未パッチの SGLang エクスプロイト、間接プロンプトインジェクションの蔓延上昇が、引き続き予測が見込んだ帰結形状を構成している — MCP コントロール プレーンとファイアウォール製品はテーゼの予測通りに集積している。",
+        "coherence": 4,
+        "remaining_gap": "OWASP MCP Top 10 はいまだ公表されておらず、メジャー コホート ベンダーからの MCP-over-mTLS / 標準化された OAuth スコープ仕様は依然不在だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.aa25623033ffe634",
+        "id": "prediction.24c0c80f954f5a45",
         "short_label": "Hyperscaler-AI-lab capital coupling graduates from finance pact to compute-stack lock-in by Q3 2026 — multi-frontier-vendor replaces multi-runtime as enterprise strategy",
         "prediction_date": "2026-04-26"
       },
-      "today_relevance": 3,
-      "evidence_summary": "5",
+      "today_relevance": 4,
+      "evidence_summary": "4/27 のパートナーシップ再アーキテクチャは、Anthropic-AWS を Trainium / Graviton のシリコンレベル協同エンジニアリングへと深化させ、AWS 常駐データを伴う Claude Cowork を Bedrock 内部に着地させる; Microsoft / OpenAI 書き換えは収益シェアをカレンダー (2030) でキャップする一方で OpenAI を AWS / Oracle / Google へクリアする — 資本結合の構造は今や計算スタックそのものまで降りていく。",
       "reference_links": [
         {
           "label": "AWS Blog - AWS Weekly Roundup Apr 27",
@@ -351,20 +351,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 5",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "so_that",
+        "narrative": "Anthropic が Trainium 上でトレーニングし Cowork が Bedrock 内部で動くことは、予測が指す計算スタック ロックインの署名そのものだ; その後 OpenAI / Microsoft 書き換えが製品ラインをマルチクラウド配信し、エンタープライズの選定を共有シリコン上のマルチフロンティアベンダーへと再キャストする。",
+        "coherence": 4,
+        "remaining_gap": "DeepSeek V4 と Qwen 3.6-3.7 の Huawei Ascend へのサービング トポロジ連携は今ウィンドウで新鮮な開示が無く、テーゼの中国側の脚は欠けている確認だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.ed23d3c928980bd7",
+        "id": "prediction.678c96beb7ff20f6",
         "short_label": "Inference servers become primitive supply chain — first AI Infra-specific CVE class with NVD tagging by Q3 2026; OWASP LLM Top-10 v2026 promotes Inference Server Template/Loader RCE to top-3",
         "prediction_date": "2026-04-26"
       },
       "today_relevance": 3,
-      "evidence_summary": "5",
+      "evidence_summary": "4/27-28 の Totolink 4 連発 (CVE-2026-7153 / 7154 / 7156 / 7202、いずれも CVSS 9.8、公開 PoC) が、Cisco ISE の認証なし RCE および 4/28 時点でも未パッチの SGLang CVE-2026-5760 と並んで着地する。Google + Forcepoint は 10 件の新鮮な野生の間接プロンプトインジェクション ペイロードを詳述し、OpenAI はプロンプトインジェクションが恒久的であることを公に認めている。",
       "reference_links": [
         {
           "label": "Feedly - CVE-2026-5760",
@@ -376,20 +376,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 5",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "because",
+        "narrative": "未パッチの SGLang RCE に Totolink 4 連発と野生の間接インジェクション ランプが加わることで、予測が指す推論ランタイム + エージェンティック CI のプリミティブを構成し続ける — これがひとつのサプライチェーン カテゴリだという根底前提は今週さらに積み上がっている。",
+        "coherence": 4,
+        "remaining_gap": "NIST / NVD はいまだ AI インフラ スキーマ タグを発表しておらず、SBOM ツール ベンダーは標準 SKU としてエンジン単位の署名フィードを出荷していない — 公式な規制プリミティブは依然保留だ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.0e9a6f29fb4f9c2f",
+        "id": "prediction.82599b6cfd05751b",
         "short_label": "Consumer-GPU coding agent displaces cloud-only coding API for ≥30% of dev workloads by Q3 2026",
         "prediction_date": "2026-04-26"
       },
       "today_relevance": 3,
-      "evidence_summary": "4",
+      "evidence_summary": "PrismML Bonsai-8B は iPhone 17 Pro Max で 44 tok/s、M4 Pro で 131 tok/s、RTX 4090 で 368 tok/s、合計 1.15 GB のファイルで保たれている; Unsloth v0.1.37-beta (4/23) は Qwen3.6 Preserve Thinking、gpt-oss thinking トグル、Studio オーバーホールを着地させる; Multica v0.2.16 は Claude Code / Codex / OpenClaw / OpenCode / Hermes / Gemini / Pi / Cursor を横断するベンダー中立の管理エージェント オーケストレータを出荷する。",
       "reference_links": [
         {
           "label": "PrismML - Bonsai 8B repo / model card",
@@ -405,20 +405,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 4",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "given",
+        "narrative": "Bonsai-8B のオンデバイス スループット、Unsloth のコンシューマ GPU ファインチューニング成熟、Multica のベンダー中立オーケストレーションはいずれも、置換テーゼが依拠する構造的条件を補強する — ローカル スタックは予測が見込んだ同じウィンドウで硬化している。",
+        "coherence": 4,
+        "remaining_gap": "Cursor、Windsurf、Kiro Power はいまだローカルファースト デフォルトのトグルを切り替えておらず、Big-3 IDE がローカルにデフォルトするまで「30% 以上のワークロード シェア」主張は動き出していない。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.ba167b978dd2901f",
+        "id": "prediction.3a5f7303d1a57312",
         "short_label": "Mag 7 Q1 earnings (Apr 29-30) reset AI-capex ROI narrative — Q3 2026 first hyperscaler publicly tiers AI capex by token-margin gate",
         "prediction_date": "2026-04-27"
       },
-      "today_relevance": 4,
-      "evidence_summary": "5",
+      "today_relevance": 5,
+      "evidence_summary": "Microsoft / Alphabet / Amazon / Meta は 4/29 の引け後、Apple は 4/30 に決算を刷り、FOMC は同ウィンドウで金利を 3.50-3.75% で据え置き (Powell の最後の会合)、テーブルには合算 2026 年 capex 約 $700B が乗っている; 4/27 の OpenAI / Microsoft 書き換えに Anthropic-AWS Trainium のシリコンレベル ディールが加わって新ドクトリンを定礎する。",
       "reference_links": [
         {
           "label": "Heygotrade - Mag 7 Earnings 2026",
@@ -430,20 +430,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 5",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "landing",
+        "narrative": "FOMC と Mag 7 決算が同じ 48 時間のテープに衝突し、テーブルに約 $700B の capex が乗ることは、予測が定めたランディング ウィンドウだ; 4/27 の契約再構築が、テーゼが見込んだ圧力解放のフレーミングとトークン単位マージン開示のセットアップを与える。",
+        "coherence": 5,
+        "remaining_gap": "Big-3 ハイパースケーラはいまだ明示的なトークン単位マージン下限を読み上げておらず、拘束的な開示言語は依然として実際のコール コメンタリーと 10-Q 脚注を待っている。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.de4a26b56939844d",
+        "id": "prediction.7db9cba24cef0f48",
         "short_label": "AI-Infra CVE class graduates into regulatory primitive — Q4 2026 CISA/NIST publish sub-catalog for inference-server + agentic-CI runtimes",
         "prediction_date": "2026-04-27"
       },
       "today_relevance": 4,
-      "evidence_summary": "4",
+      "evidence_summary": "4/28 時点の CISA KEV カタログは 4/24 の 4 件バッチ (Samsung MagicINFO 9、SimpleHelp x2、D-Link DIR-823X) と Microsoft Defender CVE-2026-33825 (4/22) を保持; SGLang CVE-2026-5760 は未パッチのまま; 4/27-28 の Totolink 4 連発と Cisco ISE の認証なし RCE がウィンドウ内に着地; Google / Forcepoint は野生における間接プロンプトインジェクションの前年比 32% 増を文書化する。",
       "reference_links": [
         {
           "label": "The Hacker News - CISA Adds 4 Exploited Flaws to KEV",
@@ -455,20 +455,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 4",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "support_dimension": "because",
+        "narrative": "未パッチの SGLang RCE に Totolink 4 連発、Cisco ISE アドバイザリ、間接インジェクション蔓延の上昇が加わって積み上がり続けることは、予測が既存の KEV パイプラインから分離した専用サブカタログを強要すると見込む根底原因のプリミティブそのものだ。",
+        "coherence": 4,
+        "remaining_gap": "CISA / NIST はいまだ AI インフラ サブカタログ向けのドラフト タクソノミーや SBOM タグ スキーマを公表しておらず、公式アーティファクトが欠けているランディング ピースだ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.865d51241c656c8a",
+        "id": "prediction.b83721f72876a218",
         "short_label": "Public-opinion blowback converts to binding agent-governance — at least one US state ships \"Statutory Identity for Autonomous Agents\" Act by Q3 2026",
         "prediction_date": "2026-04-27"
       },
-      "today_relevance": 4,
-      "evidence_summary": "3",
+      "today_relevance": 2,
+      "evidence_summary": "Okta for AI Agents GA は 2 日後 (4/30)、Agent Discovery、Agent Gateway、仮想 MCP サーバ レジストリ、認証情報の保管庫化 + 自動ローテーション、ユニバーサル ログアウトを出荷する — 州法令が引用するリファレンス テンプレートだ; ベンダー横断のゼロトラスト for エージェント フレーミングは RSAC 2026 から持ち越されているが、ウィンドウ内には新鮮な州議会提出は無い。",
       "reference_links": [
         {
           "label": "Cloud Security Alliance - ATF: Zero Trust for AI Agents",
@@ -480,20 +480,20 @@
         }
       ],
       "bridge": {
-        "support_dimension": "none",
-        "narrative": "Today's evidence: 3",
+        "support_dimension": "because",
+        "narrative": "Okta の差し迫った GA は、予測が州法令が引用すると見込むリファレンス実装を安定化させ、より広いゼロトラスト for エージェントの合意が立法者への根底原因の圧力を可視に保つ — 原因側はロードしているが、立法アーティファクトはまだ先だ。",
         "coherence": 3,
-        "remaining_gap": "n/a"
+        "remaining_gap": "今ウィンドウで CA、NY、TX の法令提出は表面化しておらず、拘束力のあるルールそのものが欠けているランディング アーティファクトだ。"
       }
     },
     {
       "prediction_ref": {
-        "id": "prediction.5b5f84edd825b7ae",
+        "id": "prediction.4bbf8ec79bafedd1",
         "short_label": "Headless Everything architecture standardizes (dormant pool, ID 20260420-3)",
         "prediction_date": "2026-04-20"
       },
       "today_relevance": 1,
-      "evidence_summary": "1",
+      "evidence_summary": "Simon Willison の 4/27 AGI 条項史エントリ、4/27 VibeVoice 取り上げ、4/28 talkie-1930 紹介はいずれも彼のアーカイブに着地している — 実務者側の取り上げは続いているが、ウィンドウ内には新たな headless-preferred メタデータ標準や MCP / Agent Registry サーフェスの変更は出ていない。",
       "reference_links": [
         {
           "label": "Simon Willison - Tracking the history of the now-deceased OpenAI Microsoft AGI clause",
@@ -510,9 +510,9 @@
       ],
       "bridge": {
         "support_dimension": "none",
-        "narrative": "Today's evidence: 1",
-        "coherence": 3,
-        "remaining_gap": "n/a"
+        "narrative": "Willison の 4/27-28 のエントリはパートナーシップ史と OSS 音声 / ヴィンテージ モデルを取り上げているが、予測が指す headless-preferred メタデータ標準には触れていない — 今日のエビデンスのいずれも休眠テーゼを直接動かさない。",
+        "coherence": 1,
+        "remaining_gap": "予測が前進するには、MCP もしくは Agent Registry サーフェスが headless-preferred メタデータ フィールドを露出させること、またはベンダーがアーキテクチャを明示的に標準化することが必要だ。"
       }
     }
   ]
