@@ -1,0 +1,58 @@
+[
+  {
+    "actor": "Hugging Face PEFT maintainer adding router-only adapter as a first-class adapter type alongside LoRA + IA3 + AdaLoRA",
+    "job": "design and ship a router-only adapter class in PEFT — config object, training loop hooks, save/load shape, and default recipe templates for the Llama, Qwen, and Mixtral families — that reproduces the May 8 four-model ablation parity baseline on community hardware tiers.",
+    "outcome": "PEFT release with a documented router-only adapter type, parity-checked default recipes for Llama 4 Behemoth, Qwen3.6-Max, and Mixtral 8x22B, and a published reproduction notebook hitting 71-78% of full-LoRA-on-experts accuracy.",
+    "motivation": "PEFT's franchise depends on staying the canonical adapter library; once Unsloth ships a working recipe and a published parity baseline exists, not adding the adapter type concedes the Mixture-of-Experts tuning workflow to a competitor.",
+    "task": {
+      "who": "PEFT core maintainer team + Transformers integration owner + Hugging Face training-stack reviewer",
+      "what": "land router-only adapter class plus default recipe templates",
+      "where": "huggingface/peft GitHub repo plus integration tests against Transformers",
+      "when": "May 2026 through Q3 2026 release cycle",
+      "why": "match the published parity baseline before competing libraries do",
+      "how": "fork the Unsloth recipe; align config with PEFT adapter API"
+    }
+  },
+  {
+    "actor": "NVIDIA NeMo + Microsoft DeepSpeed + Meta torchtune training-framework engineer adding router-only fine-tuning as a default recipe",
+    "job": "port the router-only adaptation mode into the in-house Mixture-of-Experts training path — config schema, optimizer state sharding, checkpoint format, and a default recipe targeting Llama 4 Behemoth single-node tuning plus Mixtral 8x22B sovereign-cloud customers — and validate against the four-model ablation parity baseline.",
+    "outcome": "Shipped NeMo / DeepSpeed / torchtune release with router-only training as a documented first-class recipe, validated parity numbers within the Unsloth + Hugging Face ablation envelope, and tutorials targeting RTX 6000 Ada workstation and sovereign-cloud single-node tuning.",
+    "motivation": "Framework competitiveness on Mixture-of-Experts tuning is now measured against the Unsloth recipe; on-prem and sovereign-cloud customers asking for single-node Behemoth tuning will defect to whichever stack ships the shortcut first.",
+    "task": {
+      "who": "training-framework engineer + applied-research integrations team + release-validation lead",
+      "what": "land router-only training path plus default recipes for Behemoth-class models",
+      "where": "NeMo, DeepSpeed, and torchtune training stacks plus internal benchmark cluster",
+      "when": "Q2 2026 through Q4 2026 release windows",
+      "why": "hold the Mixture-of-Experts tuning workflow against competing stacks",
+      "how": "router-aware advantage decomposition from the DeepMind preprint; published ablation as the parity target"
+    }
+  },
+  {
+    "actor": "Cerebras CS-4 systems engineer plus product manager turning the engineering-sample announcement into a router-only training reference workload",
+    "job": "harden the router-only Mixture-of-Experts training path on the CS-4 engineering-sample fleet — wafer-scale memory mapping, ultra-long-context Reinforcement Learning kernels, and a reference recipe matching the Unsloth + Hugging Face ablation — so the workload named at May 8 announcement converts into customer-deployable performance numbers and design wins ahead of general availability.",
+    "outcome": "Public CS-4 reference benchmark on router-only Mixture-of-Experts training plus ultra-long-context Reinforcement Learning, shipped customer trial recipes for Behemoth-class and Kimi K2.6 tuning, and a parity claim referenced in pre-GA marketing tied to the published ablation.",
+    "motivation": "Cerebras's positioning against the Nvidia NVL72 / NVL576 cadence rests on owning a workload where wafer-scale beats rack-scale; router-only Mixture-of-Experts training plus long-context Reinforcement Learning is the workload Cerebras explicitly named, and the ablation gives a clean parity target.",
+    "task": {
+      "who": "CS-4 systems engineering + applied research + product marketing + customer-engineering team",
+      "what": "tune router-only training plus long-context Reinforcement Learning kernels on CS-4 silicon",
+      "where": "Cerebras engineering-sample fleet plus customer-trial deployments",
+      "when": "May 2026 through Q4 2026 ahead of general-availability pricing",
+      "why": "convert named target workload into customer-deployable design wins",
+      "how": "router-aware advantage decomposition kernels; published ablation as parity benchmark"
+    }
+  },
+  {
+    "actor": "sovereign-cloud and on-prem RTX 6000 Ada workstation operator running the first production tuning runs of Behemoth-class Mixture-of-Experts models",
+    "job": "stand up the router-only fine-tuning pipeline on owned hardware — single-node RTX 6000 Ada workstations and sovereign-cloud tenant racks — using the Unsloth same-day recipes for Llama 4 Behemoth, Kimi K2.6 on a 96GB workstation, and Mixtral 8x22B, validate the parity numbers against the published ablation, and publish reproduction reports that pull the recipe out of the Unsloth-specific category.",
+    "outcome": "Reproduced parity runs on Behemoth-class and Mixtral models inside the published 71-78% accuracy and 11-16% peak VRAM envelope, internal tuning workflow documented against the recipe, and case-study reports cited by downstream framework maintainers as proof the path is generic.",
+    "motivation": "Sovereign-cloud tenants and workstation-tier operators have no other path to single-node tuning of Behemoth-class Mixture-of-Experts models; the VRAM reduction is the only way to keep the workload on owned hardware instead of renting hyperscaler racks.",
+    "task": {
+      "who": "machine-learning platform engineer + applied research lead + tenant infrastructure owner",
+      "what": "reproduce Behemoth-class router-only tuning runs and publish results",
+      "where": "RTX 6000 Ada workstation tier plus sovereign-cloud tenant racks",
+      "when": "Q2 2026 through Q3 2026 production-tuning window",
+      "why": "single-node tuning of Behemoth-class models needs the VRAM cut",
+      "how": "Unsloth same-day recipes; published ablation as the parity check"
+    }
+  }
+]
