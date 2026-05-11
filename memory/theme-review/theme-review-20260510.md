@@ -107,9 +107,62 @@ The strongest signal-to-noise candidates for new themes (same as 5/5) are the ma
 
 ## Recommended actions
 
-1. **Tighten description on `tech.ai_chip_architecture`** (`type: rename` / `apply_mode: manual`). Carry-forward from 5/5 and 4/27 — the recommendation has now been deferred for three Sundays running. Add **Cerebras IPO, WSE-3, AMD MI355X, AMD AI-accelerator revenue, training-vs-inference SKU split, accelerator-revenue 10-Q segment footnote, GB300 vs Trainium positioning, per-accelerator margin disclosure, hyperscaler custom silicon** terminology. Still the only underused theme in the schema and the 5/10 cycle continues to add Cerebras-IPO / Mag-7-training-vs-inference-SKU / AMD-10-Q-footnote signals that should be primary-attaching here. Test-mode proposal — do not auto-apply.
-2. **Add new theme `tech.ai_macro_capital_markets`** (`type: new` / `apply_mode: manual`). Carry-forward from 5/5. Category: `tech.infrastructure` (closest existing bucket; a dedicated `tech.macro` category remains a separate design discussion per §2.3). Description draft: "Macro and capital-markets dynamics shaping AI: Mag 7 super-week earnings, AI-capex ROI repricing, AI-revenue disclosure rewrite (SEC concept release, OpenAI audited revenue cadence, AMD AI-accelerator 10-Q segment, Microsoft audited monthly AI-business KPIs), Powell-Fed Board institutional-volatility regime, FOMC dissent norm, Cerebras IPO, Apple-buyback collision with $700B AI-capex print, AI-accelerator vendor forward-supply 8-K cadence." Justification: the 5/5 manually-clustered ~ 10-hit cluster is now ~ 10 in this week's pending rows as well; no existing theme cleanly absorbs it. Test-mode proposal — do not auto-apply.
-3. **Add new theme `business.inference_server_supply_chain`** (`type: new` / `apply_mode: manual`). Carry-forward from 5/5. Category: `business.regulation-compliance`. Description draft: "Inference-server supply-chain governance: AI-Infra CVE class as regulatory primitive, indirect prompt injection as top CVE category, GGUF supply-chain integrity gates (signed cards, SSTI scans), OAuth trust between AI SaaS, inference-server SSTI to OWASP LLM Top-10 v2026, agent-skills attack-surface threat sub-matrix, CISA AI-Infra KEV sub-catalog with inference-server SBOM, NIST non-human-identity control profile." Justification: 7 of the pending business-scope rows describe inference-server / supply-chain risk in market / compliance terms; the only existing security theme is tech-scope (`tech.agent_runtime_security`). Adds a business-scope counterpart so the multi-attach saturation on `business.ai_security_compliance_market` (27 children) thins. Test-mode proposal — do not auto-apply.
+1. **Tighten description on `tech.ai_chip_architecture`** (carry-forward from 5/5 and 4/27 — deferred for three Sundays running). Still the only underused theme in the schema; the 5/10 cycle continues to add Cerebras-IPO / Mag-7-training-vs-inference-SKU / AMD-10-Q-footnote signals that should be primary-attaching here.
+
+   ```action
+   {
+     "kind": "rewrite-description",
+     "theme_id": "tech.ai_chip_architecture",
+     "new_description_en": "TPU, Trainium, MAIA, MI300X, Cerebras IPO, WSE-3, AMD MI355X, AMD AI-accelerator revenue, training-vs-inference SKU split, accelerator-revenue 10-Q segment footnote, GB300 vs Trainium positioning, per-accelerator margin disclosure, hyperscaler custom silicon, accelerator-specific model behavior.",
+     "new_description_ja": "TPU、Trainium、MAIA、MI300X、Cerebras IPO、WSE-3、AMD MI355X、AMDのAIアクセラレータ売上、トレーニング/インファレンスSKU分離、10-Qセグメント脚注でのアクセラレータ売上開示、GB300対Trainiumのポジショニング、アクセラレータ単位の利益開示、ハイパースケーラのカスタムシリコン、アクセラレータ固有のモデル挙動。",
+     "new_description_es": "TPU, Trainium, MAIA, MI300X, Cerebras IPO, WSE-3, AMD MI355X, ingresos AMD por aceleradores AI, separación de SKU entrenamiento/inferencia, divulgación 10-Q de ingresos por aceleradores, posicionamiento GB300 vs Trainium, divulgación de margen por acelerador, silicio personalizado de hyperscaler, comportamiento de modelo específico por acelerador.",
+     "new_description_fil": "TPU, Trainium, MAIA, MI300X, Cerebras IPO, WSE-3, AMD MI355X, AMD AI-accelerator revenue, paghahati ng training-vs-inference SKU, accelerator-revenue 10-Q segment footnote, positioning ng GB300 kumpara sa Trainium, per-accelerator margin disclosure, custom silicon ng hyperscaler, accelerator-specific na ugali ng modelo."
+   }
+   ```
+2. **Add new theme `tech.ai_macro_capital_markets`** under `tech.infrastructure` (carry-forward from 5/5). Closest existing bucket; a dedicated `tech.macro` category remains a separate design discussion per §2.3. Justification: the 5/5 manually-clustered ~10-hit cluster is now ~10 in this week's pending rows as well; no existing theme cleanly absorbs it.
+
+   ```action
+   {
+     "kind": "add",
+     "theme_id": "tech.ai_macro_capital_markets",
+     "category_id": "tech.infrastructure",
+     "label_en": "AI Macro & Capital Markets",
+     "short_label_en": "AI Macro",
+     "tooltip_en": "AI Macro & Capital Markets",
+     "description_en": "Macro and capital-markets dynamics shaping AI: Mag 7 super-week earnings, AI-capex ROI repricing, AI-revenue disclosure rewrite (SEC concept release, OpenAI audited revenue cadence, AMD AI-accelerator 10-Q segment, Microsoft audited monthly AI-business KPIs), Powell-Fed Board institutional-volatility regime, FOMC dissent norm, Cerebras IPO, Apple-buyback collision with $700B AI-capex print, AI-accelerator vendor forward-supply 8-K cadence.",
+     "label_ja": "AIマクロと資本市場",
+     "short_label_ja": "AIマクロ",
+     "description_ja": "AIを形作るマクロ・資本市場の力学: Mag 7 スーパーウィーク決算、AI capex ROI の再評価、AI 売上開示のリライト (SEC コンセプトリリース、OpenAI の監査済み月次売上、AMD AI アクセラレータ 10-Q セグメント、Microsoft 監査済み月次 AI 事業 KPI)、Powell-Fed Board 制度ボラティリティ・レジーム、FOMC 反対票の常態化、Cerebras IPO、Apple 自社株買いと $700B AI capex の衝突、AI アクセラレータ・ベンダーの先渡し供給 8-K 開示。",
+     "label_es": "Macro de IA y mercados de capitales",
+     "short_label_es": "Macro IA",
+     "description_es": "Dinámicas macroeconómicas y de mercados de capitales que dan forma a la IA: resultados de la super-semana de Mag 7, reprecio del ROI de AI-capex, reescritura de divulgación de ingresos de IA (concept release de la SEC, cadencia de ingresos auditados de OpenAI, segmento 10-Q de aceleradores AI de AMD, KPIs mensuales auditados del negocio de IA de Microsoft), régimen de volatilidad institucional Powell-Fed Board, norma de disidencia del FOMC, IPO de Cerebras, colisión de la recompra de Apple con la impresión de $700B AI capex, cadencia de divulgaciones 8-K de oferta forward de proveedores de aceleradores AI.",
+     "label_fil": "AI Macro at Capital Markets",
+     "short_label_fil": "AI Macro",
+     "description_fil": "Macro at capital-markets dynamics na humuhubog sa AI: Mag 7 super-week earnings, repricing ng AI-capex ROI, rewrite ng AI-revenue disclosure (SEC concept release, OpenAI audited revenue cadence, AMD AI-accelerator 10-Q segment, Microsoft audited monthly AI-business KPIs), Powell-Fed Board institutional-volatility regime, norm ng dissent sa FOMC, Cerebras IPO, banggaan ng Apple buyback sa $700B AI-capex print, cadence ng forward-supply 8-K ng mga AI-accelerator vendor."
+   }
+   ```
+3. **Add new theme `business.inference_server_supply_chain`** under `business.regulation-compliance` (carry-forward from 5/5). 7 of the pending business-scope rows describe inference-server / supply-chain risk in market / compliance terms; the only existing security theme is tech-scope (`tech.agent_runtime_security`). Adds a business-scope counterpart so the multi-attach saturation on `business.ai_security_compliance_market` (27 children) thins.
+
+   ```action
+   {
+     "kind": "add",
+     "theme_id": "business.inference_server_supply_chain",
+     "category_id": "business.regulation-compliance",
+     "label_en": "Inference Server Supply Chain",
+     "short_label_en": "Inference Supply",
+     "tooltip_en": "Inference Server Supply Chain",
+     "description_en": "Inference-server supply-chain governance: AI-Infra CVE class as regulatory primitive, indirect prompt injection as top CVE category, GGUF supply-chain integrity gates (signed cards, SSTI scans), OAuth trust between AI SaaS, inference-server SSTI to OWASP LLM Top-10 v2026, agent-skills attack-surface threat sub-matrix, CISA AI-Infra KEV sub-catalog with inference-server SBOM, NIST non-human-identity control profile.",
+     "label_ja": "推論サーバ・サプライチェーン",
+     "short_label_ja": "推論サプライ",
+     "description_ja": "推論サーバのサプライチェーン・ガバナンス: 規制プリミティブとしての AI-Infra CVE クラス、トップ CVE カテゴリとしての間接プロンプトインジェクション、GGUF サプライチェーン整合性ゲート (署名済みカード、SSTI スキャン)、AI SaaS 間の OAuth 信頼、推論サーバ SSTI から OWASP LLM Top-10 v2026 へ、エージェント・スキル攻撃面の脅威サブマトリックス、推論サーバ SBOM 付き CISA AI-Infra KEV サブカタログ、NIST 非人間アイデンティティ・コントロール・プロファイル。",
+     "label_es": "Cadena de suministro de servidores de inferencia",
+     "short_label_es": "Suministro inferencia",
+     "description_es": "Gobernanza de la cadena de suministro de servidores de inferencia: la clase CVE de infraestructura de IA como primitiva regulatoria, inyección indirecta de prompt como categoría CVE principal, controles de integridad de la cadena de suministro GGUF (tarjetas firmadas, escaneos SSTI), confianza OAuth entre SaaS de IA, SSTI de servidor de inferencia integrado al OWASP LLM Top-10 v2026, sub-matriz de amenazas de superficie de ataque de agent-skills, sub-catálogo CISA AI-Infra KEV con SBOM de servidor de inferencia, perfil de control de identidad no-humana del NIST.",
+     "label_fil": "Inference Server Supply Chain",
+     "short_label_fil": "Inference Supply",
+     "description_fil": "Gobernanza ng supply chain ng inference server: AI-Infra CVE class bilang regulatory primitive, indirect prompt injection bilang top CVE category, mga integrity gate ng GGUF supply chain (signed cards, SSTI scans), OAuth trust sa pagitan ng AI SaaS, inference-server SSTI tungo sa OWASP LLM Top-10 v2026, threat sub-matrix ng agent-skills attack surface, CISA AI-Infra KEV sub-catalog na may SBOM ng inference server, profile ng kontrol ng non-human identity ng NIST."
+   }
+   ```
 4. **Investigation (no schema edit): `SECONDARY_THEME_THRESHOLD` in `app/src/export.py`**. Fourth consecutive review flagging the same multi-attach pattern. Tech multi-attach 61.7 %, business multi-attach 81.2 %, both wider than 5/5. The overpopulation appearance on the top four themes (38 / 27 / 25 / 21) and the `theme_candidates` label-deduplication problem (39 single-hit rows, no clusters firing) both have the same root cause. Tightening the threshold — or requiring a non-generic token in the secondary-attach overlap — would clean both. Defer to a separate engineering session; out of scope for this Sunday's `apply-schema-edit` flow.
 5. **Investigation (no schema edit): `theme_candidates` label normalisation pass**. New this week. The candidate-extraction pass writes one row per prediction summary verbatim — 39 rows, every label distinct, max hit count = 1. The `≥ 3 distinct-day` promotion rule from `design/memory-policy.md` §2.1 needs label normalisation (lowercase, stopword strip, token-set comparison, or LLM-driven clustering) before it can fire. Without this the candidate flow effectively produces zero promotion candidates regardless of how many real clusters land in the table. Defer to a separate engineering session; out of scope for this Sunday's `apply-schema-edit` flow.
 
