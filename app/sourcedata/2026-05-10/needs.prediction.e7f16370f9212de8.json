@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "vLLM project maintainer leading the v0.12 disaggregated-prefill release-line and serving-default cutover",
+    "job": "Promote the v0.11.1 disaggregated-prefill mode that hit Cloudflare Infire H100-tier parity into the documented default serving shape for the v0.12 release line, with per-tier deployment templates for H100 single-node and L40S edge topology.",
+    "outcome": "vLLM v0.12 ships disaggregated prefill/decode as the documented default mode, with H100 and L40S deployment templates, the prefix-cache-poisoning CVE-2026-44512 patch baked in, and the Yotta canonical benchmark harness cited as the production-readiness gate.",
+    "motivation": "Once the Cloudflare Infire production-comparable benchmark exists, leaving monolithic-mode defaults invites every downstream framework integrator to fork or replace vLLM as the reference serving stack; the maintainer cannot let SGLang's radix-tree lineage own the disaggregated narrative alone.",
+    "task": {
+      "who": "vLLM serving-engine core maintainers plus release-engineering plus security-response team",
+      "what": "promote disaggregated prefill/decode to documented default in v0.12 release",
+      "where": "vllm-project/vllm GitHub release branches plus serving-engine documentation",
+      "when": "May through Q3 2026 release-cycle runway into Q4 2026 v0.12 cut",
+      "why": "convert the Infire-parity benchmark into the operative default before forks claim the lineage",
+      "how": null
+    }
+  },
+  {
+    "actor": "SGLang RadixArk project maintainer driving the v0.6 release line and radix-tree cache substrate generalization",
+    "job": "Build on the v0.5.4 RadixAttention-aware tool-result-cache reuse 2.1x speedup to ship a disaggregated prefill/decode shape that uses the radix-tree cache substrate as the parallel architectural primitive, landing as documented default in the v0.6 release line.",
+    "outcome": "SGLang RadixArk v0.6 ships disaggregated prefill/decode as documented default, with the radix-tree cache substrate generalized across prefix sharing and tool-call result sharing, the CVE-2026-44567 SSTI fix bundled, and per-tier H100/L40S templates aligned to the Yotta canonical workload.",
+    "motivation": "The 14.65k vs 17.3k tok/s gap is already inside the architectural-choice band; if vLLM's v0.12 disaggregated default ships first without SGLang's parallel radix lineage as a peer, the sovereign-cloud and agentic-AI cohort defaults to vLLM and the radix-tree substrate loses its narrative.",
+    "task": {
+      "who": "SGLang RadixArk core engineering plus security-response plus benchmark-harness team",
+      "what": "ship radix-tree-backed disaggregated prefill/decode as v0.6 documented default",
+      "where": "sgl-project/sglang GitHub release branches plus RadixArk architecture documentation",
+      "when": "May through Q3 2026 release-cycle runway into Q4 2026 v0.6 cut",
+      "why": "keep the radix-tree substrate as a peer architectural lineage to vLLM's disaggregated default",
+      "how": null
+    }
+  },
+  {
+    "actor": "Cloudflare Infire edge-serving engineering lead publishing the H100-parity disaggregated-prefill benchmark series",
+    "job": "Extend the May 9 Saturday benchmark note showing vLLM v0.11.1 disaggregated-prefill parity at the H100 tier into a sustained benchmark series that downstream framework maintainers can cite when shipping disaggregated mode as documented default, with explicit decode-side L40S edge-tier 1.4x advantage framing.",
+    "outcome": "Quarterly benchmark cadence comparing Cloudflare Infire production edge architecture against vLLM and SGLang RadixArk disaggregated modes at H100 and L40S tiers, with the Yotta-style canonical shared-prefix workload as the gating harness, cited by both vLLM v0.12 and SGLang v0.6 release notes.",
+    "motivation": "Without ongoing production-comparable benchmark evidence the Saturday convergence reads as a one-shot anecdote; a sustained series converts it into a documented disclosure pattern that pressures every open-source serving stack to ship the disaggregated split rather than defend monolithic defaults.",
+    "task": {
+      "who": "Cloudflare Workers AI Infire performance engineering plus developer-relations plus benchmark-harness team",
+      "what": "publish sustained H100/L40S disaggregated-prefill benchmark series with Yotta workload",
+      "where": "Cloudflare engineering blog plus Workers AI documentation plus GitHub benchmark-harness repo",
+      "when": "May through Q3 2026 benchmark-cadence runway feeding Q4 2026 release windows",
+      "why": "give downstream maintainers a citable production-comparable reference for the disaggregated default",
+      "how": "Yotta-style canonical shared-prefix workload plus per-tier H100/L40S topology templates"
+    }
+  }
+]
