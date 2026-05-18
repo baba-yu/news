@@ -291,6 +291,81 @@ CREATE TABLE IF NOT EXISTS predictions (
   prediction_short_label TEXT,
   prediction_date TEXT,
 
+  -- title field: dedicated short title (≤ 80 chars). The writer in
+  -- 1_daily_update emits this alongside the full prediction body so
+  -- the dashboard can render a clean caption rather than truncating
+  -- the markdown-heavy summary. Title rules: no markdown asterisks,
+  -- no scope prefix `(Tech)` / `(Business)`, no trailing period;
+  -- subject + verb structure. NULL during the migration window for
+  -- predictions ingested before title field landed; the frontend
+  -- falls back to a cleaned-up first sentence in that case.
+  title TEXT,
+
+  -- reasoning fields: structured reasoning trace. Each Future prediction
+  -- in news-YYYYMMDD.md emits these alongside the prose body so the
+  -- dashboard's Reasoning tab can show *why* the writer made the
+  -- call without re-parsing the markdown body. NULL on legacy
+  -- predictions; the Phase 2 backfill skill fills them retroactively.
+  --   reasoning_because  : observed precondition (e.g. "Apr 29 CSAI MITRE-CNA authorization")
+  --   reasoning_given    : structural force (e.g. "enterprise risk transfer once a CNA exists")
+  --   reasoning_so_that  : consequence (e.g. "skill marketplaces lose enterprise sales unless signed")
+  --   reasoning_landing  : when + actor placement (e.g. "Q3 2026, MITRE + CSAI joint advisory")
+  --   plain_language     : 1-sentence plain-language version, ≤ 25 words
+  reasoning_because TEXT,
+  reasoning_given TEXT,
+  reasoning_so_that TEXT,
+  reasoning_landing TEXT,
+  plain_language TEXT,
+
+  -- Phase 4a: locale fan-out for title field title + reasoning fields + plain_language.
+  -- NULL = fall back to canonical EN. Filled by ingest from sibling locale
+  -- markdown files (news-YYYYMMDD.md in report/{ja,es,fil}/).
+  title_ja TEXT,
+  title_es TEXT,
+  title_fil TEXT,
+  reasoning_because_ja TEXT,
+  reasoning_because_es TEXT,
+  reasoning_because_fil TEXT,
+  reasoning_given_ja TEXT,
+  reasoning_given_es TEXT,
+  reasoning_given_fil TEXT,
+  reasoning_so_that_ja TEXT,
+  reasoning_so_that_es TEXT,
+  reasoning_so_that_fil TEXT,
+  reasoning_landing_ja TEXT,
+  reasoning_landing_es TEXT,
+  reasoning_landing_fil TEXT,
+  plain_language_ja TEXT,
+  plain_language_es TEXT,
+  plain_language_fil TEXT,
+
+  -- Phase 3: structured time bounds derived from `reasoning_landing`.
+  -- The prediction's *destination* — when the prediction completes.
+  -- Filled best-effort by the timewindow parser
+  -- (`app/src/timewindow.py`); NULL when the writer's landing text
+  -- can't be parsed. NOT the same as `needs_tasks.target_*` (that's
+  -- the runway period during which the actor's work happens).
+  target_start_date TEXT,
+  target_end_date TEXT,
+
+  -- mid-tier summary (Phase 2 forward, 2026-05-02): mid-tier summary. The
+  -- dashboard right pane is now 3-tier:
+  --   1. title              (≤ 80 chars, the dedicated `predictions.title`)
+  --   2. summary            (≤ 300 chars, this column — *what* the
+  --                          prediction is, in plain technical prose;
+  --                          the default-visible body)
+  --   3. prediction_summary (multi-paragraph long-form, default
+  --                          collapsed in <details>; the original)
+  -- Writer emits a `**Summary:**` marker block in `## Future` between
+  -- the reasoning fields bullets and the long-form body. NULL on
+  -- legacy items — the frontend falls back to title + collapsed full
+  -- text only (no middle tier). Backfill skill fills them later.
+  summary TEXT,
+  -- Locale fan-out: NULL falls back to EN at export.
+  summary_ja TEXT,
+  summary_es TEXT,
+  summary_fil TEXT,
+
   -- TTL-based "huge longshot hit" marker. NULL = no longshot revival yet.
   -- Set to ISO date when daily task 2 detects a [REVIVED] marker on a
   -- validation row referencing this prediction. Frontend highlights
@@ -311,7 +386,13 @@ CREATE TABLE IF NOT EXISTS predictions (
   raw_text TEXT,
   raw_json TEXT,
 
-  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  -- Wall-clock at ingest insertion. NOT the time the prediction was
+  -- authored — that's ``prediction_date``, derived from the source
+  -- news file's header (or its filename ``news-YYYYMMDD.md``). The
+  -- earlier name ``created_at`` was misleading because predictions
+  -- conceptually pre-exist their first DB ingest, so we keep the
+  -- semantics explicit.
+  ingested_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT,
 
   FOREIGN KEY (source_file_id) REFERENCES source_files(source_file_id)
@@ -455,6 +536,42 @@ CREATE TABLE IF NOT EXISTS validation_rows (
   reference_links_json TEXT,
 
   observed_relevance INTEGER CHECK (observed_relevance BETWEEN 1 AND 5),
+
+  -- bridge: narrative bridge between today's SUPPORT and the
+  -- referenced PREDICTION. One paragraph per validation row, written
+  -- by the writer in 2_future_prediction. Format (writer-enforced):
+  --   "Bridge (Pred ID #N): today's news X supports the predictions
+  --    Y component. Reason: Z. Coherence N/5. Remaining gap: W."
+  -- NULL on legacy rows (Phase 2 backfill skill fills them).
+  bridge_text TEXT,
+  -- Phase 4a: locale fan-out for the bridge paragraph. NULL = fall back to EN.
+  -- Filled by ingest from sibling locale FP files (future-prediction-*.md in
+  -- future-prediction/{ja,es,fil}/).
+  bridge_text_ja TEXT,
+  bridge_text_es TEXT,
+  bridge_text_fil TEXT,
+  -- bridge: which predictions.reasoning_* dimension this row supports.
+  -- 'because'   — supports the observed precondition
+  -- 'given'     — supports the structural force
+  -- 'so_that'   — supports the consequence
+  -- 'landing'   — supports the timing/actor placement
+  -- 'none'      — neutral / no specific dimension
+  support_dimension TEXT
+    CHECK (support_dimension IN ('because', 'given', 'so_that', 'landing', 'none')),
+  -- needs stream: which Needs task this validation row contributes to.
+  -- NULL on rows that are SUPPORT-without-task-mapping (e.g. dormant
+  -- pool revivals where the writer didn't yet attribute the support
+  -- to a specific 5W1H cell). The dashboard's Needs tab uses this
+  -- to highlight the cells that today's SUPPORT touches.
+  contributes_to_task_id TEXT
+    REFERENCES needs_tasks(task_id),
+
+  -- Phase 3: structured time bounds for the bridge — extracted from
+  -- bridge_text's "Remaining gap: <date or window>" or similar
+  -- explicit time mentions. NULL when the bridge has no explicit
+  -- time horizon beyond inheriting the parent prediction's window.
+  bridge_target_start_date TEXT,
+  bridge_target_end_date TEXT,
 
   raw_row_markdown TEXT,
   raw_json TEXT,
@@ -716,6 +833,326 @@ CREATE TABLE IF NOT EXISTS embedding_runs (
 );
 
 -- ============================================================
+-- 13.4. NEEDS + 5W1H tasks (needs stream — Phase 3)
+-- ============================================================
+--
+-- For each prediction, the writer (in 1_daily_update) emits one or
+-- more "Need" rows that capture *who has work to do that drives the
+-- prediction toward landing*. The terminology comes from "what is
+-- NEEDED for the prediction to land". Each Need carries a 5W1H
+-- breakdown of the specific task the actor takes on. The validation
+-- flow (2_future_prediction) maps today's SUPPORT to a contributing
+-- task via `validation_rows.contributes_to_task_id`.
+--
+-- Actor granularity is role-abstract (e.g. "enterprise security
+-- buyer") — never down to the individual company; that's a writer
+-- rule, not a schema constraint.
+--
+-- (Historical note: these tables were originally named `prediction_jtbd`
+-- and `jtbd_tasks`. Renamed in Phase 2 because "JTBD" framed the actor
+-- as someone who reacts AFTER the prediction lands. The system's
+-- intent is the opposite — actors who DRIVE the prediction's landing.
+-- "Need" expresses "what the prediction needs from its driver
+-- coalition" without the after-the-fact connotation.)
+
+CREATE TABLE IF NOT EXISTS prediction_needs (
+  need_id TEXT PRIMARY KEY,
+  prediction_id TEXT NOT NULL,
+  actor TEXT NOT NULL,                  -- role abstract; "enterprise security buyer"
+  job TEXT NOT NULL,                    -- the job this actor is doing that drives the prediction toward landing
+  outcome TEXT,                         -- the concrete deliverable that realizes the prediction's claim (≤ 25 words)
+  motivation TEXT,                      -- why this actor pushes the work forward (≤ 25 words)
+  -- Phase 4a: locale fan-out for the LLM-generated Need fields. NULL = EN
+  -- fallback. Filled by extract-needs when the LLM emits actor_ja / job_ja
+  -- etc. alongside the canonical EN values.
+  actor_ja TEXT, actor_es TEXT, actor_fil TEXT,
+  job_ja TEXT, job_es TEXT, job_fil TEXT,
+  outcome_ja TEXT, outcome_es TEXT, outcome_fil TEXT,
+  motivation_ja TEXT, motivation_es TEXT, motivation_fil TEXT,
+  -- Phase 3: the Need's deadline window — when the actor must
+  -- deliver `outcome`. Usually equals the union of the Need's
+  -- `needs_tasks.target_*` rows; pre-computed here for fast
+  -- aggregation. NULL when no time bound is known.
+  target_start_date TEXT,
+  target_end_date TEXT,
+  reviewed_by_human INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT,
+  FOREIGN KEY (prediction_id) REFERENCES predictions(prediction_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_prediction_needs_prediction
+ON prediction_needs(prediction_id);
+
+CREATE TABLE IF NOT EXISTS needs_tasks (
+  task_id TEXT PRIMARY KEY,
+  need_id TEXT NOT NULL,
+  -- 5W1H — every cell is required by the writer rule but nullable in
+  -- the schema so an LLM-extracted partial result can still land
+  -- (the orchestrator marks status='blocked' when partial).
+  who_text   TEXT,
+  what_text  TEXT,
+  where_text TEXT,
+  when_text  TEXT,                      -- runway period; not the prediction's landing destination
+  why_text   TEXT,
+  how_text   TEXT,
+  -- Phase 4a: locale fan-out for the 5W1H cells (also LLM-generated).
+  who_text_ja TEXT, who_text_es TEXT, who_text_fil TEXT,
+  what_text_ja TEXT, what_text_es TEXT, what_text_fil TEXT,
+  where_text_ja TEXT, where_text_es TEXT, where_text_fil TEXT,
+  when_text_ja TEXT, when_text_es TEXT, when_text_fil TEXT,
+  why_text_ja TEXT, why_text_es TEXT, why_text_fil TEXT,
+  how_text_ja TEXT, how_text_es TEXT, how_text_fil TEXT,
+  -- Phase 3: structured time bounds derived from `when_text`. The
+  -- task's *runway* — when the actor is doing this work. NOT the
+  -- prediction's landing destination (which lives in
+  -- `predictions.target_*`). Filled best-effort by the timewindow
+  -- parser; NULL when the writer's `when_text` can't be parsed.
+  target_start_date TEXT,
+  target_end_date TEXT,
+  status TEXT NOT NULL DEFAULT 'open'
+    CHECK (status IN ('open', 'in_progress', 'done', 'blocked')),
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT,
+  FOREIGN KEY (need_id) REFERENCES prediction_needs(need_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_needs_tasks_need
+ON needs_tasks(need_id);
+
+-- ============================================================
+-- 13.6. Prediction chain (Readings — Step 2: downstream effects)
+-- ============================================================
+--
+-- When a prediction lands (becomes confirmed), its outcome itself
+-- becomes new evidence that strengthens *other* predictions in the
+-- system. This table captures that chain effect:
+--
+--   "If `source_prediction_id` lands, `downstream_prediction_id`
+--    gets strengthened, mediated by `via_evidence_id` (or by direct
+--    semantic entailment when `via_evidence_id` is NULL)."
+--
+-- Populated by:
+--   - manual annotation in `2_future_prediction` for clear chains
+--   - future skill `extract-chain-effects` (LLM-driven detection)
+--
+-- The dashboard's Readings tab renders these as the "downstream"
+-- narrative block: predictions that would benefit from this one
+-- landing, and the evidence items that mediate the chain.
+
+CREATE TABLE IF NOT EXISTS prediction_chain (
+  chain_id TEXT PRIMARY KEY,
+  source_prediction_id TEXT NOT NULL,
+  downstream_prediction_id TEXT NOT NULL,
+  via_evidence_id TEXT,
+  -- Chain confidence in [0, 1]. 0.5 = plausible mediation; 0.9 =
+  -- strong direct entailment.
+  strength REAL NOT NULL DEFAULT 0.5
+    CHECK (strength BETWEEN 0 AND 1),
+  notes TEXT,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT,
+
+  FOREIGN KEY (source_prediction_id) REFERENCES predictions(prediction_id),
+  FOREIGN KEY (downstream_prediction_id) REFERENCES predictions(prediction_id),
+  FOREIGN KEY (via_evidence_id) REFERENCES evidence_items(evidence_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_prediction_chain_source
+ON prediction_chain(source_prediction_id);
+
+CREATE INDEX IF NOT EXISTS idx_prediction_chain_downstream
+ON prediction_chain(downstream_prediction_id);
+
+-- ============================================================
+-- 13.7. Prediction relations (Readings — Step 4: P↔P structure)
+-- ============================================================
+--
+-- Captures the relationship between predictions, orthogonal to
+-- evidence-mediated chains. Five relation types:
+--
+--   parallel:           A and B are independent facets — both can
+--                       be true at the same time.
+--   exclusive_variant:  A, B, C, ... are competing scenarios in the
+--                       same outcome space (e.g. IPO price tiers).
+--                       Only one will land. Bound together by a
+--                       shared `family_id`.
+--   negation:           A and not-A. Strict complement; one
+--                       inverts the other.
+--   entails:            A's landing implies B's landing (one-way
+--                       semantic entailment, NOT chain effect).
+--   equivalent:         A and B express the same prediction in
+--                       different words — should be merged.
+--
+-- Why this matters for the Readings tab:
+--   - Detect prediction "water-mass": if A and not-A are both in
+--     the prediction set, one will always be right (forecast count
+--     is inflated).
+--   - Show family probability mass for exclusive_variant groups:
+--     "Tier P_b is the most-supported variant at 60%."
+--   - Equivalent pairs flag prediction duplication.
+--   - Entails graphs let the reader see which predictions imply
+--     which others as a logical (not evidence-mediated) network.
+
+CREATE TABLE IF NOT EXISTS prediction_relations (
+  relation_id TEXT PRIMARY KEY,
+  prediction_a TEXT NOT NULL,
+  prediction_b TEXT NOT NULL,
+  -- Five canonical relation types. The writer must pick exactly one
+  -- per (a, b) pair; combining types on the same pair is forbidden.
+  --
+  --   parallel:           A and B are independent facets — both
+  --                       can be true at the same time. The default
+  --                       when no other relation applies.
+  --   exclusive_variant:  A, B, ... are competing scenarios in the
+  --                       same outcome space. Bound together by a
+  --                       shared `family_id`. Only one will land.
+  --   negation:           Strict complement. A = X, B = not-X.
+  --                       At most one is true.
+  --   entails:            A's claim implies B's claim **by
+  --                       definition** (no evidence needed). The
+  --                       narrower entails the broader. Strictly
+  --                       stronger than `prediction_chain`; if
+  --                       entails(A, B) exists, do NOT also write
+  --                       chain(A, B) — see
+  --                       design/skills/extract-chain-effects.md.
+  --   equivalent:         Same prediction in different words.
+  --                       Merge candidate. Reserved for true
+  --                       paraphrases — if A is the narrower /
+  --                       more specific / time-bounded version of
+  --                       B, prefer `entails` over `equivalent`.
+  --
+  -- Canonical decision tree:
+  --   1. Are A and B *the same* claim worded differently? → equivalent
+  --   2. Does A's truth force B's truth (or vice-versa) by definition?
+  --      → entails
+  --   3. Is A = NOT(B)? → negation
+  --   4. Are A and B competing scenarios in one outcome space?
+  --      → exclusive_variant (group with family_id)
+  --   5. Otherwise → parallel
+  relation_type TEXT NOT NULL CHECK (relation_type IN (
+    'parallel', 'exclusive_variant', 'negation', 'entails', 'equivalent'
+  )),
+  -- Shared identifier for exclusive_variant rows belonging to the
+  -- same outcome space. NULL for non-exclusive relations.
+  family_id TEXT,
+  -- Optional probability mass for exclusive_variant rows; the
+  -- frontend normalizes the family to 100% when rendering.
+  prob_mass REAL,
+  notes TEXT,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT,
+
+  FOREIGN KEY (prediction_a) REFERENCES predictions(prediction_id),
+  FOREIGN KEY (prediction_b) REFERENCES predictions(prediction_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_prediction_relations_a
+ON prediction_relations(prediction_a);
+
+CREATE INDEX IF NOT EXISTS idx_prediction_relations_b
+ON prediction_relations(prediction_b);
+
+CREATE INDEX IF NOT EXISTS idx_prediction_relations_family
+ON prediction_relations(family_id)
+WHERE family_id IS NOT NULL;
+
+-- ============================================================
+-- 13.5. Glossary (glossary stream — auto-curated jargon glossary)
+-- ============================================================
+--
+-- Hover-glossary backing store. The daily flow (1_daily_update)
+-- runs `extract-glossary-candidates` against the day's news to add
+-- new candidate terms; `define-glossary-terms` promotes a candidate
+-- to `active` once it has appeared on ≥ 3 distinct days in the past
+-- 14 days. `app/src/glossary_link.py` injects an `<abbr title="…">`
+-- wrapper into report / future-prediction body text for `active`
+-- terms only — `candidate` rows are not surfaced to readers so a
+-- mis-classified definition does not propagate.
+
+CREATE TABLE IF NOT EXISTS glossary_terms (
+  term TEXT PRIMARY KEY,
+  -- JSON array of alternate spellings / abbreviations / common synonyms.
+  aliases_json TEXT,
+  -- 1-line plain-language definition. No jargon. NULL for candidates.
+  quick_def TEXT,
+  -- 1-line "why a builder cares". NULL for candidates.
+  why_it_matters TEXT,
+  -- Locale-fan-out for the EN definitions. NULL = fall back to EN.
+  -- Phase 2 prebrought-forward (was originally scheduled later) so
+  -- the dashboard's hover tooltip ships in the user's selected
+  -- locale instead of always EN.
+  quick_def_ja TEXT,
+  quick_def_es TEXT,
+  quick_def_fil TEXT,
+  why_it_matters_ja TEXT,
+  why_it_matters_es TEXT,
+  why_it_matters_fil TEXT,
+  -- Optional canonical link (vendor docs, RFC, primary source).
+  canonical_link TEXT,
+  status TEXT NOT NULL CHECK (status IN ('candidate', 'active', 'retired')),
+  first_seen_date TEXT NOT NULL,
+  last_seen_date TEXT,
+  occurrences_30d INTEGER NOT NULL DEFAULT 0,
+  -- Distinct-days counter inside a 14-day rolling window — feeds the
+  -- candidate→active promotion rule (≥ 3 distinct days in 14 = active).
+  distinct_days_14d INTEGER NOT NULL DEFAULT 0,
+  -- Set once a human has signed off on the auto-generated definition.
+  reviewed_by_human INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_glossary_status
+ON glossary_terms(status);
+
+-- Daily occurrence ledger — one row per (term, date) when a term
+-- appeared in any locale's news / future-prediction body. The
+-- promotion rule reads this rather than re-scanning markdown each
+-- run.
+CREATE TABLE IF NOT EXISTS glossary_occurrences (
+  term TEXT NOT NULL,
+  occurrence_date TEXT NOT NULL,
+  hit_count INTEGER NOT NULL DEFAULT 1,
+  source TEXT,                    -- 'news' | 'future-prediction'
+  PRIMARY KEY (term, occurrence_date),
+  FOREIGN KEY (term) REFERENCES glossary_terms(term)
+);
+
+CREATE INDEX IF NOT EXISTS idx_glossary_occurrences_date
+ON glossary_occurrences(occurrence_date);
+
+-- Glossary validation audit log (Phase C — validate-glossary-terms skill).
+-- Records every check pass through validate-glossary-terms with a
+-- structured verdict per check type. Lets the weekly review surface
+-- terms that have repeatedly failed semantic / form checks even
+-- though they were auto-promoted by define-glossary-terms.
+CREATE TABLE IF NOT EXISTS glossary_audit (
+  audit_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  term TEXT NOT NULL,
+  -- check_type: which validation surface ran.
+  --   'form'      — Python-side: empty / length / sentence-count /
+  --                 banned-word checks
+  --   'semantic'  — LLM-as-judge: does the definition match the term's
+  --                 commonly-understood industry meaning?
+  --   'dedupe'    — Python-side: this term is a synonym / alias of an
+  --                 already-active term, should be merged not promoted
+  check_type TEXT NOT NULL CHECK (check_type IN ('form', 'semantic', 'dedupe')),
+  -- verdict per check.
+  --   'pass'   — clean
+  --   'warn'   — non-blocking issue (length cap, optional field empty)
+  --   'fail'   — blocking; orchestrator retires the row
+  verdict TEXT NOT NULL CHECK (verdict IN ('pass', 'warn', 'fail')),
+  reason TEXT,
+  suggested_fix TEXT,
+  checked_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (term) REFERENCES glossary_terms(term)
+);
+
+CREATE INDEX IF NOT EXISTS idx_glossary_audit_term
+ON glossary_audit(term, checked_at);
+
+-- ============================================================
 -- 14. Seed data
 -- ============================================================
 
@@ -749,43 +1186,50 @@ VALUES
 INSERT OR IGNORE INTO themes(theme_id, scope_id, category_id, canonical_label, short_label, generated_label, description, status)
 VALUES
   ('tech.one_bit_edge_llm', 'tech', 'tech.models', '1-bit / Edge LLM', '1-bit Edge LLM', '1-bit / Edge LLM',
-   '1-bit native training, quantization alternatives, compact local models, Qwen/Llama derivatives, GGUF/MLX deployment.', 'active'),
+   '1-bit native training, BitNet, Bonsai-8B, ternary-weight quantization, sub-4-bit compression, Qwen3 / Qwen3.6 derivatives, DeepSeek V4 hybrid attention, open-weight frontier models, compact 27B Dense local models, MLX / GGUF on-device deployment.', 'active'),
 
   ('tech.agent_control_plane', 'tech', 'tech.agents', 'Agent Control Plane', 'Control Plane', 'Agent Control Plane',
-   'Agent control plane, agent registry, managed harness, workspace agents, OAuth cross-trust, identity for AI agents, Entra Agent ID, Okta for AI Agents, Keycard, AgentCore, coding agents, Claude Code, Codex, Cursor, Kiro, agent tool permissions, agent lifecycle.', 'active'),
+   'Agent identity, OAuth cross-trust between AI services, MCP-based authentication, agent gateways, coding-agent harness platforms (Claude Code, Codex, Cursor, Kiro), Entra Agent ID, Okta for AI Agents, Keycard, AWS Bedrock AgentCore, Headless agent orchestration, agent tool-permission management, control plane SaaS, Cisco Duo IAM for agents, Microsoft Zero Trust for AI agents.', 'active'),
 
   ('tech.agent_runtime_security', 'tech', 'tech.security', 'Agent Runtime Security', 'Agent Runtime', 'Agent Runtime Security',
-   'Prompt injection, sandbox escape, tool misuse, RCE, CVE/CVSS issues in AI agent runtimes.', 'active'),
+   'Indirect prompt injection vulnerabilities, sandbox escape, tool-misuse exploits, RCE in agent runtimes, CVE / CVSS / OWASP Agentic Top 10 categories, MCP attack surface, comment-and-control attacks, inference-server CVEs, vendor-boundary security standards.', 'active'),
 
   ('tech.model_supply_chain', 'tech', 'tech.security', 'Model Supply Chain', 'Model Supply', 'Model Supply Chain',
-   'Malicious model files, GGUF supply-chain risk, tokenizer templates, Hugging Face/Ollama/ModelScope distribution risks.', 'active'),
+   'Model signing, provenance attestation, SLSA-for-models, sigstore, safetensors integrity, GGUF supply-chain risk, malicious model files, tokenizer templates, gated distribution programs, Anthropic Project Glasswing, Mythos Preview, partner-list distribution, usage-credit tier gates, AWS Bedrock Gated Research Preview, Bonsai / Qwen / Llama / DeepSeek / Kimi / GLM-5.1 distribution channels, Hugging Face / Ollama / ModelScope marketplace governance, model artifact attestation.', 'active'),
 
   ('tech.agent_registry_architecture', 'tech', 'tech.standards', 'Agent Registry Architecture', 'Agent Registry', 'Agent Registry Architecture',
-   'Registries for skills, tool permissions, audit traces, MCP-adjacent metadata, and agent artifacts.', 'active'),
+   'Registries for AI agent skills, tool-permission scopes, audit-log trails, MCP server inventory + metadata, cross-cloud agent identity sync, agent identity registration, Entra ID for agents, Defender per-agent relationship-map, Microsoft Agent 365 Registry Sync, AWS Bedrock + Google Gemini Enterprise registry, Anthropic Project Glasswing partner registry, Mythos partner list, agent artifact distribution, skill provenance attestation, registry hygiene controls, Skills marketplace governance.', 'active'),
 
   ('tech.local_inference_runtime', 'tech', 'tech.inference-runtime', 'Local Inference Runtime', 'Local Runtime', 'Local Inference Runtime',
-   'Local inference stacks, llama.cpp, Ollama, MLX, WebGPU, OpenVINO, on-device deployment.', 'active'),
+   'Local inference stacks: llama.cpp, Ollama, MLX, WebGPU, OpenVINO, vLLM, SGLang, Foundry-Local. Consumer-GPU runtime (RTX 4090 / 5090, M4 Max). Qwen / DeepSeek / Bonsai loaders. GGUF / safetensors loading. Coding-agent local backends. On-device inference for privacy / cost / latency.', 'active'),
 
   ('tech.ai_chip_architecture', 'tech', 'tech.infrastructure', 'AI Chip Architecture', 'AI Chips', 'AI Chip Architecture',
-   'TPU, Trainium, MAIA, MI300X, training/inference SKU separation, accelerator-specific model behavior.', 'active'),
+   'TPU, Trainium, MAIA, MI300X, Cerebras IPO, WSE-3, AMD MI355X, AMD AI-accelerator revenue, training-vs-inference SKU split, accelerator-revenue 10-Q segment footnote, GB300 vs Trainium positioning, per-accelerator margin disclosure, hyperscaler custom silicon, accelerator-specific model behavior.', 'active'),
+
+  ('tech.physical_ai_robotics', 'tech', 'tech.infrastructure', 'Physical AI / Robotics', 'Physical AI', 'Physical AI / Robotics',
+   'Humanoid robots, Robot-as-a-Service (RaaS), production-line robotics, Siemens HMND 01, NVIDIA Isaac GR00T, NVIDIA Cosmos, Neura × AWS, DEEPX × Hyundai, IROS robotics benchmarks, GTC robotics league tables, Foxconn, FANUC, Universal Robots, Agility Digit, Figure 02, Apptronik Apollo, Tesla Optimus, AEON, Mega Omniverse, Hannover Messe Physical AI, 8-hour autonomous production runs.', 'active'),
 
   ('business.cloud_vs_local_distribution', 'business', 'business.distribution', 'Cloud vs Local AI Distribution', 'Cloud vs Local', 'Cloud vs Local AI Distribution',
-   'Shift between cloud-hosted frontier AI and local or edge AI adoption, including privacy, cost, and SMB deployment.', 'active'),
+   'Local on-device inference vs hosted cloud frontier AI, edge deployment, cloud-overflow inversion, SMB local-first adoption, distribution model shifts (hosted API vs open-weight download), privacy-driven local choices.', 'active'),
 
   ('business.hyperscaler_frontier_lab_alliance', 'business', 'business.market-structure', 'Hyperscaler × Frontier Lab Alliance', 'Hyperscaler Alliance', 'Hyperscaler × Frontier Lab Alliance',
-   'Exclusive or semi-exclusive alliances between hyperscalers and frontier labs, compute commitments, and platform lock-in.', 'active'),
+   'Exclusive alliance contracts between hyperscalers and frontier AI labs (AWS × Anthropic, Google × Thinking Machines Lab, Microsoft × OpenAI), Tier-1 compute capacity capture, multi-billion compute commitments, capital coupling between cloud providers and labs, GB300 / Trainium exclusivity, platform lock-in via training and serving infrastructure.', 'active'),
 
   ('business.open_weight_vs_proprietary', 'business', 'business.competition', 'Open Weight vs Proprietary AI', 'Open vs Proprietary', 'Open Weight vs Proprietary AI',
-   'Open-weight versus hosted-only model dynamics, geopolitical fragmentation, and proprietary frontier model gating.', 'active'),
+   'Open-weight versus hosted-only model dynamics, geopolitical fragmentation, proprietary frontier model gating, MIT license / Apache-2.0 / open-source-license model releases, BenchLM Chinese leaderboard, Hugging Face open-weight downloads, gpt-oss series, DeepSeek / Qwen / Kimi / GLM / Mistral / Llama open-weight cohort, per-token pricing floor competition, Google Gemini Flash-Lite tier, frontier-vendor small-model tier vs Chinese open-weight stack.', 'active'),
 
   ('business.ai_security_compliance_market', 'business', 'business.regulation-compliance', 'AI Security Compliance Market', 'AI Security Compliance', 'AI Security Compliance Market',
-   'AI vulnerabilities becoming compliance, CVE/CVSS/OWASP categories, enterprise risk budgets, and security tooling demand.', 'active'),
+   'AI vulnerability disclosures becoming compliance categories, CVE / CVSS scoring of AI bugs, OWASP LLM Top 10 / OWASP Agentic Top 10, enterprise risk-budget allocation for AI, security-tooling spend (Wiz AI-APP, CrowdStrike, Palo Alto, Zenity, Keycard), FedRAMP for AI, audit / disclosure obligations.', 'active'),
 
   ('business.developer_platformization', 'business', 'business.enterprise-adoption', 'Developer Toolchain Platformization', 'Dev Platformization', 'Developer Toolchain Platformization',
-   'AI coding tools, CI/CD agents, tool registries, and enterprise developer workflow consolidation.', 'active'),
+   'AI coding agent platforms (Claude Code, Codex, Cursor, Kiro), IDE integration, CI/CD agent runners, developer tool registries, enterprise developer-workflow consolidation, code-review automation, agent-driven repository operations, Skills marketplace adoption, Microsoft Build platform anchor, Microsoft Foundry Toolkit, AWS AgentCore CLI, GitHub Copilot CLI, Codex CLI 0.128.0 model-provider-owned discovery, dev-experience SLA, GitHub-as-platform consolidation.', 'active'),
 
   ('business.compute_capex_strategy', 'business', 'business.capital-supply-chain', 'Compute Capex Strategy', 'Compute Capex', 'Compute Capex Strategy',
-   'AI chip investments, data center capex, accelerator differentiation, and cloud capacity constraints.', 'active');
+   'Mag 7 capex disclosures, Alphabet 2026 $175-185B capex, Microsoft Azure capex commitments, Tesla compute capex, Trainium / GB300 / Vera Rubin / MAIA accelerator commitments, 5GW Trainium capacity, 10-year compute deals, data center power footprint, hyperscaler buildout.', 'active'),
+  ('tech.ai_macro_capital_markets', 'tech', 'tech.infrastructure', 'AI Macro & Capital Markets', 'AI Macro', 'AI Macro & Capital Markets',
+   'Macro and capital-markets dynamics shaping AI: Mag 7 super-week earnings, AI-capex ROI repricing, AI-revenue disclosure rewrite (SEC concept release, OpenAI audited revenue cadence, AMD AI-accelerator 10-Q segment, Microsoft audited monthly AI-business KPIs), Powell-Fed Board institutional-volatility regime, FOMC dissent norm, Cerebras IPO, Apple-buyback collision with $700B AI-capex print, AI-accelerator vendor forward-supply 8-K cadence.', 'active'),
+  ('business.inference_server_supply_chain', 'business', 'business.regulation-compliance', 'Inference Server Supply Chain', 'Inference Supply', 'Inference Server Supply Chain',
+   'Inference-server supply-chain governance: AI-Infra CVE class as regulatory primitive, indirect prompt injection as top CVE category, GGUF supply-chain integrity gates (signed cards, SSTI scans), OAuth trust between AI SaaS, inference-server SSTI to OWASP LLM Top-10 v2026, agent-skills attack-surface threat sub-matrix, CISA AI-Infra KEV sub-catalog with inference-server SBOM, NIST non-human-identity control profile.', 'active');
 
 -- ============================================================
 -- 15. Views for exporter
@@ -1006,13 +1450,19 @@ WHERE theme_id = 'tech.agent_runtime_security';
 UPDATE themes SET
   label_ja = 'モデルサプライチェーン', short_label_ja = 'モデル供給',
   label_es = 'Cadena de suministro de modelos', short_label_es = 'Suministro de modelos',
-  label_fil = 'Model Supply Chain', short_label_fil = 'Model Supply'
+  label_fil = 'Model Supply Chain', short_label_fil = 'Model Supply',
+  description_ja = 'モデル署名、出所証明、SLSA-for-models、sigstore、safetensors 完全性、GGUF サプライチェーン・リスク、悪意あるモデルファイル、tokenizer テンプレート、ゲート付き配布プログラム、Anthropic Project Glasswing、Mythos Preview、パートナーリスト配布、利用クレジット階層ゲート、AWS Bedrock Gated Research Preview、Bonsai / Qwen / Llama / DeepSeek / Kimi / GLM-5.1 配布チャネル、Hugging Face / Ollama / ModelScope マーケットプレイス統治、モデル成果物アテステーション。',
+  description_es = 'Firma de modelos, atestación de procedencia, SLSA-for-models, sigstore, integridad de safetensors, riesgo de cadena de suministro GGUF, archivos de modelo maliciosos, plantillas de tokenizer, programas de distribución gated, Anthropic Project Glasswing, Mythos Preview, distribución por lista de socios, gates de tier de créditos de uso, AWS Bedrock Gated Research Preview, canales de distribución Bonsai / Qwen / Llama / DeepSeek / Kimi / GLM-5.1, gobernanza de marketplace Hugging Face / Ollama / ModelScope, atestación de artefactos de modelo.',
+  description_fil = 'Model signing, provenance attestation, SLSA-for-models, sigstore, safetensors integrity, GGUF supply-chain risk, mga maling model file, tokenizer templates, gated distribution programs, Anthropic Project Glasswing, Mythos Preview, partner-list distribution, usage-credit tier gates, AWS Bedrock Gated Research Preview, mga channel ng distribution ng Bonsai / Qwen / Llama / DeepSeek / Kimi / GLM-5.1, governance ng Hugging Face / Ollama / ModelScope marketplace, model artifact attestation.'
 WHERE theme_id = 'tech.model_supply_chain';
 
 UPDATE themes SET
   label_ja = 'エージェントレジストリアーキテクチャ', short_label_ja = 'エージェントレジストリ',
   label_es = 'Arquitectura de registro de agentes', short_label_es = 'Registro de agentes',
-  label_fil = 'Arkitektura ng Agent Registry', short_label_fil = 'Agent Registry'
+  label_fil = 'Arkitektura ng Agent Registry', short_label_fil = 'Agent Registry',
+  description_ja = 'AI エージェントスキルのレジストリ、ツール権限スコープ、監査ログ、MCP サーバー在庫 + メタデータ、クロスクラウド・エージェント識別同期、エージェント識別登録、Entra ID for agents、Defender エージェント単位関係マップ、Microsoft Agent 365 Registry Sync、AWS Bedrock + Google Gemini Enterprise レジストリ、Anthropic Project Glasswing パートナーレジストリ、Mythos パートナーリスト、エージェント成果物配布、スキル出所証明、レジストリ衛生統制、Skills マーケットプレイス統治。',
+  description_es = 'Registros para skills de agente AI, scopes de permisos de herramientas, audit logs, inventario + metadata de servidores MCP, sincronización cross-cloud de identidad de agente, registro de identidad de agente, Entra ID for agents, mapa de relaciones por agente Defender, Microsoft Agent 365 Registry Sync, AWS Bedrock + Google Gemini Enterprise registry, Anthropic Project Glasswing partner registry, Mythos partner list, distribución de artefactos de agente, atestación de procedencia de skills, controles de higiene de registro, gobernanza del marketplace de Skills.',
+  description_fil = 'Mga registry para sa AI agent skills, tool-permission scopes, audit-log trails, MCP server inventory + metadata, cross-cloud agent identity sync, agent identity registration, Entra ID for agents, Defender per-agent relationship-map, Microsoft Agent 365 Registry Sync, AWS Bedrock + Google Gemini Enterprise registry, Anthropic Project Glasswing partner registry, Mythos partner list, agent artifact distribution, skill provenance attestation, registry hygiene controls, governance ng Skills marketplace.'
 WHERE theme_id = 'tech.agent_registry_architecture';
 
 UPDATE themes SET
@@ -1024,8 +1474,17 @@ WHERE theme_id = 'tech.local_inference_runtime';
 UPDATE themes SET
   label_ja = 'AIチップアーキテクチャ', short_label_ja = 'AIチップ',
   label_es = 'Arquitectura de chips de IA', short_label_es = 'Chips de IA',
-  label_fil = 'Arkitektura ng AI Chip', short_label_fil = 'AI Chips'
+  label_fil = 'Arkitektura ng AI Chip', short_label_fil = 'AI Chips',
+  description_ja = 'TPU、Trainium、MAIA、MI300X、Cerebras IPO、WSE-3、AMD MI355X、AMDのAIアクセラレータ売上、トレーニング/インファレンスSKU分離、10-Qセグメント脚注でのアクセラレータ売上開示、GB300対Trainiumのポジショニング、アクセラレータ単位の利益開示、ハイパースケーラのカスタムシリコン、アクセラレータ固有のモデル挙動。',
+  description_es = 'TPU, Trainium, MAIA, MI300X, Cerebras IPO, WSE-3, AMD MI355X, ingresos AMD por aceleradores AI, separación de SKU entrenamiento/inferencia, divulgación 10-Q de ingresos por aceleradores, posicionamiento GB300 vs Trainium, divulgación de margen por acelerador, silicio personalizado de hyperscaler, comportamiento de modelo específico por acelerador.',
+  description_fil = 'TPU, Trainium, MAIA, MI300X, Cerebras IPO, WSE-3, AMD MI355X, AMD AI-accelerator revenue, paghahati ng training-vs-inference SKU, accelerator-revenue 10-Q segment footnote, positioning ng GB300 kumpara sa Trainium, per-accelerator margin disclosure, custom silicon ng hyperscaler, accelerator-specific na ugali ng modelo.'
 WHERE theme_id = 'tech.ai_chip_architecture';
+
+UPDATE themes SET
+  label_ja = 'フィジカルAI／ロボティクス', short_label_ja = 'フィジカルAI',
+  label_es = 'IA Física / Robótica', short_label_es = 'IA Física',
+  label_fil = 'Physical AI / Robotics', short_label_fil = 'Physical AI'
+WHERE theme_id = 'tech.physical_ai_robotics';
 
 UPDATE themes SET
   label_ja = 'クラウド対ローカルAI配信', short_label_ja = 'クラウド対ローカル',
@@ -1042,7 +1501,10 @@ WHERE theme_id = 'business.hyperscaler_frontier_lab_alliance';
 UPDATE themes SET
   label_ja = 'オープン重み対プロプライエタリAI', short_label_ja = 'オープン対プロプライエタリ',
   label_es = 'IA de pesos abiertos vs propietaria', short_label_es = 'Abierto vs Propietario',
-  label_fil = 'Open-Weight vs Proprietary AI', short_label_fil = 'Open vs Proprietary'
+  label_fil = 'Open-Weight vs Proprietary AI', short_label_fil = 'Open vs Proprietary',
+  description_ja = 'オープン重み対ホスト型モデルのダイナミクス、地政学的分断、プロプライエタリ・フロンティアモデルのゲート、MIT ライセンス / Apache-2.0 / オープンソース・ライセンスでのモデルリリース、BenchLM 中国リーダーボード、Hugging Face オープン・ウェイト・ダウンロード、gpt-oss シリーズ、DeepSeek / Qwen / Kimi / GLM / Mistral / Llama オープン・ウェイト・コホート、トークン単価マージン圧縮競合、Google Gemini Flash-Lite 層、フロンティア・ベンダー小型モデル層 vs 中国オープン・ウェイト・スタック。',
+  description_es = 'Dinámicas de modelo open-weight vs hosted-only, fragmentación geopolítica, gating de modelos frontera propietarios, lanzamientos de modelos con licencia MIT / Apache-2.0 / open-source, BenchLM Chinese leaderboard, descargas open-weight de Hugging Face, serie gpt-oss, cohort open-weight de DeepSeek / Qwen / Kimi / GLM / Mistral / Llama, competencia de piso de precio per-token, tier Google Gemini Flash-Lite, tier de modelo pequeño de frontier-vendor vs stack open-weight chino.',
+  description_fil = 'Open-weight versus hosted-only model dynamics, geopolitical fragmentation, proprietary frontier model gating, mga release ng modelo na may MIT license / Apache-2.0 / open-source license, BenchLM Chinese leaderboard, Hugging Face open-weight downloads, gpt-oss series, DeepSeek / Qwen / Kimi / GLM / Mistral / Llama open-weight cohort, kompetensya sa per-token pricing floor, Google Gemini Flash-Lite tier, frontier-vendor small-model tier vs Chinese open-weight stack.'
 WHERE theme_id = 'business.open_weight_vs_proprietary';
 
 UPDATE themes SET
@@ -1054,7 +1516,10 @@ WHERE theme_id = 'business.ai_security_compliance_market';
 UPDATE themes SET
   label_ja = '開発者ツールチェーンのプラットフォーム化', short_label_ja = '開発プラットフォーム化',
   label_es = 'Plataformización de herramientas de desarrollo', short_label_es = 'Plat. de Dev',
-  label_fil = 'Platformization ng Developer Toolchain', short_label_fil = 'Dev Platformization'
+  label_fil = 'Platformization ng Developer Toolchain', short_label_fil = 'Dev Platformization',
+  description_ja = 'AI コーディング・エージェント・プラットフォーム (Claude Code, Codex, Cursor, Kiro)、IDE 統合、CI/CD エージェント・ランナー、開発者ツール・レジストリ、エンタープライズ開発者ワークフロー統合、コードレビュー自動化、エージェント駆動リポジトリ操作、Skills マーケットプレイス採用、Microsoft Build プラットフォーム・アンカー、Microsoft Foundry Toolkit、AWS AgentCore CLI、GitHub Copilot CLI、Codex CLI 0.128.0 model-provider-owned discovery、開発者体験 SLA、GitHub-as-platform 統合。',
+  description_es = 'Plataformas de coding agent AI (Claude Code, Codex, Cursor, Kiro), integración IDE, runners de agente CI/CD, registries de herramientas dev, consolidación de workflow de developer empresarial, automatización de code review, operaciones de repositorio dirigidas por agente, adopción de marketplace de Skills, Microsoft Build platform anchor, Microsoft Foundry Toolkit, AWS AgentCore CLI, GitHub Copilot CLI, Codex CLI 0.128.0 model-provider-owned discovery, dev-experience SLA, consolidación GitHub-as-platform.',
+  description_fil = 'AI coding agent platforms (Claude Code, Codex, Cursor, Kiro), IDE integration, mga CI/CD agent runners, developer tool registries, enterprise developer-workflow consolidation, code-review automation, agent-driven repository operations, Skills marketplace adoption, Microsoft Build platform anchor, Microsoft Foundry Toolkit, AWS AgentCore CLI, GitHub Copilot CLI, Codex CLI 0.128.0 model-provider-owned discovery, dev-experience SLA, GitHub-as-platform consolidation.'
 WHERE theme_id = 'business.developer_platformization';
 
 UPDATE themes SET
@@ -1062,6 +1527,24 @@ UPDATE themes SET
   label_es = 'Estrategia de capex de cómputo', short_label_es = 'Capex de cómputo',
   label_fil = 'Estratehiya ng Compute Capex', short_label_fil = 'Compute Capex'
 WHERE theme_id = 'business.compute_capex_strategy';
+
+UPDATE themes SET
+  label_ja = 'AIマクロと資本市場', short_label_ja = 'AIマクロ',
+  label_es = 'Macro de IA y mercados de capitales', short_label_es = 'Macro IA',
+  label_fil = 'AI Macro at Capital Markets', short_label_fil = 'AI Macro',
+  description_ja = 'AIを形作るマクロ・資本市場の力学: Mag 7 スーパーウィーク決算、AI capex ROI の再評価、AI 売上開示のリライト (SEC コンセプトリリース、OpenAI の監査済み月次売上、AMD AI アクセラレータ 10-Q セグメント、Microsoft 監査済み月次 AI 事業 KPI)、Powell-Fed Board 制度ボラティリティ・レジーム、FOMC 反対票の常態化、Cerebras IPO、Apple 自社株買いと $700B AI capex の衝突、AI アクセラレータ・ベンダーの先渡し供給 8-K 開示。',
+  description_es = 'Dinámicas macroeconómicas y de mercados de capitales que dan forma a la IA: resultados de la super-semana de Mag 7, reprecio del ROI de AI-capex, reescritura de divulgación de ingresos de IA (concept release de la SEC, cadencia de ingresos auditados de OpenAI, segmento 10-Q de aceleradores AI de AMD, KPIs mensuales auditados del negocio de IA de Microsoft), régimen de volatilidad institucional Powell-Fed Board, norma de disidencia del FOMC, IPO de Cerebras, colisión de la recompra de Apple con la impresión de $700B AI capex, cadencia de divulgaciones 8-K de oferta forward de proveedores de aceleradores AI.',
+  description_fil = 'Macro at capital-markets dynamics na humuhubog sa AI: Mag 7 super-week earnings, repricing ng AI-capex ROI, rewrite ng AI-revenue disclosure (SEC concept release, OpenAI audited revenue cadence, AMD AI-accelerator 10-Q segment, Microsoft audited monthly AI-business KPIs), Powell-Fed Board institutional-volatility regime, norm ng dissent sa FOMC, Cerebras IPO, banggaan ng Apple buyback sa $700B AI-capex print, cadence ng forward-supply 8-K ng mga AI-accelerator vendor.'
+WHERE theme_id = 'tech.ai_macro_capital_markets';
+
+UPDATE themes SET
+  label_ja = '推論サーバ・サプライチェーン', short_label_ja = '推論サプライ',
+  label_es = 'Cadena de suministro de servidores de inferencia', short_label_es = 'Suministro inferencia',
+  label_fil = 'Inference Server Supply Chain', short_label_fil = 'Inference Supply',
+  description_ja = '推論サーバのサプライチェーン・ガバナンス: 規制プリミティブとしての AI-Infra CVE クラス、トップ CVE カテゴリとしての間接プロンプトインジェクション、GGUF サプライチェーン整合性ゲート (署名済みカード、SSTI スキャン)、AI SaaS 間の OAuth 信頼、推論サーバ SSTI から OWASP LLM Top-10 v2026 へ、エージェント・スキル攻撃面の脅威サブマトリックス、推論サーバ SBOM 付き CISA AI-Infra KEV サブカタログ、NIST 非人間アイデンティティ・コントロール・プロファイル。',
+  description_es = 'Gobernanza de la cadena de suministro de servidores de inferencia: la clase CVE de infraestructura de IA como primitiva regulatoria, inyección indirecta de prompt como categoría CVE principal, controles de integridad de la cadena de suministro GGUF (tarjetas firmadas, escaneos SSTI), confianza OAuth entre SaaS de IA, SSTI de servidor de inferencia integrado al OWASP LLM Top-10 v2026, sub-matriz de amenazas de superficie de ataque de agent-skills, sub-catálogo CISA AI-Infra KEV con SBOM de servidor de inferencia, perfil de control de identidad no-humana del NIST.',
+  description_fil = 'Gobernanza ng supply chain ng inference server: AI-Infra CVE class bilang regulatory primitive, indirect prompt injection bilang top CVE category, mga integrity gate ng GGUF supply chain (signed cards, SSTI scans), OAuth trust sa pagitan ng AI SaaS, inference-server SSTI tungo sa OWASP LLM Top-10 v2026, threat sub-matrix ng agent-skills attack surface, CISA AI-Infra KEV sub-catalog na may SBOM ng inference server, profile ng kontrol ng non-human identity ng NIST.'
+WHERE theme_id = 'business.inference_server_supply_chain';
 
 -- ============================================================
 -- 17. Migration note for ALTER TABLE
@@ -1072,7 +1555,7 @@ WHERE theme_id = 'business.compute_capex_strategy';
 -- empty database. To migrate an *existing* analytics.sqlite to this
 -- schema, the simplest path is:
 --
---     rm app/data/analytics2.sqlite
+--     rm app/data/analytics.sqlite
 --     python -m src.cli update     # rebuilds DB from scratch
 --
 -- That is the documented procedure for the locale branch since the
