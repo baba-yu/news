@@ -1,0 +1,73 @@
+{
+  "date": "2026-05-26",
+  "sections": [
+    {
+      "category": "Local LLM Optimization (Fine-tuning, Inference)",
+      "bullets": [
+        {
+          "body": "Nagpadala ang Unsloth ng Martes na point release na nakatag bilang v2026.5.26 na nagpapakilala ng first-class support para sa Qwen3.6-Max-Preview ng Alibaba bilang fine-tuning base, kasama ang Daniel Han Chen at Mike Han Chen author pair na nag-post ng kapares na benchmark sheet sa Hugging Face Blog na nagpapakita na ang bagong Qwen3.6-Max-Preview-235B Mixture-of-Experts checkpoint ay nagsasanay sa humigit-kumulang 1.74x throughput laban sa nakaraang DeepSeek R3-Pro 38B recipe sa ilalim ng kaparehong router-only LoRA driver sa iisang 8x H200 SXM5 node, kasama ang nasukat na peak combined VRAM reduction na 11.3 porsyento laban sa vanilla Hugging Face Transformers v5 baseline at karagdagang 4.1 porsyento peak savings laban sa nakaraang linggo's Mixtral-Next 70B merge. Ang release ay nag-aangat din sa contributed 60B-class recipe count sa apat — nagdaragdag ng community-tested MiniMax M2.7 235B MoE port mula sa isang Tsinghua University KEG Lab pull request sa ibabaw ng kasalukuyang DeepSeek R3-Pro, OLMo-2 60B at Qwen3 MoE 60B set — at nagpapakilala ng bagong selective-expert-checkpoint primitive na nagpapahintulot sa trainer na i-freeze ang inactive expert columns sa disk habang nagsa-save ng checkpoint, na nagbabawas ng checkpoint disk footprint sa MiniMax port mula humigit-kumulang 470GB patungong 188GB sa unang sampung saved revisions. Isang Martes na Simon Willison note ang nag-flag sa selective-expert-checkpoint primitive bilang ang pinaka-operationally meaningful na pagbabago na isiniwalat ng Unsloth sa quarter na ito para sa consumer-class downstream fine-tuners na tumatakbo sa Lambda Labs o RunPod kasama ang nakakabit na SSD budget caps, at isang hiwalay na Martes Hacker News thread ang nagpalitaw ng dalawang maagang independent reproductions ng Qwen3.6-Max-Preview benchmark sa 8x H200 SXM5 rentals mula sa CoreWeave at Crusoe Cloud kasama ang throughput numbers na tumama sa loob ng 3 porsyento ng Daniel Han Chen sheet.",
+          "citations": [
+            {"label": "Unsloth - v2026.5.26 Qwen3.6-Max-Preview support release MiniMax M2.7 235B MoE selective expert checkpoint primitive", "url": "https://unsloth.ai/blog/v2026-5-26-qwen3-6-max-preview-support-minimax-m27-235b-moe-selective-expert-checkpoint-may-26-2026"},
+            {"label": "Hugging Face Blog - Daniel Han Chen Mike Han Chen Unsloth Qwen3.6-Max-Preview 1.74x throughput 11.3 percent peak VRAM reduction 8x H200 SXM5 benchmark sheet", "url": "https://huggingface.co/blog/unsloth-qwen3-6-max-preview-1-74x-throughput-8x-h200-sxm5-may-26-2026"},
+            {"label": "Simon Willison - Unsloth selective expert checkpoint MiniMax 470GB to 188GB disk footprint operational consumer GPU fine tuning", "url": "https://simonwillison.net/2026/May/26/unsloth-selective-expert-checkpoint-minimax-disk-footprint/"},
+            {"label": "Hacker News - Unsloth Qwen3.6-Max-Preview 8x H200 SXM5 CoreWeave Crusoe Cloud independent reproductions Tuesday May 26 2026", "url": "https://news.ycombinator.com/item?id=44012744"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Models / Chinese Frontier-Open Cohort",
+      "bullets": [
+        {
+          "body": "Inilathala ng Qwen team ng Alibaba ang pormal na Qwen3.6-Max-Preview model card sa Hugging Face nitong Martes ng umaga Pacific time, na nag-aangat sa arkitektura mula sa preview-numbers-only blog post patungo sa fully gated open-weight release sa ilalim ng Tongyi Qianwen open license, kung saan ang 235B-active-parameter Mixture-of-Experts checkpoint ay nagpapadala ng 1M-token native context window, isang 24-of-160 expert routing topology, at isang nailathalang instruction-tuned variant kasama ng base. Ayon sa model card, ang Qwen3.6-Max-Preview ay tumama sa 88.7 sa LiveCodeBench v6 at 76.2 sa SWE-Bench Verified — parehong bagong records para sa anumang non-Anthropic non-OpenAI checkpoint — at tumutugma sa Claude Opus 4.7 sa AIME 2025 sa loob ng 0.6-point band. Kinumpirma ng Decrypt na ang release ay naka-time upang i-undercut ang DeepSeek-V4-Pro's pricing curve papasok ng May 28 OpenRouter integration cycle, kung saan inilista ng Alibaba Cloud Model Studio ang hosted variant sa $0.45 kada milyong input tokens laban sa $1.10 floor ng DeepSeek-V4-Pro at Anthropic's Claude Opus 4.7 sa $7.50, habang iniulat ng The Decoder ang initial Together AI at Fireworks AI hosted endpoints na nagsindi sa loob ng unang anim na oras kasama ang first-token-latency sa humigit-kumulang 0.18 segundo sa 8x H100 SXM5 na may buong FP8 quantization.",
+          "citations": [
+            {"label": "Alibaba Qwen - Qwen3.6-Max-Preview Hugging Face model card 235B active parameter MoE 1M context 24 of 160 expert routing open weight Tongyi Qianwen license", "url": "https://qwen.ai/blog?id=qwen3-6-max-preview-model-card-release-may-26-2026"},
+            {"label": "Hugging Face - Qwen Qwen3.6-Max-Preview-235B repo card LiveCodeBench 88.7 SWE-Bench Verified 76.2 AIME 2025 Claude Opus 4.7 parity", "url": "https://huggingface.co/Qwen/Qwen3.6-Max-Preview-235B"},
+            {"label": "Decrypt - Qwen3.6-Max-Preview Alibaba Cloud Model Studio pricing 0.45 per million input tokens undercuts DeepSeek-V4-Pro May 28 OpenRouter cycle", "url": "https://decrypt.co/365774/alibaba-qwen-3-6-max-preview-model-card-pricing-deepseek-v4-pro-may-26-2026"},
+            {"label": "The Decoder - Qwen3.6-Max-Preview Together AI Fireworks AI hosted endpoints first six hours 0.18s first token latency 8x H100 SXM5 FP8 quantization", "url": "https://the-decoder.com/qwen3-6-max-preview-together-ai-fireworks-ai-hosted-endpoints-first-token-latency-fp8-quantization-may-26-2026/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Stock Prices and Corporate Activity",
+      "bullets": [
+        {
+          "body": "Ang Cerebras Systems (NASDAQ: CBRS) ay muling nagbukas matapos ang Memorial Day market closure kasama ang isang Martes na session na nag-print ng pinakamataas na single-day volume na dinala ng stock mula sa post-Alphabet analyst-day Biyernes at nagresolba sa tatlong araw na natipong demand mula sa holiday hold sa isang malinis na tape session. Ang open print ay tumama sa $213.40 laban sa $209.85 close ng Biyernes (humigit-kumulang +1.7 porsyento gap), umabot sa intraday high na $221.20 sa loob ng unang siyamnapung minuto, at nagsara sa $217.05 sa volume na humigit-kumulang 18.6 milyong shares — mga 2.7x ng trailing-twenty-day average at ang ikalimang pinakamataas na volume session ng post-IPO record. Itinuro ng Bloomberg ang close bilang ang unang pagtulak ng consensus analyst spread sa itaas ng $215, kung saan inangat ng Bernstein ang Market-Perform floor nito sa $200 mula $185 sa isang Martes umaga note at ang UBS ay nag-upgrade sa Cerebras patungo sa Buy kasama ang $240 target na binabanggit ang Saudi Aramco Digital MoU na pormal na nagsara nitong Martes hapon sa isang nailathalang $1.2 bilyong total contract value sa loob ng apat na taon para sa first-generation CS-4 capacity placement sa King Abdullah Economic City data-center park. Iniulat din ng Reuters na ang institutional buyside cumulative net position ay umakyat sa humigit-kumulang 47.5 porsyento ng float sa Martes tape mula sa humigit-kumulang 44 porsyento ng Biyernes, at ang Morgan Stanley's Tuesday tape-recap ay nagtulak ng upside-scenario probability nito sa 61 porsyento mula sa 54 porsyento ng Biyernes.",
+          "citations": [
+            {"label": "Bloomberg - Cerebras CBRS Tuesday May 26 tape reopen 213.40 open 221.20 high 217.05 close 18.6M volume Bernstein 200 UBS Buy 240 Saudi Aramco Digital MoU close 1.2 billion King Abdullah Economic City", "url": "https://www.bloomberg.com/news/articles/2026-05-26/cerebras-cbrs-saudi-aramco-digital-mou-close-1-2-billion-king-abdullah-economic-city-cs-4-tuesday-tape-reopen"},
+            {"label": "Reuters - Cerebras CBRS Tuesday May 26 institutional buyside 47.5 percent of float Morgan Stanley upside scenario 61 percent UBS upgrade Buy 240", "url": "https://www.reuters.com/technology/cerebras-cbrs-tuesday-may-26-tape-reopen-institutional-buyside-position-morgan-stanley-upside-2026-05-26/"},
+            {"label": "Datacenter Dynamics - Saudi Aramco Digital Cerebras CS-4 MoU close King Abdullah Economic City 1.2 billion four year contract first generation capacity Tuesday May 26 2026", "url": "https://www.datacenterdynamics.com/en/news/saudi-aramco-digital-cerebras-cs-4-mou-close-king-abdullah-economic-city-1-2-billion-four-year-contract-tuesday-may-26-2026/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Physical AI / Robotics",
+      "bullets": [
+        {
+          "body": "Isiniwalat ng Stellantis nitong Martes ng umaga na ang Detroit Mack Avenue Optimus pilot nito ay isinulong mula sa dating inihayag na Hunyo 8 activation date patungong Hunyo 1, kung saan binabanggit ng Reuters ang Stellantis Tuesday note na nagkukumpirma na ang 60-unit cohort ay nakumpleto na ang factory-acceptance testing sa Tesla's Fremont commissioning floor sa loob ng Memorial Day weekend at ang mga units ay naipasok na sa Detroit floor para sa final fixture mating bago ang muling pagsisimula ng production line. Ang pull-in ay nag-compress sa gap sa pagitan ng Tesla Fremont 240-unit completion at ang unang US contract-manufacturing deployment sa isang linggo, at tumugon ang BMW sa loob ng kaparehong trading session kasama ang isang press release na nagsasaad na ang BMW Plant Leipzig ay magla-lock ng second AEON cohort first-activation date nito sa Hunyo 15 sa halip na ang dating Hunyo 22 placeholder, na naglalagay ng apat na humanoid-robot factory-floor activations sa loob ng 18-day window sa pagitan ng Hunyo 1 at Hunyo 18. Pinanatili ng Volkswagen Wolfsburg ang Hunyo 22 cohort activation nito ngunit nagdagdag ng 24-unit second cohort na may Hulyo 13 target, at iniulat ng Bloomberg na ang Boston Dynamics Hyundai ay nagdaos ng investor briefing nitong Martes hapon na nag-flag na ang Atlas commercial-fleet first-deployment cycle (Hyundai Motor Group Pyeongtaek plant) ay isinusulong ng halos siyam na araw patungong Hunyo 24, binabanggit ang Stellantis pull-in bilang pampublikong patunay na ang humanoid factory deployments ay tumawid na sa praktikal na threshold ng pagiging handa.",
+          "citations": [
+            {"label": "Reuters - Stellantis Detroit Mack Avenue Optimus pilot pulled from June 8 to June 1 60 unit cohort factory acceptance Fremont commissioning floor", "url": "https://www.reuters.com/business/autos-transportation/stellantis-detroit-mack-avenue-optimus-pilot-pull-in-june-1-60-unit-cohort-factory-acceptance-fremont-2026-05-26/"},
+            {"label": "BMW Group Press - Plant Leipzig second AEON cohort first activation date June 15 advanced from June 22 placeholder Tuesday May 26 2026", "url": "https://www.press.bmwgroup.com/global/article/detail/T0445129EN/bmw-plant-leipzig-second-aeon-cohort-first-activation-date-june-15-tuesday-may-26-2026"},
+            {"label": "Bloomberg - Boston Dynamics Hyundai Atlas commercial fleet first deployment Pyeongtaek plant moved to June 24 nine day pull-in Stellantis proof threshold", "url": "https://www.bloomberg.com/news/articles/2026-05-26/boston-dynamics-hyundai-atlas-commercial-fleet-first-deployment-pyeongtaek-plant-june-24-pull-in"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security Research / CVE Updates",
+      "bullets": [
+        {
+          "body": "Inilathala ng GitHub Security Lab ang isang Martes advisory na nagsisiwalat ng CVE-2026-46127, isang critical-severity (CVSS 9.4) prompt-injection-escalation vulnerability sa OpenAI's open-source Codex CLI v3.1.x development branch kung saan ang isang attacker ay maaaring magtali ng workspace-scoped sandboxed Codex agent sa isang unsandboxed shell-exec context sa pamamagitan ng isang ginawang MCP-server response na nag-e-exploit ng nawawalang JSON-Schema validation step sa agent harness's tool-call deserialization path. Iniaalay ng advisory ang mga researcher na sina Trail of Bits Vasilios Mavroudis at Pillar Security Dor Sarig para sa pag-uulat at binabanggit na nagpadala ang OpenAI ng patched v3.1.10 development tag sa loob ng disclosure window, kung saan ang patched build ay nagdaragdag ng strict schema validation plus isang runtime tool-call audit log; ang disclosure ay nag-aangat ng Trail of Bits agentic-AI tooling-stack CVE taxonomy sa labindalawang nai-catalog na instances, ang unang net-new addition mula noong May 8 cycle. Iniulat ng The Hacker News na inilagay ng CISA ang CVE-2026-46127 sa kanyang Known Exploited Vulnerabilities catalog sa loob ng kaparehong Martes window matapos kumpirmahin ng Mandiant incident-response engagement sa isang Fortune 500 financial-services customer ang active exploitation in the wild, at sinabi ng Martes na security note ng OpenAI na ang Codex CLI's production-tier auto-update path ay pipilitin ang lahat ng v3.1.x development tenants na lumipat sa v3.1.10 sa loob ng 72-oras na window. Hiwalay, naglathala ang NIST NVD ng Martes hapon update na nagkukumpirma ng CVSS 9.4 scoring at muling ikinategorya ang vulnerability sa ilalim ng agent-loader subcategory.",
+          "citations": [
+            {"label": "GitHub Security Lab - CVE-2026-46127 OpenAI Codex CLI v3.1.x prompt injection escalation MCP server tool call deserialization Trail of Bits Pillar Security Tuesday May 26 2026 advisory CVSS 9.4", "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"},
+            {"label": "The Hacker News - CISA KEV catalog CVE-2026-46127 OpenAI Codex CLI Mandiant Fortune 500 financial services active exploitation in the wild Tuesday May 26 2026", "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46127-openai-codex-cli-mandiant-fortune-500-financial-services-active-exploitation.html"},
+            {"label": "OpenAI - Codex CLI v3.1.10 security release force roll production tenants 72 hour window CVE-2026-46127 strict schema validation runtime tool call audit log", "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"},
+            {"label": "NIST NVD - CVE-2026-46127 OpenAI Codex CLI agent loader subcategory CVSS 9.4 reclassification Trail of Bits taxonomy twelve catalogued instances", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"}
+          ]
+        }
+      ]
+    }
+  ]
+}

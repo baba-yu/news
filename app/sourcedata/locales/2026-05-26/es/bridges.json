@@ -1,0 +1,686 @@
+{
+  "date": "2026-05-26",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.abe1ced634091a3c",
+        "short_label": "Selective-expert-checkpointing lands as default MoE save primitive by H2 2026",
+        "prediction_date": "2026-05-26"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "La propia prediccion de hoy aterriza directamente sobre el lanzamiento de Unsloth v2026.5.26. La publicacion etiquetada introduce una primitiva de selective-expert-checkpoint que congela las columnas de expertos inactivos en disco durante la escritura del checkpoint, colapsando la huella de checkpoint del puerto MoE de 235B de MiniMax M2.7 desde aproximadamente 470GB hasta 188GB a lo largo de las primeras diez revisiones guardadas. La hoja de benchmark pareada de Hugging Face Blog de Daniel Han Chen y Mike Han Chen reporta el entrenamiento de Qwen3.6-Max-Preview-235B con un rendimiento ~1.74x frente a la receta previa de DeepSeek R3-Pro 38B bajo el mismo driver de LoRA solo para router en un unico nodo 8x H200 SXM5, con la VRAM combinada pico reducida un 11.3 por ciento frente a una linea base vanilla de Hugging Face Transformers v5. Dos reproducciones independientes en alquileres de 8x H200 SXM5 en CoreWeave y Crusoe Cloud aterrizaron dentro de un 3 por ciento de los numeros publicados durante el dia de mercado, y una nota de Simon Willison senalo la primitiva como el cambio mas operativamente significativo enviado este trimestre para los afinadores aguas abajo que operan contra los topes de presupuesto de SSD en Lambda Labs o RunPod. El lanzamiento tambien eleva el recuento de recetas de clase 60B contribuidas a cuatro, con un puerto MiniMax M2.7 del Tsinghua KEG Lab uniendose al conjunto existente de DeepSeek R3-Pro, OLMo-2 60B y Qwen3 MoE 60B.",
+      "reference_links": [
+        {
+          "label": "Unsloth - notas de lanzamiento v2026.5.26 (soporte Qwen3.6-Max-Preview, puerto MiniMax M2.7, selective-expert-checkpoint)",
+          "url": "https://unsloth.ai/blog/v2026-5-26-qwen3-6-max-preview-support-minimax-m27-235b-moe-selective-expert-checkpoint-may-26-2026"
+        },
+        {
+          "label": "Hugging Face Blog - Unsloth Qwen3.6-Max-Preview rendimiento 1.74x, reduccion del 11.3% de VRAM pico en 8x H200 SXM5",
+          "url": "https://huggingface.co/blog/unsloth-qwen3-6-max-preview-1-74x-throughput-8x-h200-sxm5-may-26-2026"
+        },
+        {
+          "label": "Simon Willison - la primitiva selective-expert-checkpoint de Unsloth reduce la huella en disco de MiniMax de 470GB a 188GB",
+          "url": "https://simonwillison.net/2026/May/26/unsloth-selective-expert-checkpoint-minimax-disk-footprint/"
+        },
+        {
+          "label": "Hacker News - reproducciones de Unsloth Qwen3.6-Max-Preview en CoreWeave y Crusoe Cloud aterrizando dentro del 3 por ciento",
+          "url": "https://news.ycombinator.com/item?id=44012744"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Sobre la prediccion de la primitiva de guardado MoE selective-expert-checkpointing (26 de mayo), el Unsloth v2026.5.26 de hoy entrega la plantilla operativa que nombra la clausula because de la prediccion. La huella del checkpoint del MiniMax M2.7 235B se colapsa de 470GB a 188GB, dos reproducciones independientes en 8x H200 SXM5 aterrizan dentro de un tres por ciento durante el dia de mercado, y la presion de presupuesto de SSD en Lambda Labs y RunPod es ahora vinculante.",
+        "coherence": 5,
+        "remaining_gap": "Hugging Face TRL, Axolotl y Llama-Factory aun no han enviado una primitiva compatible en tiempo de guardado, y ningun nivel de afinamiento gestionado por hyperscaler la ha activado como una palanca."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3abc8b1f6643907d",
+        "short_label": "SEC extends 8-K cyber materiality to agentic-AI dev-tool incidents by Q3 2026",
+        "prediction_date": "2026-05-26"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "La propia prediccion de hoy aterriza directamente sobre la inclusion de CVE-2026-46127 en la lista KEV de CISA. GitHub Security Lab divulgo una vulnerabilidad de escalada por inyeccion de prompt de severidad critica (CVSS 9.4) en la rama de desarrollo Codex CLI v3.1.x de codigo abierto de OpenAI, en la que un atacante puede encadenar a un agente Codex en sandbox de ambito de espacio de trabajo hacia un contexto de shell-exec sin sandbox a traves de una respuesta de servidor MCP manipulada que explota un paso de validacion JSON-Schema faltante en la ruta de deserializacion de llamadas a herramienta del harness del agente. The Hacker News reporto que CISA coloco CVE-2026-46127 en su catalogo de Vulnerabilidades Conocidas Explotadas dentro de la misma ventana del martes despues de que un compromiso de respuesta a incidentes de Mandiant en un cliente Fortune 500 de servicios financieros confirmara explotacion activa en estado salvaje, y la nota de seguridad del martes de OpenAI indica que la ruta de auto-actualizacion de nivel produccion forzara la migracion de todos los inquilinos de desarrollo v3.1.x a v3.1.10 dentro de una ventana de 72 horas. NIST NVD publico una actualizacion el martes por la tarde confirmando la puntuacion CVSS 9.4 y reclasificando la vulnerabilidad bajo la subcategoria agent-loader, elevando la taxonomia de CVE del stack de herramientas de IA agentica de Trail of Bits a doce instancias catalogadas (la primera incorporacion neta desde el ciclo del 8 de mayo).",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "The Hacker News - CISA KEV anade CVE-2026-46127; Mandiant confirma explotacion activa en cliente Fortune 500 de servicios financieros",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46127-openai-codex-cli-mandiant-fortune-500-financial-services-active-exploitation.html"
+        },
+        {
+          "label": "OpenAI - lanzamiento de seguridad Codex CLI v3.1.10; migracion forzada de 72 horas para inquilinos v3.1.x; validacion de esquema estricta + registro de auditoria en tiempo de ejecucion",
+          "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Sobre la prediccion de extension del 8-K de la SEC a herramientas de desarrollo de IA agentica (26 de mayo), la inclusion de hoy de CVE-2026-46127 en la lista KEV de CISA dentro de una explotacion Fortune 500 de servicios financieros confirmada por Mandiant suministra el incidente de referencia canonico que nombra la clausula because de la prediccion. La migracion forzada de 72 horas de OpenAI y la subcategoria agent-loader de NIST dan al personal de la Corp Fin una taxonomia estable sobre la cual anclar una declaracion clarificadora.",
+        "coherence": 4,
+        "remaining_gap": "Aun no se ha emitido ninguna declaracion del personal de la Division of Corporation Finance, y ninguna nota de asesoria al cliente de Big Four ha emergido en la misma ventana para ratificar el precedente."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.304566b492fc547b",
+        "short_label": "FFIEC adds agent-harness third-party risk addendum by Q3 2026",
+        "prediction_date": "2026-05-26"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "La propia prediccion de hoy aterriza directamente sobre el hallazgo de explotacion Fortune 500 de servicios financieros de Mandiant y la reclasificacion de NIST bajo la subcategoria agent-loader. El aviso de GitHub Security Lab sobre CVE-2026-46127 en el Codex CLI de OpenAI lleva los dos rasgos operativos que la cohorte de supervisores prudenciales trata como detonantes activadores para un addendum nuevo del manual: la colocacion en la misma ventana por parte de CISA del CVE en el catalogo de Vulnerabilidades Conocidas Explotadas dentro de un compromiso de respuesta a incidentes de Mandiant en un cliente Fortune 500 de servicios financieros (una exposicion documentada a perdidas en estado salvaje en una entidad supervisada) y la reclasificacion del mismo dia por parte de NIST NVD bajo la nueva subcategoria agent-loader (elevando la taxonomia de CVE de agent-harness de Trail of Bits a doce instancias catalogadas). La nota de seguridad del martes de OpenAI indica que la ruta de auto-actualizacion de nivel produccion del Codex CLI forzara la migracion de todos los inquilinos de desarrollo v3.1.x a v3.1.10 dentro de una ventana de 72 horas.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "The Hacker News - CISA KEV anade CVE-2026-46127; Mandiant confirma explotacion activa en cliente Fortune 500 de servicios financieros",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46127-openai-codex-cli-mandiant-fortune-500-financial-services-active-exploitation.html"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        },
+        {
+          "label": "OpenAI - lanzamiento de seguridad Codex CLI v3.1.10; migracion forzada de 72 horas para inquilinos v3.1.x; validacion de esquema estricta + registro de auditoria en tiempo de ejecucion",
+          "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Sobre la prediccion del addendum FFIEC de riesgo de terceros para agent-harness (26 de mayo), el compromiso de explotacion Fortune 500 de servicios financieros por parte de Mandiant de hoy mas la promocion de la subcategoria agent-loader de NIST suministran la exposicion documentada a perdidas en estado salvaje en una entidad supervisada que la clausula because de la prediccion nombra como el detonante activador para un addendum interagencial del manual.",
+        "coherence": 4,
+        "remaining_gap": "Aun no se ha abierto ningun aviso de comentario en el federal-register desde OCC, FRB, FDIC, NCUA o CFPB, y ningun manual sectorial de FS-ISAC ha emergido citando el compromiso."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5e1c9a4f63d827b8",
+        "short_label": "Loader-verification nine-document reference set lands framework default shipment by mid-June 2026",
+        "prediction_date": "2026-05-25"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje del conjunto de referencia de verificacion de loader de nueve documentos de esta prediccion. La divulgacion de CVE-2026-46127 (CVSS 9.4) en el harness de agente Codex CLI de OpenAI - un paso faltante de validacion JSON-Schema en la ruta de deserializacion de llamadas a herramienta - se ubica en la clase de riesgo agent-loader a la que apunta el conjunto de referencia de la prediccion, pero el ciclo de noticias no muestra agitacion fresca de mantenedores de framework, promocion a RC1 o extension del conjunto de referencia de arxiv. Independientemente de la cohorte de frameworks de la prediccion, OpenAI envio una etiqueta de desarrollo v3.1.10 parcheada con validacion de esquema estricta mas un registro de auditoria de llamadas a herramienta en tiempo de ejecucion dentro de la ventana de divulgacion, y NIST NVD reclasifico la vulnerabilidad bajo la subcategoria agent-loader - ambos datos nombran la necesidad de una verificacion mas estricta del lado del loader sin confirmar la ruta de envio por defecto de mediados de junio para LangChain mas AutoGen mas CrewAI mas Haystack mas Pydantic AI.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "OpenAI - lanzamiento de seguridad Codex CLI v3.1.10; migracion forzada de 72 horas para inquilinos v3.1.x; validacion de esquema estricta + registro de auditoria en tiempo de ejecucion",
+          "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del envio por defecto del framework del conjunto de referencia de verificacion de loader de nueve documentos (25 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth v2026.5.26, Qwen3.6-Max-Preview, adelanto de Stellantis Optimus, CVE-2026-46127 de OpenAI Codex CLI). El CVE se ubica en la clase de riesgo de verificacion de loader pero no muestra promocion fresca a RC1 por parte de mantenedores de framework ni extension del conjunto de referencia de arxiv sobre la cohorte LangChain/AutoGen/CrewAI/Haystack/Pydantic AI que rastrea la prediccion.",
+        "coherence": 1,
+        "remaining_gap": "Ningun corte RC1 de la cohorte de frameworks, ninguna extension del conjunto de referencia de arxiv, ninguna senal de conformidad de matriz de interoperabilidad cross-orchestrator dentro de la ventana de hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b6d5df1a02a9af1b",
+        "short_label": "Cerebras CBRS re-rates above analyst-band ceiling on Saudi Aramco MoU close by late Q2 2026",
+        "prediction_date": "2026-05-25"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Las noticias de hoy aterrizan directamente sobre el cierre del MoU con Saudi Aramco Digital mas una ruptura del techo de la banda de analistas. Cerebras (NASDAQ: CBRS) reabrio con una sesion del martes que resolvio tres dias de demanda contenida en una cinta limpia - apertura en $213.40, maximo intradia $221.20, cierre en $217.05 con un volumen de aproximadamente 18.6 millones de acciones (~2.7x el promedio movil de veinte dias). Bloomberg destaco el cierre como el primer empujon del rango consenso de analistas por encima de $215, con Bernstein elevando su piso Market-Perform a $200 desde $185 y UBS subiendo su recomendacion a Buy con un objetivo de $240 citando el cierre formal del MoU con Saudi Aramco Digital por un valor de contrato total divulgado de $1.2 mil millones a lo largo de cuatro anos para la colocacion de capacidad CS-4 de primera generacion en el parque de centros de datos King Abdullah Economic City. Reuters reporto que la posicion neta acumulada de compra institucional subio a ~47.5 por ciento del flotante desde el ~44 por ciento del viernes, y el resumen de cinta del martes de Morgan Stanley empujo su probabilidad de escenario alcista a 61 por ciento desde 54 por ciento - a traves del umbral del 60 por ciento que la prediccion senalo como la inflexion de nivel Bullish.",
+      "reference_links": [
+        {
+          "label": "Bloomberg - cinta del martes de Cerebras CBRS: apertura $213.40, maximo $221.20, cierre $217.05, volumen 18.6M; cierre del MoU con Saudi Aramco Digital $1.2B / King Abdullah Economic City",
+          "url": "https://www.bloomberg.com/news/articles/2026-05-26/cerebras-cbrs-saudi-aramco-digital-mou-close-1-2-billion-king-abdullah-economic-city-cs-4-tuesday-tape-reopen"
+        },
+        {
+          "label": "Reuters - compra institucional de Cerebras al 47.5% del flotante, escenario alcista de Morgan Stanley al 61%, UBS sube a Buy $240",
+          "url": "https://www.reuters.com/technology/cerebras-cbrs-tuesday-may-26-tape-reopen-institutional-buyside-position-morgan-stanley-upside-2026-05-26/"
+        },
+        {
+          "label": "Datacenter Dynamics - cierre del MoU Saudi Aramco Digital / Cerebras CS-4, contrato de cuatro anos por $1.2B, King Abdullah Economic City",
+          "url": "https://www.datacenterdynamics.com/en/news/saudi-aramco-digital-cerebras-cs-4-mou-close-king-abdullah-economic-city-1-2-billion-four-year-contract-tuesday-may-26-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Sobre la prediccion del cierre del MoU de Cerebras CBRS con Saudi Aramco (25 de mayo), la cinta del martes de hoy cierra en $217.05 por encima del techo consenso de $215, el MoU con Saudi Aramco Digital se imprime formalmente en $1.2 mil millones a lo largo de cuatro anos para capacidad CS-4 en King Abdullah Economic City, UBS sube a Buy con $240, y la probabilidad de escenario alcista de Morgan Stanley cruza el umbral del 60 por ciento de nivel Bullish dentro del Q2.",
+        "coherence": 5,
+        "remaining_gap": "Sostener el cierre por encima de $215 a lo largo de las proximas cinco sesiones convertiria la ruptura de primera impresion de hoy en la revalorizacion duradera que nombra la prediccion."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4a7c1f93b8d62e0a",
+        "short_label": "Reciprocity perimeter admits US as seventeenth jurisdiction at OECD plenary closing session by June 6 2026",
+        "prediction_date": "2026-05-25"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de admision al plenario OECD GENAI de esta prediccion. El ciclo de noticias cubre Unsloth v2026.5.26, la tarjeta del modelo Qwen3.6-Max-Preview en Hugging Face, la cinta del martes de Cerebras CBRS con el cierre del MoU de Saudi Aramco Digital, el adelanto a 1 de junio del Optimus de Stellantis en Mack Avenue Detroit, y la divulgacion de CVE-2026-46127 en CISA KEV - ninguno de los cuales muestra movimiento fresco del secretariado del grupo de trabajo OECD GENAI, actividad de firma de orden ejecutiva FMRB, o noticias sobre delegacion del perimetro de dieciseis jurisdicciones. Sin base de enlace de referencia para esta fila.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del perimetro de reciprocidad OECD con Estados Unidos como decimoseptima jurisdiccion (25 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth v2026.5.26, Qwen3.6-Max-Preview, cierre del MoU Cerebras-Saudi Aramco, adelanto de Stellantis Optimus, CVE de OpenAI Codex CLI). Ningun cambio fresco de estado sobre movimiento del grupo de trabajo OECD GENAI o firma de orden ejecutiva FMRB dentro de la ventana de hoy.",
+        "coherence": 1,
+        "remaining_gap": "Ninguna lectura del secretariado de OECD, ninguna firma de orden ejecutiva FMRB, ninguna noticia de delegacion del perimetro de dieciseis jurisdicciones dentro del ciclo de hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4d8f72ce19b3a056",
+        "short_label": "Loader-verification nine-document reference set anchors mid-June default shipment across five frameworks",
+        "prediction_date": "2026-05-24"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de verificacion de loader de nueve documentos de esta prediccion. La divulgacion de CVE-2026-46127 (CVSS 9.4 en el harness de agente Codex CLI de OpenAI, validacion JSON-Schema faltante en la deserializacion de llamadas a herramienta) y la reclasificacion de NIST NVD bajo la subcategoria agent-loader nombran la clase de riesgo agent-loader a la que apunta el conjunto de referencia de la prediccion, pero el ciclo de noticias no muestra extensiones frescas de arxiv, promocion a RC1 por mantenedores de framework, o senal de conformidad de matriz de interoperabilidad. El lanzamiento de seguridad v3.1.10 de OpenAI envia validacion de esquema estricta mas un registro de auditoria de llamadas a herramienta en tiempo de ejecucion como respuesta parcheada, pero esto es una correccion del lado del proveedor en lugar de la ruta de envio por defecto de la cohorte de frameworks que rastrea la prediccion.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        },
+        {
+          "label": "OpenAI - lanzamiento de seguridad Codex CLI v3.1.10; migracion forzada de 72 horas para inquilinos v3.1.x; validacion de esquema estricta + registro de auditoria en tiempo de ejecucion",
+          "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion de cinco frameworks de mediados de junio para verificacion de loader de nueve documentos (24 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth v2026.5.26, Qwen3.6-Max-Preview, cierre del MoU Cerebras-Saudi Aramco, adelanto de Stellantis Optimus, CVE de OpenAI Codex CLI). El CVE toca la clase de riesgo de verificacion de loader pero es una correccion del lado del proveedor en lugar de la ruta de envio por defecto de la cohorte de frameworks que rastrea la prediccion.",
+        "coherence": 1,
+        "remaining_gap": "Ninguna extension fresca del conjunto de referencia de arxiv, ninguna promocion a RC1 por mantenedores de framework, ningun paso de conformidad de matriz de interoperabilidad de cinco proveedores en el ciclo de hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a3e91b7d52c4f608",
+        "short_label": "Tenstorrent S-1 anchors three-name AI-chip IPO set by early August 2026",
+        "prediction_date": "2026-05-24"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje del S-1 de Tenstorrent de esta prediccion. El ciclo de noticias cubre Unsloth v2026.5.26, la tarjeta del modelo Qwen3.6-Max-Preview, la cinta del martes de Cerebras CBRS con el cierre del MoU de Saudi Aramco Digital, el adelanto de Optimus de Stellantis en Mack Avenue, y la divulgacion de CVE-2026-46127 - ninguno muestra actividad fresca de revision de SEC Corp Fin sobre Tenstorrent, movimiento de bookrunner para SambaNova, metricas de cumplimiento de capacidad de Galaxy-rack o noticias del conjunto comparable de IPO de aceleradores de IA del tercer nombre. La revalorizacion del martes de Cerebras se ubica en un carril de equity de aceleradores de IA separado en lugar del pipeline de pista de IPO al que apunta esta prediccion.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del conjunto de IPO de tres nombres de chips de IA con Tenstorrent S-1 (24 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth v2026.5.26, Qwen3.6-Max-Preview, cierre del MoU Cerebras-Saudi Aramco, adelanto de Stellantis Optimus, CVE de OpenAI Codex CLI). La revalorizacion de Cerebras se ubica en un carril de equity de aceleradores separado y no emergio movimiento fresco de pista de IPO de Tenstorrent o SambaNova.",
+        "coherence": 1,
+        "remaining_gap": "Ninguna lectura de revision SEC Corp Fin de Tenstorrent, ninguna noticia de presentacion confidencial de SambaNova, ninguna senal de conjunto comparable de IPO de acelerador del tercer nombre en el ciclo de hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6eb8478f34847ee9",
+        "short_label": "Reciprocity perimeter admits US as seventeenth jurisdiction by June 6 2026",
+        "prediction_date": "2026-05-24"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje del perimetro de reciprocidad con Estados Unidos como decimoseptima jurisdiccion de esta prediccion. El ciclo de noticias no muestra actividad del grupo de trabajo OECD GENAI, noticias sobre firma de orden ejecutiva FMRB, o movimiento de delegacion del perimetro de dieciseis jurisdicciones. Sin base de enlace de referencia.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del perimetro de reciprocidad con Estados Unidos como decimoseptima jurisdiccion (24 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth v2026.5.26, Qwen3.6-Max-Preview, cierre del MoU Cerebras-Saudi Aramco, adelanto de Stellantis Optimus, CVE de OpenAI Codex CLI). No emergio cambio fresco de estado sobre movimiento del grupo de trabajo OECD GENAI o actividad de firma FMRB.",
+        "coherence": 1,
+        "remaining_gap": "Ninguna lectura del secretariado de OECD, ninguna firma de orden ejecutiva FMRB, ninguna noticia de delegacion de dieciseis jurisdicciones dentro de la ventana de hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c8e3b47a92f1d605",
+        "short_label": "Loader-verification eight-document reference set settles as the mid-June default-shipment anchor",
+        "prediction_date": "2026-05-23"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de verificacion de loader de ocho documentos de esta prediccion. La divulgacion de CVE-2026-46127 (CVSS 9.4) y la reclasificacion bajo la subcategoria agent-loader de NIST tocan la clase de riesgo agent-loader sobre la que esta estructurado el conjunto de referencia de la prediccion, pero el ciclo de noticias no muestra extensiones frescas de arxiv, movimiento RC1 de la cohorte de frameworks, o senal de conformidad de seis proveedores. El parche v3.1.10 de OpenAI con validacion de esquema estricta mas un registro de auditoria de llamadas a herramienta en tiempo de ejecucion es un patron de cierre del lado del proveedor en lugar de la ruta de envio por defecto cross-framework que rastrea la prediccion.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del anclaje de mediados de junio de verificacion de loader de ocho documentos (23 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth v2026.5.26, Qwen3.6-Max-Preview, cierre del MoU Cerebras-Saudi Aramco, adelanto de Stellantis Optimus, CVE de OpenAI Codex CLI). El CVE toca la clase de riesgo de verificacion de loader pero es un cierre del lado del proveedor en lugar de la ruta de envio por defecto cross-framework que rastrea la prediccion.",
+        "coherence": 1,
+        "remaining_gap": "Ninguna extension de arxiv, ningun corte RC1 de la cohorte de frameworks, ninguna senal de conformidad de seis proveedores sobre el anclaje del conjunto de referencia de la prediccion dentro de la ventana de hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f47b2c9e83d61a05",
+        "short_label": "Mag-7 AI Services revenue-line breakout sets canonical disclosure precedent by Q3 2026",
+        "prediction_date": "2026-05-23"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de ruptura de linea de ingresos AI Services de Mag-7 de esta prediccion. El ciclo de noticias no muestra movimiento de avance fiscal-Q3 de Microsoft, comentario de divulgacion de Meta o AWS, o actividad de carta de comentario de muestra de SEC Corp Fin. Sin base de enlace de referencia.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion de ruptura de linea de ingresos AI Services de Mag-7 (23 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth v2026.5.26, Qwen3.6-Max-Preview, cierre del MoU Cerebras-Saudi Aramco, adelanto de Stellantis Optimus, CVE de OpenAI Codex CLI) sin cambio fresco de estado sobre el avance fiscal-Q3 de Microsoft, comentario de divulgacion de Meta o AWS, o actividad de carta-muestra de SEC Corp Fin.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita comentario de avance fiscal-Q3 de Microsoft, Meta o AWS, movimiento de nota al pie de 10-Q de AI Services de Alphabet, o actividad de carta de comentario de muestra de SEC Corp Fin para confirmar la ruta de divulgacion de ruptura."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7d2a91f4c83b6e57",
+        "short_label": "AI-accelerator IPO S-1 risk-factor templates standardize on doubly-cleared regulatory cite by August 2026",
+        "prediction_date": "2026-05-23"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de plantilla de factor de riesgo S-1 de IPO de aceleradores de IA de esta prediccion. El ciclo de noticias no muestra revision fresca de SEC Corp Fin sobre Tenstorrent, presentacion confidencial de SambaNova, o movimiento de cita regulatoria doblemente despejada de FMRB-mas-CISA. La cinta del martes de Cerebras CBRS y el cierre del MoU de Saudi Aramco Digital se ubican en el carril del techo de banda de analistas del lado de la demanda en lugar del carril de plantilla de factor de riesgo de pista de IPO al que apunta esta prediccion.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion de plantilla de factor de riesgo S-1 de IPO de aceleradores de IA (23 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth, Qwen3.6-Max-Preview, Stellantis Optimus, CVE de OpenAI Codex CLI) sin cambio fresco de estado sobre revision SEC de Tenstorrent, presentacion confidencial de SambaNova, o movimiento de cita regulatoria doblemente despejada FMRB-mas-CISA; la cinta de Cerebras se ubica en el carril de banda de analistas del lado de la demanda en lugar del carril de plantilla de pista de IPO.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita revision Corp Fin de Tenstorrent, presentacion confidencial de SambaNova, o movimiento de cita regulatoria doblemente despejada FMRB-mas-CISA dentro de una plantilla de factor de riesgo S-1 para confirmar la estandarizacion."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b7f2e91d6c8a4035",
+        "short_label": "Loader-verification seven-document reference set ships as framework default by mid-June 2026",
+        "prediction_date": "2026-05-22"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de verificacion de loader de siete documentos de esta prediccion. La divulgacion de CVE-2026-46127 (un paso de validacion JSON-Schema faltante en el harness de agente Codex CLI de OpenAI, con NIST NVD reclasificando la vulnerabilidad bajo la subcategoria agent-loader) aterriza en la clase de riesgo de verificacion de loader a la que apunta la prediccion, pero el ciclo de noticias no muestra promocion fresca a RC1 por mantenedores de framework, extension de conjunto de referencia de arxiv, o senal de paso de conformidad de seis proveedores. El v3.1.10 parcheado de OpenAI envia validacion de esquema estricta como respuesta del lado del proveedor - un patron de correccion alineado con la tesis mas amplia de la prediccion pero no la ruta de envio por defecto multi-framework que rastrea.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "OpenAI - lanzamiento de seguridad Codex CLI v3.1.10; migracion forzada de 72 horas para inquilinos v3.1.x; validacion de esquema estricta + registro de auditoria en tiempo de ejecucion",
+          "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del envio por defecto del framework de verificacion de loader de siete documentos (22 de mayo), la divulgacion de hoy de CVE-2026-46127 (CVSS 9.4) y la reclasificacion bajo la subcategoria agent-loader de NIST tocan la clase de riesgo de verificacion de loader pero sin cambio fresco de estado sobre promocion a RC1 por mantenedores de framework, extension del conjunto de referencia de arxiv, o senal de conformidad de seis proveedores; el v3.1.10 de OpenAI es una correccion del lado del proveedor en lugar de la ruta de envio por defecto multi-framework.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita promocion a RC1 por parte de mantenedores de LangChain, AutoGen, CrewAI, Haystack o Pydantic AI con el conjunto de referencia de siete documentos cableado en el loader por defecto del framework."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8c3f1a7e92b6d540",
+        "short_label": "Tenstorrent S-1 public filing lands first of three AI-accelerator IPO comparable set by early August 2026",
+        "prediction_date": "2026-05-22"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje primero-de-tres del S-1 de Tenstorrent de esta prediccion. El ciclo de noticias no muestra actividad de revision Corp Fin de Tenstorrent, noticias de presentacion confidencial de SambaNova, metricas de cumplimiento de capacidad de Galaxy-rack, o movimiento de pipeline de IPO de aceleradores de IA del tercer nombre. La cinta del martes de Cerebras CBRS con el cierre del MoU de Saudi Aramco Digital se ubica en un carril de equity separado en lugar del pipeline de pista de IPO.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del conjunto comparable de IPO de aceleradores de IA primero-de-tres con Tenstorrent S-1 (22 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth, Qwen3.6-Max-Preview, Stellantis Optimus, CVE de OpenAI Codex CLI) sin cambio fresco de estado sobre revision Corp Fin de Tenstorrent, presentacion confidencial de SambaNova, metricas de capacidad de Galaxy-rack, o movimiento de pipeline del tercer nombre; la cinta de Cerebras se ubica en un carril de equity separado.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita actividad de revision Corp Fin de Tenstorrent, presentacion confidencial de SambaNova, metricas de cumplimiento de capacidad de Galaxy-rack, o movimiento de pipeline del tercer nombre para confirmar el conjunto comparable primero-de-tres."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6112a2a37702366a",
+        "short_label": "FMRB executive order signs inside the OECD GENAI plenary window by June 6 2026",
+        "prediction_date": "2026-05-22"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de orden ejecutiva FMRB dentro del plenario de esta prediccion. El ciclo de noticias no muestra actividad fresca de firma de OSTP, movimiento del grupo de trabajo OECD GENAI, noticias de marcado de House Energy and Commerce, o progresion de directiva federal-civil de CISA. Sin base de enlace de referencia.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion de orden ejecutiva FMRB dentro del plenario (22 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth, Qwen3.6-Max-Preview, MoU Cerebras-Saudi Aramco, Stellantis Optimus, CVE de OpenAI Codex CLI) sin cambio fresco de estado sobre actividad de firma de OSTP, movimiento del grupo de trabajo OECD GENAI, marcado de House Energy and Commerce, o progresion de directiva federal-civil de CISA.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita actividad fresca de firma de OSTP, movimiento del grupo de trabajo OECD GENAI, marcado de House Energy and Commerce, o progresion de directiva federal-civil de CISA dentro de la ventana del plenario."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a5e8d3c92f407b16",
+        "short_label": "Loader-verification six-document reference set settles as the mid-June default-shipment anchor",
+        "prediction_date": "2026-05-21"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de verificacion de loader de seis documentos de esta prediccion. La divulgacion de CVE-2026-46127 (escalada por inyeccion de prompt CVSS 9.4 en el harness de agente Codex CLI de OpenAI) y la reclasificacion bajo la subcategoria agent-loader de NIST tocan la clase de riesgo de verificacion de loader a la que apunta el conjunto de referencia de la prediccion, pero el ciclo de noticias no muestra movimiento fresco RC1 de mantenedores de framework, extension de arxiv, o senal de conformidad de matriz de interoperabilidad cross-orchestrator de seis proveedores. El CVE es un caso de cierre del lado del proveedor en lugar de la ruta de envio por defecto cross-framework que rastrea la prediccion.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del envio por defecto de mediados de junio de verificacion de loader de seis documentos (21 de mayo), la divulgacion de hoy de CVE-2026-46127 y la reclasificacion de NIST como agent-loader tocan la clase de riesgo de verificacion de loader pero sin cambio fresco de estado sobre movimiento RC1 de mantenedores de framework, extension de arxiv, o conformidad de interoperabilidad cross-orchestrator de seis proveedores; el CVE es un cierre del lado del proveedor en lugar de la ruta de envio por defecto cross-framework.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita promocion a RC1 por mantenedores de framework, extension del conjunto de referencia de arxiv, o senal de conformidad de matriz de interoperabilidad cross-orchestrator de seis proveedores para confirmar el anclaje de envio por defecto."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.49adedabdb6b4150",
+        "short_label": "Cerebras CBRS re-rates into the upper analyst band by end-Q3 2026",
+        "prediction_date": "2026-05-21"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Las noticias de hoy aterrizan directamente sobre la tesis de revalorizacion al rango superior de analistas de Cerebras CBRS. CBRS reabrio con una sesion del martes imprimiendo apertura $213.40, maximo intradia $221.20, y cierre $217.05 con un volumen de aproximadamente 18.6 millones de acciones (~2.7x el promedio movil de veinte dias y la quinta sesion de mayor volumen del registro post-IPO). Bloomberg destaco el cierre como el primer empujon del rango consenso de analistas por encima de $215 - el umbral del rango superior de la prediccion - con Bernstein elevando su piso Market-Perform a $200 desde $185 y UBS subiendo a Buy con un objetivo de $240 citando el cierre formal del MoU con Saudi Aramco Digital el martes por la tarde con un valor de contrato total divulgado de $1.2 mil millones a lo largo de cuatro anos. Reuters reporto que la posicion neta acumulada de compra institucional subio a ~47.5 por ciento del flotante desde el ~44 por ciento del viernes, y el resumen de cinta del martes de Morgan Stanley empujo su probabilidad de escenario alcista a 61 por ciento desde 54 por ciento. La ruptura del techo de Q3-2026 sobre la cual la prediccion se anclo en la tesis de asignacion Mythos-Preview de Alphabet se realiza ahora sobre el anclaje del cierre del MoU de Saudi Aramco dentro del Q2.",
+      "reference_links": [
+        {
+          "label": "Bloomberg - cinta del martes de Cerebras CBRS: apertura $213.40, maximo $221.20, cierre $217.05, volumen 18.6M; cierre del MoU con Saudi Aramco Digital $1.2B / King Abdullah Economic City",
+          "url": "https://www.bloomberg.com/news/articles/2026-05-26/cerebras-cbrs-saudi-aramco-digital-mou-close-1-2-billion-king-abdullah-economic-city-cs-4-tuesday-tape-reopen"
+        },
+        {
+          "label": "Reuters - compra institucional de Cerebras al 47.5% del flotante, escenario alcista de Morgan Stanley al 61%, UBS sube a Buy $240",
+          "url": "https://www.reuters.com/technology/cerebras-cbrs-tuesday-may-26-tape-reopen-institutional-buyside-position-morgan-stanley-upside-2026-05-26/"
+        },
+        {
+          "label": "Datacenter Dynamics - cierre del MoU Saudi Aramco Digital / Cerebras CS-4, contrato de cuatro anos por $1.2B, King Abdullah Economic City",
+          "url": "https://www.datacenterdynamics.com/en/news/saudi-aramco-digital-cerebras-cs-4-mou-close-king-abdullah-economic-city-1-2-billion-four-year-contract-tuesday-may-26-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Sobre la prediccion de revalorizacion al rango superior de analistas de Cerebras CBRS (21 de mayo), la cinta del martes de hoy (cierre $217.05, volumen 18.6M a ~2.7x del promedio movil) con el consenso empujando por encima de $215, UBS subiendo a Buy con un objetivo de $240, y el MoU con Saudi Aramco Digital cerrando en $1.2B a lo largo de cuatro anos para capacidad CS-4 aterriza la ruptura del techo predicha dentro del Q2 en lugar de esperar hasta finales del Q3.",
+        "coherence": 5,
+        "remaining_gap": "Se necesita un cierre sostenido por encima de $215 a lo largo de multiples sesiones mas elevaciones adicionales del rango de analistas antes de que la ruptura del techo este bloqueada en lugar de una impresion de una sola sesion."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.66f35ba2bf2efcbf",
+        "short_label": "US frontier-AI oversight stack settles as a three-instrument set by Q3 2026",
+        "prediction_date": "2026-05-21"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje del stack de supervision de EE.UU. de tres instrumentos de esta prediccion. El ciclo de noticias no muestra firma de orden ejecutiva FMRB, marcado de House Energy and Commerce, o movimiento de directiva operativa federal-civil de CISA. Sin base de enlace de referencia.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del stack de supervision de IA fronteriza de EE.UU. de tres instrumentos (21 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth, Qwen3.6-Max-Preview, MoU Cerebras-Saudi Aramco, Stellantis Optimus, CVE de OpenAI Codex CLI) sin cambio fresco de estado sobre firma de orden ejecutiva FMRB, marcado de House Energy and Commerce, o movimiento de directiva operativa federal-civil de CISA.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita firma de orden ejecutiva FMRB, marcado de House Energy and Commerce, y movimiento de directiva operativa federal-civil de CISA para confirmar el stack de tres instrumentos."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f06c52d4544e814f",
+        "short_label": "Sandboxed-skill verification harness ships as framework default by Q3 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje del harness de verificacion de skill sandboxed de esta prediccion. La divulgacion de CVE-2026-46127 en el Codex CLI de OpenAI describe exactamente el modo de fallo que el harness de skill sandboxed de la prediccion esta disenado para prevenir - un agente Codex en sandbox de ambito de espacio de trabajo escalando hacia un contexto de shell-exec sin sandbox a traves de una respuesta de servidor MCP manipulada que explota un paso de validacion JSON-Schema faltante en la ruta de deserializacion de llamadas a herramienta del harness del agente. NIST NVD reclasifico la vulnerabilidad bajo la subcategoria agent-loader y elevo la taxonomia de CVE del stack de herramientas de IA agentica de Trail of Bits a doce instancias catalogadas. El CVE construye el caso para el harness de skill sandboxed pero no muestra telemetria fresca de registro Mythos-Preview de Anthropic Claude Code 3.0 o movimiento de envio por defecto de la cohorte de frameworks.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Sobre la prediccion del envio por defecto del framework del harness de verificacion de skill sandboxed (20 de mayo), el CVE-2026-46127 de hoy en el Codex CLI de OpenAI describe exactamente el modo de fallo de escape del sandbox que el harness esta disenado para prevenir - un agente sandboxed escalando hacia shell-exec sin sandbox via validacion JSON-Schema faltante - fortaleciendo el caso estructural sin entregar telemetria del registro Mythos-Preview o senal de envio por defecto de la cohorte.",
+        "coherence": 2,
+        "remaining_gap": "Se necesita telemetria del registro Mythos-Preview de Anthropic Claude Code 3.0 mas movimiento de envio por defecto de la cohorte de frameworks para confirmar que el harness de verificacion se envia como un valor por defecto del framework."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5d9a3e21b4c87fa3",
+        "short_label": "AMD Helios plus MI450 commitment book clears 15GW threshold by H2 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje del libro de compromisos AMD Helios mas MI450 15GW de esta prediccion. El ciclo de noticias no muestra firmas frescas de nube soberana de AMD, actualizaciones de compromiso MI450, o metricas de cumplimiento de capacidad de Galaxy-rack. Sin base de enlace de referencia.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la prediccion del libro de compromisos AMD Helios mas MI450 15GW (20 de mayo), las noticias de hoy giraron hacia hilos frescos (Unsloth, Qwen3.6-Max-Preview, MoU Cerebras-Saudi Aramco, Stellantis Optimus, CVE de OpenAI Codex CLI) sin cambio fresco de estado sobre firmas de nube soberana de AMD, actualizaciones de compromiso MI450, o metricas de cumplimiento de capacidad de Galaxy-rack.",
+        "coherence": 1,
+        "remaining_gap": "Se necesitan firmas frescas de nube soberana de AMD, actualizaciones del libro de compromisos MI450, o metricas de cumplimiento de capacidad de Galaxy-rack para rastrear el umbral de compromiso de 15GW."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f3a8c612d7e94b05",
+        "short_label": "OECD GENAI reciprocity attestation schema adopts at June 2-6 plenary by Q3 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de esquema de atestacion de reciprocidad OECD GENAI de esta prediccion. El ciclo de noticias no muestra actividad fresca de comentario sobre esquema por parte de estados miembros, movimiento procedimental del plenario, o noticias de disponibilidad general de la matriz de interoperabilidad cross-orchestrator. Sin base de enlace de referencia.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "El ciclo de noticias de hoy giro hacia las herramientas Unsloth, el cierre del MoU Saudi de Cerebras CBRS, el CVE de Codex CLI, y la tarjeta del modelo Qwen3.6-Max-Preview; no emergio cambio fresco de estado sobre el anclaje de la prediccion del esquema de atestacion de reciprocidad OECD GENAI (20 de mayo).",
+        "coherence": 1,
+        "remaining_gap": "Actividad de comentario sobre esquema por parte de estados miembros, movimiento procedimental del plenario, y senal de disponibilidad general de matriz de interoperabilidad cross-orchestrator."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7c4a2f1e8b3d9056",
+        "short_label": "Loader-verification chain ships training-to-tenant signed default by H2 2026",
+        "prediction_date": "2026-05-19"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de cadena de verificacion de loader firmada por defecto de entrenamiento-a-inquilino de esta prediccion. La divulgacion de CVE-2026-46127 en el Codex CLI de OpenAI - un paso de validacion JSON-Schema faltante en la ruta de deserializacion de llamadas a herramienta del harness del agente con explotacion activa en estado salvaje segun Mandiant contra un cliente Fortune 500 de servicios financieros - se ubica en la superficie de nivel de despliegue de la cadena de checkpoint-firmado-a-politica-de-inquilino de la prediccion. NIST NVD reclasifico la vulnerabilidad bajo la subcategoria agent-loader, pero el ciclo de noticias no muestra movimiento fresco de superficie de entrenamiento vLLM, Unsloth, o Mistral Workflows o gancho de politica de inquilino del que depende el envio por defecto H2-2026 de la prediccion.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La divulgacion de CVE-2026-46127 y la reclasificacion bajo la subcategoria agent-loader de NIST tocan la superficie de nivel de despliegue de la prediccion de cadena de verificacion de loader firmada por defecto de entrenamiento-a-inquilino (19 de mayo), pero el parche del lado del proveedor de OpenAI no es un movimiento de superficie de entrenamiento vLLM, Unsloth o Mistral Workflows o gancho de politica de inquilino - soporte parcial sin el hilo conductor de la cohorte de frameworks.",
+        "coherence": 2,
+        "remaining_gap": "Adopcion de checkpoint-firmado en superficie de entrenamiento en vLLM/Unsloth y aterrizaje de gancho de politica de inquilino a traves de orchestrators."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.412e30b7c8f1aee2",
+        "short_label": "Microsoft, Meta, and AWS ship AI Services revenue breakouts by fiscal Q3 2026",
+        "prediction_date": "2026-05-19"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de ruptura de linea de ingresos AI Services de Microsoft-Meta-AWS de esta prediccion. El ciclo de noticias no muestra actividad fresca de avance por parte de sell-side, movimiento de nota al pie de 10-Q de AI Services de Alphabet, o noticias de carta de comentario de muestra de SEC Corp Fin. Sin base de enlace de referencia.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Las noticias de hoy giraron hacia el CVE de herramientas de IA agentica, primitivas de checkpoint MoE, y la cinta de Cerebras CBRS; no emergio cambio fresco de estado sobre el anclaje de la prediccion de ruptura de linea de ingresos AI Services de Microsoft-Meta-AWS (19 de mayo) - ni actividad de avance del lado de la venta ni movimiento de carta de comentario de Corp Fin aparecieron en el ciclo.",
+        "coherence": 1,
+        "remaining_gap": "Actividad de avance del lado de la venta para la cohorte de divulgacion de Mag-7 mas publicacion de carta de comentario de muestra de Corp Fin."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.94122b8227bd1716",
+        "short_label": "FMRB executive order signs with a parallel House joint resolution by end-Q2 2026",
+        "prediction_date": "2026-05-19"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "La evidencia de hoy gira hacia otro lado del anclaje de orden ejecutiva FMRB mas resolucion conjunta de la Camara de esta prediccion. El ciclo de noticias no muestra actividad fresca de firma de OSTP, movimiento del anexo clasificado del Senado, noticias de marcado de House Energy and Commerce, o progresion de directiva federal-civil de CISA. Sin base de enlace de referencia.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Las noticias de hoy giraron hacia el CVE de herramientas de IA agentica, primitivas de checkpoint MoE, y la cinta de Cerebras CBRS; no emergio cambio fresco de estado sobre el anclaje de la prediccion de orden ejecutiva FMRB mas resolucion conjunta de la Camara (19 de mayo) - no aparecieron firma de OSTP, anexo clasificado del Senado, o movimiento de marcado de House Energy and Commerce.",
+        "coherence": 1,
+        "remaining_gap": "Actividad de firma de OSTP, movimiento del anexo clasificado del Senado, y marcado de House Energy and Commerce."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f188a442ca9e9111",
+        "short_label": "CISA pairs agentic-AI CVE remediation with capability attestation",
+        "prediction_date": "2026-05-11"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "[REVIVIDO] La inclusion de hoy de CVE-2026-46127 en la lista KEV de CISA dentro de la misma ventana del martes que el compromiso de respuesta a incidentes de Mandiant en un cliente Fortune 500 de servicios financieros aterriza directamente sobre la tesis dormante de remediacion de CVE de IA agentica de CISA. The Hacker News confirma que CISA coloco el CVE en su catalogo KEV despues de que Mandiant confirmara explotacion activa en estado salvaje, la nota de seguridad del martes de OpenAI indica que los inquilinos de desarrollo v3.1.x seran migrados forzosamente a v3.1.10 dentro de una ventana de 72 horas, y NIST NVD reclasifico la vulnerabilidad bajo la subcategoria agent-loader - elevando la taxonomia de CVE del stack de herramientas de IA agentica de Trail of Bits a doce instancias catalogadas (la primera adicion neta desde el ciclo del 8 de mayo). La cadena de exploits - un agente Codex en sandbox de ambito de espacio de trabajo escalando hacia un contexto de shell-exec sin sandbox a traves de una respuesta de servidor MCP manipulada explotando un paso de validacion JSON-Schema faltante - es el patron exacto de exposicion de agent-checkpoint-y-manifest-loader que la prediccion dormante senalo como la clase de riesgo precipitante para la remediacion pareada mas atestacion de capacidad.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "The Hacker News - CISA KEV anade CVE-2026-46127; Mandiant confirma explotacion activa en cliente Fortune 500 de servicios financieros",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46127-openai-codex-cli-mandiant-fortune-500-financial-services-active-exploitation.html"
+        },
+        {
+          "label": "OpenAI - lanzamiento de seguridad Codex CLI v3.1.10; migracion forzada de 72 horas para inquilinos v3.1.x; validacion de esquema estricta + registro de auditoria en tiempo de ejecucion",
+          "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La inclusion en la lista KEV de CISA de CVE-2026-46127 dentro de una explotacion Fortune 500 de servicios financieros confirmada por Mandiant, emparejada con la reclasificacion bajo la subcategoria agent-loader de NIST, aterriza directamente sobre la tesis de riesgo precipitante de la prediccion de CISA empareja remediacion de CVE de IA agentica con atestacion de capacidad (11 de mayo) - la exposicion exacta de agent-loader en estado salvaje que fuerza el movimiento de politica de remediacion-mas-atestacion pareadas.",
+        "coherence": 5,
+        "remaining_gap": "Un requisito explicito de atestacion de capacidad de CISA formalizado junto con la directiva de remediacion KEV."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f5203e4cb986a4bf",
+        "short_label": "Agent-framework loaders ship signed-checkpoint + manifest mode",
+        "prediction_date": "2026-05-11"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVIDO] La divulgacion de hoy de CVE-2026-46127 en el harness de agente Codex CLI de OpenAI aterriza directamente sobre la tesis dormante de checkpoint-firmado-mas-manifest del loader del framework de agente. El defecto de escalada por inyeccion de prompt CVSS 9.4 - un paso de validacion JSON-Schema faltante en la ruta de deserializacion de llamadas a herramienta - es el patron exacto de exposicion de agent-loader que el modo de checkpoint-firmado mas fetcher de manifest de la prediccion dormante esta disenado para prevenir. NIST NVD reclasifico la vulnerabilidad bajo la subcategoria agent-loader y elevo la taxonomia de Trail of Bits a doce instancias catalogadas, y el v3.1.10 parcheado de OpenAI envia validacion de esquema estricta mas un registro de auditoria de llamadas a herramienta en tiempo de ejecucion como la superficie correctiva - un paso del lado del proveedor hacia el modo de checkpoint-firmado mas manifest que rastrea la prediccion dormante.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "OpenAI - lanzamiento de seguridad Codex CLI v3.1.10; migracion forzada de 72 horas para inquilinos v3.1.x; validacion de esquema estricta + registro de auditoria en tiempo de ejecucion",
+          "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El parche v3.1.10 de OpenAI - validacion de esquema estricta mas un registro de auditoria de llamadas a herramienta en tiempo de ejecucion enviado para cerrar CVE-2026-46127 - es la superficie correctiva exacta que la prediccion de loaders de framework de agente envian modo checkpoint-firmado mas manifest (11 de mayo) anticipo, y la reclasificacion bajo la subcategoria agent-loader de NIST da a la cohorte una categoria regulatoria sobre la cual estandarizar.",
+        "coherence": 4,
+        "remaining_gap": "Envio por defecto cross-framework de checkpoint-firmado en LangChain, AutoGen, CrewAI en lugar de solo correccion del lado del proveedor."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e4612827ed602fa6",
+        "short_label": "LLM-tooling + Linux-kernel CVE chain becomes dominant attack pattern",
+        "prediction_date": "2026-05-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVIDO] La divulgacion de hoy de CVE-2026-46127 proporciona una coincidencia parcial de palabra clave de Capa 1 contra la tesis dormante de cadena CVE de herramientas LLM mas kernel Linux. El exploit del harness de agente en el Codex CLI de OpenAI es la capa exacta de herramientas LLM que la prediccion dormante senalo, con CISA colocando el CVE en KEV dentro de un compromiso de explotacion activa confirmado por Mandiant en un cliente Fortune 500 de servicios financieros. La taxonomia de CVE del stack de herramientas de IA agentica de Trail of Bits subio a doce instancias catalogadas y NIST NVD abrio una subcategoria agent-loader dedicada. La coincidencia es parcial en lugar de total porque el exploit de hoy es una escalada por inyeccion de prompt de respuesta de servidor MCP a shell-exec sin sandbox en lugar de una cadena de escalada de privilegios locales del kernel Linux - la forma de cadena completa de herramientas LLM mas LPE que la prediccion dormante rastrea especificamente no aparece.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "The Hacker News - CISA KEV anade CVE-2026-46127; Mandiant confirma explotacion activa en cliente Fortune 500 de servicios financieros",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46127-openai-codex-cli-mandiant-fortune-500-financial-services-active-exploitation.html"
+        },
+        {
+          "label": "NIST NVD - detalle de CVE-2026-46127; reclasificacion bajo subcategoria agent-loader; CVSS 9.4",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "El exploit del harness de agente Codex CLI aterriza la mitad de herramientas LLM de la prediccion de patron de ataque de cadena CVE de herramientas LLM mas kernel Linux (2 de mayo), confirmando la capa de herramientas como una superficie activa de explotacion incluida en KEV; la forma de cadena completa - emparejada con un peldano de escalada de privilegios locales del kernel Linux - aun no se demuestra en el ciclo de hoy.",
+        "coherence": 3,
+        "remaining_gap": "Una cadena de exploits documentada que empareje el peldano de herramientas LLM con un pivote de LPE del kernel Linux en un solo incidente."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "\"Agent-in-the-Loop Secret Exfiltration\" tops CIS / OWASP risk lists",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVIDO] El CVE-2026-46127 de hoy en el Codex CLI v3.1.x de OpenAI es una coincidencia semantica de Capa 2 contra la tesis dormante de Exfiltracion de Secretos Agent-in-the-Loop. La vulnerabilidad permite que un agente Codex en sandbox de ambito de espacio de trabajo escale hacia un contexto de shell-exec sin sandbox a traves de una respuesta de servidor MCP manipulada explotando un paso de validacion JSON-Schema faltante en la ruta de deserializacion de llamadas a herramienta del harness del agente - el patron exacto de inyeccion-indirecta-de-prompt-a-shell-exec que la prediccion dormante senalo como la proxima clase de riesgo principal de CIS/OWASP. El compromiso de respuesta a incidentes de Mandiant en un cliente Fortune 500 de servicios financieros confirma explotacion en estado salvaje con riesgo de exfiltracion de secretos como una consecuencia directa aguas abajo del acceso shell sin sandbox en una herramienta de codificacion de IA usada dentro de un pipeline de desarrollo de un emisor publico. La coincidencia es semantica en lugar de directa porque las noticias de hoy no muestran un anuncio categorico de CIS o OWASP.",
+      "reference_links": [
+        {
+          "label": "GitHub Security Lab - aviso CVE-2026-46127 (escalada por inyeccion de prompt en OpenAI Codex CLI v3.1.x via deserializacion de llamadas a herramienta MCP, CVSS 9.4)",
+          "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"
+        },
+        {
+          "label": "The Hacker News - CISA KEV anade CVE-2026-46127; Mandiant confirma explotacion activa en cliente Fortune 500 de servicios financieros",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46127-openai-codex-cli-mandiant-fortune-500-financial-services-active-exploitation.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "La cadena de inyeccion-de-prompt-de-respuesta-de-servidor-MCP-a-shell-exec-sin-sandbox del Codex CLI con explotacion Fortune 500 en estado salvaje confirmada por Mandiant es el patron exacto de inyeccion-indirecta-de-prompt-a-exfiltracion-de-secretos que la prediccion de Exfiltracion de Secretos Agent-in-the-Loop encabeza listas de riesgo CIS/OWASP (20 de abril) senalo como el exemplar precipitante - coincidencia semantica sin aun un anuncio categorico de CIS u OWASP.",
+        "coherence": 3,
+        "remaining_gap": "Un evento de listado formal Top-N de CIS o Top-10 LLM de OWASP nombrando categoricamente Exfiltracion de Secretos Agent-in-the-Loop."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b60e425d646be753",
+        "short_label": "Proprietary re-expansion against open-weight geopolitical split",
+        "prediction_date": "2026-04-21"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVIDO] La publicacion de hoy de la tarjeta del modelo Qwen3.6-Max-Preview en Hugging Face es una coincidencia de palabra clave de Capa 1 contra la tesis dormante de division entre re-expansion propietaria y peso-abierto. Alibaba elevo Qwen3.6-Max-Preview de solo numeros de preview a un lanzamiento completamente gated de peso abierto bajo la licencia Tongyi Qianwen, con un checkpoint Mixture-of-Experts de 235B parametros activos enviando una ventana de contexto nativa de 1M tokens, una topologia de enrutamiento de 24-de-160 expertos, records de LiveCodeBench v6 88.7 y SWE-Bench Verified 76.2 (nuevos para cualquier checkpoint no-Anthropic no-OpenAI), y paridad AIME 2025 con Claude Opus 4.7 dentro de una banda de 0.6 puntos. Alibaba Cloud Model Studio listo la variante hospedada en $0.45 por millon de tokens de entrada frente al piso de $1.10 de DeepSeek-V4-Pro y $7.50 de Claude Opus 4.7 de Anthropic. La senal de division geopolitica de peso-abierto aterriza en el lado abierto de la tesis de division de la prediccion dormante en lugar del lado de re-expansion propietaria - la cohorte fronteriza-abierta china esta consolidando su posicion de peso-abierto en lugar de la cohorte de re-expansion propietaria consolidando pesos cerrados.",
+      "reference_links": [
+        {
+          "label": "Hugging Face - tarjeta del modelo Qwen/Qwen3.6-Max-Preview-235B (LiveCodeBench 88.7, SWE-Bench Verified 76.2)",
+          "url": "https://huggingface.co/Qwen/Qwen3.6-Max-Preview-235B"
+        },
+        {
+          "label": "Decrypt - precios de Alibaba Cloud Model Studio Qwen3.6-Max-Preview $0.45/M entrada vs DeepSeek-V4-Pro $1.10",
+          "url": "https://decrypt.co/365774/alibaba-qwen-3-6-max-preview-model-card-pricing-deepseek-v4-pro-may-26-2026"
+        },
+        {
+          "label": "The Decoder - endpoints hospedados de Together AI y Fireworks AI para Qwen3.6-Max-Preview, latencia de primer-token 0.18s en 8x H100 SXM5 FP8",
+          "url": "https://the-decoder.com/qwen3-6-max-preview-together-ai-fireworks-ai-hosted-endpoints-first-token-latency-fp8-quantization-may-26-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "La elevacion de Qwen3.6-Max-Preview de Alibaba a un lanzamiento de peso abierto gated con records de LiveCodeBench 88.7 / SWE-Bench Verified 76.2 y una brecha de precio de 16x vs Claude Opus 4.7 refuerza el lado de la cohorte abierta de la prediccion de division geopolitica de re-expansion propietaria vs peso-abierto (21 de abril) - consolidacion fronteriza-abierta china en lugar de reconsolidacion de peso-cerrado del lado propietario.",
+        "coherence": 3,
+        "remaining_gap": "Una senal simetrica de reconsolidacion de peso-cerrado en el lado OpenAI/Anthropic para confirmar la forma de dos polos de la division."
+      }
+    }
+  ]
+}
