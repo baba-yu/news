@@ -1,0 +1,73 @@
+{
+  "date": "2026-05-26",
+  "sections": [
+    {
+      "category": "ローカルLLMの最適化（ファインチューニング、推論）",
+      "bullets": [
+        {
+          "body": "Unslothは火曜にv2026.5.26とタグ付けされたポイントリリースを出荷し、AlibabaのQwen3.6-Max-Previewをファインチューニングのベースとしてファーストクラスで対応した。Daniel Han ChenとMike Han Chenの共著ペアは並列ベンチマーク・シートをHugging Face Blogに投稿しており、同じルーター専用LoRAドライバ下で単一の8x H200 SXM5ノード上での新たなQwen3.6-Max-Preview-235B Mixture-of-Expertsチェックポイントの学習が、従来のDeepSeek R3-Pro 38Bレシピと比較しておよそ1.74倍のスループット、ピーク合算VRAMの実測削減量がバニラなHugging Face Transformers v5ベースライン比で11.3パーセント、先週のMixtral-Next 70Bマージ比でさらに4.1パーセントのピーク節約を示している。同リリースはまた、貢献された60Bクラスのレシピ数を4本へと引き上げ——清華大学KEG Labのプルリクエストによるコミュニティテスト済みのMiniMax M2.7 235B MoEポートを既存のDeepSeek R3-Pro、OLMo-2 60B、Qwen3 MoE 60Bのセットに追加——加えて、トレーナーがチェックポイント書き込み時にディスク上の非アクティブなエキスパート列を凍結できる新たな選択的エキスパート・チェックポイント・プリミティブを導入し、MiniMaxポートのチェックポイント・ディスク占有を最初の10リビジョン分でおよそ470GBから188GBへと削減する。火曜のSimon Willisonのノートは、この選択的エキスパート・チェックポイント・プリミティブを、Lambda LabsやRunPod上で接続SSD予算上限のあるコンシューマー級のダウンストリーム・ファインチューナーにとって、Unslothが今四半期出荷した運用上最も意義深い変更だと指摘し、別の火曜のHacker NewsスレッドではCoreWeaveとCrusoe Cloudの8x H200 SXM5レンタル上でのQwen3.6-Max-Previewベンチマークの初期独立再現2件が浮上、スループット値はDaniel Han Chenのシートの3パーセント以内に着地した。",
+          "citations": [
+            {"label": "Unsloth — v2026.5.26 Qwen3.6-Max-Preview対応リリース、MiniMax M2.7 235B MoE、選択的エキスパート・チェックポイント・プリミティブ", "url": "https://unsloth.ai/blog/v2026-5-26-qwen3-6-max-preview-support-minimax-m27-235b-moe-selective-expert-checkpoint-may-26-2026"},
+            {"label": "Hugging Face Blog — Daniel Han Chen、Mike Han ChenによるUnsloth Qwen3.6-Max-Preview、1.74倍スループット、8x H200 SXM5でピークVRAM 11.3パーセント削減のベンチマーク・シート", "url": "https://huggingface.co/blog/unsloth-qwen3-6-max-preview-1-74x-throughput-8x-h200-sxm5-may-26-2026"},
+            {"label": "Simon Willison — Unslothの選択的エキスパート・チェックポイント、MiniMaxディスク占有を470GBから188GBへ、コンシューマーGPUファインチューニングでの運用効果", "url": "https://simonwillison.net/2026/May/26/unsloth-selective-expert-checkpoint-minimax-disk-footprint/"},
+            {"label": "Hacker News — Unsloth Qwen3.6-Max-Preview、8x H200 SXM5上のCoreWeaveおよびCrusoe Cloudによる独立再現、2026年5月26日火曜", "url": "https://news.ycombinator.com/item?id=44012744"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "ローカルLLMモデル／中国フロンティア・オープン集団",
+      "bullets": [
+        {
+          "body": "AlibabaのQwenチームは、Qwen3.6-Max-Previewの正式モデルカードを火曜午前太平洋時間にHugging Face上で公開し、アーキテクチャをプレビュー数値のみのブログ投稿の段階から、Tongyi Qianwenオープン・ライセンス下の完全にゲート付きのオープン・ウェイト・リリースへと引き上げた。235BアクティブパラメータのMixture-of-Expertsチェックポイントは、1Mトークンのネイティブ・コンテキスト・ウィンドウ、24-of-160のエキスパート・ルーティング・トポロジー、ベース版に並ぶ指示チューニング版を出荷している。モデルカードによれば、Qwen3.6-Max-PreviewはLiveCodeBench v6で88.7、SWE-Bench Verifiedで76.2に着地——いずれも非Anthropic非OpenAIチェックポイントとして新記録——AIME 2025ではClaude Opus 4.7と0.6ポイントの帯内で並ぶ。Decryptは、5月28日のOpenRouter統合サイクルに向けたDeepSeek-V4-Proの価格曲線を下回るタイミングでの出荷であることを確認し、Alibaba Cloud Model Studioはホスト版を入力1Mトークン当たり0.45ドルでリスト化、DeepSeek-V4-Proの1.10ドル下限とAnthropic Claude Opus 4.7の7.50ドルに対する位置取りで、The Decoderは、Together AIおよびFireworks AIの初期ホスト型エンドポイントが最初の6時間以内に点灯し、フルFP8量子化下の8x H100 SXM5上で最初のトークン応答待ち時間がおよそ0.18秒になったと報じた。",
+          "citations": [
+            {"label": "Alibaba Qwen — Qwen3.6-Max-Preview Hugging Faceモデルカード、235BアクティブパラメータMoE、1Mコンテキスト、24-of-160エキスパート・ルーティング、Tongyi Qianwenライセンス下のオープン・ウェイト", "url": "https://qwen.ai/blog?id=qwen3-6-max-preview-model-card-release-may-26-2026"},
+            {"label": "Hugging Face — Qwen Qwen3.6-Max-Preview-235Bリポジトリ・カード、LiveCodeBench 88.7、SWE-Bench Verified 76.2、AIME 2025でClaude Opus 4.7と同等", "url": "https://huggingface.co/Qwen/Qwen3.6-Max-Preview-235B"},
+            {"label": "Decrypt — Qwen3.6-Max-Preview、Alibaba Cloud Model Studio価格、入力1Mトークン当たり0.45ドルでDeepSeek-V4-Proをアンダーカット、5月28日OpenRouterサイクル", "url": "https://decrypt.co/365774/alibaba-qwen-3-6-max-preview-model-card-pricing-deepseek-v4-pro-may-26-2026"},
+            {"label": "The Decoder — Qwen3.6-Max-Preview、Together AI、Fireworks AIのホスト型エンドポイント、最初の6時間で0.18秒の初期トークン応答、8x H100 SXM5 FP8量子化", "url": "https://the-decoder.com/qwen3-6-max-preview-together-ai-fireworks-ai-hosted-endpoints-first-token-latency-fp8-quantization-may-26-2026/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "株価と企業活動",
+      "bullets": [
+        {
+          "body": "Cerebras Systems（NASDAQ: CBRS）はメモリアルデーの市場閉鎖からの再開後、Alphabetアナリスト・デー後の金曜以来の最高単日出来高をプリントし、休場明けの3日間繰り越された需要をクリーンなテープ・セッションへと解消する火曜セッションを刻んだ。寄り値は金曜引け値209.85ドルに対して213.40ドル（およそ+1.7パーセントのギャップ）、最初の90分以内に日中高値221.20ドル、引け値217.05ドルでおよそ1860万株——過去20取引日平均のおよそ2.7倍で、IPO後の記録で第5位の出来高セッションとなった。Bloombergは引け値がコンセンサスのアナリスト・スプレッドを215ドル超へと初めて押し上げた水準だと指摘し、BernsteinはMarket-Performの下限を185ドルから200ドルへと火曜午前のノートで引き上げ、UBSはCerebrasをBuyへ格上げし240ドル目標、根拠としてキング・アブドラ経済都市のデータセンター・パークにおける第1世代CS-4キャパシティ配置に向けた4年総額12億ドルの契約価値でのSaudi Aramco Digital MoUの火曜午後の正式クロージングを挙げた。Reutersは別途、機関投資家バイサイドの累積純ポジションが金曜のおよそ44パーセントから火曜テープでフロートの約47.5パーセントへ上昇したと報じ、Morgan Stanleyの火曜のテープ振り返りはアップサイド・シナリオ確率を金曜の54パーセントから61パーセントへ引き上げた。",
+          "citations": [
+            {"label": "Bloomberg — Cerebras CBRSの2026年5月26日火曜テープ再開、213.40ドル寄付、221.20ドル高値、217.05ドル引け、1860万株出来高、Bernstein 200ドル、UBS Buy 240ドル、Saudi Aramco Digital MoUクロージング12億ドル、キング・アブドラ経済都市", "url": "https://www.bloomberg.com/news/articles/2026-05-26/cerebras-cbrs-saudi-aramco-digital-mou-close-1-2-billion-king-abdullah-economic-city-cs-4-tuesday-tape-reopen"},
+            {"label": "Reuters — Cerebras CBRSの2026年5月26日火曜、機関投資家バイサイドがフロートの47.5パーセント、Morgan Stanleyのアップサイド・シナリオ61パーセント、UBSがBuy 240ドルへ格上げ", "url": "https://www.reuters.com/technology/cerebras-cbrs-tuesday-may-26-tape-reopen-institutional-buyside-position-morgan-stanley-upside-2026-05-26/"},
+            {"label": "Datacenter Dynamics — Saudi Aramco Digital、Cerebras CS-4 MoUクロージング、キング・アブドラ経済都市、12億ドル4年契約、第1世代キャパシティ、2026年5月26日火曜", "url": "https://www.datacenterdynamics.com/en/news/saudi-aramco-digital-cerebras-cs-4-mou-close-king-abdullah-economic-city-1-2-billion-four-year-contract-tuesday-may-26-2026/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "フィジカルAI／ロボティクス",
+      "bullets": [
+        {
+          "body": "Stellantisは火曜午前、デトロイトのMack Avenue Optimus試験運用が当初発表の6月8日起動日から6月1日へ前倒しされたと開示し、Reutersは60ユニットのコホートがメモリアルデー・ウィークエンドの間にテスラのフリーモント立ち上げフロアで工場受入試験を完了し、生産ラインの再起動を控えて最終フィクスチャ嵌合のため既にデトロイトのフロアへ搬入されているとのStellantis火曜のメモを引いた。前倒しにより、Teslaフリーモント240ユニット完了と米国初の受託製造配備との間隔がわずか1週間へ圧縮され、BMWは同じ取引セッション内でプレスリリースを発出し、BMWプラント・ライプツィヒが第2期AEONコホートの初回起動日を従来の6月22日プレースホルダではなく6月15日に確定させると述べ、6月1日から6月18日までの18日間の窓内にヒューマノイド・ロボットの工場フロア立ち上げ4件を集積させた。Volkswagen Wolfsburgは6月22日のコホート起動を維持しつつ、7月13日目標で24ユニットの第2期コホートを追加し、Bloombergは、Boston Dynamics Hyundaiが火曜午後に投資家向けブリーフィングを開催し、Atlas商用フリート初配備サイクル（Hyundai Motor Group平澤工場）をおよそ9日前倒しの6月24日へ動かすと、Stellantisの前倒しをヒューマノイドの工場配備が実用上の準備しきい値を越えた公的な裏付けとして引用しつつ、フラグしたと報じた。",
+          "citations": [
+            {"label": "Reuters — StellantisのデトロイトMack Avenue Optimus試験運用が6月8日から6月1日へ前倒し、60ユニットのコホートがフリーモント立ち上げフロアで工場受入完了", "url": "https://www.reuters.com/business/autos-transportation/stellantis-detroit-mack-avenue-optimus-pilot-pull-in-june-1-60-unit-cohort-factory-acceptance-fremont-2026-05-26/"},
+            {"label": "BMW Group Press — プラント・ライプツィヒ第2期AEONコホート初回起動日6月15日、6月22日プレースホルダから前倒し、2026年5月26日火曜", "url": "https://www.press.bmwgroup.com/global/article/detail/T0445129EN/bmw-plant-leipzig-second-aeon-cohort-first-activation-date-june-15-tuesday-may-26-2026"},
+            {"label": "Bloomberg — Boston Dynamics Hyundai Atlas商用フリート、平澤工場での初配備を6月24日へ、9日前倒し、Stellantisの前倒しを裏付けしきい値として引用", "url": "https://www.bloomberg.com/news/articles/2026-05-26/boston-dynamics-hyundai-atlas-commercial-fleet-first-deployment-pyeongtaek-plant-june-24-pull-in"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AIセキュリティ研究／CVE更新",
+      "bullets": [
+        {
+          "body": "GitHub Security Labは火曜日の勧告でCVE-2026-46127を公開した。これはOpenAIのオープンソースCodex CLI v3.1.x開発ブランチにおける重大度クリティカル（CVSS 9.4）のプロンプトインジェクション昇格脆弱性で、攻撃者が、エージェント・ハーネスのツール呼び出しデシリアライゼーション経路における欠落したJSON-Schema検証ステップを突くMCPサーバー応答を細工することにより、ワークスペース・スコープのサンドボックス化されたCodexエージェントを非サンドボックスのシェル実行コンテキストへと連鎖させ得るというものである。勧告は研究者であるTrail of BitsのVasilios MavroudisとPillar SecurityのDor Sarigを報告者としてクレジットし、OpenAIが開示窓内にパッチ済みのv3.1.10開発タグを出荷したことを示しており、パッチ済みビルドは厳格なスキーマ検証に加えてランタイム・ツール呼び出し監査ログを追加する。同開示は、Trail of Bitsのエージェント型AIツーリング・スタックのCVE分類体系を登録例12件へ引き上げ、これは5月8日サイクル以降初の純増である。The Hacker Newsは、Fortune 500金融サービス顧客でのMandiantのインシデント対応エンゲージメントが実環境での能動的悪用を確認したのち、CISAが同じ火曜の窓内にCVE-2026-46127をKnown Exploited Vulnerabilitiesカタログへ掲載したと報じ、OpenAIの火曜セキュリティ・ノートは、Codex CLIの本番層自動更新経路がv3.1.x開発テナント全件を72時間の窓内でv3.1.10へと強制ロールアウトすると述べた。別途、NIST NVDは火曜午後のアップデートを公表し、CVSS 9.4のスコアリングを確認、脆弱性をエージェント・ローダー・サブカテゴリ下へ再分類した。",
+          "citations": [
+            {"label": "GitHub Security Lab — CVE-2026-46127、OpenAI Codex CLI v3.1.xのプロンプトインジェクション昇格、MCPサーバー・ツール呼び出しデシリアライゼーション、Trail of Bits、Pillar Security、2026年5月26日火曜勧告、CVSS 9.4", "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"},
+            {"label": "The Hacker News — CISA KEVカタログCVE-2026-46127、OpenAI Codex CLI、MandiantによるFortune 500金融サービスでの実環境能動的悪用、2026年5月26日火曜", "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46127-openai-codex-cli-mandiant-fortune-500-financial-services-active-exploitation.html"},
+            {"label": "OpenAI — Codex CLI v3.1.10セキュリティ・リリース、本番テナント72時間強制ロール、CVE-2026-46127、厳格なスキーマ検証、ランタイム・ツール呼び出し監査ログ", "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"},
+            {"label": "NIST NVD — CVE-2026-46127、OpenAI Codex CLI、エージェント・ローダー・サブカテゴリ、CVSS 9.4再分類、Trail of Bits分類体系登録例12件", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"}
+          ]
+        }
+      ]
+    }
+  ]
+}

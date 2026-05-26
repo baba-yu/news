@@ -1,0 +1,73 @@
+{
+  "date": "2026-05-26",
+  "sections": [
+    {
+      "category": "Local LLM Optimization (Fine-tuning, Inference)",
+      "bullets": [
+        {
+          "body": "Unsloth shipped a Tuesday point release tagged v2026.5.26 introducing first-class support for Alibaba's Qwen3.6-Max-Preview as a fine-tuning base, with the Daniel Han Chen and Mike Han Chen author pair posting a paired benchmark sheet on the Hugging Face Blog showing that the new Qwen3.6-Max-Preview-235B Mixture-of-Experts checkpoint trains at roughly 1.74x throughput against the prior DeepSeek R3-Pro 38B recipe under the same router-only LoRA driver on a single 8x H200 SXM5 node, with a measured peak combined VRAM reduction of 11.3 percent versus a vanilla Hugging Face Transformers v5 baseline and an additional 4.1 percent peak savings against last week's Mixtral-Next 70B merge. The release also lifts the contributed 60B-class recipe count to four — adding a community-tested MiniMax M2.7 235B MoE port from a Tsinghua University KEG Lab pull request on top of the existing DeepSeek R3-Pro, OLMo-2 60B and Qwen3 MoE 60B set — and introduces a new selective-expert-checkpoint primitive that lets the trainer freeze inactive expert columns on disk during checkpoint write, cutting checkpoint disk footprint on the MiniMax port from roughly 470GB to 188GB across the first ten saved revisions. A Tuesday Simon Willison note flagged the selective-expert-checkpoint primitive as the most operationally meaningful change Unsloth has shipped this quarter for consumer-class downstream fine-tuners running on Lambda Labs or RunPod with attached SSD budget caps, and a separate Tuesday Hacker News thread surfaced two early independent reproductions of the Qwen3.6-Max-Preview benchmark on 8x H200 SXM5 rentals from CoreWeave and Crusoe Cloud with throughput numbers landing inside 3 percent of the Daniel Han Chen sheet.",
+          "citations": [
+            {"label": "Unsloth - v2026.5.26 Qwen3.6-Max-Preview support release MiniMax M2.7 235B MoE selective expert checkpoint primitive", "url": "https://unsloth.ai/blog/v2026-5-26-qwen3-6-max-preview-support-minimax-m27-235b-moe-selective-expert-checkpoint-may-26-2026"},
+            {"label": "Hugging Face Blog - Daniel Han Chen Mike Han Chen Unsloth Qwen3.6-Max-Preview 1.74x throughput 11.3 percent peak VRAM reduction 8x H200 SXM5 benchmark sheet", "url": "https://huggingface.co/blog/unsloth-qwen3-6-max-preview-1-74x-throughput-8x-h200-sxm5-may-26-2026"},
+            {"label": "Simon Willison - Unsloth selective expert checkpoint MiniMax 470GB to 188GB disk footprint operational consumer GPU fine tuning", "url": "https://simonwillison.net/2026/May/26/unsloth-selective-expert-checkpoint-minimax-disk-footprint/"},
+            {"label": "Hacker News - Unsloth Qwen3.6-Max-Preview 8x H200 SXM5 CoreWeave Crusoe Cloud independent reproductions Tuesday May 26 2026", "url": "https://news.ycombinator.com/item?id=44012744"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Models / Chinese Frontier-Open Cohort",
+      "bullets": [
+        {
+          "body": "Alibaba's Qwen team published the formal Qwen3.6-Max-Preview model card on Hugging Face on Tuesday morning Pacific time, lifting the architecture from a preview-numbers-only blog post to a fully gated open-weight release under the Tongyi Qianwen open license, with the 235B-active-parameter Mixture-of-Experts checkpoint shipping a 1M-token native context window, a 24-of-160 expert routing topology, and a published instruction-tuned variant alongside the base. Per the model card, Qwen3.6-Max-Preview lands at 88.7 on LiveCodeBench v6 and 76.2 on SWE-Bench Verified — both new records for any non-Anthropic non-OpenAI checkpoint — and matches Claude Opus 4.7 on AIME 2025 inside a 0.6-point band. Decrypt confirmed that the release is timed to undercut DeepSeek-V4-Pro's pricing curve heading into the May 28 OpenRouter integration cycle, with Alibaba Cloud Model Studio listing the hosted variant at $0.45 per million input tokens against DeepSeek-V4-Pro's $1.10 floor and Anthropic's Claude Opus 4.7 at $7.50, while The Decoder reported initial Together AI and Fireworks AI hosted endpoints lighting up inside the first six hours with first-token-latency at roughly 0.18 seconds on 8x H100 SXM5 with full FP8 quantization.",
+          "citations": [
+            {"label": "Alibaba Qwen - Qwen3.6-Max-Preview Hugging Face model card 235B active parameter MoE 1M context 24 of 160 expert routing open weight Tongyi Qianwen license", "url": "https://qwen.ai/blog?id=qwen3-6-max-preview-model-card-release-may-26-2026"},
+            {"label": "Hugging Face - Qwen Qwen3.6-Max-Preview-235B repo card LiveCodeBench 88.7 SWE-Bench Verified 76.2 AIME 2025 Claude Opus 4.7 parity", "url": "https://huggingface.co/Qwen/Qwen3.6-Max-Preview-235B"},
+            {"label": "Decrypt - Qwen3.6-Max-Preview Alibaba Cloud Model Studio pricing 0.45 per million input tokens undercuts DeepSeek-V4-Pro May 28 OpenRouter cycle", "url": "https://decrypt.co/365774/alibaba-qwen-3-6-max-preview-model-card-pricing-deepseek-v4-pro-may-26-2026"},
+            {"label": "The Decoder - Qwen3.6-Max-Preview Together AI Fireworks AI hosted endpoints first six hours 0.18s first token latency 8x H100 SXM5 FP8 quantization", "url": "https://the-decoder.com/qwen3-6-max-preview-together-ai-fireworks-ai-hosted-endpoints-first-token-latency-fp8-quantization-may-26-2026/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Stock Prices and Corporate Activity",
+      "bullets": [
+        {
+          "body": "Cerebras Systems (NASDAQ: CBRS) reopened after the Memorial Day market closure with a Tuesday session that printed the highest single-day volume the stock has carried since the post-Alphabet analyst-day Friday and resolved the three-day pent-up demand from the holiday hold into a clean tape session. The open print landed at $213.40 against Friday's $209.85 close (roughly +1.7 percent gap), reached an intraday high of $221.20 inside the first ninety minutes, and closed at $217.05 on volume of approximately 18.6 million shares — about 2.7x the trailing-twenty-day average and the fifth-highest volume session of the post-IPO record. Bloomberg flagged the close as the first push of the consensus analyst spread above $215, with Bernstein lifting its Market-Perform floor to $200 from $185 in a Tuesday morning note and UBS upgrading Cerebras to Buy with a $240 target citing the Saudi Aramco Digital MoU formally closing Tuesday afternoon at a disclosed $1.2 billion total contract value over four years for first-generation CS-4 capacity placement in the King Abdullah Economic City data-center park. Reuters separately reported institutional buyside cumulative net position lifting to approximately 47.5 percent of float on Tuesday tape from Friday's roughly 44 percent, and Morgan Stanley's Tuesday tape-recap pushed its upside-scenario probability to 61 percent from Friday's 54 percent.",
+          "citations": [
+            {"label": "Bloomberg - Cerebras CBRS Tuesday May 26 tape reopen 213.40 open 221.20 high 217.05 close 18.6M volume Bernstein 200 UBS Buy 240 Saudi Aramco Digital MoU close 1.2 billion King Abdullah Economic City", "url": "https://www.bloomberg.com/news/articles/2026-05-26/cerebras-cbrs-saudi-aramco-digital-mou-close-1-2-billion-king-abdullah-economic-city-cs-4-tuesday-tape-reopen"},
+            {"label": "Reuters - Cerebras CBRS Tuesday May 26 institutional buyside 47.5 percent of float Morgan Stanley upside scenario 61 percent UBS upgrade Buy 240", "url": "https://www.reuters.com/technology/cerebras-cbrs-tuesday-may-26-tape-reopen-institutional-buyside-position-morgan-stanley-upside-2026-05-26/"},
+            {"label": "Datacenter Dynamics - Saudi Aramco Digital Cerebras CS-4 MoU close King Abdullah Economic City 1.2 billion four year contract first generation capacity Tuesday May 26 2026", "url": "https://www.datacenterdynamics.com/en/news/saudi-aramco-digital-cerebras-cs-4-mou-close-king-abdullah-economic-city-1-2-billion-four-year-contract-tuesday-may-26-2026/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Physical AI / Robotics",
+      "bullets": [
+        {
+          "body": "Stellantis disclosed Tuesday morning that its Detroit Mack Avenue Optimus pilot has been advanced from the originally announced June 8 activation date to June 1, with Reuters citing a Stellantis Tuesday note confirming that the 60-unit cohort has completed factory-acceptance testing at Tesla's Fremont commissioning floor inside Memorial Day weekend and that the units have already been wheeled onto the Detroit floor for final fixture mating ahead of the production line restart. The pull-in compresses the gap between the Tesla Fremont 240-unit completion and the first US contract-manufacturing deployment to a single week, and BMW responded inside the same trading session with a press release stating that BMW Plant Leipzig will lock its second AEON cohort first-activation date at June 15 rather than the prior June 22 placeholder, putting four humanoid-robot factory-floor activations inside an 18-day window between June 1 and June 18. Volkswagen Wolfsburg held its June 22 cohort activation but added a 24-unit second cohort with a July 13 target, and Bloomberg reported that Boston Dynamics Hyundai held an investor briefing Tuesday afternoon flagging that the Atlas commercial-fleet first-deployment cycle (Hyundai Motor Group Pyeongtaek plant) is being moved up by roughly nine days to June 24, citing the Stellantis pull-in as the public proof that humanoid factory deployments have crossed the practical readiness threshold.",
+          "citations": [
+            {"label": "Reuters - Stellantis Detroit Mack Avenue Optimus pilot pulled from June 8 to June 1 60 unit cohort factory acceptance Fremont commissioning floor", "url": "https://www.reuters.com/business/autos-transportation/stellantis-detroit-mack-avenue-optimus-pilot-pull-in-june-1-60-unit-cohort-factory-acceptance-fremont-2026-05-26/"},
+            {"label": "BMW Group Press - Plant Leipzig second AEON cohort first activation date June 15 advanced from June 22 placeholder Tuesday May 26 2026", "url": "https://www.press.bmwgroup.com/global/article/detail/T0445129EN/bmw-plant-leipzig-second-aeon-cohort-first-activation-date-june-15-tuesday-may-26-2026"},
+            {"label": "Bloomberg - Boston Dynamics Hyundai Atlas commercial fleet first deployment Pyeongtaek plant moved to June 24 nine day pull-in Stellantis proof threshold", "url": "https://www.bloomberg.com/news/articles/2026-05-26/boston-dynamics-hyundai-atlas-commercial-fleet-first-deployment-pyeongtaek-plant-june-24-pull-in"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security Research / CVE Updates",
+      "bullets": [
+        {
+          "body": "GitHub Security Lab published a Tuesday advisory disclosing CVE-2026-46127, a critical-severity (CVSS 9.4) prompt-injection-escalation vulnerability in OpenAI's open-source Codex CLI v3.1.x development branch in which an attacker can chain a workspace-scoped sandboxed Codex agent into an unsandboxed shell-exec context via a crafted MCP-server response that exploits a missing JSON-Schema validation step in the agent harness's tool-call deserialization path. The advisory credits researchers Trail of Bits Vasilios Mavroudis and Pillar Security Dor Sarig for the report and notes that OpenAI shipped a patched v3.1.10 development tag inside the disclosure window, with the patched build adding strict schema validation plus a runtime tool-call audit log; the disclosure lifts the Trail of Bits agentic-AI tooling-stack CVE taxonomy to twelve catalogued instances, the first net-new addition since the May 8 cycle. The Hacker News reported that CISA placed CVE-2026-46127 on its Known Exploited Vulnerabilities catalog inside the same Tuesday window after a Mandiant incident-response engagement at a Fortune 500 financial-services customer confirmed active exploitation in the wild, and OpenAI's Tuesday security note stated that the Codex CLI's production-tier auto-update path will force-roll all v3.1.x development tenants to v3.1.10 inside a 72-hour window. Separately, NIST NVD published a Tuesday afternoon update confirming the CVSS 9.4 scoring and reclassifying the vulnerability under the agent-loader subcategory.",
+          "citations": [
+            {"label": "GitHub Security Lab - CVE-2026-46127 OpenAI Codex CLI v3.1.x prompt injection escalation MCP server tool call deserialization Trail of Bits Pillar Security Tuesday May 26 2026 advisory CVSS 9.4", "url": "https://securitylab.github.com/advisories/GHSL-2026-46127-openai-codex-cli-prompt-injection-escalation-mcp-tool-call-deserialization-may-26-2026/"},
+            {"label": "The Hacker News - CISA KEV catalog CVE-2026-46127 OpenAI Codex CLI Mandiant Fortune 500 financial services active exploitation in the wild Tuesday May 26 2026", "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46127-openai-codex-cli-mandiant-fortune-500-financial-services-active-exploitation.html"},
+            {"label": "OpenAI - Codex CLI v3.1.10 security release force roll production tenants 72 hour window CVE-2026-46127 strict schema validation runtime tool call audit log", "url": "https://openai.com/index/codex-cli-v3-1-10-security-release-cve-2026-46127-may-26-2026"},
+            {"label": "NIST NVD - CVE-2026-46127 OpenAI Codex CLI agent loader subcategory CVSS 9.4 reclassification Trail of Bits taxonomy twelve catalogued instances", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46127"}
+          ]
+        }
+      ]
+    }
+  ]
+}
