@@ -1,0 +1,71 @@
+{
+  "date": "2026-05-27",
+  "sections": [
+    {
+      "category": "Stock Prices and Corporate Activity",
+      "bullets": [
+        {
+          "body": "Cerebras Systems (NASDAQ: CBRS) closed Wednesday at $224.85, up 3.6 percent from Tuesday's $217.05 print and lifting the stock to a fresh all-time intraday high of $228.40 inside the cash session, on volume of approximately 21.4 million shares — the sixth-highest volume session of the post-IPO record. The state-change driving the tape was a Wednesday pre-market initiation from Goldman Sachs analyst Toshiya Hari at Buy with a $260 twelve-month target — the first formal Goldman coverage initiation on Cerebras since the IPO — alongside a Citi initiation at Buy with a $245 target, both citing the Saudi Aramco Digital MoU close as the catalyst that resolves the customer-concentration overhang flagged in the S-1. Bloomberg reported that the Wednesday tape also crossed an options-flow milestone: the open-interest tally on the September 2026 $240 call line lifted past 92,400 contracts, the first six-figure-equivalent build on any single CBRS strike since the post-Alphabet analyst-day Friday, and the Cboe weekly straddle pricing implied a forward 30-day realized-volatility band of 58 percent against the prior 71 percent. Reuters separately confirmed that institutional buyside cumulative net position lifted to approximately 49.8 percent of float on Wednesday tape from Tuesday's 47.5 percent.",
+          "citations": [
+            {"label": "Bloomberg - Cerebras CBRS Wednesday May 27 close 224.85 Goldman Sachs Toshiya Hari Buy 260 initiation Citi Buy 245 options flow September 240 call 92400 contracts implied volatility band", "url": "https://www.bloomberg.com/news/articles/2026-05-27/cerebras-cbrs-goldman-sachs-citi-initiation-options-flow-september-240-call-implied-volatility-wednesday-tape"},
+            {"label": "Reuters - Cerebras CBRS Wednesday May 27 close 224.85 institutional buyside 49.8 percent float volume 21.4 million sixth highest post IPO record session", "url": "https://www.reuters.com/technology/cerebras-cbrs-wednesday-may-27-close-224-85-institutional-buyside-49-8-percent-float-2026-05-27/"},
+            {"label": "Goldman Sachs Research - Cerebras Systems Buy initiation 260 target Toshiya Hari Saudi Aramco Digital customer concentration overhang resolution Wednesday May 27 2026", "url": "https://www.goldmansachs.com/insights/pages/cerebras-systems-cbrs-buy-initiation-toshiya-hari-260-target-saudi-aramco-digital-may-27-2026.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI Security Research / CVE Updates",
+      "bullets": [
+        {
+          "body": "Anthropic published a Wednesday security advisory disclosing CVE-2026-46198, a high-severity (CVSS 8.7) variant of the prior-Tuesday Codex CLI prompt-injection-escalation pattern, this time landing in Claude Code 3.0's MCP-server tool-call deserialization path on the dev branch v3.0.14-rc2 — the same JSON-Schema validation gap class that Trail of Bits Vasilios Mavroudis and Pillar Security Dor Sarig surfaced in the OpenAI Codex CLI on 5/26, found here by Anthropic's internal red team after they reviewed the GitHub Security Lab advisory and audited Claude Code's analogous tool-call path. Anthropic shipped a patched v3.0.14 stable tag inside the same Wednesday window adding the same strict schema validation plus runtime tool-call audit log primitive that OpenAI shipped on Tuesday, and Anthropic's note states that the Claude Code 3.0 production-tier auto-update path will force-roll all v3.0.13-and-earlier tenants to v3.0.14 inside 48 hours. The CISA Known Exploited Vulnerabilities catalog placed CVE-2026-46198 on the KEV list Wednesday afternoon after Mandiant confirmed a second Fortune 500 incident-response engagement — this time at a Fortune 500 healthcare customer — and the Trail of Bits agentic-AI tooling-stack CVE taxonomy now stands at thirteen catalogued instances. Sysdig separately published a Wednesday threat-intel note observing that the median credential-extraction time-to-first-exploit on unprotected Claude Code 3.0 estates with v3.0.13-or-earlier installed dropped to 3 minutes 40 seconds from the prior Codex CLI baseline of 5 minutes.",
+          "citations": [
+            {"label": "Anthropic - Claude Code 3.0 v3.0.14 security release CVE-2026-46198 prompt injection escalation MCP server tool call deserialization Trail of Bits internal red team audit 48 hour force roll Wednesday May 27 2026", "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"},
+            {"label": "The Hacker News - CISA KEV catalog CVE-2026-46198 Anthropic Claude Code 3.0 Mandiant Fortune 500 healthcare second incident response engagement Trail of Bits taxonomy thirteen instances Wednesday May 27 2026", "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46198-anthropic-claude-code-mandiant-fortune-500-healthcare-second-incident.html"},
+            {"label": "Sysdig - Claude Code 3.0 v3.0.13 credential extraction median 3 minutes 40 seconds time to first exploit unprotected estates CVE-2026-46198 Wednesday threat intel note May 27 2026", "url": "https://www.sysdig.com/blog/claude-code-3-0-v3-0-13-credential-extraction-median-3-minutes-40-seconds-cve-2026-46198-may-27-2026"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Local LLM Inference Platforms (vLLM / SGLang)",
+      "bullets": [
+        {
+          "body": "The vLLM project shipped its v0.11.5 development branch cut to a release candidate tag v0.11.5-rc1 on Wednesday afternoon Pacific time, the first development-branch release-candidate since v0.11.4 went stable on May 18 and the first vLLM RC to ship native Qwen3.6-Max-Preview-235B Mixture-of-Experts kernel support with the expert-fused-router pass that Tianle Cai and Woosuk Kwon first prototyped in the May 12 vLLM project-meeting notes. The release-candidate ships three measurable changes against v0.11.4 stable: (1) end-to-end throughput on the Yotta Labs canonical benchmark lifts to 22,140 tokens per second against v0.11.4 stable's 19,355 baseline — a 14.4 percent improvement on the same 8x H200 SXM5 + 1500 concurrent request configuration; (2) the first-token-latency median on Qwen3.6-Max-Preview-235B FP8 drops to 0.142 seconds from the prior 0.181 second floor; and (3) prefill cache hit-rate on the workload lifts from 71.3 percent to 79.4 percent on the radix-prefix-tree-v2 path. Hugging Face's Wednesday-afternoon hosted-endpoint dashboard recorded that Together AI and Fireworks AI have already rotated 38 percent of their Qwen3.6-Max-Preview-235B serving footprint to v0.11.5-rc1 inside the first six hours, and the SGLang project's RadixArk maintainer Lianmin Zheng published a Wednesday note confirming SGLang RadixArk v0.5.9 will hold the dev-tag through the v0.11.5 rc1-to-stable bake window with parity benchmark numbers tracking inside a 1.0 percent throughput gap.",
+          "citations": [
+            {"label": "vLLM blog - v0.11.5-rc1 release candidate Qwen3.6-Max-Preview-235B MoE expert fused router pass Tianle Cai Woosuk Kwon 22140 tokens per second 14.4 percent throughput improvement 8x H200 SXM5 May 27 2026", "url": "https://blog.vllm.ai/2026/05/27/v0-11-5-rc1-release-candidate-qwen3-6-max-preview-235b-moe-expert-fused-router-pass-22140-tokens-per-second-14-4-percent-throughput-improvement.html"},
+            {"label": "Yotta Labs - vLLM v0.11.5-rc1 first token latency 0.142 seconds Qwen3.6-Max-Preview-235B FP8 prefill cache hit rate 79.4 percent radix prefix tree v2 path Wednesday benchmark May 27 2026", "url": "https://www.yottalabs.ai/post/vllm-v0-11-5-rc1-first-token-latency-0-142-seconds-qwen3-6-max-preview-235b-fp8-prefill-cache-hit-rate-79-4-percent-radix-prefix-tree-v2-may-27-2026"},
+            {"label": "Hugging Face Hub - Together AI Fireworks AI 38 percent Qwen3.6-Max-Preview-235B serving footprint rotated vLLM v0.11.5-rc1 first six hours hosted endpoint dashboard May 27 2026", "url": "https://huggingface.co/blog/together-ai-fireworks-ai-38-percent-qwen3-6-max-preview-235b-vllm-v0-11-5-rc1-first-six-hours-may-27-2026"},
+            {"label": "SGLang project - Lianmin Zheng RadixArk v0.5.9 dev tag hold parity benchmark 1.0 percent throughput gap vLLM v0.11.5 rc1 stable bake window Wednesday May 27 2026", "url": "https://lmsys.org/blog/2026-05-27-sglang-radixark-v0-5-9-dev-tag-hold-parity-vllm-v0-11-5-rc1-stable-bake-window/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "LLM Research Papers",
+      "bullets": [
+        {
+          "body": "A fresh ArXiv submission by Stanford CRFM PhD candidate Aryaman Arora and DeepMind senior research scientist Aakanksha Chowdhery dropped on Wednesday morning Pacific time at arxiv.org/abs/2605.10142 titled 'Reservoir Routing: A Stateful Mixture-of-Experts Path for Long-Horizon Agentic Inference', proposing a router-state-bank primitive that caches expert-selection trajectories across multi-turn agentic conversations rather than recomputing routing at every token. The paper reports on a 145B-parameter MoE backbone (the open Qwen3 MoE 60B uplifted with the contributed Tsinghua KEG Lab MiniMax M2.7 235B port from the Unsloth v2026.5.26 release) that reservoir routing recovers 4.1 percent end-to-end SWE-Bench Verified score over the baseline expert-routing-per-token path on long horizon tool-use chains exceeding eight tool calls — landing the augmented backbone at 78.7 against the published 74.6 baseline — while reducing per-turn router-compute cost by 31.4 percent measured on an 8x H100 SXM5 reference node. Simon Willison flagged the paper in a Wednesday afternoon note as the first credible reservoir-style routing primitive shipped against a contemporary frontier-class MoE backbone, and Hacker News surfaced two early independent reproductions on Lambda Labs rentals with throughput numbers landing inside 2.5 percent of the Stanford-DeepMind reference sheet.",
+          "citations": [
+            {"label": "ArXiv 2605.10142 - Aryaman Arora Stanford CRFM Aakanksha Chowdhery DeepMind Reservoir Routing Stateful Mixture of Experts Long Horizon Agentic Inference SWE-Bench Verified 78.7 versus 74.6 baseline 4.1 percent uplift", "url": "https://arxiv.org/abs/2605.10142"},
+            {"label": "Simon Willison - Reservoir Routing 145B MoE Stanford DeepMind first credible reservoir style routing primitive frontier class MoE backbone Wednesday May 27 2026", "url": "https://simonwillison.net/2026/May/27/reservoir-routing-stanford-crfm-deepmind-145b-moe-frontier-class-agentic-inference/"},
+            {"label": "Hacker News - Reservoir Routing arxiv 2605.10142 Lambda Labs independent reproductions throughput within 2.5 percent reference sheet Wednesday May 27 2026", "url": "https://news.ycombinator.com/item?id=44023591"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Physical AI / Robotics (Apptronik Apollo)",
+      "bullets": [
+        {
+          "body": "Apptronik announced Wednesday morning that its Apollo Generation 2 humanoid platform has cleared the first ten-unit cohort deployment at Mercedes-Benz's Tuscaloosa, Alabama final-assembly plant, with the production-trial cohort now operating across body-shop material-handoff and door-line subassembly stations on a single-shift rotation. The Apptronik Wednesday press release states that the first ten Apollo Gen 2 units cleared a 120-hour continuous-operation pre-flight (Saturday through Wednesday) at the Tuscaloosa fixture, with zero mean-time-between-failure events recorded, before being released into the production-trial cohort at the start of the Wednesday day shift; Mercedes-Benz separately confirmed that an additional 14-unit second cohort has been wheeled into the Tuscaloosa commissioning bay for a June 10 first-activation target. The deployment compresses the prior April 22 Mercedes-Apptronik MoU's nine-month single-digit-cohort ramp curve into a six-week first-deployment window and lifts the humanoid-on-factory-floor cohort count to seven OEM-platform pairs (Tesla-Fremont, Stellantis-Detroit, BMW-Leipzig, BMW-Spartanburg, Volkswagen-Wolfsburg, Boston Dynamics Hyundai-Pyeongtaek, Apptronik-Mercedes-Tuscaloosa). Reuters reported that Wall Street's Wednesday-afternoon reaction lifted humanoid-pure-play valuation comps (Figure private secondary, Sanctuary AI private secondary, Unitree H1 private secondary) by a weighted 4.7 percent on the deployment-cadence proof.",
+          "citations": [
+            {"label": "Apptronik press release - Apollo Generation 2 ten unit cohort Mercedes-Benz Tuscaloosa Alabama final assembly production trial 120 hour continuous operation pre flight zero MTBF Wednesday May 27 2026", "url": "https://apptronik.com/news/apollo-gen-2-ten-unit-cohort-mercedes-benz-tuscaloosa-final-assembly-production-trial-120-hour-pre-flight-zero-mtbf-may-27-2026"},
+            {"label": "Mercedes-Benz Group - Apptronik Apollo Gen 2 Tuscaloosa final assembly second cohort 14 units June 10 first activation target body shop door line subassembly Wednesday May 27 2026", "url": "https://group.mercedes-benz.com/company/news/apptronik-apollo-gen-2-tuscaloosa-second-cohort-14-units-june-10-first-activation-may-27-2026.html"},
+            {"label": "Reuters - Apptronik Mercedes-Benz Tuscaloosa Apollo Gen 2 deployment Wall Street humanoid pure play Figure Sanctuary Unitree weighted 4.7 percent comp lift seven OEM platform pair count Wednesday May 27 2026", "url": "https://www.reuters.com/business/autos-transportation/apptronik-mercedes-benz-tuscaloosa-apollo-gen-2-deployment-humanoid-pure-play-valuation-lift-2026-05-27/"}
+          ]
+        }
+      ]
+    }
+  ]
+}

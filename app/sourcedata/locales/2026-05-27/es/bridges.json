@@ -1,0 +1,680 @@
+{
+  "date": "2026-05-27",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.7423f700c194c3d8",
+        "short_label": "Reservoir routing ships as default vLLM and SGLang serving knob by H2 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "La propia predicción de hoy aterriza directamente sobre la presentación del miércoles del arxiv 2605.10142 'Reservoir Routing: A Stateful Mixture-of-Experts Path for Long-Horizon Agentic Inference' por el candidato a PhD de Stanford CRFM Aryaman Arora y la científica investigadora senior de DeepMind Aakanksha Chowdhery. El paper propone un primitivo de banco de estado de enrutador que almacena en caché las trayectorias de selección de expertos a través de conversaciones agénticas multi-turno en lugar de recalcular el enrutamiento en cada token, recupera 4,1 puntos porcentuales de SWE-Bench Verified en un backbone MoE de 145B parámetros (Qwen3 MoE 60B elevado con el port MiniMax M2.7 235B del Tsinghua KEG Lab desde Unsloth v2026.5.26) aterrizando el backbone aumentado en 78,7 frente a la línea base publicada de 74,6 en cadenas de uso de herramientas que superan ocho llamadas a herramientas, y reduce el costo de cómputo del enrutador por turno en un 31,4 por ciento en un nodo de referencia 8x H100 SXM5. Simon Willison señaló el paper como el primer primitivo creíble de enrutamiento estilo reservorio sobre un backbone MoE contemporáneo de clase frontera, y Hacker News expuso dos reproducciones tempranas de Lambda Labs dentro de un sobre de rendimiento del 2,5 por ciento dentro del primer día. El mismo ciclo del miércoles llevó el corte de candidato a versión vLLM v0.11.5-rc1 enviando soporte nativo de Qwen3.6-Max-Preview-235B MoE a través del pase de enrutador-fusionado-con-expertos que Tianle Cai y Woosuk Kwon prototiparon en las notas de la reunión de proyecto del 12 de mayo, sirviendo a 22.140 tokens por segundo en el benchmark canónico de Yotta Labs de 8x H200 SXM5 + 1500 concurrentes (14,4 por ciento sobre v0.11.4 estable), y Together AI más Fireworks AI rotaron el 38 por ciento de su huella de servicio Qwen3.6-Max-Preview-235B al rc1 dentro de seis horas con el mantenedor de SGLang RadixArk v0.5.9 Lianmin Zheng confirmando paridad rastreando dentro de una brecha de rendimiento del 1,0 por ciento.",
+      "reference_links": [
+        {
+          "label": "ArXiv 2605.10142 - Aryaman Arora Stanford CRFM Aakanksha Chowdhery DeepMind Reservoir Routing Stateful Mixture of Experts Long Horizon Agentic Inference SWE-Bench Verified 78.7 frente a línea base 74.6 mejora 4.1 por ciento",
+          "url": "https://arxiv.org/abs/2605.10142"
+        },
+        {
+          "label": "Simon Willison - Reservoir Routing 145B MoE Stanford DeepMind primer primitivo creíble de enrutamiento estilo reservorio backbone MoE de clase frontera miércoles 27 de mayo de 2026",
+          "url": "https://simonwillison.net/2026/May/27/reservoir-routing-stanford-crfm-deepmind-145b-moe-frontier-class-agentic-inference/"
+        },
+        {
+          "label": "Hacker News - Reservoir Routing arxiv 2605.10142 Lambda Labs reproducciones independientes rendimiento dentro del 2.5 por ciento hoja de referencia miércoles 27 de mayo de 2026",
+          "url": "https://news.ycombinator.com/item?id=44023591"
+        },
+        {
+          "label": "Blog vLLM - candidato a versión v0.11.5-rc1 Qwen3.6-Max-Preview-235B MoE pase de enrutador fusionado con expertos Tianle Cai Woosuk Kwon 22140 tokens por segundo mejora de rendimiento del 14.4 por ciento 8x H200 SXM5 27 de mayo de 2026",
+          "url": "https://blog.vllm.ai/2026/05/27/v0-11-5-rc1-release-candidate-qwen3-6-max-preview-235b-moe-expert-fused-router-pass-22140-tokens-per-second-14-4-percent-throughput-improvement.html"
+        },
+        {
+          "label": "Hugging Face Hub - Together AI Fireworks AI 38 por ciento Qwen3.6-Max-Preview-235B huella de servicio rotada vLLM v0.11.5-rc1 primeras seis horas panel de endpoint alojado 27 de mayo de 2026",
+          "url": "https://huggingface.co/blog/together-ai-fireworks-ai-38-percent-qwen3-6-max-preview-235b-vllm-v0-11-5-rc1-first-six-hours-may-27-2026"
+        },
+        {
+          "label": "Proyecto SGLang - Lianmin Zheng RadixArk v0.5.9 dev tag mantener paridad benchmark brecha de rendimiento del 1.0 por ciento vLLM v0.11.5 rc1 ventana de cocción estable miércoles 27 de mayo de 2026",
+          "url": "https://lmsys.org/blog/2026-05-27-sglang-radixark-v0-5-9-dev-tag-hold-parity-vllm-v0-11-5-rc1-stable-bake-window/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "La predicción del knob de stack de servicio Reservoir routing aterriza dentro del ciclo de hoy: arxiv 2605.10142 entrega una mejora de 4,1pp en SWE-Bench en un MoE de 145B con un recorte del 31,4% del cómputo de enrutador, vLLM v0.11.5-rc1 envía el pase de enrutador-fusionado-con-expertos a 22.140 tok/s, la paridad de SGLang RadixArk se rastrea dentro del 1%, y dos reproducciones de Lambda Labs están activas.",
+        "coherence": 5,
+        "remaining_gap": "Ambas cohortes de mantenedores deben fusionar el banco de estado de reservorio en una versión etiquetada con el knob predeterminado sintonizable expuesto."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b87965be1be7ef72",
+        "short_label": "Cerebras (CBRS) completes top-tier sell-side Buy initiation cohort by Q3 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "La propia predicción de hoy aterriza directamente sobre la cinta del miércoles de Cerebras Systems (NASDAQ: CBRS). La acción cerró en 224,85 dólares, un 3,6 por ciento más que los 217,05 dólares del martes, elevándose a un nuevo máximo intradía histórico de 228,40 dólares con un volumen de aproximadamente 21,4 millones de acciones (sexta sesión récord más alta después de la IPO), impulsada por el inicio previo a la apertura del analista Toshiya Hari de Goldman Sachs en Compra con un objetivo a doce meses de 260 dólares emparejado con un inicio de Compra de Citi a 245 dólares. Ambas mesas citaron el cierre del MoU con Saudi Aramco Digital como la resolución del exceso de concentración de clientes del S-1 que había mantenido a varias mesas en limbo de pre-cobertura. Bloomberg reportó el hito de flujo de opciones en la línea de call de septiembre de 2026 a 240 dólares cruzando 92.400 contratos de interés abierto, la primera acumulación equivalente a seis cifras en cualquier strike único de CBRS desde el viernes posterior al día del analista de Alphabet, y el precio de straddle semanal de Cboe implicaba la banda de volatilidad realizada a 30 días comprimiéndose al 58 por ciento desde el 71 por ciento. Reuters confirmó por separado que la posición neta acumulada de compra institucional se elevó a aproximadamente el 49,8 por ciento del float en la cinta del miércoles desde el 47,5 por ciento del martes, cruzando el umbral de la mitad del float que convencionalmente señala que un nombre de cohorte de IPO se ha graduado de una historia de rotación de hedge funds a una participación anclada en long-only.",
+      "reference_links": [
+        {
+          "label": "Bloomberg - Cerebras CBRS miércoles 27 de mayo cierre 224.85 Goldman Sachs Toshiya Hari Buy 260 inicio Citi Buy 245 flujo de opciones septiembre 240 call 92400 contratos banda de volatilidad implícita",
+          "url": "https://www.bloomberg.com/news/articles/2026-05-27/cerebras-cbrs-goldman-sachs-citi-initiation-options-flow-september-240-call-implied-volatility-wednesday-tape"
+        },
+        {
+          "label": "Reuters - Cerebras CBRS miércoles 27 de mayo cierre 224.85 compra institucional 49.8 por ciento float volumen 21.4 millones sexta sesión récord más alta post IPO",
+          "url": "https://www.reuters.com/technology/cerebras-cbrs-wednesday-may-27-close-224-85-institutional-buyside-49-8-percent-float-2026-05-27/"
+        },
+        {
+          "label": "Goldman Sachs Research - Cerebras Systems inicio de Compra objetivo 260 Toshiya Hari Saudi Aramco Digital resolución de exceso de concentración de clientes miércoles 27 de mayo de 2026",
+          "url": "https://www.goldmansachs.com/insights/pages/cerebras-systems-cbrs-buy-initiation-toshiya-hari-260-target-saudi-aramco-digital-may-27-2026.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El disparador de la predicción de la cohorte de inicio de Compra de Cerebras de primer nivel aterriza hoy: Goldman inicia Compra en 260 dólares y Citi en 245 dólares en una sesión, ambos citando el MoU con Saudi Aramco Digital como la resolución del exceso de concentración de clientes del S-1. La compra institucional cruzando el 49,8% del float y los 92.400 contratos en el call de septiembre a 240 dólares confirman el posicionamiento de graduación de cohorte.",
+        "coherence": 5,
+        "remaining_gap": "Al menos seis mesas más del top-diez deben iniciar en Compra con objetivos agrupados en la banda 235-275 antes del cierre del Q3."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2edb43dc5c069ff4",
+        "short_label": "Cyber-insurance carriers ship agentic-AI dev-tool endorsement tier by Q4 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "La propia predicción de hoy aterriza directamente sobre el aviso CVE-2026-46198 del miércoles de Anthropic Claude Code 3.0 y su inclusión CISA KEV de misma ventana. La variante de escalada de inyección de prompts CVSS 8.7 en la ruta de deserialización de llamadas a herramientas del servidor MCP en la rama dev v3.0.14-rc2 es el segundo CVE de inyección de prompts en herramientas de IA agéntica listado en CISA-KEV dentro de una semana de negociación (después del CVE-2026-46127 del martes en OpenAI Codex CLI). Anthropic envió una etiqueta estable v3.0.14 parcheada con validación estricta de esquema más un primitivo de registro de auditoría de llamadas a herramientas en tiempo de ejecución y se comprometió a un force-roll de 48 horas para los inquilinos de v3.0.13-y-anteriores. CISA colocó el CVE en KEV la tarde del miércoles después de que Mandiant confirmara un segundo compromiso de respuesta a incidentes en Fortune 500 (esta vez en un cliente de salud, distinto del vertical de servicios financieros del martes), y Sysdig midió la mediana de tiempo hasta el primer exploit de extracción de credenciales en estados v3.0.13 desprotegidos en 3 minutos 40 segundos, bajando desde la línea base de Codex CLI de 5 minutos. La taxonomía de CVE del stack de herramientas de IA agéntica de Trail of Bits ahora se sitúa en trece instancias catalogadas, pasando el umbral de dos dígitos que activa la guía del grupo de trabajo de Lloyd's Market Association.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        },
+        {
+          "label": "The Hacker News - catálogo CISA KEV CVE-2026-46198 Anthropic Claude Code 3.0 Mandiant Fortune 500 salud segundo compromiso de respuesta a incidentes taxonomía Trail of Bits trece instancias miércoles 27 de mayo de 2026",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46198-anthropic-claude-code-mandiant-fortune-500-healthcare-second-incident.html"
+        },
+        {
+          "label": "Sysdig - Claude Code 3.0 v3.0.13 extracción de credenciales mediana 3 minutos 40 segundos tiempo hasta el primer exploit estados desprotegidos CVE-2026-46198 nota de inteligencia de amenazas del miércoles 27 de mayo de 2026",
+          "url": "https://www.sysdig.com/blog/claude-code-3-0-v3-0-13-credential-extraction-median-3-minutes-40-seconds-cve-2026-46198-may-27-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El patrón de hechos disparador de la predicción del nivel de respaldo de IA agéntica de seguros cibernéticos se bloquea hoy: CVE-2026-46198 en Claude Code 3.0 llega a CISA KEV el mismo día que el CVE de Codex CLI del martes, Mandiant confirma un segundo compromiso en Fortune 500 en un cliente de salud, la taxonomía de Trail of Bits cruza trece instancias, y la mediana de tiempo hasta el primer exploit de Sysdig se comprime a 3:40.",
+        "coherence": 5,
+        "remaining_gap": "Las aseguradoras deben publicar realmente lenguaje de respaldo en redacciones de ciclo de renovación — no aterrizó ninguna presentación de Chubb/AIG/Travelers/Beazley/AXA hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.abe1ced634091a3c",
+        "short_label": "Selective-expert-checkpointing lands as default MoE save primitive by H2 2026",
+        "prediction_date": "2026-05-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Las noticias de hoy tocan el stack de servicio MoE tangencialmente vía el paper arxiv 2605.10142 Reservoir Routing, que hace benchmark sobre un backbone MoE de 145B parámetros construido desde el Qwen3 MoE 60B abierto elevado con el port MiniMax M2.7 235B del Tsinghua KEG Lab que se envió en el lanzamiento Unsloth v2026.5.26 del martes — el mismo lanzamiento que introdujo el primitivo de guardado de checkpoint selectivo de expertos que esta predicción rastrea. La huella del port MiniMax M2.7 235B dentro del conjunto de recetas Unsloth es ahora el backbone canónico de MoE grande contra el cual la investigación del stack de servicio del próximo ciclo está haciendo benchmark, reforzando la atracción gravitacional del conteo de recetas sobre el resto de la cohorte de entrenadores de nivel consumidor. El candidato a versión vLLM v0.11.5-rc1 del miércoles también sirve el backbone Qwen3.6-Max-Preview-235B MoE a 22.140 tokens por segundo en 8x H200 SXM5, que es la misma clase de modelo que el lanzamiento Unsloth agregó soporte de entrenamiento el martes — extendiendo la validación del lado de inferencia del sobre de clase de modelo sin exponer noticias frescas de primitivo de tiempo de guardado de Hugging Face TRL, Axolotl, o Llama-Factory.",
+      "reference_links": [
+        {
+          "label": "ArXiv 2605.10142 - Aryaman Arora Stanford CRFM Aakanksha Chowdhery DeepMind Reservoir Routing Stateful Mixture of Experts Long Horizon Agentic Inference SWE-Bench Verified 78.7 frente a línea base 74.6 mejora 4.1 por ciento",
+          "url": "https://arxiv.org/abs/2605.10142"
+        },
+        {
+          "label": "Blog vLLM - candidato a versión v0.11.5-rc1 Qwen3.6-Max-Preview-235B MoE pase de enrutador fusionado con expertos Tianle Cai Woosuk Kwon 22140 tokens por segundo mejora de rendimiento del 14.4 por ciento 8x H200 SXM5 27 de mayo de 2026",
+          "url": "https://blog.vllm.ai/2026/05/27/v0-11-5-rc1-release-candidate-qwen3-6-max-preview-235b-moe-expert-fused-router-pass-22140-tokens-per-second-14-4-percent-throughput-improvement.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "La predicción de guardado MoE predeterminado de selective-expert-checkpointing (26 de mayo) solo se toca tangencialmente: el paper de Reservoir Routing hace benchmark sobre el port MiniMax M2.7 de Unsloth v2026.5.26 que introdujo el primitivo de checkpoint selectivo que esta predicción rastrea, reforzando la atracción gravitacional de la receta, pero no aterrizó ningún movimiento fresco de primitivo de tiempo de guardado de Hugging Face TRL, Axolotl, o Llama-Factory en el ciclo del miércoles.",
+        "coherence": 2,
+        "remaining_gap": "Un lanzamiento de Hugging Face TRL, Axolotl, o Llama-Factory que envíe selective-expert-checkpoint como el primitivo de guardado predeterminado."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3abc8b1f6643907d",
+        "short_label": "SEC extends 8-K cyber materiality to agentic-AI dev-tool incidents by Q3 2026",
+        "prediction_date": "2026-05-26"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Las noticias de hoy agregan un segundo incidente canónico de referencia para la tesis de extensión de materialidad 8-K de la SEC. La divulgación CVE-2026-46198 del miércoles de Anthropic (CVSS 8.7) en la ruta de deserialización de llamadas a herramientas del servidor MCP de Claude Code 3.0 se une al CVE-2026-46127 del martes en OpenAI Codex CLI en el catálogo CISA KEV dentro de la misma semana de negociación, con Mandiant confirmando un segundo compromiso de respuesta a incidentes en Fortune 500 en un cliente de salud (distinto del vertical de servicios financieros del martes). Anthropic se comprometió a un force-roll de 48 horas para los inquilinos de v3.0.13-y-anteriores, reflejando la ruta de force-roll de 72 horas de OpenAI y creando una postura binaria asegurado-versus-no-asegurado dentro de una ventana de 48-72 horas a través de dos de las bases de inquilinos de herramientas de desarrollo agéntico más grandes. La taxonomía de CVE del stack de herramientas de IA agéntica de Trail of Bits sube de doce a trece instancias catalogadas, y Sysdig fija la mediana de tiempo hasta el primer exploit de extracción de credenciales en estados desprotegidos en 3 minutos 40 segundos (un 27 por ciento menos que la línea base previa de 5 minutos de Codex CLI). Dos verticales distintos más dos proveedores distintos más una ventana de explotación mediana inferior a cinco minutos dentro de una semana de negociación endurece el caso estructural sobre el que descansa la cláusula 'porque' de la predicción.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        },
+        {
+          "label": "The Hacker News - catálogo CISA KEV CVE-2026-46198 Anthropic Claude Code 3.0 Mandiant Fortune 500 salud segundo compromiso de respuesta a incidentes taxonomía Trail of Bits trece instancias miércoles 27 de mayo de 2026",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46198-anthropic-claude-code-mandiant-fortune-500-healthcare-second-incident.html"
+        },
+        {
+          "label": "Sysdig - Claude Code 3.0 v3.0.13 extracción de credenciales mediana 3 minutos 40 segundos tiempo hasta el primer exploit estados desprotegidos CVE-2026-46198 nota de inteligencia de amenazas del miércoles 27 de mayo de 2026",
+          "url": "https://www.sysdig.com/blog/claude-code-3-0-v3-0-13-credential-extraction-median-3-minutes-40-seconds-cve-2026-46198-may-27-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La predicción de extensión de materialidad cibernética 8-K de la SEC (26 de mayo) gana un segundo incidente canónico de referencia: CVE-2026-46198 en Claude Code 3.0 se une al CVE de Codex CLI del martes en CISA KEV dentro de una semana de negociación, con dos verticales de Fortune 500 (finanzas + salud), dos proveedores, y una ventana de explotación mediana de 3:40 — el patrón de hechos estructural se endurece.",
+        "coherence": 4,
+        "remaining_gap": "SEC Corp Fin debe emitir una carta de comentario de muestra o una versión interpretativa vinculando los CVEs de herramientas de IA agéntica a los umbrales de materialidad 8-K."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.304566b492fc547b",
+        "short_label": "FFIEC adds agent-harness third-party risk addendum by Q3 2026",
+        "prediction_date": "2026-05-26"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Las noticias de hoy agregan un segundo proveedor y un segundo vertical al patrón de hechos activador sobre el que descansa la tesis del anexo del manual FFIEC, pero el segundo vertical es salud en lugar de servicios financieros. El CVE-2026-46198 del miércoles en Anthropic Claude Code 3.0 llega a CISA KEV dentro de la misma ventana del miércoles después del segundo compromiso de respuesta a incidentes en Fortune 500 de Mandiant (cliente de servicios financieros del Fortune 500 del martes más cliente de salud del Fortune 500 del miércoles), y la taxonomía de CVE del stack de herramientas de IA agéntica de Trail of Bits sube a trece instancias catalogadas. La explotación de servicios financieros de Mandiant del martes sigue siendo el disparador activador para la cohorte de supervisor prudencial que nombra la predicción, y el compromiso de salud del miércoles amplía la imagen de agregación intersectorial que los tratados de reaseguro de las aseguradoras enumeran como un riesgo de agregación estructural — pero el nuevo patrón de hechos apunta más directamente a la suscripción de seguros cibernéticos comerciales intersectoriales que al lenguaje del manual de supervisión bancaria del FFIEC. El force-roll de 48 horas de Anthropic más el force-roll de 72 horas de OpenAI crean la misma postura binaria asegurado-versus-no-asegurado a través de dos de las bases de inquilinos de herramientas de desarrollo agéntico más grandes que el ciclo de examen del FFIEC normalmente expondría en la próxima ronda de cartas de supervisión.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        },
+        {
+          "label": "The Hacker News - catálogo CISA KEV CVE-2026-46198 Anthropic Claude Code 3.0 Mandiant Fortune 500 salud segundo compromiso de respuesta a incidentes taxonomía Trail of Bits trece instancias miércoles 27 de mayo de 2026",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46198-anthropic-claude-code-mandiant-fortune-500-healthcare-second-incident.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "La predicción del anexo de riesgo de terceros del FFIEC (26 de mayo) obtiene una imagen de agregación intersectorial más amplia: el CVE de salud del miércoles agrega un segundo vertical al compromiso de servicios financieros del martes, endureciendo el contexto de agregación intersectorial sobre el que se apoyaría la lógica de suscripción del anexo. Pero el nuevo patrón de hechos apunta más directamente al seguro cibernético comercial que al lenguaje del manual de supervisión bancaria.",
+        "coherence": 3,
+        "remaining_gap": "Un supervisor afiliado al FFIEC (OCC, FDIC, Fed) debe publicar un borrador de anexo o guía de examen interagencias citando el riesgo de arnés de agente."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5e1c9a4f63d827b8",
+        "short_label": "Loader-verification nine-document reference set lands framework default shipment by mid-June 2026",
+        "prediction_date": "2026-05-25"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy se alejan del ancla del envío predeterminado del framework de verificación de cargador de nueve documentos. El CVE-2026-46198 del miércoles en Anthropic Claude Code 3.0 se sitúa directamente en la clase de riesgo de cargador-agente que el conjunto de referencia de la predicción apunta — la misma brecha de validación JSON-Schema en la ruta de deserialización de llamadas a herramientas del servidor MCP que Trail of Bits y Pillar Security expusieron en OpenAI Codex CLI el martes — y el v3.0.14 estable parcheado de Anthropic envía validación estricta de esquema más un primitivo de registro de auditoría de llamadas a herramientas en tiempo de ejecución idéntico al parche del martes de OpenAI. Pero el ciclo del miércoles no expone churn fresco de cohorte de mantenedores LangChain más AutoGen más CrewAI más Haystack más Pydantic AI, ninguna extensión fresca de conjunto de referencia arxiv, ninguna lectura fresca de matriz de conformidad de interoperabilidad cruzando orquestadores de seis proveedores, y ninguna actualización fresca de rama RC1 — la narrativa de envío predeterminado del framework de la predicción está en espera mientras la evidencia de CVE se apila en el lado de herramientas del proveedor.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "La predicción de envío predeterminado del framework de verificación de cargador de nueve documentos (25 de mayo) está en espera: el CVE-2026-46198 de hoy se sitúa directamente en la misma clase de brecha de validación JSON-Schema de deserialización de llamadas a herramientas del servidor MCP que el conjunto de referencia apunta, pero no aterrizó ningún movimiento fresco de cohorte de mantenedores de LangChain, AutoGen, CrewAI, Haystack, o Pydantic AI, ninguna actualización fresca de rama RC, ni lectura de matriz de interoperabilidad cruzando orquestadores en el ciclo del miércoles.",
+        "coherence": 2,
+        "remaining_gap": "Al menos tres de los cinco frameworks nombrados deben cortar un candidato a versión que envíe el conjunto de referencia de nueve documentos como predeterminado."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b6d5df1a02a9af1b",
+        "short_label": "Cerebras CBRS re-rates above analyst-band ceiling on Saudi Aramco MoU close by late Q2 2026",
+        "prediction_date": "2026-05-25"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Las noticias de hoy validan directamente la aritmética estructural de re-rating sobre la que descansa esta predicción. El cierre del miércoles de Cerebras CBRS en 224,85 dólares imprime un máximo intradía histórico de 228,40 dólares — superando intradía el techo de la banda de analistas Outperform de 225 dólares de Jefferies — y el inicio de Compra de Goldman Sachs con un objetivo a doce meses de 260 dólares más el inicio de Compra de Citi en 245 dólares elevan el techo del mercado muy por encima de los 225 dólares de Jefferies que el aterrizaje de finales del Q2 2026 de la predicción nombra como el umbral de ruptura. Goldman citó explícitamente el cierre del MoU con Saudi Aramco Digital como la resolución del exceso de concentración de clientes que nombra la cláusula 'porque' de la predicción, y el hito de flujo de opciones de la cinta del miércoles (92.400 contratos en la línea de call de septiembre de 2026 a 240 dólares, primera acumulación equivalente a seis cifras desde el viernes posterior al día del analista de Alphabet) más la posición neta acumulada de compra institucional elevándose al 49,8 por ciento del float (cruzando el umbral de la mitad del float desde el 47,5 por ciento del martes) endurece el sesgo de posicionamiento alcista que nombra la cláusula 'dado' de la predicción. El máximo intradía por encima de 225 dólares más el inicio de doble mesa en 245-260 dólares aterriza el aterrizaje nombrado de la predicción dentro de la propia sesión de negociación, por delante de la ventana de finales del Q2 2026.",
+      "reference_links": [
+        {
+          "label": "Bloomberg - Cerebras CBRS miércoles 27 de mayo cierre 224.85 Goldman Sachs Toshiya Hari Buy 260 inicio Citi Buy 245 flujo de opciones septiembre 240 call 92400 contratos banda de volatilidad implícita",
+          "url": "https://www.bloomberg.com/news/articles/2026-05-27/cerebras-cbrs-goldman-sachs-citi-initiation-options-flow-september-240-call-implied-volatility-wednesday-tape"
+        },
+        {
+          "label": "Reuters - Cerebras CBRS miércoles 27 de mayo cierre 224.85 compra institucional 49.8 por ciento float volumen 21.4 millones sexta sesión récord más alta post IPO",
+          "url": "https://www.reuters.com/technology/cerebras-cbrs-wednesday-may-27-close-224-85-institutional-buyside-49-8-percent-float-2026-05-27/"
+        },
+        {
+          "label": "Goldman Sachs Research - Cerebras Systems inicio de Compra objetivo 260 Toshiya Hari Saudi Aramco Digital resolución de exceso de concentración de clientes miércoles 27 de mayo de 2026",
+          "url": "https://www.goldmansachs.com/insights/pages/cerebras-systems-cbrs-buy-initiation-toshiya-hari-260-target-saudi-aramco-digital-may-27-2026.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "La predicción de re-rating del techo de la banda de analistas de Cerebras (25 de mayo) aterriza dentro de la sesión de negociación: el máximo intradía del miércoles de 228,40 dólares supera el techo Outperform de 225 dólares de Jefferies, Goldman inicia Compra en 260 dólares y Citi en 245 dólares — elevando el techo del mercado muy por encima del umbral nombrado de la predicción — con el MoU de Saudi Aramco anclando el disparador de demanda.",
+        "coherence": 5,
+        "remaining_gap": "El cierre debe sostenerse por encima de 225 dólares a través de múltiples sesiones para confirmar que el re-rate no es un pop de inicio de una sola sesión."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4a7c1f93b8d62e0a",
+        "short_label": "Reciprocity perimeter admits US as seventeenth jurisdiction at OECD plenary closing session by June 6 2026",
+        "prediction_date": "2026-05-25"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "El ciclo de noticias de hoy no expone reporte fresco del secretariado del grupo de trabajo OECD GENAI, ningún movimiento fresco de conteo de candidatos nombrados, ninguna actividad de firma de orden ejecutiva FMRB, y ninguna actualización de marcado de resolución conjunta de vía paralela del Comité de Energía y Comercio de la Cámara. La cinta del miércoles está dominada por la cohorte de inicio de Compra de Cerebras, la inclusión en CISA KEV del CVE-2026-46198 de Anthropic Claude Code, el corte de vLLM v0.11.5-rc1, la presentación arxiv de Reservoir Routing, y el despliegue de Apptronik Apollo Gen 2 en Mercedes-Benz Tuscaloosa — ninguno de los cuales intersecta el camino nombrado del perímetro regulatorio de la predicción. La inclusión del CVE sí extiende la superficie de ancla regulatoria de cargador-agente contra la cual está redactado el esquema de atestación de política de inquilino del perímetro de reciprocidad OECD, pero ninguna lectura fresca de esquema o señal de adopción del grupo de trabajo aterriza hoy.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "La predicción de admisión de EE.UU. al perímetro de reciprocidad OECD (25 de mayo) no obtiene evidencia directa: el ciclo del miércoles está dominado por mercados de capital de aceleradores de IA, remediación de CVE de herramientas-agente, un RC de plataforma de inferencia, un paper de investigación, y un despliegue humanoide — ninguno de los cuales intersecta el camino nombrado del secretariado del grupo de trabajo OECD GENAI o la firma de orden ejecutiva FMRB. La fecha límite del plenario del 6 de junio está ahora a nueve días.",
+        "coherence": 1,
+        "remaining_gap": "Reporte fresco del grupo de trabajo OECD GENAI, firma de orden ejecutiva FMRB, o un marcado de resolución conjunta del Comité de Energía y Comercio de la Cámara."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4d8f72ce19b3a056",
+        "short_label": "Loader-verification nine-document reference set anchors mid-June default shipment across five frameworks",
+        "prediction_date": "2026-05-24"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy tocan la clase de CVE de cargador-agente que el conjunto de referencia de la predicción apunta sin exponer movimiento fresco de cohorte de mantenedores. El CVE-2026-46198 del miércoles en Anthropic Claude Code 3.0 se sitúa en la misma clase de brecha de validación JSON-Schema de deserialización de llamadas a herramientas del servidor MCP que el CVE-2026-46127 del martes en OpenAI Codex CLI expuso, reforzando la superficie de riesgo de cargador-agente contra la cual está redactado el conjunto de referencia de nueve documentos de la predicción. El v3.0.14 estable parcheado de Anthropic envía la misma validación estricta de esquema más el primitivo de registro de auditoría de llamadas a herramientas en tiempo de ejecución que OpenAI envió el martes — independiente del alcance de cohorte de mantenedores LangChain más AutoGen más CrewAI más Haystack más Pydantic AI de la predicción. No aterrizó ninguna lectura fresca de ciclo RC de envío predeterminado de framework, ninguna extensión fresca de conjunto de referencia arxiv, y ninguna lectura fresca de matriz de conformidad de interoperabilidad cruzando orquestadores de seis proveedores en el ciclo del miércoles.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "La predicción de envío predeterminado de cinco frameworks de verificación de cargador de nueve documentos (24 de mayo) está en espera: el CVE-2026-46198 de hoy en Anthropic Claude Code 3.0 se sitúa en la misma clase de brecha de validación JSON-Schema que el conjunto de referencia apunta — reforzando la superficie de riesgo de cargador-agente — pero no aparecieron hoy ningún corte fresco de RC de cohorte de mantenedores, ninguna extensión fresca de conjunto de referencia arxiv, y ninguna lectura de matriz de interoperabilidad cruzando orquestadores de seis proveedores.",
+        "coherence": 2,
+        "remaining_gap": "Cortes RC concretos en LangChain, AutoGen, CrewAI, Haystack, o Pydantic AI que agrupen el conjunto de nueve documentos como predeterminado."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a3e91b7d52c4f608",
+        "short_label": "Tenstorrent S-1 anchors three-name AI-chip IPO set by early August 2026",
+        "prediction_date": "2026-05-24"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy no exponen actividad fresca de revisión de SEC Corp Fin de Tenstorrent, ninguna actualización fresca de presentación confidencial de SambaNova, y ninguna apertura de ventana de presentación confidencial de IPO de tercer nombre de acelerador de IA. La cohorte de inicio de Compra de Cerebras de la cinta del miércoles (Goldman Sachs en 260 dólares más Citi en 245 dólares) ajusta el entorno de precios de conjunto comparable de pure-play de acelerador de IA contra el cual se valorará el calendario de IPO de acelerador de IA — la posición neta acumulada de compra institucional elevándose al 49,8 por ciento del float cruza el umbral de la mitad del float que convencionalmente señala que un nombre de cohorte de IPO se ha graduado de una historia de rotación de hedge funds a una participación anclada en long-only, que es la señal de precios pública comparable sobre la que los suscriptores de IPO de acelerador de IA se apoyan al fijar el precio de la cohorte. Pero ninguna noticia directa de Tenstorrent o SambaNova aterrizó en el ciclo del miércoles.",
+      "reference_links": [
+        {
+          "label": "Reuters - Cerebras CBRS miércoles 27 de mayo cierre 224.85 compra institucional 49.8 por ciento float volumen 21.4 millones sexta sesión récord más alta post IPO",
+          "url": "https://www.reuters.com/technology/cerebras-cbrs-wednesday-may-27-close-224-85-institutional-buyside-49-8-percent-float-2026-05-27/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la predicción del conjunto de IPO de chip de IA de tres nombres ancla del S-1 de Tenstorrent (24 de mayo), las noticias de hoy giraron hacia hilos frescos (cohorte de inicio de Compra Goldman-Citi de Cerebras, CVE de Anthropic Claude Code, vLLM v0.11.5-rc1, arxiv de Reservoir Routing, despliegue Apptronik-Mercedes). La compra de Cerebras cruzando el 49,8 por ciento del float ajusta el carril de precios del conjunto comparable indirectamente, pero no apareció ningún movimiento de revisión de Corp Fin de Tenstorrent o presentación confidencial de SambaNova.",
+        "coherence": 2,
+        "remaining_gap": "Sin lectura de revisión de SEC Corp Fin de Tenstorrent, sin noticias de presentación confidencial de SambaNova, sin señal de conjunto comparable de IPO de acelerador de tercer nombre en el ciclo de hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6eb8478f34847ee9",
+        "short_label": "Reciprocity perimeter admits US as seventeenth jurisdiction by June 6 2026",
+        "prediction_date": "2026-05-24"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "El ciclo de noticias de hoy no expone reporte fresco del secretariado del grupo de trabajo OECD GENAI, ningún movimiento fresco de conteo de candidatos nombrados, ninguna actividad de firma de orden ejecutiva FMRB, ninguna actualización de ventana de consulta nacional de 270 días de Qatar, y ninguna actualización de marcado de resolución conjunta de vía paralela del Comité de Energía y Comercio de la Cámara. La cinta del miércoles está dominada por mercados de capital de aceleradores de IA (cohorte de inicio de Compra de Cerebras), remediación de CVE de herramientas-agente (CVE-2026-46198 de Anthropic Claude Code en CISA KEV), lanzamientos de plataforma de inferencia (vLLM v0.11.5-rc1), papers de investigación (arxiv de Reservoir Routing), y despliegue de robótica (Apptronik Apollo Gen 2 en Mercedes Tuscaloosa) — ninguno de los cuales intersecta el camino nombrado de admisión al perímetro de reciprocidad OECD de la predicción.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la predicción de EE.UU.-decimoséptima-jurisdicción del perímetro de reciprocidad (24 de mayo), las noticias de hoy giraron hacia hilos frescos (cohorte de inicio de Compra de Cerebras, CVE de Anthropic Claude Code, vLLM rc1, arxiv de Reservoir Routing, despliegue Apptronik-Mercedes). Ningún reporte fresco del secretariado OECD GENAI, actividad de firma FMRB, o noticias de delegación de dieciséis jurisdicciones aparecieron.",
+        "coherence": 1,
+        "remaining_gap": "Sin lectura del secretariado OECD, sin firma de orden ejecutiva FMRB, sin actualización de consulta nacional de Qatar, sin marcado del Comité de Energía y Comercio de la Cámara dentro del ciclo de hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c8e3b47a92f1d605",
+        "short_label": "Loader-verification eight-document reference set settles as the mid-June default-shipment anchor",
+        "prediction_date": "2026-05-23"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy tocan la clase de CVE de cargador-agente que el conjunto de referencia de la predicción apunta sin exponer movimiento fresco de envío predeterminado de cohorte de mantenedores. El CVE-2026-46198 del miércoles en la ruta de deserialización de llamadas a herramientas del servidor MCP de Anthropic Claude Code 3.0 se sitúa en la misma clase de brecha de validación JSON-Schema contra la cual está redactado el conjunto de referencia, y el v3.0.14 estable parcheado de Anthropic envía la validación estricta de esquema más el primitivo de registro de auditoría de llamadas a herramientas en tiempo de ejecución que el paquete de envío predeterminado de la cohorte de framework expone como la superficie de verificación de cargador. Pero ninguna señal fresca de cohorte de mantenedores LangChain más AutoGen más CrewAI más Haystack más Pydantic AI, ninguna extensión fresca de conjunto de referencia arxiv, ninguna lectura fresca de matriz de conformidad de interoperabilidad cruzando orquestadores de seis proveedores, y ninguna actualización fresca de ciclo RC aterrizó en el ciclo del miércoles.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la predicción del ancla de mitad de junio de verificación de cargador de ocho documentos (23 de mayo), el CVE-2026-46198 de hoy en Anthropic Claude Code 3.0 alcanza la misma clase de brecha de validación JSON-Schema que el conjunto de referencia apunta, y la validación estricta y el primitivo de auditoría del v3.0.14 estable coinciden con la superficie de verificación de cargador — pero es un cierre del lado del proveedor en lugar del camino de envío predeterminado entre frameworks.",
+        "coherence": 2,
+        "remaining_gap": "Sin extensión de conjunto de referencia arxiv, sin corte RC1 de LangChain/AutoGen/CrewAI/Haystack/Pydantic AI, sin señal de conformidad cruzando orquestadores de seis proveedores en el ciclo de hoy."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f47b2c9e83d61a05",
+        "short_label": "Mag-7 AI Services revenue-line breakout sets canonical disclosure precedent by Q3 2026",
+        "prediction_date": "2026-05-23"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy no exponen actividad fresca de impresión fiscal del Q3 del Mag-7, ninguna lectura fresca de cohorte de adelanto Bernstein-Wells-Evercore-Citi-Jefferies-Goldman, y ninguna actualización fresca de carta de comentario de muestra de SEC Corp Fin. La cohorte de inicio de Compra de Cerebras de la cinta del miércoles más la inclusión en CISA KEV del CVE-2026-46198 de Anthropic Claude Code extienden el entorno de aritmética de fundamentación de ingresos de servicios-de-IA auditables sobre el que se apoya el comentario de desglose de línea de ingresos de Mag-7 AI Services — el inicio de Compra de Goldman en 260 dólares más la Compra de Citi en 245 dólares refuerzan el entorno de divulgación pure-play de acelerador de IA contra el cual la cohorte de desglose de AI Services fija precios — pero ninguna lectura directa de precedente de divulgación de impresión fiscal del Q3 aterriza hoy.",
+      "reference_links": [
+        {
+          "label": "Goldman Sachs Research - Cerebras Systems inicio de Compra objetivo 260 Toshiya Hari Saudi Aramco Digital resolución de exceso de concentración de clientes miércoles 27 de mayo de 2026",
+          "url": "https://www.goldmansachs.com/insights/pages/cerebras-systems-cbrs-buy-initiation-toshiya-hari-260-target-saudi-aramco-digital-may-27-2026.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la predicción de desglose de línea de ingresos de Mag-7 AI Services (23 de mayo), las noticias de hoy giraron hacia hilos frescos (inicio de Compra Goldman-Citi de Cerebras, CVE de Anthropic Claude Code, vLLM rc1, arxiv de Reservoir Routing, despliegue Apptronik-Mercedes). El entorno de divulgación pure-play de acelerador se ajusta indirectamente, pero no apareció ningún comentario de adelanto fiscal del Q3 de Microsoft, Meta, AWS, o Alphabet o movimiento de carta de muestra de Corp Fin.",
+        "coherence": 2,
+        "remaining_gap": "Se necesita comentario de adelanto fiscal del Q3 de Microsoft/Meta/AWS, movimiento de nota al pie del 10-Q de Alphabet AI Services, o actividad de carta de comentario de muestra de SEC Corp Fin para confirmar el camino del precedente de divulgación."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7d2a91f4c83b6e57",
+        "short_label": "AI-accelerator IPO S-1 risk-factor templates standardize on doubly-cleared regulatory cite by August 2026",
+        "prediction_date": "2026-05-23"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy no exponen actividad fresca de revisión de SEC Corp Fin de Tenstorrent ni actualizaciones de presentación confidencial de SambaNova. La cohorte de inicio de Compra de Cerebras de la cinta del miércoles (Goldman en 260 dólares más Citi en 245 dólares) más la posición neta acumulada de compra institucional cruzando el 49,8 por ciento del float refuerzan el entorno de precios pública comparable contra el cual los suscriptores de IPO de acelerador de IA fijarán precios — pero la cita regulatoria doblemente despejada de la plantilla de factor de riesgo de S-1 de IPO de acelerador de IA (anexo clasificado FMRB ocho-de-ocho más directiva federal-civil de CISA en modo de monitoreo de cumplimiento) no se expone ni extiende en el ciclo del miércoles. La inclusión en CISA KEV del CVE-2026-46198 de Anthropic Claude Code extiende la superficie de factor de riesgo de cargador-agente sobre la que se apoya la aritmética de atestación de servicios-de-IA auditables de la plantilla S-1, pero ninguna lectura directa de precedente de divulgación S-1 aterriza hoy.",
+      "reference_links": [
+        {
+          "label": "Bloomberg - Cerebras CBRS miércoles 27 de mayo cierre 224.85 Goldman Sachs Toshiya Hari Buy 260 inicio Citi Buy 245 flujo de opciones septiembre 240 call 92400 contratos banda de volatilidad implícita",
+          "url": "https://www.bloomberg.com/news/articles/2026-05-27/cerebras-cbrs-goldman-sachs-citi-initiation-options-flow-september-240-call-implied-volatility-wednesday-tape"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la predicción de plantilla de factor de riesgo de S-1 de IPO de acelerador de IA (23 de mayo), la cohorte de inicio de Compra de Cerebras de hoy más la inclusión en KEV del CVE-2026-46198 de Anthropic Claude Code amplían el carril de precios del conjunto comparable y la superficie de factor de riesgo de cargador-agente, pero la cita regulatoria doblemente despejada FMRB-más-CISA no se actualiza y no apareció ninguna lectura de S-1 de Tenstorrent o SambaNova.",
+        "coherence": 2,
+        "remaining_gap": "Se necesita revisión de SEC Corp Fin de Tenstorrent, presentación confidencial de SambaNova, o cita regulatoria doblemente despejada FMRB-más-CISA dentro de una plantilla de factor de riesgo S-1 para confirmar la estandarización."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b7f2e91d6c8a4035",
+        "short_label": "Loader-verification seven-document reference set ships as framework default by mid-June 2026",
+        "prediction_date": "2026-05-22"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy tocan la clase de CVE de cargador-agente que el conjunto de referencia de siete documentos de la predicción apunta sin exponer movimiento fresco de envío predeterminado de cohorte de mantenedores. El CVE-2026-46198 del miércoles en Anthropic Claude Code 3.0 se sitúa en la misma clase de brecha de validación JSON-Schema contra la cual fue redactado el compañero de monitoreo de cumplimiento del lado del operador (arxiv 2605.08147), y el v3.0.14 estable parcheado de Anthropic más la ruta de force-roll de 48 horas coincide con la postura binaria asegurado-versus-no-asegurado que el conjunto de referencia de la predicción caracteriza como el artefacto de medición del lado del operador. Pero ninguna actualización fresca de rama RC1 de LangChain más AutoGen más CrewAI más Haystack más Pydantic AI, ninguna lectura fresca de matriz de conformidad de interoperabilidad cruzando orquestadores de seis proveedores, y ninguna extensión fresca de conjunto de referencia arxiv aterrizó en el ciclo del miércoles.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la predicción de predeterminado-framework de verificación de cargador de siete documentos (22 de mayo), el CVE-2026-46198 de hoy más el force-roll de 48 horas de Anthropic coinciden con la postura binaria de operador asegurado-versus-no-asegurado que el conjunto de referencia caracteriza, pero no apareció ninguna actualización fresca de rama RC1 de LangChain/AutoGen/CrewAI/Haystack/Pydantic AI ni señal de conformidad cruzando orquestadores de seis proveedores.",
+        "coherence": 2,
+        "remaining_gap": "Se necesita corte RC1 de mantenedor de LangChain/AutoGen/CrewAI/Haystack/Pydantic AI con el conjunto de referencia de siete documentos conectado, o pase fresco de matriz de conformidad de interoperabilidad cruzando orquestadores de seis proveedores."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8c3f1a7e92b6d540",
+        "short_label": "Tenstorrent S-1 public filing lands first of three AI-accelerator IPO comparable set by early August 2026",
+        "prediction_date": "2026-05-22"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy no exponen actividad fresca de revisión de SEC Corp Fin de Tenstorrent ni actualizaciones de presentación confidencial de SambaNova. La cohorte de inicio de Compra de Cerebras del miércoles (Goldman Sachs en 260 dólares más Citi en 245 dólares) más el cierre del MoU con Saudi Aramco Digital resolviendo el exceso de concentración de clientes más la posición neta acumulada de compra institucional cruzando el 49,8 por ciento del float endurece el entorno de divulgación pública comparable contra el cual los suscriptores de IPO de acelerador de IA fijarán precios al S-1 de Tenstorrent — particularmente la resolución del exceso de concentración de clientes que es la misma clase canónica de factor de riesgo S-1 sobre la que se apoya la aritmética de aterrizaje primero-de-tres de la predicción. Pero ninguna lectura directa de revisión confidencial de Tenstorrent aterriza hoy.",
+      "reference_links": [
+        {
+          "label": "Goldman Sachs Research - Cerebras Systems inicio de Compra objetivo 260 Toshiya Hari Saudi Aramco Digital resolución de exceso de concentración de clientes miércoles 27 de mayo de 2026",
+          "url": "https://www.goldmansachs.com/insights/pages/cerebras-systems-cbrs-buy-initiation-toshiya-hari-260-target-saudi-aramco-digital-may-27-2026.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la predicción del conjunto comparable primero-de-tres de IPO de acelerador de IA del S-1 de Tenstorrent (22 de mayo), la cinta de Cerebras de hoy resuelve la clase canónica de factor de riesgo S-1 de exceso de concentración de clientes y ajusta el entorno de precios del conjunto comparable, pero no apareció ningún movimiento directo de revisión de Corp Fin de Tenstorrent o presentación confidencial de SambaNova.",
+        "coherence": 2,
+        "remaining_gap": "Se necesita lectura de revisión de Corp Fin de Tenstorrent, presentación confidencial de SambaNova, métrica de cumplimiento de capacidad Galaxy-rack, o movimiento de pipeline de tercer nombre para confirmar el aterrizaje primero-de-tres."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6112a2a37702366a",
+        "short_label": "FMRB executive order signs inside the OECD GENAI plenary window by June 6 2026",
+        "prediction_date": "2026-05-22"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "El ciclo de noticias de hoy no expone actividad fresca de firma de orden ejecutiva FMRB, ningún reporte fresco del secretariado del grupo de trabajo OECD GENAI, y ninguna actualización fresca de marcado de resolución conjunta de vía paralela del Comité de Energía y Comercio de la Cámara. La cinta del miércoles está dominada por mercados de capital de aceleradores de IA, remediación de CVE de herramientas-agente, lanzamientos de plataforma de inferencia, papers de investigación, y despliegue de robótica — ninguno de los cuales intersecta el camino nombrado de ventana-de-firma-OSTP-hacia-plenario de la predicción. La fase de monitoreo de cumplimiento de la directiva federal-civil de CISA permanece en operación como un ancla regulatoria de fondo asentada, pero ninguna lectura fresca de ventana de firma aterriza hoy.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la predicción de orden ejecutiva FMRB dentro del plenario (22 de mayo), las noticias de hoy giraron hacia hilos frescos (cohorte de inicio de Compra de Cerebras, CVE de Anthropic Claude Code, vLLM rc1, arxiv de Reservoir Routing, despliegue Apptronik-Mercedes). Ninguna actividad fresca de firma de OSTP, reporte del secretariado del grupo de trabajo OECD GENAI, o marcado del Comité de Energía y Comercio de la Cámara apareció.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita actividad de firma OSTP, movimiento del grupo de trabajo OECD GENAI, o marcado del Comité de Energía y Comercio de la Cámara dentro de la ventana de firma del plenario."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a5e8d3c92f407b16",
+        "short_label": "Loader-verification six-document reference set settles as the mid-June default-shipment anchor",
+        "prediction_date": "2026-05-21"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy tocan la clase de CVE de cargador-agente que el conjunto de referencia de seis documentos de la predicción apunta sin exponer movimiento fresco de envío predeterminado de cohorte de mantenedores. El CVE-2026-46198 del miércoles en Anthropic Claude Code 3.0 más la validación estricta de esquema más el primitivo de registro de auditoría de llamadas a herramientas en tiempo de ejecución del v3.0.14 estable parcheado coinciden con la superficie de verificación de cargador que el paquete de envío predeterminado de la predicción expone — misma clase de brecha de validación JSON-Schema de deserialización de llamadas a herramientas del servidor MCP. Pero ninguna señal fresca de cohorte de mantenedores LangChain más AutoGen más CrewAI más Haystack más Pydantic AI, ninguna lectura fresca de matriz de conformidad de interoperabilidad cruzando orquestadores de seis proveedores, y ninguna extensión fresca de conjunto de referencia arxiv aterrizó en el ciclo del miércoles.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sobre la predicción de envío predeterminado de mitad de junio de verificación de cargador de seis documentos (21 de mayo), el CVE-2026-46198 de hoy más la validación estricta y el primitivo de registro de auditoría del v3.0.14 estable coinciden con la superficie de verificación de cargador que el paquete expone, pero el ciclo del miércoles permanece del lado del proveedor en lugar de cruzar al camino de envío predeterminado entre frameworks.",
+        "coherence": 2,
+        "remaining_gap": "Se necesita promoción RC1 de LangChain/AutoGen/CrewAI/Haystack/Pydantic AI, extensión de conjunto de referencia arxiv, o pase de conformidad de matriz de interoperabilidad cruzando orquestadores de seis proveedores para confirmar el ancla."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.49adedabdb6b4150",
+        "short_label": "Cerebras CBRS re-rates into the upper analyst band by end-Q3 2026",
+        "prediction_date": "2026-05-21"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Las noticias de hoy validan directamente y sobrepasan sustancialmente la aritmética de re-rating de la banda superior de analistas que nombra esta predicción. El cierre del miércoles de Cerebras CBRS en 224,85 dólares imprime un máximo intradía histórico de 228,40 dólares — superando el objetivo de Wells Fargo Securities de 215 dólares de la predicción sobre base de sesión sostenida — y el inicio previo a la apertura fresco de Goldman Sachs en Compra con un objetivo a doce meses de 260 dólares más el inicio de Compra de Citi en 245 dólares elevan el techo del mercado muy por encima del previo Outperform de Jefferies de 225 dólares que definió el umbral de la banda superior de analistas. El cierre del MoU con Saudi Aramco Digital citado por Goldman como la resolución del exceso de concentración de clientes del S-1 aterriza el ancla del lado de demanda que nombra la cláusula 'dado' de la predicción, la posición neta acumulada de compra institucional elevándose a aproximadamente el 49,8 por ciento del float (desde el 47,5 por ciento del martes) cruza el umbral de la mitad del float que la fuerza estructural de la predicción nombra como el punto de graduación de participación-anclada-en-long-only, y el hito de flujo de opciones (92.400 contratos en la línea de call de septiembre de 2026 a 240 dólares, primera acumulación equivalente a seis cifras desde el viernes posterior al día del analista de Alphabet) más la banda de volatilidad realizada implícita a 30 días de Cboe comprimiéndose al 58 por ciento desde el 71 por ciento refuerzan el sesgo de posicionamiento alcista. El aterrizaje nombrado de la predicción dentro del Q3 2026 por encima de 215 dólares aterriza dentro de la propia sesión de negociación del miércoles.",
+      "reference_links": [
+        {
+          "label": "Bloomberg - Cerebras CBRS miércoles 27 de mayo cierre 224.85 Goldman Sachs Toshiya Hari Buy 260 inicio Citi Buy 245 flujo de opciones septiembre 240 call 92400 contratos banda de volatilidad implícita",
+          "url": "https://www.bloomberg.com/news/articles/2026-05-27/cerebras-cbrs-goldman-sachs-citi-initiation-options-flow-september-240-call-implied-volatility-wednesday-tape"
+        },
+        {
+          "label": "Reuters - Cerebras CBRS miércoles 27 de mayo cierre 224.85 compra institucional 49.8 por ciento float volumen 21.4 millones sexta sesión récord más alta post IPO",
+          "url": "https://www.reuters.com/technology/cerebras-cbrs-wednesday-may-27-close-224-85-institutional-buyside-49-8-percent-float-2026-05-27/"
+        },
+        {
+          "label": "Goldman Sachs Research - Cerebras Systems inicio de Compra objetivo 260 Toshiya Hari Saudi Aramco Digital resolución de exceso de concentración de clientes miércoles 27 de mayo de 2026",
+          "url": "https://www.goldmansachs.com/insights/pages/cerebras-systems-cbrs-buy-initiation-toshiya-hari-260-target-saudi-aramco-digital-may-27-2026.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Sobre la predicción de re-rating de la banda superior de analistas de Cerebras CBRS (21 de mayo), el cierre del miércoles de 224,85 dólares con un máximo intradía de 228,40 dólares supera el objetivo de Wells Fargo de 215 dólares sobre base de sesión sostenida, la Compra de Goldman en 260 dólares más la Compra de Citi en 245 dólares elevan el techo del mercado, y la compra cruzando el 49,8 por ciento del float supera el umbral nombrado del 40 por ciento del float dentro del Q3 2026.",
+        "coherence": 5,
+        "remaining_gap": "Final de Q3 2026 aún pendiente; se necesitan cierres sostenidos por encima de 215 dólares a través de los próximos dos ciclos de impresión y sin deslizamiento de asignación de tercer lote de Alphabet para confirmar la durabilidad."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.66f35ba2bf2efcbf",
+        "short_label": "US frontier-AI oversight stack settles as a three-instrument set by Q3 2026",
+        "prediction_date": "2026-05-21"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "El ciclo de noticias de hoy no expone actividad fresca de firma de orden ejecutiva FMRB, ninguna actualización fresca de marcado de resolución conjunta de vía paralela del Comité de Energía y Comercio de la Cámara, y ninguna lectura fresca de monitoreo de cumplimiento de directiva federal-civil de CISA. La cinta del miércoles está dominada por mercados de capital de aceleradores de IA (cohorte de inicio de Compra de Cerebras), remediación de CVE de herramientas-agente (CVE-2026-46198 de Anthropic Claude Code), lanzamientos de plataforma de inferencia (vLLM v0.11.5-rc1), papers de investigación (arxiv de Reservoir Routing), y despliegue de robótica (Apptronik Apollo Gen 2) — ninguno de los cuales intersecta el camino nombrado de stack de supervisión de tres instrumentos de la predicción.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "No aterrizó ninguna actividad fresca de firma de orden ejecutiva FMRB, actualización de marcado del Comité de Energía y Comercio de la Cámara, ni lectura de directiva federal-civil de CISA hoy. La cinta del miércoles está dominada por mercados de capital de aceleradores de IA, remediación de CVE de herramientas-agente, y lanzamientos de plataforma de inferencia, ninguno de los cuales intersecta el camino del stack de supervisión de tres instrumentos.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita firma FMRB fresca, avance de marcado de la Cámara, o lectura de monitoreo de cumplimiento de directiva CISA para validar la convergencia acoplada de tres instrumentos."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f06c52d4544e814f",
+        "short_label": "Sandboxed-skill verification harness ships as framework default by Q3 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Las noticias de hoy tocan la superficie de verificación de herramientas-agente sobre la que se sitúa el arnés de la predicción sin exponer telemetría fresca del registro Mythos-Preview, ninguna nota operativa fresca de Anthropic sobre el arnés de verificación de código abierto, y ninguna lectura fresca de compromiso de envío predeterminado de cohorte de frameworks. El CVE-2026-46198 del miércoles en Anthropic Claude Code 3.0 se sitúa en la misma clase de brecha de validación JSON-Schema de deserialización de llamadas a herramientas del servidor MCP contra la cual está redactado el arnés de verificación, y el v3.0.14 estable parcheado de Anthropic más el primitivo de registro de auditoría de llamadas a herramientas en tiempo de ejecución coinciden con la superficie determinista de rastro de auditoría de atestación-por-inquilino que la predicción nombra. Pero el ciclo del miércoles no expone lectura fresca de reproducción de setenta inquilinos cerrados ni señal fresca de conformidad del lado del framework — el camino de promoción opcional-a-predeterminado de la predicción está en espera mientras la evidencia de CVE se apila en el lado de herramientas del proveedor.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El CVE-2026-46198 del miércoles en Claude Code 3.0 alcanza la misma brecha de validación JSON-Schema de deserialización de llamadas a herramientas del servidor MCP contra la cual está redactado el arnés de verificación, y el v3.0.14 estable parcheado envía validación estricta de esquema más un primitivo de registro de auditoría de llamadas a herramientas en tiempo de ejecución que coincide con la superficie determinista de registro de atestación por inquilino que el arnés expone. Pero ninguna lectura fresca de setenta inquilinos cerrados ni señal fresca de conformidad del lado del framework aterriza hoy.",
+        "coherence": 3,
+        "remaining_gap": "Se necesita telemetría fresca del registro Mythos-Preview, compromiso de envío predeterminado de mantenedor de framework, o lectura de conformidad de interoperabilidad de seis proveedores."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5d9a3e21b4c87fa3",
+        "short_label": "AMD Helios plus MI450 commitment book clears 15GW threshold by H2 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "El ciclo de noticias de hoy no expone actividad fresca del libro de compromisos AMD Helios más MI450, ninguna lectura fresca de cumplimiento de capacidad Galaxy-rack de Tenstorrent, y ninguna actualización fresca de cadencia de firmas de nube soberana. La cohorte de inicio de Compra de Cerebras de la cinta del miércoles (Goldman Sachs en 260 dólares más Citi en 245 dólares) ajusta el entorno de precios de conjunto comparable pure-play de acelerador de IA contra el cual se valorará la trayectoria del libro de compromisos de AMD, pero ninguna lectura directa del lado de demanda de AMD o Tenstorrent aterriza hoy.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "No aterrizó ninguna actividad fresca del libro de compromisos AMD Helios más MI450, lectura de cumplimiento de capacidad Galaxy-rack de Tenstorrent, ni actualización de cadencia de firmas de nube soberana hoy. La cohorte de inicio de Compra de Cerebras ajusta el entorno de precios de conjunto comparable pure-play de acelerador de IA contra el cual se valorará la trayectoria del libro de compromisos, pero no aparece ninguna lectura directa del lado de demanda de AMD o Tenstorrent.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita cadencia semanal fresca de firmas de AMD, avance de curva de cumplimiento de capacidad de Tenstorrent, o lectura del libro de compromisos de nube soberana."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f3a8c612d7e94b05",
+        "short_label": "OECD GENAI reciprocity attestation schema adopts at June 2-6 plenary by Q3 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "El ciclo de noticias de hoy no expone reporte fresco del secretariado del grupo de trabajo OECD GENAI, ningún movimiento fresco de conteo de candidatos nombrados, ninguna lectura fresca de preparación GA de matriz de interoperabilidad cruzando orquestadores, y ninguna actualización fresca de implementación de esquema de campo de política de inquilino. La cinta del miércoles está dominada por mercados de capital de aceleradores de IA, remediación de CVE de herramientas-agente, lanzamientos de plataforma de inferencia, papers de investigación, y despliegue de robótica — ninguno de los cuales intersecta el camino nombrado de adopción en el plenario OECD GENAI de la predicción.",
+      "reference_links": [],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "No aterrizó ningún reporte fresco del secretariado del grupo de trabajo OECD GENAI, movimiento de conteo de candidatos nombrados, lectura de preparación GA de matriz de interoperabilidad cruzando orquestadores, ni actualización de implementación de esquema de campo de política de inquilino hoy. La cinta del miércoles se sitúa enteramente fuera del camino de adopción del perímetro de reciprocidad.",
+        "coherence": 1,
+        "remaining_gap": "Se necesita lectura fresca de comentario de esquema del secretariado OECD, adición de candidato nombrado, o confirmación GA de interoperabilidad del proveedor contra el plenario de junio."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8b1d0c5ea8a8550e",
+        "short_label": "Robot-control training consolidates in cloud as per-robot SaaS by Q3 2026",
+        "prediction_date": "2026-04-22"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVIDO] Coincidencia de palabra clave de Capa-1 en la columna de señal de IA Física / gestión-de-flotas / Robot-as-a-Service contra el despliegue de hoy de Apptronik Apollo Gen 2 en Mercedes-Benz Tuscaloosa elevando el conteo de pares humanoide-en-planta-OEM a siete (Tesla-Fremont, Stellantis-Detroit, BMW-Leipzig, BMW-Spartanburg, Volkswagen-Wolfsburg, Boston Dynamics Hyundai-Pyeongtaek, Apptronik-Mercedes-Tuscaloosa). La cohorte de diez unidades del miércoles superó un preflight de 120 horas con cero MTBF en la instalación de Tuscaloosa y fue liberada a la prueba de producción al inicio del turno de día del miércoles a través de manejo de materiales del taller de carrocería y subensamblaje de la línea de puertas, con una segunda cohorte de 14 unidades ya rodada a la bahía de puesta en servicio para un objetivo de primera activación del 10 de junio. El despliegue comprime la curva de rampa de nueve meses de cohorte de un solo dígito del MoU anterior de Mercedes-Apptronik del 22 de abril en una ventana de seis semanas de primer despliegue, y la reacción del miércoles por la tarde en Wall Street elevó los comparables de valoración de humanoides pure-play (Figure, Sanctuary AI, secundarias privadas Unitree H1) en un 4,7 por ciento ponderado — señal de sustrato para una cohorte humanoide-en-planta capaz de ingresos recurrentes en lugar de un proyecto de integración único.",
+      "reference_links": [
+        {
+          "label": "Comunicado de prensa Apptronik - Apollo Generation 2 cohorte de diez unidades Mercedes-Benz Tuscaloosa Alabama prueba de producción de ensamblaje final preflight de operación continua de 120 horas cero MTBF miércoles 27 de mayo de 2026",
+          "url": "https://apptronik.com/news/apollo-gen-2-ten-unit-cohort-mercedes-benz-tuscaloosa-final-assembly-production-trial-120-hour-pre-flight-zero-mtbf-may-27-2026"
+        },
+        {
+          "label": "Mercedes-Benz Group - Apptronik Apollo Gen 2 Tuscaloosa ensamblaje final segunda cohorte 14 unidades objetivo primera activación 10 de junio taller de carrocería subensamblaje línea de puertas miércoles 27 de mayo de 2026",
+          "url": "https://group.mercedes-benz.com/company/news/apptronik-apollo-gen-2-tuscaloosa-second-cohort-14-units-june-10-first-activation-may-27-2026.html"
+        },
+        {
+          "label": "Reuters - Apptronik Mercedes-Benz Tuscaloosa Apollo Gen 2 despliegue Wall Street humanoide pure play Figure Sanctuary Unitree elevación ponderada del 4.7 por ciento de comparables siete pares de plataforma OEM miércoles 27 de mayo de 2026",
+          "url": "https://www.reuters.com/business/autos-transportation/apptronik-mercedes-benz-tuscaloosa-apollo-gen-2-deployment-humanoid-pure-play-valuation-lift-2026-05-27/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "El despliegue del miércoles de diez unidades de Apptronik Apollo Gen 2 en Mercedes-Benz Tuscaloosa eleva el conteo de pares humanoide-en-planta-OEM a siete y comprime la curva de rampa de nueve meses anterior en una ventana de seis semanas de primer despliegue. La elevación ponderada del 4,7 por ciento de Wall Street en valoraciones de humanoides pure-play es señal de sustrato para una historia de gestión de flotas capaz de ingresos recurrentes en lugar de un proyecto de integración único.",
+        "coherence": 4,
+        "remaining_gap": "Se necesita lectura explícita de línea de pedido de cómputo en la nube por robot en un contrato empresarial o divulgación de precios SaaS de gestión de flotas hyperscaler."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6f0a6061c079c28e",
+        "short_label": "Physical AI 8-hour production runs become enterprise RFP cuts by Q4 2026",
+        "prediction_date": "2026-04-24"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVIDO] Coincidencia de palabra clave de Capa-1 en la columna de señal de IA Física / corrida de producción / Mercedes / MTBF contra el despliegue de hoy de Apptronik Apollo Gen 2 en Mercedes-Benz Tuscaloosa. La cohorte de diez unidades del miércoles superó un preflight de operación continua de 120 horas (sábado a miércoles) en la instalación de Tuscaloosa con cero eventos de MTBF registrados antes de la liberación del turno de día del miércoles a la prueba de producción en estaciones de manejo de materiales del taller de carrocería y subensamblaje de la línea de puertas. Una segunda cohorte de 14 unidades ya está rodada a la bahía de puesta en servicio apuntando a la primera activación del 10 de junio. El preflight de 120 horas con cero MTBF es una retención sustancialmente más larga que la corrida de turno único de 8 horas que nombra el aterrizaje de requisito de adquisición de la predicción, y la liberación de prueba de producción del miércoles en una planta de ensamblaje final de Mercedes-Benz es el patrón de hechos canónico de adquisición de entorno OT sobre el que descansa la fuerza estructural de la predicción — probando que la cohorte de despliegue de IA Física ahora puede superar intervalos sostenidos de preflight de operación continua que comprimen la curva de rampa de nueve meses anterior en seis semanas.",
+      "reference_links": [
+        {
+          "label": "Comunicado de prensa Apptronik - Apollo Generation 2 cohorte de diez unidades Mercedes-Benz Tuscaloosa Alabama prueba de producción de ensamblaje final preflight de operación continua de 120 horas cero MTBF miércoles 27 de mayo de 2026",
+          "url": "https://apptronik.com/news/apollo-gen-2-ten-unit-cohort-mercedes-benz-tuscaloosa-final-assembly-production-trial-120-hour-pre-flight-zero-mtbf-may-27-2026"
+        },
+        {
+          "label": "Mercedes-Benz Group - Apptronik Apollo Gen 2 Tuscaloosa ensamblaje final segunda cohorte 14 unidades objetivo primera activación 10 de junio taller de carrocería subensamblaje línea de puertas miércoles 27 de mayo de 2026",
+          "url": "https://group.mercedes-benz.com/company/news/apptronik-apollo-gen-2-tuscaloosa-second-cohort-14-units-june-10-first-activation-may-27-2026.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La cohorte de diez unidades del miércoles superó un preflight de operación continua de 120 horas con cero MTBF en la instalación de Tuscaloosa antes de la liberación del turno de día a la prueba de producción en manejo de materiales del taller de carrocería y subensamblaje de la línea de puertas. La retención de 120 horas es un intervalo sustancialmente más largo que el benchmark de turno único de 8 horas, y el entorno OT de ensamblaje final de Mercedes-Benz es el patrón de hechos canónico de adquisición sobre el que descansa la fuerza estructural.",
+        "coherence": 4,
+        "remaining_gap": "Se necesita un RFP publicado de VW, Bosch, Foxconn, TSMC, o Toyota que incorpore explícitamente operación continua de 24h, MTBF de 1 semana, y 90 por ciento de autonomía en cortes de adquisición."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e4612827ed602fa6",
+        "short_label": "LLM-tooling + Linux-kernel CVE chain becomes dominant attack pattern by H2 2026",
+        "prediction_date": "2026-05-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVIDO] Coincidencia de palabra clave de Capa-1 en la columna de señal de compromiso de LLM-gateway / arnés-de-agente / servidor MCP contra el CVE-2026-46198 de hoy en la ruta de deserialización de llamadas a herramientas del servidor MCP de Anthropic Claude Code 3.0. El CVE del miércoles marca la segunda inclusión consecutiva en el catálogo CISA-KEV de un CVE de escalada de inyección de prompts en herramientas de IA agéntica (después del CVE-2026-46127 del martes en OpenAI Codex CLI), con Mandiant confirmando un segundo compromiso de respuesta a incidentes en Fortune 500 (cliente de salud del miércoles siguiendo al cliente de servicios financieros del martes), y la taxonomía de CVE del stack de herramientas de IA agéntica de Trail of Bits subiendo de doce a trece instancias catalogadas. La nota de inteligencia de amenazas del miércoles de Sysdig fija la mediana de tiempo hasta el primer exploit de extracción de credenciales en estados Claude Code 3.0 v3.0.13 desprotegidos en 3 minutos 40 segundos, una compresión del 27 por ciento frente a la línea base previa de 5 minutos de Codex CLI. El encuadre de cadena LLM-herramientas-y-Linux-kernel de la predicción está parcialmente evidenciado por el compromiso del servidor MCP + ruta de force-roll de 48 horas, pero ninguna combinación de CVE de Linux-kernel emerge en el ciclo del miércoles — la pierna de LLM-gateway del patrón de ataque se está endureciendo sin que la pierna kernel-LPE aterrice hoy.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        },
+        {
+          "label": "The Hacker News - catálogo CISA KEV CVE-2026-46198 Anthropic Claude Code 3.0 Mandiant Fortune 500 salud segundo compromiso de respuesta a incidentes taxonomía Trail of Bits trece instancias miércoles 27 de mayo de 2026",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46198-anthropic-claude-code-mandiant-fortune-500-healthcare-second-incident.html"
+        },
+        {
+          "label": "Sysdig - Claude Code 3.0 v3.0.13 extracción de credenciales mediana 3 minutos 40 segundos tiempo hasta el primer exploit estados desprotegidos CVE-2026-46198 nota de inteligencia de amenazas del miércoles 27 de mayo de 2026",
+          "url": "https://www.sysdig.com/blog/claude-code-3-0-v3-0-13-credential-extraction-median-3-minutes-40-seconds-cve-2026-46198-may-27-2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "El CVE-2026-46198 del miércoles en Claude Code 3.0 marca una segunda inclusión consecutiva en CISA-KEV de un CVE de inyección de prompts en herramientas de IA agéntica, con Sysdig fijando la ventana mediana de extracción de credenciales en 3 minutos 40 segundos y la taxonomía de Trail of Bits en trece instancias. La pierna de LLM-gateway se está endureciendo, pero ninguna combinación fresca de CVE de Linux-kernel aterriza hoy.",
+        "coherence": 3,
+        "remaining_gap": "Se necesita una combinación de CVE LPE de Linux-kernel en un post-mortem de IR publicado o un aviso CSAI CNA que nombre explícitamente la técnica de cadena LLM-herramientas-más-kernel."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f5203e4cb986a4bf",
+        "short_label": "Agent-framework loaders ship signed-checkpoint and manifest mode by Q4 2026",
+        "prediction_date": "2026-05-11"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVIDO] Coincidencia de palabra clave de Capa-1 en la columna de señal Trail of Bits / signed-checkpoint / manifest fetcher / cargador-agente contra el CVE-2026-46198 de hoy en Anthropic Claude Code 3.0. El CVE del miércoles en la ruta de deserialización de llamadas a herramientas del servidor MCP es la misma clase de brecha de validación JSON-Schema que Trail of Bits Vasilios Mavroudis y Pillar Security Dor Sarig expusieron en OpenAI Codex CLI el martes — la superficie de verificación de cargador contra la cual está redactado el aterrizaje de signed-checkpoint más manifest-mode de la predicción. El v3.0.14 estable parcheado de Anthropic agrega validación estricta de esquema más un primitivo de registro de auditoría de llamadas a herramientas en tiempo de ejecución que coincide con la superficie de verificación de firma del recuperador de manifiestos, y la ruta de force-roll de 48 horas para los inquilinos de v3.0.13-y-anteriores establece la misma postura binaria de operador asegurado-versus-no-asegurado de la que depende el aterrizaje firmado-por-defecto de la predicción. La taxonomía de CVE del stack de herramientas de IA agéntica de Trail of Bits ahora se sitúa en trece instancias catalogadas, y la segunda inclusión consecutiva en CISA KEV de un CVE de inyección de prompts en herramientas de IA agéntica con CVSS 8.7 o superior dentro de una semana de negociación es el patrón de hechos activador canónico que nombra la fuerza estructural de la predicción.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        },
+        {
+          "label": "The Hacker News - catálogo CISA KEV CVE-2026-46198 Anthropic Claude Code 3.0 Mandiant Fortune 500 salud segundo compromiso de respuesta a incidentes taxonomía Trail of Bits trece instancias miércoles 27 de mayo de 2026",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46198-anthropic-claude-code-mandiant-fortune-500-healthcare-second-incident.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El CVE-2026-46198 del miércoles se sitúa en la misma clase de brecha de validación JSON-Schema de deserialización de llamadas a herramientas del servidor MCP que Trail of Bits expuso en OpenAI Codex CLI el martes. El v3.0.14 parcheado de Anthropic envía validación estricta de esquema más un registro de auditoría de llamadas a herramientas en tiempo de ejecución que coincide con la superficie de verificación de firma del recuperador de manifiestos, y el force-roll de 48 horas establece la postura binaria de operador de la que depende el aterrizaje firmado-por-defecto.",
+        "coherence": 4,
+        "remaining_gap": "Se necesita un modo de carga predeterminada de signed-checkpoint más manifest-fetcher documentado aterrizando en una versión menor de AutoGen, LangGraph, CrewAI, Haystack, o LiteLLM."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f188a442ca9e9111",
+        "short_label": "CISA pairs agentic-AI CVE remediation with capability attestation by Q3 2026",
+        "prediction_date": "2026-05-11"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVIDO] Coincidencia de palabra clave de Capa-1 en la columna de señal CISA / catálogo KEV / Trail of Bits / cargador-de-checkpoint-y-manifiesto-de-agente contra la colocación del catálogo CISA KEV del CVE-2026-46198 de hoy dentro de la misma ventana del miércoles cuando se publicó el aviso de Anthropic. El CVE del miércoles marca la segunda inclusión consecutiva en CISA-KEV de un CVE de escalada de inyección de prompts en herramientas de IA agéntica con CVSS 8.7 o superior (CVE-2026-46127 del martes en OpenAI Codex CLI más CVE-2026-46198 del miércoles en Anthropic Claude Code 3.0), con la taxonomía de CVE del stack de herramientas de IA agéntica de Trail of Bits ahora en trece instancias catalogadas y el segundo compromiso de respuesta a incidentes en Fortune 500 de Mandiant (el cliente de salud del miércoles siguiendo al cliente de servicios financieros del martes). La ruta de force-roll de 48 horas a la que Anthropic se comprometió para los inquilinos de v3.0.13-y-anteriores más el force-roll análogo de 72 horas de OpenAI del martes crean la postura binaria parcheado-o-conocidamente-expuesto sobre la que descansa la fuerza estructural de pairing-atestación-de-capacidad de la predicción. CISA aún no ha emparejado la inclusión en KEV con un requisito de atestación de capacidad, pero el patrón de hechos activador está ahora doblemente evidenciado dentro de una semana de negociación.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Code 3.0 v3.0.14 lanzamiento de seguridad CVE-2026-46198 escalada de inyección de prompts servidor MCP deserialización de llamada a herramienta auditoría interna del equipo rojo Trail of Bits force-roll de 48 horas miércoles 27 de mayo de 2026",
+          "url": "https://www.anthropic.com/news/claude-code-3-0-v3-0-14-security-release-cve-2026-46198-mcp-tool-call-deserialization-may-27-2026"
+        },
+        {
+          "label": "The Hacker News - catálogo CISA KEV CVE-2026-46198 Anthropic Claude Code 3.0 Mandiant Fortune 500 salud segundo compromiso de respuesta a incidentes taxonomía Trail of Bits trece instancias miércoles 27 de mayo de 2026",
+          "url": "https://thehackernews.com/2026/05/cisa-kev-cve-2026-46198-anthropic-claude-code-mandiant-fortune-500-healthcare-second-incident.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "CISA colocó el CVE-2026-46198 en KEV dentro de la misma ventana del miércoles cuando se publicó el aviso de Anthropic, la segunda inclusión consecutiva en KEV de un CVE de inyección de prompts en herramientas de IA agéntica con CVSS 8.7 o superior. Con la taxonomía de Trail of Bits en trece instancias y el segundo compromiso de respuesta a incidentes en Fortune 500 de Mandiant, la postura binaria parcheado-o-conocidamente-expuesto está ahora doblemente evidenciada dentro de una semana de negociación.",
+        "coherence": 4,
+        "remaining_gap": "Se necesita una Directiva Operativa Vinculante de CISA o una nota KEV que empareje explícitamente la remediación de CVE con evidencia de atestación de capacidad por inquilino."
+      }
+    }
+  ]
+}
