@@ -13,43 +13,44 @@ Sorted by `count` descending, then host alphabetical.
 
 | host | count | first_seen | last_seen | sample_label |
 |---|---|---|---|---|
-| arxiv.org | 129 | 2026-04-29 | 2026-05-19 | arXiv - Corpus2Skill (2604.14572) |
+| arxiv.org | 137 | 2026-04-29 | 2026-05-28 | arXiv - Corpus2Skill (2604.14572) |
 | github.com | 105 | 2026-04-19 | 2026-05-14 | GitHub - QwenLM/Qwen3.6 |
+| simonwillison.net | 76 | 2026-04-19 | 2026-05-28 | Simon Willison - Qwen3.6-27B |
 | hpcwire.com | 71 | 2026-05-06 | 2026-05-19 | AIwire - Cerebras Systems Announces Launch of Initial Public |
 | aws.amazon.com | 68 | 2026-04-19 | 2026-05-11 | AWS - Amazon Bedrock AgentCore adds new features |
-| simonwillison.net | 66 | 2026-04-19 | 2026-05-19 | Simon Willison - Qwen3.6-27B |
+| thehackernews.com | 67 | 2026-04-20 | 2026-05-27 | The Hacker News - nginx-ui CVE-2026-33032 |
 | venturebeat.com | 63 | 2026-04-24 | 2026-05-19 | VentureBeat - Microsoft patched a Copilot Studio prompt inje |
-| thehackernews.com | 59 | 2026-04-20 | 2026-05-05 | The Hacker News - nginx-ui CVE-2026-33032 |
-| huggingface.co | 56 | 2026-04-22 | 2026-05-19 | Hugging Face - prism-ml/Bonsai-8B-gguf |
-| the-decoder.com | 50 | 2026-04-23 | 2026-05-19 | The Decoder - Anthropic ships ten AI agents for finance |
+| huggingface.co | 62 | 2026-04-22 | 2026-05-28 | Hugging Face - prism-ml/Bonsai-8B-gguf |
+| anthropic.com | 57 | 2026-04-21 | 2026-05-27 | Anthropic - Anthropic and Amazon expand collaboration |
+| the-decoder.com | 52 | 2026-04-23 | 2026-05-28 | The Decoder - Anthropic ships ten AI agents for finance |
 | cloudsecurityalliance.org | 48 | 2026-04-24 | 2026-05-05 | CSA - The Agentic Trust Framework |
 | thehackerwire.com | 45 | 2026-04-22 | 2026-05-03 | TheHackerWire - Xerte Online Toolkits RCE |
 | therobotreport.com | 45 | 2026-04-23 | 2026-05-19 | The Robot Report - Tesla 10M Optimus |
 | microsoft.com | 44 | 2026-04-24 | 2026-05-10 | Microsoft Security Blog - Zero Trust for AI |
-| anthropic.com | 43 | 2026-04-21 | 2026-05-19 | Anthropic - Anthropic and Amazon expand collaboration |
+| datacenterdynamics.com | 43 | 2026-05-06 | 2026-05-28 | Datacenter Dynamics - AMD Helios double-wide rack 3 exaflops |
 | infoq.com | 43 | 2026-04-21 | 2026-05-19 | InfoQ - Cloudflare Builds High-Performance Infrastructure fo |
-| datacenterdynamics.com | 40 | 2026-05-06 | 2026-05-19 | Datacenter Dynamics - AMD Helios double-wide rack 3 exaflops |
 | cisa.gov | 38 | 2026-04-19 | 2026-05-07 | CISA - Microsoft Defender KEV addition |
 | fool.com | 37 | 2026-04-23 | 2026-05-03 | The Motley Fool - Anthropic Announcement for Alphabet and Br |
 | beamstart.com | 34 | 2026-05-06 | 2026-05-19 | BEAMSTART - Cerebras Gears Up for $26 Billion IPO Fueled by |
 | techstartups.com | 33 | 2026-04-25 | 2026-05-14 | Tech Startups - Top Tech News Today, April 30, 2026 |
+| sysdig.com | 32 | 2026-05-06 | 2026-05-27 | Sysdig - CVE-2026-33626 LMDeploy SSRF exploited in 12 hours |
 | 247wallst.com | 31 | 2026-04-25 | 2026-05-19 | 24/7 Wall St - Cheap Salesforce Vs. Expensive ServiceNow |
 | pymnts.com | 31 | 2026-04-26 | 2026-05-19 | PYMNTS - Google Doubles Down on Anthropic With New $40 Billi |
-| decrypt.co | 28 | 2026-04-21 | 2026-05-19 | Decrypt - Apptronik Apollo Mercedes Sindelfingen six to thir |
+| decrypt.co | 30 | 2026-04-21 | 2026-05-28 | Decrypt - Apptronik Apollo Mercedes Sindelfingen six to thir |
+| unsloth.ai | 29 | 2026-04-28 | 2026-05-28 | Unsloth - Updates Changelog |
 | standardbots.com | 28 | 2026-05-03 | 2026-05-19 | Standard Bots - Humanoid league table IROS GTC Fall 2026 upd |
 | csoonline.com | 27 | 2026-04-22 | 2026-05-19 | CSO Online - Prompt injection turned Google's Antigravity fi |
 | openai.com | 27 | 2026-04-23 | 2026-05-19 | OpenAI - Introducing workspace agents in ChatGPT |
-| sysdig.com | 27 | 2026-05-06 | 2026-05-19 | Sysdig - CVE-2026-33626 LMDeploy SSRF exploited in 12 hours |
-| unsloth.ai | 26 | 2026-04-28 | 2026-05-19 | Unsloth - Updates Changelog |
 | andrew.ooo | 22 | 2026-05-06 | 2026-05-19 | andrew.ooo - AISI Cyber Eval GPT-5.5 vs Mythos vs Opus May 2 |
 | advisories.gitlab.com | 21 | 2026-05-06 | 2026-05-12 | GitLab Advisories - CVE-2026-41264 Flowise CSV Agent Prompt |
+| news.ycombinator.com | 21 | 2026-04-21 | 2026-05-28 | Hacker News - Qwen3.6-35B-A3B: Agentic coding power, now ope |
 | adversa.ai | 20 | 2026-05-05 | 2026-05-19 | Adversa AI - Top Agentic AI security resources May 2026 |
 | okta.com | 20 | 2026-04-24 | 2026-04-27 | Okta Blog - Every Agent Needs an Identity: Introducing Okta |
+| yottalabs.ai | 20 | 2026-05-06 | 2026-05-27 | Yotta Labs - vLLM vs SGLang Which Inference Engine Should Yo |
 | mistral.ai | 19 | 2026-05-06 | 2026-05-19 | Mistral AI - Workflows for work that runs the business |
 | shadowserver.org | 19 | 2026-05-07 | 2026-05-19 | Shadowserver - n8n CVE-2026-21858 First Week Scan Report |
 | aikido.dev | 18 | 2026-05-06 | 2026-05-10 | Aikido - n8n Critical Vulnerability CVE-2026-21858 Unauthent |
 | siliconangle.com | 18 | 2026-04-23 | 2026-05-05 | SiliconANGLE - OpenAI workspace agents |
-| yottalabs.ai | 18 | 2026-05-06 | 2026-05-19 | Yotta Labs - vLLM vs SGLang Which Inference Engine Should Yo |
 | dev.to | 17 | 2026-04-20 | 2026-05-04 | DEV Community - Hermes Agent Review: 95.6K Stars |
 | trendingtopics.eu | 17 | 2026-05-06 | 2026-05-14 | Trending Topics - Cerebras IPO 2026 launches IPO bid at 26.6 |
 | tech-insider.org | 16 | 2026-04-22 | 2026-05-03 | Tech Insider - Cerebras IPO Filing |
@@ -57,6 +58,7 @@ Sorted by `count` descending, then host alphabetical.
 | invezz.com | 15 | 2026-04-22 | 2026-05-04 | Invezz - Anthropic forms JV with Wall Street firms |
 | aisi.gov.uk | 14 | 2026-04-22 | 2026-05-07 | AISI - Claude Mythos Preview evaluation |
 | attack.mitre.org | 14 | 2026-05-01 | 2026-05-03 | MITRE - Updates April 2026 |
+| blog.vllm.ai | 14 | 2026-04-27 | 2026-05-27 | vLLM Blog |
 | justsecurity.org | 14 | 2026-05-10 | 2026-05-19 | Just Security - US cyber eval reciprocity outlier posture cu |
 | lawfaremedia.org | 14 | 2026-05-10 | 2026-05-19 | Lawfare - FMRB executive order Section 708 State Farm reason |
 | marktechpost.com | 14 | 2026-04-22 | 2026-04-26 | MarkTechPost - Coding Tutorial for PrismML Bonsai 1-Bit LLM |
@@ -65,9 +67,10 @@ Sorted by `count` descending, then host alphabetical.
 | wiz.io | 14 | 2026-05-07 | 2026-05-19 | Wiz Research - Joint MCP exposure baseline May 2026 |
 | meetup.com | 13 | 2026-04-19 | 2026-05-02 | Meetup - Silicon Valley AI Innovators |
 | pbs.org | 13 | 2026-05-01 | 2026-05-03 | PBS NewsHour - Powell says he will stay on Fed board after c |
+| reuters.com | 13 | 2026-05-27 | 2026-05-28 | Reuters - Cerebras CBRS Wednesday May 27 close 224.85 instit |
 | blackstone.com | 12 | 2026-05-04 | 2026-05-04 | Blackstone - Anthropic + Blackstone + Hellman & Friedman + G |
 | censys.com | 12 | 2026-05-06 | 2026-05-19 | Censys - n8n Unauthenticated RCE Ni8mare CVE-2026-21858 Advi |
-| news.ycombinator.com | 12 | 2026-04-21 | 2026-05-19 | Hacker News - Qwen3.6-35B-A3B: Agentic coding power, now ope |
+| goldmansachs.com | 12 | 2026-05-27 | 2026-05-28 | Goldman Sachs Research - Cerebras Systems Buy initiation 260 |
 | qwen.ai | 12 | 2026-04-27 | 2026-05-02 | Qwen Research - Qwen3.6-27B: Flagship-Level Coding in a 27B |
 | aitoolly.com | 11 | 2026-04-24 | 2026-05-08 | AIToolly - Cerebras Systems Targets Blockbuster IPO With 26. |
 | amd.com | 11 | 2026-05-05 | 2026-05-07 | AMD - AMD Reports First Quarter 2026 Financial Results |
@@ -79,7 +82,6 @@ Sorted by `count` descending, then host alphabetical.
 | vfuturemedia.com | 11 | 2026-04-30 | 2026-05-03 | V Future Media - Humanoid Robots 2026 |
 | aboutamazon.com | 10 | 2026-04-21 | 2026-05-02 | About Amazon - New Amazon Bedrock AgentCore capabilities |
 | blog.cloudflare.com | 10 | 2026-05-05 | 2026-05-14 | Cloudflare Blog - Building the foundation for running extra- |
-| blog.vllm.ai | 10 | 2026-04-27 | 2026-05-19 | vLLM Blog |
 | blogs.nvidia.com | 10 | 2026-04-22 | 2026-05-06 | NVIDIA Blog - GPT-5.5 Powers Codex on NVIDIA Infrastructure |
 | genai.owasp.org | 10 | 2026-05-06 | 2026-05-08 | OWASP GenAI Exploit Round-up Report Q1 2026 |
 | apidog.com | 9 | 2026-04-25 | 2026-04-27 | Apidog - GPT-5.5 Pricing |
@@ -119,6 +121,7 @@ Sorted by `count` descending, then host alphabetical.
 | mediapost.com | 6 | 2026-04-25 | 2026-04-26 | MediaPost - Tesla Earth Day Optimus |
 | medium.com | 6 | 2026-04-19 | 2026-04-27 | Medium - New 1 bit LLM is here: Bonsai-8B |
 | newatlas.com | 6 | 2026-04-25 | 2026-04-27 | New Atlas - Physical AI humanoids at BMW factory |
+| openrouter.ai | 6 | 2026-05-28 | 2026-05-28 | OpenRouter status - Qwen3.6-Max-Preview-235B integration cyc |
 | sacra.com | 6 | 2026-05-02 | 2026-05-03 | Sacra - OpenAI revenue |
 | thenextweb.com | 6 | 2026-04-23 | 2026-04-24 | TheNextWeb - Google Cloud Next 2026: AI agents, A2A, Workspa |
 | blogs.cisco.com | 5 | 2026-05-05 | 2026-05-05 | Cisco Blogs - Cisco Announces Intent to Acquire Astrix Secur |
@@ -134,6 +137,7 @@ Sorted by `count` descending, then host alphabetical.
 | keycard.ai | 5 | 2026-04-24 | 2026-04-24 | Keycard - The Control Plane for Autonomous Agents |
 | knowledgehubmedia.com | 5 | 2026-04-30 | 2026-04-30 | Knowledge Hub Media - SuiteConnect 2026 Agent Skills |
 | labs.cloudsecurityalliance.org | 5 | 2026-04-24 | 2026-04-26 | Cloud Security Alliance - Antigravity Sandbox Escape |
+| morganstanley.com | 5 | 2026-05-28 | 2026-05-28 | Morgan Stanley Research - Cerebras Systems CBRS Overweight i |
 | perspectives.nvidia.com | 5 | 2026-05-05 | 2026-05-05 | NVIDIA Perspectives - Real cost AI scale hyperscaler acceler |
 | releasealert.dev | 5 | 2026-04-22 | 2026-04-30 | releasealert.dev - llama.cpp |
 | sec.gov | 5 | 2026-04-28 | 2026-04-29 | SEC - Cerebras S-1 (April 2026) |
@@ -142,6 +146,7 @@ Sorted by `count` descending, then host alphabetical.
 | wallstreetwaves.com | 5 | 2026-04-30 | 2026-04-30 | WallStreet Waves - April 29 After-Hours Earnings |
 | agile-robots.com | 4 | 2026-04-26 | 2026-04-26 | Agile Robots - Humanoid Agile ONE embodies Physical AI at Ha |
 | airia.com | 4 | 2026-04-28 | 2026-04-29 | Airia - AI Security in 2026 |
+| apptronik.com | 4 | 2026-05-27 | 2026-05-27 | Apptronik press release - Apollo Generation 2 ten unit cohor |
 | blog.premai.io | 4 | 2026-05-04 | 2026-05-04 | Premai - vLLM vs SGLang vs LMDeploy |
 | blog.sglang.ai | 4 | 2026-05-14 | 2026-05-14 | link |
 | cypro.se | 4 | 2026-04-22 | 2026-04-22 | Cypro - SGLang CVE-2026-5760 |
@@ -149,6 +154,8 @@ Sorted by `count` descending, then host alphabetical.
 | developers.openai.com | 4 | 2026-05-01 | 2026-05-02 | OpenAI Developers - Codex Changelog |
 | eweek.com | 4 | 2026-04-27 | 2026-04-27 | eWeek - Tesla Optimus Robot Launch Timeline Targets 2027 Sca |
 | fazm.ai | 4 | 2026-04-19 | 2026-04-30 | Fazm Blog - vLLM Update April 2026 |
+| groq.com | 4 | 2026-05-28 | 2026-05-28 | Groq blog - LPU-v3 Inference Network commercial availability |
+| group.mercedes-benz.com | 4 | 2026-05-27 | 2026-05-27 | Mercedes-Benz Group - Apptronik Apollo Gen 2 Tuscaloosa fina |
 | hai.stanford.edu | 4 | 2026-04-27 | 2026-04-30 | Stanford HAI - Upcoming Events |
 | infosecurity-magazine.com | 4 | 2026-04-24 | 2026-04-30 | Infosecurity Magazine - 10 In-the-Wild Indirect Prompt Injec |
 | kiplinger.com | 4 | 2026-04-28 | 2026-04-29 | Kiplinger - April Fed Meeting: Live Updates and Commentary |
@@ -174,6 +181,7 @@ Sorted by `count` descending, then host alphabetical.
 | 24-ai.news | 3 | 2026-04-24 | 2026-04-24 | 24AI - Bedrock AgentCore managed harness |
 | aibase.com | 3 | 2026-04-24 | 2026-04-24 | AIBase - Qwen 3.6 Officially Released |
 | aimagazine.com | 3 | 2026-05-02 | 2026-05-03 | AI Magazine - Apptronik |
+| anandtech.com | 3 | 2026-05-28 | 2026-05-28 | Anandtech - Groq LPU-v3 technical deep dive 2.4x energy effi |
 | basenor.com | 3 | 2026-04-28 | 2026-04-29 | Basenor - Tesla Optimus V3 Reveal Set for Late July |
 | bleepingcomputer.com | 3 | 2026-04-25 | 2026-04-25 | BleepingComputer - Critical Nginx UI auth bypass flaw |
 | breakingdefense.com | 3 | 2026-05-03 | 2026-05-03 | Breaking Defense - Pentagon clears 8 tech firms for classifi |
@@ -194,6 +202,7 @@ Sorted by `count` descending, then host alphabetical.
 | kb.cert.org | 3 | 2026-04-21 | 2026-04-26 | CERT/CC - VU#915947 SGLang chat-template RCE |
 | letsdatascience.com | 3 | 2026-05-06 | 2026-05-07 | Let's Data Science - Frontier Model Review Board EO draft de |
 | llm-stats.com | 3 | 2026-04-19 | 2026-05-03 | LLM-Stats - AI Updates Today (May 2026) |
+| lmsys.org | 3 | 2026-05-08 | 2026-05-27 | SGLang - RadixArk v0 5 4 release tool result cache reuse CVE |
 | markmancapitalinsight.substack.com | 3 | 2026-04-28 | 2026-04-29 | Markman Capital Insight - The Quiet Inflection: What Humanoi |
 | nerdleveltech.com | 3 | 2026-05-03 | 2026-05-03 | Nerd Level Tech - Agent 365 control plane analysis |
 | news.microsoft.com | 3 | 2026-05-07 | 2026-05-07 | Microsoft News - Azure AI services run-rate analyst day disc |
@@ -332,7 +341,6 @@ Sorted by `count` descending, then host alphabetical.
 | lakera.ai | 1 | 2026-04-21 | 2026-04-21 | Lakera - Indirect Prompt Injection |
 | langchain.com | 1 | 2026-04-24 | 2026-04-24 | LangSmith homepage |
 | levo.ai | 1 | 2026-04-24 | 2026-04-24 | Levo.ai - Top 10 AI Monitoring Tools 2026 |
-| lmsys.org | 1 | 2026-05-08 | 2026-05-08 | SGLang - RadixArk v0 5 4 release tool result cache reuse CVE |
 | localaimaster.com | 1 | 2026-04-24 | 2026-04-24 | Localaimaster - Ollama Latest Version & Changelog |
 | lushbinary.com | 1 | 2026-04-25 | 2026-04-25 | Lushbinary - Self-Host Kimi K2.6: vLLM, SGLang & KTransforme |
 | markaicode.com | 1 | 2026-04-19 | 2026-04-19 | Markaicode - Prompt Injection 2026 |

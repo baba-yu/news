@@ -1,0 +1,235 @@
+{
+  "date": "2026-05-28",
+  "by_prediction": {
+    "prediction.58d2d07520ffe113": [
+      {
+        "actor": "Responsable de ingenieria comercial en Groq que asigna la capacidad de la LPU-v3 Inference Network a lo largo de los 18 sitios",
+        "job": "Reservar y escalar el pool dedicado de capacidad LPU-v3 para Qwen3.6-Max-Preview-235B para que el piso de $0.31 por millon y el cold-start de 0.082 segundos se sostengan bajo el volumen enrutado de OpenRouter.",
+        "outcome": "Un ledger semanal de capacidad LPU-v3 que fija al menos 38.420 tokens por segundo por rack para Qwen3.6-Max-Preview-235B en los 18 sitios y sostiene el piso de $0.31 a lo largo de las ventanas de refresco de la tabla de enrutamiento de OpenRouter.",
+        "motivation": "Una vez que el piso mas bajo y el cold-start mas bajo coinciden en un mismo dia de operaciones, cada refresco semanal de la tabla de enrutamiento compone share hacia la pierna LPU-v3; sostener ese par en la lista de precios es todo el mecanismo.",
+        "task": {
+          "who": "Lider de ingenieria comercial de Groq con el SRE de guardia de la flota de inferencia y el program manager de despliegue de capex de data center",
+          "what": "fijar la capacidad LPU-v3 para Qwen3.6-Max-Preview-235B en el piso publicado de precio y latencia",
+          "where": "la huella de 18 sitios de la LPU-v3 Inference Network expandiendose hacia 36 sitios para Q1 2028",
+          "when": "ciclos semanales de asignacion de capacidad desde fines de mayo de 2026 hasta la segunda mitad de 2026, antes de la evaluacion de share de enrutamiento de Q4 2026",
+          "why": "el par de precio y latencia debe sostenerse en cada refresco para que el corrimiento de share componga",
+          "how": "actualizaciones semanales del ledger de capacidad contra el sobre de produccion de 1,84 ExaFLOPS BF16 y la carga de referencia de 38.420 tokens por segundo por rack"
+        }
+      },
+      {
+        "actor": "Ingeniero de algoritmo de enrutamiento en OpenRouter que mantiene la primitiva evals-on-the-fly que selecciona las patas de proveedor en cada refresco",
+        "job": "Ajustar la primitiva de enrutamiento para que el endpoint de menor latencia y menor precio herede la pata por defecto sensible al costo en Qwen3.6-Max-Preview-235B sin requerir override manual por inquilino.",
+        "outcome": "Una regla de enrutamiento a nivel de plataforma para Qwen3.6-Max-Preview-235B que promueve el endpoint LPU-v3 como default sensible al costo y expone un toggle de nivel preferente LPU-v3 cara al cliente detras de la primitiva evals-on-the-fly.",
+        "motivation": "El grupo de cinco proveedores cargo el ciclo de integracion, pero el dashboard recompensa la pata que sostiene el par de menor latencia y menor precio; el algoritmo de enrutamiento debe codificar esa recompensa sin asistencia manual.",
+        "task": {
+          "who": "Ingeniero de algoritmo de enrutamiento de OpenRouter con el product manager de integraciones de proveedores y el ingeniero del dashboard analitico de tarjetas de modelo",
+          "what": "promover la pata LPU-v3 como default sensible al costo y desplegar el toggle de nivel preferente",
+          "where": "la primitiva de enrutamiento evals-on-the-fly de OpenRouter y la superficie de configuracion de la tarjeta de modelo",
+          "when": "ciclos semanales de refresco de la tabla de enrutamiento desde la segunda mitad de mayo de 2026 hasta Q3 2026 antes de la evaluacion de corrimiento de share de Q4 2026",
+          "why": "el corrimiento de share solo compone si la primitiva auto-promueve sin ajuste manual por inquilino",
+          "how": "ajuste de la primitiva de enrutamiento contra la lectura de latencia de primer token de 0,082 segundos del dashboard de OpenRouter y el piso de $0.31 por millon como entradas de recompensa"
+        }
+      },
+      {
+        "actor": "Lider de producto de endpoints hospedados en Together AI que coordina la respuesta de la cohorte con Fireworks AI y DeepInfra",
+        "job": "Cerrar la brecha de latencia y precio de LPU-v3 en Qwen3.6-Max-Preview-235B integrando un kernel de router fusionado en vLLM v0.11.6 o v0.12.x y reajustando la lista de precios de endpoints hospedados de la cohorte antes de Q4 2026.",
+        "outcome": "Una release del kernel de router fusionado en vLLM mas una reajuste coordinado de precios de endpoints hospedados de Together AI, Fireworks AI y DeepInfra que lleva la latencia de primer token mezclada de la cohorte por debajo de 0,1 segundos y empareja el piso de $0.31 por millon.",
+        "motivation": "Sostener el share enrutado en la banda de 35 a 45 por ciento mantiene a la cohorte relevante en el dashboard de Q4 2026; no cerrar la brecha de latencia concede el nivel de enrutamiento por defecto y triplica la pendiente del corrimiento de share.",
+        "task": {
+          "who": "Lider de producto de endpoints hospedados de Together AI con la ingenieria del stack de inferencia de Fireworks AI y la mesa de estrategia de precios de DeepInfra coordinandose por el track upstream de mantenedores de vLLM",
+          "what": "publicar un kernel de router fusionado en vLLM v0.11.6 o v0.12.x y rehacer la lista de precios de la cohorte",
+          "where": "el repositorio upstream de vLLM y los pipelines de listas de precios de endpoints hospedados de Together AI, Fireworks AI y DeepInfra",
+          "when": "trabajo de merge del kernel desde fines de mayo de 2026 hasta Q3 2026 con el reajuste de precios de la cohorte aterrizando antes de la evaluacion de share de enrutamiento de Q4 2026",
+          "why": "el kernel que cierra la latencia en el caso bajista es la unica rama que sostiene a la cohorte en la banda de 35 a 45 por ciento",
+          "how": "trabajo de pull request upstream en vLLM contra la base de latencia de primer token mezclada de 0,156 segundos de la cohorte apuntando al cruce por debajo de 0,1 segundos"
+        }
+      },
+      {
+        "actor": "Partner manager de Alibaba Cloud Model Studio a cargo de la distribucion de endpoints hospedados de Qwen3.6-Max-Preview",
+        "job": "Reposicionar la lista de precios de Alibaba Cloud Model Studio y los terminos de codistribucion con partners despues de que el Thursday-flip de $0.42 fuera socavado por el piso de $0.31 de LPU-v3 en la misma tarjeta de modelo.",
+        "outcome": "Una lista de precios revisada de Model Studio mas terminos de codistribucion con partners que posicionan Qwen3.6-Max-Preview como una referencia de pesos abiertos multi-endpoint, manteniendo al menos una pata afiliada a Alibaba dentro de la banda sensible al costo de OpenRouter.",
+        "motivation": "Si la marca Qwen3.6-Max-Preview se vuelve sinonimo de un solo endpoint de silicio dedicado, el equipo del modelo pierde palanca con futuros partners de codistribucion y la narrativa de sustitucion de la cohorte frente a Claude Opus 4.7 colapsa a una historia de un solo proveedor.",
+        "task": {
+          "who": "Partner manager de Alibaba Cloud Model Studio con el coordinador de releases del equipo de modelado Qwen y la mesa de estrategia de precios de Model Studio",
+          "what": "republicar los precios y los terminos de codistribucion de Model Studio para Qwen3.6-Max-Preview-235B",
+          "where": "la pagina de tarjeta de modelo de Alibaba Cloud Model Studio y el portal de acuerdos de distribucion con partners",
+          "when": "reajuste de precios y negociacion de terminos con partners desde fines de mayo de 2026 hasta Q3 2026 antes de la evaluacion de share de enrutamiento de Q4 2026",
+          "why": "la marca del modelo necesita al menos una pata distinta a LPU-v3 dentro de la banda sensible al costo para preservar palanca de negociacion",
+          "how": "revision de la lista de precios de Model Studio contra el piso de $0.31 de LPU-v3 y el mapa mas amplio de distribucion multi-proveedor de Qwen3.6-Max-Preview"
+        }
+      },
+      {
+        "actor": "Lider de compras de plataformas de desarrollo en tenants de herramientas agenticas en Cursor, Cline, Aider y Continue.dev",
+        "job": "Aprobar el default preferente LPU-v3 a nivel de plataforma para Qwen3.6-Max-Preview-235B dentro de los contratos empresariales para que la decision de enrutamiento sensible al costo aterrice en la plataforma y no en el override por desarrollador.",
+        "outcome": "Acuerdos firmados de plataforma empresarial con al menos dos de Cursor, Cline, Aider y Continue.dev que marcan el endpoint LPU-v3 como default de Qwen3.6-Max-Preview a nivel de plataforma con aceptacion FinOps documentada.",
+        "motivation": "La narrativa de sustitucion de Claude Opus 4.7 solo se sostiene si los defaults de las plataformas de herramientas agenticas enrutan al endpoint mas rapido y barato; sin el sign-off de compras la sustitucion queda en alternancia por desarrollador y el corrimiento de share se estanca.",
+        "task": {
+          "who": "Lider de compras de plataformas de desarrollo empresariales con el analista de asignacion de costos de FinOps y el responsable de gestion de proveedores de herramientas agenticas",
+          "what": "aprobar el nivel default preferente LPU-v3 dentro del contrato de plataforma empresarial",
+          "where": "el portal de acuerdos de gestion de proveedores de herramientas agenticas y el board de gobernanza de FinOps",
+          "when": "revision y sign-off de contratos desplegandose desde junio de 2026 hasta Q3 2026 antes de la evaluacion de share de enrutamiento de Q4 2026",
+          "why": "el sign-off de compras es el evento de bloqueo que convierte la sustitucion de alternancia por desarrollador a default de plataforma",
+          "how": "revision de contrato empresarial contra el piso de $0.31 por millon de LPU-v3, el cold-start de 0,082 segundos y el toggle de enrutamiento a nivel de plataforma de OpenRouter como entradas de aceptacion de FinOps"
+        }
+      }
+    ],
+    "prediction.8344398a4f44eed9": [
+      {
+        "actor": "Lider del comite de metodologia de construccion de indices de FTSE Russell que gestiona el expediente del anuncio de reconstitucion del 26 de junio",
+        "job": "Confirmar a Cerebras (CBRS) en la lista de inclusion prospectiva del 26 de junio para la migracion small-to-large-cap del Russell 1000 y fijar el registro documental que defiende la adicion frente a una impugnacion de ventana de inclusion por proveedores de indice rivales.",
+        "outcome": "Un anuncio de reconstitucion de FTSE Russell del 26 de junio que nombra a CBRS como adicion confirmada al Russell 1000 con fecha efectiva en el rebalance del 24 de julio, y un registro de inclusion que cita explicitamente el cruce de propiedad institucional por encima de la mitad del free float, las tres iniciaciones de compra de bulge bracket agrupadas en la banda de objetivo a 12 meses de 245-278, y el propio flag de inclusion prospectiva del equipo de construccion de indices de Russell Investments del 28 de mayo.",
+        "motivation": "El cruce de la propiedad institucional por encima de la mitad del free float al 52.4 por ciento frente al 49.8 por ciento del miercoles es el umbral de buffer de free float publicado que la pantalla de elegibilidad de migracion small-to-mid exige antes de que la construccion del indice anada el nombre a la lista prospectiva, y el comite de metodologia necesita ese cruce junto con el cluster de iniciaciones de bulge bracket en el registro para mantener la adicion defendible dentro de la ventana de cuatro semanas previa al anuncio.",
+        "task": {
+          "who": "Presidente del comite de metodologia de FTSE Russell mas el analista de la pantalla de elegibilidad de construccion de indices y el abogado de revision legal del paquete de anuncio que coordina la defensa frente a impugnaciones de proveedores rivales",
+          "what": "redactar, votar y publicar el anuncio de reconstitucion del 26 de junio que nombra a CBRS en la migracion small-to-large-cap del Russell 1000, con el registro documental anclado en los cambios de estado calificadores del 28 de mayo",
+          "where": "las camaras del comite de metodologia de FTSE Russell y el flujo de revision de la pantalla de elegibilidad de construccion de indices junto con el canal de publicacion del paquete de anuncio",
+          "when": "redaccion y votacion del comite desde la semana del 1 de junio de 2026 hasta la ventana de cuatro semanas previa al anuncio, con la publicacion del anuncio aterrizando el 26 de junio de 2026 antes de la fecha efectiva del rebalance del 24 de julio de 2026",
+          "why": "el cruce de mitad de free float junto con el cluster de iniciaciones de compra de bulge bracket y el propio flag de inclusion prospectiva del equipo de construccion de indices es el registro documental que la metodologia de FTSE Russell exige para defender la inclusion frente a una impugnacion de un proveedor rival",
+          "how": "adjudicacion del comite de metodologia contra los umbrales publicados de la banda de capitalizacion del Russell 1000 y la pantalla de liquidez, con la lectura de propiedad institucional del 28 de mayo, las tres iniciaciones de bulge bracket y el flag del equipo de construccion de Russell Investments como insumos del registro"
+        }
+      },
+      {
+        "actor": "Responsable de relaciones con inversionistas de Cerebras Systems que gestiona el paquete de documentacion para la ventana de inclusion",
+        "job": "Entregar el paquete de documentacion de IR para la ventana de inclusion del que tanto el comite de metodologia de FTSE Russell como las mesas sell-side de bulge bracket y los gestores de seguidores pasivos de fondos indexados se nutren al dimensionar la oferta mecanica para el rebalance del 24 de julio.",
+        "outcome": "Un dossier de ventana de inclusion publicado por IR de Cerebras en el sitio de IR y suplementos 8-K en EDGAR que cubre la reconciliacion del volumen promedio diario de los ultimos 30 dias, la lectura del cruce de free float del 28 de mayo anclada a la traza de propiedad institucional 13F+ADV, y los tres resumenes de iniciacion de bulge bracket, para que el comite de metodologia y las mesas de seguidores pasivos compartan un mismo conjunto de citas.",
+        "motivation": "Si el dossier de IR no provee un unico conjunto de citas reconciliadas, el comite de metodologia y las mesas de seguidores pasivos leen de forma independiente de la cinta publica y con reconciliaciones de ADV divergentes, lo que deja espacio para que un proveedor rival argumente que el registro de inclusion fue inconsistente entre las contrapartes.",
+        "task": {
+          "who": "Responsable de IR de Cerebras mas la mesa de reconciliacion de free float del controlador corporativo y la contraparte externa de proxy solicitor que maneja la traza 13F+ADV",
+          "what": "compilar y publicar el dossier de IR de ventana de inclusion y los suplementos 8-K en EDGAR que contienen el ADV reconciliado, el cruce de free float y los resumenes de iniciacion de bulge bracket",
+          "where": "el flujo de publicacion del sitio de IR de Cerebras, el canal de presentacion de 8-K en EDGAR y la lista de circulacion de IR a sell-side",
+          "when": "compilacion desde el 29 de mayo de 2026 hasta la primera mitad de junio de 2026 con publicacion aterrizando dentro de la ventana de cuatro semanas previa al anuncio del 26 de junio de 2026",
+          "why": "un unico conjunto reconciliado de citas de IR elimina el punto de apoyo de ADV divergente que un proveedor rival usaria para impugnar el registro de inclusion",
+          "how": "reconciliacion liderada por IR contra la cinta del volumen promedio diario de los ultimos 30 dias, la traza de propiedad institucional 13F y las tres notas de iniciacion de bulge bracket publicadas el jueves 28 de mayo como conjunto fuente canonico"
+        }
+      },
+      {
+        "actor": "Lideres de analistas sell-side de semiconductores en Morgan Stanley, Goldman Sachs y Citi que coordinan el cluster de iniciacion de bulge bracket sobre CBRS",
+        "job": "Aterrizar iniciaciones coordinadas de Overweight o Buy y actualizaciones de precio objetivo dentro de la banda de objetivo a 12 meses de 245-278 desde al menos tres mesas de bulge bracket a lo largo de la ventana de cuatro semanas previa al anuncio, para que el registro del comite de metodologia recoja la senal de cluster de bulge bracket que la pantalla de FTSE Russell lee como posicionamiento de anticipacion de inclusion.",
+        "outcome": "Un cluster publicado de notas de research de bulge bracket sobre CBRS — la iniciacion Overweight de Morgan Stanley a 275 dolares del pre-market del 28 de mayo, la actualizacion de Goldman de 260 a 278 dolares en la sesion de la tarde del 28 de mayo, y una iniciacion de Citi en Buy aterrizando dentro de la ventana de cuatro semanas previa al anuncio en la misma banda objetivo de 245-278 — que el comite de metodologia puede citar como evidencia de posicionamiento de anticipacion de inclusion.",
+        "motivation": "El comite de metodologia de FTSE Russell lee tres notas de compra coordinadas de bulge bracket agrupadas en una banda de objetivo a 12 meses de 30 dolares como la senal canonica de anticipacion de inclusion; sin la tercera mesa del cluster, el registro se lee como entusiasmo de dos mesas de una misma casa y no cumple la condicion de posicionamiento coordinado de la pantalla.",
+        "task": {
+          "who": "Joseph Moore en Morgan Stanley, Toshiya Hari en Goldman Sachs y el lider de analistas de semiconductores en Citi mas el abogado de clearing de publicacion de research de cada mesa",
+          "what": "redactar y publicar iniciaciones coordinadas de Overweight o Buy y actualizaciones de precio objetivo sobre CBRS en la banda de objetivo a 12 meses de 245-278 desde al menos tres mesas de bulge bracket",
+          "where": "los canales de publicacion de research sell-side de Morgan Stanley, Goldman Sachs y Citi y las listas de distribucion a clientes institucionales de bulge bracket",
+          "when": "la iniciacion de Morgan Stanley y la actualizacion de Goldman publicadas el 28 de mayo de 2026 con la iniciacion de Citi aterrizando dentro de la ventana de cuatro semanas previa al anuncio hasta el 25 de junio de 2026, antes del anuncio de reconstitucion del 26 de junio de 2026",
+          "why": "tres notas de compra coordinadas de bulge bracket dentro de una banda objetivo de 30 dolares es la senal canonica de anticipacion de inclusion que el comite de metodologia lee como posicionamiento coordinado en lugar de entusiasmo de una sola casa",
+          "how": "redaccion de la publicacion de research sell-side contra la cinta de cierre del 28 de mayo, la senal de open interest del call de 260 dolares de septiembre de 2026 y la lectura de propiedad institucional por encima de la mitad del free float como insumos de suscripcion para la banda objetivo de 245-278"
+        }
+      },
+      {
+        "actor": "Gestores de portafolios de seguidores pasivos del Russell 1000 en Vanguard, BlackRock y State Street responsables del dimensionamiento de la oferta de rebalance en IWB, VONE y SCHX",
+        "job": "Dimensionar y escalonar la compra mecanica de CBRS antes de la fecha efectiva del rebalance del 24 de julio para que el tracking error de IWB, VONE y SCHX se mantenga dentro de la banda de tolerancia del prospecto cuando el anuncio del 26 de junio nombre a CBRS como adicion confirmada al Russell 1000.",
+        "outcome": "Un plan coordinado de oferta mecanica de seguidores pasivos en las familias IWB, VONE y SCHX dimensionado en la banda de 1.800 a 2.400 millones de dolares frente al volumen promedio diario de los ultimos 30 dias, escalonado a lo largo de la ventana estandar de cinco dias de cotizacion previa al cierre del rebalance, para que el rebalance del 24 de julio aterrice dentro de la tolerancia de tracking error.",
+        "motivation": "Si las mesas de seguidores pasivos esperan la cinta posterior al anuncio para escalonar la oferta, la compra mecanica aterriza dentro de una ventana de liquidez mas fina y el tracking error rebasa la tolerancia del prospecto; escalonar en la ventana estandar de cinco dias de cotizacion previa al cierre del rebalance, usando el open interest del call de 260 dolares de septiembre de 2026 por encima de 41.200 contratos como referencia de posicionamiento institucional, es el unico camino que mantiene el tracking error dentro de banda.",
+        "task": {
+          "who": "Gestores de portafolios de seguidores pasivos del Russell 1000 de Vanguard, BlackRock y State Street mas la mesa de trading de indices de cada firma y el oficial de cumplimiento que supervisa la atestacion de tolerancia del prospecto",
+          "what": "dimensionar, escalonar y ejecutar la compra mecanica de CBRS en IWB, VONE y SCHX dentro de la banda de 1.800 a 2.400 millones de dolares a lo largo de la ventana de cinco dias de cotizacion previa al cierre del rebalance",
+          "where": "las mesas de trading de indices de IWB, VONE y SCHX enrutando hacia la subasta de cierre de NASDAQ y los canales continuos de internalizadores sistematicos, con la consola de monitoreo de tracking error operacion por operacion",
+          "when": "dimensionamiento y escalonamiento a lo largo de las cuatro semanas desde el anuncio de reconstitucion del 26 de junio de 2026 hasta la fecha efectiva del rebalance del 24 de julio de 2026, con ejecucion principal dentro de la ventana de cinco dias de cotizacion previa al cierre del rebalance",
+          "why": "la ventana estandar previa al cierre del rebalance es el unico bolsillo de liquidez suficientemente profundo para absorber la compra mecanica de 1.800 a 2.400 millones de dolares sin rebasar la banda de tolerancia de tracking error del prospecto",
+          "how": "dimensionamiento de seguidores pasivos contra el volumen promedio diario de los ultimos 30 dias, el open interest del call de 260 dolares de septiembre de 2026 por encima de 41.200 contratos y la reconciliacion de free float publicada por IR como insumos de liquidez del registro"
+        }
+      },
+      {
+        "actor": "Liderazgo comercial y go-to-market de Cerebras que cierra el MoU con Saudi Aramco y el libro de operaciones de hyperscalers aguas abajo",
+        "job": "Aterrizar el MoU con Saudi Aramco y al menos un acuerdo comercial con un hyperscaler aguas abajo dentro de la ventana de cuatro semanas previa al anuncio para que la lectura de fundamentales lleve el refuerzo de capitalizacion que el comite de metodologia necesita para mantenerse por encima del corte convencional de la banda de capitalizacion del Russell 1000.",
+        "outcome": "Un MoU anunciado entre Cerebras y Saudi Aramco mas al menos un design win de hyperscaler aguas abajo firmado dentro de junio de 2026, con cadencia de reconocimiento de ingresos divulgada en el dossier de IR, de modo que la lectura de capitalizacion se mantenga por encima del corte publicado de la banda de capitalizacion del Russell 1000 a lo largo de toda la ventana del anuncio del 26 de junio y el rebalance del 24 de julio.",
+        "motivation": "Si la lectura de capitalizacion vuelve a caer por debajo del corte convencional de la banda de capitalizacion del Russell 1000 dentro de la ventana de cuatro semanas previa al anuncio, el comite de metodologia tiene una causa de umbral publicada para diferir la inclusion a la revision trimestral de septiembre de 2026, independientemente del cruce de propiedad institucional y del cluster de bulge bracket en el registro.",
+        "task": {
+          "who": "Director de ingresos de Cerebras mas el lider de cuentas estrategicas de GTM, el GM regional de Medio Oriente y el abogado de divulgacion de operaciones que coordina con IR la divulgacion de la cadencia de reconocimiento de ingresos",
+          "what": "cerrar, anunciar y divulgar el MoU con Saudi Aramco y al menos un acuerdo comercial con un hyperscaler aguas abajo, con la cadencia de reconocimiento de ingresos reflejada en el dossier de IR",
+          "where": "los canales de relacionamiento comercial de Cerebras en Riad y Dhahran, el flujo GTM de cuentas estrategicas de hyperscalers, y el canal de publicacion de divulgacion de IR y presentacion de 8-K en EDGAR",
+          "when": "cierre y divulgacion desde el 29 de mayo de 2026 hasta la ventana de cuatro semanas previa al anuncio, con los anuncios del MoU y del design win con hyperscalers aterrizando a lo largo de junio de 2026 antes del anuncio de reconstitucion del 26 de junio de 2026",
+          "why": "el comite de metodologia necesita que la lectura de capitalizacion se mantenga por encima del corte convencional de la banda de capitalizacion del Russell 1000 durante toda la ventana previa al anuncio, y la cadencia del MoU mas el design win de hyperscaler es la senal de fundamentales que ancla esa lectura",
+          "how": "cadencia de cierre y divulgacion de operaciones comerciales coordinada con el dossier de IR de modo que los suplementos 8-K en EDGAR y las notas al pie de reconocimiento de ingresos publicadas por IR lleven el registro del MoU y del design win al conjunto de insumos de pantalla del comite de metodologia"
+        }
+      }
+    ],
+    "prediction.d2fdc064f4b852c3": [
+      {
+        "actor": "Equipo de autores de la sonda de trayectoria de token-drift del laboratorio CMU Catalyst y los colaboradores de causal-probing de Meta FAIR que preparan la implementacion de referencia Apache 2.0",
+        "job": "Aterrizar la implementacion de referencia abierta Apache 2.0 del primitivo de token-drift trajectory mapping en el repositorio del proyecto CMU Catalyst dentro de la ventana estandar de seis semanas posterior al arxiv, para que el cohort de estandares supere el piso de elegibilidad de implementacion abierta.",
+        "outcome": "Un release Apache 2.0 etiquetado en el repositorio github del proyecto CMU Catalyst que incluye la implementacion del escalar de magnitud de drift, el arnes de composicion contra el primitivo de reservoir-routing de Stanford CRFM + DeepMind sobre el backbone MoE de 145B parametros, y la receta de reproduccion en 8x H100 SXM5 dentro de 2.8 por ciento de la hoja de referencia.",
+        "motivation": "Los borradores de trabajo de CEN-CENELEC JTC 21 usan el umbral de implementacion abierta para clasificar un primitivo como elegible para estandar armonizado en lugar de propietario del proveedor, y la rama de ciencia de la medicion de NIST AISI requiere el piso de reproducibilidad antes de nombrar una sonda en un anexo formal, por lo que el release de referencia Apache 2.0 es el artefacto de bloqueo que desbloquea la ruta de adopcion de la pista de estandares.",
+        "task": {
+          "who": "Director del laboratorio CMU Catalyst Zhihao Jia, candidato a doctorado Tianqi Chen, cientifico investigador senior de Meta FAIR Naman Goyal, y el ingeniero de release MLOps del laboratorio Catalyst que coordina la etiqueta de github y la documentacion de la receta de reproduccion",
+          "what": "etiquetar y publicar la implementacion de referencia Apache 2.0 de token-drift trajectory mapping con el escalar de magnitud de drift y la receta de reproduccion en H100 SXM5",
+          "where": "el repositorio github del proyecto CMU Catalyst y el flujo de publicacion del codigo companero del articulo arxiv",
+          "when": "etiquetado durante junio de 2026 con el release Apache 2.0 aterrizando dentro de la ventana estandar de seis semanas posterior al arxiv que cierra a mediados de julio de 2026, antes de los ciclos de revision Q3 2026 de la pista de estandares",
+          "why": "el release abierto Apache 2.0 dentro de la ventana de seis semanas es el artefacto de bloqueo que desbloquea la ruta de adopcion de la pista de estandares",
+          "how": "etiquetado de implementacion de referencia contra la especificacion del arxiv 2605.11823 usando el arnes de composicion del backbone MoE de 145B parametros y la receta de reproduccion en 8x H100 SXM5 de CoreWeave como linea base de documentacion"
+        }
+      },
+      {
+        "actor": "Lider de investigacion de interpretabilidad en Anthropic que coordina con el equipo Preparedness de OpenAI y el grupo de investigacion de seguridad AGI de DeepMind sobre un arnes de auditoria de coherencia agentica productizado",
+        "job": "Productizar el primitivo de token-drift trajectory mapping en un arnes interno de auditoria de coherencia agentica pre-release conectado al flujo de aprobacion de model card, para que los modelos frontera puedan publicarse con una lectura documentada de magnitud de drift contra el umbral de la pista de estandares antes del release externo.",
+        "outcome": "Un arnes de auditoria pre-release interno ejecutando el escalar de magnitud de drift contra el modelo agentico interno de clase 145B, con el umbral de inflexion de divergencia de politica registrado en el flujo de aprobacion de model card en los tres laboratorios (Anthropic, OpenAI, DeepMind), y una nota publica coordinada que documenta la alineacion entre la lectura interna del laboratorio y el borrador del umbral de la pista de estandares.",
+        "motivation": "Sin que los tres laboratorios frontera lean el mismo escalar de magnitud de drift contra el mismo umbral antes del release externo, los grupos de trabajo de la pista de estandares no pueden defender el valor del umbral contra la inevitable resistencia de la industria de que cualquier instrumento del lado de la seguridad conlleva sobrecarga de costo de inferencia ilimitada; la productizacion interna del laboratorio es el insumo de credibilidad del lado de la oferta que el cohort de estandares necesita para fijar el umbral en los ciclos de revision Q3 2026.",
+        "task": {
+          "who": "Lider de investigacion de interpretabilidad de Anthropic mas cientifico del equipo Preparedness de OpenAI, lider del grupo de investigacion de seguridad AGI de DeepMind, y el grupo de trabajo de coordinacion de aprobacion de model card entre laboratorios",
+          "what": "conectar el arnes del escalar de magnitud de drift al flujo de aprobacion de model card pre-release en los tres laboratorios y publicar la nota de alineacion coordinada",
+          "where": "la infraestructura de evaluacion pre-release interna del laboratorio y el canal de publicacion de coordinacion de seguridad entre laboratorios",
+          "when": "conexion del arnes durante junio y julio de 2026 con la nota de alineacion coordinada publicada dentro de Q3 2026 antes de la ventana de revision de MLCommons AI Safety v1.2",
+          "why": "la productizacion interna del laboratorio es el insumo de credibilidad del lado de la oferta que el cohort de estandares necesita para fijar el valor del umbral contra la resistencia por sobrecarga ilimitada",
+          "how": "conexion del arnes pre-release contra la implementacion de referencia Apache 2.0 de CMU Catalyst y la mejora de composicion a 81.2 SWE-Bench Verified como benchmark de aceptacion interno del laboratorio"
+        }
+      },
+      {
+        "actor": "Oficial de programa de la rama de ciencia de la medicion del NIST AI Safety Institute que redacta el anexo del RMF Profile-1 para agentes de horizonte largo",
+        "job": "Citar el escalar de magnitud de drift en la inflexion de divergencia de politica como el primitivo de medicion recomendado para la caracterizacion de falla de coherencia agentica de horizonte largo en el anexo del RMF Profile-1 de NIST AISI, cerrando la brecha del RFC de Q1 2026 que dejo el anexo en limbo de pre-cobertura sin un candidato cuantitativo de sonda de drift.",
+        "outcome": "Una revision del anexo del RMF Profile-1 de NIST AISI para agentes de horizonte largo que nombra el token-drift trajectory mapping por referencia a la implementacion Apache 2.0 de CMU Catalyst y cita el escalar de magnitud de drift en la inflexion de divergencia de politica como el primitivo de caracterizacion recomendado, con la revision abierta a comentario publico dentro de Q3 2026 y publicacion de regla final dentro de Q4 2026.",
+        "motivation": "El RFC publico de NIST AISI de Q1 2026 cerro el 14 de marzo sin un candidato cuantitativo de sonda de drift, dejando el anexo Profile-1 para agentes de horizonte largo en limbo de pre-cobertura; el articulo de CMU Catalyst + Meta FAIR del jueves con 84.3 por ciento de precision de prediccion de modo de falla en SWE-Bench Verified es el primer instrumento de sonda que ata una precision falsable publicada a un solo escalar de tiempo de auditoria sin cooperacion del lado del entrenador, que es el umbral que la rama de ciencia de la medicion requiere para citar un primitivo en un anexo formal.",
+        "task": {
+          "who": "Oficial de programa de la rama de ciencia de la medicion del NIST AISI mas el comite de redaccion del anexo RMF Profile-1, el grupo de trabajo tecnico de agentes de horizonte largo, y el coordinador de recepcion de comentarios publicos",
+          "what": "redactar la revision del anexo citando el escalar de magnitud de drift como el primitivo de caracterizacion recomendado y abrirla a comentario publico",
+          "where": "el flujo de redaccion del RMF Profile-1 de NIST AISI y el canal de publicacion de comentario publico del registro federal",
+          "when": "redaccion desde junio de 2026 hasta Q3 2026 con publicacion de comentario publico dentro de Q3 2026 y publicacion de regla final aterrizando dentro de Q4 2026",
+          "why": "el RFC de Q1 2026 cerro sin un candidato cuantitativo de sonda de drift y el articulo del jueves es el primer instrumento que cumple el umbral del escalar de tiempo de auditoria requerido para la citacion en anexo formal",
+          "how": "redaccion del anexo contra la especificacion del arxiv 2605.11823 con la implementacion de referencia Apache 2.0 de CMU Catalyst y la precision de prediccion de modo de falla de 84.3 por ciento como linea base de citacion de ciencia de la medicion"
+        }
+      },
+      {
+        "actor": "Presidente del grupo de trabajo del benchmark MLCommons AI Safety mas el editor del subtest de agentes de horizonte largo que prepara las dimensiones de puntuacion de v1.2",
+        "job": "Anadir token-drift trajectory mapping como una dimension de puntuacion nombrada en el subtest de agentes de horizonte largo de MLCommons AI Safety v1.2, con el escalar de magnitud de drift reportado junto a los ejes existentes de tasa de aprobacion y tasa de rechazo, para que las presentaciones de los laboratorios frontera aterricen con el primitivo de tiempo de auditoria puntuado como dimension de benchmark de primera clase.",
+        "outcome": "Un anuncio de release de MLCommons AI Safety v1.2 que lista token-drift trajectory mapping entre las dimensiones nombradas de puntuacion de agentes de horizonte largo, con el esquema de leaderboard actualizado para reportar el escalar de magnitud de drift en la inflexion de divergencia de politica y el vinculo de implementacion de referencia al release Apache 2.0 de CMU Catalyst documentado en el documento de metodologia v1.2.",
+        "motivation": "Los releases de benchmark de MLCommons son el canal por el cual los flujos de presentacion de los laboratorios frontera incorporan una nueva dimension de puntuacion como entregable de primera clase, y el subtest de agentes de horizonte largo de v1.2 ha estado abierto desde el RFC de Q1 2026 esperando un instrumento de sonda que cumpla el umbral de precision falsable; sin la incorporacion en v1.2, el primitivo de tiempo de auditoria queda como senal de pista de investigacion en lugar de la dimension de benchmark que las tuberias de presentacion de los laboratorios optimizan.",
+        "task": {
+          "who": "Presidente del grupo de trabajo MLCommons AI Safety mas el editor del subtest de agentes de horizonte largo, el mantenedor del esquema de leaderboard, y el editor del documento de metodologia v1.2",
+          "what": "incorporar token-drift trajectory mapping como una dimension de puntuacion nombrada y actualizar el esquema de leaderboard para reportar el escalar de magnitud de drift",
+          "where": "el canal de redaccion del grupo de trabajo MLCommons AI Safety y el flujo de publicacion del release v1.2",
+          "when": "trabajo de incorporacion durante Q3 2026 con el anuncio de release v1.2 aterrizando dentro de Q4 2026 antes de la ventana de revision del borrador de estandar armonizado CEN-CENELEC JTC 21 de la EU AI Act",
+          "why": "los releases de benchmark de MLCommons son el canal que convierte una senal de pista de investigacion en una dimension de benchmark de primera clase que las tuberias de presentacion de los laboratorios optimizan",
+          "how": "incorporacion del grupo de trabajo v1.2 contra la implementacion de referencia Apache 2.0 de CMU Catalyst con la precision de prediccion de modo de falla de 84.3 por ciento y la demostracion de mejora de composicion a 81.2 SWE-Bench Verified como referencias del documento de metodologia"
+        }
+      },
+      {
+        "actor": "Lider de riesgo y cumplimiento de IA en empresa Fortune 500 en programas de despliegue agentico de servicios financieros y ciencias de la vida",
+        "job": "Adoptar el escalar de magnitud de drift en la inflexion de divergencia de politica como la puerta de aceptacion contractual en el calendario de adquisicion de proveedores de IA agentica, para que las autorizaciones de despliegue interno aterricen sobre un primitivo de auditoria documentado de la pista de estandares en lugar de la auto-atestacion del proveedor.",
+        "outcome": "Un calendario de adquisicion empresarial actualizado que cita la lectura de magnitud de drift del subtest de agentes de horizonte largo de MLCommons AI Safety v1.2 y el umbral del anexo del RMF Profile-1 de NIST AISI como los criterios de aceptacion nombrados, con el lenguaje de la clausula de adquisicion adoptado en al menos tres compradores Fortune 500 de servicios financieros y ciencias de la vida antes de las selecciones de proveedores del ciclo presupuestario Q4 2026.",
+        "motivation": "Los programas de riesgo de IA empresarial en servicios financieros y ciencias de la vida enfrentan requisitos de documentacion a nivel de directorio de que un sistema agentico desplegado lleve una caracterizacion de falla de coherencia verificada externamente, y sin un primitivo de auditoria de la pista de estandares citado en el calendario de adquisicion, la autorizacion de despliegue vuelve por defecto a la auto-atestacion del proveedor que las funciones de auditoria interna y segunda linea de defensa no pueden defender en el comite de auditoria.",
+        "task": {
+          "who": "Lider de riesgo y cumplimiento de IA empresarial mas el director de datos y analitica, el director comercial de adquisiciones, y el enlace de auditoria de segunda linea de defensa que coordina la revision del calendario de adquisicion",
+          "what": "revisar el calendario de adquisicion de proveedores de IA agentica para citar la lectura de magnitud de drift de la pista de estandares como la puerta de aceptacion contractual nombrada",
+          "where": "el flujo de revision del calendario de adquisicion empresarial y el canal de documentacion del comite de auditoria de segunda linea de defensa",
+          "when": "redaccion de la revision desde Q3 2026 con el lenguaje adoptado de clausula de adquisicion aterrizando dentro de Q4 2026 antes de las selecciones de proveedores del ciclo presupuestario y la ventana de cumplimiento de evaluacion de conformidad del Articulo 15 de la EU AI Act",
+          "why": "sin un primitivo de auditoria de la pista de estandares citado en el calendario de adquisicion, la autorizacion de despliegue vuelve por defecto a la auto-atestacion del proveedor que el comite de auditoria no puede defender",
+          "how": "revision del calendario de adquisicion contra la lectura de leaderboard de agentes de horizonte largo de MLCommons AI Safety v1.2 y el umbral del anexo del RMF Profile-1 de NIST AISI como las citaciones nombradas de puerta de aceptacion"
+        }
+      },
+      {
+        "actor": "Mantenedor de la suite de evaluacion de codigo abierto en EleutherAI lm-evaluation-harness y el proyecto OpenAI Evals que coordina la integracion de la sonda del lado comunitario",
+        "job": "Integrar la sonda de token-drift trajectory mapping en los registros de tareas de lm-evaluation-harness y OpenAI Evals como una tarea de agente de horizonte largo de primera clase con el escalar de magnitud de drift reportado a traves del esquema de salida estandar del arnes, para que las presentaciones de la comunidad aterricen con el primitivo de auditoria puntuado junto a las superficies de evaluacion existentes.",
+        "outcome": "Una serie de pull requests fusionados que aterrizan token-drift trajectory mapping como una tarea registrada tanto en lm-evaluation-harness como en OpenAI Evals, con el escalar de magnitud de drift expuesto a traves del esquema de salida estandar del arnes, el hash del conjunto de datos de referencia anclado al release companero del arxiv 2605.11823, y la tarea de agente de horizonte largo documentada en ambos READMEs de proyecto junto a las familias de tareas de evaluacion de seguridad existentes.",
+        "motivation": "El registro en suites de evaluacion de codigo abierto es la superficie del lado de la comunidad que permite a los investigadores independientes reproducir la sonda a traves de familias de modelos no frontera, que es la evidencia de reproducibilidad entre modelos que el grupo de trabajo MLCommons v1.2 y la rama de ciencia de la medicion de NIST AISI usan como citacion suplementaria para defender el valor del umbral contra argumentos de que la sonda solo es valida en el backbone de referencia de CMU Catalyst.",
+        "task": {
+          "who": "Mantenedor lider de EleutherAI lm-evaluation-harness mas el lider del proyecto OpenAI Evals, el cohort de contribuidores de tareas de agente de horizonte largo, y el revisor del esquema de salida del arnes",
+          "what": "aterrizar la tarea de token-drift trajectory mapping como una tarea registrada de primera clase para agentes de horizonte largo en lm-evaluation-harness y OpenAI Evals con salida del escalar de magnitud de drift",
+          "where": "el repositorio github de lm-evaluation-harness, el repositorio github de OpenAI Evals, y el flujo de revision del registro de tareas de la comunidad",
+          "when": "serie de pull requests abriendo en junio de 2026 contra el release Apache 2.0 de CMU Catalyst, con fusiones aterrizando durante Q3 2026 antes de la ventana de release de MLCommons v1.2 y la ventana de comentario publico del anexo Profile-1 de NIST AISI",
+          "why": "el registro de la suite de evaluacion del lado de la comunidad es la evidencia de reproducibilidad entre modelos que los grupos de trabajo de la pista de estandares usan como citacion suplementaria para defender el umbral contra argumentos de validez solo en el backbone",
+          "how": "serie de pull requests al registro de tareas contra la implementacion de referencia Apache 2.0 de CMU Catalyst con el esquema de salida estandar del arnes y el hash del conjunto de datos companero del arxiv 2605.11823 como anclas de reproducibilidad"
+        }
+      }
+    ]
+  }
+}
