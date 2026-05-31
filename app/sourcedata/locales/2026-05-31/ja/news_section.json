@@ -1,0 +1,80 @@
+{
+  "date": "2026-05-31",
+  "sections": [
+    {
+      "category": "Anthropic、Claudeの封じ込めアーキテクチャを公表:gVisor、Seatbelt/Bubblewrap、OSごとのVM",
+      "bullets": [
+        {
+          "body": "Anthropicのエンジニアリング・チームは公式のエンジニアリング・ブログに「How we contain Claude across products」と題した詳細な記事を公開し、プロダクトごとに収束させたエージェント分離スタックを解説した。Claude.aiでは隔離されたインフラ上にseccompシステムコール・フィルタリング付きgVisorコンテナを採用し、セッションごとに揮発性のファイルシステムを与え、影響範囲を最小化する。Claude CodeではOSネイティブのプロセス・サンドボックス(macOSはSeatbelt、LinuxはBubblewrap)を用い——コマンド承認をモデルベースの分類器に委ねた結果、許可プロンプトを84%削減したとチームは報告している。Claude Cowork向けにはApple Virtualization framework(macOS)とWindows HCS上で完全なゲストVMを稼働させ、認証情報はホスト側で保持し、ファイルは読み取り専用、読み書き、または読み書きかつ削除不可のモードでVMにマウントされる([Anthropic Engineering](https://www.anthropic.com/engineering/how-we-contain-claude))。同記事は「自分で書いたソフトウェアこそ最も弱い」構成要素となりがちであり、成熟したハイパーバイザーやコンテナ・ランタイムが、Anthropicが以前にその周りに開発したカスタム・セキュリティ・ラッパーを上回ると論じている。Simon Willisonは土曜夜遅くにこの公表を増幅し、同じ週末に新しい姿勢を実演するため、Claude Code for web上のClaude Opus 4.8にDatasette LiteをWeb Workersからサービス・ワーカーへリファクタリングさせ、Python ASGIアプリがブラウザ内でPyodideを介してサーバーサイドの応答を実行できるようにし、動作するFastCGIデモと、サンドボックス済みエージェント下で完全に構築されたDatasette 1.0a31デモを出荷した([Simon Willison](https://simonwillison.net/2026/May/30/how-we-contain-claude/)、[Simon WillisonのPyodide ASGI研究ノート](https://simonwillison.net/2026/May/30/pyodide-asgi-browser/))。",
+          "citations": [
+            {"label": "Anthropic Engineering - How we contain Claude across products", "url": "https://www.anthropic.com/engineering/how-we-contain-claude"},
+            {"label": "Simon Willison - How we contain Claude across products", "url": "https://simonwillison.net/2026/May/30/how-we-contain-claude/"},
+            {"label": "Simon Willison - Pyodide ASGI research", "url": "https://simonwillison.net/2026/May/30/pyodide-asgi-browser/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Snowflake、$6B AWS Gravitonコミット、MCPアイデンティティのNatoma買収意向、そして+44%の2日間株価急騰を引き連れSummit 26へ",
+      "bullets": [
+        {
+          "body": "Snowflakeは5月27-29日の枠内に、月曜の基調講演に向けたSummit 26のナラティブをリセットするカタリストを3つ積み上げた。第一に、AmazonのGraviton汎用チップとクラウドGPUのエージェントAIワークロード向け利用を拡張する、AWSへの$60億の5年コミット——2023年のAWSコミットの2.4倍規模である([Snowflake-AWSプレスリリース](https://www.snowflake.com/en/news/press-releases/snowflake-expands-aws-collaboration-with-6b-commitment-to-accelerate-enterprise-agentic-ai-adoption/)、[The Next Web](https://thenextweb.com/news/snowflake-aws-6bn-graviton-ai-commitment))。第二に、Natomaの買収最終契約——個別のMCPツール呼び出し単位でアイデンティティ、ポリシー、監査を執行する企業向けModel Context Protocolゲートウェイの提供企業で、これによりSnowflakeはどのAIエージェントがどの下流システムを呼び出せるかを統治できるようになる([Natomaプレスリリース](https://www.snowflake.com/en/news/press-releases/snowflake-announces-intent-to-acquire-natoma-providing-secure-connectivity-for-the-agentic-enterprise/)、[CIO Dive](https://www.ciodive.com/news/snowflake-targets-ai-agent-adoption-aws/821393/))。第三に、Q1 FY27の決算上振れ(調整EPS $0.39でコンセンサス$0.32超、売上$1.39Bで前年同期比+33%)に伴う通期製品売上ガイダンスの31%への引き上げ([SiliconANGLE](https://siliconangle.com/2026/05/27/snowflakes-stock-surges-hours-solid-earnings-beat-multibillion-dollar-aws-cloud-deal/))。SNOWは木曜に決算を受けて36%ギャップアップし、金曜にもう6.88%上乗せして$255近辺で引けた——同銘柄の公開市場での2日間のラリーとして史上最大である。Summit 26のオンライン登録は本日5月31日日曜で締切となり、6月1日月曜午後5:00 PTの開幕基調講演にはCEO Sridhar RamaswamyがAnthropic社長のDaniela Amodeiと並んで登壇する。観客は20,000名超の対面参加が見込まれる。",
+          "citations": [
+            {"label": "Snowflake - $6B AWS commitment press release", "url": "https://www.snowflake.com/en/news/press-releases/snowflake-expands-aws-collaboration-with-6b-commitment-to-accelerate-enterprise-agentic-ai-adoption/"},
+            {"label": "The Next Web - Snowflake commits $6B to AWS over five years", "url": "https://thenextweb.com/news/snowflake-aws-6bn-graviton-ai-commitment"},
+            {"label": "Snowflake - intent to acquire Natoma press release", "url": "https://www.snowflake.com/en/news/press-releases/snowflake-announces-intent-to-acquire-natoma-providing-secure-connectivity-for-the-agentic-enterprise/"},
+            {"label": "CIO Dive - Snowflake targets AI agent adoption with AWS deal, acquisition", "url": "https://www.ciodive.com/news/snowflake-targets-ai-agent-adoption-aws/821393/"},
+            {"label": "SiliconANGLE - Snowflake's stock surges after-hours on earnings beat and AWS megadeal", "url": "https://siliconangle.com/2026/05/27/snowflakes-stock-surges-hours-solid-earnings-beat-multibillion-dollar-aws-cloud-deal/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "CNN、テレビ局として初の著作権訴訟をPerplexityに対し提起;OpenAIはEU 8月2日の期限が迫る中でFrontier Governance Frameworkを公表",
+      "bullets": [
+        {
+          "body": "過去72時間の2つの状態変化が、6月のカンファレンス・サイクルにAIベンダーが持ち越す多戦線の規制圧力を結晶化させた。5月28日木曜、CNNはニューヨーク南部地区連邦地裁(SDNY)にPerplexity AIに対する54ページの著作権訴状を提起し、AI検索企業が2025年のライセンス契約破綻後にCNNの記事、写真、動画17,000件超をスクレイピングして再配信し、その後の停止通告も無視したと主張した——CNNにとって初のAI著作権措置で、テレビ局による初の措置でもある。PerplexityのChief Communications Officer Jesse Dwyerは「事実に著作権はかけられない」と応じた([SiliconANGLE](https://siliconangle.com/2026/05/28/cnn-sues-perplexity-alleging-massive-copyright-infringement/)、[Variety](https://variety.com/2026/biz/news/cnn-sues-perplexity-alleging-copyright-infringement-1236760987/))。CNNの追加で、Perplexityは現在9件の発行者訴訟に直面する。同日、OpenAIはFrontier Governance Frameworkを公表し、内部のPreparedness Framework統制をEU AI ActのCode of Practice for General-Purpose AIおよびカリフォルニアのTransparency in Frontier AI Actに明示的に対応づけた。EUの2026年8月2日の完全執行可能性日に先んじての公表である——5月31日付の[TechTimes日曜分析](https://www.techtimes.com/articles/317461/20260531/ai-regulation-2026-opens-three-fronts-cnn-sues-perplexity-openai-aligns-eu-rules.htm)は、3つの戦線(訴訟主導の著作権コスト、州AI法に対するDOJ主導の連邦先取——5月14日のColorado SB 26-189後継法令を含む——そしてEU主導の開示インフラ)が、ベンダーが単一の遵守戦略の下では解決できない別個の振り替え不能な義務を生み出していると整理する。これとは別に、Sam AltmanはシドニーでのCBAカンファレンス(バーチャル登壇)で2023年の「ジョブズ・アポカリプス」発言を撤回し、ChatGPT時代のAIに期待していた新卒ホワイトカラー職の消滅について「かなり間違っていた」と認めた([Cyprus Mail](https://cyprus-mail.com/2026/05/31/openais-altman-says-ai-unlikely-to-lead-to-jobs-apocalypse))。",
+          "citations": [
+            {"label": "SiliconANGLE - CNN sues Perplexity alleging massive copyright infringement", "url": "https://siliconangle.com/2026/05/28/cnn-sues-perplexity-alleging-massive-copyright-infringement/"},
+            {"label": "Variety - CNN sues Perplexity alleging copyright infringement", "url": "https://variety.com/2026/biz/news/cnn-sues-perplexity-alleging-copyright-infringement-1236760987/"},
+            {"label": "TechTimes - AI regulation 2026 opens three fronts", "url": "https://www.techtimes.com/articles/317461/20260531/ai-regulation-2026-opens-three-fronts-cnn-sues-perplexity-openai-aligns-eu-rules.htm"},
+            {"label": "Cyprus Mail - OpenAI's Altman says AI unlikely to lead to jobs apocalypse", "url": "https://cyprus-mail.com/2026/05/31/openais-altman-says-ai-unlikely-to-lead-to-jobs-apocalypse"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Unsloth、CUDA 13.3と復活したApple Silicon llama.cppバイナリを搭載したv0.1.43-betaを出荷;日曜にPyPIで2026.5.9に更新",
+      "bullets": [
+        {
+          "body": "Unslothは日曜午前、5月26日火曜のv0.1.42-beta(API呼び出し対応)のドロップで残されたローカル・ファインチューニングの隙間を埋める2つのリリース成果物をプッシュした。コアの`unsloth` Pythonパッケージは本日5月31日にPyPI上で2026.5.9に上がり(5月26日の2026.5.8の後)、付属の`unsloth-zoo`ユーティリティ・パッケージも同日2026.5.5に上がった([PyPI上のunsloth](https://pypi.org/project/unsloth/)、[PyPI上のunsloth-zoo](https://pypi.org/project/unsloth-zoo/))。対応するUnsloth Studioタグv0.1.43-betaは、CUDA 13.3サポートとWindows向けのビルド済み`llama.cpp`バイナリを搭載し——CUDA 13.2でユーザーが報告していた「文字化け出力」問題を明示的に解消する——加えて、以前の退行でMacユーザーがソース・ビルドを強いられていたApple Silicon M1-M4のmacOS 14、15、26サポートをビルド済みバイナリで復活させた。Blackwell GPUサポートは、上流CUDA互換性の修正待ちで保留のままである。今週初頭(5月26日)のv0.1.42-betaの土台では、OpenAIおよびAnthropic互換のAPI呼び出し(自動プロンプト・キャッシングで50-90%のコスト削減)、vLLM、Ollama、llama-serverへの外部推論バックエンド接続、そしてチャット側での日本語・中国語・インド系言語の適切なトークナイゼーションがすでに追加されていた。累積効果は、Apple Siliconのラップトップ、CUDA 13.3下のコンシューマー向けNVIDIAカード、そして同じUIの背後にある外部APIプロバイダーにまたがる、単一のオープンソース・ファインチューニング・スタックである——Unslothが1回のリリース枠で出荷した中で最も広いハードウェア・カバレッジだ。付属のHugging Face学習ハブ記事は、平日ペースのrouter-only LoRAドキュメント更新を継続している。5月28日のv2026.5.8のリリース投稿では、TRL v0.16.0との差し替え互換性とKimi K3-Pro 218B MoEの移植もすでに出荷されていた([Hugging Face](https://huggingface.co/blog/unsloth-trl-v0-16-0-joint-selective-expert-checkpoint-costa-huang-rlhf-pipeline-drop-in-compatibility-may-28-2026))。",
+          "citations": [
+            {"label": "Unsloth on PyPI", "url": "https://pypi.org/project/unsloth/"},
+            {"label": "Unsloth-zoo on PyPI", "url": "https://pypi.org/project/unsloth-zoo/"},
+            {"label": "Hugging Face - Unsloth TRL v0.16.0 compatibility (May 28)", "url": "https://huggingface.co/blog/unsloth-trl-v0-16-0-joint-selective-expert-checkpoint-costa-huang-rlhf-pipeline-drop-in-compatibility-may-28-2026"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "ベイエリア6-7月カレンダー:Snowflake Summit 26のオンライン登録は本日締切、Summitは明日開幕;Microsoft Build、WWDC、Databricks、AI Engineer World's Fairが今後5週間に並ぶ",
+      "bullets": [
+        {
+          "body": "ベイエリアのカンファレンス枠は、明日6月1日月曜の午後5:00 PTに開幕する——Snowflake Summit 26のオンライン登録は本日5月31日日曜で締切となり、フルパスは$2,295、開幕基調講演はCEO Sridhar RamaswamyがAnthropic社長のDaniela Amodeiと並んで登壇する。6月1-4日月-木にMoscone Centerで開催され、観客は20,000名超の対面参加が見込まれる([Snowflake Summit 26](https://www.snowflake.com/en/summit/)、[Snowflake Summit 26 FAQ](https://www.snowflake.com/en/summit/faq/))。Microsoft Build 2026は6月2-3日火-水にFort Mason Center San Franciscoで開催され、Satya Nadellaの開幕基調講演に加えて、オープンソースMITライセンスでのリリースが予定されているWindows Agent Frameworkも発表される。オンライン配信は無料、対面パスは[セッション・カタログ](https://www.thurrott.com/microsoft/334704/microsofts-build-2026-session-catalog-is-now-live)経由で申し込める。Apple WWDC26は6月8-12日月-金に開催され、月曜6月8日午前10:00 PTの基調講演に加えて、抽選制のApple Park対面イベントが登録済み開発者向けに開かれる([Apple Developer WWDC26](https://developer.apple.com/wwdc26/))。AI Tinkerers SFは6月2日火曜に招待制のVIP Dinner: Harnessing Agentsを開催し、本番環境でエージェント・システムを出荷するエンジニアの厳選ゲスト・リストで進行する([AI Tinkerers SF](https://sf.aitinkerers.org/p/ai-tinkerers-vip-dinner-harnessing-agents))。さらに、ElevenLabs協賛のVoice Agents Science Fairが6月に別途予定されている([AI Tinkerers SFイベント・ページ](https://sf.aitinkerers.org/events))。Databricks Data + AI Summitは6月15-18日月-木にMoscone North、West、Southで開催され、800超のセッションを揃え、Databricks、Microsoft、OpenAI、NVIDIA、Anthropic、LangChainの登壇者が並ぶ([Databricks](https://www.databricks.com/dataaisummit))。AI Engineer World's FairはMoscone Westで6月29日-7月2日月-木に開催され、20超のトラックにわたって250超の登壇者、50超のワークショップ、公称6,000名超の参加が見込まれ、6月を7月初頭まで延長してこの波を締めくくる。ホテルのグループ料金は6月6日で締切となる(Parc 55はすでに完売)([AI Engineer World's Fair](https://www.ai.engineer/worldsfair/2026))。さらに先を見れば、GitHub UniverseがSF Fort Masonに10月28-29日に戻ってくる([GitHub Universe FAQ](https://githubuniverse.com/faq))。AWS re:Inventは11月30日-12月4日にLas Vegasで開催され、登録は6月16日に開始される([AWS re:Invent](https://aws.amazon.com/events/reinvent/))。",
+          "citations": [
+            {"label": "Snowflake Summit 26", "url": "https://www.snowflake.com/en/summit/"},
+            {"label": "Snowflake Summit 26 FAQ", "url": "https://www.snowflake.com/en/summit/faq/"},
+            {"label": "Microsoft Build session catalog (Thurrott)", "url": "https://www.thurrott.com/microsoft/334704/microsofts-build-2026-session-catalog-is-now-live"},
+            {"label": "Apple Developer WWDC26", "url": "https://developer.apple.com/wwdc26/"},
+            {"label": "AI Tinkerers SF VIP Dinner", "url": "https://sf.aitinkerers.org/p/ai-tinkerers-vip-dinner-harnessing-agents"},
+            {"label": "AI Tinkerers SF events", "url": "https://sf.aitinkerers.org/events"},
+            {"label": "Databricks Data + AI Summit", "url": "https://www.databricks.com/dataaisummit"},
+            {"label": "AI Engineer World's Fair 2026", "url": "https://www.ai.engineer/worldsfair/2026"},
+            {"label": "GitHub Universe FAQ", "url": "https://githubuniverse.com/faq"},
+            {"label": "AWS re:Invent 2026", "url": "https://aws.amazon.com/events/reinvent/"}
+          ]
+        }
+      ]
+    }
+  ]
+}

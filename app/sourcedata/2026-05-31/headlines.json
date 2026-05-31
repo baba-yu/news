@@ -1,0 +1,58 @@
+{
+  "date": "2026-05-31",
+  "technical": [
+    {
+      "lead": "Anthropic publishes Claude containment stack: gVisor, Seatbelt/Bubblewrap, per-OS VMs",
+      "body": "Anthropic's engineering team published How we contain Claude across products on Saturday May 30, walking through the agent-isolation stack converged across every product surface: gVisor containers with seccomp syscall filtering on isolated infrastructure for Claude.ai (ephemeral per-session filesystems), OS-native process sandboxes for Claude Code (Seatbelt on macOS, Bubblewrap on Linux) with an 84% reduction in permission prompts after delegating command approvals to a model-based classifier, and full guest VMs for Claude Cowork on Apple Virtualization (macOS) and Hyper-V HCS (Windows) with host-held credentials and read-only / read-write / read-write-no-delete mount modes, per [Anthropic Engineering](https://www.anthropic.com/engineering/how-we-contain-claude). The post argues mature hypervisors and container runtimes outperform the custom security wrappers Anthropic had previously built around them, and [Simon Willison](https://simonwillison.net/2026/May/30/how-we-contain-claude/) amplified the publication the same weekend by shipping a Datasette Lite refactor from Web Workers to service workers under the new sandboxed Claude Code for web posture.",
+      "citations": [
+        {"label": "Anthropic Engineering - How we contain Claude across products", "url": "https://www.anthropic.com/engineering/how-we-contain-claude"},
+        {"label": "Simon Willison - How we contain Claude across products", "url": "https://simonwillison.net/2026/May/30/how-we-contain-claude/"}
+      ]
+    },
+    {
+      "lead": "Snowflake heads into Summit 26 on +44% rip after $6B AWS + Natoma MCP deal",
+      "body": "Snowflake stacked three pre-Summit catalysts inside the May 27-29 window heading into Monday June 1's Moscone keynote: a $6 billion five-year AWS Graviton commitment that is 2.4x the 2023 deal per the [Snowflake-AWS press release](https://www.snowflake.com/en/news/press-releases/snowflake-expands-aws-collaboration-with-6b-commitment-to-accelerate-enterprise-agentic-ai-adoption/), a definitive agreement to acquire Natoma — an enterprise Model Context Protocol gateway that enforces identity, policy, and audit at the individual MCP tool-call level — per [CIO Dive](https://www.ciodive.com/news/snowflake-targets-ai-agent-adoption-aws/821393/), and a Q1 FY27 earnings beat (adjusted EPS $0.39 vs $0.32 consensus, +33% YoY revenue) with raised 31% full-year product-revenue guidance per [SiliconANGLE](https://siliconangle.com/2026/05/27/snowflakes-stock-surges-hours-solid-earnings-beat-multibillion-dollar-aws-cloud-deal/). SNOW gapped 36% Thursday and added 6.88% Friday to close near $255 — the largest two-day rally in the stock's public history — and CEO Sridhar Ramaswamy shares the Monday 5:00 PM PT opening stage with Anthropic President Daniela Amodei in front of a projected 20,000+ in-person attendees.",
+      "citations": [
+        {"label": "Snowflake - $6B AWS commitment press release", "url": "https://www.snowflake.com/en/news/press-releases/snowflake-expands-aws-collaboration-with-6b-commitment-to-accelerate-enterprise-agentic-ai-adoption/"},
+        {"label": "CIO Dive - Snowflake targets AI agent adoption with AWS deal, Natoma acquisition", "url": "https://www.ciodive.com/news/snowflake-targets-ai-agent-adoption-aws/821393/"},
+        {"label": "SiliconANGLE - Snowflake stock surges on earnings beat and AWS megadeal", "url": "https://siliconangle.com/2026/05/27/snowflakes-stock-surges-hours-solid-earnings-beat-multibillion-dollar-aws-cloud-deal/"}
+      ]
+    },
+    {
+      "lead": "CNN files first-by-TV copyright suit against Perplexity; OpenAI maps to EU Aug-2",
+      "body": "Two state-changes inside 72 hours have crystallized the three-front regulatory pressure on AI search vendors. Thursday May 28, CNN filed a 54-page copyright complaint against Perplexity AI in the US District Court for the Southern District of New York, alleging the AI search company scraped and redistributed more than 17,000 CNN stories, photos, and videos after a 2025 licensing deal fell through — CNN's first AI copyright action and the first by any TV network, pushing Perplexity to nine active publisher suits per [SiliconANGLE](https://siliconangle.com/2026/05/28/cnn-sues-perplexity-alleging-massive-copyright-infringement/) and [Variety](https://variety.com/2026/biz/news/cnn-sues-perplexity-alleging-copyright-infringement-1236760987/). The same day, OpenAI published its Frontier Governance Framework mapping internal Preparedness Framework controls to the EU AI Act's Code of Practice for General-Purpose AI ahead of the August 2, 2026 full-enforceability deadline, and a [TechTimes analysis](https://www.techtimes.com/articles/317461/20260531/ai-regulation-2026-opens-three-fronts-cnn-sues-perplexity-openai-aligns-eu-rules.htm) frames the three fronts — litigation-driven copyright costs, DOJ-led federalism preemption against state AI laws, and EU-led disclosure infrastructure — as producing non-transferable obligations vendors cannot resolve under a single compliance strategy.",
+      "citations": [
+        {"label": "SiliconANGLE - CNN sues Perplexity alleging massive copyright infringement", "url": "https://siliconangle.com/2026/05/28/cnn-sues-perplexity-alleging-massive-copyright-infringement/"},
+        {"label": "Variety - CNN sues Perplexity alleging copyright infringement", "url": "https://variety.com/2026/biz/news/cnn-sues-perplexity-alleging-copyright-infringement-1236760987/"},
+        {"label": "TechTimes - AI regulation 2026 opens three fronts", "url": "https://www.techtimes.com/articles/317461/20260531/ai-regulation-2026-opens-three-fronts-cnn-sues-perplexity-openai-aligns-eu-rules.htm"}
+      ]
+    },
+    {
+      "lead": "Unsloth v0.1.43-beta lands CUDA 13.3 + restored Apple Silicon llama.cpp binaries",
+      "body": "Unsloth pushed two Sunday-morning release artifacts that close the local-fine-tuning gap left by the v0.1.42-beta API-calling drop on Tuesday May 26. The core unsloth Python package jumped to 2026.5.9 on PyPI today May 31 with the companion unsloth-zoo utility package at 2026.5.5, per [unsloth on PyPI](https://pypi.org/project/unsloth/) and [unsloth-zoo on PyPI](https://pypi.org/project/unsloth-zoo/). The matching Unsloth Studio tag v0.1.43-beta lands CUDA 13.3 support with prebuilt llama.cpp binaries for Windows — explicitly resolving the gibberish-output regression operators were hitting under CUDA 13.2 — and restores Apple Silicon M1-M4 support for macOS 14, 15, and 26 with prebuilt binaries after a previous regression forced Mac users onto source builds; Blackwell GPU support remains held pending an upstream CUDA compatibility fix. The cumulative effect is a single open-source fine-tuning stack that now spans Apple Silicon laptops, consumer NVIDIA cards under CUDA 13.3, and external API providers behind the same UI — the broadest hardware coverage Unsloth has shipped in one release window, with the May 28 [Hugging Face](https://huggingface.co/blog/unsloth-trl-v0-16-0-joint-selective-expert-checkpoint-costa-huang-rlhf-pipeline-drop-in-compatibility-may-28-2026) v2026.5.8 post already shipping TRL v0.16.0 compatibility and the Kimi K3-Pro 218B MoE port.",
+      "citations": [
+        {"label": "Unsloth on PyPI", "url": "https://pypi.org/project/unsloth/"},
+        {"label": "Unsloth-zoo on PyPI", "url": "https://pypi.org/project/unsloth-zoo/"},
+        {"label": "Hugging Face - Unsloth TRL v0.16.0 compatibility (May 28)", "url": "https://huggingface.co/blog/unsloth-trl-v0-16-0-joint-selective-expert-checkpoint-costa-huang-rlhf-pipeline-drop-in-compatibility-may-28-2026"}
+      ]
+    },
+    {
+      "lead": "Snowflake Summit registration closes today; Bay Area June calendar opens tomorrow",
+      "body": "The Bay Area conference window opens at 5:00 PM PT tomorrow Monday June 1 — online registration for Snowflake Summit 26 closes today Sunday May 31, with full-conference passes at $2,295 and the opening keynote pairing CEO Sridhar Ramaswamy with Anthropic President Daniela Amodei across Monday-Thursday June 1-4 at Moscone Center, per [Snowflake Summit 26](https://www.snowflake.com/en/summit/). Microsoft Build 2026 follows Tuesday-Wednesday June 2-3 at Fort Mason Center with Satya Nadella's keynote and the Windows Agent Framework slated for open-source MIT-licensed release per the [session catalog](https://www.thurrott.com/microsoft/334704/microsofts-build-2026-session-catalog-is-now-live). Apple WWDC26 runs Monday-Friday June 8-12 with the keynote Monday June 8 at 10:00 AM PT per [Apple Developer WWDC26](https://developer.apple.com/wwdc26/); Databricks Data + AI Summit runs June 15-18 across Moscone with 800+ sessions per [Databricks](https://www.databricks.com/dataaisummit); and AI Engineer World's Fair caps the wave Moscone West June 29-July 2 with 250+ speakers across 20+ tracks and 6,000+ stated attendance, hotel group rates expiring June 6 per [AI Engineer World's Fair](https://www.ai.engineer/worldsfair/2026).",
+      "citations": [
+        {"label": "Snowflake Summit 26", "url": "https://www.snowflake.com/en/summit/"},
+        {"label": "Microsoft Build session catalog (Thurrott)", "url": "https://www.thurrott.com/microsoft/334704/microsofts-build-2026-session-catalog-is-now-live"},
+        {"label": "Apple Developer WWDC26", "url": "https://developer.apple.com/wwdc26/"},
+        {"label": "Databricks Data + AI Summit", "url": "https://www.databricks.com/dataaisummit"},
+        {"label": "AI Engineer World's Fair 2026", "url": "https://www.ai.engineer/worldsfair/2026"}
+      ]
+    }
+  ],
+  "plain": [
+    "Anthropic shows how it locks down its AI tools",
+    "Snowflake stock jumps 44% before big conference",
+    "TV network CNN sues an AI search company",
+    "Open-source training tool fixes Mac and Windows",
+    "Five big tech conferences start this week"
+  ]
+}
