@@ -1,0 +1,14 @@
+{
+  "id": "prediction.d3fe274c6e51bd9b",
+  "scope_hint": "cross",
+  "title": "BadHost CVE-2026-48710 CVSS score gets upgraded above 6.5 by Q4 2026",
+  "body": "The CVSS 6.5 base score assigned to BadHost (CVE-2026-48710), the Starlette host-header injection flaw, gets revised upward to high severity by Q4 2026, with either NVD re-scoring the record or downstream consumers publishing higher vendor-specific advisories. The disclosing researchers at X41 D-Sec and OSTIF have already gone on record that 6.5 understates the downstream impact: a single-character Host-header primitive defeats path-based authentication middleware and chains to authentication bypass, server-side request forgery, and in some cases remote code execution. The flaw sits under FastAPI's routing core at roughly 325 million weekly downloads and reaches the local-LLM serving stack — vLLM, LiteLLM, and MCP servers whose spec mandates unauthenticated OAuth discovery endpoints. That combination of mass deployment and clean escalation is exactly the profile that drives post-disclosure score inflation as exploitation paths get demonstrated in the wild and vendors who ship affected gateways issue their own advisories above the conservative initial rating.",
+  "reasoning": {
+    "because": "X41 and OSTIF publicly argue the initial CVSS 6.5 understates BadHost's RCE/SSRF escalation",
+    "given": "Starlette underpins FastAPI/vLLM/LiteLLM/MCP at ~325M weekly downloads with auth-bypass reach",
+    "so_that": "NVD re-scores CVE-2026-48710 to high severity or downstream vendors publish advisories above 6.5",
+    "landing": "by Q4 2026; NVD record edit or >=1 vendor advisory rating the flaw high",
+    "plain_language": "A bug in code that runs millions of AI servers got a low danger score, but experts say it is worse, so it will rise."
+  },
+  "summary": "X41 and OSTIF say BadHost's initial CVSS 6.5 understates a flaw chaining to auth bypass, SSRF, and RCE across Starlette, vLLM, LiteLLM, and MCP servers. Expect it revised to high severity by Q4 2026, via an NVD re-score or vendor advisories rating it above 6.5."
+}

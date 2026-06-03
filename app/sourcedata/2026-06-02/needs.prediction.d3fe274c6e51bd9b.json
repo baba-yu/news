@@ -1,0 +1,58 @@
+[
+  {
+    "actor": "Disclosing vulnerability researcher at the coordinating advisory team (X41 D-Sec / OSTIF) who argues the initial 6.5 understates BadHost",
+    "job": "Publish a follow-up technical write-up demonstrating the Host-header primitive chaining to auth bypass, SSRF, and RCE, with a proposed high-severity CVSS vector.",
+    "outcome": "Public advisory revision or detailed escalation write-up putting BadHost's real-world impact at high severity, giving NVD and vendors a citable basis to re-score above 6.5.",
+    "motivation": "The researchers are already on record that 6.5 understates downstream impact; a conservative score blunts the urgency their disclosure was meant to create.",
+    "task": {
+      "who": "X41 D-Sec / OSTIF advisory and disclosure team",
+      "what": "Publish escalation write-up with proposed high CVSS vector",
+      "where": "Coordinated disclosure advisory and project security channels",
+      "when": "June 2026 through Q3 2026 post-disclosure window",
+      "why": "Initial 6.5 understates the auth-bypass-to-RCE chain",
+      "how": "CVSS v3.1 vector rescore, PoC chain, advisory update"
+    }
+  },
+  {
+    "actor": "NVD CVE analyst at NIST owning re-scoring of records when new escalation evidence or downstream impact data arrives",
+    "job": "Re-evaluate CVE-2026-48710's base metrics against the demonstrated auth-bypass/SSRF/RCE chains and the Starlette mass-deployment reach, and edit the NVD record.",
+    "outcome": "Edited NVD record raising CVE-2026-48710's CVSS base score above 6.5 into the high band, one of the two landing paths the prediction names.",
+    "motivation": "Researcher pushback plus demonstrated exploitation on a ~325M-weekly-download dependency is exactly the profile that forces NVD to revise a conservative initial score.",
+    "task": {
+      "who": "NIST NVD analyst and CVSS review staff",
+      "what": "Re-score CVE-2026-48710 base metrics upward",
+      "where": "NVD vulnerability record and CVSS scoring workflow",
+      "when": "H2 2026, as escalation evidence accumulates",
+      "why": "New impact evidence invalidates the conservative initial 6.5",
+      "how": "CVSS v3.1 recalculation, analyst review, NVD record edit"
+    }
+  },
+  {
+    "actor": "Product security incident response lead (PSIRT) at a vendor shipping an affected gateway built on Starlette/FastAPI, vLLM, LiteLLM, or an MCP server",
+    "job": "Assess BadHost's blast radius in the vendor's own gateway, where the Host-header primitive defeats path-based auth, and draft a vendor-specific advisory with an independent severity rating.",
+    "outcome": "Vendor advisory rating CVE-2026-48710 high for that product, satisfying the prediction's second landing path (a downstream advisory above 6.5).",
+    "motivation": "A vendor whose product is exploitable cannot hide behind the upstream 6.5; customer risk and disclosure duty force an honest, product-specific high rating.",
+    "task": {
+      "who": "Vendor PSIRT and security-engineering team",
+      "what": "Draft product advisory with independent high severity rating",
+      "where": "Vendor security advisory and CVE coordination process",
+      "when": "Q3 to Q4 2026 advisory drafting window",
+      "why": "Host-header primitive defeats the product's path-based auth",
+      "how": "Internal CVSS scoring, exploitability assessment, advisory publication"
+    }
+  },
+  {
+    "actor": "Offensive-security / exploit-PoC researcher demonstrating in-the-wild escalation from the BadHost Host-header primitive on the local-LLM serving stack",
+    "job": "Build and publish a working proof-of-concept escalating the single-character Host-header injection to authentication bypass, SSRF, or RCE against vLLM/LiteLLM/MCP discovery endpoints.",
+    "outcome": "Public PoC or write-up proving the escalation chain in practice, the demonstrated-exploitation trigger the prediction names as what drives post-disclosure score inflation.",
+    "motivation": "Demonstrated exploitation on mass-deployed AI infrastructure earns research credit and is the concrete evidence that pressures NVD and vendors to revise the score.",
+    "task": {
+      "who": "Offensive-security researcher or red-team",
+      "what": "Publish PoC chaining Host-header injection to RCE/SSRF",
+      "where": "Security blog, conference talk, or PoC repository",
+      "when": "June through Q4 2026 as exploitation matures",
+      "why": "Demonstrated exploitation forces conservative scores upward",
+      "how": "Exploit development against vLLM/LiteLLM/MCP unauthenticated endpoints"
+    }
+  }
+]
