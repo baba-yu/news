@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-03",
+  "sections": [
+    {
+      "category": "Unsloth Studioの6月版ビルドが、ローカルのファインチューニングUIをMCPに接続したエージェントの作業台に変える",
+      "bullets": [
+        {
+          "body": "Unslothは今週、新版のStudioビルドを公開し、ローカルのファインチューニングUIを学習とチャットの域から大きく押し進めて、MCPに接続したエージェントの領域へと踏み込んだ。目玉となる追加機能は組み込みのModel Context Protocolサポートである。StudioはContext7、Exa、Hugging FaceのMCPサーバーを既定で有効にして同梱し、Gemma 4やQwen3.6といったローカルで動かすモデルが1つのチャットスレッド内でこれらのツールを自律的に呼び出せるようにし、さらにOAuthまたはトークン認証と自動ツール検出を用いて任意のカスタムMCPサーバーをURLで追加する流れも用意した（[Unsloth Documentation - How to Use MCP Servers with Local LLMs](https://unsloth.ai/docs/basics/mcp)による）。同じビルドはData Recipesも追加した。これはNVIDIA Nemo Data Designerを基盤とするグラフベースのデータセット作成エディタで、PDFやCSVを取り込み、シードデータと生成ブロックを接続し、サンプル出力をプレビューし、Studioのファインチューニングへ直接流れ込む合成データセットの生成を一通り実行できる（[Unsloth Documentation - Unsloth Data Recipes](https://unsloth.ai/docs/new/studio/data-recipe)による）。MCP、Projects、Canvas、刷新されたチャットUIの作業とあわせて、このリリースは、前週のCUDA 13.3のWindowsバイナリとApple Siliconでのllama.cpp再有効化から続くUnslothのハードウェア対応拡大を、Linux上のNVIDIA BlackwellとB300にまで広げ、256Kトークンの文脈長を持つGemma 4 12Bを、民生クラスのメモリで実行・学習可能な対象として組み込んだ。通底するのは、小型のオープンモデルをQLoRAでファインチューニングするのに使う同じツールが、いまや、ツールを使うローカルエージェントのクライアントと合成データ生成基盤を兼ね、開発者が既に所有しているハードウェア上で、ファインチューニングとエージェントの出荷の隔たりを狭めているという点だ。",
+          "citations": [
+            {"label": "Unsloth Documentation - How to Use MCP Servers with Local LLMs", "url": "https://unsloth.ai/docs/basics/mcp"},
+            {"label": "Unsloth Documentation - Unsloth Data Recipes", "url": "https://unsloth.ai/docs/new/studio/data-recipe"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Snowflake SummitのビルダーキーノートがIceberg v3をGAで提供し、Cortex Sense、Datastream、Adaptive Computeをエージェント型データスタックとして位置づける",
+      "bullets": [
+        {
+          "body": "Snowflake Summit 26のビルダーキーノートは、Mosconeで太平洋時間6月3日水曜午前9時の枠に行われ、エージェント実演の下にある実体は、エージェント型企業という訴えが成り立つかどうかを左右する4つのインフラ上の賭けである。この催しで実際に一般提供に至った唯一の成果物が、Polarisの双方向書き込みを備えたIceberg v3であり、SparkやTrinoといった外部エンジンが、統制を適用したオープン標準を通じて、データの重複もダウンタイムを伴う移行もなしに、Snowflakeが管理するテーブルへ直接書き込めるようにするもので、早期採用企業としてAffirmとSamsung Adsの名前が挙げられた。残る3つはプレビュー段階のままだ。Cortex Senseは、Horizon Contextという統制層の上に位置し、エージェントが利用する、スキルとセマンティクスの共有された定義を自動構築する、メタデータからオントロジーへの層である（SnowflakeはMCPと組み合わせたClaude Codeより3.5倍高い性能だと主張するが、これは本番環境では未実証の数字だ）。Snowflake Datastreamは、既存のKafkaプロデューサーをコード変更なしで受け入れる、フルマネージドでKafka互換のストリーミングサービスであり、Adaptive Computeは、手動チューニングをなくすためにウェアハウスをリアルタイムで自動的にサイズ調整する（[Futurum - Snowflake Summit 2026: four infrastructure bets that determine whether the agentic enterprise delivers](https://futurumgroup.com/insights/snowflake-summit-2026-four-infrastructure-bets-that-determine-whether-the-agentic-enterprise-delivers/)による）。基調講演はスライドではなく、ライブの顧客エージェントに話の根拠を置いた。BlackRockはHorizon Contextを用いて自社のエージェントを企業の真実の共有された単一の定義に基づいて動かす様子を実演し、Sanofiは医師訪問に向けて営業担当者をライブデータから準備させる「Concierge」というエージェントを示した。同じ週にSanofiは、AIを活用した創薬の取り組みの基盤としてSnowflakeを採用したことを明らかにした（[BusinessWire - Sanofi Chooses Snowflake to Accelerate its AI-Powered Drug Development](https://www.businesswire.com/news/home/20260602582503/en/Sanofi-Chooses-Snowflake-to-Accelerate-its-AI-Powered-Drug-Development)による）。",
+          "citations": [
+            {"label": "Futurum - Snowflake Summit 2026: four infrastructure bets that determine whether the agentic enterprise delivers", "url": "https://futurumgroup.com/insights/snowflake-summit-2026-four-infrastructure-bets-that-determine-whether-the-agentic-enterprise-delivers/"},
+            {"label": "BusinessWire - Sanofi Chooses Snowflake to Accelerate its AI-Powered Drug Development", "url": "https://www.businesswire.com/news/home/20260602582503/en/Sanofi-Chooses-Snowflake-to-Accelerate-its-AI-Powered-Drug-Development"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Broadcomの第2四半期決算が、カスタムAIアクセラレータ収益を$10.8Bとし、第3四半期のAIを約$16Bと見通す",
+      "bullets": [
+        {
+          "body": "Broadcomは6月3日の取引終了後に会計年度2026年第2四半期の決算を発表し、AIシリコンの項目がすべてを物語る内容だった。連結収益は過去最高の$22.2Bで前年同期比48%増だったが、際立つのはAI半導体収益の$10.8B、143%増であり、カスタムAIアクセラレータ（BroadcomのXPU）とAIネットワーキングが牽引した（[Grafa - Broadcom reports Q2 earnings: AI chip revenue jumps 143%](https://grafa.com/en/news/united-states/broadcom-q2-fy26-earnings-ai-growth)による）。説明会でCEOのHock Tan氏は、第3四半期のAI半導体収益を前年同期比200%超の成長となる約$16Bと見通し、AI半導体の受注がこの四半期に$30Bを超え、出荷した$10.8Bを上回ったことを開示し、6社の中核的なカスタムシリコン顧客へXPUおよびそれを実現する部品を供給するというBroadcomの立場をあらためて述べた。第3四半期の総収益は約$29.4B、84%増と見通される。VMwareに紐付いたインフラソフトウェア部門は$7.2B、9%増を積み上げ、第3四半期は約$8.9Bと見通される。フリーキャッシュフローは過去最高の$10.3B、非GAAPのEPSは$2.44となり、株価は時間外取引で約2.6%上昇して約$494となった（[Investing.com - Broadcom Q2 2026 earnings beat, stock rises (earnings-call transcript)](https://ca.investing.com/news/stock-market-news/earnings-call-transcript-broadcom-q2-2026-earnings-beat-stock-rises-93CH-4674808)による）。読み取れるのは、汎用GPUに対するカスタムASICという代替が、いまやGPUの既存大手自身の成長率より速く積み上がっており、現在の出荷量の何倍も前もって積んだ受注残を抱えているということだ。",
+          "citations": [
+            {"label": "Grafa - Broadcom reports Q2 earnings: AI chip revenue jumps 143%", "url": "https://grafa.com/en/news/united-states/broadcom-q2-fy26-earnings-ai-growth"},
+            {"label": "Investing.com - Broadcom Q2 2026 earnings beat, stock rises (earnings-call transcript)", "url": "https://ca.investing.com/news/stock-market-news/earnings-call-transcript-broadcom-q2-2026-earnings-beat-stock-rises-93CH-4674808"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "ベイエリアの6月〜7月イベント：Snowflake SummitとMicrosoft Buildが本日閉幕、続いてWWDC、Databricks、AI Engineer World's Fair",
+      "bullets": [
+        {
+          "body": "本日はサンフランシスコの密集したカンファレンス期間の後半にあたる。Snowflake Summit 26はMoscone Centerで6月1〜4日の月曜から木曜にかけて開催され、ライブのエージェント実演を含むビルダーキーノートが今朝（太平洋時間6月3日水曜午前9時）に行われ、展示フロアは木曜まで開いている（[Moscone Center - Snowflake Summit 2026](https://www.moscone.com/events/snowflake-summit-2026)による）。Microsoft Build 2026はFort Mason Centerで本日最終日を迎え（6月2〜3日火曜から水曜）、水曜のプログラムはGitHub、Copilot、Visual Studioのライブのエージェントセッションを中心とする。AI Tinkerers SFは、WorkOS協賛のAdvanced MCP ShowcaseとElevenLabs協賛のVoice Agents Science Fairを6月のカレンダーに引き続き掲げている（[AI Tinkerers SF - events](https://sf.aitinkerers.org/)のハブによる）。Apple WWDC26はApple Parkで6月8〜12日の月曜から金曜にかけて開催され、基調講演とPlatforms State of the Unionは6月8日月曜（基調講演は太平洋時間午前10時）に行われる（[Apple Developer - WWDC26](https://developer.apple.com/wwdc26/)による）。Databricks Data + AI SummitはMoscone一帯で6月15〜18日の月曜から木曜にかけて開催され、データエンジニアリング、統制、分析、アプリケーション、エージェントにまたがる800以上のセッションが組まれる（[Moscone Center - Databricks Data + AI Summit 2026](https://www.moscone.com/events/databricks-data-ai-summit-2026)による）。AI Engineer World's FairはMoscone Westで開催され、新規エンジニア向けオリエンテーションとバッジ受け取りは6月28日日曜（Day 0）、本編は6月29日月曜から7月2日木曜まで行われ、29のトラック、300名超の登壇者、6,000名超のAIエンジニア・創業者・AI担当VPが集う（[AI Engineer World's Fair 2026](https://www.ai.engineer/worldsfair/2026)のサイトによる）。さらに先には、GitHub UniverseがFort Masonへ10月28〜29日に戻り、AWS re:Inventは11月30日〜12月4日にラスベガスで開催され（re:Inforceが統合された）、登録は6月16日に開始される。",
+          "citations": [
+            {"label": "Moscone Center - Snowflake Summit 2026", "url": "https://www.moscone.com/events/snowflake-summit-2026"},
+            {"label": "AI Tinkerers SF - events", "url": "https://sf.aitinkerers.org/"},
+            {"label": "Apple Developer - WWDC26", "url": "https://developer.apple.com/wwdc26/"},
+            {"label": "Moscone Center - Databricks Data + AI Summit 2026", "url": "https://www.moscone.com/events/databricks-data-ai-summit-2026"},
+            {"label": "AI Engineer World's Fair 2026", "url": "https://www.ai.engineer/worldsfair/2026"}
+          ]
+        }
+      ]
+    }
+  ]
+}

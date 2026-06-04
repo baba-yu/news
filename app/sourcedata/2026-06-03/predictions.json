@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-03",
+  "predictions": [
+    {
+      "id": "prediction.917403b0cad1440a",
+      "scope_hint": "business",
+      "title": "Custom AI-accelerator XPU silicon clears $20B-per-quarter run-rate by Q4 2026",
+      "body": "Custom AI-accelerator silicon — the hyperscaler-designed XPUs and ASICs that Broadcom and its peers fabricate as an alternative to merchant GPUs — is on track to clear a roughly $20 billion quarterly revenue run-rate at Broadcom alone by the close of calendar 2026, with a parallel disclosure that the count of named core custom-silicon customers moves past six. The Broadcom fiscal Q2 print is the trigger: AI-semiconductor revenue of $10.8 billion grew 143% year over year, Q3 was guided to approximately $16 billion at over 200% growth, and bookings for AI semiconductors topped $30 billion in a single quarter against the $10.8 billion actually shipped. A backlog that pre-commits nearly three times current shipments is not a demand pull that decays gracefully; it is capacity that has already been sold, so the shipped-revenue line tends to climb toward the booked line rather than away from it. If Q3 lands near $16 billion as guided, the sequential slope plus the disclosed backlog puts the following quarter within reach of the $20 billion mark. The same dynamic pressures the customer roster: six core XPU customers were enough to book $30 billion in a quarter, and the economics of a single hyperscaler custom-silicon program — amortizing design cost against captive internal inference and training demand — are now visibly favorable enough that additional named programs graduating from development to volume is the path of least resistance. The forward state to watch is therefore both a revenue threshold and a roster expansion, either of which confirms that the custom-ASIC track is no longer a niche hedge against GPU allocation but a structurally compounding second supply line for accelerator compute.",
+      "reasoning": {
+        "because": "Broadcom Q2 AI-semi revenue hit $10.8B (+143% YoY), Q3 guided ~$16B, >$30B booked vs $10.8B shipped",
+        "given": "A backlog pre-committing ~3x shipments is sold capacity, so shipped revenue climbs toward booked",
+        "so_that": "Custom XPU/ASIC silicon clears a ~$20B/quarter run-rate at one supplier and the core-customer count passes six",
+        "landing": "by Q4 2026; a vendor AI-semi quarter near $20B or a 7th core XPU customer",
+        "plain_language": "Companies designing their own AI chips already ordered about three times what they bought last quarter, so those chips will soon sell far more."
+      },
+      "summary": "Broadcom's fiscal Q2 put custom AI-accelerator (XPU) revenue at $10.8B, up 143%, with Q3 guided near $16B and over $30B booked against $10.8B shipped. That sold-out backlog pushes shipped revenue toward a roughly $20B quarterly run-rate by Q4 2026, likely past today's six named core XPU customers."
+    },
+    {
+      "id": "prediction.467b2bda02de97b5",
+      "scope_hint": "tech",
+      "title": "Local fine-tune-to-agent stack ships as a managed hyperscaler service by H2 2026",
+      "body": "Unsloth's June Studio build collapsed three previously separate jobs into one local workbench: it now QLoRAs a small open model, runs that model as a tool-using agent through built-in Model Context Protocol support (Context7, Exa, and Hugging Face servers on by default, plus any custom MCP server added by URL with OAuth and automatic tool discovery), and builds the training data itself through Data Recipes, a graph-based synthetic-dataset factory powered by NVIDIA Nemo Data Designer that feeds straight back into a fine-tune. With Gemma 4 12B at a 256K-token context runnable and trainable on consumer-class memory and coverage extended to Blackwell and B300, the entire fine-tune to MCP-agent to synthetic-data loop now closes on hardware a developer already owns. The prediction is that this on-device fine-tune-to-agent pattern becomes attractive enough that a hyperscaler or managed-platform vendor ships a hosted equivalent of the same closed loop by H2 2026: a single managed surface that fine-tunes a small open model, wires it to a curated MCP tool catalog, and generates its own synthetic training data, marketed explicitly as a fine-tune-to-deployed-agent pipeline rather than three disconnected products. The structural pull is that the local stack now demonstrates the workflow end to end, so the managed offering's job is convenience and scale, not invention. Expect the signal to surface as a launch or preview from a major cloud's AI platform or an MLOps vendor that names all three stages in one service, ships a default MCP server catalog the fine-tuned model can call, and includes a managed synthetic-data generator in the same console.",
+      "reasoning": {
+        "because": "Unsloth Studio's June build fused fine-tuning, an MCP agent, and a synthetic-data factory",
+        "given": "That fine-tune to MCP-agent to synthetic-data loop now runs on a developer's own GPU",
+        "so_that": "A hyperscaler ships a managed version of the same closed loop, on its own inference and dataset services",
+        "landing": "by H2 2026; a managed service wiring fine-tune to MCP agent to synthetic data",
+        "plain_language": "Unsloth now turns one small AI model into a trainer, a tool-using agent, and a data factory on your PC, so a cloud copies it."
+      },
+      "summary": "Unsloth's June Studio build fused local fine-tuning with an MCP tool-using agent and an NVIDIA Nemo synthetic-dataset factory in one on-device workbench. Because that fine-tune-to-agent loop now runs on hardware a developer already owns, expect a hyperscaler to ship a managed equivalent by H2 2026."
+    },
+    {
+      "id": "prediction.b1c9df26397a712a",
+      "scope_hint": "cross",
+      "title": "Governed agent-ontology layer hardens into the enterprise-agent moat by Q4 2026",
+      "body": "The governed semantic/ontology layer that sits between raw warehouse data and the agents querying it is becoming the contested center of enterprise AI, and by Q4 2026 a second major data platform will ship a directly comparable governed agent-context surface, confirming the category rather than any single vendor. The Snowflake Summit Builder Keynote made the shape explicit: Cortex Sense auto-builds a metadata-to-ontology layer on top of the Horizon Context governance layer so agents consume one shared definition of skills and semantics, demonstrated with BlackRock running its agents off a single Horizon Context definition of enterprise truth and Sanofi's Concierge agent prepping reps off live data. The reason this is a moat and not a feature is that an agent is only as trustworthy as the semantic and governance layer it reads from; whoever owns that layer owns where enterprise agents run, regardless of which model sits on top. The same keynote pushed open table formats toward table stakes by taking Iceberg v3 with Polaris bi-directional writes to GA, letting external engines like Spark and Trino write into governed tables with no duplication, which removes lock-in as the differentiator and forces the fight up to the governance-and-ontology layer. Databricks Data + AI Summit on June 15-18, with dedicated governance and agent tracks, is the most likely near-term venue for a parallel Unity-Catalog-anchored agent-context/ontology announcement, and additional pressure should come from at least one more platform or an open-standard proposal extending a catalog into an agent-consumable semantic layer before year end.",
+      "reasoning": {
+        "because": "Snowflake shipped Cortex Sense ontology on its Horizon Context governance layer, run by live agents",
+        "given": "An agent trusts only the governed layer it reads, so that layer decides where enterprise agents run",
+        "so_that": "A second major data platform ships a comparable governed agent-context/ontology layer, making the category the moat",
+        "landing": "by Q4 2026; Databricks Data+AI Summit Jun 15-18 the likely first move",
+        "plain_language": "Whoever owns the trusted, governed map of company data controls where AI agents run, so rival data clouds race to build that map too."
+      },
+      "summary": "The governed semantic layer agents read from is becoming the enterprise-AI moat: whoever owns the trusted definition of company data owns where agents run, not the model. After Snowflake shipped Cortex Sense plus Iceberg v3 bi-directional writes, expect a rival to ship a comparable layer by Q4 2026."
+    }
+  ]
+}
