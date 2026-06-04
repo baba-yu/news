@@ -1,0 +1,67 @@
+{
+  "date": "2026-06-04",
+  "sections": [
+    {
+      "category": "Microsoft launches Scout, an always-on personal work agent built on OpenClaw and wired into Microsoft 365",
+      "bullets": [
+        {
+          "body": "Microsoft used its Build keynote this week to introduce Microsoft Scout, an always-on personal agent that the company frames as its first \"Autopilot\" - a new class of agent that runs continuously, holds its own identity, and acts on the user's behalf rather than waiting for a prompt in a sidebar. Scout works across cloud, desktop, and web and plugs directly into Teams, Outlook, OneDrive, and SharePoint, reaching the chats, email, calendar, and contacts that make up a workday so it can read threads, pull data, draft documents, schedule meetings, and chase tasks across those apps without the user switching contexts, per the [Microsoft 365 Blog - Introducing Microsoft Scout: Your always-on personal agent](https://www.microsoft.com/en-us/microsoft-365/blog/2026/06/02/introducing-microsoft-scout-your-always-on-personal-agent/). The substance for this project's coverage is what Scout is built on: it is powered by OpenClaw, the open-source local-agent platform, which Microsoft has wrapped in its own enterprise controls - every Scout agent runs under a governed Microsoft Entra identity rather than a shared service account, with scoped credentials, audit trails, a continuous policy-conformance check, and Microsoft Purview data-protection enforcement applied before data leaves, and a Work IQ layer that carries context forward by learning how the user works and what needs to happen next. Availability is deliberately narrow at launch: an early desktop build that Microsoft employees have been running internally is now extended to a select set of customers in private preview through the Frontier early-access program, gated behind Frontier enrollment, Intune policy configuration, an opt-in attestation, and a GitHub Copilot license, with a broader waitlisted preview expected later in 2026, per [Thurrott - Build 2026: Microsoft Unveils New 'Scout' Personal Work Agent Powered by OpenClaw](https://www.thurrott.com/a-i/336926/build-2026-microsoft-unveils-scout-personal-work-agent-and-new-in-house-ai-models). The throughline is that one of the three open coding/agent harnesses this brief tracks, OpenClaw, is now the engine inside a first-party Microsoft product placed directly inside Teams and Outlook as a participant.",
+          "citations": [
+            {"label": "Microsoft 365 Blog - Introducing Microsoft Scout: Your always-on personal agent", "url": "https://www.microsoft.com/en-us/microsoft-365/blog/2026/06/02/introducing-microsoft-scout-your-always-on-personal-agent/"},
+            {"label": "Thurrott - Build 2026: Microsoft Unveils New 'Scout' Personal Work Agent Powered by OpenClaw", "url": "https://www.thurrott.com/a-i/336926/build-2026-microsoft-unveils-scout-personal-work-agent-and-new-in-house-ai-models"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Nvidia posts Nemotron 3 Ultra 550B open weights, the most capable US open-weights model so far",
+      "bullets": [
+        {
+          "body": "The Nemotron 3 Ultra weights that Jensen Huang previewed at Computex on June 1 went live today on Hugging Face. Nvidia's NVIDIA Nemotron v3 collection now lists the 550-billion-parameter Ultra in three freshly uploaded variants - an instruction-tuned `NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16`, a `Base-BF16` pretrained checkpoint, and an `NVFP4` quantized build - alongside a generative reward model, per the [Hugging Face - NVIDIA Nemotron v3 collection](https://huggingface.co/collections/nvidia/nvidia-nemotron-v3). The model is a mixture-of-experts design with roughly 55 billion parameters active per token, a 1-million-token context window, and a claimed 300-plus tokens per second of output, and Nvidia positions it as the first open model designed from the ground up for multi-step agent reasoning rather than chat. On the independent Artificial Analysis Intelligence Index it scores 48, which makes it the strongest US open-weights model released to date and places it ahead of every other American open model - though it still trails China's Kimi K2.6 at 54, so the \"best open model\" claim holds only within the US field, per [Implicator.ai - Nvidia's Nemotron 3 Ultra leads US open models but trails China's Kimi K2.6](https://www.implicator.ai/nvidias-nemotron-3-ultra-leads-us-open-models-but-trails-chinas-kimi-k2-6/). The weights ship under an open license, but the practical catch is hardware: a 550B model needs datacenter-class memory to self-host, so most teams will reach it through OpenRouter or build.nvidia.com NIM endpoints, and the open release doubles as a funnel toward Nvidia silicon - the CUDA-X skill libraries bundled with it run best on Nvidia GPUs. For local-LLM builders the more immediately runnable pieces are the smaller Nano (4B/30B) and Super (120B) members of the same v3 family, which the quantized formats in the collection make tractable on single-node hardware.",
+          "citations": [
+            {"label": "Hugging Face - NVIDIA Nemotron v3 collection", "url": "https://huggingface.co/collections/nvidia/nvidia-nemotron-v3"},
+            {"label": "Implicator.ai - Nvidia's Nemotron 3 Ultra leads US open models but trails China's Kimi K2.6", "url": "https://www.implicator.ai/nvidias-nemotron-3-ultra-leads-us-open-models-but-trails-chinas-kimi-k2-6/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Microsoft's Surface RTX Spark Dev Box puts the RTX Spark superchip on the desk and ships with Foundry Local for on-device inference",
+      "bullets": [
+        {
+          "body": "Microsoft turned the RTX Spark superchip - the Nvidia/MediaTek Grace-Blackwell part unveiled at GTC Taipei earlier this month - into a developer workstation, announcing the Surface RTX Spark Dev Box at Build. The deskside box pairs an Nvidia Blackwell RTX GPU with a Grace CPU and 128 GB of unified memory to deliver up to 1 petaflop of AI compute, enough to run 120B-plus-parameter models at a 1-million-token context entirely locally; it ships as a Secured-core PC running Windows 11 Pro with WSL 2 pre-configured for GPU passthrough and CUDA, VS Code, GitHub Copilot, and the AI Toolkit for VS Code, and is managed through Entra ID and Intune for organizations, per the [Microsoft Devices Blog - Building the next generation of devices for developers: Surface RTX Spark Dev Box](https://blogs.windows.com/devices/2026/06/02/building-the-next-generation-of-devices-for-developers-surface-rtx-spark-dev-box/). Microsoft lists it as a pre-release device shipping later this year, exclusively through Microsoft.com, with the on-device software stack built around Windows ML with TensorRT, the Windows Copilot Runtime, and Microsoft Foundry to connect a local prototype to a cloud deployment pipeline. The relevant piece for embedded/edge local-LLM work is Foundry Local, Microsoft's on-device runtime - distinct from the Azure AI Foundry cloud marketplace - which reached general availability in April and shipped 1.1 and 1.2 updates at the end of May that added live audio transcription with a Nemotron ASR model, on-device text embeddings (qwen3-0.6b-embedding) and Qwen 3.5 Vision multimodal inference, a downloadable WebGPU execution provider, Linux ARM64 support, and a bump to ONNX Runtime 1.26 across the Python, JavaScript, C#, and Rust SDKs, per [Microsoft Foundry Blog - What's new in Microsoft Foundry, May 2026](https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-may-2026/). Together they describe Microsoft's local-AI pitch: a curated on-device runtime in a roughly 20 MB native library, paired with first-party hardware sized to run frontier-class open models off the cloud.",
+          "citations": [
+            {"label": "Microsoft Devices Blog - Building the next generation of devices for developers: Surface RTX Spark Dev Box", "url": "https://blogs.windows.com/devices/2026/06/02/building-the-next-generation-of-devices-for-developers-surface-rtx-spark-dev-box/"},
+            {"label": "Microsoft Foundry Blog - What's new in Microsoft Foundry, May 2026", "url": "https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-may-2026/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "SpaceX fixes its IPO at $135 a share before the roadshow, a $1.77T listing that reprices the AI-and-space capital market",
+      "bullets": [
+        {
+          "body": "SpaceX set a fixed $135-per-share price for its initial public offering ahead of the investor roadshow - an unusual move, since most issuers leave the number open until marketing finishes - in what would be the largest IPO in US history. At $135 the company sells about 555.5 million shares to raise roughly $75 billion at a valuation near $1.77 trillion, which would rank it among the most valuable US companies and above Tesla; the listing targets Nasdaq under the ticker SPCX, with pricing expected June 11 and a trading debut as soon as June 12, and Elon Musk retaining more than 85% of voting power through a dual-class structure despite holding about 42% of the economics, underwritten by a syndicate led by Goldman Sachs and Morgan Stanley with BofA, Citigroup, JPMorgan, and Barclays, per [Stocktwits - SpaceX IPO Pricing At $135 Per Share Will Value The Rocket Maker At $1.77 Trillion](https://stocktwits.com/news-articles/markets/equity/spacex-ipo-pricing-135-per-share-will-value-the-rocket-maker-at-1.77-trillion/cZ0jlpNReUn). The SpaceX print lands inside a crowded queue of AI-adjacent listings: Anthropic confirmed last week that it has confidentially filed a draft S-1 with the SEC after a May round valued it at $965 billion (up from $380 billion in February), and OpenAI is reported to be preparing its own confidential filing in the coming weeks, per [Investing.com - Anthropic files confidentially for IPO in major AI industry milestone](https://www.investing.com/news/stock-market-news/anthropic-files-confidentially-for-ipo-in-major-ai-industry-milestone-4719863). The combined effect is that the year's biggest demands on public-market capital are now concentrated in companies whose theses rest on compute - rockets, frontier models, and the data centers behind them - testing whether equity markets can absorb that much AI-correlated supply at once.",
+          "citations": [
+            {"label": "Stocktwits - SpaceX IPO Pricing At $135 Per Share Will Value The Rocket Maker At $1.77 Trillion", "url": "https://stocktwits.com/news-articles/markets/equity/spacex-ipo-pricing-135-per-share-will-value-the-rocket-maker-at-1.77-trillion/cZ0jlpNReUn"},
+            {"label": "Investing.com - Anthropic files confidentially for IPO in major AI industry milestone", "url": "https://www.investing.com/news/stock-market-news/anthropic-files-confidentially-for-ipo-in-major-ai-industry-milestone-4719863"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Bay Area June-July events: with Build and Snowflake Summit wrapped, WWDC, Databricks, and the AI Engineer World's Fair are next",
+      "bullets": [
+        {
+          "body": "The dense early-June San Francisco conference run has closed out - Microsoft Build (Fort Mason, June 2-3) and Snowflake Summit 26 (Moscone, June 1-4) have both ended - and the still-upcoming calendar to plan attendance around starts with Apple. Apple WWDC26 runs Monday-Friday June 8-12 at Apple Park, with the keynote and Platforms State of the Union on Monday June 8 (keynote 10:00 AM PT), per [Apple Developer - WWDC26](https://developer.apple.com/wwdc26/). Databricks Data + AI Summit follows Monday-Thursday June 15-18 across Moscone with 800-plus sessions spanning data engineering, governance, analytics, applications, and agents, per [Moscone Center - Databricks Data + AI Summit 2026](https://www.moscone.com/events/databricks-data-ai-summit-2026). The AI Engineer World's Fair runs at Moscone West with New Engineer Orientation and badge pickup on Sunday June 28 (Day 0) and the main program Monday June 29 through Thursday July 2 - 29 tracks, 300-plus speakers, and 6,000-plus AI engineers, founders, and VPs of AI, per the [AI Engineer World's Fair 2026](https://www.ai.engineer/worldsfair/2026) site. For smaller local gatherings, AI Tinkerers SF keeps an active meetup calendar - recent and upcoming sessions have included an Advanced MCP Showcase, a Voice Agents Science Fair, and a GTM Engineering Track - with RSVPs through the chapter hub at [AI Tinkerers SF](https://sf.aitinkerers.org/). Further out, GitHub Universe returns to Fort Mason October 28-29, and AWS re:Invent runs November 30-December 4 in Las Vegas with registration opening June 16.",
+          "citations": [
+            {"label": "Apple Developer - WWDC26", "url": "https://developer.apple.com/wwdc26/"},
+            {"label": "Moscone Center - Databricks Data + AI Summit 2026", "url": "https://www.moscone.com/events/databricks-data-ai-summit-2026"},
+            {"label": "AI Engineer World's Fair 2026", "url": "https://www.ai.engineer/worldsfair/2026"},
+            {"label": "AI Tinkerers SF", "url": "https://sf.aitinkerers.org/"}
+          ]
+        }
+      ]
+    }
+  ]
+}
