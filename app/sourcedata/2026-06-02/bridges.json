@@ -1,0 +1,308 @@
+{
+  "date": "2026-06-02",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.b4ec0c53d816fdb4",
+        "short_label": "Microsoft MAI coding model becomes the default GitHub Copilot engine by Q4 2026",
+        "prediction_date": "2026-06-02"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Today's Microsoft Build 2026 keynote lands the originating evidence for the prediction. Satya Nadella opened at Fort Mason this morning with an in-house MAI model family debuting on stage, including a coding-focused model explicitly positioned to power GitHub Copilot — Microsoft's most direct move yet to reduce foundation-model dependence on OpenAI. The day-prior June 1 GitHub Copilot switch to usage-based billing is the other half of the same margin story: premium request units gave way to per-token GitHub AI Credits, and the fallback that let users who exhausted an allowance drop to a cheaper model and keep working was removed, so metered billing now exposes Microsoft's own gross margin on every agentic Copilot request. The Build framing pitches the first-party MAI coding model as the lower-inference-cost engine under the new metered plans, and the autonomous GitHub Copilot pushed from pair programmer toward an agent assigned bugs, features, and pull requests is exactly the high-volume agentic path where a model Microsoft does not pay OpenAI per-token for is the cleanest lever. What has not yet printed is the Copilot release-note language naming a first-party model as the default for completions or agent mode, or distinct per-model token rates in the published GitHub AI Credits table.",
+      "reference_links": [
+        {
+          "label": "FAQ - Microsoft Build 2026: the MAI model family that signals the end of OpenAI dependency",
+          "url": "https://faq.com.tw/en/developer-tools/2026-06-01-microsoft-build-2026-mai-coding-models-en/"
+        },
+        {
+          "label": "Windows Forum - Build 2026: Microsoft makes AI agents the new work model",
+          "url": "https://windowsforum.com/threads/build-2026-microsoft-makes-ai-agents-the-new-work-model-agent-mode-agent-365-local-ai.421349/"
+        },
+        {
+          "label": "The GitHub Blog - GitHub Copilot is moving to usage-based billing",
+          "url": "https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/"
+        },
+        {
+          "label": "GitHub Community Discussion - GitHub Copilot is moving to usage-based billing",
+          "url": "https://github.com/orgs/community/discussions/192948"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Today's Build keynote debuts a first-party MAI coding model positioned to power Copilot, and the June 1 switch to per-token AI Credits dropped the cheaper-model fallback, so metered billing now exposes Microsoft's margin on every agentic request. A model it owns is the cleanest margin lever, making a default switch the mechanical next step.",
+        "coherence": 4,
+        "remaining_gap": "No Copilot release-note names a first-party model as the completions or agent-mode default, and no distinct per-model rates appear in the published AI Credits table."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c92cd5fcd22d0200",
+        "short_label": "Snowflake ships a metered Claude-in-Cortex governed-data agent tier by Q4 2026",
+        "prediction_date": "2026-06-02"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Today's Snowflake Summit 26 Platform Keynote lands the originating evidence for the prediction. Benoit Dageville and Christian Kleinerman, in the 9:00 AM PT Tuesday slot, announced that Snowflake will integrate Anthropic's Claude directly into Cortex AI, extending the roughly $200M partnership signed in December and letting Snowflake's 13,900+ enterprise customers run Claude-powered agents against governed data without that data leaving the platform — pitched to finance, healthcare, and public-sector teams wary of data leakage. Daniela Amodei argued on stage that building security and customer trust can be an accelerant that speeds up business, with Carvana, eSentire, and Notion named as early adopters anchoring the regulated-industry case. The agent control plane has two named pieces — Snowflake Intelligence for knowledge workers and Cortex Code ('Coco') for developers and data engineers — sitting alongside the Openflow, Adaptive Compute, and Cortex AISQL roadmap. Snowflake's whole model is credit-based consumption, so a frontier-model agent running against governed tables is the highest-margin compute it can sell; the GitHub Copilot move to per-token billing the day prior signals the same industry tilt toward metered agentic consumption. Not yet printed: a separately-metered governed-data agent SKU priced on credits per agent run or per token, or a named growth-line disclosure.",
+      "reference_links": [
+        {
+          "label": "Seoul Economic Daily - Snowflake integrates Anthropic's Claude into its platform",
+          "url": "https://en.sedaily.com/international/2026/06/02/snowflake-integrates-anthropics-claude-into-its-platform"
+        },
+        {
+          "label": "cData - Snowflake Summit 2026 pre-event guide",
+          "url": "https://www.cdata.com/blog/snowflake-summit-2026-guide"
+        },
+        {
+          "label": "The GitHub Blog - GitHub Copilot is moving to usage-based billing",
+          "url": "https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Today's keynote wired Claude directly into Cortex and shipped a named agent control plane, pitching no-data-egress to finance, healthcare, and public-sector buyers. Snowflake's whole model is credit-based consumption, so a frontier-model agent against governed tables is the highest-margin compute it sells; metering that headline is the mechanical way the launch becomes revenue.",
+        "coherence": 4,
+        "remaining_gap": "No separately-metered governed-data agent SKU priced on credits per run or per token has printed, and no named growth-line disclosure yet."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2d763790a313224e",
+        "short_label": "BadHost CVE-2026-48710 CVSS score gets upgraded above 6.5 by Q4 2026",
+        "prediction_date": "2026-06-02"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Today's fresh BadHost analysis lands the originating evidence for the prediction. BadHost (CVE-2026-48710) is a host-header injection flaw in the Starlette ASGI framework — the routing core under FastAPI — that lets an attacker control the path a request appears to target by inserting a single character into the HTTP Host header, defeating any path-based authentication middleware. Starlette pulls roughly 325 million downloads a week, and the affected surface reaches directly into the local-LLM serving stack: FastAPI, vLLM, LiteLLM, and MCP servers whose spec mandates unauthenticated OAuth discovery endpoints, with researchers chaining the primitive to authentication bypass, server-side request forgery, and in some cases remote code execution. The disclosing researchers at X41 D-Sec, who found it during an OSTIF-sponsored vLLM audit, have already gone on record that the assigned CVSS 6.5 understates the downstream impact given how cleanly the single-character primitive escalates. That combination of mass deployment and clean escalation is the profile that drives post-disclosure score inflation as exploitation paths get demonstrated and vendors shipping affected gateways issue advisories above the conservative initial rating. The fix shipped in Starlette 1.0.1 on May 21. Not yet printed: an NVD re-score of the record or a downstream vendor advisory rating the flaw high severity.",
+      "reference_links": [
+        {
+          "label": "InfoQ - BadHost vulnerability exposes AI agents, evaluators, and LLM gateways",
+          "url": "https://www.infoq.com/news/2026/06/badhost-ai-systems-vulnerability/"
+        },
+        {
+          "label": "OSTIF - Disclosing the BadHost vulnerability in Starlette",
+          "url": "https://ostif.org/disclosing-the-badhost-vulnerability-in-starlette/"
+        },
+        {
+          "label": "BadHost - CVE-2026-48710 Starlette host-header auth bypass",
+          "url": "https://badhost.org/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The disclosing researchers at X41 D-Sec and OSTIF have gone on record that 6.5 understates the downstream impact. A single-character host-header primitive that defeats path-based authentication and chains to bypass, request forgery, and sometimes code execution, sitting under FastAPI at roughly 325 million weekly downloads, is exactly the profile that drives post-disclosure score inflation.",
+        "coherence": 4,
+        "remaining_gap": "No NVD re-score of the record and no downstream vendor advisory rating the flaw high severity have appeared yet."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2970bfdce5e0004c",
+        "short_label": "Large PaaS vendors bundle MCP-identity gateway into default platform by H1 2027",
+        "prediction_date": "2026-05-31"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Today's Snowflake Summit Platform Keynote delivers the in-platform reveal the PaaS MCP-identity-gateway prediction depends on. Snowflake wired Anthropic's Claude directly into Cortex AI and shipped a named agent control plane — Snowflake Intelligence for knowledge workers and Cortex Code for developers — that governs which agents run against governed data without that data leaving the platform, the operational follow-through on the December Natoma per-tool-call identity-gateway acquisition the prediction anchors on. In parallel, Microsoft Build's multi-model Azure AI Foundry rebuilt Copilot orchestration so Claude runs as a first-class alternative to GPT, and the Agent 365 enterprise control plane monitors agent decisions and enforces compliance boundaries while Work IQ delegates Microsoft 365 tasks over the Agent-to-Agent protocol enforcing the signed-in user's permissions and sensitivity labels. Two of the named cohort — Snowflake and Microsoft Fabric / the Foundry agent stack — are now demonstrating native agent-governance surfaces inside the same 72-hour window, tightening the procurement-side question for Databricks (June 15-18 at the same Moscone complex), Salesforce Data Cloud, BigQuery + Vertex AI, and Confluent. What is still missing is a peer PaaS first-party or M&A announcement adding per-tool-call MCP-identity to the default tier rather than a paid add-on, and a proven Snowflake-Natoma integration at scale.",
+      "reference_links": [
+        {
+          "label": "Seoul Economic Daily - Snowflake integrates Anthropic's Claude into its platform",
+          "url": "https://en.sedaily.com/international/2026/06/02/snowflake-integrates-anthropics-claude-into-its-platform"
+        },
+        {
+          "label": "Microsoft Azure Blog - Introducing Anthropic's Claude models in Microsoft Foundry",
+          "url": "https://azure.microsoft.com/en-us/blog/introducing-anthropics-claude-models-in-microsoft-foundry-bringing-frontier-intelligence-to-azure/"
+        },
+        {
+          "label": "Microsoft Learn - Connect agents to Microsoft 365 with Work IQ (preview)",
+          "url": "https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/work-iq"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Two named cohort members now demonstrate native agent-governance surfaces in one window: Snowflake shipped a control plane governing which agents touch governed data, and Build rebuilt Foundry with Agent 365 enforcing compliance boundaries and Work IQ honoring the signed-in user's permissions. That tightens the procurement-side question for Databricks, Salesforce, BigQuery, and Confluent.",
+        "coherence": 3,
+        "remaining_gap": "These are permission-and-monitoring layers, not per-tool-call MCP-identity in the default tier; no peer first-party or M&A move has printed."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.9e6145236104cad9",
+        "short_label": "Open-source agent orchestrators ship 1k-parallel-subagent primitives by Q4 2026",
+        "prediction_date": "2026-05-29"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Today's Microsoft Build keynote extends the orchestrator-cohort substrate the open-source 1k-parallel-subagent prediction depends on, at the named venue. Azure AI Foundry now spans a 3,000+ model marketplace and rebuilds Copilot orchestration so Claude and GPT run as first-class alternatives in one environment, with Agent 365 the enterprise control plane that monitors agent decisions and tracks accuracy over time, paired with Office Copilot Agent Mode and a GitHub Copilot pushed toward an autonomous agent assigned bugs, features, and pull requests. This is a first-party reference orchestrator landing at Build, the lead venue in the conference cohort the prediction expects bounded-parallel primitive announcements to print at, with Databricks Data + AI Summit (June 15-18) and the AI Engineer World's Fair (June 28-July 2) still ahead. The pressure on AutoGen, LangGraph, CrewAI, and Claude Code Cowork-style harnesses is the planner-and-fan-out primitive itself. What has not printed is a documented parallel-subagent primitive with published scaling-limit numbers in any open-source orchestrator's reference docs.",
+      "reference_links": [
+        {
+          "label": "Microsoft Azure Blog - Introducing Anthropic's Claude models in Microsoft Foundry",
+          "url": "https://azure.microsoft.com/en-us/blog/introducing-anthropics-claude-models-in-microsoft-foundry-bringing-frontier-intelligence-to-azure/"
+        },
+        {
+          "label": "Windows Forum - Build 2026: Microsoft makes AI agents the new work model",
+          "url": "https://windowsforum.com/threads/build-2026-microsoft-makes-ai-agents-the-new-work-model-agent-mode-agent-365-local-ai.421349/"
+        },
+        {
+          "label": "Moscone Center - Databricks Data + AI Summit 2026",
+          "url": "https://www.moscone.com/events/databricks-data-ai-summit-2026"
+        },
+        {
+          "label": "AI Engineer World's Fair 2026",
+          "url": "https://www.ai.engineer/worldsfair/2026"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Microsoft's June 2 Build keynote landed a first-party reference orchestrator at a cohort venue: Azure AI Foundry's 3,000-model marketplace, rebuilt multi-model Copilot orchestration, the Agent 365 control plane, and a GitHub Copilot pushed toward autonomous bug/feature/PR work. That raises the planner-and-fan-out baseline enterprise procurement now benchmarks, which is the pressure pushing open-source orchestrators toward matching parallel-subagent primitives.",
+        "coherence": 2,
+        "remaining_gap": "Build is closed-source, not the named open-source targets; no documented parallel-subagent primitive with published scaling-limit numbers printed in any orchestrator's reference docs."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f4066ed102bfedd1",
+        "short_label": "FFIEC publishes formal booklet addendum on agentic-AI developer-tool exposure by mid-July 2026",
+        "prediction_date": "2026-05-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Today's BadHost disclosure feeds the in-the-wild agentic-developer-tooling exposure pattern the FFIEC booklet-addendum prediction depends on. BadHost (CVE-2026-48710) sits under FastAPI's routing core at roughly 325 million weekly downloads and reaches the local-LLM serving stack — vLLM, LiteLLM, and MCP servers — defeating path-based authentication middleware with a single character and chaining to authentication bypass, server-side request forgery, and in some cases remote code execution against AI services on internal networks. This is exactly the third-party agentic-tooling supply-chain exposure a federally-regulated institution running agent harnesses against governed systems would have to map into its outsourced-technology examination posture, on top of the orchestrator-vendor CVE cohort that originally drove the FFIEC interagency cohort toward an early-July addendum draft. The mid-July target window is now days out. What has not printed today is an FFIEC publication, interagency working-group calendar, or examination-cycle release date naming agentic-AI developer tooling.",
+      "reference_links": [
+        {
+          "label": "InfoQ - BadHost vulnerability exposes AI agents, evaluators, and LLM gateways",
+          "url": "https://www.infoq.com/news/2026/06/badhost-ai-systems-vulnerability/"
+        },
+        {
+          "label": "OSTIF - Disclosing the BadHost vulnerability in Starlette",
+          "url": "https://ostif.org/disclosing-the-badhost-vulnerability-in-starlette/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Today's BadHost disclosure extends the in-the-wild agentic-developer-tooling exposure the addendum responds to: a single-character Starlette host-header primitive under FastAPI's 325M-weekly-download routing core defeats path-based auth across vLLM, LiteLLM, and MCP servers, chaining to bypass, SSRF, and RCE. A regulated institution running agent harnesses against governed systems would have to map exactly this into its outsourced-technology examination posture.",
+        "coherence": 2,
+        "remaining_gap": "No FFIEC publication, interagency working-group calendar, or examination-cycle date naming agentic-AI developer tooling; BadHost is a dependency flaw, not the orchestrator-CVE cohort the trigger names."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3ad27df38140f1ef",
+        "short_label": "SEC extends 8-K cyber materiality to agentic-AI dev-tool incidents by Q3 2026",
+        "prediction_date": "2026-05-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Today's BadHost disclosure is a fresh agentic-AI developer-tooling incident class feeding the SEC cyber-materiality prediction. The single-character host-header primitive in Starlette reaches FastAPI, vLLM, LiteLLM, and MCP servers across roughly 325 million weekly downloads and escalates to authentication bypass, server-side request forgery, and in some cases remote code execution against AI services sitting on internal networks without reverse-proxy protection. A flaw of this blast radius landing in the routing core under the most widely deployed Python AI-serving stack is the kind of incident that, once exploited at a public issuer running agentic developer tooling, tests whether an 8-K Item 1.05 materiality determination has to account for agentic-AI dev-tool compromise distinct from generic software supply chain. The disclosing researchers argue the conservative 6.5 rating understates the downstream impact. What has not printed is any SEC Division of Corporation Finance interpretation or staff guidance naming agentic-AI dev-tool incidents as a covered materiality class.",
+      "reference_links": [
+        {
+          "label": "InfoQ - BadHost vulnerability exposes AI agents, evaluators, and LLM gateways",
+          "url": "https://www.infoq.com/news/2026/06/badhost-ai-systems-vulnerability/"
+        },
+        {
+          "label": "BadHost - CVE-2026-48710 Starlette host-header auth bypass",
+          "url": "https://badhost.org/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Today's BadHost disclosure adds a fresh agentic-developer-tooling incident class: a single-character Starlette host-header primitive reaching vLLM, LiteLLM, and MCP servers across 325M weekly downloads, escalating to auth bypass, SSRF, and RCE. A flaw of that blast radius exploited at a public issuer tests whether an 8-K materiality determination must treat agentic-AI dev-tool compromise distinctly.",
+        "coherence": 2,
+        "remaining_gap": "No SEC Division of Corporation Finance interpretation or staff guidance naming agentic-AI dev-tool incidents; BadHost lacks the confirmed public-issuer in-the-wild exploitation the materiality clock keys on."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a7f3fc0d30769651",
+        "short_label": "Cyber-insurance carriers ship agentic-AI dev-tool endorsement tier by Q4 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Today's BadHost disclosure adds underwriting-side reference data the cyber-insurance endorsement prediction depends on. A host-header injection primitive in Starlette — the routing core under FastAPI at roughly 325 million weekly downloads — that defeats path-based authentication middleware with a single character and reaches vLLM, LiteLLM, and MCP servers across the local-LLM serving stack is precisely the structural-aggregation profile carriers' actuarial desks treat as a correlated-loss surface, since a single dependency flaw exposes a vast shared population of AI services simultaneously. The escalation to authentication bypass, server-side request forgery, and in some cases remote code execution, plus a free scanner already posted, is the fact pattern that pulls a vulnerability class out of the generic software-supply-chain rider toward named endorsement language. What has not printed today is any Lloyd's Market Association working-group guidance, carrier endorsement-language draft, or named-tier rating-bureau filing.",
+      "reference_links": [
+        {
+          "label": "InfoQ - BadHost vulnerability exposes AI agents, evaluators, and LLM gateways",
+          "url": "https://www.infoq.com/news/2026/06/badhost-ai-systems-vulnerability/"
+        },
+        {
+          "label": "OSTIF - Disclosing the BadHost vulnerability in Starlette",
+          "url": "https://ostif.org/disclosing-the-badhost-vulnerability-in-starlette/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Today's BadHost disclosure supplies the underwriting-side fact pattern carriers price toward a named endorsement: one shared-dependency Starlette flaw exposes a vast population of AI services simultaneously, the correlated-loss profile actuarial desks treat as structural aggregation. The clean escalation to auth bypass, SSRF, and RCE plus an already-posted free scanner pulls a class out of the generic supply-chain rider.",
+        "coherence": 2,
+        "remaining_gap": "No Lloyd's Market Association guidance, carrier endorsement-language draft, or named-tier rating-bureau filing; BadHost is a dependency CVE, not the multi-vendor KEV cohort the trigger enumerates."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3a917faa36a1b827",
+        "short_label": "Agent-harness vendors ship gVisor+OS-sandbox+VM containment specs by Q2 2027",
+        "prediction_date": "2026-05-31"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Today's Microsoft Build keynote touches the agent-harness containment prediction adjacently on the governance side rather than with a named containment spec. The Foundry agent stack shipped two grounding-and-governance components: Work IQ, which lets an agent act against a user's Microsoft 365 mail, meetings, files, and chats over the Agent-to-Agent protocol while enforcing the signed-in user's permissions and sensitivity labels, and Agent 365, the enterprise control plane that monitors agent decisions, tracks accuracy over time, and enforces compliance boundaries. This lifts the cohort-wide expectation that an agent runtime expose permission-enforcement and decision-monitoring surfaces, the same buyer-side pressure the prediction expects to converge harness-isolation postures, but it is a permissions-and-monitoring layer, not the hypervisor + OS-sandbox + per-product VM containment stack the prediction names. What has not printed is a named containment profile from Cursor, Codex CLI, Cline, Windsurf, Devin, or Continue, or a standards-body draft naming gVisor or equivalent at the cloud tier and OS sandboxes at the laptop tier.",
+      "reference_links": [
+        {
+          "label": "Microsoft Learn - Connect agents to Microsoft 365 with Work IQ (preview)",
+          "url": "https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/work-iq"
+        },
+        {
+          "label": "Windows Forum - Build 2026: Microsoft makes AI agents the new work model",
+          "url": "https://windowsforum.com/threads/build-2026-microsoft-makes-ai-agents-the-new-work-model-agent-mode-agent-365-local-ai.421349/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Build's Work IQ enforces a signed-in user's permissions and sensitivity labels while Agent 365 monitors agent decisions and enforces compliance boundaries, lifting buyer expectations that agent runtimes expose permission and oversight surfaces. That pressure pushes the cohort toward isolation, but a permissions-and-monitoring layer is not the named hypervisor, OS-sandbox, and per-product VM containment stack.",
+        "coherence": 2,
+        "remaining_gap": "No named containment profile from the coding-agent vendors, and no standards-body draft naming gVisor at the cloud tier or OS sandboxes on the laptop tier."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e4612827ed602fa6",
+        "short_label": "LLM-tooling + Linux-kernel CVE chain becomes dominant attack pattern by H2 2026",
+        "prediction_date": "2026-05-02"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] Today's BadHost disclosure revives the dormant LLM-tooling CVE-chain prediction with a concrete new chain landing squarely on the inference-runtime and LLM-gateway surface it names. BadHost (CVE-2026-48710) is a host-header injection flaw in Starlette, the routing core under FastAPI at roughly 325 million weekly downloads, that defeats path-based authentication middleware with a single character and reaches FastAPI, vLLM, LiteLLM, and MCP servers — the InfoQ writeup is titled for AI agents, evaluators, and LLM gateways. Researchers chain the primitive to authentication bypass, server-side request forgery, and in some cases remote code execution against AI services on internal networks, found by X41 D-Sec during an OSTIF-sponsored vLLM audit. This matches the dormant signal set directly — LiteLLM, SGLang-class inference-runtime, LLM-gateway, agent-harness, MCP server compromise, supply-chain weaponization — and extends the agentic-tooling-stack CVE pattern with a single shared-dependency flaw amplifying across the whole serving stack. The dormant thesis specifically pairs LLM-tooling CVEs with a Linux-kernel local-privilege-escalation leg for full-chain root; today's print is the LLM-tooling half only, with no kernel-LPE component disclosed.",
+      "reference_links": [
+        {
+          "label": "InfoQ - BadHost vulnerability exposes AI agents, evaluators, and LLM gateways",
+          "url": "https://www.infoq.com/news/2026/06/badhost-ai-systems-vulnerability/"
+        },
+        {
+          "label": "OSTIF - Disclosing the BadHost vulnerability in Starlette",
+          "url": "https://ostif.org/disclosing-the-badhost-vulnerability-in-starlette/"
+        },
+        {
+          "label": "BadHost - CVE-2026-48710 Starlette host-header auth bypass",
+          "url": "https://badhost.org/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "BadHost is a single-character host-header flaw in Starlette, the routing core under FastAPI at roughly 325 million weekly downloads, defeating path-based authentication and chaining to auth bypass, request forgery, and sometimes remote code execution across vLLM, LiteLLM, and MCP servers. That is the inference-runtime and gateway surface the pattern names, one shared-dependency flaw amplifying across the whole serving stack.",
+        "coherence": 4,
+        "remaining_gap": "Only the tooling half printed; no Linux-kernel local-privilege-escalation leg pairs with it for the full-chain root the thesis specifies."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c850d46b059e600c",
+        "short_label": "SSO providers carve out AI-extension OAuth scope category by Q3 2026",
+        "prediction_date": "2026-04-22"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Today's BadHost disclosure revives the dormant AI-extension OAuth-scope prediction via the exploitation vector it names explicitly. The BadHost writeup calls out that the affected surface includes MCP servers whose spec mandates unauthenticated OAuth discovery endpoints, giving attackers a reliable exploitation path once the host-header primitive defeats path-based authentication middleware. An MCP server's unauthenticated OAuth discovery endpoint sitting in the exploit chain is direct pressure on the question the dormant thesis frames — whether identity providers and the agent-integration ecosystem carve out a dedicated AI-extension OAuth scope category with tighter defaults rather than the permissive discovery and broad-grant posture that today's chain exploits. The match is on the OAuth-scope and AI-integration axis rather than a named SSO-provider product move. What is absent is any Okta, Entra ID, or Google Workspace announcement defining an AI-extension scope category, or a CASB / SSPM control treating it as a distinct surface.",
+      "reference_links": [
+        {
+          "label": "InfoQ - BadHost vulnerability exposes AI agents, evaluators, and LLM gateways",
+          "url": "https://www.infoq.com/news/2026/06/badhost-ai-systems-vulnerability/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The BadHost write-up flags that the affected surface includes MCP servers whose spec mandates unauthenticated OAuth discovery endpoints, giving attackers a reliable path once path-based authentication falls. A permissive, broadly-granted discovery posture sitting inside a live exploit chain is exactly the pressure toward identity providers defining a tighter, dedicated AI-extension scope with safer defaults.",
+        "coherence": 3,
+        "remaining_gap": "No identity-provider move defining an AI-extension scope category, and no access-broker or posture control treating it as a distinct surface."
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "date": "2026-06-02",
+  "sections": [
+    {
+      "category": "Microsoft Build opening keynote ships the multi-model Foundry, Work IQ grounding layer, and an in-house MAI model family",
+      "bullets": [
+        {
+          "body": "Satya Nadella opened Microsoft Build 2026 this morning at Fort Mason Center in San Francisco with agents as the throughline across every product track, and the keynote shipped concrete platform pieces rather than a roadmap. The clearest net-new artifact is the in-house MAI model family debuting on stage — including a coding-focused model positioned to power GitHub Copilot alongside speech, voice, and image models — Microsoft's most explicit move yet to reduce its dependence on OpenAI for foundation-model capability, per [FAQ - Microsoft Build 2026: the MAI model family that signals the end of OpenAI dependency](https://faq.com.tw/en/developer-tools/2026-06-01-microsoft-build-2026-mai-coding-models-en/). Azure AI Foundry is the orchestration layer underneath: its model marketplace has grown past 3,000 models spanning OpenAI, Anthropic, Meta Llama, Mistral, and specialty providers, and Microsoft is rebuilding Copilot's orchestration so Claude models run as first-class alternatives to GPT inside the same environment — Azure now positions itself as the only cloud offering both Claude and GPT frontier models on one platform, with Claude usable through Anthropic's Claude Code coding agent, per [Microsoft Azure Blog - Introducing Anthropic's Claude models in Microsoft Foundry](https://azure.microsoft.com/en-us/blog/introducing-anthropics-claude-models-in-microsoft-foundry-bringing-frontier-intelligence-to-azure/). The agent stack got two named grounding-and-governance components: Work IQ, the intelligence layer that lets a Foundry agent delegate natural-language tasks against a user's Microsoft 365 emails, meetings, files, and chats over the Agent-to-Agent protocol while enforcing the signed-in user's permissions and sensitivity labels (in public preview, requiring a Microsoft 365 Copilot license), per [Microsoft Learn - Connect agents to Microsoft 365 with Work IQ (preview)](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/work-iq); and Agent 365, the enterprise control plane that monitors agent decisions, tracks accuracy over time, and enforces compliance boundaries, paired with Office 365 Copilot Agent Mode and an evolved GitHub Copilot pushed from pair programmer toward an autonomous agent assigned bugs, features, and pull requests, per [Windows Forum - Build 2026: Microsoft makes AI agents the new work model (Agent Mode, Agent 365, Local AI)](https://windowsforum.com/threads/build-2026-microsoft-makes-ai-agents-the-new-work-model-agent-mode-agent-365-local-ai.421349/).",
+          "citations": [
+            {"label": "FAQ - Microsoft Build 2026: the MAI model family that signals the end of OpenAI dependency", "url": "https://faq.com.tw/en/developer-tools/2026-06-01-microsoft-build-2026-mai-coding-models-en/"},
+            {"label": "Microsoft Azure Blog - Introducing Anthropic's Claude models in Microsoft Foundry", "url": "https://azure.microsoft.com/en-us/blog/introducing-anthropics-claude-models-in-microsoft-foundry-bringing-frontier-intelligence-to-azure/"},
+            {"label": "Microsoft Learn - Connect agents to Microsoft 365 with Work IQ (preview)", "url": "https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/tools/work-iq"},
+            {"label": "Windows Forum - Build 2026: Microsoft makes AI agents the new work model", "url": "https://windowsforum.com/threads/build-2026-microsoft-makes-ai-agents-the-new-work-model-agent-mode-agent-365-local-ai.421349/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Snowflake Platform Keynote wires Anthropic's Claude into Cortex AI and ships the Snowflake Intelligence plus Cortex Code agent control plane",
+      "bullets": [
+        {
+          "body": "At the Snowflake Summit 26 Platform Keynote this morning — Benoit Dageville and Christian Kleinerman taking the 9:00 AM PT slot Tuesday June 2 — the headline product announcement is that Snowflake will integrate Anthropic's Claude directly into Cortex AI, extending the roughly $200M partnership the two companies signed in December and letting Snowflake's 13,900+ enterprise customers run Claude-powered agents against governed data without that data leaving the platform, which Snowflake frames as the answer to finance, healthcare, and public-sector compliance teams wary of data leakage. Daniela Amodei, on the keynote stage, argued that \"building security and customer trust can be an accelerant that speeds up business,\" and Snowflake named early adopters: Carvana applying AI across inventory, logistics, finance, and demand management; eSentire applying Claude to threat detection and investigation; and Notion building an AI agent that connects directly to Snowflake data, per [Seoul Economic Daily - Snowflake integrates Anthropic's Claude into its platform](https://en.sedaily.com/international/2026/06/02/snowflake-integrates-anthropics-claude-into-its-platform). The agentic control plane is organized around two named pieces — Snowflake Intelligence, a natural-language work agent for knowledge workers exploring governed data, and Cortex Code (\"Coco\"), an AI coding agent for developers and data engineers — sitting alongside the broader roadmap reveal of Openflow ingestion, Adaptive Compute, Cortex AISQL, and agentic listings on the Snowflake Marketplace, per the [cData - Snowflake Summit 2026 pre-event guide](https://www.cdata.com/blog/snowflake-summit-2026-guide).",
+          "citations": [
+            {"label": "Seoul Economic Daily - Snowflake integrates Anthropic's Claude into its platform", "url": "https://en.sedaily.com/international/2026/06/02/snowflake-integrates-anthropics-claude-into-its-platform"},
+            {"label": "cData - Snowflake Summit 2026 pre-event guide", "url": "https://www.cdata.com/blog/snowflake-summit-2026-guide"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "BadHost Starlette host-header flaw puts the open-source LLM serving stack in scope for authentication bypass",
+      "bullets": [
+        {
+          "body": "Fresh analysis this week sharpens the blast radius of BadHost (CVE-2026-48710), a host-header injection flaw in the Starlette ASGI framework — the routing core under FastAPI — that lets an attacker fully control the path a request appears to target by inserting a single character into the HTTP Host header, defeating any path-based authentication middleware. Starlette pulls roughly 325 million downloads a week, and the flaw reaches directly into the local-LLM serving stack: it was discovered by German security firm X41 D-Sec during an OSTIF-sponsored audit of vLLM, and the affected surface spans FastAPI, vLLM, LiteLLM, and MCP servers — whose spec mandates unauthenticated OAuth discovery endpoints, giving attackers a reliable exploitation path — with researchers chaining the primitive to authentication bypass, server-side request forgery, and in some cases remote code execution against AI services that sit on internal networks without reverse-proxy protection, per [InfoQ - BadHost vulnerability exposes AI agents, evaluators, and LLM gateways](https://www.infoq.com/news/2026/06/badhost-ai-systems-vulnerability/). The fix shipped in Starlette 1.0.1 (released May 21, one day ahead of public disclosure), and the practical mitigation is to read the request path from the ASGI scope rather than the reconstructed URL in any middleware that makes a security decision; a free scanner is posted at [BadHost - CVE-2026-48710 Starlette host-header auth bypass](https://badhost.org/). Its assigned CVSS score is 6.5, which the disclosing researchers argue understates the downstream impact given how cleanly the single-character primitive escalates, per the [OSTIF - Disclosing the BadHost vulnerability in Starlette](https://ostif.org/disclosing-the-badhost-vulnerability-in-starlette/).",
+          "citations": [
+            {"label": "InfoQ - BadHost vulnerability exposes AI agents, evaluators, and LLM gateways", "url": "https://www.infoq.com/news/2026/06/badhost-ai-systems-vulnerability/"},
+            {"label": "BadHost - CVE-2026-48710 Starlette host-header auth bypass", "url": "https://badhost.org/"},
+            {"label": "OSTIF - Disclosing the BadHost vulnerability in Starlette", "url": "https://ostif.org/disclosing-the-badhost-vulnerability-in-starlette/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "GitHub Copilot flips every plan to usage-based billing as Microsoft preps its own coding model",
+      "bullets": [
+        {
+          "body": "GitHub Copilot switched all plans to usage-based billing on June 1, retiring the flat-rate premium-request model: premium request units are replaced by GitHub AI Credits consumed against published per-model token rates for input, output, and cached tokens, and the prior fallback that let users who exhausted their allowance drop to a cheaper model and keep working is gone — usage is now governed by available credits and admin budget controls, per [The GitHub Blog - GitHub Copilot is moving to usage-based billing](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/). The change has drawn sustained developer pushback, with users posting projections of 10x-to-50x cost increases — one estimating a jump from $29 to $750 a month, another from $50 to $3,000 — as the metered model exposes heavy agentic workloads to per-token cost, per the [GitHub Community Discussion - GitHub Copilot is moving to usage-based billing](https://github.com/orgs/community/discussions/192948). The timing lands directly against Microsoft's Build keynote the next morning, where the in-house MAI coding model is pitched as a lower-inference-cost engine for Copilot — the billing shift and the cheaper first-party model are two halves of the same margin story.",
+          "citations": [
+            {"label": "The GitHub Blog - GitHub Copilot is moving to usage-based billing", "url": "https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/"},
+            {"label": "GitHub Community Discussion - GitHub Copilot is moving to usage-based billing", "url": "https://github.com/orgs/community/discussions/192948"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Bay Area June-July events: Snowflake Summit and Microsoft Build both mid-keynote today, then WWDC, Databricks, and the AI Engineer World's Fair",
+      "bullets": [
+        {
+          "body": "The dense San Francisco conference window is at its peak today. Snowflake Summit 26 runs Monday-Thursday June 1-4 at Moscone Center with 20,000+ attendees, 500+ sessions across 12 tracks, and 190+ partner booths; the Tuesday June 2 Platform Keynote (Dageville and Kleinerman, 9:00 AM PT) is happening now, with a Builder Keynote of live agent demos Wednesday June 3 at 9:00 AM PT still ahead, per [Moscone Center - Snowflake Summit 2026](https://www.moscone.com/events/snowflake-summit-2026). Microsoft Build 2026 opened this morning and runs Tuesday-Wednesday June 2-3 at Fort Mason Center, Nadella's keynote having streamed from 9:30 AM PT, with free online registration and the in-person cohort capped near 2,500 developers. AI Tinkerers SF hosts its invite-only VIP Dinner: Harnessing Agents tonight Tuesday June 2 for engineers shipping production agentic systems, per the [AI Tinkerers SF - VIP Dinner: Harnessing Agents](https://sf.aitinkerers.org/p/ai-tinkerers-vip-dinner-harnessing-agents) page, plus an Advanced MCP Showcase sponsored by WorkOS later in the month per the [AI Tinkerers SF - Advanced MCP Showcase](https://sf.aitinkerers.org/p/ai-tinkerers-advanced-mcp-showcase) and a Voice Agents Science Fair sponsored by ElevenLabs across the broader June calendar, per the [AI Tinkerers SF - Voice Agents Science Fair](https://sf.aitinkerers.org/p/ai-tinkerers-voice-agents-science-fair). Apple WWDC26 runs Monday-Friday June 8-12 at Apple Park, with the keynote and Platforms State of the Union on Monday June 8 (keynote 10:00 AM PT) and more than 1,000 developers attending in person by lottery, per [Apple Developer - WWDC26 special event](https://developer.apple.com/wwdc26/special-event/). Databricks Data + AI Summit runs Monday-Thursday June 15-18 across Moscone with 800+ sessions spanning data engineering, governance, analytics, applications, and agents, per [Moscone Center - Databricks Data + AI Summit 2026](https://www.moscone.com/events/databricks-data-ai-summit-2026). The AI Engineer World's Fair runs at Moscone West with New Engineer Orientation and badge pickup on Sunday June 28 (Day 0) and the main program Monday June 29 through Thursday July 2 — 29 tracks, 300+ speakers, 100+ expo partners, and 6,000+ AI engineers, founders, and VPs of AI across 10 parallel engineering miniconferences plus 2 leadership tracks, per the [AI Engineer World's Fair 2026](https://www.ai.engineer/worldsfair/2026) site. Further out, GitHub Universe returns to Fort Mason October 28-29, and AWS re:Invent runs November 30-December 4 in Las Vegas (re:Inforce merged in for the first time) with registration opening June 16.",
+          "citations": [
+            {"label": "Moscone Center - Snowflake Summit 2026", "url": "https://www.moscone.com/events/snowflake-summit-2026"},
+            {"label": "AI Tinkerers SF - VIP Dinner: Harnessing Agents", "url": "https://sf.aitinkerers.org/p/ai-tinkerers-vip-dinner-harnessing-agents"},
+            {"label": "AI Tinkerers SF - Advanced MCP Showcase", "url": "https://sf.aitinkerers.org/p/ai-tinkerers-advanced-mcp-showcase"},
+            {"label": "AI Tinkerers SF - Voice Agents Science Fair", "url": "https://sf.aitinkerers.org/p/ai-tinkerers-voice-agents-science-fair"},
+            {"label": "Apple Developer - WWDC26 special event", "url": "https://developer.apple.com/wwdc26/special-event/"},
+            {"label": "Moscone Center - Databricks Data + AI Summit 2026", "url": "https://www.moscone.com/events/databricks-data-ai-summit-2026"},
+            {"label": "AI Engineer World's Fair 2026", "url": "https://www.ai.engineer/worldsfair/2026"}
+          ]
+        }
+      ]
+    }
+  ]
+}
