@@ -1,0 +1,14 @@
+{
+  "id": "prediction.d333899065046b01",
+  "scope_hint": "tech",
+  "title": "Agent-framework SQL tools ship read-only-by-default execution guards by Q1 2027",
+  "body": "The agentic text-to-SQL execution layer will converge on a safe-by-default posture: by Q1 2027 at least three widely used LLM-agent frameworks beyond Langroid will ship their database-query tools defaulting to a parser-validated, SELECT-only allowlist with a dialect-aware dangerous-pattern blocklist, treating raw write/DDL/program-execution SQL as opt-in rather than the out-of-the-box behavior. The shift is driven by the realization that a model coerced via prompt injection can author arbitrary SQL, so the framework's own execution wrapper - not just the deployer's database role - must be the enforcement point. Expect this to show up concretely as a changed default in tools such as LangChain's SQL toolkit, LlamaIndex's text-to-SQL query engine, or comparable agent libraries, alongside documentation that elevates least-privilege, read-only database credentials from a footnote to a stated prerequisite. Maintainers who do not adopt a default guard will increasingly attract their own CVSS-critical advisories as researchers replay the prompt-to-SQL-to-RCE pattern across the ecosystem.",
+  "reasoning": {
+    "because": "Langroid 0.63.0 fixed CVE-2026-25879 by defaulting SQLChatAgent to a SELECT-only sqlglot allowlist",
+    "given": "Prompt injection makes model-authored SQL attacker-controllable, and LiteLLM CVE-2026-42208 is live",
+    "so_that": "Maintainers of text-to-SQL agent frameworks ship a SELECT-only, least-privilege default, not opt-in hardening",
+    "landing": "by Q1 2027; >=3 agent frameworks ship safe-by-default SQL execution",
+    "plain_language": "Hackers can trick an AI into writing dangerous database commands, so the tools running those commands will soon block writes by default."
+  },
+  "summary": "After Langroid patched a critical prompt-injection-to-RCE flaw by making its SQL agent SELECT-only by default, expect at least three more LLM-agent frameworks to ship the same read-only-by-default guard by Q1 2027. Maintainers who keep write SQL on by default will draw their own critical CVEs."
+}

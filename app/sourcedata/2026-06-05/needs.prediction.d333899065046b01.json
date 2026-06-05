@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "agent-framework SQL-tool maintainer",
+    "job": "Rework their text-to-SQL query tool so its default execution path is a parser-validated, SELECT-only allowlist with a dialect-aware dangerous-pattern blocklist.",
+    "outcome": "A shipped framework release whose database-query tool defaults to read-only execution, treating write/DDL/program-execution SQL as explicit opt-in.",
+    "motivation": "Avoid drawing their own CVSS-critical advisory once researchers replay the prompt-to-SQL-to-RCE pattern against their unguarded default.",
+    "task": {
+      "who": "core maintainers of the SQL/text-to-SQL tooling module",
+      "what": "default the query tool to a SELECT-only allowlist",
+      "where": "the framework's SQL execution wrapper in the upstream repo",
+      "when": "runway from June 2026 through Q1 2027",
+      "why": "make the wrapper the injection enforcement point",
+      "how": "parser-based allowlist (e.g. sqlglot) plus pattern blocklist"
+    }
+  },
+  {
+    "actor": "agent-framework documentation maintainer",
+    "job": "Rewrite tool docs to elevate least-privilege, read-only database credentials from an optional footnote to a stated prerequisite alongside the new default guard.",
+    "outcome": "Published documentation framing read-only DB credentials as a required deployment baseline rather than advisory best practice.",
+    "motivation": "Reinforce the safe-by-default posture and reduce deployer misconfiguration that would still surface as framework-attributed incidents.",
+    "task": {
+      "who": "the framework's docs / developer-relations writers",
+      "what": "elevate least-privilege credentials to a stated prerequisite",
+      "where": "the tool's official documentation and security guidance",
+      "when": "alongside the guard release, through Q1 2027",
+      "why": "harden the default posture against misconfiguration",
+      "how": "documented least-privilege, read-only credential requirement"
+    }
+  },
+  {
+    "actor": "agentic-SQL security researcher",
+    "job": "Replay the prompt-injection-to-SQL-to-RCE pattern across additional agent frameworks and file CVSS-critical advisories against tools that keep write SQL on by default.",
+    "outcome": "A stream of critical CVEs that makes opt-in-only hardening untenable and pressures maintainers to ship the read-only default.",
+    "motivation": "Demonstrate that the framework's execution wrapper, not just the deployer's DB role, must be the enforcement point against model-authored SQL.",
+    "task": {
+      "who": "independent and vendor application-security researchers",
+      "what": "replay prompt-to-SQL-to-RCE exploits against agent frameworks",
+      "where": "open-source agent libraries and their disclosure programs",
+      "when": "runway from June 2026 into Q1 2027",
+      "why": "prove the wrapper must enforce, not the DB role",
+      "how": "prompt-injection exploit chains and CVSS advisories"
+    }
+  }
+]

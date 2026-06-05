@@ -1,0 +1,53 @@
+{
+  "date": "2026-06-05",
+  "technical": [
+    {
+      "lead": "Great American AI Act draft: 3-year state preemption plus federal rules",
+      "body": "Representatives Jay Obernolte (R-Calif.) and Lori Trahan (D-Mass.) released a bipartisan discussion draft of the Great American Artificial Intelligence Act on Thursday June 4 - a roughly 270-page text meant to gather stakeholder feedback before formal introduction. The headline provision is a three-year preemption of state laws that specifically regulate the development of frontier AI models (it would block rules like California's AB 2013 training-data-disclosure law and part of SB 942 watermarking, while leaving general-applicability and use/deployment laws intact). In exchange, the draft requires large frontier developers (reported threshold: more than $500 million in prior-year gross revenue) to publish a public frontier AI framework describing how they evaluate and manage catastrophic risks, and codifies the Center for AI Standards and Innovation in Commerce with $100 million a year authorized for fiscal 2027-2029.",
+      "citations": [
+        {"label": "FedScoop - Bipartisan 'Great American AI Act' draft proposes new federal AI governance framework", "url": "https://fedscoop.com/bipartisan-great-american-ai-act-draft-proposes-new-federal-ai-governance-framework/"},
+        {"label": "Roll Call - Bipartisan AI draft proposes three-year preemption of state laws", "url": "https://rollcall.com/2026/06/04/bipartisan-ai-draft-proposes-three-year-preemption-of-state-laws/"},
+        {"label": "Nextgov/FCW - Lawmakers propose AI framework that would preempt state laws for 3 years", "url": "https://www.nextgov.com/artificial-intelligence/2026/06/lawmakers-propose-ai-framework-would-preempt-state-laws-3-years/413975/"}
+      ]
+    },
+    {
+      "lead": "CVE-2026-25879: prompt-injection-to-RCE in Langroid SQLChatAgent, CVSS 9.8",
+      "body": "A new advisory rates CVE-2026-25879 in Langroid - a popular open-source framework for LLM-powered apps - as CVSS 9.8 critical. The flaw lives in the SQLChatAgent, which executes SQL produced by the model; because that SQL is steerable by prompt injection (directly via a malicious prompt or indirectly by poisoning data the model later reads), an attacker can coerce dangerous dialect-specific primitives. When the agent connects with an over-privileged database role (PostgreSQL pg_execute_server_program, MySQL FILE, MSSQL xp_cmdshell), primitives like COPY ... FROM PROGRAM escalate from data theft to remote code execution on the database host. The fix landed in Langroid 0.63.0, which defaults SQLChatAgent to a SELECT-only allowlist parsed with sqlglot plus a dialect-aware dangerous-pattern blocklist.",
+      "citations": [
+        {"label": "GitLab Advisory Database - CVE-2026-25879: Langroid has Prompt to SQL Injection, Leading to RCE", "url": "https://advisories.gitlab.com/pypi/langroid/CVE-2026-25879/"},
+        {"label": "GitHub Security Advisory - Prompt to SQL Injection leading to RCE in Langroid (GHSA-mxfr-6hcw-j9rq)", "url": "https://github.com/langroid/langroid/security/advisories/GHSA-mxfr-6hcw-j9rq"}
+      ]
+    },
+    {
+      "lead": "Exploited LiteLLM proxy SQL injection (CVE-2026-42208) drives access rule",
+      "body": "The Langroid flaw shares a through-line with the actively exploited LiteLLM proxy injection, CVE-2026-42208, where a crafted Authorization header reached an unparameterized key-lookup query through the error-handling path - fixed in v1.83.7 and recommended at v1.83.10-stable. Both flaws trace the same text-to-SQL-to-database path and underline one lesson: any LLM allowed to author SQL must run against a least-privilege, read-only-by-default database role, because the model's output has to be treated as untrusted, attacker-controllable input.",
+      "citations": [
+        {"label": "LiteLLM docs - Security Update: CVE-2026-42208 in LiteLLM Proxy", "url": "https://docs.litellm.ai/blog/cve-2026-42208-litellm-proxy-sql-injection"},
+        {"label": "GitLab Advisory Database - CVE-2026-25879: Langroid has Prompt to SQL Injection, Leading to RCE", "url": "https://advisories.gitlab.com/pypi/langroid/CVE-2026-25879/"}
+      ]
+    },
+    {
+      "lead": "MiniMax M3 claims open-weight frontier coding, 1M context - no weights yet",
+      "body": "China's MiniMax launched M3, billed as the first open-weight system to combine frontier coding-agent performance, a one-million-token context window, and native multimodality. The architecture centers on a new MiniMax Sparse Attention (MSA) mechanism that scores only selected segments to sidestep the quadratic cost of full attention, reaching the 1M-token window; MiniMax says it trained on roughly 100 trillion interleaved text-image tokens with per-token compute about one-twentieth of its prior M2.7. It reports 59.0% on SWE-Bench Pro (ahead of GPT-5.5 and Gemini 3.1 Pro, approaching Claude Opus 4.7) and 83.5 on BrowseComp. The key caveat: scores are company-reported, the model is reachable only via MiniMax's API and Code app, and weights plus a technical report are promised on Hugging Face and GitHub within about ten days but have not yet appeared (the newest published checkpoint there is still M2.7).",
+      "citations": [
+        {"label": "The Decoder - MiniMax M3: open-weight model with a million-token context challenges proprietary leaders", "url": "https://the-decoder.com/minimax-m3-open-weight-model-with-a-million-token-context-challenges-proprietary-leaders/"},
+        {"label": "TechTimes - MiniMax M3 Open-Weight Coding Model: Frontier Claims, Unverified Benchmarks", "url": "https://www.techtimes.com/articles/317532/20260601/minimax-m3-open-weight-coding-model-frontier-claims-unverified-benchmarks.htm"}
+      ]
+    },
+    {
+      "lead": "Bay Area calendar: WWDC26 June 8-12, then Databricks Data + AI Summit June 15-18",
+      "body": "With Microsoft Build and Snowflake Summit closed, the next still-upcoming Bay Area event to plan around is Apple's WWDC26, running the week of June 8-12 at Apple Park and online - opening Monday June 8 with the keynote at 10:00 AM PT and the Platforms State of the Union at 1:00 PM PT, followed by 100-plus video sessions, with AI-focused Siri and OS updates expected. Next comes Databricks Data + AI Summit, June 15-18 at Moscone, where the company expects 30,000-plus in-person attendees across 800-plus sessions; the keynote lineup includes Ali Ghodsi, Matei Zaharia, a recorded fireside with Satya Nadella, and OpenAI president Greg Brockman, plus a multi-day hackathon run with OpenAI. Further out, the AI Engineer World's Fair runs June 29-July 2 at Moscone West.",
+      "citations": [
+        {"label": "Apple Developer - WWDC26 special event", "url": "https://developer.apple.com/wwdc26/special-event/"},
+        {"label": "Databricks Newsroom - Databricks announces 2026 Data + AI Summit keynote lineup", "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-announces-2026-data-ai-summit-keynote-lineup-and"}
+      ]
+    }
+  ],
+  "plain": [
+    "Draft US law would pause state AI rules for three years",
+    "Critical bug lets attackers run code via an AI's SQL agent",
+    "A live attack shows why AI needs read-only database access",
+    "New open coding model claims top scores, but no weights yet",
+    "Several big developer conferences run across the next month"
+  ]
+}

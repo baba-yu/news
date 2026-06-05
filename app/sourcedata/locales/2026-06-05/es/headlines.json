@@ -1,0 +1,53 @@
+{
+  "date": "2026-06-05",
+  "technical": [
+    {
+      "lead": "Borrador del Great American AI Act: preferencia estatal de 3 años más reglas federales",
+      "body": "Los representantes Jay Obernolte (R-Calif.) y Lori Trahan (D-Mass.) publicaron el jueves 4 de junio un borrador de discusión bipartidista del Great American Artificial Intelligence Act, un texto de unas 270 páginas pensado para recoger comentarios de las partes interesadas antes de su presentación formal. La disposición principal es una preferencia de tres años sobre las leyes estatales que regulan específicamente el desarrollo de modelos de IA de frontera (bloquearía reglas como la ley AB 2013 de California sobre divulgación de datos de entrenamiento y parte de la SB 942 sobre marcas de agua, mientras deja intactas las leyes de aplicación general y las de uso/despliegue). A cambio, el borrador exige a los grandes desarrolladores de frontera (umbral informado: más de $500 millones de ingresos brutos del año anterior) publicar un framework público de IA de frontera que describa cómo evalúan y gestionan los riesgos catastróficos, y codifica el Center for AI Standards and Innovation en el Departamento de Comercio con $100 millones al año autorizados para los ejercicios fiscales 2027-2029.",
+      "citations": [
+        {"label": "FedScoop - Bipartisan 'Great American AI Act' draft proposes new federal AI governance framework", "url": "https://fedscoop.com/bipartisan-great-american-ai-act-draft-proposes-new-federal-ai-governance-framework/"},
+        {"label": "Roll Call - Bipartisan AI draft proposes three-year preemption of state laws", "url": "https://rollcall.com/2026/06/04/bipartisan-ai-draft-proposes-three-year-preemption-of-state-laws/"},
+        {"label": "Nextgov/FCW - Lawmakers propose AI framework that would preempt state laws for 3 years", "url": "https://www.nextgov.com/artificial-intelligence/2026/06/lawmakers-propose-ai-framework-would-preempt-state-laws-3-years/413975/"}
+      ]
+    },
+    {
+      "lead": "CVE-2026-25879: inyección de prompts a RCE en Langroid SQLChatAgent, CVSS 9.8",
+      "body": "Una nueva alerta califica CVE-2026-25879 en Langroid -un popular framework de código abierto para aplicaciones impulsadas por LLM- como CVSS 9.8 crítico. La vulnerabilidad reside en el SQLChatAgent, que ejecuta el SQL producido por el modelo; como ese SQL es manipulable mediante inyección de prompts (directamente con un prompt malicioso o indirectamente envenenando datos que el modelo lee después), un atacante puede forzar primitivas peligrosas específicas del dialecto. Cuando el agente se conecta con un rol de base de datos con privilegios excesivos (PostgreSQL pg_execute_server_program, MySQL FILE, MSSQL xp_cmdshell), primitivas como COPY ... FROM PROGRAM escalan del robo de datos a la ejecución remota de código en el host de la base de datos. La corrección llegó en Langroid 0.63.0, que hace que SQLChatAgent use por defecto una lista de permitidos limitada a SELECT analizada con sqlglot más una lista de bloqueo de patrones peligrosos consciente del dialecto.",
+      "citations": [
+        {"label": "GitLab Advisory Database - CVE-2026-25879: Langroid has Prompt to SQL Injection, Leading to RCE", "url": "https://advisories.gitlab.com/pypi/langroid/CVE-2026-25879/"},
+        {"label": "GitHub Security Advisory - Prompt to SQL Injection leading to RCE in Langroid (GHSA-mxfr-6hcw-j9rq)", "url": "https://github.com/langroid/langroid/security/advisories/GHSA-mxfr-6hcw-j9rq"}
+      ]
+    },
+    {
+      "lead": "La inyección SQL explotada en el proxy de LiteLLM (CVE-2026-42208) impulsa una regla de acceso",
+      "body": "La vulnerabilidad de Langroid comparte un hilo común con la inyección activamente explotada del proxy de LiteLLM, CVE-2026-42208, donde una cabecera Authorization manipulada llegaba a una consulta de búsqueda de claves sin parametrizar a través de la ruta de gestión de errores; corregida en v1.83.7 y recomendada en v1.83.10-stable. Ambas vulnerabilidades recorren la misma ruta de texto-a-SQL-a-base de datos y subrayan una lección: cualquier LLM al que se le permita redactar SQL debe ejecutarse contra un rol de base de datos de mínimo privilegio y de solo lectura por defecto, porque la salida del modelo tiene que tratarse como entrada no confiable y controlable por el atacante.",
+      "citations": [
+        {"label": "LiteLLM docs - Security Update: CVE-2026-42208 in LiteLLM Proxy", "url": "https://docs.litellm.ai/blog/cve-2026-42208-litellm-proxy-sql-injection"},
+        {"label": "GitLab Advisory Database - CVE-2026-25879: Langroid has Prompt to SQL Injection, Leading to RCE", "url": "https://advisories.gitlab.com/pypi/langroid/CVE-2026-25879/"}
+      ]
+    },
+    {
+      "lead": "MiniMax M3 reivindica codificación de frontera de pesos abiertos, 1M de contexto - aún sin pesos",
+      "body": "La china MiniMax lanzó M3, presentado como el primer sistema de pesos abiertos que combina rendimiento de agente de codificación de frontera, una ventana de contexto de un millón de tokens y multimodalidad nativa. La arquitectura se centra en un nuevo mecanismo MiniMax Sparse Attention (MSA) que solo puntúa segmentos seleccionados para esquivar el coste cuadrático de la atención completa, alcanzando la ventana de 1M de tokens; MiniMax dice que se entrenó con unos 100 billones de tokens intercalados de texto e imagen, con un cómputo por token cercano a una veinteava parte del de su anterior M2.7. Informa de un 59.0% en SWE-Bench Pro (por delante de GPT-5.5 y Gemini 3.1 Pro, acercándose a Claude Opus 4.7) y un 83.5 en BrowseComp. La salvedad clave: las puntuaciones las informa la empresa, el modelo solo es accesible a través de la API y la app Code de MiniMax, y los pesos junto con un informe técnico están prometidos en Hugging Face y GitHub en unos diez días pero aún no han aparecido (el checkpoint más reciente publicado allí sigue siendo M2.7).",
+      "citations": [
+        {"label": "The Decoder - MiniMax M3: open-weight model with a million-token context challenges proprietary leaders", "url": "https://the-decoder.com/minimax-m3-open-weight-model-with-a-million-token-context-challenges-proprietary-leaders/"},
+        {"label": "TechTimes - MiniMax M3 Open-Weight Coding Model: Frontier Claims, Unverified Benchmarks", "url": "https://www.techtimes.com/articles/317532/20260601/minimax-m3-open-weight-coding-model-frontier-claims-unverified-benchmarks.htm"}
+      ]
+    },
+    {
+      "lead": "Calendario del Área de la Bahía: WWDC26 del 8 al 12 de junio, luego Databricks Data + AI Summit del 15 al 18 de junio",
+      "body": "Con Microsoft Build y Snowflake Summit ya cerrados, el siguiente evento aún por celebrarse en el Área de la Bahía que conviene tener presente es la WWDC26 de Apple, que transcurre la semana del 8 al 12 de junio en Apple Park y en línea, abriendo el lunes 8 de junio con la keynote a las 10:00 AM PT y el Platforms State of the Union a la 1:00 PM PT, seguidos de más de 100 sesiones en vídeo, con actualizaciones de Siri y del sistema operativo centradas en IA previstas. Luego llega Databricks Data + AI Summit, del 15 al 18 de junio en Moscone, donde la empresa espera más de 30.000 asistentes presenciales en más de 800 sesiones; el cartel de keynotes incluye a Ali Ghodsi, Matei Zaharia, una charla grabada con Satya Nadella y al presidente de OpenAI Greg Brockman, además de un hackathon de varios días organizado con OpenAI. Más adelante, la AI Engineer World's Fair se celebra del 29 de junio al 2 de julio en Moscone West.",
+      "citations": [
+        {"label": "Apple Developer - WWDC26 special event", "url": "https://developer.apple.com/wwdc26/special-event/"},
+        {"label": "Databricks Newsroom - Databricks announces 2026 Data + AI Summit keynote lineup", "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-announces-2026-data-ai-summit-keynote-lineup-and"}
+      ]
+    }
+  ],
+  "plain": [
+    "Un borrador de ley de EE. UU. pausaría las reglas estatales de IA durante tres años",
+    "Una vulnerabilidad crítica permite a los atacantes ejecutar código a través del agente SQL de una IA",
+    "Un ataque en activo muestra por qué la IA necesita acceso de solo lectura a la base de datos",
+    "Un nuevo modelo de codificación abierto reivindica las mejores puntuaciones, pero aún sin pesos",
+    "Varias grandes conferencias para desarrolladores se celebran a lo largo del próximo mes"
+  ]
+}

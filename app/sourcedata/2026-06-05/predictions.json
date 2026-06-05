@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-05",
+  "predictions": [
+    {
+      "id": "prediction.d333899065046b01",
+      "scope_hint": "tech",
+      "title": "Agent-framework SQL tools ship read-only-by-default execution guards by Q1 2027",
+      "body": "The agentic text-to-SQL execution layer will converge on a safe-by-default posture: by Q1 2027 at least three widely used LLM-agent frameworks beyond Langroid will ship their database-query tools defaulting to a parser-validated, SELECT-only allowlist with a dialect-aware dangerous-pattern blocklist, treating raw write/DDL/program-execution SQL as opt-in rather than the out-of-the-box behavior. The shift is driven by the realization that a model coerced via prompt injection can author arbitrary SQL, so the framework's own execution wrapper - not just the deployer's database role - must be the enforcement point. Expect this to show up concretely as a changed default in tools such as LangChain's SQL toolkit, LlamaIndex's text-to-SQL query engine, or comparable agent libraries, alongside documentation that elevates least-privilege, read-only database credentials from a footnote to a stated prerequisite. Maintainers who do not adopt a default guard will increasingly attract their own CVSS-critical advisories as researchers replay the prompt-to-SQL-to-RCE pattern across the ecosystem.",
+      "reasoning": {
+        "because": "Langroid 0.63.0 fixed CVE-2026-25879 by defaulting SQLChatAgent to a SELECT-only sqlglot allowlist",
+        "given": "Prompt injection makes model-authored SQL attacker-controllable, and LiteLLM CVE-2026-42208 is live",
+        "so_that": "Maintainers of text-to-SQL agent frameworks ship a SELECT-only, least-privilege default, not opt-in hardening",
+        "landing": "by Q1 2027; >=3 agent frameworks ship safe-by-default SQL execution",
+        "plain_language": "Hackers can trick an AI into writing dangerous database commands, so the tools running those commands will soon block writes by default."
+      },
+      "summary": "After Langroid patched a critical prompt-injection-to-RCE flaw by making its SQL agent SELECT-only by default, expect at least three more LLM-agent frameworks to ship the same read-only-by-default guard by Q1 2027. Maintainers who keep write SQL on by default will draw their own critical CVEs."
+    },
+    {
+      "id": "prediction.1f1f6cfdcd4bec78",
+      "scope_hint": "business",
+      "title": "Frontier-lab safety frameworks align on catastrophic-risk disclosure by Q2 2027",
+      "body": "The Great American AI Act discussion draft conditions its three-year preemption of state development laws on a new federal disclosure: any frontier developer above roughly $500M in prior-year gross revenue must publish a public framework describing how it evaluates and manages a model's catastrophic risks. Several of the labs that clear that threshold already maintain their own catastrophic-risk safety frameworks under different names and structures, so the draft's mandatory-disclosure shape gives them a strong incentive to act before a bill is ever voted on. The prediction is that the largest frontier developers will voluntarily revise and re-publish their existing safety frameworks to converge on a common disclosure structure that mirrors the draft's framework requirement, treating the bill text as the template the industry standardizes around. Moving first lets the labs define what a compliant catastrophic-risk disclosure looks like, blunt the safety-advocate argument that a federal ceiling weakens the state-law floor, and lock in a uniform regime they can defend in lobbying as the draft moves toward formal introduction. Concretely, by the second quarter of 2027 at least three over-threshold developers will publish framework updates that explicitly track the federal disclosure shape, well ahead of any enacted statutory deadline.",
+      "reasoning": {
+        "because": "House draft would force >$500M frontier developers to publish a catastrophic-risk framework",
+        "given": "Top labs already run rival safety frameworks and want to shape the bill, not merely react to it",
+        "so_that": "Labs voluntarily converge their published frameworks toward the draft template to set the de facto standard pre-vote",
+        "landing": "by Q2 2027; >=3 over-threshold labs publish updates citing the federal shape",
+        "plain_language": "A draft law would make big AI firms publish how they guard against catastrophic risks, so they will agree on one shared format first."
+      },
+      "summary": "The Great American AI Act draft would require frontier developers above ~$500M in revenue to publish a catastrophic-risk framework. Rather than wait for a vote, the largest labs that already run safety frameworks will voluntarily align them on a shared template to set the standard a bill codifies."
+    },
+    {
+      "id": "prediction.4b6645739f9d32f8",
+      "scope_hint": "cross",
+      "title": "MiniMax M3 ships weights but trails its SWE-Bench Pro claim on rerun by Q3 2026",
+      "body": "By Q3 2026 MiniMax publishes the M3 checkpoint and technical report on Hugging Face and GitHub, making the open-weight commitment a fact rather than a press claim and letting outside engineers self-host the 1M-context model and its Sparse Attention design. But when independent evaluators run M3 on SWE-Bench Pro under a public harness, the verified figure lands materially below the company-reported 59.0% headline, so the model no longer cleanly sits ahead of GPT-5.5 and Gemini 3.1 Pro on a reproducible measurement. The gap follows from the launch shape itself: at announcement the 59.0% and the 83.5 BrowseComp numbers came from MiniMax's own infrastructure with no external scaffold or scoring details disclosed, and agentic-coding scores are notoriously sensitive to harness, tool access, retry budget, and prompt construction. The business consequence is that the weights ship as promised yet the parity story softens, hardening a hosted-API-first, weights-and-report-later pattern in which the launch-day leaderboard claim and the later reproducible result are treated as two separate events by buyers.",
+      "reasoning": {
+        "because": "M3 launched API-only June 1 on self-reported 59.0% SWE-Bench Pro; weights only promised in ~10 days",
+        "given": "Open-weight launches increasingly lead with hosted APIs and self-reported, unreproduced scores",
+        "so_that": "M3 weights land on Hugging Face but independent SWE-Bench Pro reruns post a materially lower figure than 59.0%",
+        "landing": "by Q3 2026; checkpoint on MiniMaxAI HF org + 1 third-party eval below the claim",
+        "plain_language": "MiniMax says its new coder beats GPT-5.5, but until others test the real weights, expect the public score to come in lower."
+      },
+      "summary": "MiniMax bills M3 as open-weight and posts a 59.0% SWE-Bench Pro score on its own hardware, but the checkpoint is not out yet. Expect the weights to ship on Hugging Face this quarter while independent reruns land below that figure, separating the open-weight claim from a reproducible result."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-05",
+  "predictions": [
+    {
+      "id": "prediction.d333899065046b01",
+      "scope_hint": "tech",
+      "title": "Las herramientas SQL de los frameworks de agentes incorporarán protecciones de ejecución de solo lectura por defecto para el Q1 2027",
+      "body": "La capa de ejecución agéntica de texto-a-SQL convergerá hacia una postura segura por defecto: para el Q1 2027 al menos tres frameworks de agentes LLM de uso extendido, además de Langroid, entregarán sus herramientas de consulta a bases de datos con un valor predeterminado basado en una lista de permitidos validada por parser y limitada a SELECT, junto con una lista de bloqueo de patrones peligrosos consciente del dialecto, tratando el SQL de escritura/DDL/ejecución de programas en crudo como una opción que hay que activar y no como el comportamiento de fábrica. El cambio surge de la constatación de que un modelo manipulado mediante inyección de prompts puede redactar SQL arbitrario, de modo que el propio envoltorio de ejecución del framework -y no solo el rol de base de datos de quien lo despliega- debe ser el punto donde se aplica el control. Cabe esperar que esto se materialice de forma concreta como un cambio de valor predeterminado en herramientas como el toolkit SQL de LangChain, el motor de consultas texto-a-SQL de LlamaIndex o bibliotecas de agentes comparables, acompañado de documentación que eleve las credenciales de base de datos de mínimo privilegio y solo lectura de una nota al pie a un requisito previo declarado. Los mantenedores que no adopten una protección por defecto atraerán cada vez más sus propias alertas críticas de CVSS a medida que los investigadores reproduzcan el patrón de prompt-a-SQL-a-RCE en todo el ecosistema.",
+      "reasoning": {
+        "because": "Langroid 0.63.0 corrigió CVE-2026-25879 haciendo que SQLChatAgent use por defecto una lista de permitidos sqlglot limitada a SELECT",
+        "given": "La inyección de prompts hace que el SQL redactado por el modelo sea controlable por el atacante, y LiteLLM CVE-2026-42208 está activo",
+        "so_that": "Los mantenedores de frameworks de agentes texto-a-SQL entregan un valor predeterminado de mínimo privilegio limitado a SELECT, no un endurecimiento opcional",
+        "landing": "para el Q1 2027; >=3 frameworks de agentes entregan ejecución SQL segura por defecto",
+        "plain_language": "Los hackers pueden engañar a una IA para que escriba comandos peligrosos de base de datos, así que las herramientas que ejecutan esos comandos pronto bloquearán las escrituras por defecto."
+      },
+      "summary": "Después de que Langroid corrigiera una vulnerabilidad crítica de inyección de prompts a RCE haciendo que su agente SQL fuera de solo lectura por defecto, cabe esperar que al menos tres frameworks de agentes LLM más entreguen la misma protección de solo lectura por defecto para el Q1 2027. Los mantenedores que mantengan el SQL de escritura activado por defecto atraerán sus propios CVE críticos."
+    },
+    {
+      "id": "prediction.1f1f6cfdcd4bec78",
+      "scope_hint": "business",
+      "title": "Los frameworks de seguridad de los laboratorios de frontera se alinearán en la divulgación de riesgos catastróficos para el Q2 2027",
+      "body": "El borrador de discusión del Great American AI Act condiciona su preferencia federal de tres años sobre las leyes estatales de desarrollo a una nueva divulgación federal: todo desarrollador de frontera con más de unos $500M de ingresos brutos del año anterior debe publicar un framework público que describa cómo evalúa y gestiona los riesgos catastróficos de un modelo. Varios de los laboratorios que superan ese umbral ya mantienen sus propios frameworks de seguridad de riesgo catastrófico bajo nombres y estructuras distintos, de modo que la forma de divulgación obligatoria del borrador les da un fuerte incentivo para actuar antes de que un proyecto de ley llegue siquiera a votarse. La predicción es que los mayores desarrolladores de frontera revisarán y volverán a publicar voluntariamente sus frameworks de seguridad existentes para converger en una estructura de divulgación común que refleje el requisito de framework del borrador, tratando el texto del proyecto como la plantilla en torno a la cual se estandariza la industria. Dar el primer paso permite a los laboratorios definir cómo es una divulgación de riesgo catastrófico que cumpla, debilitar el argumento de los defensores de la seguridad de que un techo federal rebaja el mínimo de las leyes estatales, y fijar un régimen uniforme que puedan defender en su labor de presión a medida que el borrador avanza hacia su presentación formal. En concreto, para el segundo trimestre de 2027 al menos tres desarrolladores por encima del umbral publicarán actualizaciones de framework que sigan explícitamente la forma de divulgación federal, muy por delante de cualquier plazo legal en vigor.",
+      "reasoning": {
+        "because": "El borrador de la Cámara obligaría a los desarrolladores de frontera con más de $500M a publicar un framework de riesgo catastrófico",
+        "given": "Los principales laboratorios ya operan frameworks de seguridad rivales y quieren dar forma al proyecto de ley, no solo reaccionar a él",
+        "so_that": "Los laboratorios convergen voluntariamente sus frameworks publicados hacia la plantilla del borrador para fijar el estándar de facto antes de la votación",
+        "landing": "para el Q2 2027; >=3 laboratorios por encima del umbral publican actualizaciones que citan la forma federal",
+        "plain_language": "Un borrador de ley obligaría a las grandes empresas de IA a publicar cómo se protegen contra los riesgos catastróficos, así que primero se pondrán de acuerdo en un formato compartido."
+      },
+      "summary": "El borrador del Great American AI Act obligaría a los desarrolladores de frontera con más de ~$500M en ingresos a publicar un framework de riesgo catastrófico. En lugar de esperar a una votación, los mayores laboratorios que ya operan frameworks de seguridad los alinearán voluntariamente en una plantilla compartida para fijar el estándar que un proyecto de ley acabe codificando."
+    },
+    {
+      "id": "prediction.4b6645739f9d32f8",
+      "scope_hint": "cross",
+      "title": "MiniMax M3 publicará los pesos pero quedará por debajo de su afirmación en SWE-Bench Pro al reejecutarse, para el Q3 2026",
+      "body": "Para el Q3 2026 MiniMax publica el checkpoint y el informe técnico de M3 en Hugging Face y GitHub, convirtiendo el compromiso de pesos abiertos en un hecho y no en una afirmación de prensa, y permitiendo a ingenieros externos alojar por su cuenta el modelo de 1M de contexto y su diseño de Sparse Attention. Pero cuando evaluadores independientes ejecutan M3 en SWE-Bench Pro bajo un arnés público, la cifra verificada queda sustancialmente por debajo del 59.0% que la empresa anunció como titular, de modo que el modelo ya no se sitúa con claridad por delante de GPT-5.5 y Gemini 3.1 Pro en una medición reproducible. La diferencia se desprende de la propia forma del lanzamiento: en el anuncio, el 59.0% y la cifra de 83.5 en BrowseComp procedían de la infraestructura propia de MiniMax sin ningún andamiaje externo ni detalles de puntuación divulgados, y las puntuaciones de codificación agéntica son notoriamente sensibles al arnés, al acceso a herramientas, al presupuesto de reintentos y a la construcción del prompt. La consecuencia de negocio es que los pesos se publican según lo prometido pero la historia de paridad se debilita, afianzando un patrón de API alojada primero y pesos-e-informe después en el que la afirmación de la clasificación del día del lanzamiento y el resultado reproducible posterior son tratados como dos eventos distintos por los compradores.",
+      "reasoning": {
+        "because": "M3 se lanzó solo por API el 1 de junio con un 59.0% en SWE-Bench Pro autoinformado; los pesos solo se prometieron en ~10 días",
+        "given": "Los lanzamientos de pesos abiertos cada vez más empiezan con API alojadas y puntuaciones autoinformadas y no reproducidas",
+        "so_that": "Los pesos de M3 llegan a Hugging Face pero las reejecuciones independientes de SWE-Bench Pro registran una cifra sustancialmente más baja que el 59.0%",
+        "landing": "para el Q3 2026; checkpoint en la org HF de MiniMaxAI + 1 evaluación de terceros por debajo de la afirmación",
+        "plain_language": "MiniMax dice que su nuevo modelo de código supera a GPT-5.5, pero hasta que otros prueben los pesos reales, cabe esperar que la puntuación pública resulte más baja."
+      },
+      "summary": "MiniMax presenta M3 como de pesos abiertos y publica una puntuación del 59.0% en SWE-Bench Pro en su propio hardware, pero el checkpoint aún no está disponible. Cabe esperar que los pesos lleguen a Hugging Face este trimestre mientras las reejecuciones independientes quedan por debajo de esa cifra, separando la afirmación de pesos abiertos de un resultado reproducible."
+    }
+  ]
+}
