@@ -1,0 +1,53 @@
+{
+  "date": "2026-06-05",
+  "technical": [
+    {
+      "lead": "Great American AI Act草案：州法の3年間先取りと連邦規則",
+      "body": "Jay Obernolte下院議員（共和、カリフォルニア州）とLori Trahan下院議員（民主、マサチューセッツ州）は、6月4日木曜、超党派でGreat American Artificial Intelligence Actのディスカッション草案を公表した。正式提出の前に関係者の意見を集めることを狙った、約270ページの条文である。目玉となる規定は、フロンティアAIモデルの開発を特に規制する州法を3年間先取りするものだ（カリフォルニア州のAB 2013学習データ開示法やSB 942の透かし規定の一部のような規則を阻む一方、一般適用性の法律や利用・展開に関する法律はそのまま残す）。その見返りとして草案は、大手フロンティア開発者（報道された基準は前年度総収益5億ドル超）に対し、壊滅的リスクをどう評価・管理するかを記した公開のフロンティアAIフレームワークの公表を求める。あわせて商務省内にCenter for AI Standards and Innovationを法定化し、2027〜2029会計年度に年1億ドルの予算を認める。",
+      "citations": [
+        {"label": "FedScoop - Bipartisan 'Great American AI Act' draft proposes new federal AI governance framework", "url": "https://fedscoop.com/bipartisan-great-american-ai-act-draft-proposes-new-federal-ai-governance-framework/"},
+        {"label": "Roll Call - Bipartisan AI draft proposes three-year preemption of state laws", "url": "https://rollcall.com/2026/06/04/bipartisan-ai-draft-proposes-three-year-preemption-of-state-laws/"},
+        {"label": "Nextgov/FCW - Lawmakers propose AI framework that would preempt state laws for 3 years", "url": "https://www.nextgov.com/artificial-intelligence/2026/06/lawmakers-propose-ai-framework-would-preempt-state-laws-3-years/413975/"}
+      ]
+    },
+    {
+      "lead": "CVE-2026-25879：Langroid SQLChatAgentのプロンプトインジェクションからRCE、CVSS 9.8",
+      "body": "新たな勧告が、LLM活用アプリ向けの人気オープンソースフレームワークLangroidのCVE-2026-25879を、CVSS 9.8の重大と評価した。この欠陥はSQLChatAgentに存在する。SQLChatAgentはモデルが生成したSQLを実行するが、そのSQLはプロンプトインジェクションで操れる（悪意あるプロンプトによる直接的な経路でも、モデルが後で読むデータを汚染する間接的な経路でも）ため、攻撃者は方言固有の危険な命令を強いることができる。エージェントが過剰な権限を持つデータベースロール（PostgreSQLのpg_execute_server_program、MySQLのFILE、MSSQLのxp_cmdshell）で接続している場合、COPY ... FROM PROGRAMのような命令は、データ窃取からデータベースホスト上でのリモートコード実行へと格上げされる。修正はLangroid 0.63.0で行われ、SQLChatAgentのデフォルトを、sqlglotで解析したSELECT専用の許可リストと、方言を踏まえた危険パターンの拒否リストにした。",
+      "citations": [
+        {"label": "GitLab Advisory Database - CVE-2026-25879: Langroid has Prompt to SQL Injection, Leading to RCE", "url": "https://advisories.gitlab.com/pypi/langroid/CVE-2026-25879/"},
+        {"label": "GitHub Security Advisory - Prompt to SQL Injection leading to RCE in Langroid (GHSA-mxfr-6hcw-j9rq)", "url": "https://github.com/langroid/langroid/security/advisories/GHSA-mxfr-6hcw-j9rq"}
+      ]
+    },
+    {
+      "lead": "悪用されたLiteLLMプロキシのSQLインジェクション（CVE-2026-42208）がアクセス規律を促す",
+      "body": "Langroidの欠陥は、現に悪用されているLiteLLMプロキシのインジェクション、CVE-2026-42208と一本の筋でつながる。そこでは、細工されたAuthorizationヘッダーが、エラー処理の経路を通じて、パラメータ化されていないキー検索クエリに到達していた。これはv1.83.7で修正され、v1.83.10-stableが推奨されている。どちらの欠陥も、同じtext-to-SQLからデータベースへ至る経路をたどり、一つの教訓を浮き彫りにする。SQLを書くことを許されたLLMはすべて、最小権限でデフォルト読み取り専用のデータベースロールに対して動かさなければならない。モデルの出力は、信頼できず攻撃者に操作され得る入力として扱う必要があるからだ。",
+      "citations": [
+        {"label": "LiteLLM docs - Security Update: CVE-2026-42208 in LiteLLM Proxy", "url": "https://docs.litellm.ai/blog/cve-2026-42208-litellm-proxy-sql-injection"},
+        {"label": "GitLab Advisory Database - CVE-2026-25879: Langroid has Prompt to SQL Injection, Leading to RCE", "url": "https://advisories.gitlab.com/pypi/langroid/CVE-2026-25879/"}
+      ]
+    },
+    {
+      "lead": "MiniMax M3、オープンウェイトのフロンティアコーディングと1Mコンテキストを主張──重みはまだ未公開",
+      "body": "中国のMiniMaxがM3を公開した。フロンティアのコーディングエージェント性能、100万トークンのコンテキストウィンドウ、ネイティブのマルチモダリティを兼ね備えた初のオープンウェイトシステムと銘打たれている。アーキテクチャの中核は、新しいMiniMax Sparse Attention（MSA）機構だ。選んだセグメントだけをスコアリングすることで、完全なアテンションの二次的コストを回避し、1Mトークンのウィンドウに到達する。MiniMaxによれば、テキストと画像を交互に並べた約100兆トークンで学習し、トークンあたりの計算量は前世代M2.7の約20分の1だという。同社はSWE-Bench Proで59.0%（GPT-5.5とGemini 3.1 Proを上回り、Claude Opus 4.7に迫る）、BrowseCompで83.5を報告している。重要な留保がある。スコアは同社の自己申告であり、モデルはMiniMaxのAPIとCodeアプリ経由でしか到達できない。重みと技術報告は約10日以内にHugging FaceとGitHubで出すと約束されているが、まだ現れていない（そこで公開されている最新のチェックポイントは依然としてM2.7である）。",
+      "citations": [
+        {"label": "The Decoder - MiniMax M3: open-weight model with a million-token context challenges proprietary leaders", "url": "https://the-decoder.com/minimax-m3-open-weight-model-with-a-million-token-context-challenges-proprietary-leaders/"},
+        {"label": "TechTimes - MiniMax M3 Open-Weight Coding Model: Frontier Claims, Unverified Benchmarks", "url": "https://www.techtimes.com/articles/317532/20260601/minimax-m3-open-weight-coding-model-frontier-claims-unverified-benchmarks.htm"}
+      ]
+    },
+    {
+      "lead": "ベイエリアの予定：WWDC26は6月8〜12日、続いてDatabricks Data + AI Summitが6月15〜18日",
+      "body": "Microsoft BuildとSnowflake Summitが終わり、次に予定を組むべきベイエリアの未開催イベントはAppleのWWDC26だ。6月8〜12日の週にApple Parkとオンラインで開催される。6月8日月曜の午前10時（PT）の基調講演で幕を開け、午後1時（PT）のPlatforms State of the Unionが続き、その後100本超のビデオセッションが行われる。AIに焦点を当てたSiriとOSの更新が見込まれる。続くのはDatabricks Data + AI Summitで、6月15〜18日にMosconeで開催される。同社は800超のセッションにわたり、3万人超の現地参加を見込む。基調講演の顔ぶれにはAli Ghodsi、Matei Zaharia、Satya Nadellaとの録画対談、OpenAIのGreg Brockman社長が含まれ、加えてOpenAIと共催する複数日のハッカソンも行われる。さらに先では、AI Engineer World's Fairが6月29日〜7月2日にMoscone Westで開催される。",
+      "citations": [
+        {"label": "Apple Developer - WWDC26 special event", "url": "https://developer.apple.com/wwdc26/special-event/"},
+        {"label": "Databricks Newsroom - Databricks announces 2026 Data + AI Summit keynote lineup", "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-announces-2026-data-ai-summit-keynote-lineup-and"}
+      ]
+    }
+  ],
+  "plain": [
+    "米国の草案は州のAI規則を3年間停止させる",
+    "重大なバグにより、攻撃者はAIのSQLエージェント経由でコードを実行できる",
+    "実際の攻撃が、AIに読み取り専用のデータベースアクセスが必要な理由を示す",
+    "新しいオープンなコーディングモデルがトップスコアを主張するが、重みはまだない",
+    "大規模な開発者向けカンファレンスがいくつか、今後1か月にわたって開催される"
+  ]
+}
