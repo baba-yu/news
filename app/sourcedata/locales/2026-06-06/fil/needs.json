@@ -1,0 +1,137 @@
+{
+  "date": "2026-06-06",
+  "by_prediction": {
+    "prediction.a1910f5d2178f52e": [
+      {
+        "actor": "tagapanatili ng MCP reference-server at SDK",
+        "job": "Inaayos muli ang tool-launch path ng stdio transport para ikulong ang inilunsad na command sa halip na patakbuhin ito sa host process.",
+        "outcome": "Naglalabas ang mga reference server at SDK ng stdio tool execution na naka-default sa isang isolated na proseso/container na may allowlist at ibinabang pribilehiyo.",
+        "motivation": "Ang pag-patch sa iisang command field ay isang symptom-fix; ang launcher mismo ang dapat maging enforcement point.",
+        "task": {
+          "who": "Protocol transport / SDK core maintainers",
+          "what": "Ilipat ang stdio tool launch sa likod ng isang confined launcher",
+          "where": "MCP reference server at SDK stdio adapter code",
+          "when": "Mula ngayon hanggang sa mga Q2 2027 release cycle",
+          "why": "Dapat nasa runtime ang enforcement, hindi sa string",
+          "how": "Hiwalay na proseso/container, command allowlist, ibinabang pribilehiyo"
+        }
+      },
+      {
+        "actor": "inhinyero ng agent-framework at flow-builder",
+        "job": "Binabago ang default ng framework para ang mga tool command ay maglunsad sa loob ng isang isolated na boundary sa halip na direkta sa agent process.",
+        "outcome": "Nagde-default ang mga sikat na flow builder ng stdio tools sa process isolation; ang raw in-host exec ay nagiging opt-in para sa mga pinagkakatiwalaang setup.",
+        "motivation": "Ang paglulunsad ng tool command sa agent process ay patuloy na bumubunot ng mga kritikal na RCE advisory tulad ng Flowise import flaw.",
+        "task": {
+          "who": "Framework runtime / integrations team",
+          "what": "I-default ang tool-server exec sa isolated na boundary",
+          "where": "Flow-builder import path at tool-runner runtime",
+          "when": "Panahong inilaan bago ang Q2 2027 ship",
+          "why": "Iwasan ang mga one-click config-to-execution RCE advisory",
+          "how": "Per-server command allowlist, remote transport, sandbox"
+        }
+      },
+      {
+        "actor": "offensive security researcher",
+        "job": "Muling pinatatakbo ang one-click configuration-to-execution pattern sa mga MCP host at naglalathala ng mga advisory na nagtuturo sa transport bilang ugat na sanhi.",
+        "outcome": "Patuloy na mga kritikal na advisory na nagpapatunay na hindi ligtas ang in-host stdio exec, na pumipilit sa mga maintainer na gawing shipped default ang isolation.",
+        "motivation": "Umiiral ang stdio adapter para magpatakbo ng code, kaya ang pagpapakita ng exploitability ay nagpipilit sa ecosystem na ilipat ang enforcement.",
+        "task": {
+          "who": "Vulnerability research / disclosure team",
+          "what": "Kopyahin ang config-to-execution exploit at i-disclose",
+          "where": "Mga MCP host, framework, pampublikong advisory channel",
+          "when": "Patuloy hanggang sa panahong inilaan bago ang Q2 2027",
+          "why": "Patunayang hindi sapat ang patch-over-field na depensa",
+          "how": "Coordinated disclosure, mga CVE filing, PoC replay"
+        }
+      }
+    ],
+    "prediction.b9350fd080696d03": [
+      {
+        "actor": "tagagawa ng patakaran sa federal acquisition",
+        "job": "Bumubuo ng FAR amendment o solicitation clause na gumagawa sa boluntaryong cyber-benchmarking framework bilang isang covered-model contracting condition.",
+        "outcome": "Isang FAR amendment, agency acquisition rule, o standardized solicitation clause na nag-aatas sa mga vendor ng covered frontier model na patunayan ang cyber framework.",
+        "motivation": "Direksyon ng executive branch na isabuhay ang procurement pull ng EO nang walang bagong batas, na ginagaya ang mga naunang secure-software self-attestation gate.",
+        "task": {
+          "who": "FAR Council / agency acquisition-policy office",
+          "what": "Bumuo ng covered-model cyber-attestation solicitation clause",
+          "where": "Federal Acquisition Regulation rulemaking process",
+          "when": "Sa pagitan ng paglabas ng EO at Q2 2027",
+          "why": "Gawing de facto seller requirement ang boluntaryong framework",
+          "how": "FAR amendment na hinubog sa CISA self-attestation"
+        }
+      },
+      {
+        "actor": "lead ng covered-model designation at clearinghouse program",
+        "job": "Itinatayo ang cyber-capability benchmarking process, ang covered-frontier-model designation list, at ang AI Cybersecurity Clearinghouse na binibilhan ng mga ahensiya.",
+        "outcome": "Isang operational na designation list kasama ang clearinghouse na nagbibigay sa procurement gate ng maipatutupad na batayan at federal buying leverage.",
+        "motivation": "Inuutusan ng EO ang Treasury, NSA, at CISA na buuin ang makinaryang nagbibigay sa attestation clause ng isang bagay na konkretong aatasan.",
+        "task": {
+          "who": "Treasury / NSA / CISA interagency program team",
+          "what": "Buuin ang benchmarking, designation list, at clearinghouse",
+          "where": "AI Cybersecurity Clearinghouse at federal critical-infrastructure systems",
+          "when": "Panahong inilaan bago matapos ang acquisition clause",
+          "why": "Bigyan ang procurement gate ng maipatutupad na designation na batayan",
+          "how": "Offensive/defensive cyber-capability benchmarking, vuln scanning, pamamahagi ng patch"
+        }
+      },
+      {
+        "actor": "lead ng government-affairs at compliance ng frontier-vendor",
+        "job": "Inihahanda ang paglahok sa benchmarking, ang early-access disclosure, at ang pampublikong cyber attestation na kailangan para patuloy na makapagbenta ng covered model para sa federal use.",
+        "outcome": "Isang nailathalang federal cyber attestation, o isang clause-bound na award, na nagpapakita ng paglahok sa benchmarking at disclosure process.",
+        "motivation": "Ginagawa ng federal buying power ang attestation na isang precondition para sa contract eligibility; ang hindi lumalahok ay nakukulong sa labas ng government revenue.",
+        "task": {
+          "who": "Frontier-lab government-affairs at security-compliance team",
+          "what": "Ihanda at ilathala ang cyber-capability attestation",
+          "where": "Mga federal solicitation response at clearinghouse early-access track",
+          "when": "Bago ang mga Q2 2027 covered-model solicitation",
+          "why": "Panatilihin ang eligibility na manalo ng federal frontier-model contract",
+          "how": "Pag-enroll sa cyber-capability benchmarking at pagsumite ng disclosure"
+        }
+      }
+    ],
+    "prediction.e318bde1c777b0f2": [
+      {
+        "actor": "GM ng data-center product ng GPU vendor",
+        "job": "Pinapabilis ang shipment at allocation ng next-gen accelerator para mapanatili ng data-center segment revenue ang ~$130B na annualized run-rate sa susunod na dalawang print.",
+        "outcome": "Dalawang magkasunod na data-center quarter na nasa o lampas sa ~$32B, ang hardware print na pumipilit sa mga laggard na desk na magre-revise pataas ng target.",
+        "motivation": "Pinapatunayan ng tuloy-tuloy na run-rate na istruktural ang demand para sa AI-accelerator, hindi isang rurok, na nag-uugnay sa bullish soft-landing na pagbasa ng negosyo.",
+        "task": {
+          "who": "data-center GPU product at demand-planning org",
+          "what": "Pabilisin ang shipment ng accelerator para mapanatili ang run-rate",
+          "where": "fab allocation, order book, quarterly revenue recognition",
+          "when": "ang dalawang quarter bago ang mga Q4 2026 print",
+          "why": "Patunayang istruktural ang demand, na nagtataas ng pagbasa sa target",
+          "how": "next-gen accelerator line + supply allocation"
+        }
+      },
+      {
+        "actor": "may-ari ng pricing at gross-margin ng GPU vendor",
+        "job": "Ipinagtatanggol ang gross margin ng accelerator laban sa inference fragmentation patungo sa custom silicon at mga LPU na maaaring maghudyat ng pressure sa presyo.",
+        "outcome": "Walang matinding gross-margin step-down sa susunod na dalawang print, na nagaalis sa kondisyong sisira sa thesis at magpapanatili sa mean sa ibaba ng $300.",
+        "motivation": "Ang isang napanatiling margin ay naghuhudyat na buo ang pricing power, ang kawalan ng negatibong trigger na nagpapahintulot sa mga desk na magsama-sama palapit sa Street high.",
+        "task": {
+          "who": "pricing, finance, at product-mix strategy team",
+          "what": "Panatilihing matatag ang gross margin ng accelerator",
+          "where": "pricing model, product mix, segment P&L",
+          "when": "sa susunod na dalawang earnings cycle",
+          "why": "Iwasan ang senyales ng pressure sa presyo na sisira sa thesis",
+          "how": "premium mix, AI PC + licensed accelerator lines"
+        }
+      },
+      {
+        "actor": "may-ari ng AI infrastructure capex ng hyperscaler",
+        "job": "Naglalagay at nagpopondo ng malalaking multi-quarter na GPU order para palawakin ang mga training at inference cluster, na naghahatid ng demand sa likod ng revenue print.",
+        "outcome": "Mga committed purchase order na nagpapanatili sa data-center backlog ng vendor sa run-rate na pinagbabatayan ng bullish target.",
+        "motivation": "Ang pag-secure ng accelerator capacity bago ang mga karibal ay nagpoprotekta sa kanilang AI roadmap at nagpipilit sa kanilang mag-commit ng matibay na forward order.",
+        "task": {
+          "who": "cloud infrastructure at capex planning org",
+          "what": "Maglagay at magpondo ng forward GPU order",
+          "where": "annual capex budget at supplier purchase agreements",
+          "when": "ang order cycle na nagpapakain sa susunod na dalawang print",
+          "why": "I-secure ang capacity bago ang AI buildout ng mga karibal",
+          "how": "multi-quarter purchase commitment at capex financing"
+        }
+      }
+    ]
+  }
+}

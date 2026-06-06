@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "MCP reference-server and SDK maintainer",
+    "job": "Reworking the stdio transport's tool-launch path to confine the spawned command instead of running it in the host process.",
+    "outcome": "Reference servers and SDKs ship stdio tool execution defaulting to an isolated process/container with allowlist and dropped privileges.",
+    "motivation": "Patching a single command field is a symptom-fix; the launcher itself must be the enforcement point.",
+    "task": {
+      "who": "Protocol transport / SDK core maintainers",
+      "what": "Move stdio tool launch behind a confined launcher",
+      "where": "MCP reference server and SDK stdio adapter code",
+      "when": "Between now and Q2 2027 release cycles",
+      "why": "Enforcement must sit in the runtime, not the string",
+      "how": "Separate process/container, command allowlist, dropped privileges"
+    }
+  },
+  {
+    "actor": "Agent-framework and flow-builder engineer",
+    "job": "Changing the framework's default so tool commands launch inside an isolated boundary rather than directly in the agent process.",
+    "outcome": "Popular flow builders default stdio tools to process isolation; raw in-host exec becomes an opt-in for trusted setups.",
+    "motivation": "Launching tool commands in the agent process keeps drawing critical RCE advisories like the Flowise import flaw.",
+    "task": {
+      "who": "Framework runtime / integrations team",
+      "what": "Default tool-server exec to isolated boundary",
+      "where": "Flow-builder import path and tool-runner runtime",
+      "when": "Runway before Q2 2027 ship",
+      "why": "Avoid one-click config-to-execution RCE advisories",
+      "how": "Per-server command allowlist, remote transport, sandbox"
+    }
+  },
+  {
+    "actor": "Offensive security researcher",
+    "job": "Replaying the one-click configuration-to-execution pattern across MCP hosts and publishing advisories that pin the root cause on the transport.",
+    "outcome": "Continued critical advisories proving in-host stdio exec is unsafe, forcing maintainers to make isolation the shipped default.",
+    "motivation": "The stdio adapter exists to run code, so demonstrating exploitability pressures the ecosystem to relocate enforcement.",
+    "task": {
+      "who": "Vulnerability research / disclosure team",
+      "what": "Reproduce config-to-execution exploit and disclose",
+      "where": "MCP hosts, frameworks, public advisory channels",
+      "when": "Ongoing through the runway to Q2 2027",
+      "why": "Prove patch-over-field defense is insufficient",
+      "how": "Coordinated disclosure, CVE filings, PoC replay"
+    }
+  }
+]
