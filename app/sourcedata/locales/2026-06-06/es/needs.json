@@ -1,0 +1,137 @@
+{
+  "date": "2026-06-06",
+  "by_prediction": {
+    "prediction.a1910f5d2178f52e": [
+      {
+        "actor": "mantenedor de servidores de referencia y SDK de MCP",
+        "job": "Rehacer la ruta de lanzamiento de herramientas del transporte stdio para confinar el comando generado en lugar de ejecutarlo en el proceso anfitrión.",
+        "outcome": "Los servidores de referencia y los SDK envían la ejecución de herramientas stdio con un valor por defecto que la pone en un proceso/contenedor aislado con lista de permitidos y privilegios reducidos.",
+        "motivation": "Parchear un único campo de comando es una corrección del síntoma; el propio lanzador debe ser el punto de aplicación.",
+        "task": {
+          "who": "Mantenedores del núcleo del transporte del protocolo / SDK",
+          "what": "Trasladar el lanzamiento de herramientas stdio detrás de un lanzador confinado",
+          "where": "Código del servidor de referencia y del adaptador stdio del SDK de MCP",
+          "when": "Entre ahora y los ciclos de lanzamiento del Q2 2027",
+          "why": "La aplicación debe residir en el runtime, no en la cadena",
+          "how": "Proceso/contenedor separado, lista de comandos permitidos, privilegios reducidos"
+        }
+      },
+      {
+        "actor": "ingeniero de frameworks de agentes y constructores de flujos",
+        "job": "Cambiar el valor por defecto del framework para que los comandos de herramientas se lancen dentro de una frontera aislada en lugar de directamente en el proceso del agente.",
+        "outcome": "Los constructores de flujos populares ponen por defecto las herramientas stdio en aislamiento de proceso; la ejecución cruda dentro del anfitrión pasa a ser una opción de activación voluntaria para entornos de confianza.",
+        "motivation": "Lanzar comandos de herramientas en el proceso del agente sigue atrayendo avisos críticos de RCE como el fallo de importación de Flowise.",
+        "task": {
+          "who": "Equipo de runtime / integraciones del framework",
+          "what": "Poner por defecto la ejecución del servidor de herramientas en una frontera aislada",
+          "where": "Ruta de importación del constructor de flujos y runtime ejecutor de herramientas",
+          "when": "Margen antes del lanzamiento del Q2 2027",
+          "why": "Evitar avisos de RCE de configuración a ejecución de un clic",
+          "how": "Lista de comandos permitidos por servidor, transporte remoto, sandbox"
+        }
+      },
+      {
+        "actor": "investigador de seguridad ofensiva",
+        "job": "Reproducir el patrón de configuración a ejecución de un clic en distintos anfitriones MCP y publicar avisos que atribuyen la causa raíz al propio transporte.",
+        "outcome": "Avisos críticos continuados que demuestran que la ejecución stdio dentro del anfitrión es insegura, obligando a los mantenedores a hacer del aislamiento el valor por defecto enviado.",
+        "motivation": "El adaptador stdio existe para ejecutar código, así que demostrar su explotabilidad presiona al ecosistema para reubicar la aplicación.",
+        "task": {
+          "who": "Equipo de investigación de vulnerabilidades / divulgación",
+          "what": "Reproducir el exploit de configuración a ejecución y divulgarlo",
+          "where": "Anfitriones MCP, frameworks, canales públicos de avisos",
+          "when": "De forma continua durante el margen hasta el Q2 2027",
+          "why": "Demostrar que la defensa de parche sobre un campo es insuficiente",
+          "how": "Divulgación coordinada, registros de CVE, reproducción de PoC"
+        }
+      }
+    ],
+    "prediction.b9350fd080696d03": [
+      {
+        "actor": "regulador de la política de adquisiciones federales",
+        "job": "Redactar la enmienda al FAR o la cláusula de licitación que convierte el marco voluntario de evaluación comparativa cibernética en una condición de contratación para modelos cubiertos.",
+        "outcome": "Una enmienda al FAR, una norma de adquisición de una agencia o una cláusula de licitación estandarizada que exige a los vendedores de modelos frontera cubiertos atestiguar el marco cibernético.",
+        "motivation": "Dirección del poder ejecutivo para operacionalizar la atracción de contratación de la EO sin nuevo estatuto, reflejando las puertas previas de autoatestación de software seguro.",
+        "task": {
+          "who": "FAR Council / oficina de política de adquisiciones de la agencia",
+          "what": "Redactar una cláusula de licitación de atestación cibernética para modelos cubiertos",
+          "where": "Proceso de elaboración de normas del Federal Acquisition Regulation",
+          "when": "Entre la emisión de la EO y el Q2 2027",
+          "why": "Convertir el marco voluntario en un requisito de facto para el vendedor",
+          "how": "Enmienda al FAR modelada según la autoatestación de CISA"
+        }
+      },
+      {
+        "actor": "responsable del programa de designación de modelos cubiertos y del clearinghouse",
+        "job": "Poner en marcha el proceso de evaluación comparativa de capacidad cibernética, la lista de designación de modelos frontera cubiertos y el AI Cybersecurity Clearinghouse en el que compran las agencias.",
+        "outcome": "Una lista de designación operativa más un clearinghouse que da a la puerta de contratación su referente aplicable y la palanca de compra federal.",
+        "motivation": "La EO encarga a Treasury, la NSA y CISA construir la maquinaria que da a la cláusula de atestación algo concreto que exigir.",
+        "task": {
+          "who": "Equipo de programa interagencias de Treasury / NSA / CISA",
+          "what": "Construir la evaluación comparativa, la lista de designación y el clearinghouse",
+          "where": "AI Cybersecurity Clearinghouse y sistemas federales de infraestructura crítica",
+          "when": "Margen antes de que se finalice la cláusula de adquisición",
+          "why": "Dar a la puerta de contratación un referente de designación aplicable",
+          "how": "Evaluación comparativa de capacidad cibernética ofensiva/defensiva, escaneo de vulnerabilidades, distribución de parches"
+        }
+      },
+      {
+        "actor": "responsable de asuntos gubernamentales y cumplimiento del vendedor frontera",
+        "job": "Preparar la participación en la evaluación comparativa, la divulgación de acceso anticipado y la atestación cibernética pública necesaria para seguir vendiendo modelos cubiertos para uso federal.",
+        "outcome": "Una atestación cibernética federal publicada, o una adjudicación ligada a la cláusula, que demuestra la participación en el proceso de evaluación comparativa y de divulgación.",
+        "motivation": "El poder de compra federal hace de la atestación una condición previa para la elegibilidad contractual; los no participantes quedan excluidos de los ingresos gubernamentales.",
+        "task": {
+          "who": "Equipo de asuntos gubernamentales y cumplimiento de seguridad del laboratorio frontera",
+          "what": "Preparar y publicar la atestación de capacidad cibernética",
+          "where": "Respuestas a licitaciones federales y vía de acceso anticipado del clearinghouse",
+          "when": "Antes de las licitaciones de modelos cubiertos del Q2 2027",
+          "why": "Preservar la elegibilidad para ganar contratos federales de modelos frontera",
+          "how": "Inscripción en la evaluación comparativa de capacidad cibernética y presentación de divulgación"
+        }
+      }
+    ],
+    "prediction.e318bde1c777b0f2": [
+      {
+        "actor": "director general de producto de centros de datos del fabricante de GPU",
+        "job": "Acelerar los envíos y la asignación de aceleradores de próxima generación para que los ingresos del segmento de centros de datos mantengan una tasa anualizada de ~130.000 millones de dólares en los próximos dos resultados.",
+        "outcome": "Dos trimestres consecutivos de centros de datos en o por encima de ~32.000 millones de dólares, la cifra de hardware que obliga a las mesas rezagadas a revisar los objetivos al alza.",
+        "motivation": "Una tasa de ejecución sostenida demuestra que la demanda de aceleradores de IA es estructural, no un pico, anclando la lectura alcista de aterrizaje suave del negocio.",
+        "task": {
+          "who": "organización de producto de GPU para centros de datos y planificación de demanda",
+          "what": "Acelerar los envíos de aceleradores para mantener la tasa de ejecución",
+          "where": "asignación de fábrica, libro de pedidos, reconocimiento de ingresos trimestral",
+          "when": "los dos trimestres antes de los resultados del Q4 2026",
+          "why": "Demostrar que la demanda es estructural, elevando la lectura del objetivo",
+          "how": "línea de aceleradores de próxima generación + asignación de suministro"
+        }
+      },
+      {
+        "actor": "responsable de precios y margen bruto del fabricante de GPU",
+        "job": "Defender el margen bruto de los aceleradores frente a la fragmentación de la inferencia hacia silicio personalizado y LPU que podrían señalar presión de precios.",
+        "outcome": "Sin un fuerte descenso escalonado del margen bruto en los próximos dos resultados, eliminando la condición que rompería la tesis y estancaría la media por debajo de los 300 dólares.",
+        "motivation": "Un margen mantenido señala que el poder de fijación de precios sigue intacto, la ausencia del disparador negativo que permite a las mesas converger hacia el máximo de Wall Street.",
+        "task": {
+          "who": "equipo de estrategia de precios, finanzas y mezcla de producto",
+          "what": "Mantener estable el margen bruto de los aceleradores",
+          "where": "modelo de precios, mezcla de producto, P&L del segmento",
+          "when": "a lo largo de los próximos dos ciclos de resultados",
+          "why": "Evitar una señal de presión de precios que rompa la tesis",
+          "how": "mezcla premium, líneas de PC con IA + aceleradores con licencia"
+        }
+      },
+      {
+        "actor": "responsable de capex de infraestructura de IA del hyperscaler",
+        "job": "Colocar y financiar grandes pedidos de GPU de varios trimestres para ampliar los clústeres de entrenamiento e inferencia, suministrando la demanda detrás de la cifra de ingresos.",
+        "outcome": "Órdenes de compra comprometidas que mantienen la cartera de centros de datos del fabricante en la tasa de ejecución de la que depende el objetivo alcista.",
+        "motivation": "Asegurar la capacidad de aceleradores por delante de los competidores protege su hoja de ruta de IA y les obliga a comprometer pedidos firmes a futuro.",
+        "task": {
+          "who": "organización de infraestructura en la nube y planificación de capex",
+          "what": "Colocar y financiar pedidos de GPU a futuro",
+          "where": "presupuesto anual de capex y acuerdos de compra con proveedores",
+          "when": "el ciclo de pedidos que alimenta los próximos dos resultados",
+          "why": "Asegurar capacidad por delante de la expansión de IA de los competidores",
+          "how": "compromisos de compra de varios trimestres y financiación de capex"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "date": "2026-06-06",
+  "by_prediction": {
+    "prediction.a1910f5d2178f52e": [
+      {
+        "actor": "MCP reference-server and SDK maintainer",
+        "job": "Reworking the stdio transport's tool-launch path to confine the spawned command instead of running it in the host process.",
+        "outcome": "Reference servers and SDKs ship stdio tool execution defaulting to an isolated process/container with allowlist and dropped privileges.",
+        "motivation": "Patching a single command field is a symptom-fix; the launcher itself must be the enforcement point.",
+        "task": {
+          "who": "Protocol transport / SDK core maintainers",
+          "what": "Move stdio tool launch behind a confined launcher",
+          "where": "MCP reference server and SDK stdio adapter code",
+          "when": "Between now and Q2 2027 release cycles",
+          "why": "Enforcement must sit in the runtime, not the string",
+          "how": "Separate process/container, command allowlist, dropped privileges"
+        }
+      },
+      {
+        "actor": "Agent-framework and flow-builder engineer",
+        "job": "Changing the framework's default so tool commands launch inside an isolated boundary rather than directly in the agent process.",
+        "outcome": "Popular flow builders default stdio tools to process isolation; raw in-host exec becomes an opt-in for trusted setups.",
+        "motivation": "Launching tool commands in the agent process keeps drawing critical RCE advisories like the Flowise import flaw.",
+        "task": {
+          "who": "Framework runtime / integrations team",
+          "what": "Default tool-server exec to isolated boundary",
+          "where": "Flow-builder import path and tool-runner runtime",
+          "when": "Runway before Q2 2027 ship",
+          "why": "Avoid one-click config-to-execution RCE advisories",
+          "how": "Per-server command allowlist, remote transport, sandbox"
+        }
+      },
+      {
+        "actor": "Offensive security researcher",
+        "job": "Replaying the one-click configuration-to-execution pattern across MCP hosts and publishing advisories that pin the root cause on the transport.",
+        "outcome": "Continued critical advisories proving in-host stdio exec is unsafe, forcing maintainers to make isolation the shipped default.",
+        "motivation": "The stdio adapter exists to run code, so demonstrating exploitability pressures the ecosystem to relocate enforcement.",
+        "task": {
+          "who": "Vulnerability research / disclosure team",
+          "what": "Reproduce config-to-execution exploit and disclose",
+          "where": "MCP hosts, frameworks, public advisory channels",
+          "when": "Ongoing through the runway to Q2 2027",
+          "why": "Prove patch-over-field defense is insufficient",
+          "how": "Coordinated disclosure, CVE filings, PoC replay"
+        }
+      }
+    ],
+    "prediction.b9350fd080696d03": [
+      {
+        "actor": "federal acquisition-policy rulemaker",
+        "job": "Drafting the FAR amendment or solicitation clause that turns the voluntary cyber-benchmarking framework into a covered-model contracting condition.",
+        "outcome": "A FAR amendment, agency acquisition rule, or standardized solicitation clause requiring covered-frontier-model vendors to attest to the cyber framework.",
+        "motivation": "Executive-branch direction to operationalize the EO's procurement pull without new statute, mirroring prior secure-software self-attestation gates.",
+        "task": {
+          "who": "FAR Council / agency acquisition-policy office",
+          "what": "Draft covered-model cyber-attestation solicitation clause",
+          "where": "Federal Acquisition Regulation rulemaking process",
+          "when": "Between EO issuance and Q2 2027",
+          "why": "Convert voluntary framework into de facto seller requirement",
+          "how": "FAR amendment modeled on CISA self-attestation"
+        }
+      },
+      {
+        "actor": "covered-model designation and clearinghouse program lead",
+        "job": "Standing up the cyber-capability benchmarking process, the covered-frontier-model designation list, and the AI Cybersecurity Clearinghouse agencies buy into.",
+        "outcome": "An operational designation list plus clearinghouse that supplies the procurement gate its enforceable referent and federal buying leverage.",
+        "motivation": "EO directs Treasury, NSA, and CISA to build the machinery that gives the attestation clause something concrete to require.",
+        "task": {
+          "who": "Treasury / NSA / CISA interagency program team",
+          "what": "Build benchmarking, designation list, and clearinghouse",
+          "where": "AI Cybersecurity Clearinghouse and federal critical-infrastructure systems",
+          "when": "Runway before the acquisition clause finalizes",
+          "why": "Give the procurement gate an enforceable designation referent",
+          "how": "Offensive/defensive cyber-capability benchmarking, vuln scanning, patch distribution"
+        }
+      },
+      {
+        "actor": "frontier-vendor government-affairs and compliance lead",
+        "job": "Preparing benchmarking participation, early-access disclosure, and the public cyber attestation needed to keep selling covered models into federal use.",
+        "outcome": "A published federal cyber attestation, or a clause-bound award, demonstrating participation in the benchmarking and disclosure process.",
+        "motivation": "Federal buying power makes attestation a precondition for contract eligibility; non-participants get locked out of government revenue.",
+        "task": {
+          "who": "Frontier-lab government-affairs and security-compliance team",
+          "what": "Prepare and publish cyber-capability attestation",
+          "where": "Federal solicitation responses and clearinghouse early-access track",
+          "when": "Ahead of Q2 2027 covered-model solicitations",
+          "why": "Preserve eligibility to win federal frontier-model contracts",
+          "how": "Cyber-capability benchmarking enrollment and disclosure submission"
+        }
+      }
+    ],
+    "prediction.e318bde1c777b0f2": [
+      {
+        "actor": "GPU vendor data-center product GM",
+        "job": "Ramping next-gen accelerator shipments and allocation so data-center segment revenue holds a ~$130B annualized run-rate over the next two prints.",
+        "outcome": "Two consecutive data-center quarters at or above ~$32B, the hardware print that forces laggard desks to revise targets upward.",
+        "motivation": "Sustained run-rate proves AI-accelerator demand is structural, not a peak, anchoring the bullish soft-landing read of the business.",
+        "task": {
+          "who": "data-center GPU product and demand-planning org",
+          "what": "Ramp accelerator shipments to hold run-rate",
+          "where": "fab allocation, order book, quarterly revenue recognition",
+          "when": "the two quarters before Q4 2026 prints",
+          "why": "Prove demand is structural, lifting target read",
+          "how": "next-gen accelerator line + supply allocation"
+        }
+      },
+      {
+        "actor": "GPU vendor pricing and gross-margin owner",
+        "job": "Defending accelerator gross margin against inference fragmentation toward custom silicon and LPUs that could signal pricing pressure.",
+        "outcome": "No sharp gross-margin step-down on the next two prints, removing the condition that would break the thesis and stall the mean below $300.",
+        "motivation": "A held margin signals pricing power intact, the absence of the negative trigger that lets desks converge toward the Street high.",
+        "task": {
+          "who": "pricing, finance, and product-mix strategy team",
+          "what": "Hold accelerator gross margin steady",
+          "where": "pricing model, product mix, segment P&L",
+          "when": "across the next two earnings cycles",
+          "why": "Avoid pricing-pressure signal that breaks thesis",
+          "how": "premium mix, AI PC + licensed accelerator lines"
+        }
+      },
+      {
+        "actor": "hyperscaler AI infrastructure capex owner",
+        "job": "Placing and financing large multi-quarter GPU orders to expand training and inference clusters, supplying the demand behind the revenue print.",
+        "outcome": "Committed purchase orders that keep the vendor's data-center backlog at the run-rate the bullish target depends on.",
+        "motivation": "Securing accelerator capacity ahead of competitors protects their AI roadmap and forces them to commit firm forward orders.",
+        "task": {
+          "who": "cloud infrastructure and capex planning org",
+          "what": "Place and finance forward GPU orders",
+          "where": "annual capex budget and supplier purchase agreements",
+          "when": "the order cycle feeding the next two prints",
+          "why": "Secure capacity ahead of competitors' AI buildout",
+          "how": "multi-quarter purchase commitments and capex financing"
+        }
+      }
+    ]
+  }
+}

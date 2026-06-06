@@ -1,0 +1,14 @@
+{
+  "id": "prediction.a1910f5d2178f52e",
+  "scope_hint": "tech",
+  "title": "MCP host runtimes ship sandboxed stdio tool execution as the default by Q2 2027",
+  "body": "The Model Context Protocol's stdio transport will lose its status as an unguarded shell into the host process. By Q2 2027 at least three widely used MCP hosts or agent frameworks will ship their stdio tool-server path defaulting to an isolated execution boundary - a separate process or container with a constrained environment, an explicit per-server command allowlist, and dropped privileges - rather than spawning an attacker-configurable command in the host's own context. The change is forced by the recognition that the stdio adapter exists precisely to run code, so an allowlist-and-flag-validation patch over a single field cannot be the whole defense; the enforcement point has to be the runtime that launches and confines the tool, not the string it was handed. Concretely, expect this to surface as a changed default in the reference servers and SDKs and in popular flow builders, with documentation that reframes remote transports and process isolation as the recommended posture and treats raw in-host stdio exec as an opt-in for trusted local setups only. Frameworks that keep launching tool commands directly inside the agent process will keep drawing their own critical advisories as researchers replay the one-click configuration-to-execution pattern across the ecosystem.",
+  "reasoning": {
+    "because": "Flowise CVE-2026-40933 ran attacker-set commands through its MCP stdio adapter on a 1-click import",
+    "given": "Researchers call the patch a symptom-fix; the NSA flags stdio transport and weak privilege isolation",
+    "so_that": "MCP hosts move enforcement into a sandboxed launcher and make isolated or remote-transport execution the shipped default",
+    "landing": "by Q2 2027; >=3 MCP hosts default stdio tools to process/container isolation",
+    "plain_language": "An AI builder got hacked because its tool feature ran any command directly, so these tools will soon run commands in a locked box."
+  },
+  "summary": "After Flowise's MCP stdio adapter let a 1-click import run arbitrary commands as a CVSS 9.9 RCE, and researchers and the NSA pinned the root cause on the transport itself, expect at least three MCP hosts or frameworks to default stdio tool execution to a sandboxed, isolated boundary by Q2 2027."
+}

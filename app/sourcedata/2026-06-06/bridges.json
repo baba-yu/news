@@ -1,0 +1,454 @@
+{
+  "date": "2026-06-06",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.299950dc17b30ddd",
+        "short_label": "Cross-sector CERT bodies issue joint AI-found embedded-CVE guidance by Q3 2027",
+        "prediction_date": "2026-05-30"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The June 6 analysis of Trump's \"Promoting Advanced Artificial Intelligence Innovation and Security\" order directs Treasury, NSA, and CISA to stand up an \"AI Cybersecurity Clearinghouse\" coordinating vulnerability scanning, discovery, and patch distribution across federal and critical-infrastructure operators - a government-run cross-agency channel for AI-relevant vulnerability handling.\nThe Flowise CVE-2026-40933 coverage reinforces the substrate: the one-click MCP RCE lands on the exact concern the NSA AI Security Center already published in its Model Context Protocol Cybersecurity Information Sheet, an existing cross-sector technical advisory for an AI-found agent-framework flaw class.\nTogether a clearinghouse for inter-agency vuln coordination plus a standing NSA information sheet on an AI-tooling vulnerability class are early scaffolding for the predicted joint cross-sector CERT-style guidance, though neither is yet a multi-CERT embedded-CVE document.",
+      "reference_links": [
+        {
+          "label": "White House - Promoting Advanced Artificial Intelligence Innovation and Security",
+          "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+        },
+        {
+          "label": "NSA - Press release: Security Design Considerations for AI-Driven Automation Leveraging the Model Context Protocol",
+          "url": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4496698/nsa-releases-security-design-considerations-for-ai-driven-automation-leveraging/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "The June 6 order tasks Treasury, NSA, and CISA to stand up an AI Cybersecurity Clearinghouse coordinating vuln scanning and patch distribution across federal and critical-infrastructure operators, and the NSA Model Context Protocol information sheet already supplies a cross-sector technical advisory for an AI-tooling flaw class. Together they are early scaffolding for the predicted joint guidance.",
+        "coherence": 3,
+        "remaining_gap": "Neither is yet a multi-authority embedded-CVE document; no CISA/FDA/NHTSA/ENISA joint advisory or MoU naming AI-found CVEs has been published."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2d800e2dfed12361",
+        "short_label": "AI-found-vuln cohort programs ship shared disclosure standard by Q1 2027",
+        "prediction_date": "2026-05-30"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The June 6 Flowise CVE-2026-40933 thread is, at its core, a disclosure-process story. The flaw was fixed in Flowise 3.1.0 via maintainer-coordinated disclosure, and Obsidian Security published proof-of-concept exploit code alongside the fix.\nThe newer development is an open disclosure debate: Obsidian argues the allowlist-and-flag-validation patch \"treats the symptom rather than the cause\" and recommends operators drop stdio for Server-Sent Events, while the pattern is mapped against the NSA AI Security Center's published Model Context Protocol Cybersecurity Information Sheet.\nA second CVSS-9-plus agent-framework RCE in successive weeks, each handled through coordinated disclosure with public PoC and a vendor patch, is the kind of repeated practice that pushes the predicted shared disclosure standard for AI-found-vuln work, even if no formal common standard has been published yet.",
+      "reference_links": [
+        {
+          "label": "GitHub Advisory GHSA-c9gw-hvqq-f33r - Flowise: Authenticated RCE Via MCP Adapters",
+          "url": "https://github.com/advisories/GHSA-c9gw-hvqq-f33r"
+        },
+        {
+          "label": "Obsidian Security - 1-Click RCE in Flowise (CVE-2026-40933): When Is stdio MCP Actually a Vulnerability?",
+          "url": "https://www.obsidiansecurity.com/blog/when-is-stdio-mcp-actually-a-vulnerability"
+        },
+        {
+          "label": "NSA - Press release: Security Design Considerations for AI-Driven Automation Leveraging the Model Context Protocol",
+          "url": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4496698/nsa-releases-security-design-considerations-for-ai-driven-automation-leveraging/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Flowise CVE-2026-40933 is at core a disclosure-process story: fixed in 3.1.0 via maintainer-coordinated disclosure with Obsidian publishing proof-of-concept code, and the flaw mapped against the NSA Model Context Protocol information sheet. A second CVSS-9-plus agent-framework RCE handled this way in successive weeks is the repeated practice that pushes toward a shared disclosure standard.",
+        "coherence": 3,
+        "remaining_gap": "No formal common disclosure-format standard, and no peer-lab cohort programs at the predicted scale, have yet been published."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2970bfdce5e0004c",
+        "short_label": "Large PaaS vendors bundle MCP-identity gateway into default platform by H1 2027",
+        "prediction_date": "2026-05-31"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The June 6 Flowise CVE-2026-40933 disclosure sharpens the case for an MCP-identity-and-control layer in the platform. The bug is an OS command injection in Flowise's Model Context Protocol stdio adapter where an authenticated user can configure an MCP stdio server with an arbitrary command, and the coverage notes that agents spanning multiple MCP servers often lack privilege isolation per the NSA information sheet.\nObsidian Security's critique that an allowlist-and-flag patch \"treats the symptom rather than the cause\" points the enforcement burden toward the platform-managed transport and identity boundary rather than per-field validation.\nThat strengthens the demand side of the prediction - PaaS-level MCP governance - but today's evidence is a self-hosted-flow-builder RCE, not a hyperscaler shipping a default identity gateway, so the gateway-as-default mechanism itself is not yet demonstrated.",
+      "reference_links": [
+        {
+          "label": "GitLab Advisory Database - CVE-2026-40933: Flowise: Authenticated RCE Via MCP Adapters",
+          "url": "https://advisories.gitlab.com/npm/flowise-components/CVE-2026-40933/"
+        },
+        {
+          "label": "NSA - Press release: Security Design Considerations for AI-Driven Automation Leveraging the Model Context Protocol",
+          "url": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4496698/nsa-releases-security-design-considerations-for-ai-driven-automation-leveraging/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Flowise CVE-2026-40933 is an OS command injection in its MCP stdio adapter, with coverage noting agents spanning multiple MCP servers often lack privilege isolation. Obsidian's critique that an allowlist patch treats the symptom not the cause points enforcement toward a platform-managed transport and identity boundary, strengthening the demand for PaaS-level MCP governance.",
+        "coherence": 3,
+        "remaining_gap": "Today's evidence is a self-hosted flow-builder RCE; no large PaaS vendor has shipped a default-tier MCP-identity gateway, so the mechanism is undemonstrated."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3a917faa36a1b827",
+        "short_label": "Agent-harness vendors ship gVisor+OS-sandbox+VM containment specs by Q2 2027",
+        "prediction_date": "2026-05-31"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "The June 6 Flowise CVE-2026-40933 thread is the cleanest support yet for the containment thesis. The CVSS 9.9 flaw is an OS command injection in Flowise's Model Context Protocol stdio adapter where a one-click chatflow import triggers code execution with the Flowise process's own privileges - i.e., the tool command runs directly inside the host context with no confinement.\nObsidian Security argues the allowlist-and-flag-validation patch \"treats the symptom rather than the cause\" because the stdio transport exists to execute code, and recommends operators disable stdio in favor of Server-Sent Events - an argument that the enforcement point has to be the runtime that launches and confines the tool, not the string it was handed.\nComing a week after the Langroid text-to-SQL flaw, two CVSS-9-plus framework RCEs make self-hosted agent platforms a clearly active attack surface, exactly the pressure that forces agent-harness vendors toward the predicted sandboxed/VM containment posture.",
+      "reference_links": [
+        {
+          "label": "GitLab Advisory Database - CVE-2026-40933: Flowise: Authenticated RCE Via MCP Adapters",
+          "url": "https://advisories.gitlab.com/npm/flowise-components/CVE-2026-40933/"
+        },
+        {
+          "label": "CSO Online - Flowise's MCP implementation can run ghost commands",
+          "url": "https://www.csoonline.com/article/4179309/flowises-mcp-implementation-can-run-ghost-commands.html"
+        },
+        {
+          "label": "Obsidian Security - 1-Click RCE in Flowise (CVE-2026-40933): When Is stdio MCP Actually a Vulnerability?",
+          "url": "https://www.obsidiansecurity.com/blog/when-is-stdio-mcp-actually-a-vulnerability"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Flowise CVE-2026-40933 (CVSS 9.9) runs a one-click chatflow import as code with the host process's own privileges, no confinement. Obsidian argues the stdio transport exists to execute code, so the enforcement point must be the runtime that launches and confines the tool. Coming a week after the Langroid flaw, two framework RCEs make this the pressure forcing a containment posture.",
+        "coherence": 4,
+        "remaining_gap": "No peer agent-harness vendor has yet published a matching gVisor/OS-sandbox/VM containment spec, and no standards body has drafted a profile."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8810bab3c28adac5",
+        "short_label": "On-device LLM silicon ships 1-PFLOP deskside + sandbox-runtime specs by H1 2027",
+        "prediction_date": "2026-06-01"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The June 6 China Renaissance Nvidia coverage notes Nvidia is widening its product surface beyond data-center GPUs, using its GTC 2026 cycle to push into Windows AI PCs with the RTX Spark superchip - direct movement on the deskside on-device silicon half of the prediction.\nThe sandbox-runtime half is reinforced separately by the same day's Flowise CVE-2026-40933 coverage and Obsidian's argument that agent tool execution must be confined to an isolated runtime, the on-device-execution-confinement concern the prediction pairs with the silicon.\nThe two halves are advancing on different threads rather than in a single integrated deskside-plus-sandbox product, so this is reinforcement of both legs rather than a unified landing.",
+      "reference_links": [
+        {
+          "label": "ServeTheHome - Groq LPUs Join Vera Rubin Platform for Low-Latency Inference",
+          "url": "https://www.servethehome.com/decoding-the-future-of-inference-at-nvidia-groq-lpus-join-vera-rubin-platform-for-low-latency-inference/"
+        },
+        {
+          "label": "Obsidian Security - 1-Click RCE in Flowise (CVE-2026-40933): When Is stdio MCP Actually a Vulnerability?",
+          "url": "https://www.obsidiansecurity.com/blog/when-is-stdio-mcp-actually-a-vulnerability"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Nvidia is widening past data-center GPUs into Windows AI PCs with the RTX Spark superchip, direct movement on the deskside on-device silicon leg, while the same day's Flowise coverage and Obsidian's case for confining tool execution to an isolated runtime reinforce the paired sandbox-runtime concern. Both legs of the driving rationale are advancing.",
+        "coherence": 3,
+        "remaining_gap": "The two halves advance on separate threads rather than as one integrated deskside-plus-sandbox product, and no peer silicon vendor has published matching specs."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c724b65094d304dd",
+        "short_label": "AI-assisted vuln triage anchors federal-financial-insurer baseline by H1 2027",
+        "prediction_date": "2026-06-01"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The June 6 analysis of Trump's \"Promoting Advanced Artificial Intelligence Innovation and Security\" order directly advances the federal leg of this baseline. Within 30 days CISA must issue directives to harden civilian federal systems and expand AI-enabled defensive tooling, and Treasury, NSA, and CISA must stand up an \"AI Cybersecurity Clearinghouse\" to coordinate vulnerability scanning, discovery, and patch distribution across government and critical-infrastructure operators.\nOutside counsel read the framing as light-touch on its face but carrying mandatory pull in practice through federal procurement leverage and the clearinghouse's vulnerability-coordination role.\nThe presence of Treasury alongside CISA, and the critical-infrastructure scope, gesture toward the financial-sector reach the prediction names; what is still missing is an explicit insurer/financial-supervisor adoption rather than a federal-plus-Treasury clearinghouse.",
+      "reference_links": [
+        {
+          "label": "White House - Promoting Advanced Artificial Intelligence Innovation and Security",
+          "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+        },
+        {
+          "label": "Ropes & Gray - Trump's AI Cybersecurity Order: A Voluntary Framework with Mandatory Implications",
+          "url": "https://www.ropesgray.com/en/insights/alerts/2026/06/trumps-ai-cybersecurity-order-a-voluntary-framework-with-mandatory-implications"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "The June 6 order directly advances the federal leg: within 30 days CISA must harden civilian systems and expand AI-enabled defensive tooling, and Treasury, NSA, and CISA must stand up a clearinghouse coordinating vuln scanning and patch distribution across critical infrastructure. Treasury's presence and the critical-infrastructure scope gesture toward the financial reach the baseline names.",
+        "coherence": 3,
+        "remaining_gap": "Still missing an explicit insurer or financial-supervisor adoption, plus the named FFIEC/SEC anchors, rather than a federal-plus-Treasury clearinghouse alone."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.fd0660f0789c6e44",
+        "short_label": "Fortune 500 IT capex bundles AI-PC refresh into data-center spend by H2 2027",
+        "prediction_date": "2026-06-01"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The June 6 China Renaissance Nvidia coverage shows the supply-side precondition for the prediction firming: Nvidia is pushing into Windows AI PCs with the RTX Spark superchip while continuing to widen its data-center GPU surface, putting the same vendor on both sides of the AI-PC-plus-data-center spend the prediction expects buyers to bundle.\nThe Buy initiation at a $319 target rests on a soft-landing read of AI-accelerator demand across both segments.\nThe evidence is on the vendor/product side; it does not yet show a Fortune 500 buyer formally folding AI-PC refresh into a data-center capex line, which is the prediction's actual claim.",
+      "reference_links": [
+        {
+          "label": "ServeTheHome - Groq LPUs Join Vera Rubin Platform for Low-Latency Inference",
+          "url": "https://www.servethehome.com/decoding-the-future-of-inference-at-nvidia-groq-lpus-join-vera-rubin-platform-for-low-latency-inference/"
+        },
+        {
+          "label": "MarketScreener - China Renaissance Initiates Nvidia at Buy With $319 Price Target",
+          "url": "https://www.marketscreener.com/news/china-renaissance-initiates-nvidia-at-buy-with-319-price-target-ce7f5ddddf89f125"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Nvidia's June 6 RTX Spark push into Windows AI PCs while widening its data-center GPU surface puts one vendor on both sides of the spend, firming the shipping-AI-PC-alongside-data-center substrate the prediction rests on. But this is vendor product movement; no buyer yet folds an AI-PC fleet refresh into a unified infrastructure capex line.",
+        "coherence": 2,
+        "remaining_gap": "No Fortune 500 disclosure bundling AI-PC refresh with data-center spend, nor a Big Four RFP template; evidence is supply-side only."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.808bbd831ebf41b3",
+        "short_label": "Custom AI-accelerator XPU silicon clears $20B-per-quarter run-rate by Q4 2026",
+        "prediction_date": "2026-06-03"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The June 6 China Renaissance Nvidia coverage frames the inference market as fragmenting toward custom silicon and dedicated low-latency parts even as Nvidia stays dominant - the structural backdrop the custom-XPU run-rate thesis depends on.\nConcretely, Nvidia is folding the licensed Groq LPU line into its Vera Rubin roadmap, a marquee example of a dedicated non-GPU accelerator moving into volume deployment alongside data-center GPUs.\nThe signal supports the direction (custom/dedicated accelerator silicon scaling) but offers no run-rate dollar figure, so it does not yet confirm the predicted $20B-per-quarter threshold.",
+      "reference_links": [
+        {
+          "label": "ServeTheHome - Groq LPUs Join Vera Rubin Platform for Low-Latency Inference",
+          "url": "https://www.servethehome.com/decoding-the-future-of-inference-at-nvidia-groq-lpus-join-vera-rubin-platform-for-low-latency-inference/"
+        },
+        {
+          "label": "MarketBeat - NVIDIA (NASDAQ:NVDA) Coverage Initiated at China Renaissance",
+          "url": "https://www.marketbeat.com/instant-alerts/nvidia-nasdaqnvda-coverage-initiated-at-china-renaissance-2026-06-05/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "The June 6 China Renaissance note frames inference as fragmenting toward custom and dedicated low-latency silicon even with Nvidia dominant, and cites Nvidia folding the licensed Groq LPU line into its Vera Rubin roadmap - a marquee non-GPU accelerator moving into volume deployment. That supports custom/dedicated silicon scaling, the predicted outcome, but offers no shipped-revenue figure.",
+        "coherence": 3,
+        "remaining_gap": "No quarterly run-rate dollar figure near the named $20B threshold, and no count of custom-XPU core customers passing six."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.488b349d322d5c4a",
+        "short_label": "Agent-framework SQL tools ship read-only-by-default execution guards by Q1 2027",
+        "prediction_date": "2026-06-05"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The June 6 Flowise CVE-2026-40933 thread generalizes this prediction's logic from SQL tools to agent-framework tool execution broadly. The CVSS 9.9 flaw lets an authenticated user configure an MCP stdio server with an arbitrary command that the host executes with full process privileges, and the fix shipped as an allowlist-and-flag-validation guard in Flowise 3.1.0 - a default-restriction control on a tool-execution path.\nObsidian Security argues that guard \"treats the symptom rather than the cause,\" pushing for an even more restrictive default (disable stdio in favor of Server-Sent Events) - the same direction-of-travel as a read-only-by-default execution posture for agent tools.\nComing a week after the Langroid text-to-SQL flaw, the pattern shows agent-framework maintainers being forced toward default-deny execution guards, though the specific read-only-by-default SQL-tool default the prediction names is not the exact control shipped here.",
+      "reference_links": [
+        {
+          "label": "GitLab Advisory Database - CVE-2026-40933: Flowise: Authenticated RCE Via MCP Adapters",
+          "url": "https://advisories.gitlab.com/npm/flowise-components/CVE-2026-40933/"
+        },
+        {
+          "label": "CSO Online - Flowise's MCP implementation can run ghost commands",
+          "url": "https://www.csoonline.com/article/4179309/flowises-mcp-implementation-can-run-ghost-commands.html"
+        },
+        {
+          "label": "Obsidian Security - 1-Click RCE in Flowise (CVE-2026-40933): When Is stdio MCP Actually a Vulnerability?",
+          "url": "https://www.obsidiansecurity.com/blog/when-is-stdio-mcp-actually-a-vulnerability"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Flowise 3.1.0's June 6 fix shipped an allowlist-and-flag-validation guard as a default restriction on its tool-execution path, and Obsidian Security pushed an even harder default (drop stdio for SSE). That is maintainers moving toward least-privilege-by-default rather than opt-in hardening - the predicted direction-of-travel - though the control is broad MCP execution, not a read-only SQL default.",
+        "coherence": 3,
+        "remaining_gap": "Evidence is one MCP-adapter fix, not the specific SELECT-only SQL default, and far short of three text-to-SQL frameworks shipping safe-by-default."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.69bedb462442e205",
+        "short_label": "Frontier-lab safety frameworks align on catastrophic-risk disclosure by Q2 2027",
+        "prediction_date": "2026-06-05"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The June 6 analysis of Trump's \"Promoting Advanced Artificial Intelligence Innovation and Security\" order is a direct governance signal for frontier-model risk disclosure, framed as the executive-branch counterpart to the congressional catastrophic-risk debate rather than a restatement of it.\nWithin 60 days NSA, CISA, and Treasury must build a benchmarking process to assess models' offensive and defensive cyber capabilities and designate \"covered frontier models,\" coupled with a strictly voluntary framework letting developers give the government up to 30 days of pre-release access.\nThe order bars any reading authorizing mandatory licensing, preclearance, or permitting, but analysts noted procurement leverage gives the voluntary scheme mandatory pull - a concrete mechanism nudging frontier labs toward standardized capability disclosure, even if the cyber-capability scope is narrower than the broad catastrophic-risk alignment the prediction targets.",
+      "reference_links": [
+        {
+          "label": "White House - Promoting Advanced Artificial Intelligence Innovation and Security",
+          "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+        },
+        {
+          "label": "Freshfields - Trump Executive Order on AI: Voluntary Framework, Cybersecurity Focus, and Key Takeaways",
+          "url": "https://www.freshfields.com/en/our-thinking/blogs/a-fresh-take/trump-executive-order-on-ai-voluntary-framework-cybersecurity-focus-and-key-ta-102n18b"
+        },
+        {
+          "label": "Ropes & Gray - Trump's AI Cybersecurity Order: A Voluntary Framework with Mandatory Implications",
+          "url": "https://www.ropesgray.com/en/insights/alerts/2026/06/trumps-ai-cybersecurity-order-a-voluntary-framework-with-mandatory-implications"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Trump's June 2 order builds a frontier-model cyber-capability benchmarking process, designates \"covered frontier models,\" and offers a strictly voluntary up-to-30-day pre-release access framework that procurement leverage gives mandatory pull - a concrete federal shape labs can converge their disclosures toward, matching the predicted voluntary alignment, though scoped to cyber capability rather than broad catastrophic risk.",
+        "coherence": 3,
+        "remaining_gap": "No over-threshold lab has yet published a framework update citing the federal shape, and the order's cyber scope is narrower than catastrophic-risk disclosure."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e4612827ed602fa6",
+        "short_label": "LLM-tooling + Linux-kernel CVE chain becomes dominant attack pattern by H2 2026",
+        "prediction_date": "2026-05-02"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] The June 6 Flowise CVE-2026-40933 thread is a textbook instance of this dormant attack-pattern thesis, matching its Signals on MCP server compromise, tool invocation abuse, and agent-harness/inference-runtime weaponization. The CVSS 9.9 OS command injection lives in Flowise's Model Context Protocol stdio adapter, where a one-click chatflow import yields code execution with the host process's privileges.\nObsidian Security's published proof-of-concept and its argument that the allowlist patch \"treats the symptom rather than the cause\" sharpen the supply-chain-weaponization read, while the pattern is mapped onto the NSA AI Security Center's Model Context Protocol Cybersecurity Information Sheet.\nComing a week after the Langroid text-to-SQL flaw, two CVSS-9-plus framework RCEs in successive weeks make the LLM-tooling-as-attack-surface pattern concrete; the Linux-kernel-LPE chaining leg of the original thesis is not present in today's evidence.",
+      "reference_links": [
+        {
+          "label": "GitLab Advisory Database - CVE-2026-40933: Flowise: Authenticated RCE Via MCP Adapters",
+          "url": "https://advisories.gitlab.com/npm/flowise-components/CVE-2026-40933/"
+        },
+        {
+          "label": "Obsidian Security - 1-Click RCE in Flowise (CVE-2026-40933): When Is stdio MCP Actually a Vulnerability?",
+          "url": "https://www.obsidiansecurity.com/blog/when-is-stdio-mcp-actually-a-vulnerability"
+        },
+        {
+          "label": "NSA - Press release: Security Design Considerations for AI-Driven Automation Leveraging the Model Context Protocol",
+          "url": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4496698/nsa-releases-security-design-considerations-for-ai-driven-automation-leveraging/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The June 6 Flowise CVE-2026-40933 is a textbook LLM-tooling weaponization: a CVSS 9.9 OS command injection in the MCP stdio adapter executing with host privileges, with a published PoC and mapping to the NSA MCP information sheet. A second CVSS-9-plus framework RCE in successive weeks makes the LLM-tooling-as-attack-surface premise concrete, though no kernel-LPE chaining appears.",
+        "coherence": 3,
+        "remaining_gap": "The Linux-kernel-LPE chaining leg is absent, and no IR post-mortem or CNA advisory yet names a full LLM-tooling-plus-kernel chain."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] The June 6 Flowise CVE-2026-40933 thread revives this agent-attack-surface thesis along its Signals on indirect-execution PoCs, CI/agent platforms, and supply-chain categorization. The takeaway in the coverage is explicit: two CVSS-9-plus agent-framework RCEs in successive weeks make self-hosted agent platforms a clearly active attack surface, and operators should treat both model output and tool configuration as untrusted.\nObsidian Security's proof-of-concept and the NSA information sheet's warning that agents spanning multiple MCP servers often lack privilege isolation are the kind of evidence that lifts agent-execution-abuse categories up risk rankings.\nThe match is on the broad agent-attack-surface-rising direction rather than the specific secret-exfiltration sub-category or a formal CIS/OWASP list placement, so relevance is moderate.",
+      "reference_links": [
+        {
+          "label": "CSO Online - Flowise's MCP implementation can run ghost commands",
+          "url": "https://www.csoonline.com/article/4179309/flowises-mcp-implementation-can-run-ghost-commands.html"
+        },
+        {
+          "label": "Obsidian Security - 1-Click RCE in Flowise (CVE-2026-40933): When Is stdio MCP Actually a Vulnerability?",
+          "url": "https://www.obsidiansecurity.com/blog/when-is-stdio-mcp-actually-a-vulnerability"
+        },
+        {
+          "label": "NSA - Press release: Security Design Considerations for AI-Driven Automation Leveraging the Model Context Protocol",
+          "url": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4496698/nsa-releases-security-design-considerations-for-ai-driven-automation-leveraging/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The June 6 Flowise coverage concludes two CVSS-9-plus agent-framework RCEs in successive weeks make self-hosted agent platforms an active attack surface and urges treating tool configuration as untrusted, echoed by Obsidian's PoC and the NSA note that multi-MCP agents lack privilege isolation. That reinforces the rising-agent-attack-surface premise, but not the specific secret-exfiltration category.",
+        "coherence": 2,
+        "remaining_gap": "Evidence is broad agent-execution abuse, not the named secret-exfiltration sub-category, and shows no CIS/OWASP top-list placement."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.972fcccebef0cc07",
+        "short_label": "Capability-attestation rider lands as default defense-prime AI MSA by Q4 2026",
+        "prediction_date": "2026-05-11"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] The June 6 analysis of Trump's \"Promoting Advanced Artificial Intelligence Innovation and Security\" order revives the capability-attestation thesis via its government-buying-power mechanism. The order directs NSA, CISA, and Treasury to benchmark models' offensive and defensive cyber capabilities and designate \"covered frontier models,\" paired with a strictly voluntary early-access framework.\nAnalysts noted the voluntary framing carries mandatory implications in practice: federal procurement leverage plus the clearinghouse's vulnerability-coordination role create strong pull for frontier labs to participate - the same procurement-forces-attestation dynamic the prediction expects to harden into a contracting rider.\nThe match is on the capability-attestation-via-procurement mechanism in general rather than the defense-prime MSA addendum and NATO-allied-prime specifics the dormant prediction names, so relevance is moderate.",
+      "reference_links": [
+        {
+          "label": "White House - Promoting Advanced Artificial Intelligence Innovation and Security",
+          "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+        },
+        {
+          "label": "Ropes & Gray - Trump's AI Cybersecurity Order: A Voluntary Framework with Mandatory Implications",
+          "url": "https://www.ropesgray.com/en/insights/alerts/2026/06/trumps-ai-cybersecurity-order-a-voluntary-framework-with-mandatory-implications"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "The June 2 AI order directs NSA, CISA, and Treasury to benchmark models' cyber capabilities and designate covered frontier models under a voluntary scheme that procurement leverage makes effectively binding. That procurement-forces-attestation dynamic is the same engine the prediction expects to harden capability-attestation into a standard contracting addendum, though the order names no defense-prime master-services-agreement shape.",
+        "coherence": 2,
+        "remaining_gap": "Nothing yet ties the federal mechanism to a defense-prime MSA addendum or the NATO-allied-prime contracting specifics the prediction names; no Big-4 template or procurement reference."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.eadbcf808bc0c2e7",
+        "short_label": "FMRB executive order signs with a parallel House joint resolution by end-Q2 2026",
+        "prediction_date": "2026-05-19"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] The June 6 analysis of Trump's \"Promoting Advanced Artificial Intelligence Innovation and Security\" order partially revives this thesis along its Signals - an executive order, CISA federal-civilian hardening directives, and a frontier-model designation track. Trump signed the order June 2; it tasks CISA with directives to harden civilian federal systems and directs NSA, CISA, and Treasury to designate \"covered frontier models.\"\nThe coverage frames the order as the executive-branch counterpart to the congressional Great American AI Act debate, echoing the prediction's EO-plus-parallel-legislative-track structure.\nRelevance is moderate, not high: the signed order is a cyber-focused, strictly voluntary instrument that expressly bars mandatory licensing or preclearance, not the Frontier Model Review Board with a 30-day technical-review track the prediction specified.",
+      "reference_links": [
+        {
+          "label": "White House - Promoting Advanced Artificial Intelligence Innovation and Security",
+          "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+        },
+        {
+          "label": "Freshfields - Trump Executive Order on AI: Voluntary Framework, Cybersecurity Focus, and Key Takeaways",
+          "url": "https://www.freshfields.com/en/our-thinking/blogs/a-fresh-take/trump-executive-order-on-ai-voluntary-framework-cybersecurity-focus-and-key-ta-102n18b"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Trump signed the AI order June 2, tasking CISA with federal-civilian hardening and directing designation of covered frontier models, and analysts frame it as the executive-branch counterpart to the congressional Great American AI Act debate. That paired executive-action-plus-legislative-track shape is the coupled structure the prediction anticipated, even if the instrument lands as a cyber order.",
+        "coherence": 3,
+        "remaining_gap": "The signed order is a strictly voluntary cyber instrument barring preclearance, not the Frontier Model Review Board with a 30-day technical-review track; the House resolution has not cleared markup."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f3f9045169aaae77",
+        "short_label": "US frontier-AI oversight stack settles as a three-instrument set by Q3 2026",
+        "prediction_date": "2026-05-21"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] The June 6 analysis of Trump's \"Promoting Advanced Artificial Intelligence Innovation and Security\" order revives the oversight-stack thesis on its Signals - an executive order plus a CISA federal-civilian operational directive plus a parallel legislative track. The order pairs CISA hardening directives with a frontier-model benchmarking-and-designation process, and is explicitly framed as the executive-branch counterpart to the congressional AI-governance debate.\nThat federal-civilian directive plus EO plus parallel-congressional-track combination matches the multi-instrument shape the prediction expects the US oversight stack to settle into.\nRelevance is moderate: the actual instruments diverge from the predicted FMRB-EO/House-joint-resolution/compliance-directive triplet, and the order is a voluntary cyber-focused order rather than a review-board oversight regime.",
+      "reference_links": [
+        {
+          "label": "White House - Promoting Advanced Artificial Intelligence Innovation and Security",
+          "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+        },
+        {
+          "label": "Ropes & Gray - Trump's AI Cybersecurity Order: A Voluntary Framework with Mandatory Implications",
+          "url": "https://www.ropesgray.com/en/insights/alerts/2026/06/trumps-ai-cybersecurity-order-a-voluntary-framework-with-mandatory-implications"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "The June 2 order pairs a CISA federal-civilian hardening directive with a frontier-model benchmarking-and-designation process and is explicitly cast as the executive-branch counterpart to the congressional AI-governance debate. That executive-order-plus-operational-directive-plus-parallel-congressional-track combination matches the coupled multi-instrument shape the prediction expects the US oversight stack to settle into.",
+        "coherence": 3,
+        "remaining_gap": "The actual instruments diverge from the predicted FMRB-EO, House joint resolution, and compliance-directive triplet, and a voluntary cyber order is not yet a settled review-board oversight regime."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.27edd133aaf6687a",
+        "short_label": "FMRB executive order signs inside the OECD GENAI plenary window by June 6 2026",
+        "prediction_date": "2026-05-22"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] The June 6 analysis of Trump's \"Promoting Advanced Artificial Intelligence Innovation and Security\" order is a date-and-instrument revival of this dated thesis. The prediction expected a frontier-model-touching executive order to sign by June 6; an AI cybersecurity executive order that directs the designation of \"covered frontier models\" was in fact signed June 2, inside the predicted window.\nThe coverage centers the order's frontier-model benchmarking track and CISA hardening directives, the executive-action substance the prediction anticipated landing in this calendar slot.\nRelevance is moderate rather than high: the order is a cyber-focused voluntary framework that bars preclearance, not the Frontier Model Review Board instrument, and today's evidence ties it to the congressional debate rather than to any OECD GENAI plenary.",
+      "reference_links": [
+        {
+          "label": "White House - Promoting Advanced Artificial Intelligence Innovation and Security",
+          "url": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+        },
+        {
+          "label": "Freshfields - Trump Executive Order on AI: Voluntary Framework, Cybersecurity Focus, and Key Takeaways",
+          "url": "https://www.freshfields.com/en/our-thinking/blogs/a-fresh-take/trump-executive-order-on-ai-voluntary-framework-cybersecurity-focus-and-key-ta-102n18b"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "The prediction expected a frontier-model-touching executive order to sign by June 6; an AI cybersecurity order directing the designation of covered frontier models was in fact signed June 2, inside that window, with the coverage centering its frontier-model benchmarking track. The dated sign-by-event and the frontier-model-designation substance both land where the prediction placed them.",
+        "coherence": 3,
+        "remaining_gap": "The order is a voluntary cyber framework barring preclearance, not the named Frontier Model Review Board, and is tied to the congressional debate rather than any OECD GENAI plenary."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.41589b1968c4543f",
+        "short_label": "AMD breaks out AI-accelerator revenue as 10-Q segment footnote by Q3 2026",
+        "prediction_date": "2026-05-04"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] The June 6 China Renaissance Nvidia coverage revives this accelerator-disclosure thesis on its Signals - NVIDIA, AI-accelerator demand, and competitive-disclosure pressure. The Buy initiation at a $319 target rests on a soft-landing read of AI-accelerator demand and frames the inference market as fragmenting toward custom silicon, with Nvidia folding the licensed Groq LPU line into its Vera Rubin roadmap.\nA bullish, well-covered accelerator demand backdrop and intensifying scrutiny of accelerator-segment economics are the conditions under which competitive-disclosure pressure pushes a peer like AMD toward a dedicated AI-accelerator revenue line.\nRelevance is moderate: today's evidence is Nvidia-side sell-side coverage with no AMD print or segment-footnote disclosure, which is the specific event the prediction names.",
+      "reference_links": [
+        {
+          "label": "MarketBeat - NVIDIA (NASDAQ:NVDA) Coverage Initiated at China Renaissance",
+          "url": "https://www.marketbeat.com/instant-alerts/nvidia-nasdaqnvda-coverage-initiated-at-china-renaissance-2026-06-05/"
+        },
+        {
+          "label": "ServeTheHome - Groq LPUs Join Vera Rubin Platform for Low-Latency Inference",
+          "url": "https://www.servethehome.com/decoding-the-future-of-inference-at-nvidia-groq-lpus-join-vera-rubin-platform-for-low-latency-inference/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "China Renaissance's Buy initiation on Nvidia at a $319 target rests on a soft-landing read of AI-accelerator demand and frames inference as fragmenting toward custom silicon. A bullish, well-covered accelerator backdrop and intensifying scrutiny of segment economics are the conditions under which competitive-disclosure pressure pushes a peer like AMD toward a dedicated accelerator revenue line.",
+        "coherence": 2,
+        "remaining_gap": "Today's evidence is Nvidia-side sell-side coverage with no AMD print and no AI-accelerator segment footnote, which is the specific filing event the prediction names."
+      }
+    }
+  ]
+}
