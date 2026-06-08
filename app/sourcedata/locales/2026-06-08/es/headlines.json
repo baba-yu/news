@@ -1,0 +1,94 @@
+{
+  "date": "2026-06-08",
+  "technical": [
+    {
+      "lead": "Siri reconstruido desde cero sobre un modelo Gemini de Google personalizado de 1,2 billones de parámetros",
+      "body": "En su keynote de la WWDC del lunes 8 de junio - el último de Tim Cook como CEO - Apple presentó un Siri reconstruido desde cero y movido no por los modelos propios de Apple sino por una versión personalizada de Gemini de Google: un sistema mixture-of-experts de aproximadamente 1,2 billones de parámetros, unas ocho veces mayor que el mayor modelo en la nube que Apple había construido internamente, designado en la empresa como \"Apple Foundation Models v10\". Apple plantea la privacidad como topología: un modelo en el dispositivo de unos 3.000 millones de parámetros atiende las solicitudes locales, y el trabajo más pesado se enruta a servidores con Apple Silicon bajo Private Cloud Compute (sin estado, efímeros, con la información de identificación personal eliminada antes de que cualquier contenido llegue a la capa de inferencia de Gemini) en lugar de a la infraestructura de Google. El resultado visible para el usuario es un Siri que se comporta como un chatbot completo: una app dedicada, un gesto \"Search or Ask\" en todo el sistema, integración con Dynamic Island, conciencia de lo que hay en pantalla, recuperación de contexto personal y acciones de varios pasos encadenadas entre apps, con las betas para desarrolladores de iOS 27 y sus hermanos lanzándose ahora y un lanzamiento general en otoño.",
+      "citations": [
+        {
+          "label": "9to5Mac - Apple nears $1 billion Google deal for custom Gemini model to power Siri",
+          "url": "https://9to5mac.com/2025/11/05/google-gemini-1-billion-deal-apple-siri/"
+        },
+        {
+          "label": "TechTimes - WWDC 2026: Gemini Powers Rebuilt Siri",
+          "url": "https://www.techtimes.com/articles/317902/20260606/wwdc-2026-opens-monday-gemini-powers-rebuilt-siri-iphone-11-faces-ios-27-cut.htm"
+        },
+        {
+          "label": "Macworld - WWDC 2026 keynote announcements",
+          "url": "https://www.macworld.com/article/678333/wwdc-keynote-event-time-what-launch-ios-macos-watchos-hardware.html"
+        }
+      ]
+    },
+    {
+      "lead": "Apple paga a Google unos 1.000 millones de dólares al año por licenciar la capa de inteligencia de su asistente",
+      "body": "La economía detrás de la reconstrucción de Siri es tan llamativa como la tecnología. Según se informa, el acuerdo plurianual para licenciar un modelo Gemini personalizado le cuesta a Apple del orden de 1.000 millones de dólares al año, con estimaciones de analistas que sitúan el valor total hasta en 5.000 millones. Tras años batallando por sacar un asistente competitivo, el fabricante del iPhone ha externalizado la capa de inteligencia de su función de IA estrella a la misma empresa que ya paga a Apple por ser el buscador predeterminado en sus dispositivos. Es una apuesta a que poseer dos mil millones de dispositivos y la puerta de entrada del usuario importa más que poseer el mejor modelo. El modelo licenciado es aproximadamente ocho veces mayor que el mayor sistema en la nube que Apple había construido internamente, lo que subraya cuánto se habían quedado atrás sus propios esfuerzos en modelos fundacionales y por qué alquilar el modelo frontera de un rival se convirtió en la vía pragmática.",
+      "citations": [
+        {
+          "label": "TechTimes - WWDC 2026: Gemini Powers Rebuilt Siri",
+          "url": "https://www.techtimes.com/articles/317902/20260606/wwdc-2026-opens-monday-gemini-powers-rebuilt-siri-iphone-11-faces-ios-27-cut.htm"
+        },
+        {
+          "label": "9to5Mac - Apple nears $1 billion Google deal for custom Gemini model to power Siri",
+          "url": "https://9to5mac.com/2025/11/05/google-gemini-1-billion-deal-apple-siri/"
+        }
+      ]
+    },
+    {
+      "lead": "El asistente del sistema se convierte en una ranura de modelo seleccionable por el usuario",
+      "body": "iOS 27, iPadOS 27 y macOS 27 introducen un mecanismo de Extensions que permite a los usuarios elegir qué asistente responde desde el nuevo panel \"Search or Ask\" - enrutando una consulta a Siri, Google Gemini o ChatGPT, con Apple confirmando que ha probado Claude de Anthropic como opción adicional. Por primera vez esto convierte al asistente del sistema en una ranura agnóstica de modelo en lugar de un servicio fijo de Apple: el cerebro del asistente es seleccionable por el usuario en lugar de estar cableado de forma permanente a un único proveedor. Es un giro notable para una empresa que históricamente ha controlado de cerca sus servicios predeterminados, y replantea la capa de asistente del iPhone como una superficie competitiva abierta donde varios proveedores de modelos pueden conectarse tras el mismo gesto de todo el sistema.",
+      "citations": [
+        {
+          "label": "Gadgetbridge - Apple's WWDC 2026 kicks off today: Here is everything",
+          "url": "https://www.gadgetbridge.com/news/apples-worldwide-developers-conference-wwdc-2026-kicks-off-today-here-is-everything/"
+        },
+        {
+          "label": "TechTimes - WWDC 2026: Gemini Powers Rebuilt Siri",
+          "url": "https://www.techtimes.com/articles/317902/20260606/wwdc-2026-opens-monday-gemini-powers-rebuilt-siri-iphone-11-faces-ios-27-cut.htm"
+        }
+      ]
+    },
+    {
+      "lead": "App Intents más un modelo gratuito en el dispositivo convierten el iPhone en una superficie de integración para agentes",
+      "body": "La mitad del anuncio orientada a desarrolladores puede importar más al ecosistema de agentes que el cambio de nombre de Siri. Apple está profundizando App Intents - el framework que permite a Siri, Spotlight y Shortcuts invocar acciones dentro de apps de terceros - como el mecanismo por el cual el nuevo asistente encadena tareas entre apps, y lo combina con el framework Foundation Models, que expone el modelo en el dispositivo a los desarrolladores para llamadas a herramientas y generación guiada (estructurada) sin coste por llamada, ya que el modelo se ejecuta de forma local. La conclusión práctica para cualquiera que construya funciones agénticas es que la mayor base de dispositivos de consumo se está convirtiendo en una superficie de integración para agentes en dos direcciones a la vez: las apps pueden ofrecer sus capacidades como intents que un asistente puede orquestar, y las apps pueden llamar a un LLM gratuito en el dispositivo para salida estructurada y uso de herramientas. Las sesiones detalladas de API se celebran del 9 al 12 de junio, así que aún falta definir cómo de estrictos serán el modelo de entitlements y de permisos de herramientas.",
+      "citations": [
+        {
+          "label": "Computerworld - Why Apple's Foundation Models Framework matter",
+          "url": "https://www.computerworld.com/article/4008276/why-apples-foundation-models-framework-matter.html"
+        },
+        {
+          "label": "Gadgetbridge - Apple's WWDC 2026 kicks off today: Here is everything",
+          "url": "https://www.gadgetbridge.com/news/apples-worldwide-developers-conference-wwdc-2026-kicks-off-today-here-is-everything/"
+        }
+      ]
+    },
+    {
+      "lead": "El calendario veraniego de eventos de IA: la WWDC ahora, luego las pistas de seguridad y de chips",
+      "body": "El calendario de IA aún por venir que vale la pena planificar para asistir abarca tres pistas. En el lado del desarrollo mainstream, Apple WWDC26 está en marcha: abrió el 8 de junio y se prolonga hasta el 12 de junio. La Databricks Data + AI Summit le sigue del 15 al 18 de junio en Moscone (más de 30.000 asistentes presenciales, más de 800 sesiones), y la AI Engineer World's Fair se celebra del 28 de junio al 2 de julio en Moscone West con 29 pistas, entre ellas las agénticas, de inferencia y de seguridad. En la pista de seguridad de IA, la Confidential Computing Summit aterriza del 23 al 24 de junio en el San Francisco Mint con una agenda construida en torno a la seguridad de agentes y la inferencia atestiguada; la AI Risk Summit de SecurityWeek le sigue del 11 al 12 de agosto en Half Moon Bay; y el AI Summit de Black Hat USA (4 de agosto) más el AI Village de DEF CON 34 anclan el calendario de red-teaming agéntico, con la AI Agent Security Summit de Zenity, liderada por profesionales, confirmada para expandirse a Nueva York, Londres y APAC. En la pista de chips de IA, el Advancing AI 2026 de AMD está previsto para julio para detallar la disponibilidad de Instinct MI400 / MI455X, Hot Chips 2026 se celebra en Stanford del 23 al 25 de agosto, y la AI Infra Summit tiene lugar del 15 al 17 de septiembre en Santa Clara.",
+      "citations": [
+        {
+          "label": "Moscone - AI Engineer World's Fair 2026",
+          "url": "https://www.moscone.com/events/ai-engineer-worlds-fair-2026"
+        },
+        {
+          "label": "PR Newswire - Confidential Computing Summit 2026 Schedule Showcases Next Era of AI Sovereignty",
+          "url": "https://www.prnewswire.com/news-releases/confidential-computing-summit-2026-schedule-showcases-next-era-of-ai-sovereignty-302765476.html"
+        },
+        {
+          "label": "AMD - AI Everywhere, for Everyone at CES 2026",
+          "url": "https://www.amd.com/en/newsroom/press-releases/2026-1-5-amd-and-its-partners-share-their-vision-for-ai-ev.html"
+        },
+        {
+          "label": "AI Infra Summit 2026 - Venue",
+          "url": "https://www.ai-infra-summit.com/venue"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Apple reconstruyó Siri usando un modelo de IA gigante de Google",
+    "Apple paga a Google unos 1.000 millones de dólares al año para hacer funcionar Siri",
+    "Ahora puedes elegir qué IA responde en tu iPhone",
+    "Las apps obtienen una IA integrada gratuita que actúa por ti",
+    "Un verano intenso de conferencias de IA arranca esta semana"
+  ]
+}
