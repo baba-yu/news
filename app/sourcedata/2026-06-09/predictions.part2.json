@@ -1,0 +1,14 @@
+{
+  "id": "prediction.23e1785cd1c8cb06",
+  "scope_hint": "tech",
+  "title": "MCP specification makes remote-server authentication mandatory by H1 2027",
+  "body": "This week's Model Context Protocol security wave hardened a single conclusion: the layer that wires agents to tools is the AI stack's most exposed surface, and the fix is structural rather than per-server. Adversa's VIPER-MCP scanner swept roughly 40,000 MCP repositories into 106 zero-days and 67 CVEs - nine of them tracing to broken OAuth flows - while a Censys scan counted 12,520 internet-accessible MCP services that are mostly unauthenticated and a separate study found about 40% of remote MCP servers expose their tools with no authentication at all. The NSA's design-considerations document then supplied a government baseline naming the inverted client-server pattern, unverified task propagation, tool-poisoning, and arbitrary-code-execution as the protocol's core risks. The throughline is a zero-trust agenda: authenticate every remote MCP server, treat agent memory and MCP configuration as untrusted input, and inspect each agent-to-tool exchange. The durable way to enforce that is at the specification level, because optional, SHOULD-grade guidance is exactly what produced a population of unauthenticated public servers. The forward consequence is that the MCP specification itself stops leaving authentication and caller identity to the implementer and promotes them to a normative requirement for remote transports. The concrete, falsifiable landing: by H1 2027 a published revision of the official MCP specification makes authentication (or a verified identity/authorization handshake) a MUST-level requirement for remote/HTTP-transport servers - not merely an OPTIONAL or RECOMMENDED OAuth profile - so that a spec-compliant remote server can no longer expose tools with no authentication. Absent such a normative change in a dated, published spec revision by June 30, 2027, the prediction fails.",
+  "reasoning": {
+    "because": "~40% of remote MCP servers expose tools with no auth; 67 CVEs incl. nine broken-OAuth flows",
+    "given": "NSA + zero-trust guidance push auth-by-default; spec currently leaves remote-server auth optional",
+    "so_that": "the MCP spec promotes remote-server auth/identity from optional to a normative MUST for HTTP transports",
+    "landing": "by H1 2027: a published MCP spec revision requiring auth on remote servers",
+    "plain_language": "Right now most internet MCP servers need no login, so the rules that define MCP will likely require one."
+  },
+  "summary": "This week 67 MCP CVEs, an NSA design baseline, and findings that ~40% of remote MCP servers expose tools with no auth converged on a zero-trust agenda. Expect the MCP spec itself to make remote-server authentication a normative requirement, not optional, for HTTP-transport servers by H1 2027."
+}

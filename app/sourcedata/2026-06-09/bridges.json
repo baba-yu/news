@@ -1,0 +1,271 @@
+{
+  "date": "2026-06-09",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.a1910f5d2178f52e",
+        "short_label": "MCP host runtimes ship sandboxed stdio tool execution as the default by Q2 2027",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "This week's MCP-security wave is the clearest confirmation yet of the prediction's core thesis: that the Model Context Protocol is the AI stack's most-exposed surface and that the fix has to move into the runtime, not a per-field patch. Adversa AI's June 4 roundup details VIPER-MCP, a static-and-dynamic taint-analysis scanner that swept roughly 40,000 MCP server repositories, surfaced 106 zero-days and filed 67 CVEs (nine from broken OAuth), while a Censys scan counts 12,520 internet-accessible MCP services, most unauthenticated, and a separate study finds about 40% of remote MCP servers expose tools with no auth at all.\nMost on-point for the sandboxing thesis, the NSA's \"Model Context Protocol: security design considerations for AI-driven automation\" names the inverted client-server pattern, unverified task propagation and arbitrary-code-execution exposure as core risks, and ranks tool-poisoning highest-severity because malicious server metadata enters the agent's context with instruction-level authority before human review - exactly the in-host execution boundary the prediction says must move to an isolated launcher. Akamai's three database-MCP flaws (SQL injection in Apache Doris MCP, unauthenticated exfiltration in Alibaba RDS MCP, a takeover path in Apache Pinot MCP, one vendor declining to patch) extend the pattern from the stdio adapter to the tool servers themselves.",
+      "reference_links": [
+        {
+          "label": "Adversa AI - Top MCP security resources & CVEs June 2026",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        },
+        {
+          "label": "SecurityWeek - Top 25 MCP vulnerabilities reveal how AI agents can be exploited",
+          "url": "https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/"
+        },
+        {
+          "label": "The Hacker News - Ollama out-of-bounds read vulnerability allows remote process memory leak",
+          "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The NSA's design-considerations document names the inverted client-server pattern, unverified task propagation and arbitrary-code-execution as core risks and ranks tool-poisoning highest because malicious server metadata enters the agent's context with instruction-level authority before review - exactly the in-host execution boundary the thesis says must move into an isolated launcher. VIPER-MCP's 67 CVEs confirm a per-field patch cannot be the defense.",
+        "coherence": 5,
+        "remaining_gap": "No reference MCP host or SDK has yet shipped a changed default that confines stdio tools to a separate process or container; the evidence is risk-naming, not an isolated launcher."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.1cd413918d286c84",
+        "short_label": "Open agent harness powers a second vendor's first-party agent by Q4 2026",
+        "prediction_date": "2026-06-04"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Cognition's June 2 retirement of the Windsurf brand for Devin Desktop reinforces the prediction's structural claim that the differentiated work is the governance/product wrapper while the agent loop is an adoptable open component. Devin Desktop reopens the editor as an agent manager whose default Agent Command Center hosts Codex, Claude Agent, OpenCode and any ACP-compatible agent - including a team's in-house agents - over the open Agent Client Protocol, with a Rust-rewritten Devin Local replacing the prior Cascade engine, and ACP described as already adopted by JetBrains, Google, GitHub and 25-plus agents.\nThis is the same open-core-wrapped-in-proprietary-surface inversion the prediction tracks, now playing out at the editor/orchestration layer: the vendor competes on the host surface and protocol rather than rebuilding the runtime. The partial gap is that today's evidence sits in the coding-agent tier and turns on the open ACP protocol and a Rust local agent rather than a named enterprise vendor disclosing a tracked open harness (the OpenClaw-style runtime) as the engine inside a branded first-party agent.",
+      "reference_links": [
+        {
+          "label": "Cognition - Introducing Devin Desktop",
+          "url": "https://cognition.ai/blog/introducing-devin-desktop"
+        },
+        {
+          "label": "Devin - Windsurf is now Devin Desktop",
+          "url": "https://devin.ai/blog/windsurf-is-now-devin-desktop"
+        },
+        {
+          "label": "TechTimes - GitHub Copilot replaces GPT-4 with Project Polaris, ships multi-agent VS Code at Build",
+          "url": "https://www.techtimes.com/articles/317596/20260602/github-copilot-replaces-gpt-4-project-polaris-ships-multi-agent-vs-code-build.htm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Cognition's retirement of Windsurf for Devin Desktop ships the open Agent Client Protocol as the default surface, hosting Codex, Claude Agent, OpenCode and a team's in-house agents while a Rust-rewritten Devin Local replaces Cascade - the vendor competing on the host surface and protocol rather than rebuilding the runtime, which is the open-core-wrapped-in-proprietary-governance inversion the thesis tracks.",
+        "coherence": 4,
+        "remaining_gap": "This sits in the coding-agent tier on the ACP protocol, not a named enterprise vendor disclosing a tracked open harness as the engine inside a branded first-party agent."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e318bde1c777b0f2",
+        "short_label": "Nvidia mean Street price target clears $300 on data-center GPU demand by Q4 2026",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Nvidia's N1/N1X Computex launch lends partial support to the prediction's cross-cutting claim that Nvidia is widening into AI PCs and licensed accelerator lines while holding its data-center base - the structural read the prediction says forces laggard desks to converge toward the Street high. Jensen Huang's June 1 unveiling of the Arm-based N1 (10-12 core CPU, 2,048-2,560 CUDA cores, 18-45W) and flagship N1X (20-core CPU, 6,144 CUDA cores, 45-80W) is framed as Nvidia trying to own every layer of the AI stack at once - data-center accelerators, the licensed Groq inference IP, and now on-device Windows-on-Arm inference - and pushed AMD, Intel and Qualcomm shares lower.\nThe relevance is partial because the prediction's falsifiable mechanism is a data-center segment revenue run-rate near $130B annualized across the next two prints lifting the mean analyst 12-month target past $300; today's consumer-silicon expansion is a demand-surface and competitive-moat datapoint, not an earnings print or a published target revision.",
+      "reference_links": [
+        {
+          "label": "TechSpot - Nvidia's first consumer CPU in over a decade is coming, and it has RTX cores built in",
+          "url": "https://www.techspot.com/news/112585-microsoft-nvidia-arm-tease-new-era-pc-computex.html"
+        },
+        {
+          "label": "PCWorld - Nvidia's RTX Spark chip 'reinvents' laptops for agentic AI",
+          "url": "https://www.pcworld.com/article/3152460/nvidia-rtx-spark-chip-reinvents-laptops-for-agentic-ai.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Huang's June 1 N1/N1X unveiling shows Nvidia widening into on-device AI-PC inference and licensed Groq accelerator IP while holding its data-center base, trying to own every layer of the stack at once - the technical-reality read the thesis says forces laggard desks to converge toward, not away from, the Street high - and it pushed AMD and Intel shares lower.",
+        "coherence": 3,
+        "remaining_gap": "This is a demand-surface and competitive-moat datapoint, not a data-center revenue print near the $130B run-rate or a published mean-target revision past $300."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b9350fd080696d03",
+        "short_label": "Federal AI procurement mandates frontier-model cyber attestations by Q2 2027",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The NSA's publication of \"Model Context Protocol: security design considerations for AI-driven automation\" is an adjacent government action that strengthens the prediction's premise that federal cyber bodies are building the designation-and-benchmarking scaffolding that later hardens into a procurement gate. The document establishes a government baseline naming MCP's inverted client-server pattern, unverified task propagation and arbitrary-code-execution exposure as core risks, putting a named federal-security authority on record about agentic-AI cyber capability the same week researchers filed 67 MCP CVEs and disclosed the unauthenticated Ollama \"Bleeding Llama\" memory-leak flaw (CVE-2026-7482, CVSS 9.1).\nThe relevance is partial because the prediction's falsifiable landing is a specific procurement instrument - a FAR amendment, agency acquisition rule, or solicitation clause requiring covered-frontier-model vendors to attest to a cyber-capability benchmarking and early-access framework - and the NSA guidance is design advice rather than a contracting condition, with no covered-vendor attestation on a federal award yet.",
+      "reference_links": [
+        {
+          "label": "Adversa AI - Top MCP security resources & CVEs June 2026",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        },
+        {
+          "label": "The Hacker News - Ollama out-of-bounds read vulnerability allows remote process memory leak",
+          "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The NSA's MCP security-design guidance puts a named federal-security authority on record about agentic-AI cyber risk - the inverted client-server pattern, unverified task propagation, arbitrary-code-execution - the same week researchers filed 67 MCP CVEs and disclosed the Ollama Bleeding Llama flaw, advancing the designation-and-benchmarking scaffolding the thesis says federal cyber bodies build before it hardens into a procurement gate.",
+        "coherence": 3,
+        "remaining_gap": "The guidance is design advice, not a contracting instrument; no FAR amendment, acquisition rule, solicitation clause, or covered-vendor cyber attestation on a federal award has appeared yet."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.467b2bda02de97b5",
+        "short_label": "Local fine-tune-to-agent stack ships as a managed hyperscaler service by H2 2026",
+        "prediction_date": "2026-06-03"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Unsloth's launch-day support for Gemma 4 reinforces the substrate premise the prediction rests on - that a complete local fine-tune-to-agent loop now runs on hardware a developer already owns, which is the precondition for a hyperscaler to ship a managed equivalent. Google released Gemma 4 on June 3 as an Apache-2.0 multimodal open-weight family, and Unsloth shipped launch-day running and tuning: dynamic 4-bit GGUF runs the 12B model in roughly 8GB of RAM/VRAM, with June 5 QAT checkpoints cutting the floor to about 3GB (E2B), 5GB (E4B), 7GB (12B) and 15GB (26B-A4B MoE) at near-original quality, plus paths through Transformers, llama.cpp, MLX, SGLang and vLLM.\nThe relevance is partial: this confirms the local leg (fine-tune and serve a current multimodal model on one consumer GPU on launch day) but shows no managed hosted equivalent - the prediction's actual landing is a cloud or MLOps vendor shipping a single console that fine-tunes a small open model, wires it to a curated MCP tool catalog, and generates its own synthetic training data.",
+      "reference_links": [
+        {
+          "label": "Unsloth Docs - Gemma 4: how to run locally",
+          "url": "https://unsloth.ai/docs/models/gemma-4"
+        },
+        {
+          "label": "TechTimes - Google Gemma 4 12B brings multimodal AI to 16GB laptops, free under Apache 2.0",
+          "url": "https://www.techtimes.com/articles/317758/20260604/google-gemma-4-12b-brings-multimodal-ai-16gb-laptops-free-under-apache-20.htm"
+        },
+        {
+          "label": "Unsloth - gemma-4-26B-A4B-it-GGUF model card",
+          "url": "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The NSA's MCP guidance ranks tool-poisoning highest-severity because malicious server metadata enters the agent's context with instruction-level authority before human review - the untrusted-text-into-a-privileged-agent path this thesis names. Bleeding Llama (CVE-2026-7482, CVSS 9.1) lets an unauthenticated attacker leak API keys, system prompts and other users' data from 300,000-plus exposed Ollama servers, making the secret-exfiltration mechanism a measured, recurring class.",
+        "coherence": 3,
+        "remaining_gap": "Today's artifacts are CVEs and government design guidance, not a CIS or OWASP risk list that names Agent-in-the-Loop Secret Exfiltration as a top-ranked category."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.d333899065046b01",
+        "short_label": "Agent-framework SQL tools ship read-only-by-default execution guards by Q1 2027",
+        "prediction_date": "2026-06-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Akamai's database-MCP disclosures give the prediction a fresh, concrete instance of the prompt-to-SQL execution risk it argues the framework wrapper must guard against. Akamai disclosed three database-MCP flaws this week - SQL injection in Apache Doris MCP, unauthenticated metadata exfiltration in Alibaba's RDS MCP, and a takeover path in Apache Pinot's MCP, with one vendor declining to patch - landing the exact failure mode (a database-query tool executing attacker-influenced SQL) at the MCP layer rather than the deployer's database role.\nThe relevance is adjacent rather than direct: these are MCP database-connector CVEs, not a changed default in a named text-to-SQL agent framework (LangChain's SQL toolkit, LlamaIndex's text-to-SQL engine, or a peer) shipping a parser-validated SELECT-only allowlist, which is the prediction's specific landing. The broader NSA tool-poisoning and zero-trust framing this week pushes in the same safe-by-default direction.",
+      "reference_links": [
+        {
+          "label": "Adversa AI - Top MCP security resources & CVEs June 2026",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        },
+        {
+          "label": "SecurityWeek - Top 25 MCP vulnerabilities reveal how AI agents can be exploited",
+          "url": "https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Adversa's VIPER-MCP sweep of roughly 40,000 repositories filed 67 CVEs, nine tracing specifically to broken OAuth flows, while a Censys scan counts 12,520 mostly-unauthenticated internet-accessible MCP services and a separate study finds about 40% of remote servers expose tools with no auth at all. That quantifies the broken-AI-integration-authorization breach class the thesis rests on as a measured, recurring failure mode.",
+        "coherence": 3,
+        "remaining_gap": "The landing is an identity provider - Okta, Entra ID or Google Workspace - formally carving out a distinct AI-extension OAuth scope category, which vulnerability research alone does not constitute."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Layer 1 keyword match on this dormant prediction's signals (indirect prompt injection PoC, secret leakage, agent CI credentials): today's MCP-security wave puts agent secret-exfiltration squarely back in the active threat conversation. The NSA's MCP guidance ranks tool-poisoning highest-severity precisely because malicious server metadata enters the agent's context with instruction-level authority before human review - the canonical indirect-injection-to-secret-leak path the prediction names. On the raw-infrastructure side, \"Bleeding Llama\" (CVE-2026-7482, CVSS 9.1), a heap out-of-bounds read in Ollama's GGUF loader, lets an unauthenticated attacker leak process memory - API keys, system prompts, and other users' conversation data - from an estimated 300,000-plus exposed servers, fixed in Ollama 0.17.1.\nThe gap to the prediction's specific landing remains: today's artifacts are CVEs and government design guidance, not a formal CIS or OWASP risk-list that names \"Agent-in-the-Loop Secret Exfiltration\" as a top-ranked category.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Ollama out-of-bounds read vulnerability allows remote process memory leak",
+          "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html"
+        },
+        {
+          "label": "Adversa AI - Top MCP security resources & CVEs June 2026",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Nvidia's Arm-based N1/N1X, unveiled June 1 at Computex, are positioned explicitly as on-device inference silicon - the standard N1 at 2,048-2,560 CUDA cores and 18-45W, the flagship N1X at 6,144 cores and 45-80W, co-designed with Microsoft to run an agentic assistant locally - while Nvidia simultaneously holds the data-center training/accelerator layer and licensed Groq inference IP, extending the divergent training-versus-inference compute profiles down to the client edge.",
+        "coherence": 3,
+        "remaining_gap": "The landing concerns hyperscaler in-house silicon (TPU, Trainium, MAIA, MTIA) bifurcating into separate part numbers; Nvidia is a merchant vendor pushing into client inference, not the hyperscaler-SKU split."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c850d46b059e600c",
+        "short_label": "SSO providers carve out AI-extension OAuth scope category by Q3 2026",
+        "prediction_date": "2026-04-22"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Layer 1 keyword match on this dormant prediction's signals (OAuth scope, AI integration, Allow All defaults): the MCP CVE roundup surfaces broken OAuth as a measured, recurring failure class in the agent-to-tool authorization layer. Adversa's VIPER-MCP sweep of roughly 40,000 MCP repositories filed 67 CVEs, of which nine trace specifically to broken OAuth flows, while a Censys scan counts 12,520 internet-accessible MCP services that are mostly unauthenticated and a separate study finds about 40% of remote MCP servers expose tools with no authentication at all.\nThe relevance is real but indirect: the data quantifies the OAuth/authorization gap the prediction's thesis depends on, yet the prediction's landing is an identity provider (Okta, Entra ID, Google Workspace) formally carving out a distinct AI-extension OAuth scope category, which today's vulnerability research does not itself constitute.",
+      "reference_links": [
+        {
+          "label": "Adversa AI - Top MCP security resources & CVEs June 2026",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        },
+        {
+          "label": "SecurityWeek - Top 25 MCP vulnerabilities reveal how AI agents can be exploited",
+          "url": "https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "This week pushes the secret-exfiltration threat back into the foreground: the NSA ranks tool-poisoning highest-severity because malicious server metadata reaches the agent with instruction-level authority, and Bleeding Llama (CVE-2026-7482) lets an unauthenticated attacker leak API keys and system prompts from 300,000-plus exposed Ollama servers - the canonical indirect-injection-to-leak path. The named category still has not topped a formal list, though.",
+        "coherence": 3,
+        "remaining_gap": "No CIS or OWASP risk list yet ranks an \"Agent-in-the-Loop Secret Exfiltration\" category at the top; today is CVEs and government design guidance, not a list entry."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.36f4ab773b39713e",
+        "short_label": "Hyperscaler custom AI silicon splits into training vs inference SKUs by H1 2027",
+        "prediction_date": "2026-04-22"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Layer 2 semantic match against today's Nvidia silicon thread: the N1/N1X launch is a concrete instance of the dual-track training-vs-inference silicon split the prediction forecasts, now extended from data-center SKUs down to the client edge. Nvidia's Arm-based N1/N1X are positioned explicitly as on-device inference silicon - the standard N1 (2,048-2,560 CUDA cores, 18-45W) and flagship N1X (6,144 CUDA cores, 45-80W) co-designed with Microsoft to run an agentic assistant locally - while Nvidia simultaneously holds the data-center training/accelerator layer and the licensed Groq inference IP, the read being that it is trying to own every layer of the AI stack at once.\nThe relevance is semantic rather than exact: the prediction concerns hyperscaler in-house custom silicon (TPU/Trainium/MAIA/MTIA) bifurcating into separate training and inference part numbers, whereas Nvidia is a merchant vendor pushing into client inference, so today reinforces the training/inference substrate-bifurcation thesis without being the hyperscaler-SKU split the landing specifies.",
+      "reference_links": [
+        {
+          "label": "TechSpot - Nvidia's first consumer CPU in over a decade is coming, and it has RTX cores built in",
+          "url": "https://www.techspot.com/news/112585-microsoft-nvidia-arm-tease-new-era-pc-computex.html"
+        },
+        {
+          "label": "PCWorld - Nvidia's RTX Spark chip 'reinvents' laptops for agentic AI",
+          "url": "https://www.pcworld.com/article/3152460/nvidia-rtx-spark-chip-reinvents-laptops-for-agentic-ai.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The MCP CVE wave quantifies the broad, unmanaged authorization gap the prediction's premise rests on: nine of VIPER-MCP's 67 CVEs trace to broken OAuth, a Censys scan counts 12,520 mostly-unauthenticated services, and roughly 40% of remote servers expose tools with no auth at all. That measures the wholesale-OAuth exposure but is not an identity provider acting on it.",
+        "coherence": 3,
+        "remaining_gap": "No SSO provider - Okta, Entra ID, or Google Workspace - has carved out a distinct AI-extension OAuth scope category; vulnerability research is not the landing."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.bcace95fe3e753d1",
+        "short_label": "27B Dense + 1M context becomes default enterprise local-LLM recipe by Q3 2026",
+        "prediction_date": "2026-04-23"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Layer 2 semantic match against today's Gemma 4 / Unsloth thread: a current open-weight model is now fine-tunable and serveable on a single consumer GPU on launch day, which is the on-device local-LLM envelope the prediction's recipe thesis depends on. Google's Apache-2.0 Gemma 4 12B runs inference in roughly 8GB of RAM/VRAM via Unsloth's dynamic 4-bit GGUF (about 14GB at 8-bit), with June 5 QAT checkpoints cutting the 12B floor to about 7GB and the 26B-A4B MoE variant to roughly 15GB at near-original quality, bringing a multimodal model within reach of gaming laptops and M-series MacBook Pro configurations.\nThe relevance is semantic and partial: the prediction pins a specific 27B-dense, 1M-context, no-MoE shape as the default enterprise local recipe, while Gemma 4 is a 12B-and-26B-A4B-MoE multimodal family, so today confirms the consumer-GPU local-inference trajectory rather than the exact parameter-and-context recipe the landing names.",
+      "reference_links": [
+        {
+          "label": "Unsloth Docs - Gemma 4: how to run locally",
+          "url": "https://unsloth.ai/docs/models/gemma-4"
+        },
+        {
+          "label": "TechTimes - Google Gemma 4 12B brings multimodal AI to 16GB laptops, free under Apache 2.0",
+          "url": "https://www.techtimes.com/articles/317758/20260604/google-gemma-4-12b-brings-multimodal-ai-16gb-laptops-free-under-apache-20.htm"
+        },
+        {
+          "label": "Unsloth - gemma-4-26B-A4B-it-GGUF model card",
+          "url": "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Nvidia's N1/N1X are explicitly positioned as dedicated on-device inference silicon - co-designed with Microsoft to run a local agent - while Nvidia simultaneously holds the data-center training layer and the licensed Groq inference IP. That reinforces the divergent-compute-profile premise driving a training-versus-inference bifurcation, but Nvidia is a merchant vendor pushing into client inference, not a hyperscaler splitting its own part numbers.",
+        "coherence": 3,
+        "remaining_gap": "The landing names hyperscaler in-house silicon (MAIA, MTIA, TPU, Trainium) bifurcating into separate training and inference SKUs; a merchant edge-inference chip is adjacent, not that split."
+      }
+    }
+  ]
+}

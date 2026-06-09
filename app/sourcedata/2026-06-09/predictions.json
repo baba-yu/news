@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-09",
+  "predictions": [
+    {
+      "id": "prediction.856334a081d6f893",
+      "scope_hint": "cross",
+      "title": "First-party-silicon agentic AI PC ships from a rival platform by H1 2027",
+      "body": "Nvidia's Computex move - its first consumer PC processors in over a decade, the Arm-based N1/N1X with integrated RTX/CUDA cores, launched jointly with Microsoft as an \"agentic-AI PC\" that runs an assistant locally and ships this fall from Surface, Dell, HP, ASUS, Lenovo and MSI - does more than add one new CPU vendor. It defines a product class: a laptop where the chip maker also owns the AI stack underneath it, so a local on-device agentic assistant becomes the default experience rather than an add-on, and the device, the silicon, and the bundled agent ship as one vertically integrated tier. That AMD, Intel and Qualcomm shares fell on the news shows the market reading this as a structural threat to the merchant-silicon model of selling a CPU into someone else's box, and the same Gemma-4-on-8GB and QAT trend in this week's cycle confirms that a capable multimodal model now fits the on-device envelope these machines are built to fill. The forward consequence is that the agentic AI PC - first-party silicon plus a bundled local assistant as the default tier - hardens into the category every platform owner feels it must match, not a single Nvidia SKU. The concrete, falsifiable landing: by H1 2027 at least one other major platform owner - the strongest candidates being Apple (an M-series Mac whose default Siri/Foundation-Models assistant runs fully on-device), Google with Qualcomm or MediaTek on a first-party-silicon Windows/ChromeOS-on-Arm laptop, or AMD/Intel co-launching with an OEM and Microsoft - announces a shipping or beta laptop that pairs its own first-party silicon with a bundled local agentic assistant marketed as the default tier, explicitly positioned against Nvidia's N1/N1X agentic-PC framing. A bare NPU spec bump or a cloud-routed assistant does not count; the marker is a vendor matching the full first-party-silicon-plus-default-local-agent shape.",
+      "reasoning": {
+        "because": "Nvidia + Microsoft launched the Arm N1/N1X as a co-designed agentic-AI PC with local on-device AI",
+        "given": "owning device base + first-party silicon + a bundled local agent now beats buying merchant CPUs",
+        "so_that": "a rival platform owner ships its own first-party-silicon laptop with a bundled local agentic assistant by default",
+        "landing": "by H1 2027, one named rival ships a first-party-silicon agentic AI-PC SKU",
+        "plain_language": "After Nvidia and Microsoft made an AI laptop with its own chip and built-in helper, a rival will build a matching one."
+      },
+      "summary": "Nvidia and Microsoft co-launched the Arm N1/N1X as an agentic AI PC pairing first-party silicon with a bundled local assistant, sending rival chip makers lower. By H1 2027 expect one rival - Apple, Google/Qualcomm, or AMD with an OEM - to ship a first-party-silicon laptop with a default local agent."
+    },
+    {
+      "id": "prediction.23e1785cd1c8cb06",
+      "scope_hint": "tech",
+      "title": "MCP specification makes remote-server authentication mandatory by H1 2027",
+      "body": "This week's Model Context Protocol security wave hardened a single conclusion: the layer that wires agents to tools is the AI stack's most exposed surface, and the fix is structural rather than per-server. Adversa's VIPER-MCP scanner swept roughly 40,000 MCP repositories into 106 zero-days and 67 CVEs - nine of them tracing to broken OAuth flows - while a Censys scan counted 12,520 internet-accessible MCP services that are mostly unauthenticated and a separate study found about 40% of remote MCP servers expose their tools with no authentication at all. The NSA's design-considerations document then supplied a government baseline naming the inverted client-server pattern, unverified task propagation, tool-poisoning, and arbitrary-code-execution as the protocol's core risks. The throughline is a zero-trust agenda: authenticate every remote MCP server, treat agent memory and MCP configuration as untrusted input, and inspect each agent-to-tool exchange. The durable way to enforce that is at the specification level, because optional, SHOULD-grade guidance is exactly what produced a population of unauthenticated public servers. The forward consequence is that the MCP specification itself stops leaving authentication and caller identity to the implementer and promotes them to a normative requirement for remote transports. The concrete, falsifiable landing: by H1 2027 a published revision of the official MCP specification makes authentication (or a verified identity/authorization handshake) a MUST-level requirement for remote/HTTP-transport servers - not merely an OPTIONAL or RECOMMENDED OAuth profile - so that a spec-compliant remote server can no longer expose tools with no authentication. Absent such a normative change in a dated, published spec revision by June 30, 2027, the prediction fails.",
+      "reasoning": {
+        "because": "~40% of remote MCP servers expose tools with no auth; 67 CVEs incl. nine broken-OAuth flows",
+        "given": "NSA + zero-trust guidance push auth-by-default; spec currently leaves remote-server auth optional",
+        "so_that": "the MCP spec promotes remote-server auth/identity from optional to a normative MUST for HTTP transports",
+        "landing": "by H1 2027: a published MCP spec revision requiring auth on remote servers",
+        "plain_language": "Right now most internet MCP servers need no login, so the rules that define MCP will likely require one."
+      },
+      "summary": "This week 67 MCP CVEs, an NSA design baseline, and findings that ~40% of remote MCP servers expose tools with no auth converged on a zero-trust agenda. Expect the MCP spec itself to make remote-server authentication a normative requirement, not optional, for HTTP-transport servers by H1 2027."
+    },
+    {
+      "id": "prediction.231cdb5216fa8c96",
+      "scope_hint": "cross",
+      "title": "Agent Client Protocol becomes default coding-agent interop standard by H1 2027",
+      "body": "Cognition's decision to retire the Windsurf brand and reopen the editor as Devin Desktop - rebuilt from an editor-with-AI into an agent manager whose default surface hosts Codex, Claude Agent, OpenCode, any third-party ACP agent, and a team's own in-house agents over the open Agent Client Protocol - reframes the coding tool as a neutral host rather than a vehicle for one company's model. ACP is already described as adopted by JetBrains, Google, GitHub and 25-plus agents, which is the signature of a protocol crossing from one vendor's convenience into shared infrastructure: the editor, the orchestration layer, and the underlying agent are being decoupled so none is locked to a single vendor. The strongest forward thesis from this week is that the open agent-interop layer - ACP or an equivalent cross-vendor protocol - hardens into the de-facto standard that coding-agent tools converge on, the way LSP became the universal editor-to-language-server contract. The concrete, falsifiable landing: by H1 2027 at least one major code editor or IDE that is NOT Cognition (the strongest candidates being a JetBrains IDE, VS Code or a VS Code fork, Zed, or a Google developer surface) ships first-class, default support for ACP - or a materially equivalent open agent-interop protocol that lets a user run an arbitrary third-party coding agent in-editor - rather than only its own first-party agent, and the published roster of ACP-compatible agents grows past 50. If no non-Cognition IDE has shipped default open-protocol agent support and the agent count has not crossed 50 by June 30, 2027, the prediction fails. The counter-risk is that platform owners instead entrench vertically integrated, first-party agent stacks - the Project Polaris pattern of swapping in an in-house model - and treat cross-vendor interop as a checkbox rather than the default surface.",
+      "reasoning": {
+        "because": "Devin Desktop, JetBrains, Google, GitHub + 25 agents already wire editors to any agent over open ACP",
+        "given": "Cognition retired Windsurf for an agent-neutral ACP IDE, decoupling the editor from any one vendor",
+        "so_that": "a second major IDE adopts ACP (or an equivalent open agent-interop protocol) as a default agent surface",
+        "landing": "by H1 2027: a non-Cognition IDE ships ACP by default; 50+ ACP agents",
+        "plain_language": "The way code editors talk to AI helpers is becoming one shared standard, so any editor can run any AI agent."
+      },
+      "summary": "Cognition retired Windsurf for the agent-neutral Devin Desktop, on open Agent Client Protocol that runs Codex, Claude Agent and 25-plus agents and is adopted by JetBrains, Google and GitHub. Expect an open agent-interop protocol to become the default cross-vendor coding-agent standard by H1 2027."
+    }
+  ]
+}

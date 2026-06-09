@@ -1,0 +1,115 @@
+{
+  "date": "2026-06-09",
+  "sections": [
+    {
+      "category": "Nvidiaが10年以上ぶりの初のノートPC向けCPUであるArmベースのN1/N1Xで消費者向けPCに参入し、Microsoftと共同設計したエージェント型AIのWindowsマシンを売り込む",
+      "bullets": [
+        {
+          "body": "6月1日、台北のComputexで、NvidiaのCEOであるJensen Huangが、同社にとって10年以上ぶりの消費者向けPCプロセッサであるN1とN1Xを披露し、長らくIntel、AMD、Qualcommのものであったクライアント市場へ直接踏み込んだ。これらのチップは、ディスクリートグラフィックスではなくRTX/CUDAのGPUコアを統合したArmベースのシステムオンチップである。最上位のN1Xは20コア（10+10）CPUと6,144基のCUDAコアを45〜80Wの枠で組み合わせ、標準のN1は10コアおよび12コアのCPU構成と2,048〜2,560基のCUDAコアを18〜45Wで提供する。出典: [TechSpot - Nvidia's first consumer CPU in over a decade is coming, and it has RTX cores built in](https://www.techspot.com/news/112585-microsoft-nvidia-arm-tease-new-era-pc-computex.html)。Nvidiaはこの発表を、Microsoftと共同で「PCの新時代」として打ち出した——Huangは、この転換は「電話が今でいうスマートフォンへと作り直されたのと同じくらい大きな出来事だ」と論じ、新しいマシン群でエージェント型AIがローカルで動くとした——そしてノートPCは、この秋にMicrosoft（Surface）、Dell（XPS）、HP、ASUS、Lenovo、MSIから出荷される予定で、薄いものでは14mmに達する。出典: [PCWorld - Nvidia's RTX Spark chip 'reinvents' laptops for agentic AI](https://www.pcworld.com/article/3152460/nvidia-rtx-spark-chip-reinvents-laptops-for-agentic-ai.html)。戦略的に読み解けば、Nvidiaはデータセンター向けアクセラレータ、最近ライセンス供与されたGroqの推論IP、そして今やWindows-on-Armノートでのオンデバイス推論層という、AIスタックのあらゆる層を一気に所有しようとしているということだ。だからこそこの発表は、この日にAMD、Intel、Qualcommの株価を押し下げた。それはまた、消費者向けノートPCを自社による端末側LLMの実行対象へと変え、他のプラットフォーム所有者が競って出荷しようとしている類のローカルなオンデバイス・アシスタントの真下に、Nvidiaのシリコンを直接据えることにもなる。",
+          "citations": [
+            {
+              "label": "TechSpot - Nvidia's first consumer CPU in over a decade is coming, and it has RTX cores built in",
+              "url": "https://www.techspot.com/news/112585-microsoft-nvidia-arm-tease-new-era-pc-computex.html"
+            },
+            {
+              "label": "PCWorld - Nvidia's RTX Spark chip 'reinvents' laptops for agentic AI",
+              "url": "https://www.pcworld.com/article/3152460/nvidia-rtx-spark-chip-reinvents-laptops-for-agentic-ai.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "次々と現れた研究が、Model Context ProtocolをAIスタックで最も無防備な領域へと変える——自動スキャナーが67件のCVEを登録し、NSAが設計指針を出し、未認証で重大なOllamaのメモリ漏えいの欠陥が着地する",
+      "bullets": [
+        {
+          "body": "今週のAIエージェントのセキュリティは、一つの結論へと収束した——エージェントとツールを接続するModel Context Protocolが、スタックで最も無防備な領域になったというものだ——そしてそれは具体的で新しい成果物に裏付けられている。6月4日のまとめで、Adversa AIはVIPER-MCPを取り上げた。これは静的・動的を組み合わせたテイント解析フレームワークで、約40,000のMCPサーバーリポジトリを走査して106件のゼロデイ脆弱性を浮かび上がらせ、67件のCVE（うち9件は壊れたOAuthフローに起因する）を生んだ。同じレビューは、大半が未認証である12,520件のインターネットからアクセス可能なMCPサービスを数えたCensysのスキャンと、リモートMCPサーバーの約40%が認証なしでツールを露出していることを見いだした別の調査を引いている。出典: [Adversa AI - Top MCP security resources & CVEs June 2026](https://adversa.ai/blog/top-mcp-security-resources-june-2026/)。Akamaiは3件のデータベースMCPの欠陥を公表した——Apache Doris MCPのSQLインジェクション、Alibaba RDS MCPにおける未認証のメタデータ持ち出し、Apache Pinot MCPの乗っ取り経路で、うち1社はパッチ提供を見送った——そしてNSAは「Model Context Protocol: security design considerations for AI-driven automation」を公表し、MCPの反転したクライアント・サーバーパターン、検証されないタスクの伝播、任意コード実行の露出を中核的なリスクとして挙げる政府としての基準線を打ち立てた。Adversaの併載カタログである[Top 25 MCP vulnerabilities](https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/)は、ツールポイズニングを最も深刻度の高い類型と位置づけている。悪意あるサーバーのメタデータが、人間が確認する前に命令レベルの権限でエージェントの文脈窓に入り込むからだ。一貫した筋道は、エージェント型AIに対するゼロトラストの方針である——すべてのリモートMCPサーバーの前に認証を置き、エージェントのメモリとMCPの設定を信頼できない入力経路として扱い、エージェントとツールのやり取りを一つ一つ異常な挙動がないか検査する。素の基盤側で緊急性を補強するように、研究者は「Bleeding Llama」（CVE-2026-7482、CVSS 9.1）の詳細を明らかにした。これはOllamaのGGUFモデルローダーにおけるヒープの境界外読み取りで、未認証の攻撃者が、推定30万台超の露出したサーバーからプロセスメモリ——APIキー、システムプロンプト、他の利用者の会話データ——を漏えいさせられるもので、The Hacker Newsによれば、Ollama 0.17.1で修正された。出典: [The Hacker News - Ollama out-of-bounds read vulnerability allows remote process memory leak](https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html)。",
+          "citations": [
+            {
+              "label": "Adversa AI - Top MCP security resources & CVEs June 2026",
+              "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+            },
+            {
+              "label": "SecurityWeek - Top 25 MCP vulnerabilities reveal how AI agents can be exploited",
+              "url": "https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/"
+            },
+            {
+              "label": "The Hacker News - Ollama out-of-bounds read vulnerability allows remote process memory leak",
+              "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "コーディングエージェントが開かれたプロトコルと社内モデルの周りに集約していく——Cognitionがエージェント中立なDevin DesktopのためにWindsurfを畳み、MicrosoftがGitHub CopilotからGPT-4を外して自社のProject Polarisに差し替える",
+      "bullets": [
+        {
+          "body": "コーディングエージェントの階層は、6月初旬に、どちらもプロバイダーからの独立を押し進める2つの動きを軸に再編された。6月2日、CognitionはOTA更新でWindsurfというブランドを畳み、エディタをDevin Desktopとして開き直した——「AIを後付けしたエディタ」から、フル機能のIDEに包まれたエージェント管理ツールへと作り替えられたもので、Agent Command Centerを既定の画面とし、開かれたAgent Client Protocol（ACP）に対応する。これにより、Codex、Claude Agent、OpenCode、その他のACP互換エージェント（チームの社内エージェントを含む）がその中で動かせる。Rustで書き直されたローカルエージェントのDevin Localが、従来のCascadeエンジンを置き換え、ACPはすでにJetBrains、Google、GitHub、25を超えるエージェントに採用されていると説明される。出典: [Cognition - Introducing Devin Desktop](https://cognition.ai/blog/introducing-devin-desktop)、[Devin - Windsurf is now Devin Desktop](https://devin.ai/blog/windsurf-is-now-devin-desktop)。同じ日のBuild 2026で、MicrosoftはProject Polarisを披露した——同社初の社内コーディングモデルで、Microsoft自身のMaiaシリコン上で動くエキスパート混合（MoE）システムであり、8月からすべてのGitHub Copilot契約者にとってGPT-4 Turboに代わる既定のエンジンとなり（自動移行、任意で3か月の代替手段あり）、マルチエージェントのVS Codeとともに出荷される。出典: [TechTimes - GitHub Copilot replaces GPT-4 with Project Polaris, ships multi-agent VS Code at Build](https://www.techtimes.com/articles/317596/20260602/github-copilot-replaces-gpt-4-project-polaris-ships-multi-agent-vs-code-build.htm)。MicrosoftとOpenAIが4月に7年間の独占的パートナーシップを終えてから数週間後に着地したPolarisは、Microsoftが自社の開発者向けツールの内側で、流通だけでなくモデルの品質でも競うつもりであることを示している——そしてDevin Desktopのエージェント中立なプロトコルと合わせて、この週の合図は、コーディングエージェントの層が、エディタ、オーケストレーションのプロトコル、その下のモデルを、特定の一社から切り離しつつあるということだ。",
+          "citations": [
+            {
+              "label": "Cognition - Introducing Devin Desktop",
+              "url": "https://cognition.ai/blog/introducing-devin-desktop"
+            },
+            {
+              "label": "Devin - Windsurf is now Devin Desktop",
+              "url": "https://devin.ai/blog/windsurf-is-now-devin-desktop"
+            },
+            {
+              "label": "TechTimes - GitHub Copilot replaces GPT-4 with Project Polaris, ships multi-agent VS Code at Build",
+              "url": "https://www.techtimes.com/articles/317596/20260602/github-copilot-replaces-gpt-4-project-polaris-ships-multi-agent-vs-code-build.htm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "GoogleがGemma 4をマルチモーダルなオープンウェイト・ファミリーとして出荷し、Unslothが初日のローカル・ファインチューニングを提供して、12Bのマルチモーダルモデルをおよそ8GBの消費者向けRAMに押し込む",
+      "bullets": [
+        {
+          "body": "Googleは6月3日、テキスト・画像・音声を別個のエンコーダーネットワークなしにそのまま扱うApache-2.0のオープンウェイト・ファミリーとしてGemma 4を公開した。そして利用者が毎回追跡しているローカルのファインチューニング・推論最適化ツールであるUnslothが、消費者向けハードウェアでの実行と調整を初日からサポートした。Unslothの動的4ビットGGUF量子化により、12BのGemma 4モデルはおよそ8GBのRAM/VRAMで推論が動き（8ビットでは約14GB）、ゲーミングノートPCやMシリーズMacBook Proの構成でもマルチモーダルモデルが手の届くものになる。これにHugging Face Transformers、llama.cpp、MLX、SGLang、vLLMを通じた初日の経路も加わる。出典: [Unsloth Docs - Gemma 4: how to run locally](https://unsloth.ai/docs/models/gemma-4)、[TechTimes - Google Gemma 4 12B brings multimodal AI to 16GB laptops, free under Apache 2.0](https://www.techtimes.com/articles/317758/20260604/google-gemma-4-12b-brings-multimodal-ai-16gb-laptops-free-under-apache-20.htm)。2日後の6月5日、GoogleとUnslothは、メモリの下限をさらに切り下げる量子化を意識した学習（QAT）のチェックポイントを続けて出した——QATの顔ぶれはGemma-4-E2Bを約3GB、E4Bを5GB、12Bを7GB、26B-A4Bのエキスパート混合（MoE）版を約15GBで動かす——元の品質をほぼ保ちながら。出典: [Unsloth - gemma-4-26B-A4B-it-GGUF model card](https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF)。ローカルLLMと端末側ランタイムの分野にとっての実際的な効果は、現行のマルチモーダルなオープンウェイトモデルが、データセンターのメモリを要するのではなく、出荷されたその日に1基の消費者向けGPUでファインチューニングも提供も可能になるということだ——これはまさに、新たな波のAI PCが埋めるべく作られている、オンデバイス推論の許容枠である。",
+          "citations": [
+            {
+              "label": "Unsloth Docs - Gemma 4: how to run locally",
+              "url": "https://unsloth.ai/docs/models/gemma-4"
+            },
+            {
+              "label": "TechTimes - Google Gemma 4 12B brings multimodal AI to 16GB laptops, free under Apache 2.0",
+              "url": "https://www.techtimes.com/articles/317758/20260604/google-gemma-4-12b-brings-multimodal-ai-16gb-laptops-free-under-apache-20.htm"
+            },
+            {
+              "label": "Unsloth - gemma-4-26B-A4B-it-GGUF model card",
+              "url": "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま計画しておきたいAIイベント——WWDCは金曜まで、DatabricksとAI Engineer World's Fairが6月の柱、その後ろに夏のAIセキュリティとAIチップの日程が埋まっていく",
+      "bullets": [
+        {
+          "body": "出席を計画する価値のある、これから先のAI日程は引き続き3つの分野にまたがる。主流の開発者・データ側では、AppleのWWDC26が6月12日まで続き、今週は新しいSiriとFoundation Models APIの技術セッションが行われる。Databricks Data + AI SummitがMosconeで6月15〜18日に続く（対面で30,000人超、800を超えるセッション）。出典: [10times - Databricks Data + AI Summit (Jun 2026), San Francisco](https://10times.com/e1z1-9r17-ppzk)。そしてAI Engineer World's FairがMoscone Westで6月28日〜7月2日に開かれ、6,000人超の出席者にわたる29の分野があり、推論（量子化、投機的デコーディング、KVキャッシュ）とセキュリティの専用トラックを含む。出典: [AI Engineer World's Fair 2026 - Yerba Buena](https://yerbabuena.org/do/ai-engineer-worlds-fair-2026)。AIセキュリティの分野では、Confidential Computing SummitがSan Francisco Mintで6月23〜24日に、Linux FoundationとOPAQUEの主催により、機密AI・証明付き推論・ハードウェアで検証される証明をめぐって開かれる。出典: [Linux Foundation - Confidential Computing Summit 2026](https://events.linuxfoundation.org/confidential-computing-summit/)。SecurityWeekのAI Risk SummitがRitz-Carlton Half Moon Bayで8月11〜12日に続き、ラスベガスでは、Black Hat USAの単日のAI Summit（8月4日、8月1〜6日のカンファレンス内）とDEF CON 34のAI Villageが、エージェントのレッドチーミングの日程の柱となり、San FranciscoではOWASP Global AppSec USAが11月2〜6日に開かれる。Zenity——利用者が追跡している実務者主導のAI Agent Security Summit——は、2026年のニューヨーク、ロンドン、APACへの世界的な拡大を確定しており、日程は引き続き注視する価値がある。AIチップとハードウェアの分野では、AMDのAdvancing AI 2026のイベントが7月に予定され、Instinct MI400/MI455Xのデータセンター向けGPUの顔ぶれの提供時期を示すと見込まれる。Hot Chips 2026がStanfordで8月23〜25日に開かれ、AI Infra SummitがSanta Clara Convention Centerで9月15〜17日に開かれる（8,000人の出席者、計算資源・AIデータセンター・物理AIにわたる400人超の講演者）。出典: [Information Matters - AI Infra Summit 2026](https://informationmatters.net/event/ai-infra-summit-2026/)。さらに先では、GitHub UniverseがFort Masonに10月28〜29日に戻り、AWS re:Inventがラスベガスで11月30日〜12月4日に開かれる。",
+          "citations": [
+            {
+              "label": "10times - Databricks Data + AI Summit (Jun 2026), San Francisco",
+              "url": "https://10times.com/e1z1-9r17-ppzk"
+            },
+            {
+              "label": "AI Engineer World's Fair 2026 - Yerba Buena",
+              "url": "https://yerbabuena.org/do/ai-engineer-worlds-fair-2026"
+            },
+            {
+              "label": "Linux Foundation - Confidential Computing Summit 2026",
+              "url": "https://events.linuxfoundation.org/confidential-computing-summit/"
+            },
+            {
+              "label": "Information Matters - AI Infra Summit 2026",
+              "url": "https://informationmatters.net/event/ai-infra-summit-2026/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
