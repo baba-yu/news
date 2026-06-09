@@ -1,0 +1,165 @@
+{
+  "date": "2026-06-09",
+  "by_prediction": {
+    "prediction.231cdb5216fa8c96": [
+      {
+        "actor": "product lead ng agent-platform sa isang non-Cognition na IDE",
+        "job": "Pag-uugnay ng isang JetBrains IDE, VS Code fork, Zed, o Google developer surface para mag-host ng anumang third-party na agent sa pamamagitan ng ACP bilang default na harapan, hindi lamang isang first-party na agent",
+        "outcome": "Isang shipped o beta na IDE release na may first-class, default na suporta sa ACP (o katumbas na bukas na interop) na nagpapahintulot sa mga user na magpatakbo ng anumang third-party na coding agent sa loob ng editor",
+        "motivation": "Ang pagmamay-ari ng neutral na host ay mas mahusay kaysa sa pagkabit ng editor sa iisang model vendor; ang pagtapat sa hugis ng agent-manager ng Devin Desktop ay nagpapanatiling makabuluhan sa IDE",
+        "task": {
+          "who": "team ng agent-integration at editor-platform engineering ng IDE",
+          "what": "Itayo ang default na in-editor ACP host para sa mga third-party na agent",
+          "where": "agent panel ng IDE, extension API, editor-to-agent transport layer",
+          "when": "2026-06 hanggang H1 2027 na panahong inilaan",
+          "why": "Maging ang neutral na host na pinagtatakbuhan ng anumang agent, hindi sasakyan ng iisang vendor",
+          "how": "Agent Client Protocol o materyal na katumbas na bukas na interop protocol"
+        }
+      },
+      {
+        "actor": "maintainer / steward ng Agent Client Protocol",
+        "job": "Pagpapatibay ng Cognition at mga co-maintainer sa ACP mula sa kaginhawaan ng iisang vendor tungo sa ibinabahaging imprastruktura, na nire-rekrut ang mga editor at agent sa bukas na spec",
+        "outcome": "Isang matatag at dokumentadong ACP spec kasama ang lumalaking nailathalang roster ng mga compatible na agent at nag-aampong IDE (nakalista na ang JetBrains, Google, GitHub)",
+        "motivation": "Isang bukas at neutral na protocol na pinagtatagpuan ng lahat, gaya ng ginawa ng LSP, ang nagpapatibay sa pusta ng Devin Desktop sa agent-manager at sa abot ng protocol",
+        "task": {
+          "who": "team ng ACP spec maintainers at developer-relations / partnerships",
+          "what": "Patatagin ang spec at i-onboard ang mga editor at third-party na agent",
+          "where": "bukas na ACP spec, reference host, partner-integration program",
+          "when": "2026-06 hanggang H1 2027 na panahong inilaan",
+          "why": "Tumawid mula sa kaginhawaan ng vendor tungo sa de-facto na ibinabahaging pamantayan",
+          "how": "Pamamahala ng bukas na spec, reference implementation, conformance roster"
+        }
+      },
+      {
+        "actor": "engineer ng isang third-party na coding-agent vendor",
+        "job": "Mga gumagawa ng Codex, Claude Agent, OpenCode at in-house na team agent na naglalabas ng mga ACP-compatible na adapter para tumakbo ang kanilang agent sa loob ng anumang ACP host editor",
+        "outcome": "Bawat agent ay nailathala sa ACP-compatible na roster, na nagtutulak sa bilang mula mahigit 25 tungo sa lampas 50",
+        "motivation": "Ang ACP compatibility ay nananalo ng distribusyon papasok sa bawat neutral-host na editor nang walang per-IDE na bespoke na integrasyon, na umaabot sa mga user saan man sila mag-code",
+        "task": {
+          "who": "team ng product at integrations engineering ng coding agent",
+          "what": "Maglabas ng ACP-compatible na agent adapter at irehistro sa roster",
+          "where": "agent runtime, ACP adapter layer, pampublikong compatibility roster",
+          "when": "2026-06 hanggang H1 2027 na panahong inilaan",
+          "why": "Maabot ang mga user sa loob ng anumang neutral-host na editor nang walang bespoke na trabaho",
+          "how": "Agent-side conformance implementation ng Agent Client Protocol"
+        }
+      }
+    ],
+    "prediction.23e1785cd1c8cb06": [
+      {
+        "actor": "maintainer / core spec editor ng MCP specification",
+        "job": "Pagbalangkas ng susunod na opisyal na rebisyon ng MCP spec, na itinataas ang authentication at caller identity ng remote transport mula sa SHOULD/OPTIONAL na gabay tungo sa isang normatibong MUST",
+        "outcome": "Isang petsadong, nailathalang rebisyon ng spec na gumagawa ng auth o isang beripikadong identity/authorization handshake bilang isang MUST para sa remote/HTTP-transport na server",
+        "motivation": "Ang opsyonal na SHOULD-grade na gabay ay nagdulot ng populasyon ng mga hindi-authenticated na pampublikong server; isang normatibong MUST lamang ang matibay na magsasara ng puwang",
+        "task": {
+          "who": "MCP spec working group / maintainers at mga security-focused na contributor",
+          "what": "Baguhin ang transport spec para atasan ang authentication ng remote server",
+          "where": "repository ng MCP specification, proseso ng RFC/proposal at pagsusuri",
+          "when": "2026-06 hanggang Q2 2027 na panahong inilaan",
+          "why": "Iniwan ng opsyonal na gabay na hindi-authenticated bilang default ang mga pampublikong server",
+          "how": "Normatibong MUST na pananalita sa isang petsadong rebisyon ng spec / RFC"
+        }
+      },
+      {
+        "actor": "MCP security researcher / may-akda ng vulnerability scanner",
+        "job": "Pagsaklaw sa mga pampublikong MCP repository at internet-exposed na server, paglalahad ng mga zero-day, CVE, at sirang OAuth flow na nagbibilang sa problema ng hindi-authenticated na server",
+        "outcome": "Mga nailathalang scan at CVE disclosure (VIPER-MCP, Censys, no-auth na pag-aaral) na nagdidiin sa mga maintainer na atasan ang auth sa antas ng spec",
+        "motivation": "Ang pagpapakita na ~40% ng remote server ang naglalantad ng mga tool nang walang auth ay nagpapamukha sa mga per-server na ayos na hindi sapat kumpara sa isang istruktural",
+        "task": {
+          "who": "panlabas na security research team (scanner vendor, akademikong pag-aaral)",
+          "what": "I-scan ang mga MCP server at ilahad ang mga auth/OAuth na kahinaan",
+          "where": "pampublikong MCP repo, internet-accessible na MCP service, CVE database",
+          "when": "2026-06 hanggang Q2 2027 na panahong inilaan",
+          "why": "Pinipilit ng nabilang na pagkakalantad ang ayos sa antas ng spec sa halip na bawat-server",
+          "how": "Mga awtomatikong MCP scanner (VIPER-MCP-class), proseso ng CVE disclosure"
+        }
+      },
+      {
+        "actor": "may-akda ng gabay ng pamahalaan sa zero-trust (NSA design-considerations track)",
+        "job": "Paglalathala at pagpapalawak ng isang baseline ng pamahalaan na nagngangalan sa inverted client-server, hindi-beripikadong task propagation, tool-poisoning, at arbitrary-code-execution bilang ang pangunahing panganib ng MCP",
+        "outcome": "Makapangyarihang gabay na nagtatatag ng authenticate-every-remote-server bilang ang inaasahang baseline na pinipilit ng spec na ipaloob nang normatibo",
+        "motivation": "Ang isang zero-trust na baseline ng pamahalaan ay nagbibigay sa mga maintainer ng saklolo at panlabas na presyon para igalaw ang auth mula opsyonal tungo sa sapilitan",
+        "task": {
+          "who": "may-akda at tagasuri ng gabay ng national-security / cyber agency",
+          "what": "Maglathala ng design-considerations na baseline na nag-aatas ng auth sa remote server",
+          "where": "mga dokumento ng design-considerations at zero-trust na gabay ng ahensiya",
+          "when": "2026-06 hanggang Q2 2027 na panahong inilaan",
+          "why": "Itakda ang authenticate-by-default bilang ang inaasahang baseline ng protocol",
+          "how": "Dokumento ng zero-trust design-considerations at kasunod na gabay"
+        }
+      }
+    ],
+    "prediction.856334a081d6f893": [
+      {
+        "actor": "lead ng Apple silicon at on-device AI platform",
+        "job": "Pagdadala sa susunod na M-series Mac at sa isang on-device Siri/Foundation-Models assistant sa ship-ready na kalagayan bilang ang default, lokal-na-pinapatakbong karanasan",
+        "outcome": "Isang shipping o beta na M-series Mac na imima-market kasama ang default nitong Siri/Foundation-Models agent na ganap na tumatakbo on-device, na tumatapat sa hugis ng first-party-silicon-kasama-default-local-agent",
+        "motivation": "Pag-aari na ng Apple ang silicon at ang OS, kaya ang isang bundled na lokal na agent ang natural na paraan para ipagtanggol ang laptop tier nito laban sa framing ng Nvidia",
+        "task": {
+          "who": "Apple Silicon group kasama ang team ng Foundation Models / on-device Siri",
+          "what": "Isama ang on-device Foundation-Models agent bilang default na Mac assistant",
+          "where": "M-series Mac platform, macOS, Apple Silicon Neural Engine",
+          "when": "2026-06 hanggang H1 2027 na panahong inilaan",
+          "why": "Ipagtanggol ang laptop tier sa pamamagitan ng pag-aaring silicon-kasama-agent na stack",
+          "how": "On-device Foundation Models na na-quantize sa envelope ng Neural Engine"
+        }
+      },
+      {
+        "actor": "lead ng programa ng Google sa first-party-silicon na laptop",
+        "job": "Pagpapares ng isang Google-designed na Arm SoC (kasama ang Qualcomm o MediaTek) at isang on-device Gemini/Gemma agent papasok sa isang Windows o ChromeOS-on-Arm na laptop",
+        "outcome": "Isang shipping o beta na first-party-silicon na Windows/ChromeOS-on-Arm na laptop na nagbu-bundle ng default na lokal na Gemini-class na agent, na tahasang nakaposisyon laban sa framing ng N1/N1X",
+        "motivation": "May on-device model stack at OS base ang Google at hindi dapat isuko ang agentic-PC tier sa isang bertikal na Nvidia-Microsoft na bundle",
+        "task": {
+          "who": "Google Tensor/Pixel silicon team kasama ang Qualcomm o MediaTek at ang on-device Gemma group",
+          "what": "Sabay-disenyuhin ang Arm SoC at i-bundle ang on-device Gemini agent bilang default",
+          "where": "reference platform ng first-party-silicon na Windows/ChromeOS-on-Arm na laptop",
+          "when": "2026-06 hanggang H1 2027 na panahong inilaan",
+          "why": "Iwasang isuko ang agentic-PC tier sa isang karibal na bertikal na bundle",
+          "how": "Partnership sa Arm SoC kasama ang on-device Gemma/Gemini na may QAT"
+        }
+      },
+      {
+        "actor": "product manager ng AMD/Intel OEM co-launch",
+        "job": "Pagtitipon ng sagot ng isang merchant-silicon na vendor - ang sarili nilang CPU kasama ang isang OEM at ang Microsoft - papasok sa isang laptop na may bundled na default na lokal na agent sa halip na isang add-on",
+        "outcome": "Isang inanunsyong shipping o beta na laptop na sabay-inilunsad ng AMD o Intel kasama ang isang OEM at ang Microsoft, na nagpapares ng first-party silicon sa isang default na lokal na agentic assistant",
+        "motivation": "Nakita ng mga merchant-silicon na vendor na bumagsak ang kanilang shares dahil sa balita ng N1/N1X at kailangan nilang patunayan na maaari pa ring ariin ng merchant model ang default-agent tier",
+        "task": {
+          "who": "AMD o Intel client-silicon team kasama ang isang OEM at ang Microsoft Windows AI group",
+          "what": "Sabay-ilunsad ang isang laptop na nagbu-bundle ng default na on-device agentic assistant",
+          "where": "OEM laptop platform, Windows on-device AI stack, co-marketing ng Microsoft",
+          "when": "2026-06 hanggang H1 2027 na panahong inilaan",
+          "why": "Patunayan na maaari pa ring ariin ng merchant-silicon na model ang agent tier",
+          "how": "Co-design at co-marketing partnership kasama ang OEM at Microsoft"
+        }
+      },
+      {
+        "actor": "may-ari ng Nvidia + Microsoft na agentic-PC platform",
+        "job": "Pagpapadala ng N1/N1X mula sa Surface, Dell, HP, ASUS, Lenovo at MSI ngayong taglagas at pagpapalawak ng kategorya ng agentic-AI-PC lampas sa iisang SKU",
+        "outcome": "Isang volume-shipping, multi-OEM na agentic AI PC na nagpapatibay sa first-party-silicon-kasama-default-local-agent bilang ang kategoryang nararamdaman ng bawat may-ari ng platform na kailangan nilang tapatan",
+        "motivation": "Nais ng Nvidia na ariin ang AI stack sa ilalim ng laptop, na ginagawa ang isang minsanang CPU launch bilang ang kategoryang napipilitang sagutin ng mga karibal",
+        "task": {
+          "who": "Nvidia client-silicon group kasama ang Microsoft at anim na launch OEM",
+          "what": "Ipadala ang N1/N1X agentic PC at palawakin ang mga panalo sa OEM design",
+          "where": "mga launch laptop ng Surface, Dell, HP, ASUS, Lenovo at MSI",
+          "when": "2026-06 hanggang taglagas 2026 na panahong inilaan ng pagpapadala",
+          "why": "Gawing kategoryang dapat tapatan ng mga karibal ang isang nag-iisang launch",
+          "how": "Arm N1/N1X na may integrated RTX/CUDA at isang bundled na lokal na agent"
+        }
+      },
+      {
+        "actor": "engineer ng kahusayan ng on-device foundation-model",
+        "job": "Pagsisiksik ng mahuhusay na multimodal model para kumasya sa isang 8GB on-device envelope sa pamamagitan ng quantization-aware training, para ang isang bundled na lokal na agent ay default sa halip na cloud-routed",
+        "outcome": "Isang Gemma-4-class na multimodal model na tumatakbo nang lokal sa loob ng memory envelope ng agentic-PC, na ginagawang teknikal na posible para sa mga karibal na ipadala ang isang default na on-device agent",
+        "motivation": "Ang isang default na lokal na agent ay mabibilang lamang kung talagang kasya on-device ang isang mahusay na model; ang kahusayang ito ang kondisyong nagbibigay-daan para sa bawat karibal na SKU",
+        "task": {
+          "who": "team ng on-device model at quantization research sa mga model at silicon vendor",
+          "what": "I-quantize ang mga multimodal model sa 8GB on-device envelope",
+          "where": "on-device inference runtime sa mga agentic-PC NPU at accelerator",
+          "when": "2026-06 hanggang H1 2027 na panahong inilaan",
+          "why": "Gawing posible ang isang default na lokal na agent sa halip na cloud-routed",
+          "how": "Quantization-aware training (QAT) at mga build ng model na 8GB-envelope"
+        }
+      }
+    ]
+  }
+}

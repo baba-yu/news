@@ -1,0 +1,102 @@
+{
+  "date": "2026-06-09",
+  "technical": [
+    {
+      "lead": "Naglabas ang Nvidia ng unang consumer PC silicon nito sa loob ng isang dekada: ang Arm-based na N1/N1X",
+      "body": "Sa Computex sa Taipei noong June 1, inilantad ni Jensen Huang ang N1 at N1X, ang unang consumer-class na PC processor ng Nvidia sa loob ng mahigit isang dekada at isang tuwirang pagpasok sa client market na hawak ng Intel, AMD at Qualcomm. Ang mga chip ay Arm system-on-chip na may integrated RTX/CUDA GPU cores: ang flagship na N1X ay nagpapares ng 20-core (10+10) CPU sa 6,144 CUDA cores sa 45-80W, samantalang ang standard na N1 ay nagpapatakbo ng 10- at 12-core CPU config na may 2,048-2,560 CUDA cores sa 18-45W, ayon sa TechSpot at PCWorld. Ibinalangkas ng Nvidia ang launch kasabay ng Microsoft bilang \"isang bagong panahon ng PC\" na may agentic AI na tumatakbo nang lokal, at ang mga laptop ay ipapadala sa taglagas mula sa Microsoft (Surface), Dell, HP, ASUS, Lenovo at MSI, ang ilan ay kasing-nipis ng 14mm. Ang istratehikong pagbasa ay sinusubukan ng Nvidia na ariin nang sabay-sabay ang bawat layer ng AI stack - mga data-center accelerator, ang lisensyadong Groq inference IP, at ngayon ang on-device inference layer sa Windows-on-Arm na laptop - na nagpababa sa shares ng AMD, Intel at Qualcomm sa araw na iyon at ginagawang isang first-party na edge-LLM runtime ang consumer laptop.",
+      "citations": [
+        {
+          "label": "TechSpot - Nvidia's first consumer CPU in over a decade is coming, and it has RTX cores built in",
+          "url": "https://www.techspot.com/news/112585-microsoft-nvidia-arm-tease-new-era-pc-computex.html"
+        },
+        {
+          "label": "PCWorld - Nvidia's RTX Spark chip 'reinvents' laptops for agentic AI",
+          "url": "https://www.pcworld.com/article/3152460/nvidia-rtx-spark-chip-reinvents-laptops-for-agentic-ai.html"
+        }
+      ]
+    },
+    {
+      "lead": "Naging pinaka-nakalantad na AI surface ang MCP: 67 CVE, gabay ng NSA, leak sa Ollama",
+      "body": "Nagtagpo ang AI-agent security ngayong linggo sa iisang konklusyon - ang Model Context Protocol na nag-uugnay ng mga agent sa mga tool ay naging pinaka-nakalantad na bahagi ng stack. Sa isang roundup noong June 4, itinampok ng Adversa AI ang VIPER-MCP, isang static-and-dynamic taint-analysis framework na sumaklaw sa humigit-kumulang 40,000 MCP server repository, naglabas ng 106 zero-day at nagbunga ng 67 CVE (siyam mula sa sirang OAuth flow); binanggit ng parehong review ang isang Censys scan na nagbilang ng 12,520 internet-accessible na MCP service, karamihan ay hindi naka-authenticate, kung saan humigit-kumulang 40% ng remote server ang naglalantad ng mga tool nang walang anumang auth. Inihayag ng Akamai ang tatlong database-MCP na depekto (SQL injection sa Apache Doris, hindi-authenticated na metadata exfiltration sa Alibaba RDS, at isang takeover path sa Apache Pinot), at inilathala ng NSA ang \"Model Context Protocol: security design considerations for AI-driven automation,\" na nagngangalan sa inverted client-server pattern, hindi-beripikadong task propagation at arbitrary-code-execution bilang pangunahing panganib; pinakamataas-bigat ang tool-poisoning dahil ang malisyosong server metadata ay pumapasok sa konteksto ng agent na may awtoridad sa antas ng instruksyon bago pa man ang anumang pagsusuri ng tao. Sa panig naman ng hilaw na imprastruktura, inilarawan ng mga mananaliksik ang \"Bleeding Llama\" (CVE-2026-7482, CVSS 9.1), isang heap out-of-bounds read sa GGUF loader ng Ollama na nagpapahintulot sa isang hindi-authenticated na umaatake na makapag-leak ng process memory - mga API key, system prompt, mga usapan ng ibang user - mula sa tinatayang mahigit 300,000 na nakalantad na server, na inayos sa Ollama 0.17.1, ayon sa The Hacker News.",
+      "citations": [
+        {
+          "label": "Adversa AI - Top MCP security resources & CVEs June 2026",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        },
+        {
+          "label": "SecurityWeek - Top 25 MCP vulnerabilities reveal how AI agents can be exploited",
+          "url": "https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/"
+        },
+        {
+          "label": "The Hacker News - Ollama out-of-bounds read vulnerability allows remote process memory leak",
+          "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html"
+        }
+      ]
+    },
+    {
+      "lead": "Humihiwalay ang mga coding agent sa mga vendor: Devin Desktop at ang Polaris ng Copilot",
+      "body": "Muling nag-ayos ang coding-agent tier noong unang bahagi ng Hunyo sa paligid ng dalawang hakbang tungo sa kalayaan mula sa provider. Noong June 2, inretiro ng Cognition ang Windsurf brand sa pamamagitan ng isang over-the-air na update na muling nagbukas sa editor bilang Devin Desktop - na muling itinayo mula sa isang editor na may nakadikit na AI tungo sa isang agent manager na nakabalot sa isang buong IDE, kung saan ang Agent Command Center ang default na harapan at may suporta para sa bukas na Agent Client Protocol (ACP), kaya ang Codex, Claude Agent, OpenCode at anumang ibang ACP-compatible na agent (kasama ang in-house na agent ng isang team) ay maaaring tumakbo sa loob nito; isang Rust-rewritten na lokal na agent, ang Devin Local, ang humahalili sa dating Cascade engine, at inilalarawan ang ACP bilang inampon na ng JetBrains, Google, GitHub at mahigit 25 na agent, ayon sa Cognition at Devin. Sa parehong araw sa Build 2026, inilantad ng Microsoft ang Project Polaris, ang unang in-house na coding model nito - isang mixture-of-experts na sistema na tumatakbo sa sariling Maia silicon ng Microsoft at papalit sa GPT-4 Turbo bilang default na engine para sa bawat GitHub Copilot subscriber simula Agosto (awtomatikong migration, opsyonal na tatlong-buwang fallback), na ipinapadala kasama ng isang multi-agent na VS Code, ayon sa TechTimes. Dumarating ilang linggo matapos tapusin ng Microsoft at OpenAI ang kanilang pitong-taong eksklusibong partnership noong Abril, ang senyales ngayong linggo ay ang coding-agent layer ay humihiwalay sa editor, sa orchestration protocol at sa pinagbabatayang model mula sa iisang vendor.",
+      "citations": [
+        {
+          "label": "Cognition - Introducing Devin Desktop",
+          "url": "https://cognition.ai/blog/introducing-devin-desktop"
+        },
+        {
+          "label": "Devin - Windsurf is now Devin Desktop",
+          "url": "https://devin.ai/blog/windsurf-is-now-devin-desktop"
+        },
+        {
+          "label": "TechTimes - GitHub Copilot replaces GPT-4 with Project Polaris, ships multi-agent VS Code at Build",
+          "url": "https://www.techtimes.com/articles/317596/20260602/github-copilot-replaces-gpt-4-project-polaris-ships-multi-agent-vs-code-build.htm"
+        }
+      ]
+    },
+    {
+      "lead": "Naglabas ang Gemma 4 nang multimodal at open-weight; tina-tune ito ng Unsloth sa unang araw sa ~8GB RAM",
+      "body": "Inilabas ng Google ang Gemma 4 noong June 3 bilang isang Apache-2.0 open-weight na pamilya na likas na humahawak ng teksto, larawan at audio nang walang hiwalay na encoder network, at ang Unsloth - ang local fine-tuning at inference optimizer na sinusubaybayan sa bawat run - ay naglabas ng suporta sa unang araw para sa pagpapatakbo at pag-tune nito sa consumer hardware. Sa dynamic 4-bit GGUF quantization ng Unsloth, ang 12B Gemma 4 model ay nagpapatakbo ng inference sa humigit-kumulang 8GB ng RAM/VRAM (mga 14GB sa 8-bit), na nagdadala ng isang multimodal model sa abot ng gaming laptop at mga M-series MacBook Pro config, kasama ang mga unang-araw na daan sa Hugging Face Transformers, llama.cpp, MLX, SGLang at vLLM, ayon sa Unsloth Docs at TechTimes. Noong June 5, sinundan ito ng Google at Unsloth ng quantization-aware-training (QAT) checkpoint na higit pang nagpababa sa memory floor - Gemma-4-E2B sa mga 3GB, E4B sa 5GB, 12B sa 7GB at ang 26B-A4B mixture-of-experts na variant sa humigit-kumulang 15GB - na halos-orihinal ang kalidad. Ang praktikal na epekto para sa local-LLM at edge-runtime na track ay ang isang kasalukuyang multimodal open-weight model ay tina-tune at naiha-serve na ngayon sa iisang consumer GPU sa mismong araw na inilabas ito, na siyang eksaktong on-device inference envelope na dinisenyong punuin ng bagong alon ng AI PC.",
+      "citations": [
+        {
+          "label": "Unsloth Docs - Gemma 4: how to run locally",
+          "url": "https://unsloth.ai/docs/models/gemma-4"
+        },
+        {
+          "label": "TechTimes - Google Gemma 4 12B brings multimodal AI to 16GB laptops, free under Apache 2.0",
+          "url": "https://www.techtimes.com/articles/317758/20260604/google-gemma-4-12b-brings-multimodal-ai-16gb-laptops-free-under-apache-20.htm"
+        },
+        {
+          "label": "Unsloth - gemma-4-26B-A4B-it-GGUF model card",
+          "url": "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF"
+        }
+      ]
+    },
+    {
+      "lead": "Ang kalendaryo ng AI event ngayong tag-init: WWDC ngayon, tapos ang security at chip track",
+      "body": "Ang mga paparating pang AI na kaganapan na sulit planuhin ang pagdalo ay umaabot sa tatlong track. Sa mainstream developer/data side, tumatakbo ang WWDC26 ng Apple hanggang June 12 na may mga teknikal na sesyon sa bagong Siri at Foundation Models APIs; sumusunod ang Databricks Data + AI Summit sa June 15-18 sa Moscone (mahigit 30,000 nang personal, mahigit 800 na sesyon); at tumatakbo ang AI Engineer World's Fair sa June 28-July 2 sa Moscone West na may 29 na track sa mahigit 6,000 na dadalo, kasama ang dedikadong Inference (quantization, speculative decoding, KV-cache) at Security na track. Sa AI-security track, dumarating ang Confidential Computing Summit sa June 23-24 sa San Francisco Mint tungkol sa confidential AI at attested inference, sumusunod ang AI Risk Summit ng SecurityWeek sa August 11-12 sa Half Moon Bay, at sa Las Vegas, ang AI Summit ng Black Hat USA (August 4) at ang AI Village ng DEF CON 34 ang nagtatakda sa kalendaryo ng agentic red-teaming, kasama ang OWASP Global AppSec USA sa San Francisco November 2-6; kinumpirma ng practitioner-led na AI Agent Security Summit ng Zenity ang isang 2026 na pagpapalawak sa New York, London at APAC. Sa AI-chip track, nakatakda ang Advancing AI 2026 ng AMD sa Hulyo para ilahad ang availability ng Instinct MI400/MI455X, kinukuha ng Hot Chips 2026 ang Stanford sa August 23-25, at tumatakbo ang AI Infra Summit sa September 15-17 sa Santa Clara (8,000 na dadalo, mahigit 400 na tagapagsalita); mas malayo pa, babalik ang GitHub Universe sa Fort Mason October 28-29 at tumatakbo ang AWS re:Invent sa November 30-December 4.",
+      "citations": [
+        {
+          "label": "10times - Databricks Data + AI Summit (Jun 2026), San Francisco",
+          "url": "https://10times.com/e1z1-9r17-ppzk"
+        },
+        {
+          "label": "AI Engineer World's Fair 2026 - Yerba Buena",
+          "url": "https://yerbabuena.org/do/ai-engineer-worlds-fair-2026"
+        },
+        {
+          "label": "Linux Foundation - Confidential Computing Summit 2026",
+          "url": "https://events.linuxfoundation.org/confidential-computing-summit/"
+        },
+        {
+          "label": "Information Matters - AI Infra Summit 2026",
+          "url": "https://informationmatters.net/event/ai-infra-summit-2026/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Gumawa ang Nvidia ng unang laptop chip nito sa loob ng mahigit isang dekada",
+    "Natuklasang puno ng butas sa seguridad ang mga AI agent connector",
+    "Pinutol ng mga coding tool ang ugnayan sa iisang AI provider",
+    "Tumatakbo sa gaming laptop ang bagong open AI model ng Google",
+    "Isang punong-puno ng AI conference na tag-init na dapat planuhin"
+  ]
+}

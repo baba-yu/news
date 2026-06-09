@@ -1,0 +1,115 @@
+{
+  "date": "2026-06-09",
+  "sections": [
+    {
+      "category": "Nvidia jumps into consumer PCs with its first laptop CPU in over a decade, the Arm-based N1/N1X, and pitches an agentic-AI Windows machine co-designed with Microsoft",
+      "bullets": [
+        {
+          "body": "At Computex in Taipei on June 1, Nvidia CEO Jensen Huang unveiled the N1 and N1X, the company's first consumer-class PC processors in more than a decade, marking a direct push into the client market that has long belonged to Intel, AMD and Qualcomm. The chips are Arm-based system-on-chips with integrated RTX/CUDA GPU cores rather than discrete graphics: the flagship N1X pairs a 20-core (10+10) CPU with 6,144 CUDA cores in a 45-80W envelope, while the standard N1 offers 10- and 12-core CPU configurations with 2,048-2,560 CUDA cores at 18-45W, per [TechSpot - Nvidia's first consumer CPU in over a decade is coming, and it has RTX cores built in](https://www.techspot.com/news/112585-microsoft-nvidia-arm-tease-new-era-pc-computex.html). Nvidia framed the launch jointly with Microsoft as \"a new era of PC\" - Huang argued the shift is \"as big of a deal as the reinvention of the phone into what we now know as the smartphone,\" with agentic AI running locally across the new machines - and laptops are slated to ship in the fall from Microsoft (Surface), Dell (XPS), HP, ASUS, Lenovo and MSI, some as thin as 14mm, per [PCWorld - Nvidia's RTX Spark chip 'reinvents' laptops for agentic AI](https://www.pcworld.com/article/3152460/nvidia-rtx-spark-chip-reinvents-laptops-for-agentic-ai.html). The strategic read is that Nvidia is trying to own every layer of the AI stack at once - data-center accelerators, the recently licensed Groq inference IP, and now the on-device inference layer in Windows-on-Arm laptops - which is why the announcement sent AMD, Intel and Qualcomm shares lower on the day; it also turns the consumer laptop into a first-party edge-LLM runtime target, putting Nvidia silicon directly underneath the kind of local on-device assistant that other platform owners are racing to ship.",
+          "citations": [
+            {
+              "label": "TechSpot - Nvidia's first consumer CPU in over a decade is coming, and it has RTX cores built in",
+              "url": "https://www.techspot.com/news/112585-microsoft-nvidia-arm-tease-new-era-pc-computex.html"
+            },
+            {
+              "label": "PCWorld - Nvidia's RTX Spark chip 'reinvents' laptops for agentic AI",
+              "url": "https://www.pcworld.com/article/3152460/nvidia-rtx-spark-chip-reinvents-laptops-for-agentic-ai.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "A wave of fresh research turns the Model Context Protocol into the AI stack's most-exposed surface: an automated scanner files 67 CVEs, the NSA issues design guidance, and a critical unauthenticated Ollama memory-leak flaw lands",
+      "bullets": [
+        {
+          "body": "AI-agent security this week converged on a single conclusion - the Model Context Protocol that wires agents to tools has become the most exposed surface in the stack - backed by concrete new artifacts. In a June 4 roundup, Adversa AI flagged VIPER-MCP, a combined static-and-dynamic taint-analysis framework that swept roughly 40,000 MCP server repositories and surfaced 106 zero-day vulnerabilities, yielding 67 CVEs (nine of them tracing to broken OAuth flows); the same review cites a Censys scan counting 12,520 internet-accessible MCP services, most of them unauthenticated, and a separate study finding about 40% of remote MCP servers expose their tools with no authentication at all, per [Adversa AI - Top MCP security resources & CVEs June 2026](https://adversa.ai/blog/top-mcp-security-resources-june-2026/). Akamai disclosed three database-MCP flaws - SQL injection in Apache Doris MCP, unauthenticated metadata exfiltration in Alibaba's RDS MCP, and a takeover path in Apache Pinot's MCP, with one vendor declining to patch - and the NSA published \"Model Context Protocol: security design considerations for AI-driven automation,\" establishing a government baseline that names MCP's inverted client-server pattern, unverified task propagation, and arbitrary-code-execution exposure as the core risks; Adversa's companion catalog of the [Top 25 MCP vulnerabilities](https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/) frames tool-poisoning as the highest-severity class because malicious server metadata enters the agent's context window with instruction-level authority before any human reviews it. The throughline is a zero-trust agenda for agentic AI: put authentication in front of every remote MCP server, treat agent memory and MCP configuration as untrusted input paths, and inspect each agent-to-tool exchange for anomalous behavior. Reinforcing the urgency on the raw-infrastructure side, researchers detailed \"Bleeding Llama\" (CVE-2026-7482, CVSS 9.1), a heap out-of-bounds read in Ollama's GGUF model loader that lets an unauthenticated attacker leak process memory - API keys, system prompts, and other users' conversation data - from an estimated 300,000-plus exposed servers, fixed in Ollama 0.17.1, per [The Hacker News - Ollama out-of-bounds read vulnerability allows remote process memory leak](https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html).",
+          "citations": [
+            {
+              "label": "Adversa AI - Top MCP security resources & CVEs June 2026",
+              "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+            },
+            {
+              "label": "SecurityWeek - Top 25 MCP vulnerabilities reveal how AI agents can be exploited",
+              "url": "https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/"
+            },
+            {
+              "label": "The Hacker News - Ollama out-of-bounds read vulnerability allows remote process memory leak",
+              "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Coding agents consolidate around open protocols and in-house models: Cognition retires Windsurf for an agent-neutral Devin Desktop, and Microsoft swaps GPT-4 out of GitHub Copilot for its own Project Polaris",
+      "bullets": [
+        {
+          "body": "The coding-agent tier reshuffled in early June around two moves that both push toward provider independence. On June 2, Cognition retired the Windsurf brand via an over-the-air update that reopened the editor as Devin Desktop - recast from \"an editor with AI bolted on\" into an agent manager wrapped in a full IDE, with the Agent Command Center as the default surface and support for the open Agent Client Protocol (ACP), so Codex, Claude Agent, OpenCode and any other ACP-compatible agent (including a team's in-house agents) can run inside it; a Rust-rewritten local agent, Devin Local, replaces the prior Cascade engine, and ACP is described as already adopted by JetBrains, Google, GitHub and 25-plus agents, per [Cognition - Introducing Devin Desktop](https://cognition.ai/blog/introducing-devin-desktop) and [Devin - Windsurf is now Devin Desktop](https://devin.ai/blog/windsurf-is-now-devin-desktop). The same day at Build 2026, Microsoft unveiled Project Polaris, its first in-house coding model - a mixture-of-experts system that runs on Microsoft's own Maia silicon and will replace GPT-4 Turbo as the default engine for every GitHub Copilot subscriber starting in August (automatic migration, optional three-month fallback), shipping alongside a multi-agent VS Code, per [TechTimes - GitHub Copilot replaces GPT-4 with Project Polaris, ships multi-agent VS Code at Build](https://www.techtimes.com/articles/317596/20260602/github-copilot-replaces-gpt-4-project-polaris-ships-multi-agent-vs-code-build.htm). Landing weeks after Microsoft and OpenAI ended their seven-year exclusive partnership in April, Polaris signals that Microsoft intends to compete on model quality inside its developer tools rather than only on distribution - and together with Devin Desktop's agent-neutral protocol, the week's signal is that the coding-agent layer is decoupling the editor, the orchestration protocol, and the underlying model from any single vendor.",
+          "citations": [
+            {
+              "label": "Cognition - Introducing Devin Desktop",
+              "url": "https://cognition.ai/blog/introducing-devin-desktop"
+            },
+            {
+              "label": "Devin - Windsurf is now Devin Desktop",
+              "url": "https://devin.ai/blog/windsurf-is-now-devin-desktop"
+            },
+            {
+              "label": "TechTimes - GitHub Copilot replaces GPT-4 with Project Polaris, ships multi-agent VS Code at Build",
+              "url": "https://www.techtimes.com/articles/317596/20260602/github-copilot-replaces-gpt-4-project-polaris-ships-multi-agent-vs-code-build.htm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Google ships Gemma 4 as a multimodal open-weight family and Unsloth provides launch-day local fine-tuning, squeezing a 12B multimodal model onto roughly 8GB of consumer RAM",
+      "bullets": [
+        {
+          "body": "Google released Gemma 4 on June 3 as an Apache-2.0 open-weight family that natively handles text, images and audio without separate encoder networks, and Unsloth - the local fine-tuning and inference optimizer the user tracks every run - shipped launch-day support for running and tuning it on consumer hardware. With Unsloth's dynamic 4-bit GGUF quantization, the 12B Gemma 4 model runs inference in roughly 8GB of RAM/VRAM (about 14GB at 8-bit), bringing a multimodal model within reach of gaming laptops and M-series MacBook Pro configurations, alongside launch-day paths through Hugging Face Transformers, llama.cpp, MLX, SGLang and vLLM, per [Unsloth Docs - Gemma 4: how to run locally](https://unsloth.ai/docs/models/gemma-4) and [TechTimes - Google Gemma 4 12B brings multimodal AI to 16GB laptops, free under Apache 2.0](https://www.techtimes.com/articles/317758/20260604/google-gemma-4-12b-brings-multimodal-ai-16gb-laptops-free-under-apache-20.htm). Two days later, on June 5, Google and Unsloth followed with quantization-aware-training (QAT) checkpoints that cut the memory floor further - the QAT lineup runs Gemma-4-E2B on about 3GB, E4B on 5GB, 12B on 7GB and the 26B-A4B mixture-of-experts variant on roughly 15GB - with near-original quality, per [Unsloth - gemma-4-26B-A4B-it-GGUF model card](https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF). The practical effect for the local-LLM and edge-runtime tracks is that a current multimodal open-weight model is now fine-tunable and serveable on a single consumer GPU on the day it ships, rather than requiring data-center memory - exactly the on-device inference envelope the new wave of AI PCs is being built to fill.",
+          "citations": [
+            {
+              "label": "Unsloth Docs - Gemma 4: how to run locally",
+              "url": "https://unsloth.ai/docs/models/gemma-4"
+            },
+            {
+              "label": "TechTimes - Google Gemma 4 12B brings multimodal AI to 16GB laptops, free under Apache 2.0",
+              "url": "https://www.techtimes.com/articles/317758/20260604/google-gemma-4-12b-brings-multimodal-ai-16gb-laptops-free-under-apache-20.htm"
+            },
+            {
+              "label": "Unsloth - gemma-4-26B-A4B-it-GGUF model card",
+              "url": "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI events to plan around now: WWDC runs through Friday, Databricks and the AI Engineer World's Fair anchor June, with the summer AI-security and AI-chip calendar filling in behind them",
+      "bullets": [
+        {
+          "body": "The still-upcoming AI calendar worth planning attendance around continues to span three tracks. On the mainstream developer/data side, Apple's WWDC26 runs through June 12 with this week's technical sessions on the new Siri and Foundation Models APIs; the Databricks Data + AI Summit follows June 15-18 at Moscone (30,000-plus in person, 800-plus sessions), per [10times - Databricks Data + AI Summit (Jun 2026), San Francisco](https://10times.com/e1z1-9r17-ppzk); and the AI Engineer World's Fair runs June 28-July 2 at Moscone West with 29 tracks across 6,000-plus attendees, including dedicated Inference (quantization, speculative decoding, KV-cache) and Security tracks, per [AI Engineer World's Fair 2026 - Yerba Buena](https://yerbabuena.org/do/ai-engineer-worlds-fair-2026). On the AI-security track, the Confidential Computing Summit lands June 23-24 at the San Francisco Mint, organized by the Linux Foundation and OPAQUE around confidential AI, attested inference and hardware-verified attestation, per [Linux Foundation - Confidential Computing Summit 2026](https://events.linuxfoundation.org/confidential-computing-summit/); SecurityWeek's AI Risk Summit follows August 11-12 at the Ritz-Carlton Half Moon Bay; and in Las Vegas, Black Hat USA's single-day AI Summit (August 4, inside the August 1-6 conference) and DEF CON 34's AI Village anchor the agentic red-teaming calendar, with OWASP Global AppSec USA in San Francisco November 2-6. Zenity - the practitioner-led AI Agent Security Summit the user tracks - has confirmed a 2026 global expansion to New York, London and APAC, with dates still worth monitoring. On the AI-chip and hardware track, AMD's Advancing AI 2026 event is slated for July and expected to detail availability for the Instinct MI400/MI455X data-center GPU lineup; Hot Chips 2026 takes Stanford August 23-25; and the AI Infra Summit runs September 15-17 at the Santa Clara Convention Center (8,000 attendees, 400-plus speakers across compute, AI data centers and physical AI), per [Information Matters - AI Infra Summit 2026](https://informationmatters.net/event/ai-infra-summit-2026/). Further out, GitHub Universe returns to Fort Mason October 28-29 and AWS re:Invent runs November 30-December 4 in Las Vegas.",
+          "citations": [
+            {
+              "label": "10times - Databricks Data + AI Summit (Jun 2026), San Francisco",
+              "url": "https://10times.com/e1z1-9r17-ppzk"
+            },
+            {
+              "label": "AI Engineer World's Fair 2026 - Yerba Buena",
+              "url": "https://yerbabuena.org/do/ai-engineer-worlds-fair-2026"
+            },
+            {
+              "label": "Linux Foundation - Confidential Computing Summit 2026",
+              "url": "https://events.linuxfoundation.org/confidential-computing-summit/"
+            },
+            {
+              "label": "Information Matters - AI Infra Summit 2026",
+              "url": "https://informationmatters.net/event/ai-infra-summit-2026/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

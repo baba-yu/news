@@ -1,0 +1,271 @@
+{
+  "date": "2026-06-09",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.a1910f5d2178f52e",
+        "short_label": "MCP host runtimes ship sandboxed stdio tool execution as the default by Q2 2027",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "今週のMCPセキュリティの波は、この予測の中核となる主張、すなわちModel Context ProtocolがAIスタックで最も露出が大きい領域であり、対処はフィールドごとの個別パッチではなくランタイム側へ移すしかない、という見立てを現時点で最も明快に裏付けている。Adversa AIの6月4日のまとめは、静的・動的のテイント解析スキャナーVIPER-MCPを詳述する。約40,000件のMCPサーバーリポジトリを走査し、106件のゼロデイを洗い出して67件のCVE（うち9件は壊れたOAuthに起因）を登録した。並行して、Censysのスキャンはインターネットから到達可能なMCPサービスを12,520件数え、その大半は認証なし、別の調査ではリモートMCPサーバーの約40%が認証なしでツールを公開していると判明した。\nサンドボックス化の見立てに最も的を射ているのが、NSAの「Model Context Protocol: security design considerations for AI-driven automation」だ。クライアントとサーバーの逆転構造、検証されないタスク伝播、任意コード実行の露出を中核リスクとして挙げ、ツール汚染を最も深刻と位置づけている。悪意あるサーバーのメタデータが、人による確認の前に命令レベルの権限を伴ってエージェントの文脈へ入り込むためだ。これはまさに、予測が分離されたランチャーへ移すべきだとするホスト内の実行境界そのものである。Akamaiが報告した3件のデータベースMCPの欠陥（Apache Doris MCPのSQLインジェクション、Alibaba RDS MCPの認証なしの情報持ち出し、Apache Pinot MCPの乗っ取り経路、1社はパッチ提供を拒否）は、このパターンをstdioアダプターからツールサーバー本体にまで広げている。",
+      "reference_links": [
+        {
+          "label": "Adversa AI - 2026年6月のMCPセキュリティ主要リソースとCVE",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        },
+        {
+          "label": "SecurityWeek - MCPの脆弱性トップ25が示す、AIエージェントの悪用手口",
+          "url": "https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/"
+        },
+        {
+          "label": "The Hacker News - Ollamaの境界外読み取りの脆弱性、リモートからプロセスメモリの漏えいを許す",
+          "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "NSAの設計指針の文書は、クライアントとサーバーの逆転構造、検証されないタスク伝播、任意コード実行を中核リスクとして挙げ、ツール汚染を最も深刻と位置づけている。悪意あるサーバーのメタデータが、確認の前に命令レベルの権限を伴ってエージェントの文脈へ入り込むためだ。これはまさに、この見立てが分離されたランチャーへ移すべきだとするホスト内の実行境界そのものである。VIPER-MCPの67件のCVEは、フィールドごとの個別パッチでは防御になり得ないことを裏付けている。",
+        "coherence": 5,
+        "remaining_gap": "stdioツールを別プロセスや別コンテナに閉じ込める形にデフォルトを変更して出荷した参照実装のMCPホストやSDKは、まだ存在しない。今ある証拠はリスクの指摘であって、分離されたランチャーではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.1cd413918d286c84",
+        "short_label": "Open agent harness powers a second vendor's first-party agent by Q4 2026",
+        "prediction_date": "2026-06-04"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Cognitionが6月2日にWindsurfブランドを畳んでDevin Desktopへ移したことは、差別化につながる仕事はガバナンスやプロダクトの外殻にあり、エージェントのループ自体は取り込み可能なオープン部品である、という予測の構造的な主張を補強する。Devin Desktopはエディタをエージェント管理ツールとして開き直したもので、既定のAgent Command CenterはCodex、Claude Agent、OpenCode、そしてACP互換の任意のエージェント（チーム内製のエージェントを含む）を、オープンなAgent Client Protocol経由でホストする。従来のCascadeエンジンはRustで書き直されたDevin Localに置き換わり、ACPはすでにJetBrains、Google、GitHubおよび25を超えるエージェントに採用済みと説明されている。\nこれは予測が追っているのと同じ反転、すなわちオープンコアを独自の外殻で包む構図であり、今回はエディタとオーケストレーションの層で起きている。ベンダーはランタイムを作り直すのではなく、ホストの領域とプロトコルで競っているのだ。部分的な隔たりは、今日の証拠がコーディングエージェントの層にとどまり、オープンなACPプロトコルとRust製のローカルエージェントを軸にしている点にある。特定の大手エンタープライズベンダーが、自社ブランドの一次エージェントのエンジンとして追跡対象のオープンハーネス（OpenClaw型のランタイム）を公表する、という形にはまだなっていない。",
+      "reference_links": [
+        {
+          "label": "Cognition - Devin Desktopの紹介",
+          "url": "https://cognition.ai/blog/introducing-devin-desktop"
+        },
+        {
+          "label": "Devin - WindsurfはDevin Desktopになりました",
+          "url": "https://devin.ai/blog/windsurf-is-now-devin-desktop"
+        },
+        {
+          "label": "TechTimes - GitHub CopilotがGPT-4をProject Polarisに置き換え、Buildでマルチエージェント版VS Codeを出荷",
+          "url": "https://www.techtimes.com/articles/317596/20260602/github-copilot-replaces-gpt-4-project-polaris-ships-multi-agent-vs-code-build.htm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "CognitionがWindsurfを畳んでDevin Desktopへ移したことで、オープンなAgent Client Protocolが既定の領域として出荷され、Codex、Claude Agent、OpenCode、そしてチーム内製のエージェントをホストする。一方でRustで書き直されたDevin LocalがCascadeを置き換える。ベンダーはランタイムを作り直すのではなくホストの領域とプロトコルで競っており、これはこの見立てが追う、オープンコアを独自ガバナンスで包む反転そのものである。",
+        "coherence": 4,
+        "remaining_gap": "これはACPプロトコル上のコーディングエージェント層にあり、特定の大手エンタープライズベンダーが、自社ブランドの一次エージェントのエンジンとして追跡対象のオープンハーネスを公表したものではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e318bde1c777b0f2",
+        "short_label": "Nvidia mean Street price target clears $300 on data-center GPU demand by Q4 2026",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "NvidiaのN1/N1XのComputexでの発表は、Nvidiaがデータセンターの基盤を保ちつつAI PCやライセンス供与のアクセラレータ系へ広がっている、という予測の横断的な主張を部分的に支える。これは、出遅れた市場予想がStreetの上限へ収束せざるを得なくなる、と予測が述べる構造的な読みである。Jensen Huangが6月1日に披露したArmベースのN1（10〜12コアCPU、2,048〜2,560 CUDAコア、18〜45W）と最上位のN1X（20コアCPU、6,144 CUDAコア、45〜80W）は、Nvidiaがスタックのあらゆる層を一度に押さえようとする動き——データセンター向けアクセラレータ、ライセンス供与を受けたGroqの推論IP、そして今回の端末側Windows-on-Arm推論——と位置づけられ、AMD、Intel、Qualcommの株価を押し下げた。\n関連性が部分的なのは、予測の反証可能な機構が、データセンター部門の収益が次の2回の決算にかけて年率換算で約1300億ドル近辺となり、アナリストの12カ月平均目標株価を300ドル超へ押し上げることだからだ。今日の民生向けシリコンの拡張は、需要側と競争上の堀を示す材料であって、決算の数字でも公表された目標株価の改定でもない。",
+      "reference_links": [
+        {
+          "label": "TechSpot - Nvidiaの10年超ぶりの民生CPUが登場、RTXコアを内蔵",
+          "url": "https://www.techspot.com/news/112585-microsoft-nvidia-arm-tease-new-era-pc-computex.html"
+        },
+        {
+          "label": "PCWorld - NvidiaのRTX Sparkチップがエージェント型AI向けにノートPCを「作り直す」",
+          "url": "https://www.pcworld.com/article/3152460/nvidia-rtx-spark-chip-reinvents-laptops-for-agentic-ai.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Huangが6月1日に披露したN1/N1Xは、Nvidiaがデータセンターの基盤を保ちつつ端末側AI PC推論とライセンス供与のGroqアクセラレータIPへ広がり、スタックのあらゆる層を一度に押さえようとしていることを示す。これは、出遅れた市場予想がStreetの上限から離れるのではなく収束していくと見立てが述べる、技術的現実の読みであり、AMDとIntelの株価を押し下げた。",
+        "coherence": 3,
+        "remaining_gap": "これは需要側と競争上の堀を示す材料であって、年率換算1300億ドル近辺のデータセンター収益の数字でも、300ドル超への平均目標株価の改定でもない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b9350fd080696d03",
+        "short_label": "Federal AI procurement mandates frontier-model cyber attestations by Q2 2027",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "NSAによる「Model Context Protocol: security design considerations for AI-driven automation」の公開は、連邦のサイバー機関が、後に調達のゲートへと固まっていく指定とベンチマークの足場を築いている、という予測の前提を強める、隣接した政府の動きである。この文書は、MCPのクライアントとサーバーの逆転構造、検証されないタスク伝播、任意コード実行の露出を中核リスクとして挙げ、政府としての基準を定めている。連邦のセキュリティ当局が実名で、エージェント型AIのサイバー能力について記録に残す形となり、同じ週に研究者は67件のMCP CVEを登録し、認証なしのOllama「Bleeding Llama」のメモリ漏えいの欠陥（CVE-2026-7482、CVSS 9.1）を公表した。\n関連性が部分的なのは、予測の反証可能な到達点が具体的な調達上の手段——対象となる先端モデルのベンダーに、サイバー能力のベンチマークと早期アクセスの枠組みへの表明を求めるFAR改正、省庁の調達規則、または公募の条項——だからだ。NSAの指針は契約条件ではなく設計上の助言であり、連邦の発注における対象ベンダーの表明はまだ存在しない。",
+      "reference_links": [
+        {
+          "label": "Adversa AI - 2026年6月のMCPセキュリティ主要リソースとCVE",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        },
+        {
+          "label": "The Hacker News - Ollamaの境界外読み取りの脆弱性、リモートからプロセスメモリの漏えいを許す",
+          "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "NSAのMCPセキュリティ設計の指針は、連邦のセキュリティ当局を実名で、エージェント型AIのサイバーリスク——クライアントとサーバーの逆転構造、検証されないタスク伝播、任意コード実行——について記録に残す形にした。同じ週に研究者は67件のMCP CVEを登録し、OllamaのBleeding Llamaの欠陥を公表しており、これは、調達のゲートへ固まる前に連邦のサイバー機関が築くと見立てが述べる、指定とベンチマークの足場を進めるものである。",
+        "coherence": 3,
+        "remaining_gap": "この指針は契約上の手段ではなく設計上の助言であり、FAR改正、調達規則、公募条項、または連邦の発注における対象ベンダーのサイバー表明は、まだ現れていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.467b2bda02de97b5",
+        "short_label": "Local fine-tune-to-agent stack ships as a managed hyperscaler service by H2 2026",
+        "prediction_date": "2026-06-03"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "UnslothによるGemma 4の発売初日対応は、この予測が拠り所とする基盤の前提——ローカルのファインチューニングからエージェントまでの一連のループが、開発者がすでに持つハードウェアで今や動く、という点——を補強する。これは、ハイパースケーラーがマネージドな等価物を出荷するための前提条件だ。Googleは6月3日にGemma 4をApache-2.0のマルチモーダルなオープンウェイトの系列として公開し、Unslothは初日からの実行とチューニングを提供した。動的4bitのGGUFは12Bモデルを約8GBのRAM/VRAMで動かし、6月5日のQATチェックポイントは下限をE2Bで約3GB、E4Bで約5GB、12Bで約7GB、26B-A4B MoEで約15GBまで、ほぼ元の品質のまま引き下げる。加えてTransformers、llama.cpp、MLX、SGLang、vLLMからの経路もある。\n関連性は部分的だ。これはローカル側の軸（現行のマルチモーダルモデルを発売初日に1枚の民生GPUでファインチューニングして提供する）を裏付ける一方で、マネージドなホスト型の等価物は示していない。予測の実際の到達点は、クラウドまたはMLOpsのベンダーが、小型のオープンモデルをファインチューニングし、厳選されたMCPツールのカタログに接続し、独自の合成学習データを生成する単一のコンソールを出荷することである。",
+      "reference_links": [
+        {
+          "label": "Unsloth Docs - Gemma 4: ローカルでの実行方法",
+          "url": "https://unsloth.ai/docs/models/gemma-4"
+        },
+        {
+          "label": "TechTimes - Google Gemma 4 12Bが16GBのノートPCにマルチモーダルAIをもたらす、Apache 2.0で無償",
+          "url": "https://www.techtimes.com/articles/317758/20260604/google-gemma-4-12b-brings-multimodal-ai-16gb-laptops-free-under-apache-20.htm"
+        },
+        {
+          "label": "Unsloth - gemma-4-26B-A4B-it-GGUF モデルカード",
+          "url": "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "NSAのMCP指針は、ツール汚染を最も深刻と位置づけている。悪意あるサーバーのメタデータが、人による確認の前に命令レベルの権限を伴ってエージェントの文脈へ入り込むためだ。これはこの見立てが指す、信頼できないテキストが権限を持つエージェントへ流れ込む経路である。Bleeding Llama（CVE-2026-7482、CVSS 9.1）は、認証なしの攻撃者が30万台超の露出したOllamaサーバーからAPIキー、システムプロンプト、他ユーザーのデータを漏えいできるようにし、秘密情報の持ち出しの仕組みを、繰り返し起こる確かな一群とした。",
+        "coherence": 3,
+        "remaining_gap": "今日の成果物はCVEと政府の設計指針であって、「Agent-in-the-Loop Secret Exfiltration」を上位の分類として挙げるCISやOWASPのリスクリストではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.d333899065046b01",
+        "short_label": "Agent-framework SQL tools ship read-only-by-default execution guards by Q1 2027",
+        "prediction_date": "2026-06-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "AkamaiのデータベースMCPの公表は、フレームワークの外殻が守るべきだと予測が論じる、プロンプトからSQLへの実行リスクの、新たで具体的な事例を与える。Akamaiは今週3件のデータベースMCPの欠陥を公表した——Apache Doris MCPのSQLインジェクション、Alibaba RDS MCPの認証なしのメタデータ持ち出し、Apache Pinot MCPの乗っ取り経路で、1社はパッチ提供を拒否——これは、まさにその失敗の形（データベース照会ツールが攻撃者の影響を受けたSQLを実行する）を、利用側のデータベース権限ではなくMCPの層で生じさせている。\n関連性は直接的というより隣接している。これらはMCPのデータベースコネクタのCVEであって、特定のtext-to-SQLのエージェントフレームワーク（LangChainのSQLツールキット、LlamaIndexのtext-to-SQLエンジン、または同種のもの）が、構文解析で検証されたSELECT専用の許可リストを出荷する形にデフォルトを変えたものではない。これが予測の具体的な到達点である。今週のより広いNSAのツール汚染とゼロトラストの枠組みも、同じく既定で安全な方向へ押している。",
+      "reference_links": [
+        {
+          "label": "Adversa AI - 2026年6月のMCPセキュリティ主要リソースとCVE",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        },
+        {
+          "label": "SecurityWeek - MCPの脆弱性トップ25が示す、AIエージェントの悪用手口",
+          "url": "https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "AdversaのVIPER-MCPによる約40,000件のリポジトリの走査は67件のCVEを登録し、うち9件は壊れたOAuthフローに固有のものだった。一方でCensysのスキャンはインターネットから到達可能でその大半が認証なしのMCPサービスを12,520件数え、別の調査ではリモートサーバーの約40%が認証なしでツールを公開していると判明した。これは、見立てが拠り所とする、AI連携の認可が壊れているという侵害の種類を、繰り返し起こる確かな失敗の形として定量化している。",
+        "coherence": 3,
+        "remaining_gap": "到達点は、Okta、Entra ID、Google Workspaceといったアイデンティティプロバイダーが、AI拡張向けの独立したOAuthスコープの分類を正式に切り出すことであり、脆弱性の研究だけではそれに当たらない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] この休眠中の予測のシグナル（間接プロンプトインジェクションのPoC、秘密情報の漏えい、エージェントのCI資格情報）に対するレイヤー1のキーワード一致。今日のMCPセキュリティの波は、エージェントの秘密情報持ち出しを、活発な脅威の議論の真ん中へ押し戻す。NSAのMCP指針がツール汚染を最も深刻と位置づけるのは、まさに悪意あるサーバーのメタデータが、人による確認の前に命令レベルの権限を伴ってエージェントの文脈へ入り込むためだ——これは予測が指す、間接インジェクションから秘密情報の漏えいへ至る典型的な経路である。生のインフラ側では、OllamaのGGUFローダーにおけるヒープの境界外読み取りである「Bleeding Llama」（CVE-2026-7482、CVSS 9.1）が、認証なしの攻撃者に、推定30万台超の露出したサーバーからプロセスメモリ——APIキー、システムプロンプト、他ユーザーの会話データ——を漏えいさせ、Ollama 0.17.1で修正された。\n予測の具体的な到達点までの隔たりは残る。今日の成果物はCVEと政府の設計指針であって、「Agent-in-the-Loop Secret Exfiltration」を上位の分類として挙げる正式なCISやOWASPのリスクリストではない。",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Ollamaの境界外読み取りの脆弱性、リモートからプロセスメモリの漏えいを許す",
+          "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html"
+        },
+        {
+          "label": "Adversa AI - 2026年6月のMCPセキュリティ主要リソースとCVE",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "NvidiaのArmベースのN1/N1Xは、6月1日にComputexで披露され、端末側の推論シリコンとして明確に位置づけられている——標準のN1は2,048〜2,560 CUDAコアで18〜45W、最上位のN1Xは6,144コアで45〜80W、Microsoftと共同設計しエージェント型アシスタントをローカルで動かす——一方でNvidiaは同時にデータセンターの学習・アクセラレータ層とライセンス供与のGroq推論IPを保ち、学習と推論で分かれる計算プロファイルをクライアントの端まで広げている。",
+        "coherence": 3,
+        "remaining_gap": "到達点は、ハイパースケーラーの自社シリコン（TPU、Trainium、MAIA、MTIA）が別々の型番へ分かれることに関わる。Nvidiaはクライアント推論へ踏み込む販売ベンダーであって、ハイパースケーラーのSKUの分岐ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c850d46b059e600c",
+        "short_label": "SSO providers carve out AI-extension OAuth scope category by Q3 2026",
+        "prediction_date": "2026-04-22"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] この休眠中の予測のシグナル（OAuthスコープ、AI連携、Allow Allの既定）に対するレイヤー1のキーワード一致。MCPのCVEまとめは、壊れたOAuthを、エージェントからツールへの認可層における、繰り返し起こる確かな失敗の種類として浮かび上がらせる。AdversaのVIPER-MCPによる約40,000件のMCPリポジトリの走査は67件のCVEを登録し、うち9件は壊れたOAuthフローに固有のものだった。一方でCensysのスキャンはインターネットから到達可能でその大半が認証なしのMCPサービスを12,520件数え、別の調査ではリモートMCPサーバーの約40%が認証なしでツールを公開していると判明した。\n関連性は実在するが間接的だ。このデータは予測の見立てが拠り所とするOAuthと認可の隔たりを定量化するものの、予測の到達点は、アイデンティティプロバイダー（Okta、Entra ID、Google Workspace）がAI拡張向けの独立したOAuthスコープの分類を正式に切り出すことであり、今日の脆弱性の研究そのものはそれに当たらない。",
+      "reference_links": [
+        {
+          "label": "Adversa AI - 2026年6月のMCPセキュリティ主要リソースとCVE",
+          "url": "https://adversa.ai/blog/top-mcp-security-resources-june-2026/"
+        },
+        {
+          "label": "SecurityWeek - MCPの脆弱性トップ25が示す、AIエージェントの悪用手口",
+          "url": "https://www.securityweek.com/top-25-mcp-vulnerabilities-reveal-how-ai-agents-can-be-exploited/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "今週は秘密情報の持ち出しという脅威を再び前面へ押し出す。NSAはツール汚染を最も深刻と位置づけるが、それは悪意あるサーバーのメタデータが命令レベルの権限を伴ってエージェントへ届くためであり、Bleeding Llama（CVE-2026-7482）は認証なしの攻撃者が30万台超の露出したOllamaサーバーからAPIキーとシステムプロンプトを漏えいできるようにする——間接インジェクションから漏えいへ至る典型的な経路だ。とはいえ、その分類はまだ正式なリストの首位には立っていない。",
+        "coherence": 3,
+        "remaining_gap": "CISやOWASPのリスクリストで「Agent-in-the-Loop Secret Exfiltration」の分類を首位に挙げたものはまだない。今日あるのはCVEと政府の設計指針であって、リストへの記載ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.36f4ab773b39713e",
+        "short_label": "Hyperscaler custom AI silicon splits into training vs inference SKUs by H1 2027",
+        "prediction_date": "2026-04-22"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 今日のNvidiaシリコンの筋に対するレイヤー2の意味的一致。N1/N1Xの発売は、予測が見通す、学習と推論の二系統に分かれるシリコンの具体的な事例であり、データセンターのSKUからクライアントの端まで広がっている。NvidiaのArmベースのN1/N1Xは、端末側の推論シリコンとして明確に位置づけられている——標準のN1（2,048〜2,560 CUDAコア、18〜45W）と最上位のN1X（6,144 CUDAコア、45〜80W）はMicrosoftと共同設計され、エージェント型アシスタントをローカルで動かす——一方でNvidiaは同時にデータセンターの学習・アクセラレータ層とライセンス供与のGroq推論IPを保っており、その読みは、スタックのあらゆる層を一度に押さえようとしている、というものだ。\n関連性は厳密というより意味的だ。予測はハイパースケーラーの自社向けカスタムシリコン（TPU/Trainium/MAIA/MTIA）が別々の学習用と推論用の型番へ分かれることに関わるのに対し、Nvidiaはクライアント推論へ踏み込む販売ベンダーである。よって今日は、学習と推論の基盤が分かれるという見立てを補強するが、到達点が定めるハイパースケーラーのSKUの分岐そのものではない。",
+      "reference_links": [
+        {
+          "label": "TechSpot - Nvidiaの10年超ぶりの民生CPUが登場、RTXコアを内蔵",
+          "url": "https://www.techspot.com/news/112585-microsoft-nvidia-arm-tease-new-era-pc-computex.html"
+        },
+        {
+          "label": "PCWorld - NvidiaのRTX Sparkチップがエージェント型AI向けにノートPCを「作り直す」",
+          "url": "https://www.pcworld.com/article/3152460/nvidia-rtx-spark-chip-reinvents-laptops-for-agentic-ai.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "MCPのCVEの波は、予測の前提が拠り所とする、広く管理されていない認可の隔たりを定量化する。VIPER-MCPの67件のCVEのうち9件は壊れたOAuthに起因し、Censysのスキャンは大半が認証なしのサービスを12,520件数え、リモートサーバーの約40%が認証なしでツールを公開している。これはOAuthの露出が全面的であることを示すが、アイデンティティプロバイダーがそれに対して動いているわけではない。",
+        "coherence": 3,
+        "remaining_gap": "Okta、Entra ID、Google WorkspaceといったどのSSOプロバイダーも、AI拡張向けの独立したOAuthスコープの分類を切り出していない。脆弱性の研究は到達点ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.bcace95fe3e753d1",
+        "short_label": "27B Dense + 1M context becomes default enterprise local-LLM recipe by Q3 2026",
+        "prediction_date": "2026-04-23"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 今日のGemma 4 / Unslothの筋に対するレイヤー2の意味的一致。現行のオープンウェイトモデルが、今や発売初日に1枚の民生GPUでファインチューニングして提供できる。これは予測のレシピの見立てが拠り所とする、端末側でのローカルLLMの動作範囲である。GoogleのApache-2.0のGemma 4 12Bは、Unslothの動的4bit GGUF経由で約8GBのRAM/VRAM（8bitでは約14GB）で推論を動かし、6月5日のQATチェックポイントは12Bの下限を約7GBへ、26B-A4B MoE版を約15GBへ、ほぼ元の品質のまま引き下げ、マルチモーダルモデルをゲーミングノートPCやM系のMacBook Proの構成の手の届く範囲に収める。\n関連性は意味的で部分的だ。予測は27Bデンス・1Mコンテキスト・MoEなし、という特定の形を企業向けのローカルの既定レシピとして見込むのに対し、Gemma 4は12Bと26B-A4B MoEのマルチモーダルな系列である。よって今日は、民生GPUでのローカル推論という軌道を裏付けるが、到達点が挙げる正確なパラメータとコンテキストのレシピそのものではない。",
+      "reference_links": [
+        {
+          "label": "Unsloth Docs - Gemma 4: ローカルでの実行方法",
+          "url": "https://unsloth.ai/docs/models/gemma-4"
+        },
+        {
+          "label": "TechTimes - Google Gemma 4 12Bが16GBのノートPCにマルチモーダルAIをもたらす、Apache 2.0で無償",
+          "url": "https://www.techtimes.com/articles/317758/20260604/google-gemma-4-12b-brings-multimodal-ai-16gb-laptops-free-under-apache-20.htm"
+        },
+        {
+          "label": "Unsloth - gemma-4-26B-A4B-it-GGUF モデルカード",
+          "url": "https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "NvidiaのN1/N1Xは、端末側の専用推論シリコンとして明確に位置づけられ——Microsoftと共同設計され、ローカルのエージェントを動かす——一方でNvidiaは同時にデータセンターの学習層とライセンス供与のGroq推論IPを保っている。これは学習と推論の分岐を駆動する、計算プロファイルが分かれるという前提を補強するが、Nvidiaはクライアント推論へ踏み込む販売ベンダーであって、自社の型番を分けるハイパースケーラーではない。",
+        "coherence": 3,
+        "remaining_gap": "到達点はハイパースケーラーの自社シリコン（MAIA、MTIA、TPU、Trainium）が別々の学習用と推論用のSKUへ分かれることを挙げる。販売向けのエッジ推論チップは隣接ではあるが、その分岐ではない。"
+      }
+    }
+  ]
+}
