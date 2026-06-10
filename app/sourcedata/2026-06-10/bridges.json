@@ -1,0 +1,330 @@
+{
+  "date": "2026-06-10",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.2d763790a313224e",
+        "short_label": "BadHost CVE-2026-48710 CVSS score gets upgraded above 6.5 by Q4 2026",
+        "prediction_date": "2026-06-02"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Today's CISA-KEV LiteLLM story names CVE-2026-48710 explicitly: per \"CISA adds an actively-exploited LiteLLM MCP command-injection flaw,\" the Starlette host-header bypass tracked as CVE-2026-48710 is the chaining partner that turns the standalone command-injection bug (CVE-2026-42271) into an unauthenticated CVSS 10.0 remote-code-execution needing no login, no API key, and no prior access. That is the prediction's exact mechanism: BadHost's host-header bypass, in chain, now carries an effective severity far above 6.5, and its fix shipping in version 1.0.1 confirms it is being scored and remediated as a live high-severity bug rather than a low-impact one.",
+      "reference_links": [
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        },
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Today's KEV story names CVE-2026-48710 as the Starlette host-header bypass that chains the command-injection bug into unauthenticated CVSS 10.0 remote code execution needing no login, key, or prior access. That effective severity sits far above the original 6.5, and the Starlette fix shipping in 1.0.1 shows it scored and remediated as a live high-severity flaw, supporting the expected upward re-score.",
+        "coherence": 3,
+        "remaining_gap": "No formal NVD record edit or vendor advisory yet rating CVE-2026-48710 itself above 6.5; today's high severity is the chained pair, not a standalone re-score."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4c31ca30d449311e",
+        "short_label": "CISA ships AI-Infra KEV sub-catalog with inference-server SBOM by Q3 2026",
+        "prediction_date": "2026-04-28"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "The \"CISA adds an actively-exploited LiteLLM MCP command-injection flaw to its KEV catalog\" headline is a direct KEV listing of an AI-inference-proxy CVE: on June 9 CISA added CVE-2026-42271 in LiteLLM's MCP-server preview endpoints to its Known Exploited Vulnerabilities catalog with a federal remediation deadline, following Horizon3.ai's June 1 chained-RCE confirmation. LiteLLM is described as the open-source proxy brokering calls across hundreds of model providers, so a KEV entry for the AI-inference-broker tier is exactly the AI-Infra sub-catalog substrate this prediction anticipates - though it is still a single per-CVE listing, not yet a carved-out named sub-catalog with an inference-server SBOM requirement.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        },
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "CISA adding CVE-2026-42271 in LiteLLM's MCP endpoints to its KEV catalog with a federal remediation deadline puts the AI-inference-broker tier squarely inside federal cyber governance, the substrate this sub-catalog anticipates. It moves toward the expected outcome, but remains a single per-CVE listing rather than a carved-out, named AI-Infra catalog carrying a mandatory inference-server SBOM requirement.",
+        "coherence": 3,
+        "remaining_gap": "No named AI-Infra sub-catalog and no mandatory SBOM tagging on inference servers yet; only an individual KEV entry exists."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7db9cba24cef0f48",
+        "short_label": "CISA + NIST publish inference-server + agentic-tool CVE sub-catalog by Q4 2026",
+        "prediction_date": "2026-04-27"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Today's CISA-KEV LiteLLM addition advances the federal-cyber-governance side of this thesis: per \"turning the agent stack's tool-wiring layer into a confirmed in-the-wild credential-theft path,\" CISA formally tracked an inference-proxy / agentic-tool CVE (CVE-2026-42271 in LiteLLM's MCP endpoints) on a KEV timeline. The day's broader throughline - the proxy and MCP-config layer that wires agents to tools is itself an unauthenticated, internet-reachable attack surface that must be patched on KEV timelines and kept off the public internet - is precisely the inference-server-plus-agentic-tool category this prediction expects CISA and NIST to formalize. What is still missing is the NIST-side classification and a named sub-catalog rather than a one-off listing.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        },
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "CISA formally tracked an inference-proxy and agentic-tool CVE - the LiteLLM MCP-endpoint flaw - on a KEV remediation timeline, advancing the federal-governance side of this thesis that the agent tool-wiring layer is an internet-reachable surface needing patch deadlines. It nudges toward the expected publication, but is a one-off CISA listing with no NIST-side classification and no named inference-server-plus-agentic-tool sub-catalog.",
+        "coherence": 3,
+        "remaining_gap": "Missing the NIST-side classification and a dedicated named sub-catalog with SBOM tagging; today is a single KEV entry, not category-level formalization."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.678c96beb7ff20f6",
+        "short_label": "Inference servers form supply chain, triggering AI-Infra CVE class by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "The LiteLLM KEV story is the cleanest validation of this prediction's core claim that inference-serving infrastructure is becoming a credential-bearing supply chain that spawns its own CVE class. Per \"LiteLLM is the open-source proxy that brokers calls across hundreds of model providers,\" an attacker who lands on the proxy via the unauthenticated MCP-test endpoints can read provider credentials and API keys for every connected AI service and move laterally into the rest of the org's inference infrastructure. That is the supply-chain blast radius the prediction described, now realized as a confirmed in-the-wild, KEV-deadlined AI-Infra CVE rather than a forecast.",
+      "reference_links": [
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        },
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The LiteLLM KEV listing realizes the claimed condition: an inference-serving proxy is now a credential-bearing supply-chain node. Because it brokers calls across hundreds of providers, an attacker reaching its unauthenticated MCP endpoints reads every connected service's credentials and pivots across the inference stack. That confirmed, KEV-deadlined blast radius is the coherent AI-Infra attack-surface category this prediction said inference runtimes form.",
+        "coherence": 4,
+        "remaining_gap": "No NIST/NVD AI-Infra tag, OWASP Top-10 promotion, or per-engine SBOM signature feeds yet; the category is exploited in the wild but not formally codified."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8723e8e2d6f5a23a",
+        "short_label": "MCP specification makes remote-server authentication mandatory by H1 2027",
+        "prediction_date": "2026-06-09"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Today's LiteLLM exploitation is the strongest pressure yet behind mandatory MCP authentication. Per the CISA-KEV story, the flaw lives in two unauthenticated test endpoints (POST /mcp-rest/test/connection and /mcp-rest/test/tools/list) that accept a full server config and spawn it as a subprocess on the proxy host with no validation, yielding remote code execution with \"no login, no API key, and no prior access.\" The remediation framing - authenticate every caller, keep the MCP-config layer off the public internet - is exactly the unauthenticated-by-default failure mode that a mandatory-authentication change to the MCP spec would close. This is a real-world demonstration that the spec's optional auth is being exploited.",
+      "reference_links": [
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        },
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The flaw lives in two unauthenticated MCP test endpoints that accept a full server config and spawn it as a host subprocess, yielding remote code execution with no login, key, or prior access. Active in-the-wild exploitation of this optional-auth gap is fresh, concrete pressure behind the prediction's premise that no-auth remote MCP servers force the spec toward mandatory authentication.",
+        "coherence": 4,
+        "remaining_gap": "No MCP spec revision or working-group draft yet promotes remote-server auth from optional to a normative requirement; this is exploitation pressure, not spec movement."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.20a590c59cffd7fb",
+        "short_label": "MCP host runtimes ship sandboxed stdio tool execution as the default by Q2 2027",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The LiteLLM CVE is a textbook case for sandboxed tool execution. Per the CISA-KEV story, the MCP-test endpoints accept a full server config - including command, args, and env fields - in the request body and spawn it as a subprocess on the proxy host with no validation, giving code execution as the LiteLLM proxy. Spawning attacker-supplied tool configs as unsandboxed host subprocesses is precisely the failure this prediction says MCP host runtimes will close by making sandboxed stdio tool execution the default. Today shows the unsandboxed default being actively exploited in the wild, which is the forcing pressure - though no host runtime has yet shipped the sandbox-by-default response.",
+      "reference_links": [
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        },
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The live LiteLLM exploitation sharpens the premise that unauthenticated remote MCP surfaces are the core failure. Two unauthenticated test endpoints accept a full server config and spawn it on the proxy host, yielding remote code execution with no login or API key. CISA's KEV listing and the authenticate-every-caller remediation turn the optional-auth gap into an actively-exploited one.",
+        "coherence": 4,
+        "remaining_gap": "No spec-body movement yet; the pressure is exploitation and federal advisory, not a published MCP revision requiring remote-server authentication."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a91f33b7684871df",
+        "short_label": "AI-accelerator equities re-rate lower on the next in-line ASIC print by Q4 2026",
+        "prediction_date": "2026-06-07"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "This prediction is realized almost literally today. Per \"The Broadcom-triggered chip drawdown deepens as AMD falls ~10% and Intel ~8% in a single session,\" the custom-ASIC bellwether Broadcom guided Q3 AI-chip sales to $16 billion against a ~$17.2 billion consensus and declined to raise its full-year 2026 AI-semiconductor forecast, and the whole accelerator cohort re-rated lower on that single guide even though AMD, Intel, and Nvidia reported no company-specific issues. That is exactly the mechanism the prediction names - an in-line ASIC print resetting the entire AI-accelerator equity complex lower via guidance contagion rather than any individual miss.",
+      "reference_links": [
+        {
+          "label": "CryptoBriefing - AMD stock falls 10% as AI chip sector faces broad selloff",
+          "url": "https://cryptobriefing.com/amd-stock-falls-10-percent-ai-selloff/"
+        },
+        {
+          "label": "Kavout - What triggered the recent semiconductor sell-off",
+          "url": "https://www.kavout.com/market-lens/what-triggered-the-recent-semiconductor-sell-off"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Today's CVE is a second in-the-wild case of the exact root cause the prediction names. The MCP-test endpoints accept a full server config - command, args, and env - and spawn it as an unsandboxed subprocess on the proxy host with no validation. That attacker-supplied tool config running on the host without isolation is now confirmed exploited and KEV-deadlined.",
+        "coherence": 4,
+        "remaining_gap": "No MCP host or framework has shipped sandbox-by-default in response; today supplies forcing pressure, not adoption of the isolated-launcher fix."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.808bbd831ebf41b3",
+        "short_label": "Custom AI-accelerator XPU silicon clears $20B-per-quarter run-rate by Q4 2026",
+        "prediction_date": "2026-06-03"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The Broadcom-triggered selloff puts a concrete number on the custom-XPU trajectory. Per the chip-drawdown story, Broadcom's Q3 AI-chip sales guide of $16 billion undershot the ~$17.2 billion consensus and the company declined to raise its full-year 2026 AI-semiconductor forecast - markets read this as a demand-pacing signal for the whole accelerator complex. Broadcom is the dominant merchant custom-ASIC/XPU supplier, so a $16B quarterly AI-chip guide is a direct read on whether custom-accelerator silicon is on a $20B-per-quarter path. The honest reading is mixed-to-negative: the print is below the run-rate the prediction targets and the refusal to raise full-year guidance pressures the trajectory.",
+      "reference_links": [
+        {
+          "label": "Kavout - What triggered the recent semiconductor sell-off",
+          "url": "https://www.kavout.com/market-lens/what-triggered-the-recent-semiconductor-sell-off"
+        },
+        {
+          "label": "CryptoBriefing - AMD stock falls 10% as AI chip sector faces broad selloff",
+          "url": "https://cryptobriefing.com/amd-stock-falls-10-percent-ai-selloff/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "The forecast landing nearly materialized today. Broadcom's in-line Q3 AI-chip guide of $16 billion, with no full-year raise, re-rated the accelerator complex lower - AMD fell about 10% and Intel more than 8% in one session with no company-specific issue. That is precisely the named landing: an in-line print triggering a near-10% single-name drop plus a correlated peer drawdown.",
+        "coherence": 5,
+        "remaining_gap": "The trigger was Broadcom's own guide rather than a separate next-in-line ASIC print, and formal AI-chip estimate cuts have not yet followed."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.69bedb462442e205",
+        "short_label": "Frontier-lab safety frameworks align on catastrophic-risk disclosure by Q2 2027",
+        "prediction_date": "2026-06-05"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Claude Fable 5's launch advances the disclosure side of this thesis. Per \"Anthropic ships Claude Fable 5,\" the model ships a published system card documenting its safety architecture - routing queries touching cybersecurity, biology, chemistry, and model distillation down to Opus 4.8, and, per the system card, silently degrading its own help on frontier-LLM-development requests - and it lands days after Anthropic publicly warned that frontier AI is becoming too dangerous. A frontier lab publicly documenting catastrophic-misuse-class controls (CBRN, cyber, model-distillation routing) in a system card is the disclosure behavior the prediction expects labs to converge on, though it is so far a single Anthropic implementation rather than cross-lab alignment.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Fable 5 and Claude Mythos 5",
+          "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"
+        },
+        {
+          "label": "Simon Willison - If Claude Fable stops helping you, you'll never know",
+          "url": "https://simonwillison.net/2026/Jun/10/if-claude-fable-stops-helping-you/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Today puts a fresh number on the XPU trajectory, and it cuts against the target. Broadcom, the dominant merchant custom-ASIC supplier, guided Q3 AI-chip sales to $16 billion, below the roughly $17.2 billion consensus, and declined to raise its full-year forecast. An in-line print with no raise pressures rather than confirms the climb toward a $20B-per-quarter run-rate.",
+        "coherence": 2,
+        "remaining_gap": "No backlog or core-XPU-customer-count disclosure today, and the $16B guide leaves the $20B/quarter run-rate and a seventh named customer unconfirmed."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f6e9b9e9348622ee",
+        "short_label": "Frontier-lab governance frameworks converge on shared quantitative-harm thresholds by Q2 2027",
+        "prediction_date": "2026-05-29"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The Fable 5 system card supplies fresh quantitative-threshold evidence. Per \"Fable 5 system card: model silently degrades its own help on rival LLM work,\" Anthropic attaches explicit numbers to its safety interventions - fewer than 5% of sessions trigger any fallback routing of sensitive intents to Opus 4.8, and the silent self-degradation on frontier-LLM-development requests touches about 0.03% of traffic. Publishing quantified harm/intervention rates as part of a governance disclosure is exactly the kind of measurable threshold this prediction expects frontier labs to standardize on; today shows one lab doing it, not yet a shared cross-lab quantitative-harm standard.",
+      "reference_links": [
+        {
+          "label": "Simon Willison - If Claude Fable stops helping you, you'll never know",
+          "url": "https://simonwillison.net/2026/Jun/10/if-claude-fable-stops-helping-you/"
+        },
+        {
+          "label": "Anthropic - Claude Fable 5 and Claude Mythos 5",
+          "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Anthropic attaches explicit numbers to its safety interventions in the Fable 5 system card - under 5% of sessions trigger fallback routing of sensitive intents, and silent self-degradation on frontier-LLM work touches about 0.03% of traffic. Publishing quantified intervention rates inside a governance disclosure is the measurable, numeric-threshold framing the thesis expects labs to standardize on.",
+        "coherence": 3,
+        "remaining_gap": "These are intervention-rate metrics, not the fatalities/dollar harm thresholds the prediction anchors on, and no other Tier-1 lab has published equivalent numbers."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b60e425d646be753",
+        "short_label": "Closed-weight frontier crystallizes as open weights cap at 35B-A3B by Q3 2026",
+        "prediction_date": "2026-04-21"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] Dormant-pool Layer 1 keyword hit on the proprietary-re-expansion signals (Mythos Preview, staged gating, closed weights, cloud for frontier). Today's Claude Fable 5 launch is a strong proprietary-re-expansion data point: per \"Anthropic ships Claude Fable 5, its first Mythos-class public model,\" Anthropic introduces a new closed-weight Mythos-class tier above Opus, makes the public model a routed, terms-enforced release, and pairs it with an unrestricted partners-only twin (Claude Mythos 5 - the same model with safety classifiers lifted, restricted to vetted partners), with free public access staged to end June 22 before usage-credit gating. The highest-capability frontier crystallizing as closed-weight and partner-gated, with the unrestricted variant withheld from the public, is exactly the closed-weight re-expansion this prediction tracks.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Fable 5 and Claude Mythos 5",
+          "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"
+        },
+        {
+          "label": "VentureBeat - Anthropic brings Mythos to the masses with Claude Fable 5",
+          "url": "https://venturebeat.com/technology/anthropic-brings-mythos-to-the-masses-with-claude-fable-5-its-most-powerful-generally-available-model-ever"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Anthropic's Claude Fable 5 launches as a closed-weight Mythos-class tier above Opus, shipped as a routed, terms-enforced public release paired with an unrestricted partners-only twin withheld from everyone else. The highest-capability frontier crystallizing as closed and partner-gated, with the unrestricted variant kept private, is exactly the closed-weight re-expansion this prediction tracks - a genuine fresh data point.",
+        "coherence": 3,
+        "remaining_gap": "One lab's launch does not establish the prediction's specific markers: two-plus frontier labs going API-only and an open-weight ceiling settling at the 35B-A3B class."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Dormant-pool Layer 1 keyword hit on the secret-leakage / build-server-credentials signals. Today's LiteLLM CVE is a concrete agent-tool-layer credential-exfiltration path: per \"turning the agent stack's tool-wiring layer into a confirmed in-the-wild credential-theft path,\" an attacker who lands on the LiteLLM proxy can read the provider credentials and API keys for every connected AI service and move laterally. That is secret exfiltration through the agent tool-wiring layer being actively exploited - reinforcing the prediction's thesis that agent-mediated credential theft is a rising top-tier risk category, though today's vector is an unauthenticated proxy RCE rather than the indirect-prompt-injection-in-CI variant the prediction emphasizes, and there is no CIS/OWASP list movement yet.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        },
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The LiteLLM KEV flaw lets an attacker who lands on the proxy read provider credentials and API keys for every connected service and move laterally - secret exfiltration through the agent stack's tool-wiring layer, now actively exploited in the wild. That reinforces the thesis that agent-mediated credential theft is a rising top-tier risk category.",
+        "coherence": 2,
+        "remaining_gap": "Today's vector is an unauthenticated proxy RCE, not the indirect-prompt-injection-in-CI variant the prediction emphasizes, and there is no CIS or OWASP top-list movement yet."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8ae347c6052558e0",
+        "short_label": "AMD Helios plus MI450 commitment book clears 15GW threshold by H2 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Dormant-pool Layer 2 semantic hit on the MI400 / Instinct demand-anchor signals via today's AI-events bullet. Per \"AI events to plan around now,\" AMD's Advancing AI 2026 event is slated for July and expected to detail availability for the Instinct MI400-series data-center GPUs - the silicon line behind the Helios/MI450 commitment book this prediction tracks. The signal is weak and forward-looking (an event preview, not a fresh commitment-book or GW-threshold disclosure), and the same day's Broadcom-triggered selloff dragging AMD down ~10% cuts against demand momentum, so this is a low-relevance, calendar-context revival rather than direct evidence on the 15GW threshold.",
+      "reference_links": [
+        {
+          "label": "HPCwire - Hot Chips 2026",
+          "url": "https://www.hpcwire.com/eventon-archive/hot-chips-2026/"
+        },
+        {
+          "label": "CryptoBriefing - AMD stock falls 10% as AI chip sector faces broad selloff",
+          "url": "https://cryptobriefing.com/amd-stock-falls-10-percent-ai-selloff/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Today offers only calendar context for the Instinct line behind this commitment book: AMD's Advancing AI 2026 event is slated for July and expected to detail MI400-series availability. That is an event preview, not a fresh commitment-book or gigawatt-threshold disclosure, and the same day's Broadcom-triggered selloff dragging AMD down roughly 10% cuts against the demand momentum the prediction relies on.",
+        "coherence": 1,
+        "remaining_gap": "No new signing, capacity, or cumulative-gigawatt figure touches the 15GW threshold; today is a low-relevance calendar revival running counter to demand sentiment."
+      }
+    }
+  ]
+}
