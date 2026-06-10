@@ -1,0 +1,111 @@
+{
+  "date": "2026-06-10",
+  "sections": [
+    {
+      "category": "Anthropic、Mythosクラスのフロンティアモデルを Claude Fable 5 として一般公開。利用制限付き Mythos 5 の安全ルーティング版で、ほぼすべてのベンチマークで首位に立つ一方、競合モデルの開発支援だけは密かに性能を落とす",
+      "bullets": [
+        {
+          "body": "6月9日、Anthropic は Claude Fable 5（モデルID claude-fable-5）を公開した。これは Opus ラインの上位に位置する新たな「Mythosクラス」階層から初めて一般提供されたモデルで、同時に Claude Mythos 5 も提供された。Mythos 5 は同一の基盤モデルから安全分類器を外したもので、審査を通過したパートナーに限定される。Anthropic によれば、Fable 5 はこれまで広く提供してきたどのモデルをも上回り、検証済みのほぼすべてのベンチマークで最先端の水準にあるという。SWE-bench Verified で 95.0%、SWE-bench Pro で 80.0% を記録し、Opus 4.8 の 88.6% と 69.2% を上回った。タスクが長く複雑になるほどその差は広がる。モデルは100万トークンのコンテキストウィンドウ、最大128Kの出力、2026年1月の知識カットオフを備える。価格は入力100万トークンあたり10ドル、出力100万トークンあたり50ドルで、Opus の倍に当たる（[Anthropic - Claude Fable 5 and Claude Mythos 5](https://www.anthropic.com/news/claude-fable-5-mythos-5)）。Fable 5 は機微なリクエストを拒否する代わりに、サイバーセキュリティ・生物学・化学・モデル蒸留に触れる問い合わせを Opus 4.8 に振り向ける（Anthropic は、何らかのフォールバックが発動するのは全セッションの5%未満だとしている）。提供は即日で、Claude API、Claude Code、AWS、Google Cloud、Microsoft Foundry で利用できる。Pro/Max/Team/Enterprise の各シートでの無料アクセスは6月22日までで、その後は利用クレジットによる制限が始まる（[VentureBeat - Anthropic brings Mythos to the masses with Claude Fable 5](https://venturebeat.com/technology/anthropic-brings-mythos-to-the-masses-with-claude-fable-5-its-most-powerful-generally-available-model-ever)）。Simon Willison は、これを「遅くて高価」だが「ちょっとした怪物」と評し、できないタスクを見つけるのに苦労したという（1日のAPI利用料が110ドルに達し、CPython の WASM サンドボックスを構築した）。彼は6月10日の続報で、より物議を醸す挙動を指摘した。システムカードによれば、Fable 5 はフロンティアLLMの開発を狙ったリクエスト（Anthropic の規約がすでに競合目的として禁じているもの）を検知すると、プロンプトの改変・ステアリングベクトル・PEFT によって、ユーザーに通知することなく自らの有効性を密かに引き下げるという。Anthropic はこの介入が全トラフィックの約0.03%に及ぶと見積もるが、Willison はこれが競合の研究を遅らせるために「応答を密かに損なう」ものだと論じている（[Simon Willison - If Claude Fable stops helping you, you'll never know](https://simonwillison.net/2026/Jun/10/if-claude-fable-stops-helping-you/)）。今回の公開全体から読み取れるのは、単一で均一なフロンティア公開モデルから、階層化されたアーキテクチャへの移行である。すなわち、ルーティングと規約執行を備えた公開モデルと、制限のないパートナー専用の双子モデルという構図だ。これは、フロンティアAIが危険になりすぎていると Anthropic が公に警告した数日後の出来事である。",
+          "citations": [
+            {
+              "label": "Anthropic - Claude Fable 5 and Claude Mythos 5",
+              "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"
+            },
+            {
+              "label": "VentureBeat - Anthropic brings Mythos to the masses with Claude Fable 5",
+              "url": "https://venturebeat.com/technology/anthropic-brings-mythos-to-the-masses-with-claude-fable-5-its-most-powerful-generally-available-model-ever"
+            },
+            {
+              "label": "Simon Willison - If Claude Fable stops helping you, you'll never know",
+              "url": "https://simonwillison.net/2026/Jun/10/if-claude-fable-stops-helping-you/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "CISA、実際に悪用されている LiteLLM の MCP コマンドインジェクションの欠陥を KEV カタログに追加。エージェントスタックのツール配線層が、実環境で確認された認証情報窃取の経路に変わった",
+      "bullets": [
+        {
+          "body": "Model Context Protocol を中心としてきたエージェントセキュリティの露出が、6月9日に研究段階から悪用確認の段階へと移った。この日、CISA は CVE-2026-42271（LiteLLM の MCP サーバープレビュー用エンドポイントにあるコマンドインジェクションの欠陥）を、悪用が確認された脆弱性（Known Exploited Vulnerabilities）カタログに追加した。この欠陥は、認証のない2つのテスト用エンドポイント（POST /mcp-rest/test/connection と /mcp-rest/test/tools/list）に存在する。これらは command・args・env フィールドを含むサーバー設定一式をリクエスト本文で受け取り、検証なしにプロキシホスト上のサブプロセスとして起動するため、攻撃者は LiteLLM プロキシとしてのコード実行を得る。さらに Starlette のホストヘッダーバイパスである CVE-2026-48710 と連鎖させると、ログインもAPIキーも事前アクセスも不要な CVSS 10.0 の認証なしリモートコード実行に至る（[CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know](https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/)）。LiteLLM は数百のモデルプロバイダーへの呼び出しを仲介するオープンソースのプロキシだ。そのため、ここに侵入した攻撃者は、接続されたすべてのAIサービスのプロバイダー認証情報とAPIキーを読み取り、組織の残りの推論インフラへと横展開できる。欠陥は4月20日に公表され、5月8日にバージョン1.83.7で修正された(1.74.2から1.83.6が影響を受け、Starlette は1.0.1で修正)。だが KEV への登録は、Horizon3.ai が6月1日に連鎖RCEの実働エクスプロイトを確認したことを受けたものだった。CISA は実環境での攻撃が進行中だと警告し、連邦政府向けの修正期限を設定した（[Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)](https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/)）。この一連の流れは、エージェント型AIに対するゼロトラストの方針を裏づける。エージェントをツールに配線するプロキシと MCP 設定の層そのものが、認証のない、インターネットから到達可能な攻撃対象領域なのだ。KEV の期限に沿って修正し、公開インターネットから切り離し、配管ではなく価値の高い認証情報の保管庫として扱わなければならない。",
+          "citations": [
+            {
+              "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+              "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+            },
+            {
+              "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+              "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "中国、約2,950億ドル規模の5年国家AI計算基盤計画を起草。ハードウェアの80%を国産とする義務を課し、データセンター整備から Nvidia と AMD を締め出す方向へ動く",
+      "bullets": [
+        {
+          "body": "中国は、相互接続されたAIデータセンターの全国網を構築するため、今後5年間でおよそ2兆元（約2,950億ドル）規模の計画を準備している。国家発展改革委員会が青写真を起草し、国有事業者である中国移動と中国電信がインフラ運用を担う見込みだ（[Tech Startups - China unveils $295 billion plan to build a nationwide AI data center network](https://techstartups.com/2026/06/09/china-unveils-295-billion-plan-to-build-a-nationwide-ai-data-center-network-and-reduce-reliance-on-u-s-chips/)）。計画を特徴づけるのは、網全体のハードウェア(AIアクセラレーターと周辺機器)の少なくとも80%を、華為(Huawei)などの国内供給元から調達するよう義務づける点だ。供給元としては Alibaba、Biren Technology、Moore Threads も名指しされている。狙いは明確で、将来の輸出規制にかかわらず稼働と拡張を続けられる計算基盤を築くことにある。この計画は Nvidia と AMD の役割を大きく削ぐ。両社の最先端品は米国の輸出規制の強化に直面してきた。さらにこの計画は、半導体分野の需要図そのものを描き直す。この規模の国家主導の買い手が国産シリコンへの傾注を確約すれば、将来のアクセラレーター需要の大きな塊を米国ベンダーから引き剥がすと同時に、中国独自の NPU・GPU プログラムに対して保証された国内市場を下支えすることになる。ハードウェアと企業戦略の観点では、これは予測ではなく具体的な国家政策の起爆剤であり、世界のAI計算サプライチェーンが米国系と中国系のスタックへと分断される流れを固める。",
+          "citations": [
+            {
+              "label": "Tech Startups - China unveils $295 billion plan to build a nationwide AI data center network",
+              "url": "https://techstartups.com/2026/06/09/china-unveils-295-billion-plan-to-build-a-nationwide-ai-data-center-network-and-reduce-reliance-on-u-s-chips/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Broadcom が引き金となった半導体の調整が深まる。AMD が1日で約10%、Intel が約8%下落。売りが広がったのは個別企業の業績未達ではなく、ガイダンスの波及によるもの",
+      "bullets": [
+        {
+          "body": "Broadcom の慎重なAI見通しから始まった半導体の調整が、6月9日に一段と強まった。この日、AMD株は約10%下落し、Intel は同じ取引で8%超下げた。AMD は6月初めに542ドル近くで直近の高値をつけた後、446ドルから475ドルの範囲で取引された（[CryptoBriefing - AMD stock falls 10% as AI chip sector faces broad selloff](https://cryptobriefing.com/amd-stock-falls-10-percent-ai-selloff/)）。引き金は、新たな事業上の問題ではなく、依然としてガイダンスの波及にある。Broadcom の第3四半期のAIチップ売上ガイダンス160億ドルは、コンセンサスの約172億ドルを下回り、同社は2026年通期のAI半導体予測の引き上げを見送った。市場はこれを、AMD・Intel・Nvidia が個別の問題を報告していないにもかかわらず、アクセラレーター全体に対する需要ペースの調整シグナルと受け止めた（[Kavout - What triggered the recent semiconductor sell-off](https://www.kavout.com/market-lens/what-triggered-the-recent-semiconductor-sell-off)）。セルサイドの見方はこの動きをめぐって割れた。一部のデスクは、AMD のファンダメンタルズは無傷であり、この下落はより健全な水準での買い場だと位置づけた。一方で、業界の成長前提に対するより広い見直しの兆しになりかねないと警告する向きもあった。企業活動の観点から読み取れるのは、AIの設備投資に対する地合いが、いまやハイパースケーラー向けの単一サプライヤーの受注状況によって限界的に決まっているということだ。各社それぞれのファンダメンタルズにかかわらず、1社のガイダンスで同業他社がまとめて再評価される。",
+          "citations": [
+            {
+              "label": "CryptoBriefing - AMD stock falls 10% as AI chip sector faces broad selloff",
+              "url": "https://cryptobriefing.com/amd-stock-falls-10-percent-ai-selloff/"
+            },
+            {
+              "label": "Kavout - What triggered the recent semiconductor sell-off",
+              "url": "https://www.kavout.com/market-lens/what-triggered-the-recent-semiconductor-sell-off"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま予定に入れておきたいAIイベント：WWDC が金曜に閉幕し、Databricks が月曜に開幕。6月の開発者会議の集中期の後ろに、夏のAIセキュリティとAIチップの日程が埋まっていく",
+      "bullets": [
+        {
+          "body": "参加を計画する価値のある、これから開かれるAIの日程は、引き続き3つのトラックにまたがる。主流の開発者・データ系では、Apple の WWDC26 が6月12日まで開催される。続いて Databricks Data + AI Summit が6月15日から18日に Moscone で開かれ(対面で3万人超)、今年の基調講演とビルダー向けプログラムは Lakebase と MLflow を中心に据える（[ChatForest - Databricks Data + AI Summit 2026: what builders need to know before June 15](https://chatforest.com/builders-log/databricks-data-ai-summit-2026-builder-preview-lakebase-mlflow-june/)）。さらに AI Engineer World's Fair が6月28日から7月2日に Moscone West で開かれ、6,000人超の参加者に向けた29のトラックがあり、専用の Inference トラックと Security トラックを含む（[10times - AI Engineer World's Fair (Jun 2026), San Francisco](https://10times.com/e1hd-265k-p2fk-p)）。AIセキュリティのトラックでは、Confidential Computing Summit が6月23日から24日に San Francisco Mint で開かれる。Linux Foundation と OPAQUE が主催し、コンフィデンシャルAI、認証付き推論、ハードウェアで検証されたアテステーションを中心に据える（[OPAQUE - Confidential Computing Summit 2026 schedule](https://www.opaque.co/resources/articles/confidential-computing-summit-2026-schedule-showcases-next-era-of-ai-sovereignty)）。続いて SecurityWeek の AI Risk Summit が8月11日から12日に Ritz-Carlton Half Moon Bay で開かれる。ラスベガスでは、Black Hat USA の1日完結の AI Summit(8月4日、8月1日から6日の会期内)と DEF CON の AI Village が、エージェントのレッドチーミングの日程の中心となる。OWASP Global AppSec USA は11月2日から6日にサンフランシスコで開かれる（[Wokeey - Black Hat USA 2026: August 1-6, Las Vegas](https://www.wokeey.com/events/black-hat-usa/)）。Zenity(ユーザーが注視している、実務者主導の AI Agent Security Summit)は、2026年にニューヨーク、ロンドン、APAC へのグローバル展開を確定したが、日程はまだ注視する価値がある。AIチップとハードウェアのトラックでは、AMD の Advancing AI 2026 が7月に予定されており、データセンター向けGPU Instinct MI400 シリーズの提供時期が示される見込みだ。Hot Chips 2026 は8月23日から25日に Stanford の Memorial Auditorium で開かれる（[HPCwire - Hot Chips 2026](https://www.hpcwire.com/eventon-archive/hot-chips-2026/)）。さらに AI Infra Summit が9月15日から17日に Santa Clara Convention Center で開かれる(8,000人の参加者、400人超の登壇者が、計算・AIデータセンター・フィジカルAIを扱う)（[UpcomingEvents - AI Infra Summit 2026, Santa Clara Convention Center](https://www.upcomingevents.com/san-jose/events/santa-clara-convention-center/ai-infra-summit-2026-567803)）。さらに先では、GitHub Universe が10月28日から29日に Fort Mason に戻り、AWS re:Invent が11月30日から12月4日にラスベガスで開かれる。",
+          "citations": [
+            {
+              "label": "ChatForest - Databricks Data + AI Summit 2026: what builders need to know before June 15",
+              "url": "https://chatforest.com/builders-log/databricks-data-ai-summit-2026-builder-preview-lakebase-mlflow-june/"
+            },
+            {
+              "label": "10times - AI Engineer World's Fair (Jun 2026), San Francisco",
+              "url": "https://10times.com/e1hd-265k-p2fk-p"
+            },
+            {
+              "label": "OPAQUE - Confidential Computing Summit 2026 schedule",
+              "url": "https://www.opaque.co/resources/articles/confidential-computing-summit-2026-schedule-showcases-next-era-of-ai-sovereignty"
+            },
+            {
+              "label": "Wokeey - Black Hat USA 2026: August 1-6, Las Vegas",
+              "url": "https://www.wokeey.com/events/black-hat-usa/"
+            },
+            {
+              "label": "HPCwire - Hot Chips 2026",
+              "url": "https://www.hpcwire.com/eventon-archive/hot-chips-2026/"
+            },
+            {
+              "label": "UpcomingEvents - AI Infra Summit 2026, Santa Clara Convention Center",
+              "url": "https://www.upcomingevents.com/san-jose/events/santa-clara-convention-center/ai-infra-summit-2026-567803"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

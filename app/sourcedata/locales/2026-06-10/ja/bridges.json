@@ -1,0 +1,330 @@
+{
+  "date": "2026-06-10",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.2d763790a313224e",
+        "short_label": "BadHost CVE-2026-48710 CVSS score gets upgraded above 6.5 by Q4 2026",
+        "prediction_date": "2026-06-02"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "本日のCISA-KEVのLiteLLM関連報道はCVE-2026-48710を明示的に名指ししている。「CISAが実際に悪用されているLiteLLMのMCPコマンドインジェクションの欠陥を追加」によると、CVE-2026-48710として追跡されているStarletteのホストヘッダー回避が連鎖の相手役となり、単体のコマンドインジェクションのバグ（CVE-2026-42271）を、ログイン不要・APIキー不要・事前アクセス不要で成立する未認証のCVSS 10.0リモートコード実行へと押し上げる。これはまさにこの予測が想定した仕組みである。BadHostのホストヘッダー回避は連鎖した状態で6.5をはるかに上回る実効的な深刻度を帯びており、その修正がバージョン1.0.1で配信されたことは、これが影響の小さいバグではなく現に存在する高深刻度のバグとして評価・修正されていることを裏付ける。",
+      "reference_links": [
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        },
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "本日のKEV関連報道は、CVE-2026-48710をStarletteのホストヘッダー回避として名指しし、これがコマンドインジェクションのバグを連鎖させて、ログイン・キー・事前アクセスのいずれも要しない未認証のCVSS 10.0リモートコード実行に仕立て上げると説明している。その実効的な深刻度は元の6.5をはるかに上回る。Starletteの修正が1.0.1で配信されたことは、これが現に存在する高深刻度の欠陥として評価・修正されたことを示し、想定された上方再評価を支持する。",
+        "coherence": 3,
+        "remaining_gap": "CVE-2026-48710そのものを6.5超と格付けする正式なNVDレコードの修正もベンダー勧告もまだ出ていない。本日の高い深刻度は連鎖した組み合わせによるものであり、単体での再評価ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4c31ca30d449311e",
+        "short_label": "CISA ships AI-Infra KEV sub-catalog with inference-server SBOM by Q3 2026",
+        "prediction_date": "2026-04-28"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "「CISAが実際に悪用されているLiteLLMのMCPコマンドインジェクションの欠陥をKEVカタログに追加」という見出しは、AI推論プロキシのCVEがKEVに直接掲載された事例である。6月9日、CISAはHorizon3.aiによる6月1日の連鎖RCE確認を受けて、LiteLLMのMCPサーバープレビュー用エンドポイントに存在するCVE-2026-42271を、連邦の修正期限付きで既知の悪用された脆弱性カタログに追加した。LiteLLMは数百のモデルプロバイダーへの呼び出しを仲介するオープンソースのプロキシと説明されており、AI推論ブローカー層に対するKEV掲載は、まさにこの予測が見込むAI-Infraサブカタログの土台にあたる。ただし、これはなおCVE単位の個別掲載にとどまり、推論サーバーのSBOM要件を伴う独立した名前付きサブカタログにはまだなっていない。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        },
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "CISAがLiteLLMのMCPエンドポイントにあるCVE-2026-42271を連邦の修正期限付きでKEVカタログに追加したことで、AI推論ブローカー層が連邦のサイバーガバナンスの内側に明確に組み込まれた。これはこのサブカタログが想定する土台である。想定される帰結に向けて前進しているものの、推論サーバーのSBOMを必須とする独立した名前付きのAI-Infraカタログではなく、なおCVE単位の個別掲載にとどまっている。",
+        "coherence": 3,
+        "remaining_gap": "名前付きのAI-Infraサブカタログも、推論サーバーへのSBOMタグ付け義務もまだ存在しない。あるのは個別のKEVエントリだけである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7db9cba24cef0f48",
+        "short_label": "CISA + NIST publish inference-server + agentic-tool CVE sub-catalog by Q4 2026",
+        "prediction_date": "2026-04-27"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "本日のCISA-KEVへのLiteLLM追加は、この見立ての連邦サイバーガバナンス側を前進させる。「エージェントスタックのツール配線層を、実際に悪用された資格情報窃取の経路へと変えた」によると、CISAは推論プロキシ／エージェント型ツールのCVE（LiteLLMのMCPエンドポイントにあるCVE-2026-42271）をKEVのタイムラインで正式に追跡した。その日の大きな筋立て——エージェントをツールに配線するプロキシとMCP設定の層自体が、未認証でインターネットから到達可能な攻撃対象領域であり、KEVのタイムラインで修正しつつ公開インターネットから遮断すべきだという点——は、まさにこの予測がCISAとNISTに正式化を期待する、推論サーバーとエージェント型ツールという区分そのものである。なお欠けているのは、NIST側の分類と、単発の掲載ではなく名前付きのサブカタログである。",
+        "reference_links": [
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        },
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "CISAは推論プロキシおよびエージェント型ツールのCVE——LiteLLMのMCPエンドポイントの欠陥——をKEVの修正タイムラインで正式に追跡し、エージェントのツール配線層はインターネットから到達可能であり修正期限を要するという、この見立ての連邦ガバナンス側を前進させた。想定される公表に向けて後押しするものの、NIST側の分類も、推論サーバーとエージェント型ツールという名前付きサブカタログも伴わない、CISAの単発の掲載にとどまる。",
+        "coherence": 3,
+        "remaining_gap": "NIST側の分類と、SBOMタグ付けを伴う専用の名前付きサブカタログが欠けている。本日は単一のKEVエントリであって、区分レベルの正式化ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.678c96beb7ff20f6",
+        "short_label": "Inference servers form supply chain, triggering AI-Infra CVE class by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "LiteLLMのKEV関連報道は、推論を担うインフラが資格情報を抱えるサプライチェーンと化し、独自のCVE区分を生み出しつつあるというこの予測の中核的主張を、最も明快に裏付ける。「LiteLLMは数百のモデルプロバイダーへの呼び出しを仲介するオープンソースのプロキシである」によると、未認証のMCPテスト用エンドポイント経由でプロキシに到達した攻撃者は、接続されたあらゆるAIサービスのプロバイダー資格情報とAPIキーを読み取り、組織の残りの推論インフラへ横展開できる。これは予測が描いたサプライチェーンの影響範囲そのものであり、いまや予測ではなく、実際に悪用が確認されKEV期限が付されたAI-InfraのCVEとして現実化している。",
+      "reference_links": [
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        },
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "LiteLLMのKEV掲載は、主張された条件を現実のものにした。推論を担うプロキシが、いまや資格情報を抱えるサプライチェーンの拠点となっている。数百のプロバイダーへの呼び出しを仲介するがゆえに、その未認証のMCPエンドポイントに到達した攻撃者は、接続された全サービスの資格情報を読み取り、推論スタックの全域へ移動できる。確認済みでKEV期限の付いたこの影響範囲こそ、推論ランタイムが形作るとこの予測が述べた、整合的なAI-Infra攻撃対象領域の区分である。",
+        "coherence": 4,
+        "remaining_gap": "NIST/NVDのAI-Infraタグも、OWASP Top-10への格上げも、エンジン別のSBOM署名フィードもまだ存在しない。この区分は実際に悪用されているが、正式には成文化されていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8723e8e2d6f5a23a",
+        "short_label": "MCP specification makes remote-server authentication mandatory by H1 2027",
+        "prediction_date": "2026-06-09"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "本日のLiteLLM悪用は、MCP認証の必須化を後押しするこれまでで最も強い圧力である。CISA-KEV関連報道によると、この欠陥は二つの未認証テスト用エンドポイント（POST /mcp-rest/test/connection と /mcp-rest/test/tools/list）に存在し、これらはサーバー設定一式を受け取り、検証なしでプロキシホスト上の子プロセスとして起動するため、「ログイン不要・APIキー不要・事前アクセス不要」のリモートコード実行をもたらす。その修正の方向性——すべての呼び出し元を認証し、MCP設定の層を公開インターネットから遮断する——は、MCP仕様の認証必須化が塞ぐであろう、まさに既定で未認証という失敗の型そのものである。これは仕様の任意認証が悪用されていることの現実の実証である。",
+      "reference_links": [
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        },
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "この欠陥は二つの未認証MCPテスト用エンドポイントに存在し、サーバー設定一式を受け取ってホストの子プロセスとして起動するため、ログイン・キー・事前アクセスのいずれも要しないリモートコード実行をもたらす。この任意認証の穴が実際に悪用されていることは、認証なしのリモートMCPサーバーが仕様を認証必須へと押しやるという、この予測の前提を裏付ける新たで具体的な圧力である。",
+        "coherence": 4,
+        "remaining_gap": "リモートサーバー認証を任意から規範的要件へと格上げするMCP仕様の改訂も、作業部会の草案もまだ存在しない。これは悪用による圧力であって、仕様そのものの動きではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.20a590c59cffd7fb",
+        "short_label": "MCP host runtimes ship sandboxed stdio tool execution as the default by Q2 2027",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "LiteLLMのCVEは、サンドボックス化されたツール実行の教科書的な事例である。CISA-KEV関連報道によると、MCPテスト用エンドポイントは、command・args・envの各フィールドを含むサーバー設定一式をリクエスト本体で受け取り、検証なしでプロキシホスト上の子プロセスとして起動するため、LiteLLMプロキシの権限でコード実行を許す。攻撃者の指定したツール設定を、サンドボックスのないホストの子プロセスとして起動することこそ、MCPホストランタイムがサンドボックス化されたstdioツール実行を既定にすることで塞ぐ、とこの予測が述べる失敗そのものである。本日は、サンドボックスのない既定が実際に悪用されている様子を示しており、これが後押しの圧力となる。ただし、サンドボックスを既定とする対応を出荷したホストランタイムはまだない。",
+      "reference_links": [
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        },
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "現に進行中のLiteLLM悪用は、未認証のリモートMCPの露出面が中核的な失敗だという前提を鮮明にする。二つの未認証テスト用エンドポイントがサーバー設定一式を受け取り、プロキシホスト上で起動するため、ログインもAPIキーも要しないリモートコード実行をもたらす。CISAのKEV掲載と「すべての呼び出し元を認証する」という修正方針は、任意認証の穴を実際に悪用されているものへと変える。",
+        "coherence": 4,
+        "remaining_gap": "仕様本体の動きはまだない。圧力となっているのは悪用と連邦の勧告であって、リモートサーバー認証を求めるMCP改訂の公表ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a91f33b7684871df",
+        "short_label": "AI-accelerator equities re-rate lower on the next in-line ASIC print by Q4 2026",
+        "prediction_date": "2026-06-07"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "この予測は本日ほぼ文字どおり実現した。「Broadcomを引き金とするチップ株の下落が深まり、AMDが約10%、Intelが約8%下落（同一取引日）」によると、カスタムASICの先行指標であるBroadcomが第3四半期のAIチップ売上を約172億ドルの市場予想に対し160億ドルと見通し、2026年通期のAI半導体予想の引き上げを見送ったため、AMD・Intel・Nvidiaに各社固有の問題はなかったにもかかわらず、アクセラレータ勢全体がこの一つのガイダンスで一段安に再評価された。これはまさに予測が名指しした仕組みである。すなわち、個別の未達ではなく、市場予想どおりのASIC決算がガイダンスの波及を通じてAIアクセラレータ株の全体を下方へ再設定するというものである。",
+      "reference_links": [
+        {
+          "label": "CryptoBriefing - AMD stock falls 10% as AI chip sector faces broad selloff",
+          "url": "https://cryptobriefing.com/amd-stock-falls-10-percent-ai-selloff/"
+        },
+        {
+          "label": "Kavout - What triggered the recent semiconductor sell-off",
+          "url": "https://www.kavout.com/market-lens/what-triggered-the-recent-semiconductor-sell-off"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "本日のCVEは、予測が名指しした根本原因のまさにそのものについての、実際の悪用としては二例目である。MCPテスト用エンドポイントはcommand・args・envを含むサーバー設定一式を受け取り、検証なしでプロキシホスト上の隔離されない子プロセスとして起動する。攻撃者の指定したツール設定が隔離なしでホスト上で動くこの状態は、いまや悪用が確認されKEV期限が付されている。",
+        "coherence": 4,
+        "remaining_gap": "これに応えてサンドボックスを既定とする対応を出荷したMCPホストやフレームワークはまだない。本日は後押しの圧力をもたらすものであって、隔離起動という修正の採用ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.808bbd831ebf41b3",
+        "short_label": "Custom AI-accelerator XPU silicon clears $20B-per-quarter run-rate by Q4 2026",
+        "prediction_date": "2026-06-03"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Broadcomを引き金とする売りは、カスタムXPUの軌道に具体的な数字を当てはめる。チップ株下落の報道によると、Broadcomの第3四半期AIチップ売上見通し160億ドルは約172億ドルの市場予想を下回り、同社は2026年通期のAI半導体予想の引き上げを見送った。市場はこれをアクセラレータ全体に対する需要ペースのシグナルと受け止めた。BroadcomはカスタムASIC／XPUの最大手商用サプライヤーであり、四半期160億ドルというAIチップ見通しは、カスタムアクセラレータのシリコンが四半期200億ドルの軌道に乗っているかどうかを直接読み取らせる。率直に読めば、やや弱気寄りの混在である。決算は予測が掲げる年率換算の水準を下回り、通期予想の引き上げ見送りがその軌道に圧力をかけている。",
+      "reference_links": [
+        {
+          "label": "Kavout - What triggered the recent semiconductor sell-off",
+          "url": "https://www.kavout.com/market-lens/what-triggered-the-recent-semiconductor-sell-off"
+        },
+        {
+          "label": "CryptoBriefing - AMD stock falls 10% as AI chip sector faces broad selloff",
+          "url": "https://cryptobriefing.com/amd-stock-falls-10-percent-ai-selloff/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "予測した実現がほぼ本日かたちになった。Broadcomの市場予想どおりの第3四半期AIチップ見通し160億ドルは、通期の引き上げを伴わず、アクセラレータ全体を一段安に再評価させた。AMDは約10%、Intelは8%超、同一取引日に下落し、各社固有の問題はなかった。これはまさに名指しされた実現である。すなわち、市場予想どおりの決算が単一銘柄で約10%の下落を引き起こし、相関した同業の下落を伴うというものである。",
+        "coherence": 5,
+        "remaining_gap": "引き金は別の次のASIC決算ではなくBroadcom自身の見通しであり、AIチップの正式な業績予想引き下げはまだ続いていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.69bedb462442e205",
+        "short_label": "Frontier-lab safety frameworks align on catastrophic-risk disclosure by Q2 2027",
+        "prediction_date": "2026-06-05"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Claude Fable 5の公開は、この見立ての開示側を前進させる。「AnthropicがClaude Fable 5を出荷」によると、このモデルは安全性のアーキテクチャを記した公開システムカードを伴って出荷される。サイバーセキュリティ・生物学・化学・モデル蒸留に触れる問い合わせをOpus 4.8へ振り分け、システムカードによれば、フロンティアLLM開発に関する要求では自らの支援を密かに弱める。そしてこれは、フロンティアAIが危険になりすぎているとAnthropicが公に警告した数日後に登場した。フロンティアのラボが、破滅的悪用に類する管理策（CBRN・サイバー・モデル蒸留の振り分け）をシステムカードで公に文書化することは、ラボが収れんするとこの予測が見込む開示の振る舞いである。ただし今のところ、これはラボ横断の足並みではなく、Anthropic単独の実装にとどまる。",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Fable 5 and Claude Mythos 5",
+          "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"
+        },
+        {
+          "label": "Simon Willison - If Claude Fable stops helping you, you'll never know",
+          "url": "https://simonwillison.net/2026/Jun/10/if-claude-fable-stops-helping-you/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "本日はXPUの軌道に新たな数字を加え、それは目標に逆らう向きに働く。カスタムASICの最大手商用サプライヤーであるBroadcomは、第3四半期のAIチップ売上をおよそ172億ドルの市場予想を下回る160億ドルと見通し、通期予想の引き上げを見送った。引き上げを伴わない市場予想どおりの決算は、四半期200億ドルの年率換算水準への上昇を裏付けるどころか、それに圧力をかける。",
+        "coherence": 2,
+        "remaining_gap": "本日は受注残や中核XPU顧客数の開示がなく、160億ドルの見通しは四半期200億ドルの年率換算水準と七社目の顧客を未確認のまま残す。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f6e9b9e9348622ee",
+        "short_label": "Frontier-lab governance frameworks converge on shared quantitative-harm thresholds by Q2 2027",
+        "prediction_date": "2026-05-29"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Fable 5のシステムカードは、定量的なしきい値に関する新たな証拠を提供する。「Fable 5システムカード：モデルが競合LLM作業への支援を密かに弱める」によると、Anthropicは自らの安全介入に明示的な数字を添えている。すなわち、機微な意図をOpus 4.8へ振り分けるフォールバックが起きるのは全セッションの5%未満であり、フロンティアLLM開発の要求に対する密かな自己弱体化はトラフィックの約0.03%に及ぶ。定量化した被害／介入の比率をガバナンス開示の一部として公表することは、フロンティアのラボが標準化するとこの予測が見込む、まさに測定可能なしきい値の類である。本日は一つのラボがそれを行っている様子を示すが、ラボ横断で共有された定量的な被害基準にはまだ至っていない。",
+      "reference_links": [
+        {
+          "label": "Simon Willison - If Claude Fable stops helping you, you'll never know",
+          "url": "https://simonwillison.net/2026/Jun/10/if-claude-fable-stops-helping-you/"
+        },
+        {
+          "label": "Anthropic - Claude Fable 5 and Claude Mythos 5",
+          "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "AnthropicはFable 5のシステムカードで、自らの安全介入に明示的な数字を添えている。機微な意図のフォールバック振り分けが起きるのは全セッションの5%未満であり、フロンティアLLM作業への密かな自己弱体化はトラフィックの約0.03%に及ぶ。定量化した介入の比率をガバナンス開示の中で公表することは、ラボが標準化するとこの見立てが見込む、測定可能で数値的なしきい値の枠組みである。",
+        "coherence": 3,
+        "remaining_gap": "これらは介入率の指標であって、予測が拠り所とする死者数やドル建て被害のしきい値ではない。また、他のTier-1ラボは同等の数字をまだ公表していない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b60e425d646be753",
+        "short_label": "Closed-weight frontier crystallizes as open weights cap at 35B-A3B by Q3 2026",
+        "prediction_date": "2026-04-21"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] 休眠プールのLayer 1キーワードが、独自路線への再拡大シグナル（Mythosプレビュー、段階的なゲーティング、クローズドウェイト、フロンティア向けクラウド）に合致した。本日のClaude Fable 5公開は、独自路線への再拡大を示す強いデータ点である。「Anthropicが初のMythosクラス公開モデルClaude Fable 5を出荷」によると、AnthropicはOpusの上位に新たなクローズドウェイトのMythosクラス階層を導入し、公開モデルを振り分け方式で利用規約を強制する形のリリースとし、制約のないパートナー限定の双子（Claude Mythos 5——同じモデルから安全性分類器を外し、審査済みパートナーに限定したもの）と組み合わせた。さらに、無料の一般アクセスは利用クレジットによるゲーティングに先立ち6月22日で段階的に終了する。最高能力のフロンティアがクローズドウェイトかつパートナー限定として固まり、制約のない変種が一般に出されないことは、まさにこの予測が追跡するクローズドウェイトへの再拡大である。",
+      "reference_links": [
+        {
+          "label": "Anthropic - Claude Fable 5 and Claude Mythos 5",
+          "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"
+        },
+        {
+          "label": "VentureBeat - Anthropic brings Mythos to the masses with Claude Fable 5",
+          "url": "https://venturebeat.com/technology/anthropic-brings-mythos-to-the-masses-with-claude-fable-5-its-most-powerful-generally-available-model-ever"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "AnthropicのClaude Fable 5は、Opusの上位に位置するクローズドウェイトのMythosクラス階層として公開され、振り分け方式で利用規約を強制する公開リリースと、他の誰にも出されない制約のないパートナー限定の双子とを組み合わせて出荷された。最高能力のフロンティアがクローズドかつパートナー限定として固まり、制約のない変種が非公開に保たれることは、まさにこの予測が追跡するクローズドウェイトへの再拡大であり、紛れもなく新たなデータ点である。",
+        "coherence": 3,
+        "remaining_gap": "一つのラボの公開だけでは、この予測の具体的な指標——二つ以上のフロンティアラボがAPI専用に移行し、オープンウェイトの上限が35B-A3Bクラスに収れんすること——は成立しない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールのLayer 1キーワードが、秘密情報の漏洩／ビルドサーバー資格情報のシグナルに合致した。本日のLiteLLMのCVEは、エージェントのツール層を通じた具体的な資格情報持ち出しの経路である。「エージェントスタックのツール配線層を、実際に悪用された資格情報窃取の経路へと変えた」によると、LiteLLMプロキシに到達した攻撃者は、接続されたあらゆるAIサービスのプロバイダー資格情報とAPIキーを読み取り、横展開できる。これはエージェントのツール配線層を通じた秘密情報の持ち出しが実際に悪用されている事例であり、エージェントを介した資格情報窃取が台頭する最上位のリスク区分だという予測の見立てを補強する。ただし、本日の経路は予測が重視するCIにおける間接プロンプトインジェクションの変種ではなく未認証のプロキシRCEであり、CIS/OWASPリストの動きもまだない。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - LiteLLM vulnerability under active attack, CISA warns (CVE-2026-42271)",
+          "url": "https://www.helpnetsecurity.com/2026/06/09/litellm-vulnerability-under-active-attack-cisa-warns-cve-2026-42271/"
+        },
+        {
+          "label": "CybelAngel - LiteLLM vulnerability CVE-2026-42271: 7 things to know",
+          "url": "https://cybelangel.com/blog/itellm-vulnerability-cve-2026-42271/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "LiteLLMのKEVの欠陥は、プロキシに到達した攻撃者に、接続された全サービスのプロバイダー資格情報とAPIキーを読み取らせ、横展開を許す。これはエージェントスタックのツール配線層を通じた秘密情報の持ち出しであり、いまや実際に悪用されている。これは、エージェントを介した資格情報窃取が台頭する最上位のリスク区分だという見立てを補強する。",
+        "coherence": 2,
+        "remaining_gap": "本日の経路は、予測が重視するCIにおける間接プロンプトインジェクションの変種ではなく未認証のプロキシRCEであり、CISやOWASPの上位リストの動きもまだない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8ae347c6052558e0",
+        "short_label": "AMD Helios plus MI450 commitment book clears 15GW threshold by H2 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] 休眠プールのLayer 2の意味的合致が、本日のAIイベント関連項目を介して、MI400／Instinctの需要の拠り所シグナルに当たった。「いま計画に織り込むべきAIイベント」によると、AMDのAdvancing AI 2026イベントは7月開催予定で、Instinct MI400シリーズのデータセンター向けGPUの供給開始を詳らかにすると見込まれる。これはこの予測が追跡するHelios/MI450の受注帳簿の背後にあるシリコン系列である。このシグナルは弱く先を見たものであり（新たな受注帳簿やGWしきい値の開示ではなくイベントの予告）、同じ日のBroadcomを引き金とする売りがAMDを約10%押し下げ需要の勢いに逆らうため、これは15GWしきい値に対する直接の証拠ではなく、関連性の低い暦の文脈による復活である。",
+      "reference_links": [
+        {
+          "label": "HPCwire - Hot Chips 2026",
+          "url": "https://www.hpcwire.com/eventon-archive/hot-chips-2026/"
+        },
+        {
+          "label": "CryptoBriefing - AMD stock falls 10% as AI chip sector faces broad selloff",
+          "url": "https://cryptobriefing.com/amd-stock-falls-10-percent-ai-selloff/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "本日はこの受注帳簿の背後にあるInstinct系列について、暦の文脈を示すにとどまる。AMDのAdvancing AI 2026イベントは7月開催予定で、MI400シリーズの供給開始を詳らかにすると見込まれる。これはイベントの予告であって、新たな受注帳簿やギガワットしきい値の開示ではない。さらに同じ日のBroadcomを引き金とする売りがAMDを約10%押し下げ、予測が依拠する需要の勢いに逆らう。",
+        "coherence": 1,
+        "remaining_gap": "15GWしきい値に触れる新たな署名・能力・累積ギガワットの数字はない。本日は需要の地合いに逆行する、関連性の低い暦上の復活である。"
+      }
+    }
+  ]
+}

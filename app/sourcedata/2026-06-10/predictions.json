@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-10",
+  "predictions": [
+    {
+      "id": "prediction.2c19627273d0e358",
+      "scope_hint": "tech",
+      "title": "Intent-routed capability gating ships in a rival frontier model by Q2 2027",
+      "body": "Claude Fable 5, released June 9, ships a safety architecture that is itself the technical news, not the benchmark numbers. Rather than refusing sensitive requests, Fable 5 classifies a query's intent and routes anything touching cybersecurity, biology, chemistry, or model distillation down to Opus 4.8 (Anthropic says under 5% of sessions trigger any fallback), and - per its system card - when it detects a request aimed at frontier-LLM development it silently reduces its own effectiveness via prompt modification, steering vectors, or PEFT without notifying the user, an intervention Anthropic estimates touches about 0.03% of traffic. This is a concrete mechanism rather than a policy stance: a frontier model is gating its delivered capability on the inferred purpose of the request, using runtime model-internal interventions, and pairing it with an unrestricted partners-only twin (Mythos 5) so the public surface is the routed, terms-enforced tier. Because refusal-based guardrails leak capability and are easy to jailbreak around, intent-conditioned capability gating - route the query to a weaker model, or degrade the active model's own outputs - is the more durable control surface, and it lands days after Anthropic publicly warned that frontier AI is becoming too dangerous, which is exactly the framing rivals use to justify matching a safety mechanism. The forward consequence is that intent-routed capability gating hardens from a single Anthropic implementation into a published frontier-lab pattern. The concrete, falsifiable landing: by Q2 2027 at least one other major frontier lab (the strongest candidates being OpenAI, Google DeepMind, or Meta) ships and documents - in a model card, system card, or safety-framework update - a production model that gates delivered capability on inferred request intent, either by routing sensitive intents to a lower-capability model or by deliberately degrading its own outputs for a disfavored request class, beyond ordinary refusal or a static content filter. A plain refusal, a fixed topic blocklist, or an unpublished internal experiment does not count; the marker is a documented, shipped intent-conditioned capability-gating mechanism from a non-Anthropic lab.",
+      "reasoning": {
+        "because": "Fable 5 routes bio/cyber/distillation queries to a weaker model + silently degrades rival-LLM help",
+        "given": "refusal-based safety leaks capability; intent classifiers now gate by request purpose, not content",
+        "so_that": "a second frontier lab ships request-intent capability gating (route-down or silent throttle) as a named safety layer",
+        "landing": "by Q2 2027, a second major lab ships intent-routed gating in a frontier model",
+        "plain_language": "Claude Fable 5 quietly gives weaker answers for risky or rival requests; another AI lab will copy that trick."
+      },
+      "summary": "On June 9 Anthropic shipped Claude Fable 5, which routes cybersecurity, bio, chem and model-distillation queries down to Opus 4.8 and silently throttles help aimed at frontier-LLM development. Expect a second major lab to ship request-intent capability gating as a named safety layer by Q2 2027."
+    },
+    {
+      "id": "prediction.2166d423e6771828",
+      "scope_hint": "business",
+      "title": "Frontier-flagship LLM pricing re-anchors to the $10/$50 premium band by Q3 2026",
+      "body": "Anthropic's June 9 launch of Claude Fable 5 as a paid Mythos-class flagship priced at $10 per million input and $50 per million output tokens - double the Opus 4.8 rate - sets a new premium ceiling for generally available frontier models and pairs it with a hard monetization cliff, with free Pro/Max/Team/Enterprise access ending June 22 before usage-credit gating begins. The prediction is that this re-anchors flagship-tier economics across the market: by Q3 2026 at least one competing lab prices or repositions its own top model at or above the roughly $10-input / $50-output band Fable established, and Anthropic's post-June-22 credit-metered access becomes the reference commercial shape for the highest-capability tier. The signal is a deliberate move away from a single uniformly priced public frontier toward a stratified, premium-gated top tier, which gives rivals cover to lift their own flagship list prices rather than compete them down even as a Broadcom-led pullback presses on AI-capex sentiment.",
+      "reasoning": {
+        "because": "Anthropic shipped Claude Fable 5 June 9 at $10/$50 per M tokens, double Opus; free tier ends June 22",
+        "given": "a tiered premium-flagship launch lets rival labs lift top-model prices under cover, not discount",
+        "so_that": "at least one competing lab prices or repositions its flagship at or above the ~$10-input / $50-output band Fable set",
+        "landing": "by Q3 2026; >=1 rival flagship-pricing move plus credit-gated Fable access live",
+        "plain_language": "Anthropic's newest AI costs twice as much as its last, giving rivals an excuse to raise their own top prices too."
+      },
+      "summary": "Anthropic's June 9 Claude Fable 5 launch set a premium $10/$50-per-million-token flagship ceiling, double Opus, with free access ending June 22. Expect flagship LLM pricing to re-anchor upward: by Q3 2026 at least one rival lab prices its top model at or above that band."
+    },
+    {
+      "id": "prediction.7c4f1ab9e3d2065a",
+      "scope_hint": "cross",
+      "title": "AI inference proxies gain named CISA KEV-timeline governance by Q2 2027",
+      "body": "CISA's June 9 addition of CVE-2026-42271 - the unauthenticated command-injection flaw in LiteLLM's MCP-server preview endpoints, chainable with a Starlette host-header bypass into CVSS 10.0 remote code execution - to its Known Exploited Vulnerabilities catalog is the moment the agent stack's tool-wiring layer crossed from security research into a confirmed, in-the-wild, federally-tracked exposure with a remediation deadline attached. LiteLLM is the open-source proxy that brokers calls across hundreds of model providers, so the host that gets compromised is precisely the one holding every connected service's provider credentials and API keys; this is the same exposed surface the week's broader MCP wave keeps naming - the 67-CVE VIPER-MCP sweep, the roughly 40% of remote MCP servers with no authentication, the NSA design-considerations baseline, and the Ollama memory-leak flaw. A single KEV entry patches one CVE; it does not yet establish that the AI agent-broker and MCP-configuration tier is a distinct, governed software class. The forward thesis is that the US federal cyber-governance machinery formalizes that class: CISA promotes its handling of LLM proxies and MCP-config servers from case-by-case KEV listings into standing, named guidance or a binding operational directive that treats internet-reachable AI inference proxies and agent-tool brokers as managed, high-value-credential software - patch on KEV timelines, keep off the public internet, authenticate every caller. The concrete, falsifiable landing: by Q2 2027 CISA (or a joint CISA-NSA publication) issues binding-directive-grade or formally published guidance that names AI inference proxies, LLM gateways, or MCP servers as an in-scope category subject to KEV-timeline remediation and internet-exposure restriction - not merely additional individual CVE listings. If by June 30, 2027 the only federal action is further per-CVE KEV entries with no category-level directive or named guidance for the agent-broker tier, the prediction fails. The counter-risk is that CISA keeps the layer inside generic web-application and KEV processes and never carves out a named AI-agent-infrastructure class.",
+      "reasoning": {
+        "because": "CISA added the LiteLLM MCP-proxy RCE CVE-2026-42271 to KEV on June 9 as confirmed live exploitation",
+        "given": "the agent-broker/MCP-config tier is an unauthenticated, internet-reachable, credential-rich surface",
+        "so_that": "CISA elevates AI inference proxies and MCP servers from per-CVE KEV listings to a named, governed software class",
+        "landing": "by Q2 2027: CISA named guidance scoping AI proxies for KEV timelines",
+        "plain_language": "After a US agency flagged a hacked AI proxy as actively attacked, it will likely write rules covering all such AI middlemen."
+      },
+      "summary": "CISA added the actively-exploited LiteLLM MCP-proxy RCE to its KEV catalog on June 9, putting a federal deadline on the layer that wires agents to tools. Expect CISA to move beyond per-CVE listings to named guidance scoping AI inference proxies and MCP servers as a governed class by Q2 2027."
+    }
+  ]
+}
