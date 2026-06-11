@@ -1,0 +1,77 @@
+{
+  "date": "2026-06-11",
+  "sections": [
+    {
+      "category": "Google ships DiffusionGemma, the first major open-weight text-diffusion model, generating 256-token blocks in parallel for up to 4x faster local inference - with an Unsloth Sudoku fine-tune showing off its bidirectional attention",
+      "bullets": [
+        {
+          "body": "On June 10 Google released DiffusionGemma under Apache 2.0, an experimental 26B open-weight model (3.8B active, Mixture-of-Experts) that abandons autoregressive token-by-token decoding for text diffusion: it starts from a canvas of placeholder tokens and refines a 256-token block in parallel over multiple passes, locking in confident tokens as context and finalizing roughly 15-20 per pass, for up to 4x faster generation than a comparable autoregressive baseline, per [Google - DiffusionGemma: 4x faster text generation](https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/). It is built on the Gemma 4 (26B-A4B) backbone with an added diffusion head, supports a 256K context across 140+ languages with text/image/video inputs, and clocks 1,000+ tokens/sec on an H100 and 700+ on a consumer RTX 5090 at about 18GB VRAM when quantized; the work is a Google DeepMind-NVIDIA collaboration with native support across vLLM, Hugging Face Transformers, MLX, NVIDIA NeMo, and Unsloth, and deployment via Google Cloud Model Garden and NVIDIA NIM, with llama.cpp support listed as coming, per [MarkTechPost - Google AI releases DiffusionGemma, a 26B MoE open model using text diffusion](https://www.marktechpost.com/2026/06/10/google-ai-releases-diffusiongemma-a-26b-moe-open-model-using-text-diffusion-for-up-to-4x-faster-generation/). Google is explicit about the tradeoff - it states DiffusionGemma's output quality is lower than standard Gemma 4 and recommends the autoregressive model for production-quality work, positioning the diffusion variant for speed-critical, low-concurrency local inference rather than high-QPS cloud serving. Notably, the launch shipped with an Unsloth-fine-tuned Sudoku-solving variant that exploits the model's bidirectional (non-left-to-right) attention to fill a grid as a constraint-satisfaction problem - a concrete demonstration that the diffusion formulation changes which tasks a small local model is good at, not just how fast it runs.",
+          "citations": [
+            {
+              "label": "Google - DiffusionGemma: 4x faster text generation",
+              "url": "https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/"
+            },
+            {
+              "label": "MarkTechPost - Google AI releases DiffusionGemma, a 26B MoE open model using text diffusion",
+              "url": "https://www.marktechpost.com/2026/06/10/google-ai-releases-diffusiongemma-a-26b-moe-open-model-using-text-diffusion-for-up-to-4x-faster-generation/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "A new agent-tooling pattern lands: agents that pause mid-run to ask the user a question, as Simon Willison ships datasette-agent 0.2 with a ToolContext.ask_user primitive and durable, restart-surviving suspended conversations",
+      "bullets": [
+        {
+          "body": "Simon Willison shipped datasette-agent 0.2a0 on June 10, adding a capability that has been missing from most autonomous-loop harnesses: a tool can now suspend the agent run to ask the operator a question rather than guessing. Tools that declare a context parameter receive a ToolContext object and can call await context.ask_user(...) for yes/no, multiple-choice, or free-text input, and crucially the suspended conversation persists to the database and survives a server restart - the half-finished agent run resumes from where it paused once the human answers; the release also adds a save_query tool that writes agent-generated SQL as a stored Datasette query only after explicit human approval, per [Simon Willison - datasette-agent 0.2a0](https://simonwillison.net/2026/Jun/10/datasette-agent/). The day before, Willison released llm 0.32a3, the latest alpha of his command-line LLM toolkit, which he notes was almost entirely written by Anthropic's just-launched Claude Fable 5, per [Simon Willison - llm 0.32a3](https://simonwillison.net/2026/Jun/9/llm/). Read together, these are a small but pointed signal in the agent-workflow layer: rather than pushing agents toward fully unattended runs, the design is moving toward human-in-the-loop checkpoints as a first-class, durable primitive - mid-execution clarification and approval gates that hold state across process restarts - which is the same need that durable-execution agent frameworks have been building toward, here implemented at the individual-tool level in an open-source stack.",
+          "citations": [
+            {
+              "label": "Simon Willison - datasette-agent 0.2a0",
+              "url": "https://simonwillison.net/2026/Jun/10/datasette-agent/"
+            },
+            {
+              "label": "Simon Willison - llm 0.32a3",
+              "url": "https://simonwillison.net/2026/Jun/9/llm/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Chip stocks snap back hard to open the week, with Intel +8.5% and Micron +9% on June 8 reversing the Broadcom-driven washout - and an Alphabet-Intel foundry deal plus Nvidia 18A evaluation reframing the rebound around US manufacturing",
+      "bullets": [
+        {
+          "body": "The semiconductor complex reversed sharply on Monday June 8, with Intel up about 8.5% and Micron about 9% as the group recovered from the prior Friday's washout, when the Nasdaq fell 4.2% (its worst day since April) and the chip index shed roughly $1 trillion in market value on Broadcom's cautious AI-chip guidance and memory and smartphone-demand fears, per [Intellectia - Semiconductor stocks rebound June 2026](https://intellectia.ai/blog/semiconductor-stocks-rebound-june-2026). The rebound's framing is what makes it a fresh development rather than a bounce: the move was led not by the AI-demand names alone but by US-manufacturing catalysts - reporting that Alphabet had tapped Intel to manufacture about 3 million in-house chips and that Nvidia was evaluating Intel's 18A process for future parts - alongside renewed recognition that high-bandwidth memory demand for AI workloads remains robust, with desks characterizing Friday's drop as a liquidity-driven washout rather than a change in the underlying thesis, per [HeyGoTrade - Semiconductor selloff and Nvidia, chip rebound explained](https://www.heygotrade.com/en/news/semiconductor-selloff-nvidia-chip-rebound/). The corporate-activity read is that the sector's pricing has stayed reflexive to a single hyperscaler-facing supplier's order book on the way down, but the snap-back rotated leadership toward domestic foundry capacity - Intel as a potential merchant fab for Alphabet and Nvidia - rather than the GPU vendors that led the prior run, a different mix of names carrying the same AI-capex story.",
+          "citations": [
+            {
+              "label": "Intellectia - Semiconductor stocks rebound June 2026",
+              "url": "https://intellectia.ai/blog/semiconductor-stocks-rebound-june-2026"
+            },
+            {
+              "label": "HeyGoTrade - Semiconductor selloff and Nvidia, chip rebound explained",
+              "url": "https://www.heygotrade.com/en/news/semiconductor-selloff-nvidia-chip-rebound/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI events to plan around now: WWDC closes Friday, Databricks opens Monday, and the summer calendar firms up - AMD's Advancing AI gets locked to July 22-23 and Hot Chips registration opens",
+      "bullets": [
+        {
+          "body": "The still-upcoming AI calendar worth planning attendance around continues to span three tracks. On the mainstream developer/data side, Apple's WWDC26 reaches its final day Friday June 12; the Databricks Data + AI Summit follows June 15-18 at Moscone (30,000-plus in person, 800-plus breakouts, keynotes from Databricks' founders plus OpenAI's Greg Brockman and a recorded Satya Nadella fireside); and the AI Engineer World's Fair runs June 28-July 2 at Moscone West with 29 tracks across 6,000-plus attendees, including dedicated Inference and Security tracks and a Harness Engineering keynote. On the AI-security track, the Confidential Computing Summit lands June 23-24 at the San Francisco Mint, organized by the Linux Foundation and OPAQUE around confidential agents and secure AI workflows (speakers from AMD, Google, Microsoft, NVIDIA, Samsung, and UC Berkeley); SecurityWeek's AI Risk Summit follows August 11-12 at the Ritz-Carlton Half Moon Bay; and in Las Vegas, Black Hat USA's single-day AI Summit (August 4, inside the August 1-6 conference) and DEF CON's AI Village anchor the agentic red-teaming calendar, with OWASP Global AppSec USA in San Francisco November 2-6. Zenity - the practitioner-led AI Agent Security Summit the user tracks - has confirmed a 2026 global expansion to New York, London, and APAC, with dates still worth monitoring. On the AI-chip and hardware track, AMD has now locked its Advancing AI 2026 event to July 22-23 at the San Francisco Moscone Center, where it is expected to detail availability for the Instinct MI400-series (and unveil MI450) data-center GPUs, per [VideoCardz - AMD confirms Advancing AI 2026 event is set for July 22-23](https://videocardz.com/newz/amd-confirms-advancing-ai-2026-event-is-set-for-july-22-23); Hot Chips 2026 takes Stanford's Memorial Auditorium August 23-25 with early registration now open through July 31, per [Hot Chips - Registration](https://hotchips.org/registration/); and the AI Infra Summit runs September 15-17 at the Santa Clara Convention Center (8,000 attendees, 400-plus speakers across compute, AI data centers, and physical AI). Further out, GitHub Universe returns to Fort Mason October 28-29 and AWS re:Invent runs November 30-December 4 in Las Vegas.",
+          "citations": [
+            {
+              "label": "VideoCardz - AMD confirms Advancing AI 2026 event is set for July 22-23",
+              "url": "https://videocardz.com/newz/amd-confirms-advancing-ai-2026-event-is-set-for-july-22-23"
+            },
+            {
+              "label": "Hot Chips - Registration",
+              "url": "https://hotchips.org/registration/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
