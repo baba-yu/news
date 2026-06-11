@@ -1,0 +1,74 @@
+{
+  "date": "2026-06-11",
+  "technical": [
+    {
+      "lead": "Google ships DiffusionGemma, the first major open-weight text-diffusion LLM",
+      "body": "On June 10 Google released DiffusionGemma under Apache 2.0, an experimental 26B Mixture-of-Experts model (3.8B active) built on the Gemma 4 backbone with an added diffusion head that abandons left-to-right autoregressive decoding: it refines a 256-token block in parallel over multiple passes, locking in confident tokens as context for up to 4x faster generation than a comparable autoregressive baseline. It clocks 1,000+ tokens/sec on an H100 and 700+ on a consumer RTX 5090 at about 18GB VRAM quantized, supports a 256K context across 140+ languages, and lands with native support across vLLM, Hugging Face Transformers, MLX, NVIDIA NeMo, and Unsloth, with llama.cpp listed as coming. Google is explicit that output quality trails standard Gemma 4 and steers production work back to the autoregressive model, positioning diffusion for speed-critical, low-concurrency local inference. The launch shipped with an Unsloth-fine-tuned Sudoku solver that exploits the model's bidirectional attention to fill a grid as a constraint-satisfaction problem, per [Google - DiffusionGemma: 4x faster text generation](https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/) and [MarkTechPost - Google AI releases DiffusionGemma, a 26B MoE open model using text diffusion](https://www.marktechpost.com/2026/06/10/google-ai-releases-diffusiongemma-a-26b-moe-open-model-using-text-diffusion-for-up-to-4x-faster-generation/).",
+      "citations": [
+        {
+          "label": "Google - DiffusionGemma: 4x faster text generation",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/"
+        },
+        {
+          "label": "MarkTechPost - Google AI releases DiffusionGemma, a 26B MoE open model using text diffusion",
+          "url": "https://www.marktechpost.com/2026/06/10/google-ai-releases-diffusiongemma-a-26b-moe-open-model-using-text-diffusion-for-up-to-4x-faster-generation/"
+        }
+      ]
+    },
+    {
+      "lead": "datasette-agent 0.2 lets a tool pause an agent run to ask the operator",
+      "body": "Simon Willison shipped datasette-agent 0.2a0 on June 10, adding a capability missing from most autonomous-loop harnesses: a tool that declares a context parameter receives a ToolContext object and can call await context.ask_user(...) to suspend the run and ask the operator a yes/no, multiple-choice, or free-text question rather than guessing. Crucially the suspended conversation persists to the database and survives a server restart, so the half-finished run resumes from where it paused once the human answers; a paired save_query tool writes agent-generated SQL as a stored Datasette query only after explicit human approval, per [Simon Willison - datasette-agent 0.2a0](https://simonwillison.net/2026/Jun/10/datasette-agent/). Rather than pushing agents toward fully unattended runs, the design moves human-in-the-loop checkpoints into a first-class, durable primitive: mid-execution clarification and approval gates that hold state across process restarts, the same need durable-execution agent frameworks have been building toward, here implemented at the individual-tool level in an open-source stack.",
+      "citations": [
+        {
+          "label": "Simon Willison - datasette-agent 0.2a0",
+          "url": "https://simonwillison.net/2026/Jun/10/datasette-agent/"
+        }
+      ]
+    },
+    {
+      "lead": "Chip stocks snap back, Intel +8.5% and Micron +9%, on US-manufacturing catalysts",
+      "body": "The semiconductor complex reversed sharply on Monday June 8, with Intel up about 8.5% and Micron about 9% as the group recovered from the prior Friday's washout - when the Nasdaq fell 4.2% (its worst day since April) and the chip index shed roughly $1 trillion in market value on Broadcom's cautious AI-chip guidance and memory and smartphone-demand fears, per [Intellectia - Semiconductor stocks rebound June 2026](https://intellectia.ai/blog/semiconductor-stocks-rebound-june-2026). The rebound's framing is what makes it fresh: the move was led not by AI-demand names alone but by US-manufacturing catalysts - reporting that Alphabet had tapped Intel to manufacture about 3 million in-house chips and that Nvidia was evaluating Intel's 18A process for future parts - alongside renewed recognition that high-bandwidth memory demand for AI workloads remains robust, with desks characterizing Friday's drop as a liquidity-driven washout rather than a change in the thesis, per [HeyGoTrade - Semiconductor selloff and Nvidia, chip rebound explained](https://www.heygotrade.com/en/news/semiconductor-selloff-nvidia-chip-rebound/). The snap-back rotated leadership toward domestic foundry capacity - Intel as a potential merchant fab for Alphabet and Nvidia - rather than the GPU vendors that led the prior run, a different mix of names carrying the same AI-capex story.",
+      "citations": [
+        {
+          "label": "Intellectia - Semiconductor stocks rebound June 2026",
+          "url": "https://intellectia.ai/blog/semiconductor-stocks-rebound-june-2026"
+        },
+        {
+          "label": "HeyGoTrade - Semiconductor selloff and Nvidia, chip rebound explained",
+          "url": "https://www.heygotrade.com/en/news/semiconductor-selloff-nvidia-chip-rebound/"
+        }
+      ]
+    },
+    {
+      "lead": "Summer AI-event calendar firms up: AMD Advancing AI locked to July 22-23",
+      "body": "The still-upcoming AI calendar worth planning attendance around spans three tracks. On the mainstream developer/data side, Apple's WWDC26 reaches its final day Friday June 12; the Databricks Data + AI Summit follows June 15-18 at Moscone (30,000-plus in person, keynotes from Databricks' founders plus OpenAI's Greg Brockman and a recorded Satya Nadella fireside); and the AI Engineer World's Fair runs June 28-July 2 at Moscone West with 29 tracks, including dedicated Inference and Security tracks. On the AI-security track, the Confidential Computing Summit lands June 23-24 at the San Francisco Mint, SecurityWeek's AI Risk Summit follows August 11-12, and Black Hat USA's AI Summit (August 4) plus DEF CON's AI Village anchor the agentic red-teaming calendar; Zenity's practitioner-led AI Agent Security Summit has confirmed a 2026 expansion to New York, London, and APAC. On the AI-chip and hardware track, AMD has locked its Advancing AI 2026 event to July 22-23 at the San Francisco Moscone Center, where it is expected to detail Instinct MI400-series availability and unveil MI450, per [VideoCardz - AMD confirms Advancing AI 2026 event is set for July 22-23](https://videocardz.com/newz/amd-confirms-advancing-ai-2026-event-is-set-for-july-22-23); Hot Chips 2026 takes Stanford's Memorial Auditorium August 23-25 with early registration open through July 31, per [Hot Chips - Registration](https://hotchips.org/registration/); and the AI Infra Summit runs September 15-17 at Santa Clara.",
+      "citations": [
+        {
+          "label": "VideoCardz - AMD confirms Advancing AI 2026 event is set for July 22-23",
+          "url": "https://videocardz.com/newz/amd-confirms-advancing-ai-2026-event-is-set-for-july-22-23"
+        },
+        {
+          "label": "Hot Chips - Registration",
+          "url": "https://hotchips.org/registration/"
+        }
+      ]
+    },
+    {
+      "lead": "Willison says his llm 0.32a3 alpha was written almost entirely by Claude Fable 5",
+      "body": "A day before datasette-agent 0.2a0, Simon Willison released llm 0.32a3, the latest alpha of his command-line LLM toolkit, which he notes was written almost entirely by Anthropic's just-launched Claude Fable 5, per [Simon Willison - llm 0.32a3](https://simonwillison.net/2026/Jun/9/llm/). Read alongside the datasette-agent release, it is a small but pointed data point on how far a single frontier model can carry the authorship of a maintained open-source tool, with the human author framing the work as model-driven and crediting the newly shipped Anthropic model by name.",
+      "citations": [
+        {
+          "label": "Simon Willison - llm 0.32a3",
+          "url": "https://simonwillison.net/2026/Jun/9/llm/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Google releases the first open AI that writes in parallel",
+    "An open-source AI agent can pause to ask you a question",
+    "Chip stocks bounce back hard as Intel and Micron jump",
+    "Plan your summer: AMD's big AI event is set for July 22-23",
+    "A coder says Claude Fable 5 wrote almost all of his new tool"
+  ]
+}

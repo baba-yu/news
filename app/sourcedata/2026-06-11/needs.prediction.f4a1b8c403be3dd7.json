@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "coding-agent runtime product engineer",
+    "job": "Designing a mid-execution human-input primitive so a running tool can suspend the agent, ask a typed question, and resume after restart.",
+    "outcome": "A documented suspend-ask-resume checkpoint in the coding agent that persists paused state and survives a full process or server restart.",
+    "motivation": "Unattended long-running agents risk wrong irreversible actions; a durable pause-and-ask control surface prevents them and differentiates the product.",
+    "task": {
+      "who": "agent core / tool-execution sub-team",
+      "what": "Build durable tool-level suspend-and-ask-operator API",
+      "where": "the agent runtime's tool-call and session layer",
+      "when": "the runway from June 2026 through H1 2027",
+      "why": "to stop irreversible unattended actions taken without human intervention",
+      "how": null
+    }
+  },
+  {
+    "actor": "durable-execution orchestration framework maintainer",
+    "job": "Extending the framework's human-in-the-loop signal so a paused agent step holds typed operator input as durable workflow state across restarts.",
+    "outcome": "A documented human-input checkpoint where a running step suspends, requests approval or a typed answer, and resumes the same run after restart.",
+    "motivation": "Durable-execution runtimes already converge on orchestration-side checkpoints; a tool-level ask-user primitive completes their human-in-the-loop story.",
+    "task": {
+      "who": "workflow-engine / SDK sub-team",
+      "what": "Add typed suspend-ask-resume signal to durable steps",
+      "where": "the workflow durability and signaling layer",
+      "when": "the runway from June 2026 through H1 2027",
+      "why": "to hold human approval as persisted state, not re-prompts",
+      "how": "durable workflow signals / event-sourced state"
+    }
+  },
+  {
+    "actor": "managed agent platform product manager",
+    "job": "Shipping a documented mid-execution human-input feature so platform-hosted agents can pause for operator approval and resume after a server restart.",
+    "outcome": "A named, documented restart-durable approval primitive in the managed agent service, distinct from transient prompts or pre-run allowlists.",
+    "motivation": "Enterprise customers moving agents into unattended production demand auditable, restart-safe human approval gates before irreversible actions execute.",
+    "task": {
+      "who": "agent-platform service / runtime sub-team",
+      "what": "Ship hosted suspend-ask-resume approval primitive",
+      "where": "the managed agent runtime and control plane",
+      "when": "the runway from June 2026 through H1 2027",
+      "why": "to give enterprises restart-safe approval gates for production agents",
+      "how": null
+    }
+  }
+]

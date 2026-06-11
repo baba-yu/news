@@ -1,0 +1,123 @@
+{
+  "date": "2026-06-11",
+  "by_prediction": {
+    "prediction.01c655574b733fb7": [
+      {
+        "actor": "pretraining lead ng karibal na open-weight model lab",
+        "job": "Pagsasanay ng isang text-diffusion language model sa isang parallel block-refinement na layunin para maglabas ng pangalawang non-Google na open-weight na diffusion LLM.",
+        "outcome": "Isang inilabas na model card kasama ang permissive-license na weight para sa isang independiyenteng open-weight na text-diffusion LLM mula sa isang publisher na hindi Google.",
+        "motivation": "Angkinin nang maaga ang umuusbong na text-diffusion na kategorya at sakupin ang 4x-faster at mababang-concurrency na puwang ng edge-inference bago ito magsama-sama sa iisang vendor.",
+        "task": {
+          "who": "foundation-model pretraining / research team",
+          "what": "Train and fine-tune a diffusion-head LLM for block-parallel decoding.",
+          "where": "Internal large-scale GPU/TPU training clusters.",
+          "when": "2026-06 to 2027-Q1 runway",
+          "why": "Establish an independent diffusion-LLM entry beyond DiffusionGemma.",
+          "how": "Diffusion-head atop an existing transformer backbone, MoE"
+        }
+      },
+      {
+        "actor": "tagapagpanatili ng edge inference runtime",
+        "job": "Pagdaragdag ng native na block-parallel na text-diffusion decoding sa isang consumer CPU/edge runtime para tumakbo ang mga diffusion-LLM na weight sa GGUF/edge stack.",
+        "outcome": "Isang runtime release na naglalabas ng first-class na block-parallel na diffusion decoding, hindi lamang isang balot sa umiiral na autoregressive PyTorch na daanan.",
+        "motivation": "Sakupin ang puwang ng local-inference na mahalaga ang bilis at mababa ang concurrency na bagay sa diffusion, na pinananatiling mapagkumpitensya ang runtime habang dumarating ang isang bagong model format.",
+        "task": {
+          "who": "core inference-engine / decoding maintainers",
+          "what": "Implement parallel multi-pass block-refinement decoding kernel.",
+          "where": "Open-source runtime codebase (llama.cpp / LM Studio / Ollama / MLX).",
+          "when": "2026-06 to 2027-Q1 runway",
+          "why": "Run diffusion-LLM weights natively on consumer CPU/edge hardware.",
+          "how": null
+        }
+      }
+    ],
+    "prediction.60ff24cfe4c34842": [
+      {
+        "actor": "lead ng customer-acquisition ng foundry",
+        "job": "Pagpapatuloy ng mga prospektong fabless at hyperscaler na ebalwasyon tungo sa mga nilagdaang leading-edge na foundry na pangako para sa mga pinangalanang AI accelerator sa advanced na node.",
+        "outcome": "Isang pangalawang panlabas na customer na lampas sa Alphabet ang lantarang mangangako ng isang pinangalanang AI na parte sa 18A o 14A na node.",
+        "motivation": "Nangangailangan ang isang merchant-fab na prangkisa ng isang listahan ng customer bilang patunay-puntos, hindi iisang in-house na trabaho ng Alphabet, para maging kapani-paniwala.",
+        "task": {
+          "who": "Foundry business-development and key-account team",
+          "what": "Close evaluating designers into signed advanced-node tape-out agreements",
+          "where": "Customer engagements and foundry contract negotiations",
+          "when": "Runway from June 2026 through Q2 2027",
+          "why": "Establishes Intel Foundry as a credible second-source merchant fab",
+          "how": "On-record customer announcement or signed foundry agreement"
+        }
+      },
+      {
+        "actor": "engineering lead ng advanced-node process-yield",
+        "job": "Pagdadala ng yield, performance, at iskedyul ng 18A sa volume-ready na kahandaan para mangako ng leading-edge na parte ang mga prospektong AI na customer.",
+        "outcome": "Isang 18A na node na umaabot sa mga target ng yield at iskedyul na sapat na kapani-paniwala para mangako ng isang pinangalanang AI na parte ang isang panlabas na customer.",
+        "motivation": "Ang pinangalanang panganib na salungat ay ang pagkadulas ng yield o iskedyul ng 18A, na magpapadala sa mga customer sa TSMC para sa leading-edge na volume.",
+        "task": {
+          "who": "Foundry process-development and yield-ramp engineering",
+          "what": "Stabilize 18A defect density and ramp volume yield",
+          "where": "Intel fabs running the 18A process",
+          "when": "Runway from June 2026 through Q2 2027",
+          "why": "De-risks the node so customers choose Intel over TSMC",
+          "how": null
+        }
+      },
+      {
+        "actor": "lead ng design-enablement ng fabless AI-chip",
+        "job": "Pagpapatakbo ng ebalwasyon ng 18A process at pag-port ng isang leading-edge na AI accelerator o networking na parte tungo sa tape-out sa isang node ng Intel.",
+        "outcome": "Isang nakatuong tape-out o on-record na desisyon na pumapangalan sa isang AI na parte na ginawa sa 18A o 14A na node ng Intel.",
+        "motivation": "Ang isang kapani-paniwalang second-source na leading-edge na foundry ay nag-iibang-iba ng suplay palayo sa sole-source na pagdepende sa TSMC para sa custom na AI silicon.",
+        "task": {
+          "who": "Silicon design-enablement and physical-design team",
+          "what": "Qualify PDK and port accelerator design to 18A",
+          "where": "Customer design flow against Intel's 18A PDK",
+          "when": "Runway from June 2026 through Q2 2027",
+          "why": "Diversifies leading-edge supply beyond sole-source TSMC",
+          "how": "Intel 18A process design kit and tape-out flow"
+        }
+      }
+    ],
+    "prediction.f4a1b8c403be3dd7": [
+      {
+        "actor": "product engineer ng coding-agent runtime",
+        "job": "Pagdidisenyo ng isang human-input primitive sa kalagitnaan ng pagpapatupad para makapaghinto sa agent ang isang tumatakbong tool, makapagtanong ng nakatipong tanong, at makapagpatuloy pagkatapos ng restart.",
+        "outcome": "Isang dokumentadong suspend-ask-resume na checkpoint sa coding agent na nag-pe-persist ng naka-pause na estado at nakakaligtas sa buong restart ng proseso o server.",
+        "motivation": "Nanganganib ang mga walang-bantay na pangmatagalang agent sa maling di-mababawing aksyon; pinipigil ito ng isang matibay na pause-and-ask na kontrol at pinag-iiba ang produkto.",
+        "task": {
+          "who": "agent core / tool-execution sub-team",
+          "what": "Build durable tool-level suspend-and-ask-operator API",
+          "where": "the agent runtime's tool-call and session layer",
+          "when": "the runway from June 2026 through H1 2027",
+          "why": "to stop irreversible unattended actions taken without human intervention",
+          "how": null
+        }
+      },
+      {
+        "actor": "tagapagpanatili ng durable-execution orchestration framework",
+        "job": "Pagpapalawak ng human-in-the-loop na signal ng framework para humawak ng nakatipong input ng operator bilang matibay na workflow na estado ang isang naka-pause na hakbang ng agent sa kabila ng mga restart.",
+        "outcome": "Isang dokumentadong human-input na checkpoint kung saan ang isang tumatakbong hakbang ay humihinto, humihiling ng pag-apruba o nakatipong sagot, at nagpapatuloy ng parehong takbo pagkatapos ng restart.",
+        "motivation": "Nagsasama-sama na ang mga durable-execution na runtime sa mga checkpoint sa panig ng orkestrasyon; kinukumpleto ng isang tool-level na ask-user primitive ang kanilang human-in-the-loop na kuwento.",
+        "task": {
+          "who": "workflow-engine / SDK sub-team",
+          "what": "Add typed suspend-ask-resume signal to durable steps",
+          "where": "the workflow durability and signaling layer",
+          "when": "the runway from June 2026 through H1 2027",
+          "why": "to hold human approval as persisted state, not re-prompts",
+          "how": "durable workflow signals / event-sourced state"
+        }
+      },
+      {
+        "actor": "product manager ng managed agent platform",
+        "job": "Paglalabas ng isang dokumentadong human-input na katangian sa kalagitnaan ng pagpapatupad para makapaghinto para sa pag-apruba ng operator at makapagpatuloy pagkatapos ng restart ng server ang mga agent na naka-host sa platform.",
+        "outcome": "Isang pinangalanan at dokumentadong restart-durable na approval primitive sa managed agent service, naiiba sa mga panandaliang prompt o pre-run na allowlist.",
+        "motivation": "Hinihingi ng mga enterprise na customer na inililipat ang mga agent sa walang-bantay na produksiyon ang mga audit-able at restart-safe na human approval na gate bago maisagawa ang mga di-mababawing aksyon.",
+        "task": {
+          "who": "agent-platform service / runtime sub-team",
+          "what": "Ship hosted suspend-ask-resume approval primitive",
+          "where": "the managed agent runtime and control plane",
+          "when": "the runway from June 2026 through H1 2027",
+          "why": "to give enterprises restart-safe approval gates for production agents",
+          "how": null
+        }
+      }
+    ]
+  }
+}

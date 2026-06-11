@@ -1,0 +1,74 @@
+{
+  "date": "2026-06-11",
+  "technical": [
+    {
+      "lead": "Googleが、主要な公開ウェイトのテキスト拡散LLMとして初となるDiffusionGemmaを公開",
+      "body": "6月10日、GoogleはApache 2.0のもとでDiffusionGemmaを公開した。Gemma 4のバックボーン上に拡散ヘッドを追加して構築された、実験的な26BのMixture-of-Expertsモデル（アクティブ3.8B）で、左から右への自己回帰デコードを捨てる。256トークンのブロックを複数パスにわたって並列に洗練し、確信度の高いトークンを文脈として固定して、同等の自己回帰ベースラインと比べて最大4倍の生成を実現する。H100では毎秒1,000トークン超、量子化時にVRAM約18GBで動くコンシューマー向けRTX 5090では毎秒700トークン超を記録し、140以上の言語にわたる256Kの文脈に対応する。そしてvLLM、Hugging Face Transformers、MLX、NVIDIA NeMo、Unslothにわたるネイティブ対応を備え、llama.cppは近日提供予定として記載されている。Googleは、出力品質が標準のGemma 4を下回ると明言し、本番作業には自己回帰モデルへ戻すよう促しており、拡散は速度が重要で同時実行数の少ないローカル推論に位置づけている。ローンチには、モデルの双方向アテンションを活用してグリッドを制約充足問題として埋める、Unslothでファインチューンされた数独ソルバーが同梱されたと、[Google - DiffusionGemma: 4x faster text generation](https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/) および [MarkTechPost - Google AI releases DiffusionGemma, a 26B MoE open model using text diffusion](https://www.marktechpost.com/2026/06/10/google-ai-releases-diffusiongemma-a-26b-moe-open-model-using-text-diffusion-for-up-to-4x-faster-generation/) は伝えている。",
+      "citations": [
+        {
+          "label": "Google - DiffusionGemma: 4x faster text generation",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/"
+        },
+        {
+          "label": "MarkTechPost - Google AI releases DiffusionGemma, a 26B MoE open model using text diffusion",
+          "url": "https://www.marktechpost.com/2026/06/10/google-ai-releases-diffusiongemma-a-26b-moe-open-model-using-text-diffusion-for-up-to-4x-faster-generation/"
+        }
+      ]
+    },
+    {
+      "lead": "datasette-agent 0.2では、ツールがエージェントの実行を一時停止してオペレーターに質問できる",
+      "body": "Simon Willisonは6月10日にdatasette-agent 0.2a0を公開し、多くの自律ループ・ハーネスに欠けていた機能を追加した。context引数を宣言したツールはToolContextオブジェクトを受け取り、await context.ask_user(...)を呼び出して、推測する代わりに実行を中断し、Yes/No、選択式、または自由記述の質問をオペレーターに尋ねられる。重要なことに、中断された会話はデータベースに永続化されてサーバーの再起動を生き延びる。やりかけの実行は、人間が回答するとそこから再開される。あわせて、エージェントが生成したSQLを、人間が明示的に承認した後にのみDatasetteの保存済みクエリとして書き込むsave_queryツールも追加されたと、[Simon Willison - datasette-agent 0.2a0](https://simonwillison.net/2026/Jun/10/datasette-agent/) は伝えている。エージェントを完全な無人実行へ押し進めるのではなく、この設計は人間参加型のチェックポイントを一級かつ永続的なプリミティブへと組み込む。実行途中の確認と承認のゲートが、プロセスの再起動をまたいで状態を保持する。これは永続実行型のエージェント・フレームワークが目指してきたのと同じニーズであり、ここではオープンソースのスタックにおいて個々のツールのレベルで実装されている。",
+      "citations": [
+        {
+          "label": "Simon Willison - datasette-agent 0.2a0",
+          "url": "https://simonwillison.net/2026/Jun/10/datasette-agent/"
+        }
+      ]
+    },
+    {
+      "lead": "半導体株が急反発、Intel+8.5%とMicron+9%、米国製造業を軸とするきっかけで",
+      "body": "半導体セクターは月曜6月8日に急反発し、Intelは約8.5%、Micronは約9%上昇して、前週金曜の投げ売りから持ち直した。その金曜にはNasdaqが4.2%下落し（4月以来最悪の1日）、Broadcomの慎重なAIチップ見通しと、メモリおよびスマートフォン需要への懸念から、半導体指数は時価総額でおよそ1兆ドルを失っていたと、[Intellectia - Semiconductor stocks rebound June 2026](https://intellectia.ai/blog/semiconductor-stocks-rebound-june-2026) は伝えている。今回の反発を新たなものにしているのは、その捉え方だ。この動きを牽引したのはAI需要関連銘柄だけではなく、米国製造業を軸とするきっかけだった。AlphabetがIntelに自社向けチップを約300万個製造するよう発注したという報道と、NvidiaがIntelの18Aプロセスを将来の製品向けに評価しているという報道である。あわせて、AIワークロード向けの広帯域メモリ需要が依然として堅調だとの認識が改めて広がった。各トレーディングデスクは金曜の下落を、論拠の変化ではなく流動性主導の投げ売りと特徴づけていると、[HeyGoTrade - Semiconductor selloff and Nvidia, chip rebound explained](https://www.heygotrade.com/en/news/semiconductor-selloff-nvidia-chip-rebound/) は報じている。急反発は、先の上昇を牽引したGPUベンダーではなく、国内ファウンドリの生産能力へと牽引役を回した。AlphabetとNvidiaにとっての受託ファブ候補としてのIntelである。これは同じAI設備投資のストーリーを、異なる顔ぶれが担う構図だ。",
+      "citations": [
+        {
+          "label": "Intellectia - Semiconductor stocks rebound June 2026",
+          "url": "https://intellectia.ai/blog/semiconductor-stocks-rebound-june-2026"
+        },
+        {
+          "label": "HeyGoTrade - Semiconductor selloff and Nvidia, chip rebound explained",
+          "url": "https://www.heygotrade.com/en/news/semiconductor-selloff-nvidia-chip-rebound/"
+        }
+      ]
+    },
+    {
+      "lead": "夏のAIイベントのカレンダーが固まる。AMD Advancing AIが7月22〜23日に確定",
+      "body": "参加を計画する価値のある、まだこれからのAIカレンダーは3つのトラックにまたがる。主流の開発者/データ系では、AppleのWWDC26が金曜6月12日に最終日を迎える。Databricks Data + AI SummitはMosconeで6月15〜18日に続く（対面で3万人超、Databricks創業者陣に加えOpenAIのGreg Brockmanによる基調講演と、Satya Nadellaの録画によるファイアサイド）。AI Engineer World's FairはMoscone Westで6月28日〜7月2日に開催され、29トラックを擁し、専用のInferenceトラックとSecurityトラックを含む。AIセキュリティのトラックでは、Confidential Computing Summitがサンフランシスコのthe San Francisco Mintで6月23〜24日に開催され、SecurityWeekのAI Risk Summitが8月11〜12日に続く。そしてBlack Hat USAのAI Summit（8月4日）とDEF CONのAI Villageが、エージェント型レッドチーミングのカレンダーの軸となる。Zenityの実務者主導のAI Agent Security Summitは、ニューヨーク、ロンドン、APACへの2026年の展開を確定している。AIチップおよびハードウェアのトラックでは、AMDがAdvancing AI 2026イベントをサンフランシスコのthe San Francisco Moscone Centerで7月22〜23日に確定し、ここではInstinct MI400シリーズの提供時期を詳説し、MI450を発表すると見込まれていると、[VideoCardz - AMD confirms Advancing AI 2026 event is set for July 22-23](https://videocardz.com/newz/amd-confirms-advancing-ai-2026-event-is-set-for-july-22-23) は伝えている。Hot Chips 2026はStanfordのMemorial Auditoriumで8月23〜25日に開催され、早期登録は7月31日まで受付中だと、[Hot Chips - Registration](https://hotchips.org/registration/) は報じている。AI Infra Summitはthe Santa Claraで9月15〜17日に開催される。",
+      "citations": [
+        {
+          "label": "VideoCardz - AMD confirms Advancing AI 2026 event is set for July 22-23",
+          "url": "https://videocardz.com/newz/amd-confirms-advancing-ai-2026-event-is-set-for-july-22-23"
+        },
+        {
+          "label": "Hot Chips - Registration",
+          "url": "https://hotchips.org/registration/"
+        }
+      ]
+    },
+    {
+      "lead": "Willisonは、自身のllm 0.32a3アルファがClaude Fable 5によってほぼ全面的に書かれたと述べる",
+      "body": "datasette-agent 0.2a0の前日、Simon WillisonはコマンドラインのLLMツールキット最新アルファであるllm 0.32a3を公開した。これはAnthropicが公開したばかりのClaude Fable 5によってほぼ全面的に書かれたと述べていると、[Simon Willison - llm 0.32a3](https://simonwillison.net/2026/Jun/9/llm/) は伝えている。datasette-agentのリリースとあわせて読むと、単一のフロンティアモデルが、保守されているオープンソースツールの著述をどこまで担えるかを示す、小さくも示唆的なデータ点だ。人間の作者は、この作業をモデル主導と位置づけ、公開されたばかりのAnthropicのモデルを名指しで功績として挙げている。",
+      "citations": [
+        {
+          "label": "Simon Willison - llm 0.32a3",
+          "url": "https://simonwillison.net/2026/Jun/9/llm/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Googleが、並列で文章を書く初のオープンなAIを公開",
+    "オープンソースのAIエージェントが、一時停止してあなたに質問できる",
+    "IntelとMicronが急騰し、半導体株が力強く反発",
+    "夏の予定を立てよう。AMDの大型AIイベントは7月22〜23日に決定",
+    "あるコーダーが、新ツールのほぼ全てをClaude Fable 5が書いたと語る"
+  ]
+}
