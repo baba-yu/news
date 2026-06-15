@@ -1,0 +1,81 @@
+{
+  "date": "2026-06-14",
+  "sections": [
+    {
+      "category": "Ajuste fino de LLM en local: Unsloth publica una versión de 150 PR que añade DiffusionGemma, la predicción multi-token de Gemma 4 y el entrenamiento consciente de la cuantización",
+      "bullets": [
+        {
+          "body": "Unsloth publicó su beta 2026.6.7 el 12 de junio, una versión que, según el equipo, fusionó más de 150 pull requests y rehízo Unsloth Studio con un nuevo Hub de modelos. Las incorporaciones destacadas son el soporte para ejecutar y entrenar el modelo de difusión de texto DiffusionGemma de Google directamente en Studio, la predicción multi-token de Gemma 4 (activada de forma automática, para una generación unas 2x más rápida), el chat de audio para Gemma 4 (wav, mp3, m4a, flac, webm) y el paralelismo de tensores para GGUF que, según informa el equipo, añade alrededor de un 30% de rendimiento. Studio también incorporó una página Hub para explorar y gestionar modelos y datasets de Hugging Face y un modo Chat-with-Files con búsqueda híbrida y citas.",
+          "citations": [
+            {"label": "Unsloth (GitHub Discussions) - Notas de la versión DiffusionGemma + Gemma 4 MTP", "url": "https://github.com/unslothai/unsloth/discussions/6256"}
+          ]
+        },
+        {
+          "body": "En el lado del entrenamiento, el mismo ciclo llevó más lejos el entrenamiento consciente de la cuantización: Unsloth informa de que el QAT de Gemma 4 corre con unas 3x menos memoria sin alejarse de la precisión original, y la versión mejoró la fiabilidad de las invocaciones locales de herramientas más APIs compatibles con OpenAI y Anthropic, incluido el soporte para Claude Code y una vía de actualización de llama.cpp dentro de la app. El impulso es que el ecosistema de ajuste fino en el dispositivo está convergiendo hacia una única aplicación local que maneja el entrenamiento del modelo de difusión, la decodificación especulativa y la cuantización posterior al entrenamiento en lugar de una biblioteca solo para notebooks.",
+          "citations": [
+            {"label": "Unsloth - Guía para ejecutar DiffusionGemma en local", "url": "https://unsloth.ai/docs/models/diffusiongemma"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "La seguridad de IA se encuentra con el silicio: Apple ejecuta Private Cloud Compute en Google Cloud sobre GPUs Blackwell de computación confidencial",
+      "bullets": [
+        {
+          "body": "Apple reveló que está extendiendo Private Cloud Compute, su infraestructura de inferencia reforzada para la privacidad, para ejecutarse en Google Cloud por primera vez fuera de los centros de datos controlados por Apple, con la inferencia del lado del servidor para Apple Foundation Models corriendo en GPUs NVIDIA Blackwell en modo de computación confidencial. NVIDIA, en una publicación del 9 de junio, describió el modelo de seguridad como confianza enraizada en el hardware sobre GPUs genuinas y sin manipular, más rutas de comunicación cifradas y atestación remota, de modo que la plataforma puede verificar criptográficamente que la infraestructura no ha sido manipulada antes de enviar cualquier dato sensible. El conjunto combinado une la computación confidencial de Blackwell con CPUs Intel TDX y el chip de seguridad Titan de Google en lo que Apple llama una canalización de inferencia confidencial de extremo a extremo.",
+          "citations": [
+            {"label": "Blog de NVIDIA - NVIDIA Confidential Computing to help expand Apple's Private Cloud Compute", "url": "https://blogs.nvidia.com/blog/nvidia-confidential-computing-apple-private-cloud-compute/"},
+            {"label": "Apple Security Research - Expanding Private Cloud Compute", "url": "https://security.apple.com/blog/expanding-pcc/"}
+          ]
+        },
+        {
+          "body": "El acuerdo mantiene a Apple al mando del límite de confianza: los dispositivos solo confiarán en el software que Apple apruebe criptográficamente, un registro criptográfico rastrea cada nodo de Google Cloud en la flota de PCC, todos los binarios de PCC se publican para inspección pública y el Security Bounty de Apple se extiende a los nodos alojados en Google. El despliegue avanza mediante una vista previa en el verano de 2026, con más detalle técnico esperado en el Confidential Computing Summit del 23-24 de junio. Es un dato concreto para la tesis del acelerador de IA seguro: la inferencia de computación confidencial sobre GPUs con atestación y raíz de confianza en el hardware se está usando ya para poner la inferencia privada de un proveedor de frontera sobre el silicio de centro de datos de un tercero.",
+          "citations": [
+            {"label": "Help Net Security - Apple extiende Private Cloud Compute a Google Cloud", "url": "https://www.helpnetsecurity.com/2026/06/10/apple-private-cloud-compute-google-cloud-expansion/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Investigación en LLM: los agentes se replantean como software generado en tiempo de ejecución, y un nuevo benchmark examina si su memoria sigue el ritmo de un mundo cambiante",
+      "bullets": [
+        {
+          "body": "Un paper de arXiv de junio, Agentic Software: How AI Agents Are Restructuring the Software Paradigm (arXiv:2606.05608), sostiene que los agentes LLM constituyen una reestructuración fundamental de lo que es el software: en lugar de que el código lleve una lógica de decisión escrita de antemano, el propio agente es el software y su lógica de decisión se genera en tiempo de ejecución, un cambio que el autor enmarca como el paso del software licenciado al SaaS y al agente como servicio. Es un compañero conceptual de las noticias de herramental de la semana, que formaliza por qué los agentes de programación que generan y descartan código sobre la marcha se comportan de forma distinta a los programas deterministas.",
+          "citations": [
+            {"label": "arXiv - Agentic Software: How AI Agents Are Restructuring the Software Paradigm", "url": "https://arxiv.org/abs/2606.05608"}
+          ]
+        },
+        {
+          "body": "En el plano empírico, EvoArena (arXiv:2606.13681, 11 de junio) prueba si los agentes pueden mantener su conocimiento alineado a medida que cambia el entorno, modelando el cambio como secuencias de actualizaciones progresivas en los dominios de terminal, software y social. Los agentes actuales rinden mal, con un 39,6% de precisión de media en estos entornos cambiantes; los autores proponen EvoMem, un paradigma de memoria basado en parches que registra la memoria como historiales estructurados de actualizaciones, e informan de que eleva EvoArena un 1,5% de media a la vez que mejora los benchmarks estándar GAIA y LoCoMo en un 6,1% y un 4,8%. El resultado afina un hallazgo recurrente: que los benchmarks estáticos exageran cuán robustos son en realidad los agentes de larga ejecución.",
+          "citations": [
+            {"label": "arXiv - EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments", "url": "https://arxiv.org/abs/2606.13681"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Precios de acciones y actividad corporativa: SpaceX completa la mayor IPO de la historia y abre la ventana de salidas a bolsa de IA de 2026",
+      "bullets": [
+        {
+          "body": "SpaceX empezó a cotizar en el Nasdaq bajo el ticker SPCX el 12 de junio a un precio de oferta fijo de 135 dólares por acción, vendiendo unos 555,6 millones de acciones para captar cerca de 75.000 millones de dólares, la mayor IPO de la historia. La acción saltó alrededor de un 19-20% en su debut hasta cerrar cerca de los 161 dólares, valorando a la compañía por encima de los 2 billones de dólares. La salida a bolsa es notable para la IA en concreto porque xAI está dentro de la entidad: Musk fusionó xAI (que había absorbido la plataforma X) dentro de SpaceX en febrero en un acuerdo que valoró al grupo combinado en 1,25 billones de dólares, así que SpaceX es el primero de los nombres megacap ligados a la IA en superar el mercado público en este ciclo.",
+          "citations": [
+            {"label": "Deseret News - SpaceX rocks public market debut, stock pop drives new $2.1T valuation", "url": "https://www.deseret.com/business/2026/06/12/spacex-ipo-elon-musk-stock-market-debut-nasdaq-exchange-xai-tesla-star-trek-science-fiction-future/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Eventos de IA para planificar ahora: el Data + AI Summit de Databricks abre el lunes en Moscone, con un calendario de verano que cubre tracks de seguridad de computación confidencial y de chips de IA",
+      "bullets": [
+        {
+          "body": "El calendario de IA aún por venir que conviene tener en cuenta para asistir abarca tres tracks. Dev/datos mayoritario: el Databricks Data + AI Summit abre del 15 al 18 de junio en Moscone (más de 30.000 asistentes presenciales de más de 150 países; keynotes de los cofundadores Ali Ghodsi, Matei Zaharia, Arsalan Tavakoli-Shiraji y Reynold Xin, además de Greg Brockman de OpenAI, una charla grabada con Satya Nadella y los Chainsmokers en Oracle Park el 17 de junio), y la AI Engineer World's Fair transcurre del 29 de junio al 2 de julio en Moscone West, con tracks dedicados de Inference y Security. Seguridad de IA: el Confidential Computing Summit aterriza el 23-24 de junio en la San Francisco Mint (Linux Foundation y OPAQUE, sobre agentes confidenciales y flujos de trabajo de IA seguros, con ponentes de AMD, Google, Microsoft, NVIDIA, Samsung y UC Berkeley); el AI Risk Summit de SecurityWeek sigue el 11-12 de agosto en el Ritz-Carlton Half Moon Bay; en Las Vegas, el AI Summit de Black Hat USA (4 de agosto, dentro de la conferencia del 1 al 6 de agosto) y el AI Village de DEF CON anclan el calendario de red-teaming de agentes, con OWASP Global AppSec USA en San Francisco del 2 al 6 de noviembre; y el AI Agent Security Summit de Zenity, liderado por profesionales y que el usuario sigue, ha confirmado una expansión global en 2026 a Nueva York, Londres y APAC, con fechas que aún conviene vigilar. Chips/hardware de IA: el Advancing AI 2026 de AMD está fijado al 22-23 de julio en Moscone (se espera la disponibilidad de la serie Instinct MI400, con la presentación de la MI450 anticipada); Hot Chips 2026 ocupa el Memorial Auditorium de Stanford del 23 al 25 de agosto, con la inscripción anticipada abierta hasta el 31 de julio; y el AI Infra Summit transcurre del 15 al 17 de septiembre en el Santa Clara Convention Center (8.000 asistentes, más de 400 ponentes sobre cómputo, centros de datos de IA e IA física). Más adelante, GitHub Universe vuelve a Fort Mason el 28-29 de octubre y AWS re:Invent se celebra del 30 de noviembre al 4 de diciembre en Las Vegas.",
+          "citations": [
+            {"label": "Relve - Databricks Data + AI Summit 2026 (15-18 de junio, San Francisco)", "url": "https://relvehq.com/events/databricks-data-ai-summit"},
+            {"label": "Infosec-Conferences - Confidential Computing Summit 2026 (23-24 de junio)", "url": "https://infosec-conferences.com/event/20260623-confidential-computing-summit-2026/"},
+            {"label": "Hot Chips 2026 Registration - Stanford, 23-25 de agosto", "url": "https://hotchipssymposium.regfox.com/hot-chips-2026"}
+          ]
+        }
+      ]
+    }
+  ]
+}
