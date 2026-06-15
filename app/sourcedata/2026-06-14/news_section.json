@@ -1,0 +1,81 @@
+{
+  "date": "2026-06-14",
+  "sections": [
+    {
+      "category": "Local LLM fine-tuning: Unsloth ships a 150-PR release adding DiffusionGemma, Gemma 4 multi-token prediction, and quantization-aware training",
+      "bullets": [
+        {
+          "body": "Unsloth shipped its 2026.6.7 beta on June 12, a release the team says merged more than 150 pull requests and reworked Unsloth Studio with a new model Hub. The headline additions are support for running and training Google's text-diffusion model DiffusionGemma directly in Studio, Gemma 4 multi-token prediction (auto-enabled, for roughly 2x faster generation), audio chat for Gemma 4 (wav, mp3, m4a, flac, webm), and tensor parallelism for GGUFs that the team reports adds about 30% throughput. Studio also gained a Hub page for browsing and managing Hugging Face models and datasets and a Chat-with-Files mode with hybrid search and citations.",
+          "citations": [
+            {"label": "Unsloth (GitHub Discussions) - DiffusionGemma + Gemma 4 MTP release notes", "url": "https://github.com/unslothai/unsloth/discussions/6256"}
+          ]
+        },
+        {
+          "body": "On the training side the same cycle pushed quantization-aware training further: Unsloth reports Gemma 4 QAT runs with about 3x less memory while staying close to original accuracy, and the release improved local tool-calling reliability plus OpenAI- and Anthropic-compatible APIs, including Claude Code support and an in-app llama.cpp update path. The thrust is that the on-device fine-tuning stack is converging toward a single local app that handles diffusion-LM training, speculative decoding, and post-training quantization rather than a notebook-only library.",
+          "citations": [
+            {"label": "Unsloth - DiffusionGemma run-locally guide", "url": "https://unsloth.ai/docs/models/diffusiongemma"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI security meets silicon: Apple runs Private Cloud Compute on Google Cloud over confidential-computing Blackwell GPUs",
+      "bullets": [
+        {
+          "body": "Apple disclosed that it is extending Private Cloud Compute, its privacy-hardened inference infrastructure, to run on Google Cloud for the first time outside Apple-controlled data centers, with server-side inference for Apple Foundation Models executing on NVIDIA Blackwell GPUs running in confidential-computing mode. NVIDIA, in a June 9 post, described the security model as hardware-rooted trust on genuine, untampered GPUs plus encrypted communication paths and remote attestation, so the platform can cryptographically verify the infrastructure has not been tampered with before any sensitive data is sent. The combined stack pairs Blackwell confidential computing with Intel TDX CPUs and Google's Titan security chip into what Apple calls an end-to-end confidential inference pipeline.",
+          "citations": [
+            {"label": "NVIDIA Blog - NVIDIA Confidential Computing to help expand Apple's Private Cloud Compute", "url": "https://blogs.nvidia.com/blog/nvidia-confidential-computing-apple-private-cloud-compute/"},
+            {"label": "Apple Security Research - Expanding Private Cloud Compute", "url": "https://security.apple.com/blog/expanding-pcc/"}
+          ]
+        },
+        {
+          "body": "The arrangement keeps Apple in control of the trust boundary: devices will only trust software Apple cryptographically approves, a cryptographic ledger tracks every Google Cloud node in the PCC fleet, all PCC binaries are published for public inspection, and Apple's Security Bounty is extended to the Google-hosted nodes. The deployment ramps through a summer 2026 preview, with further technical detail expected at the Confidential Computing Summit on June 23-24. It is a concrete data point for the secure-AI-accelerator thesis: confidential-computing inference on attested, hardware-root-of-trust GPUs is now being used to put a frontier vendor's private inference onto a third party's data-center silicon.",
+          "citations": [
+            {"label": "Help Net Security - Apple extends Private Cloud Compute to Google Cloud", "url": "https://www.helpnetsecurity.com/2026/06/10/apple-private-cloud-compute-google-cloud-expansion/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "LLM research: agents are reframed as runtime-generated software, and a new benchmark probes whether their memory tracks a changing world",
+      "bullets": [
+        {
+          "body": "A June arXiv paper, Agentic Software: How AI Agents Are Restructuring the Software Paradigm (arXiv:2606.05608), argues that LLM agents constitute a fundamental restructuring of what software is: rather than code carrying pre-written decision logic, the agent itself is the software and its decision logic is generated at runtime, a shift the author frames as the move from licensed software to SaaS to agent-as-a-service. It is a conceptual companion to the week's tooling news, formalizing why coding agents that generate and discard code on the fly behave differently from deterministic programs.",
+          "citations": [
+            {"label": "arXiv - Agentic Software: How AI Agents Are Restructuring the Software Paradigm", "url": "https://arxiv.org/abs/2606.05608"}
+          ]
+        },
+        {
+          "body": "On the empirical side, EvoArena (arXiv:2606.13681, June 11) tests whether agents can keep their knowledge aligned as the environment changes, modeling change as sequences of progressive updates across terminal, software and social domains. Current agents do poorly, averaging 39.6% accuracy across these evolving settings; the authors propose EvoMem, a patch-based memory paradigm that records memory as structured update histories, and report it lifts EvoArena by 1.5% on average while also improving the standard GAIA and LoCoMo benchmarks by 6.1% and 4.8%. The result sharpens a recurring finding that static benchmarks overstate how robust long-running agents really are.",
+          "citations": [
+            {"label": "arXiv - EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments", "url": "https://arxiv.org/abs/2606.13681"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Stock prices and corporate activity: SpaceX completes the largest IPO on record, opening the 2026 AI-listing window",
+      "bullets": [
+        {
+          "body": "SpaceX began trading on the Nasdaq under ticker SPCX on June 12 at a fixed offering price of $135 a share, selling about 555.6 million shares to raise roughly $75 billion, the largest IPO in history. The stock jumped about 19-20% on its debut to close near $161, valuing the company above $2 trillion. The listing is notable for AI specifically because xAI sits inside the entity: Musk merged xAI (which had absorbed the X platform) into SpaceX in February in a deal that valued the combined group at $1.25 trillion, so SpaceX is the first of the megacap AI-adjacent names to clear the public market this cycle.",
+          "citations": [
+            {"label": "Deseret News - SpaceX rocks public market debut, stock pop drives new $2.1T valuation", "url": "https://www.deseret.com/business/2026/06/12/spacex-ipo-elon-musk-stock-market-debut-nasdaq-exchange-xai-tesla-star-trek-science-fiction-future/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI events to plan around now: Databricks' Data + AI Summit opens Monday at Moscone, with a summer calendar covering confidential-computing security and AI-chip tracks",
+      "bullets": [
+        {
+          "body": "The still-upcoming AI calendar worth planning attendance around spans three tracks. Mainstream dev/data: the Databricks Data + AI Summit opens June 15-18 across Moscone (30,000-plus in person from 150-plus countries; keynotes from co-founders Ali Ghodsi, Matei Zaharia, Arsalan Tavakoli-Shiraji and Reynold Xin, plus OpenAI's Greg Brockman, a recorded Satya Nadella fireside, and the Chainsmokers at Oracle Park on June 17), and the AI Engineer World's Fair runs June 29-July 2 at Moscone West with dedicated Inference and Security tracks. AI-security: the Confidential Computing Summit lands June 23-24 at the San Francisco Mint (Linux Foundation and OPAQUE, on confidential agents and secure AI workflows, with speakers from AMD, Google, Microsoft, NVIDIA, Samsung and UC Berkeley); SecurityWeek's AI Risk Summit follows August 11-12 at the Ritz-Carlton Half Moon Bay; in Las Vegas, Black Hat USA's AI Summit (August 4, inside the August 1-6 conference) and DEF CON's AI Village anchor the agentic red-teaming calendar, with OWASP Global AppSec USA in San Francisco November 2-6; and Zenity's practitioner-led AI Agent Security Summit, which the user tracks, has confirmed a 2026 global expansion to New York, London and APAC with dates still worth monitoring. AI-chip/hardware: AMD's Advancing AI 2026 is locked to July 22-23 at Moscone (Instinct MI400-series availability expected, with an MI450 unveil anticipated); Hot Chips 2026 takes Stanford's Memorial Auditorium August 23-25 with early registration open through July 31; and the AI Infra Summit runs September 15-17 at the Santa Clara Convention Center (8,000 attendees, 400-plus speakers across compute, AI data centers and physical AI). Further out, GitHub Universe returns to Fort Mason October 28-29 and AWS re:Invent runs November 30-December 4 in Las Vegas.",
+          "citations": [
+            {"label": "Relve - Databricks Data + AI Summit 2026 (June 15-18, San Francisco)", "url": "https://relvehq.com/events/databricks-data-ai-summit"},
+            {"label": "Infosec-Conferences - Confidential Computing Summit 2026 (June 23-24)", "url": "https://infosec-conferences.com/event/20260623-confidential-computing-summit-2026/"},
+            {"label": "Hot Chips 2026 Registration - Stanford, August 23-25", "url": "https://hotchipssymposium.regfox.com/hot-chips-2026"}
+          ]
+        }
+      ]
+    }
+  ]
+}

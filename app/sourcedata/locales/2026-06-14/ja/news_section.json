@@ -1,0 +1,81 @@
+{
+  "date": "2026-06-14",
+  "sections": [
+    {
+      "category": "ローカル LLM のファインチューニング:Unsloth が150件の PR を含むリリースを出荷し、DiffusionGemma、Gemma 4 のマルチトークン予測、量子化対応学習を追加",
+      "bullets": [
+        {
+          "body": "Unsloth は6月12日に 2026.6.7 ベータを公開した。チームによれば、このリリースは150件を超えるプルリクエストを統合し、新しいモデル Hub を備えた Unsloth Studio を作り直したという。主な追加点は、Google のテキスト拡散モデル DiffusionGemma を Studio 内で直接実行・学習できる機能、Gemma 4 のマルチトークン予測(自動有効化、生成が約2倍高速)、Gemma 4 の音声チャット(wav、mp3、m4a、flac、webm)、そしてチームが約30%のスループット向上を報告する GGUF 向けのテンソル並列だ。Studio には、Hugging Face のモデルやデータセットを閲覧・管理する Hub ページと、ハイブリッド検索および引用に対応した Chat-with-Files モードも加わった。",
+          "citations": [
+            {"label": "Unsloth (GitHub Discussions) - DiffusionGemma + Gemma 4 MTP release notes", "url": "https://github.com/unslothai/unsloth/discussions/6256"}
+          ]
+        },
+        {
+          "body": "学習面では、同じサイクルで量子化対応学習がさらに前進した。Unsloth の報告によれば、Gemma 4 の QAT は元の精度に近い水準を保ちながら約3分の1のメモリで動作する。さらにこのリリースは、ローカルのツール呼び出しの信頼性を改善し、OpenAI 互換・Anthropic 互換の API(Claude Code 対応とアプリ内の llama.cpp 更新経路を含む)も改善した。要点は、オンデバイスのファインチューニング基盤が、ノートブック専用のライブラリではなく、拡散言語モデルの学習・投機的デコーディング・学習後量子化を扱う単一のローカルアプリへと収束しつつあることだ。",
+          "citations": [
+            {"label": "Unsloth - DiffusionGemma run-locally guide", "url": "https://unsloth.ai/docs/models/diffusiongemma"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI セキュリティがシリコンと交わる:Apple が Private Cloud Compute を、機密コンピューティング対応の Blackwell GPU 上で Google Cloud 上にて実行",
+      "bullets": [
+        {
+          "body": "Apple は、プライバシーを強化した推論基盤である Private Cloud Compute を拡張し、Apple 管理外のデータセンターとして初めて Google Cloud 上で動かすことを明らかにした。Apple Foundation Models のサーバー側推論は、機密コンピューティングモードで動作する NVIDIA Blackwell GPU 上で実行される。NVIDIA は6月9日の投稿で、このセキュリティモデルを、本物で改ざんされていない GPU 上のハードウェアに根ざした信頼に、暗号化された通信経路とリモートアテステーションを加えたものと説明した。これにより、機密データを送る前にインフラが改ざんされていないことを暗号学的に検証できる。組み合わされた構成は、Blackwell の機密コンピューティングを Intel TDX CPU および Google の Titan セキュリティチップと結びつけ、Apple が言うエンドツーエンドの機密推論パイプラインを成す。",
+          "citations": [
+            {"label": "NVIDIA Blog - NVIDIA Confidential Computing to help expand Apple's Private Cloud Compute", "url": "https://blogs.nvidia.com/blog/nvidia-confidential-computing-apple-private-cloud-compute/"},
+            {"label": "Apple Security Research - Expanding Private Cloud Compute", "url": "https://security.apple.com/blog/expanding-pcc/"}
+          ]
+        },
+        {
+          "body": "この取り決めは、信頼境界における主導権を Apple に残す。端末は Apple が暗号学的に承認したソフトウェアしか信頼せず、暗号学的な台帳が PCC フリート内の Google Cloud の全ノードを追跡し、すべての PCC バイナリは公開検査のために公開され、Apple の Security Bounty も Google ホストのノードに及ぶ。この展開は2026年夏のプレビューを通じて段階的に拡大し、さらなる技術的な詳細は6月23~24日の Confidential Computing Summit で示される見込みだ。これは安全な AI アクセラレータという論点に対する具体的な裏付けである。証明済みでハードウェアの信頼の起点を備えた GPU 上での機密コンピューティング推論が、いまやフロンティアベンダーの非公開推論を第三者のデータセンターのシリコン上に置くために使われている。",
+          "citations": [
+            {"label": "Help Net Security - Apple extends Private Cloud Compute to Google Cloud", "url": "https://www.helpnetsecurity.com/2026/06/10/apple-private-cloud-compute-google-cloud-expansion/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "LLM 研究:エージェントを実行時生成のソフトウェアとして捉え直し、新ベンチマークがそのメモリが変化する世界に追従するかを検証",
+      "bullets": [
+        {
+          "body": "6月の arXiv 論文『Agentic Software: How AI Agents Are Restructuring the Software Paradigm』(arXiv:2606.05608)は、LLM エージェントがソフトウェアとは何かの根本的な再構成をなすと論じる。コードがあらかじめ書かれた判断ロジックを担うのではなく、エージェント自身がソフトウェアであり、その判断ロジックは実行時に生成される。著者はこれを、ライセンス販売型ソフトウェアから SaaS、そして agent-as-a-service への移行と位置づける。これは今週のツール関連ニュースの概念的な対をなし、コードをその場で生成しては捨てるコーディングエージェントが、なぜ決定論的なプログラムとは異なる振る舞いをするのかを定式化している。",
+          "citations": [
+            {"label": "arXiv - Agentic Software: How AI Agents Are Restructuring the Software Paradigm", "url": "https://arxiv.org/abs/2606.05608"}
+          ]
+        },
+        {
+          "body": "実証面では、EvoArena(arXiv:2606.13681、6月11日)が、環境が変化するにつれてエージェントが知識の整合を保てるかを検証する。変化を、ターミナル・ソフトウェア・ソーシャルの各領域にわたる段階的な更新の連なりとしてモデル化する。現行のエージェントの成績は振るわず、こうした変化していく状況での平均正答率は39.6%にとどまる。著者らは EvoMem を提案する。これはメモリを構造化された更新履歴として記録するパッチ方式のメモリ手法で、EvoArena を平均1.5%引き上げつつ、標準的な GAIA と LoCoMo のベンチマークもそれぞれ6.1%、4.8%改善したと報告されている。この結果は、静的なベンチマークは長時間動作するエージェントの頑健さを過大評価する、という繰り返し現れる指摘をいっそう鮮明にする。",
+          "citations": [
+            {"label": "arXiv - EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments", "url": "https://arxiv.org/abs/2606.13681"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "株価と企業動向:SpaceX が史上最大の IPO を完了し、2026年の AI 上場の窓を開く",
+      "bullets": [
+        {
+          "body": "SpaceX は6月12日、ティッカー SPCX で Nasdaq での取引を、1株135ドルの固定公開価格で開始した。約5億5,560万株を売り出しておよそ750億ドルを調達し、これは史上最大の IPO となった。株価は初日に約19~20%上昇して161ドル近くで引け、評価額は2兆ドル超となった。この上場が AI にとって特に注目されるのは、xAI が同社の内部にあるからだ。Musk は2月、(X プラットフォームを取り込んでいた)xAI を SpaceX に統合し、その取引は統合グループを1.25兆ドルと評価した。これにより SpaceX は、今サイクルで公開市場に到達した最初の超大型 AI 関連銘柄となった。",
+          "citations": [
+            {"label": "Deseret News - SpaceX rocks public market debut, stock pop drives new $2.1T valuation", "url": "https://www.deseret.com/business/2026/06/12/spacex-ipo-elon-musk-stock-market-debut-nasdaq-exchange-xai-tesla-star-trek-science-fiction-future/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま予定に入れておくべき AI イベント:Databricks の Data + AI Summit が月曜に Moscone で開幕し、夏の日程は機密コンピューティングのセキュリティと AI チップのトラックを網羅",
+      "bullets": [
+        {
+          "body": "出席を予定する価値がある、これから開かれる AI のカレンダーは3つのトラックにまたがる。主流の開発/データでは、Databricks Data + AI Summit が6月15~18日に Moscone 全域で開幕し(150か国超から3万人超が対面で参加。基調講演は共同創業者の Ali Ghodsi、Matei Zaharia、Arsalan Tavakoli-Shiraji、Reynold Xin に加え、OpenAI の Greg Brockman、録画による Satya Nadella の対談、そして6月17日に Oracle Park で The Chainsmokers)、AI Engineer World's Fair が6月29日~7月2日に Moscone West で開かれ、Inference と Security の専用トラックを設ける。AI セキュリティでは、Confidential Computing Summit が6月23~24日に San Francisco Mint で開催される(Linux Foundation と OPAQUE、機密エージェントと安全な AI ワークフローを扱い、登壇者は AMD、Google、Microsoft、NVIDIA、Samsung、UC Berkeley から)。SecurityWeek の AI Risk Summit が8月11~12日に Ritz-Carlton Half Moon Bay で続く。Las Vegas では、Black Hat USA の AI Summit(8月4日、8月1~6日の会期内)と DEF CON の AI Village が、エージェントのレッドチーミングの日程の柱となる。OWASP Global AppSec USA は11月2~6日に San Francisco で開かれる。さらに、ユーザーが注視している Zenity の実務者主導の AI Agent Security Summit は、New York、London、APAC への2026年のグローバル展開を確定しており、日程は引き続き注視する価値がある。AI チップ/ハードウェアでは、AMD の Advancing AI 2026 が7月22~23日に Moscone で確定している(Instinct MI400 シリーズの提供開始が見込まれ、MI450 の披露が予想される)。Hot Chips 2026 は8月23~25日に Stanford の Memorial Auditorium で開かれ、早期登録は7月31日まで受け付けている。AI Infra Summit は9月15~17日に Santa Clara Convention Center で開催される(8,000人の参加者、コンピュート・AI データセンター・フィジカル AI にわたる400人超の登壇者)。さらに先では、GitHub Universe が10月28~29日に Fort Mason へ戻り、AWS re:Invent が11月30日~12月4日に Las Vegas で開かれる。",
+          "citations": [
+            {"label": "Relve - Databricks Data + AI Summit 2026 (June 15-18, San Francisco)", "url": "https://relvehq.com/events/databricks-data-ai-summit"},
+            {"label": "Infosec-Conferences - Confidential Computing Summit 2026 (June 23-24)", "url": "https://infosec-conferences.com/event/20260623-confidential-computing-summit-2026/"},
+            {"label": "Hot Chips 2026 Registration - Stanford, August 23-25", "url": "https://hotchipssymposium.regfox.com/hot-chips-2026"}
+          ]
+        }
+      ]
+    }
+  ]
+}

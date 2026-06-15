@@ -1,0 +1,81 @@
+{
+  "date": "2026-06-14",
+  "sections": [
+    {
+      "category": "Lokal na LLM fine-tuning: naglunsad ang Unsloth ng isang 150-PR na release na nagdadagdag ng DiffusionGemma, Gemma 4 multi-token prediction, at quantization-aware training",
+      "bullets": [
+        {
+          "body": "Inilunsad ng Unsloth ang 2026.6.7 beta nito noong June 12, isang release na ayon sa team ay nagsama ng mahigit 150 pull request at nag-rework sa Unsloth Studio gamit ang bagong model Hub. Ang mga pangunahing dagdag ay ang suporta para sa pagpapatakbo at pagtuturo sa text-diffusion model na DiffusionGemma ng Google nang direkta sa Studio, Gemma 4 multi-token prediction (awtomatikong naka-enable, para sa halos 2x na mas mabilis na paglikha), audio chat para sa Gemma 4 (wav, mp3, m4a, flac, webm), at tensor parallelism para sa GGUFs na ayon sa team ay nagdaragdag ng halos 30% na throughput. Nagkaroon din ang Studio ng isang Hub page para sa pagba-browse at pamamahala ng mga modelo at dataset ng Hugging Face at isang Chat-with-Files mode na may hybrid search at mga citation.",
+          "citations": [
+            {"label": "Unsloth (GitHub Discussions) - DiffusionGemma + Gemma 4 MTP release notes", "url": "https://github.com/unslothai/unsloth/discussions/6256"}
+          ]
+        },
+        {
+          "body": "Sa panig ng training, itinulak pa ng parehong siklo ang quantization-aware training: iniulat ng Unsloth na tumatakbo ang Gemma 4 QAT nang may halos 3x na mas kaunting memory habang nananatiling malapit sa orihinal na katumpakan, at pinabuti ng release ang pagiging maaasahan ng lokal na tool-calling pati na ang mga API na tugma sa OpenAI at Anthropic, kasama ang suporta sa Claude Code at isang in-app na daan ng update ng llama.cpp. Ang diin ay ang on-device fine-tuning stack ay nagsasama-sama tungo sa isang lokal na app na humahawak sa diffusion-LM training, speculative decoding, at post-training quantization sa halip na isang library na para lamang sa notebook.",
+          "citations": [
+            {"label": "Unsloth - DiffusionGemma run-locally guide", "url": "https://unsloth.ai/docs/models/diffusiongemma"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Nagtatagpo ang AI security at silikon: pinapatakbo ng Apple ang Private Cloud Compute sa Google Cloud sa pamamagitan ng confidential-computing Blackwell GPUs",
+      "bullets": [
+        {
+          "body": "Ibinunyag ng Apple na pinalalawak nito ang Private Cloud Compute, ang infrastructure nito sa inference na pinatibay para sa privacy, upang tumakbo sa Google Cloud sa unang pagkakataon labas sa mga data center na kontrolado ng Apple, na ang server-side inference para sa Apple Foundation Models ay tumatakbo sa NVIDIA Blackwell GPUs na nasa confidential-computing mode. Inilarawan ng NVIDIA, sa isang post noong June 9, ang security model bilang hardware-rooted na tiwala sa tunay at hindi ginalaw na GPUs kasama ang mga naka-encrypt na daan ng komunikasyon at remote attestation, kaya cryptographically na napapatunayan ng platform na hindi ginalaw ang infrastructure bago ipadala ang anumang sensitibong datos. Pinagsasama ng kombinadong stack ang Blackwell confidential computing sa Intel TDX CPUs at sa Titan security chip ng Google tungo sa tinatawag ng Apple na isang end-to-end na confidential inference pipeline.",
+          "citations": [
+            {"label": "NVIDIA Blog - NVIDIA Confidential Computing to help expand Apple's Private Cloud Compute", "url": "https://blogs.nvidia.com/blog/nvidia-confidential-computing-apple-private-cloud-compute/"},
+            {"label": "Apple Security Research - Expanding Private Cloud Compute", "url": "https://security.apple.com/blog/expanding-pcc/"}
+          ]
+        },
+        {
+          "body": "Pinapanatili ng kaayusan ang Apple sa kontrol ng trust boundary: magtitiwala lamang ang mga device sa software na cryptographically inaaprubahan ng Apple, sinusubaybayan ng isang cryptographic ledger ang bawat node ng Google Cloud sa PCC fleet, inilalathala para sa pampublikong pagsusuri ang lahat ng PCC binaries, at pinalalawak sa mga node na naka-host sa Google ang Security Bounty ng Apple. Tumataas ang deployment sa pamamagitan ng isang preview sa tag-init ng 2026, na may higit pang teknikal na detalyeng inaasahan sa Confidential Computing Summit sa June 23-24. Isa itong konkretong datos para sa tesis ng secure-AI-accelerator: ginagamit na ngayon ang confidential-computing inference sa attested na GPUs na may hardware-root-of-trust upang ilagay ang pribadong inference ng isang frontier vendor sa silikon ng data center ng ibang partido.",
+          "citations": [
+            {"label": "Help Net Security - Apple extends Private Cloud Compute to Google Cloud", "url": "https://www.helpnetsecurity.com/2026/06/10/apple-private-cloud-compute-google-cloud-expansion/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Pananaliksik sa LLM: muling binalangkas ang mga agent bilang software na nililikha habang tumatakbo, at sinisiyasat ng bagong benchmark kung sumusubaybay ang kanilang memory sa nagbabagong mundo",
+      "bullets": [
+        {
+          "body": "Argumento ng isang June arXiv paper, Agentic Software: How AI Agents Are Restructuring the Software Paradigm (arXiv:2606.05608), na ang mga LLM agent ay bumubuo ng isang pundamental na muling pagbuo ng kung ano ang software: sa halip na code na may dalang nakasulat nang lohika ng pagpapasya, ang agent mismo ang software at ang lohika ng pagpapasya nito ay nililikha habang tumatakbo, isang paglipat na ibinabalangkas ng may-akda bilang ang paggalaw mula sa lisensyadong software tungo sa SaaS tungo sa agent-as-a-service. Isa itong konseptuwal na kasama ng balita sa tooling ng linggo, na nagpa-pormal kung bakit naiiba ang kilos ng mga coding agent na lumilikha at nagtatapon ng code habang tumatakbo kaysa sa mga deterministikong programa.",
+          "citations": [
+            {"label": "arXiv - Agentic Software: How AI Agents Are Restructuring the Software Paradigm", "url": "https://arxiv.org/abs/2606.05608"}
+          ]
+        },
+        {
+          "body": "Sa panig ng empirikal, sinusubok ng EvoArena (arXiv:2606.13681, June 11) kung kayang panatilihing magkatugma ng mga agent ang kaalaman nila habang nagbabago ang kapaligiran, na minomodelo ang pagbabago bilang mga sunud-sunod na update sa mga domain ng terminal, software at sosyal. Mahina ang mga kasalukuyang agent, na nag-aaverage ng 39.6% na katumpakan sa mga umuunlad na setting na ito; iminumungkahi ng mga may-akda ang EvoMem, isang patch-based na paradigm ng memory na nagtatala ng memory bilang mga istrukturadong kasaysayan ng update, at iniulat nilang itinataas nito ang EvoArena nang 1.5% sa karaniwan habang pinapabuti rin ang mga karaniwang benchmark na GAIA at LoCoMo nang 6.1% at 4.8%. Pinapatalas ng resulta ang paulit-ulit na natuklasang labis na ipinapalagay ng mga static na benchmark kung gaano talaga katibay ang mga matagal na tumatakbong agent.",
+          "citations": [
+            {"label": "arXiv - EvoArena: Tracking Memory Evolution for Robust LLM Agents in Dynamic Environments", "url": "https://arxiv.org/abs/2606.13681"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Presyo ng stock at aktibidad ng korporasyon: natapos ng SpaceX ang pinakamalaking IPO sa kasaysayan, na nagbubukas ng bintana ng AI-listing ng 2026",
+      "bullets": [
+        {
+          "body": "Nagsimulang mag-trade ang SpaceX sa Nasdaq sa ilalim ng ticker SPCX noong June 12 sa nakapirming offering price na $135 bawat share, na nagbenta ng humigit-kumulang 555.6 milyong shares upang makalikom ng halos $75 billion, ang pinakamalaking IPO sa kasaysayan. Tumalon ang stock nang mga 19-20% sa debut nito upang magsara malapit sa $161, na nagtatasa sa kompanya nang lampas $2 trillion. Kapansin-pansin ang listing para sa AI partikular dahil nasa loob ng entidad ang xAI: pinagsama ni Musk ang xAI (na nahigop na ang X platform) sa SpaceX noong February sa isang kasunduan na nagtaya sa pinagsamang grupo nang $1.25 trillion, kaya ang SpaceX ang una sa mga megacap na pangalang malapit sa AI na nakatawid sa pampublikong merkado sa siklong ito.",
+          "citations": [
+            {"label": "Deseret News - SpaceX rocks public market debut, stock pop drives new $2.1T valuation", "url": "https://www.deseret.com/business/2026/06/12/spacex-ipo-elon-musk-stock-market-debut-nasdaq-exchange-xai-tesla-star-trek-science-fiction-future/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mga AI event na dapat planuhin ngayon: bubukas sa Lunes sa Moscone ang Data + AI Summit ng Databricks, kasama ang isang kalendaryo ng tag-init na sumasaklaw sa confidential-computing security at mga AI-chip track",
+      "bullets": [
+        {
+          "body": "Ang darating pang kalendaryo ng AI na sulit planuhing dumalo ay sumasaklaw sa tatlong track. Mainstream na dev/data: bubukas ang Databricks Data + AI Summit sa June 15-18 sa buong Moscone (mahigit 30,000 nang personal mula sa mahigit 150 bansa; mga keynote mula sa mga co-founder na sina Ali Ghodsi, Matei Zaharia, Arsalan Tavakoli-Shiraji at Reynold Xin, kasama si Greg Brockman ng OpenAI, isang naitalang fireside ni Satya Nadella, at ang Chainsmokers sa Oracle Park noong June 17), at tumatakbo ang AI Engineer World's Fair sa June 29-July 2 sa Moscone West na may nakalaang Inference at Security track. AI-security: lalapag ang Confidential Computing Summit sa June 23-24 sa San Francisco Mint (Linux Foundation at OPAQUE, ukol sa confidential agents at secure AI workflows, na may mga tagapagsalita mula sa AMD, Google, Microsoft, NVIDIA, Samsung at UC Berkeley); susunod ang AI Risk Summit ng SecurityWeek sa August 11-12 sa Ritz-Carlton Half Moon Bay; sa Las Vegas, ang AI Summit ng Black Hat USA (August 4, sa loob ng kumperensyang August 1-6) at ang AI Village ng DEF CON ay nangunguna sa kalendaryo ng agentic red-teaming, kasama ang OWASP Global AppSec USA sa San Francisco sa November 2-6; at ang AI Agent Security Summit na pinangungunahan ng mga practitioner ng Zenity, na sinusubaybayan ng user, ay nagkumpirma ng isang pandaigdigang pagpapalawak sa 2026 sa New York, London at APAC na ang mga petsa ay sulit pa ring bantayan. AI-chip/hardware: nakatakda ang Advancing AI 2026 ng AMD sa July 22-23 sa Moscone (inaasahan ang availability ng Instinct MI400-series, na may inaasahang paglalantad ng MI450); kukunin ng Hot Chips 2026 ang Memorial Auditorium ng Stanford sa August 23-25 na bukas ang maagang rehistrasyon hanggang July 31; at tumatakbo ang AI Infra Summit sa September 15-17 sa Santa Clara Convention Center (8,000 dadalo, mahigit 400 tagapagsalita sa kabuuan ng compute, AI data center at physical AI). Mas malayo pa, babalik ang GitHub Universe sa Fort Mason sa October 28-29 at tumatakbo ang AWS re:Invent sa November 30-December 4 sa Las Vegas.",
+          "citations": [
+            {"label": "Relve - Databricks Data + AI Summit 2026 (June 15-18, San Francisco)", "url": "https://relvehq.com/events/databricks-data-ai-summit"},
+            {"label": "Infosec-Conferences - Confidential Computing Summit 2026 (June 23-24)", "url": "https://infosec-conferences.com/event/20260623-confidential-computing-summit-2026/"},
+            {"label": "Hot Chips 2026 Registration - Stanford, August 23-25", "url": "https://hotchipssymposium.regfox.com/hot-chips-2026"}
+          ]
+        }
+      ]
+    }
+  ]
+}
