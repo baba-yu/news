@@ -1,0 +1,41 @@
+{
+  "date": "2026-06-15",
+  "sections": [
+    {
+      "category": "エージェントのハーネス:Databricks が Omnigent をオープンソース化、Claude Code・Codex・エージェント SDK を一つのインターフェースの背後に束ねるメタハーネス",
+      "bullets": [
+        {
+          "body": "Databricks は6月13日、Omnigent を発表した。これはオープンソース(Apache 2.0、アルファ)のメタハーネスで、個々のコーディングエージェントやエージェント SDK の一段上に位置し、開発者が別々のツールを抱え込む代わりに、複数を一つの共通インターフェースから動かせるようにする。狙いは構成・制御・協働だ。コマンドライン型エージェント(Claude Code、Codex、Pi)と SDK(OpenAI Agents、Claude Agents SDK)を覆う共通インターフェースを設け、書き換えずに実装を差し替えられるようにする。状態を持ち文脈に応じたポリシーをメタハーネス層で適用してエージェントの動作を追跡し、コスト予算・権限・OS レベルのサンドボックス化といったガードレールを効かせる。さらに URL で共有できるライブのエージェントセッションにより、同僚がファイルを確認し、コメントを付け、同じ実行を一緒に操舵できる。セッションは Web・モバイル・macOS アプリ・API にまたがり、Modal と Daytona のサンドボックス上でのクラウド実行や、YAML で記述する複数ハーネスのエージェントにも対応する。このリリースは Data + AI Summit に合わせて登場したが、Databricks 専用機能としてではなく、GitHub 上の独立した OSS プロジェクトとして公開された。",
+          "citations": [
+            {"label": "Databricks Blog - Introducing Omnigent: A Meta-Harness to Combine, Control and Share Your Agents", "url": "https://www.databricks.com/blog/introducing-omnigent-meta-harness-combine-control-and-share-your-agents"},
+            {"label": "GitHub - omnigent-ai/omnigent", "url": "https://github.com/omnigent-ai/omnigent"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "ローカル LLM 最適化の研究:キャッシュ再生型 RL のレシピが、小型のツール呼び出しエージェントをわずかな計算量でフロンティア精度へ向けて学習",
+      "bullets": [
+        {
+          "body": "6月12日の arXiv 論文 CacheRL: Multi-Turn Tool-Calling Agents via Cached Rollouts and Hybrid Reward(arXiv:2606.14179)は、小型エージェントモデルのファインチューニングにおける実務上のボトルネックに取り組む。マルチターンのツール利用に対する強化学習は、通常、費用のかさむライブのツール実行を要する。CacheRL は代わりに、トラジェクトリの三層のあいまいキャッシュをトークン単位のマスキングを施して再生し、ライブの呼び出しを避ける。そしてこれを、キャッシュの階層を踏まえたハイブリッド報酬と組み合わせる。この報酬は回答品質の重み付けを動的に調整し、キャッシュ自身が持ち込んだ制約を理由にモデルが罰せられないようにする。著者らは、マルチステップのツール呼び出しのタスクでプロセス正答率92%を報告し、GPT-5 の報告値94%に迫りながら、計算量はおよそ100分の1だとする。さらに Qwen3-4B-Thinking の検証報酬を0.43から0.78へ引き上げており、アブレーションでは、知識転移を除くと41%低下し、キャッシュを踏まえた報酬が17%分寄与するとされる。これは、費用のかさむライブ実行の RL ループなしに、ツール呼び出しの能力を小型のオープンモデルへ蒸留する具体的なレシピである。",
+          "citations": [
+            {"label": "arXiv - CacheRL: Multi-Turn Tool-Calling Agents via Cached Rollouts and Hybrid Reward", "url": "https://arxiv.org/abs/2606.14179"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま予定に入れておくべき AI イベント:Databricks の Data + AI Summit が月曜に Moscone で開幕し、夏の日程は開発/データ・AI セキュリティ・AI チップのトラックにまたがる",
+      "bullets": [
+        {
+          "body": "出席を予定する価値がある、これから開かれるカレンダーは3つのトラックにまたがり、今週のライブの柱は主流の開発/データのイベントだ。主流の開発/データ:Databricks Data + AI Summit が本日開幕し、6月15~18日に San Francisco の Moscone 全域で開かれる(150か国超から3万人超が対面で参加。基調講演は共同創業者の Ali Ghodsi、Matei Zaharia、Arsalan Tavakoli-Shiraji、Reynold Xin に加え、OpenAI の Greg Brockman、録画による Satya Nadella の対談、そして OpenAI との複数日のハッカソン)。続いて AI Engineer World's Fair が6月29日~7月2日に Moscone West で、Inference と Security の専用トラックを設けて開かれる。AI セキュリティ:Confidential Computing Summit が6月23~24日に San Francisco Mint で開かれる(Linux Foundation と OPAQUE、機密エージェントと安全な AI ワークフローを扱う)。SecurityWeek の AI Risk Summit が8月11~12日に Ritz-Carlton Half Moon Bay で続く。Las Vegas では、Black Hat USA の AI Summit が、Mandalay Bay での8月1~6日の会期内に、DEF CON の AI Village と並んで置かれる。OWASP Global AppSec USA は11月5~6日に San Francisco で開かれる。さらに、ユーザーが注視している Zenity の実務者主導の AI Agent Security Summit は、2026年のグローバル展開を予定しており、New York・London・APAC の日程は引き続き発表待ちだ。AI チップ/ハードウェア:AMD の Advancing AI 2026 は7月23日に Moscone で確定している(Instinct/MI400 シリーズが焦点と見込まれる)。Hot Chips 2026 は8月23~25日に Stanford の Memorial Auditorium で開かれる。AI Infra Summit は9月15~17日に Santa Clara Convention Center で開かれる(コンピュート・AI データセンター・フィジカル AI にわたり8,000人超が参加)。さらに先では、GitHub Universe が10月28~29日に Fort Mason へ戻り、AWS re:Invent が11月30日~12月4日に Las Vegas で開かれる。",
+          "citations": [
+            {"label": "StorageNewsletter - Data + AI Summit 2026: Databricks Announces Keynote Lineup and Programming (June 15-18, San Francisco)", "url": "https://www.storagenewsletter.com/2026/06/15/data-ai-summit-2026-databricks-announces-keynote-lineup-and-programming-for-the-worlds-largest-data-and-ai-conference/"},
+            {"label": "AMD Investor Relations - AMD Announces Advancing AI 2026 (July 23, San Francisco Moscone)", "url": "https://ir.amd.com/news-events/press-releases/detail/1283/amd-announces-advancing-ai-2026"},
+            {"label": "Infosec-Conferences - OWASP Global AppSec USA 2026 (November 5-6, San Francisco)", "url": "https://infosec-conferences.com/event/20261105-owasp-global-appsec-usa-2026-conference/"}
+          ]
+        }
+      ]
+    }
+  ]
+}
