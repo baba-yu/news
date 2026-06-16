@@ -1,0 +1,52 @@
+{
+  "date": "2026-06-15",
+  "technical": [
+    {
+      "lead": "Databricks open-sources Omnigent, a meta-harness wrapping Claude Code, Codex and agent SDKs",
+      "body": "Databricks introduced Omnigent on June 13, an Apache 2.0 (alpha) open-source meta-harness that sits one layer above individual coding agents and agent SDKs so a developer drives several through one interface. It wraps command-line agents (Claude Code, Codex, Pi) and SDKs (OpenAI Agents, Claude Agents SDK) so implementations swap without rewriting, enforces stateful, contextual policy at the meta-harness layer (cost budgets, permissions, OS-level sandboxing), and exposes live agent sessions shareable by URL for teammates to review files, comment and steer the same run. Sessions span web, mobile, a macOS app and APIs, with cloud execution on Modal and Daytona sandboxes and multi-harness agents authored in YAML. It shipped as a standalone GitHub project (omnigent-ai/omnigent) alongside the Data + AI Summit rather than a Databricks-only feature.",
+      "citations": [
+        {"label": "Databricks Blog - Introducing Omnigent: A Meta-Harness to Combine, Control and Share Your Agents", "url": "https://www.databricks.com/blog/introducing-omnigent-meta-harness-combine-control-and-share-your-agents"},
+        {"label": "GitHub - omnigent-ai/omnigent", "url": "https://github.com/omnigent-ai/omnigent"}
+      ]
+    },
+    {
+      "lead": "CacheRL trains small tool-calling agents near frontier accuracy with cached rollouts at ~100x less compute",
+      "body": "A June 12 arXiv paper, CacheRL: Multi-Turn Tool-Calling Agents via Cached Rollouts and Hybrid Reward (arXiv:2606.14179), targets the most expensive part of fine-tuning small agent models: reinforcement learning over multi-turn tool use normally requires live tool execution thousands of times per batch. CacheRL replays a three-tier fuzzy cache of past trajectories with token-level masking to avoid live calls, and pairs it with a cache-tier-aware hybrid reward that reweights answer quality so the model is not penalized for limitations the cache introduces. The authors report 92% process accuracy on multi-step tool-calling, approaching GPT-5's reported 94%, while using roughly 100x less compute, and lift validation reward on Qwen3-4B-Thinking from 0.43 to 0.78; ablations credit a 41% drop to removing knowledge transfer and a 17% gain to the cache-aware reward. The result is a concrete recipe for distilling tool-calling competence into a small open model without a costly live-execution RL loop.",
+      "citations": [
+        {"label": "arXiv - CacheRL: Multi-Turn Tool-Calling Agents via Cached Rollouts and Hybrid Reward", "url": "https://arxiv.org/abs/2606.14179"}
+      ]
+    },
+    {
+      "lead": "Databricks Data + AI Summit opens Monday, anchoring a three-track summer AI calendar",
+      "body": "The Databricks Data + AI Summit opens today and runs June 15-18 across Moscone in San Francisco (30,000-plus in person from 150-plus countries; keynotes from co-founders Ali Ghodsi, Matei Zaharia, Arsalan Tavakoli-Shiraji and Reynold Xin, plus OpenAI's Greg Brockman, a recorded Satya Nadella fireside and a multi-day hackathon with OpenAI), anchoring a summer calendar across three tracks. Dev/data continues with the AI Engineer World's Fair June 29-July 2 at Moscone West (dedicated Inference and Security tracks). AI-security spans the Confidential Computing Summit June 23-24 at the San Francisco Mint, SecurityWeek's AI Risk Summit August 11-12, Black Hat USA's AI Summit inside the August 1-6 conference, and OWASP Global AppSec USA November 5-6. AI-chip/hardware spans AMD's Advancing AI 2026 on July 23 at Moscone (Instinct/MI400-series focus expected), Hot Chips 2026 at Stanford August 23-25, and the AI Infra Summit September 15-17 in Santa Clara.",
+      "citations": [
+        {"label": "StorageNewsletter - Data + AI Summit 2026: Databricks Announces Keynote Lineup and Programming (June 15-18, San Francisco)", "url": "https://www.storagenewsletter.com/2026/06/15/data-ai-summit-2026-databricks-announces-keynote-lineup-and-programming-for-the-worlds-largest-data-and-ai-conference/"},
+        {"label": "AMD Investor Relations - AMD Announces Advancing AI 2026 (July 23, San Francisco Moscone)", "url": "https://ir.amd.com/news-events/press-releases/detail/1283/amd-announces-advancing-ai-2026"},
+        {"label": "Infosec-Conferences - OWASP Global AppSec USA 2026 (November 5-6, San Francisco)", "url": "https://infosec-conferences.com/event/20261105-owasp-global-appsec-usa-2026-conference/"}
+      ]
+    },
+    {
+      "lead": "Omnigent looks set to become a paid Databricks-managed agent-orchestration tier by Q2 2027",
+      "body": "Omnigent shipped as a standalone Apache 2.0 OSS project (omnigent-ai/omnigent) alongside the Data + AI Summit rather than a Databricks-only feature, which reads as the opening move of an open-core go-to-market rather than a charity release - the same playbook that built Databricks around open-source Spark and Delta. Giving away the orchestration and policy layer seeds adoption and makes Omnigent the default control point a team standardizes on, while the durable revenue is the managed runtime, hosted execution, identity and governance underneath. The forward thesis: by Q2 2027 Databricks publicly offers a priced, Databricks-hosted Omnigent-based product - a managed runtime, hosted/cloud execution, or enterprise governance tier that is generally available or in paid preview, tied to Databricks-billed consumption (DBUs) or a subscription. The counter-risk is that Databricks keeps Omnigent purely community OSS and monetizes agents only through its existing Mosaic AI / Agent Bricks surface.",
+      "citations": [
+        {"label": "Databricks Blog - Introducing Omnigent: A Meta-Harness to Combine, Control and Share Your Agents", "url": "https://www.databricks.com/blog/introducing-omnigent-meta-harness-combine-control-and-share-your-agents"},
+        {"label": "GitHub - omnigent-ai/omnigent", "url": "https://github.com/omnigent-ai/omnigent"}
+      ]
+    },
+    {
+      "lead": "Meta-harness emerges as the cross-vendor policy plane for enterprise agents by H1 2027",
+      "body": "The structurally significant part of Omnigent is not its unified driver surface but where the guardrails live: it enforces stateful, contextual policy at the meta-harness layer itself, tracking each wrapped agent's actions and applying cost budgets, permissions and OS-level sandboxing across whichever runtime is underneath. That relocates the natural control point for enterprise agent governance upward, from per-runtime configuration scattered across each vendor's own harness to a single vendor-neutral layer that brokers, observes and constrains them all. The prediction: by H1 2027 at least one more independent vendor or hyperscaler ships an agent meta-harness whose headline capability is enforcing policy (budgets, permissions, sandboxing or audit) uniformly across two or more rival agent runtimes, or an enterprise-agent governance framework names the meta-harness layer as the prescribed policy-enforcement point. A single-vendor harness that only governs its own agents, or routing with no cross-runtime guardrail enforcement, would not count.",
+      "citations": [
+        {"label": "Databricks Blog - Introducing Omnigent: A Meta-Harness to Combine, Control and Share Your Agents", "url": "https://www.databricks.com/blog/introducing-omnigent-meta-harness-combine-control-and-share-your-agents"},
+        {"label": "GitHub - omnigent-ai/omnigent", "url": "https://github.com/omnigent-ai/omnigent"}
+      ]
+    }
+  ],
+  "plain": [
+    "Databricks frees a tool to run many AI agents as one",
+    "New trick trains tool-using AI 100x cheaper by reusing runs",
+    "Big Databricks summit kicks off a busy AI-event summer",
+    "Databricks may sell a paid hosted version of its agent tool",
+    "One tool could set shared safety rules for rival AI agents"
+  ]
+}
