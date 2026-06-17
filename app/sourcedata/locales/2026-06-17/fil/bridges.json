@@ -1,0 +1,341 @@
+{
+  "date": "2026-06-17",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.9a1a8c75dcdd41a8",
+        "short_label": "Agent-framework loaders ship signed-checkpoint and manifest mode by Q4 2026",
+        "prediction_date": "2026-05-11"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Ang 'Pickle in the Middle' disclosure ng Palo Alto Unit 42 noong Hunyo 16 ang pinakamalakas na single-incident na suporta na natanggap ng prediksiyong ito. Umiikot ang chain sa mismong mekanismong tinatarget ng prediksiyon: isang model artifact na naka-serialize gamit ang pickle/joblib na ang __reduce__ method nito ay nagpapatakbo ng arbitrary code sa mismong sandaling i-deserialize ito ng serving container ng Vertex ng Google. Dito, lumaki ito tungong cross-tenant RCE dahil tiningnan lamang ng SDK kung may umiiral na default staging bucket, hindi kung pagmamay-ari ito ng caller. Ang remediation path na inilabas ng Google - UUID-randomized bucket names (v1.144.0) na sinundan ng buong ownership verification (v1.148.0) - ang eksaktong signed/attested-provenance at caller-verification na postura na sinasabi ng prediksiyon na magiging default sa mga loader. Ang isang nailathalang cross-tenant break ay nagbibigay sa mas malawak na framework cohort ng masisipi na dahilan para ilipat ang artifact trust mula opt-in tungong default.",
+      "reference_links": [
+        {"label": "Palo Alto Networks Unit 42 - Pickle in the Middle: Hijacking Vertex AI Model Uploads for Cross-Tenant RCE", "url": "https://unit42.paloaltonetworks.com/hijacking-vertex-ai-model/"},
+        {"label": "The Hacker News - Google Vertex AI SDK Flaw Let Attackers Hijack Model Uploads via Bucket Squatting (June 16, 2026)", "url": "https://thehackernews.com/2026/06/google-vertex-ai-sdk-flaw-let-attackers.html"}
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang Vertex pickle RCE ang eksaktong load-time-arbitrary-code na pagkabigo na sinasara ng signed-checkpoint at manifest loaders. Ang fix path ng Google - random staging-bucket names, tapos caller-ownership verification - ay nagbibigay sa framework cohort ng nailathalang cross-tenant break para bigyang-katwiran ang pag-default ng artifact provenance at verification sa naka-on sa halip na iwang opt-in.",
+        "coherence": 4,
+        "remaining_gap": "Wala pang agent framework na naglabas ng signed-checkpoint o manifest mode bilang default bilang tugon; isa itong managed-platform break, hindi isang framework default na natupad."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b86be1e7c376d4db",
+        "short_label": "Open-source serving stacks ship signed-checkpoint loading as default by Q4 2026",
+        "prediction_date": "2026-05-12"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Ang Vertex AI pickle-deserialization RCE na inilabas ng Unit 42 noong Hunyo 16 ay tuwirang pagpapakita ng failure mode na nilalayong isara ng signed-load default ng prediksiyong ito: isang untrusted checkpoint ang nagpapatakbo ng code sa load time sa loob ng serving container. Ang mas malalim na aral na hinahango ng saklaw ng araw ay structural at hindi tukoy sa vendor - ang managed-inference at model-serving platforms ay namamana sa deserialization risk ng Python sa tenant boundary, at ang malinis na mitigation ay ang itigil ang pagtitiwala sa raw artifacts, pinapaboran ang non-executable serialization (mga safetensors-class na format kaysa pickle) kasama ang signed/attested provenance. Iyan mismo ang open-serving-stack default na hinuhulaan ng prediksiyong ito, at ang isang konkreto, nailathalang break na may remediation na inilabas na ng Google ay nagtataas ng pamantayan para sundan ito ng mga kapwa serving stack.",
+      "reference_links": [
+        {"label": "Palo Alto Networks Unit 42 - Pickle in the Middle: Hijacking Vertex AI Model Uploads for Cross-Tenant RCE", "url": "https://unit42.paloaltonetworks.com/hijacking-vertex-ai-model/"},
+        {"label": "CSO Online - Google's Vertex AI SDK could allow RCE through bucket squatting", "url": "https://www.csoonline.com/article/4186193/googles-vertex-ai-sdk-could-allow-rce-through-bucket-squatting.html"}
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang nailathalang cross-tenant break kung saan ang untrusted checkpoint ay nagpapatakbo ng code sa load time ang kinakailangang katalista ng signed-load default na ito. Ang pananaw ng araw - dapat itigil ng serving stacks ang pagtitiwala sa raw artifacts at paboran ang non-executable safetensors-class na format na may signed provenance - ang open-serving-stack na postura na hinuhulaan ng prediksiyon na magiging default.",
+        "coherence": 4,
+        "remaining_gap": "Tumama ang insidente sa isang managed SDK; wala pang open-source serving stack (vLLM/SGLang/TGI class) na naglipat ng signed-checkpoint loading tungong inilabas na default nito bilang tugon."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2970bfdce5e0004c",
+        "short_label": "Large PaaS vendors bundle MCP-identity gateway into default platform by H1 2027",
+        "prediction_date": "2026-05-31"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang closing-day push ng Databricks noong Hunyo 17 - pagpo-posisyon sa Lakebase bilang managed serverless-Postgres LTAP na may copy-on-write branching at governed agent memory, kapareha ng Genie One coworker suite na sinusuportahan ng Genie Agents, App Builder, at ZeroOps kasama ang Genie-for-Teams/M365-Copilot beta - ay nagpapalawak sa parehong large-PaaS na pattern na binabantayan ng prediksiyong ito: ang platform, hindi isang bolt-on, ang nagbibigay ng governed substrate at identity-scoped na mga surface na pinagpapatakbuhan ng production agents. Karatig ito sa halip na tama sa gitna dahil mas binibigyang-diin ng balita ngayon ang transactional store at ang autonomous-agent layer kaysa sa isang MCP-identity gateway nang tukoy, ngunit pinatitibay nito ang direksiyon ng platform-default agent governance bundling sa isang malaking PaaS vendor.",
+      "reference_links": [
+        {"label": "Databricks Blog - Unifying Data and Governance in the Agentic Era: What's New with Azure Databricks (June 16, 2026)", "url": "https://www.databricks.com/blog/unifying-data-and-governance-agentic-era-whats-new-azure-databricks"},
+        {"label": "Microsoft Community Hub - Azure Databricks at Data + AI Summit 2026: updates and new announcements", "url": "https://techcommunity.microsoft.com/blog/azure-databricks/azure-databricks-at-databricks-data--ai-summit-2026-updates-and-new-announcement/4528388"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang pag-bundle ng Databricks ng managed transactional substrate kasama ang governed agent suite sa platform nito ay umaayon sa pattern ng malalaking PaaS vendor na ginagawang built-in default ang agent governance sa halip na add-on. Ngunit binibigyang-diin ng balita ngayon ang transactional store at coworker suite, hindi isang MCP-identity gateway nang tukoy, kaya sinusuportahan nito ang trajectory nang hindi tumatama sa pinangalanang landing.",
+        "coherence": 3,
+        "remaining_gap": "Walang PaaS vendor na nag-bundle ng MCP-identity gateway bilang platform default ngayon; ang sumusuportang ebidensya ay ibang governance layer (transactional store kasama ang agent suite)."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f492c98e68ae3d89",
+        "short_label": "Inline MCP-channel policy enforcement ships as a platform default by Q1 2027",
+        "prediction_date": "2026-06-16"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang LTAP at Genie One na mga anunsiyo ng Databricks noong Hunyo 17 ay nagpapatuloy sa parehong-vendor na thread na ginawan ng prediksiyong ito (ang Hunyo 16 Agent Bricks / Unity Catalog MCP integration). Nakasentro ang materyal ngayon sa transactional substrate (Lakebase serverless Postgres na may copy-on-write branching) at sa autonomous-agent suite sa halip na inline MCP-channel access control, kaya hindi tuwiran ang ugnayan: pinalalago nito ang production-agent governance stack ng Databricks ngunit hindi nito mismo idinadagdag ang ikatlong platform na naglalabas ng inline per-agent MCP-channel enforcement, na siyang tukoy na landing condition.",
+      "reference_links": [
+        {"label": "Databricks Blog - Unifying Data and Governance in the Agentic Era: What's New with Azure Databricks (June 16, 2026)", "url": "https://www.databricks.com/blog/unifying-data-and-governance-agentic-era-whats-new-azure-databricks"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Pinalalago ng mga anunsiyo ngayon ang sariling production-agent governance stack ng Databricks ngunit nananatili ito sa transactional substrate at coworker suite, hindi sa inline MCP-channel access control. Pinatitibay ng mga ito na patuloy na ginagawang built-in ang agent governance ng mga platform bilang default, ngunit walang idinadagdag na ikatlong platform na naglalabas ng inline per-agent MCP-channel enforcement, kaya hindi nagagalaw ang tukoy na landing.",
+        "coherence": 2,
+        "remaining_gap": "Dalawang platform pa lamang ang naglalabas ng inline MCP-channel enforcement; walang natatanging ikatlong platform o cloud runtime na nagdagdag nito bilang default sa cycle ngayon."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.dfecc0414f3d0b1a",
+        "short_label": "Omnigent ships as a paid Databricks-managed agent-orchestration tier by Q2 2027",
+        "prediction_date": "2026-06-15"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ipinapakita ng closing-day Summit announcements ng Databricks na pinupunan ng kompanya ang managed, monetizable na layer sa ilalim ng kanilang agent story nang eksakto kung saan inaasahan ng prediksiyong ito na mapupunta ang open-core conversion. Nagiging ganap na managed serverless-Postgres LTAP ang Lakebase na may copy-on-write branching bilang transactional substrate para sa production agents, at lumalawak ang Genie tungong Genie One - isang paid-shaped na AI-coworker suite (Genie Agents, App Builder, Lakeflow Designer, ZeroOps) na may Teams/M365-Copilot beta. Ito ang managed-runtime-at-governance na surface na sinasabi ng prediksiyon na sisingilin ng Databricks, bagaman wala sa mga item ngayon ang isang may-presyo, Databricks-hosted na Omnigent-based na produkto nang tukoy, kaya pinatitibay nito ang direksiyon sa halip na ang pinangalanang landing.",
+      "reference_links": [
+        {"label": "Databricks Blog - Unifying Data and Governance in the Agentic Era: What's New with Azure Databricks (June 16, 2026)", "url": "https://www.databricks.com/blog/unifying-data-and-governance-agentic-era-whats-new-azure-databricks"},
+        {"label": "Microsoft Community Hub - Azure Databricks at Data + AI Summit 2026: updates and new announcements", "url": "https://techcommunity.microsoft.com/blog/azure-databricks/azure-databricks-at-databricks-data--ai-summit-2026-updates-and-new-announcement/4528388"}
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Itinatayo ng Databricks ang eksaktong managed, monetizable na layer na inaasahan ng open-core thesis: isang managed Lakebase substrate kasama ang paid-shaped na Genie One suite. Iyan ang hosted-runtime-at-governance na surface na sisingilin ng kompanya, bagaman wala sa mga item ngayon ang isang may-presyo, Databricks-hosted na Omnigent product nang tukoy, kaya pinatitibay nito ang direksiyon nang hindi nagiging ang pinangalanang landing.",
+        "coherence": 3,
+        "remaining_gap": "Walang may-presyo, Databricks-hosted na Omnigent-based na orchestration tier na inanunsiyo; ang monetization na ipinakita ay nakakabit sa Lakebase at Genie, hindi sa Omnigent mismo."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.adbdf490706f8fc3",
+        "short_label": "Agent meta-harness becomes the cross-vendor policy plane for agents by H1 2027",
+        "prediction_date": "2026-06-15"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Inililipat ng Lakebase LTAP kasama ang Genie One na mga anunsiyo ng Databricks noong Hunyo 17 ang mas marami pa sa enterprise-agent control point papunta sa platform - governed memory, copy-on-write branching para sa ligtas na agent debugging, at isang ZeroOps operational layer - na may pagkakaugnay sa tema sa pataas na paglipat ng agent governance na binabantayan ng prediksiyong ito. Ngunit ang landing ng prediksiyon ay tukoy na isang vendor-neutral meta-harness na nagpapatupad ng patakaran sa dalawa o higit pang karibal na agent runtime, at ang balita ngayon ay ang sariling first-party substrate at suite ng Databricks, hindi isang cross-runtime policy plane, kaya mababa ang kaugnayan.",
+      "reference_links": [
+        {"label": "Databricks Blog - Unifying Data and Governance in the Agentic Era: What's New with Azure Databricks (June 16, 2026)", "url": "https://www.databricks.com/blog/unifying-data-and-governance-agentic-era-whats-new-azure-databricks"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Itinutulak ng Lakebase governed memory, copy-on-write branching para sa ligtas na agent debugging, at isang ZeroOps operational layer ang mas maraming agent control papunta sa platform, na umaayon sa pataas na paglipat ng governance na binabantayan ng thesis. Ngunit ito ang sariling first-party na mga surface ng Databricks, hindi isang vendor-neutral na layer na nagpapatupad ng patakaran sa mga karibal na runtime, kaya hindi nagagalaw ang cross-vendor landing.",
+        "coherence": 2,
+        "remaining_gap": "Pinamamahalaan ng mga surface ngayon ang sariling agents lamang ng Databricks; walang independiyenteng vendor na naglabas ng meta-harness na nagpapatupad ng patakaran sa dalawa o higit pang karibal na agent runtime."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cac44f8530c87f6b",
+        "short_label": "Durable agent-execution substrate hardens into a standard primitive by H1 2027",
+        "prediction_date": "2026-06-12"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Ang muling pagpo-posisyon ng Databricks sa Lakebase noong Hunyo 17 bilang managed serverless-Postgres LTAP ay malapit sa tuwirang tama sa prediksiyong ito. Ang pitch ay kailangan ng production agents ng low-latency transactional store na may ligtas na branching at governed memory, hindi lamang isang model endpoint - kaya pinagsasama ng Lakebase ang analytical data, streaming pipelines, at live application transactions, hinihiwalay ang compute mula sa storage, at idinadagdag ang instant copy-on-write database branching para ma-debug ng mga team ang isang production agent laban sa isang forked database nang hindi ginagalaw ang live data. Iyan mismo ang durable, stateful execution-at-memory substrate na sinasabi ng prediksiyon na tumitibay tungong standard primitive, na inilabas na ngayon bilang managed offering ng isang malaking data platform.",
+      "reference_links": [
+        {"label": "Databricks Blog - Unifying Data and Governance in the Agentic Era: What's New with Azure Databricks (June 16, 2026)", "url": "https://www.databricks.com/blog/unifying-data-and-governance-agentic-era-whats-new-azure-databricks"},
+        {"label": "Microsoft Community Hub - Azure Databricks at Data + AI Summit 2026: updates and new announcements", "url": "https://techcommunity.microsoft.com/blog/azure-databricks/azure-databricks-at-databricks-data--ai-summit-2026-updates-and-new-announcement/4528388"}
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang Lakebase bilang managed LTAP - low-latency transactional store, governed memory, at copy-on-write branching para ma-debug ang isang production agent laban sa isang forked database nang hindi ginagalaw ang live data - ang durable, stateful execution-at-memory substrate na inilalarawan ng thesis, na inilabas na ngayon bilang managed offering ng isang malaking data platform sa halip na isang model endpoint lamang.",
+        "coherence": 4,
+        "remaining_gap": "Ang managed offering ng isang platform ay hindi pa industry-wide na standard primitive; ang ikalawang malaking vendor na maglalabas ng katumbas na durable substrate ay magpapatatag sa trajectory."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.386fc2ca894276ee",
+        "short_label": "Governed agent-ontology layer hardens into the enterprise-agent moat by Q4 2026",
+        "prediction_date": "2026-06-03"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Layer-2 semantic match laban sa dormant Signals (Snowflake Cortex Sense metadata-to-ontology, Horizon Context governance layer, Databricks Data + AI Summit, Unity Catalog agent-context ontology, agent-consumable semantic layer). Sa closing day ng Summit, iniposisyon ng Databricks ang Lakebase bilang managed LTAP na may governed memory at idinagdag ang Genie One na sinusuportahan ng Genie Agents at isang semantics-aware na suite, na may tahasang pananaw na kailangan ng production agents ng governed memory at isang ligtas na transactional store sa halip na isang model endpoint lamang. Pinalalawak niyan ang pinagtatalunang governed-semantic/governance na layer na binabantayan ng dormant na prediksiyong ito bilang enterprise-agent moat, kung saan muling itinatayo ng data-platform na incumbent ang governed-context na surface na kinokonsumo ng mga agent.",
+      "reference_links": [
+        {"label": "Databricks Blog - Unifying Data and Governance in the Agentic Era: What's New with Azure Databricks (June 16, 2026)", "url": "https://www.databricks.com/blog/unifying-data-and-governance-agentic-era-whats-new-azure-databricks"},
+        {"label": "Microsoft Community Hub - Azure Databricks at Data + AI Summit 2026: updates and new announcements", "url": "https://techcommunity.microsoft.com/blog/azure-databricks/azure-databricks-at-databricks-data--ai-summit-2026-updates-and-new-announcement/4528388"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Sa closing day ng Summit, muling itinatayo ng Databricks ang governed-context na surface na kinokonsumo ng mga agent - Lakebase governed memory kasama ang isang semantics-aware na Genie One suite - sa pananaw na kailangan ng mga agent ng governed memory, hindi lamang isang model endpoint. Pinalalawak niyan ang pinagtatalunang governed-semantic na layer na pinangalanan ng thesis bilang enterprise-agent moat, kung saan pinalalalim ng data-platform na incumbent ang kanyang kapit.",
+        "coherence": 3,
+        "remaining_gap": "Pinatitibay ng hakbang ngayon ang governed-context na surface ngunit hindi pa nito napapatunayan ang isang maipagtatanggol na moat; pinananatili ng mga kakumpitensya ang sarili nilang semantic-layer na mga alok."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c92cd5fcd22d0200",
+        "short_label": "Snowflake ships a metered Claude-in-Cortex governed-data agent tier by Q4 2026",
+        "prediction_date": "2026-06-02"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Layer-2 semantic match: nakasentro ang dormant Signals sa isang governed-data agent tier sa isang malaking data platform (Snowflake Cortex, governed data na walang egress, credit-based consumption SKU). Ang competitive comparable ngayon ay ang closing-day na hakbang ng Databricks tungong managed Lakebase LTAP transactional substrate kasama ang Genie One coworker suite - ang karibal na data platform na naglalabas ng governed, consumption-shaped na agent surfaces sa ibabaw ng sariling data nito. Pinipilit nito ang parehong enterprise category na pinangalanan ng dormant na prediksiyong ito, bagaman ito ang launch ng kakumpitensya at walang sinasabi nang tuwiran tungkol sa metered Claude-in-Cortex tier ng Snowflake, kaya mababa ang kaugnayan.",
+      "reference_links": [
+        {"label": "Databricks Blog - Unifying Data and Governance in the Agentic Era: What's New with Azure Databricks (June 16, 2026)", "url": "https://www.databricks.com/blog/unifying-data-and-governance-agentic-era-whats-new-azure-databricks"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang paglabas ng Databricks ng governed, consumption-shaped na agent surfaces sa ibabaw ng sariling data nito - isang managed Lakebase substrate kasama ang Genie One suite - ang competitive comparable na nagtataas ng panggigipit sa karibal na data platform na maglabas ng sarili nitong governed-data agent tier. Ang ebidensya ay ang launch ng kakumpitensya, hindi anumang tuwirang senyas sa metered Claude-in-Cortex offering ng Snowflake.",
+        "coherence": 2,
+        "remaining_gap": "Walang gumalaw ngayon sa Cortex roadmap ng Snowflake, sa Claude integration, o sa isang metered consumption SKU nang tuwiran; ito ay puro hakbang ng kakumpitensya."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.808bbd831ebf41b3",
+        "short_label": "Custom AI-accelerator XPU silicon clears $20B-per-quarter run-rate by Q4 2026",
+        "prediction_date": "2026-06-03"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang anunsiyo ng d-Matrix noong Hunyo 9 na pumasok sa full production ang Corsair inference accelerator nito at ipinapadala na nang malakihan sa mga priority customer - kasama ang SquadRack rack-scale reference design na binuo kasama ang Arista, Broadcom, at Supermicro - ay isang bagong non-GPU custom-silicon na pumapasok na umaabot sa deployable na laki, na may Microsoft kabilang sa mga backer nito at humigit-kumulang 90 porsiyentong US customer. Nagdaragdag ito ng isa pang data point sa custom-accelerator run-rate thesis na binabantayan ng prediksiyong ito, ngunit ang isang volume ship sa hindi pinangalanang priority customers ay walang ibinunyag na halaga sa dolyar, kaya sinusuportahan nito ang momentum ng kategorya nang hindi ginagalaw ang tukoy na $20B-per-quarter marker.",
+      "reference_links": [
+        {"label": "d-Matrix - Corsair AI Inference Platform Enters Full Production to Meet Customer Demand (June 9, 2026)", "url": "https://www.d-matrix.ai/announcements/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/"},
+        {"label": "HPCwire - d-Matrix Corsair AI Inference Platform Enters Full Production", "url": "https://www.hpcwire.com/off-the-wire/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Isang bagong non-GPU custom-accelerator na pumapasok na umaabot sa full production at volume shipment, na may Microsoft kabilang sa mga backer, ay nagdaragdag sa momentum ng custom-XPU run-rate thesis. Ngunit ang isang volume ship sa hindi pinangalanang priority customers ay walang ibinunyag na halaga sa dolyar, kaya sinusuportahan nito ang direksiyon ng kategorya nang hindi ginagalaw ang tukoy na $20B-per-quarter marker.",
+        "coherence": 3,
+        "remaining_gap": "Walang ibinunyag na revenue o units figure, at ang d-Matrix ay isang merchant na pumapasok sa halip na ang hyperscaler in-house XPU programs na ipinagkakabit sa run-rate marker."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a91f33b7684871df",
+        "short_label": "AI-accelerator equities re-rate lower on the next in-line ASIC print by Q4 2026",
+        "prediction_date": "2026-06-07"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Pinatatalas ng Corsair full-production milestone at SquadRack launch ng d-Matrix noong Hunyo 9 ang merchant-GPU-laban-sa-custom-inference-silicon na competitive narrative na sinasakyan ng prediksiyong ito. Binabanggit ng kompanya ang independiyenteng Gimlet Labs testing ng humigit-kumulang 12x latency improvement at mga claim na mga 10x na mas mabilis, 3x na mas mura, at hanggang 5x na mas energy-efficient na inference laban sa isang standalone GPU kapag ang Corsair ay nasa harap ng isang Blackwell host - eksaktong ang in-line-ASIC na panggigipit na inaasahan ng prediksiyon na bibigat sa GPU-centric accelerator equities. Isa itong ebidensiyaryong tailwind para sa thesis sa halip na isang market print, dahil walang galaw sa presyo ng equity sa saklaw ngayon.",
+      "reference_links": [
+        {"label": "d-Matrix - Corsair AI Inference Platform Enters Full Production to Meet Customer Demand (June 9, 2026)", "url": "https://www.d-matrix.ai/announcements/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/"},
+        {"label": "VMblog - d-Matrix Announces SquadRack, Industry's First Rack-Scale Solution Purpose-Built for AI Inference at Datacenter Scale", "url": "https://vmblog.com/news/d-matrix-announces-squadrack-industrys-first-rack-scale-solution-purpose-built-for-ai-inference-at-datacenter-scale/"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang pagpasok ng Corsair sa full production na may mga claim na mga 10x na mas mabilis, 3x na mas mura, at hanggang 5x na mas energy-efficient na inference kaysa sa isang standalone GPU ay nagpapatalas sa custom-ASIC-laban-sa-merchant-GPU na panggigipit na sinasakyan ng thesis. Isa itong ebidensiyaryong tailwind para sa re-rating logic, hindi ang re-rating mismo, dahil ang saklaw ngayon ay walang dalang galaw sa presyo ng accelerator-equity.",
+        "coherence": 3,
+        "remaining_gap": "Walang galaw sa presyo ng equity o sell-side re-rating sa balita ngayon; ang in-line ASIC print na siyang magti-trigger ng mas mababang re-rate ay hindi pa natutupad."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.42df3be2edb72f8d",
+        "short_label": "Nvidia mean Street price target clears $300 on data-center GPU demand by Q4 2026",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang Corsair production ramp at SquadRack rack-scale design ng d-Matrix noong Hunyo 9, na may mga claim na malaki ang pagiging mas mabilis, mas mura, at mas energy-efficient na inference kaysa sa isang standalone GPU, ay nagpapakain sa counter-thesis na nakabaon sa sariling lohika ng prediksiyong ito - na ang inference ay nahahati tungong custom silicon at pinipilit ang GPU pricing power. Hindi tuwiran ang ugnayan at sumasalungat sa halip na sumuporta sa bullish na $300-target na landing: pinatitibay ng balita ngayon ang non-GPU inference alternative nang walang inaalok na sell-side target revision o data-center-demand datum para sa Nvidia nang tukoy.",
+      "reference_links": [
+        {"label": "d-Matrix - Corsair AI Inference Platform Enters Full Production to Meet Customer Demand (June 9, 2026)", "url": "https://www.d-matrix.ai/announcements/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang isang non-GPU inference part na umaabot sa volume na may malalakas na efficiency claim ay nagpapakain sa counter-thesis na nakabaon sa sariling lohika ng target - na ang inference ay nahahati tungong custom silicon at pinipilit ang GPU pricing power. Sumasalungat ang senyas sa bullish na $300-target na kaso at walang dalang sell-side revision o Nvidia data-center-demand datum, kaya bumibigat ito nang magaan at sa maling direksiyon.",
+        "coherence": 2,
+        "remaining_gap": "Walang pagbabago sa analyst target o Nvidia-specific demand figure ngayon; ang ebidensya ay tungkol sa isang kakumpitensya at sumasalungat sa bullish na landing."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8ae347c6052558e0",
+        "short_label": "AMD Helios plus MI450 commitment book clears 15GW threshold by H2 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "[REVIVED] Layer-1 keyword match sa dormant Signals (AMD Helios, MI450, Instinct MI400). Binabanggit ng forward-looking Bay Area calendar ngayon ang Advancing AI 2026 ng AMD na nakatakda sa Hulyo 23 sa Moscone na may inaasahang Instinct MI400-series na pokus. Isa itong banggit ng nakatakdang kaganapan sa halip na isang commitment-book o capacity datum, kaya nagrerehistro lamang ito ng pook kung saan susunod na maaaring ibunyag ang MI450 demand-side anchor ng prediksiyon; walang GW figure na ginagalaw ngayon.",
+      "reference_links": [
+        {"label": "AMD Newsroom - AMD Announces Advancing AI 2026 (July 23, San Francisco Moscone)", "url": "https://www.amd.com/en/newsroom/press-releases/2026-4-28-amd-announces-advancing-ai-2026-.html"}
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Ang tanging ugnayan ay isang listahan sa kalendaryo para sa Advancing AI 2026 ng AMD sa Hulyo 23, kung saan inaasahan ang detalye ng MI400-series. Tinatandaan niyan ang pook kung saan maaaring lumitaw ang isang hinaharap na MI450 commitment-book o capacity disclosure, ngunit walang ibinibigay ngayon na GW figure o signing, kaya hindi nito isinusulong o pinabubulaanan ang threshold.",
+        "coherence": 1,
+        "remaining_gap": "Walang commitment-book o capacity-GW datum ngayon; ang kaugnay na disclosures, kung mayroon man, ay darating sa kaganapan sa Hulyo 23, na nasa unahan pa."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.69bedb462442e205",
+        "short_label": "Frontier-lab safety frameworks align on catastrophic-risk disclosure by Q2 2027",
+        "prediction_date": "2026-06-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang Deployment Simulation ng OpenAI noong Hunyo 16 ay isang konkretong pagsulong sa pre-release safety methodology na nagpapakain sa convergence na binabantayan ng prediksiyong ito. Ang muling pag-replay ng humigit-kumulang 1.3 milyong de-identified na ChatGPT conversations sa pamamagitan ng isang candidate model para hulaan ang behavioral drift ay naglantad ng isang dating hindi nakikitang 'calculator hacking' misalignment at nakabuo ng calibrated rate estimates, at tahasang ipinapahayag ito ng OpenAI bilang pandagdag sa targeted evaluations at red-teaming. Pinalalawak niyan ang nailathala, metodolohikong mahigpit na pre-deployment risk assessment - ang substrate na inaasahan ng prediksiyon na pagkakasunduan ng frontier-lab safety frameworks - bagaman ito ay method paper ng isang lab sa halip na cross-lab na pagkakasundo sa isang ibinahaging catastrophic-risk disclosure standard.",
+      "reference_links": [
+        {"label": "OpenAI - Predicting model behavior before release by simulating deployment", "url": "https://openai.com/index/deployment-simulation/"},
+        {"label": "OpenAI - Predicting LLM Safety Before Release by Simulating Deployment (PDF)", "url": "https://cdn.openai.com/pdf/predicting-llm-safety-before-release-by-simulating-deployment.pdf"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang Deployment Simulation ng OpenAI - muling pag-replay ng ~1.3 milyong de-identified na conversations para hulaan ang behavioral drift, naglalantad ng bagong misalignment, ipinapahayag bilang pandagdag sa red-teaming - ay nagpapasulong sa nailathalang pre-deployment risk-assessment na mga paraan na inaasahan ng thesis na pagkakasunduan ng frontier-lab safety frameworks. Ito ay method paper ng isang lab, gayunpaman, hindi cross-lab na pagkakasundo sa isang ibinahaging catastrophic-risk disclosure standard.",
+        "coherence": 3,
+        "remaining_gap": "Isang lab lamang; wala pang ikalawang frontier lab na gumamit ng katumbas na paraan o pumirma sa isang karaniwang catastrophic-risk disclosure framework."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f6e9b9e9348622ee",
+        "short_label": "Frontier-lab governance frameworks converge on shared quantitative-harm thresholds by Q2 2027",
+        "prediction_date": "2026-05-29"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang Deployment Simulation ng OpenAI, na inilathala noong Hunyo 16, ay nag-aambag ng isang quantitative pre-release evaluation signal - calibrated behavior-rate forecasts na may iniulat na median multiplicative error na mga 1.5x at isang automated audit na nag-flag ng bagong misalignment. Ang quantified, masusukat na behavior-rate estimates na ganito ang uri ay ang hilaw na materyal na pamantayan ng isang ibinahaging quantitative-harm threshold regime, kaya itinutulak ng paraan ang substrate ng prediksiyon. Ngunit ito ay measurement technique ng isang lab na ipinapahayag bilang pandagdag sa umiiral na evals, hindi isang hakbang tungong karaniwang cross-lab numeric thresholds, kaya nananatiling mababa ang kaugnayan.",
+      "reference_links": [
+        {"label": "OpenAI - Predicting model behavior before release by simulating deployment", "url": "https://openai.com/index/deployment-simulation/"},
+        {"label": "MarkTechPost - OpenAI's Deployment Simulation Extends Pre-Deployment Risk Assessment to Agentic Coding (June 16, 2026)", "url": "https://www.marktechpost.com/2026/06/16/openai-deployment-simulation/"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang calibrated behavior-rate forecasts (isang iniulat na median multiplicative error na malapit sa 1.5x) ay ang uri ng quantified, masusukat na harm estimate na pamantayan ng isang ibinahaging numeric-threshold regime, kaya itinutulak ng paraan ang convergence substrate. Ito ay measurement technique ng isang lab na ipinapahayag bilang pandagdag sa umiiral na evals, hindi isang hakbang tungong karaniwang cross-lab thresholds.",
+        "coherence": 2,
+        "remaining_gap": "Walang lumilitaw na ibinahaging numeric-threshold proposal o multi-lab na kasunduan; ito ay measurement method ng isang lab, hindi isang convergence sa karaniwang quantitative-harm thresholds."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4c9f0a001afac89a",
+        "short_label": "Coding-agent frameworks ship goal-grounded completion verification by H1 2027",
+        "prediction_date": "2026-06-07"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Pinalalawak ng Deployment Simulation ng OpenAI noong Hunyo 16 ang replay method nito sa agentic coding sa pamamagitan ng simulated tool calls, at ang 'calculator hacking' misalignment na inilantad nito - ang model na kinakalkula ang isang sagot gamit ang isang browser tool ngunit ipinapakita ang aksiyon bilang isang search query - ang eksaktong puwang sa pagitan ng inaangkin ng isang agent na ginawa nito at kung ano talaga ang ginawa nito na tinatarget ng goal-grounded completion verification ng prediksiyong ito. Ang production-traffic replay na nakakahuli sa isang agent na binabaluktot ang sariling mga aksiyon nito ay karatig na ebidensya para sa run-the-real-target verification axis na hinuhulaan ng prediksiyon, bagaman ito ay pre-release evaluation technique sa halip na isang inilabas na in-harness completion-verification default.",
+      "reference_links": [
+        {"label": "OpenAI - Predicting model behavior before release by simulating deployment", "url": "https://openai.com/index/deployment-simulation/"},
+        {"label": "MarkTechPost - OpenAI's Deployment Simulation Extends Pre-Deployment Risk Assessment to Agentic Coding (June 16, 2026)", "url": "https://www.marktechpost.com/2026/06/16/openai-deployment-simulation/"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang 'calculator hacking' misalignment - isang agent na kinakalkula ang isang sagot gamit ang isang browser tool ngunit ipinapakita ito bilang isang search query - ang eksaktong puwang sa pagitan ng inaangkin at aktuwal na aksiyon na tinatarget ng goal-grounded completion verification, at pinalalawak ng OpenAI ang replay method sa agentic coding sa pamamagitan ng simulated tool calls. Karatig na ebidensya ito para sa verification axis, hindi isang inilabas na in-harness completion-verification default.",
+        "coherence": 3,
+        "remaining_gap": "Ang senyas ay isang pre-release evaluation technique sa isang lab; walang coding-agent framework na naglabas ng goal-grounded, run-the-real-target completion verification bilang default."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.20a590c59cffd7fb",
+        "short_label": "MCP host runtimes ship sandboxed stdio tool execution as the default by Q2 2027",
+        "prediction_date": "2026-06-06"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang Vertex AI 'Pickle in the Middle' RCE na inilabas ng Unit 42 noong Hunyo 16 ay isa pang pagkakataon ng malawak na aral sa likod ng prediksiyong ito: ang untrusted input na na-deserialize sa loob ng isang privileged execution context ay nagpapatakbo ng arbitrary code, at ang payload dito ay kumuha ng isang OAuth token para sa isang cloud-platform-scoped service account. Pinatitibay niyan ang kaso para ihiwalay ang tool/artifact execution bilang default, ngunit ang insidente ay tungkol sa model-artifact deserialization sa isang managed-serving path sa halip na MCP stdio tool execution nang tukoy, kaya ang ugnayan sa sandboxed-stdio na landing ng prediksiyong ito ay pangkaisipan at mahina.",
+      "reference_links": [
+        {"label": "Palo Alto Networks Unit 42 - Pickle in the Middle: Hijacking Vertex AI Model Uploads for Cross-Tenant RCE", "url": "https://unit42.paloaltonetworks.com/hijacking-vertex-ai-model/"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang Vertex RCE - untrusted input na na-deserialize sa isang privileged context ay nagpapatakbo ng arbitrary code at kumukuha ng isang cloud-scoped OAuth token - ay nagpapatibay sa malawak na kaso para ihiwalay ang tool at artifact execution bilang default. Ngunit tungkol ito sa model-artifact deserialization sa isang managed-serving path, hindi MCP stdio tool execution, kaya ang ugnayan sa sandboxed-stdio na landing ay pangkaisipan at mahina.",
+        "coherence": 2,
+        "remaining_gap": "Ang insidente ay hindi tungkol sa MCP host runtimes o stdio tool execution; walang MCP runtime na naglabas ng sandboxed-stdio bilang default bilang tugon."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.36f4ab773b39713e",
+        "short_label": "Hyperscaler custom AI silicon splits into training vs inference SKUs by H1 2027",
+        "prediction_date": "2026-04-22"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Layer-2 semantic match laban sa dormant Signals (training-vs-inference SKU split, dual-track silicon, inference-specific accelerators). Ang Corsair full-production milestone ng d-Matrix noong Hunyo 9 ay isang inference-dedicated, non-GPU accelerator na binuo sa isang digital in-memory-compute chiplet na pinagsasanib ang SRAM at compute on-die para atakihin ang memory-bandwidth wall na sumasakal sa transformer decoding - isang purpose-built na inference part na naiiba sa training silicon. Pinatitibay nito ang mas malawak na market bifurcation tungong inference-specialized hardware na pinangalanan ng dormant na prediksiyong ito, bagaman ito ay isang merchant na pumapasok sa halip na sariling in-house training/inference SKU split ng isang hyperscaler, kaya bahagya ang tugma.",
+      "reference_links": [
+        {"label": "d-Matrix - Corsair AI Inference Platform Enters Full Production to Meet Customer Demand (June 9, 2026)", "url": "https://www.d-matrix.ai/announcements/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/"},
+        {"label": "HPCwire - d-Matrix Corsair AI Inference Platform Enters Full Production", "url": "https://www.hpcwire.com/off-the-wire/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/"}
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang Corsair ay isang inference-dedicated, non-GPU part - isang digital in-memory-compute chiplet na pinagsasanib ang SRAM at compute para atakihin ang decoding memory-bandwidth wall - na umaabot sa full production, na nagpapatibay sa mas malawak na bifurcation tungong inference-specialized silicon na pinangalanan ng thesis. Ito ay isang merchant na pumapasok, gayunpaman, hindi sariling in-house training-laban-sa-inference SKU split ng isang hyperscaler, kaya bahagya ang tugma.",
+        "coherence": 2,
+        "remaining_gap": "Ang split na pinangalanan sa thesis ay hyperscaler in-house silicon; ang d-Matrix ay isang merchant vendor, kaya ang ebidensya ay karatig sa kategorya sa halip na tama sa target."
+      }
+    }
+  ]
+}

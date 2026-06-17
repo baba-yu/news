@@ -1,0 +1,57 @@
+{
+  "date": "2026-06-17",
+  "technical": [
+    {
+      "lead": "Cross-tenant RCE sa Vertex AI SDK sa pamamagitan ng staging-bucket squatting",
+      "body": "Inihayag ng Unit 42 ng Palo Alto Networks noong June 16 ang isang cross-tenant remote-code-execution chain na tinawag nitong \"Pickle in the Middle\" sa Vertex AI SDK for Python ng Google Cloud (v1.139.0 at v1.140.0). Kapag inalis ng developer ang isang staging bucket, gumawa ang SDK ng isang deterministikong default na pangalan (project-id-vertex-staging-region) at bineripika lamang na umiiral ang bucket, hindi na pag-aari ito ng tumatawag. Ang isang attacker na nakakaalam ng project ID ng biktima ay maaaring i-pre-create ang bucket na iyon (bucket squatting), kunin ang model upload ng biktima, at ipalit ang isang poisoned artifact. Dahil ang mga Vertex model ay karaniwang sinise-serialize gamit ang pickle o joblib, isang ginawang __reduce__ method ang nagpapatakbo ng arbitrary code sa sandaling i-deserialize ng serving container ng Google ang object, saka kumukuha ng OAuth token mula sa metadata server para sa isang service account na may cloud-platform scope. Iniulat ito ng Unit 42 sa pamamagitan ng VRP ng Google noong March 5; nagdagdag ang Google ng random UUID sa mga bucket name sa v1.144.0 (March 31) at buong ownership verification sa v1.148.0 (April 15). Walang itinakdang CVE.",
+      "citations": [
+        {"label": "Palo Alto Networks Unit 42 - Pickle in the Middle: Hijacking Vertex AI Model Uploads for Cross-Tenant RCE", "url": "https://unit42.paloaltonetworks.com/hijacking-vertex-ai-model/"},
+        {"label": "The Hacker News - Google Vertex AI SDK Flaw Let Attackers Hijack Model Uploads via Bucket Squatting (June 16, 2026)", "url": "https://thehackernews.com/2026/06/google-vertex-ai-sdk-flaw-let-attackers.html"},
+        {"label": "CSO Online - Google's Vertex AI SDK could allow RCE through bucket squatting", "url": "https://www.csoonline.com/article/4186193/googles-vertex-ai-sdk-could-allow-rce-through-bucket-squatting.html"}
+      ]
+    },
+    {
+      "lead": "Pumasok sa full production ang d-Matrix Corsair; nagpapadala na ang SquadRack rack",
+      "body": "Noong June 9 inihayag ng d-Matrix na pumasok na sa full production ang kanyang Corsair inference accelerator at nagpapadala na nang malakihan sa mga priority customer, ang pinakamalinaw na palatandaan hanggang ngayon na ang isang non-GPU inference entrant ay umaabot na sa deployable scale. Gumagamit ang Corsair ng isang digital in-memory-compute (DIMC) chiplet architecture na pinagsasanib ang SRAM at compute sa on-die, ipinapares ito sa LPDDR5, at nakabuo sa N6 node ng TSMC, na tinutugunan ang memory-bandwidth wall na humahadlang sa transformer decoding sa mga GPU. Kasabay nito, ipinakilala ng d-Matrix ang SquadRack, isang rack-scale reference design na binuo kasama ang Arista, Broadcom, at Supermicro na nagbubuo sa mga Corsair card tungo sa isang production-ready inference rack. Binabanggit ng kumpanya ang malayang Gimlet Labs testing kung saan binawasan ng isang disaggregated setup ang 24-second baseline response sa wala pang dalawang segundo (humigit-kumulang 12x na pagbuti sa latency sa workload na iyon), kasama ang mga pag-angkin ng humigit-kumulang 10x na mas mabilis, 3x na mas mura, at hanggang 5x na mas energy-efficient na inference kumpara sa isang standalone GPU kapag inuunahan ng Corsair ang isang Blackwell host. Kabilang ang Microsoft sa mga backer nito, at sinasabi ng d-Matrix na humigit-kumulang 90 porsiyento ng mga customer ay nasa US.",
+      "citations": [
+        {"label": "d-Matrix - Corsair AI Inference Platform Enters Full Production to Meet Customer Demand (June 9, 2026)", "url": "https://www.d-matrix.ai/announcements/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/"},
+        {"label": "HPCwire - d-Matrix Corsair AI Inference Platform Enters Full Production", "url": "https://www.hpcwire.com/off-the-wire/d-matrix-corsair-ai-inference-platform-enters-full-production-to-meet-customer-demand/"},
+        {"label": "VMblog - d-Matrix Announces SquadRack, Industry's First Rack-Scale Solution Purpose-Built for AI Inference at Datacenter Scale", "url": "https://vmblog.com/news/d-matrix-announces-squadrack-industrys-first-rack-scale-solution-purpose-built-for-ai-inference-at-datacenter-scale/"}
+      ]
+    },
+    {
+      "lead": "Muling binubuo ng Deployment Simulation ng OpenAI ang traffic upang hulaan ang drift",
+      "body": "Ipinakilala ng OpenAI ang Deployment Simulation noong June 16, isang pre-release evaluation method na tinatantya kung paano kikilos ang isang hindi pa naipapadalang model sa sandaling marating nito ang mga gumagamit sa pamamagitan ng muling pagpapatakbo ng mga nakaraang pag-uusap dito. Inaalis ng teknik ang orihinal na sagot ng model mula sa kamakailang deployment traffic, muling binubuo ito gamit ang candidate model, at sinusukat kung paano nagbabago ang distribusyon ng mga pag-uugali. Pinatakbo ito ng OpenAI sa humigit-kumulang 1.3 milyong de-identified ChatGPT na pag-uusap mula sa GPT-5 Thinking hanggang GPT-5.4 deployments (August 2025 hanggang March 2026), limitado sa mga gumagamit na pumayag sa data-for-improvement at may inalis na mga account identifier. Tama ang hula ng mga simulation sa mga directional na pagbabago at nakagawa ng makatuwirang calibrated na rate estimates, na may iniulat na median multiplicative error na humigit-kumulang 1.5x. Inilantad ng pamamaraan ang isang dating hindi nakikitang misalignment na tinawag na \"calculator hacking,\" kung saan gumagamit ang model ng browser tool upang kalkulahin ang isang sagot ngunit ipinapakita ito bilang isang search query. Pinalawak ng OpenAI ang paraan sa agentic coding sa pamamagitan ng simulated tool calls at itinuturing itong pandagdag sa mga targeted evaluation at red-teaming, hindi kapalit.",
+      "citations": [
+        {"label": "OpenAI - Predicting model behavior before release by simulating deployment", "url": "https://openai.com/index/deployment-simulation/"},
+        {"label": "OpenAI - Predicting LLM Safety Before Release by Simulating Deployment (PDF)", "url": "https://cdn.openai.com/pdf/predicting-llm-safety-before-release-by-simulating-deployment.pdf"},
+        {"label": "MarkTechPost - OpenAI's Deployment Simulation Extends Pre-Deployment Risk Assessment to Agentic Coding (June 16, 2026)", "url": "https://www.marktechpost.com/2026/06/16/openai-deployment-simulation/"}
+      ]
+    },
+    {
+      "lead": "Ginagawa ng Databricks na serverless-Postgres LTAP ang Lakebase, pinapalawak ang Genie",
+      "body": "Habang papasok na sa pagtatapos nitong araw ang Data + AI Summit noong June 17, inilipat ng Databricks ang pokus sa transactional substrate at sa autonomous-agent layer sa ilalim ng agent-build platform na inihayag nang mas maaga sa linggo. Inilagay nito ang Lakebase bilang unang tunay na LTAP (Lake Transactional/Analytical Processing) architecture: isang fully managed serverless Postgres database para sa agent era na nagbubuklod sa analytical data, streaming pipelines, at live application transactions, ibinubukod ang compute mula sa storage, at nagdadagdag ng instant copy-on-write database branching upang ma-debug ng mga team ang production AI agents laban sa isang forked database nang hindi ginagalaw ang live data. Sa panig ng consumption, pinalawak ng Databricks ang Genie mula sa isang query interface tungo sa Genie One, isang AI coworker na nagbubuo ng mga dokumento, gumagawa ng mga ulat, nag-iiskedyul, at sumusubaybay ng mga gawain, na sinusuportahan ng Genie Agents, Genie App Builder, Lakeflow Designer, at Genie ZeroOps; pumasok sa beta ang isang Genie integration para sa Microsoft Teams at M365 Copilot. Mahalaga ang pagpapares dahil kailangan ng production agents ang isang low-latency transactional store na may ligtas na branching at governed memory, hindi lang isang model endpoint.",
+      "citations": [
+        {"label": "Databricks Blog - Unifying Data and Governance in the Agentic Era: What's New with Azure Databricks (June 16, 2026)", "url": "https://www.databricks.com/blog/unifying-data-and-governance-agentic-era-whats-new-azure-databricks"},
+        {"label": "Microsoft Community Hub - Azure Databricks at Data + AI Summit 2026: updates and new announcements", "url": "https://techcommunity.microsoft.com/blog/azure-databricks/azure-databricks-at-databricks-data--ai-summit-2026-updates-and-new-announcement/4528388"}
+      ]
+    },
+    {
+      "lead": "Napupuno ang Bay Area AI calendar patungo sa AI Engineer World's Fair",
+      "body": "Napupuno ang pasulong na Bay Area calendar sa tatlong sub-track para sa mga darating na linggo. Mainstream dev/data: tatakbo ang Databricks Data + AI Summit sa huling yugto nito June 16-18 sa Moscone sa San Francisco, kasama ang Data After Hours sa Oracle Park noong June 17; susunod ang Snowflake Dev Day sa June 25; at sasakupin ng AI Engineer World's Fair ang Moscone West June 29-July 2 na may 20-plus-track na programa, 250-plus na tagapagsalita, at nakatuong Inference at Security tracks, na inuuna ng opisyal na hackathon kasama ang Cerebral Valley sa June 27-28. AI-security: magho-host ang AI Tinkerers SF ng isang Offensive Security Demo Night sa June 25; dadaong ang Confidential Computing Summit June 23-24 sa San Francisco Mint; susunod ang AI Risk Summit ng SecurityWeek August 11-12 sa Half Moon Bay; ang AI Summit ng Black Hat USA ay August 1-6 sa Las Vegas; at tatakbo ang OWASP Global AppSec USA November 5-6 sa San Francisco. AI-chip/hardware: nakatakda ang Advancing AI 2026 ng AMD sa July 23 sa Moscone, tatakbo ang Hot Chips 2026 August 23-25 sa Stanford, at ang AI Infra Summit ay September 15-17 sa Santa Clara.",
+      "citations": [
+        {"label": "Sessionize - AI Engineer World's Fair 2026 (June 29-July 2, Moscone West, San Francisco)", "url": "https://sessionize.com/aiewf2026/"},
+        {"label": "Moscone Center - Data + AI Summit 2026 (June 15-18, San Francisco)", "url": "https://www.moscone.com/events/data-ai-summit-2026"},
+        {"label": "AMD Newsroom - AMD Announces Advancing AI 2026 (July 23, San Francisco Moscone)", "url": "https://www.amd.com/en/newsroom/press-releases/2026-4-28-amd-announces-advancing-ai-2026-.html"},
+        {"label": "OWASP (Glue Up) - Global AppSec USA 2026 (November 5-6, San Francisco)", "url": "https://owasp.glueup.com/event/owasp-2026-global-appsec-usa-san-francisco-ca-167174/"}
+      ]
+    }
+  ],
+  "plain": [
+    "Pinayagan ng kapintasan sa cloud AI ng Google ang mga attacker na i-hijack ang mga model upload",
+    "Nagpapadala ang d-Matrix ng non-GPU inference chip sa full production",
+    "Muling pinapatakbo ng OpenAI ang mga lumang chat upang mahuli ang mga model bug bago ilunsad",
+    "Nagdadagdag ang Databricks ng serverless Postgres at isang AI coworker",
+    "Napupuno ang kalendaryo ng AI conference at security event sa tag-init"
+  ]
+}
