@@ -1,0 +1,14 @@
+{
+  "id": "prediction.8132d066f621bd12",
+  "scope_hint": "cross",
+  "title": "Managed model-serving platforms default to safe artifact handling by H1 2027",
+  "body": "Palo Alto Unit 42's June 16 \"Pickle in the Middle\" disclosure turned a quiet SDK convenience into a cross-tenant remote-code-execution chain: Vertex AI's Python SDK minted a predictable default staging bucket and verified only that the bucket existed, not that the caller owned it, letting an attacker pre-create (squat) it, intercept a victim's model upload, and swap in a poisoned artifact that executed the moment Google's serving container deserialized it via pickle/joblib. The deeper lesson is structural, not vendor-specific: managed-inference platforms inherit Python's deserialization risk at the multi-tenant boundary, where one tenant's poisoned model can run code with another tenant's service-account scope. The clean mitigation is to stop trusting raw model artifacts by default. Expect the major managed-inference and model-serving platforms to move safe artifact handling from an opt-in to a platform default within roughly a year - mandating or defaulting to non-executable serialization (safetensors-class formats over pickle), adding signed/attested artifact provenance, and verifying caller ownership of upload and staging buckets. The catalyst is a published cross-tenant break with a concrete remediation path Google already shipped (UUID bucket names, then ownership verification), which both raises the bar for peers and gives standards bodies a citable incident; the likeliest sequence is one hyperscaler hardening its model-serving path first, followed by a second platform or a standards/guidance body codifying the pattern.",
+  "reasoning": {
+    "because": "Unit 42's Pickle-in-the-Middle showed pickle loads + bucket-squatting break Vertex AI's tenancy",
+    "given": "managed inference inherits Python deserialization risk at the multi-tenant boundary, not one account",
+    "so_that": "≥1 major managed-inference platform ships safe-serialization defaults or caller-ownership checks on model uploads",
+    "landing": "by H1 2027; ≥1 hyperscaler model-serving changelog or security bulletin",
+    "plain_language": "Hackers hijacked AI model uploads on Google's cloud, so model-hosting services will soon make safe model loading the default."
+  },
+  "summary": "Unit 42's cross-tenant RCE in Vertex AI's SDK abused pickle deserialization and bucket-squatting at the tenant boundary. Expect managed model-serving platforms to make safe artifact handling a default by H1 2027: non-pickle serialization, signed provenance, or caller-ownership checks on uploads."
+}

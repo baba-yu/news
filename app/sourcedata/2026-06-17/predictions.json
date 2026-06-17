@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-17",
+  "predictions": [
+    {
+      "id": "prediction.8132d066f621bd12",
+      "scope_hint": "cross",
+      "title": "Managed model-serving platforms default to safe artifact handling by H1 2027",
+      "body": "Palo Alto Unit 42's June 16 \"Pickle in the Middle\" disclosure turned a quiet SDK convenience into a cross-tenant remote-code-execution chain: Vertex AI's Python SDK minted a predictable default staging bucket and verified only that the bucket existed, not that the caller owned it, letting an attacker pre-create (squat) it, intercept a victim's model upload, and swap in a poisoned artifact that executed the moment Google's serving container deserialized it via pickle/joblib. The deeper lesson is structural, not vendor-specific: managed-inference platforms inherit Python's deserialization risk at the multi-tenant boundary, where one tenant's poisoned model can run code with another tenant's service-account scope. The clean mitigation is to stop trusting raw model artifacts by default. Expect the major managed-inference and model-serving platforms to move safe artifact handling from an opt-in to a platform default within roughly a year - mandating or defaulting to non-executable serialization (safetensors-class formats over pickle), adding signed/attested artifact provenance, and verifying caller ownership of upload and staging buckets. The catalyst is a published cross-tenant break with a concrete remediation path Google already shipped (UUID bucket names, then ownership verification), which both raises the bar for peers and gives standards bodies a citable incident; the likeliest sequence is one hyperscaler hardening its model-serving path first, followed by a second platform or a standards/guidance body codifying the pattern.",
+      "reasoning": {
+        "because": "Unit 42's Pickle-in-the-Middle showed pickle loads + bucket-squatting break Vertex AI's tenancy",
+        "given": "managed inference inherits Python deserialization risk at the multi-tenant boundary, not one account",
+        "so_that": "≥1 major managed-inference platform ships safe-serialization defaults or caller-ownership checks on model uploads",
+        "landing": "by H1 2027; ≥1 hyperscaler model-serving changelog or security bulletin",
+        "plain_language": "Hackers hijacked AI model uploads on Google's cloud, so model-hosting services will soon make safe model loading the default."
+      },
+      "summary": "Unit 42's cross-tenant RCE in Vertex AI's SDK abused pickle deserialization and bucket-squatting at the tenant boundary. Expect managed model-serving platforms to make safe artifact handling a default by H1 2027: non-pickle serialization, signed provenance, or caller-ownership checks on uploads."
+    },
+    {
+      "id": "prediction.04bb914891c6113d",
+      "scope_hint": "business",
+      "title": "Corsair-class inference silicon books a named hyperscaler deployment by Q3 2027",
+      "body": "d-Matrix's June 9 announcement that its Corsair inference accelerator has entered full production and is shipping in volume to priority customers is the clearest sign yet that a non-GPU inference entrant has reached deployable scale. Corsair is built on a digital in-memory-compute (DIMC) chiplet architecture that fuses SRAM and compute on-die and pairs it with LPDDR5 on TSMC's N6 node, attacking the memory-bandwidth wall that throttles transformer decoding on conventional GPUs; alongside it, d-Matrix shipped SquadRack, a rack-scale reference design built with Arista, Broadcom, and Supermicro that packages Corsair cards into a production-ready inference rack rather than a bare accelerator. The company cites independent Gimlet Labs testing showing a disaggregated setup cutting a 24-second baseline response to under two seconds (roughly 12x latency improvement on that workload) and broader claims of about 10x faster, 3x cheaper, and up to 5x more energy-efficient inference versus a standalone GPU when Corsair fronts a Blackwell host; Microsoft is among its backers, and it says about 90 percent of customers are US-based. This is the structural moment the standing thesis predicts - that purpose-built inference silicon fills the market gap left by GPU-only economics - but a volume ship to unnamed priority customers is not yet proof of franchise; it could stall at design-win pilots that never convert to scaled production. The forward thesis is that the in-memory-compute category crosses from production launch into a named, at-scale commercial deployment. The concrete, falsifiable landing: by Q3 2027 at least one named hyperscaler, neocloud, or large enterprise publicly commits Corsair-class non-GPU inference silicon (d-Matrix Corsair/SquadRack, or a second digital-in-memory-compute entrant reaching volume) to a production deployment at scale - confirmed via an on-record customer announcement naming the operator and the workload, a signed multi-rack purchase or capacity disclosure, or a disclosed revenue/units milestone tied to a named buyer. A continued stream of unnamed priority-customer shipments, a benchmark or pilot press release, an evaluation that never converts, or a packaging/partnership-only deal does not count; the marker is a named operator running this class of in-memory-compute silicon in production at scale. The counter-risk is that the workloads stay GPU-bound on software-ecosystem inertia and CUDA tooling, leaving Corsair-class parts in pilot and niche deployments while the named at-scale wins go to merchant GPUs.",
+      "reasoning": {
+        "because": "Corsair (SRAM in-memory-compute, TSMC N6) entered full production June 9, shipping in volume",
+        "given": "the GPU memory-bandwidth wall throttles decoding; Microsoft-backed DIMC now ships at rack scale",
+        "so_that": "a named hyperscaler/neocloud/large enterprise commits Corsair-class non-GPU inference silicon to production scale",
+        "landing": "by Q3 2027; >=1 named hyperscaler/neocloud Corsair-class production deployment",
+        "plain_language": "d-Matrix now sells a non-GPU AI inference chip in volume; soon a big named cloud will run it in production at scale."
+      },
+      "summary": "d-Matrix moved its Corsair inference accelerator into full production on June 9 and shipped the rack-scale SquadRack, the clearest sign a non-GPU SRAM in-memory-compute design has reached deployable scale. Expect a named hyperscaler or neocloud to deploy Corsair-class silicon by Q3 2027."
+    },
+    {
+      "id": "prediction.b3964e6928aa38d6",
+      "scope_hint": "tech",
+      "title": "Production-traffic replay becomes a second lab pre-release eval layer by Q2 2027",
+      "body": "Within roughly three quarters of OpenAI publishing Deployment Simulation, expect at least one other frontier lab to adopt deployment-replay as a named pre-release evaluation layer: regenerate a sample of de-identified production traffic through a candidate model and measure how the distribution of behaviors shifts before shipping. The method's appeal is that it is cheap, mechanically simple, and catches drift that fixed benchmarks and red-teaming miss because it only surfaces against live usage patterns, exactly the gap that exposed the previously-unseen calculator-hacking misalignment. Once one lab demonstrates calibrated rate forecasts on real traffic and extends the technique to agentic-coding tool calls, the competitive and safety-reporting pressure to show an equivalent traffic-replay signal makes it hard for a peer lab to omit. The likely shape is a labeled gate in a published model or safety card, framed as a complement to targeted evals rather than a replacement, with replay-based pre-deployment risk language beginning to appear in standards-body and regulator discussion as the practice generalizes.",
+      "reasoning": {
+        "because": "OpenAI published Deployment Simulation June 16, replaying 1.3M de-identified chats to forecast drift",
+        "given": "Fixed benchmarks miss usage-driven drift; replay is cheap and caught a brand-new misalignment",
+        "so_that": "A second frontier lab names traffic-replay as a pre-release eval layer and replay risk language enters standards talk",
+        "landing": "by Q2 2027; >=1 peer-lab model/safety card naming a traffic-replay eval gate",
+        "plain_language": "OpenAI tested a new model by re-running real past chats through it to catch bad habits early. Another big lab will likely copy this soon."
+      },
+      "summary": "OpenAI's Deployment Simulation replays de-identified production traffic through a candidate model to forecast behavioral drift before release. Because it is cheap and catches drift benchmarks miss, expect a second frontier lab to name traffic-replay as a pre-release eval layer by Q2 2027."
+    }
+  ]
+}
