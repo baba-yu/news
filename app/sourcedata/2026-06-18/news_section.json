@@ -1,0 +1,67 @@
+{
+  "date": "2026-06-18",
+  "sections": [
+    {
+      "category": "Open-weight models: Z.ai pushes GLM-5.2 to fully open MIT weights, a 753B mixture-of-experts that lands near the top of the coding leaderboards at a fraction of frontier-API cost",
+      "bullets": [
+        {
+          "body": "Z.ai (the lab formerly branded Zhipu AI) completed the open-weight release of GLM-5.2 this week, moving the model from a June 13 subscription preview to publicly downloadable weights on Hugging Face under an unrestricted MIT license. GLM-5.2 is a mixture-of-experts model with roughly 753 billion total parameters and about 40 billion active per token, and it ships with a one-million-token context window held stable by an architectural change the lab calls IndexShare, which it says cuts per-token compute by about 2.9x at the full 1M-token length; an improved multi-token-prediction layer is reported to raise the accepted length for speculative decoding by up to 20 percent. On long-horizon coding benchmarks the model is competitive with far more expensive closed systems: Z.ai reports 81.0 on Terminal-Bench 2.1 against 85.0 for Claude Opus 4.8, and 62.1 on SWE-bench Pro, placing it ahead of the GLM-5.1 predecessor and of GPT-5.5's reported 58.6 on the same suite, while landing second on the Code Arena coding leaderboard. The weights are usable for local or virtual-machine deployment and the model is already wired into more than twenty third-party coding environments, with enterprise subscription tiers starting around 12.60 dollars per month. The standard caveats apply: the benchmark figures are vendor-reported and independent replication plus production-scale latency and memory testing are still outstanding, and coverage flags that routing requests through Z.ai's hosted API (as opposed to running the open weights yourself) carries China-jurisdiction data-handling considerations that enterprises will want to weigh. The release continues the pattern of open-weight Chinese coding models pressing on the closed frontier on price-performance rather than raw top-line score. <a href=\"https://letsdatascience.com/news/zai-releases-glm-52-with-1m-token-context-a24a7a02\">Let's Data Science - Z.ai Releases GLM-5.2 With 1M-Token Context</a> <a href=\"https://pandaily.com/zhipu-ai-glm-5-dot-2-open-source-mit-jun2026\">Pandaily - Zhipu AI Open-Sources GLM-5.2 With 1 Million Token Context (MIT)</a> <a href=\"https://stable-learn.com/en/glm-5-2-open-source-release/\">StableLearn - GLM-5.2 Goes Fully Open: 753B Parameters at 1/6 the Cost</a>",
+          "citations": [
+            {"label": "Let's Data Science - Z.ai Releases GLM-5.2 With 1M-Token Context", "url": "https://letsdatascience.com/news/zai-releases-glm-52-with-1m-token-context-a24a7a02"},
+            {"label": "Pandaily - Zhipu AI Open-Sources GLM-5.2 With 1 Million Token Context (MIT)", "url": "https://pandaily.com/zhipu-ai-glm-5-dot-2-open-source-mit-jun2026"},
+            {"label": "StableLearn - GLM-5.2 Goes Fully Open: 753B Parameters at 1/6 the Cost", "url": "https://stable-learn.com/en/glm-5-2-open-source-release/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI events to plan around now: with the Databricks Summit closing today, the Bay Area calendar runs toward the AI Engineer World's Fair, and the security and chip tracks each have their own near-term dates",
+      "bullets": [
+        {
+          "body": "The forward-looking calendar across all three sub-tracks for the weeks ahead, with events that have already closed dropped (the Databricks Data + AI Summit wraps its final day today, June 18, at Moscone; the June 16 AICamp documentary premiere and the June 4 in-person Snowflake Dev Day have passed). Mainstream dev/data: Snowflake runs a virtual Dev Day on June 25 (two luminary talks plus a hands-on agentic-AI bootcamp), and the AI Engineer World's Fair takes over Moscone West June 29 through July 2 with a roughly 29-track program, around 300 speakers, and dedicated Inference and Security tracks, preceded by the official AIE World's Fair Hackathon with Cerebral Valley on June 27-28. Further out on this track, GitHub Universe returns October 28-29 and AWS re:Invent runs November 30 through December 4 in Las Vegas. AI-security: the Confidential Computing Summit lands June 23-24 at the San Francisco Mint (Linux Foundation and OPAQUE, with keynotes on confidential AI, agentic security, and data sovereignty featuring AMD, Google, Microsoft, NVIDIA and others); AI Tinkerers San Francisco hosts an Offensive Security Demo Night on June 25 with live agent-attack-surface demos; SecurityWeek's AI Risk Summit follows August 11-12 at the Ritz-Carlton Half Moon Bay; Black Hat USA's AI Summit is August 1-6 at Mandalay Bay in Las Vegas alongside DEF CON's AI Village; and OWASP Global AppSec USA runs November 5-6 in San Francisco. Zenity's AI Agent Security Summit series remains on the watch list. AI-chip/hardware: AMD's Advancing AI 2026 is set for July 23 at Moscone (Instinct MI400-series focus expected); Hot Chips 2026 runs August 23-25 at Stanford's Memorial Auditorium; and the AI Infra Summit is September 15-17 at the Santa Clara Convention Center. <a href=\"https://www.snowflake.com/en/dev-day/\">Snowflake Dev Day 2026 (in-person and virtual)</a> <a href=\"https://10times.com/e1k5-s2k3-d3xr\">Confidential Computing Summit (June 23-24, San Francisco Mint)</a> <a href=\"https://github.com/universe\">GitHub Universe 2026 (October 28-29, San Francisco)</a> <a href=\"https://reinvent.awsevents.com/\">AWS re:Invent 2026 (November 30-December 4, Las Vegas)</a>",
+          "citations": [
+            {"label": "Snowflake Dev Day 2026 (in-person and virtual)", "url": "https://www.snowflake.com/en/dev-day/"},
+            {"label": "Confidential Computing Summit (June 23-24, San Francisco Mint)", "url": "https://10times.com/e1k5-s2k3-d3xr"},
+            {"label": "GitHub Universe 2026 (October 28-29, San Francisco)", "url": "https://github.com/universe"},
+            {"label": "AWS re:Invent 2026 (November 30-December 4, Las Vegas)", "url": "https://reinvent.awsevents.com/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Inference serving: vLLM ships v0.23.0, maturing DeepSeek-V4 across backends and promoting its Rust frontend and Model Runner V2 to defaults for Llama and Mistral",
+      "bullets": [
+        {
+          "body": "The vLLM project tagged v0.23.0 on June 15, a release that folds in 408 commits from 200 contributors (63 of them first-time) and pushes several in-flight subsystems toward default status. The headline is broader DeepSeek-V4 maturity: the release adds improved attention kernels, mixture-of-experts handling, and a decoupling of sparse multi-head-latent-attention metadata so the architecture runs more cleanly across vLLM's backends. The newer Model Runner V2 execution path, previously the default only for Qwen3, now becomes the default for Llama and Mistral dense models and gains a FlashInfer sampler plus breakable CUDA graphs; the Rust frontend that vLLM has been building out picks up a streaming generate endpoint, dynamic LoRA loading, and additional tool-call parsers, narrowing the gap with the legacy Python server. The release also lands Gemma 4 support (an encoder-free unified variant with multi-token prediction), Transformers v5 compatibility, and a multi-tier KV-cache offloading framework with an object-store secondary tier and per-request policies, alongside newly supported models including Step-3.7-Flash, Cosmos 3 Reasoner, JetBrains Mellum v2, Granite Speech Plus, and Cohere Mini Code. Reported micro-optimizations include a CUTLASS FP8 scaled-matmul padding bypass (about 20 percent on that path) and MoE-permute buffer pre-allocation (roughly 9 to 14 percent); the notes stop short of an end-to-end throughput claim, so production gains will depend on model and backend. The cadence keeps vLLM and the rival SGLang line moving in lockstep on the same frontier-model targets. <a href=\"https://github.com/vllm-project/vllm/releases/tag/v0.23.0\">vLLM v0.23.0 release notes (GitHub)</a>",
+          "citations": [
+            {"label": "vLLM v0.23.0 release notes (GitHub)", "url": "https://github.com/vllm-project/vllm/releases/tag/v0.23.0"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Quantization research: MosaicQuant splits weights into a dense 4-bit base plus a sparse 4-bit residual to keep near-FP16 accuracy while running a single low-bit pipeline",
+      "bullets": [
+        {
+          "body": "A paper posted to arXiv on June 14 (arXiv:2606.15652, filed under cs.LG and cs.CL) proposes MosaicQuant, a 4-bit large-language-model quantization scheme aimed at the long-standing tension between compressing the dense bulk of a weight matrix and faithfully preserving the rare large-magnitude outliers that 4-bit grids tend to clip. Rather than fall back on a mixed-precision format, MosaicQuant disaggregates each weight matrix into a dense 4-bit base component that captures most values and a sparse 4-bit residual component that compensates for quantization error in the most error-sensitive blocks, so both pieces stay in 4-bit. To keep that two-part representation from re-introducing the overhead mixed-precision methods usually pay, the authors add ZipperEngine, which folds the sparse residual computation into the dense 4-bit matrix operations through an overlapped pipeline, preserving a unified low-bit execution path. On LLaMA3 and Qwen3 models the method is reported to retain near-FP16 accuracy while delivering up to a 1.24x speedup over the 16-bit baseline. As with any single-paper result the numbers are the authors' own and await independent reproduction and broader model coverage, but the work is a concrete data point in the running effort to make 4-bit serving the default for memory-constrained local deployment rather than a lossy fallback. <a href=\"https://arxiv.org/abs/2606.15652\">arXiv:2606.15652 - MosaicQuant: Inlier-Outlier Disaggregation for Unified 4-Bit LLM Quantization</a>",
+          "citations": [
+            {"label": "arXiv:2606.15652 - MosaicQuant: Inlier-Outlier Disaggregation for Unified 4-Bit LLM Quantization", "url": "https://arxiv.org/abs/2606.15652"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Physical AI: Neura Robotics closes one of the largest robotics rounds on record, an up-to-1.4-billion-dollar Series C from Nvidia, Amazon, Qualcomm, Bosch and a Tether-led syndicate to scale its 4NE-1 humanoid",
+      "bullets": [
+        {
+          "body": "German cognitive-robotics company Neura Robotics disclosed a Series C of up to 1.4 billion dollars, a round that surfaced June 10 and continued to drive coverage through the week, with the company calling it the largest funding ever raised by a full-stack robotics firm. The financing is structured as a ceiling tied to performance milestones rather than a single upfront check, and reporting places the valuation in the neighborhood of 7 billion dollars. The investor roster is unusually strategic for a humanoid maker: alongside a lead role attributed to stablecoin issuer Tether, the backers include Nvidia, Amazon, Qualcomm, Bosch, Schaeffler, the European Investment Bank, imec.xpand and Lingotto Horizon. Metzingen-based Neura, led by founder David Reger, builds what it markets as cognitive robots, machines designed to perceive, reason and act in unstructured human environments rather than repeat fixed motions, with the 4NE-1 humanoid as its flagship; the capital is earmarked to push serial production toward what the company describes as multi-million units by 2030 and to roll out its 'Neura Gyms' training environments for physical AI, with first volume shipments targeted for late 2026 and an order-and-deployment pipeline the company values above 1 billion dollars. The raise is a clear marker that European humanoid efforts are now drawing frontier-scale capital and pulling chip and cloud strategics directly onto their cap tables, even as deployment revenue across the sector remains early. <a href=\"https://www.manufacturingdive.com/news/neura-robotics-startup-backed-by-nvidia-amazon-bosch-qualcomm-raises-1b-series-c/822900/\">Manufacturing Dive - Robotics startup backed by Nvidia, Amazon and others raises $1.4B</a> <a href=\"https://interestingengineering.com/ai-robotics/neura-humanoid-robotics-funding\">Interesting Engineering - Neura raises one of the largest funding rounds in humanoid robotics history</a> <a href=\"https://techfundingnews.com/neura-robotics-1-4b-series-c-tether-amazon-nvidia/\">Tech Funding News - Amazon, NVIDIA and Tether back NEURA Robotics' $1.4B raise</a>",
+          "citations": [
+            {"label": "Manufacturing Dive - Robotics startup backed by Nvidia, Amazon and others raises $1.4B", "url": "https://www.manufacturingdive.com/news/neura-robotics-startup-backed-by-nvidia-amazon-bosch-qualcomm-raises-1b-series-c/822900/"},
+            {"label": "Interesting Engineering - Neura raises one of the largest funding rounds in humanoid robotics history", "url": "https://interestingengineering.com/ai-robotics/neura-humanoid-robotics-funding"},
+            {"label": "Tech Funding News - Amazon, NVIDIA and Tether back NEURA Robotics' $1.4B raise", "url": "https://techfundingnews.com/neura-robotics-1-4b-series-c-tether-amazon-nvidia/"}
+          ]
+        }
+      ]
+    }
+  ]
+}
