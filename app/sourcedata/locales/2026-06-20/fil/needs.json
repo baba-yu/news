@@ -1,0 +1,137 @@
+{
+  "date": "2026-06-20",
+  "by_prediction": {
+    "prediction.42470d9936a2eb30": [
+      {
+        "actor": "maintainer ng autonomous coding-agent harness",
+        "job": "Dinidisenyo ang mga default ng toolset at kakayahan para sa isang open-source o commercial na coding-agent framework habang lumalaki ang autonomy at bilang ng tool",
+        "outcome": "Isang inilabas na harness release na nagbu-boot na may least-privilege, default-off na toolset na dapat hayagang i-enable ng user bawat kakayahan",
+        "motivation": "Ang isang agent na nakakabit sa browser, code-exec, MCP at shell bilang default ay isang hindi-na-audit na pananagutan; ang pag-gate dito ang siyang pinakamurang ligtas na default",
+        "task": {
+          "who": "ang mga maintainer ng agent-runtime at seguridad ng framework",
+          "what": "Magdagdag ng default-deny toolset gating mode sa harness",
+          "where": "Ang codebase ng open-source o produktong coding-agent framework",
+          "when": "Ngayon hanggang sa mga release cycle ng H2 2026",
+          "why": "Ang default-on na access sa tool ay isang malaking hindi-na-audit na attack surface",
+          "how": "Per-tool opt-in gating na matibay na naka-pin laban sa tahimik na muling pag-enable"
+        }
+      },
+      {
+        "actor": "may-akda ng patnubay sa seguridad ng agent",
+        "job": "Bumabalangkas at naglalathala ng mga baseline sa seguridad para sa mga autonomous LLM agent habang lumilitaw ang default-on na access sa tool bilang isang kinikilalang uri ng panganib",
+        "outcome": "Isang inilathalang patnubay sa seguridad ng agent na nagngangalan sa least-privilege o default-deny toolset gating bilang isang inirerekomendang baseline control",
+        "motivation": "Ang pagkokodipika ng isang konkreto at magagawang mitigasyon ay nagbibigay sa larangan ng isang masisiping pamantayan at nagpipresyon sa mga harness na gawin itong default",
+        "task": {
+          "who": "mga may-akda sa standards-body, OWASP-style, o vendor security-research",
+          "what": "Irekomenda ang default-deny toolset gating bilang isang baseline control",
+          "where": "Isang inilathalang framework, pamantayan, o gabay sa seguridad ng agent",
+          "when": "Ngayon hanggang sa mga drafting cycle sa unang bahagi ng 2027",
+          "why": "Kailangan ng larangan ng isang masisiping baseline para sa ligtas na access sa tool ng agent",
+          "how": "Least-privilege na per-tool gating na isinulat sa inirerekomendang baseline"
+        }
+      },
+      {
+        "actor": "security lead ng enterprise agent-platform",
+        "job": "Nagtatakda ng mga kinakailangan sa deployment para sa mga coding agent sa loob ng organisasyon, na humihiling ng scoped na access sa tool bago aprubahan ang anumang autonomous harness",
+        "outcome": "Mga kinakailangan sa procurement at platform na pumipilit sa mga harness vendor na maglabas ng default-deny, hayagang naka-gate na toolset out of the box",
+        "motivation": "Ang auditability at limitasyon sa blast-radius ay hindi napag-uusapan para sa mga production agent; nabibigo sa internal security review ang default-on na access sa tool",
+        "task": {
+          "who": "mga enterprise platform at AppSec security lead",
+          "what": "Hingin ang scoped, default-off na access sa tool para sa mga na-deploy na agent",
+          "where": "Internal na patakaran sa agent-deployment at mga kinakailangan sa vendor procurement",
+          "when": "Ngayon hanggang sa mga vendor evaluation ng H2 2026",
+          "why": "Nabibigo sa internal security review ang default-on na access sa tool ng agent",
+          "how": "Gawing isang deployment at procurement gate ang per-tool gating"
+        }
+      }
+    ],
+    "prediction.9f3c1a7e2b4d6058": [
+      {
+        "actor": "maintainer ng local fine-tuning framework",
+        "job": "Naglalabas ng nag-iipon-ipong mga optimisasyon sa memory-fit (auto-fit context, multi-token prediction, sequence packing, quantized-state offload) na nagpapalaki sa magagamit na konteksto bawat fixed na GPU byte",
+        "outcome": "Isang inilathalang recipe o release note na nagdodokumento ng 100K+ na magagamit na fine-tuning context sa iisang 24-32GB consumer GPU",
+        "motivation": "Ang bawat pakinabang sa fixed-memory ay nagpapalawak sa hobbyist user base ng framework at nagpapatunay sa single-card na long-context adaptation",
+        "task": {
+          "who": "ang team ng kernel at memory-optimization ng framework",
+          "what": "Pagsamahin ang mga pakinabang sa auto-fit, multi-token, packing, at offload memory",
+          "where": "Ang open-source fine-tuning library at ang mga release note nito",
+          "when": "Bawat release ngayon hanggang Q1 2027, bago ang paglapag sa Q2 2027",
+          "why": "Ang pag-iipon ng mga pakinabang sa memory-fit ay nag-aangat sa magagamit na konteksto nang lampas sa 100K token",
+          "how": "Auto-fit context kasama ang multi-token prediction sa mga LoRA/QLoRA run"
+        }
+      },
+      {
+        "actor": "maintainer ng low-bit quantization at GPU-kernel",
+        "job": "Pinipino ang quantized-state offload at 4-bit kernel upang ang fixed-memory fine-tuning ay magkasya ng mas maraming token nang walang pagkawala ng precision o pag-apaw",
+        "outcome": "Mga release ng quantization at offload na nagbibigay-daan sa isang 24-32GB card na maghawak ng isang 100K-token na f16-equivalent na fine-tuning run",
+        "motivation": "Ang mas masinsing packing ng memory ang siyang lever na nagpapalit sa bawat pakinabang ng framework tungong tunay na nagkakasyang konteksto sa commodity card",
+        "task": {
+          "who": "ang team ng maintainer ng quantization at CUDA-kernel",
+          "what": "Maglabas ng quantized-state offload at mga pinong 4-bit kernel",
+          "where": "Mga open-source na repository ng quantization at GPU-kernel",
+          "when": "Tuloy-tuloy na release sa buong H2 2026 papasok sa Q1 2027",
+          "why": "Ang mas masinsing packing ay nagpapalit sa mga pakinabang ng framework tungong nagkakasyang on-card na konteksto",
+          "how": "4-bit quantization at quantized-state offload kernel"
+        }
+      },
+      {
+        "actor": "maintainer ng on-device retrieval-stack",
+        "job": "Naglalabas ng maliliit at permissively-licensed na embedding at retrieval model na nagpapanatiling ganap na local sa parehong card ng nakapaligid na long-context pipeline",
+        "outcome": "Isang local na embedding/retrieval component na nagpapanatili ng grounded na long-context personalization sa iisang consumer GPU mula simula hanggang dulo",
+        "motivation": "Ang isang ganap na local na retrieval stack ang gumagawang praktikal sa single-card na long-context fine-tuning use case, hindi lamang ang training step",
+        "task": {
+          "who": "ang team ng maintainer ng on-device embedding at retrieval",
+          "what": "Maglabas ng maliliit at permissively-licensed na local na embedding at retrieval model",
+          "where": "Mga local-LLM runtime at repository ng paglabas ng embedding-model",
+          "when": "Mga release sa buong H2 2026 papasok sa unang bahagi ng 2027",
+          "why": "Pinapanatili ng local na retrieval ang buong long-context pipeline sa iisang card",
+          "how": "Maliliit na GGUF embedding model na tumatakbo sa local inference stack"
+        }
+      }
+    ],
+    "prediction.aef24ea0af45268a": [
+      {
+        "actor": "lab ng open-weight retrieval-model",
+        "job": "Nagsasanay ng maliliit, mabilis, at permissively-licensed na multilingual embedding at late-interaction retriever at pinakikete ang mga ito bilang GGUF build",
+        "outcome": "Isang sub-500M MIT/Apache na retriever pair na ipinamamahagi bilang GGUF na tumatakbo sa ilalim ng llama.cpp sa sub-10ms na laptop query latency",
+        "motivation": "Ang isang tunay na mabilis at maliit na open retriever ang nawawalang piyesa na nagbubukas sa ganap-na-local na RAG ecosystem at adoption",
+        "task": {
+          "who": "ang team ng research at paglabas ng embedding-model ng lab",
+          "what": "Magsanay at maglabas ng isang maliit at permissive na multilingual retriever bilang GGUF",
+          "where": "Mga open model hub at llama.cpp-compatible na GGUF distribution",
+          "when": "Ngayon hanggang H2 2026, bago ang Q1 2027 na bundling",
+          "why": "Ang isang maliit at mabilis na open retriever ang nag-aalis sa huling sagabal sa ganap-na-local na RAG",
+          "how": "I-distill ang compact na embedding/ColBERT pair, i-quantize tungong GGUF build"
+        }
+      },
+      {
+        "actor": "maintainer ng local-LLM inference-engine",
+        "job": "Nagdaragdag ng first-class na embedding at retrieval support upang tumakbo ang mga retriever sa parehong on-device stack ng generator",
+        "outcome": "Mga runtime API at build na nag-iindex ng mga dokumento at nagseserbisyo ng embedding nang local nang walang server-side embedding call",
+        "motivation": "Ang pagsasama ng retrieval at generation sa iisang permissive stack ay nagpapaliit sa engineering distance tungong turnkey na local RAG",
+        "task": {
+          "who": "ang core maintainer team ng inference engine",
+          "what": "Maglabas ng embedding at on-device retrieval support sa runtime",
+          "where": "Mga llama.cpp-class na open-source na inference repository",
+          "when": "Ritmo ng release sa buong H2 2026 papasok sa Q1 2027",
+          "why": "Ang iisang stack para sa embed at generate ay nagbibigay-daan sa bundled na local RAG",
+          "how": "Magdagdag ng GGUF embedding inference at isang local na vector index path"
+        }
+      },
+      {
+        "actor": "developer ng desktop RAG app",
+        "job": "Ikinakabit ang local retriever at runtime sa isang turnkey na index-and-ask-your-files na feature na inilalabas nang naka-on bilang default",
+        "outcome": "Isang mainstream local runtime o desktop tool na naglalabas ng default-on na on-device embedding kasama ang retrieval, walang panlabas na embedding service",
+        "motivation": "Ang privacy, offline na paggamit, at walang-gastos sa embedding-API ang gumagawang isang default na product differentiator ng built-in na local retrieval",
+        "task": {
+          "who": "ang product team ng local runtime o desktop RAG app",
+          "what": "I-bundle ang on-device embedding at retrieval bilang isang naidodokumentong default",
+          "where": "Isang mainstream local-LLM runtime o desktop RAG application",
+          "when": "Pagbuo sa buong huling bahagi ng 2026 papasok sa Q1 2027",
+          "why": "Naghahatid ang default na local retrieval ng pribado, offline, at walang-API na grounded search",
+          "how": "Isama ang GGUF retriever at isang built-in na local index"
+        }
+      }
+    ]
+  }
+}

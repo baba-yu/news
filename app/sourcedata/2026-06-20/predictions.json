@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-20",
+  "predictions": [
+    {
+      "id": "prediction.9f3c1a7e2b4d6058",
+      "scope_hint": "tech",
+      "title": "Single 24-32GB GPU fine-tuning crosses 100K-token context routine by Q2 2027",
+      "body": "Unsloth's v0.1.47-beta auto-fit context algorithm, paired with multi-token prediction, roughly triples the usable context that fits in fixed GPU memory, lifting a 32GB f16 card from about 23,040 to 64,000 tokens for fine-tuning without spilling. This prediction holds that the local fine-tuning stack will turn that one-off gain into a steady trajectory: a sequence of memory-fit optimizations (auto-fit, multi-token prediction, sequence packing, and quantized-state offload refinements) will compound rather than plateau, so that by Q2 2027 the Unsloth stack documents a single commodity 24-32GB consumer GPU fitting 100,000-plus tokens of usable context for a LoRA/QLoRA fine-tuning run in a published recipe or release note, in f16 or a near-equivalent precision the project ships as default. The economic consequence is that long-context adaptation, today gated behind multi-card or rented A100/H100 capacity, becomes a routine single-card task: a hobbyist or small team can fine-tune a model on book-length or full-repository inputs on one card they already own, collapsing the cost of grounded, long-context personalization toward zero marginal infrastructure spend. The mechanism is the same fixed-memory-fit engineering Unsloth already demonstrates, extended one more doubling, and the trajectory is reinforced by adjacent on-device components like small permissively-licensed embedding models that keep the surrounding retrieval stack local too.",
+      "reasoning": {
+        "because": "Unsloth v0.1.47-beta auto-fit + multi-token prediction tripled fixed-memory context to ~64K on 32GB",
+        "given": "memory-fit gains compound across releases and 24-32GB cards are the local fine-tuning floor",
+        "so_that": "long-context fine-tuning moves from rented multi-GPU capacity to a routine single-card task at near-zero infra cost",
+        "landing": "Unsloth documents 100K+ usable context on one 24-32GB GPU by Q2 2027",
+        "plain_language": "Soon you'll be able to teach an AI on book-length text using just one normal gaming graphics card."
+      },
+      "summary": "Unsloth's v0.1.47-beta auto-fit work tripled the usable fine-tuning context on a fixed-memory GPU. Extending that trajectory, by Q2 2027 the stack should document a single 24-32GB card fitting 100,000-plus tokens in a published recipe, making long-context adaptation a routine single-card task."
+    },
+    {
+      "id": "prediction.aef24ea0af45268a",
+      "scope_hint": "cross",
+      "title": "On-device retrieval ships built-in by default in a local-LLM runtime by Q1 2027",
+      "body": "A widely used local-LLM runtime or RAG framework that runs entirely on-device will ship built-in embedding-and-retrieval as a first-class, default component, so that a user can index documents and run grounded search without ever calling a server-side embedding API. The catalyst is that the historically missing piece for fully local RAG was a small, permissively licensed, genuinely fast multilingual retriever, and Liquid AI's 350M LFM2.5-Embedding and LFM2.5-ColBERT pair, distributed as GGUF builds that run under llama.cpp at sub-10ms query latency on a laptop, removes that bottleneck. Once a retriever this size runs in the same inference stack as the generator and under the same permissive terms, the engineering distance to bundling it as a turnkey 'index-and-ask-your-files' feature collapses. The concrete falsifiable claim: at least one mainstream local runtime or desktop RAG tool (for example a llama.cpp-based app, an Ollama-style runtime, or a comparable local stack) will ship on-device embedding plus retrieval as a documented, default-on capability, with no required external embedding service, by the first quarter of 2027. This would mark on-device retrieval shifting from a hand-wired add-on to standard infrastructure for the local-LLM ecosystem.",
+      "reasoning": {
+        "because": "A 350M multilingual retriever now runs under llama.cpp at sub-10ms latency on a laptop CPU/GPU",
+        "given": "Local-LLM stacks want grounded search but avoid server-side embedding calls for privacy and offline",
+        "so_that": "A mainstream local runtime can bundle embedding+retrieval as a default, turnkey on-device RAG feature",
+        "landing": "By Q1 2027 a named local-LLM runtime ships built-in on-device retrieval",
+        "plain_language": "Soon a popular offline AI app will search your own files by itself, with no need to send them to any server."
+      },
+      "summary": "Small, fast, openly licensed retrievers like Liquid AI's 350M LFM2.5 pair remove the last bottleneck for fully local RAG. The prediction: a mainstream local-LLM runtime or desktop RAG tool ships built-in on-device embedding and retrieval as a default, with no server-side embedding call, by Q1 2027."
+    },
+    {
+      "id": "prediction.42470d9936a2eb30",
+      "scope_hint": "cross",
+      "title": "Coding-agent harnesses adopt default-deny toolset gating as standard by H1 2027",
+      "body": "Nous Research's Blank Slate mode for the open-source Hermes Agent framework, shipped June 20, boots an agent with only a provider/model plus File-Operations and Terminal toolsets, leaving web, browser, code execution, vision, memory, delegation, cron, skills, plugins and MCP servers off until explicitly enabled, and persists those choices durably so a framework update cannot silently re-enable them. That is a textbook least-privilege, attack-surface-reduction posture, and it lands the same week that Codex Record & Replay and Cisco's pipeline-aware FAPO optimizer push more autonomy into the same harnesses. The prediction is that default-off, explicitly-gated toolsets stop being one vendor's opt-in setting and become an expected default for autonomous coding agents: by the first half of 2027 at least three additional named coding-agent harnesses or platforms will ship a least-privilege or default-deny toolset configuration out of the box, or a published agent-security guideline will recommend it as the baseline. The driver is not feature competition but the security reality that an autonomous agent wired to browser, code-exec, MCP and shell access by default is a large, mostly-unaudited attack surface, and durable per-tool gating is the cheapest mitigation that does not break existing workflows.",
+      "reasoning": {
+        "because": "Hermes Blank Slate boots File-Ops + Terminal only, all other toolsets default-off and durably pinned",
+        "given": "agents wired to browser/code-exec/MCP/shell by default are a large unaudited attack surface",
+        "so_that": "least-privilege toolset gating becomes the cheapest mitigation that does not break existing agent workflows",
+        "landing": "By H1 2027, 3+ more coding-agent harnesses ship default-deny toolset gating",
+        "plain_language": "Soon most coding robots will start with almost no powers turned on, so a hacked one can do far less damage."
+      },
+      "summary": "Nous Research's June 20 Hermes Blank Slate mode boots an agent with only file and terminal tools, every other capability off and durably pinned. Answering an attack-surface concern, by H1 2027 three-plus more coding-agent harnesses should ship default-deny toolset gating as baseline."
+    }
+  ]
+}

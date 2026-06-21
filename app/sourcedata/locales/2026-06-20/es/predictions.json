@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-20",
+  "predictions": [
+    {
+      "id": "prediction.9f3c1a7e2b4d6058",
+      "scope_hint": "tech",
+      "title": "El fine-tuning en una sola GPU de 24-32GB cruzará de forma rutinaria el contexto de 100K tokens para el Q2 2027",
+      "body": "El algoritmo de auto-ajuste de contexto de la v0.1.47-beta de Unsloth, combinado con predicción multi-token, aproximadamente triplica el contexto utilizable que cabe en una memoria fija de GPU, llevando una tarjeta de 32GB en f16 de unos 23.040 a 64.000 tokens para fine-tuning sin desbordar. Esta predicción sostiene que el stack de fine-tuning local convertirá esa ganancia puntual en una trayectoria sostenida: una secuencia de optimizaciones de ajuste a memoria (auto-ajuste, predicción multi-token, empaquetado de secuencias y refinamientos de offload de estado cuantizado) se acumulará en lugar de estancarse, de modo que para el Q2 2027 el stack de Unsloth documente una sola GPU de consumo común de 24-32GB que aloja más de 100.000 tokens de contexto utilizable para una ejecución de fine-tuning LoRA/QLoRA en una receta publicada o nota de versión, en f16 o una precisión casi equivalente que el proyecto lance por defecto. La consecuencia económica es que la adaptación de contexto largo, hoy supeditada a capacidad multitarjeta o a alquilar A100/H100, se convierte en una tarea rutinaria de una sola tarjeta: un aficionado o un equipo pequeño puede ajustar un modelo con entradas del tamaño de un libro o de un repositorio completo en una sola tarjeta que ya posee, reduciendo el coste de la personalización fundamentada de contexto largo hacia un gasto marginal de infraestructura cercano a cero. El mecanismo es la misma ingeniería de ajuste a memoria fija que Unsloth ya demuestra, extendida una duplicación más, y la trayectoria se refuerza con componentes en dispositivo adyacentes como pequeños modelos de embedding con licencia permisiva que mantienen local también el resto del stack de recuperación que lo rodea.",
+      "reasoning": {
+        "because": "El auto-ajuste + predicción multi-token de la v0.1.47-beta de Unsloth triplicó el contexto en memoria fija hasta ~64K en 32GB",
+        "given": "las ganancias de ajuste a memoria se acumulan entre versiones y las tarjetas de 24-32GB son el piso del fine-tuning local",
+        "so_that": "el fine-tuning de contexto largo pasa de capacidad multi-GPU alquilada a una tarea rutinaria de una sola tarjeta con coste de infraestructura casi nulo",
+        "landing": "Unsloth documenta más de 100K de contexto utilizable en una sola GPU de 24-32GB para el Q2 2027",
+        "plain_language": "Pronto podrás enseñar a una IA con texto del tamaño de un libro usando solo una tarjeta gráfica de juegos normal."
+      },
+      "summary": "El trabajo de auto-ajuste de la v0.1.47-beta de Unsloth triplicó el contexto de fine-tuning utilizable en una GPU de memoria fija. Extendiendo esa trayectoria, para el Q2 2027 el stack debería documentar una sola tarjeta de 24-32GB alojando más de 100.000 tokens en una receta publicada, haciendo de la adaptación de contexto largo una tarea rutinaria de una sola tarjeta."
+    },
+    {
+      "id": "prediction.aef24ea0af45268a",
+      "scope_hint": "cross",
+      "title": "La recuperación en dispositivo vendrá integrada por defecto en un runtime de LLM local para el Q1 2027",
+      "body": "Un runtime de LLM local ampliamente usado o un framework de RAG que corra enteramente en dispositivo incorporará embedding-y-recuperación integrados como componente de primera clase y activado por defecto, de modo que un usuario pueda indexar documentos y ejecutar búsqueda fundamentada sin llamar nunca a una API de embedding del lado del servidor. El catalizador es que la pieza históricamente ausente para un RAG totalmente local era un recuperador multilingüe pequeño, con licencia permisiva y genuinamente rápido, y el par de 350M LFM2.5-Embedding y LFM2.5-ColBERT de Liquid AI, distribuido como versiones GGUF que corren bajo llama.cpp con latencia de consulta por debajo de 10 ms en un portátil, elimina ese cuello de botella. Una vez que un recuperador de este tamaño corre en el mismo stack de inferencia que el generador y bajo los mismos términos permisivos, la distancia de ingeniería para incluirlo como una función llave en mano de \"indexa-y-pregunta-a-tus-archivos\" se desploma. La afirmación falsable concreta: al menos un runtime local mainstream o herramienta de RAG de escritorio (por ejemplo una app basada en llama.cpp, un runtime al estilo de Ollama, o un stack local comparable) lanzará embedding más recuperación en dispositivo como una capacidad documentada y activada por defecto, sin ningún servicio de embedding externo requerido, para el primer trimestre de 2027. Esto marcaría que la recuperación en dispositivo pasa de ser un añadido cableado a mano a infraestructura estándar para el ecosistema de LLM locales.",
+      "reasoning": {
+        "because": "Un recuperador multilingüe de 350M corre ahora bajo llama.cpp con latencia por debajo de 10 ms en la CPU/GPU de un portátil",
+        "given": "Los stacks de LLM locales quieren búsqueda fundamentada pero evitan las llamadas de embedding del lado del servidor por privacidad y uso sin conexión",
+        "so_that": "Un runtime local mainstream puede incluir embedding+recuperación como una función de RAG en dispositivo llave en mano y activada por defecto",
+        "landing": "Para el Q1 2027 un runtime de LLM local nombrado lanza recuperación en dispositivo integrada",
+        "plain_language": "Pronto una app de IA sin conexión popular buscará en tus propios archivos por sí sola, sin necesidad de enviarlos a ningún servidor."
+      },
+      "summary": "Recuperadores pequeños, rápidos y con licencia abierta como el par de 350M LFM2.5 de Liquid AI eliminan el último cuello de botella para un RAG totalmente local. La predicción: un runtime de LLM local mainstream o una herramienta de RAG de escritorio lanza embedding y recuperación en dispositivo integrados como opción por defecto, sin llamada de embedding del lado del servidor, para el Q1 2027."
+    },
+    {
+      "id": "prediction.42470d9936a2eb30",
+      "scope_hint": "cross",
+      "title": "Los entornos de agentes de programación adoptarán como estándar el control de herramientas con denegación por defecto para el H1 2027",
+      "body": "El modo Blank Slate de Nous Research para el framework de código abierto Hermes Agent, lanzado el 20 de junio, arranca un agente solo con un proveedor/modelo más los conjuntos de herramientas de File-Operations y Terminal, dejando web, navegador, ejecución de código, visión, memoria, delegación, cron, skills, plugins y servidores MCP desactivados hasta que se habiliten explícitamente, y persiste esas elecciones de forma duradera para que una actualización del framework no pueda reactivarlas en silencio. Eso es una postura de manual de mínimo privilegio y reducción de la superficie de ataque, y aterriza la misma semana en que Codex Record & Replay y el optimizador FAPO de Cisco, consciente de la pipeline, empujan más autonomía a esos mismos entornos. La predicción es que los conjuntos de herramientas desactivados por defecto y habilitados de forma explícita dejan de ser el ajuste opcional de un solo proveedor y se convierten en un valor por defecto esperado para los agentes de programación autónomos: para la primera mitad de 2027 al menos tres entornos o plataformas de agentes de programación nombrados adicionales lanzarán de fábrica una configuración de herramientas de mínimo privilegio o de denegación por defecto, o una guía de seguridad de agentes publicada la recomendará como base. El impulsor no es la competencia de funciones sino la realidad de seguridad de que un agente autónomo conectado por defecto a navegador, ejecución de código, MCP y acceso a shell es una superficie de ataque grande y en su mayoría no auditada, y el control duradero por herramienta es la mitigación más barata que no rompe los flujos de trabajo existentes.",
+      "reasoning": {
+        "because": "Hermes Blank Slate arranca solo con File-Ops + Terminal, todos los demás conjuntos de herramientas desactivados por defecto y fijados de forma duradera",
+        "given": "los agentes conectados por defecto a navegador/ejecución de código/MCP/shell son una superficie de ataque grande y no auditada",
+        "so_that": "el control de herramientas de mínimo privilegio se convierte en la mitigación más barata que no rompe los flujos de trabajo de agentes existentes",
+        "landing": "Para el H1 2027, 3+ entornos de agentes de programación más lanzan control de herramientas con denegación por defecto",
+        "plain_language": "Pronto la mayoría de los robots de programación arrancarán casi sin poderes activados, de modo que uno hackeado pueda causar mucho menos daño."
+      },
+      "summary": "El modo Hermes Blank Slate de Nous Research, del 20 de junio, arranca un agente solo con herramientas de archivos y terminal, con cualquier otra capacidad desactivada y fijada de forma duradera. Respondiendo a una preocupación por la superficie de ataque, para el H1 2027 tres o más entornos de agentes de programación más deberían lanzar el control de herramientas con denegación por defecto como base."
+    }
+  ]
+}

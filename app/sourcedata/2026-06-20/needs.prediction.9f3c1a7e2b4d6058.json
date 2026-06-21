@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "local fine-tuning framework maintainer",
+    "job": "Shipping compounding memory-fit optimizations (auto-fit context, multi-token prediction, sequence packing, quantized-state offload) that grow usable context per fixed GPU byte",
+    "outcome": "A published recipe or release note documenting 100K+ usable fine-tuning context on a single 24-32GB consumer GPU",
+    "motivation": "Each fixed-memory gain widens the framework's hobbyist user base and proves single-card long-context adaptation",
+    "task": {
+      "who": "the framework's kernel and memory-optimization team",
+      "what": "Compound auto-fit, multi-token, packing, and offload memory gains",
+      "where": "The open-source fine-tuning library and its release notes",
+      "when": "Each release now through Q1 2027, ahead of the Q2 2027 landing",
+      "why": "Stacking memory-fit gains lifts usable context past 100K tokens",
+      "how": "Auto-fit context plus multi-token prediction on LoRA/QLoRA runs"
+    }
+  },
+  {
+    "actor": "low-bit quantization and GPU-kernel maintainer",
+    "job": "Refining quantized-state offload and 4-bit kernels so fixed-memory fine-tuning packs more tokens without precision loss or spilling",
+    "outcome": "Quantization and offload releases that let a 24-32GB card hold a 100K-token f16-equivalent fine-tuning run",
+    "motivation": "Tighter memory packing is the lever that turns each framework gain into real fittable context on commodity cards",
+    "task": {
+      "who": "the quantization and CUDA-kernel maintainer team",
+      "what": "Ship quantized-state offload and 4-bit kernel refinements",
+      "where": "Open-source quantization and GPU-kernel repositories",
+      "when": "Rolling releases through H2 2026 into Q1 2027",
+      "why": "Tighter packing converts framework gains into fittable on-card context",
+      "how": "4-bit quantization and quantized-state offload kernels"
+    }
+  },
+  {
+    "actor": "on-device retrieval-stack maintainer",
+    "job": "Shipping small permissively-licensed embedding and retrieval models that keep the surrounding long-context pipeline fully local on the same card",
+    "outcome": "A local embedding/retrieval component that keeps grounded long-context personalization on one consumer GPU end-to-end",
+    "motivation": "A fully local retrieval stack makes the single-card long-context fine-tuning use case practical, not just the training step",
+    "task": {
+      "who": "the on-device embedding and retrieval maintainer team",
+      "what": "Ship small permissively-licensed local embedding and retrieval models",
+      "where": "Local-LLM runtimes and embedding-model release repositories",
+      "when": "Releases through H2 2026 into early 2027",
+      "why": "Local retrieval keeps the whole long-context pipeline on one card",
+      "how": "Small GGUF embedding models running in the local inference stack"
+    }
+  }
+]

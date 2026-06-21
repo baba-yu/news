@@ -1,0 +1,137 @@
+{
+  "date": "2026-06-20",
+  "by_prediction": {
+    "prediction.42470d9936a2eb30": [
+      {
+        "actor": "autonomous coding-agent harness maintainer",
+        "job": "Designing toolset and capability defaults for an open-source or commercial coding-agent framework as autonomy and tool count grow",
+        "outcome": "A shipped harness release that boots with a least-privilege, default-off toolset that the user must explicitly enable per capability",
+        "motivation": "An agent wired to browser, code-exec, MCP and shell by default is an unaudited liability; gating it is the cheapest safe default",
+        "task": {
+          "who": "the framework's agent-runtime and security maintainers",
+          "what": "Add a default-deny toolset gating mode to the harness",
+          "where": "The open-source or product coding-agent framework codebase",
+          "when": "Now through H2 2026 release cycles",
+          "why": "Default-on tool access is a large unaudited attack surface",
+          "how": "Per-tool opt-in gating durably pinned against silent re-enable"
+        }
+      },
+      {
+        "actor": "agent-security guideline author",
+        "job": "Drafting and publishing security baselines for autonomous LLM agents as default-on tool access emerges as a recognized risk class",
+        "outcome": "A published agent-security guideline that names least-privilege or default-deny toolset gating as a recommended baseline control",
+        "motivation": "Codifying a concrete, workable mitigation gives the field a citable standard and pressures harnesses to adopt it by default",
+        "task": {
+          "who": "standards-body, OWASP-style, or vendor security-research authors",
+          "what": "Recommend default-deny toolset gating as a baseline control",
+          "where": "A published agent-security framework, standard, or guidance doc",
+          "when": "Now through early 2027 drafting cycles",
+          "why": "The field needs a citable baseline for safe agent tool access",
+          "how": "Least-privilege per-tool gating written into the recommended baseline"
+        }
+      },
+      {
+        "actor": "enterprise agent-platform security lead",
+        "job": "Setting deployment requirements for coding agents inside the org, demanding scoped tool access before approving any autonomous harness",
+        "outcome": "Procurement and platform requirements that force harness vendors to ship default-deny, explicitly-gated toolsets out of the box",
+        "motivation": "Auditability and blast-radius limits are non-negotiable for production agents; default-on tool access fails internal security review",
+        "task": {
+          "who": "enterprise platform and AppSec security leads",
+          "what": "Require scoped, default-off tool access for deployed agents",
+          "where": "Internal agent-deployment policy and vendor procurement requirements",
+          "when": "Now through H2 2026 vendor evaluations",
+          "why": "Default-on agent tool access fails internal security review",
+          "how": "Make per-tool gating a deployment and procurement gate"
+        }
+      }
+    ],
+    "prediction.9f3c1a7e2b4d6058": [
+      {
+        "actor": "local fine-tuning framework maintainer",
+        "job": "Shipping compounding memory-fit optimizations (auto-fit context, multi-token prediction, sequence packing, quantized-state offload) that grow usable context per fixed GPU byte",
+        "outcome": "A published recipe or release note documenting 100K+ usable fine-tuning context on a single 24-32GB consumer GPU",
+        "motivation": "Each fixed-memory gain widens the framework's hobbyist user base and proves single-card long-context adaptation",
+        "task": {
+          "who": "the framework's kernel and memory-optimization team",
+          "what": "Compound auto-fit, multi-token, packing, and offload memory gains",
+          "where": "The open-source fine-tuning library and its release notes",
+          "when": "Each release now through Q1 2027, ahead of the Q2 2027 landing",
+          "why": "Stacking memory-fit gains lifts usable context past 100K tokens",
+          "how": "Auto-fit context plus multi-token prediction on LoRA/QLoRA runs"
+        }
+      },
+      {
+        "actor": "low-bit quantization and GPU-kernel maintainer",
+        "job": "Refining quantized-state offload and 4-bit kernels so fixed-memory fine-tuning packs more tokens without precision loss or spilling",
+        "outcome": "Quantization and offload releases that let a 24-32GB card hold a 100K-token f16-equivalent fine-tuning run",
+        "motivation": "Tighter memory packing is the lever that turns each framework gain into real fittable context on commodity cards",
+        "task": {
+          "who": "the quantization and CUDA-kernel maintainer team",
+          "what": "Ship quantized-state offload and 4-bit kernel refinements",
+          "where": "Open-source quantization and GPU-kernel repositories",
+          "when": "Rolling releases through H2 2026 into Q1 2027",
+          "why": "Tighter packing converts framework gains into fittable on-card context",
+          "how": "4-bit quantization and quantized-state offload kernels"
+        }
+      },
+      {
+        "actor": "on-device retrieval-stack maintainer",
+        "job": "Shipping small permissively-licensed embedding and retrieval models that keep the surrounding long-context pipeline fully local on the same card",
+        "outcome": "A local embedding/retrieval component that keeps grounded long-context personalization on one consumer GPU end-to-end",
+        "motivation": "A fully local retrieval stack makes the single-card long-context fine-tuning use case practical, not just the training step",
+        "task": {
+          "who": "the on-device embedding and retrieval maintainer team",
+          "what": "Ship small permissively-licensed local embedding and retrieval models",
+          "where": "Local-LLM runtimes and embedding-model release repositories",
+          "when": "Releases through H2 2026 into early 2027",
+          "why": "Local retrieval keeps the whole long-context pipeline on one card",
+          "how": "Small GGUF embedding models running in the local inference stack"
+        }
+      }
+    ],
+    "prediction.aef24ea0af45268a": [
+      {
+        "actor": "open-weight retrieval-model lab",
+        "job": "Training small, fast, permissively-licensed multilingual embedding and late-interaction retrievers and packaging them as GGUF builds",
+        "outcome": "A sub-500M MIT/Apache retriever pair distributed as GGUF that runs under llama.cpp at sub-10ms laptop query latency",
+        "motivation": "A genuinely fast tiny open retriever is the missing piece that unlocks the fully-local RAG ecosystem and adoption",
+        "task": {
+          "who": "the lab's embedding-model research and release team",
+          "what": "Train and release a tiny permissive multilingual retriever as GGUF",
+          "where": "Open model hubs and llama.cpp-compatible GGUF distributions",
+          "when": "Now through H2 2026, ahead of Q1 2027 bundling",
+          "why": "A small fast open retriever removes the last fully-local RAG bottleneck",
+          "how": "Distill compact embedding/ColBERT pairs, quantize to GGUF builds"
+        }
+      },
+      {
+        "actor": "local-LLM inference-engine maintainer",
+        "job": "Adding first-class embedding and retrieval support so retrievers run in the same on-device stack as the generator",
+        "outcome": "Runtime APIs and builds that index documents and serve embeddings locally with no server-side embedding call",
+        "motivation": "Co-locating retrieval with generation in one permissive stack collapses the engineering distance to turnkey local RAG",
+        "task": {
+          "who": "the inference engine's core maintainer team",
+          "what": "Ship embedding and on-device retrieval support in the runtime",
+          "where": "llama.cpp-class open-source inference repositories",
+          "when": "Release cadence through H2 2026 into Q1 2027",
+          "why": "One stack for embed and generate enables bundled local RAG",
+          "how": "Add GGUF embedding inference and a local vector index path"
+        }
+      },
+      {
+        "actor": "desktop RAG app developer",
+        "job": "Wiring the local retriever and runtime into a turnkey index-and-ask-your-files feature shipped on by default",
+        "outcome": "A mainstream local runtime or desktop tool shipping default-on on-device embedding plus retrieval, no external embedding service",
+        "motivation": "Privacy, offline use, and zero embedding-API cost make built-in local retrieval a default product differentiator",
+        "task": {
+          "who": "the local runtime or desktop RAG app product team",
+          "what": "Bundle on-device embedding and retrieval as a documented default",
+          "where": "A mainstream local-LLM runtime or desktop RAG application",
+          "when": "Development through late 2026 into Q1 2027",
+          "why": "Default local retrieval delivers private, offline, zero-API grounded search",
+          "how": "Integrate the GGUF retriever and a built-in local index"
+        }
+      }
+    ]
+  }
+}
