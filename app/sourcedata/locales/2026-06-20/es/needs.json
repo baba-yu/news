@@ -1,0 +1,137 @@
+{
+  "date": "2026-06-20",
+  "by_prediction": {
+    "prediction.42470d9936a2eb30": [
+      {
+        "actor": "mantenedor de un entorno de agente de programación autónomo",
+        "job": "Diseñar los valores por defecto de conjuntos de herramientas y capacidades para un framework de agente de programación de código abierto o comercial a medida que crecen la autonomía y el número de herramientas",
+        "outcome": "Una versión lanzada del entorno que arranca con un conjunto de herramientas de mínimo privilegio, desactivado por defecto, que el usuario debe habilitar explícitamente por capacidad",
+        "motivation": "Un agente conectado por defecto a navegador, ejecución de código, MCP y shell es un pasivo no auditado; controlarlo es el valor por defecto seguro más barato",
+        "task": {
+          "who": "los mantenedores del runtime del agente y de seguridad del framework",
+          "what": "Añadir un modo de control de herramientas con denegación por defecto al entorno",
+          "where": "El código del framework de agente de programación de código abierto o de producto",
+          "when": "Desde ahora a lo largo de los ciclos de versión del H2 2026",
+          "why": "El acceso a herramientas activado por defecto es una superficie de ataque grande y no auditada",
+          "how": "Control por herramienta con habilitación explícita, fijado de forma duradera contra la reactivación silenciosa"
+        }
+      },
+      {
+        "actor": "autor de guías de seguridad de agentes",
+        "job": "Redactar y publicar bases de seguridad para agentes LLM autónomos a medida que el acceso a herramientas activado por defecto emerge como una clase de riesgo reconocida",
+        "outcome": "Una guía de seguridad de agentes publicada que nombre el control de herramientas de mínimo privilegio o de denegación por defecto como un control base recomendado",
+        "motivation": "Codificar una mitigación concreta y viable da al campo un estándar citable y presiona a los entornos para adoptarlo por defecto",
+        "task": {
+          "who": "autores de organismos de estandarización, al estilo OWASP, o de investigación de seguridad de proveedores",
+          "what": "Recomendar el control de herramientas con denegación por defecto como control base",
+          "where": "Un framework, estándar o documento de guía de seguridad de agentes publicado",
+          "when": "Desde ahora a lo largo de los ciclos de redacción de principios de 2027",
+          "why": "El campo necesita una base citable para el acceso seguro a herramientas de los agentes",
+          "how": "Control por herramienta de mínimo privilegio escrito en la base recomendada"
+        }
+      },
+      {
+        "actor": "responsable de seguridad de plataforma de agentes empresarial",
+        "job": "Fijar los requisitos de despliegue para los agentes de programación dentro de la organización, exigiendo acceso a herramientas acotado antes de aprobar cualquier entorno autónomo",
+        "outcome": "Requisitos de adquisición y de plataforma que obliguen a los proveedores de entornos a lanzar de fábrica conjuntos de herramientas con denegación por defecto y control explícito",
+        "motivation": "La auditabilidad y los límites del radio de impacto son innegociables para los agentes en producción; el acceso a herramientas activado por defecto no pasa la revisión interna de seguridad",
+        "task": {
+          "who": "responsables de seguridad de plataforma empresarial y de AppSec",
+          "what": "Exigir acceso a herramientas acotado y desactivado por defecto para los agentes desplegados",
+          "where": "La política interna de despliegue de agentes y los requisitos de adquisición a proveedores",
+          "when": "Desde ahora a lo largo de las evaluaciones de proveedores del H2 2026",
+          "why": "El acceso a herramientas de agentes activado por defecto no pasa la revisión interna de seguridad",
+          "how": "Convertir el control por herramienta en una condición de despliegue y de adquisición"
+        }
+      }
+    ],
+    "prediction.9f3c1a7e2b4d6058": [
+      {
+        "actor": "mantenedor de framework de fine-tuning local",
+        "job": "Lanzar optimizaciones acumulativas de ajuste a memoria (auto-ajuste de contexto, predicción multi-token, empaquetado de secuencias, offload de estado cuantizado) que aumenten el contexto utilizable por byte fijo de GPU",
+        "outcome": "Una receta publicada o nota de versión que documente más de 100K de contexto utilizable de fine-tuning en una sola GPU de consumo de 24-32GB",
+        "motivation": "Cada ganancia en memoria fija amplía la base de usuarios aficionados del framework y prueba la adaptación de contexto largo en una sola tarjeta",
+        "task": {
+          "who": "el equipo de kernel y de optimización de memoria del framework",
+          "what": "Acumular las ganancias de memoria de auto-ajuste, multi-token, empaquetado y offload",
+          "where": "La librería de fine-tuning de código abierto y sus notas de versión",
+          "when": "Cada versión desde ahora hasta el Q1 2027, de cara al cierre del Q2 2027",
+          "why": "Apilar las ganancias de ajuste a memoria lleva el contexto utilizable más allá de los 100K tokens",
+          "how": "Auto-ajuste de contexto más predicción multi-token en ejecuciones LoRA/QLoRA"
+        }
+      },
+      {
+        "actor": "mantenedor de cuantización de bajos bits y de kernels de GPU",
+        "job": "Refinar el offload de estado cuantizado y los kernels de 4 bits para que el fine-tuning en memoria fija aloje más tokens sin pérdida de precisión ni desbordamiento",
+        "outcome": "Versiones de cuantización y offload que permitan que una tarjeta de 24-32GB aloje una ejecución de fine-tuning de 100K tokens con equivalencia a f16",
+        "motivation": "Un empaquetado de memoria más ajustado es la palanca que convierte cada ganancia del framework en contexto realmente alojable en tarjetas comunes",
+        "task": {
+          "who": "el equipo mantenedor de cuantización y de kernels CUDA",
+          "what": "Lanzar refinamientos de offload de estado cuantizado y de kernels de 4 bits",
+          "where": "Repositorios de código abierto de cuantización y de kernels de GPU",
+          "when": "Versiones continuas a lo largo del H2 2026 hasta el Q1 2027",
+          "why": "Un empaquetado más ajustado convierte las ganancias del framework en contexto alojable en tarjeta",
+          "how": "Cuantización de 4 bits y kernels de offload de estado cuantizado"
+        }
+      },
+      {
+        "actor": "mantenedor de stack de recuperación en dispositivo",
+        "job": "Lanzar modelos pequeños de embedding y recuperación con licencia permisiva que mantengan totalmente local en la misma tarjeta la pipeline de contexto largo que los rodea",
+        "outcome": "Un componente local de embedding/recuperación que mantiene la personalización fundamentada de contexto largo en una sola GPU de consumo de extremo a extremo",
+        "motivation": "Un stack de recuperación totalmente local hace práctico el caso de uso de fine-tuning de contexto largo en una sola tarjeta, no solo el paso de entrenamiento",
+        "task": {
+          "who": "el equipo mantenedor de embedding y recuperación en dispositivo",
+          "what": "Lanzar modelos pequeños de embedding y recuperación locales con licencia permisiva",
+          "where": "Runtimes de LLM locales y repositorios de lanzamiento de modelos de embedding",
+          "when": "Versiones a lo largo del H2 2026 hasta principios de 2027",
+          "why": "La recuperación local mantiene toda la pipeline de contexto largo en una sola tarjeta",
+          "how": "Modelos de embedding GGUF pequeños corriendo en el stack de inferencia local"
+        }
+      }
+    ],
+    "prediction.aef24ea0af45268a": [
+      {
+        "actor": "laboratorio de modelos de recuperación de pesos abiertos",
+        "job": "Entrenar recuperadores multilingües de embedding e interacción tardía pequeños, rápidos y con licencia permisiva, y empaquetarlos como versiones GGUF",
+        "outcome": "Un par de recuperadores sub-500M MIT/Apache distribuido como GGUF que corre bajo llama.cpp con latencia de consulta por debajo de 10 ms en un portátil",
+        "motivation": "Un recuperador abierto diminuto genuinamente rápido es la pieza que falta para desbloquear el ecosistema y la adopción del RAG totalmente local",
+        "task": {
+          "who": "el equipo de investigación y lanzamiento de modelos de embedding del laboratorio",
+          "what": "Entrenar y lanzar un recuperador multilingüe diminuto y permisivo como GGUF",
+          "where": "Hubs de modelos abiertos y distribuciones GGUF compatibles con llama.cpp",
+          "when": "Desde ahora a lo largo del H2 2026, de cara a la integración del Q1 2027",
+          "why": "Un recuperador abierto pequeño y rápido elimina el último cuello de botella del RAG totalmente local",
+          "how": "Destilar pares compactos de embedding/ColBERT, cuantizar a versiones GGUF"
+        }
+      },
+      {
+        "actor": "mantenedor de motor de inferencia de LLM local",
+        "job": "Añadir soporte de embedding y recuperación de primera clase para que los recuperadores corran en el mismo stack en dispositivo que el generador",
+        "outcome": "APIs de runtime y versiones que indexan documentos y sirven embeddings localmente sin ninguna llamada de embedding del lado del servidor",
+        "motivation": "Co-ubicar la recuperación con la generación en un solo stack permisivo desploma la distancia de ingeniería hacia un RAG local llave en mano",
+        "task": {
+          "who": "el equipo mantenedor central del motor de inferencia",
+          "what": "Lanzar soporte de embedding y recuperación en dispositivo en el runtime",
+          "where": "Repositorios de inferencia de código abierto de la clase llama.cpp",
+          "when": "Ritmo de versiones a lo largo del H2 2026 hasta el Q1 2027",
+          "why": "Un solo stack para embedding y generación habilita el RAG local integrado",
+          "how": "Añadir inferencia de embedding GGUF y una ruta de índice vectorial local"
+        }
+      },
+      {
+        "actor": "desarrollador de app de RAG de escritorio",
+        "job": "Cablear el recuperador local y el runtime en una función llave en mano de indexa-y-pregunta-a-tus-archivos lanzada activada por defecto",
+        "outcome": "Un runtime local mainstream o herramienta de escritorio que lanza embedding más recuperación en dispositivo activados por defecto, sin servicio de embedding externo",
+        "motivation": "La privacidad, el uso sin conexión y el coste cero de API de embedding hacen de la recuperación local integrada un diferenciador de producto por defecto",
+        "task": {
+          "who": "el equipo de producto del runtime local o de la app de RAG de escritorio",
+          "what": "Incluir embedding y recuperación en dispositivo como opción documentada por defecto",
+          "where": "Un runtime de LLM local mainstream o una aplicación de RAG de escritorio",
+          "when": "Desarrollo a lo largo de finales de 2026 hasta el Q1 2027",
+          "why": "La recuperación local por defecto entrega búsqueda fundamentada privada, sin conexión y sin coste de API",
+          "how": "Integrar el recuperador GGUF y un índice local incorporado"
+        }
+      }
+    ]
+  }
+}

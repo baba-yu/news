@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-20",
+  "predictions": [
+    {
+      "id": "prediction.9f3c1a7e2b4d6058",
+      "scope_hint": "tech",
+      "title": "Magiging rutina sa iisang 24-32GB GPU ang fine-tuning na may 100K-token na konteksto pagsapit ng Q2 2027",
+      "body": "Ang auto-fit context algorithm ng Unsloth v0.1.47-beta, kasama ang multi-token prediction, ay halos tinotriple ang magagamit na kontekstong kasya sa fixed na GPU memory, na nag-aangat sa isang 32GB f16 card mula sa humigit-kumulang 23,040 patungong 64,000 token para sa fine-tuning nang hindi umaapaw. Ang hula ay ito: gagawin ng local fine-tuning stack ang isang-beses na pakinabang na iyon tungong isang matatag na trajectory: isang serye ng mga optimisasyon sa memory-fit (auto-fit, multi-token prediction, sequence packing, at pino sa quantized-state offload) ang mag-iipon-ipon sa halip na huminto, kaya pagsapit ng Q2 2027 ay magdodokumento ang Unsloth stack ng isang commodity 24-32GB consumer GPU na nagkakasya ng 100,000-plus na magagamit na token ng konteksto para sa isang LoRA/QLoRA fine-tuning run sa isang inilathalang recipe o release note, sa f16 o sa halos-katumbas na precision na inilalabas ng proyekto bilang default. Ang pang-ekonomiyang epekto ay ito: ang long-context adaptation, na ngayon ay naka-gate sa likod ng multi-card o inuupahang A100/H100 capacity, ay nagiging isang rutinang single-card na gawain: isang hobbyist o maliit na team ang makapag-fine-tune ng isang model sa book-length o full-repository na input sa iisang card na pag-aari na nila, na nagpapababa sa gastos ng grounded at long-context na personalisasyon tungong halos walang marginal na gastos sa infrastructure. Ang mekanismo ay ang parehong fixed-memory-fit na engineering na ipinakita na ng Unsloth, na pinalawig pa nang isang doubling, at pinatitibay ang trajectory ng mga katabing on-device component gaya ng maliliit at permissively-licensed na embedding model na nagpapanatiling local din sa nakapaligid na retrieval stack.",
+      "reasoning": {
+        "because": "Tinriple ng auto-fit + multi-token prediction ng Unsloth v0.1.47-beta ang fixed-memory na konteksto tungong ~64K sa 32GB",
+        "given": "Nag-iipon-ipon ang mga pakinabang sa memory-fit sa bawat release at ang 24-32GB na card ang sahig ng local fine-tuning",
+        "so_that": "Lumilipat ang long-context fine-tuning mula sa inuupahang multi-GPU capacity tungong isang rutinang single-card na gawain sa halos walang gastos sa infra",
+        "landing": "Magdodokumento ang Unsloth ng 100K+ na magagamit na konteksto sa iisang 24-32GB GPU pagsapit ng Q2 2027",
+        "plain_language": "Malapit nang magagawa mong turuan ang isang AI sa teksto na kasinghaba ng isang libro gamit lamang ang isang ordinaryong gaming graphics card."
+      },
+      "summary": "Tinriple ng auto-fit na gawain ng Unsloth v0.1.47-beta ang magagamit na fine-tuning context sa isang fixed-memory na GPU. Sa pagpapalawig ng trajectory na iyon, pagsapit ng Q2 2027 ay dapat magdokumento ang stack ng isang 24-32GB card na nagkakasya ng 100,000-plus na token sa isang inilathalang recipe, na ginagawang rutinang single-card na gawain ang long-context adaptation."
+    },
+    {
+      "id": "prediction.aef24ea0af45268a",
+      "scope_hint": "cross",
+      "title": "Maglalabas ng built-in na on-device retrieval bilang default ang isang local-LLM runtime pagsapit ng Q1 2027",
+      "body": "Isang malawakang ginagamit na local-LLM runtime o RAG framework na tumatakbo nang buong on-device ang maglalabas ng built-in na embedding-at-retrieval bilang isang first-class at default na component, kaya makapag-iindex ang isang user ng mga dokumento at makapagsagawa ng grounded search nang hindi kailanman tumatawag sa isang server-side embedding API. Ang katalista ay ito: ang historikal na nawawalang piyesa para sa ganap na local na RAG ay isang maliit, permissively licensed, at tunay na mabilis na multilingual retriever, at ang 350M LFM2.5-Embedding at LFM2.5-ColBERT pair ng Liquid AI, na ipinamamahagi bilang GGUF build na tumatakbo sa ilalim ng llama.cpp sa sub-10ms na query latency sa isang laptop, ay nag-aalis sa sagabal na iyon. Kapag ang isang retriever na ganito kalaki ay tumakbo sa parehong inference stack ng generator at sa ilalim ng parehong permissive na termino, gumuguho ang engineering distance tungo sa pag-bundle nito bilang isang turnkey na 'index-and-ask-your-files' na feature. Ang konkreto at falsifiable na angkin: hindi bababa sa isang mainstream local runtime o desktop RAG tool (halimbawa ay isang llama.cpp-based na app, isang Ollama-style na runtime, o isang katulad na local stack) ang maglalabas ng on-device embedding kasama ang retrieval bilang isang naidodokumento at default-on na kakayahan, nang walang kinakailangang panlabas na embedding service, pagsapit ng unang quarter ng 2027. Magtatakda ito ng paglipat ng on-device retrieval mula sa isang hand-wired na add-on patungong standard na infrastructure para sa local-LLM ecosystem.",
+      "reasoning": {
+        "because": "Isang 350M na multilingual retriever ang tumatakbo na ngayon sa ilalim ng llama.cpp sa sub-10ms na latency sa isang laptop CPU/GPU",
+        "given": "Gusto ng mga local-LLM stack ng grounded search ngunit iniiwasan ang server-side embedding call para sa privacy at offline",
+        "so_that": "Makakapag-bundle ang isang mainstream local runtime ng embedding+retrieval bilang isang default at turnkey na on-device RAG feature",
+        "landing": "Pagsapit ng Q1 2027 ay maglalabas ang isang pinangalanang local-LLM runtime ng built-in na on-device retrieval",
+        "plain_language": "Malapit nang hahanapin ng isang sikat na offline AI app ang sarili mong mga file nang mag-isa, nang hindi na kailangang ipadala ang mga ito sa anumang server."
+      },
+      "summary": "Ang maliliit, mabilis, at lantarang lisensyado na mga retriever gaya ng 350M LFM2.5 pair ng Liquid AI ay nag-aalis sa huling sagabal sa ganap na local na RAG. Ang hula: isang mainstream local-LLM runtime o desktop RAG tool ang maglalabas ng built-in na on-device embedding at retrieval bilang default, nang walang server-side embedding call, pagsapit ng Q1 2027."
+    },
+    {
+      "id": "prediction.42470d9936a2eb30",
+      "scope_hint": "cross",
+      "title": "Magiging standard ang default-deny toolset gating sa mga coding-agent harness pagsapit ng H1 2027",
+      "body": "Ang Blank Slate mode ng Nous Research para sa open-source na Hermes Agent framework, na inilabas noong June 20, ay nagbu-boot ng isang agent na may provider/model kasama ang File-Operations at Terminal toolset lamang, na iniiwang naka-off ang web, browser, code execution, vision, memory, delegation, cron, skills, plugins at MCP server hanggang hayagang i-enable, at matibay na pinananatili ang mga pagpiling iyon kaya hindi sila tahimik na muling maa-enable ng isang framework update. Iyon ay isang tipikal na least-privilege na postura para bawasan ang attack surface, at naganap ito sa parehong linggo na itinutulak ng Codex Record & Replay at ng pipeline-aware na FAPO optimizer ng Cisco ang mas maraming autonomy sa parehong mga harness. Ang hula ay ito: titigil na maging opt-in na setting ng iisang vendor ang default-off at hayagang naka-gate na toolset at magiging inaasahang default para sa mga autonomous coding agent: pagsapit ng unang kalahati ng 2027 ay hindi bababa sa tatlo pang pinangalanang coding-agent harness o platform ang maglalabas ng isang least-privilege o default-deny na toolset configuration out of the box, o isang inilathalang patnubay sa seguridad ng agent ang magrerekomenda nito bilang baseline. Ang nagtutulak ay hindi kompetisyon sa feature kundi ang realidad sa seguridad na ang isang autonomous agent na nakakabit sa browser, code-exec, MCP at shell bilang default ay isang malaki at halos hindi-na-audit na attack surface, at ang matibay na per-tool gating ang siyang pinakamurang mitigasyon na hindi sumisira sa umiiral na mga workflow.",
+      "reasoning": {
+        "because": "Nagbu-boot ang Hermes Blank Slate ng File-Ops + Terminal lamang, lahat ng iba pang toolset ay default-off at matibay na naka-pin",
+        "given": "Ang mga agent na nakakabit sa browser/code-exec/MCP/shell bilang default ay isang malaking hindi-na-audit na attack surface",
+        "so_that": "Nagiging pinakamurang mitigasyon na hindi sumisira sa umiiral na mga workflow ng agent ang least-privilege na toolset gating",
+        "landing": "Pagsapit ng H1 2027, 3+ pang coding-agent harness ang maglalabas ng default-deny toolset gating",
+        "plain_language": "Malapit nang magsisimula ang karamihan ng coding robot na halos walang naka-on na kapangyarihan, kaya mas kakaunti ang masisira ng isang na-hack."
+      },
+      "summary": "Ang Hermes Blank Slate mode ng Nous Research noong June 20 ay nagbu-boot ng isang agent na may file at terminal tool lamang, lahat ng iba pang kakayahan ay naka-off at matibay na naka-pin. Bilang tugon sa isang alalahanin sa attack surface, pagsapit ng H1 2027 ay dapat maglabas ang tatlo-pa na coding-agent harness ng default-deny toolset gating bilang baseline."
+    }
+  ]
+}

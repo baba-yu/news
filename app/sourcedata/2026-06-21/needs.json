@@ -1,0 +1,137 @@
+{
+  "date": "2026-06-21",
+  "by_prediction": {
+    "prediction.35f8ffc56ab13c91": [
+      {
+        "actor": "frontier-lab post-training research team",
+        "job": "Folding a small share of beneficial-trait reinforcement learning into the standard post-training pipeline so the robustness gain survives from a research write-up into a shippable model property",
+        "outcome": "An internal post-training run on a production-candidate model showing a persona-level RL stage that improves jailbreak and harmful-fine-tuning resistance without degrading capability",
+        "motivation": "The method buys broad cross-domain robustness for only a small slice of the RL data budget, exactly the surface buyers and regulators distrust most, making it cheap to fold into the next generation",
+        "task": {
+          "who": "the lab's alignment and post-training researchers",
+          "what": "Integrate a small-dose beneficial-trait RL stage into standard post-training",
+          "where": "The lab's production model post-training pipeline",
+          "when": "Across post-training runs from now through late 2026 ahead of the H1 2027 landing",
+          "why": "A cheap RL slice generalizes into broad jailbreak and fine-tune robustness",
+          "how": "Reusing the misalignment-generalization mechanism on a small persona-RL data fraction"
+        }
+      },
+      {
+        "actor": "lab safety-evaluation and benchmarking team",
+        "job": "Running the independent alignment and jailbreak benchmarks that confirm the trait-RL stage lifts robustness across domains and resists harmful fine-tuning before it ships",
+        "outcome": "A benchmark sweep replicating the 44-of-53 cross-domain lift plus selective-persistence and harmful-fine-tuning-resistance results on a release-candidate model",
+        "motivation": "Documented robustness gains on independent safety benchmarks are what let the technique be claimed as a product property rather than a one-off paper result",
+        "task": {
+          "who": "the lab's safety-evaluation and red-team engineers",
+          "what": "Verify the trait-RL robustness and selective-persistence gains across benchmarks",
+          "where": "The lab's internal alignment and jailbreak benchmark suite",
+          "when": "During release-candidate evaluation through the first half of 2027",
+          "why": "Independent benchmark confirmation lets the gain be reported as a shipped property",
+          "how": "Adversarial prompt and harmful-fine-tuning attacks against baseline versus trait-RL variants"
+        }
+      },
+      {
+        "actor": "model and system card documentation owner",
+        "job": "Writing the model or system card so the beneficial-trait RL stage and its robustness gain are documented as part of standard post-training for a generally available model",
+        "outcome": "A published model-card or post-training methodology note for a GA model stating a persona-RL stage was applied and tied to a jailbreak or harmful-fine-tuning robustness gain",
+        "motivation": "The prediction lands only when the technique is documented on a shipped product, so the card is the artifact that crosses it from research into a reported property",
+        "task": {
+          "who": "the lab's model-card and policy documentation owner",
+          "what": "Document the trait-RL post-training stage and its robustness gain in the card",
+          "where": "The model or system card for a generally available model",
+          "when": "At the model's general-availability release by the end of H1 2027",
+          "why": "Documenting it on a shipped model is what satisfies the prediction's claim",
+          "how": "A post-training methodology note tying the persona-RL stage to measured robustness"
+        }
+      }
+    ],
+    "prediction.5eed2648ecc5a61d": [
+      {
+        "actor": "frontier life-science research-agent lab",
+        "job": "Treating the artifact gap as the explicit optimization target via rubric-targeted post-training on artifact-bearing tasks rather than larger context windows",
+        "outcome": "A named GPT-Rosalind-successor or scientific-agent system reporting a sub-10-point LifeSciBench artifact-vs-text spread at or above current overall accuracy",
+        "motivation": "The artifact gap is the cleanest, most-cited objection a lab can move, and quantifying its shrinkage is the precondition before anyone trusts the agent with real experimental data",
+        "task": {
+          "who": "an OpenAI/DeepMind/Isomorphic-class research-agent team",
+          "what": "Post-train an agent to lift artifact-task accuracy toward its text-only level",
+          "where": "On LifeSciBench or a comparably artifact-grounded successor benchmark",
+          "when": "A reported result landing by H2 2027, with training runs through 2026 into 2027",
+          "why": "The 17-point artifact cliff is the single most-cited weakness blocking trust",
+          "how": "Rubric-targeted RL on artifact-bearing tasks plus file-aware tool use"
+        }
+      },
+      {
+        "actor": "scientific-format parser and tool maintainer",
+        "job": "Shipping native readers and file-aware tools for genomic sequence, chemical-structure, and raw-assay formats so an agent can parse the data objects a working scientist manipulates",
+        "outcome": "A robust agent-callable toolset that ingests sequence/structure/experimental-data files and URLs without the agent falling back to prose reasoning",
+        "motivation": "Tool-and-parser grounding is the tractable mechanism that converts a fluent-in-prose model into one that handles real data objects",
+        "task": {
+          "who": "the bioinformatics and cheminformatics tooling maintainer team",
+          "what": "Build native parsers and file-aware tool wrappers for scientific artifacts",
+          "where": "In open-source bio/chem libraries and the agent tool-calling layer",
+          "when": "Rolling releases through 2026 ahead of the H2 2027 landing",
+          "why": "Native artifact readers are the direct lever against the measured failure",
+          "how": "Format-specific readers exposed as structured, file-aware agent tools"
+        }
+      },
+      {
+        "actor": "artifact-grounded benchmark maintainer",
+        "job": "Maintaining and extending LifeSciBench so it keeps both text-only and real-artifact task tracks that isolate and quantify the gap as an optimization target",
+        "outcome": "A live, accepted benchmark that separately scores artifact and text tasks, letting any submission report a comparable sub-10-point spread",
+        "motivation": "A standing artifact-vs-text split turns the most-cited objection into a tracked, falsifiable number labs can compete to shrink",
+        "task": {
+          "who": "the LifeSciBench (or successor benchmark) maintainer team",
+          "what": "Keep a paired artifact-task and text-only track that measures the gap",
+          "where": "On the public LifeSciBench leaderboard and its successor evaluations",
+          "when": "Sustained through 2026 and 2027 so H2 2027 submissions are comparable",
+          "why": "A stable artifact split is needed for the gap claim to be falsifiable",
+          "how": "Curating artifact-bearing tasks and reporting artifact and text scores separately"
+        }
+      }
+    ],
+    "prediction.99a46fc31e41627a": [
+      {
+        "actor": "incumbent SAST/ASPM vendor",
+        "job": "Bolting a sandboxed proof-of-exploit stage onto its existing scanner so findings are confirmed reachable before they reach a human, not just CVSS-scored",
+        "outcome": "A shipped release or documented feature that automatically builds and runs a sandbox exploit to validate a finding before surfacing it",
+        "motivation": "Buyers drowning in unreachable findings won't renew a scanner that only adds noise, so validation becomes the renewal-defining differentiator",
+        "task": {
+          "who": "the vendor's application-security product and detection-engineering team",
+          "what": "Add an exploit-validation stage that proves reachability in a sandbox before alerting",
+          "where": "The vendor's ASPM/SAST platform and its release notes",
+          "when": "Through H2 2026 into H1 2027, ahead of the H1 2027 landing",
+          "why": "False-alarm reduction is now the competitive frontier over raw finding count",
+          "how": "An agent that constructs and runs a working proof-of-exploit against each candidate finding"
+        }
+      },
+      {
+        "actor": "autonomous-pentest startup",
+        "job": "Productizing its live offensive-security agent so it auto-constructs and runs proof-of-exploit as a confirmation stage other security tools can adopt",
+        "outcome": "A released or documented offensive-agent feature that turns a finding into a sandbox-validated exploit before it is surfaced",
+        "motivation": "Its demoed exploit-building agents are the cheapest credible substrate for the validation guarantee buyers now demand",
+        "task": {
+          "who": "the autonomous-pentest startup's offensive-agent engineering team",
+          "what": "Ship an exploit-construction agent as a finding-confirmation stage",
+          "where": "The startup's offensive-security platform and integration partners",
+          "when": "From now through H1 2027, building on this week's live agent demos",
+          "why": "Machine-built proof-of-exploit is the cheapest way to guarantee a finding is real",
+          "how": "An LLM-driven agent that builds and detonates exploits in an isolated sandbox"
+        }
+      },
+      {
+        "actor": "rival cloud security platform",
+        "job": "Matching AWS Continuum with its own AI-native validation-by-construction service so exploit-proof becomes table stakes across hyperscalers",
+        "outcome": "A launched or documented cloud security service that runs sandbox exploit-validation to filter findings before they reach a customer",
+        "motivation": "Letting Continuum own validation-by-construction concedes the AI-security narrative, so a rival cloud must ship parity",
+        "task": {
+          "who": "the rival cloud's AI security service product team",
+          "what": "Launch a model-agnostic vulnerability service that validates findings by building exploits",
+          "where": "The competing cloud's security product portfolio and summit announcements",
+          "when": "Through H2 2026 into H1 2027 to land within the prediction window",
+          "why": "Exploit-validation is becoming the expected baseline, not a single hyperscaler's edge",
+          "how": "A sandboxed proof-of-exploit pipeline wired into the cloud's vulnerability-management service"
+        }
+      }
+    ]
+  }
+}

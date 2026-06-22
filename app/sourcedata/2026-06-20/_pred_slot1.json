@@ -1,0 +1,14 @@
+{
+  "id": "prediction.9f3c1a7e2b4d6058",
+  "scope_hint": "tech",
+  "title": "Single 24-32GB GPU fine-tuning crosses 100K-token context routine by Q2 2027",
+  "body": "Unsloth's v0.1.47-beta auto-fit context algorithm, paired with multi-token prediction, roughly triples the usable context that fits in fixed GPU memory, lifting a 32GB f16 card from about 23,040 to 64,000 tokens for fine-tuning without spilling. This prediction holds that the local fine-tuning stack will turn that one-off gain into a steady trajectory: a sequence of memory-fit optimizations (auto-fit, multi-token prediction, sequence packing, and quantized-state offload refinements) will compound rather than plateau, so that by Q2 2027 the Unsloth stack documents a single commodity 24-32GB consumer GPU fitting 100,000-plus tokens of usable context for a LoRA/QLoRA fine-tuning run in a published recipe or release note, in f16 or a near-equivalent precision the project ships as default. The economic consequence is that long-context adaptation, today gated behind multi-card or rented A100/H100 capacity, becomes a routine single-card task: a hobbyist or small team can fine-tune a model on book-length or full-repository inputs on one card they already own, collapsing the cost of grounded, long-context personalization toward zero marginal infrastructure spend. The mechanism is the same fixed-memory-fit engineering Unsloth already demonstrates, extended one more doubling, and the trajectory is reinforced by adjacent on-device components like small permissively-licensed embedding models that keep the surrounding retrieval stack local too.",
+  "reasoning": {
+    "because": "Unsloth v0.1.47-beta auto-fit + multi-token prediction tripled fixed-memory context to ~64K on 32GB",
+    "given": "memory-fit gains compound across releases and 24-32GB cards are the local fine-tuning floor",
+    "so_that": "long-context fine-tuning moves from rented multi-GPU capacity to a routine single-card task at near-zero infra cost",
+    "landing": "Unsloth documents 100K+ usable context on one 24-32GB GPU by Q2 2027",
+    "plain_language": "Soon you'll be able to teach an AI on book-length text using just one normal gaming graphics card."
+  },
+  "summary": "Unsloth's v0.1.47-beta auto-fit work tripled the usable fine-tuning context on a fixed-memory GPU. Extending that trajectory, by Q2 2027 the stack should document a single 24-32GB card fitting 100,000-plus tokens in a published recipe, making long-context adaptation a routine single-card task."
+}

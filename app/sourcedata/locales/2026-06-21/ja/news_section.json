@@ -1,0 +1,57 @@
+{
+  "date": "2026-06-21",
+  "sections": [
+    {
+      "category": "AWS はニューヨーク・サミットを舞台に、エージェント基盤へ業務コンテキストと AI 駆動の脆弱性サービスを組み込み、自律エージェントは職場で信頼されるだけの知識とセキュリティをまだ備えていないと主張した",
+      "bullets": [
+        {
+          "body": "ニューヨーク・サミット（6月17日開催、報道は週末まで続いた）で AWS は、企業向けエージェントを阻む根本的な要因を「業務コンテキストの欠如」と「セキュリティの欠如」と位置づけ、その両方を正面から狙う2つのサービスを発表した。AWS Context は、組織が既に保有するデータ（データベース、文書、メール、チャット）と業務ルールから、ガバナンスの効いたナレッジグラフを自動的に構築し、それを社内のどのエージェントでも実行時に問い合わせられるエージェント型検索レイヤーとして提供する。アクセス制御が組み込まれており、エージェントは呼び出し元が閲覧を許可された範囲しか見られない。さらに、どの情報源が正しい答えを返すかを時間とともに学習していく。これは、不完全あるいは誤った組織内知識をもとにエージェントが自信たっぷりに振る舞ってしまうという、繰り返し起きる失敗に対処するものだ。AWS Continuum は、コードを対象とした AI ネイティブかつモデル非依存の脆弱性管理サービスで、4段階のループを回す。まず discover（既存のバックログと独立したスキャンを取り込み、攻撃経路を俯瞰する）、次に到達可能性と本番・業務上の影響で prioritize（優先順位付け）し、サンドボックス内で実際に動く攻撃コードを構築して検出が本物であることを証明し誤検知を取り除く validate（検証）、そして network・policy・code のいずれかの修正を recommend（提案）して再検証する。AWS によれば、攻撃経路を推論するために Claude Mythos を含むフロンティアモデルを活用しており、すべての判断は説明可能で監査できるという。本サービスは金融、自動車、テクノロジー各業界のパイロット顧客とともに、限定公開のプレビュー段階にある。あわせて Bedrock AgentCore には、エージェントの動作をプロンプトインジェクション・有害コンテンツ・機微データの露出について審査する Guardrails、数百件のエージェントセッションを横断して失敗・意図・軌跡に関する知見を可視化する最適化分析、そして Check Point、Zscaler、SentinelOne、Netskope、Rubrik から提供予定の検知シグナルが追加された。これは自律エージェントに対する具体的な最小権限・挙動監視の体制と言える。提供状況や機能に関する主張は AWS 自身によるものだ。 <a href=\"https://aws.amazon.com/blogs/aws/top-announcements-of-the-aws-summit-in-new-york-2026/\">AWS - 2026年ニューヨーク AWS サミットの主要発表</a> <a href=\"https://aws.amazon.com/blogs/security/introducing-aws-continuum-security-at-machine-speed/\">AWS セキュリティブログ - AWS Continuum の紹介: マシンスピードのセキュリティ</a> <a href=\"https://www.aboutamazon.com/news/aws/aws-summit-nyc-2026-ai-agents\">About Amazon - 2026年 AWS ニューヨーク・サミット: AI エージェントを職場でより役立たせる新しい方法</a>",
+          "citations": [
+            {"label": "AWS - 2026年ニューヨーク AWS サミットの主要発表", "url": "https://aws.amazon.com/blogs/aws/top-announcements-of-the-aws-summit-in-new-york-2026/"},
+            {"label": "AWS セキュリティブログ - AWS Continuum の紹介: マシンスピードのセキュリティ", "url": "https://aws.amazon.com/blogs/security/introducing-aws-continuum-security-at-machine-speed/"},
+            {"label": "About Amazon - 2026年 AWS ニューヨーク・サミット: AI エージェントを職場でより役立たせる新しい方法", "url": "https://www.aboutamazon.com/news/aws/aws-summit-nyc-2026-ai-agents"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "OpenAI は、有益な特性を強化する強化学習をポストトレーニングに少量だけ混ぜると、モデルが全般的に安全になり、ジェイルブレイクや悪意あるファインチューニングで挙動を崩されにくくなると報告した",
+      "bullets": [
+        {
+          "body": "OpenAI は6月19日、研究成果「Reinforcement Learning Towards Broadly and Persistently Beneficial Models」を公開し、創発的なミスアライメントの背後にあるのと同じ汎化のしくみを、逆方向に向けられると論じた。この手法では、医療・教育・科学・法律・工学にまたがる現実的な会話を題材に、強化学習を通じて6つの目標特性を強める。すなわち、誠実さ、認識上の謙虚さ、是正可能性（corrigibility）、推論の透明性、公平性、そして人間の幸福への配慮である。重要なのは、この有益な特性のデータをごく一部だけ、それ以外は通常どおりの RL ポストトレーニング工程に織り込んでいる点だ。チームの報告によれば、訓練したモデルは、欺瞞・正直さ・追従（sycophancy）・報酬ハッキング・健康とメンタルヘルスに関する挙動を測る53の独立したベンチマークのうち44で改善した。さらにその効果は分野を越えて汎化し、健康データだけで訓練しても健康以外の評価が押し上げられ、その逆も成り立った。これは、訓練が狭い規則を丸暗記させるのではなく、モデルの広範な人格そのものを動かしているという考え方と整合する。セキュリティの観点で見出しになるのは、2つの頑健性の発見だ。1つは「選択的持続性（selective persistence）」で、ベースラインを不安定にした敵対的プロンプトの効果が、訓練後のモデルでは明らかに弱まった。もう1つは、悪意あるファインチューニングが、植え付けられた特性を侵食しにくくなった一方で、正当な指示には依然として柔軟に従えたことであり、ジェイルブレイクおよびファインチューニング攻撃への耐性を直接押し上げるものだ。OpenAI は、経験的に測定できる特性を RL で強化する自分たちの手法を、Anthropic の明示的な憲法（constitution）方式とは異なるものと位置づけている。同社は本研究が予備的なものであり、有益特性データの効果を通常のポストトレーニング RL から完全には切り分けられていないと注意を促している。数値は OpenAI 自身によるもので、独立した再現が待たれる。 <a href=\"https://alignment.openai.com/beneficial-rl\">OpenAI - 広範かつ持続的に有益なモデルへ向けた強化学習</a> <a href=\"https://cdn.openai.com/pdf/beneficial-rl.pdf\">OpenAI - Reinforcement Learning Towards Broadly and Persistently Beneficial Models（PDF）</a> <a href=\"https://the-decoder.com/openai-researchers-show-small-doses-of-beneficial-trait-training-make-ai-models-broadly-safer-and-harder-to-manipulate/\">The Decoder - 有益特性の訓練を少量加えると AI モデルが全般的に安全になり操作されにくくなることを OpenAI の研究者が示す</a>",
+          "citations": [
+            {"label": "OpenAI - 広範かつ持続的に有益なモデルへ向けた強化学習", "url": "https://alignment.openai.com/beneficial-rl"},
+            {"label": "OpenAI - Reinforcement Learning Towards Broadly and Persistently Beneficial Models（PDF）", "url": "https://cdn.openai.com/pdf/beneficial-rl.pdf"},
+            {"label": "The Decoder - 有益特性の訓練を少量加えると AI モデルが全般的に安全になり操作されにくくなることを OpenAI の研究者が示す", "url": "https://the-decoder.com/openai-researchers-show-small-doses-of-beneficial-trait-training-make-ai-models-broadly-safer-and-harder-to-manipulate/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "OpenAI の新ベンチマーク LifeSciBench は、専門家のルーブリックを用いて750の実際のライフサイエンス研究タスクでモデルを採点する。最良のモデルでも約3分の1しか正解できず、エージェントが自律的な実験作業からいかに遠いかを露わにした",
+      "bullets": [
+        {
+          "body": "OpenAI は、バイオテクノロジーと製薬の現場から集まった博士号レベルの科学者173名とともに構築した、ライフサイエンス研究向けの750タスクからなるベンチマーク LifeSciBench を公開した。関連報道は6月20日まで続いた。教科書的な生物学クイズとは異なり、タスクは自由記述形式で、平均して約25項目の基準からなる専門家作成のルーブリック（合計でおよそ19,020項目）に照らして採点される。多くのタスクは、ゲノム配列ファイル、化学構造ファイル、実験データといった実際の科学的成果物を解釈することを求め、文章だけから答えることはできない。結果は手厳しい現実の確認となった。評価された最良のモデルである OpenAI のライフサイエンス向けモデル GPT-Rosalind が正解できたタスクは約36.1%にとどまった（最良のモデルでも約63.9%を取りこぼしたという見出しが、報道の多くを牽引した）。最も示唆的な内訳は成果物の壁（artifact gap）だ。GPT-Rosalind の正答率は、テキストのみのタスクでの45.1%から、ファイルや作業対象の URL を含むタスクになると28.1%へ落ち込んだ。設計・最適化・多段階分析のタスクも同様に難しく、約30%しか正解できなかった。ライフサイエンス応用分野にとって、これは自律研究エージェントの具体的な上限を示すものだ。モデルは科学を語ることはできても、現場の科学者が実際に扱うデータオブジェクトを解析しようとするとつまずく。そして、信頼できる実験室の自動化や計算生物学の自動化が成功しなければならないのは、まさにその部分なのだ。OpenAI が自ら執筆し、自社の GPT-Rosalind モデルの更新と同時に公開したベンチマークである以上、その枠組みやスコアはベンダーのものであり、外部の精査を招くものだ。 <a href=\"https://www.marktechpost.com/2026/06/17/openai-releases-lifescibench-a-750-task-benchmark-grading-ai-models-on-real-life-science-research-with-expert-written-rubric/\">MarkTechPost - OpenAI が LifeSciBench を公開、実際のライフサイエンス研究で AI モデルを採点する750タスクのベンチマーク</a> <a href=\"https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/\">OpenAI - GPT-Rosalind の新機能を紹介</a> <a href=\"https://labcritics.com/blog/2026/06/19/lifescibench-openais-hard-new-life-science-benchmark-and-how-gpt-rosalind-stacks-up/\">Labcritics - LifeSciBench: OpenAI の手強い新ライフサイエンス・ベンチマークと GPT-Rosalind の実力</a>",
+          "citations": [
+            {"label": "MarkTechPost - OpenAI が LifeSciBench を公開、実際のライフサイエンス研究で AI モデルを採点する750タスクのベンチマーク", "url": "https://www.marktechpost.com/2026/06/17/openai-releases-lifescibench-a-750-task-benchmark-grading-ai-models-on-real-life-science-research-with-expert-written-rubric/"},
+            {"label": "OpenAI - GPT-Rosalind の新機能を紹介", "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/"},
+            {"label": "Labcritics - LifeSciBench: OpenAI の手強い新ライフサイエンス・ベンチマークと GPT-Rosalind の実力", "url": "https://labcritics.com/blog/2026/06/19/lifescibench-openais-hard-new-life-science-benchmark-and-how-gpt-rosalind-stacks-up/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま予定に入れておくべき AI イベント: 数日後に迫る機密コンピューティングと攻撃的セキュリティのトラック、続いて AI Engineer World's Fair、そして秋まで続くチップとセキュリティのカレンダー",
+      "bullets": [
+        {
+          "body": "3つのサブトラックすべてにまたがる今後のカレンダーで、直近のイベントは数日後に迫り、終了日を過ぎたものはまだ一つもない。メインストリームの開発・データ系: Snowflake は6月25日にバーチャルの Dev Day を開催する（2つの著名講演に加え、エージェント型 AI のハンズオンラボ付き）。AI Engineer World's Fair は Moscone West を貸し切り、メインプログラムを6月29日から7月2日まで実施する（任意参加の New Engineer Orientation は6月28日）。20を超えるトラック、約250名の登壇者、専用の Inference トラックと Security トラックを擁し、OpenAI、Anthropic、Google DeepMind、Amazon AGI Labs、Microsoft が会場に並ぶ、技術系として最大規模の AI エンジニアリング会議と銘打たれている。これに先立ち、6月27日〜28日には Cerebral Valley と組んだ公式の AIE World's Fair Hackathon が開かれる。さらに先では、GitHub Universe が10月28日〜29日に戻ってきて、AWS re:Invent はラスベガスで11月30日から12月4日まで開催される。AI セキュリティ系: Confidential Computing Summit が6月23日〜24日にサンフランシスコの The Mint で開かれる（Linux Foundation と OPAQUE による主催で、AMD、Google、Microsoft、NVIDIA、Meta、Samsung らが登壇する機密 AI とデータ主権の基調講演を擁する）。AI Tinkerers San Francisco は6月25日に Offensive Security Demo Night を主催し、自律型ペンテストエージェントのライブデモを行う（スポンサーは XBOW）。SecurityWeek の AI Risk Summit は8月11日〜12日に Half Moon Bay で続く。Black Hat USA の AI Summit は8月1日〜6日にラスベガスで、DEF CON の AI Village と並行して開催される。OWASP Global AppSec USA は11月5日〜6日にサンフランシスコで開かれる。Zenity の AI Agent Security Summit シリーズは引き続き注視対象だ。AI チップ・ハードウェア系: AMD の Advancing AI 2026 は7月22日〜23日に Moscone で予定されている（Instinct MI400 シリーズが焦点になる見込みで、基調講演は7月23日）。Hot Chips 2026 は8月23日〜25日に Stanford で開かれる。AI Infra Summit は9月15日〜17日に Santa Clara Convention Center で開催される。 <a href=\"https://www.ai.engineer/worldsfair/2026\">AI Engineer World's Fair 2026（6月29日〜7月2日、サンフランシスコ）</a> <a href=\"https://events.linuxfoundation.org/confidential-computing-summit/\">Linux Foundation - Confidential Computing Summit 2026（6月23日〜24日、サンフランシスコ）</a> <a href=\"https://www.amd.com/en/corporate/events/advancing-ai.html\">AMD - Advancing AI 2026（7月22日〜23日、サンフランシスコ）</a>",
+          "citations": [
+            {"label": "AI Engineer World's Fair 2026（6月29日〜7月2日、サンフランシスコ）", "url": "https://www.ai.engineer/worldsfair/2026"},
+            {"label": "Linux Foundation - Confidential Computing Summit 2026（6月23日〜24日、サンフランシスコ）", "url": "https://events.linuxfoundation.org/confidential-computing-summit/"},
+            {"label": "AMD - Advancing AI 2026（7月22日〜23日、サンフランシスコ）", "url": "https://www.amd.com/en/corporate/events/advancing-ai.html"}
+          ]
+        }
+      ]
+    }
+  ]
+}
