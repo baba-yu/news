@@ -1,0 +1,123 @@
+{
+  "date": "2026-06-30",
+  "by_prediction": {
+    "prediction.763542bfa1346adf": [
+      {
+        "actor": "Rival OSS inference-engine maintainer",
+        "job": "Re-architecting model loading and KV-cache management to match vLLM's quantized-by-default plus tiered KV-offload baseline so they don't cede throughput-per-dollar.",
+        "outcome": "A released engine version where quantized model loading and tiered KV-cache offload are documented out-of-the-box defaults, not opt-in tuning.",
+        "motivation": "Competitive parity: shipping FP16-by-default and full-precision-only KV would surrender measurable throughput-per-dollar to vLLM.",
+        "task": {
+          "who": "Core serving / kernel engineering team",
+          "what": "Make quantized loading and tiered KV-offload the default",
+          "where": "Engine model-runner and KV-cache subsystem",
+          "when": "Now through H1 2027 release cycles",
+          "why": "Keep cost parity with vLLM's serving-layer gains",
+          "how": "Low-precision FP8 kernels plus object-store secondary KV tier"
+        }
+      },
+      {
+        "actor": "Managed inference platform operator",
+        "job": "Folding the new engine defaults into hosted serving tiers so customer endpoints inherit quantized loading and tiered KV-cache spill automatically.",
+        "outcome": "Hosted inference tiers that ship quantized-by-default loading and tiered KV offload as the platform default configuration.",
+        "motivation": "Serving-layer cost gains drive margin and price competitiveness for managed offerings in 2026.",
+        "task": {
+          "who": "Platform engineering / managed-serving team",
+          "what": "Adopt upstream quantized + KV-offload defaults into hosted tiers",
+          "where": "Hosted inference control plane and endpoint defaults",
+          "when": "After upstream engines ship, through H1 2027",
+          "why": "Pass serving-layer cost savings into competitive hosted pricing",
+          "how": "Integrate upgraded vLLM/SGLang/TensorRT-LLM/TGI engine builds"
+        }
+      }
+    ],
+    "prediction.9f12a295515bf5ce": [
+      {
+        "actor": "coding-agent harness engineer",
+        "job": "Integrating an inference-time runtime memory and world-model-adaptation layer into an autonomous coding agent so it learns from its own mistakes mid-task",
+        "outcome": "A shipped harness feature that persists task-outcome learnings across a session or repository and carries a named task-success or reliability gain",
+        "motivation": "Runtime memory adaptation is a far cheaper reliability lever than retraining a frozen frontier backbone",
+        "task": {
+          "who": "autonomous coding agent platform team",
+          "what": "build persistent task-outcome memory and world-model layer",
+          "where": "the coding-agent harness runtime",
+          "when": "from mid-2026 through Q2 2027",
+          "why": "cut wrong actions without retraining the backbone",
+          "how": "episodic memory plus error-distilled semantic rules"
+        }
+      },
+      {
+        "actor": "inference-time world-model researcher",
+        "job": "Maturing WorldEvolver-style methods so episodic memory, error-distilled semantic rules, and selective foresight reliably improve agent action-outcome accuracy with a frozen backbone",
+        "outcome": "Validated, reproducible runtime-adaptation techniques and benchmarks that harness vendors can productionize for coding agents",
+        "motivation": "Demonstrating reliability gains without fine-tuning establishes the cheaper adaptation paradigm and research impact",
+        "task": {
+          "who": "agent world-model research group",
+          "what": "refine and benchmark inference-time evolving-memory methods",
+          "where": "arXiv papers and open agent benchmarks",
+          "when": "following the June 29 WorldEvolver paper into 2027",
+          "why": "prove runtime adaptation beats retraining on task success",
+          "how": "episodic plus semantic memory and selective foresight"
+        }
+      },
+      {
+        "actor": "harness engineering community organizer",
+        "job": "Convening practitioners around persistent agent memory and harness reliability, signaling and coordinating the field's convergence on runtime adaptation",
+        "outcome": "Shared best practices and momentum that push harness vendors to ship persistent memory features on the runway",
+        "motivation": "Persistent agent memory is the field's emerging answer to multi-step agent unreliability",
+        "task": {
+          "who": "AI Engineer World's Fair program track",
+          "what": "spotlight harness engineering and agent memory",
+          "where": "Harness Engineering keynote and conference track",
+          "when": "July 2 2026 keynote and follow-on events",
+          "why": "coordinate vendor convergence on persistent agent memory",
+          "how": "keynote talks and practitioner sessions"
+        }
+      }
+    ],
+    "prediction.a64fc6b0d37d6a91": [
+      {
+        "actor": "rival-hyperscaler AI-platform product manager",
+        "job": "Building an in-tenant first-party GA path so a frontier model runs on the cloud's own silicon under customer identity and one invoice",
+        "outcome": "Vertex AI or Bedrock GA tier serving a flagship model end-to-end on TPU/Trainium/Blackwell inside the enterprise tenant with consolidated cloud-native billing",
+        "motivation": "Cannot leave the catalog third-party-API-only while Azure offers in-tenant Foundry GA; parity is the new enterprise procurement bar",
+        "task": {
+          "who": "managed-AI-platform / PaaS-LLM product team",
+          "what": "ship in-tenant first-party GA serving tier",
+          "where": "Google Cloud Vertex AI or AWS Bedrock console",
+          "when": "Jun 2026 - Q2 2027 runway",
+          "why": "match Azure's in-tenant GA procurement bar",
+          "how": "TPU/Blackwell or Trainium/GB300 plus consolidated billing"
+        }
+      },
+      {
+        "actor": "frontier-lab cloud-deployment partnerships lead",
+        "job": "Porting and certifying the lab's flagship models to run natively on a rival hyperscaler's own accelerators inside customer tenants",
+        "outcome": "Lab's flagship models reach equivalent first-party in-tenant GA on the rival cloud's silicon, not a hosted passthrough",
+        "motivation": "Multi-cloud distribution and matching Anthropic's Azure GA footprint expands enterprise reach and procurement-grade placement",
+        "task": {
+          "who": "model-serving / cloud-partnerships engineering function",
+          "what": "certify flagship model on rival cloud silicon",
+          "where": "partner cloud's tenant-isolated serving stack",
+          "when": "Jun 2026 - Q2 2027 runway",
+          "why": "win procurement-grade multi-cloud enterprise placement",
+          "how": "TPU/Trainium/GB300 inference integration plus identity/governance controls"
+        }
+      },
+      {
+        "actor": "enterprise cloud-procurement architect",
+        "job": "Rewriting AI vendor requirements to demand models that run in-tenant on the cloud's own hardware under existing identity and billing",
+        "outcome": "RFP/procurement criteria that make in-tenant first-party GA the bar, pulling a second hyperscaler+lab pair to deliver it",
+        "motivation": "In-tenant residency on the cloud's own silicon satisfies governance, billing-consolidation and data-control mandates better than third-party API access",
+        "task": {
+          "who": "enterprise cloud / vendor-management procurement team",
+          "what": "set in-tenant first-party GA as procurement requirement",
+          "where": "AI vendor RFPs and cloud contract terms",
+          "when": "Jun 2026 - Q2 2027 runway",
+          "why": "enforce tenant residency, governance and one-invoice billing",
+          "how": "RFP criteria referencing identity/governance and consolidated billing"
+        }
+      }
+    ]
+  }
+}

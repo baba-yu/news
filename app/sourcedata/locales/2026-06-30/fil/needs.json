@@ -1,0 +1,123 @@
+{
+  "date": "2026-06-30",
+  "by_prediction": {
+    "prediction.763542bfa1346adf": [
+      {
+        "actor": "Tagapagpanatili ng karibal na OSS inference-engine",
+        "job": "Muling ino-arkitekto ang model loading at KV-cache management para tumapat sa baseline ng vLLM na quantized-by-default kasama ang tiered KV-offload upang hindi mawalan ng throughput-per-dollar.",
+        "outcome": "Isang inilabas na bersyon ng engine kung saan ang quantized model loading at tiered KV-cache offload ay nakadokumentong out-of-the-box na defaults, hindi opt-in na tuning.",
+        "motivation": "Pagkakapantay sa kompetisyon: ang pagpapadala ng FP16-by-default at full-precision-only na KV ay maglalaglag ng nasusukat na throughput-per-dollar sa vLLM.",
+        "task": {
+          "who": "Core serving / kernel engineering team",
+          "what": "Gawing default ang quantized loading at tiered KV-offload",
+          "where": "Engine model-runner at KV-cache subsystem",
+          "when": "Ngayon hanggang sa mga release cycle ng H1 2027",
+          "why": "Panatilihin ang cost parity sa serving-layer gains ng vLLM",
+          "how": "Low-precision FP8 kernels kasama ang object-store secondary KV tier"
+        }
+      },
+      {
+        "actor": "Operator ng managed inference platform",
+        "job": "Isinasama ang mga bagong default ng engine sa hosted serving tiers upang awtomatikong mamana ng mga endpoint ng kustomer ang quantized loading at tiered KV-cache spill.",
+        "outcome": "Mga hosted inference tier na nagpapadala ng quantized-by-default loading at tiered KV offload bilang default na konpigurasyon ng platform.",
+        "motivation": "Hinihila ng serving-layer cost gains ang margin at pagiging kompetitibo sa presyo para sa mga managed offering noong 2026.",
+        "task": {
+          "who": "Platform engineering / managed-serving team",
+          "what": "Gamitin ang upstream na quantized + KV-offload defaults sa hosted tiers",
+          "where": "Hosted inference control plane at endpoint defaults",
+          "when": "Matapos ilabas ng upstream engines, hanggang H1 2027",
+          "why": "Ipasa ang serving-layer cost savings sa kompetitibong hosted pricing",
+          "how": "Isama ang mga na-upgrade na vLLM/SGLang/TensorRT-LLM/TGI engine build"
+        }
+      }
+    ],
+    "prediction.9f12a295515bf5ce": [
+      {
+        "actor": "inhinyero ng coding-agent harness",
+        "job": "Isinasama ang isang inference-time runtime memory at world-model-adaptation layer sa isang autonomous coding agent upang matuto ito mula sa sariling pagkakamali habang nasa gitna ng gawain",
+        "outcome": "Isang inilabas na harness feature na nagpapanatili ng mga natutuhang task-outcome sa buong session o repository at may nakatakdang task-success o reliability gain",
+        "motivation": "Ang runtime memory adaptation ay mas murang reliability lever kaysa sa muling pagsasanay ng frozen na frontier backbone",
+        "task": {
+          "who": "team ng platform ng autonomous coding agent",
+          "what": "bumuo ng persistent task-outcome memory at world-model layer",
+          "where": "ang runtime ng coding-agent harness",
+          "when": "mula kalagitnaan ng 2026 hanggang Q2 2027",
+          "why": "bawasan ang maling aksyon nang hindi muling sinasanay ang backbone",
+          "how": "episodic memory kasama ang error-distilled na semantic rules"
+        }
+      },
+      {
+        "actor": "mananaliksik ng inference-time world-model",
+        "job": "Pinapaunlad ang mga pamamaraang tulad ng WorldEvolver upang maaasahang mapabuti ng episodic memory, error-distilled na semantic rules, at selective foresight ang action-outcome accuracy ng agent gamit ang frozen na backbone",
+        "outcome": "Mga napatunayan at na-reproduce na runtime-adaptation na teknik at benchmark na maaaring i-productionize ng mga harness vendor para sa coding agents",
+        "motivation": "Ang pagpapakita ng reliability gains nang walang fine-tuning ay nagtatatag ng mas murang paradigma ng adaptation at research impact",
+        "task": {
+          "who": "grupo ng pananaliksik sa agent world-model",
+          "what": "pinuhin at i-benchmark ang inference-time evolving-memory methods",
+          "where": "arXiv papers at bukas na agent benchmarks",
+          "when": "kasunod ng WorldEvolver paper noong June 29 papasok sa 2027",
+          "why": "patunayan na nahihigitan ng runtime adaptation ang muling pagsasanay sa task success",
+          "how": "episodic kasama ang semantic memory at selective foresight"
+        }
+      },
+      {
+        "actor": "tagapag-organisa ng harness engineering community",
+        "job": "Tinitipon ang mga praktisyoner sa paligid ng persistent agent memory at harness reliability, na nagsisenyas at nag-uugnay sa pagsasanib ng larangan sa runtime adaptation",
+        "outcome": "Pinagsaluhang best practices at momentum na nagtutulak sa mga harness vendor na magpadala ng persistent memory features sa loob ng inilaang panahon",
+        "motivation": "Ang persistent agent memory ang umuusbong na sagot ng larangan sa hindi maaasahang multi-step na agent",
+        "task": {
+          "who": "program track ng AI Engineer World's Fair",
+          "what": "itampok ang harness engineering at agent memory",
+          "where": "Harness Engineering keynote at conference track",
+          "when": "keynote noong July 2 2026 at mga kasunod na kaganapan",
+          "why": "i-coordinate ang pagsasanib ng mga vendor sa persistent agent memory",
+          "how": "keynote talks at practitioner sessions"
+        }
+      }
+    ],
+    "prediction.a64fc6b0d37d6a91": [
+      {
+        "actor": "product manager ng AI-platform ng karibal na hyperscaler",
+        "job": "Bumubuo ng isang in-tenant first-party GA path upang tumakbo ang isang frontier model sa sariling silicon ng cloud sa ilalim ng identity ng kustomer at iisang invoice",
+        "outcome": "Isang Vertex AI o Bedrock GA tier na naghahain ng isang flagship model nang buong-buo sa TPU/Trainium/Blackwell sa loob ng enterprise tenant na may pinagsama-samang cloud-native billing",
+        "motivation": "Hindi puwedeng iwanan ang katalogo bilang third-party-API-only habang nag-aalok ang Azure ng in-tenant Foundry GA; ang pagkakapantay ang bagong batayan ng enterprise procurement",
+        "task": {
+          "who": "team ng managed-AI-platform / PaaS-LLM product",
+          "what": "magpadala ng in-tenant first-party GA serving tier",
+          "where": "Google Cloud Vertex AI o AWS Bedrock console",
+          "when": "Jun 2026 - Q2 2027 na inilaang panahon",
+          "why": "tumapat sa in-tenant GA procurement bar ng Azure",
+          "how": "TPU/Blackwell o Trainium/GB300 kasama ang pinagsama-samang billing"
+        }
+      },
+      {
+        "actor": "lead ng cloud-deployment partnerships ng frontier-lab",
+        "job": "Ipinop't at sinesertipika ang mga flagship model ng lab upang tumakbo nang natibo sa sariling accelerators ng karibal na hyperscaler sa loob ng mga tenant ng kustomer",
+        "outcome": "Umaabot ang mga flagship model ng lab sa katumbas na first-party in-tenant GA sa silicon ng karibal na cloud, hindi isang hosted passthrough",
+        "motivation": "Pinapalawak ng multi-cloud distribution at pagtapat sa Azure GA footprint ng Anthropic ang abot sa enterprise at procurement-grade na paglalagay",
+        "task": {
+          "who": "function ng model-serving / cloud-partnerships engineering",
+          "what": "sertipikahin ang flagship model sa silicon ng karibal na cloud",
+          "where": "tenant-isolated serving stack ng partner cloud",
+          "when": "Jun 2026 - Q2 2027 na inilaang panahon",
+          "why": "manalo ng procurement-grade na multi-cloud enterprise placement",
+          "how": "TPU/Trainium/GB300 inference integration kasama ang identity/governance controls"
+        }
+      },
+      {
+        "actor": "arkitekto ng enterprise cloud-procurement",
+        "job": "Muling isinusulat ang mga AI vendor requirement upang hilingin ang mga modelong tumatakbo in-tenant sa sariling hardware ng cloud sa ilalim ng umiiral na identity at billing",
+        "outcome": "Mga RFP/procurement na pamantayan na ginagawang batayan ang in-tenant first-party GA, na humihila sa pangalawang pares ng hyperscaler+lab upang ihatid ito",
+        "motivation": "Ang in-tenant residency sa sariling silicon ng cloud ay mas natutugunan ang governance, billing-consolidation at data-control na mandato kaysa sa third-party API access",
+        "task": {
+          "who": "team ng enterprise cloud / vendor-management procurement",
+          "what": "itakda ang in-tenant first-party GA bilang procurement requirement",
+          "where": "AI vendor RFPs at cloud contract terms",
+          "when": "Jun 2026 - Q2 2027 na inilaang panahon",
+          "why": "ipatupad ang tenant residency, governance at one-invoice billing",
+          "how": "RFP na pamantayan na tumutukoy sa identity/governance at pinagsama-samang billing"
+        }
+      }
+    ]
+  }
+}

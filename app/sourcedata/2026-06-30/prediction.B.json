@@ -1,0 +1,14 @@
+{
+  "id": "prediction.763542bfa1346adf",
+  "scope_hint": "tech",
+  "title": "Quantized-by-default serving lands as the OSS inference baseline by H1 2027",
+  "body": "vLLM's v0.24.0 release on June 29 made quantized models the default in Model Runner V2 and added a multi-tier KV-cache offloading path that spills cache to an object-store secondary tier beyond GPU memory, alongside DeepEP v2 expert parallelism and 180-290% SM90 CUTLASS FP8 kernel speedups. Because vLLM is the dominant open-source inference server and now treats low-precision weights and cheaper-tier KV spill as the out-of-the-box path rather than an opt-in tuning exercise, the forcing function is competitive parity: rival OSS serving stacks (SGLang, NVIDIA TensorRT-LLM, Hugging Face TGI) cannot ship FP16-by-default defaults and full-precision-only KV without ceding measurable throughput-per-dollar. The structural force is that 2026 cost gains are increasingly booked at the serving layer, not the model layer, so the baseline expectation shifts: by H1 2027 at least two major rival OSS inference stacks will ship quantized-by-default model loading plus tiered KV-cache offload as documented defaults, and managed inference platforms built on these engines will fold the same defaults into their hosted tiers.",
+  "reasoning": {
+    "because": "vLLM v0.24.0 shipped June 29 with Model Runner V2 quantized-by-default plus multi-tier KV offload",
+    "given": "vLLM dominates OSS inference and 2026 throughput-per-dollar gains are booked at the serving layer",
+    "so_that": "rival OSS serving stacks adopt quantized-by-default loading and tiered KV offload as defaults to keep cost parity",
+    "landing": "by H1 2027, SGLang/TensorRT-LLM/TGI plus managed platforms built on them",
+    "plain_language": "vLLM made smaller, cheaper model serving the default, so other serving tools will copy it within a year."
+  },
+  "summary": "vLLM v0.24.0 made quantized models and tiered KV-cache offload the default in its serving engine. Because vLLM dominates open-source inference, rivals like SGLang, TensorRT-LLM, and TGI will adopt quantized-by-default loading and KV offload as documented defaults by H1 2027."
+}

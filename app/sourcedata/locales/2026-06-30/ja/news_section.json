@@ -1,0 +1,52 @@
+{
+  "date": "2026-06-30",
+  "sections": [
+    {
+      "category": "AnthropicのClaudeがMicrosoft Foundry内で一般提供に到達し、AzureホストのNVIDIA GB300 Blackwell Ultra上で稼働",
+      "bullets": [
+        {
+          "body": "AnthropicとMicrosoftは6月29日、Microsoft Foundry内でClaudeをプレビューから一般提供へ移行し、Azureネイティブな企業に、すでに運用しているID・ネットワーク・課金・ガバナンス管理のもとでClaudeを呼び出すファーストパーティな手段を与えた。このローンチは<a href=\"https://claude.com/blog/claude-in-microsoft-foundry\">Claude Opus 4.8とClaude Haiku 4.5をMessages API経由で</a>プロンプトキャッシュと拡張思考のサポートとともに出荷し、2つの展開の形を提供する——Azureインフラ上をエンドツーエンドで走り一般提供されるティアである「Azureホスト型」と、プレビューにとどまる「Anthropicインフラ・ホスト型」だ。さらに対象顧客には単一のAzure統合請求書とMicrosoft Enterprise Agreement連携が付く。インフラの物語が差別化要因だ。Azureホストのティアは<a href=\"https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/\">Quantum-X800 InfiniBandネットワークを備えたNVIDIA GB300 NVL72システム</a>上を走り、NVIDIAはGB300の推論効率を総所有コストの削減要因として訴求し、自律的でドメイン特化したエージェントを構築するためのSecure Agent Workspaceのリファレンス設計と組み合わせて展開する。読み取れるのは、PaaS-LLM層が統合へ向かっているということだ。フロンティアラボの旗艦モデルが今やハイパースケーラー自社シリコン上でその自社カタログと並んで座り、「ラボのAPIを使う」ことと「自社クラウドテナント内に展開する」ことの隔たりを縮めている。",
+          "citations": [
+            {"label": "Claude by Anthropic - Claude in Microsoft Foundry is now generally available", "url": "https://claude.com/blog/claude-in-microsoft-foundry"},
+            {"label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure", "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "vLLMが量子化デフォルトのModel Runner V2、多層KVキャッシュ・オフロード、成熟するRustフロントエンドを備えたv0.24.0を出荷",
+      "bullets": [
+        {
+          "body": "支配的なオープンソース推論サーバーが主要リリース<a href=\"https://github.com/vllm-project/vllm/releases\">vLLM v0.24.0</a>を出し、256人の貢献者から571件のコミットを取り込み、ローカルLLM提供スタックの複数の部分を一挙に前進させた。実質的なのはエンジンレベルの変更だ。Model Runner V2が量子化モデルをデフォルトでサポートするようになり、多層KVキャッシュ・オフロード経路がGPUメモリを超えてキャッシュを退避するオブジェクトストレージの二次層を追加し、DeepSeek-V4がスパースインデックスキャッシュとプリフィルのチャンク計画を伴うもう一つの大きな最適化パスを得て、DeepEP v2がMoEモデルのエキスパート並列のために統合された。生のカーネルでは、このリリースはswap_ab最適化によりSM90 CUTLASS FP8で180-290%の高速化を謳い、SM100でネイティブなDSAインデクサのデコードを加え、Rustフロントエンドが認証・CORS・トークン化エンドポイントと、ツール呼び出しと推論の解析を統一したストリーミングパーサーで成熟した。発売初日のモデル対応は現行のオープンウェイトの波を追う——AMD/ROCm最適化を備えたMiniMax-M3、CPUサポート付きのDiffusionGemma、Gemma 4向けの統一FlashAttention——これは2026年の対ドル・スループット改善の多くが今や計上される場所が、モデルだけでなく提供層であることを補強している。",
+          "citations": [
+            {"label": "GitHub - vllm-project/vllm Releases (v0.24.0)", "url": "https://github.com/vllm-project/vllm/releases"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "新しいarXiv研究がWorldEvolverを提案。LLMエージェント計画を鋭くするため推論時に更新する自己進化する世界モデル",
+      "bullets": [
+        {
+          "body": "6月29日にarXivへ投稿された論文<a href=\"https://arxiv.org/abs/2606.30639\">「Self-Evolving World Models for LLM Agent Planning」(Xuan Zhang、Wenxuan Zhang、See-Kiong Ng、Yang Deng著)</a>は、エージェントハーネスにおける具体的な失敗様式を標的にする。エージェントは行動の結果をうまく予測できないために計画を誤る。提案されたフレームワークWorldEvolverは、その行動-結果の予測を、結びついた3つの構成要素を通じて改善する——過去のやり取りを想起するエピソード記憶、予測誤差から明示的なルールを蒸留する意味記憶、信頼できない予測が計画器に届く前にふるい落とす選択的予見の仕組みだ。注目すべき設計上の選択は、世界モデルが運用中に進化し続ける一方でコアのエージェントは凍結したまま、という点で、システムは基盤を再訓練せずに推論時に適応する。著者らは、3つの異なる基盤モデルにわたり最高の予測精度と、対話的環境において競合する世界モデルのベースラインを上回る下流のタスク成功率を報告しており、これはランタイムメモリの更新を、フルなファインチューニングよりも安価なエージェント信頼性の梃子として位置づける——正確な前方シミュレーションへの依存をますます強めるオーケストレーションやコーディングエージェントのハーネスに関わる話だ。",
+          "citations": [
+            {"label": "arXiv - Self-Evolving World Models for LLM Agent Planning (2606.30639)", "url": "https://arxiv.org/abs/2606.30639"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "今から計画すべきAIイベント。AI Engineer World's Fairがサンフランシスコで会期中盤、夏と秋のチップとセキュリティの日程も確定",
+      "bullets": [
+        {
+          "body": "6月30日時点で更新した、3つのサブトラックすべてにわたる先々のカレンダー。主流の開発/データ。<a href=\"https://www.ai.engineer/worldsfair/2026\">AI Engineer World's Fair</a>はサンフランシスコのMoscone Westで会期中盤を迎えている(6月29日から7月2日。約29トラック、約300人の登壇者、約100の展示パートナー、6,000人超の参加者)。7月1日にAutoresearch基調講演と約12の並行トラック、7月2日にHarness Engineering基調講演がある。さらに先では、GitHub Universeが10月28-29日に戻り、AWS re:Inventがラスベガスで11月30日から12月4日に開かれる。AIセキュリティ。SecurityWeekの<a href=\"https://www.securityweek.com/securityweek-to-host-ai-risk-summit-august-11-12-at-the-ritz-carlton-half-moon-bay/\">AI Risk Summit</a>がHalf Moon BayのRitz-Carltonで8月11-12日に開かれる。Black Hat USA 2026は8月初旬にラスベガスのMandalay BayへAI Summitと本編のBriefingsを持ち込み、同じ週にDEF CON 34とそのAI Villageがある。OWASP Global AppSec USAはサンフランシスコで11月5-6日。ZenityのAI Agent Security Summitシリーズはサンフランシスコ開催の後も追加都市へ続くため、監視リストに残る。AIチップ/ハードウェア。AMDのAdvancing AI 2026はMosconeで7月22-23日(7月23日にInstinct MI400シリーズに注目)、<a href=\"https://hotchips.org/\">Hot Chips 2026</a>はスタンフォードのMemorial Auditoriumで8月23-25日、AI Infra SummitはSanta Clara Convention Centerで9月15-17日に開かれる。この項目は参加計画ツールとして扱ってほしい。セキュリティとチップのトラックは、ここ数週のセキュアAIアクセラレータとエージェント乗っ取りの筋が対面で表に出てくる場だ。",
+          "citations": [
+            {"label": "AI Engineer - World's Fair 2026 (June 29 - July 2, Moscone West, San Francisco)", "url": "https://www.ai.engineer/worldsfair/2026"},
+            {"label": "SecurityWeek - AI Risk Summit, August 11-12, Ritz-Carlton Half Moon Bay", "url": "https://www.securityweek.com/securityweek-to-host-ai-risk-summit-august-11-12-at-the-ritz-carlton-half-moon-bay/"},
+            {"label": "Hot Chips - 2026 symposium (August 23-25, Stanford Memorial Auditorium)", "url": "https://hotchips.org/"}
+          ]
+        }
+      ]
+    }
+  ]
+}

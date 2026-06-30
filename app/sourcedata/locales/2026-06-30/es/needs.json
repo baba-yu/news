@@ -1,0 +1,123 @@
+{
+  "date": "2026-06-30",
+  "by_prediction": {
+    "prediction.763542bfa1346adf": [
+      {
+        "actor": "Mantenedor de un motor de inferencia de código abierto rival",
+        "job": "Rediseñar la carga de modelos y la gestión de caché KV para igualar la base de vLLM de cuantizado por defecto más descarga de KV por niveles, de modo que no cedan rendimiento por dólar.",
+        "outcome": "Una versión publicada del motor donde la carga de modelos cuantizados y la descarga de caché KV por niveles sean valores por defecto de fábrica documentados, no un ajuste opcional.",
+        "motivation": "Paridad competitiva: ofrecer FP16 por defecto y KV solo en precisión completa cedería rendimiento medible por dólar a vLLM.",
+        "task": {
+          "who": "Equipo central de ingeniería de serving / kernels",
+          "what": "Hacer que la carga cuantizada y la descarga de KV por niveles sean el valor por defecto",
+          "where": "El subsistema de model-runner y caché KV del motor",
+          "when": "Desde ahora a lo largo de los ciclos de lanzamiento del H1 2027",
+          "why": "Mantener la paridad de coste con las ganancias de vLLM en la capa de serving",
+          "how": "Kernels FP8 de baja precisión más un nivel secundario de KV en almacenamiento de objetos"
+        }
+      },
+      {
+        "actor": "Operador de una plataforma de inferencia gestionada",
+        "job": "Incorporar los nuevos valores por defecto del motor a los niveles de serving alojados para que los endpoints de los clientes hereden automáticamente la carga cuantizada y el volcado de caché KV por niveles.",
+        "outcome": "Niveles de inferencia alojados que ofrecen carga cuantizada por defecto y descarga de KV por niveles como configuración por defecto de la plataforma.",
+        "motivation": "Las ganancias de coste en la capa de serving impulsan el margen y la competitividad de precios de las ofertas gestionadas en 2026.",
+        "task": {
+          "who": "Equipo de ingeniería de plataforma / serving gestionado",
+          "what": "Adoptar en los niveles alojados los valores por defecto upstream de cuantizado + descarga de KV",
+          "where": "El plano de control de inferencia alojada y los valores por defecto de los endpoints",
+          "when": "Tras la publicación de los motores upstream, a lo largo del H1 2027",
+          "why": "Trasladar el ahorro de coste de la capa de serving a precios alojados competitivos",
+          "how": "Integrar builds actualizados de los motores vLLM/SGLang/TensorRT-LLM/TGI"
+        }
+      }
+    ],
+    "prediction.9f12a295515bf5ce": [
+      {
+        "actor": "ingeniero de harness de agente de código",
+        "job": "Integrar una capa de memoria en tiempo de ejecución y adaptación del modelo del mundo en un agente de código autónomo para que aprenda de sus propios errores a mitad de la tarea",
+        "outcome": "Una función de harness publicada que conserva los aprendizajes de resultados de tareas a lo largo de una sesión o repositorio y conlleva una mejora nombrada de éxito de tareas o de fiabilidad",
+        "motivation": "La adaptación de memoria en tiempo de ejecución es una palanca de fiabilidad mucho más barata que reentrenar un backbone de frontera congelado",
+        "task": {
+          "who": "equipo de plataforma de agente de código autónomo",
+          "what": "construir una capa de memoria de resultados de tareas persistente y modelo del mundo",
+          "where": "el runtime del harness del agente de código",
+          "when": "desde mediados de 2026 hasta el Q2 2027",
+          "why": "reducir las acciones erróneas sin reentrenar el backbone",
+          "how": "memoria episódica más reglas semánticas destiladas de errores"
+        }
+      },
+      {
+        "actor": "investigador de modelos del mundo en tiempo de inferencia",
+        "job": "Madurar métodos al estilo WorldEvolver para que la memoria episódica, las reglas semánticas destiladas de errores y la previsión selectiva mejoren de forma fiable la precisión de acción-resultado del agente con un backbone congelado",
+        "outcome": "Técnicas de adaptación en tiempo de ejecución validadas y reproducibles, y benchmarks que los proveedores de harnesses puedan productivizar para agentes de código",
+        "motivation": "Demostrar ganancias de fiabilidad sin ajuste fino establece el paradigma de adaptación más barato y el impacto en investigación",
+        "task": {
+          "who": "grupo de investigación de modelos del mundo de agentes",
+          "what": "refinar y evaluar métodos de memoria evolutiva en tiempo de inferencia",
+          "where": "artículos de arXiv y benchmarks abiertos de agentes",
+          "when": "tras el artículo WorldEvolver del 29 de junio y hasta 2027",
+          "why": "demostrar que la adaptación en tiempo de ejecución supera al reentrenamiento en éxito de tareas",
+          "how": "memoria episódica más semántica y previsión selectiva"
+        }
+      },
+      {
+        "actor": "organizador de la comunidad de ingeniería de harnesses",
+        "job": "Reunir a los profesionales en torno a la memoria persistente del agente y la fiabilidad de los harnesses, señalando y coordinando la convergencia del campo hacia la adaptación en tiempo de ejecución",
+        "outcome": "Buenas prácticas compartidas e impulso que empujen a los proveedores de harnesses a publicar funciones de memoria persistente dentro del plazo previsto",
+        "motivation": "La memoria persistente del agente es la respuesta emergente del campo a la falta de fiabilidad de los agentes de múltiples pasos",
+        "task": {
+          "who": "track de programa de la AI Engineer World's Fair",
+          "what": "destacar la ingeniería de harnesses y la memoria del agente",
+          "where": "la keynote de Harness Engineering y el track de la conferencia",
+          "when": "la keynote del 2 de julio de 2026 y los eventos posteriores",
+          "why": "coordinar la convergencia de los proveedores hacia la memoria persistente del agente",
+          "how": "charlas keynote y sesiones para profesionales"
+        }
+      }
+    ],
+    "prediction.a64fc6b0d37d6a91": [
+      {
+        "actor": "product manager de plataforma de IA de un hyperscaler rival",
+        "job": "Construir una vía de GA de primera parte dentro del tenant para que un modelo de frontera se ejecute sobre el silicio propio de la nube bajo la identidad del cliente y una sola factura",
+        "outcome": "Un nivel GA de Vertex AI o Bedrock que sirve un modelo insignia de extremo a extremo sobre TPU/Trainium/Blackwell dentro del tenant empresarial con facturación nativa de nube consolidada",
+        "motivation": "No puede dejar el catálogo solo como API de terceros mientras Azure ofrece GA de Foundry dentro del tenant; la paridad es el nuevo listón de adquisición empresarial",
+        "task": {
+          "who": "equipo de producto de plataforma de IA gestionada / PaaS-LLM",
+          "what": "publicar un nivel de serving GA de primera parte dentro del tenant",
+          "where": "la consola de Google Cloud Vertex AI o AWS Bedrock",
+          "when": "plazo de junio de 2026 al Q2 2027",
+          "why": "igualar el listón de adquisición de GA dentro del tenant de Azure",
+          "how": "TPU/Blackwell o Trainium/GB300 más facturación consolidada"
+        }
+      },
+      {
+        "actor": "responsable de alianzas de despliegue en nube de un laboratorio de frontera",
+        "job": "Portar y certificar los modelos insignia del laboratorio para que se ejecuten de forma nativa sobre los aceleradores propios de un hyperscaler rival dentro de los tenants de los clientes",
+        "outcome": "Los modelos insignia del laboratorio alcanzan una GA de primera parte dentro del tenant equivalente sobre el silicio de la nube rival, no un passthrough alojado",
+        "motivation": "La distribución multinube y el igualar la presencia de la GA de Anthropic en Azure amplían el alcance empresarial y la colocación de grado de adquisición",
+        "task": {
+          "who": "función de ingeniería de serving de modelos / alianzas en nube",
+          "what": "certificar el modelo insignia sobre el silicio de la nube rival",
+          "where": "el stack de serving aislado por tenant de la nube socia",
+          "when": "plazo de junio de 2026 al Q2 2027",
+          "why": "ganar colocación empresarial multinube de grado de adquisición",
+          "how": "integración de inferencia TPU/Trainium/GB300 más controles de identidad/gobernanza"
+        }
+      },
+      {
+        "actor": "arquitecto de adquisición de nube empresarial",
+        "job": "Reescribir los requisitos para proveedores de IA para exigir modelos que se ejecuten dentro del tenant sobre el hardware propio de la nube bajo la identidad y la facturación existentes",
+        "outcome": "Criterios de RFP/adquisición que convierten la GA de primera parte dentro del tenant en el listón, empujando a un segundo par hyperscaler+laboratorio a ofrecerla",
+        "motivation": "La residencia dentro del tenant sobre el silicio propio de la nube satisface los mandatos de gobernanza, consolidación de facturación y control de datos mejor que el acceso por API de terceros",
+        "task": {
+          "who": "equipo de adquisición de nube empresarial / gestión de proveedores",
+          "what": "establecer la GA de primera parte dentro del tenant como requisito de adquisición",
+          "where": "RFP de proveedores de IA y términos de contratos de nube",
+          "when": "plazo de junio de 2026 al Q2 2027",
+          "why": "imponer la residencia en el tenant, la gobernanza y la facturación de una sola factura",
+          "how": "criterios de RFP que referencian identidad/gobernanza y facturación consolidada"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "date": "2026-06-30",
+  "sections": [
+    {
+      "category": "Claude de Anthropic alcanza disponibilidad general dentro de Microsoft Foundry, ejecutándose sobre NVIDIA GB300 Blackwell Ultra alojado en Azure",
+      "bullets": [
+        {
+          "body": "Anthropic y Microsoft llevaron Claude de preview a disponibilidad general dentro de Microsoft Foundry el 29 de junio, dando a las empresas nativas de Azure una vía de primera parte para llamar a Claude bajo los controles de identidad, red, facturación y gobernanza que ya operan. El lanzamiento ofrece <a href=\"https://claude.com/blog/claude-in-microsoft-foundry\">Claude Opus 4.8 y Claude Haiku 4.5 a través de la Messages API</a> con caché de prompts y soporte de razonamiento extendido, y propone dos formas de despliegue —\"hosted on Azure\", que se ejecuta de extremo a extremo sobre infraestructura de Azure y es el nivel disponible de forma general, frente a \"hosted on Anthropic infrastructure\", que sigue en preview— más una única factura consolidada de Azure e integración con Microsoft Enterprise Agreement para los clientes elegibles. La historia de infraestructura es el diferenciador: el nivel alojado en Azure se ejecuta sobre <a href=\"https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/\">sistemas NVIDIA GB300 NVL72 con red InfiniBand Quantum-X800</a>, y NVIDIA presenta la eficiencia de inferencia del GB300 como un reductor del coste total de propiedad, emparejando el despliegue con su diseño de referencia Secure Agent Workspace para construir agentes autónomos de dominio específico. La lectura de fondo es que la capa PaaS-LLM se está consolidando: los modelos insignia de un laboratorio de frontera ahora conviven junto al propio catálogo del hyperscaler sobre el silicio del hyperscaler, estrechando la distancia entre \"usar la API del laboratorio\" y \"desplegar dentro de tu tenant de nube\".",
+          "citations": [
+            {"label": "Claude by Anthropic - Claude in Microsoft Foundry ya está disponible de forma general", "url": "https://claude.com/blog/claude-in-microsoft-foundry"},
+            {"label": "NVIDIA Blog - Claude se encuentra con Blackwell Ultra: los modelos de Anthropic ahora se ejecutan sobre NVIDIA GB300 en Azure", "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "vLLM lanza la v0.24.0 con un Model Runner V2 cuantizado por defecto, descarga de caché KV multinivel y un frontend en Rust que madura",
+      "bullets": [
+        {
+          "body": "El servidor de inferencia de código abierto dominante publicó un lanzamiento importante, <a href=\"https://github.com/vllm-project/vllm/releases\">vLLM v0.24.0</a>, con 571 commits de 256 contribuyentes y que empuja varias piezas del stack de serving de LLM local a la vez. Los cambios a nivel de motor son los sustanciales: Model Runner V2 ahora admite modelos cuantizados por defecto, una ruta de descarga de caché KV multinivel añade un nivel secundario de almacenamiento de objetos para volcar la caché más allá de la memoria GPU, DeepSeek-V4 recibió otro gran paso de optimización con una caché de índice disperso y planificación de chunks de prefill, y DeepEP v2 se integró para el paralelismo de expertos en modelos MoE. En cuanto a kernels puros, el lanzamiento reclama una aceleración del 180-290% para FP8 CUTLASS SM90 mediante una optimización swap_ab y añade decodificación nativa con indexador DSA en SM100, mientras que el frontend en Rust maduró con autenticación de API, CORS y endpoints de tokenización más un parser de streaming que unifica el análisis de tool-call y de razonamiento. La cobertura de modelos desde el primer día sigue la ola actual de pesos abiertos —MiniMax-M3 con optimizaciones AMD/ROCm, DiffusionGemma con soporte de CPU y FlashAttention unificado para Gemma 4— reforzando que la capa de serving, no solo los modelos, es donde se anota ahora buena parte de las ganancias de rendimiento por dólar de 2026.",
+          "citations": [
+            {"label": "GitHub - vllm-project/vllm Releases (v0.24.0)", "url": "https://github.com/vllm-project/vllm/releases"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Un nuevo trabajo de arXiv propone WorldEvolver: modelos del mundo autoevolutivos que se actualizan en tiempo de inferencia para afinar la planificación de agentes LLM",
+      "bullets": [
+        {
+          "body": "Un artículo enviado a arXiv el 29 de junio, <a href=\"https://arxiv.org/abs/2606.30639\">\"Self-Evolving World Models for LLM Agent Planning\" de Xuan Zhang, Wenxuan Zhang, See-Kiong Ng y Yang Deng</a>, apunta a un modo de fallo concreto en los harnesses de agentes: los agentes planifican mal porque predicen mal las consecuencias de sus acciones. El framework propuesto, WorldEvolver, mejora esa predicción de acción-resultado mediante tres componentes acoplados: una memoria episódica que recuerda interacciones pasadas, una memoria semántica que destila reglas explícitas a partir de errores de predicción y un mecanismo de previsión selectiva que filtra las predicciones poco fiables antes de que lleguen al planificador. La elección de diseño notable es que el modelo del mundo sigue evolucionando durante el despliegue mientras el agente central permanece congelado, de modo que el sistema se adapta en tiempo de inferencia sin reentrenar el backbone. Los autores reportan la mayor precisión de predicción en tres modelos backbone distintos y mayores tasas de éxito de tareas posteriores que las líneas base de modelos del mundo competidoras en entornos interactivos, lo que posiciona las actualizaciones de memoria en tiempo de ejecución como una palanca de fiabilidad de agentes más barata que el ajuste fino completo, relevante para los harnesses de orquestación y de agentes de código que dependen cada vez más de una simulación prospectiva precisa.",
+          "citations": [
+            {"label": "arXiv - Self-Evolving World Models for LLM Agent Planning (2606.30639)", "url": "https://arxiv.org/abs/2606.30639"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Eventos de IA para planificar ya: la AI Engineer World's Fair está a mitad de evento en San Francisco, con fechas de chips y seguridad de verano y otoño confirmadas",
+      "bullets": [
+        {
+          "body": "El calendario prospectivo en los tres sub-tracks, actualizado a 30 de junio. Dev/datos mainstream: la <a href=\"https://www.ai.engineer/worldsfair/2026\">AI Engineer World's Fair</a> está a mitad de evento en Moscone West, San Francisco (del 29 de junio al 2 de julio; ~29 tracks, ~300 ponentes, ~100 socios de expo, más de 6.000 asistentes), con la keynote de Autoresearch y ~12 tracks paralelos el 1 de julio y la keynote de Harness Engineering el 2 de julio; más adelante, GitHub Universe regresa el 28-29 de octubre y AWS re:Invent se celebra del 30 de noviembre al 4 de diciembre en Las Vegas. Seguridad de IA: la <a href=\"https://www.securityweek.com/securityweek-to-host-ai-risk-summit-august-11-12-at-the-ritz-carlton-half-moon-bay/\">AI Risk Summit</a> de SecurityWeek es el 11 y 12 de agosto en el Ritz-Carlton de Half Moon Bay; Black Hat USA 2026 lleva su AI Summit más los Briefings principales al Mandalay Bay de Las Vegas a principios de agosto, con DEF CON 34 y su AI Village la misma semana; OWASP Global AppSec USA es el 5 y 6 de noviembre en San Francisco; y la serie AI Agent Security Summit de Zenity continúa en ciudades adicionales tras su parada en San Francisco, así que se mantiene en la lista de seguimiento. Chips/hardware de IA: Advancing AI 2026 de AMD es el 22 y 23 de julio en Moscone (foco en la serie Instinct MI400 el 23 de julio), <a href=\"https://hotchips.org/\">Hot Chips 2026</a> se celebra del 23 al 25 de agosto en el Memorial Auditorium de Stanford, y la AI Infra Summit es del 15 al 17 de septiembre en el Santa Clara Convention Center. Toma esta viñeta como un planificador de asistencia: los tracks de seguridad y chips son donde los hilos del acelerador de IA seguro y del secuestro de agentes de las últimas semanas aparecerán en persona.",
+          "citations": [
+            {"label": "AI Engineer - World's Fair 2026 (29 de junio - 2 de julio, Moscone West, San Francisco)", "url": "https://www.ai.engineer/worldsfair/2026"},
+            {"label": "SecurityWeek - AI Risk Summit, 11-12 de agosto, Ritz-Carlton Half Moon Bay", "url": "https://www.securityweek.com/securityweek-to-host-ai-risk-summit-august-11-12-at-the-ritz-carlton-half-moon-bay/"},
+            {"label": "Hot Chips - simposio 2026 (23-25 de agosto, Stanford Memorial Auditorium)", "url": "https://hotchips.org/"}
+          ]
+        }
+      ]
+    }
+  ]
+}
