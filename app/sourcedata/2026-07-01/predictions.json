@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-01",
+  "predictions": [
+    {
+      "id": "prediction.aaf378fb3d29766b",
+      "scope_hint": "cross",
+      "title": "OpenAI or Google ships an agent-tuned mid-tier model by Q4 2026",
+      "body": "Anthropic's June 30 Sonnet 5 release reframes the mid-tier as the default substrate for long-horizon autonomous agents: it claims cost-performance parity with Opus 4.8 on the BrowseComp agentic-search and OSWorld-Verified computer-use benchmarks while launching at an introductory $2 per million input / $10 per million output tokens (standard $3/$15 after August 31) and shipping as the default on Free and Pro. That collapses the price of capable browser/terminal/tool-use agent loops to roughly a third of flagship cost, which is exactly the layer where enterprise agent token bills accumulate. The prediction: at least one rival frontier lab (OpenAI or Google being the most probable) responds by shipping a mid-tier model explicitly positioned and tuned for autonomous agentic work — sold on agentic-search and computer-use benchmark parity rather than raw reasoning scores — at competitive sub-$3-per-million input pricing. The competitive pressure is structural, not reactive marketing: once the cheapest good-enough agent runtime sets the reference price for autonomous loops, platform builders default their agent orchestration to whichever mid-tier clears the quality bar cheapest, so rivals must field a matching tier or cede the highest-volume inference workload.",
+      "reasoning": {
+        "because": "Sonnet 5 launched at $2/$10 with claimed Opus-parity on agentic-search and computer-use benchmarks.",
+        "given": "Autonomous agent loops are the highest-volume inference workload, priced from the mid-tier.",
+        "so_that": "A rival must field a competitively-priced agent-tuned mid-tier or cede that volume to the cheapest good-enough runtime.",
+        "landing": "A rival frontier lab ships an agent-tuned mid-tier tier by Q4 2026.",
+        "plain_language": "One of Anthropic's big rivals will likely release a cheaper mid-size AI built for running agents, to match the new Sonnet."
+      },
+      "summary": "Sonnet 5's $2/$10 launch claims Opus-level quality on agentic-search and computer-use benchmarks, making the mid-tier the cheapest place to run autonomous agents. Expect a rival frontier lab to ship its own agent-tuned mid-tier model at competitive sub-$3 input pricing by Q4 2026."
+    },
+    {
+      "id": "prediction.c734f8612b88e88b",
+      "scope_hint": "tech",
+      "title": "Agent-builder frameworks ship sandboxed MCP tool execution by default by Q1 2027",
+      "body": "The late-June CVE cluster in agentic-AI developer tooling puts the MCP-server / tool-execution boundary on notice: Flowise's Custom MCP Server carried a CVSS 9.9 OS-command-injection flaw (CVE-2026-56274) where a regex bypass and incomplete flag validation let an authenticated user run arbitrary host commands, while Microsoft AutoGen Studio's code-execution advisory traced to insufficient containerization letting agent-generated code run in the host process with excessive privileges. Crawl4AI, Langflow, and picklescan carried 9.6-9.8 RCE scores in the same window. The prediction: the leading open-source agent-builder frameworks (Flowise, AutoGen Studio, Langflow and peers) will move sandboxed, least-privilege MCP/tool execution from an opt-in configuration to a shipped default within two release cycles, because the common failure mode across the cluster is the same trust-the-authenticated-user, run-on-the-host pattern that a single hardened default forecloses. Expect the shift to show up as containerized-by-default tool runners, allowlist-based command validation replacing blocklists, and dropped host privileges, mirroring how prior injection-class CVE waves forced secure defaults in web frameworks.",
+      "reasoning": {
+        "because": "A late-June CVE cluster (Flowise 9.9, AutoGen Studio) exploits host-privileged MCP tool execution",
+        "given": "The shared failure mode is authenticated-user-to-host RCE at the tool boundary, one default fixes it",
+        "so_that": "Leading open-source agent-builder frameworks ship sandboxed least-privilege MCP tool execution by default, not opt-in",
+        "landing": "Default sandboxed MCP execution across major frameworks by Q1 2027",
+        "plain_language": "The apps people use to build AI agents keep getting hacked through the tools, so they will make safe sandboxing the default."
+      },
+      "summary": "A late-June cluster of critical RCE flaws in agent-builder tooling (Flowise's CVSS 9.9 MCP command-injection, AutoGen Studio code-execution) exploits host-privileged tool execution. Expect leading open-source agent frameworks to make sandboxed, least-privilege MCP execution the default by Q1 2027."
+    },
+    {
+      "id": "prediction.c358f7ab35340e0a",
+      "scope_hint": "cross",
+      "title": "Vertical domain agent harness ships from a second frontier lab by Q1 2027",
+      "body": "Anthropic's June 30 Claude Science launch is not a new model but a harness: it wires the existing Claude models (including Opus 4.8, with no special access) into 60+ scientific databases, computation tools, and lab connectors, extending the same code-agent-harness pattern from software into wet-lab science. The differentiated product is the tool-integration and domain-skills layer around a general model, not the weights. This reframes where competitive value sits, and the same-week arxiv orchestration work (2606.31518, treating composition and orchestration as the first-order engineering concern) shows the research front converging on the same idea. The prediction: at least one other frontier lab or major model platform will ship its own productized vertical domain agent harness — a packaged connector-plus-skills layer over its existing models aimed at a specific domain such as science, law, or finance — rather than answering with a new model, by Q1 2027. The harness becomes a named product line, not a reference example or a cookbook.",
+      "reasoning": {
+        "because": "Claude Science productizes a domain connector-and-skills harness over existing weights, not new ones",
+        "given": "Frontier model quality is converging and orchestration is now the first-order engineering layer",
+        "so_that": "Rivals differentiate on packaged vertical harnesses over their existing models rather than racing only on weights",
+        "landing": "A rival lab or platform ships a named vertical domain harness product by Q1 2027",
+        "plain_language": "Other AI companies will sell ready-made toolkits that plug their existing models into a specific field, not just new models."
+      },
+      "summary": "Claude Science shipped as a harness wiring existing Claude models into 60+ science databases and lab tools, not as new weights, signaling value is moving to domain-specific tool-and-skills layers. Expect a second frontier lab to ship its own vertical domain harness over existing models by Q1 2027."
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "date": "2026-07-01",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.f52aeb7468446ca2",
+        "short_label": "Multi-tenant agent builders draw a 9.0+ cross-tenant authz CVE by Q1 2027",
+        "prediction_date": "2026-06-27"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Tumama nang diretso ang alon ng CVE noong huling bahagi ng Hunyo sa multi-tenant agent-builder surface na tinatarget ng prediksiyong ito. Pinangungunahan ng Flowise MCP command-injection RCE ang kumpol, kasama ang CVE-2026-56274, isang CVSS 9.9 na depekto ng OS-command-injection sa Flowise Custom MCP Server (bago ang 3.1.2). Dito, dahil sa kulang na validation ng command-flag at isang regex bypass sa mga restriksiyon ng local-file-access, nagagawa ng sinumang authenticated na user na i-configure ang isang malisyosong MCP server na nakalulusot sa validateCommandFlags blocklist at nagpapatakbo ng arbitraryong host commands. Nakaupo ito sa loob ng mas malawak na window: umabot sa 9.6-9.8 ang Crawl4AI (CVE-2026-53753), Langflow, at picklescan, at ang code execution sa Microsoft AutoGen Studio ay nagmumula sa kulang na containerization kaya tumatakbo ang code na ginawa ng agent sa host process nang may sobrang pribilehiyo. Ang landas ng exploit ay ang authenticated-tenant-patungong-host na eskalasyon na inaasahan ng prediksiyon, at malinaw na nalampasan ng Flowise ang hangganang 9.0+. Ang natatanging puwang laban sa eksaktong claim ay saklaw ng Flowise ang isang authenticated na user sa halip na isang tahasang pinangalanang pagkasira ng cross-tenant authorization, kaya naabot ang antas ng severity habang bahagya lamang na tumutugma ang mahigpit na cross-tenant na pananaw.",
+      "reference_links": [
+        {
+          "label": "NVD - CVE-2026-56274 (Flowise Custom MCP Server command injection, CVSS 9.9)",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56274"
+        },
+        {
+          "label": "Threat-Modeling.com - Microsoft AutoGen Studio code execution (June 2026)",
+          "url": "https://threat-modeling.com/microsoft-autogen-studio-code-execution-june-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Tumama nang diretso ang alon ng CVE noong huling bahagi ng Hunyo sa multi-tenant agent-builder surface na tinatarget ng prediksiyong ito. Malinaw na nalampasan ng Flowise Custom MCP Server command-injection RCE (CVSS 9.9) ang hangganang 9.0+ habang nakaeskala ang isang authenticated na user lampas sa sirang command-flag blocklist para magpatakbo ng arbitraryong host commands, sa gitna ng mas malawak na kumpol na 9.6-9.8 sa Crawl4AI, Langflow, at AutoGen Studio.",
+        "coherence": 4,
+        "remaining_gap": "Saklaw ng Flowise ang isang authenticated na user, hindi isang tahasang pinangalanang pagkasira ng cross-tenant authorization, kaya bahagya lamang na tumutugma ang mahigpit na cross-tenant na pananaw."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f492c98e68ae3d89",
+        "short_label": "Inline MCP-channel policy enforcement ships as a platform default by Q1 2027",
+        "prediction_date": "2026-06-16"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Direktang tinutukoy ngayong araw ang MCP-server / tool-execution na hangganan bilang ang puntong pinagtitipunan ng ma-eexploit na code, na siya mismong channel na sinasabi ng prediksiyong ito na kailangang magkaroon ng inline default policy enforcement. Nakalulusot ang Flowise custom-MCP command-injection RCE (CVE-2026-56274, CVSS 9.9) sa validateCommandFlags blocklist sa pamamagitan ng regex bypass para magpatakbo ng arbitraryong host commands, samantalang tumatakbo ang code execution ng Microsoft AutoGen Studio na ginawa ng agent sa host process nang may sobrang pribilehiyo dahil sa kulang na containerization. Ang karaniwang hibla na iginuguhit ng ulat ay ang mga plumbing na nagbibigay-daan sa mga agent na tumawag ng mga tool ang siyang kinaroroonan ng ma-eexploit na code. Iyon ang presyur sa panig ng demand para sa inline MCP-channel enforcement, ngunit wala pang platform na naglabas ng inline allowlist-based MCP policy bilang default na inilabas na. Ang ngayong araw ay ebidensiya ng insidenteng nag-uudyok nito, hindi ang naiprodukto nang default mismo.",
+      "reference_links": [
+        {
+          "label": "NVD - CVE-2026-56274 (Flowise Custom MCP Server command injection, CVSS 9.9)",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56274"
+        },
+        {
+          "label": "Threat-Modeling.com - Microsoft AutoGen Studio code execution (June 2026)",
+          "url": "https://threat-modeling.com/microsoft-autogen-studio-code-execution-june-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Tinutukoy ngayong araw ang MCP-server at tool-execution na hangganan bilang ang puntong pinagtitipunan ng ma-eexploit na code: nakalulusot ang Flowise custom-MCP RCE (CVSS 9.9) sa validateCommandFlags blocklist sa pamamagitan ng regex bypass, at pinatatakbo ng AutoGen Studio ang code na ginawa ng agent sa host process nang may sobrang pribilehiyo. Iyon ang presyur ng insidente na nag-uudyok ng inline default policy enforcement sa mismong channel na inaasahan ng prediksiyong ito na magkakaroon nito.",
+        "coherence": 4,
+        "remaining_gap": "Wala pang platform na naglabas ng inline allowlist-based MCP policy bilang naiprodukto nang default, kaya ang ngayong araw ay nag-uudyok na ebidensiya sa halip na ang inilabas na kontrol."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6ba7ca6e01ab313e",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Dalawa sa mga senyales ngayong araw ang humahawak sa agent-harness reliability-and-authorization surface na kinaroroonan ng prediksiyong ito. Sa panig ng seguridad, ang Flowise custom-MCP RCE (CVE-2026-56274) at ang AutoGen Studio host-process code execution ay parehong nagmumula sa isang pattern na pagtitiwala-sa-authenticated-user, patakbo-sa-host na dinisenyong pigilan ng isang deny-by-default capability gate. Sa panig ng modelo, naglabas ang Anthropic ng Claude Sonnet 5 na nagtatala ng mas mababang antas ng hindi kanais-nais na pag-uugali at mas mahusay na paglaban sa mga pagtatangkang prompt-injection hijack kaysa sa nauna rito. Ngunit wala sa dalawa ang siyang pangunahing mekanismo: isang default-on na gate na naglilimita sa lethal trifecta ng access sa pribadong datos, hindi mapagkatiwalaang nilalaman, at panlabas na komunikasyon. Pinapataas ng paglaban sa injection sa antas-modelo at ng mga pagbubunyag ng framework RCE ang presyur para sa gayong gate nang walang anumang coding-agent platform na naglalabas ng deny-by-default authorization control mismo, kaya ang kaugnayan ay pangtema sa halip na direktang katuparan.",
+      "reference_links": [
+        {
+          "label": "NVD - CVE-2026-56274 (Flowise Custom MCP Server command injection, CVSS 9.9)",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56274"
+        },
+        {
+          "label": "Anthropic - Introducing Claude Sonnet 5",
+          "url": "https://www.anthropic.com/news/claude-sonnet-5"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang Flowise custom-MCP RCE at ang AutoGen Studio host-process code execution ay parehong nagmumula sa isang pattern na pagtitiwala-sa-authenticated-user, patakbo-sa-host na dinisenyong pigilan ng isang deny-by-default capability gate, samantalang naglalabas ang Claude Sonnet 5 ng mas matibay na paglaban sa prompt-injection. Magkasama nilang pinatataas ang presyur para sa gayong gate, na nagpapalusog sa precondition na pinagbabatayan ng prediksiyong ito.",
+        "coherence": 3,
+        "remaining_gap": "Walang coding-agent platform na naglabas ng default-on na gate na naglilimita sa trifecta ng pribadong datos, hindi mapagkatiwalaang nilalaman, at panlabas na komunikasyon, kaya nananatiling pangtema ang kaugnayan."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.488b349d322d5c4a",
+        "short_label": "Agent-framework SQL tools ship read-only-by-default execution guards by Q1 2027",
+        "prediction_date": "2026-06-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Muling isinasandal ng huling-Hunyo na kumpol ng agent-tooling CVE ang tesis ng execution-layer-guard. Nagpapatakbo ang Flowise custom-MCP command-injection (CVE-2026-56274, CVSS 9.9) ng arbitraryong host commands dahil tinatalo ng kulang na flag validation at ng regex bypass ang isang blocklist, at pinatatakbo ng AutoGen Studio ang code na ginawa ng agent sa host process nang may sobrang pribilehiyo dahil sa kulang na containerization. Pareho itong ang mismong pang-aabusong prompt-patungong-tool-patungong-execution na sinasadyang bawasan ng mga read-only-by-default, least-privilege na execution guard, at ang blocklist-na-tinalo-ng-bypass ang mismong paraan ng pagkabigo na iginigiit ng prediksiyon na nagtutulak sa mga framework tungo sa allowlist, least-privilege na mga default. Ang ebidensiya ay ang presyur ng insidente ng klaseng injection sa halip na isang inilabas na read-only-by-default na SQL o execution guard sa isang pinangalanang framework, kaya binubuhay nito ang natutulog na tesis nang hindi ito natutupad.",
+      "reference_links": [
+        {
+          "label": "NVD - CVE-2026-56274 (Flowise Custom MCP Server command injection, CVSS 9.9)",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56274"
+        },
+        {
+          "label": "Threat-Modeling.com - Microsoft AutoGen Studio code execution (June 2026)",
+          "url": "https://threat-modeling.com/microsoft-autogen-studio-code-execution-june-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang huling-Hunyo na kumpol ng agent-tooling CVE ang presyur ng insidente na pinagbabatayan ng tesis na ito: nagpatakbo ang Flowise custom-MCP command-injection ng arbitraryong host commands dahil mismong natalo ang isang blocklist ng regex bypass, at pinatakbo ng AutoGen Studio ang code na ginawa ng agent sa host process dahil sa kulang na containerization. Ang blocklist-na-tinalo-ng-bypass ang mismong paraan ng pagkabigo na nag-uudyok sa mga framework tungo sa allowlist, least-privilege, read-only-by-default na mga execution guard, kaya muling isinasandal ng ngayong araw ang precondition matapos ang panunulog.",
+        "coherence": 3,
+        "remaining_gap": "Walang pinangalanang framework na naglabas ng read-only-by-default na SQL o execution guard; ang ngayong araw ay presyur ng insidente ng klaseng injection, hindi isang naiprodukto nang default na kontrol."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3a5fa9315f58608d",
+        "short_label": "Agentic coding platforms ship token budgets and caps as default by Q2 2027",
+        "prediction_date": "2026-06-25"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Inilabas ng Anthropic ang Claude Sonnet 5 noong Hunyo 30 bilang pinakamurang paraan para patakbuhin ang mga long-horizon na agent sa antas na malapit sa flagship, na nag-aangking may pagkakapantay ng cost-performance sa Opus 4.8 sa BrowseComp agentic-search at OSWorld-Verified computer-use na mga benchmark sa panimulang $2 kada milyong input / $10 kada milyong output na token (standard $3/$15 pagkatapos ng Agosto 31), at inilalabas bilang default sa Free at Pro. Ang pagbaba ng halaga ng per-token para sa mahuhusay na agentic loop sa tinatayang ikatlong bahagi ng flagship ay siya ring presyur ng enterprise-token-bill na nag-uudyok sa mga platform na maglahad ng mga budget at caps bilang default: hindi inaalis ng mas murang token ang pangangailangang limitahan ang gastos ng long-horizon na agent, sa halip ay pinapataas nito ang dami ng autonomous na loop na tumatakbo. Ito ay konteksto ng gastos ng substrate na naghahasa sa ekonomikong dahilan para sa mga default budget sa halip na isang platform na naglalabas ng token-cap na kontrol mismo.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Introducing Claude Sonnet 5",
+          "url": "https://www.anthropic.com/news/claude-sonnet-5"
+        },
+        {
+          "label": "9to5Mac - Anthropic upgrades Claude with new Sonnet 5 model",
+          "url": "https://9to5mac.com/2026/06/30/anthropic-upgrades-claude-with-new-sonnet-5-model-details-here/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Sa pagbaba ng Claude Sonnet 5 sa halaga ng per-token para sa mahuhusay na long-horizon na agent sa tinatayang ikatlong bahagi ng flagship, hinahasa nito ang ekonomikong dahilan sa likod ng prediksiyong ito: hindi inaalis ng mas murang token ang pangangailangang limitahan ang autonomous na gastos, sa halip ay pinapataas nito ang dami ng loop na tumatakbo, na siyang presyur ng enterprise-token-bill na nagtutulak sa mga platform na maglahad ng mga budget at caps bilang default. Naghahatid ang ngayong araw ng kondisyon ng gastos ng substrate na nagpapadagdag, hindi nagpapabawas, sa pangangailangan ng mga default na kontrol sa gastos.",
+        "coherence": 3,
+        "remaining_gap": "Ito ay konteksto ng gastos, hindi isang platform na naglalabas ng token-budget-and-cap na kontrol mismo; walang agentic coding platform na gumawang default sa mga cap."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4db5b05c737e13d8",
+        "short_label": "A frontier lab ships beneficial-trait RL in a production model by H1 2027",
+        "prediction_date": "2026-06-21"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Inilabas ang Claude Sonnet 5 na may nakasaad na pagbuti sa kaligtasan na may kaugnayan sa tesis na ito: isang mas mababang antas ng hindi kanais-nais na pag-uugali at mas mahusay na paglaban sa mga pagtatangkang prompt-injection hijack kaysa sa nauna rito, na direktang isinama sa isang generally available na production model sa halip na isang research artifact. Iyon ang hugis na inaasahan ng prediksiyon, isang frontier lab na inihahalo ang mga pagbuti sa pag-uugali at alignment sa isang inilabas na modelo bilang isang karaniwang resulta ng post-training sa halip na isang benchmark demo. Ang puwang ay tinatrato ng Anthropic ang pagbuti bilang nabawasang hindi kanais-nais na pag-uugali at paglaban sa injection sa halip na isang tahasang pinangalanang beneficial-trait reinforcement-learning na yugto na may tala ng metodolohiya sa system card, kaya sinusuportahan nito ang trajektorya nang hindi kinukumpirma ang tiyak na mekanismong RL-persona na pinangalanan ng prediksiyon.",
+      "reference_links": [
+        {
+          "label": "Anthropic - Introducing Claude Sonnet 5",
+          "url": "https://www.anthropic.com/news/claude-sonnet-5"
+        },
+        {
+          "label": "9to5Mac - Anthropic upgrades Claude with new Sonnet 5 model",
+          "url": "https://9to5mac.com/2026/06/30/anthropic-upgrades-claude-with-new-sonnet-5-model-details-here/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Inilabas ang Claude Sonnet 5 na may nakasaad na mas mababang antas ng hindi kanais-nais na pag-uugali at mas mahusay na paglaban sa mga pagtatangkang prompt-injection hijack kaysa sa nauna rito, na direktang isinama sa isang generally available na production model sa halip na isang research artifact. Iyon ang trajektorya na inaasahan ng prediksiyong ito: isang frontier lab na inihahalo ang mga pagbuti sa pag-uugali at alignment sa isang inilabas na modelo bilang isang karaniwang resulta ng post-training, na nagpapatunay sa istrukturang puwersa tungo sa mga naiprodukto nang pagbuti sa kaligtasan.",
+        "coherence": 3,
+        "remaining_gap": "Tinatrato ng Anthropic ang pagbuti bilang nabawasang hindi kanais-nais na pag-uugali at paglaban sa injection, hindi isang tahasang pinangalanang beneficial-trait RL na yugto na may metodolohiya sa system card, kaya hindi pa nakukumpirma ang tiyak na mekanismo."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a2d6a1d80d9edd87",
+        "short_label": "Orchestration benchmarks add a latency-disclosure column by Q1 2027",
+        "prediction_date": "2026-06-24"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Itinutulak ng batch ng arXiv noong Hunyo 29 ang agent orchestration sa harapan ng agenda ng pananaliksik: tinatrato ng Design and Implementation of Agentic Orchestrations and Orchestration of Agents (2606.31518) kung paano binubuo at inoorkestra ang mga agent bilang pangunahing engineering na alalahanin sa halip na isang pang-huling isipin, kasama ng isang self-evolving na biological-protocol na agent (2606.31763) at isang framework ng plant-phenotyping, na nagtatagpo sa orchestration at self-evolving na autonomiya sa mga domain-specific na setting. Ang pag-angat ng orchestration sa isang first-class na engineering na bagay ang precondition para sa mga orchestration-specific na benchmark at sa mga disclosure column na inaasahan ng prediksiyong ito, ngunit binabalangkas ng mga papel ang komposisyon at self-evolution sa halip na standardisadong pag-uulat ng latency, kaya isinusulong ng ebidensiya ang direksiyon ng orchestration-benchmark nang hindi idinadagdag ang tiyak na latency-disclosure column.",
+      "reference_links": [
+        {
+          "label": "arXiv - Design and Implementation of Agentic Orchestrations and Orchestration of Agents (2606.31518)",
+          "url": "https://arxiv.org/abs/2606.31518"
+        },
+        {
+          "label": "arXiv - A Self-Evolving Agentic System for Automated Generation and Execution of Biological Protocols (2606.31763)",
+          "url": "https://arxiv.org/abs/2606.31763"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Iniaangat ng batch ng arXiv noong Hunyo 29 ang kung paano binubuo at inoorkestra ang mga agent tungo sa isang pangunahing engineering na alalahanin sa halip na isang pang-huling isipin, na siyang precondition para umiral man lamang ang mga orchestration-specific na benchmark. Kapag naging sinusukat na bagay ang orchestration, nagiging halatang axis ang latency na dapat standardisahin at ilahad.",
+        "coherence": 3,
+        "remaining_gap": "Binabalangkas ng mga papel ang komposisyon at self-evolution, hindi ang standardisadong pag-uulat ng latency, kaya wala pang benchmark na aktwal na nagdagdag ng latency-disclosure column."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.adbdf490706f8fc3",
+        "short_label": "Agent meta-harness becomes the cross-vendor policy plane for agents by H1 2027",
+        "prediction_date": "2026-06-15"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Inilunsad ang Anthropic Claude Science noong Hunyo 30 bilang isang harness sa halip na isang bagong modelo: pinatatakbo nito ang mga umiiral nang Claude na modelo (kabilang ang Opus 4.8, walang espesyal na access) at nagdaragdag ng mga pre-configured na connector sa mahigit 60 na siyentipikong database at computation na tool sa buong genomics, proteomics, structural biology at cheminformatics, kung saan ang naiibang produkto ay ang layer ng tool-integration at domain-skills sa palibot ng isang general na modelo, hindi ang weights. Kaakibat ng gawaing arXiv sa orchestration noong Hunyo 29 (2606.31518) na tinatrato ang komposisyon at orchestration bilang pangunahing alalahanin, pinatitibay ng senyales na ang layer ng harness at policy-and-integration sa ibabaw ng mga modelo ang kinatatampukan ng paggalaw ng halagang mapagkumpitensiya. Ito ay direksyunal na suporta para sa isang harness na nagiging matibay na control surface, ngunit ang Claude Science ay isang single-vendor na domain workbench, hindi isang cross-vendor policy plane na sumasaklaw sa mga modelo ng maraming lab, na siyang tiyak na claim.",
+      "reference_links": [
+        {
+          "label": "Northeastern Global News - Anthropic Claude Science aims to boost drug discovery",
+          "url": "https://news.northeastern.edu/2026/06/30/anthropic-claude-science-launch/"
+        },
+        {
+          "label": "arXiv - Design and Implementation of Agentic Orchestrations and Orchestration of Agents (2606.31518)",
+          "url": "https://arxiv.org/abs/2606.31518"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Inilunsad ang Claude Science bilang isang harness sa ibabaw ng mga umiiral nang modelo, kung saan ang naiibang halaga ay nasa layer ng connector at domain-skills nito sa halip na sa weights, at tinatrato ng gawaing arXiv sa orchestration ang komposisyon bilang pangunahing alalahanin. Magkasama nilang inilalarawan ang istrukturang paghatak na naglilipat ng halagang mapagkumpitensiya mula sa mga modelo patungo sa layer ng integration-and-policy na maghahain ng isang control plane.",
+        "coherence": 3,
+        "remaining_gap": "Ang Claude Science ay isang single-vendor na domain workbench, hindi isang cross-vendor policy plane na sumasaklaw sa mga modelo ng maraming lab, na siyang tiyak na claim."
+      }
+    }
+  ]
+}
