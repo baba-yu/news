@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-01",
+  "predictions": [
+    {
+      "id": "prediction.aaf378fb3d29766b",
+      "scope_hint": "cross",
+      "title": "Maglalabas ang OpenAI o Google ng agent-tuned na mid-tier na modelo bago matapos ang Q4 2026",
+      "body": "Muling binago ng paglabas ng Anthropic sa Sonnet 5 noong Hunyo 30 ang mid-tier bilang default na batayan para sa long-horizon na autonomous agents: sinasabi nitong may cost-performance parity ito sa Opus 4.8 sa BrowseComp agentic-search at OSWorld-Verified computer-use benchmarks, habang inilulunsad sa introductory na presyong $2 kada milyong input / $10 kada milyong output tokens (magiging standard na $3/$15 pagkatapos ng Agosto 31) at ipinadadala bilang default sa Free at Pro. Dahil dito, bumagsak ang presyo ng magagaling na browser/terminal/tool-use agent loops sa halos ikatlong bahagi lamang ng gastos ng flagship, at doon mismo nag-iipon ang mga enterprise agent token bill. Ang hula: tutugon ang kahit isang karibal na frontier lab (malamang na OpenAI o Google) sa pamamagitan ng paglabas ng mid-tier na modelo na tahasang inilaan at ini-tune para sa autonomous agentic na trabaho — ibinebenta batay sa agentic-search at computer-use benchmark parity sa halip na sa hilaw na reasoning scores — sa mapagkumpitensyang presyong wala pang $3 kada milyong input. Istruktural ang presyon ng kompetisyon, hindi lang reaktibong marketing: kapag ang pinakamurang sapat-na-galing na agent runtime na ang nagtatakda ng reference price para sa autonomous loops, itatakda ng mga platform builder ang kanilang agent orchestration sa kahit aling mid-tier ang pinakamura na nakakalampas sa quality bar, kaya kailangang maglabas ng mga karibal ng katumbas na tier o iwanan ang pinakamalaking-volume na inference workload.",
+      "reasoning": {
+        "because": "Inilunsad ang Sonnet 5 sa $2/$10 na may sinasabing Opus-parity sa agentic-search at computer-use benchmarks.",
+        "given": "Ang autonomous agent loops ang pinakamalaking-volume na inference workload, at pinepresyuhan mula sa mid-tier.",
+        "so_that": "Kailangang maglabas ng karibal ng mapagkumpitensyang presyo ng agent-tuned na mid-tier o iwanan ang volume na iyon sa pinakamurang sapat-na-galing na runtime.",
+        "landing": "Maglalabas ng agent-tuned na mid-tier na tier ang isang karibal na frontier lab bago matapos ang Q4 2026.",
+        "plain_language": "Malamang na maglabas ang isa sa malalaking karibal ng Anthropic ng mas murang mid-size na AI na gawa para magpatakbo ng agents, para tapatan ang bagong Sonnet."
+      },
+      "summary": "Sinasabi ng $2/$10 na paglunsad ng Sonnet 5 na may kalidad itong katulad ng Opus sa agentic-search at computer-use benchmarks, kaya ang mid-tier ang pinakamurang lugar para magpatakbo ng autonomous agents. Asahan na maglalabas ang isang karibal na frontier lab ng sarili nitong agent-tuned na mid-tier na modelo sa mapagkumpitensyang presyong wala pang $3 input bago matapos ang Q4 2026."
+    },
+    {
+      "id": "prediction.c734f8612b88e88b",
+      "scope_hint": "tech",
+      "title": "Magpapadala ang mga agent-builder framework ng sandboxed MCP tool execution bilang default bago matapos ang Q1 2027",
+      "body": "Inilagay ng CVE cluster sa agentic-AI developer tooling noong huling bahagi ng Hunyo ang MCP-server / tool-execution boundary sa ilalim ng bantay: nagdala ang Custom MCP Server ng Flowise ng CVSS 9.9 na OS-command-injection na depekto (CVE-2026-56274), kung saan ang isang regex bypass at kulang na flag validation ay nagpapahintulot sa isang authenticated user na magpatakbo ng anumang host command, samantalang ang code-execution advisory ng Microsoft AutoGen Studio ay nagmula sa kulang na containerization na nagpapahintulot sa code na ginawa ng agent na tumakbo sa host process nang may sobrang privilege. Ang Crawl4AI, Langflow, at picklescan ay nagtala ng 9.6-9.8 na RCE scores sa parehong panahon. Ang hula: ililipat ng mga nangungunang open-source agent-builder framework (Flowise, AutoGen Studio, Langflow at iba pa) ang sandboxed, least-privilege na MCP/tool execution mula sa opt-in na configuration tungo sa isang ipinadadalang default sa loob ng dalawang release cycle, dahil ang karaniwang failure mode sa buong cluster ay ang parehong pagtitiwala-sa-authenticated-user, patakbo-sa-host na pattern na napipigilan ng iisang matibay na default. Asahan na lalabas ang paglilipat bilang containerized-by-default na tool runners, allowlist-based na command validation na papalit sa blocklists, at ibinabang host privileges, kagaya ng paraan na pinilit ng mga naunang injection-class na CVE wave ang secure defaults sa mga web framework.",
+      "reasoning": {
+        "because": "Sinasamantala ng CVE cluster sa huling bahagi ng Hunyo (Flowise 9.9, AutoGen Studio) ang host-privileged na MCP tool execution",
+        "given": "Ang magkabahaging failure mode ay authenticated-user-to-host RCE sa tool boundary, na naaayos ng iisang default",
+        "so_that": "Magpapadala ang mga nangungunang open-source agent-builder framework ng sandboxed least-privilege na MCP tool execution bilang default, hindi opt-in",
+        "landing": "Default na sandboxed MCP execution sa mga pangunahing framework bago matapos ang Q1 2027",
+        "plain_language": "Palaging na-ha-hack ang mga app na ginagamit ng tao para gumawa ng AI agents sa pamamagitan ng mga tool, kaya gagawin nilang default ang ligtas na sandboxing."
+      },
+      "summary": "Sinasamantala ng cluster ng kritikal na RCE flaws sa agent-builder tooling noong huling bahagi ng Hunyo (CVSS 9.9 na MCP command-injection ng Flowise, code-execution ng AutoGen Studio) ang host-privileged na tool execution. Asahan na gagawing default ng mga nangungunang open-source agent framework ang sandboxed, least-privilege na MCP execution bago matapos ang Q1 2027."
+    },
+    {
+      "id": "prediction.c358f7ab35340e0a",
+      "scope_hint": "cross",
+      "title": "Maglalabas ng vertical domain agent harness ang pangalawang frontier lab bago matapos ang Q1 2027",
+      "body": "Hindi bagong modelo ang paglunsad ng Anthropic sa Claude Science noong Hunyo 30 kundi isang harness: ikinakabit nito ang mga umiiral nang Claude models (kasama ang Opus 4.8, na walang espesyal na access) sa mahigit 60 scientific database, computation tool, at lab connector, na inaabot ang parehong code-agent-harness pattern mula software tungo sa wet-lab science. Ang pinagkaibang produkto ay ang tool-integration at domain-skills layer sa paligid ng isang general model, hindi ang weights. Muli nitong binubuo kung saan nakaupo ang mapagkumpitensyang halaga, at ipinapakita ng arxiv orchestration work sa parehong linggo (2606.31518, na itinuturing ang composition at orchestration bilang unang-antas na engineering na alalahanin) na sabay-sabay na dumadako ang research front sa parehong ideya. Ang hula: maglalabas ang kahit isa pang frontier lab o malaking model platform ng sarili nitong productized na vertical domain agent harness — isang nakabalot na connector-plus-skills layer sa ibabaw ng umiiral nitong mga modelo na nakatuon sa isang tiyak na larangan gaya ng agham, batas, o pananalapi — sa halip na tumugon ng bagong modelo, bago matapos ang Q1 2027. Ang harness ay magiging isang pinangalanang linya ng produkto, hindi isang halimbawang reperensya o cookbook.",
+      "reasoning": {
+        "because": "Ginagawang produkto ng Claude Science ang isang domain connector-and-skills harness sa ibabaw ng umiiral nang weights, hindi bago",
+        "given": "Sabay-sabay nang dumadako ang kalidad ng frontier model at ang orchestration ang unang-antas na engineering layer ngayon",
+        "so_that": "Nagkakaiba ang mga karibal batay sa mga nakabalot na vertical harness sa ibabaw ng kanilang umiiral na modelo sa halip na makipagpaligsahan lang sa weights",
+        "landing": "Maglalabas ang isang karibal na lab o platform ng pinangalanang vertical domain harness na produkto bago matapos ang Q1 2027",
+        "plain_language": "Magbebenta ang ibang AI company ng handa nang mga toolkit na ikinakabit ang kanilang umiiral na modelo sa isang tiyak na larangan, hindi lang bagong modelo."
+      },
+      "summary": "Inilabas ang Claude Science bilang harness na ikinakabit ang umiiral nang Claude models sa mahigit 60 science database at lab tool, hindi bilang bagong weights, na senyales na lumilipat ang halaga tungo sa domain-specific na tool-and-skills layer. Asahan na maglalabas ang pangalawang frontier lab ng sarili nitong vertical domain harness sa ibabaw ng umiiral na modelo bago matapos ang Q1 2027."
+    }
+  ]
+}

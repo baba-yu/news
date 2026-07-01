@@ -1,0 +1,30 @@
+[
+  {
+    "actor": "Open-source agent-builder framework maintainer",
+    "job": "Rewriting the MCP/tool-execution boundary so agent-invoked tools run containerized with dropped host privileges instead of trust-the-authenticated-user, run-on-the-host.",
+    "outcome": "A released framework version where sandboxed, least-privilege MCP tool execution is the shipped default rather than an opt-in configuration flag.",
+    "motivation": "The late-June CVE cluster made host-privileged tool execution a reputational and CVSS-9.9 liability the project cannot keep shipping as default behavior.",
+    "task": {
+      "who": "Core runtime and security engineering maintainers",
+      "what": "Containerize tool runners and drop host privileges by default",
+      "where": "Framework tool-execution and MCP-server subsystem",
+      "when": "Across the next two release cycles through Q1 2027",
+      "why": "Foreclose the shared authenticated-user-to-host RCE failure mode",
+      "how": "Container isolation plus allowlist command validation replacing blocklists"
+    }
+  },
+  {
+    "actor": "Agentic-AI security researcher and CVE reporter",
+    "job": "Disclosing and scoring command-injection and code-execution flaws at the tool boundary, keeping pressure on maintainers to harden execution defaults.",
+    "outcome": "A steady stream of high-severity advisories that make opt-in sandboxing untenable and push frameworks to adopt secure-by-default tool execution.",
+    "motivation": "Recurring critical RCE at the same trust boundary shows the class is systemic, and researchers gain credibility by forcing the ecosystem fix.",
+    "task": {
+      "who": "Independent and vendor vulnerability-research teams",
+      "what": "Find and disclose tool-boundary command-injection and RCE flaws",
+      "where": "Agent-builder codebases and their MCP tool runners",
+      "when": "Continuously through the two-release-cycle runway to Q1 2027",
+      "why": "Sustain pressure until sandboxed defaults ship across frameworks",
+      "how": "Coordinated disclosure with CVSS scoring and proof-of-concept exploits"
+    }
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-01",
+  "predictions": [
+    {
+      "id": "prediction.aaf378fb3d29766b",
+      "scope_hint": "cross",
+      "title": "OpenAI o Google lanzará un modelo de gama media afinado para agentes antes del Q4 2026",
+      "body": "El lanzamiento de Sonnet 5 por parte de Anthropic el 30 de junio replantea la gama media como el sustrato por defecto para los agentes autónomos de horizonte largo: afirma tener una relación coste-rendimiento a la par de Opus 4.8 en los benchmarks de búsqueda agéntica BrowseComp y de uso de ordenador OSWorld-Verified, mientras se estrena con un precio introductorio de 2 dólares por millón de tokens de entrada y 10 dólares por millón de tokens de salida (estándar de 3/15 dólares tras el 31 de agosto) y llega como opción por defecto en los planes Free y Pro. Eso reduce el coste de los bucles de agentes capaces de usar navegador, terminal y herramientas a aproximadamente un tercio del coste de un modelo insignia, que es justamente la capa donde se acumulan las facturas de tokens de los agentes empresariales. La predicción: al menos un laboratorio rival de vanguardia (OpenAI o Google como los más probables) responderá lanzando un modelo de gama media posicionado y afinado explícitamente para el trabajo agéntico autónomo —vendido por su paridad en benchmarks de búsqueda agéntica y uso de ordenador, no por sus puntuaciones brutas de razonamiento— a un precio competitivo por debajo de los 3 dólares por millón de entrada. La presión competitiva es estructural, no una reacción de marketing: una vez que el entorno de agentes más barato y suficientemente bueno fija el precio de referencia para los bucles autónomos, quienes construyen plataformas orientan por defecto la orquestación de sus agentes hacia la gama media que supere el umbral de calidad al menor coste, de modo que los rivales deben ofrecer un nivel equivalente o ceder la carga de inferencia de mayor volumen.",
+      "reasoning": {
+        "because": "Sonnet 5 se lanzó a 2/10 dólares con paridad declarada frente a Opus en benchmarks de búsqueda agéntica y uso de ordenador.",
+        "given": "Los bucles de agentes autónomos son la carga de inferencia de mayor volumen y se pagan desde la gama media.",
+        "so_that": "Un rival debe ofrecer una gama media afinada para agentes a precio competitivo o ceder ese volumen al entorno más barato y suficientemente bueno.",
+        "landing": "Un laboratorio rival de vanguardia lanza un nivel de gama media afinado para agentes antes del Q4 2026.",
+        "plain_language": "Es probable que uno de los grandes rivales de Anthropic lance una IA de tamaño medio más barata pensada para ejecutar agentes, para igualar al nuevo Sonnet."
+      },
+      "summary": "El lanzamiento de Sonnet 5 a 2/10 dólares afirma tener calidad de nivel Opus en benchmarks de búsqueda agéntica y uso de ordenador, lo que convierte a la gama media en el lugar más barato para ejecutar agentes autónomos. Cabe esperar que un laboratorio rival de vanguardia lance su propio modelo de gama media afinado para agentes a un precio de entrada competitivo por debajo de 3 dólares antes del Q4 2026."
+    },
+    {
+      "id": "prediction.c734f8612b88e88b",
+      "scope_hint": "tech",
+      "title": "Los frameworks para construir agentes traerán ejecución aislada de herramientas MCP por defecto antes del Q1 2027",
+      "body": "El grupo de CVE de finales de junio en las herramientas de desarrollo de IA agéntica pone en alerta el límite entre el servidor MCP y la ejecución de herramientas: el Custom MCP Server de Flowise arrastraba un fallo de inyección de comandos del sistema operativo con CVSS 9.9 (CVE-2026-56274), donde un bypass de expresiones regulares y una validación incompleta de flags permitían a un usuario autenticado ejecutar comandos arbitrarios en el host, mientras que el aviso de ejecución de código de Microsoft AutoGen Studio se debía a una contenedorización insuficiente que dejaba que el código generado por el agente corriera en el proceso del host con privilegios excesivos. Crawl4AI, Langflow y picklescan arrastraron puntuaciones de RCE de 9.6 a 9.8 en la misma ventana. La predicción: los principales frameworks de código abierto para construir agentes (Flowise, AutoGen Studio, Langflow y similares) pasarán la ejecución aislada y de mínimos privilegios de herramientas MCP de una opción de configuración a un valor por defecto en un plazo de dos ciclos de lanzamiento, porque el fallo común en todo el grupo es el mismo patrón de confiar en el usuario autenticado y ejecutar en el host que un único valor por defecto reforzado deja sin salida. Cabe esperar que el cambio se manifieste como ejecutores de herramientas contenedorizados por defecto, validación de comandos basada en listas de permitidos en lugar de listas de bloqueo, y privilegios de host descartados, reflejando cómo las anteriores oleadas de CVE de la clase de inyección forzaron valores seguros por defecto en los frameworks web.",
+      "reasoning": {
+        "because": "Un grupo de CVE de finales de junio (Flowise 9.9, AutoGen Studio) explota la ejecución de herramientas MCP con privilegios de host",
+        "given": "El fallo compartido es un RCE que va del usuario autenticado al host en el límite de las herramientas, y un solo valor por defecto lo resuelve",
+        "so_that": "Los principales frameworks de código abierto para construir agentes traen la ejecución aislada de herramientas MCP con mínimos privilegios por defecto, no como opción",
+        "landing": "Ejecución aislada de MCP por defecto en los principales frameworks antes del Q1 2027",
+        "plain_language": "Las aplicaciones que la gente usa para construir agentes de IA siguen siendo hackeadas a través de las herramientas, así que harán del aislamiento seguro la opción por defecto."
+      },
+      "summary": "Un grupo de fallos críticos de RCE de finales de junio en las herramientas para construir agentes (la inyección de comandos MCP con CVSS 9.9 de Flowise, la ejecución de código de AutoGen Studio) explota la ejecución de herramientas con privilegios de host. Cabe esperar que los principales frameworks de agentes de código abierto conviertan la ejecución aislada de MCP con mínimos privilegios en el valor por defecto antes del Q1 2027."
+    },
+    {
+      "id": "prediction.c358f7ab35340e0a",
+      "scope_hint": "cross",
+      "title": "Un segundo laboratorio de vanguardia lanzará un arnés de agente para un dominio vertical antes del Q1 2027",
+      "body": "El lanzamiento de Claude Science por parte de Anthropic el 30 de junio no es un modelo nuevo, sino un arnés: conecta los modelos Claude existentes (incluido Opus 4.8, sin acceso especial) con más de 60 bases de datos científicas, herramientas de cálculo y conectores de laboratorio, extendiendo el mismo patrón de arnés de agente de código desde el software hacia la ciencia de laboratorio experimental. El producto que marca la diferencia es la capa de integración de herramientas y habilidades de dominio en torno a un modelo general, no los pesos. Esto replantea dónde reside el valor competitivo, y el trabajo de orquestación publicado en arxiv esa misma semana (2606.31518, que trata la composición y la orquestación como la principal preocupación de ingeniería) muestra que el frente de investigación converge en la misma idea. La predicción: al menos otro laboratorio de vanguardia o una gran plataforma de modelos lanzará su propio arnés de agente productizado para un dominio vertical —una capa empaquetada de conectores más habilidades sobre sus modelos existentes, dirigida a un dominio concreto como la ciencia, el derecho o las finanzas— en lugar de responder con un modelo nuevo, antes del Q1 2027. El arnés se convierte en una línea de producto con nombre propio, no en un ejemplo de referencia ni en un recetario.",
+      "reasoning": {
+        "because": "Claude Science convierte en producto un arnés de conectores y habilidades de dominio sobre pesos existentes, no nuevos",
+        "given": "La calidad de los modelos de vanguardia está convergiendo y la orquestación es ahora la principal capa de ingeniería",
+        "so_that": "Los rivales se diferencian mediante arneses verticales empaquetados sobre sus modelos existentes en lugar de competir solo por los pesos",
+        "landing": "Un laboratorio o plataforma rival lanza un producto de arnés con nombre para un dominio vertical antes del Q1 2027",
+        "plain_language": "Otras empresas de IA venderán kits ya listos que conectan sus modelos existentes con un campo concreto, no solo modelos nuevos."
+      },
+      "summary": "Claude Science se lanzó como un arnés que conecta los modelos Claude existentes con más de 60 bases de datos científicas y herramientas de laboratorio, no como pesos nuevos, lo que señala que el valor se está desplazando a las capas de herramientas y habilidades específicas de cada dominio. Cabe esperar que un segundo laboratorio de vanguardia lance su propio arnés para un dominio vertical sobre modelos existentes antes del Q1 2027."
+    }
+  ]
+}

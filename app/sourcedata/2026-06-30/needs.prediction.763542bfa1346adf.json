@@ -1,0 +1,30 @@
+[
+  {
+    "actor": "Rival OSS inference-engine maintainer",
+    "job": "Re-architecting model loading and KV-cache management to match vLLM's quantized-by-default plus tiered KV-offload baseline so they don't cede throughput-per-dollar.",
+    "outcome": "A released engine version where quantized model loading and tiered KV-cache offload are documented out-of-the-box defaults, not opt-in tuning.",
+    "motivation": "Competitive parity: shipping FP16-by-default and full-precision-only KV would surrender measurable throughput-per-dollar to vLLM.",
+    "task": {
+      "who": "Core serving / kernel engineering team",
+      "what": "Make quantized loading and tiered KV-offload the default",
+      "where": "Engine model-runner and KV-cache subsystem",
+      "when": "Now through H1 2027 release cycles",
+      "why": "Keep cost parity with vLLM's serving-layer gains",
+      "how": "Low-precision FP8 kernels plus object-store secondary KV tier"
+    }
+  },
+  {
+    "actor": "Managed inference platform operator",
+    "job": "Folding the new engine defaults into hosted serving tiers so customer endpoints inherit quantized loading and tiered KV-cache spill automatically.",
+    "outcome": "Hosted inference tiers that ship quantized-by-default loading and tiered KV offload as the platform default configuration.",
+    "motivation": "Serving-layer cost gains drive margin and price competitiveness for managed offerings in 2026.",
+    "task": {
+      "who": "Platform engineering / managed-serving team",
+      "what": "Adopt upstream quantized + KV-offload defaults into hosted tiers",
+      "where": "Hosted inference control plane and endpoint defaults",
+      "when": "After upstream engines ship, through H1 2027",
+      "why": "Pass serving-layer cost savings into competitive hosted pricing",
+      "how": "Integrate upgraded vLLM/SGLang/TensorRT-LLM/TGI engine builds"
+    }
+  }
+]

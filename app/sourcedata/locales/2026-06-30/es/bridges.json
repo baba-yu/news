@@ -1,0 +1,160 @@
+{
+  "date": "2026-06-30",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.7c1a3f9b2e6d04a8",
+        "short_label": "Frontier-class open-weight LLM runs single-node under 256GB by Q4 2026",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "El Model Runner V2 de vLLM v0.24.0 ahora admite modelos cuantizados por defecto y añade una ruta de descarga de la caché KV en varios niveles que vuelca la caché a un nivel secundario de almacenamiento de objetos más allá de la memoria de la GPU, junto con una aceleración del 180-290% en el kernel CUTLASS FP8 para SM90. Estas son precisamente las palancas de la capa de servicio —pesos de baja precisión por defecto más la descarga de la huella de la caché KV fuera de la escasa memoria de la GPU— que hacen viable ejecutar un checkpoint pesado de pesos abiertos en un único nodo de alta memoria en lugar de un trabajo de clúster con varias GPU. La versión traslada la carga cuantizada y el volcado por niveles de la caché KV del ajuste opcional a valores por defecto documentados en el servidor de código abierto dominante, lo que baja el piso de memoria para el despliegue en un solo nodo de pesos abiertos de nivel frontera. Por sí sola no demuestra que un modelo concreto de más de 700B quepa por debajo de 256GB con una retención de precisión publicada y reproducida de forma independiente, así que es infraestructura habilitadora para la predicción más que un cumplimiento directo.",
+      "reference_links": [
+        {
+          "label": "GitHub - vllm-project/vllm Releases (v0.24.0)",
+          "url": "https://github.com/vllm-project/vllm/releases"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El Model Runner V2 cuantizado por defecto de vLLM v0.24.0 y su descarga de la caché KV en varios niveles, que vuelca la caché a un nivel de almacenamiento de objetos más allá de la memoria de la GPU, son precisamente las condiciones previas de la capa de servicio para el despliegue en un solo nodo: pesos de baja precisión más un piso de memoria de GPU menor convierten un checkpoint pesado de pesos abiertos de un trabajo de clúster en un único nodo de alta memoria.",
+        "coherence": 4,
+        "remaining_gap": "No se ha mostrado ningún modelo concreto de más de 700B cabiendo por debajo de 256GB en un solo nodo con retención de precisión reproducida de forma independiente; esto habilita la predicción en lugar de cumplirla."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6b8bb37f50fe7e09",
+        "short_label": "Local-LLM stacks expose unified compressed-KV-cache flag",
+        "prediction_date": "2026-04-30"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] vLLM v0.24.0 incorpora una ruta de descarga de la caché KV en varios niveles que añade un nivel secundario de almacenamiento de objetos para volcar la caché más allá de la memoria de la GPU, ya disponible en el Model Runner V2, que ahora usa modelos cuantizados por defecto. Es un paso concreto en la dirección prevista de que los servidores locales de LLM conviertan el manejo comprimido y por niveles de la caché KV en una función de servicio de primer nivel y documentada, en lugar de un parámetro experimental escondido. El planteamiento exacto de la predicción es un control unificado de caché KV comprimida expuesto en los principales servidores; la evidencia de hoy es un único servidor dominante (vLLM) que incorpora la descarga por niveles de la caché KV como capacidad de ruta por defecto, lo que reaviva la tesis latente y fija la referencia competitiva que los servidores OSS rivales deben igualar. La brecha es que la versión de hoy es descarga por niveles y no un parámetro de tipo de compresión explícitamente nombrado, y es un solo servidor, no la unificación entre servidores que la predicción reclama.",
+      "reference_links": [
+        {
+          "label": "GitHub - vllm-project/vllm Releases (v0.24.0)",
+          "url": "https://github.com/vllm-project/vllm/releases"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La tesis del \"parámetro unificado de caché KV comprimida\" se reaviva porque vLLM v0.24.0 incorpora la descarga de la caché KV en varios niveles con un nivel secundario de almacenamiento de objetos como capacidad de ruta por defecto del Model Runner V2, llevando el manejo por niveles de la caché de un parámetro experimental escondido hacia una función de servicio de primer nivel y fijando la referencia que los servidores OSS rivales deben igualar.",
+        "coherence": 3,
+        "remaining_gap": "La versión de hoy es descarga por niveles en un solo servidor, no un parámetro de tipo de compresión explícitamente nombrado y unificado entre los principales servidores que la predicción reclama."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b297d63ab5891e4a",
+        "short_label": "Reservoir routing ships as default vLLM and SGLang serving knob by H2 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] vLLM v0.24.0 integró DeepEP v2 para el paralelismo de expertos de MoE y ejecutó una amplia pasada de optimización de DeepSeek-V4 con una caché de índice disperso y planificación de fragmentos de prefill, con la versión sumando 571 commits de 256 colaboradores. La predicción reclama específicamente una primitiva de banco de estado del enrutador con estado (Reservoir Routing) expuesta como un parámetro de servicio ajustable por defecto en vLLM y SGLang; la versión de hoy hace avanzar la maquinaria de enrutamiento y paralelismo de expertos de MoE en vLLM, la misma superficie de la capa de servicio, pero no incorpora la propia primitiva nombrada de enrutador con estado. La señal reaviva la tesis latente porque confirma que las internas del enrutamiento de MoE son una preocupación activa de ruta por defecto para el servidor dominante, mientras que la afirmación que sostiene la predicción —un parámetro nombrado de estado persistente del enrutador incorporado por defecto— sigue sin cumplirse.",
+      "reference_links": [
+        {
+          "label": "GitHub - vllm-project/vllm Releases (v0.24.0)",
+          "url": "https://github.com/vllm-project/vllm/releases"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La integración de DeepEP v2 y la optimización del enrutamiento de expertos de DeepSeek-V4 en vLLM v0.24.0 confirman que las internas del enrutamiento de MoE son ya una preocupación de ruta por defecto en el servidor dominante, la misma superficie de servicio a la que apunta la tesis de Reservoir routing. Esto reaviva la predicción latente, pero hace avanzar la maquinaria de paralelismo, no la propia primitiva nombrada de banco de estado del enrutador con estado.",
+        "coherence": 3,
+        "remaining_gap": "No se ha incorporado por defecto ningún parámetro nombrado de estado persistente del enrutador; la paridad con SGLang queda sin abordar."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f7fdcbe86950bd61",
+        "short_label": "AI accelerator ships confidential-inference tier with attestation by H1 2027",
+        "prediction_date": "2026-06-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Claude alcanzó disponibilidad general dentro de Microsoft Foundry, con el nivel alojado en Azure ejecutándose de extremo a extremo sobre sistemas NVIDIA GB300 NVL72 con InfiniBand Quantum-X800, y NVIDIA acompañó el lanzamiento con su diseño de referencia Secure Agent Workspace para agentes autónomos y específicos de dominio bajo controles empresariales de identidad, red y gobernanza. Esto lleva la inferencia de modelos frontera a silicio acelerador diseñado a propósito dentro del tenant de nube del cliente, exactamente el perfil de comprador (regulado, soberano, con fuerte gobernanza) que la predicción espera que impulse un nivel nombrado de inferencia confidencial. Sin embargo, el lanzamiento se promociona por la eficiencia de inferencia y un diseño de referencia de espacio de trabajo de seguridad, no por las primitivas concretas que la predicción exige —raíz de confianza en el propio chip, pesos y activaciones cifrados en uso con TEE-I/O, y atestación de modelo firmado verificable por el tenant como un SKU nombrado de inferencia confidencial. Es presión direccional hacia la tesis, no la parte nombrada de inferencia confidencial que el pronóstico reclama.",
+      "reference_links": [
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        },
+        {
+          "label": "Claude by Anthropic - Claude in Microsoft Foundry is now generally available",
+          "url": "https://claude.com/blog/claude-in-microsoft-foundry"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La disponibilidad general de Claude dentro de Microsoft Foundry se ejecuta sobre silicio NVIDIA GB300 en el propio tenant de Azure del cliente, con el Secure Agent Workspace envolviendo a los agentes en identidad y gobernanza empresarial. Eso pone la inferencia de frontera sobre aceleradores diseñados a propósito para exactamente los compradores regulados y soberanos que la predicción espera que exijan un nivel confidencial, respaldándola como presión direccional más que como cumplimiento.",
+        "coherence": 3,
+        "remaining_gap": "No hay un SKU nombrado de inferencia confidencial con raíz de confianza en el propio chip, pesos cifrados en uso con TEE-I/O ni atestación de modelo firmado verificable por el tenant."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.18ba4b3ebe2d6bba",
+        "short_label": "Inference-ASIC cohort gains a fourth named buyer-designed chip by H1 2027",
+        "prediction_date": "2026-06-25"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "El lanzamiento de hoy en Foundry pone la inferencia de disponibilidad general de Claude sobre silicio comercial NVIDIA GB300 NVL72 dentro de Azure, con NVIDIA presentando la eficiencia de inferencia del GB300 como un reductor del coste total de propiedad. Es una leve señal en contra de la predicción de que un cuarto comprador de modelos frontera se comprometa con su propio acelerador de inferencia a escala de rack codiseñado: que los modelos estrella de un laboratorio frontera de primer nivel lleguen a disponibilidad general sobre el silicio de GPU comercial de un hiperescalador muestra que la economía de la inferencia con GPU comercial sigue siendo viable en el nivel de disponibilidad general, sin forzar una salida hacia un ASIC diseñado por el comprador. Es tangencial e indirecto —la noticia no nombra ninguna pieza nueva diseñada por el comprador y se refiere al despliegue, no a compromisos de diseño de silicio—, así que ni confirma ni refuta la tesis de expansión del grupo, solo inclina el equilibrio entre comercial y a medida.",
+      "reference_links": [
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "La disponibilidad general de Claude de hoy sobre el silicio comercial GB300 de NVIDIA dentro de Azure toca de forma tangencial la tesis del grupo de ASIC de inferencia, yendo levemente en su contra: que un laboratorio estrella llegue a disponibilidad general sobre la GPU comercial de un hiperescalador muestra que la economía comercial sigue siendo viable en ese nivel. La noticia no nombra ninguna pieza nueva diseñada por el comprador y se refiere al despliegue, no a compromisos de diseño de silicio, así que ni confirma ni refuta la predicción del cuarto chip.",
+        "coherence": 2,
+        "remaining_gap": "No hay un cuarto comprador nombrado que se comprometa con un acelerador de inferencia a escala de rack codiseñado; las noticias de despliegue no dicen nada sobre decisiones de diseño de silicio."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c5aa6ceae507d1a8",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "El artículo de arXiv WorldEvolver propone modelos del mundo autoevolutivos en tiempo de inferencia que afinan la predicción de acción-resultado del agente LLM mediante memoria episódica, reglas semánticas destiladas a partir de errores de predicción, y una previsión selectiva que filtra las predicciones poco fiables antes de que el planificador actúe. Esto apunta a la misma superficie de fiabilidad del entorno del agente sobre la que vive la predicción del control de la tríada, y el diseño de referencia Secure Agent Workspace de NVIDIA (entregado con la disponibilidad general de Foundry de hoy) muestra que el enfoque de seguridad de la capa de orquestación se está convirtiendo en producto en torno a los agentes autónomos. Pero la afirmación que sostiene la predicción es un control de capacidad activado por defecto que limita la tríada letal (acceso a datos privados, contenido no confiable y comunicación externa), un control de autorización de denegación por defecto —un mecanismo distinto del filtrado de calidad de predicción de WorldEvolver, que mejora lo que hace un agente en lugar de restringir lo que se le permite combinar. La relevancia es temática (fiabilidad del agente en la capa del entorno) más que evidencia directa del mecanismo de control.",
+      "reference_links": [
+        {
+          "label": "arXiv - Self-Evolving World Models for LLM Agent Planning (2606.30639)",
+          "url": "https://arxiv.org/abs/2606.30639"
+        },
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "La memoria autoevolutiva en tiempo de inferencia del artículo WorldEvolver y el Secure Agent Workspace de NVIDIA tocan ambos la capa del entorno del agente sobre la que vive la tesis del control de la tríada, pero ninguno incorpora el mecanismo clave: un control activado por defecto que limite la tríada letal de acceso a datos privados, contenido no confiable y comunicación externa. WorldEvolver mejora la calidad de la predicción, no la autorización de denegación por defecto, así que el vínculo es temático, no evidencia directa.",
+        "coherence": 2,
+        "remaining_gap": "Ninguna plataforma de agentes de programación ha incorporado un control de autorización de denegación por defecto, activado por defecto, que restrinja las tres capacidades de la tríada."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2d6b8e0a4c1f9357",
+        "short_label": "Major AI-agent platform ships zero-trust controls as default-on by Q2 2027",
+        "prediction_date": "2026-06-27"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "El diseño de referencia Secure Agent Workspace de NVIDIA, junto con la disponibilidad general de Claude alojada en Azure dentro de Microsoft Foundry, enmarca a los agentes autónomos y específicos de dominio dentro de controles empresariales de identidad, red, facturación y gobernanza. Esto es adyacente a la predicción de que una plataforma de agentes importante incorpore controles de confianza cero como una versión nombrada activada por defecto, en tanto que señala la convergencia de hiperescaladores y proveedores en torno a la ejecución gobernada de agentes. Pero es un diseño de referencia agrupado con un lanzamiento de inferencia, no una versión nombrada de plataforma de agentes cuyo perfil por defecto imponga autorización de denegación por defecto por tenant o listas de permitidos de egreso por defecto —la postura cualificadora concreta que la predicción exige. La conexión es contexto tangencial de infraestructura más que evidencia de que el control de confianza cero activado por defecto se haya incorporado.",
+      "reference_links": [
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "El diseño de referencia Secure Agent Workspace de NVIDIA, agrupado con la disponibilidad general de Claude alojada en Azure dentro de Foundry, envuelve a los agentes autónomos en controles empresariales de identidad, red y gobernanza, señalando la convergencia de los proveedores en torno a la ejecución gobernada de agentes. Pero \"incorpora controles de confianza cero activados por defecto\" requiere una versión nombrada de plataforma de agentes que imponga autorización de denegación por defecto por tenant o listas de permitidos de egreso por defecto. Un diseño de referencia adjunto a un lanzamiento de inferencia es contexto adyacente, no ese control activado por defecto ya incorporado.",
+        "coherence": 2,
+        "remaining_gap": "No hay una versión nombrada de plataforma de agentes cuyo perfil por defecto imponga autorización de denegación por defecto por tenant o listas de permitidos de egreso por defecto."
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "prediction.c734f8612b88e88b",
+  "scope_hint": "tech",
+  "title": "Agent-builder frameworks ship sandboxed MCP tool execution by default by Q1 2027",
+  "body": "The late-June CVE cluster in agentic-AI developer tooling puts the MCP-server / tool-execution boundary on notice: Flowise's Custom MCP Server carried a CVSS 9.9 OS-command-injection flaw (CVE-2026-56274) where a regex bypass and incomplete flag validation let an authenticated user run arbitrary host commands, while Microsoft AutoGen Studio's code-execution advisory traced to insufficient containerization letting agent-generated code run in the host process with excessive privileges. Crawl4AI, Langflow, and picklescan carried 9.6-9.8 RCE scores in the same window. The prediction: the leading open-source agent-builder frameworks (Flowise, AutoGen Studio, Langflow and peers) will move sandboxed, least-privilege MCP/tool execution from an opt-in configuration to a shipped default within two release cycles, because the common failure mode across the cluster is the same trust-the-authenticated-user, run-on-the-host pattern that a single hardened default forecloses. Expect the shift to show up as containerized-by-default tool runners, allowlist-based command validation replacing blocklists, and dropped host privileges, mirroring how prior injection-class CVE waves forced secure defaults in web frameworks.",
+  "reasoning": {
+    "because": "A late-June CVE cluster (Flowise 9.9, AutoGen Studio) exploits host-privileged MCP tool execution",
+    "given": "The shared failure mode is authenticated-user-to-host RCE at the tool boundary, one default fixes it",
+    "so_that": "Leading open-source agent-builder frameworks ship sandboxed least-privilege MCP tool execution by default, not opt-in",
+    "landing": "Default sandboxed MCP execution across major frameworks by Q1 2027",
+    "plain_language": "The apps people use to build AI agents keep getting hacked through the tools, so they will make safe sandboxing the default."
+  },
+  "summary": "A late-June cluster of critical RCE flaws in agent-builder tooling (Flowise's CVSS 9.9 MCP command-injection, AutoGen Studio code-execution) exploits host-privileged tool execution. Expect leading open-source agent frameworks to make sandboxed, least-privilege MCP execution the default by Q1 2027."
+}

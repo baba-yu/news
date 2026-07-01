@@ -1,0 +1,160 @@
+{
+  "date": "2026-06-30",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.7c1a3f9b2e6d04a8",
+        "short_label": "Frontier-class open-weight LLM runs single-node under 256GB by Q4 2026",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "vLLM v0.24.0 の Model Runner V2 は量子化モデルを既定でサポートするようになり、さらに多階層の KV キャッシュオフロード経路を追加した。これは GPU メモリを超えた領域として、キャッシュをオブジェクトストレージの二次層へ退避させる仕組みである。あわせて SM90 CUTLASS FP8 カーネルが 180〜290% 高速化した。低精度の重みを既定とし、KV キャッシュの占有分を希少な GPU メモリの外へ追い出すこれらの仕組みは、まさに重量級のオープンウェイトのチェックポイントを、複数 GPU クラスタの作業ではなく単一の大容量メモリノードで動かせるようにする配信レイヤーのてこである。今回のリリースは、主流のオープンソースサーバーにおいて、量子化ロードと階層的な KV 退避を任意設定のチューニングから文書化された既定値へと押し上げ、フロンティア級のオープンウェイトを単一ノードに展開するためのメモリ下限を引き下げた。ただし、700B 超の特定モデルが 256GB 未満に収まり、独立して再現された精度維持が公表された、という具体例をそれ自体で示すものではない。よって、これは予測を直接満たすものではなく、予測を可能にする基盤インフラに当たる。",
+      "reference_links": [
+        {
+          "label": "GitHub - vllm-project/vllm Releases (v0.24.0)",
+          "url": "https://github.com/vllm-project/vllm/releases"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "vLLM v0.24.0 の量子化を既定とする Model Runner V2 と、GPU メモリを超えてオブジェクトストレージ層へキャッシュを退避させる多階層 KV キャッシュオフロードは、まさに単一ノード展開の前提条件である。低精度の重みに GPU メモリ下限の低下が加わることで、重量級のオープンウェイトのチェックポイントはクラスタ作業から単一の大容量メモリノードへと移る。",
+        "coherence": 4,
+        "remaining_gap": "700B 超の特定モデルが、独立して再現された精度維持を伴って 1 ノードの 256GB 未満に収まることは示されていない。これは予測を満たすものではなく、予測を可能にするものである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6b8bb37f50fe7e09",
+        "short_label": "Local-LLM stacks expose unified compressed-KV-cache flag",
+        "prediction_date": "2026-04-30"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] vLLM v0.24.0 は、GPU メモリを超えてキャッシュを退避させるためのオブジェクトストレージ二次層を追加する多階層 KV キャッシュオフロード経路を搭載した。これは、量子化モデルを既定とするようになった Model Runner V2 に取り込まれている。これは、ローカル LLM の配信スタックが、圧縮・階層化された KV キャッシュ処理を、埋もれた実験的フラグではなく文書化された一級の配信機能として製品化していく、という予測された方向への具体的な一歩である。予測そのものの趣旨は、主要スタック全体に横断的に公開される統一的な圧縮 KV キャッシュのつまみである。本日の証拠は、主流を占める単一スタック(vLLM)が階層化 KV キャッシュ退避を既定経路の機能として搭載したというものであり、これは休眠していた仮説を復活させると同時に、競合 OSS サーバーが追随すべき競争上の基準を定めるものでもある。隔たりは、本日のリリースが明示的に名付けられた圧縮データ型フラグではなく退避の階層化にとどまる点、そして予測が求める複数スタック横断の統一ではなく単一スタックにとどまる点である。",
+      "reference_links": [
+        {
+          "label": "GitHub - vllm-project/vllm Releases (v0.24.0)",
+          "url": "https://github.com/vllm-project/vllm/releases"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "「統一的な圧縮 KV キャッシュフラグ」という仮説が復活するのは、vLLM v0.24.0 がオブジェクトストレージ二次層を伴う多階層 KV キャッシュオフロードを Model Runner V2 の既定経路の機能として搭載したからである。これは階層化キャッシュ処理を埋もれた実験的フラグから一級の配信機能へと前進させ、競合 OSS サーバーが追随すべき基準を定める。",
+        "coherence": 3,
+        "remaining_gap": "本日のリリースは単一スタックにおける退避の階層化であり、予測が求める、主要な配信スタック全体に統一された明示的な名前を持つ圧縮データ型フラグではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b297d63ab5891e4a",
+        "short_label": "Reservoir routing ships as default vLLM and SGLang serving knob by H2 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] vLLM v0.24.0 は MoE のエキスパート並列のために DeepEP v2 を統合し、スパースインデックスキャッシュとプリフィルのチャンク計画を伴う DeepSeek-V4 の大規模な最適化を実施した。このリリースには 256 名の貢献者から 571 件のコミットが取り込まれている。予測が具体的に求めているのは、ステートフルなルーター状態バンクのプリミティブ(Reservoir Routing)が vLLM と SGLang で既定で調整可能な配信のつまみとして公開されることである。本日のリリースは vLLM における MoE のエキスパートルーティングと並列処理の機構を前進させており、これは同じ配信レイヤーの領域だが、名前を持つステートフルなルーターのプリミティブそれ自体を搭載してはいない。このシグナルが休眠していた仮説を復活させるのは、MoE ルーティングの内部処理が主流を占めるサーバーにとって既定経路で活発に扱われる関心事であることを裏付けるからである。一方、肝心の主張、すなわち名前を持つ永続的なルーター状態のつまみが既定として搭載されること、は依然として満たされていない。",
+      "reference_links": [
+        {
+          "label": "GitHub - vllm-project/vllm Releases (v0.24.0)",
+          "url": "https://github.com/vllm-project/vllm/releases"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "vLLM v0.24.0 の DeepEP v2 統合と DeepSeek-V4 のエキスパートルーティング最適化は、MoE ルーティングの内部処理が主流を占めるサーバーにとって既定経路の関心事になっていることを裏付ける。これは Reservoir ルーティングの仮説が狙う配信領域そのものである。これにより休眠していた予測は復活するが、前進したのは並列処理の機構であって、名前を持つステートフルなルーター状態バンクのプリミティブそれ自体ではない。",
+        "coherence": 3,
+        "remaining_gap": "名前を持つ永続的なルーター状態のつまみは既定として搭載されておらず、SGLang での同等対応も手つかずである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f7fdcbe86950bd61",
+        "short_label": "AI accelerator ships confidential-inference tier with attestation by H1 2027",
+        "prediction_date": "2026-06-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Claude が Microsoft Foundry 内で一般提供に到達し、Azure ホスト型のティアは Quantum-X800 InfiniBand を備えた NVIDIA GB300 NVL72 システム上でエンドツーエンドに稼働する。NVIDIA はこの展開に、企業の ID・ネットワーク・ガバナンス統制のもとで自律的かつ領域特化のエージェントを動かすための Secure Agent Workspace 参照設計を組み合わせた。これは、フロンティアモデルの推論を顧客のクラウドテナント内の専用アクセラレータシリコンへ移すものであり、まさに予測が名前を持つ機密推論ティアを駆動すると見込む買い手像(規制対象・主権重視・ガバナンス重視)に合致する。ただし、この立ち上げで打ち出されているのは推論効率とセキュリティワークスペースの参照設計であって、予測が求める肝心のプリミティブ、すなわちオンダイの信頼の起点、TEE-I/O による利用中の重みと活性値の暗号化、テナント検証可能な署名付きモデルの認証を名前を持つ機密推論 SKU として備えること、ではない。これは仮説に向かう方向性のある圧力であり、予測が求める名前を持つ機密推論の部分ではない。",
+      "reference_links": [
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        },
+        {
+          "label": "Claude by Anthropic - Claude in Microsoft Foundry is now generally available",
+          "url": "https://claude.com/blog/claude-in-microsoft-foundry"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Claude の Microsoft Foundry 内での一般提供は、顧客自身の Azure テナント内の NVIDIA GB300 シリコン上で稼働し、Secure Agent Workspace がエージェントを企業の ID とガバナンスで包む。これは、予測が機密ティアを求めると見込む規制対象で主権重視の買い手にまさに向けて、フロンティア推論を専用アクセラレータに載せるものである。よって予測を満たすのではなく、方向性のある圧力として支える。",
+        "coherence": 3,
+        "remaining_gap": "オンダイの信頼の起点、TEE-I/O による利用中の重みの暗号化、テナント検証可能な署名付きモデルの認証を備えた、名前を持つ機密推論 SKU は存在しない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.18ba4b3ebe2d6bba",
+        "short_label": "Inference-ASIC cohort gains a fourth named buyer-designed chip by H1 2027",
+        "prediction_date": "2026-06-25"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "本日の Foundry の立ち上げは、Claude の一般提供推論を Azure 内の NVIDIA GB300 NVL72 という汎用シリコン上に載せるものであり、NVIDIA は GB300 の推論効率を総保有コストの削減要因として打ち出している。これは、4 番目のフロンティアモデルの買い手が自社共同設計のラックスケール推論アクセラレータに踏み切るという予測に対する、弱い反証シグナルである。看板となるフロンティア研究所の主力モデルが、ハイパースケーラーの汎用 GPU シリコン上で一般提供に到達したことは、汎用 GPU による推論の経済性が一般提供のティアでも依然として成立し、買い手設計の ASIC という逃げ道を強いるものではないことを示す。これは周辺的で間接的な事象であり、本ニュースは新たな買い手設計の部品を挙げておらず、シリコン設計の意思決定ではなく展開に関するものである。よって、コホート拡大の仮説を確証も反証もせず、汎用と独自設計の均衡をわずかに動かすにとどまる。",
+      "reference_links": [
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "本日の Azure 内の NVIDIA GB300 汎用シリコン上での Claude 一般提供は、推論 ASIC コホートの仮説に周辺的に触れ、わずかに不利に働く。看板研究所がハイパースケーラーの汎用 GPU 上で一般提供に到達したことは、汎用の経済性が一般提供のティアでも依然成立することを示す。本ニュースは新たな買い手設計の部品を挙げておらず、シリコン設計の決定ではなく展開に関するものなので、4 番目のチップの予測を確証も反証もしない。",
+        "coherence": 2,
+        "remaining_gap": "共同設計のラックスケール推論アクセラレータに踏み切る、名前を持つ 4 番目の買い手は存在しない。展開のニュースはシリコン設計の決定を語らない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c5aa6ceae507d1a8",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "WorldEvolver の arXiv 論文は、推論時に自己進化する世界モデルを提案している。これはエピソード記憶、予測誤差から蒸留した意味規則、そしてプランナーが動く前に信頼できない予測を選別する選択的予見によって、LLM エージェントの行動と結果の予測を鋭くする。これは三位一体ゲートの予測が立脚するのと同じエージェントハーネスの信頼性の領域を狙うものであり、本日の Foundry 一般提供とともに搭載された NVIDIA の Secure Agent Workspace 参照設計は、オーケストレーションレイヤーのセキュリティの枠組みが自律エージェントを中心に製品化されつつあることを示す。しかし、予測の肝心の主張は、致命的な三位一体(プライベートデータへのアクセス、信頼できないコンテンツ、外部との通信)に上限をかける既定で有効な能力ゲート、すなわち既定拒否の認可制御である。これは、エージェントが許可された組み合わせを制約するのではなくエージェントの振る舞いを改善する WorldEvolver の予測品質の選別とは異なる仕組みである。関連性はテーマ上のもの(ハーネスレイヤーでのエージェント信頼性)であって、ゲート機構の直接的な証拠ではない。",
+      "reference_links": [
+        {
+          "label": "arXiv - Self-Evolving World Models for LLM Agent Planning (2606.30639)",
+          "url": "https://arxiv.org/abs/2606.30639"
+        },
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "WorldEvolver 論文の推論時に自己進化する記憶と NVIDIA の Secure Agent Workspace は、いずれも三位一体ゲートの仮説が立脚するエージェントハーネスのレイヤーに触れる。しかしどちらも肝心の仕組み、すなわちプライベートデータへのアクセス・信頼できないコンテンツ・外部との通信という致命的な三位一体に上限をかける既定で有効なゲートを搭載していない。WorldEvolver が改善するのは予測品質であって既定拒否の認可ではないので、結びつきはテーマ上のものであり直接の証拠ではない。",
+        "coherence": 2,
+        "remaining_gap": "三位一体の 3 つの能力を制約する、既定で有効な既定拒否の認可ゲートを搭載したコーディングエージェントのプラットフォームは存在しない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2d6b8e0a4c1f9357",
+        "short_label": "Major AI-agent platform ships zero-trust controls as default-on by Q2 2027",
+        "prediction_date": "2026-06-27"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "NVIDIA の Secure Agent Workspace 参照設計は、Microsoft Foundry における Azure ホスト型の Claude 一般提供と組み合わされ、自律的かつ領域特化のエージェントを企業の ID・ネットワーク・課金・ガバナンス統制の内側に位置づける。これは、主要なエージェントプラットフォームがゼロトラスト統制を名前を持つ既定で有効なリリースとして搭載するという予測に隣接しており、統制されたエージェント実行に向けたハイパースケーラーとベンダーの収束を示す。しかしこれは推論の立ち上げに同梱された参照設計であって、既定のプロファイルがテナント単位の既定拒否の認可や既定の送信先許可リストを強制する、名前を持つエージェントプラットフォームのリリース、すなわち予測が求める適格な姿勢ではない。この結びつきは、既定で有効なゼロトラストのゲートが搭載されたという証拠ではなく、周辺的なインフラの文脈にとどまる。",
+      "reference_links": [
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "NVIDIA の Secure Agent Workspace 参照設計は、Foundry における Azure ホスト型の Claude 一般提供に同梱され、自律エージェントを企業の ID・ネットワーク・ガバナンス統制で包み、統制されたエージェント実行へのベンダー収束を示す。しかし「ゼロトラスト統制を既定で有効として搭載」と言うには、テナント単位の既定拒否の認可や既定の送信先許可リストを強制する、名前を持つエージェントプラットフォームのリリースが必要である。推論の立ち上げに付随した参照設計は隣接する文脈であって、搭載された既定で有効なゲートではない。",
+        "coherence": 2,
+        "remaining_gap": "既定のプロファイルがテナント単位の既定拒否の認可や既定の送信先許可リストを強制する、名前を持つエージェントプラットフォームのリリースは存在しない。"
+      }
+    }
+  ]
+}

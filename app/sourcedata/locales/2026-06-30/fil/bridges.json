@@ -1,0 +1,160 @@
+{
+  "date": "2026-06-30",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.7c1a3f9b2e6d04a8",
+        "short_label": "Frontier-class open-weight LLM runs single-node under 256GB by Q4 2026",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Ang Model Runner V2 ng vLLM v0.24.0 ay sumusuporta na ngayon sa quantized models bilang default, at nagdagdag ng multi-tier KV-cache offloading path na nagtatapon ng cache sa isang object-store secondary tier na lampas sa GPU memory. Kasama rito ang 180-290% na bilis sa SM90 CUTLASS FP8 kernel. Ito mismo ang mga palanggana sa serving-layer na nagpapadali sa pagpapatakbo ng mabigat na open-weight checkpoint sa iisang high-memory node: low-precision weights bilang default kasabay ng paglilipat ng KV footprint palabas ng kakaunting GPU memory. Inililipat ng release na ito ang quantized loading at tiered KV spill mula sa opt-in tuning patungo sa nakadokumentong default sa pinakaginagamit na open-source server, kaya bumababa ang memory floor para sa single-node deployment ng frontier-class open weights. Ngunit hindi nito mag-isang ipinapakita na may partikular na 700B-plus na modelong kasya sa ilalim ng 256GB na may nailathala at malayang naulit na accuracy retention, kaya enabling infrastructure ito para sa prediksyon at hindi tuwirang katuparan.",
+      "reference_links": [
+        {
+          "label": "GitHub - vllm-project/vllm Releases (v0.24.0)",
+          "url": "https://github.com/vllm-project/vllm/releases"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang quantized-by-default na Model Runner V2 ng vLLM v0.24.0 at ang multi-tier KV-cache offloading nito na nagtatapon ng cache sa object-store tier na lampas sa GPU memory ay siyang eksaktong serving-layer na mga prekondisyon para sa single-node deployment. Sa low-precision weights kasabay ng mas mababang GPU memory floor, ang mabigat na open-weight checkpoint ay nagiging trabaho ng iisang high-memory node sa halip na isang cluster.",
+        "coherence": 4,
+        "remaining_gap": "Walang partikular na 700B-plus na modelong naipakitang kasya sa ilalim ng 256GB sa iisang node na may malayang naulit na accuracy retention; pinapagana nito ang prediksyon sa halip na tuparin ito."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6b8bb37f50fe7e09",
+        "short_label": "Local-LLM stacks expose unified compressed-KV-cache flag",
+        "prediction_date": "2026-04-30"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] Naglulunsad ang vLLM v0.24.0 ng multi-tier KV-cache offloading path na nagdadagdag ng object-store secondary tier para sa pagtatapon ng cache na lampas sa GPU memory, na lumapag sa Model Runner V2 na nag-de-default na ngayon sa quantized models. Konkretong hakbang ito sa direksyong hinula: ang mga local-LLM serving stack ay ginagawang produkto ang compressed at tiered KV-cache handling bilang isang first-class, nakadokumentong serving feature sa halip na nakatagong experimental flag. Ang eksaktong pagkakabalangkas ng prediksyon ay isang unified compressed-KV-cache na knob na inilantad sa mga pangunahing stack. Ang ebidensiya ngayon ay isang nangingibabaw na stack (vLLM) na naglulunsad ng tiered KV-cache offload bilang default-path na kakayahan, na parehong bumubuhay sa natutulog na tesis at nagtatakda ng competitive baseline na kailangang tapatan ng mga karibal na OSS server. Ang puwang ay ang release ngayon ay offload-tiering at hindi isang malinaw na pinangalanang compression-dtype flag, at isa lamang itong stack, hindi ang cross-stack na pag-iisa na hinihingi ng prediksyon.",
+      "reference_links": [
+        {
+          "label": "GitHub - vllm-project/vllm Releases (v0.24.0)",
+          "url": "https://github.com/vllm-project/vllm/releases"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Bumabangon ang tesis ng \"unified compressed-KV-cache flag\" dahil naglulunsad ang vLLM v0.24.0 ng multi-tier KV-cache offloading na may object-store secondary tier bilang default-path na kakayahan ng Model Runner V2. Inililipat nito ang tiered cache handling mula sa nakatagong experimental flag patungo sa first-class na serving feature, at itinatakda ang baseline na kailangang tapatan ng mga karibal na OSS server.",
+        "coherence": 3,
+        "remaining_gap": "Ang release ngayon ay offload-tiering sa iisang stack, hindi isang malinaw na pinangalanang compression-dtype flag na pinag-isa sa mga pangunahing serving stack na hinihingi ng prediksyon."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b297d63ab5891e4a",
+        "short_label": "Reservoir routing ships as default vLLM and SGLang serving knob by H2 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Isinama ng vLLM v0.24.0 ang DeepEP v2 para sa MoE expert parallelism at nagpatakbo ng malaking DeepSeek-V4 optimization pass na may sparse index cache at prefill chunk-planning, kasama ang release na lumapag sa 571 commits mula sa 256 contributors. Tahasang hinihingi ng prediksyon ang isang stateful router-state-bank primitive (Reservoir Routing) na inilantad bilang default-tunable na serving knob sa vLLM at SGLang. Ang release ngayon ay sumusulong sa MoE expert-routing at parallelism machinery sa vLLM, ang parehong serving-layer, ngunit hindi inilulunsad ang pinangalanang stateful-router primitive mismo. Bumubuhay ang senyales sa natutulog na tesis dahil kinukumpirma nito na ang MoE routing internals ay isang aktibong default-path na alalahanin para sa nangingibabaw na server, habang ang pasanin na pag-aangkin -- isang pinangalanang persistent router-state knob na inilunsad bilang default -- ay hindi pa natutupad.",
+      "reference_links": [
+        {
+          "label": "GitHub - vllm-project/vllm Releases (v0.24.0)",
+          "url": "https://github.com/vllm-project/vllm/releases"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang integrasyon ng DeepEP v2 at ang DeepSeek-V4 expert-routing optimization ng vLLM v0.24.0 ay kinukumpirma na ang MoE routing internals ay default-path na alalahanin na ngayon sa nangingibabaw na server, ang parehong serving surface na tinatarget ng Reservoir-routing na tesis. Binubuhay nito ang natutulog na prediksyon ngunit sumusulong sa parallelism machinery, hindi sa pinangalanang stateful router-state-bank primitive mismo.",
+        "coherence": 3,
+        "remaining_gap": "Walang pinangalanang persistent router-state knob na inilunsad bilang default; hindi pa natutugunan ang SGLang parity."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f7fdcbe86950bd61",
+        "short_label": "AI accelerator ships confidential-inference tier with attestation by H1 2027",
+        "prediction_date": "2026-06-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Naabot ng Claude ang general availability sa loob ng Microsoft Foundry, kung saan ang Azure-hosted tier ay tumatakbo nang end-to-end sa NVIDIA GB300 NVL72 systems na may Quantum-X800 InfiniBand, at ipinares ng NVIDIA ang rollout sa Secure Agent Workspace reference design nito para sa autonomous, domain-specific agents sa ilalim ng enterprise identity, networking at governance controls. Inililipat nito ang frontier-model inference papunta sa purpose-built accelerator silicon sa loob ng cloud tenant ng customer, ang eksaktong uri ng mamimili (regulated, sovereign, mabigat sa governance) na inaasahan ng prediksyon na magtutulak ng pinangalanang confidential-inference tier. Gayunpaman, ang launch ay ibinebenta batay sa inference efficiency at isang security-workspace reference design, hindi sa partikular na mga pasanin na primitive na hinihingi ng prediksyon -- on-die root-of-trust, TEE-I/O na encrypted-in-use na weights at activations, at tenant-verifiable na signed-model attestation bilang pinangalanang confidential-inference SKU. Pamigil na presyon ito patungo sa tesis, hindi ang pinangalanang confidential-inference na bahaging hinihingi ng hula.",
+      "reference_links": [
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        },
+        {
+          "label": "Claude by Anthropic - Claude in Microsoft Foundry is now generally available",
+          "url": "https://claude.com/blog/claude-in-microsoft-foundry"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang GA ng Claude sa loob ng Microsoft Foundry ay tumatakbo sa NVIDIA GB300 silicon sa sariling Azure tenant ng customer, kasama ang Secure Agent Workspace na bumabalot sa mga agent sa enterprise identity at governance. Inilalagay nito ang frontier inference sa purpose-built accelerators para sa eksaktong regulated, sovereign na mamimili na inaasahan ng prediksyon na hihingi ng confidential tier, kaya sinusuportahan ito bilang pamigil na presyon sa halip na katuparan.",
+        "coherence": 3,
+        "remaining_gap": "Walang pinangalanang confidential-inference SKU na may on-die root-of-trust, TEE-I/O na encrypted-in-use na weights, o tenant-verifiable na signed-model attestation."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.18ba4b3ebe2d6bba",
+        "short_label": "Inference-ASIC cohort gains a fourth named buyer-designed chip by H1 2027",
+        "prediction_date": "2026-06-25"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Inilalagay ng Foundry launch ngayon ang GA inference ng Claude sa NVIDIA GB300 NVL72 merchant silicon sa loob ng Azure, kung saan itinutulak ng NVIDIA ang inference efficiency ng GB300 bilang pampababa ng total-cost-of-ownership. Banayad na kontra-senyales ito sa prediksyong may pang-apat na frontier-model na mamimili na magtatatag ng sarili nitong co-designed na rack-scale inference accelerator: ang pag-abot ng flagship models ng isang kilalang frontier lab sa GA sa merchant-GPU silicon ng hyperscaler ay nagpapakitang nananatiling buhay ang merchant-GPU inference economics sa GA tier, sa halip na pilitin ang isang buyer-designed-ASIC na takasan. Tangential at hindi tuwiran ito -- walang pinangalanang bagong buyer-designed na bahagi ang balita at tungkol ito sa deployment, hindi sa mga pangako sa silicon design -- kaya hindi nito kinukumpirma ni binabaligtad ang tesis ng pagpapalawak ng cohort, banayad lamang nitong inuuga ang timbang sa pagitan ng merchant at custom.",
+      "reference_links": [
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Ang GA ng Claude ngayon sa GB300 merchant silicon ng NVIDIA sa loob ng Azure ay banayad na sumasalat sa tesis ng inference-ASIC cohort, na bahagyang tumatahip laban dito: ang pag-abot ng isang flagship lab sa GA sa merchant GPU ng hyperscaler ay nagpapakitang nananatiling buhay ang merchant economics sa GA tier. Walang pinangalanang bagong buyer-designed na bahagi ang balita at tungkol ito sa deployment, hindi sa mga pangako sa silicon design, kaya hindi nito kinukumpirma ni binabaligtad ang prediksyon ng pang-apat na chip.",
+        "coherence": 2,
+        "remaining_gap": "Walang pinangalanang pang-apat na mamimili na nangangakong gagawa ng co-designed na rack-scale inference accelerator; ang balita sa deployment ay walang sinasabi tungkol sa mga desisyon sa silicon design."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c5aa6ceae507d1a8",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Iminumungkahi ng WorldEvolver arXiv paper ang inference-time self-evolving world models na nagpapatalas sa action-outcome prediction ng LLM-agent sa pamamagitan ng episodic memory, semantic rules na hinango mula sa prediction errors, at selective foresight na sumasala sa hindi mapagkakatiwalaang prediksyon bago kumilos ang planner. Tinatarget nito ang parehong agent-harness reliability surface kung saan nakatira ang trifecta-gate na prediksyon, at ipinapakita ng Secure Agent Workspace reference design ng NVIDIA (kasamang inilunsad ng Foundry GA ngayon) na ginagawang produkto ang orchestration-layer security framing sa paligid ng autonomous agents. Ngunit ang pasanin na pag-aangkin ng prediksyon ay isang default-on capability gate na naglilimita sa lethal trifecta (private-data access, untrusted content, external communication), isang deny-by-default na authorization control -- ibang mekanismo ito sa prediction-quality filtering ng WorldEvolver, na pinabubuti kung ano ang ginagawa ng agent sa halip na limitahan kung ano ang pinapayagan nitong pagsamahin. Ang kaugnayan ay pampaksa (agent reliability sa harness layer) sa halip na tuwirang ebidensiya para sa gating mechanism.",
+      "reference_links": [
+        {
+          "label": "arXiv - Self-Evolving World Models for LLM Agent Planning (2606.30639)",
+          "url": "https://arxiv.org/abs/2606.30639"
+        },
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Ang inference-time self-evolving memory ng WorldEvolver paper at ang Secure Agent Workspace ng NVIDIA ay parehong sumasalat sa agent-harness layer kung saan nakatira ang trifecta-gate na tesis, ngunit walang isa man sa kanila ang naglulunsad ng pasanin na mekanismo: isang default-on na gate na naglilimita sa lethal trifecta ng private-data access, untrusted content, at external communication. Pinabubuti ng WorldEvolver ang kalidad ng prediksyon, hindi ang deny-by-default na authorization, kaya pampaksa ang ugnayan, hindi tuwirang ebidensiya.",
+        "coherence": 2,
+        "remaining_gap": "Walang coding-agent platform ang naglunsad ng default-on na deny-by-default na authorization gate na naglilimita sa tatlong kakayahan ng trifecta."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2d6b8e0a4c1f9357",
+        "short_label": "Major AI-agent platform ships zero-trust controls as default-on by Q2 2027",
+        "prediction_date": "2026-06-27"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang Secure Agent Workspace reference design ng NVIDIA, na ipinares sa Azure-hosted na Claude GA sa Microsoft Foundry, ay bumabalangkas sa autonomous, domain-specific agents sa loob ng enterprise identity, networking, billing at governance controls. Katabi ito ng prediksyong may pangunahing agent platform na maglulunsad ng zero-trust controls bilang pinangalanang default-on na release, dahil nagpapahiwatig ito ng pagtatagpo ng hyperscaler at vendor sa governed agent execution. Ngunit isa itong reference design na ibinigkis sa isang inference launch, hindi isang pinangalanang agent-platform release na ang default profile ay nagpapatupad ng deny-by-default per-tenant authorization o default egress allowlisting -- ang partikular na kwalipikadong tindig na hinihingi ng prediksyon. Tangential na infrastructure context ang koneksyon sa halip na ebidensiyang nailunsad na ang default-on zero-trust gate.",
+      "reference_links": [
+        {
+          "label": "NVIDIA Blog - Claude Meets Blackwell Ultra: Anthropic's Models Now Run on NVIDIA GB300 in Azure",
+          "url": "https://blogs.nvidia.com/blog/anthropic-nvidia-gb300-blackwell-ultra-microsoft-azure/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Ang Secure Agent Workspace reference design ng NVIDIA, na ibinigkis sa Azure-hosted na Claude GA sa Foundry, ay bumabalot sa autonomous agents sa enterprise identity, networking at governance controls, na nagpapahiwatig ng pagtatagpo ng mga vendor sa governed agent execution. Ngunit ang \"naglulunsad ng zero-trust controls bilang default-on\" ay nangangailangan ng pinangalanang agent-platform release na nagpapatupad ng deny-by-default per-tenant authorization o default egress allowlisting. Ang reference design na ikinabit sa isang inference launch ay katabing konteksto, hindi ang nailunsad na default-on na gate.",
+        "coherence": 2,
+        "remaining_gap": "Walang pinangalanang agent-platform release na ang default profile ay nagpapatupad ng deny-by-default per-tenant authorization o default egress allowlisting."
+      }
+    }
+  ]
+}

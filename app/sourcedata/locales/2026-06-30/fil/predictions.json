@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-30",
+  "predictions": [
+    {
+      "id": "prediction.a64fc6b0d37d6a91",
+      "scope_hint": "business",
+      "title": "Pangalawang frontier lab aabot sa first-party GA sa silicon ng hyperscaler pagsapit ng Q2 2027",
+      "body": "Ang paglipat ng Claude noong June 29 tungo sa general availability sa loob ng Microsoft Foundry — ang Opus 4.8 at Haiku 4.5 na inihahain nang buong-buo sa Azure-hosted na NVIDIA GB300 NVL72 systems sa loob ng tenant ng kustomer, sa ilalim ng kanilang identity, networking, billing at iisang pinagsama-samang Azure invoice — ang nagtatakda ng template na gagayahin ng iba pang bahagi ng PaaS-LLM layer. Ang hugis ng deployment na mahalaga ay 'frontier model, sariling silicon ng hyperscaler, tenant ng kustomer, iisang invoice,' at sa sandaling mapatunayan ng isang cloud na handang magbayad ang mga enterprise para rito, ang hindi maiiwasang puwersa sa kompetisyon ay pagkakapantay: hindi puwedeng iwanan ng karibal na hyperscaler ang katalogo nito bilang third-party-API-only habang nag-aalok ang Azure ng in-tenant GA na may MEA integration. Asahan na may pangalawang frontier lab na aabot sa katumbas na first-party general availability — mga flagship model na tumatakbo sa sariling imprastraktura ng hyperscaler sa loob ng enterprise tenant, hindi isang hosted passthrough — sa isang karibal na cloud (Google Cloud Vertex AI sa TPU/Blackwell o AWS Bedrock sa Trainium/GB300), na may pinagsama-samang cloud-native billing at parehong identity/governance controls, pagsapit ng Q2 2027. Ang istrukturang hila ay ito: itinuturing na ngayon ng mga enterprise ang 'tumatakbo sa aking tenant sa sariling hardware ng cloud' bilang batayan sa procurement, na ginagawa ang PaaS-LLM layer na isang multi-cloud parity race sa halip na isang API-access differentiator.",
+      "reasoning": {
+        "because": "Umabot ang Claude sa GA sa Microsoft Foundry sa Azure-hosted GB300 sa loob ng mga tenant ng kustomer noong June 29 2026",
+        "given": "Nahaharap ang mga karibal na cloud sa presyur ng pagkakapantay: ang in-tenant first-party GA ang nagiging batayan ng enterprise procurement",
+        "so_that": "May pangalawang frontier lab na aabot sa katumbas na first-party in-tenant GA sa sariling silicon ng karibal na hyperscaler",
+        "landing": "Pagsapit ng Q2 2027, may pangalawang lab sa Google Cloud o AWS na aabot sa in-tenant GA",
+        "plain_language": "Malapit nang patakbuhin ng isa pang nangungunang AI lab ang pinakamahusay nitong mga modelo sa sariling chip at tenant ng karibal na cloud, gaya ng ginawa ng Claude sa Azure."
+      },
+      "summary": "Ang pag-abot ng Claude sa general availability sa loob ng Microsoft Foundry sa sariling GB300 silicon at tenant ng kustomer ng Azure ay nagtatakda ng template ng deployment na kailangang tapatan ng mga karibal. Ang presyur ng pagkakapantay sa kompetisyon ay dapat magtulak sa pangalawang frontier lab tungo sa katumbas na first-party in-tenant GA sa hardware ng Google Cloud o AWS, na may pinagsama-samang cloud-native billing, pagsapit ng Q2 2027."
+    },
+    {
+      "id": "prediction.763542bfa1346adf",
+      "scope_hint": "tech",
+      "title": "Magiging baseline ng OSS inference ang quantized-by-default serving pagsapit ng H1 2027",
+      "body": "Ginawa ng vLLM v0.24.0 release noong June 29 na default sa Model Runner V2 ang mga quantized model at nagdagdag ng multi-tier KV-cache offloading path na nag-iimbak ng cache sa isang object-store secondary tier lampas sa GPU memory, kasama ang DeepEP v2 expert parallelism at 180-290% SM90 CUTLASS FP8 kernel speedups. Dahil ang vLLM ang nangingibabaw na open-source inference server at itinuturing na nito ngayon ang low-precision weights at murang-tier na KV spill bilang ang out-of-the-box na landas sa halip na isang opt-in na tuning exercise, ang hindi maiiwasang puwersa ay pagkakapantay sa kompetisyon: hindi puwedeng magpadala ang mga karibal na OSS serving stack (SGLang, NVIDIA TensorRT-LLM, Hugging Face TGI) ng FP16-by-default na defaults at full-precision-only na KV nang hindi nawawalan ng nasusukat na throughput-per-dollar. Ang istrukturang puwersa ay ito: ang cost gains ng 2026 ay lalong nakukuha sa serving layer, hindi sa model layer. Kaya nagbabago ang inaasahang baseline: pagsapit ng H1 2027, hindi bababa sa dalawang malalaking karibal na OSS inference stack ang magpapadala ng quantized-by-default na model loading kasama ang tiered KV-cache offload bilang nakadokumentong defaults, at isasama ng mga managed inference platform na nakabatay sa mga engine na ito ang parehong defaults sa kanilang hosted tiers.",
+      "reasoning": {
+        "because": "Inilabas ang vLLM v0.24.0 noong June 29 na may Model Runner V2 na quantized-by-default kasama ang multi-tier KV offload",
+        "given": "Nangingibabaw ang vLLM sa OSS inference at nakukuha ang throughput-per-dollar gains ng 2026 sa serving layer",
+        "so_that": "Gagamitin ng mga karibal na OSS serving stack ang quantized-by-default loading at tiered KV offload bilang defaults para mapanatili ang cost parity",
+        "landing": "Pagsapit ng H1 2027, SGLang/TensorRT-LLM/TGI kasama ang mga managed platform na nakabatay sa kanila",
+        "plain_language": "Ginawa ng vLLM na default ang mas maliit at mas murang model serving, kaya gagayahin ito ng iba pang serving tool sa loob ng isang taon."
+      },
+      "summary": "Ginawa ng vLLM v0.24.0 na default sa serving engine nito ang mga quantized model at tiered KV-cache offload. Dahil nangingibabaw ang vLLM sa open-source inference, gagamitin ng mga karibal gaya ng SGLang, TensorRT-LLM, at TGI ang quantized-by-default loading at KV offload bilang nakadokumentong defaults pagsapit ng H1 2027."
+    },
+    {
+      "id": "prediction.9f12a295515bf5ce",
+      "scope_hint": "tech",
+      "title": "Magpapadala ang GitHub Copilot coding agent ng inference-time self-evolving memory pagsapit ng Q2 2027",
+      "body": "Noong June 29, ipinakita ng WorldEvolver arXiv paper (2606.30639) na ang pagpapatuloy ng pag-update ng isang world model sa inference time — sa pamamagitan ng episodic memory, semantic rules na hinango mula sa prediction errors, at selective foresight na sinasala ang hindi maaasahang predictions — ay nahihigitan ang mga karibal na baseline sa action-outcome accuracy at downstream task success habang nananatiling frozen ang core agent, walang kailangang fine-tuning. Tumutugma ito sa pangunahing sakit sa paghahain ng mga coding-agent harness: nagkakamali ng aksyon ang mga agent dahil mali ang kanilang hula sa kahihinatnan sa mahabang multi-step na gawain. Ang istrukturang puwersa ay gastos: ang runtime memory at world-model adaptation ay mas murang reliability lever kaysa sa muling pagsasanay ng frontier backbone, at nagsasanib na ang mga harness vendor sa persistent agent memory (ang AI Engineer World's Fair Harness Engineering keynote noong July 2 ay tumutukoy mismo sa ganitong pokus). Ang hula: may malaking coding-agent harness — malamang ang autonomous coding agent ng GitHub Copilot — na magpapadala ng runtime memory/world-model-adaptation na tampok na nagpapanatili ng mga natutuhang task-outcome sa buong session o repository at may nakatakdang task-success o reliability improvement, pagsapit ng Q2 2027.",
+      "reasoning": {
+        "because": "WorldEvolver paper ng Jun 29: nahihigitan ng inference-time evolving world model ang mga baseline sa task-success ng agent, frozen ang backbone",
+        "given": "Mas murang reliability lever ang runtime memory adaptation kaysa muling pagsasanay; nagsasanib ang mga harness vendor sa agent memory",
+        "so_that": "May malaking coding-agent harness na magpapadala ng runtime memory/world-model na tampok na may nakatakdang task-success o reliability gain",
+        "landing": "Pagsapit ng Q2 2027; autonomous coding agent ng GitHub Copilot (o katumbas na harness)",
+        "plain_language": "Malapit nang matuto ang mga coding-agent tool mula sa sariling pagkakamali habang nasa gitna ng gawain, nang hindi muling sinasanay ang AI, para mabawasan ang pagkakamali."
+      },
+      "summary": "Ipinakita ng isang arXiv paper noong June 29 (WorldEvolver) na ang isang world model na nag-eevolve sa inference time — gamit ang episodic at semantic memory kasama ang selective foresight — ay nagpapabuti sa action-prediction at task success ng agent nang hindi muling sinasanay ang frozen na backbone. Dahil mas mura ang runtime memory adaptation kaysa fine-tuning, inaasahang magpapadala ang isang malaking coding-agent harness gaya ng autonomous agent ng GitHub Copilot ng runtime memory/world-model-adaptation na tampok na may nakatakdang reliability gain pagsapit ng Q2 2027."
+    }
+  ]
+}
