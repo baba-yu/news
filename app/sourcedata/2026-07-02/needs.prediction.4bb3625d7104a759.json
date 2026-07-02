@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "open-source agent-builder platform maintainer",
+    "job": "hardening flow-execution endpoints so every flow, run and artifact is bound to its owning tenant with object-level access checks",
+    "outcome": "released version making tenant-scoped flow authorization a shipped default across execution APIs like /api/v1/responses",
+    "motivation": "an authenticated-only IDOR (CVE-2026-55255) carried cross-tenant blast radius and was exploited in the wild",
+    "task": {
+      "who": "core maintainers and security-response contributors",
+      "what": "add object-level authorization to flow-execution endpoints",
+      "where": "REST APIs and flow-run/artifact data models",
+      "when": "July 2026 to Q1 2027",
+      "why": "close cross-tenant IDOR blast radius in multi-user factories",
+      "how": "per-object ownership checks bound to authenticated tenant"
+    }
+  },
+  {
+    "actor": "enterprise platform-security engineer running internal agent factories",
+    "job": "defining tenant-isolation requirements and gating agent-orchestration deployments on shipped per-tenant authorization defaults",
+    "outcome": "security-review checklist item requiring tenant-scoped execution and object-level authz before agent-builder tools are approved",
+    "motivation": "citizen-developer agent factories are internal multi-user systems where authenticated bugs still leak across tenants",
+    "task": {
+      "who": "product-security / platform-security review team",
+      "what": "make tenant-scoped authz a review checkbox",
+      "where": "internal agent-orchestration security reviews and procurement gates",
+      "when": "August 2026 to Q1 2027",
+      "why": "block deployment of tools lacking cross-tenant isolation",
+      "how": "security-review checklist and vendor requirements"
+    }
+  },
+  {
+    "actor": "vulnerability-triage and EPSS tooling maintainer",
+    "job": "reprioritizing patch guidance toward exploitation likelihood so IDOR flaws reached before older RCEs surface at the top of queues",
+    "outcome": "triage feeds and dashboards that rank the CVE-2026-55255-class IDOR by EPSS-driven exploitation signal over raw CVSS",
+    "motivation": "Sysdig showed attackers chose the lower-CVSS IDOR before an older 9.8 RCE, breaking CVSS-only ordering",
+    "task": {
+      "who": "vulnerability-intelligence and scoring engineers",
+      "what": "surface exploitation-prioritized patch ordering",
+      "where": "EPSS feeds, triage pipelines and scanner rules",
+      "when": "July 2026 to Q1 2027",
+      "why": "guide patching toward actively exploited IDOR flaws",
+      "how": "EPSS scores plus in-the-wild exploitation signals"
+    }
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-02",
+  "predictions": [
+    {
+      "id": "prediction.4bb3625d7104a759",
+      "scope_hint": "tech",
+      "title": "Magdadagdag ang mga agent-builder platform ng tenant-scoped flow authorization pagsapit ng Q1 2027",
+      "body": "Kasunod ng ulat ng Sysdig hinggil sa unang in-the-wild na pagsasamantala sa CVE-2026-55255, isang CVSS 9.9 IDOR sa /api/v1/responses endpoint ng Langflow na nagpapahintulot sa isang authenticated na user na patakbuhin ang flow ng ibang tenant sa pamamagitan ng pagbibigay ng flow ID nito, ililipat ng mga nangungunang agent-builder platform (Langflow, Flowise, AutoGen Studio at mga kapantay) ang per-tenant authorization mula pangalawang isip patungo sa isang ipinadalang default. Asahan ang object-level access checks na nag-uugnay ng bawat flow, run at artifact sa nagmamay-ari nitong tenant, kaya't hindi na maaabot ng isang balidong session ang kabila ng shared instance. Ang puwersang nagtutulak ay istruktural: itinatayo ang mga tool na ito bilang multi-user na 'citizen developer' agent factory kung saan may dala pa ring malaking cross-tenant na blast radius ang authenticated-only na bug. Ang mismong punto ng Sysdig ay inabot ng mga attacker ang mas mababang-CVSS na IDOR bago ang mas lumang 9.8 RCE. Binabaligtad niyon ang karaniwang triage logic at itinutulak ang mga vendor at defender patungo sa exploitation-prioritized, EPSS-driven na pag-patch sa halip na hilaw na CVSS ranking. Pagsapit ng maagang 2027, magiging checkbox item na ang tenant-scoped execution at object-level authorization sa mga agent-orchestration security review sa halip na maging isang tangi-tanging katangian.",
+      "reasoning": {
+        "because": "Kinumpirma ng Sysdig ang unang in-the-wild na pagsasamantala sa Langflow IDOR CVE-2026-55255 (CVSS 9.9) sa kabila ng mga tenant",
+        "given": "tumatakbo ang mga agent-builder bilang shared multi-user na internal factory, kaya lumalampas sa mga tenant ang authenticated-only na bug",
+        "so_that": "naghahatid ang mga vendor ng object-level per-tenant authorization at nag-tri-triage ang mga defender ayon sa EPSS/exploitation, hindi sa hilaw na CVSS",
+        "landing": "naghahatid ang mga nangungunang agent-builder platform ng tenant-scoped flow authz pagsapit ng Q1 2027",
+        "plain_language": "Ika-lock ng mga AI app-building tool ang bawat user sa sarili nilang flows para hindi mapatakbo ng iba ang flow ng isa't isa sa pamamagitan ng ID."
+      },
+      "summary": "Matapos iulat ng Sysdig ang unang aktibong pagsasamantala sa isang CVSS 9.9 IDOR na nagpapatakbo ng Langflow flow ng ibang tenant sa pamamagitan ng ID, gagawing default ng mga nangungunang agent-builder platform ang tenant-scoped flow authorization pagsapit ng Q1 2027. Inatake ito ng mga attacker bago ang mas mataas-CVSS na RCE, na nagtutulak sa mga defender patungo sa EPSS triage."
+    },
+    {
+      "id": "prediction.e6e1ab64e75b5513",
+      "scope_hint": "tech",
+      "title": "Ang launch-day na vLLM/SGLang + Ollama support ang magiging pamantayan ng open-weight MoE release",
+      "body": "Ang launch ng Mistral 3 ay naghatid ng Large 3 sparse MoE flagship nito (41B active / 675B total) na na-tune para sa vLLM at SGLang, habang sinukat ang 14B/8B/3B dense variants nito para sa Ollama, llama.cpp, at MLX sa release. Ipinapakita nito kung paano na dumarating na ang Qwen 3.5 at ang pinakabagong sparse checkpoints ng DeepSeek na may same-week na serving-runtime at local-runtime na saklaw. Habang nagkokonsolida ang open-weight frontier sa paligid ng ilang MoE na pamilya na sumasapon sa magkakatulad na sparse-activation na disenyo, huminto na maging tangi-tanging katangian ang coordinated na launch-time runtime support at nagiging inaasahang minimum na ito. Asahan na ituturing ng susunod na malalaking open-weight MoE release ang first-party vLLM/SGLang serving paths kasama ang Ollama/llama.cpp/MLX local packaging bilang isang di-mapag-uusapang launch deliverable sa halip na community follow-up. Ito ay dahil ang permissive na Apache 2.0 na termino ay nagiging tunay na commercial adoption lamang kapag maide-deploy ng mga practitioner ang mga weight sa mismong araw na ilabas ang mga ito.",
+      "reasoning": {
+        "because": "Naghatid ang Mistral 3 ng MoE flagship sa vLLM/SGLang at dense variants sa Ollama/llama.cpp/MLX sa launch",
+        "given": "Sumasapon ang Qwen 3.5, DeepSeek, Mistral MoE na pamilya sa sparse na disenyo, na may same-week na runtime coverage",
+        "so_that": "Nagiging inaasahang minimum, hindi tangi-tanging katangian, ang launch-time serving + local-runtime support para sa open-weight MoE",
+        "landing": "Isang malaking open-weight MoE ang maghahatid ng launch-day vLLM/SGLang + Ollama support pagsapit ng Q4 2026",
+        "plain_language": "Ang mga bagong open AI model ay ituturing lamang na ganap na inilabas kung mapapatakbo mo ang mga ito saanman sa unang araw."
+      },
+      "summary": "Inilunsad ang Mistral 3 na may MoE flagship na na-tune para sa vLLM/SGLang at dense variants na naka-package para sa Ollama, llama.cpp, at MLX. Habang sumasapon ang mga open-weight MoE na pamilya sa magkakatulad na sparse na disenyo, lumilipat ang launch-day runtime support mula tangi-tanging katangian patungo sa release-quality na baseline para sa susunod na malalaking release."
+    },
+    {
+      "id": "prediction.5058f9be0798fd18",
+      "scope_hint": "tech",
+      "title": "Ipagmamalaki ng AMD MI400 ang memory bandwidth kaysa peak FLOPS sa Advancing AI",
+      "body": "Kapag umakyat ang AMD sa entablado sa Advancing AI 2026 sa July 22-23 sa Moscone Center, asahan na mangunguna ang pitch ng MI400 sa memory sa halip na hilaw na compute. Ang generational na kuwentong tinutukoy ng mga ulat ay isang bandwidth jump na higit sa 2x kaysa MI350, na itinayo sa CDNA 5 at TSMC's 2nm node, kasama ang rack-scale na 'Helios' system at ang mga availing timeline na pinigil sa 2025 preview na sa wakas ay idedetalye. Mahalaga ang balangkas dahil lumipat na ang binding constraint sa inference: pinapalaki ng long-context workloads ang KV-cache footprint, kaya lalong pinahahalagahan ng mga mamimili ang mas malalaking HBM pool at mas matalinong parallelism kaysa headline FLOPS. Ipinapaliwanag ng parehong lohika ang counter-positioning ng NVIDIA, kung saan umaabot ang Blackwell Ultra GB300 sa 288GB ng HBM3e at ang Rubin Ultra variants ay naglalayong 512GB. Sa HBM capacity na iniulat na sold out hanggang calendar 2026 at TAM na inaasahang malapit sa $100B pagsapit ng 2028, ang tuktok ng accelerator na merkado ay lumalapit sa isang memory-capacity at bandwidth na paligsahan. Ang July reveal ng AMD ang malapitang catalyst na naglilinaw sa muling pagbabalangkas na iyon.",
+      "reasoning": {
+        "because": "Nangunguna ang mga ulat hinggil sa MI400 sa >2x MI350 memory bandwidth, hindi sa peak FLOPS na pag-unlad",
+        "given": "Pinapalaki ng long-context inference ang KV-cache; ginagawang constraint ng sold-out HBM hanggang 2026 ang capacity",
+        "so_that": "Ipinagmamalaki ng mga vendor ang memory bandwidth/HBM capacity bilang headline spec, na muling binabalangkas ang accelerator race",
+        "landing": "Binabalangkas ng AMD ang MI400 sa paligid ng memory sa Advancing AI, July 22-23, 2026 (Q3 2026)",
+        "plain_language": "Ipagmamalaki ng bagong AI chip ng AMD ang bilis ng memory, hindi ang hilaw na lakas, kapag ipinakita sa July 22-23."
+      },
+      "summary": "Sa Advancing AI sa July 22-23, 2026, inaasahang ilalagay ng AMD ang MI400 pangunahin sa paligid ng >2x memory-bandwidth na pag-unlad kaysa MI350 sa halip na peak compute. Ang long-context inference na nagpapalaki sa KV-cache at ang HBM na sold out hanggang 2026 ang gumagawa sa memory bilang binding constraint, na tumbas sa 288GB-hanggang-512GB HBM roadmap ng NVIDIA. Ang tuktok ng accelerator na merkado ay nagiging isang memory-capacity at bandwidth na paligsahan."
+    }
+  ]
+}

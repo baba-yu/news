@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-02",
+  "predictions": [
+    {
+      "id": "prediction.4bb3625d7104a759",
+      "scope_hint": "tech",
+      "title": "Agent-builder platforms add tenant-scoped flow authorization by Q1 2027",
+      "body": "Following Sysdig's report of the first in-the-wild exploitation of CVE-2026-55255, a CVSS 9.9 IDOR in Langflow's /api/v1/responses endpoint that lets an authenticated user execute another tenant's flow by supplying its flow ID, the leading agent-builder platforms (Langflow, Flowise, AutoGen Studio and peers) will move per-tenant authorization from an afterthought to a shipped default. Expect object-level access checks that bind every flow, run and artifact to its owning tenant, so a valid session can no longer reach across the shared instance. The forcing pressure is structural: these tools are stood up internally as multi-user 'citizen developer' agent factories where authenticated-only bugs still carry a large cross-tenant blast radius, and Sysdig's own point is that attackers reached for the lower-CVSS IDOR before an older 9.8 RCE. That inverts the usual triage logic and pushes vendors and defenders toward exploitation-prioritized, EPSS-driven patching over raw CVSS ranking. By early 2027 tenant-scoped execution and object-level authorization become a checkbox item in agent-orchestration security reviews rather than a differentiator.",
+      "reasoning": {
+        "because": "Sysdig confirmed first in-the-wild exploit of Langflow IDOR CVE-2026-55255 (CVSS 9.9) across tenants",
+        "given": "agent-builders run as shared multi-user internal factories, so authenticated-only bugs cross tenants",
+        "so_that": "vendors ship object-level per-tenant authorization and defenders triage by EPSS/exploitation, not raw CVSS",
+        "landing": "leading agent-builder platforms ship tenant-scoped flow authz by Q1 2027",
+        "plain_language": "AI app-building tools will lock each user to their own flows so people cannot run each other's by ID."
+      },
+      "summary": "After Sysdig reported the first active exploitation of a CVSS 9.9 IDOR that runs another tenant's Langflow flow by ID, leading agent-builder platforms will make tenant-scoped flow authorization a default by Q1 2027. Attackers hit it before a higher-CVSS RCE, pushing defenders to EPSS triage."
+    },
+    {
+      "id": "prediction.e6e1ab64e75b5513",
+      "scope_hint": "tech",
+      "title": "Launch-day vLLM/SGLang + Ollama support becomes open-weight MoE release bar",
+      "body": "Mistral 3's launch shipped its Large 3 sparse MoE flagship (41B active / 675B total) tuned for vLLM and SGLang while sizing its 14B/8B/3B dense variants for Ollama, llama.cpp, and MLX on release. This mirrors how Qwen 3.5 and DeepSeek's latest sparse checkpoints already land with same-week serving-runtime and local-runtime coverage. As the open-weight frontier consolidates around a handful of MoE families converging on similar sparse-activation designs, coordinated launch-time runtime support stops being a differentiator and becomes the expected minimum. Expect the next major open-weight MoE releases to treat first-party vLLM/SGLang serving paths plus Ollama/llama.cpp/MLX local packaging as a non-negotiable launch deliverable rather than a community follow-up, because Apache 2.0 permissive terms only convert to real commercial adoption when practitioners can deploy the weights the day they drop.",
+      "reasoning": {
+        "because": "Mistral 3 shipped MoE flagship on vLLM/SGLang and dense variants on Ollama/llama.cpp/MLX at launch",
+        "given": "Qwen 3.5, DeepSeek, Mistral MoE families converge on sparse designs, same-week runtime coverage",
+        "so_that": "Launch-time serving + local-runtime support becomes the expected minimum, not a differentiator, for open-weight MoE",
+        "landing": "A major open-weight MoE ships launch-day vLLM/SGLang + Ollama support by Q4 2026",
+        "plain_language": "New open AI models will only count as fully released if you can run them everywhere on day one."
+      },
+      "summary": "Mistral 3 launched with its MoE flagship tuned for vLLM/SGLang and dense variants packaged for Ollama, llama.cpp, and MLX. As open-weight MoE families converge on shared sparse designs, launch-day runtime support shifts from differentiator to release-quality baseline for the next major releases."
+    },
+    {
+      "id": "prediction.5058f9be0798fd18",
+      "scope_hint": "tech",
+      "title": "AMD MI400 will market memory bandwidth over peak FLOPS at Advancing AI",
+      "body": "When AMD takes the stage at Advancing AI 2026 on July 22-23 at Moscone Center, expect the MI400 pitch to lead with memory rather than raw compute. The generational story reporting points to is a bandwidth jump of more than 2x over MI350, built on CDNA 5 and TSMC's 2nm node, with the rack-scale 'Helios' system and the availability timelines held back at the 2025 preview finally detailed. The framing matters because the binding constraint in inference has shifted: long-context workloads inflate KV-cache footprints, so buyers increasingly value larger HBM pools and smarter parallelism over headline FLOPS. That same logic explains NVIDIA's counter-positioning, with Blackwell Ultra GB300 reaching 288GB of HBM3e and Rubin Ultra variants targeting 512GB. With HBM capacity reportedly sold out through calendar 2026 and TAM projected near $100B by 2028, the top of the accelerator market is settling into a memory-capacity and bandwidth contest, and AMD's July reveal is the near-term catalyst that makes that reframing explicit.",
+      "reasoning": {
+        "because": "Reporting on MI400 leads with >2x MI350 memory bandwidth, not peak FLOPS gains",
+        "given": "Long-context inference inflates KV-cache; HBM sold out through 2026 makes capacity the constraint",
+        "so_that": "Vendors market memory bandwidth/HBM capacity as the headline spec, reframing the accelerator race",
+        "landing": "AMD frames MI400 around memory at Advancing AI, July 22-23, 2026 (Q3 2026)",
+        "plain_language": "AMD's new AI chip will brag about memory speed, not raw power, when it's shown off July 22-23."
+      },
+      "summary": "At Advancing AI on July 22-23, 2026, AMD is expected to position the MI400 primarily around a >2x memory-bandwidth gain over MI350 rather than peak compute. Long-context inference inflating KV-cache and HBM sold out through 2026 make memory the binding constraint, mirrored by NVIDIA's 288GB-to-512GB HBM roadmap. The top of the accelerator market is becoming a memory-capacity and bandwidth contest."
+    }
+  ]
+}

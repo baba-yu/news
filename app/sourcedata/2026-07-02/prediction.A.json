@@ -1,0 +1,14 @@
+{
+  "id": "prediction.4bb3625d7104a759",
+  "scope_hint": "tech",
+  "title": "Agent-builder platforms add tenant-scoped flow authorization by Q1 2027",
+  "body": "Following Sysdig's report of the first in-the-wild exploitation of CVE-2026-55255, a CVSS 9.9 IDOR in Langflow's /api/v1/responses endpoint that lets an authenticated user execute another tenant's flow by supplying its flow ID, the leading agent-builder platforms (Langflow, Flowise, AutoGen Studio and peers) will move per-tenant authorization from an afterthought to a shipped default. Expect object-level access checks that bind every flow, run and artifact to its owning tenant, so a valid session can no longer reach across the shared instance. The forcing pressure is structural: these tools are stood up internally as multi-user 'citizen developer' agent factories where authenticated-only bugs still carry a large cross-tenant blast radius, and Sysdig's own point is that attackers reached for the lower-CVSS IDOR before an older 9.8 RCE. That inverts the usual triage logic and pushes vendors and defenders toward exploitation-prioritized, EPSS-driven patching over raw CVSS ranking. By early 2027 tenant-scoped execution and object-level authorization become a checkbox item in agent-orchestration security reviews rather than a differentiator.",
+  "reasoning": {
+    "because": "Sysdig confirmed first in-the-wild exploit of Langflow IDOR CVE-2026-55255 (CVSS 9.9) across tenants",
+    "given": "agent-builders run as shared multi-user internal factories, so authenticated-only bugs cross tenants",
+    "so_that": "vendors ship object-level per-tenant authorization and defenders triage by EPSS/exploitation, not raw CVSS",
+    "landing": "leading agent-builder platforms ship tenant-scoped flow authz by Q1 2027",
+    "plain_language": "AI app-building tools will lock each user to their own flows so people cannot run each other's by ID."
+  },
+  "summary": "After Sysdig reported the first active exploitation of a CVSS 9.9 IDOR that runs another tenant's Langflow flow by ID, leading agent-builder platforms will make tenant-scoped flow authorization a default by Q1 2027. Attackers hit it before a higher-CVSS RCE, pushing defenders to EPSS triage."
+}

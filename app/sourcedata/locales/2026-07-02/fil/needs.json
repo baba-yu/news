@@ -1,0 +1,137 @@
+{
+  "date": "2026-07-02",
+  "by_prediction": {
+    "prediction.4bb3625d7104a759": [
+      {
+        "actor": "maintainer ng open-source agent-builder platform",
+        "job": "pinatatatag ang flow-execution endpoints para ang bawat flow, run at artifact ay nakaugnay sa nagmamay-ari nitong tenant nang may object-level access checks",
+        "outcome": "inilabas na bersyon na ginagawang ipinadalang default ang tenant-scoped flow authorization sa mga execution API tulad ng /api/v1/responses",
+        "motivation": "isang authenticated-only na IDOR (CVE-2026-55255) ang nagdala ng cross-tenant na blast radius at sinamantala sa wild",
+        "task": {
+          "who": "core maintainers at security-response contributors",
+          "what": "magdagdag ng object-level authorization sa flow-execution endpoints",
+          "where": "REST APIs at flow-run/artifact data models",
+          "when": "July 2026 hanggang Q1 2027",
+          "why": "isara ang cross-tenant IDOR blast radius sa multi-user factories",
+          "how": "per-object ownership checks na nakaugnay sa authenticated tenant"
+        }
+      },
+      {
+        "actor": "enterprise platform-security engineer na nagpapatakbo ng internal agent factories",
+        "job": "tumutukoy ng tenant-isolation requirements at nagta-gate ng agent-orchestration deployments sa mga ipinadalang per-tenant authorization default",
+        "outcome": "security-review checklist item na nag-aatas ng tenant-scoped execution at object-level authz bago aprubahan ang agent-builder tools",
+        "motivation": "ang citizen-developer agent factories ay internal multi-user na sistema kung saan tumatagos pa rin ang authenticated na bug sa kabila ng mga tenant",
+        "task": {
+          "who": "product-security / platform-security review team",
+          "what": "gawing review checkbox ang tenant-scoped authz",
+          "where": "internal agent-orchestration security reviews at procurement gates",
+          "when": "August 2026 hanggang Q1 2027",
+          "why": "harangan ang deployment ng mga tool na walang cross-tenant isolation",
+          "how": "security-review checklist at vendor requirements"
+        }
+      },
+      {
+        "actor": "maintainer ng vulnerability-triage at EPSS tooling",
+        "job": "muling pinapahalaga ang patch guidance patungo sa exploitation likelihood para ang mga IDOR na inabot bago ang mas lumang RCEs ay lumitaw sa tuktok ng mga queue",
+        "outcome": "triage feeds at dashboards na nagra-rank sa CVE-2026-55255-class na IDOR ayon sa EPSS-driven na exploitation signal kaysa hilaw na CVSS",
+        "motivation": "ipinakita ng Sysdig na pinili ng mga attacker ang mas mababang-CVSS na IDOR bago ang mas lumang 9.8 RCE, na sumisira sa CVSS-only na pagkakasunod-sunod",
+        "task": {
+          "who": "vulnerability-intelligence at scoring engineers",
+          "what": "ilitaw ang exploitation-prioritized na patch ordering",
+          "where": "EPSS feeds, triage pipelines at scanner rules",
+          "when": "July 2026 hanggang Q1 2027",
+          "why": "gabayan ang pag-patch patungo sa aktibong sinasamantalang IDOR flaws",
+          "how": "EPSS scores kasama ang in-the-wild na exploitation signals"
+        }
+      }
+    ],
+    "prediction.5058f9be0798fd18": [
+      {
+        "actor": "product-marketing / keynote lead ng accelerator vendor",
+        "job": "Balangkasin ang MI400 launch narrative sa paligid ng HBM capacity at 2x bandwidth sa halip na peak FLOPS para sa Advancing AI keynote",
+        "outcome": "Keynote deck at messaging na nangunguna sa memory bandwidth kaysa MI350 at nagpo-posisyon laban sa 288GB/512GB HBM roadmap ng NVIDIA",
+        "motivation": "Lumipat ang binding constraint ng inference patungo sa KV-cache footprint; nakikilala ng memory-first na kuwento ang sarili laban sa FLOPS-led na incumbent",
+        "task": {
+          "who": "product marketing at keynote content team",
+          "what": "bumuo ng memory-first na MI400 launch messaging at slides",
+          "where": "Advancing AI 2026, Moscone Center",
+          "when": "July 2026 keynote preparation (mga linggo bago ang July 22-23)",
+          "why": "makilala sa memory na paligsahan na pinahahalagahan na ngayon ng mga mamimili",
+          "how": "competitive benchmarking laban sa Blackwell Ultra / Rubin Ultra HBM specs"
+        }
+      },
+      {
+        "actor": "data-center accelerator silicon / SKU architecture lead",
+        "job": "I-engineer ang HBM-heavy na MI400 SKU sa CDNA 5 at TSMC 2nm na naghahatid ng >2x bandwidth at ang rack-scale na Helios system",
+        "outcome": "Validated na MI400 silicon kasama ang Helios rack platform na may detalyadong availing timelines na handang idetalye sa reveal",
+        "motivation": "Pinapalaki ng long-context inference ang KV-cache; nananalo ang mas malalaking HBM pool at mas matalinong parallelism sa tuktok ng accelerator na merkado",
+        "task": {
+          "who": "silicon architecture at platform engineering team",
+          "what": "i-tape out at i-validate ang HBM-heavy na MI400 at Helios rack",
+          "where": "CDNA 5 architecture sa TSMC 2nm node",
+          "when": "2026 pre-launch bring-up at validation na panahong inilaan",
+          "why": "ihatid ang bandwidth at capacity na kuwentong sinasabi ng pitch",
+          "how": "CDNA 5 microarchitecture, HBM integration, rack-scale interconnect"
+        }
+      },
+      {
+        "actor": "capacity-allocation planner ng HBM supplier",
+        "job": "Ilaan ang limitadong HBM supply para masiguro ang memory volume na inaasahan ng MI400 at ng bandwidth pitch nito",
+        "outcome": "Nakatalagang HBM capacity allocation na nagpapahintulot sa >2x bandwidth SKU sa kabila ng sold-out na supply hanggang calendar 2026",
+        "motivation": "Sold out ang HBM hanggang 2026 na may TAM na malapit sa $100B pagsapit ng 2028; tinutukoy ng allocation kung sino ang makakapaghatid ng memory-heavy accelerators",
+        "task": {
+          "who": "supply-chain capacity at allocation planning function",
+          "what": "italaga at iiskedyul ang HBM wafer allocation sa accelerator program",
+          "where": "HBM fabrication at packaging supply chain",
+          "when": "calendar-2026 allocation planning cycle",
+          "why": "hinihigpitan ng limitadong supply ang memory-capacity na paligsahan",
+          "how": null
+        }
+      }
+    ],
+    "prediction.e6e1ab64e75b5513": [
+      {
+        "actor": "release/deployment engineer ng open-weight model lab",
+        "job": "I-coordinate ang day-one na serving at local-runtime coverage sa buong MoE flagship at dense variants bago ilabas nang publiko ang mga weight.",
+        "outcome": "Launch-day na vLLM/SGLang serving paths kasama ang Ollama/llama.cpp/MLX packaging na inihatid kasabay ng open-weight MoE release.",
+        "motivation": "Nagiging commercial adoption lamang ang Apache 2.0 na termino kapag maide-deploy ng mga practitioner ang mga weight sa mismong araw na ilabas ang mga ito.",
+        "task": {
+          "who": "model release / deployment engineering team",
+          "what": "Ihatid ang first-party runtime support bago ang weight release",
+          "where": "internal release pipeline + upstream vLLM/SGLang/Ollama repos",
+          "when": "July hanggang Q4 2026",
+          "why": "Hinihimok ng same-day deployability ang tunay na commercial adoption",
+          "how": "pre-release model-support PRs at quantized packaging"
+        }
+      },
+      {
+        "actor": "maintainer ng vLLM/SGLang serving-runtime",
+        "job": "Ihatid ang model-support at sparse-MoE kernel PRs para gumana ang serving path ng bagong checkpoint sa release commit.",
+        "outcome": "Na-merge na same-week na vLLM/SGLang support para sa sparse-activation na arkitektura ng MoE flagship sa launch.",
+        "motivation": "Ang coordinated na launch-time serving support ay inaasahang minimum na ngayon habang sumasapon ang mga MoE na pamilya sa magkakatulad na disenyo.",
+        "task": {
+          "who": "serving-runtime maintainer / core contributors",
+          "what": "I-merge ang sparse-MoE model-support PRs bago ang release",
+          "where": "vLLM at SGLang upstream repositories",
+          "when": "July hanggang Q4 2026",
+          "why": "Ang launch-day serving ang inaasahang release bar",
+          "how": "kolaborasyon sa lab sa ilalim ng embargo access"
+        }
+      },
+      {
+        "actor": "maintainer ng Ollama/llama.cpp/MLX local-runtime packaging",
+        "job": "Ihanda ang quantized GGUF/MLX conversions at templates para tumakbo ang dense variants nang lokal sa araw ng release.",
+        "outcome": "Day-one na Ollama, llama.cpp, at MLX packaging para sa 14B/8B/3B dense variants sa launch.",
+        "motivation": "Ang lokal na deployability sa araw na ilabas ang mga weight ang gumagawang magamit ang permissive na open-weight release, hindi isang community follow-up.",
+        "task": {
+          "who": "local-runtime packaging maintainers",
+          "what": "Ihatid ang launch-day na quantized local packaging",
+          "where": "Ollama library, llama.cpp, MLX conversion pipelines",
+          "when": "July hanggang Q4 2026",
+          "why": "Ginagawang adoption ng same-day local deploy ang permissive na termino",
+          "how": "GGUF/MLX quantization kasama ang chat templates"
+        }
+      }
+    ]
+  }
+}
