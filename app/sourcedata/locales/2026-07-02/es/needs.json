@@ -1,0 +1,137 @@
+{
+  "date": "2026-07-02",
+  "by_prediction": {
+    "prediction.4bb3625d7104a759": [
+      {
+        "actor": "responsable de una plataforma open-source de constructor de agentes",
+        "job": "fortalecer los endpoints de ejecución de flujos para que cada flujo, ejecución y artefacto quede vinculado a su inquilino propietario con comprobaciones de acceso a nivel de objeto",
+        "outcome": "versión publicada que hace de la autorización de flujos por inquilino un valor por defecto incorporado en las APIs de ejecución como /api/v1/responses",
+        "motivation": "una IDOR que solo requiere autenticación (CVE-2026-55255) tenía un radio de impacto entre inquilinos y se explotó in-the-wild",
+        "task": {
+          "who": "mantenedores del núcleo y contribuyentes de respuesta de seguridad",
+          "what": "añadir autorización a nivel de objeto a los endpoints de ejecución de flujos",
+          "where": "APIs REST y modelos de datos de ejecución de flujos/artefactos",
+          "when": "julio de 2026 a Q1 2027",
+          "why": "cerrar el radio de impacto de la IDOR entre inquilinos en las fábricas multiusuario",
+          "how": "comprobaciones de propiedad por objeto vinculadas al inquilino autenticado"
+        }
+      },
+      {
+        "actor": "ingeniero de seguridad de plataforma en empresa que opera fábricas internas de agentes",
+        "job": "definir los requisitos de aislamiento por inquilino y condicionar los despliegues de orquestación de agentes a que los valores por defecto de autorización por inquilino ya vengan incorporados",
+        "outcome": "ítem de checklist de revisión de seguridad que exige ejecución acotada por inquilino y autorización a nivel de objeto antes de aprobar las herramientas de constructores de agentes",
+        "motivation": "las fábricas de agentes de citizen-developer son sistemas internos multiusuario donde los errores autenticados aún se filtran entre inquilinos",
+        "task": {
+          "who": "equipo de revisión de seguridad de producto / de plataforma",
+          "what": "convertir la autorización acotada por inquilino en una casilla de revisión",
+          "where": "revisiones de seguridad de orquestación de agentes internas y controles de aprovisionamiento",
+          "when": "agosto de 2026 a Q1 2027",
+          "why": "bloquear el despliegue de herramientas que carecen de aislamiento entre inquilinos",
+          "how": "checklist de revisión de seguridad y requisitos a proveedores"
+        }
+      },
+      {
+        "actor": "mantenedor de herramientas de triaje de vulnerabilidades y EPSS",
+        "job": "repriorizar la guía de parcheo hacia la probabilidad de explotación para que los fallos IDOR aprovechados antes que RCE más antiguas aparezcan al principio de las colas",
+        "outcome": "feeds de triaje y paneles que clasifican la IDOR tipo CVE-2026-55255 por señal de explotación guiada por EPSS por encima del CVSS bruto",
+        "motivation": "Sysdig mostró que los atacantes eligieron la IDOR de menor CVSS antes que una RCE 9.8 más antigua, rompiendo el orden basado solo en CVSS",
+        "task": {
+          "who": "ingenieros de inteligencia de vulnerabilidades y puntuación",
+          "what": "exponer un orden de parcheo priorizado por explotación",
+          "where": "feeds de EPSS, pipelines de triaje y reglas de escáneres",
+          "when": "julio de 2026 a Q1 2027",
+          "why": "orientar el parcheo hacia los fallos IDOR explotados activamente",
+          "how": "puntuaciones EPSS más señales de explotación in-the-wild"
+        }
+      }
+    ],
+    "prediction.5058f9be0798fd18": [
+      {
+        "actor": "responsable de marketing de producto / de keynote de un proveedor de aceleradores",
+        "job": "Encuadrar la narrativa de lanzamiento del MI400 en torno a la capacidad de HBM y 2x de ancho de banda en lugar de los FLOPS pico para el keynote de Advancing AI",
+        "outcome": "Presentación y mensajería del keynote que lideran con el ancho de banda de memoria sobre el MI350 y se posicionan frente a la hoja de ruta de HBM de 288GB/512GB de NVIDIA",
+        "motivation": "La restricción determinante de la inferencia se desplazó al tamaño de la caché KV; una historia centrada en la memoria diferencia frente al incumbente liderado por FLOPS",
+        "task": {
+          "who": "equipo de marketing de producto y de contenido del keynote",
+          "what": "construir la mensajería y las diapositivas de lanzamiento del MI400 centradas en la memoria",
+          "where": "Advancing AI 2026, Moscone Center",
+          "when": "preparación del keynote de julio de 2026 (semanas antes del 22-23 de julio)",
+          "why": "diferenciarse en la disputa de memoria que los compradores ahora valoran",
+          "how": "benchmarking competitivo frente a las especificaciones de HBM de Blackwell Ultra / Rubin Ultra"
+        }
+      },
+      {
+        "actor": "responsable de arquitectura de silicio / SKU de aceleradores de centro de datos",
+        "job": "Diseñar el SKU MI400 con mucha HBM sobre CDNA 5 y 2nm de TSMC que entregue >2x de ancho de banda y el sistema a escala de rack Helios",
+        "outcome": "Silicio MI400 validado más la plataforma de rack Helios con calendarios de disponibilidad detallados listos para exponer en el anuncio",
+        "motivation": "La inferencia de contexto largo infla la caché KV; pools de HBM más grandes y un paralelismo más inteligente ganan la cima del mercado de aceleradores",
+        "task": {
+          "who": "equipo de arquitectura de silicio e ingeniería de plataforma",
+          "what": "hacer el tape out y validar el MI400 con mucha HBM y el rack Helios",
+          "where": "arquitectura CDNA 5 en el nodo de 2nm de TSMC",
+          "when": "puesta a punto y validación previas al lanzamiento en 2026",
+          "why": "entregar la historia de ancho de banda y capacidad que el discurso afirma",
+          "how": "microarquitectura CDNA 5, integración de HBM, interconexión a escala de rack"
+        }
+      },
+      {
+        "actor": "planificador de asignación de capacidad de un proveedor de HBM",
+        "job": "Asignar el suministro restringido de HBM para asegurar el volumen de memoria del que dependen el MI400 y su discurso de ancho de banda",
+        "outcome": "Asignación comprometida de capacidad de HBM que permite el SKU de >2x de ancho de banda pese al suministro agotado durante todo el año 2026",
+        "motivation": "El HBM está agotado durante todo 2026 con un TAM cerca de 100.000 millones de dólares para 2028; la asignación determina quién puede lanzar aceleradores con mucha memoria",
+        "task": {
+          "who": "función de planificación de capacidad y asignación de la cadena de suministro",
+          "what": "comprometer y programar la asignación de obleas de HBM al programa de aceleradores",
+          "where": "cadena de suministro de fabricación y empaquetado de HBM",
+          "when": "ciclo de planificación de asignación del año 2026",
+          "why": "el suministro restringido limita la disputa por la capacidad de memoria",
+          "how": null
+        }
+      }
+    ],
+    "prediction.e6e1ab64e75b5513": [
+      {
+        "actor": "ingeniero de publicación/despliegue de un laboratorio de modelos open-weight",
+        "job": "Coordinar la cobertura de servido y de runtime local desde el primer día entre el buque insignia MoE y las variantes densas antes de que los pesos salgan públicamente.",
+        "outcome": "Rutas de servido con vLLM/SGLang más empaquetado con Ollama/llama.cpp/MLX publicadas desde el día del lanzamiento junto a la versión MoE open-weight.",
+        "motivation": "Los términos de Apache 2.0 solo se convierten en adopción comercial cuando quienes trabajan con esto pueden desplegar los pesos el mismo día en que salen.",
+        "task": {
+          "who": "equipo de ingeniería de publicación / despliegue del modelo",
+          "what": "Incorporar el soporte de runtime de primera parte antes de la publicación de los pesos",
+          "where": "pipeline de publicación interno + repos upstream de vLLM/SGLang/Ollama",
+          "when": "julio a Q4 2026",
+          "why": "La capacidad de despliegue el mismo día impulsa la adopción comercial real",
+          "how": "PRs de soporte del modelo previos a la publicación y empaquetado cuantizado"
+        }
+      },
+      {
+        "actor": "mantenedor del runtime de servido vLLM/SGLang",
+        "job": "Incorporar PRs de soporte del modelo y de kernels MoE dispersos para que la ruta de servido de un nuevo checkpoint funcione en el commit de publicación.",
+        "outcome": "Soporte de vLLM/SGLang fusionado en la misma semana para la arquitectura de activación dispersa del buque insignia MoE en el lanzamiento.",
+        "motivation": "El soporte coordinado de servido en el lanzamiento es ahora el mínimo esperado a medida que las familias MoE convergen en diseños similares.",
+        "task": {
+          "who": "mantenedor del runtime de servido / contribuyentes del núcleo",
+          "what": "Fusionar los PRs de soporte del modelo MoE disperso antes de la publicación",
+          "where": "repositorios upstream de vLLM y SGLang",
+          "when": "julio a Q4 2026",
+          "why": "El servido desde el día del lanzamiento es el listón de publicación esperado",
+          "how": "colaboración con el laboratorio bajo acceso con embargo"
+        }
+      },
+      {
+        "actor": "mantenedor de empaquetado de runtime local Ollama/llama.cpp/MLX",
+        "job": "Preparar conversiones cuantizadas GGUF/MLX y plantillas para que las variantes densas se ejecuten localmente el día del lanzamiento.",
+        "outcome": "Empaquetado de Ollama, llama.cpp y MLX desde el primer día para las variantes densas de 14B/8B/3B en el lanzamiento.",
+        "motivation": "La capacidad de despliegue local el día en que salen los pesos hace que las versiones open-weight permisivas sean utilizables, no un seguimiento comunitario.",
+        "task": {
+          "who": "mantenedores de empaquetado de runtime local",
+          "what": "Publicar empaquetado local cuantizado desde el día del lanzamiento",
+          "where": "biblioteca de Ollama, llama.cpp, pipelines de conversión de MLX",
+          "when": "julio a Q4 2026",
+          "why": "El despliegue local el mismo día convierte los términos permisivos en adopción",
+          "how": "cuantización GGUF/MLX más plantillas de chat"
+        }
+      }
+    ]
+  }
+}

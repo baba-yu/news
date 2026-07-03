@@ -1,0 +1,66 @@
+{
+  "date": "2026-07-02",
+  "sections": [
+    {
+      "category": "Sysdig confirma la primera explotación in-the-wild del fallo Langflow con CVSS 9.9 y saca al grupo de RCE en constructores de agentes de la teoría al abuso activo",
+      "bullets": [
+        {
+          "body": "El Sysdig Threat Research Team informó de la primera explotación activa observada de <a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-55255\">CVE-2026-55255</a>, un fallo con CVSS 9.9 en el popular constructor de agentes de IA low-code Langflow que el NVD publicó el 23 de junio de 2026. El error es una Insecure Direct Object Reference en el endpoint <code>/api/v1/responses</code> que permite a un atacante autenticado ejecutar cualquier flujo perteneciente a otro usuario con solo aportar el ID de flujo de la víctima, y está corregido en Langflow 1.9.2. El <a href=\"https://www.sysdig.com/blog/understanding-langflow-cve-2026-55255-and-why-higher-cvss-vulnerabilities-arent-always-the-most-exploited\">análisis de Sysdig</a> plantea el punto más agudo de que esta IDOR se aprovechó antes que una RCE de Langflow más antigua y de mayor perfil, argumentando que el CVSS por sí solo predice mal a qué agujeros de los frameworks de agentes recurren realmente los atacantes. La divulgación llega junto a un conjunto cada vez más amplio de RCE de orquestación de agentes ya en circulación, incluida la anterior <a href=\"https://www.huuphan.com/2026/06/langflow-vulnerability-cve-2026-5027-rce.html\">CVE-2026-5027</a> de Langflow (CVSS 9.8, previa a 1.0.19) que se ha usado para colocar criptomineros y shells inversas en entornos de ML expuestos. Como las instancias de Langflow suelen montarse como fábricas internas de agentes de \"citizen developer\", un error que requiere autenticación sigue teniendo un radio de impacto real muy grande dentro de las empresas. Los operadores deberían tratar como expuesto cualquier despliegue previo a 1.9.2 y auditar los registros de ejecución de flujos en busca de IDs entre inquilinos. El patrón refuerza que la capa del constructor visual de agentes, y no solo el modelo, es ya una superficie de ataque principal.",
+          "citations": [
+            {"label": "NVD - CVE-2026-55255 Detail", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-55255"},
+            {"label": "Sysdig - Understanding Langflow CVE-2026-55255 and why higher-CVSS vulnerabilities aren't always the most exploited", "url": "https://www.sysdig.com/blog/understanding-langflow-cve-2026-55255-and-why-higher-cvss-vulnerabilities-arent-always-the-most-exploited"},
+            {"label": "HuuPhan - Langflow CVE-2026-5027 RCE", "url": "https://www.huuphan.com/2026/06/langflow-vulnerability-cve-2026-5027-rce.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Unsloth publica la v0.1.471-beta con soporte para GLM 5.2 y un auto-ajuste de contexto 3x más largo, extendiendo su stack de fine-tuning local a Blackwell RTX",
+      "bullets": [
+        {
+          "body": "La última versión etiquetada de Unsloth, la <a href=\"https://github.com/unslothai/unsloth/releases\">v0.1.471-beta</a> (18 de junio de 2026), añade soporte a nivel de día para GLM 5.2 en todos los niveles de razonamiento y rediseña su algoritmo de auto-ajuste de memoria para lograr un contexto alcanzable de aproximadamente 3x más largo con la misma VRAM. La versión también incorpora mejor soporte de GPU Blackwell RTX, un Hub de modelos rediseñado con un feed de tendencias y búsqueda, y un flag <code>--secure</code> que antepone cifrado de Cloudflare a las sesiones de Studio. Se construye sobre la anterior línea <a href=\"https://github.com/unslothai/unsloth/releases\">v0.1.464-beta</a> que introdujo la predicción multi-token de Gemma 4 para una inferencia ~2x más rápida y la generación de imágenes DiffusionGemma, mostrando cómo el proyecto avanza mucho más allá del puro fine-tuning con LoRA hacia un stack más amplio de entrenamiento y servido local. La dirección la marca la <a href=\"https://unslothai.substack.com/p/unsloth-2026-update-faster-moe\">actualización Faster MoE</a> de Unsloth de comienzos de 2026, que reportó un entrenamiento de mixture-of-experts 12x más rápido, más del 35% de ahorro de VRAM y hasta 380K tokens de contexto de RL en una sola B200 de 192GB. En conjunto, las versiones mantienen a Unsloth como la vía de entrada por defecto para ajustar los checkpoints MoE open-weight más recientes en una única GPU de estación de trabajo. Para los equipos que estandarizan un pipeline local, las incorporaciones de GLM 5.2 y Blackwell son las razones concretas para actualizar de versión esta semana. Sigue siendo uno de los pocos stacks de tuning que ofrece soporte en la misma semana para modelos abiertos recién lanzados.",
+          "citations": [
+            {"label": "GitHub - unslothai/unsloth releases", "url": "https://github.com/unslothai/unsloth/releases"},
+            {"label": "Unsloth - 2026 Update: Faster MoE", "url": "https://unslothai.substack.com/p/unsloth-2026-update-faster-moe"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mistral 3 llega como una familia open-weight completa que abarca un MoE disperso de 675B totales y tres modelos densos pequeños, ampliando la frontera con licencia Apache",
+      "bullets": [
+        {
+          "body": "Mistral AI presentó <a href=\"https://mistral.ai/news/mistral-3/\">Mistral 3</a>, una gama de nueva generación construida en torno a Mistral Large 3, un mixture-of-experts disperso entrenado con 41B activos y 675B de parámetros totales, junto a tres modelos densos de vanguardia de 14B, 8B y 3B. Mistral describe la familia como explícitamente agéntica y orientada al uso de herramientas, abarcando programación, análisis de documentos y orquestación de larga duración en lugar del chat puro. El movimiento continúa un giro de licencias que el proveedor ya había señalado a comienzos de 2026, con <a href=\"https://mistral.ai/news/\">Mistral</a> cediendo terreno hacia los términos permisivos de Apache 2.0 en más partes de su gama, lo cual importa porque hace que los pesos sean seguros para el fine-tuning comercial y la redistribución. Eso encaja de lleno con el ecosistema de runtimes locales: las variantes densas pequeñas están dimensionadas para ejecutarse cómodamente en Ollama, llama.cpp y MLX, mientras que el buque insignia MoE encaja en despliegues de servidor con vLLM y SGLang. También agudiza el panorama competitivo open-weight frente a Qwen 3.5 y los últimos checkpoints MoE de DeepSeek, todos ahora agrupados en torno a diseños de activación dispersa similares. Para quienes construyen estandarizando sobre modelos autoalojados, Mistral 3 añade una opción creíble de origen europeo tanto en el extremo tiny-edge como en el de MoE de centro de datos. La versión refuerza la idea de que la frontera open-weight la impulsan ahora un puñado de familias MoE y no un único líder.",
+          "citations": [
+            {"label": "Mistral AI - Introducing Mistral 3", "url": "https://mistral.ai/news/mistral-3/"},
+            {"label": "Mistral AI - News", "url": "https://mistral.ai/news/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "La carrera de aceleradores de IA se reformula en torno al ancho de banda de memoria mientras AMD fija el anuncio del MI400 para el 22-23 de julio y el suministro de HBM sigue agotado durante todo 2026",
+      "bullets": [
+        {
+          "body": "AMD ha confirmado su evento <a href=\"https://ir.amd.com/news-events/press-releases/detail/1283/amd-announces-advancing-ai-2026\">Advancing AI 2026</a> para el 22-23 de julio en el Moscone Center de San Francisco, donde se espera que detalle la serie MI400 y el sistema a escala de rack \"Helios\", incluidos los calendarios de disponibilidad que la compañía se guardó en su avance de 2025. El MI400, construido sobre CDNA 5 y el proceso de 2nm de TSMC, apunta a un salto generacional de ancho de banda, con informes que señalan más del doble del ancho de banda de memoria de la generación MI350. El trasfondo en todo el sector es que la memoria, y no los FLOPS brutos, es ahora la restricción determinante: los análisis apuntan a que el crecimiento de la caché KV por la inferencia de contexto largo empuja a los compradores hacia pools de HBM más grandes y un paralelismo más inteligente en lugar del cómputo pico. Esa presión se agrava por una <a href=\"https://introl.com/blog/ai-memory-supercycle-hbm-2026\">escasez de suministro de HBM</a> en la que la capacidad de memoria de alto ancho de banda sigue agotada durante todo el año 2026 frente a un TAM proyectado cerca de 100.000 millones de dólares para 2028. La respuesta de NVIDIA es su Blackwell Ultra GB300 con hasta 288GB de HBM3e y las variantes Rubin Ultra apuntando a 512GB, manteniendo la cima del mercado como una disputa por la capacidad de memoria. Para los compradores de centros de datos, el anuncio de AMD de julio es el próximo catalizador programado que podría reajustar las suposiciones de precio-rendimiento antes de que se cierren los despliegues de fin de año. El marco señala un giro claro de un ciclo de aceleradores liderado por el cómputo a uno liderado por la memoria.",
+          "citations": [
+            {"label": "AMD - Advancing AI 2026 press release", "url": "https://ir.amd.com/news-events/press-releases/detail/1283/amd-announces-advancing-ai-2026"},
+            {"label": "Introl - The AI Memory Supercycle: HBM 2026", "url": "https://introl.com/blog/ai-memory-supercycle-hbm-2026"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Eventos de IA que planificar ya: la World's Fair cierra hoy mientras AMD, la seguridad y las conferencias de chips se apilan hasta el otoño",
+      "bullets": [
+        {
+          "body": "La <a href=\"https://www.ai.engineer/worldsfair/2026\">AI Engineer World's Fair</a> en Moscone West cierra hoy, 2 de julio, cerrando una edición de cuatro días (tracks del escenario principal del 30 de junio al 2 de julio) con 561 sesiones en 29 tracks y más de 6.000 asistentes; sigue siendo la cita de referencia de desarrollo/datos mainstream para minar en busca de grabaciones de charlas. En el track de chips de IA, el <a href=\"https://www.amd.com/en/corporate/events/advancing-ai.html\">Advancing AI 2026</a> de AMD es el siguiente el 22-23 de julio en Moscone, con la presentación del MI400 como pieza central, seguido de Hot Chips en Stanford del 23 al 25 de agosto y del AI Infra Summit en Santa Clara del 15 al 17 de septiembre. Para la seguridad de IA, el calendario se concentra entre principios y mediados de agosto: el AI Risk Summit de SecurityWeek se celebra del 11 al 12 de agosto en Half Moon Bay, mientras que Black Hat USA y el AI Village de DEF CON 34 llegan a Las Vegas a principios de agosto, y OWASP Global AppSec USA sigue en San Francisco el 5-6 de noviembre. La serie AI Agent Security Summit de Zenity continúa sus paradas globales (Tokio, Londres, NYC) para los equipos centrados específicamente en el secuestro de agentes y la defensa a nivel de MCP. Más adelante, GitHub Universe está previsto para el 28-29 de octubre y AWS re:Invent para el 30 de noviembre al 4 de diciembre en Las Vegas. Quienes planifiquen deberían registrarse ya para el bloque de seguridad de agosto y el keynote de AMD del 22 de julio, los dos catalizadores más cercanos de esta lista.",
+          "citations": [
+            {"label": "AI Engineer - World's Fair 2026", "url": "https://www.ai.engineer/worldsfair/2026"},
+            {"label": "AMD - Advancing AI event page", "url": "https://www.amd.com/en/corporate/events/advancing-ai.html"}
+          ]
+        }
+      ]
+    }
+  ]
+}

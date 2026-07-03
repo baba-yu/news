@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-02",
+  "predictions": [
+    {
+      "id": "prediction.4bb3625d7104a759",
+      "scope_hint": "tech",
+      "title": "Las plataformas de constructores de agentes añadirán autorización de flujos por inquilino para el Q1 2027",
+      "body": "Tras el informe de Sysdig sobre la primera explotación in-the-wild de CVE-2026-55255, una IDOR con CVSS 9.9 en el endpoint /api/v1/responses de Langflow que permite a un usuario autenticado ejecutar el flujo de otro inquilino aportando su ID de flujo, las principales plataformas de constructores de agentes (Langflow, Flowise, AutoGen Studio y afines) convertirán la autorización por inquilino de una idea tardía en un valor por defecto ya incorporado. Se esperan comprobaciones de acceso a nivel de objeto que vinculen cada flujo, ejecución y artefacto a su inquilino propietario, de modo que una sesión válida ya no pueda alcanzar el resto de la instancia compartida. La presión que fuerza el cambio es estructural: estas herramientas se montan internamente como fábricas de agentes multiusuario de \"citizen developer\" donde los errores que solo requieren autenticación siguen teniendo un gran radio de impacto entre inquilinos, y el propio argumento de Sysdig es que los atacantes recurrieron a la IDOR de menor CVSS antes que a una RCE 9.8 más antigua. Eso invierte la lógica habitual de triaje y empuja a proveedores y defensores hacia un parcheo priorizado por explotación y guiado por EPSS en lugar del ranking por CVSS bruto. Para comienzos de 2027, la ejecución acotada por inquilino y la autorización a nivel de objeto pasan a ser un ítem de checklist en las revisiones de seguridad de orquestación de agentes, en lugar de un diferenciador.",
+      "reasoning": {
+        "because": "Sysdig confirmó la primera explotación in-the-wild de la IDOR de Langflow CVE-2026-55255 (CVSS 9.9) entre inquilinos",
+        "given": "los constructores de agentes funcionan como fábricas internas multiusuario compartidas, por lo que los errores que solo requieren autenticación cruzan inquilinos",
+        "so_that": "los proveedores incorporan autorización por inquilino a nivel de objeto y los defensores triajan por EPSS/explotación, no por CVSS bruto",
+        "landing": "las principales plataformas de constructores de agentes incorporan autorización de flujos acotada por inquilino para el Q1 2027",
+        "plain_language": "Las herramientas de construcción de apps de IA vincularán a cada usuario a sus propios flujos para que nadie pueda ejecutar los de otro por su ID."
+      },
+      "summary": "Después de que Sysdig reportara la primera explotación activa de una IDOR con CVSS 9.9 que ejecuta el flujo de otro inquilino de Langflow por su ID, las principales plataformas de constructores de agentes harán de la autorización de flujos por inquilino un valor por defecto para el Q1 2027. Los atacantes la aprovecharon antes que una RCE de mayor CVSS, empujando a los defensores hacia el triaje por EPSS."
+    },
+    {
+      "id": "prediction.e6e1ab64e75b5513",
+      "scope_hint": "tech",
+      "title": "El soporte de vLLM/SGLang + Ollama desde el día del lanzamiento se convierte en el listón de las publicaciones MoE open-weight",
+      "body": "El lanzamiento de Mistral 3 publicó su buque insignia MoE disperso Large 3 (41B activos / 675B totales) afinado para vLLM y SGLang, mientras dimensionaba sus variantes densas de 14B/8B/3B para Ollama, llama.cpp y MLX en el momento del lanzamiento. Esto refleja cómo Qwen 3.5 y los últimos checkpoints dispersos de DeepSeek ya llegan con cobertura de runtime de servido y de runtime local en la misma semana. A medida que la frontera open-weight se consolida en torno a un puñado de familias MoE que convergen en diseños de activación dispersa similares, el soporte coordinado de runtime en el lanzamiento deja de ser un diferenciador y se convierte en el mínimo esperado. Se espera que las próximas grandes publicaciones MoE open-weight traten las rutas de servido de primera parte con vLLM/SGLang más el empaquetado local con Ollama/llama.cpp/MLX como un entregable de lanzamiento innegociable en lugar de un seguimiento comunitario, porque los términos permisivos de Apache 2.0 solo se convierten en adopción comercial real cuando quienes trabajan con esto pueden desplegar los pesos el mismo día en que salen.",
+      "reasoning": {
+        "because": "Mistral 3 publicó el buque insignia MoE en vLLM/SGLang y las variantes densas en Ollama/llama.cpp/MLX en el lanzamiento",
+        "given": "las familias MoE de Qwen 3.5, DeepSeek y Mistral convergen en diseños dispersos, con cobertura de runtime en la misma semana",
+        "so_that": "el soporte de servido en el lanzamiento + runtime local se convierte en el mínimo esperado, no en un diferenciador, para el MoE open-weight",
+        "landing": "un MoE open-weight importante se publica con soporte de vLLM/SGLang + Ollama desde el día del lanzamiento para el Q4 2026",
+        "plain_language": "Los nuevos modelos de IA abiertos solo contarán como plenamente lanzados si puedes ejecutarlos en todas partes desde el primer día."
+      },
+      "summary": "Mistral 3 se lanzó con su buque insignia MoE afinado para vLLM/SGLang y las variantes densas empaquetadas para Ollama, llama.cpp y MLX. A medida que las familias MoE open-weight convergen en diseños dispersos compartidos, el soporte de runtime desde el día del lanzamiento pasa de diferenciador a línea base de calidad de lanzamiento para las próximas grandes publicaciones."
+    },
+    {
+      "id": "prediction.5058f9be0798fd18",
+      "scope_hint": "tech",
+      "title": "AMD promocionará el MI400 por su ancho de banda de memoria por encima de los FLOPS pico en Advancing AI",
+      "body": "Cuando AMD suba al escenario en Advancing AI 2026 el 22-23 de julio en el Moscone Center, cabe esperar que el discurso del MI400 lidere con la memoria más que con el cómputo bruto. La historia generacional que apuntan los informes es un salto de ancho de banda de más de 2x sobre el MI350, construido sobre CDNA 5 y el nodo de 2nm de TSMC, con el sistema a escala de rack \"Helios\" y los calendarios de disponibilidad guardados en el avance de 2025 finalmente detallados. El encuadre importa porque la restricción determinante en la inferencia ha cambiado: las cargas de contexto largo inflan el tamaño de la caché KV, por lo que los compradores valoran cada vez más pools de HBM más grandes y un paralelismo más inteligente por encima de los FLOPS de titular. Esa misma lógica explica el contraposicionamiento de NVIDIA, con el Blackwell Ultra GB300 alcanzando 288GB de HBM3e y las variantes Rubin Ultra apuntando a 512GB. Con la capacidad de HBM reportadamente agotada durante todo el año 2026 y un TAM proyectado cerca de 100.000 millones de dólares para 2028, la cima del mercado de aceleradores se está asentando en una disputa por la capacidad y el ancho de banda de memoria, y el anuncio de AMD de julio es el catalizador cercano que hace explícita esa reformulación.",
+      "reasoning": {
+        "because": "Los informes sobre el MI400 lideran con >2x el ancho de banda de memoria del MI350, no con mejoras de FLOPS pico",
+        "given": "La inferencia de contexto largo infla la caché KV; el HBM agotado durante todo 2026 convierte la capacidad en la restricción",
+        "so_that": "Los proveedores promocionan el ancho de banda/capacidad de HBM como la especificación de titular, reformulando la carrera de aceleradores",
+        "landing": "AMD encuadra el MI400 en torno a la memoria en Advancing AI, 22-23 de julio de 2026 (Q3 2026)",
+        "plain_language": "El nuevo chip de IA de AMD presumirá de velocidad de memoria, no de potencia bruta, cuando se muestre el 22-23 de julio."
+      },
+      "summary": "En Advancing AI el 22-23 de julio de 2026, se espera que AMD posicione el MI400 principalmente en torno a una ganancia de ancho de banda de memoria de >2x sobre el MI350 en lugar del cómputo pico. La inferencia de contexto largo que infla la caché KV y el HBM agotado durante todo 2026 convierten la memoria en la restricción determinante, algo reflejado por la hoja de ruta de HBM de NVIDIA de 288GB a 512GB. La cima del mercado de aceleradores se está convirtiendo en una disputa por la capacidad y el ancho de banda de memoria."
+    }
+  ]
+}

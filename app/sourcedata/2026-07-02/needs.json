@@ -1,0 +1,137 @@
+{
+  "date": "2026-07-02",
+  "by_prediction": {
+    "prediction.4bb3625d7104a759": [
+      {
+        "actor": "open-source agent-builder platform maintainer",
+        "job": "hardening flow-execution endpoints so every flow, run and artifact is bound to its owning tenant with object-level access checks",
+        "outcome": "released version making tenant-scoped flow authorization a shipped default across execution APIs like /api/v1/responses",
+        "motivation": "an authenticated-only IDOR (CVE-2026-55255) carried cross-tenant blast radius and was exploited in the wild",
+        "task": {
+          "who": "core maintainers and security-response contributors",
+          "what": "add object-level authorization to flow-execution endpoints",
+          "where": "REST APIs and flow-run/artifact data models",
+          "when": "July 2026 to Q1 2027",
+          "why": "close cross-tenant IDOR blast radius in multi-user factories",
+          "how": "per-object ownership checks bound to authenticated tenant"
+        }
+      },
+      {
+        "actor": "enterprise platform-security engineer running internal agent factories",
+        "job": "defining tenant-isolation requirements and gating agent-orchestration deployments on shipped per-tenant authorization defaults",
+        "outcome": "security-review checklist item requiring tenant-scoped execution and object-level authz before agent-builder tools are approved",
+        "motivation": "citizen-developer agent factories are internal multi-user systems where authenticated bugs still leak across tenants",
+        "task": {
+          "who": "product-security / platform-security review team",
+          "what": "make tenant-scoped authz a review checkbox",
+          "where": "internal agent-orchestration security reviews and procurement gates",
+          "when": "August 2026 to Q1 2027",
+          "why": "block deployment of tools lacking cross-tenant isolation",
+          "how": "security-review checklist and vendor requirements"
+        }
+      },
+      {
+        "actor": "vulnerability-triage and EPSS tooling maintainer",
+        "job": "reprioritizing patch guidance toward exploitation likelihood so IDOR flaws reached before older RCEs surface at the top of queues",
+        "outcome": "triage feeds and dashboards that rank the CVE-2026-55255-class IDOR by EPSS-driven exploitation signal over raw CVSS",
+        "motivation": "Sysdig showed attackers chose the lower-CVSS IDOR before an older 9.8 RCE, breaking CVSS-only ordering",
+        "task": {
+          "who": "vulnerability-intelligence and scoring engineers",
+          "what": "surface exploitation-prioritized patch ordering",
+          "where": "EPSS feeds, triage pipelines and scanner rules",
+          "when": "July 2026 to Q1 2027",
+          "why": "guide patching toward actively exploited IDOR flaws",
+          "how": "EPSS scores plus in-the-wild exploitation signals"
+        }
+      }
+    ],
+    "prediction.5058f9be0798fd18": [
+      {
+        "actor": "accelerator vendor product-marketing / keynote lead",
+        "job": "Frame the MI400 launch narrative around HBM capacity and 2x bandwidth rather than peak FLOPS for the Advancing AI keynote",
+        "outcome": "Keynote deck and messaging that leads with memory bandwidth over MI350 and positions against NVIDIA's 288GB/512GB HBM roadmap",
+        "motivation": "Inference's binding constraint shifted to KV-cache footprint; a memory-first story differentiates against the FLOPS-led incumbent",
+        "task": {
+          "who": "product marketing and keynote content team",
+          "what": "build memory-first MI400 launch messaging and slides",
+          "where": "Advancing AI 2026, Moscone Center",
+          "when": "July 2026 keynote preparation (weeks before July 22-23)",
+          "why": "differentiate on the memory contest buyers now value",
+          "how": "competitive benchmarking vs Blackwell Ultra / Rubin Ultra HBM specs"
+        }
+      },
+      {
+        "actor": "data-center accelerator silicon / SKU architecture lead",
+        "job": "Engineer the HBM-heavy MI400 SKU on CDNA 5 and TSMC 2nm delivering >2x bandwidth and the rack-scale Helios system",
+        "outcome": "Validated MI400 silicon plus Helios rack platform with detailed availability timelines ready to detail at the reveal",
+        "motivation": "Long-context inference inflates KV-cache; larger HBM pools and smarter parallelism win the top of the accelerator market",
+        "task": {
+          "who": "silicon architecture and platform engineering team",
+          "what": "tape out and validate HBM-heavy MI400 and Helios rack",
+          "where": "CDNA 5 architecture on TSMC 2nm node",
+          "when": "2026 pre-launch bring-up and validation runway",
+          "why": "deliver the bandwidth and capacity story the pitch claims",
+          "how": "CDNA 5 microarchitecture, HBM integration, rack-scale interconnect"
+        }
+      },
+      {
+        "actor": "HBM supplier capacity-allocation planner",
+        "job": "Allocate constrained HBM supply to secure the memory volume the MI400 and its bandwidth pitch depend on",
+        "outcome": "Committed HBM capacity allocation enabling the >2x bandwidth SKU despite sold-out supply through calendar 2026",
+        "motivation": "HBM is sold out through 2026 with TAM near $100B by 2028; allocation determines who can ship memory-heavy accelerators",
+        "task": {
+          "who": "supply-chain capacity and allocation planning function",
+          "what": "commit and schedule HBM wafer allocation to accelerator program",
+          "where": "HBM fabrication and packaging supply chain",
+          "when": "calendar-2026 allocation planning cycle",
+          "why": "constrained supply gates the memory-capacity contest",
+          "how": null
+        }
+      }
+    ],
+    "prediction.e6e1ab64e75b5513": [
+      {
+        "actor": "open-weight model lab release/deployment engineer",
+        "job": "Coordinate day-one serving and local-runtime coverage across the MoE flagship and dense variants before the weights drop publicly.",
+        "outcome": "Launch-day vLLM/SGLang serving paths plus Ollama/llama.cpp/MLX packaging shipped alongside the open-weight MoE release.",
+        "motivation": "Apache 2.0 terms only convert to commercial adoption when practitioners can deploy the weights the day they drop.",
+        "task": {
+          "who": "model release / deployment engineering team",
+          "what": "Land first-party runtime support ahead of weight release",
+          "where": "internal release pipeline + upstream vLLM/SGLang/Ollama repos",
+          "when": "July to Q4 2026",
+          "why": "Same-day deployability drives real commercial adoption",
+          "how": "pre-release model-support PRs and quantized packaging"
+        }
+      },
+      {
+        "actor": "vLLM/SGLang serving-runtime maintainer",
+        "job": "Land model-support and sparse-MoE kernel PRs so a new checkpoint's serving path works on the release commit.",
+        "outcome": "Merged same-week vLLM/SGLang support for the MoE flagship's sparse-activation architecture on launch.",
+        "motivation": "Coordinated launch-time serving support is now the expected minimum as MoE families converge on similar designs.",
+        "task": {
+          "who": "serving-runtime maintainer / core contributors",
+          "what": "Merge sparse-MoE model-support PRs pre-release",
+          "where": "vLLM and SGLang upstream repositories",
+          "when": "July to Q4 2026",
+          "why": "Launch-day serving is the expected release bar",
+          "how": "collaboration with lab under embargo access"
+        }
+      },
+      {
+        "actor": "Ollama/llama.cpp/MLX local-runtime packaging maintainer",
+        "job": "Prepare quantized GGUF/MLX conversions and templates so dense variants run locally on release day.",
+        "outcome": "Day-one Ollama, llama.cpp, and MLX packaging for the 14B/8B/3B dense variants at launch.",
+        "motivation": "Local deployability the day weights drop makes permissive open-weight releases usable, not a community follow-up.",
+        "task": {
+          "who": "local-runtime packaging maintainers",
+          "what": "Ship launch-day quantized local packaging",
+          "where": "Ollama library, llama.cpp, MLX conversion pipelines",
+          "when": "July to Q4 2026",
+          "why": "Same-day local deploy converts permissive terms to adoption",
+          "how": "GGUF/MLX quantization plus chat templates"
+        }
+      }
+    ]
+  }
+}

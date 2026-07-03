@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-02",
+  "technical": [
+    {
+      "lead": "Langflow の IDOR、CVE-2026-55255 の実環境での初の悪用",
+      "body": "Sysdig は、CVE-2026-55255 について実環境で観測された初の悪用を確認しました。これは Langflow の /api/v1/responses エンドポイントにおける CVSS 9.9 の安全でない直接オブジェクト参照（IDOR）で、認証済みの攻撃者が被害者のフロー ID を渡すことで他ユーザーのフローを実行できてしまうもので、Langflow 1.9.2 で修正されています。Sysdig は、素の CVSS は攻撃者が実際に武器化する対象をうまく予測できないと主張し、この IDOR がより古い RCE の CVE-2026-5027（9.8）よりも先に狙われたことを指摘したうえで、これを広がりつつあるエージェント構築ツールの RCE 群のなかに位置づけています。",
+      "citations": [
+        {"label": "NVD - CVE-2026-55255", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-55255"},
+        {"label": "Sysdig - Understanding Langflow CVE-2026-55255", "url": "https://www.sysdig.com/blog/understanding-langflow-cve-2026-55255-and-why-higher-cvss-vulnerabilities-arent-always-the-most-exploited"}
+      ]
+    },
+    {
+      "lead": "Unsloth v0.1.471-beta が GLM 5.2 対応と約 3 倍長いコンテキストを追加",
+      "body": "Unsloth は 6 月 18 日に v0.1.471-beta を公開し、すべての推論レベルにわたる GLM 5.2 対応、同じ VRAM でおよそ 3 倍長いコンテキストを実現するメモリ自動調整、Blackwell RTX 対応の改善、刷新されたモデル Hub、そして Cloudflare で暗号化される --secure な Studio を追加しました。これは、MoE 学習を最大 12 倍高速化し、VRAM を 35% 超節約し、単一の 192GB B200 上で最大 380K トークンの強化学習コンテキストを実現した以前の Faster MoE アップデートを土台としています。",
+      "citations": [
+        {"label": "GitHub - Unsloth releases", "url": "https://github.com/unslothai/unsloth/releases"},
+        {"label": "Unsloth - Faster MoE update", "url": "https://unslothai.substack.com/p/unsloth-2026-update-faster-moe"}
+      ]
+    },
+    {
+      "lead": "Mistral 3 のオープンウェイトファミリーが Apache 2.0 で出荷",
+      "body": "Mistral は、Apache 2.0 への転換のもとで Mistral 3 のオープンウェイトファミリーを公開しました。675B 総パラメータのうち 41B がアクティブなスパース MoE の Mistral Large 3 に加え、エージェント的なツール利用向けに明確に調整された 14B・8B・3B の dense 版が含まれます。小型の dense モデルは Ollama、llama.cpp、MLX で動作し、MoE は vLLM と SGLang を狙っており、このファミリーを Qwen 3.5 や DeepSeek の MoE 製品に対して位置づけています。",
+      "citations": [
+        {"label": "Mistral AI - Mistral 3", "url": "https://mistral.ai/news/mistral-3/"}
+      ]
+    },
+    {
+      "lead": "AMD が MI400 と Helios ラックを伴う Advancing AI 2026 を確定",
+      "body": "AMD は、Advancing AI 2026 イベントをサンフランシスコの Moscone で 7 月 22〜23 日に開催すると確定しました。ここで MI400 シリーズ（TSMC 2nm 上の CDNA 5）と Helios ラックスケールシステムの詳細が発表され、報道は MI350 のメモリ帯域幅の 2 倍超を指し示しています。KV キャッシュの増大が需要を押し上げ、HBM は 2026 年を通じて完売、TAM は 2028 年までに 1,000 億ドル近くと予測されるなか、いまや FLOPS ではなくメモリが制約要因です。NVIDIA の対抗策は、最大 288GB の HBM3e を積む GB300 と、512GB を狙う Rubin Ultra にまたがります。",
+      "citations": [
+        {"label": "AMD - Advancing AI 2026 announcement", "url": "https://ir.amd.com/news-events/press-releases/detail/1283/amd-announces-advancing-ai-2026"},
+        {"label": "Introl - AI memory supercycle HBM 2026", "url": "https://introl.com/blog/ai-memory-supercycle-hbm-2026"}
+      ]
+    },
+    {
+      "lead": "AI Engineer World's Fair が本日閉幕、夏の会議日程が固まる",
+      "body": "AI Engineer World's Fair は本日 7 月 2 日に閉幕し、この先の密な会議日程の起点となります。インフラのトラックでは AMD Advancing AI が 7 月 22〜23 日、Hot Chips が 8 月 23〜25 日、AI Infra Summit が 9 月 15〜17 日。AI セキュリティのトラックでは SecurityWeek AI Risk Summit が 8 月 11〜12 日、Black Hat / DEF CON が 8 月上旬。さらに年内には OWASP Global AppSec が 11 月 5〜6 日、GitHub Universe が 10 月 28〜29 日、AWS re:Invent が 11 月 30 日〜12 月 4 日と続きます。",
+      "citations": [
+        {"label": "AI Engineer - World's Fair 2026", "url": "https://www.ai.engineer/worldsfair/2026"}
+      ]
+    }
+  ],
+  "plain": [
+    "攻撃者が Langflow の不具合を悪用し、他人のフローを実行",
+    "Unsloth のアップデートで、はるかに少ないメモリで大規模モデルを学習",
+    "Mistral が新しいモデルファミリーをオープン利用向けに解放",
+    "AMD が次世代 AI チップのお披露目を 7 月に設定",
+    "大規模な AI 開発イベントが閉幕、さらに多くの会議が控える"
+  ]
+}
