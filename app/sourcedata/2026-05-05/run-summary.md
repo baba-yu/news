@@ -2,7 +2,7 @@
 
 **Date**: 2026-05-05 (Tuesday — Mon-Sat slot, but with Sunday-task test runs)
 **Branch**: dev
-**Repo**: C:\Users\Yuki Baba\work\research
+**Repo**: /home/baba-y/news
 
 ## Run shape
 
