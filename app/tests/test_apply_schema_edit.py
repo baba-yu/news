@@ -104,6 +104,86 @@ def test_parse_proposal_json_overrides_prose(tmp_path: Path):
     assert "json_block" not in ops[1].args
 
 
+def test_parse_proposal_h3_action_headers(tmp_path: Path):
+    """`### Action N:` H3 headers delimit items, not just `N. ` numbered lists.
+
+    Regression: the weekly theme-review proposal writer switched from numbered
+    list items to `### Action N: …` H3 headers on 2026-05-31. `parse_proposal`
+    only recognised numbered items, so it found 0 ops on every H3-style
+    proposal and `apply-schema-edit --mode auto` silently no-op'd for 6+ weeks.
+    Both rewrite-description edits below must be extracted from the H3 form, and
+    the trailing log-only observation must stay a log-only (not a schema edit).
+    """
+    proposal = tmp_path / "theme-review-h3.md"
+    proposal.write_text(
+        textwrap.dedent(
+            """\
+            # Theme review — week ending 2026-07-05
+
+            ## Overpopulated themes
+
+            - `business.ai_revenue_disclosure` is too broad.
+
+            ## Recommended actions
+
+            ### Action 1: Sharpen `business.ai_revenue_disclosure` description
+
+            Re-emits the vetted sharpening. The rewrite tightens the keyword set.
+
+            ```action
+            {
+              "kind": "rewrite-description",
+              "theme_id": "business.ai_revenue_disclosure",
+              "new_description_en": "Disclosure-mechanic vocabulary only."
+            }
+            ```
+
+            ### Action 2: Widen `business.cloud_vs_local_distribution` description
+
+            Re-emitted from 6/28; never landed.
+
+            ```action
+            {
+              "kind": "rewrite-description",
+              "theme_id": "business.cloud_vs_local_distribution",
+              "new_description_en": "On-device vs hosted distribution channels."
+            }
+            ```
+
+            ### Action 3: Observation (no schema edit) — apply pipeline health
+
+            Folded log-only note for the parent's attention.
+
+            ```action
+            {"kind": "log-only"}
+            ```
+
+            ## Why this rotation
+
+            Two re-emitted edits that never landed.
+            """
+        ),
+        encoding="utf-8",
+    )
+    ops = parse_proposal(proposal)
+
+    kinds = [o.kind for o in ops]
+    assert len(ops) == 3, f"expected 3 items from H3 headers, got {len(ops)}: {kinds}"
+
+    rewrites = [o for o in ops if o.kind == "rewrite-description"]
+    assert len(rewrites) == 2, f"expected 2 rewrite-description ops, got {kinds}"
+    assert all("json_block" in o.args for o in rewrites)
+    assert {o.args["json_block"]["theme_id"] for o in rewrites} == {
+        "business.ai_revenue_disclosure",
+        "business.cloud_vs_local_distribution",
+    }
+    # theme_id from the JSON block is lifted onto the op for the apply path.
+    assert rewrites[0].args["theme_id"] == "business.ai_revenue_disclosure"
+
+    # {"kind": "log-only"} stays log-only — must never become a schema edit.
+    assert ops[2].kind == "log-only"
+
+
 def test_apply_add_with_json_writes_full_description(tmp_path: Path):
     # Minimal valid schema fixture with a categories + themes seed block.
     schema = tmp_path / "schema.sql"
