@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "transformer-ASIC serving-integration engineer",
+    "job": "Upstreaming a fixed-function transformer-ASIC backend into mainstream serving runtimes so pre-ship customer orders can reach the silicon without a bespoke per-deployment integration",
+    "outcome": "A merged, documented non-GPU inference backend that lets an existing serving runtime target the transformer ASIC with the model-definition and API surface a GPU already gets",
+    "motivation": "A billion-dollar pre-ship order book only pays off if real model traffic can reach the fixed-function part through the stacks customers already run",
+    "task": {
+      "who": "ASIC vendor software and developer-relations team",
+      "what": "contribute a fixed-function transformer inference backend",
+      "where": "vLLM, SGLang, and TensorRT-LLM class serving runtimes",
+      "when": "from H2 2026 through H1 2027 ahead of first shipment",
+      "why": "make customer traffic reach the silicon without bespoke integration",
+      "how": "runtime plugin plus proprietary interconnect and shared memory pool"
+    }
+  },
+  {
+    "actor": "open-source serving-runtime maintainer",
+    "job": "Extending a CUDA-centric serving runtime's backend abstraction to accept a non-GPU fixed-function transformer accelerator as a first-class, documented deployment target",
+    "outcome": "A released serving-runtime version that lists a fixed-function transformer-ASIC backend as a supported target, not a fork, sharing the runtime's model-definition and API surface",
+    "motivation": "A billion-dollar pre-ship order book is the demand signal that justifies supporting a non-GPU fixed-function target rather than leaving it a fork",
+    "task": {
+      "who": "serving-runtime core engineering and maintainer group",
+      "what": "generalize the accelerator backend and scheduler interface",
+      "where": "the runtime's paged-attention and continuous-batching backend layer",
+      "when": "across late 2026 into H1 2027",
+      "why": "turn backend generality into a feature the serving layer ships",
+      "how": "pluggable backend API decoupling schedulers from a programmable GPU"
+    }
+  },
+  {
+    "actor": "hyperscaler managed-inference product manager",
+    "job": "Adding a fixed-function transformer-ASIC option to a managed inference service so tenants can point production traffic at non-GPU silicon through the same deployment path as GPUs",
+    "outcome": "A managed serving stack that exposes a transformer-ASIC fixed-function inference backend as a documented, first-class deployment path with the existing model and API surface",
+    "motivation": "Model serving now dominates production spend, so a denser fixed-function serving option is a cost and differentiation lever worth supporting",
+    "task": {
+      "who": "cloud managed-inference platform team",
+      "what": "onboard a fixed-function transformer backend as a target",
+      "where": "the managed inference control plane and deployment API",
+      "when": "over the runway from H2 2026 to H1 2027",
+      "why": "capture serving spend with denser non-GPU inference silicon",
+      "how": "managed backend integration behind the existing deployment surface"
+    }
+  }
+]
