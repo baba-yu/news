@@ -1,0 +1,272 @@
+{
+  "date": "2026-07-08",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.c5fe8479ffcd7e16",
+        "short_label": "LLM client libraries ship a permission-gated coding-agent loop by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Direct origin evidence. Simon Willison's llm-coding-agent 0.1a0 (July 2) promotes the agent loop into a first-class primitive of his existing model-calling library rather than shipping it as a separate product, exposing a `llm code` CLI (runnable via uvx without installation) and a Python `CodingAgent` class with six built-in file-and-shell tools, shell timeouts up to 600 seconds, and a permission model where `--yolo` runs unrestricted while allowlist flags like `--allow \"pytest*\"` constrain which commands fire. Because the loop rides on a model-pluggable substrate, the whole harness is a few hundred lines, vendor-decoupled, and self-hostable.\nThe library-ships-a-permission-gated-coding-agent-loop prediction reads this as the reference implementation the rest of the ecosystem now measures against: by H1 2027 at least two mainstream general-purpose LLM client libraries that developers already import (in the lineage of llm, LangChain, LlamaIndex, the vendor SDKs, Pydantic AI) will expose a documented, permission-gated tool-executing agent loop as a stock primitive callable in a handful of lines, dropping the floor for a usable coding agent from a funded IDE product to an import statement over a trusted library.",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+          "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+        },
+        {
+          "label": "Simon Willison - June 2026 newsletter",
+          "url": "https://simonwillison.net/2026/Jul/3/june-newsletter/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "This is the originating instance: an already-imported model-calling library grows a stock `llm code` CLI and `CodingAgent` class with six file-and-shell tools behind an allowlist gate, in a few hundred vendor-decoupled lines. The permission-gated-loop-as-library-primitive prediction now has a live reference implementation on exactly the lineage it names, showing the shape is buildable atop a general client library today.",
+        "coherence": 5,
+        "remaining_gap": "One maintainer's alpha proves feasibility; the claim needs a second mainstream library to ship its own documented gated loop as a stock primitive."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7e04ececc362f9bd",
+        "short_label": "Local fine-tuning toolkits absorb the model-serving layer by default by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Direct origin evidence. Unsloth's v0.1.481-beta (July 7) stops being only a training tool: alongside 3-5x faster MoE LoRA it folds every export target (portable FP8/INT8, compressed FP8/FP4, imatrix GGUF, and LoRA) into a single one-pass export, then bundles a llama-swap-style local API server directly into the toolkit that auto-switches between downloaded GGUFs, idle-unloads to free VRAM and reloads on demand, and heals malformed tool calls per request. That collapses fine-tune, quantize-and-export, and serve into one local loop, with data-center Blackwell (sm_100/sm_103) and ROCm-on-WSL coverage widening the hardware base.\nThe tuning-toolkit-absorbs-serving prediction is that this becomes the category default: by H1 2027 at least two widely used local fine-tuning toolkits will document train, one-pass low-bit export, and serve as a single continuous flow with a bundled or first-party model server handling checkpoint switching and memory-aware load/unload out of the box, eroding the boundary between the fine-tuning framework and the inference server for the local and on-prem tier.",
+      "reference_links": [
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        },
+        {
+          "label": "Unsloth - project site (Studio, local model training and running)",
+          "url": "https://unsloth.ai/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The origin signal realizes the mechanism: Unsloth's July 7 build fuses one-pass low-bit export with a bundled llama-swap-style server that auto-switches GGUFs and idle-unloads VRAM, collapsing train, quantize-export, and serve into one loop. The absorb-the-serving-layer prediction now has its first mover carrying the inference server as a toolkit feature, exactly the boundary erosion it forecasts.",
+        "coherence": 5,
+        "remaining_gap": "One toolkit having bundled serving is not yet a category default; a second widely used tuning toolkit must document the same integrated train-export-serve flow."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.546732d279b0a395",
+        "short_label": "Open inference engines adopt a named release-gating security track by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Direct origin evidence. vLLM's v0.24.0 (571 commits, 256 contributors, 77 new) folded a coordinated security-hardening batch into the same release as its DeepSeek-V4 serving paths and FP8 kernel speedups: it bumps Starlette past CVE-2026-48710, closes an audio-decompression bomb in the speech-to-text endpoint, and fixes a remote denial-of-service via invalid recovered-token reinjection in speculative decoding. Treating adversarial-input handling, DoS-resistance, and supply-chain patching as release-blocking concerns rather than post-hoc patches lands the same week a CVSS 9.5 unauthenticated command-injection RCE in BMC Control-M/Server underscores that self-hosted inference and orchestration infrastructure is now an active attack surface.\nThe inference-engine-adopts-a-named-security-track prediction is that this hardens into a formal maturity axis: by H1 2027 at least two of the major open or self-hosted inference stacks (vLLM, SGLang, TensorRT-LLM, TGI class) publish a named, documented security track with a stated response policy, a hardening or fuzzing gate wired into the release checklist, and CVE handling coordinated to a shipped build, so production-readiness is measured on a security axis the way it is already measured on tokens-per-second.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        },
+        {
+          "label": "CVEFeed - CVE-2026-10539 (unauthenticated command injection, Control-M/Server, CVSS 9.5)",
+          "url": "https://cvefeed.io/vuln/detail/CVE-2026-10539"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The origin evidence shows the leading open engine treating security as release-blocking: vLLM's v0.24.0 shipped a Starlette CVE bump, a decompression-bomb fix, and a spec-decoding DoS fix inside the same release as its throughput work, the week a CVSS 9.5 scheduler RCE proved self-hosted inference is an active attack surface. The named-security-track prediction now rests on demonstrated behavior.",
+        "coherence": 5,
+        "remaining_gap": "vLLM hardens security in practice but has not published a named track with a stated policy and a fuzzing gate in its release checklist, nor has a second engine."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a4f83081580b9a3d",
+        "short_label": "Launch-day vLLM/SGLang + Ollama support becomes open-weight MoE release bar",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The launch-day-serving-stack-support-as-release-bar prediction gets a clean confirming pulse from both sides of the same open-weight family. vLLM's v0.24.0 makes DeepSeek-V4 a first-class serving target with a FlashInfer sparse-index cache worth a few percent time-to-first-token plus dedicated attention and MoE paths across XPU and ROCm, while Unsloth's v0.1.481-beta the same week adds first-class DeepSeek-V4-Flash tuning, so serving and tuning readiness for a frontier-tier open MoE now arrive coordinated with the model rather than lagging it.\nThe partial gap is that both signals name the engine-and-tuning tier (vLLM plus Unsloth) but neither confirms the Ollama half of the prediction's serving bar for this 1.6-trillion-parameter-scale release, and a MoE that large sits well outside the single-workstation envelope Ollama typically targets, so launch-day local packaging remains the untested edge of the claim.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        },
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Both stacks land on the DeepSeek-V4 family within the same week: vLLM v0.24.0 makes it a first-class serving target while Unsloth v0.1.481-beta adds Flash tuning, so serving and tuning readiness arrive coordinated with the model rather than trailing it. That places the engine half of the release-bar prediction squarely on the timeline it forecasts for a frontier-tier open MoE.",
+        "coherence": 4,
+        "remaining_gap": "The Ollama half is unconfirmed; a 1.6T-parameter MoE sits outside Ollama's single-workstation envelope, so launch-day local packaging stays the untested edge of the bar."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.14cd36ae7a6a8633",
+        "short_label": "Quantized-by-default serving lands as the OSS inference baseline by H1 2027",
+        "prediction_date": "2026-06-30"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The quantized-by-default-serving-baseline prediction gains reinforcement from both the serving and the tuning stack this week. vLLM's v0.24.0 expands Intel XPU coverage with W4A16 int4 group-size-32 MoE quantization and adds CUTLASS FP8 kernels reporting 180-290 percent speedups, treating low-bit paths as a mainstream serving concern rather than an experimental fork. In parallel, Unsloth's v0.1.481-beta folds portable FP8/INT8, compressed FP8/FP4, and imatrix GGUF export into a single one-pass step, so a merged model emits ready-to-serve quantized artifacts by default without a separate quantization stage.\nWhat keeps this at relevance 4 rather than a landing is that quantized kernels and one-pass low-bit export are shipping as first-class options, but neither engine has declared a quantized weight format the out-of-the-box serving default over full-precision; the baseline is converging, not yet named as the default.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        },
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The precondition for a quantized baseline hardens from both ends: vLLM ships W4A16 int4 MoE quantization and CUTLASS FP8 kernels claiming 180-290 percent speedups as mainstream serving paths, and Unsloth emits FP8/INT8, FP4, and imatrix GGUF artifacts in one export pass. Low-bit is becoming the ready-to-serve path a team reaches for first, which is what the quantized-by-default prediction rides on.",
+        "coherence": 4,
+        "remaining_gap": "Neither engine has declared a quantized format the out-of-the-box default over full precision; low-bit is a first-class option, not yet the named baseline."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.43f75bc5c1e559f8",
+        "short_label": "Open-weight MoE fine-tunes beat frontier APIs on niche expert tasks by Q2 2027",
+        "prediction_date": "2026-07-03"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The open-weight-MoE-fine-tunes-beat-frontier-APIs prediction gains a hardening substrate precondition. Unsloth's v0.1.481-beta adds first-class DeepSeek-V4-Flash support with thinking toggles plus 3-5x faster MoE LoRA via automatic grouped-MoE detection, making a frontier-tier open-weight MoE tunable on consumer and Blackwell hardware, while vLLM's v0.24.0 makes the same DeepSeek-V4 family a first-class serving target. Together they close the practical gap between a genuine frontier-tier open-weight checkpoint and the low-VRAM adapt-and-serve route a team needs to specialize it for niche expert tasks.\nWhat is still missing is a benchmarked head-to-head where a DeepSeek-V4 fine-tune actually clears a hosted frontier API on a specific expert task; today's evidence supplies the enabling stack, not the demonstrated victory.",
+      "reference_links": [
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        },
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The premise the open-MoE-beats-frontier-APIs prediction depends on keeps firming: Unsloth's Flash tuning with 3-5x faster MoE LoRA makes a frontier-tier open checkpoint adaptable on consumer and Blackwell hardware, and vLLM makes the same family a first-class serving target. The cheap adapt-and-serve route a small team needs to specialize DeepSeek-V4 for a niche task now exists end to end.",
+        "coherence": 3,
+        "remaining_gap": "Still no benchmarked head-to-head where a DeepSeek-V4 fine-tune actually beats a hosted frontier API on a specific expert task; the stack is present, the win is not."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.9eb6e9888959d4b6",
+        "short_label": "Local-LLM runtimes ship in-model speculative decoding on by default by Q2 2027",
+        "prediction_date": "2026-07-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The local-runtime-ships-speculative-decoding-by-default prediction gets a directional pulse rather than a confirmation. vLLM's v0.24.0 hardens its speculative-decoding path by fixing a remote denial-of-service via invalid recovered-token reinjection, treating spec decoding as a maintained, security-audited production feature that is worth defending against adversarial input, which is the kind of attention a stock default path attracts rather than an experimental one.\nThe tension keeping this at relevance 3 is that the evidence is a hardening fix to spec decoding, not a runtime flipping speculative decoding on by default: vLLM's move shows the mechanism is mature enough to defend, but nobody named it the out-of-the-box default this week, and the fix arrives on the server engine rather than the consumer local-runtime tier the prediction targets.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "vLLM's fix for a remote DoS via invalid recovered-token reinjection treats speculative decoding as a maintained, security-audited production feature, the defensive attention a stock default path draws rather than an experiment. That maturity is a soft precondition for the speculative-decoding-on-by-default prediction, arguing the mechanism is ready, not that any runtime has flipped the switch.",
+        "coherence": 2,
+        "remaining_gap": "No runtime named speculative decoding the out-of-the-box default, and the fix lands on a server engine, not the consumer local-runtime tier the prediction targets."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0c569408626bbdd3",
+        "short_label": "Sub-gigabyte on-device LLM gains same-week Unsloth tuning support by Q3 2026",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The same-week-Unsloth-tuning prediction gains a pattern reinforcement, though not on the sub-gigabyte class it names. Unsloth's v0.1.481-beta lands first-class DeepSeek-V4-Flash tuning the same week the Flash variant surfaces, extending the report's own throughline that the practical gap between a newly shipped open-weight model and a consumer-GPU team's ability to adapt it keeps compressing to within the same week. ROCm-on-WSL for discrete Radeon RDNA 3/4 GPUs widens the commodity-hardware base that makes same-week tuning reachable for small teams.\nWhat holds this at relevance 3 is scale mismatch: the prediction targets a sub-gigabyte on-device model, whereas today's same-week tuning lands on a frontier-tier 1.6-trillion-parameter MoE, so the timing pattern is confirmed while the specific small-model instance the claim tracks is not the one Unsloth shipped this week.",
+      "reference_links": [
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        },
+        {
+          "label": "Unsloth - project site (Studio, local model training and running)",
+          "url": "https://unsloth.ai/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "The timing pattern the same-week-tuning prediction rests on holds again: Unsloth's July 7 build tunes DeepSeek-V4-Flash the same week the variant surfaces, and ROCm-on-WSL for consumer Radeon GPUs widens the reachable hardware base. Unsloth is once more placed at day-zero alongside a fresh open-weight drop, the exact actor-and-timing coincidence the claim expects.",
+        "coherence": 3,
+        "remaining_gap": "Scale mismatch: this lands on a 1.6-trillion-parameter MoE, not the sub-gigabyte on-device class the prediction names, so its specific small-model instance stays unproven."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6ba7ca6e01ab313e",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The coding-agent-ships-a-capability-gate-as-default prediction gets a directional pulse from Willison's llm-coding-agent 0.1a0. Its six built-in tools spanning file read/write/edit, listing and searching, and shell execution with timeouts are all gated behind a permission model out of the box: `--yolo` runs unrestricted while allowlist flags like `--allow \"pytest*\"` constrain which commands can fire, so a default-on capability gate over dangerous tool actions ships with the harness rather than as an add-on.\nThe reason this stays at relevance 3 is that Willison's gate is a command allowlist and approval toggle over shell-and-file capabilities, not the specific lethal-trifecta constraint the prediction names, capping any two of private-data access, untrusted-content ingestion, and external communication. The structural instinct, deny dangerous capability combinations by default at the harness layer, is present, but the framing is per-command permissioning rather than the trifecta rule.",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+          "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+        },
+        {
+          "label": "Simon Willison - June 2026 newsletter",
+          "url": "https://simonwillison.net/2026/Jul/3/june-newsletter/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Willison's harness ships a default-on capability gate: all six file-and-shell tools sit behind a permission model where `--yolo` opens everything and allowlist flags scope which commands fire. That the harness layer itself denies dangerous capabilities by default is the same structural instinct the trifecta-gate prediction rests on, even if it ships as an alpha rather than a platform default.",
+        "coherence": 2,
+        "remaining_gap": "The gate is per-command allowlisting, not the lethal-trifecta rule capping any two of private-data access, untrusted content, and external comms that the prediction specifically names."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.82599b6cfd05751b",
+        "short_label": "Consumer-GPU coding agents displace cloud-only APIs for 30% of devs by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Dormant-pool match (20260426-3, Signals: consumer-GPU coding agent, cloud-only API, local-first toggle, hybrid harness, Cursor Windsurf Kiro). Two of today's stories push the local-first coding-agent thesis from opposite ends. Willison's llm-coding-agent 0.1a0 drops the floor for a usable coding agent to a few-hundred-line, dependency-light, self-hostable loop over a model-pluggable library, so the harness itself no longer requires a cloud product, and because llm supports local backends the same loop can drive a model running on a developer's own GPU. In parallel, Unsloth's v0.1.481-beta bundles a local auto-swapping model server and adds ROCm-on-WSL for consumer Radeon RDNA 3/4 GPUs, lowering the barrier to serving a tuned model locally.\nThe consumer-GPU-coding-agents-displace-cloud-APIs prediction is that local coding agents capture a material share of developer usage from cloud-only APIs. Today's evidence strengthens the supply side, a self-hostable harness plus easier local serving, but nothing quantifies developer adoption or a share shift away from hosted APIs, holding this at relevance 3.",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+          "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+        },
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The dormant local-first thesis revives because two releases converge on its supply side: Willison's self-hostable, model-pluggable harness lets the coding loop drive a model on a developer's own GPU with no cloud product, while Unsloth's bundled auto-swapping server plus ROCm-on-WSL eases serving that model locally on consumer Radeon hardware. The building blocks for a consumer-GPU coding agent are now off-the-shelf.",
+        "coherence": 3,
+        "remaining_gap": "Pure supply-side enablement; nothing quantifies developer adoption or any share shift away from cloud-only APIs, and the 30%-by-Q3-2026 bar remains unmeasured."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f960d058dc42c7c6",
+        "short_label": "KV-cache-compression dtype ships as inference-stack deployment knob by Q4 2026",
+        "prediction_date": "2026-04-29"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Dormant-pool match (20260429-1, Signals: KV-cache-compression dtype, vLLM, SGLang, TGI, compressed-cache tiers, --kv-cache-dtype). vLLM's v0.24.0 advances KV-cache and low-bit serving as first-class deployment knobs: it adds a KV-cache watermark to cut preemptions and two-phase allocation for cross-group prefix-cache hits, alongside W4A16 int4 group-size-32 MoE quantization and CUTLASS FP8 kernels reporting 180-290 percent speedups. That is exactly the memory-tier and compressed-precision plumbing this prediction anchors on, shipped as tunable serving behavior rather than a research demo.\nThe KV-cache-compression-dtype-as-deployment-knob prediction is that a compressed KV-cache dtype becomes a standard, user-selectable inference-stack flag across the major engines. Today's evidence shows vLLM hardening KV-cache management and low-bit MoE paths, but the specific move it names, a compressed-cache dtype exposed as a documented cross-engine deployment flag, is adjacent rather than confirmed, so this reads as a relevance-3 substrate pulse.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "The revival signal is vLLM v0.24.0 advancing exactly this prediction's substrate: a KV-cache watermark to cut preemptions, two-phase allocation for cross-group prefix-cache reuse, plus W4A16 int4 MoE and CUTLASS FP8 kernels. The memory-tier and compressed-precision plumbing a compressed-cache dtype knob would ride on is shipping as tunable serving behavior, not a research demo, reactivating the dormant thesis.",
+        "coherence": 3,
+        "remaining_gap": "The specific move, a compressed KV-cache dtype exposed as a documented user-selectable flag across engines, remains adjacent rather than shipped; this is substrate, not the named knob."
+      }
+    }
+  ]
+}

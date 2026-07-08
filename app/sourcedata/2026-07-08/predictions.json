@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-08",
+  "predictions": [
+    {
+      "id": "prediction.c5fe8479ffcd7e16",
+      "scope_hint": "tech",
+      "title": "LLM client libraries ship a permission-gated coding-agent loop by H1 2027",
+      "body": "Simon Willison's llm-coding-agent 0.1a0 does not add a new product so much as promote the agent loop into a first-class primitive of his existing model-calling library, exposing it as a `llm code` CLI and a `CodingAgent` Python class with six built-in file-and-shell tools gated behind an allowlist permission model. Because the loop rides on a model-pluggable substrate, the whole harness is a few hundred lines, vendor-decoupled, and self-hostable, which resets the reference implementation the rest of the ecosystem measures against. The prediction is that this shape generalizes: by H1 2027 the mainstream open-source, general-purpose LLM client libraries that developers already import for chat and tool calls, projects in the lineage of llm, LangChain, LlamaIndex, the vendor Python and JS SDKs, and Pydantic AI, will ship a documented, permission-gated tool-executing agent loop as a stock, first-class primitive rather than leaving it to a separate agent framework or a bespoke IDE product. Concretely, at least two of these widely used libraries will expose an out-of-the-box coding-or-tooling agent, with a built-in filesystem and shell toolset and a command allowlist or approval gate as the default safety control, callable in a handful of lines without a standalone dependency. The competitive consequence is that the floor for a usable coding agent stops being a funded IDE or cloud-agent product and becomes an import statement over a library a team already trusts, pushing differentiation up-stack toward orchestration, review, and managed hosting while the raw loop commoditizes toward a dependency-light, self-hosted default.",
+      "reasoning": {
+        "because": "Willison folded a permission-gated coding-agent loop into his general LLM library as CLI and class.",
+        "given": "Model-pluggable libraries make the loop a few-hundred-line vendor-decoupled primitive one dev ships.",
+        "so_that": "Rival LLM libraries adopt a built-in allowlist-gated tool-executing agent as stock, undercutting standalone harnesses.",
+        "landing": "By H1 2027, two-plus mainstream LLM libraries ship the loop first-class.",
+        "plain_language": "The code library you already use to talk to an AI will soon come with a safe, built-in agent that edits files for you."
+      },
+      "summary": "Willison folding a permission-gated coding-agent loop into his general LLM library signals a spreading pattern. By H1 2027, at least two mainstream LLM client libraries ship allowlist-gated tool-executing agent loops as a stock primitive, commoditizing what funded IDE and cloud-agent products sell."
+    },
+    {
+      "id": "prediction.7e04ececc362f9bd",
+      "scope_hint": "cross",
+      "title": "Local fine-tuning toolkits absorb the model-serving layer by default by H1 2027",
+      "body": "Unsloth's v0.1.481-beta stops being only a training tool: alongside faster mixture-of-experts adapter training it folds every export target, portable and compressed low-bit weights plus quantized GGUF and adapter formats, into a single one-pass export, and then bundles a llama-swap-style local model server directly into the toolkit that auto-switches between downloaded checkpoints, idle-unloads to free GPU memory and reloads on demand, and heals malformed tool calls per request. That collapses what used to be three separate tools, one to fine-tune, one to quantize and export, one to serve, into a single local loop. The prediction is that this becomes the category's default shape: by H1 2027 the mainstream open fine-tuning toolkits that local and small-team practitioners already use will treat an integrated quantized-export-to-serve path, a training run that emits ready-to-serve artifacts and ships or wires a built-in auto-swapping inference server, as the stock local workflow rather than an optional add-on or a hand-off to a separate serving stack. Concretely, at least two widely used local fine-tuning toolkits will document train, one-pass low-bit export, and serve as a single continuous flow driven from the same tool, with a bundled or first-party model server that handles checkpoint switching and memory-aware load/unload out of the box. The consequence is that the boundary between the fine-tuning framework and the inference server erodes for the local and on-prem tier: the serving layer stops being a distinct product a team assembles and becomes a feature the tuning toolkit is expected to carry, pushing standalone lightweight local servers to differentiate on scale, multi-tenancy, and operations while the single-box train-and-serve loop commoditizes.",
+      "reasoning": {
+        "because": "Unsloth bundled one-pass low-bit export and an auto-swapping model server into its training toolkit.",
+        "given": "For local teams, separate train, export, and serve tools are friction a single toolkit can absorb.",
+        "so_that": "Open fine-tuning toolkits make integrated export-to-serve with a built-in inference server the default local workflow.",
+        "landing": "By H1 2027, two-plus local tuning toolkits ship train-export-serve as one flow.",
+        "plain_language": "The tool you use to retrain an AI model will soon also run it for you, so training and serving become one step."
+      },
+      "summary": "Unsloth's beta bundles one-pass low-bit export and an auto-swapping model server into the training toolkit, collapsing train, quantize, and serve into one loop. By H1 2027, two-plus mainstream open fine-tuning toolkits make integrated export-to-serve with a built-in server the default local flow."
+    },
+    {
+      "id": "prediction.546732d279b0a395",
+      "scope_hint": "business",
+      "title": "Open inference engines adopt a named release-gating security track by H1 2027",
+      "body": "vLLM's v0.24.0 did not just add throughput: alongside DeepSeek-V4 serving paths and FP8 kernel speedups, it folded a coordinated security-hardening batch into the same release, bumping Starlette past CVE-2026-48710, closing an audio-decompression bomb in the speech-to-text endpoint, and fixing a remote denial-of-service via invalid recovered-token reinjection in speculative decoding. Treating adversarial-input handling, DoS-resistance, and supply-chain patching as release-blocking concerns rather than post-hoc patches is the signature of a serving stack maturing for production multi-tenant exposure, not benchmark demos, and it lands the same week a CVSS 9.5 unauthenticated RCE in an enterprise job scheduler underscores that self-hosted inference and orchestration infrastructure is now an active attack surface. The prediction is that this hardens into a formal maturity axis: by H1 2027 at least two of the major open or self-hosted LLM inference stacks in the vLLM, SGLang, TensorRT-LLM, and TGI class will publish a named, documented security track, a security policy plus coordinated CVE-disclosure process with multi-tenant-exposure hardening (untrusted-input fuzzing on public endpoints, upstream-dependency CVE gating, and DoS-resistance checks) treated as a release-blocking criterion, rather than folding security into general bug-fix churn. Concretely, expect a stated security-response policy, a hardening or fuzzing gate wired into the release checklist, and CVE handling coordinated to a shipped build, so that a serving engine's production-readiness is measured on a security axis the way it is already measured on tokens-per-second. The consequence is that the procurement and deployment bar for standing up self-hosted inference stops being raw performance alone and starts including a demonstrable, versioned security posture, pushing pure-throughput forks and unmaintained engines below the line enterprises will run in a multi-tenant setting.",
+      "reasoning": {
+        "because": "vLLM v0.24.0 shipped a CVE, decompression-bomb, and DoS-reinjection batch as release-blocking work.",
+        "given": "Self-hosted inference is a live attack surface, making multi-tenant hardening a production axis.",
+        "so_that": "Major open inference engines publish a named security track with hardening and CVE gating as release-blocking criteria.",
+        "landing": "By H1 2027, two-plus major open inference stacks formalize a security track.",
+        "plain_language": "The software that runs open AI models will start blocking releases on security checks, the way it already blocks on speed."
+      },
+      "summary": "vLLM's v0.24.0 folded a dependency CVE fix, a decompression-bomb fix, and a speculative-decoding DoS fix into a performance release, treating hardening as release-blocking. Expect two-plus major open inference engines to formalize a named, release-gating security track by H1 2027."
+    }
+  ]
+}

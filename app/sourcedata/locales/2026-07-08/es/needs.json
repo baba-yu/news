@@ -1,0 +1,137 @@
+{
+  "date": "2026-07-08",
+  "by_prediction": {
+    "prediction.546732d279b0a395": [
+      {
+        "actor": "responsable de publicaciones de motor de inferencia abierto",
+        "job": "Integrar correcciones coordinadas de CVE, actualizaciones de dependencias y refuerzo frente a entradas adversarias en publicaciones con barreras, de modo que la seguridad se convierta en un criterio que bloquea la publicación, no en trajín a posteriori.",
+        "outcome": "Una vía de seguridad publicada y con nombre: una política de respuesta declarada más una barrera de refuerzo conectada a la lista de comprobación de publicación del motor, junto a un manejo de CVE coordinado con las compilaciones entregadas.",
+        "motivation": "La exposición multiinquilino en producción y los ataques activos sobre la inferencia autoalojada convierten una postura de seguridad demostrable y versionada en un requisito básico para la adopción empresarial.",
+        "task": {
+          "who": "responsable principal / equipo de ingeniería de publicaciones",
+          "what": "condicionar las correcciones de CVE y de refuerzo a publicaciones bloqueadas",
+          "where": "la lista de comprobación de publicación del motor y la política SECURITY",
+          "when": "ciclos de publicación desde finales de 2026 hasta el primer semestre de 2027",
+          "why": "convertir la seguridad en un eje de producción que bloquea la publicación",
+          "how": "proceso coordinado de divulgación de CVE y barrera de publicación"
+        }
+      },
+      {
+        "actor": "ingeniero de seguridad y fuzzing de servido de inferencia",
+        "job": "Construir fuzzing de entradas no confiables en endpoints públicos, comprobaciones de resistencia a DoS y condicionamiento por CVE de dependencias upstream, de modo que el refuerzo se ejecute automáticamente como parte de cada publicación.",
+        "outcome": "Una barrera de refuerzo/fuzzing en la canalización de publicación que aplica fuzzing a los endpoints públicos, bloquea ante CVE upstream sin parchear y ejercita la resistencia a DoS antes de que se entregue una compilación.",
+        "motivation": "Las entradas adversarias, las bombas de descompresión y el DoS por reinyección en endpoints expuestos deben detectarse antes de la publicación, no tras un incidente multiinquilino.",
+        "task": {
+          "who": "ingenieros de seguridad / infraestructura de pruebas",
+          "what": "conectar barreras de fuzzing y de resistencia a DoS en la CI",
+          "where": "la canalización de publicación de los endpoints públicos de servido",
+          "when": "construcción a lo largo del segundo semestre de 2026 y el primer semestre de 2027",
+          "why": "detectar fallos de entrada adversaria y de DoS antes de la publicación",
+          "how": "fuzzers de endpoints y escaneo de CVE de dependencias upstream"
+        }
+      },
+      {
+        "actor": "responsable de adquisición de inferencia empresarial y seguridad de plataforma",
+        "job": "Reescribir los listones de adquisición de inferencia autoalojada para exigir una postura de seguridad versionada y documentada, empujando por debajo de la línea de aceptación a los motores de puro rendimiento y sin mantenimiento.",
+        "outcome": "Criterios de adquisición que midan la preparación para producción de un motor de servido en un eje de seguridad, premiando a los motores con una vía de seguridad con nombre y rechazando a los que no la tienen.",
+        "motivation": "Levantar inferencia autoalojada multiinquilino sobre una superficie de ataque activa exige garantías de seguridad auditables, no solo tokens por segundo en bruto.",
+        "task": {
+          "who": "función de seguridad de plataforma / adquisición de infraestructura",
+          "what": "añadir una postura de seguridad versionada al listón de selección de motor",
+          "where": "la revisión de adquisición y despliegue de inferencia autoalojada",
+          "when": "ciclos de evaluación a lo largo de 2026 hasta el primer semestre de 2027",
+          "why": "ejecutar solo motores con refuerzo multiinquilino auditable",
+          "how": "lista de comprobación de postura de seguridad en la revisión de proveedores y motores"
+        }
+      }
+    ],
+    "prediction.7e04ececc362f9bd": [
+      {
+        "actor": "responsable de kit de fine-tuning abierto",
+        "job": "Integrar una exportación cuantizada de baja precisión de una sola pasada y un servidor de inferencia con autoalternancia incorporado en la ruta de publicación central del kit de entrenamiento.",
+        "outcome": "Un flujo documentado de entrenar, exportar a baja precisión en una sola pasada y servir, gobernado desde una sola herramienta con un servidor de modelos con alternancia de checkpoints incorporado.",
+        "motivation": "Los usuarios locales y de equipos pequeños tratan las herramientas separadas de entrenar, exportar y servir como una fricción que el kit puede absorber para seguir siendo el valor por defecto.",
+        "task": {
+          "who": "equipo central de ingeniería / publicaciones",
+          "what": "conectar la exportación cuantizada a servido en un solo flujo continuo",
+          "where": "la canalización de entrenamiento y la rama de publicación del kit",
+          "when": "el margen desde esta beta hasta el primer semestre de 2027",
+          "why": "convertir la exportación a servido integrada en el flujo de trabajo local de serie",
+          "how": "exportación GGUF/adaptador de una sola pasada más servidor de autoalternancia incorporado"
+        }
+      },
+      {
+        "actor": "desarrollador de servidor de inferencia local",
+        "job": "Hacer que un servidor al estilo llama-swap sea integrable dentro de los kits de tuning, alternando checkpoints automáticamente y haciendo carga/descarga con consciencia de la memoria de forma inmediata.",
+        "outcome": "Un servidor de modelos propio o incorporado que gestiona la alternancia de checkpoints y la descarga/recarga por inactividad, entregado como función del kit y no como una pila aparte.",
+        "motivation": "A medida que el bucle en bruto de una sola máquina se convierte en mercancía, integrar el servidor lo mantiene relevante y cede el hueco del servidor independiente en el nivel local.",
+        "task": {
+          "who": "subequipo de servido / ejecución",
+          "what": "incorporar un servidor con autoalternancia y consciencia de la memoria en el kit de tuning",
+          "where": "el módulo de servido del kit y el traspaso de la exportación",
+          "when": "el margen entre esta beta y el primer semestre de 2027",
+          "why": "cargar el servido como función del kit, no como producto",
+          "how": "autoalternancia al estilo llama-swap, descarga por inactividad, reparación de llamadas a herramientas"
+        }
+      },
+      {
+        "actor": "ingeniero de formato de exportación de baja precisión",
+        "job": "Reducir los pesos portables y comprimidos de baja precisión, el GGUF cuantizado y los destinos de adaptador a una única exportación de una sola pasada que emite artefactos listos para servir.",
+        "outcome": "Una ejecución de entrenamiento que emite artefactos cuantizados listos para servir en una sola pasada, alimentando al servidor incorporado sin un traspaso a una pila aparte.",
+        "motivation": "La exportación a servido de una sola pasada elimina la herramienta intermedia de cuantizar y exportar, convirtiendo el bucle local de una sola herramienta en la vía natural.",
+        "task": {
+          "who": "subequipo de cuantización / exportación",
+          "what": "emitir artefactos de baja precisión listos para servir en una sola pasada",
+          "where": "la etapa de exportación del kit que alimenta al servidor",
+          "when": "el margen desde finales de 2026 hasta el primer semestre de 2027",
+          "why": "eliminar el paso separado de traspaso de cuantización y exportación",
+          "how": "exportación unificada de baja precisión, GGUF y adaptador en una sola pasada"
+        }
+      }
+    ],
+    "prediction.c5fe8479ffcd7e16": [
+      {
+        "actor": "responsable de biblioteca cliente de LLM de código abierto",
+        "job": "Integrar un bucle de agente ejecutor de herramientas en la biblioteca general de chat y llamadas a herramientas como primitiva de primera clase documentada en lugar de un framework aparte.",
+        "outcome": "Una clase y una CLI de serie al estilo CodingAgent invocables en unas pocas líneas, con herramientas integradas de sistema de archivos y shell entregadas en la biblioteca.",
+        "motivation": "Mantiene a los desarrolladores en su biblioteca a medida que el bucle de agente se convierte en mercancía, y bloquea a las bibliotecas rivales para que no reclamen primero el valor por defecto de agente integrado.",
+        "task": {
+          "who": "subequipo de biblioteca central / agentes",
+          "what": "implementar un bucle de agente ejecutor de herramientas integrado",
+          "where": "el repositorio principal y la publicación de la biblioteca",
+          "when": "el margen hasta el primer semestre de 2027",
+          "why": "adueñarse del valor por defecto del bucle de agente que se convierte en mercancía",
+          "how": "base intercambiable entre modelos, herramientas integradas de archivos y shell"
+        }
+      },
+      {
+        "actor": "responsable único de implementación de referencia",
+        "job": "Entregar un bucle de agente de programación con permisos de unos pocos cientos de líneas, independiente del proveedor y autoalojable sobre una biblioteca intercambiable entre modelos para redefinir la forma de referencia del ecosistema.",
+        "outcome": "Una CLI `llm code` publicada y una primitiva CodingAgent cuyo andamiaje mínimo se convierte en la referencia que las bibliotecas de referencia miden y copian.",
+        "motivation": "Demuestra que el bucle pertenece a la biblioteca base, presionando a los pares para que adopten la misma forma integrada en lugar de frameworks a medida.",
+        "task": {
+          "who": "responsable único / independiente",
+          "what": "publicar una referencia mínima de bucle de agente con permisos",
+          "where": "la biblioteca llm y sus plugins",
+          "when": "el margen desde 0.1a0 hasta el primer semestre de 2027",
+          "why": "redefinir la implementación de referencia del ecosistema",
+          "how": "andamiaje de unos cientos de líneas, independiente del proveedor y autoalojable"
+        }
+      },
+      {
+        "actor": "ingeniero de seguridad de agentes de biblioteca",
+        "job": "Diseñar el modelo de permisos de lista de permitidos y barrera de aprobación que hace que el bucle de agente integrado de archivos y shell sea lo bastante seguro para entregarse como primitiva por defecto.",
+        "outcome": "Una lista de permitidos de comandos o una barrera de aprobación conectada como control de seguridad por defecto del agente de serie, de modo que el bucle se entregue habilitado sin una dependencia independiente.",
+        "motivation": "Sin una barrera de seguridad por defecto creíble el bucle no puede entregarse como de primera clase, así que el trabajo de barreras es la condición previa que condiciona la llegada.",
+        "task": {
+          "who": "función de seguridad / permisos",
+          "what": "construir una barrera de permisos de lista de permitidos y aprobación",
+          "where": "la capa de ejecución de herramientas del bucle de agente",
+          "when": "el margen hasta el primer semestre de 2027",
+          "why": "hacer que las herramientas integradas de archivos y shell sean entregables de forma segura",
+          "how": "lista de permitidos de comandos más barrera de aprobación por acción"
+        }
+      }
+    ]
+  }
+}

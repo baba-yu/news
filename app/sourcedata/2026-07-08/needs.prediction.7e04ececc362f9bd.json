@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "open fine-tuning toolkit maintainer",
+    "job": "Folding one-pass low-bit quantized export and a bundled auto-swapping inference server into the training toolkit's core release path.",
+    "outcome": "A documented train, one-pass low-bit export, and serve flow driven from one tool with a bundled checkpoint-switching model server.",
+    "motivation": "Local and small-team users treat separate train, export, and serve tools as friction the toolkit can absorb to stay the default.",
+    "task": {
+      "who": "core engineering / release team",
+      "what": "wire quantized-export-to-serve into one continuous flow",
+      "where": "the toolkit's training pipeline and release branch",
+      "when": "runway from this beta through H1 2027",
+      "why": "make integrated export-to-serve the stock local workflow",
+      "how": "one-pass GGUF/adapter export plus bundled auto-swap server"
+    }
+  },
+  {
+    "actor": "local inference server developer",
+    "job": "Making a llama-swap-style server embeddable inside tuning toolkits, auto-switching checkpoints and doing memory-aware load/unload out of the box.",
+    "outcome": "A first-party or bundled model server that handles checkpoint switching and idle-unload/reload, shipped as a toolkit feature not a separate stack.",
+    "motivation": "As the raw single-box loop commoditizes, embedding the server keeps it relevant and cedes the standalone-server slot on the local tier.",
+    "task": {
+      "who": "serving / runtime sub-team",
+      "what": "bundle auto-swapping memory-aware server into tuning toolkit",
+      "where": "the toolkit's serve module and export handoff",
+      "when": "runway between this beta and H1 2027",
+      "why": "carry serving as a toolkit feature, not a product",
+      "how": "llama-swap-style auto-swap, idle-unload, tool-call healing"
+    }
+  },
+  {
+    "actor": "low-bit export format engineer",
+    "job": "Collapsing portable compressed low-bit weights, quantized GGUF, and adapter targets into a single one-pass export emitting ready-to-serve artifacts.",
+    "outcome": "A training run that emits ready-to-serve quantized artifacts in one pass, feeding the bundled server without a hand-off to a separate stack.",
+    "motivation": "One-pass export-to-serve removes the quantize-and-export middle tool, making the single-tool local loop the path of least resistance.",
+    "task": {
+      "who": "quantization / export sub-team",
+      "what": "emit ready-to-serve low-bit artifacts in one pass",
+      "where": "the toolkit's export stage feeding the server",
+      "when": "runway across late 2026 into H1 2027",
+      "why": "eliminate the separate quantize-export hand-off step",
+      "how": "unified low-bit, GGUF, and adapter one-pass export"
+    }
+  }
+]

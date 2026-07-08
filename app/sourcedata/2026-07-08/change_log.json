@@ -1,0 +1,31 @@
+{
+  "date": "2026-07-08",
+  "vs_date": "2026-07-07",
+  "items": [
+    {
+      "kind": "new",
+      "headline": "Simon Willison turns his LLM library into an agent framework with llm-coding-agent",
+      "diff_narrative": "This is a fresh thread today. Yesterday's coding-and-agent stories were about funded runtime security (Straiker) and hosted frontier releases (OpenAI's gpt-realtime-2.1 and GPT-5.6); today the lead is the opposite end of that market. Simon Willison's llm-coding-agent 0.1a0 (July 2) builds an autonomous coding agent directly on his open-source llm library, exposing an llm code CLI runnable via uvx without installation and a Python CodingAgent class, with six built-in file and shell tools gated behind a permission model (--yolo versus allowlist flags like --allow \"pytest*\"). Because llm is model-pluggable, the agent loop is decoupled from any single vendor. The angle absent yesterday is that the coding-harness floor is dropping toward a few-hundred-line, dependency-light, self-hostable loop a single maintainer can ship, a structurally different shape from the venture-funded IDE and cloud-agent products in the same space."
+    },
+    {
+      "kind": "updated",
+      "headline": "Unsloth's v0.1.481-beta adds DeepSeek-V4-Flash tuning, faster MoE LoRA, and a bundled local server",
+      "diff_narrative": "This evolves yesterday's Unsloth item rather than starting over. Yesterday's Studio build simply enabled DeepSeek-V4 fine-tuning (all reasoning levels, alongside GLM-5.2 and MiniMax-M3) as the model exited preview. Today's tagged v0.1.481-beta release is the substantive follow-on: first-class DeepSeek-V4-Flash support with thinking toggles and corrected chat templates, MoE LoRA training 3-5x faster via automatic grouped-MoE detection, GRPO sequence packing on by default, and a single-pass export that writes FP8/INT8, compressed FP8/FP4, imatrix GGUF, and LoRA without a separate quantization stage. It also folds in a llama-swap-style local API that auto-switches between downloaded GGUFs and idle-unloads VRAM, effectively bundling a small model server into the training toolkit, plus data-center Blackwell (sm_100/sm_103) and ROCm-on-WSL coverage. Where yesterday's point was that tuning support had arrived, today's is that the adapt-and-serve gap for a frontier open model keeps compressing to within the same week."
+    },
+    {
+      "kind": "new",
+      "headline": "CVE-2026-10539: unauthenticated command injection RCE in BMC Control-M/Server, CVSS 9.5",
+      "diff_narrative": "New today; no named vulnerability ran yesterday, where the security thread was funding-and-exploit narrative (Straiker plus the Claude Cowork sandbox escape). CVE-2026-10539 (published July 1) is a critical CVSS 9.5 flaw in BMC's Control-M/Server, the server component of a widely deployed enterprise workload-automation and batch-scheduling platform: a communication command fails to sanitize user-supplied input, letting an unauthenticated attacker execute commands on the server (CWE-305, command injection to full remote code execution). Affected builds span 9.0.20.x through 9.0.21.200 inclusive plus potentially earlier unsupported releases, and crucially no fixed build is enumerated, so defenders are pointed to the latest vendor update plus input sanitization, network restriction, and monitoring as interim controls. What sets it apart from a routine scheduler bug is position: Control-M sits at the orchestration layer that triggers financial, data-pipeline, and operational jobs, so an unauthenticated RCE there is a high-leverage foothold, and the missing patched build widens the exposure window."
+    },
+    {
+      "kind": "new",
+      "headline": "vLLM v0.24.0 pairs DeepSeek-V4 serving paths with a coordinated security-hardening batch",
+      "diff_narrative": "New today; the open-inference-engine angle did not appear yesterday. vLLM's v0.24.0 (571 commits, 256 contributors, 77 new) is notable for how defensive the changelog is: it bumps Starlette to 1.0.1+ to close CVE-2026-48710 and lands a coordinated hardening batch fixing an audio-decompression bomb in the speech-to-text endpoint and a remote denial-of-service via invalid recovered-token reinjection in speculative decoding. On capability it makes DeepSeek-V4 a first-class serving target (FlashInfer sparse-index cache, dedicated attention and MoE paths across XPU and ROCm), the same open-weight family the tuning stacks are racing to support, and expands Intel XPU coverage plus KV-cache and CUTLASS FP8 kernel work reporting 180-290 percent speedups. This connects to yesterday from the serving side rather than the tuning side: the read is that the leading open engine now treats denial-of-service resistance and supply-chain patching as release-blocking concerns alongside tokens-per-second, a sign of hardening for production exposure."
+    },
+    {
+      "kind": "continuing",
+      "headline": "AI events calendar: ICML wrapping today, AI Tinkerers SF moved to August, fall tracks stacked",
+      "diff_narrative": "The events section carries over from yesterday with state-changes rather than a hold. ICML in Seoul has advanced from yesterday's mid-run main conference to wrapping today, with only the July 10-11 workshops left live. The AI Tinkerers SF meetup that was tomorrow yesterday has now passed its go-to-market session and the next one moves to August, so it drops off the near-term list. Yesterday's UN Global Dialogue on AI Governance in Geneva (July 6-7) has concluded and is no longer carried. The standing fall calendar is essentially unchanged: Hot Chips Aug 23-25 (early rate closes July 31), the AI Risk Summit Aug 11-12, Ai4 Aug 4-6, plus the AI Infra Summit Sep 15-17, ACM AI Leadership Summit, GitHub Universe, and AWS re:Invent. The immediate actions narrow to catching the ICML workshops through July 11 and locking the August security-and-chip dates."
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "date": "2026-07-08",
+  "by_prediction": {
+    "prediction.546732d279b0a395": [
+      {
+        "actor": "open inference engine release maintainer",
+        "job": "Folding coordinated CVE fixes, dependency bumps, and adversarial-input hardening into gated releases so security becomes a release-blocking criterion, not post-hoc churn.",
+        "outcome": "A published, named security track: stated response policy plus a hardening gate wired into the engine's release checklist alongside CVE handling coordinated to shipped builds.",
+        "motivation": "Multi-tenant production exposure and live attacks on self-hosted inference make a demonstrable, versioned security posture table-stakes for enterprise adoption.",
+        "task": {
+          "who": "core maintainer / release-engineering team",
+          "what": "gate CVE and hardening fixes into blocked releases",
+          "where": "engine release checklist and SECURITY policy",
+          "when": "release cycles across late 2026 into H1 2027",
+          "why": "make security a release-blocking production axis",
+          "how": "coordinated CVE-disclosure process and release gate"
+        }
+      },
+      {
+        "actor": "inference-serving security and fuzzing engineer",
+        "job": "Building untrusted-input fuzzing on public endpoints, DoS-resistance checks, and upstream-dependency CVE gating so hardening runs automatically as part of every release.",
+        "outcome": "A hardening/fuzzing gate in the release pipeline that fuzzes public endpoints, blocks on unpatched upstream CVEs, and exercises DoS-resistance before a build ships.",
+        "motivation": "Adversarial inputs, decompression bombs, and reinjection DoS on exposed endpoints must be caught pre-release, not after a multi-tenant incident.",
+        "task": {
+          "who": "security / test-infrastructure engineers",
+          "what": "wire fuzzing and DoS-resistance gates into CI",
+          "where": "release pipeline for public serving endpoints",
+          "when": "buildout through H2 2026 and H1 2027",
+          "why": "catch adversarial-input and DoS flaws pre-release",
+          "how": "endpoint fuzzers and upstream-CVE dependency scanning"
+        }
+      },
+      {
+        "actor": "enterprise inference procurement and platform-security lead",
+        "job": "Rewriting self-hosted inference procurement bars to require a versioned, documented security posture, pushing pure-throughput and unmaintained engines below the acceptance line.",
+        "outcome": "Procurement criteria that measure a serving engine's production-readiness on a security axis, rewarding engines with a named security track and rejecting those without one.",
+        "motivation": "Standing up multi-tenant self-hosted inference on an active attack surface demands auditable security guarantees, not raw tokens-per-second alone.",
+        "task": {
+          "who": "platform-security / infrastructure procurement function",
+          "what": "add versioned security posture to engine selection bar",
+          "where": "self-hosted inference procurement and deployment review",
+          "when": "evaluation cycles across 2026 into H1 2027",
+          "why": "only run engines with auditable multi-tenant hardening",
+          "how": "security-posture checklist in vendor and engine review"
+        }
+      }
+    ],
+    "prediction.7e04ececc362f9bd": [
+      {
+        "actor": "open fine-tuning toolkit maintainer",
+        "job": "Folding one-pass low-bit quantized export and a bundled auto-swapping inference server into the training toolkit's core release path.",
+        "outcome": "A documented train, one-pass low-bit export, and serve flow driven from one tool with a bundled checkpoint-switching model server.",
+        "motivation": "Local and small-team users treat separate train, export, and serve tools as friction the toolkit can absorb to stay the default.",
+        "task": {
+          "who": "core engineering / release team",
+          "what": "wire quantized-export-to-serve into one continuous flow",
+          "where": "the toolkit's training pipeline and release branch",
+          "when": "runway from this beta through H1 2027",
+          "why": "make integrated export-to-serve the stock local workflow",
+          "how": "one-pass GGUF/adapter export plus bundled auto-swap server"
+        }
+      },
+      {
+        "actor": "local inference server developer",
+        "job": "Making a llama-swap-style server embeddable inside tuning toolkits, auto-switching checkpoints and doing memory-aware load/unload out of the box.",
+        "outcome": "A first-party or bundled model server that handles checkpoint switching and idle-unload/reload, shipped as a toolkit feature not a separate stack.",
+        "motivation": "As the raw single-box loop commoditizes, embedding the server keeps it relevant and cedes the standalone-server slot on the local tier.",
+        "task": {
+          "who": "serving / runtime sub-team",
+          "what": "bundle auto-swapping memory-aware server into tuning toolkit",
+          "where": "the toolkit's serve module and export handoff",
+          "when": "runway between this beta and H1 2027",
+          "why": "carry serving as a toolkit feature, not a product",
+          "how": "llama-swap-style auto-swap, idle-unload, tool-call healing"
+        }
+      },
+      {
+        "actor": "low-bit export format engineer",
+        "job": "Collapsing portable compressed low-bit weights, quantized GGUF, and adapter targets into a single one-pass export emitting ready-to-serve artifacts.",
+        "outcome": "A training run that emits ready-to-serve quantized artifacts in one pass, feeding the bundled server without a hand-off to a separate stack.",
+        "motivation": "One-pass export-to-serve removes the quantize-and-export middle tool, making the single-tool local loop the path of least resistance.",
+        "task": {
+          "who": "quantization / export sub-team",
+          "what": "emit ready-to-serve low-bit artifacts in one pass",
+          "where": "the toolkit's export stage feeding the server",
+          "when": "runway across late 2026 into H1 2027",
+          "why": "eliminate the separate quantize-export hand-off step",
+          "how": "unified low-bit, GGUF, and adapter one-pass export"
+        }
+      }
+    ],
+    "prediction.c5fe8479ffcd7e16": [
+      {
+        "actor": "open-source LLM client library maintainer",
+        "job": "Folding a tool-executing agent loop into the general chat-and-tool-calls library as a documented first-class primitive rather than a separate framework.",
+        "outcome": "A stock CodingAgent-style class and CLI callable in a few lines, with built-in filesystem and shell tools shipped in the library.",
+        "motivation": "Keeps developers on their library as the agent loop commoditizes, and blocks rival libraries from claiming the built-in-agent default first.",
+        "task": {
+          "who": "core library / agents subteam",
+          "what": "implement built-in tool-executing agent loop",
+          "where": "the library's main repo and release",
+          "when": "runway through H1 2027",
+          "why": "own the commoditizing agent-loop default",
+          "how": "model-pluggable substrate, built-in file and shell tools"
+        }
+      },
+      {
+        "actor": "reference-implementation solo maintainer",
+        "job": "Shipping a few-hundred-line, vendor-decoupled, self-hostable permission-gated coding-agent loop atop a model-pluggable library to reset the ecosystem's reference shape.",
+        "outcome": "A published `llm code` CLI and CodingAgent primitive whose minimal harness becomes the reference the mainstream libraries measure and copy.",
+        "motivation": "Demonstrates the loop belongs in the base library, pressuring peers to adopt the same built-in shape instead of bespoke frameworks.",
+        "task": {
+          "who": "solo/independent maintainer",
+          "what": "publish minimal permission-gated agent-loop reference",
+          "where": "the llm library and its plugins",
+          "when": "runway from 0.1a0 through H1 2027",
+          "why": "reset the ecosystem's reference implementation",
+          "how": "few-hundred-line vendor-decoupled self-hostable harness"
+        }
+      },
+      {
+        "actor": "library agent-safety engineer",
+        "job": "Designing the allowlist-and-approval-gate permission model that makes the built-in file-and-shell agent loop safe enough to ship as a default primitive.",
+        "outcome": "A command allowlist or approval gate wired as the default safety control on the stock agent, so the loop ships enabled without a standalone dependency.",
+        "motivation": "Without a credible default safety gate the loop cannot ship first-class, so gating work is the gating precondition for landing.",
+        "task": {
+          "who": "safety / permissions function",
+          "what": "build allowlist and approval permission gate",
+          "where": "the agent loop's tool-execution layer",
+          "when": "runway through H1 2027",
+          "why": "make built-in file-and-shell tools shippable safely",
+          "how": "command allowlist plus per-action approval gate"
+        }
+      }
+    ]
+  }
+}

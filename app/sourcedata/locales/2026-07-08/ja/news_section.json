@@ -1,0 +1,99 @@
+{
+  "date": "2026-07-08",
+  "sections": [
+    {
+      "category": "Simon Willison が自身の LLM ライブラリをエージェントフレームワークに変え、llm-coding-agent を出荷。コーディングハーネスを単体プロダクトではなく pip でインストールできる CLI と Python クラスへとまとめ上げる",
+      "bullets": [
+        {
+          "body": "Simon Willison は2026年7月2日、<a href=\"https://simonwillison.net/2026/Jul/2/llm-coding-agent/\">llm-coding-agent 0.1a0</a> を公開した。これは広く使われている自身のオープンソース LLM ライブラリの上に直接構築された自律型コーディングエージェントで、彼はこのライブラリがモデル呼び出しユーティリティから本格的なエージェントフレームワークへと進化したと語っている。このツールは 2 つの入り口を提供する。llm code として起動し、uvx --prerelease=allow --with llm-coding-agent llm code でインストールなしに実行できる CLI と、CodingAgent(model=\"gpt-5.5\", root=\"/path\", approve=True).run(\"Fix the failing test in tests/test_parser.py\") のように生成する Python の CodingAgent クラスだ。このエージェントは 6 つの組み込みツール、すなわちファイルの読み書き、特定の文字列の編集、ファイル内容の一覧と検索、そして最大 600 秒のタイムアウトでのシェルコマンドの実行を備え、これらを権限モデルの後ろに置く。--yolo は無制限で動き、--allow \"pytest*\" --allow \"git diff*\" のような許可リストのフラグでどのコマンドが実行できるかを制約する。llm はモデルを差し替え可能なため、同じハーネスがライブラリの対応するあらゆるバックエンドを駆動し、エージェントループは特定ベンダーから切り離されている。Willison の <a href=\"https://simonwillison.net/2026/Jul/3/june-newsletter/\">6月ニュースレターの振り返り</a>は、これをライブラリのプラグインアーキテクチャがチャットの外装ではなくツールを使うエージェントの汎用基盤になった瞬間として位置づけている。コーディングエージェントのハーネスを追う者にとっての意義は、このカテゴリの下限が、保守者 1 人で出せる数百行・依存の少ない自前ホスト型のループへと下がりつつあることだ。これは、同じ領域にひしめくベンチャー資金を得た IDE やクラウドエージェントのプロダクトとは異なる競争の形である。",
+          "citations": [
+            {
+              "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+              "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+            },
+            {
+              "label": "Simon Willison - June 2026 newsletter",
+              "url": "https://simonwillison.net/2026/Jul/3/june-newsletter/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Unsloth の v0.1.481-beta が DeepSeek-V4-Flash のチューニングに加えて 3〜5 倍高速な MoE LoRA と一手での FP8/FP4 エクスポートを搭載。フロンティアのオープンウェイト向けにファインチューニングから配信までのループを、コモディティおよび Blackwell ハードウェアへとさらに押し進める",
+      "bullets": [
+        {
+          "body": "Unsloth は2026年7月7日、<a href=\"https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta\">v0.1.481-beta</a> をタグ付けした。これは以前の DeepSeek-V4 対応から大きく踏み込んだもので、自動のグループ化 MoE 検出により MoE LoRA 学習が 3〜5 倍速くなり、GRPO 学習は参照パスと旧対数確率パスでシーケンスパッキングを既定で有効にし、テンソル並列により GGUF 推論のスループットが約 30 パーセント向上する。このリリースは、思考トグルと修正済みチャットテンプレートを備えた DeepSeek-V4-Flash の第一級サポートを追加し、複数のエクスポート形式を単一パスにまとめた。これにより、マージ済みモデルを別立ての量子化段階なしに、ポータブルな FP8/INT8、圧縮 FP8/FP4、imatrix GGUF、LoRA 形式として書き出せる。ランタイム側では、ダウンロード済みの GGUF 間を安全に自動で切り替え、アイドル時にはアンロードして VRAM を解放し、次のリクエストで再ロードする llama-swap 方式のローカル API を導入し、リクエストごとのツール呼び出し修復の制御を提供する。実質的に、小さなローカルモデルサーバーを学習ツールキットに同梱したことになる。<a href=\"https://unsloth.ai/\">Unsloth プロジェクト</a>によれば、データセンター向け Blackwell(sm_100/sm_103)対応と、ディスクリート Radeon RDNA 3/4 GPU 向けの ROCm-on-WSL によって、ハードウェア対応範囲も広がった。昨日の DeepSeek-V4 対応から本日の Flash 版リリースに加えて高速な MoE と統合された FP4 エクスポートに至る一貫した筋は、新たに公開されたオープンウェイトのフロンティアモデルと、コンシューマー GPU のチームがそれを適応させて配信する能力との実質的な差が、同じ週のうちに収まるところまで縮まり続けている、ということだ。",
+          "citations": [
+            {
+              "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+              "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+            },
+            {
+              "label": "Unsloth - project site (Studio, local model training and running)",
+              "url": "https://unsloth.ai/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "BMC Control-M/Server の CVSS 9.5 認証不要コマンドインジェクション脆弱性が、修正版ビルドの名指しなしに登場。エンタープライズ向けジョブスケジューラを深刻なリモートコード実行リスクの中心に据える",
+      "bullets": [
+        {
+          "body": "2026年7月1日に公開された <a href=\"https://cvefeed.io/vuln/detail/CVE-2026-10539\">CVE-2026-10539</a> は、BMC の Control-M/Server における深刻な CVSS 9.5(CVSS 4.0、リモートから悪用可能)の脆弱性だ。Control-M/Server は、広く導入されているエンタープライズ向けワークロード自動化・バッチジョブスケジューリングプラットフォームのサーバーコンポーネントである。Control-M/Server の通信コマンドはユーザー提供の入力を十分にフィルタリング・サニタイズしておらず、特定の条件下では認証されていない攻撃者が影響を受けるサーバー上で不正なコマンドを実行できてしまう。これはサーバーの完全な乗っ取りへの直接の経路であり、この弱点は CWE-305 に分類され、実際の影響はリモートコード実行につながるコマンドインジェクションだ。影響を受けるビルドは Control-M/Server 9.0.20.x から 9.0.21.200 まで(両端を含む)に及び、さらにサポート終了済みの旧リリースも対象となりうるが、勧告には修正版の具体的なバージョン番号が明記されておらず、防御側はベンダーの最新アップデートの適用と、暫定的な対策としての入力サニタイズ、ネットワークアクセス制限、活動監視に頼るよう指示されている。これがありふれたスケジューラのバグを超えて注目に値する理由は、その位置にある。Control-M は、大企業にわたって金融、データパイプライン、運用のジョブを起動するオーケストレーション層に位置するため、そこでの認証不要 RCE は、まさに自動化が触れるシステムへの影響力の大きい足がかりとなり、修正版ビルドが名指しされていないことが、公開されたインスタンスが到達可能なまま留まる期間を広げる。",
+          "citations": [
+            {
+              "label": "CVEFeed - CVE-2026-10539 (unauthenticated command injection, Control-M/Server, CVSS 9.5)",
+              "url": "https://cvefeed.io/vuln/detail/CVE-2026-10539"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "vLLM の v0.24.0 が DeepSeek-V4 の配信経路と協調的なセキュリティ強化のまとまりを同一リリースにまとめ、このオープン推論エンジンが素のスループットと同じくらいサプライチェーンと DoS の軸でも成熟しつつあることを示す",
+      "bullets": [
+        {
+          "body": "vLLM は <a href=\"https://github.com/vllm-project/vllm/releases/tag/v0.24.0\">v0.24.0</a> を、256 人の貢献者(うち 77 人が新規)による 571 コミットとともに出荷した。注目すべき変化は、変更履歴のうちどれだけが性能ではなく防御に充てられているかだ。このリリースは依存を Starlette 1.0.1 以降へパッチして CVE-2026-48710 を塞ぎ、音声認識エンドポイントの音声解凍爆弾と、投機的デコードにおける不正な復元トークンの再注入によるリモート DoS を修正する協調的なセキュリティ強化のまとまりを盛り込んだ。これは、推論サーバーがマルチテナントの API として公開されると重要になる類の敵対的入力の処理だ。機能面では、DeepSeek-V4 が広範に最適化され、TTFT を数パーセント改善する FlashInfer のスパースインデックスキャッシュに加え、XPU と ROCm にわたる専用のアテンションおよび MoE 経路が用意された。これにより、チューニングスタックが対応を競っているのと同じフロンティアのオープンウェイトファミリーが、今や第一級の配信対象になった。Intel XPU 対応はシーケンス並列サポート、torch-xpu 2.12、W4A16 int4 グループサイズ 32 の MoE 量子化で拡張され、メモリとカーネルの作業、すなわちプリエンプションを減らす KV キャッシュのウォーターマーク、グループ横断のプレフィックスキャッシュヒットのための二段階割り当て、そして 180〜290 パーセントの高速化を報告する CUTLASS FP8 カーネルが、スループットの進展を保っている。自前ホスト型推論を立ち上げるチームにとっての読みは、主導的なオープンエンジンが今や DoS 耐性とサプライチェーンのパッチ適用を、トークン毎秒と並んでリリースをブロックする関心事として扱っている、ということだ。これはベンチマークのデモではなく本番公開に向けて配信スタックが強化されている証である。",
+          "citations": [
+            {
+              "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+              "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま予定に入れておきたい AI イベント: ICML のソウルのプログラムは週末まで続き、次の AI Tinkerers SF のミートアップは8月に移る一方、チップ、セキュリティ、エンタープライズの各分野が秋にかけて積み上がる",
+      "bullets": [
+        {
+          "body": "今週の研究面では、<a href=\"https://icml.cc/\">ソウルの ICML 2026</a> が COEX センターで継続中で、本会議は本日締めくくられ、ワークショップは7月10〜11日に開催される。週末を通して遠隔または現地で参加する人にとって、プログラムはまだ動いている。ベイエリア在住者には、次の <a href=\"https://sf.aitinkerers.org/p/ai-tinkerers-sf-august-meetup\">AI Tinkerers サンフランシスコ・ミートアップ</a>が、本日の市場投入エンジニアリングのセッションに続き、いつもの実働デモ形式で8月に移る。これはエージェント、音声、推論インフラのハンズオンデモにとって、当面の頼れる開催地であり続ける。AI チップ・ハードウェアの分野では、最も近い確定済みの集まりは8月23〜25日にスタンフォードの Memorial Auditorium で開かれる Hot Chips 2026 だ。これは <a href=\"https://hotchips.org/registration/\">Hot Chips 登録ページ</a>によれば早期登録料が7月31日に締め切られる、対面とオンラインのハイブリッドイベントで、その後には9月15〜17日にサンタクララで AI Infra Summit が続く。AI セキュリティのまとまりは8月上旬から中旬に集中している。SecurityWeek の <a href=\"https://www.airisksummit.com/register/\">AI Risk Summit</a> は8月11〜12日、Half Moon Bay の Ritz-Carlton で CISO と AI セキュリティ研究者向けに開かれ、Black Hat USA と DEF CON 34 の AI Village は8月上旬にラスベガスで開催され、OWASP Global AppSec USA は11月5〜6日にサンフランシスコで続く。Zenity の AI Agent Security Summit シリーズは、エージェントの乗っ取りや MCP 層の防御に注力するチーム向けに開催地を巡り続けている。エンタープライズ分野では、<a href=\"https://ai4.io/register/\">Ai4 2026</a> が8月4〜6日にラスベガスの The Venetian で開かれ、ACM AI Leadership Summit は8月30日から9月2日までアトランタで、GitHub Universe は10月28〜29日、AWS re:Invent は11月30日から12月4日までラスベガスで行われる。当面の行動としては、研究が専門なら7月11日までの ICML ワークショップを押さえること、そして今サイクルで守秘推論やセキュアなアクセラレータの発表の自然な場となる、8月の AI Risk Summit と Hot Chips の日程を確保することだ。",
+          "citations": [
+            {
+              "label": "ICML 2026 official site (Seoul, main conference July 7-9, workshops July 10-11)",
+              "url": "https://icml.cc/"
+            },
+            {
+              "label": "AI Tinkerers - San Francisco August meetup",
+              "url": "https://sf.aitinkerers.org/p/ai-tinkerers-sf-august-meetup"
+            },
+            {
+              "label": "Hot Chips 2026 registration (Aug 23-25, Stanford; early rate closes July 31)",
+              "url": "https://hotchips.org/registration/"
+            },
+            {
+              "label": "SecurityWeek AI Risk Summit 2026 registration (Aug 11-12, Half Moon Bay)",
+              "url": "https://www.airisksummit.com/register/"
+            },
+            {
+              "label": "Ai4 2026 registration (Aug 4-6, The Venetian, Las Vegas)",
+              "url": "https://ai4.io/register/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

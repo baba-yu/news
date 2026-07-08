@@ -1,0 +1,137 @@
+{
+  "date": "2026-07-08",
+  "by_prediction": {
+    "prediction.546732d279b0a395": [
+      {
+        "actor": "maintainer ng release ng open inference engine",
+        "job": "Pagsasama ng mga koordinadong CVE fix, dependency bump, at adversarial-input hardening sa mga gated na release para maging isang release-blocking na kriteryo ang security, hindi isang post-hoc na churn.",
+        "outcome": "Isang inilathala at pinangalanang security track: nakasaad na response policy saka isang hardening gate na nakakabit sa release checklist ng engine kasabay ng CVE handling na koordinado sa mga inilabas na build.",
+        "motivation": "Ginagawang table-stakes para sa enterprise adoption ang isang matunayan at versioned na security posture ng multi-tenant production exposure at buhay na mga atake sa self-hosted inference.",
+        "task": {
+          "who": "core maintainer / release-engineering na koponan",
+          "what": "i-gate ang CVE at hardening fix patungo sa mga hinarang na release",
+          "where": "release checklist at SECURITY policy ng engine",
+          "when": "mga release cycle mula huling bahagi ng 2026 hanggang H1 2027",
+          "why": "gawing isang release-blocking na production axis ang security",
+          "how": "koordinadong CVE-disclosure na proseso at release gate"
+        }
+      },
+      {
+        "actor": "inference-serving na security at fuzzing engineer",
+        "job": "Pagbuo ng untrusted-input fuzzing sa mga public endpoint, DoS-resistance na tsek, at upstream-dependency CVE gating para awtomatikong tumakbo ang hardening bilang bahagi ng bawat release.",
+        "outcome": "Isang hardening/fuzzing gate sa release pipeline na nag-fu-fuzz ng mga public endpoint, humaharang sa mga hindi-naaayos na upstream CVE, at nag-eehersisyo ng DoS-resistance bago maglabas ng isang build.",
+        "motivation": "Ang mga adversarial na input, decompression bomb, at reinjection DoS sa mga nakalantad na endpoint ay kailangang mahuli bago-ang-release, hindi pagkatapos ng isang multi-tenant na insidente.",
+        "task": {
+          "who": "security / test-infrastructure na engineer",
+          "what": "ikabit ang fuzzing at DoS-resistance na gate sa CI",
+          "where": "release pipeline para sa mga public serving endpoint",
+          "when": "buildout hanggang H2 2026 at H1 2027",
+          "why": "mahuli ang mga adversarial-input at DoS na depekto bago-ang-release",
+          "how": "endpoint fuzzer at upstream-CVE dependency scanning"
+        }
+      },
+      {
+        "actor": "lead sa enterprise inference procurement at platform-security",
+        "job": "Muling pagsulat sa mga procurement bar ng self-hosted inference para hilingin ang isang versioned at dokumentadong security posture, na nag-iipit sa mga puro-throughput at hindi-pinananatiling engine pababa sa linya ng pagtanggap.",
+        "outcome": "Mga procurement na kriteryo na sumusukat sa production-readiness ng isang serving engine sa isang security axis, na gumagantimpala sa mga engine na may pinangalanang security track at tumatanggi sa mga wala nito.",
+        "motivation": "Ang pagtatayo ng multi-tenant na self-hosted inference sa isang aktibong attack surface ay humihingi ng mga na-audit na security na garantiya, hindi hilaw na tokens-per-second lamang.",
+        "task": {
+          "who": "platform-security / infrastructure procurement na tungkulin",
+          "what": "idagdag ang versioned na security posture sa engine selection bar",
+          "where": "self-hosted inference procurement at deployment review",
+          "when": "mga evaluation cycle sa buong 2026 hanggang H1 2027",
+          "why": "patakbuhin lamang ang mga engine na may na-audit na multi-tenant hardening",
+          "how": "security-posture na checklist sa vendor at engine review"
+        }
+      }
+    ],
+    "prediction.7e04ececc362f9bd": [
+      {
+        "actor": "maintainer ng open fine-tuning toolkit",
+        "job": "Pagsasama ng one-pass low-bit na quantized export at isang naka-bundle na auto-swapping inference server sa core release path ng training toolkit.",
+        "outcome": "Isang dokumentadong train, one-pass low-bit export, at serve na daloy na pinapatakbo mula sa iisang tool na may naka-bundle na checkpoint-switching model server.",
+        "motivation": "Tinuturing ng mga local at maliliit-na-koponang user ang hiwalay na train, export, at serve na tool bilang isang alitan na kayang sakupin ng toolkit para manatiling default.",
+        "task": {
+          "who": "core engineering / release na koponan",
+          "what": "ikabit ang quantized-export-to-serve sa iisang tuloy-tuloy na daloy",
+          "where": "training pipeline at release branch ng toolkit",
+          "when": "panahong inilaan mula sa beta na ito hanggang H1 2027",
+          "why": "gawing stock na local workflow ang integrated na export-to-serve",
+          "how": "one-pass GGUF/adapter export saka naka-bundle na auto-swap server"
+        }
+      },
+      {
+        "actor": "developer ng local inference server",
+        "job": "Paggawa ng isang llama-swap-style na server na embeddable sa loob ng mga tuning toolkit, na awtomatikong nagpapalit ng checkpoint at gumagawa ng memory-aware na load/unload nang out of the box.",
+        "outcome": "Isang first-party o naka-bundle na model server na humahawak sa checkpoint switching at idle-unload/reload, na inilabas bilang isang tampok ng toolkit hindi isang hiwalay na stack.",
+        "motivation": "Habang nagiging commodity ang hilaw na single-box na loop, pinananatili itong may saysay ng pag-embed ng server at ibinibigay ang standalone-server na puwesto sa local na tier.",
+        "task": {
+          "who": "serving / runtime na sub-team",
+          "what": "ibundle ang auto-swapping at memory-aware na server sa tuning toolkit",
+          "where": "serve module at export handoff ng toolkit",
+          "when": "panahong inilaan sa pagitan ng beta na ito at H1 2027",
+          "why": "dalhin ang serving bilang isang tampok ng toolkit, hindi isang produkto",
+          "how": "llama-swap-style na auto-swap, idle-unload, tool-call healing"
+        }
+      },
+      {
+        "actor": "engineer ng low-bit export format",
+        "job": "Pagpapag-isa ng portable at compressed na low-bit weight, quantized GGUF, at adapter na target sa iisang one-pass na export na naglalabas ng handa-nang-ihaing artifact.",
+        "outcome": "Isang training run na naglalabas ng handa-nang-ihaing quantized na artifact sa iisang pass, na nagpapakain sa naka-bundle na server nang walang pag-abot sa isang hiwalay na stack.",
+        "motivation": "Inaalis ng one-pass na export-to-serve ang quantize-and-export na gitnang tool, na ginagawang pinakanatural na opsyon ang single-tool na local loop.",
+        "task": {
+          "who": "quantization / export na sub-team",
+          "what": "maglabas ng handa-nang-ihaing low-bit na artifact sa iisang pass",
+          "where": "export stage ng toolkit na nagpapakain sa server",
+          "when": "panahong inilaan sa buong huling bahagi ng 2026 hanggang H1 2027",
+          "why": "alisin ang hiwalay na quantize-export na hakbang ng pag-abot",
+          "how": "pinag-isang low-bit, GGUF, at adapter na one-pass export"
+        }
+      }
+    ],
+    "prediction.c5fe8479ffcd7e16": [
+      {
+        "actor": "maintainer ng open-source LLM client library",
+        "job": "Pagsasama ng isang tool-executing agent loop sa pangkalahatang chat-and-tool-calls na library bilang isang dokumentadong first-class na primitive sa halip na isang hiwalay na framework.",
+        "outcome": "Isang stock na CodingAgent-style na class at CLI na matatawag sa ilang linya, na may built-in na filesystem at shell na tool na inilabas sa library.",
+        "motivation": "Pinananatili ang mga developer sa kanilang library habang nagiging commodity ang agent loop, at humaharang sa mga karibal na library na maunang mag-angkin ng built-in-agent na default.",
+        "task": {
+          "who": "core library / agents na subteam",
+          "what": "ipatupad ang built-in na tool-executing agent loop",
+          "where": "pangunahing repo at release ng library",
+          "when": "panahong inilaan hanggang H1 2027",
+          "why": "angkinin ang nagiging-commodity na agent-loop na default",
+          "how": "model-pluggable na substrate, built-in na file at shell na tool"
+        }
+      },
+      {
+        "actor": "solo maintainer ng reference-implementation",
+        "job": "Paglalabas ng isang ilang-daang-linya, nakahiwalay-sa-vendor, self-hostable at permission-gated na coding-agent loop sa ibabaw ng isang model-pluggable na library para muling itakda ang reference na hugis ng ekosistema.",
+        "outcome": "Isang inilathalang `llm code` CLI at CodingAgent na primitive na ang minimal na harness ay nagiging reference na sinusukat at kinokopya ng mga mainstream na library.",
+        "motivation": "Ipinapakita na kabilang ang loop sa base library, na nagpipilit sa mga kapantay na kunin ang parehong built-in na hugis sa halip na mga bespoke na framework.",
+        "task": {
+          "who": "solo/independiyenteng maintainer",
+          "what": "ilathala ang minimal at permission-gated na agent-loop na reference",
+          "where": "ang llm library at mga plugin nito",
+          "when": "panahong inilaan mula 0.1a0 hanggang H1 2027",
+          "why": "muling itakda ang reference implementation ng ekosistema",
+          "how": "ilang-daang-linya, nakahiwalay-sa-vendor, at self-hostable na harness"
+        }
+      },
+      {
+        "actor": "agent-safety engineer ng library",
+        "job": "Pagdidisenyo ng allowlist-and-approval-gate na permission model na nagpapaligtas sa built-in na file-and-shell agent loop nang sapat para ilabas bilang isang default na primitive.",
+        "outcome": "Isang command allowlist o approval gate na nakakabit bilang default na safety control sa stock na agent, kaya inilalabas ang loop nang naka-enable nang walang standalone na dependency.",
+        "motivation": "Kung walang kapani-paniwalang default na safety gate, hindi mailalabas ang loop bilang first-class, kaya ang gating na gawa ang gating na precondition para tumama.",
+        "task": {
+          "who": "safety / permissions na tungkulin",
+          "what": "buuin ang allowlist at approval na permission gate",
+          "where": "tool-execution layer ng agent loop",
+          "when": "panahong inilaan hanggang H1 2027",
+          "why": "gawing ligtas na mailalabas ang built-in na file-and-shell na tool",
+          "how": "command allowlist saka per-action na approval gate"
+        }
+      }
+    ]
+  }
+}
