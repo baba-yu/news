@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "open inference engine release maintainer",
+    "job": "Folding coordinated CVE fixes, dependency bumps, and adversarial-input hardening into gated releases so security becomes a release-blocking criterion, not post-hoc churn.",
+    "outcome": "A published, named security track: stated response policy plus a hardening gate wired into the engine's release checklist alongside CVE handling coordinated to shipped builds.",
+    "motivation": "Multi-tenant production exposure and live attacks on self-hosted inference make a demonstrable, versioned security posture table-stakes for enterprise adoption.",
+    "task": {
+      "who": "core maintainer / release-engineering team",
+      "what": "gate CVE and hardening fixes into blocked releases",
+      "where": "engine release checklist and SECURITY policy",
+      "when": "release cycles across late 2026 into H1 2027",
+      "why": "make security a release-blocking production axis",
+      "how": "coordinated CVE-disclosure process and release gate"
+    }
+  },
+  {
+    "actor": "inference-serving security and fuzzing engineer",
+    "job": "Building untrusted-input fuzzing on public endpoints, DoS-resistance checks, and upstream-dependency CVE gating so hardening runs automatically as part of every release.",
+    "outcome": "A hardening/fuzzing gate in the release pipeline that fuzzes public endpoints, blocks on unpatched upstream CVEs, and exercises DoS-resistance before a build ships.",
+    "motivation": "Adversarial inputs, decompression bombs, and reinjection DoS on exposed endpoints must be caught pre-release, not after a multi-tenant incident.",
+    "task": {
+      "who": "security / test-infrastructure engineers",
+      "what": "wire fuzzing and DoS-resistance gates into CI",
+      "where": "release pipeline for public serving endpoints",
+      "when": "buildout through H2 2026 and H1 2027",
+      "why": "catch adversarial-input and DoS flaws pre-release",
+      "how": "endpoint fuzzers and upstream-CVE dependency scanning"
+    }
+  },
+  {
+    "actor": "enterprise inference procurement and platform-security lead",
+    "job": "Rewriting self-hosted inference procurement bars to require a versioned, documented security posture, pushing pure-throughput and unmaintained engines below the acceptance line.",
+    "outcome": "Procurement criteria that measure a serving engine's production-readiness on a security axis, rewarding engines with a named security track and rejecting those without one.",
+    "motivation": "Standing up multi-tenant self-hosted inference on an active attack surface demands auditable security guarantees, not raw tokens-per-second alone.",
+    "task": {
+      "who": "platform-security / infrastructure procurement function",
+      "what": "add versioned security posture to engine selection bar",
+      "where": "self-hosted inference procurement and deployment review",
+      "when": "evaluation cycles across 2026 into H1 2027",
+      "why": "only run engines with auditable multi-tenant hardening",
+      "how": "security-posture checklist in vendor and engine review"
+    }
+  }
+]

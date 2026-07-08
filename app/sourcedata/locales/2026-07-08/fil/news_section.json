@@ -1,0 +1,99 @@
+{
+  "date": "2026-07-08",
+  "sections": [
+    {
+      "category": "Ginawang agent framework ni Simon Willison ang kanyang LLM library at inilabas ang llm-coding-agent, na pinag-iisa ang isang coding harness patungong isang pip-installable na CLI at Python class sa halip na isang standalone na produkto",
+      "bullets": [
+        {
+          "body": "Inilabas ni Simon Willison ang <a href=\"https://simonwillison.net/2026/Jul/2/llm-coding-agent/\">llm-coding-agent 0.1a0</a> noong July 2, 2026, isang autonomous coding agent na direktang nakabatay sa kanyang malawakang ginagamit na open-source na LLM library, na inilalarawan niyang lumago mula sa isang model-calling utility patungong buong agent framework. Dalawang bagay ang inilalantad ng tool na ito: isang CLI na tinatawag bilang llm code, na napapatakbo nang walang installation sa pamamagitan ng uvx --prerelease=allow --with llm-coding-agent llm code, at isang Python CodingAgent class na ini-instantiate bilang CodingAgent(model=\"gpt-5.5\", root=\"/path\", approve=True).run(\"Fix the failing test in tests/test_parser.py\"). May anim na built-in na tool ang agent, pagbabasa at pagsusulat ng file, pag-edit ng partikular na string, paglilista at paghahanap sa nilalaman ng file, at pagpapatakbo ng shell command na may timeout hanggang 600 segundo, at kinakandado ang mga ito sa likod ng isang permission model: tumatakbo nang walang restriksyon ang --yolo, samantalang pinaghihigpitan ng allowlist flag gaya ng --allow \"pytest*\" --allow \"git diff*\" kung aling command ang puwedeng tumakbo. Dahil model-pluggable ang llm, pinapatakbo ng parehong harness ang anumang backend na sinusuportahan ng library, kaya nahihiwalay ang agent loop mula sa iisang vendor, at binabanggit ng <a href=\"https://simonwillison.net/2026/Jul/3/june-newsletter/\">June newsletter recap</a> ni Willison na ito na ang sandali kung kailan naging pangkalahatang substrate ang plugin architecture ng library para sa mga tool-using agent sa halip na isang chat wrapper. Ang kahalagahan para sa sinumang sumusubaybay sa mga coding-agent harness ay bumababa ang pinakamababang antas ng kategorya patungong isang loop na may ilang daang linya lamang, magaan sa dependency, at self-hostable na kayang ilabas ng iisang maintainer, na isang ibang kompetitibong hugis mula sa mga venture-funded na IDE at cloud-agent na produkto na nagsisiksikan sa parehong espasyo.",
+          "citations": [
+            {
+              "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+              "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+            },
+            {
+              "label": "Simon Willison - June 2026 newsletter",
+              "url": "https://simonwillison.net/2026/Jul/3/june-newsletter/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Naglabas ang v0.1.481-beta ng Unsloth ng DeepSeek-V4-Flash tuning saka 3-5x na mas mabilis na MoE LoRA at one-step na FP8/FP4 export, na nag-iitulak sa fine-tune-then-serve na loop para sa mga frontier open weight nang higit pa patungo sa commodity at Blackwell na hardware",
+      "bullets": [
+        {
+          "body": "Tinag ng Unsloth ang <a href=\"https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta\">v0.1.481-beta</a> noong July 7, 2026, isang malaking hakbang lampas sa naunang DeepSeek-V4 na gawa nito: 3-5x nang mas mabilis ang MoE LoRA training sa pamamagitan ng automatic grouped-MoE detection, pinagana ng GRPO training ang sequence packing bilang default para sa reference at lumang log-probability na pass, at nagdadagdag ang tensor parallelism ng humigit-kumulang 30 porsiyentong throughput para sa GGUF inference. Nagdaragdag ang release ng first-class na suporta sa DeepSeek-V4-Flash na may thinking toggle at naitamang chat template, at pinagsasama nito ang ilang export format sa iisang pass, kaya maisusulat ang isang merged model bilang portable FP8/INT8, compressed FP8/FP4, imatrix GGUF, at LoRA na format nang walang hiwalay na quantization stage. Sa panig ng runtime, ipinakikilala nito ang isang llama-swap-style na local API na ligtas na awtomatikong nagpapalit-palit sa mga na-download na GGUF, nag-a-unload kapag idle para magpalaya ng VRAM at nagre-reload sa susunod na request, at naglalantad ng per-request na tool-call healing control, na mabisang nagbabalot ng isang maliit na local model server sa loob ng training toolkit. Lumalawak din ang hardware coverage, kasama ang data-center Blackwell (sm_100/sm_103) na suporta at ROCm-on-WSL para sa discrete Radeon RDNA 3/4 GPU, ayon sa <a href=\"https://unsloth.ai/\">Unsloth project</a>. Ang nagdudugtong mula sa DeepSeek-V4 enablement kahapon patungo sa Flash-variant release ngayon kasama ang mas mabilis na MoE at integrated FP4 export ay patuloy na lumiliit hanggang sa loob ng iisang linggo ang praktikal na agwat sa pagitan ng bagong inilabas na open-weight frontier model at ng kakayahan ng isang consumer-GPU na koponan na iakma at ihain ito.",
+          "citations": [
+            {
+              "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+              "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+            },
+            {
+              "label": "Unsloth - project site (Studio, local model training and running)",
+              "url": "https://unsloth.ai/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Isang CVSS 9.5 na unauthenticated command-injection na depekto sa BMC Control-M/Server ang dumating nang walang pinangalanang naayos na build, na naglalagay sa isang enterprise job scheduler sa sentro ng isang kritikal na remote-code-execution na panganib",
+      "bullets": [
+        {
+          "body": "Ang <a href=\"https://cvefeed.io/vuln/detail/CVE-2026-10539\">CVE-2026-10539</a>, na inilathala noong July 1, 2026, ay isang kritikal na CVSS 9.5 (CVSS 4.0, remotely exploitable) na depekto sa Control-M/Server ng BMC, ang server component ng isang malawakang naka-deploy na enterprise workload-automation at batch-job scheduling platform. May isang Control-M/Server na communication command na hindi sapat na nagsasala o naglilinis ng input mula sa user, na sa ilalim ng ilang kondisyon ay nagbibigay-daan sa isang unauthenticated na attacker na magpatakbo ng hindi awtorisadong command sa apektadong server, isang tuwirang daan patungo sa buong pagkakompromiso ng server; nakauri ang kahinaan sa ilalim ng CWE-305 at ang praktikal na epekto ay command injection na humahantong sa remote code execution. Sakop ng apektadong build ang Control-M/Server 9.0.20.x hanggang 9.0.21.200 kasama na, saka posibleng mga naunang unsupported na release, at walang partikular na naayos na version number na nakalista sa advisory, kaya inaatasan ang mga tagapagtanggol na ilapat ang pinakabagong vendor update at umasa sa input sanitization, network access restriction, at activity monitoring bilang pansamantalang kontrol. Ang dahilan kung bakit ito nararapat pansinin nang higit pa sa isang karaniwang scheduler bug ay posisyonal: nasa orchestration layer ang Control-M na nagpapaandar ng mga financial, data-pipeline, at operational na trabaho sa malalaking enterprise, kaya ang isang unauthenticated RCE doon ay isang mataas-na-leverage na paninindigan patungo sa eksaktong mga sistemang hinahawakan ng automation, at pinapalapad ng kawalan ng pinangalanang naayos na build ang panahon kung saan nananatiling naaabot ang mga nakalantad na instance.",
+          "citations": [
+            {
+              "label": "CVEFeed - CVE-2026-10539 (unauthenticated command injection, Control-M/Server, CVSS 9.5)",
+              "url": "https://cvefeed.io/vuln/detail/CVE-2026-10539"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Pinagsasama ng v0.24.0 ng vLLM ang mga DeepSeek-V4 serving path at isang koordinadong security-hardening batch sa parehong release, na senyales na nagkakahustong-gulang na ang open inference engine sa supply-chain at denial-of-service na aksis nang kasindami ng sa hilaw na throughput",
+      "bullets": [
+        {
+          "body": "Inilabas ng vLLM ang <a href=\"https://github.com/vllm-project/vllm/releases/tag/v0.24.0\">v0.24.0</a> na may 571 commit mula sa 256 contributor (77 sa kanila ay bago), at ang kapansin-pansing pagbabago ay kung gaano karaming bahagi ng changelog ang depensibo sa halip na pang-performance lamang. Nagpa-patch ang release ng isang dependency patungong Starlette 1.0.1 o mas bago para isara ang CVE-2026-48710 at naglabas ng isang koordinadong security-hardening batch na nag-aayos ng audio-decompression bomb sa speech-to-text endpoint at isang remote denial-of-service sa pamamagitan ng invalid recovered-token reinjection sa speculative decoding, ang uri ng adversarial-input handling na mahalaga kapag nakalantad na ang isang inference server bilang multi-tenant na API. Sa panig ng kakayahan, nakakuha ang DeepSeek-V4 ng malawakang optimisasyon, isang FlashInfer sparse-index cache na nagkakahalaga ng ilang porsiyentong time-to-first-token saka mga dedikadong attention at MoE na path sa buong XPU at ROCm, kaya ang parehong frontier open-weight na pamilya na pinagpupunyagian ng mga tuning stack na suportahan ay isa nang first-class na serving target. Lumalawak ang Intel XPU coverage kasama ang sequence-parallel na suporta, torch-xpu 2.12, at W4A16 int4 group-size-32 MoE quantization, samantalang ang gawa sa memory at kernel, isang KV-cache watermark para bawasan ang preemption, two-phase allocation para sa cross-group prefix-cache hit, at CUTLASS FP8 kernel na nag-uulat ng 180-290 porsiyentong speedup, ay patuloy na nagpapaandar sa kuwento ng throughput. Para sa mga koponan na nagtatayo ng self-hosted inference, ang basa ay tinatrato na ngayon ng nangungunang open engine ang denial-of-service resistance at supply-chain patching bilang mga release-blocking na alalahanin kasabay ng tokens-per-second, na siyang senyales ng isang serving stack na pinatitibay para sa production exposure sa halip na benchmark demo.",
+          "citations": [
+            {
+              "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+              "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mga AI event na dapat planuhin ngayon: tumatakbo ang Seoul program ng ICML hanggang katapusan ng linggo at lumilipat sa August ang susunod na AI Tinkerers SF meetup, habang nagsasalansan ang chip, security, at enterprise na track sa buong fall",
+      "bullets": [
+        {
+          "body": "Para sa research ngayong linggo, patuloy ang <a href=\"https://icml.cc/\">ICML 2026 sa Seoul</a> sa COEX center, na nagtatapos ngayon ang main conference at tumatakbo ang mga workshop sa July 10-11, kaya buhay pa ang programa para sa sinumang dadalo nang remote o on-site hanggang katapusan ng linggo. Para sa mga taga-Bay Area, lumilipat sa August ang susunod na <a href=\"https://sf.aitinkerers.org/p/ai-tinkerers-sf-august-meetup\">AI Tinkerers San Francisco meetup</a> sa dating working-demo na format, kasunod ng go-to-market engineering session ngayon; nananatili itong maaasahang malapitang lugar para sa mga hands-on na agent, voice, at inference-infra demo. Sa AI-chip at hardware na track, ang pinakamalapit na kumpirmadong pagtitipon ay ang Hot Chips 2026 sa Memorial Auditorium ng Stanford sa August 23-25, isang hybrid na in-person at virtual na event na nagsasara ang early-registration rate sa July 31 ayon sa <a href=\"https://hotchips.org/registration/\">Hot Chips registration page</a>, kasunod ng AI Infra Summit sa Santa Clara sa September 15-17. Nagsisiksikan ang AI-security block sa maaga-hanggang-kalagitnaan ng August: ang <a href=\"https://www.airisksummit.com/register/\">AI Risk Summit</a> ng SecurityWeek ay sa August 11-12 sa Ritz-Carlton sa Half Moon Bay para sa mga CISO at AI-security researcher, dadapo ang Black Hat USA at ang AI Village ng DEF CON 34 sa Las Vegas sa maagang August, at kasunod ang OWASP Global AppSec USA sa San Francisco sa November 5-6; patuloy ang AI Agent Security Summit series ng Zenity sa mga hinto nito para sa mga koponan na nakatutok sa agent-hijack at MCP-layer na depensa. Sa enterprise na track, tumatakbo ang <a href=\"https://ai4.io/register/\">Ai4 2026</a> sa August 4-6 sa The Venetian sa Las Vegas, ang ACM AI Leadership Summit ay sa August 30 hanggang September 2 sa Atlanta, ang GitHub Universe ay sa October 28-29, at tumatakbo ang AWS re:Invent sa November 30 hanggang December 4 sa Las Vegas. Ang agarang aksyon ay ang pag-abot sa mga ICML workshop hanggang July 11 kung research ang iyong larangan at ang pag-lock sa mga petsa ng August AI Risk Summit at Hot Chips, na nananatiling likas na lugar para sa mga anunsyo ng confidential-inference at secure-accelerator ngayong siklo.",
+          "citations": [
+            {
+              "label": "ICML 2026 official site (Seoul, main conference July 7-9, workshops July 10-11)",
+              "url": "https://icml.cc/"
+            },
+            {
+              "label": "AI Tinkerers - San Francisco August meetup",
+              "url": "https://sf.aitinkerers.org/p/ai-tinkerers-sf-august-meetup"
+            },
+            {
+              "label": "Hot Chips 2026 registration (Aug 23-25, Stanford; early rate closes July 31)",
+              "url": "https://hotchips.org/registration/"
+            },
+            {
+              "label": "SecurityWeek AI Risk Summit 2026 registration (Aug 11-12, Half Moon Bay)",
+              "url": "https://www.airisksummit.com/register/"
+            },
+            {
+              "label": "Ai4 2026 registration (Aug 4-6, The Venetian, Las Vegas)",
+              "url": "https://ai4.io/register/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

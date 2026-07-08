@@ -1,0 +1,272 @@
+{
+  "date": "2026-07-08",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.c5fe8479ffcd7e16",
+        "short_label": "LLM client libraries ship a permission-gated coding-agent loop by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Direktang ebidensya ng pinagmulan. Ang llm-coding-agent 0.1a0 ni Simon Willison (July 2) ay ginagawang first-class primitive ang agent loop sa loob ng dati na niyang model-calling library, sa halip na ilabas ito bilang hiwalay na produkto. Naglalabas ito ng `llm code` CLI (patatakbuhin sa pamamagitan ng uvx nang walang installation) at isang Python `CodingAgent` class na may anim na built-in na file-and-shell tools, shell timeout hanggang 600 segundo, at isang permission model kung saan tumatakbo nang walang restriksyon ang `--yolo` habang nililimitahan ng mga allowlist flag tulad ng `--allow \"pytest*\"` kung anong mga command ang puwedeng tumakbo. Dahil nakasakay ang loop sa isang model-pluggable na substrate, ang buong harness ay ilang daang linya lamang, vendor-decoupled, at self-hostable.\nAyon sa prediction na naglalabas-ang-library-ng-permission-gated-coding-agent-loop, ito ang reference implementation na kinukumpara na ngayon ng iba pang ekosistema: sa H1 2027 kahit dalawang mainstream general-purpose LLM client library na ini-import na ng mga developer (sa linya ng llm, LangChain, LlamaIndex, ang mga vendor SDK, Pydantic AI) ang maglalabas ng dokumentado, permission-gated na tool-executing agent loop bilang stock primitive na matatawag sa iilang linya, na ibababa ang pinakamababang hanggahan para sa isang magagamit na coding agent mula sa isang pinondohang IDE product patungo sa isang import statement sa ibabaw ng isang pinagkakatiwalaang library.",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+          "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+        },
+        {
+          "label": "Simon Willison - June 2026 newsletter",
+          "url": "https://simonwillison.net/2026/Jul/3/june-newsletter/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ito ang unang pinagmulang halimbawa: isang na-import nang model-calling library ang nagkaroon ng stock na `llm code` CLI at `CodingAgent` class na may anim na file-and-shell tools sa likod ng isang allowlist gate, sa loob ng ilang daang vendor-decoupled na linya. Ang prediction na permission-gated-loop-bilang-library-primitive ay may buháy na ngayong reference implementation sa mismong linyang binabanggit nito, na nagpapakita na ang hugis ay nabubuo sa ibabaw ng isang general client library ngayon.",
+        "coherence": 5,
+        "remaining_gap": "Ang alpha ng isang maintainer ay nagpapatunay ng feasibility; kailangan ng claim ng ikalawang mainstream library na maglabas ng sarili nitong dokumentado at gated na loop bilang stock primitive."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7e04ececc362f9bd",
+        "short_label": "Local fine-tuning toolkits absorb the model-serving layer by default by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Direktang ebidensya ng pinagmulan. Ang v0.1.481-beta ng Unsloth (July 7) ay hindi na lang basta training tool: bukod sa 3-5x na mas mabilis na MoE LoRA, pinagsasama nito ang bawat export target (portable FP8/INT8, compressed FP8/FP4, imatrix GGUF, at LoRA) sa iisang one-pass export, pagkatapos ay isinasama nito ang isang llama-swap-style na local API server nang direkta sa toolkit na awtomatikong nagpapalit-palit sa mga na-download na GGUF, nag-i-idle-unload para magbakante ng VRAM at muling naglo-load kapag kinailangan, at nagsasaayos ng mga maling tool call bawat request. Pinagsasama noon ang fine-tune, quantize-and-export, at serve sa iisang lokal na loop, habang pinalalawak ng data-center Blackwell (sm_100/sm_103) at ROCm-on-WSL ang saklaw ng hardware.\nAyon sa prediction na sinasakop-ng-tuning-toolkit-ang-serving, ito ang magiging default ng kategorya: sa H1 2027 kahit dalawang malawakang ginagamit na local fine-tuning toolkit ang magdodokumento ng train, one-pass low-bit export, at serve bilang iisang tuluy-tuloy na daloy na may kasamang o first-party na model server na humahawak sa checkpoint switching at memory-aware na load/unload nang default, na pumupupo sa hangganan sa pagitan ng fine-tuning framework at inference server para sa local at on-prem na antas.",
+      "reference_links": [
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        },
+        {
+          "label": "Unsloth - project site (Studio, local model training and running)",
+          "url": "https://unsloth.ai/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Isinasakatuparan ng pinagmulang senyales ang mekanismo: pinagsasama ng build ng Unsloth noong July 7 ang one-pass low-bit export sa isang kasamang llama-swap-style na server na awtomatikong nagpapalit ng mga GGUF at nag-i-idle-unload ng VRAM, na pumupupo sa train, quantize-export, at serve sa iisang loop. May unang tagapagsimula na ngayon ang prediction na sakupin-ang-serving-layer na dala ang inference server bilang tampok ng toolkit, mismong ang paglusaw ng hangganan na hinuhulaan nito.",
+        "coherence": 5,
+        "remaining_gap": "Ang isang toolkit na may kasamang serving ay hindi pa default ng kategorya; kailangang idokumento ng ikalawang malawakang ginagamit na tuning toolkit ang parehong pinagsamang daloy ng train-export-serve."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.546732d279b0a395",
+        "short_label": "Open inference engines adopt a named release-gating security track by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Direktang ebidensya ng pinagmulan. Ang v0.24.0 ng vLLM (571 commits, 256 contributors, 77 bago) ay nagsama ng isang coordinated na security-hardening batch sa parehong release ng mga DeepSeek-V4 serving path at FP8 kernel speedup nito: ina-update nito ang Starlette lampas sa CVE-2026-48710, sinasara ang isang audio-decompression bomb sa speech-to-text endpoint, at inaayos ang isang remote denial-of-service sa pamamagitan ng invalid recovered-token reinjection sa speculative decoding. Ang pagtrato sa adversarial-input handling, DoS-resistance, at supply-chain patching bilang mga release-blocking na alalahanin sa halip na post-hoc na mga patch ay dumarating sa parehong linggo na ang isang CVSS 9.5 unauthenticated command-injection RCE sa BMC Control-M/Server ay nagbibigay-diin na ang self-hosted inference at orchestration infrastructure ay isa na ngayong aktibong attack surface.\nAyon sa prediction na nag-aampon-ang-inference-engine-ng-named-security-track, tumitibay ito bilang isang pormal na maturity axis: sa H1 2027 kahit dalawa sa mga pangunahing open o self-hosted inference stack (vLLM, SGLang, TensorRT-LLM, klaseng TGI) ang maglalathala ng isang pinangalanan, dokumentadong security track na may nakasaad na response policy, isang hardening o fuzzing gate na nakakabit sa release checklist, at CVE handling na kaayon ng isang inilabas na build, upang ang production-readiness ay masukat sa isang security axis tulad ng pagsukat na dito ayon sa tokens-per-second.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        },
+        {
+          "label": "CVEFeed - CVE-2026-10539 (unauthenticated command injection, Control-M/Server, CVSS 9.5)",
+          "url": "https://cvefeed.io/vuln/detail/CVE-2026-10539"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ipinapakita ng pinagmulang ebidensya na tinatrato ng nangungunang open engine ang seguridad bilang release-blocking: naglabas ang v0.24.0 ng vLLM ng Starlette CVE bump, isang decompression-bomb fix, at isang spec-decoding DoS fix sa loob ng parehong release ng throughput work nito, sa linggong pinatunayan ng isang CVSS 9.5 scheduler RCE na aktibong attack surface ang self-hosted inference. Nakaupo na ngayon sa napatunayang pag-uugali ang prediction na named-security-track.",
+        "coherence": 5,
+        "remaining_gap": "Pinatitibay ng vLLM ang seguridad sa praktika ngunit hindi pa naglalathala ng pinangalanang track na may nakasaad na policy at fuzzing gate sa release checklist nito, ni wala pang ikalawang engine."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a4f83081580b9a3d",
+        "short_label": "Launch-day vLLM/SGLang + Ollama support becomes open-weight MoE release bar",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Ang prediction na suporta-ng-serving-stack-sa-araw-ng-launch-bilang-release-bar ay nakakuha ng malinaw na nagpapatibay na senyales mula sa magkabilang panig ng parehong open-weight na pamilya. Ginagawa ng v0.24.0 ng vLLM na first-class serving target ang DeepSeek-V4 na may FlashInfer sparse-index cache na katumbas ng ilang porsyentong time-to-first-token kasama ang nakatuong attention at MoE path sa buong XPU at ROCm, habang nagdaragdag naman ang v0.1.481-beta ng Unsloth sa parehong linggo ng first-class DeepSeek-V4-Flash tuning, kaya ang kahandaan sa serving at tuning para sa isang frontier-tier open MoE ay dumarating na ngayong kaayon ng modelo sa halip na nahuhuli dito.\nAng bahagyang puwang ay ang parehong senyales ay bumabanggit sa antas ng engine-at-tuning (vLLM kasama ang Unsloth) ngunit walang nagkukumpirma ng bahaging Ollama ng serving bar ng prediction para sa 1.6-trilyong-parameter-scale na release na ito, at ang isang MoE na ganoon kalaki ay nasa labas ng single-workstation na saklaw na karaniwang tinatarget ng Ollama, kaya nananatiling hindi pa nasusubok na gilid ng claim ang launch-day local packaging.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        },
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Parehong lumapag ang dalawang stack sa pamilyang DeepSeek-V4 sa loob ng parehong linggo: ginagawa ng vLLM v0.24.0 na first-class serving target ito habang nagdaragdag ang Unsloth v0.1.481-beta ng Flash tuning, kaya ang kahandaan sa serving at tuning ay dumarating nang kaayon ng modelo sa halip na nahuhuli dito. Inilalagay nito ang bahaging engine ng release-bar prediction nang tumpak sa timeline na hinuhulaan nito para sa isang frontier-tier open MoE.",
+        "coherence": 4,
+        "remaining_gap": "Hindi pa nakumpirma ang bahaging Ollama; ang isang 1.6T-parameter MoE ay nasa labas ng single-workstation na saklaw ng Ollama, kaya nananatiling hindi pa nasusubok na gilid ng bar ang launch-day local packaging."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.14cd36ae7a6a8633",
+        "short_label": "Quantized-by-default serving lands as the OSS inference baseline by H1 2027",
+        "prediction_date": "2026-06-30"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Ang prediction na quantized-by-default-serving-baseline ay tumitibay mula sa parehong serving at tuning stack ngayong linggo. Pinalalawak ng v0.24.0 ng vLLM ang saklaw ng Intel XPU gamit ang W4A16 int4 group-size-32 MoE quantization at nagdaragdag ng CUTLASS FP8 kernel na nag-uulat ng 180-290 porsyentong speedup, na tinatrato ang mga low-bit path bilang mainstream serving na alalahanin sa halip na eksperimentong fork. Kaakibat nito, pinagsasama ng v0.1.481-beta ng Unsloth ang portable FP8/INT8, compressed FP8/FP4, at imatrix GGUF export sa iisang one-pass na hakbang, kaya ang isang pinagsamang modelo ay naglalabas ng handang-i-serve na quantized artifact nang default nang walang hiwalay na quantization stage.\nAng nagpapanatili dito sa relevance 4 sa halip na landing ay ang quantized kernel at one-pass low-bit export ay inilalabas bilang first-class na opsyon, ngunit walang engine ang nagdeklara ng isang quantized weight format bilang out-of-the-box serving default kaysa sa full-precision; nagtatagpo ang baseline, ngunit hindi pa pinangalanan bilang default.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        },
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Tumitibay mula sa magkabilang dulo ang paunang kondisyon para sa isang quantized baseline: naglalabas ang vLLM ng W4A16 int4 MoE quantization at CUTLASS FP8 kernel na sinasabing 180-290 porsyentong speedup bilang mainstream serving path, at naglalabas ang Unsloth ng FP8/INT8, FP4, at imatrix GGUF artifact sa iisang export pass. Nagiging handang-i-serve na path ang low-bit na unang inaabot ng isang team, na siyang sinasakyan ng prediction na quantized-by-default.",
+        "coherence": 4,
+        "remaining_gap": "Walang engine ang nagdeklara ng isang quantized format bilang out-of-the-box default kaysa sa full precision; ang low-bit ay isang first-class na opsyon, hindi pa ang pinangalanang baseline."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.43f75bc5c1e559f8",
+        "short_label": "Open-weight MoE fine-tunes beat frontier APIs on niche expert tasks by Q2 2027",
+        "prediction_date": "2026-07-03"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Ang prediction na open-weight-MoE-fine-tunes-daig-ang-frontier-APIs ay nakakuha ng tumitibay na paunang kondisyon sa substrate. Nagdaragdag ang v0.1.481-beta ng Unsloth ng first-class DeepSeek-V4-Flash support na may thinking toggle kasama ang 3-5x na mas mabilis na MoE LoRA sa pamamagitan ng automatic grouped-MoE detection, na ginagawang matu-tune sa consumer at Blackwell hardware ang isang frontier-tier open-weight MoE, habang ginagawa naman ng v0.24.0 ng vLLM na first-class serving target ang parehong pamilyang DeepSeek-V4. Magkasama, isinasara nila ang praktikal na puwang sa pagitan ng isang tunay na frontier-tier open-weight checkpoint at ang low-VRAM na adapt-and-serve na ruta na kailangan ng isang team para dalubhasain ito para sa mga niche expert task.\nAng kulang pa ay isang benchmarked head-to-head kung saan aktuwal na nadaig ng isang DeepSeek-V4 fine-tune ang isang hosted frontier API sa isang partikular na expert task; ang ebidensya ngayon ay nagbibigay ng nagpapagana na stack, hindi ng ipinakitang tagumpay.",
+      "reference_links": [
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        },
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Patuloy na tumitibay ang premisang inaasahan ng prediction na open-MoE-daig-ang-frontier-APIs: ginagawa ng Flash tuning ng Unsloth na may 3-5x na mas mabilis na MoE LoRA na maiaakma sa consumer at Blackwell hardware ang isang frontier-tier open checkpoint, at ginagawa ng vLLM na first-class serving target ang parehong pamilya. Umiiral na ngayon mula simula hanggang dulo ang murang adapt-and-serve na ruta na kailangan ng isang maliit na team para dalubhasain ang DeepSeek-V4 para sa isang niche task.",
+        "coherence": 3,
+        "remaining_gap": "Wala pa ring benchmarked head-to-head kung saan aktuwal na daig ng isang DeepSeek-V4 fine-tune ang isang hosted frontier API sa isang partikular na expert task; naroon ang stack, wala ang tagumpay."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.9eb6e9888959d4b6",
+        "short_label": "Local-LLM runtimes ship in-model speculative decoding on by default by Q2 2027",
+        "prediction_date": "2026-07-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang prediction na naglalabas-ang-local-runtime-ng-speculative-decoding-nang-default ay nakakuha ng direksyonal na senyales sa halip na kumpirmasyon. Pinatitibay ng v0.24.0 ng vLLM ang speculative-decoding path nito sa pamamagitan ng pag-aayos ng isang remote denial-of-service sa invalid recovered-token reinjection, na tinatrato ang spec decoding bilang isang inaalagaan, security-audited na production feature na sulit ipagtanggol laban sa adversarial input, na siyang uri ng pansin na naaakit ng isang stock default path sa halip na isang eksperimental.\nAng tensyong nagpapanatili dito sa relevance 3 ay ang ebidensya ay isang hardening fix sa spec decoding, hindi isang runtime na ginagawang default ang speculative decoding: ipinapakita ng galaw ng vLLM na sapat nang mature ang mekanismo para ipagtanggol, ngunit walang nagngalang out-of-the-box default nito ngayong linggo, at dumarating ang fix sa server engine sa halip na sa consumer local-runtime na antas na tinatarget ng prediction.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Tinatrato ng fix ng vLLM para sa isang remote DoS sa invalid recovered-token reinjection ang speculative decoding bilang isang inaalagaan, security-audited na production feature, ang mapagtanggol na pansin na inaakit ng isang stock default path sa halip na isang eksperimento. Ang maturity na iyon ay isang malambot na paunang kondisyon para sa prediction na speculative-decoding-nang-default, na nangangatwirang handa na ang mekanismo, hindi na may runtime na naglipat ng switch.",
+        "coherence": 2,
+        "remaining_gap": "Walang runtime ang nagngalang out-of-the-box default ang speculative decoding, at dumarating ang fix sa isang server engine, hindi sa consumer local-runtime na antas na tinatarget ng prediction."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0c569408626bbdd3",
+        "short_label": "Sub-gigabyte on-device LLM gains same-week Unsloth tuning support by Q3 2026",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang prediction na same-week-Unsloth-tuning ay nakakuha ng nagpapatibay na pattern, bagaman hindi sa sub-gigabyte na klaseng binabanggit nito. Naglalabas ang v0.1.481-beta ng Unsloth ng first-class DeepSeek-V4-Flash tuning sa parehong linggo na lumitaw ang Flash variant, na pinalalawig ang sariling pangunahing tema ng report na ang praktikal na puwang sa pagitan ng isang bagong inilabas na open-weight na modelo at ang kakayahan ng isang consumer-GPU team na iakma ito ay patuloy na umiikli hanggang sa loob ng parehong linggo. Pinalalawak ng ROCm-on-WSL para sa discrete Radeon RDNA 3/4 GPUs ang commodity-hardware na base na ginagawang naabot ng maliliit na team ang same-week tuning.\nAng nagpapanatili dito sa relevance 3 ay ang di-pagtutugma ng scale: tinatarget ng prediction ang isang sub-gigabyte na on-device na modelo, samantalang ang same-week tuning ngayon ay lumalapag sa isang frontier-tier na 1.6-trilyong-parameter na MoE, kaya nakumpirma ang timing pattern habang hindi ang partikular na small-model na instance na tinutukoy ng claim ang inilabas ng Unsloth ngayong linggo.",
+      "reference_links": [
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        },
+        {
+          "label": "Unsloth - project site (Studio, local model training and running)",
+          "url": "https://unsloth.ai/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Muling tumatatag ang timing pattern na sinasandigan ng prediction na same-week-tuning: tinu-tune ng build ng Unsloth noong July 7 ang DeepSeek-V4-Flash sa parehong linggo na lumitaw ang variant, at pinalalawak ng ROCm-on-WSL para sa consumer Radeon GPUs ang naaabot na hardware base. Muling inilalagay ang Unsloth sa day-zero kasabay ng isang bagong open-weight na paglabas, ang mismong pagkakataon ng aktor-at-timing na inaasahan ng claim.",
+        "coherence": 3,
+        "remaining_gap": "Di-pagtutugma ng scale: lumalapag ito sa isang 1.6-trilyong-parameter na MoE, hindi sa sub-gigabyte na on-device na klaseng binabanggit ng prediction, kaya nananatiling hindi pa napapatunayan ang partikular nitong small-model na instance."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6ba7ca6e01ab313e",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang prediction na naglalabas-ang-coding-agent-ng-capability-gate-bilang-default ay nakakuha ng direksyonal na senyales mula sa llm-coding-agent 0.1a0 ni Willison. Ang anim nitong built-in na tool na sumasaklaw sa file read/write/edit, listing at searching, at shell execution na may timeout ay lahat gated sa likod ng isang permission model nang default: tumatakbo nang walang restriksyon ang `--yolo` habang nililimitahan ng mga allowlist flag tulad ng `--allow \"pytest*\"` kung anong mga command ang puwedeng tumakbo, kaya isang default-on na capability gate sa mapanganib na tool action ay inilalabas kasama ng harness sa halip na bilang add-on.\nAng dahilan kung bakit nananatili ito sa relevance 3 ay ang gate ni Willison ay isang command allowlist at approval toggle sa shell-and-file na kakayahan, hindi ang partikular na lethal-trifecta na hadlang na binabanggit ng prediction, na naglilimita sa alinmang dalawa sa private-data access, untrusted-content ingestion, at external communication. Naroon ang istrukturang instinct na tanggihan nang default sa antas ng harness ang mapanganib na kombinasyon ng kakayahan, ngunit ang balangkas ay per-command permissioning sa halip na ang trifecta rule.",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+          "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+        },
+        {
+          "label": "Simon Willison - June 2026 newsletter",
+          "url": "https://simonwillison.net/2026/Jul/3/june-newsletter/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Naglalabas ang harness ni Willison ng isang default-on na capability gate: ang lahat ng anim na file-and-shell tool ay nakaupo sa likod ng isang permission model kung saan binubuksan ng `--yolo` ang lahat at ang mga allowlist flag ang naglilimita kung anong mga command ang tumatakbo. Na ang mismong antas ng harness ay tumatanggi sa mapanganib na kakayahan nang default ay siyang parehong istrukturang instinct na sinasandigan ng prediction na trifecta-gate, kahit inilabas ito bilang alpha sa halip na platform default.",
+        "coherence": 2,
+        "remaining_gap": "Ang gate ay per-command allowlisting, hindi ang lethal-trifecta na tuntunin na naglilimita sa alinmang dalawa sa private-data access, untrusted content, at external comms na partikular na binabanggit ng prediction."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.82599b6cfd05751b",
+        "short_label": "Consumer-GPU coding agents displace cloud-only APIs for 30% of devs by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Dormant-pool match (20260426-3, Signals: consumer-GPU coding agent, cloud-only API, local-first toggle, hybrid harness, Cursor Windsurf Kiro). Dalawa sa mga kuwento ngayon ang nagtutulak sa local-first coding-agent na tesis mula sa magkabilang dulo. Ibinababa ng llm-coding-agent 0.1a0 ni Willison ang pinakamababang hanggahan para sa isang magagamit na coding agent tungo sa isang ilang-daang-linya, magaan-sa-dependency, self-hostable na loop sa ibabaw ng isang model-pluggable na library, kaya hindi na nangangailangan ng cloud product ang harness mismo, at dahil sinusuportahan ng llm ang mga local backend, ang parehong loop ay makakapagpatakbo ng isang modelo sa sariling GPU ng developer. Kaakibat nito, isinasama ng v0.1.481-beta ng Unsloth ang isang local auto-swapping model server at nagdaragdag ng ROCm-on-WSL para sa consumer Radeon RDNA 3/4 GPUs, na nagpapababa sa hadlang sa lokal na pag-serve ng isang tuned na modelo.\nAyon sa prediction na consumer-GPU-coding-agents-nagtatabuyan-sa-cloud-APIs, ang mga local coding agent ay kukuha ng makabuluhang bahagi ng paggamit ng developer mula sa cloud-only APIs. Pinatitibay ng ebidensya ngayon ang panig ng supply, isang self-hostable na harness kasama ang mas madaling lokal na serving, ngunit walang nagbibilang ng adoption ng developer o pagbabago ng bahagi palayo sa hosted APIs, na nagpapanatili dito sa relevance 3.",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+          "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+        },
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Nabubuhay muli ang dormant na local-first na tesis dahil dalawang paglabas ang nagtatagpo sa panig ng supply nito: ang self-hostable, model-pluggable na harness ni Willison ay nagpapahintulot sa coding loop na magpatakbo ng isang modelo sa sariling GPU ng developer nang walang cloud product, habang pinapadali ng kasamang auto-swapping server ng Unsloth kasama ang ROCm-on-WSL ang lokal na pag-serve ng modelong iyon sa consumer Radeon hardware. Handa na sa istante ang mga bloke ng pagbuo para sa isang consumer-GPU coding agent.",
+        "coherence": 3,
+        "remaining_gap": "Purong pagpapagana sa panig ng supply; walang nagbibilang ng adoption ng developer o anumang pagbabago ng bahagi palayo sa cloud-only APIs, at nananatiling hindi nasusukat ang 30%-pagsapit-ng-Q3-2026 na hangganan."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f960d058dc42c7c6",
+        "short_label": "KV-cache-compression dtype ships as inference-stack deployment knob by Q4 2026",
+        "prediction_date": "2026-04-29"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Dormant-pool match (20260429-1, Signals: KV-cache-compression dtype, vLLM, SGLang, TGI, compressed-cache tiers, --kv-cache-dtype). Isinusulong ng v0.24.0 ng vLLM ang KV-cache at low-bit serving bilang first-class deployment knob: nagdaragdag ito ng KV-cache watermark para bawasan ang mga preemption at two-phase allocation para sa cross-group prefix-cache hit, kasama ang W4A16 int4 group-size-32 MoE quantization at CUTLASS FP8 kernel na nag-uulat ng 180-290 porsyentong speedup. Iyon mismo ang memory-tier at compressed-precision na plumbing na sinasandigan ng prediction na ito, inilabas bilang matu-tune na serving na pag-uugali sa halip na research demo.\nAyon sa prediction na KV-cache-compression-dtype-bilang-deployment-knob, ang isang compressed KV-cache dtype ay nagiging isang pamantayan, mapipili-ng-user na inference-stack flag sa buong mga pangunahing engine. Ipinapakita ng ebidensya ngayon na pinatitibay ng vLLM ang KV-cache management at low-bit MoE path, ngunit ang partikular na galaw na binabanggit nito, isang compressed-cache dtype na inilantad bilang isang dokumentadong cross-engine deployment flag, ay katabi sa halip na nakumpirma, kaya nababasa ito bilang isang relevance-3 na senyales ng substrate.",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang senyales ng muling pagkabuhay ay ang v0.24.0 ng vLLM na nagsusulong ng mismong substrate ng prediction na ito: isang KV-cache watermark para bawasan ang mga preemption, two-phase allocation para sa cross-group prefix-cache reuse, kasama ang W4A16 int4 MoE at CUTLASS FP8 kernel. Ang memory-tier at compressed-precision na plumbing na sasakyan ng isang compressed-cache dtype knob ay inilalabas bilang matu-tune na serving na pag-uugali, hindi isang research demo, na muling binubuhay ang dormant na tesis.",
+        "coherence": 3,
+        "remaining_gap": "Ang partikular na galaw, isang compressed KV-cache dtype na inilantad bilang isang dokumentado at mapipili-ng-user na flag sa buong mga engine, ay nananatiling katabi sa halip na inilabas; ito ay substrate, hindi ang pinangalanang knob."
+      }
+    }
+  ]
+}

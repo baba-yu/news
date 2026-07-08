@@ -1,0 +1,272 @@
+{
+  "date": "2026-07-08",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.c5fe8479ffcd7e16",
+        "short_label": "LLM client libraries ship a permission-gated coding-agent loop by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "予測の起点そのものを示す証拠。Simon Willisonのllm-coding-agent 0.1a0（7月2日）は、エージェントループを別製品として出すのではなく、既存のモデル呼び出しライブラリの第一級のプリミティブへと引き上げた。インストール不要でuvx経由で実行できる`llm code`CLIと、6つの組み込みファイル・シェルツールを備えたPythonの`CodingAgent`クラスを提供する。シェルのタイムアウトは最大600秒で、権限モデルも備える。`--yolo`は無制限で走らせ、`--allow \"pytest*\"`のような許可リストのフラグは、どのコマンドを実行できるかを絞り込む。ループがモデルを差し替え可能な土台の上に載っているため、ハーネス全体は数百行に収まり、ベンダーから切り離され、自前でホストできる。\nライブラリが権限ゲート付きのコーディングエージェントループを出荷するという予測は、これをエコシステムの他が基準とする参照実装として読む。すなわち2027年上半期までに、開発者がすでにインポートしている汎用のLLMクライアントライブラリ（llm、LangChain、LlamaIndex、各ベンダーのSDK、Pydantic AIの系譜）のうち少なくとも2つが、文書化された権限ゲート付きのツール実行エージェントループを、数行で呼び出せる標準プリミティブとして提供する、というものだ。これにより、実用的なコーディングエージェントを手に入れる下限は、資金の付いたIDE製品から、信頼できるライブラリを介したインポート文へと下がる。",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+          "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+        },
+        {
+          "label": "Simon Willison - June 2026 newsletter",
+          "url": "https://simonwillison.net/2026/Jul/3/june-newsletter/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "これは起点となる実例である。すでにインポートされているモデル呼び出しライブラリが、許可リストのゲートの内側で6つのファイル・シェルツールを備えた標準の`llm code`CLIと`CodingAgent`クラスを、ベンダーから切り離された数百行で得た。権限ゲート付きループをライブラリのプリミティブとするこの予測は、まさに名指しした系譜の上に、動く参照実装を得た。その形が、今日の汎用クライアントライブラリの上に構築可能であることを示している。",
+        "coherence": 5,
+        "remaining_gap": "一人のメンテナーによるアルファ版は実現可能性を証明したにとどまる。この主張が成立するには、2つ目の主要ライブラリが、文書化された自前のゲート付きループを標準プリミティブとして出荷する必要がある。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7e04ececc362f9bd",
+        "short_label": "Local fine-tuning toolkits absorb the model-serving layer by default by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "予測の起点そのものを示す証拠。Unslothのv0.1.481-beta（7月7日）は、もはや学習ツールだけの存在ではない。3〜5倍高速なMoE LoRAに加えて、あらゆるエクスポート先（ポータブルなFP8/INT8、圧縮済みのFP8/FP4、imatrix GGUF、そしてLoRA）を1回のエクスポートにまとめる。さらに、llama-swap風のローカルAPIサーバーをツールキット本体に同梱した。このサーバーは、ダウンロード済みのGGUFを自動で切り替え、アイドル時にはアンロードしてVRAMを解放し、必要に応じて再ロードし、リクエストごとに不正なツール呼び出しを修復する。これにより、ファインチューニング、量子化とエクスポート、そして推論の提供が、1つのローカルなループへと集約される。データセンター向けのBlackwell（sm_100/sm_103）とROCm-on-WSLへの対応が、対象ハードウェアの裾野を広げている。\nチューニングツールキットが推論提供を吸収するという予測は、これがこの分野の既定になる、というものだ。すなわち2027年上半期までに、広く使われるローカルのファインチューニングツールキットのうち少なくとも2つが、学習、1回の低ビットエクスポート、そして推論提供を、同梱または自社製のモデルサーバーを伴う1つの連続した流れとして文書化する。そのサーバーはチェックポイントの切り替えと、メモリを意識したロード・アンロードを標準で担い、ローカルおよびオンプレミスの領域において、ファインチューニングのフレームワークと推論サーバーの境界を侵食する。",
+      "reference_links": [
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        },
+        {
+          "label": "Unsloth - project site (Studio, local model training and running)",
+          "url": "https://unsloth.ai/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "起点となるシグナルが、その仕組みを実現している。Unslothの7月7日ビルドは、1回の低ビットエクスポートと、GGUFを自動で切り替えアイドル時にVRAMをアンロードするllama-swap風の同梱サーバーを一体化させ、学習、量子化・エクスポート、推論提供を1つのループに集約した。推論提供の層を吸収するという予測は、推論サーバーをツールキットの機能として担う最初の担い手を得た。まさに予測が示す境界の侵食である。",
+        "coherence": 5,
+        "remaining_gap": "1つのツールキットが推論提供を同梱したことは、まだ分野の既定ではない。広く使われる2つ目のチューニングツールキットが、同じ統合された学習・エクスポート・提供の流れを文書化する必要がある。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.546732d279b0a395",
+        "short_label": "Open inference engines adopt a named release-gating security track by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "予測の起点そのものを示す証拠。vLLMのv0.24.0（571コミット、256人の貢献者、うち77人が新規）は、DeepSeek-V4の推論経路とFP8カーネルの高速化と同じリリースに、協調したセキュリティ強化のまとまりを織り込んだ。StarletteをアップデートしてCVE-2026-48710に対処し、音声認識エンドポイントにおける音声の展開爆弾を塞ぎ、投機的デコーディングでの不正な復元トークンの再注入によるリモートのサービス拒否を修正した。敵対的な入力への対処、DoS耐性、そしてサプライチェーンのパッチ適用を、事後のパッチではなくリリースを止めうる関心事として扱ったのだ。これは、BMC Control-M/ServerのCVSS 9.5の認証不要なコマンドインジェクションRCEが、自前でホストする推論とオーケストレーションの基盤がいまや現に攻撃対象領域であることを浮き彫りにしたのと同じ週の出来事である。\n推論エンジンが名前の付いたセキュリティトラックを採用するという予測は、これが正式な成熟度の軸として固まる、というものだ。すなわち2027年上半期までに、主要なオープンまたは自前ホストの推論スタック（vLLM、SGLang、TensorRT-LLM、TGIの類）のうち少なくとも2つが、明示された対応方針、リリースのチェックリストに組み込まれた強化またはファジングのゲート、そして出荷ビルドに合わせて協調したCVE対応を伴う、名前の付いた文書化されたセキュリティトラックを公開する。これにより、本番投入の適性が、すでにトークン毎秒で測られているのと同じように、セキュリティの軸でも測られるようになる。",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        },
+        {
+          "label": "CVEFeed - CVE-2026-10539 (unauthenticated command injection, Control-M/Server, CVSS 9.5)",
+          "url": "https://cvefeed.io/vuln/detail/CVE-2026-10539"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "起点となる証拠は、主要なオープンエンジンがセキュリティをリリースを止めうる関心事として扱っていることを示す。vLLMのv0.24.0は、Starletteのアップデート、展開爆弾の修正、投機的デコーディングのDoS修正を、スループット向上と同じリリースで出荷した。CVSS 9.5のスケジューラRCEが、自前ホストの推論が現に攻撃対象領域であることを証明したのと同じ週である。名前の付いたセキュリティトラックの予測は、いまや実証された振る舞いの上に立っている。",
+        "coherence": 5,
+        "remaining_gap": "vLLMは実務としてセキュリティを強化しているが、明示された方針とファジングのゲートをリリースのチェックリストに掲げた名前の付いたトラックは、まだ公開していない。2つ目のエンジンについても同様である。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a4f83081580b9a3d",
+        "short_label": "Launch-day vLLM/SGLang + Ollama support becomes open-weight MoE release bar",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "リリース当日の推論スタック対応がリリースの基準になるという予測は、同じオープンウェイトのファミリーの両側から明快な裏付けを得た。vLLMのv0.24.0はDeepSeek-V4を第一級の推論対象とし、最初のトークンまでの時間を数パーセント縮めるFlashInferのスパースインデックスキャッシュに加え、XPUとROCmにまたがる専用のアテンションおよびMoE経路を備える。同じ週にUnslothのv0.1.481-betaがDeepSeek-V4-Flashの第一級のチューニング対応を追加した。その結果、フロンティア級のオープンMoEに対する推論とチューニングの準備は、モデルに遅れるのではなく、モデルと歩調を合わせて到着するようになった。\n部分的な隔たりは、どちらのシグナルもエンジンとチューニングの層（vLLMとUnsloth）を名指す一方、この1.6兆パラメータ規模のリリースについて予測が掲げる基準のうちOllamaの部分を確認していない点にある。これほど大きなMoEは、Ollamaが通常想定する単一ワークステーションの範囲を大きく超えており、リリース当日のローカル向けパッケージングは、この主張の未検証な端のままである。",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        },
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "両方のスタックが同じ週にDeepSeek-V4ファミリーに着地した。vLLMのv0.24.0はこれを第一級の推論対象とし、Unslothのv0.1.481-betaはFlashのチューニングを追加した。その結果、推論とチューニングの準備は、モデルに遅れるのではなく歩調を合わせて到着する。これは、リリース基準の予測のうちエンジンの側を、フロンティア級のオープンMoEに対して予測が示すタイミングにぴたりと位置づける。",
+        "coherence": 4,
+        "remaining_gap": "Ollamaの部分は未確認。1.6兆パラメータのMoEはOllamaの単一ワークステーションの範囲外にあり、リリース当日のローカル向けパッケージングは基準の未検証な端のままである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.14cd36ae7a6a8633",
+        "short_label": "Quantized-by-default serving lands as the OSS inference baseline by H1 2027",
+        "prediction_date": "2026-06-30"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "量子化を既定とする推論提供が基準になるという予測は、今週、推論とチューニングの両スタックから補強を得た。vLLMのv0.24.0は、W4A16のint4・グループサイズ32のMoE量子化でIntel XPUの対応を広げ、180〜290パーセントの高速化を報告するCUTLASS FP8カーネルを追加した。低ビット経路を、実験的な派生ではなく主流の推論の関心事として扱っている。並行して、Unslothのv0.1.481-betaは、ポータブルなFP8/INT8、圧縮済みのFP8/FP4、そしてimatrix GGUFのエクスポートを1回の工程にまとめた。これにより、マージ済みのモデルが、独立した量子化の段階を経ずに、すぐ提供できる量子化済みの成果物を既定で吐き出す。\nこれを着地ではなく関連度4にとどめているのは、量子化カーネルと1回の低ビットエクスポートが第一級の選択肢として出荷されている一方、いずれのエンジンも量子化済みの重み形式を、完全精度に対する既定の推論形式とは宣言していない点である。基準は収束しつつあるが、まだ既定として名指されてはいない。",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        },
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "量子化を既定とする基準の前提条件が、両側から固まっている。vLLMはW4A16のint4 MoE量子化と、180〜290パーセントの高速化を謳うCUTLASS FP8カーネルを主流の推論経路として出荷し、Unslothは1回のエクスポート工程でFP8/INT8、FP4、imatrix GGUFの成果物を吐き出す。低ビットは、チームがまず手を伸ばす、すぐ提供できる経路になりつつある。量子化を既定とする予測が拠って立つのはまさにこれである。",
+        "coherence": 4,
+        "remaining_gap": "いずれのエンジンも、量子化済みの形式を完全精度に対する既定とは宣言していない。低ビットは第一級の選択肢であり、まだ名指された基準ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.43f75bc5c1e559f8",
+        "short_label": "Open-weight MoE fine-tunes beat frontier APIs on niche expert tasks by Q2 2027",
+        "prediction_date": "2026-07-03"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "オープンウェイトMoEのファインチューンがニッチな専門タスクでフロンティアAPIを上回るという予測は、その土台となる前提条件を固めた。Unslothのv0.1.481-betaは、思考の切り替えを備えたDeepSeek-V4-Flashの第一級の対応と、grouped-MoEの自動検出による3〜5倍高速なMoE LoRAを追加し、フロンティア級のオープンウェイトMoEを、コンシューマー向けおよびBlackwellのハードウェアでチューニング可能にした。一方、vLLMのv0.24.0は同じDeepSeek-V4ファミリーを第一級の推論対象とする。両者が相まって、真にフロンティア級のオープンウェイトのチェックポイントと、それをニッチな専門タスク向けに特化させるためにチームが必要とする低VRAMの適応・提供経路との間にあった実用上の隔たりを埋める。\nいまなお欠けているのは、DeepSeek-V4のファインチューンが特定の専門タスクでホスト型のフロンティアAPIを実際に上回る、ベンチマークによる直接対決である。本日の証拠は、それを可能にするスタックは供給するが、実証された勝利は供給していない。",
+      "reference_links": [
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        },
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "オープンMoEがフロンティアAPIを上回るという予測が拠って立つ前提が、なお固まり続けている。Unslothの3〜5倍高速なMoE LoRAを伴うFlashチューニングは、フロンティア級のオープンチェックポイントを、コンシューマー向けおよびBlackwellのハードウェアで適応可能にした。vLLMは同じファミリーを第一級の推論対象とする。小さなチームがDeepSeek-V4をニッチなタスク向けに特化させるために必要な、安価な適応・提供の経路が、いまや端から端まで存在する。",
+        "coherence": 3,
+        "remaining_gap": "DeepSeek-V4のファインチューンが特定の専門タスクでホスト型のフロンティアAPIを実際に上回った、ベンチマークによる直接対決はまだない。スタックは揃ったが、勝利はない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.9eb6e9888959d4b6",
+        "short_label": "Local-LLM runtimes ship in-model speculative decoding on by default by Q2 2027",
+        "prediction_date": "2026-07-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "ローカルランタイムが投機的デコーディングを既定で有効にして出荷するという予測は、確定ではなく方向性を示すシグナルを得た。vLLMのv0.24.0は、不正な復元トークンの再注入によるリモートのサービス拒否を修正して、投機的デコーディングの経路を強化した。投機的デコーディングを、保守され、セキュリティ監査され、敵対的な入力に対して守る価値のある本番機能として扱っているのだ。これは、実験的な経路ではなく標準の既定経路が引き寄せる類の注目である。\nこれを関連度3にとどめている緊張は、この証拠が投機的デコーディングへの強化修正であって、ランタイムがそれを既定で有効にしたものではない点にある。vLLMの動きは、その仕組みが守るに値するほど成熟していることを示すが、今週それを標準の既定と名指した者はいない。しかもこの修正は、予測が対象とするコンシューマー向けのローカルランタイムの層ではなく、サーバーエンジンに到着している。",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "vLLMによる、不正な復元トークンの再注入を用いたリモートDoSの修正は、投機的デコーディングを、保守されセキュリティ監査された本番機能として扱っている。これは実験ではなく標準の既定経路が引き寄せる防御的な注目である。この成熟は、投機的デコーディングを既定で有効にする予測の緩やかな前提条件であり、仕組みは整ったと論じるものの、いずれかのランタイムがスイッチを入れたとは論じない。",
+        "coherence": 2,
+        "remaining_gap": "投機的デコーディングを標準の既定と名指したランタイムはなく、しかもこの修正は、予測が対象とするコンシューマー向けのローカルランタイムの層ではなく、サーバーエンジンに到着している。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0c569408626bbdd3",
+        "short_label": "Sub-gigabyte on-device LLM gains same-week Unsloth tuning support by Q3 2026",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "同じ週にUnslothがチューニング対応するという予測は、名指しのサブギガバイト級ではないものの、パターンの補強を得た。Unslothのv0.1.481-betaは、Flash版が登場したのと同じ週にDeepSeek-V4-Flashの第一級のチューニング対応を出した。新たに公開されたオープンウェイトモデルと、それをコンシューマーGPUのチームが適応できるようになるまでの実用上の隔たりが、同じ週の内へと縮み続けているという、報告自体の一貫した筋を延長するものだ。ディスクリートなRadeon RDNA 3/4 GPU向けのROCm-on-WSLが、同じ週のチューニングを小さなチームにも届きうるものにする市販ハードウェアの裾野を広げている。\nこれを関連度3にとどめているのは規模の不一致である。予測はサブギガバイトのオンデバイスモデルを対象とするのに対し、今日の同じ週のチューニングは、フロンティア級の1.6兆パラメータのMoEに着地している。したがってタイミングのパターンは裏付けられる一方、この主張が追う特定の小型モデルの実例は、Unslothが今週出荷したものではない。",
+      "reference_links": [
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        },
+        {
+          "label": "Unsloth - project site (Studio, local model training and running)",
+          "url": "https://unsloth.ai/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "同じ週のチューニングという予測が拠って立つタイミングのパターンが、再び成立している。Unslothの7月7日ビルドは、Flash版が登場したのと同じ週にDeepSeek-V4-Flashをチューニングし、コンシューマー向けRadeon GPU向けのROCm-on-WSLが、届きうるハードウェアの裾野を広げた。Unslothは、新しいオープンウェイトの登場と同じ日にふたたび並び立った。まさにこの主張が期待する、担い手とタイミングの一致である。",
+        "coherence": 3,
+        "remaining_gap": "規模の不一致。これは1.6兆パラメータのMoEに着地しており、予測が名指すサブギガバイトのオンデバイス級ではない。そのため、この主張が追う特定の小型モデルの実例は、なお未実証のままである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6ba7ca6e01ab313e",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "コーディングエージェントがケーパビリティ・ゲートを既定で出荷するという予測は、Willisonのllm-coding-agent 0.1a0から方向性を示すシグナルを得た。ファイルの読み書き・編集、一覧と検索、そしてタイムアウト付きのシェル実行にまたがる6つの組み込みツールは、すべて権限モデルの背後で既定でゲートされている。`--yolo`は無制限で走らせ、`--allow \"pytest*\"`のような許可リストのフラグはどのコマンドを実行できるかを絞り込む。つまり、危険なツール操作に対するデフォルト有効のケーパビリティ・ゲートが、追加機能としてではなくハーネスとともに出荷される。\nこれを関連度3にとどめている理由は、Willisonのゲートが、シェルとファイルのケーパビリティに対するコマンド許可リストと承認の切り替えであって、予測が名指す特定の「致命的トリオ」の制約、すなわち非公開データへのアクセス、信頼できないコンテンツの取り込み、外部との通信のうち任意の2つを上限とする制約ではない点にある。危険なケーパビリティの組み合わせをハーネスの層で既定で拒否する、という構造的な志向は存在する。しかしその枠組みは、トリオの規則ではなく、コマンド単位の権限付与である。",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+          "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+        },
+        {
+          "label": "Simon Willison - June 2026 newsletter",
+          "url": "https://simonwillison.net/2026/Jul/3/june-newsletter/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Willisonのハーネスは、デフォルト有効のケーパビリティ・ゲートを出荷する。6つのファイル・シェルツールはすべて権限モデルの背後にあり、`--yolo`はすべてを開き、許可リストのフラグがどのコマンドを実行できるかを絞る。ハーネスの層そのものが危険なケーパビリティを既定で拒否することは、トリオゲートの予測が拠って立つのと同じ構造的な志向である。たとえそれがプラットフォームの既定ではなくアルファ版として出荷されたとしても。",
+        "coherence": 2,
+        "remaining_gap": "このゲートはコマンド単位の許可リストであって、予測が名指す、非公開データへのアクセス、信頼できないコンテンツ、外部通信のうち任意の2つを上限とする致命的トリオの規則ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.82599b6cfd05751b",
+        "short_label": "Consumer-GPU coding agents displace cloud-only APIs for 30% of devs by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260426-3、シグナル：コンシューマーGPUのコーディングエージェント、クラウド専用API、ローカルファーストの切り替え、ハイブリッドなハーネス、Cursor Windsurf Kiro）。本日の2つの記事が、ローカルファーストのコーディングエージェントという論を両側から押し進める。Willisonのllm-coding-agent 0.1a0は、実用的なコーディングエージェントの下限を、数百行で依存の少ない自前ホスト可能な、モデルを差し替え可能なライブラリの上のループへと下げる。ハーネスそのものがもはやクラウド製品を必要とせず、しかもllmがローカルのバックエンドに対応するため、同じループが開発者自身のGPU上で走るモデルを駆動できる。並行して、Unslothのv0.1.481-betaは、ローカルの自動切り替え型モデルサーバーを同梱し、コンシューマー向けRadeon RDNA 3/4 GPU向けのROCm-on-WSLを追加して、チューニング済みモデルをローカルで提供する障壁を下げる。\nコンシューマーGPUのコーディングエージェントがクラウドAPIを置き換えるという予測は、ローカルのコーディングエージェントが開発者の利用のうち相当な割合をクラウド専用APIから奪う、というものだ。本日の証拠は供給側、すなわち自前ホスト可能なハーネスとより容易なローカル提供を強めるが、開発者の採用やホスト型APIからの割合の移行を定量化するものは何もない。そのためこれは関連度3にとどまる。",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Release: llm-coding-agent 0.1a0 (July 2 2026)",
+          "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/"
+        },
+        {
+          "label": "Unsloth - GitHub release v0.1.481-beta (July 7 2026)",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.481-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "休眠していたローカルファーストの論が復活するのは、2つのリリースがその供給側で重なるからだ。Willisonの自前ホスト可能でモデルを差し替え可能なハーネスは、クラウド製品なしに開発者自身のGPU上のモデルをコーディングループで駆動させる。Unslothの同梱された自動切り替えサーバーとROCm-on-WSLは、そのモデルをコンシューマー向けRadeonハードウェア上でローカルに提供するのを容易にする。コンシューマーGPUのコーディングエージェントを成す構成要素は、いまや既製で手に入る。",
+        "coherence": 3,
+        "remaining_gap": "純粋に供給側の後押しにとどまる。開発者の採用や、クラウド専用APIからの割合の移行を定量化するものは何もなく、2026年第3四半期までに30パーセントという基準は未計測のままである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f960d058dc42c7c6",
+        "short_label": "KV-cache-compression dtype ships as inference-stack deployment knob by Q4 2026",
+        "prediction_date": "2026-04-29"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260429-1、シグナル：KVキャッシュ圧縮のdtype、vLLM、SGLang、TGI、圧縮キャッシュの階層、--kv-cache-dtype）。vLLMのv0.24.0は、KVキャッシュと低ビット推論を第一級のデプロイ調整項目として前進させる。プリエンプションを減らすKVキャッシュのウォーターマークと、グループをまたぐプレフィックスキャッシュのヒットのための2段階割り当てを追加し、あわせてW4A16のint4・グループサイズ32のMoE量子化と、180〜290パーセントの高速化を報告するCUTLASS FP8カーネルを備える。これはまさに、この予測が拠り所とするメモリ階層と圧縮精度の配管であり、研究デモではなく調整可能な推論の振る舞いとして出荷されている。\nKVキャッシュ圧縮のdtypeがデプロイの調整項目になるという予測は、圧縮されたKVキャッシュのdtypeが、主要なエンジンを横断する標準的でユーザー選択可能な推論スタックのフラグになる、というものだ。本日の証拠は、vLLMがKVキャッシュ管理と低ビットMoE経路を強化していることを示すが、予測が名指す特定の動き、すなわち圧縮キャッシュのdtypeを文書化されたエンジン横断のデプロイフラグとして提供することは、確定ではなく隣接にとどまる。したがってこれは、関連度3の土台となるシグナルとして読める。",
+      "reference_links": [
+        {
+          "label": "vLLM - GitHub release v0.24.0 (security hardening, DeepSeek-V4 paths, Intel XPU)",
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.24.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "復活のシグナルは、vLLMのv0.24.0がまさにこの予測の土台を前進させたことだ。プリエンプションを減らすKVキャッシュのウォーターマーク、グループをまたぐプレフィックスキャッシュ再利用のための2段階割り当て、加えてW4A16のint4 MoEとCUTLASS FP8カーネルである。圧縮キャッシュのdtype調整項目が乗るであろうメモリ階層と圧縮精度の配管が、研究デモではなく調整可能な推論の振る舞いとして出荷され、休眠していた論を再び動かしている。",
+        "coherence": 3,
+        "remaining_gap": "特定の動き、すなわち圧縮されたKVキャッシュのdtypeを、エンジンを横断する文書化されたユーザー選択可能なフラグとして提供することは、確定ではなく隣接にとどまる。これは土台であり、名指された調整項目ではない。"
+      }
+    }
+  ]
+}
