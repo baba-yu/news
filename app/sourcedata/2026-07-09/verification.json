@@ -1,0 +1,142 @@
+{
+  "date": "2026-07-09",
+  "verifications": [
+    {
+      "topic": "LLM Workflow",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "Sysdig details JADEPUFFER, the first ransomware intrusion run end-to-end by an autonomous AI agent, after an LLM-driven agent chained a known Langflow RCE into full credential theft and data encryption",
+        "CISA orders a two-day federal patch sprint after adding four actively exploited flaws to its catalog, led by a maximum-severity Adobe ColdFusion RCE weaponized within hours of disclosure"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Langflow is an in-scope LLM-agent/workflow-builder platform named in the rubric and it features centrally in two bullets (the JADEPUFFER RCE vector and the CVE-2026-55255 authorization-bypass), but both frame it as a security target rather than a workflow/orchestration-capability development, so coverage of the LLM-Workflow topic proper is borderline. No dedicated agent-DAG / pipeline-orchestration release today."
+    },
+    {
+      "topic": "Multi-profiling for Local LLM (e.g. Multica)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "News-driven-only topic; no shipped bullet references Multica or any multi-profiling-for-local-LLM activity, so uncovered+consistent per the gating rule."
+    },
+    {
+      "topic": "Agent Harness (OpenClaw, NemoClaw, Hermes Agents, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "SpaceXAI ships Grok 4.5, a Cursor-trained frontier model that co-locates the model layer and the coding harness in one vertically integrated product priced to undercut incumbents"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Section 1 centers on Cursor, a named agentic IDE / coding agent in the rubric: Grok 4.5 is co-trained on Cursor's coding data and ships as Cursor's default agent across desktop, web, iOS, CLI, and SDK, and the bullet also benchmarks against Codex and Claude Code, so it is squarely coding-agent-harness news."
+    },
+    {
+      "topic": "Platform for Local LLM (vLLM, SGLang, etc.)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No bullet covers a local inference engine / serving runtime (vLLM, SGLang, TGI, Ollama-serving, LiteLLM). Grok 4.5 ships on xAI's hosted API, not a self-hosted serving stack. Best-effort topic with no hit today."
+    },
+    {
+      "topic": "Ecosystems for Local LLM Embedded System (Foundry Local, etc.)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No bullet covers an edge / on-device LLM runtime or NPU SDK (Ollama, LM Studio, MLX, OpenVINO, ExecuTorch). Zeroth's robots are embodied AI hardware, not an embedded-LLM runtime story. Best-effort topic with no hit today."
+    },
+    {
+      "topic": "Local LLM Models",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No open-weight LLM release or model-card drop today. Grok 4.5 (Section 1) is a proprietary, API-only frontier model, not an open-weight family, so it falls outside the open-weight-models topic. Best-effort topic with no hit today."
+    },
+    {
+      "topic": "Local LLM Optimization, Fine-tuning (Unsloth — every run)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "The writer searched Unsloth per the constant-coverage rule (GitHub releases + changelog); the newest release, v0.1.481-beta (July 7), was already reported on 2026-07-08, so there is no fresh state-change to promote today and correctly no bullet (ADR-002 Rule 2). Searched honestly with nothing new to surface — this is not an overreport, so the mandatory topic stays consistent."
+    },
+    {
+      "topic": "Ecosystems for LLM on PaaS (AWS Bedrock, Azure AI Foundry, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "SpaceXAI ships Grok 4.5, a Cursor-trained frontier model that co-locates the model layer and the coding harness in one vertically integrated product priced to undercut incumbents"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Section 1 details Grok 4.5's availability on the xAI developer API with per-token pricing ($2/$6 base, $4/$18 fast), a 500K context window, and configurable reasoning effort — a hosted frontier-model API, which the rubric's generic scope explicitly lists (frontier model API / hosted LLM API / inference-as-a-service / PaaS LLM). The bullet's center is the model+harness, but the hosted-API-availability facet fits this topic."
+    },
+    {
+      "topic": "AI Security",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Sysdig details JADEPUFFER, the first ransomware intrusion run end-to-end by an autonomous AI agent, after an LLM-driven agent chained a known Langflow RCE into full credential theft and data encryption",
+        "CISA orders a two-day federal patch sprint after adding four actively exploited flaws to its catalog, led by a maximum-severity Adobe ColdFusion RCE weaponized within hours of disclosure"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Section 3 is squarely agentic-AI security: the first ransomware intrusion run end-to-end by an autonomous LLM-driven agent (recon, API-key/credential theft, lateral movement, encryption) — a textbook agent-abuse / tool-call-abuse case. Section 4 adds the Langflow authorization-bypass (CVE-2026-55255) that lets one user execute another's agent flow, explicitly flagged as AI-tooling security."
+    },
+    {
+      "topic": "CVE update on score ≥ 8.0",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "CISA orders a two-day federal patch sprint after adding four actively exploited flaws to its catalog, led by a maximum-severity Adobe ColdFusion RCE weaponized within hours of disclosure"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Section 4 is a dedicated high-severity CVE update: CISA added four actively exploited flaws to its KEV catalog, led by CVE-2026-48282 (CVSS 10.0 Adobe ColdFusion path-traversal RCE) plus two more 10.0-rated Joomla RCEs (CVE-2026-56290, CVE-2026-48908), all at or above 8.0. Section 3 additionally names CVE-2025-3248 (the exploited Langflow RCE) as attack-vector context."
+    },
+    {
+      "topic": "Hardware",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "SK Hynix and CXMT launch back-to-back multi-billion-dollar memory-chip IPOs in the same week, moving the AI-infrastructure capital story one layer beneath the accelerator into HBM and DRAM"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Section 2 centers on memory-chip makers SK Hynix (HBM) and CXMT (DRAM) and their fab-capacity expansion to meet AI demand; HBM/DRAM and fab build-out are explicitly in the Hardware rubric (HBM, wafer, fab, data-center capacity), so the AI-memory-silicon story is covered even though it is framed through an IPO lens."
+    },
+    {
+      "topic": "Physical AI",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Zeroth raises $74M led by Ant Group as China's humanoid-robot market scales on home and education demand, a different use-case center than the West's factory-floor humanoid pitch"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Section 5 is a direct embodied-AI/robotics bullet: Chinese humanoid-robot maker Zeroth (M1/W1 robots, 30,000+ orders) scaling home, early-childhood-education, and pet-companionship deployments — squarely within the humanoid / embodied-AI scope."
+    },
+    {
+      "topic": "LLM-related research and papers",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "AI events to plan around now: ICML's Seoul workshops close out the weekend while the chip, security, and enterprise tracks stack up from August into the fall"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "No bullet presents a specific paper or research finding; ICML 2026 (workshops July 10-11) and NeurIPS Sydney appear in Section 6 only as upcoming venues/events, not as research results, so coverage of the research-and-papers topic itself is at best ambiguous (consistent with the prior-day read)."
+    },
+    {
+      "topic": "Stock prices and corporate activity",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "SK Hynix and CXMT launch back-to-back multi-billion-dollar memory-chip IPOs in the same week, moving the AI-infrastructure capital story one layer beneath the accelerator into HBM and DRAM",
+        "Zeroth raises $74M led by Ant Group as China's humanoid-robot market scales on home and education demand, a different use-case center than the West's factory-floor humanoid pitch"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Two distinct corporate-finance bullets: Section 2 covers back-to-back mega-IPOs (SK Hynix ~$28B US listing expected to price July 10, seven-times oversubscribed, and CXMT's ~$4.3B Shanghai listing), and Section 5 covers Zeroth's ~$74M pre-Series A funding round led by Ant Group with named co-investors; both are squarely IPO/funding corporate-activity news."
+    },
+    {
+      "topic": "Bay Area / SV AI meet-up events",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "AI events to plan around now: ICML's Seoul workshops close out the weekend while the chip, security, and enterprise tracks stack up from August into the fall"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Section 6 is a forward-looking events roundup covering all three mandatory sub-tracks — dev/enterprise (AI Tinkerers SF August, The AI Conference Sep 29-Oct 1, Ray Summit, Ai4, GitHub Universe, re:Invent), AI-security (SecurityWeek AI Risk Summit Aug 11-12, Black Hat/DEF CON 34 AI Village, OWASP Global AppSec, Zenity), and AI-chip (Hot Chips Aug 23-25, AI Infra Summit Sep 15-17). The carry-forward exception applies: it carries forward every still-upcoming event from the 2026-07-08 bullet (ICML workshops July 10-11, Hot Chips, AI Risk Summit, Ai4, GitHub Universe, re:Invent, etc.) and adds new upcoming events, with no still-upcoming event dropped, so it is covered with no fresh-state-change required."
+    },
+    {
+      "topic": "Other standing-out topics",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "SpaceXAI ships Grok 4.5, a Cursor-trained frontier model that co-locates the model layer and the coding harness in one vertically integrated product priced to undercut incumbents"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Section 1's structural angle — a frontier lab co-training its model on a top coding-agent's own usage data and shipping it as that agent's default, collapsing the model layer and harness layer into one vertically integrated product priced to undercut standalone incumbents — is a standout ecosystem-shape shift that fits this catch-all beyond the Agent-Harness mapping."
+    }
+  ]
+}
