@@ -1,0 +1,14 @@
+{
+  "id": "prediction.tmpC",
+  "scope_hint": "cross",
+  "title": "AI coding assistants make symlink-aware write consent the default by H1 2027",
+  "body": "By H1 2027 most of the six AI coding assistants named in Wiz Research's July 8 GhostApproval disclosure converge on a write-approval prompt that resolves and shows the real target path before a developer okays an edit, closing the consent bypass at the center of the flaw. GhostApproval turns an ordinary symbolic link into a repository-borne attack: a malicious repo ships a file with a benign name such as project_settings.json that is actually a symlink to ~/.ssh/authorized_keys, so when a developer asks the agent to set up the workspace and approves a harmless-looking config edit, the write lands on the SSH file and plants an attacker's key for passwordless remote access. The dialog showed only the innocuous filename, never the resolved destination, so the human consented to a write they could not see. Three of the six vendors - Amazon Q Developer (CVE-2026-12958), Cursor (CVE-2026-50549), and Google Antigravity - shipped fixes within days; Augment and Windsurf were unpatched at disclosure; and Anthropic disputed that Claude Code's behavior is a bug, arguing a developer who trusts a directory and approves an edit owns that decision. That split verdict is unstable: once half a field carrying assigned CVEs treats silent symlink-following as a defect, enterprise security review and procurement make a shown-resolved-target consent surface the baseline expectation, and the holdouts wear an audit and competitive liability rather than a defensible design choice. The forcing function reaches past vendor patches - an agent-security guidance source such as the OWASP LLM/agentic project or a CWE entry is positioned to name symlink-mediated consent-bypass as a distinct AI-agent weakness class, converting a six-vendor scramble into a documented standard the remaining assistants must meet.",
+  "reasoning": {
+    "because": "Wiz's GhostApproval hit six AI coding agents; three shipped fixes, two lagged, one disputed it.",
+    "given": "Assigned CVEs and enterprise security review make 'show the real write target' the baseline.",
+    "so_that": "≥5 of the six named assistants show the resolved symlink target in the write-approval prompt by default.",
+    "landing": "by H1 2027; Augment + Windsurf ship fixes; a CWE/OWASP entry names it.",
+    "plain_language": "A repo can disguise a booby-trapped shortcut as a normal file; soon coding AIs will show the real file before you approve a change."
+  },
+  "summary": "Wiz's July 8 GhostApproval showed a repo-planted symlink can redirect an AI coding agent's approved write onto ~/.ssh; three of six vendors patched, one disputed. By H1 2027, most of the six show the resolved symlink target in the approval prompt by default, and a guidance body names the weakness."
+}

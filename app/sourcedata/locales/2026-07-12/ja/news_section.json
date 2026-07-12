@@ -1,0 +1,77 @@
+{
+  "date": "2026-07-12",
+  "sections": [
+    {
+      "category": "Wiz の GhostApproval 研究は、リポジトリに仕込まれたシンボリックリンクが、AI コーディングエージェントのファイル書き込みを被害者の SSH 鍵へ向け直せることを示した。Claude Code、Cursor、Amazon Q を含む6つの主要アシスタントが影響を受けた",
+      "bullets": [
+        {
+          "body": "Wiz Research は<a href=\"https://www.wiz.io/blog/ghostapproval-a-trust-boundary-gap-in-ai-coding-assistants\">7月8日に GhostApproval を公開した</a>。何十年も前からあるファイルシステムの機能――シンボリックリンク――を、AI コーディングアシスタントへのリポジトリ経由の攻撃に変える、信頼境界の欠陥だ。悪意あるリポジトリは、project_settings.json のような無害な名前のファイルを同梱するが、その実体は ~/.ssh/authorized_keys を指すシンボリックリンクだ。開発者がエージェントにワークスペースの準備や README に従った作業を頼み、無害に見える設定ファイルの編集を承認すると、書き込みは代わりに SSH ファイルに対して行われる。攻撃者の鍵が仕込まれ、パスワードなしのリモートアクセスを許してしまう。核心にある不具合は同意の回避だ。承認ダイアログは無害なファイル名しか示さないため、人間は、本当の対象が解決される様子を一度も見ないまま編集を承認してしまう。<a href=\"https://thehackernews.com/2026/07/ghostapproval-symlink-flaws-could-let.html\">Wiz はこれを6社のベンダーに報告した</a>。Amazon Q Developer、Anthropic の Claude Code、Augment、Cursor、Google Antigravity、Windsurf だ。Amazon（CVE-2026-12958）、Cursor（CVE-2026-50549）、Google Antigravity は修正を出した。Augment と Windsurf は公開時点でなお未修正だった。そして Anthropic は、Claude Code の挙動がバグだとの見方に異を唱え、ディレクトリを信頼して編集を承認する開発者はその判断に責任を負うとし、これを自社の脅威モデルの範囲外に置いた。本当に注目すべきは、この判断の割れだ。ユーザーに代わってシンボリックリンクを黙って辿り、機微なパスへ入り込むことが、ツールの脆弱性なのかユーザーの過ちなのか、業界はまだ合意していない。",
+          "citations": [
+            {
+              "label": "Wiz - GhostApproval: AI コーディングアシスタントにおける信頼境界の欠陥",
+              "url": "https://www.wiz.io/blog/ghostapproval-a-trust-boundary-gap-in-ai-coding-assistants"
+            },
+            {
+              "label": "The Hacker News - GhostApproval のシンボリックリンク欠陥、悪意あるリポジトリが AI コーディングエージェントでコードを実行できる恐れ",
+              "url": "https://thehackernews.com/2026/07/ghostapproval-symlink-flaws-could-let.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "ミュンヘン工科大学のベンチマーク ThorArena は、記録した人間の動作と力のデータをシミュレーション上で再現し、主要なヒューマノイドの全身制御器が、実際の接触力が入ってくると急激に性能低下することを明らかにした",
+      "bullets": [
+        {
+          "body": "ミュンヘン工科大学の研究チームは、<a href=\"https://arxiv.org/abs/2607.06052\">ThorArena を arXiv で公開した</a>。実際の人間とロボットの協働に伴う、意図的で荷重のかかる物理的接触の下でヒューマノイドの全身制御に負荷をかけて試すベンチマークだ。衝突回避ではなく、能動的な力のやり取りを対象とする。研究チームは、VR ヘッドセット、モーショントラッカー、3D プリント製の力覚センサー付きツールを装着した人間の操作者が、接触の多い6種類の作業――水の入った容器の持ち上げと下ろし、椅子の押し引き、パートナーとの物体の共同運搬――を行う様子から、全身の動きと手の力を同期して記録した。そのうえで、それらの力を代表的な制御方策に対してシミュレーション上で再現した。同チームの指標である Force-Aware Tracking Score（FATS）は、追従精度、さまざまな力の大きさに対する頑健性、制御にかかる労力、そしてロボットがエピソード終了まで直立を保てるかを、まとめて評価する。<a href=\"https://techxplore.com/news/2026-07-humanoid-robots-real-world.html\">独立した報道</a>でも取り上げられた主要な発見はこうだ。力を加味した評価は、従来の力を加えない試験では見えないまま残る大きな性能差を明らかにする。そして6つの課題すべてでほぼ完璧なバランスを保てたのは、著者ら自身の Thor2 方策だけだった。この結果は、Figure、Agility、Boston Dynamics がヒューマノイドを実証段階から工場や倉庫へと送り込むさなかに出てきた。そこでは人が必ずロボットに寄りかかったり、押したり、物を手渡したりする。まさに今の制御器が最も苦手とする領域だ。",
+          "citations": [
+            {
+              "label": "arXiv - ThorArena: 人間の動作・力のデモンストレーションによるヒューマノイドの物理的相互作用のベンチマーク",
+              "url": "https://arxiv.org/abs/2607.06052"
+            },
+            {
+              "label": "TechXplore - 新しい試験、ヒューマノイドロボットが実世界の力にどれだけ対応できるかを測定",
+              "url": "https://techxplore.com/news/2026-07-humanoid-robots-real-world.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Micron は米国の製造計画を2035年までに2,500億ドルへ引き上げ、ニューヨーク州クレイのメモリ大規模工場で最初のコンクリートを四半期早く打設した。この拡張を、AI 時代の DRAM と HBM の需要に明確に結びつけている",
+      "bullets": [
+        {
+          "body": "Micron は<a href=\"https://www.globenewswire.com/news-release/2026/07/09/3324807/14450/en/Micron-Accelerates-U-S-Investments-Pours-First-Concrete-at-New-York-Fab.html\">7月9日、米国での投資計画を2035年までに2,500億ドル超へ引き上げると表明した</a>。2025年半ばに定めた2,000億ドルの計画から500億ドルの上積みで、この増額を AI 時代のメモリ需要の急増への対応と明確に位置づけた。この発表は、ニューヨーク州クレイの用地での最初のコンクリート打設と同時に行われた。当初の予定より四半期分以上早く、用地の準備から立ち上げ工事への移行を示すものだ。Micron によれば、この用地は米国史上最大の半導体製造拠点になるという。同社は、DRAM の40%を米国内で生産するという目標を改めて示した。<a href=\"https://www.trendforce.com/news/2026/07/10/news-micron-raises-u-s-investment-target-to-250b-through-2035-begins-concrete-work-on-new-yorks-first-fab/\">今回の引き上げは、メモリが AI アクセラレーターの決定的な制約になっていることを浮き彫りにする</a>。HBM スタックと先端 DRAM は先々まで完売しており、これは SK Hynix が記録的な規模の米国上場で得た資金を EUV 対応の生産能力に充ててから数日後のことだ。3大メモリメーカーのうち2社が、同じ週に同じボトルネックへ新たな資本を投じている。",
+          "citations": [
+            {
+              "label": "GlobeNewswire（Micron）- Micron、米国投資を加速、ニューヨークの工場で最初のコンクリートを打設",
+              "url": "https://www.globenewswire.com/news-release/2026/07/09/3324807/14450/en/Micron-Accelerates-U-S-Investments-Pours-First-Concrete-at-New-York-Fab.html"
+            },
+            {
+              "label": "TrendForce - Micron、米国投資目標を2035年までに2,500億ドルへ引き上げ、ニューヨーク初の工場でコンクリート工事を開始",
+              "url": "https://www.trendforce.com/news/2026/07/10/news-micron-raises-u-s-investment-target-to-250b-through-2035-begins-concrete-work-on-new-yorks-first-fab/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "今から予定に入れておきたい AI イベント。AMD Advancing AI が7月22〜23日に Moscone で開幕し、続いて8月には半導体、セキュリティ、開発者向けのサミットが続く。Black Hat と DEF CON、AI Risk Summit、Ai4、Hot Chips、そして日程が新たに決まった Anyscale の Ray Summit（8月24〜26日）だ",
+      "bullets": [
+        {
+          "body": "カレンダー上で最も近い日程は、<a href=\"https://www.redhat.com/en/events/red-hat-amd-advancing-ai-2026\">サンフランシスコの Moscone West で7月22〜23日に開かれる AMD Advancing AI 2026</a> だ。リサ・スーとパートナー各社が、Instinct MI450 アクセラレーターと Zen 6 EPYC「Venice」CPU の詳細を明らかにすると見られる。現地での参加は無料でライブ配信もあり、Blackwell に対する AMD の回答を示す格好の場となる。その後の AI 半導体系では、スタンフォードで8月23〜25日に Hot Chips が開かれ、早期登録料金の締め切りは7月31日だ。続いて、サンタクララで9月15〜17日に AI Infra Summit が開かれる。AI セキュリティ系は8月上旬から中旬に集中する。ラスベガスで Black Hat USA（8月1〜6日）と DEF CON 34 の AI Village、ハーフムーンベイの Ritz-Carlton で8月11〜12日に SecurityWeek の AI Risk Summit、サンフランシスコで11月5〜6日に OWASP Global AppSec USA、そしてエージェントの乗っ取りや MCP 層の防御に取り組むチーム向けの Zenity の AI Agent Security Summit シリーズがある。開発者、データ、ベイエリア系では、<a href=\"https://www.anyscale.com/ray-summit/2026\">Anyscale の Ray Summit の日程が確定した。San Francisco Marriott Marquis で8月24〜26日</a>（トレーニング1日に加え、LLM と強化学習のワークロードのスケーリングを扱う2日間）だ。次回の AI Tinkerers San Francisco のミートアップは、いつもの実働デモ形式で8月に開かれる。Ai4 2026 はラスベガスの The Venetian で8月4〜6日、ACM AI Leadership Summit はアトランタで8月30日〜9月2日、The AI Conference は Pier 48 で9月29日〜10月1日、GitHub Universe は10月28〜29日、AWS re:Invent はラスベガスで11月30日〜12月4日、そして NeurIPS 2026 が12月に年を締めくくる。当面の対応。AMD Advancing AI は7月22日の開幕前に登録し、Hot Chips の早期料金は7月31日までに確保し、8月上旬のセキュリティ関連の時期に向けて Black Hat と AI Risk Summit を予約しておくとよい。",
+          "citations": [
+            {
+              "label": "Red Hat - AMD Advancing AI 2026 の Red Hat（Moscone West、サンフランシスコ、7月22〜23日）",
+              "url": "https://www.redhat.com/en/events/red-hat-amd-advancing-ai-2026"
+            },
+            {
+              "label": "Anyscale - Ray Summit 2026（サンフランシスコ、8月24〜26日）",
+              "url": "https://www.anyscale.com/ray-summit/2026"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

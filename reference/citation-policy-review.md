@@ -14,8 +14,8 @@ Sorted by `count` descending, then host alphabetical.
 | host | count | first_seen | last_seen | sample_label |
 |---|---|---|---|---|
 | github.com | 214 | 2026-04-19 | 2026-07-08 | GitHub - QwenLM/Qwen3.6 |
-| arxiv.org | 166 | 2026-04-29 | 2026-07-01 | arXiv - Corpus2Skill (2604.14572) |
-| thehackernews.com | 130 | 2026-04-20 | 2026-07-11 | The Hacker News - nginx-ui CVE-2026-33032 |
+| arxiv.org | 170 | 2026-04-29 | 2026-07-12 | arXiv - Corpus2Skill (2604.14572) |
+| thehackernews.com | 140 | 2026-04-20 | 2026-07-12 | The Hacker News - nginx-ui CVE-2026-33032 |
 | anthropic.com | 129 | 2026-04-21 | 2026-07-01 | Anthropic - Anthropic and Amazon expand collaboration |
 | simonwillison.net | 128 | 2026-04-19 | 2026-07-08 | Simon Willison - Qwen3.6-27B |
 | siliconangle.com | 122 | 2026-04-23 | 2026-07-07 | SiliconANGLE - OpenAI workspace agents |
@@ -65,6 +65,7 @@ Sorted by `count` descending, then host alphabetical.
 | standardbots.com | 28 | 2026-05-03 | 2026-05-19 | Standard Bots - Humanoid league table IROS GTC Fall 2026 upd |
 | airisksummit.com | 26 | 2026-06-08 | 2026-07-10 | SecurityWeek - AI Risk Summit 2026 |
 | ollama.com | 26 | 2026-07-05 | 2026-07-05 | Ollama Blog - Faster Gemma 4 on MLX with multi-token predict |
+| wiz.io | 24 | 2026-05-07 | 2026-07-12 | Wiz Research - Joint MCP exposure baseline May 2026 |
 | adversa.ai | 22 | 2026-05-05 | 2026-06-09 | Adversa AI - Top Agentic AI security resources May 2026 |
 | andrew.ooo | 22 | 2026-05-06 | 2026-05-19 | andrew.ooo - AISI Cyber Eval GPT-5.5 vs Mythos vs Opus May 2 |
 | securityweek.com | 22 | 2026-04-20 | 2026-07-09 | SecurityWeek - Claude Code, Gemini CLI, GitHub Copilot Agent |
@@ -87,6 +88,7 @@ Sorted by `count` descending, then host alphabetical.
 | trendingtopics.eu | 17 | 2026-05-06 | 2026-05-14 | Trending Topics - Cerebras IPO 2026 launches IPO bid at 26.6 |
 | 9to5mac.com | 16 | 2026-04-22 | 2026-07-01 | 9to5Mac - OpenAI Codex expansion |
 | githubuniverse.com | 16 | 2026-05-30 | 2026-05-31 | GitHub Universe FAQ |
+| globenewswire.com | 16 | 2026-04-22 | 2026-07-12 | GlobeNewswire - Humanoid Robot Market $8.78B by 2035 |
 | humanoidsdaily.com | 16 | 2026-05-30 | 2026-05-30 | Humanoids Daily |
 | opentools.ai | 16 | 2026-05-30 | 2026-05-30 | OpenTools |
 | tech-insider.org | 16 | 2026-04-22 | 2026-05-03 | Tech Insider - Cerebras IPO Filing |
@@ -110,7 +112,6 @@ Sorted by `count` descending, then host alphabetical.
 | renovateqr.com | 14 | 2026-04-25 | 2026-05-03 | Renovate QR - Chinese AI Models in April 2026 |
 | thestreet.com | 14 | 2026-04-28 | 2026-05-03 | TheStreet - Stock Market Today (Apr. 28, 2026) |
 | whitehouse.gov | 14 | 2026-06-06 | 2026-06-06 | White House - Promoting Advanced Artificial Intelligence Inn |
-| wiz.io | 14 | 2026-05-07 | 2026-05-19 | Wiz Research - Joint MCP exposure baseline May 2026 |
 | devblogs.microsoft.com | 13 | 2026-04-23 | 2026-06-04 | Microsoft Foundry Blog - From Local to Production |
 | icml.cc | 13 | 2026-07-06 | 2026-07-10 | ICML 2026 official site (July 6-11, Seoul) |
 | pbs.org | 13 | 2026-05-01 | 2026-05-03 | PBS NewsHour - Powell says he will stay on Fed board after c |
@@ -130,7 +131,6 @@ Sorted by `count` descending, then host alphabetical.
 | webflow.sysdig.com | 12 | 2026-06-27 | 2026-06-27 | Sysdig - Understanding Langflow CVE-2026-55255, and why high |
 | badhost.org | 11 | 2026-06-02 | 2026-06-02 | BadHost - CVE-2026-48710 Starlette host-header auth bypass |
 | cloud.google.com | 11 | 2026-04-23 | 2026-04-27 | Google Cloud - Introducing Gemini Enterprise Agent Platform |
-| globenewswire.com | 11 | 2026-04-22 | 2026-06-16 | GlobeNewswire - Humanoid Robot Market $8.78B by 2035 |
 | nsa.gov | 11 | 2026-06-06 | 2026-06-06 | NSA - Press release: Security Design Considerations for AI-D |
 | tradingkey.com | 11 | 2026-04-22 | 2026-05-03 | tradingkey - Anthropic Moving Toward AI Chips for Claude |
 | vfuturemedia.com | 11 | 2026-04-30 | 2026-05-03 | V Future Media - Humanoid Robots 2026 |
@@ -177,6 +177,7 @@ Sorted by `count` descending, then host alphabetical.
 | futurumgroup.com | 8 | 2026-06-03 | 2026-06-03 | Futurum - Snowflake Summit 2026: four infrastructure bets th |
 | marketbeat.com | 8 | 2026-06-06 | 2026-06-06 | MarketBeat - NVIDIA (NASDAQ:NVDA) Coverage Initiated at Chin |
 | notebookcheck.net | 8 | 2026-06-01 | 2026-06-01 | Notebookcheck - Microsoft Build 2026 what to expect from the |
+| techxplore.com | 8 | 2026-04-25 | 2026-07-12 | TechXplore - DeepSeek V4 1M context |
 | thetechportal.com | 8 | 2026-04-30 | 2026-06-12 | The Tech Portal - OpenAI targets 122M ChatGPT subscribers by |
 | zenity.io | 8 | 2026-04-24 | 2026-07-01 | Zenity Newsroom - FedRAMP In Process Status |
 | ai-dev.deeplearning.ai | 7 | 2026-04-27 | 2026-05-02 | AI Dev 26 x SF — DeepLearning.AI |
@@ -258,6 +259,7 @@ Sorted by `count` descending, then host alphabetical.
 | tenable.com | 5 | 2026-04-20 | 2026-04-25 | Tenable - Copilot Studio Security |
 | thinkingmachines.ai | 5 | 2026-07-03 | 2026-07-03 | Thinking Machines Lab - Learning to Replicate Expert Judgmen |
 | threat-modeling.com | 5 | 2026-07-01 | 2026-07-01 | Threat-Modeling.com - Microsoft AutoGen Studio code executio |
+| trendforce.com | 5 | 2026-07-12 | 2026-07-12 | TrendForce - Micron raises U.S. investment target to $250B t |
 | tweaktown.com | 5 | 2026-06-25 | 2026-06-25 | TweakTown - AMD announces Advancing AI 2026 event for July ( |
 | unit42.paloaltonetworks.com | 5 | 2026-06-17 | 2026-06-17 | Palo Alto Networks Unit 42 - Pickle in the Middle: Hijacking |
 | wallstreetwaves.com | 5 | 2026-04-30 | 2026-04-30 | WallStreet Waves - April 29 After-Hours Earnings |
@@ -298,7 +300,6 @@ Sorted by `count` descending, then host alphabetical.
 | promptquorum.com | 4 | 2026-04-25 | 2026-04-26 | PromptQuorum - Local LLMs 2026 |
 | security.apple.com | 4 | 2026-06-14 | 2026-06-14 | Apple Security Research - Expanding Private Cloud Compute |
 | semiwiki.com | 4 | 2026-07-03 | 2026-07-03 | SemiWiki - Hot Chips 2026 |
-| techxplore.com | 4 | 2026-04-25 | 2026-04-25 | TechXplore - DeepSeek V4 1M context |
 | techzine.eu | 4 | 2026-06-12 | 2026-06-12 | Techzine - As Anthropic claims the enterprise, OpenAI fights |
 | testingcatalog.com | 4 | 2026-06-01 | 2026-06-01 | Testing Catalog - Microsoft readies new MAI voice and image |
 | thecyberthrone.in | 4 | 2026-04-27 | 2026-04-27 | TheCyberThrone - CISA Adds Eight Actively Exploited Vulnerab |
@@ -374,6 +375,7 @@ Sorted by `count` descending, then host alphabetical.
 | ai21.com | 2 | 2026-04-28 | 2026-04-29 | AI21 - AI Dev 26 events page (Kiro / B-Capital partnership c |
 | aiconference.com | 2 | 2026-07-09 | 2026-07-10 | The AI Conference 2026 (Pier 48, San Francisco, Sep 29-Oct 1 |
 | alignment.openai.com | 2 | 2026-06-21 | 2026-06-21 | OpenAI - Reinforcement learning towards broadly and persiste |
+| anyscale.com | 2 | 2026-07-12 | 2026-07-12 | Anyscale - Ray Summit 2026 (San Francisco, Aug 24-26) |
 | benzinga.com | 2 | 2026-04-23 | 2026-04-25 | Benzinga - IBM Shares Drop Despite Q1 Earnings Beat |
 | bostondynamics.com | 2 | 2026-04-27 | 2026-04-27 | Boston Dynamics - Atlas Humanoid Robot Product Page |
 | braintrust.dev | 2 | 2026-04-24 | 2026-04-24 | Braintrust - Best AI observability tools: A buyer's guide to |
@@ -423,6 +425,7 @@ Sorted by `count` descending, then host alphabetical.
 | platform.claude.com | 2 | 2026-05-01 | 2026-05-01 | Anthropic - Claude API Release Notes |
 | prateeksinghphd.in | 2 | 2026-04-21 | 2026-04-26 | Prateek Singh PhD - The Agent Wars: OpenClaw, NemoClaw, Herm |
 | promarket.org | 2 | 2026-04-27 | 2026-04-27 | ProMarket - The Antitrust Risks of Anthropic's Project Glass |
+| redhat.com | 2 | 2026-07-12 | 2026-07-12 | Red Hat - Red Hat at AMD Advancing AI 2026 (Moscone West, Sa |
 | reinvent.awsevents.com | 2 | 2026-06-18 | 2026-06-18 | AWS re:Invent 2026 (November 30-December 4, Las Vegas) |
 | robohorizon.com | 2 | 2026-04-28 | 2026-04-28 | RoboHorizon - Figure AI Now Builds a Humanoid Every 90 Minut |
 | salt.security | 2 | 2026-04-27 | 2026-04-27 | Salt Security - The Era of Agentic Security Is Here |
