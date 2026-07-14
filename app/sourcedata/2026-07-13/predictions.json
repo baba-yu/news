@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-13",
+  "predictions": [
+    {
+      "id": "prediction.cc109942df2a6460",
+      "scope_hint": "tech",
+      "title": "AMD Instinct emerges as second vendor for open RL post-training by H1 2027",
+      "body": "On July 10 the vLLM project announced that vime - its reinforcement-learning post-training framework - now runs end-to-end on AMD Instinct MI355X GPUs through native ROCm support, a port contributed by AMD engineers and shipped as a prebuilt Docker container that removes the from-source build long gating ROCm adoption. The validated runs matter more than the port itself: on Qwen3-4B, Qwen3-8B, and the Qwen3-30B-A3B mixture-of-experts model, throughput held near 4,100 tokens per GPU per second, the training-versus-rollout log-probability divergence stayed around 0.012, and reward climbed from roughly zero to about 0.5-0.6 by step 100 - precisely the numerical-stability and convergence signals a lab inspects before trusting non-NVIDIA silicon for post-training. Reinforcement-learning post-training, not pre-training, is where most of this year's frontier gains are being extracted, and that stage has been almost entirely CUDA-bound, so a working MI355X path hands open-model builders their first credible second hardware vendor for their most compute-hungry phase. The July 10 release is AMD-authored, though, so the real test of whether CUDA's grip on the RL stage is loosening is external validation. I expect that by H1 2027 at least one group independent of AMD and the vime core team publishes an end-to-end open-model RL post-training run on AMD Instinct - or an open-weight model ships whose post-training recipe names AMD Instinct - turning a vendor demo into a reproduced, second-source capability, with AMD's July 22-23 Advancing AI event and the expected MI450 accelerator adding near-term momentum.",
+      "reasoning": {
+        "because": "vLLM's vime RL post-training framework now runs end-to-end on AMD Instinct MI355X via native ROCm",
+        "given": "RL post-training drives this year's frontier gains and has been almost entirely CUDA-bound",
+        "so_that": "A group independent of AMD publishes an end-to-end open-model RL post-training run on AMD Instinct",
+        "landing": "by H1 2027; >=1 non-AMD group or open-weight release validates AMD Instinct",
+        "plain_language": "Teaching AIs by trial and error has mostly needed Nvidia chips; AMD just proved it works on theirs, so others will copy it soon."
+      },
+      "summary": "vLLM's July 10 port put its vime RL post-training framework on AMD Instinct MI355X with native ROCm and validated Qwen3 runs. Since RL post-training drives this year's gains yet stays CUDA-bound, expect a group independent of AMD to publish an open-model RL run on AMD Instinct by H1 2027."
+    },
+    {
+      "id": "prediction.4dba2dbfb8d2798b",
+      "scope_hint": "tech",
+      "title": "Agent-memory provenance tagging ships default-on in a major platform by H1 2027",
+      "body": "By H1 2027 at least one major agent platform — a frontier-model vendor's built-in agent memory or a widely adopted agent framework — ships memory-provenance tagging as a default-on control: every fact written to persistent memory carries a machine-checkable record of the input that produced it, so a stored claim can be traced back to the untrusted email, document, or page it came from and quarantined or down-weighted when the agent later reads it. The forcing event is MemGhost, disclosed by Nanyang Technological University, A*STAR's CFAR, and Johns Hopkins on July 6 and amplified in security coverage on July 13: a single crafted email drives a personal agent to write attacker-chosen facts into its long-term memory, reply as if nothing happened, and let those planted facts steer later unrelated sessions — succeeding in 87.5% of background-mode runs against the open-source OpenClaw agent and 71.4% against a Claude Code SDK agent, and transferring across architectures and memory backends. The authors' own first-listed mitigation is tagging the provenance of every stored fact, and because the disclosed agents currently write memory with no source record, no approval gate, and no audit log, provenance tagging is the lowest-friction of those defenses to make default. Signed memory stores and mandatory write-approval are heavier lifts that add cryptographic machinery or a user prompt on every write; provenance metadata attaches at the existing memory-write call and enables read-time trust decisions silently, which is why it lands first as the industry's baseline answer to single-interaction memory poisoning.",
+      "reasoning": {
+        "because": "MemGhost planted persistent false memories via one email at 87.5% and 71.4% success on two agents",
+        "given": "Disclosed agents write memory with no source tag, approval gate, or audit log on the write path",
+        "so_that": "≥1 major agent platform ships default-on provenance tagging on persistent-memory writes as its first poisoning defense",
+        "landing": "by H1 2027; ≥1 model-vendor or agent-framework memory feature, on by default",
+        "plain_language": "AI helpers save facts without noting where each came from, so one email can fool them; vendors will start tagging every memory with its source."
+      },
+      "summary": "MemGhost showed one crafted email can plant persistent false memories in a personal AI agent because its memory is written with no record of each fact's source. Expect a major agent platform to ship default-on memory-provenance tagging by H1 2027 as the baseline poisoning defense."
+    },
+    {
+      "id": "prediction.4ae0dd497b3c0ac0",
+      "scope_hint": "cross",
+      "title": "AI security posture tools ship auto-remediation for AI packages by Q4 2026",
+      "body": "Orca Security's 2026 State of AI Security report, summarized July 13, found that 99.9% of AI-related vulnerability alerts that already have a fix available remain unpatched, with 81.2% of AI-running organizations carrying at least one known vulnerability and 74.1% carrying at least one critical CVE — even as 56% of adopters have pushed agent frameworks and 64% have wired vector databases into production. The arresting number is not the presence of flaws but the fix-available-yet-untouched backlog: the patch exists and is simply not applied. Orca is itself an agentless cloud-security (CNAPP) vendor whose platform already automates prioritization and remediation for conventional cloud risk, so publishing this precise statistic doubles as a product-roadmap tell. I expect the detection-heavy AI security posture management (AI-SPM) market to answer the backlog on the remediation side: by Q4 2026 at least one major cloud- or security-posture vendor — Orca, Wiz, Palo Alto Networks Prisma Cloud, Microsoft Defender for Cloud, or a CNAPP peer — ships a named feature that does not merely flag AI-package and agent-framework CVEs but drives them down, through auto-prioritized patch workflows, one-click or auto-generated fixes, and a mean-time-to-remediate or patch-coverage metric scoped to AI assets. The forcing function is competitive and timed: the report lands the same week as working attacks on agent memory and immediately ahead of Black Hat, DEF CON's AI Village, and the August AI Risk Summit, where every posture vendor will want to convert '99.9% unpatched' from an indictment into a shipped answer. Detection alone now reads as restating the problem; the differentiated pitch is closing the fixable gap before agentic autonomy turns one unpatched flaw into a self-propagating incident.",
+      "reasoning": {
+        "because": "Orca's 2026 report finds 99.9% of fixable AI vulnerabilities remain unpatched",
+        "given": "CNAPP/AI-SPM tooling is detection-heavy as agent frameworks and vector DBs surge into production",
+        "so_that": "≥1 major CNAPP/AI-SPM vendor ships auto-remediation that drives down the fixable AI-package CVE backlog",
+        "landing": "by Q4 2026; ≥1 major posture vendor ships a named AI-remediation feature",
+        "plain_language": "Almost every AI security hole that already has a fix sits unpatched, so security tools will start fixing them automatically, not just flagging them."
+      },
+      "summary": "Orca's 2026 AI-security report finds 99.9% of fixable AI vulnerabilities sit unpatched even as agent frameworks and vector databases reach production. By Q4 2026, at least one major cloud- or security-posture vendor likely ships auto-remediation that burns down the fixable AI-package backlog."
+    }
+  ]
+}

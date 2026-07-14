@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-12",
+  "predictions": [
+    {
+      "id": "prediction.b1812fc905cd31ea",
+      "scope_hint": "tech",
+      "title": "Humanoid whole-body control adopts force-aware contact evaluation by H1 2027",
+      "body": "Researchers at the Technical University of Munich released ThorArena, a benchmark that stress-tests humanoid whole-body control under deliberate, load-bearing physical contact - active force exchange, not collision avoidance. Capturing synchronized whole-body motion and hand forces from human operators across six contact-rich chores (lifting and lowering a water container, pushing and pulling a chair, and co-carrying an object with a partner), the team replayed those forces in simulation and scored policies with a Force-Aware Tracking Score that jointly grades tracking accuracy, robustness across force levels, control effort, and whether the robot stays upright to the end of the episode. The headline result is that force-informed evaluation exposes large performance gaps that stay invisible under conventional no-force testing, and only the authors' own Thor2 policy held near-perfect balance across all six tasks. Because Figure, Agility, and Boston Dynamics are pushing humanoids off pilot stages and into factories and warehouses - where a person will inevitably lean on, push, or hand something to the robot - the no-force motion-tracking demo is no longer sufficient evidence of readiness. I expect force-aware contact evaluation to cross from this single academic benchmark into commercial practice: by H1 2027 at least one leading humanoid platform, or an independent second group, publicly reports whole-body control results under active applied contact force rather than motion tracking alone.",
+      "reasoning": {
+        "because": "TU Munich's ThorArena finds humanoid whole-body controllers degrade once real contact forces enter",
+        "given": "Figure, Agility, Boston Dynamics push humanoids into factories where people physically contact them",
+        "so_that": "At least one leading humanoid platform or an independent group reports whole-body control under active contact force",
+        "landing": "by H1 2027; ≥1 humanoid maker or group reports contact-force results",
+        "plain_language": "A new test pushes and leans on robots to see if they stay standing; today's best humanoids often fail, so makers will start testing this."
+      },
+      "summary": "TU Munich's ThorArena replays real human contact forces against humanoid whole-body controllers and finds leading policies degrade under load - gaps no-force testing hides. As humanoids move into factories, expect force-aware contact evaluation to reach a commercial platform by H1 2027."
+    },
+    {
+      "id": "prediction.a31a93089cef22da",
+      "scope_hint": "business",
+      "title": "Samsung answers memory-capex race with fresh HBM capacity buildout by Q1 2027",
+      "body": "By Q1 2027 Samsung — the one large memory maker absent from this week's capital surge — moves to match its rivals with a fresh, publicly-announced HBM or advanced-DRAM capacity commitment tied explicitly to AI demand. The trigger is the July 9 collision of two of the three big memory suppliers committing capital to the same bottleneck in the same week: Micron lifted its US manufacturing plan to more than $250 billion through 2035 (a $50 billion increase) and poured first concrete at its Clay, New York megafab a quarter ahead of schedule, while SK Hynix's record US listing earmarked proceeds for EUV-equipped capacity. With HBM stacks and advanced DRAM sold out well into the future and both rivals visibly locking in AI-era supply, Samsung faces direct competitive and customer-facing pressure to signal its own capacity path rather than cede the narrative. The predicted state change is a concrete Samsung commitment — a raised memory capex line, a new or expanded HBM/DRAM fab or line, or a formal AI-memory capacity target — announced through an earnings call, filing, or press release.",
+      "reasoning": {
+        "because": "Micron's $250B raise + NY concrete pour and SK Hynix's EUV-earmarked US listing hit the same week",
+        "given": "HBM and advanced DRAM are sold out ahead; two of three big memory makers committed fresh capital",
+        "so_that": "Samsung, the absent third supplier, announces a matching HBM/DRAM capacity commitment or raised memory capex",
+        "landing": "By Q1 2027; ≥1 Samsung capacity or capex announcement tied to AI memory demand",
+        "plain_language": "Two of the three big memory-chip makers just poured money into AI memory in one week; expect the third, Samsung, to follow soon."
+      },
+      "summary": "After Micron raised its US plan past $250 billion and SK Hynix's record listing earmarked EUV capacity in the same week, Samsung is the one large memory maker yet to commit fresh AI-memory capital. By Q1 2027 it likely answers with a new HBM or DRAM capacity commitment or raised memory capex."
+    },
+    {
+      "id": "prediction.b76fcb409546f23d",
+      "scope_hint": "cross",
+      "title": "AI coding assistants make symlink-aware write consent the default by H1 2027",
+      "body": "By H1 2027 most of the six AI coding assistants named in Wiz Research's July 8 GhostApproval disclosure converge on a write-approval prompt that resolves and shows the real target path before a developer okays an edit, closing the consent bypass at the center of the flaw. GhostApproval turns an ordinary symbolic link into a repository-borne attack: a malicious repo ships a file with a benign name such as project_settings.json that is actually a symlink to ~/.ssh/authorized_keys, so when a developer asks the agent to set up the workspace and approves a harmless-looking config edit, the write lands on the SSH file and plants an attacker's key for passwordless remote access. The dialog showed only the innocuous filename, never the resolved destination, so the human consented to a write they could not see. Three of the six vendors - Amazon Q Developer (CVE-2026-12958), Cursor (CVE-2026-50549), and Google Antigravity - shipped fixes within days; Augment and Windsurf were unpatched at disclosure; and Anthropic disputed that Claude Code's behavior is a bug, arguing a developer who trusts a directory and approves an edit owns that decision. That split verdict is unstable: once half a field carrying assigned CVEs treats silent symlink-following as a defect, enterprise security review and procurement make a shown-resolved-target consent surface the baseline expectation, and the holdouts wear an audit and competitive liability rather than a defensible design choice. The forcing function reaches past vendor patches - an agent-security guidance source such as the OWASP LLM/agentic project or a CWE entry is positioned to name symlink-mediated consent-bypass as a distinct AI-agent weakness class, converting a six-vendor scramble into a documented standard the remaining assistants must meet.",
+      "reasoning": {
+        "because": "Wiz's GhostApproval hit six AI coding agents; three shipped fixes, two lagged, one disputed it.",
+        "given": "Assigned CVEs and enterprise security review make 'show the real write target' the baseline.",
+        "so_that": "≥5 of the six named assistants show the resolved symlink target in the write-approval prompt by default.",
+        "landing": "by H1 2027; Augment + Windsurf ship fixes; a CWE/OWASP entry names it.",
+        "plain_language": "A repo can disguise a booby-trapped shortcut as a normal file; soon coding AIs will show the real file before you approve a change."
+      },
+      "summary": "Wiz's July 8 GhostApproval showed a repo-planted symlink can redirect an AI coding agent's approved write onto ~/.ssh; three of six vendors patched, one disputed. By H1 2027, most of the six show the resolved symlink target in the approval prompt by default, and a guidance body names the weakness."
+    }
+  ]
+}

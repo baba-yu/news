@@ -1,0 +1,306 @@
+{
+  "date": "2026-07-13",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.cc109942df2a6460",
+        "short_label": "AMD Instinct emerges as second vendor for open RL post-training by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Ang senyales ng pinagmulan ng forecast na ito ay ang July 10 na anunsyo ng vLLM project na ang vime — ang reinforcement-learning post-training framework nito — ay tumatakbo na ngayon nang end-to-end sa mga AMD Instinct MI355X GPU sa pamamagitan ng native ROCm support. Ang port ay iniuugnay sa mga AMD contributor, at inihahatid bilang prebuilt na Docker container na nag-aalis sa from-source build na matagal nang humahadlang sa pag-adopt ng ROCm. May kasama itong mga validated na end-to-end run: sa Qwen3-4B, Qwen3-8B, at sa Qwen3-30B-A3B mixture-of-experts na modelo, nanatili ang throughput malapit sa 4,100 tokens per GPU per second, ang training-versus-rollout log-probability divergence ay nanatili sa paligid ng 0.012, at umakyat ang reward mula halos zero tungo sa mga 0.5-0.6 pagsapit ng step 100. Ito ang mga senyales ng numerical-stability at convergence na tinitingnan ng isang lab bago magtiwala sa non-NVIDIA na silicon para sa post-training.\nDahil ang reinforcement-learning post-training, hindi ang pre-training, ang pinagkukunan ng karamihan sa mga frontier na tagumpay ngayong taon, at halos buong CUDA-bound ang yugtong iyon, ang isang gumaganang MI355X path ang unang kapani-paniwalang pangalawang hardware vendor para sa pinakagutom-sa-compute na yugto ng mga open-model builder. Gayunpaman, ang July 10 na release ay AMD-authored, kaya ang tunay na pagsubok ng prediksyon ay ang external validation — isang independiyenteng grupo na maglalathala ng end-to-end run sa Instinct, o isang open-weight na modelo na binabanggit ng post-training recipe nito ang AMD Instinct — pagsapit ng H1 2027, habang ang July 22-23 na Advancing AI event ng AMD at ang inaasahang MI450 accelerator ay nagdaragdag ng panandaliang momentum.",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Dinadala ng July 10 native ROCm port ng vLLM ang buong RL post-training loop ng vime sa Instinct MI355X, at ang mga inilathalang Qwen3 run — malapit sa 4,100 tokens per GPU-second, 0.012 na train-rollout divergence, at reward na umaakyat tungo sa mga 0.5 pagsapit ng step 100 — ang mismong mga tsek sa numerical-stability na ginagawa ng isang lab bago magtiwala sa non-NVIDIA na silicon para sa pinakagutom-sa-compute nitong yugto.",
+        "coherence": 5,
+        "remaining_gap": "Ang port ay AMD-authored; tataas ang kumpiyansa kapag muling naipakita ng isang grupong independiyente sa AMD, o ng post-training recipe ng isang open-weight na modelo, ang isang end-to-end na Instinct run."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4dba2dbfb8d2798b",
+        "short_label": "Agent-memory provenance tagging ships default-on in a major platform by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Ang MemGhost disclosure ang forcing event ng forecast na ito: isang teknik mula sa Nanyang Technological University, A*STAR's CFAR, at Johns Hopkins — na inilathala sa arXiv noong July 6 at pinalakas ng security coverage noong July 13 — na naglalason sa long-term memory ng isang personal na AI agent gamit ang iisang ginawang email. Kapag na-ingest ng agent ang mensahe, isinusulat nito ang mga piniling datos ng attacker sa mga persistent memory file nito. Nagbabalik ito ng inosenteng sagot na nagpapakitang walang nangyari, at pagkatapos ay hinahayaan ang mga itinaním na datos na iyon na pumatnubay sa gawi nito sa mga susunod at di-kaugnay na session. Nagtagumpay ito sa 87.5% ng mga background-mode run laban sa open-source na OpenClaw agent sa GPT-5.4 at 71.4% laban sa isang Claude Code SDK agent sa Sonnet 4.6, na kumakalat sa iba't ibang agent architecture at memory backend.\nAng unang-nakalistang mitigasyon ng mga may-akda mismo ay ang pag-tag sa provenance ng bawat naka-imbak na datos. Dahil ang mga inilantad na agent ay kasalukuyang nagsusulat ng memory nang walang tala ng pinagmulan, walang approval gate, at walang audit log, ang provenance tagging ang pinakamababang-friction sa mga depensang iyon na maaaring gawing default. Ang mga signed na memory store at ang mandatoryong write-approval ay mas mabibigat na gawain na nagdaragdag ng cryptographic machinery o ng prompt sa user sa bawat write. Ang provenance metadata naman ay dumidikit sa umiiral nang memory-write call at nagbibigay-daan sa mga tahimik na desisyon ng tiwala sa read-time, kaya inaasahan ng prediksyon na ito ang unang darating bilang baseline na sagot ng industriya sa single-interaction na memory poisoning pagsapit ng H1 2027.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Itinutulak ng MemGhost ang isang personal na agent na isulat ang mga piniling datos ng attacker mula sa iisang ginawang email — 87.5% laban sa OpenClaw, 71.4% laban sa isang Claude Code SDK agent, na kumakalat sa iba't ibang memory backend — dahil walang itinatalang pinagmulan ang mga agent na iyon sa anumang iniimbak nila. Dumidikit ang provenance tagging sa umiiral nang write call, kaya ito ang pinakamababang-friction na unang sagot.",
+        "coherence": 5,
+        "remaining_gap": "Wala pang vendor na naglabas ng default-on na provenance tagging; pinatutunayan ng disclosure ang pangangailangan ngunit iniiwang hindi pa nabubuo ang baseline na kontrol."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ae0dd497b3c0ac0",
+        "short_label": "AI security posture tools ship auto-remediation for AI packages by Q4 2026",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Ang senyales ng pinagmulan ng forecast na ito ay ang 2026 State of AI Security report ng Orca Security, na binuod noong July 13: 99.9% ng mga alerto sa AI-related na vulnerability na may available nang fix ay nananatiling hindi pa na-patch, kung saan 81.2% ng mga organisasyong nagpapatakbo ng AI ay may hindi bababa sa isang kilalang vulnerability at 74.1% ay may hindi bababa sa isang critical CVE — kahit na 56% ng mga adopter ay nagtulak na ng mga agent framework at 64% ay nag-wire na ng mga vector database sa produksyon. Ang nakakagulat na bilang ay hindi ang presensya ng mga depekto kundi ang backlog na may-available-na-fix-ngunit-hindi-pa-nagagalaw: umiiral na ang patch at basta hindi lang inilalapat.\nAng Orca mismo ay isang agentless na cloud-security (CNAPP) vendor na ang platform ay awtomatiko nang nag-uuna at nag-aayos ng kombensyonal na cloud risk, kaya ang paglalathala ng eksaktong estadistikang ito ay dobleng nagsisilbi ring tell sa product-roadmap. Inaasahan ng prediksyon na ang detection-heavy na merkado ng AI security posture management ay tutugon sa panig ng remediation pagsapit ng Q4 2026 — isang pinangalanang feature na hindi lang nagmamarka ng mga CVE ng AI-package at agent-framework kundi ibinababa ang mga ito sa pamamagitan ng auto-prioritized na patch workflow at ng isang mean-time-to-remediate o patch-coverage na sukatan na nakatuon sa mga AI asset. Nakatakda ang timing ng forcing function: dumarating ang report sa parehong linggo ng gumaganang mga atake sa agent memory at kaagad bago ang Black Hat, ang AI Village ng DEF CON, at ang August AI Risk Summit, kung saan gugustuhin ng bawat posture vendor na gawing sagot na naipadala ang '99.9% na hindi na-patch' mula sa pagiging paratang.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Binibilang ng report ng Orca ang eksaktong backlog na pinag-uusapan: 99.9% ng mga naaayos na AI vulnerability ay nakaupong hindi pa na-patch, kung saan 81.2% ng mga organisasyong nagpapatakbo ng AI ay may kilalang depekto at 74.1% ay may critical CVE. Umiiral na ang fix at basta hindi lang inilalapat — ang agwat na ito ang binubuo ng auto-remediation, hindi ng mas maraming detection, para isara.",
+        "coherence": 5,
+        "remaining_gap": "Wala pang posture vendor na naglabas ng pinangalanang AI-remediation na feature; nababasa ang report bilang tell sa roadmap, hindi isang inilunsad na kakayahan."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5e0beac647793331",
+        "short_label": "AMD MI400 will market memory bandwidth over peak FLOPS at Advancing AI",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang forecast na ito tungkol sa positioning ng AMD sa Advancing AI ay nakakuha ng sariwang suporta mula sa dalawang senyales ng Hulyo. Ang July 10 native ROCm port ng AMD ng vime papunta sa Instinct MI355X ay naglalagay ng kongkretong substansya sa likod ng momentum ng data-center accelerator ng AMD sa mismong reinforcement-learning na workload kung saan mahalaga ang memory footprint. Kinukumpirma naman ng AI-events roundup na bubuksan ang Advancing AI 2026 sa Moscone West sa July 22-23, kung saan inaasahang idedetalye ni Lisa Su at ng mga partner ang Instinct MI450 accelerator at ang Zen 6 EPYC 'Venice' na mga CPU.\nPinatitibay ng ebidensya ang timing at plataporma ng prediksyon sa halip na ang tiyak nitong claim sa marketing. Wala pa sa dalawang senyales ang nagpapakitang inuuna ng AMD ang memory bandwidth kaysa peak FLOPS sa pitch ng MI400/MI450; kinukumpirma lamang nila ang venue at ang accelerator na magdadala ng ganitong framing. Pinalalakas nito ang paghahanda tungo sa July 22-23 na keynote — ang mismong sandaling lilitaw ang mensaheng bandwidth-higit-sa-FLOPS — nang hindi kinukumpirma ang mismong axis ng mensahe.",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Itinatakda ng AI-events roundup ang Advancing AI sa Moscone West sa July 22-23, kung saan inaasahang idedetalye ni Lisa Su ang Instinct MI450, at ang ROCm RL port noong July 10 ay nagbibigay sa AMD ng sariwang substansya sa mismong mga memory-bound na workload na iuuna ng isang bandwidth pitch. Nakatakda na ang venue at momentum; ang axis ng mensahe ay hindi pa.",
+        "coherence": 3,
+        "remaining_gap": "Wala sa dalawang senyales ang nagpapakitang inuuna ng AMD ang memory bandwidth kaysa peak FLOPS; tanging ang mismong keynote sa July 22-23 ang makakakumpirma sa framing ng marketing."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b29d00f310d8ad2c",
+        "short_label": "Second open-weight frontier model discloses non-NVIDIA ASIC training by Q2 2027",
+        "prediction_date": "2026-07-04"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang July 10 native ROCm port ng AMD ng vime — ang reinforcement-learning post-training framework ng vLLM — papunta sa Instinct MI355X ay nagpapaunlad sa mas malawak na tesis ng non-NVIDIA-compute na kinabibilangan ng prediksyong ito: nagpapakita ito ng gumagana at validated na non-NVIDIA na daan para sa pinakagutom-sa-compute na yugto ng training, na unti-unting binabawasan ang CUDA lock-in na nagpanatiling NVIDIA-bound ang frontier training.\nTemátiko ang kaugnayan sa halip na tuwiran. Ang AMD Instinct ay isang merchant GPU, hindi ang buyer-designed ASIC na pinangalanan ng prediksyong ito, at ang isang framework port na may inilathalang mga Qwen3 run ay hindi isang training disclosure ng open-weight na modelo. Pinatutunayan nito na nagiging viable ang non-NVIDIA na silicon para sa seryosong gawain ng training nang hindi ginagalaw ang tiyak na landing ng ASIC-training-disclosure na kailangan ng prediksyon.",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ipinapakita ng ROCm port ng AMD ng vime na kayang hawakan ng non-NVIDIA na silicon ang pinakagutom-sa-compute na yugto ng training gamit ang mga inilathalang Qwen3 run, na unti-unting binabawasan ang CUDA lock-in na pinagbabatayan ng tesis. Temátiko ang kaugnayan: ang Instinct ay isang merchant GPU, hindi ang buyer-designed ASIC na pinangalanan dito, at ang isang framework port ay hindi isang training disclosure ng isang modelo.",
+        "coherence": 2,
+        "remaining_gap": "Kailangan ng kumpiyansa ang isang open-weight na frontier model na maglalantad ng training sa isang buyer-designed na non-NVIDIA ASIC; hindi natutugunan ng isang merchant-GPU na framework port ang landing na iyon."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f5e698fbeaa37461",
+        "short_label": "Companion-agent memory guardrails become binding rules in a second major market by Q4 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang MemGhost disclosure ay isang kongkretong demonstrasyon ng pinsalang inaasahan ng prediksyong ito na tutugunan ng mga regulator: isang ginawang email ang naglalason sa long-term memory ng isang personal na AI agent gamit ang mga piniling datos ng attacker na tahimik na pumapatnubay sa mga susunod at di-kaugnay na session. Nagtagumpay ito sa 87.5% ng mga background-mode run laban sa open-source na OpenClaw agent at kumalat sa iba't ibang agent architecture at memory backend, na nagpalit sa agent memory mula sa pagiging feature na pang-ginhawa tungo sa isang hindi-naa-audit na persistence layer na kayang sulatan ng isang tagalabas.\nPinalalakas ng ebidensya ang driver — isang dokumentado at mataas-ang-tagumpay na atake sa feature na persistent-memory na ibinebenta ng mga companion at personal na agent — nang hindi hinihipo ang landing. Hinihingi ng prediksyon ang isang binding na patakaran sa isang pangalawang malaking merkado; ang MemGhost ay isang research disclosure na ang mga iminungkahing fix ay arkitektural (provenance tagging, write-approval, audit log), hindi pa isang regulatoryong mandato. Itinataas nito ang kahalagahan ng mga obligasyon sa memory-safety nang walang anumang patakarang inampon.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Pinapalitan ng MemGhost ang memory ng companion-agent mula sa pagiging feature na pang-ginhawa tungo sa isang hindi-naa-audit na persistence layer na sinusulatan ng isang tagalabas gamit ang iisang email — 87.5% na tagumpay laban sa OpenClaw, na kumakalat sa iba't ibang arkitektura. Ang isang kongkreto at mataas-ang-tagumpay na atake sa mismong feature na ibinebenta ng mga agent na ito ang dokumentadong pinsalang kadalasang kinikilos ng mga regulator.",
+        "coherence": 3,
+        "remaining_gap": "Ito ay isang research disclosure, hindi isang patakaran; ang isang binding na mandato sa memory-safety sa isang pangalawang malaking merkado ay nananatiling hindi pa inaampon at karaniwang nahuhuli nang ilang taon sa mga demonstrasyon."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3049b69e910c2279",
+        "short_label": "Autonomous-AI-agent intrusions become a named detection category by H1 2027",
+        "prediction_date": "2026-07-09"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Dalawa sa mga senyales ngayon ang nagpapalakas sa prediksyong ito. Nagdadagdag ang MemGhost ng bagong klase ng atake ng autonomous-agent — palihim na persistent-memory injection mula sa iisang email na itinatago ang pandaraya sa likod ng isang inosenteng sagot at pumapatnubay sa mga susunod na session — na sinukat sa bagong 108-kaso na WhisperBench at nagtagumpay laban kapwa sa OpenClaw agent at sa isang Claude Code SDK agent. Ibinibigay naman ng 2026 State of AI Security report ng Orca Security ang denominator: 56% ng mga adopter ay nagtulak na ng mga agent framework sa produksyon sa ibabaw ng isang attack surface na halos buong hindi na-patch bilang default.\nSama-sama nilang tinutulisan ang argumentong ang mga intrusyong tiyak-sa-agent ay nararapat sa sarili nilang detection category — mga bagong teknik na tumatama sa isang malaki at bahagyang-ipinagtatanggol na attack surface ng mga agent. Nananatiling direksyonal ang ebidensya: walang SIEM o EDR taxonomy ni isang pinangalanang detection class na 'AI-agent intrusion' ang inanunsyo ngayon, kaya lumalakas ang driver nang hindi dumarating ang mismong kategorisasyon.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Dalawang senyales ang nagtatagpo: nagdadagdag ang MemGhost ng palihim na klase ng persistent-memory injection na itinatago ang pandaraya at pumapatnubay sa mga susunod na session, na sinukat sa 108-kaso na WhisperBench, habang ibinibigay ng Orca ang denominator — 56% ng mga adopter na nagpapatakbo ng mga agent framework sa ibabaw ng isang halos buong hindi-na-patch na attack surface. Ang mga bagong teknik sa isang malaki at bahagyang-ipinagtatanggol na attack surface ng mga agent ang pumipilit sa isang natatanging detection category.",
+        "coherence": 3,
+        "remaining_gap": "Walang SIEM o EDR taxonomy na nagpangalan ng isang detection class na 'AI-agent intrusion' ngayon; lumalakas ang driver ngunit hindi pa dumarating ang mismong kategorisasyon."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.25bbb1fc4e3ce653",
+        "short_label": "Coding agents ship default-deny sandboxes for untrusted-repo audits by Q2 2027",
+        "prediction_date": "2026-07-11"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Pinalalawak ng MemGhost ang untrusted-content na attack surface para sa mga coding agent tungo sa isang bagong vector: isang Claude Code SDK agent sa Sonnet 4.6 ang naitulak na isulat ang mga piniling datos ng attacker sa persistent memory nito sa 71.4% ng mga run mula sa iisang email na na-ingest nito. Pinatitibay nito ang premise ng prediksyon na ang isang agent na nagpoproseso ng nilalaman mula sa labas ay nangangailangan ng isang pinatibay na hangganan ng execution-at-approval sa halip na tiwala sa antas ng modelo.\nAng koneksyon ay sa ibinahaging tesis na 'sinisira ng untrusted na input ang agent', hindi sa tiyak na mekanismo. Ang vector ng MemGhost ay email sa inbox at ang payload nito ay isang write sa persistent-memory, samantalang tinutukoy ng prediksyong ito ang isang network-isolated at default-deny na execution sandbox para sa mga audit ng untrusted na repository. Pinalalakas nito ang pangkalahatang forcing function para sa isolation ng execution-environment nang walang tuwirang kinalaman sa postura ng repo-audit na sandbox.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Itinulak ng MemGhost ang isang Claude Code SDK agent na isulat ang mga piniling datos ng attacker mula sa iisang na-ingest na email sa 71.4% ng mga run, na nagpapatibay sa ibinahaging premise na ang isang agent na humahawak ng nilalaman mula sa labas ay nangangailangan ng isang pinatibay na hangganan ng execution-at-approval sa halip na tiwala sa antas ng modelo. Ang vector dito ay email sa inbox at isang memory write, hindi isang audit ng repository.",
+        "coherence": 2,
+        "remaining_gap": "Walang tumutugon ngayon sa network-isolated at default-deny na sandbox para sa mga audit ng untrusted na repo nang tiyakan; ang pangkalahatang premise ng isolation lamang ang gumagalaw, hindi ang postura ng repo-audit."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.15eec0e8b46997d6",
+        "short_label": "Agentic vulnerability scanning ships at a second major vendor by Q1 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang 2026 State of AI Security report ng Orca Security ay tuwirang konteksto ng merkado para sa prediksyong ito: ang natuklasan nitong 99.9% ng mga naaayos na AI vulnerability ay nakaupong hindi pa na-patch, kung saan 81.2% ng mga organisasyon ay may hindi bababa sa isang kilalang AI-package na vulnerability at 74.1% ay may critical CVE, ay eksaktong tumutukoy sa backlog na tatargetin ng isang agentic na scan-and-remediate na produkto, at ang Orca ay isang posture vendor na nasa posisyong maglabas ng ganitong kakayahan.\nNakatuon ang ebidensya sa panig ng demand at insentibo ng vendor sa halip na isang inilabas na produkto. Hinihingi ng prediksyon ang isang pangalawang malaking vendor na maglabas ng agentic na vulnerability scanning; binibilang ng report ng Orca ang problema at nababasa bilang tell sa roadmap, ngunit walang pinangalanang bagong agentic-scanning na feature na inilunsad ngayon. Pinalalakas nito ang mapagkumpitensiyang hila — na tinutulisan ng nalalapit na window ng Black Hat at DEF CON AI Village — nang hindi minamarkahan ang isang paglabas ng pangalawang-vendor.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Tumpak na tumutukoy ang natuklasan ng Orca sa demand: 99.9% ng mga naaayos na AI vulnerability ay hindi pa na-patch, 81.2% ng mga organisasyon ay may kilalang AI-package na depekto, 74.1% ay may critical CVE — ang backlog na dinisenyong tugisin ng isang scan-and-remediate na produkto, na inilathala ng isang posture vendor na nasa posisyong maglabas nito bago mismo ang window ng Black Hat at DEF CON.",
+        "coherence": 3,
+        "remaining_gap": "Binibilang ng report ang problema at nababasa bilang tell sa roadmap ngunit walang pinangalanang inilunsad na feature; hindi pa naganap ang isang paglabas ng agentic-scanning ng pangalawang-vendor."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.71c1acea4be80819",
+        "short_label": "Agent-runtime security folds into a hyperscaler-native defense tier by H1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang 2026 State of AI Security report ng Orca Security ay may kaugnayan sa prediksyong ito sa pamamagitan ng pagbilang kung gaano karami sa cloud AI-runtime ang nakalantad bilang default: sa pagitan ng 87% at 98% ng mga organisasyon sa mga malalaking cloud ay hindi pa nag-enable ng customer-managed encryption keys para sa kanilang mga serbisyong AI, 64% ang nagpapatakbo ng mga vector database na nag-uugnay ng mga modelo sa panloob na datos, at halos 30% ang nag-iimbak ng hindi bababa sa isang AI API key sa isang hindi-ligtas na lokasyon.\nPinupukaw ng natuklasan ang direksyon ng prediksyon — pag-aako ng cloud at hyperscaler na mga plataporma sa depensa ng agent-runtime bilang isang native na tier dahil nasa loob ng kanilang mga estate ang paglantad — ngunit isinulat ang report ng isang independiyenteng CNAPP vendor, hindi isang hyperscaler, at idinodokumento nito ang agwat sa halip na isang first-party na tier ng depensa. Pinatitibay nito ang estruktural na kaso nang walang inanunsyong hyperscaler-native na tier ng depensa-ng-agent.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Sinusukat ng Orca kung gaano karami sa cloud AI-runtime ang nakalantad bilang default: 87-98% ng mga organisasyon sa mga malalaking cloud ay nagpapatakbo ng mga serbisyong AI nang walang customer-managed encryption keys, 64% ang nag-uugnay ng mga vector database sa panloob na datos, at halos 30% ang nag-iimbak ng isang AI API key nang hindi-ligtas — paglantad na nasa loob ng mga estate ng hyperscaler, na siyang estruktural na kaso para akuin ang depensa nang native.",
+        "coherence": 2,
+        "remaining_gap": "Isinulat ang report ng isang independiyenteng CNAPP vendor at idinodokumento nito ang agwat; walang hyperscaler na nag-anunsyo ng isang first-party na tier ng depensa ng agent-runtime."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f3f7e18b691f1c39",
+        "short_label": "OpenClaw ships default-deny tool and network gating out-of-box by Q4 2026",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Tugma sa dormant pool (20260623-2, Signals: OpenClaw, least-privilege out-of-box default, deny tool calls outbound network, harness-layer defense, StakeBench resists prompt injection). Ang MemGhost disclosure ay isang tuwirang tama sa pinangalanang paksa ng dormant na prediksyong ito: nagtagumpay ang atake sa 87.5% ng mga background-mode run laban sa open-source na OpenClaw agent, na nagtatanim ng mga piniling datos ng attacker sa persistent memory nito mula sa iisang email at kumakalat sa iba't ibang memory backend.\nAng isang naipakitang 87.5% na compromise rate laban sa OpenClaw ang mismong presyong inaasahan ng prediksyong ito na magpipilit sa least-privilege at default-deny na gating papasok sa harness out-of-box. Nasa motibasyon ang kaugnayan, hindi sa paglabas: ang mismong iminungkahing mga depensa ng MemGhost ay mga kontrol na memory-provenance at write-approval, at walang OpenClaw release na nag-a-on ng default-deny na tool o network gating na lumitaw ngayon, kaya pinalalakas ng muling pagbuhay ang driver ngunit kulang pa sa landing.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Tuwirang tinamaan ng MemGhost ang pinangalanang harness — 87.5% ng mga background-mode run na nagtatanim ng piniling memory ng attacker sa OpenClaw mula sa iisang email at kumakalat sa iba't ibang backend. Ang isang compromise rate na ganito kataas laban sa mismong agent na pinag-uusapan ang eksaktong presyong inaasahang magpipilit sa least-privilege at default-deny na tool at network gating papasok sa out-of-box na postura.",
+        "coherence": 4,
+        "remaining_gap": "Walang OpenClaw release na nag-a-on ng default-deny na tool o network gating ang lumitaw ngayon, at ang mismong mga fix ng MemGhost ay nakatuon sa memory provenance, isang ibang kontrol."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3e6e8b6ae1e7c76e",
+        "short_label": "AI-agent procurement adds a numeric prompt-injection-resistance bar by Q2 2027",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Tugma sa dormant pool (20260623-3, Signals: quantified prompt-injection-resistance score, named benchmark contract bar, StakeBench, numeric maximum injection-success rate, auditable acceptance criterion). Ipinakilala ng MemGhost ang WhisperBench, isang 108-kaso na benchmark na sumasaklaw sa fact at preference poisoning sa ibabaw ng isang live na IMAP/SMTP na email workflow, at nag-uulat ng mga numeric na injection-success rate — 87.5% laban sa OpenClaw at 71.4% laban sa isang Claude Code SDK agent.\nAng isang pinangalanang benchmark na gumagawa ng maihahambing na mga numeric na injection-success figure ang mismong hilaw na materyal na inaasahan ng prediksyong ito na kokodipikahin ng procurement tungo sa isang maximum-injection-success na acceptance bar. Isinusulong ng ebidensya ang substrate ng pagsukat sa halip na ang landing ng procurement: ang WhisperBench ay isang research benchmark, hindi pa isang contract clause o certification threshold, kaya pinalalakas ng muling pagbuhay ang bahagi ng quantification nang walang inampong procurement bar.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ipinakilala ng MemGhost ang WhisperBench, isang 108-kaso na benchmark na sumasaklaw sa fact at preference poisoning sa ibabaw ng isang live na email workflow, at nag-uulat ng maihahambing na mga numeric na injection-success rate — 87.5% at 71.4% sa dalawang agent. Ang isang pinangalanang benchmark na gumagawa ng tuwirang maihahambing na mga figure ang substrate ng pagsukat na kakailanganin ng procurement bago nito makodipika ang isang maximum-injection-success na acceptance bar.",
+        "coherence": 3,
+        "remaining_gap": "Ang WhisperBench ay isang research benchmark, hindi isang contract clause o certification threshold; walang procurement process na nag-ampon ng isang numeric na injection-resistance bar."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6ba7ca6e01ab313e",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Tugma sa dormant pool (20260628-3, Signals: Claude Code, untrusted-content, cap lethal trifecta, pause for explicit human approval, default-on capability gate, Rule-of-Two). Ang MemGhost ay isang malinaw na halimbawa ng panganib ng untrusted-content na tinutugunan ng gate na ito: isang Claude Code SDK agent na nag-i-ingest ng isang untrusted na email ay naitutulak na isulat ang mga piniling datos ng attacker sa persistent memory nito at pagkatapos ay kumilos batay sa mga ito sa mga susunod na session, na nakatago ang pandaraya sa likod ng isang inosenteng sagot.\nAng unang-nakalistang depensa ng MemGhost mismo — ang paghingi ng pag-apruba ng user bago ang isang memory write — ang mismong postura ng pause-para-sa-pag-apruba-ng-tao na inaasahan ng prediksyong ito na magiging isang default-on na capability gate. Nasa estruktural na kaso ang kaugnayan sa halip na isang inilabas na gate: pinupukaw ng disclosure ang paglilimita sa untrusted-content-kasama-ang-may-bunga-na-aksyon sa orchestration layer nang walang ebidensyang may platform na naglabas ng ganitong default.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Isinasakatuparan ng MemGhost ang pattern ng trifecta na tinatarget ng gate na ito: nag-i-ingest ang isang Claude Code SDK agent ng untrusted na email, isinusulat ang mga piniling datos ng attacker sa persistent memory, at pagkatapos ay kumikilos batay sa mga ito nang paglaon — nakatago ang pandaraya sa likod ng isang inosenteng sagot. Ang unang-nakalistang depensa nito, ang pag-apruba ng user bago ang isang memory write, ang mismong postura ng pause-para-sa-pag-apruba na gagawing default ng gate.",
+        "coherence": 3,
+        "remaining_gap": "Pinupukaw ng disclosure ang paglilimita sa untrusted-content-kasama-ang-may-bunga-na-aksyon sa orchestration layer, ngunit walang platform na naglabas ng ganitong trifecta gate na naka-on bilang default."
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "Frontier-model vendor agent-memory product engineer (built-in assistant long-term memory)",
+    "job": "Adding source-provenance metadata to the persistent-memory write path so each stored fact records the input that produced it, default-on for all users.",
+    "outcome": "A shipped default-on memory-provenance tag on the vendor's built-in agent memory, letting stored facts trace to their untrusted source at read time.",
+    "motivation": "MemGhost shows one email can poison built-in memory; shipping the lowest-friction defense protects users and heads off a public poisoning incident.",
+    "task": {
+      "who": "Agent-memory platform team plus trust-and-safety security engineers",
+      "what": "Attach source-provenance metadata to every persistent-memory write",
+      "where": "The built-in agent memory write API and read-time retrieval path",
+      "when": "July 2026 through H1 2027",
+      "why": "Provenance tags enable silent read-time trust decisions against poisoned facts",
+      "how": "Metadata field on the existing memory-write call; no crypto"
+    }
+  },
+  {
+    "actor": "Agent-framework core maintainer (widely adopted open-source or SDK agent memory)",
+    "job": "Redesigning the framework's memory-write interface to record and persist each fact's originating input, then flipping provenance tagging on by default.",
+    "outcome": "A framework release whose default memory store stamps every write with its source, exposing provenance for read-time quarantine or down-weighting.",
+    "motivation": "MemGhost succeeded against SDK-class agents; maintainers must ship a default defense to keep the framework trusted for autonomous background agents.",
+    "task": {
+      "who": "Framework memory-subsystem maintainers plus security-focused contributors",
+      "what": "Add default-on provenance field to memory-write API",
+      "where": "The framework's memory backend adapters and write-call interface",
+      "when": "July 2026 through H1 2027",
+      "why": "Lowest-friction defense; attaches at existing write without user prompt",
+      "how": "Backend-agnostic metadata schema across supported memory stores"
+    }
+  },
+  {
+    "actor": "Agent-security disclosure researcher (memory-poisoning red team; academic plus coordinated-disclosure community)",
+    "job": "Demonstrating single-interaction memory poisoning and publishing provenance tagging as the first-listed mitigation to pressure platforms into adopting it as baseline.",
+    "outcome": "A publicized cross-architecture attack plus recommended provenance-tagging defense that platforms adopt as the industry's baseline answer to memory poisoning.",
+    "motivation": "Responsible-disclosure impact: converting a proven cross-architecture attack into a shipped, default ecosystem defense before real-world exploitation.",
+    "task": {
+      "who": "Academic security-research team plus coordinated-disclosure and security-press channels",
+      "what": "Publish attack findings and provenance-tagging mitigation guidance",
+      "where": "Disclosure papers, security-conference venues, and security-press coverage",
+      "when": "July 2026 through H1 2027",
+      "why": "Pressure and specify the lowest-friction fix so platforms ship it",
+      "how": "Coordinated disclosure, reproducible proof-of-concept, first-listed mitigation writeup"
+    }
+  }
+]

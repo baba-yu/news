@@ -1,0 +1,65 @@
+{
+  "date": "2026-07-13",
+  "sections": [
+    {
+      "category": "AMD が、vLLM プロジェクトの強化学習による事後学習フレームワーク vime にネイティブな ROCm 対応をもたらし、オープンモデルの大規模な RL ファインチューニングが、事前ビルド済みのコンテナから Instinct MI355X GPU 上でエンドツーエンドに動作するようになった",
+      "bullets": [
+        {
+          "body": "vLLM プロジェクトは7月10日、<a href=\"https://vllm.ai/blog/2026-07-10-vime-rocm\">同プロジェクトの強化学習による事後学習フレームワーク vime が、ネイティブな ROCm 対応によって AMD Instinct MI355X GPU 上でエンドツーエンドに動作するようになった</a>と発表した。この移植は、vime のコミュニティと協働した AMD の貢献者によるものだと同ブログは伝えている。vime は、RL の実行を疎結合のパイプラインに分ける。Megatron 上でのモデル学習、vLLM による生成とロールアウト、そして両者を仲介するデータバッファだ。これにより、オープンモデルの推論で標準となった同じサービングエンジンが、いまや報酬ループも動かす。このリリースは事前ビルド済みの Docker コンテナとして提供され、ROCm の採用を長く阻んできたソースからのビルドを不要にする。あわせて、ROCm 固有の統合と、検証済みのエンドツーエンドの実行結果も含む。公開された Qwen3-4B、Qwen3-8B、そして混合エキスパートモデルの Qwen3-30B-A3B の結果では、スループットが100回の学習ステップを通じて毎秒約4,100トークン/GPU を維持し、学習時とロールアウト時の対数確率の乖離は約0.012にとどまり、報酬は100ステップ目までにほぼゼロから約0.5〜0.6へと上昇した。いずれも、非 NVIDIA のシリコンを事後学習に用いて信頼する前に、ラボが確認する数値的安定性と収束の指標である。これが重要なのは、今年のフロンティアでの性能向上の大半が、事前学習ではなく強化学習による事後学習から絞り出されており、その段階がこれまでほぼ完全に CUDA に縛られてきたからだ。動作する MI355X の経路は、最も計算資源を要する段階について、オープンモデルの開発者に真の意味での第2のハードウェア供給元をもたらす。",
+          "citations": [
+            {
+              "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+              "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "研究者らが MemGhost を公開。1通のメールから個人向け AI エージェントに永続する偽の記憶を植え付け、改ざんをユーザーから隠しつつ、後のセッションでエージェントの回答を操る自動化された攻撃だ",
+      "bullets": [
+        {
+          "body": "Nanyang Technological University、A*STAR の CFAR、そして Johns Hopkins のチームは、<a href=\"https://arxiv.org/abs/2607.05189\">個人向け AI エージェントの長期メモリを、巧妙な1通のメールで汚染する手法 MemGhost</a> を、7月6日に arXiv へ投稿した論文で詳述した。これは<a href=\"https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html\">7月13日のセキュリティ報道</a>で取り上げられた。持ち主の受信箱を読むエージェントがそのメッセージを取り込むと、MemGhost はエージェントに、攻撃者の選んだ「事実」を永続メモリのファイルへ書き込ませる。そのうえで、何も起きていないように見える無害な返信を返させ、植え付けられた事実に後の無関係な会話での挙動を形づくらせる。このフレームワークは、メモリへの取り込みと会話上の隠密性の双方に報酬を与える代理指標に対し、教師ありファインチューニングと強化学習で攻撃者の方策を学習させ、単発のペイロードを生成する。著者らは、実際の IMAP/SMTP メールのワークフロー上で事実の汚染と選好の汚染にまたがる108件のベンチマーク WhisperBench で、これを評価している。GPT-5.4 上のオープンソース OpenClaw エージェントに対してはバックグラウンドモードの実行の87.5%で成功し、Sonnet 4.6 上の Claude Code SDK エージェントに対しては71.4%で成功した。さらに、異なるエージェントのアーキテクチャやメモリバックエンドをまたいで通用した。すっきりとしたパッチは存在しない。OpenClaw の方針は、権限の境界を越えない限り、プロンプトインジェクションを対象外として扱う。そして研究者らが提案する防御策、すなわち保存されるすべての事実に来歴のタグを付けること、メモリ書き込みの前にユーザーの承認を求めること、そしてすべてのメモリ変更を記録することは、ユーザーが切り替えられるスイッチではなく、アーキテクチャ上の変更だ。この結果は、通常は便利な機能として売られるエージェントメモリを、外部の者が書き込める、監査されない永続化の層として捉え直させる。",
+          "citations": [
+            {
+              "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+              "url": "https://arxiv.org/abs/2607.05189"
+            },
+            {
+              "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+              "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Orca Security の「2026 State of AI Security」報告書、大半の導入企業がすでにエージェントフレームワークとベクトルデータベースを本番環境に投入しているにもかかわらず、修正可能な AI 脆弱性の99.9%が未適用のままだと指摘",
+      "bullets": [
+        {
+          "body": "Orca Security の<a href=\"https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/\">7月13日に要約された「2026 State of AI Security」報告書は、修正がすでに提供されている AI 関連の脆弱性アラートの99.9%が未適用のまま残っていることを明らかにした</a>。これは、研究者がエージェントメモリへの実際に機能する攻撃を実証したのと同じ週に浮かび上がった、防御体制の隙間だ。稼働中のクラウド環境のスキャンに基づき、報告書は、AI パッケージを運用する組織の81.2%が既知の脆弱性を少なくとも1つ抱え、74.1%が深刻な CVE を少なくとも1つ抱えているとする。一方で、主要なクラウド全体で87%から98%の組織が、自社の AI サービスに顧客管理の暗号鍵を有効にしていない。この露出は研究所に限られない。AI 導入企業の56%がすでにエージェントフレームワークを本番環境に展開し、64%が言語モデルを社内データにつなぐベクトルデータベースを運用している。それでいて、30%近くが AI の API キーを少なくとも1つ、安全でない場所に保存している。Orca の見立てでは、各チームは基礎、すなわちパッチ適用、鍵管理、暗号化よりも、展開の速さを優先している。まさに、エージェント型のシステムが、未適用の1つの欠陥を自己増殖するインシデントに変えるだけの自律性とツールへのアクセスを獲得しつつある局面でだ。今週のメモリ注入やコーディングエージェントに関する公表と並べると、報告書は母数を与える。攻撃の手法は新しくても、それが及ぶ対象領域は、既定では圧倒的に未適用のままなのだ。",
+          "citations": [
+            {
+              "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+              "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま計画に組み込むべき AI イベント：AMD Advancing AI が7月22〜23日に Moscone で開幕し、その後8月以降にチップ、セキュリティ、開発者のサミットが続く。World Summit AI が10月のアムステルダム開催で新たにカレンダーに加わった",
+      "bullets": [
+        {
+          "body": "最も近い日程は、引き続き7月22〜23日にサンフランシスコの Moscone West で開かれる AMD Advancing AI 2026 だ。ここでは Lisa Su とパートナーが、Instinct MI450 アクセラレータと Zen 6 EPYC「Venice」CPU について詳しく説明すると見込まれる。今月の AMD と vLLM による強化学習の取り組みへのふさわしい対照でもある。その後ろに続く AI チップとインフラの流れでは、8月23〜25日にスタンフォードで Hot Chips（早期登録料金は7月31日締め切り）、9月15〜17日にサンタクララ・コンベンションセンターで AI Infra Summit が開かれる。AI セキュリティの流れは8月初旬から集中する。8月1〜6日にラスベガスで Black Hat USA と DEF CON 34 の AI Village、8月11〜12日に Half Moon Bay のリッツ・カールトンで SecurityWeek の AI Risk Summit、11月5〜6日にサンフランシスコで OWASP Global AppSec USA、そしてエージェントの乗っ取りや MCP 層の防御に取り組むチーム向けの Zenity の AI Agent Security Summit シリーズが並ぶ。開発者・データ・ベイエリアの流れでは、Anyscale の Ray Summit が8月24〜26日に San Francisco Marriott Marquis で開かれ、次回の AI Tinkerers San Francisco のミートアップがいつもの実演デモ形式で8月に催される。Ai4 2026 は8月4〜6日にラスベガスの The Venetian を埋め、ACM AI Leadership Summit は8月30日から9月2日までアトランタで、The AI Conference は9月29日から10月1日までサンフランシスコの Pier 48 で再び開かれ、GitHub Universe は10月28〜29日、AWS re:Invent は11月30日から12月4日までラスベガスで、そして NeurIPS 2026 が12月に年を締めくくる。今週カレンダーに加わったのが、<a href=\"https://worldsummit.ai/\">約1万人規模の主力イベントを10月7〜8日にアムステルダムの Taets Art & Event Park で開く World Summit AI</a> で、すでにヨーロッパの秋の巡回を計画している人には実際的な追加だ。当面の行動としては、7月22日の開幕前に AMD Advancing AI へ参加登録し、7月31日の Hot Chips 早期料金を確保し、8月初旬のセキュリティ枠として Black Hat と Half Moon Bay の AI Risk Summit を予約しておくこと。",
+          "citations": [
+            {
+              "label": "World Summit AI - Amsterdam, Taets Art & Event Park, October 7-8, 2026",
+              "url": "https://worldsummit.ai/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
