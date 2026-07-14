@@ -110,6 +110,7 @@ Sorted by `count` descending, then host alphabetical.
 | justsecurity.org | 14 | 2026-05-10 | 2026-05-19 | Just Security - US cyber eval reciprocity outlier posture cu |
 | lawfaremedia.org | 14 | 2026-05-10 | 2026-05-19 | Lawfare - FMRB executive order Section 708 State Farm reason |
 | renovateqr.com | 14 | 2026-04-25 | 2026-05-03 | Renovate QR - Chinese AI Models in April 2026 |
+| technode.com | 14 | 2026-06-07 | 2026-07-14 | TechNode - BYD is developing humanoid robots, according to s |
 | thestreet.com | 14 | 2026-04-28 | 2026-05-03 | TheStreet - Stock Market Today (Apr. 28, 2026) |
 | whitehouse.gov | 14 | 2026-06-06 | 2026-06-06 | White House - Promoting Advanced Artificial Intelligence Inn |
 | devblogs.microsoft.com | 13 | 2026-04-23 | 2026-06-04 | Microsoft Foundry Blog - From Local to Production |
@@ -173,6 +174,7 @@ Sorted by `count` descending, then host alphabetical.
 | computerworld.com | 8 | 2026-06-08 | 2026-06-08 | Computerworld - Why Apple's Foundation Models Framework matt |
 | computing.net | 8 | 2026-05-04 | 2026-05-04 | Computing.net - AMD Q1 2026 Earnings Preview |
 | defcon.org | 8 | 2026-06-05 | 2026-06-07 | DEF CON |
+| defensenews.com | 8 | 2026-05-02 | 2026-07-14 | Defense News |
 | fedscoop.com | 8 | 2026-06-05 | 2026-06-05 | FedScoop - Bipartisan 'Great American AI Act' draft proposes |
 | futurumgroup.com | 8 | 2026-06-03 | 2026-06-03 | Futurum - Snowflake Summit 2026: four infrastructure bets th |
 | marketbeat.com | 8 | 2026-06-06 | 2026-06-06 | MarketBeat - NVIDIA (NASDAQ:NVDA) Coverage Initiated at Chin |
@@ -232,11 +234,11 @@ Sorted by `count` descending, then host alphabetical.
 | cdn.openai.com | 5 | 2026-06-17 | 2026-06-21 | OpenAI - Predicting LLM Safety Before Release by Simulating |
 | cisco.com | 5 | 2026-04-24 | 2026-04-29 | Cisco - Zero trust for agentic AI workforce |
 | cursor.com | 5 | 2026-07-09 | 2026-07-09 | Cursor - Introducing Grok 4.5 (trained jointly with SpaceXAI |
-| defensenews.com | 5 | 2026-05-02 | 2026-05-03 | Defense News |
 | developer.nvidia.com | 5 | 2026-04-24 | 2026-04-27 | NVIDIA Developer Blog - Rubin Platform |
 | docs.x.ai | 5 | 2026-07-09 | 2026-07-09 | xAI - developer API release notes (Grok 4.5 pricing and reas |
 | feedly.com | 5 | 2026-04-28 | 2026-04-28 | Feedly - CVE-2026-5760 |
 | ghacks.net | 5 | 2026-04-26 | 2026-04-26 | gHacks - DeepSeek Releases V4 Models With 9.5x Lower Memory |
+| govevents.com | 5 | 2026-07-11 | 2026-07-14 | GovEvents - AMD Advancing AI 2026 (Moscone Center, San Franc |
 | gracker.ai | 5 | 2026-04-28 | 2026-05-02 | GrackerAI - AI Dev 26 x SF – Free Tickets (event listing) |
 | graniteshares.com | 5 | 2026-07-11 | 2026-07-11 | GraniteShares - SK Hynix ADR (SKHY): what the Nasdaq listing |
 | helpforce.ai | 5 | 2026-04-30 | 2026-05-02 | Help Force AI - Tesla Optimus vs Boston Dynamics Atlas vs Fi |
@@ -251,11 +253,11 @@ Sorted by `count` descending, then host alphabetical.
 | neowin.net | 5 | 2026-06-19 | 2026-06-25 | Neowin - Google Gemini co-lead Noam Shazeer is leaving for O |
 | news.crunchbase.com | 5 | 2026-07-04 | 2026-07-04 | Crunchbase News - Global Startup Investment Hit Record $510B |
 | news.skhynix.com | 5 | 2026-07-11 | 2026-07-11 | SK hynix Newsroom - SK hynix lists ADRs on NASDAQ |
+| newsroom.intel.com | 5 | 2026-07-14 | 2026-07-14 | Intel Newsroom - Intel Invests EUR 5 Billion to Expand Manuf |
 | perspectives.nvidia.com | 5 | 2026-05-05 | 2026-05-05 | NVIDIA Perspectives - Real cost AI scale hyperscaler acceler |
 | releasealert.dev | 5 | 2026-04-22 | 2026-04-30 | releasealert.dev - llama.cpp |
 | relvehq.com | 5 | 2026-06-14 | 2026-07-06 | Relve - Databricks Data + AI Summit 2026 (June 15-18, San Fr |
 | spknowledge.com | 5 | 2026-04-19 | 2026-04-26 | Knowledge Share - Mastering Azure Foundry Local |
-| technode.com | 5 | 2026-06-07 | 2026-07-06 | TechNode - BYD is developing humanoid robots, according to s |
 | tenable.com | 5 | 2026-04-20 | 2026-04-25 | Tenable - Copilot Studio Security |
 | thinkingmachines.ai | 5 | 2026-07-03 | 2026-07-03 | Thinking Machines Lab - Learning to Replicate Expert Judgmen |
 | threat-modeling.com | 5 | 2026-07-01 | 2026-07-01 | Threat-Modeling.com - Microsoft AutoGen Studio code executio |
@@ -292,6 +294,7 @@ Sorted by `count` descending, then host alphabetical.
 | moodys.com | 4 | 2026-05-05 | 2026-05-05 | Moody's Press - Moody's brings credit and compliance workflo |
 | msspalert.com | 4 | 2026-05-05 | 2026-05-05 | MSSP Alert - Cisco to Acquire Astrix Security |
 | newreleases.io | 4 | 2026-04-22 | 2026-04-27 | newreleases.io - openclaw v2026.4.20-beta.1 |
+| newsfilecorp.com | 4 | 2026-07-14 | 2026-07-14 | Newsfile - Booster Robotics Unveils Booster T2, Its Flagship |
 | newsroom.cisco.com | 4 | 2026-04-24 | 2026-05-03 | Cisco Newsroom - Reimagines Security for the Agentic Workfor |
 | ox.security | 4 | 2026-07-03 | 2026-07-03 | OX Security - MCP Supply Chain Advisory |
 | pillar.security | 4 | 2026-04-26 | 2026-04-26 | Pillar Security - Prompt Injection leads to RCE and Sandbox |
@@ -365,6 +368,7 @@ Sorted by `count` descending, then host alphabetical.
 | sherwood.news | 3 | 2026-04-29 | 2026-04-29 | Sherwood News - Technology stocks suffer after WSJ reports |
 | storagenewsletter.com | 3 | 2026-06-15 | 2026-06-15 | StorageNewsletter - Data + AI Summit 2026: Databricks Announ |
 | straiker.ai | 3 | 2026-07-07 | 2026-07-07 | Straiker - Straiker Raises $64M Series A to Secure the Agent |
+| tech.eu | 3 | 2026-07-14 | 2026-07-14 | Tech.eu - European defencetech leader Helsing secures $1.8B |
 | ucstrategies.com | 3 | 2026-04-25 | 2026-04-25 | UCStrategies - DeepSeek V4 Pro Lands on GPT-5.5 Day |
 | vmblog.com | 3 | 2026-06-17 | 2026-06-17 | VMblog - d-Matrix Announces SquadRack, Industry's First Rack |
 | welcome.ai | 3 | 2026-04-25 | 2026-04-25 | Welcome.AI - Microsoft's Copilot Studio Vulnerability |
@@ -398,7 +402,6 @@ Sorted by `count` descending, then host alphabetical.
 | getdeploying.com | 2 | 2026-04-23 | 2026-04-23 | getdeploying - Bonsai 1-bit |
 | global.toyota | 2 | 2026-04-23 | 2026-04-23 | Toyota Global - Woven City Kakezan |
 | gomarkets.com | 2 | 2026-04-27 | 2026-04-27 | goMarkets - US earnings: Wall Street's AI reality check |
-| govevents.com | 2 | 2026-07-11 | 2026-07-11 | GovEvents - AMD Advancing AI 2026 (Moscone Center, San Franc |
 | greendrive-accessories.com | 2 | 2026-05-03 | 2026-05-03 | Greendrive Accessories - Optimus 3 production summer 2026 |
 | hannovermesse.de | 2 | 2026-04-25 | 2026-04-25 | Hannover Messe 2026 official |
 | hendryadrian.com | 2 | 2026-04-22 | 2026-04-22 | hendryadrian - CISA Adds 8 Exploited Vulnerabilities |
@@ -407,6 +410,7 @@ Sorted by `count` descending, then host alphabetical.
 | humanoid.press | 2 | 2026-05-01 | 2026-05-02 | Humanoid Press - Latest Humanoid Robot News |
 | indexbox.io | 2 | 2026-04-26 | 2026-04-26 | IndexBox - Nvidia Stock Gains 19% in April as Semiconductor |
 | intuitionlabs.ai | 2 | 2026-05-02 | 2026-05-03 | IntuitionLabs - Cerebras vs SambaNova vs Groq: AI Chip Compa |
+| irishtimes.com | 2 | 2026-07-14 | 2026-07-14 | The Irish Times - Intel to invest EUR 5bn in Leixlip campus |
 | itwire.com | 2 | 2026-04-27 | 2026-04-27 | iTWire - Google Cloud unveils agentic defence innovations at |
 | jpost.com | 2 | 2026-05-04 | 2026-05-04 | Jerusalem Post - Tesla begins production of first humanoid r |
 | labcritics.com | 2 | 2026-06-21 | 2026-06-21 | Labcritics - LifeSciBench: OpenAI's hard new life-science be |
@@ -416,6 +420,7 @@ Sorted by `count` descending, then host alphabetical.
 | menlovc.com | 2 | 2026-07-03 | 2026-07-03 | Menlo Ventures - Menlo Turns 50 and Announces $3B in Fresh C |
 | mezha.net | 2 | 2026-04-27 | 2026-04-27 | Mezha - Sam Altman accuses Anthropic of using fear to market |
 | neurips.cc | 2 | 2026-07-11 | 2026-07-11 | NeurIPS 2026 official site (December) |
+| newyork.theaisummit.com | 2 | 2026-07-14 | 2026-07-14 | The AI Summit New York - December 9-10, 2026, Javits Center |
 | nist.gov | 2 | 2026-04-25 | 2026-04-26 | NIST - NIST Updates NVD Operations to Address Record CVE Gro |
 | notateslaapp.com | 2 | 2026-04-27 | 2026-04-27 | NotaTeslaApp - Tesla Delays Optimus Gen 3 Unveil for 'Finish |
 | ofox.ai | 2 | 2026-04-25 | 2026-04-25 | OFox - DeepSeek V4 Released |

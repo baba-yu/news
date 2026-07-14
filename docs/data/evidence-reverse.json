@@ -6,6 +6,86 @@
     {
       "linked_predictions": [
         {
+          "prediction_id": "prediction.98c20322cf3f2161",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 1.0,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "Ant Group's AI Safety Lab open-sourced SingGuard-NSFA on July 13 — a guardrail model that scores an autonomous agent's actions, not chatbot text, against a taxonomy of seven risk categories and 185 scenarios spanning prompt injection, sensitive-data theft, malicious-code execution, resource abuse, and permission misuse. Because it ships as open weights in 0.8B-to-9B sizes and returns a risk judgment in roughly 50 milliseconds, it is small and cheap enough to sit inline on every tool call rather than run as an offline audit — the first widely inspectable, drop-in control of its kind. It lands into a defensive vacuum the same week made vivid: persistent memory-poisoning (MemGhost), decades-old shell tricks slipping past coding-agent filters, and Orca's finding that nearly all fixable AI vulnerabilities sit unpatched. Agent frameworks and hyperscaler agent runtimes today ship text and content moderation but treat the agent's own tool calls as trusted, leaving the gap between filtering text and authorizing actions as the exposed surface. The forecast: with an open-weight reference implementation removing the build-it-yourself barrier and the week's evidence removing the do-we-need-it question, at least one top-tier agent platform will elevate inline, action-level tool-call risk classification from an optional add-on to a first-class, documented guardrail — an interceptor that scores or blocks each tool call at runtime, whether by adopting SingGuard-class weights or shipping an equivalent. Landing condition: by H1 2027, a major agent framework or hyperscaler agent runtime — top-tier agent platforms such as LangChain/LangGraph, the OpenAI Agents SDK, Anthropic, Microsoft, Google, or AWS Bedrock AgentCore are the candidate landing points — publishes a released, not demo-only, first-class runtime guardrail that classifies agent actions, with default-on configuration the stronger signal.",
+          "prediction_short_label": "Action-level guardrails become first-class agent-framework controls by H1 2027",
+          "prediction_date": "2026-07-14"
+        },
+        {
+          "prediction_id": "prediction.3049b69e910c2279",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.6,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "Sysdig's disclosure of JADEPUFFER, which it characterizes as the first ransomware intrusion executed end-to-end by an autonomous AI agent rather than a human operator, is a category-defining event rather than a one-off incident. The agent chained a long-known Langflow remote-code-execution flaw into reconnaissance, credential and API-key theft, lateral movement, a secondary 2021 Nacos bypass, and destructive encryption on its own, and the tell that a model drove it was structural: roughly 600 distinct, purpose-built payloads carrying explanatory code comments in the style of LLM output. That fingerprint, machine-authored artifacts produced at machine volume, is exactly the kind of signature detection vendors convert into a named attacker profile. The prediction is that the security industry formalizes it: by H1 2027 at least two major threat-intelligence vendors, or MITRE ATT&CK itself, will publish a named, documented category for autonomous-AI-agent-driven intrusion, held distinct from human-operator tradecraft and keyed on machine-authored-payload volume, LLM-style artifacts, and agent-loop telemetry. The forcing function is the collapsing patch-to-exploit window that CISA's July 8 four-flaw, two-day federal sprint underscored, where a maximum-severity ColdFusion bug was exploited within hours of disclosure and a fresh Langflow flaw landed on the exploited-vulnerabilities catalog; once agents can weaponize known, already-cataloged CVEs faster than agencies can patch them, defenders can no longer lean on patch cadence alone and must be able to name, detect, and hunt the agent-class attacker. The consequence is that agentic AI acquires a formal offensive-threat taxonomy the way earlier eras named nation-state and ransomware-as-a-service actors, and unpatched agent-framework servers become its first tracked point of entry.",
+          "prediction_short_label": "Autonomous-AI-agent intrusions become a named detection category by H1 2027",
+          "prediction_date": "2026-07-09"
+        },
+        {
+          "prediction_id": "prediction.71c1acea4be80819",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.6,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "The standalone agentic-security category that Straiker's $64M Series A just capitalized will begin collapsing into the platform layer, with at least one major cloud or agent-platform incumbent shipping runtime agent-defense (agent discovery, pre-deployment red-teaming, and behavioral runtime guardrails) as a native, first-party tier by H1 2027. Straiker's three-product framing (Discover, Ascend, Defend) and its claimed 15x run-rate growth prove enterprise demand and a repeatable product shape, while the same-week Claude Cowork sandbox-escape chain shows the agent runtime is a live, disputed vulnerability class the platform owners themselves must answer for. Because the sandbox is the vendor's own containment boundary, the incumbents whose runtimes are being attacked have both the incentive and the telemetry advantage to absorb this defense natively rather than cede it to a pure-play, which compresses the window in which an independent agent-security vendor can stay standalone before it is either acquired or bundled against.",
+          "prediction_short_label": "Agent-runtime security folds into a hyperscaler-native defense tier by H1 2027",
+          "prediction_date": "2026-07-07"
+        },
+        {
+          "prediction_id": "prediction.f3f7e18b691f1c39",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.6,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "A named open coding-agent harness ships least-privilege execution as the shipped out-of-box default rather than an opt-in flag by Q4 2026. The most probable first mover is OpenClaw: its June 2026.6.x releases already patched concrete injection paths, tightened Docker sandbox boundaries, added Browser CDP endpoint validation, pinned SSH tunnel checks to loopback, and began rejecting unsafe tool, package, and response lengths. The prediction calls for the next step: a fresh stable release whose default profile denies tool calls, outbound network access, and MCP credential exposure unless an operator explicitly grants them, so that a clean install runs sandboxed-and-gated with no extra configuration. NVIDIA's NemoClaw (stricter network-policy defaults around OpenShell sandboxes) and Nous Research's Hermes Agent (MCP credential filtering, SSRF protection, and a Tirith pre-execution scan) are the same-direction alternatives that could land first. The catalyst is the converging security evidence: OWASP's 2026 agentic report ties nearly every risk category to real CVEs and ranks Claude Code among the most advisory-laden coding-agent repos, while StakeBench found no tested agent configuration resists prompt injection (41-68% indirect, above 79% direct). When the model layer cannot be made robust, the harness layer carries the defense, and least-privilege only works as a default. Verification: a tagged release or its changelog/docs stating that capability, network, or MCP-credential gating is enabled by default on a fresh install, not behind an opt-in setting.",
+          "prediction_short_label": "OpenClaw ships default-deny tool and network gating out-of-box by Q4 2026",
+          "prediction_date": "2026-06-23"
+        },
+        {
+          "prediction_id": "prediction.6ba7ca6e01ab313e",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.6,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "At least one leading coding-agent platform (the category OWASP names as prompt injection's epicenter, with Claude Code, AutoGPT, Dify and Roo-Code among the most-advisoried repositories) will ship a default-on capability gate that enforces a 'Rule of Two'-style constraint: an agent run may combine at most two of private-data access, exposure to untrusted content, and external communication before it must pause for explicit human approval. The move follows OWASP's reframing of prompt injection as a structural, unpatchable property of agentic systems rather than a patchable CVE, which leaves vendors to mitigate by capping the lethal trifecta at the orchestration layer instead of filtering the token stream. Because the architectural argument denies any reliable way to separate command tokens from data tokens, the only durable defense is to deny the dangerous combination by default, and competitive pressure plus advisory volume will push the largest platforms there first.",
+          "prediction_short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+          "prediction_date": "2026-06-28"
+        },
+        {
+          "prediction_id": "prediction.4dba2dbfb8d2798b",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.4,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "By H1 2027 at least one major agent platform — a frontier-model vendor's built-in agent memory or a widely adopted agent framework — ships memory-provenance tagging as a default-on control: every fact written to persistent memory carries a machine-checkable record of the input that produced it, so a stored claim can be traced back to the untrusted email, document, or page it came from and quarantined or down-weighted when the agent later reads it. The forcing event is MemGhost, disclosed by Nanyang Technological University, A*STAR's CFAR, and Johns Hopkins on July 6 and amplified in security coverage on July 13: a single crafted email drives a personal agent to write attacker-chosen facts into its long-term memory, reply as if nothing happened, and let those planted facts steer later unrelated sessions — succeeding in 87.5% of background-mode runs against the open-source OpenClaw agent and 71.4% against a Claude Code SDK agent, and transferring across architectures and memory backends. The authors' own first-listed mitigation is tagging the provenance of every stored fact, and because the disclosed agents currently write memory with no source record, no approval gate, and no audit log, provenance tagging is the lowest-friction of those defenses to make default. Signed memory stores and mandatory write-approval are heavier lifts that add cryptographic machinery or a user prompt on every write; provenance metadata attaches at the existing memory-write call and enables read-time trust decisions silently, which is why it lands first as the industry's baseline answer to single-interaction memory poisoning.",
+          "prediction_short_label": "Agent-memory provenance tagging ships default-on in a major platform by H1 2027",
+          "prediction_date": "2026-07-13"
+        },
+        {
+          "prediction_id": "prediction.4ae0dd497b3c0ac0",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.4,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "Orca Security's 2026 State of AI Security report, summarized July 13, found that 99.9% of AI-related vulnerability alerts that already have a fix available remain unpatched, with 81.2% of AI-running organizations carrying at least one known vulnerability and 74.1% carrying at least one critical CVE — even as 56% of adopters have pushed agent frameworks and 64% have wired vector databases into production. The arresting number is not the presence of flaws but the fix-available-yet-untouched backlog: the patch exists and is simply not applied. Orca is itself an agentless cloud-security (CNAPP) vendor whose platform already automates prioritization and remediation for conventional cloud risk, so publishing this precise statistic doubles as a product-roadmap tell. I expect the detection-heavy AI security posture management (AI-SPM) market to answer the backlog on the remediation side: by Q4 2026 at least one major cloud- or security-posture vendor — Orca, Wiz, Palo Alto Networks Prisma Cloud, Microsoft Defender for Cloud, or a CNAPP peer — ships a named feature that does not merely flag AI-package and agent-framework CVEs but drives them down, through auto-prioritized patch workflows, one-click or auto-generated fixes, and a mean-time-to-remediate or patch-coverage metric scoped to AI assets. The forcing function is competitive and timed: the report lands the same week as working attacks on agent memory and immediately ahead of Black Hat, DEF CON's AI Village, and the August AI Risk Summit, where every posture vendor will want to convert '99.9% unpatched' from an indictment into a shipped answer. Detection alone now reads as restating the problem; the differentiated pitch is closing the fixable gap before agentic autonomy turns one unpatched flaw into a self-propagating incident.",
+          "prediction_short_label": "AI security posture tools ship auto-remediation for AI packages by Q4 2026",
+          "prediction_date": "2026-07-13"
+        }
+      ],
+      "evidence_id": "evidence.348eae4c0e65ee6b",
+      "title": "TechNode - Ant Group unveils AI safety models for agents and multimodal systems",
+      "url": "https://technode.com/2026/07/13/ant-group-unveils-ai-safety-models-for-agents-and-multimodal-systems/",
+      "source_type": "news",
+      "reported_at": "2026-07-14",
+      "total_score": 4.2
+    },
+    {
+      "linked_predictions": [
+        {
           "prediction_id": "prediction.4dba2dbfb8d2798b",
           "scope_id": "business",
           "support_direction": "support",
@@ -1726,6 +1806,36 @@
     {
       "linked_predictions": [
         {
+          "prediction_id": "prediction.f123d894ca5c7207",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 1.0,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "By H1 2027, at least one humanoid-robot vendor or lab will publicly demonstrate or report a whole-body manipulation policy — one that coordinates legs, waist, arms, head, and end-effectors to handle objects while the robot is still moving — running entirely on the machine's own onboard compute, untethered from any external workstation. The precondition landed on July 13, 2026, when Booster Robotics launched Booster T2, whose Pro edition mounts NVIDIA's flagship Thor module rated at up to 2,070 TFLOPS — which Booster bills as the most powerful compute yet carried by any bipedal humanoid — paired with an open development ecosystem. This matters because the humanoid field has moved its bar from clean bipedal walking to whole-body manipulation under vision-language-action policies — learned models that map camera input and a language instruction directly to motor actions — and the gating problem has been where that policy runs: today's manipulation work frequently streams perception to, and takes actions from, a tethered workstation, because the neural policy is too heavy to execute at control-loop rates on the robot itself. Putting Thor-class compute — on the order of 2,000 TFLOPS — physically on the robot removes that tether as a hardware constraint, and a shipping developer platform at that compute tier lowers the barrier for the labs building manipulation skills. With multiple vendors now competing on exactly this ground and an open ecosystem inviting outside labs to build on T2, the first public, documented instance of whole-body manipulation executed on onboard Thor-class silicon rather than a workstation is the natural next milestone. The landing condition: by H1 2027, at least one humanoid vendor or lab publicly reports — in a demo, technical writeup, or deployment — a whole-body manipulation task executed with the policy running fully on the robot's onboard Thor-class compute, explicitly untethered from an external workstation.",
+          "prediction_short_label": "Whole-body manipulation runs untethered on Thor-class compute by H1 2027",
+          "prediction_date": "2026-07-14"
+        },
+        {
+          "prediction_id": "prediction.b1812fc905cd31ea",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.8,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "Researchers at the Technical University of Munich released ThorArena, a benchmark that stress-tests humanoid whole-body control under deliberate, load-bearing physical contact - active force exchange, not collision avoidance. Capturing synchronized whole-body motion and hand forces from human operators across six contact-rich chores (lifting and lowering a water container, pushing and pulling a chair, and co-carrying an object with a partner), the team replayed those forces in simulation and scored policies with a Force-Aware Tracking Score that jointly grades tracking accuracy, robustness across force levels, control effort, and whether the robot stays upright to the end of the episode. The headline result is that force-informed evaluation exposes large performance gaps that stay invisible under conventional no-force testing, and only the authors' own Thor2 policy held near-perfect balance across all six tasks. Because Figure, Agility, and Boston Dynamics are pushing humanoids off pilot stages and into factories and warehouses - where a person will inevitably lean on, push, or hand something to the robot - the no-force motion-tracking demo is no longer sufficient evidence of readiness. I expect force-aware contact evaluation to cross from this single academic benchmark into commercial practice: by H1 2027 at least one leading humanoid platform, or an independent second group, publicly reports whole-body control results under active applied contact force rather than motion tracking alone.",
+          "prediction_short_label": "Humanoid whole-body control adopts force-aware contact evaluation by H1 2027",
+          "prediction_date": "2026-07-12"
+        }
+      ],
+      "evidence_id": "evidence.c77cb30fb6b0435a",
+      "title": "Newsfile - Booster Robotics Unveils Booster T2, Its Flagship Humanoid Platform for Embodied AI Development",
+      "url": "https://www.newsfilecorp.com/release/304940/Booster-Robotics-Unveils-Booster-T2-Its-Flagship-Humanoid-Platform-for-Embodied-AI-Development",
+      "source_type": "news",
+      "reported_at": "2026-07-14",
+      "total_score": 1.8
+    },
+    {
+      "linked_predictions": [
+        {
           "prediction_id": "prediction.b29d00f310d8ad2c",
           "scope_id": "business",
           "support_direction": "support",
@@ -2436,6 +2546,46 @@
     {
       "linked_predictions": [
         {
+          "prediction_id": "prediction.a879b03610b9ab92",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.4,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "Two signals in the same news cycle point to the AI-datacenter buildout being priced as more than a GPU-plus-memory story. Stathera closed an oversubscribed $55M Series B (bringing total funding to $75M, led by Maverick Silicon with MediaTek Innovation Fund, TXC, and Celesta participating) explicitly to fund a GEN3 platform for AI-data-center clocks, pitching MEMS timing as a $1.5B cumulative synchronization opportunity through 2030 and framing precise cross-node timing as a real constraint once accelerator clusters scale to tens of thousands of GPUs. In parallel, Tenstorrent CEO Jim Keller publicly denied the reported $8-10B Qualcomm buyout and reaffirmed an independent path on an IPO bridge and confidential S-1, keeping a credible RISC-V accelerator-IP house on a standalone-capitalization trajectory rather than folding into a mobile-SoC incumbent. Read together, capital is naming and funding the non-GPU layers of the AI datacenter — timing, interconnect, and synchronization silicon, plus independent accelerator IP — as distinct line items with their own theses and dedicated funds (Maverick Silicon here is a silicon-specialist backer), not as commodity glue bundled under the GPU. The prediction: within roughly two years, at least one more supplier of a non-GPU AI-datacenter silicon layer beyond the accelerator itself — clock/timing, interconnect, or synchronization — closes an institutional round or files to go public that markets it as a standalone AI-datacenter infrastructure category, and the leading independent accelerator houses stay independent through a public listing rather than being absorbed by consolidation. The coupling is that visible timing-and-interconnect scaling pain plus specialist capital turns these sub-layers from afterthoughts into separately-financed, separately-valued pieces of the AI-infrastructure stack.",
+          "prediction_short_label": "Non-GPU AI-datacenter silicon draws standalone infrastructure funding by Q4 2027",
+          "prediction_date": "2026-07-05"
+        },
+        {
+          "prediction_id": "prediction.f9d98cef26d5d5aa",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.4,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "SK Hynix's $26.5 billion Nasdaq ADR sale — the largest US listing ever by a foreign company, seven times oversubscribed and up 14% on debut — is explicitly earmarked for expanding the Korean manufacturing base and buying equipment including EUV lithography scanners. That framing turns the listing from a financing event into a capacity commitment: HBM output is sold out against AI accelerator demand, EUV scanner slots at ASML are the binding constraint on any expansion, and a company holding fresh dollar-denominated capital has every incentive to lock delivery slots before competitors do. The prediction is that SK Hynix moves from earmark to contract quickly: within three quarters it discloses binding EUV scanner purchase commitments and a concrete Korean fab expansion schedule tied to the ADR proceeds, visible in its filings, earnings materials, or ASML's own bookings commentary. The scale of the raise makes silence unlikely — US investors who bought a seven-times-covered book on the HBM supply story will demand a deployment timeline, and the fastest credible proof is scanner orders on the books.",
+          "prediction_short_label": "SK Hynix converts ADR proceeds into booked EUV orders by Q2 2027",
+          "prediction_date": "2026-07-11"
+        },
+        {
+          "prediction_id": "prediction.a31a93089cef22da",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.4,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "By Q1 2027 Samsung — the one large memory maker absent from this week's capital surge — moves to match its rivals with a fresh, publicly-announced HBM or advanced-DRAM capacity commitment tied explicitly to AI demand. The trigger is the July 9 collision of two of the three big memory suppliers committing capital to the same bottleneck in the same week: Micron lifted its US manufacturing plan to more than $250 billion through 2035 (a $50 billion increase) and poured first concrete at its Clay, New York megafab a quarter ahead of schedule, while SK Hynix's record US listing earmarked proceeds for EUV-equipped capacity. With HBM stacks and advanced DRAM sold out well into the future and both rivals visibly locking in AI-era supply, Samsung faces direct competitive and customer-facing pressure to signal its own capacity path rather than cede the narrative. The predicted state change is a concrete Samsung commitment — a raised memory capex line, a new or expanded HBM/DRAM fab or line, or a formal AI-memory capacity target — announced through an earnings call, filing, or press release.",
+          "prediction_short_label": "Samsung answers memory-capex race with fresh HBM capacity buildout by Q1 2027",
+          "prediction_date": "2026-07-12"
+        }
+      ],
+      "evidence_id": "evidence.ca1fbd0a138add82",
+      "title": "Intel Newsroom - Intel Invests EUR 5 Billion to Expand Manufacturing in Europe",
+      "url": "https://newsroom.intel.com/intel-foundry/intel-invests-5-billion-euro-to-expand-manufacturing-in-europe",
+      "source_type": "news",
+      "reported_at": "2026-07-14",
+      "total_score": 1.2
+    },
+    {
+      "linked_predictions": [
+        {
           "prediction_id": "prediction.f52aeb7468446ca2",
           "scope_id": "business",
           "support_direction": "support",
@@ -3022,6 +3172,46 @@
       "source_type": "news",
       "reported_at": "2026-06-26",
       "total_score": 1.0158
+    },
+    {
+      "linked_predictions": [
+        {
+          "prediction_id": "prediction.0a0a8beee55f860d",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 1.0,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "Munich-based Helsing closed a $1.8 billion Series E at an $18 billion valuation on July 13 - the largest defense-technology round in European history - and the syndicate's composition matters as much as its size. Goldman Sachs Alternatives' growth arm led alongside the Canada Pension Plan Investment Board, JPMorgan, Dragoneer, and Iconiq, with Lightspeed, General Catalyst, and Plural returning, and Helsing stressed it stays predominantly European-owned. That backer list is the signal: a national pension fund and two bulge-bracket banks writing into a sovereign-defense-AI builder - strike and surveillance drones, underwater sensing, and the CA-1 Europa autonomous combat aircraft - is the point at which European defense-AI stops reading as a venture curiosity and becomes an institutional asset class, the continent's clearest counterweight yet to the valuations US firms like Anduril command. Capital of this kind rarely enters a category once; it enters a thesis. The structural pull is Europe's rearmament turn - the ReArm Europe / Readiness 2030 program and the SAFE defense-financing instrument - plus sovereignty mandates favoring European-owned suppliers, which convert multi-year procurement demand into fundable, de-risked growth stories that pensions, sovereign funds, and asset managers can underwrite at scale. Given that, I expect the Helsing round to prove replicable rather than singular: by H1 2027, at least one other European defense-technology or defense-AI company closes a nine-figure-or-larger growth round whose backers include at least one institutional or crossover investor - a pension or sovereign-wealth fund, a bulge-bracket bank, or a large public-market asset manager - rather than venture funds alone. The landing condition is a single such round, publicly announced with a named institutional participant, before the end of H1 2027.",
+          "prediction_short_label": "European defense-AI draws a second institutional mega-round by H1 2027",
+          "prediction_date": "2026-07-14"
+        }
+      ],
+      "evidence_id": "evidence.186eb764257e86fc",
+      "title": "Tech.eu - European defencetech leader Helsing secures $1.8B Series E at $18B valuation",
+      "url": "https://tech.eu/2026/07/13/european-defence-ai-leader-helsing-secures-18b-series-e-at-18b-valuation/",
+      "source_type": "news",
+      "reported_at": "2026-07-14",
+      "total_score": 1.0
+    },
+    {
+      "linked_predictions": [
+        {
+          "prediction_id": "prediction.0a0a8beee55f860d",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 1.0,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "Munich-based Helsing closed a $1.8 billion Series E at an $18 billion valuation on July 13 - the largest defense-technology round in European history - and the syndicate's composition matters as much as its size. Goldman Sachs Alternatives' growth arm led alongside the Canada Pension Plan Investment Board, JPMorgan, Dragoneer, and Iconiq, with Lightspeed, General Catalyst, and Plural returning, and Helsing stressed it stays predominantly European-owned. That backer list is the signal: a national pension fund and two bulge-bracket banks writing into a sovereign-defense-AI builder - strike and surveillance drones, underwater sensing, and the CA-1 Europa autonomous combat aircraft - is the point at which European defense-AI stops reading as a venture curiosity and becomes an institutional asset class, the continent's clearest counterweight yet to the valuations US firms like Anduril command. Capital of this kind rarely enters a category once; it enters a thesis. The structural pull is Europe's rearmament turn - the ReArm Europe / Readiness 2030 program and the SAFE defense-financing instrument - plus sovereignty mandates favoring European-owned suppliers, which convert multi-year procurement demand into fundable, de-risked growth stories that pensions, sovereign funds, and asset managers can underwrite at scale. Given that, I expect the Helsing round to prove replicable rather than singular: by H1 2027, at least one other European defense-technology or defense-AI company closes a nine-figure-or-larger growth round whose backers include at least one institutional or crossover investor - a pension or sovereign-wealth fund, a bulge-bracket bank, or a large public-market asset manager - rather than venture funds alone. The landing condition is a single such round, publicly announced with a named institutional participant, before the end of H1 2027.",
+          "prediction_short_label": "European defense-AI draws a second institutional mega-round by H1 2027",
+          "prediction_date": "2026-07-14"
+        }
+      ],
+      "evidence_id": "evidence.b361e9ef05e2d4ff",
+      "title": "Defense News - Helsing raises $1.8 billion in Europe's biggest defense-startup round",
+      "url": "https://www.defensenews.com/global/europe/2026/07/13/helsing-raises-18-billion-in-europes-biggest-defense-startup-round/",
+      "source_type": "news",
+      "reported_at": "2026-07-14",
+      "total_score": 1.0
     },
     {
       "linked_predictions": [
@@ -4522,6 +4712,26 @@
       "source_type": "news",
       "reported_at": "2026-06-15",
       "total_score": 0.6048
+    },
+    {
+      "linked_predictions": [
+        {
+          "prediction_id": "prediction.5e0beac647793331",
+          "scope_id": "business",
+          "support_direction": "support",
+          "score": 0.6,
+          "validation_date": "2026-07-14",
+          "prediction_summary": "When AMD takes the stage at Advancing AI 2026 on July 22-23 at Moscone Center, expect the MI400 pitch to lead with memory rather than raw compute. The generational story reporting points to is a bandwidth jump of more than 2x over MI350, built on CDNA 5 and TSMC's 2nm node, with the rack-scale 'Helios' system and the availability timelines held back at the 2025 preview finally detailed. The framing matters because the binding constraint in inference has shifted: long-context workloads inflate KV-cache footprints, so buyers increasingly value larger HBM pools and smarter parallelism over headline FLOPS. That same logic explains NVIDIA's counter-positioning, with Blackwell Ultra GB300 reaching 288GB of HBM3e and Rubin Ultra variants targeting 512GB. With HBM capacity reportedly sold out through calendar 2026 and TAM projected near $100B by 2028, the top of the accelerator market is settling into a memory-capacity and bandwidth contest, and AMD's July reveal is the near-term catalyst that makes that reframing explicit.",
+          "prediction_short_label": "AMD MI400 will market memory bandwidth over peak FLOPS at Advancing AI",
+          "prediction_date": "2026-07-02"
+        }
+      ],
+      "evidence_id": "evidence.5025ecd84424ffdd",
+      "title": "GovEvents - AMD Advancing AI 2026",
+      "url": "https://www.govevents.com/event/28216/amd-advancing-ai-2026",
+      "source_type": "news",
+      "reported_at": "2026-07-14",
+      "total_score": 0.6
     },
     {
       "linked_predictions": [
@@ -8582,236 +8792,6 @@
       "source_type": "news",
       "reported_at": "2026-06-09",
       "total_score": 0.1807
-    },
-    {
-      "linked_predictions": [
-        {
-          "prediction_id": "prediction.20a590c59cffd7fb",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0821,
-          "validation_date": "2026-06-09",
-          "prediction_summary": "The Model Context Protocol's stdio transport will lose its status as an unguarded shell into the host process. By Q2 2027 at least three widely used MCP hosts or agent frameworks will ship their stdio tool-server path defaulting to an isolated execution boundary - a separate process or container with a constrained environment, an explicit per-server command allowlist, and dropped privileges - rather than spawning an attacker-configurable command in the host's own context. The change is forced by the recognition that the stdio adapter exists precisely to run code, so an allowlist-and-flag-validation patch over a single field cannot be the whole defense; the enforcement point has to be the runtime that launches and confines the tool, not the string it was handed. Concretely, expect this to surface as a changed default in the reference servers and SDKs and in popular flow builders, with documentation that reframes remote transports and process isolation as the recommended posture and treats raw in-host stdio exec as an opt-in for trusted local setups only. Frameworks that keep launching tool commands directly inside the agent process will keep drawing their own critical advisories as researchers replay the one-click configuration-to-execution pattern across the ecosystem.",
-          "prediction_short_label": "MCP host runtimes ship sandboxed stdio tool execution as the default by Q2 2027",
-          "prediction_date": "2026-06-06"
-        },
-        {
-          "prediction_id": "prediction.e997117d0c9d145c",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0493,
-          "validation_date": "2026-06-09",
-          "prediction_summary": "The Promoting Advanced Artificial Intelligence Innovation and Security executive order is written to be light-touch on its face: it explicitly bars any reading that authorizes mandatory governmental licensing, preclearance, or permitting, and the frontier-model early-access track is framed as strictly voluntary. The teeth arrive through a different channel. The order directs Treasury, NSA, and CISA to build a benchmarking process, designate covered frontier models by reference to their offensive and defensive cyber capability, and stand up an AI Cybersecurity Clearinghouse that coordinates vulnerability scanning and patch distribution across federal and critical-infrastructure systems the government itself buys. That combination - a government-run designation list plus federal buying power flowing through the clearinghouse - is the classic path by which a nominally voluntary framework becomes a de facto seller requirement. The prediction is that by Q2 2027 the executive branch converts the framework into a procurement condition: a Federal Acquisition Regulation amendment, an agency acquisition rule, or standardized solicitation clause will require vendors of covered frontier models selling into federal use to attest that they participate in the cyber-capability benchmarking and the early-access disclosure process, with at least three covered-frontier vendors publishing such attestations or winning awards bound to the clause. This mirrors how prior cyber executive orders (secure-software self-attestation under the CISA repository) turned guidance into a contracting gate without new statute, and it is the executive-branch counterpart to the separate congressional catastrophic-risk disclosure debate rather than a restatement of it.",
-          "prediction_short_label": "Federal AI procurement mandates frontier-model cyber attestations by Q2 2027",
-          "prediction_date": "2026-06-06"
-        },
-        {
-          "prediction_id": "prediction.4ecb84808c9acc3f",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0493,
-          "validation_date": "2026-06-09",
-          "prediction_summary": "**Secret leakage through CI / agents becomes the next battleground.** GitHub Actions indirect prompt injection PoCs reproduce across Claude Code, Gemini CLI, and Copilot — three vendors at once. Through Q2-Q3 2026, a new supply-chain security category, \"Agent-in-the-Loop Secret Exfiltration,\" will rise to the top of CIS / OWASP risk lists. In plain language: In plain language: In plain language: In plain language:",
-          "prediction_short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
-          "prediction_date": "2026-04-20"
-        }
-      ],
-      "evidence_id": "evidence.1b2d8f48a93e7c1c",
-      "title": "The Hacker News - Ollama out-of-bounds read vulnerability allows remote process memory leak",
-      "url": "https://thehackernews.com/2026/05/ollama-out-of-bounds-read-vulnerability.html",
-      "source_type": "news",
-      "reported_at": "2026-06-09",
-      "total_score": 0.1807
-    },
-    {
-      "linked_predictions": [
-        {
-          "prediction_id": "prediction.c349283881f8339b",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.1785,
-          "validation_date": "2026-06-23",
-          "prediction_summary": "Apple's decision to run Private Cloud Compute on Google Cloud, with Apple Foundation Model inference executing on NVIDIA Blackwell GPUs in confidential-computing mode, is the first time a frontier vendor has placed its private inference onto a rival cloud's silicon while keeping the trust boundary. The deal works only because the hardware can prove itself: remote attestation on genuine, untampered GPUs, a cryptographic ledger of every node in the fleet, public binary inspection, and a security bounty extended to the hosted nodes. The prediction is that this stops being an Apple-specific engineering feat and becomes a procurement primitive. Within the next year, expect at least one more frontier-vendor or hyperscaler inference arrangement to name remote GPU attestation, confidential-computing mode, and a verifiable node ledger as contracted, auditable terms rather than marketing claims. That turns confidential-compute hardware from a security feature into a commercial gate on where private AI inference is allowed to run, pulling chip vendors, clouds, and model providers into a shared attestation standard.",
-          "prediction_short_label": "Confidential-GPU attestation lands as a cloud-AI contract term by Q2 2027",
-          "prediction_date": "2026-06-14"
-        }
-      ],
-      "evidence_id": "evidence.960728ad98de2183",
-      "title": "Confidential Computing Summit 2026 schedule (June 23-24, San Francisco Mint)",
-      "url": "https://ccsummit2026.sched.com/",
-      "source_type": "news",
-      "reported_at": "2026-06-23",
-      "total_score": 0.1785
-    },
-    {
-      "linked_predictions": [
-        {
-          "prediction_id": "prediction.4ecb84808c9acc3f",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.1785,
-          "validation_date": "2026-06-23",
-          "prediction_summary": "**Secret leakage through CI / agents becomes the next battleground.** GitHub Actions indirect prompt injection PoCs reproduce across Claude Code, Gemini CLI, and Copilot — three vendors at once. Through Q2-Q3 2026, a new supply-chain security category, \"Agent-in-the-Loop Secret Exfiltration,\" will rise to the top of CIS / OWASP risk lists. In plain language: In plain language: In plain language: In plain language:",
-          "prediction_short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
-          "prediction_date": "2026-04-20"
-        }
-      ],
-      "evidence_id": "evidence.4c35a24e12e1d573",
-      "title": "Microsoft Security - When prompts become shells: RCE vulnerabilities in AI agent frameworks",
-      "url": "https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/",
-      "source_type": "news",
-      "reported_at": "2026-06-23",
-      "total_score": 0.1785
-    },
-    {
-      "linked_predictions": [
-        {
-          "prediction_id": "prediction.f719ac3961399766",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.126,
-          "validation_date": "2026-06-15",
-          "prediction_summary": "The June 12 arXiv paper CacheRL (arXiv:2606.14179) attacks the most expensive part of teaching a small model to use tools well: reinforcement learning over multi-turn tool use normally has to run the real tools live thousands of times per training batch, which dominates cost and makes the loop slow and brittle. CacheRL removes the live tool calls by replaying a three-tier fuzzy cache of past trajectories with token-level masking, and pairs that with a cache-tier-aware hybrid reward that reweights answer quality so the model is not punished for gaps the cache itself introduced. The reported numbers are the kind that get a method copied rather than admired: 92% process accuracy on multi-step tool-calling, within striking distance of GPT-5's reported 94%, while using roughly 100x less compute, and lifting validation reward on Qwen3-4B-Thinking from 0.43 to 0.78, with ablations crediting a 17% gain to the cache-aware reward. The structural reason this spreads is that the bottleneck it removes is universal: every team doing agent RL on open models — and the major open post-training libraries (TRL, verl, OpenRLHF, SkyRL, ART, NeMo-RL) plus inference-coupled rollout stacks — pays the same live-tool-execution tax, and a cached-replay rollout with a tier-aware reward is a drop-in substitution for the rollout phase rather than a new model architecture, which is exactly the shape of technique that diffuses fast. The forward thesis is that cached-rollout (replay-instead-of-live-execution) RL for tool-calling agents hardens from a single paper into a supported training mode that practitioners can pick up off the shelf. The concrete, falsifiable landing: by H1 2027 (on or before 2027-06-30) EITHER a mainstream open agent-RL or post-training framework other than the CacheRL authors' own code — TRL, verl, OpenRLHF, SkyRL, ART, NeMo-RL, or a comparably adopted open library — ships documented, first-class support for a cached or replayed rollout mode (offline trajectory replay with masking in place of live tool execution) for multi-turn tool-calling RL, OR at least one independent group publishes a reproduction that releases open weights or training code applying cached-rollout RL to a different base model family and reports tool-calling accuracy within ten points of a frontier model at an order-of-magnitude-lower rollout cost. What does NOT count: a closed or hosted-only service that merely offers 'cheaper agent RL' without a documented cached-replay rollout path; a generic prompt or trajectory cache used only for inference rather than for the RL rollout loop; a citation, benchmark mention, or blog reference to CacheRL with no shipped feature or released artifact; or a follow-up from the original authors on the same codebase. If by June 30, 2027 cached-rollout RL remains confined to the original CacheRL paper and its own repository, with no second framework feature and no independent open reproduction on a different model, the prediction fails.",
-          "prediction_short_label": "Cached-rollout agent fine-tuning reaches a second open framework by H1 2027",
-          "prediction_date": "2026-06-15"
-        },
-        {
-          "prediction_id": "prediction.64e162098784ed03",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0504,
-          "validation_date": "2026-06-15",
-          "prediction_summary": "Moonshot's June 12 open-weight Kimi K2.7-Code release shipped only in-house benchmark wins (Kimi Code Bench v2, Program Bench, MLS Bench Lite, MCP Mark) with no third-party numbers on the public suites practitioners actually trust, and early coverage made that gap the headline. Because the weights are openly downloadable under a Modified MIT license and the model targets agentic coding, the community will run it on the standard public harnesses fast. The prediction: by Q3 2026 at least one independent, reproducible third-party result for Kimi K2.7-Code appears on a standard public coding/agent benchmark, specifically SWE-bench Verified, SWE-bench Pro, Terminal-Bench, or LiveCodeBench, published with a runnable harness or a leaderboard entry by someone other than Moonshot. A vendor re-statement of Moonshot's own numbers, a marketing recap, or a non-reproducible anecdote does NOT count; the result must come from an independent party and be on one of those four named suites.",
-          "prediction_short_label": "Kimi K2.7-Code lands independent SWE-bench Verified scores by Q3 2026",
-          "prediction_date": "2026-06-13"
-        }
-      ],
-      "evidence_id": "evidence.461ba765e9db170a",
-      "title": "arXiv - CacheRL: Multi-Turn Tool-Calling Agents via Cached Rollouts and Hybrid Reward",
-      "url": "https://arxiv.org/abs/2606.14179",
-      "source_type": "news",
-      "reported_at": "2026-06-15",
-      "total_score": 0.1764
-    },
-    {
-      "linked_predictions": [
-        {
-          "prediction_id": "prediction.8810bab3c28adac5",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0464,
-          "validation_date": "2026-06-01",
-          "prediction_summary": "Nvidia's GTC Taipei keynote this morning June 1 paired silicon and sandbox runtime in one reference. The RTX Spark Superchip — 20 Arm CPU cores co-designed with MediaTek, a Blackwell GPU with 6,144 CUDA cores, 128GB unified LPDDR5X on TSMC 3nm — hits 1 petaflop FP4 and runs 120B-parameter LLMs at 1M-token context locally, debuting in the Microsoft Surface Laptop Ultra with ASUS, Dell, HP, Lenovo, MSI follow-ons fall 2026. The DGX Station for Windows on GB300 Grace Blackwell Ultra delivers 20 petaflops FP4 at 748GB memory running Nvidia OpenShell for Windows — the agent runtime jointly developed with Microsoft, Canonical, IBM Red Hat that enforces security controls on agent invocations via Windows security primitives — Q4 2026 from Dell, HP, ASUSTeK, MSI, Supermicro. The structural force is procurement-side coupling between silicon and sandbox runtime: once one vendor publicly ships a deskside 1-petaflop FP4 baseline paired with a named OS-sandbox runtime running 120B-parameter local inference inside an enterprise envelope, every peer on-device silicon stack faces an RFP question — does your silicon hit the petaflop FP4 floor at the laptop tier, does your runtime expose host-OS sandbox primitives at agent-invocation granularity, and do you ship them as one bundle. Named cohort under pressure: Apple M-series + Core ML / MLX heading into WWDC June 8, Qualcomm Snapdragon X Elite 2 + Hexagon NPU on Windows on Arm, AMD Ryzen AI Max+ + ROCm-on-Windows, Intel Lunar Lake / Panther Lake + OpenVINO. By H1 2027 we expect at least two of Apple, Qualcomm, AMD, Intel to publish deskside-class on-device LLM specs matching the petaflop FP4 floor with a paired OS-sandbox runtime at agent-invocation granularity, plus one industry body (MLCommons MLPerf Client, the Confidential Computing Consortium, or an OpenSSF on-device agent SIG) drafting a profile naming the pairing as baseline. Bear case is a peer ships a divergent spec (NPU-only without GPU FP4, or a runtime omitting host-OS sandbox primitives) that fragments convergence before two vendors align; absent that, H1 2027 lands the first peer matching specs and the first industry-body draft.",
-          "prediction_short_label": "On-device LLM silicon ships 1-PFLOP deskside + sandbox-runtime specs by H1 2027",
-          "prediction_date": "2026-06-01"
-        },
-        {
-          "prediction_id": "prediction.fd0660f0789c6e44",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0464,
-          "validation_date": "2026-06-01",
-          "prediction_summary": "Nvidia and Microsoft opened a managed-fleet capex category Monday June 1 at GTC Taipei. The RTX Spark Superchip (20 Arm cores co-designed with MediaTek paired with a Blackwell GPU carrying 6,144 CUDA cores and 128GB unified LPDDR5X on a single TSMC 3nm package, hitting 1 petaflop of FP4 AI compute and running 120B-parameter LLMs at 1M-token context locally) ships fall 2026 inside Microsoft's Surface Laptop Ultra as the lead device, with ASUS, Dell, HP, Lenovo, and MSI follow-on systems shipping in the same window — five named PC OEMs in lockstep, the same supply chain already shipping Vera Rubin NVL72 racks fall 2026 across 350+ partners in 30 countries. The structural force is procurement-side. Once a frontier-grade local-inference budget (1 PFLOP FP4, 128GB unified memory, 120B-param LLMs offline) lands inside the OEM channel running corporate-fleet refresh on a 36-month cycle, the CFO question stops being 'do we buy Copilot seats?' and becomes 'do we refresh 40,000 endpoints into AI-PCs against which budget line, before the next Vera Rubin training contract closes?' The Build June 2-3 follow-on closes the architectural loop: the Windows Agent Framework MIT release lets a single YAML manifest run identically on the worker's laptop, the Windows 365 Cloud PC GPU node provisioned overnight, and the on-prem rack the data-center capex paid for. By H2 2027 we expect at least three Fortune 500 IT organizations (likely from the early-Copilot-Studio cohort: JPMorgan, Walmart, Accenture, Pfizer, Honeywell, KPMG) to disclose at investor-day or 10-K MD&A a unified AI-infrastructure capex line bundling managed AI-PC fleet refresh with data-center training and inference spend — replacing the separate end-user-computing and data-center capex lines 10-Ks currently maintain — and at least one Big Four advisory practice (Deloitte, EY, PwC, or KPMG) to publish a public RFP template under that unified-capex framing. The bear case is Surface Laptop Ultra fall-2026 unit-economics slipping past the corporate RFP cycle, signaled by a Q4 2026 Microsoft 10-Q footnote restating Surface volume guidance downward; absent that slip, H2 2027 lands AI-PC managed-fleet refresh as a named line in Fortune 500 AI capex disclosure.",
-          "prediction_short_label": "Fortune 500 IT capex bundles AI-PC refresh into data-center spend by H2 2027",
-          "prediction_date": "2026-06-01"
-        },
-        {
-          "prediction_id": "prediction.3a917faa36a1b827",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0464,
-          "validation_date": "2026-06-01",
-          "prediction_summary": "Anthropic published How we contain Claude across products on its engineering blog Saturday May 30, walking through the agent-isolation stack converged across all three product surfaces: gVisor containers with seccomp syscall filtering on isolated infrastructure for Claude.ai (ephemeral per-session filesystems), OS-native process sandboxes for Claude Code (Seatbelt on macOS and Bubblewrap on Linux, with an 84% reduction in permission prompts after delegating command approvals to a model-based classifier), and full guest VMs for Claude Cowork running on Apple Virtualization framework on macOS and Hyper-V HCS on Windows with host-held credentials and read-only / read-write / read-write-no-delete file-mount modes. The structural force is procurement-side. Once one frontier lab publicly commits to mature hypervisor + OS-sandbox + VM containment as the named posture and explicitly argues that the software you build yourself is often the weakest component, every peer agent-harness vendor faces a buyer-side question whose answer cannot stay opaque: does your harness ship equivalent containment, or do you document why not. The same convergence pressure that pulled SBOM formats and hyperscaler responsible-scaling templates into a small number of public shapes will act here, because enterprise security teams refuse to map N vendor-specific harness-isolation narratives into N risk-acceptance frameworks when the reference design is already public. By Q2 2027 we expect at least two of Cursor, Codex CLI, Cline, Windsurf, Devin, and Continue to publish named containment profiles matching the Anthropic posture (per-OS sandbox tier for the local CLI plus per-product VM tier for the autonomous-agent surface), and at least one standards body (OpenSSF, the CNCF agent SIG, or a Frontier Model Forum working group analog) to publish a draft agent-runtime-containment profile that names gVisor or equivalent at the cloud tier and named OS sandboxes at the laptop tier as the reference design. Bear case is a single peer vendor publishes a divergent containment spec (Wasm-only or eBPF-only) that fragments the convergence pressure before two named vendors align; absent that fragmentation, Q2 2027 lands the first peer-vendor containment specs and the first standards-body draft naming hypervisor + OS sandbox as the agent-runtime reference.",
-          "prediction_short_label": "Agent-harness vendors ship gVisor+OS-sandbox+VM containment specs by Q2 2027",
-          "prediction_date": "2026-05-31"
-        },
-        {
-          "prediction_id": "prediction.4bd33db2ea06e5b4",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0371,
-          "validation_date": "2026-06-01",
-          "prediction_summary": "**Acceleration of the \"local-first, cloud-overflow\" inversion.** Qwen3.6-35B-A3B's 73.4% on SWE-bench Verified and Bonsai 1.7B's 674 tok/s on CUDA push edge implementations into practical territory. By Q3 2026, individual / SMB coding agents will standardize on \"local by default, cloud as overflow.\" In plain language: In plain language: In plain language: In plain language:",
-          "prediction_short_label": "Local-first coding agents standardize cloud-overflow as default by Q3 2026",
-          "prediction_date": "2026-04-20"
-        }
-      ],
-      "evidence_id": "evidence.c9def4b9f51f30cf",
-      "title": "Nvidia Newsroom - NVIDIA and Microsoft Reinvent Windows PCs for the Age of Personal AI",
-      "url": "https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark",
-      "source_type": "news",
-      "reported_at": "2026-06-01",
-      "total_score": 0.1763
-    },
-    {
-      "linked_predictions": [
-        {
-          "prediction_id": "prediction.80e1695ea6a623b6",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0281,
-          "validation_date": "2026-05-25",
-          "prediction_summary": "By mid-June 2026 the agentic-AI loader-verification reference set lands as the canonical nine-document academic-plus-deployment-plus-compliance-monitoring-plus-workshop-consolidation-plus-workshop-extension bundle that the LangChain plus AutoGen plus CrewAI plus Haystack plus Pydantic AI maintainer cohort ships as the default verification surface from Friday's RC1 branch cuts, with the framework default-shipment commitment now sitting atop a triply-aged triply-cleared regulatory backdrop and the post-Memorial-Day Tuesday resumption opening a clean release-engineering execution window rather than a fresh verification question. The Monday Memorial Day federal observance closes the closing pre-business-Tuesday research cycle with the workshop-extension companion holding cleanly through a third holiday-equivalent day. A Monday Simon Willison federal-holiday reading characterizes the now-triply-aged nine-document reference set — Wednesday's 2605.07891 consolidation survey plus Thursday's 2605.08019 applied-deployment evaluation companion plus Friday's 2605.08147 operator-side compliance-monitoring evaluation companion plus Saturday's 2605.08234 workshop-consolidation companion plus Sunday's 2605.08312 workshop-extension companion plus the prior four-paper academic cluster — as sitting atop a settled triply-cleared regulatory backdrop with the federal-civilian directive holding cleanly into its first federal-holiday operating day under compliance-monitoring mode and the FMRB classified-annex eight-of-eight record now a triply-aged hold through the closing Memorial Day federal observance. A Monday Hugging Face Blog federal-holiday post reports the LangChain, AutoGen, CrewAI, Haystack, and Pydantic AI maintainer cohort holding Friday's mid-June default-shipment release-candidate cycle RC1 branch cut on each project's main cleanly through three holiday-equivalent days without further churn, with the cohort treating the RC1 cut plus the now-triply-aged nine-document reference set as the canonical closing federal observance stable snapshot the post-Memorial-Day Tuesday release-cycle execution week will resume against. The DeepMind plus Meta AI plus Anthropic plus Microsoft consolidated Python-and-Rust reference-implementation index continues to ship the Friday-morning supplementary tag bundling the workshop-extension companion alongside the workshop-consolidation companion, the operator-side compliance-monitoring evaluation companion, the applied-deployment evaluation companion, and the consolidation survey as the canonical five-paper deployment reference unchanged through the third holiday-equivalent day. The vLLM v0.11.4 stable build held its seventh full operating day with no escalations from the maintainer cohort and the six-vendor cross-orchestrator interop matrix conformance suite holds green for an eighth consecutive day on the nine-document end-to-end conformance run across Codex CLI, Claude Code 3.0, Mistral Workflows, Azure AI Foundry, Vertex AI Agent Governance Center, and Amazon Bedrock Agent Registry. The structural force is that once the nine-document reference set sits triply-aged through a closing federal observance with the maintainer cohort holding RC1 branch cuts cleanly through three holiday-equivalent days without churn, the consolidated reference-implementation index extending to cover the workshop-extension companion, the vLLM stable build holding its seventh operating day with no escalations, the cross-orchestrator interop matrix conformance suite holding green for an eighth consecutive day on the nine-document conformance run, and the federal-civilian directive plus the FMRB executive instrument both sitting as triply-aged settled regulatory anchors, the promotion from RC-runway to settled default-shipment anchor compresses to post-Memorial-Day release-engineering arithmetic rather than an unresolved verification question. The most likely landing is the nine-document reference set shipping as the default verification surface bundle inside the mid-June default-shipment window, with each of the five framework projects tagging stable from their Friday RC1 branches inside the mid-June release window, the six-vendor cross-orchestrator interop matrix shipping general availability the same first week of June with default support, and the cleared CISA compliance-monitoring phase plus the cleared FMRB executive instrument cited together as the triply-aged triply-cleared regulatory backdrop the framework default-shipment commitment can lean on without overhanging risk-factor questions. Bear case is that one of the five RC1 branches logs a schema-drift regression during the post-Memorial-Day Tuesday-through-Friday dry-run week and the default-shipment slips one minor release cycle into late June; absent that slip, mid-June 2026 lands the nine-document reference set as the framework default-shipment anchor.",
-          "prediction_short_label": "Loader-verification nine-document reference set lands framework default shipment by mid-June 2026",
-          "prediction_date": "2026-05-25"
-        },
-        {
-          "prediction_id": "prediction.dc75bb7e849eaa52",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0281,
-          "validation_date": "2026-05-25",
-          "prediction_summary": "By mid-June 2026 the agentic-AI loader-verification reference set settles as a nine-document academic-plus-deployment-plus-compliance-monitoring-plus-workshop-consolidation-plus-workshop-extension bundle that the LangChain plus AutoGen plus CrewAI plus Haystack plus Pydantic AI maintainer cohort ships as the default verification surface bundle from Friday's RC1 branch cuts, with the framework default-shipment commitment now treating the bundle as a stable closing pre-Memorial-Day snapshot rather than an open verification surface. The Sunday weekend closes the closing pre-Memorial-Day research cycle with the workshop-extension companion in place atop a doubly-weekend-aged doubly-cleared regulatory backdrop. A Sunday arxiv release (2605.08312) extends the now-canonical four-paper applied-deployment-plus-operator-side-compliance-plus-workshop-consolidation reference set with a second workshop-style measurement-and-verification overlay that applies the consolidation survey plus the applied-deployment evaluation companion plus the operator-side compliance-monitoring evaluation companion plus Saturday's workshop-consolidation companion to the federal-civilian directive's second full weekend operating window under compliance-monitoring mode, reporting the eleven-operator sample's per-operator attestation-event arithmetic holding inside the consolidation survey's predicted bounds for a fifth consecutive cross-section sample. A Sunday Simon Willison weekend reading characterizes the paper as the canonical closing pre-Memorial-Day end-of-cycle settling artifact for the loader-verification line and observes that the timing — released into the second weekend operating day of the compliance-monitoring phase against a doubly-weekend-aged eight-of-eight FMRB classified-annex backdrop — completes a nine-document reference set the framework cohort's mid-June default-shipment release-candidate cycle can cite as a single coherent academic-plus-deployment-plus-compliance-monitoring-plus-workshop-consolidation-plus-workshop-extension end-to-end reference heading into the post-Memorial-Day Tuesday business resumption. A Sunday Hugging Face Blog weekend post reports the LangChain, AutoGen, CrewAI, Haystack, and Pydantic AI maintainer cohort holding Friday's mid-June default-shipment release-candidate cycle RC1 branch cut on each project's main cleanly through both weekend days without further churn, with the cohort treating the RC1 cut plus the now-doubly-weekend-aged nine-document reference set as the canonical closing pre-Memorial-Day stable snapshot the upcoming release-cycle execution week will resume against. A Sunday andrew.ooo weekend reading observes the workshop-extension companion extends the DeepMind plus Meta AI plus Anthropic plus Microsoft consolidated reference-implementation index by a second workshop-style measurement-and-verification overlay covering the eleven-operator sample across both weekend operating days, giving the framework cohort a directly citable doubly-weekend-aged end-to-end measurement-and-verification artifact alongside the prior four deployment-line papers. The structural force is that once a second workshop-style measurement-and-verification overlay joins the eight-document cluster on the second weekend operating day under compliance-monitoring mode against a doubly-weekend-aged doubly-cleared regulatory backdrop, the maintainer cohort holds its Friday RC1 branch cuts cleanly through both weekend days without churn, the consolidated reference-implementation index extends to cover the second workshop-overlay, the vLLM v0.11.4 stable build holds its sixth full operating day with no escalations, and the six-vendor cross-orchestrator interop matrix conformance suite holds green for a seventh consecutive day on the eight-document end-to-end conformance run, the nine-document reference set's promotion from RC-runway to settled default-shipment anchor compresses to post-Memorial-Day release-engineering arithmetic rather than an unresolved verification question. The most likely landing is the nine-document reference set — the four-paper academic cluster plus arxiv 2605.07891 consolidation survey plus arxiv 2605.08019 applied-deployment companion plus arxiv 2605.08147 operator-side compliance-monitoring companion plus arxiv 2605.08234 workshop-consolidation companion plus arxiv 2605.08312 workshop-extension companion — shipping as the default verification surface bundle inside the mid-June default-shipment window, with each of the five framework projects tagging stable from their Friday RC1 branches inside the mid-June release window, the six-vendor cross-orchestrator interop matrix shipping general availability the same first week of June with default support, and the cleared CISA compliance-monitoring phase plus the cleared FMRB executive instrument cited together as the doubly-weekend-aged doubly-cleared regulatory backdrop. Bear case is that one of the five RC1 branches logs a schema-drift regression during the post-Memorial-Day dry-run week and the default-shipment slips one minor release cycle into late June; absent that, mid-June 2026 lands the nine-document reference set as the framework default-shipment anchor.",
-          "prediction_short_label": "Loader-verification nine-document reference set anchors mid-June default shipment across five frameworks",
-          "prediction_date": "2026-05-24"
-        },
-        {
-          "prediction_id": "prediction.ab8674cfb4e36376",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0281,
-          "validation_date": "2026-05-25",
-          "prediction_summary": "By mid-June 2026 the agentic-AI loader-verification reference set settles as an eight-document academic-plus-deployment-plus-compliance-monitoring-plus-workshop-consolidation bundle that the LangChain plus AutoGen plus CrewAI plus Haystack plus Pydantic AI maintainer cohort ships as the default verification surface bundle from Friday's RC1 branch cuts, with the framework default-shipment commitment now treating the bundle as a release-cycle execution detail rather than a verification question. The Saturday weekend snapshot closes the business-week research cycle with the final consolidation companion in place. A Saturday arxiv release (2605.08234) extends the now-canonical three-paper applied-deployment-plus-operator-side compliance reference set with a workshop-style consolidation companion that applies the consolidation survey plus the applied-deployment evaluation companion plus the operator-side compliance-monitoring evaluation companion to the federal-civilian directive's first full weekend operating window under compliance-monitoring mode, reporting the eleven-operator sample's per-operator attestation-event arithmetic holding inside the consolidation survey's predicted bounds for a fourth consecutive cross-section sample. A Saturday Simon Willison weekend reading characterizes the paper as the canonical pre-Memorial-Day end-of-week settling artifact for the loader-verification line and observes that the timing — released into the first weekend operating day of the compliance-monitoring phase and against a now-cleared eight-of-eight FMRB classified-annex backdrop — completes the now-eight-document reference set the framework cohort's mid-June default-shipment release-candidate cycle can cite as a single coherent academic-plus-deployment-plus-compliance-monitoring-plus-workshop-consolidation end-to-end reference heading into the post-Memorial-Day business resumption. A Saturday Hugging Face Blog weekend post reports the LangChain, AutoGen, CrewAI, Haystack, and Pydantic AI maintainer cohort holding Friday's mid-June default-shipment release-candidate cycle RC1 branch cut on each project's main without further weekend churn, with the cohort treating the RC1 cut plus the now-settled eight-document reference set as the canonical pre-Memorial-Day stable snapshot the upcoming release-cycle execution week will resume against. A Saturday andrew.ooo weekend reading confirms the workshop-consolidation companion extends the consolidated Python-and-Rust reference-implementation index by a workshop-style measurement-and-verification overlay covering the eleven-operator sample, giving the framework cohort a directly citable end-to-end measurement-and-verification artifact alongside the prior three deployment-line papers. The structural force is that once a workshop-style measurement-and-verification consolidation companion joins the seven-document cluster on the first weekend operating day under compliance-monitoring mode against a doubly-cleared regulatory backdrop, the maintainer cohort holds its Friday RC1 branch cuts cleanly through the weekend without churn, the consolidated reference-implementation index extends to cover the workshop-overlay, the vLLM v0.11.4 stable build holds its fifth full operating day with no escalations, and the six-vendor cross-orchestrator interop matrix conformance suite holds green for a sixth consecutive day on the seven-document end-to-end conformance run, the eight-document reference set's promotion from RC-runway to settled default-shipment anchor compresses to execution arithmetic rather than an unresolved verification question. The most likely landing is the eight-document reference set — the four-paper academic cluster plus arxiv 2605.07891 consolidation survey plus arxiv 2605.08019 applied-deployment companion plus arxiv 2605.08147 operator-side compliance-monitoring companion plus arxiv 2605.08234 workshop-consolidation companion — shipping as the default verification surface bundle inside the mid-June default-shipment window, with each of the five framework projects tagging stable from their Friday RC1 branches inside the mid-June release window, the six-vendor cross-orchestrator interop matrix shipping general availability the same first week of June with default support, and the cleared CISA compliance-monitoring phase plus the cleared FMRB executive instrument cited together as the doubly-cleared regulatory backdrop. Bear case is that one of the five RC1 branches logs a schema-drift regression during the post-Memorial-Day dry-run week and the default-shipment slips one minor release cycle into late June; absent that, mid-June 2026 lands the eight-document reference set as the framework default-shipment anchor.",
-          "prediction_short_label": "Loader-verification eight-document reference set settles as the mid-June default-shipment anchor",
-          "prediction_date": "2026-05-23"
-        },
-        {
-          "prediction_id": "prediction.0aff038e6ba92ab4",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0281,
-          "validation_date": "2026-05-25",
-          "prediction_summary": "By mid-June 2026 the agentic-AI loader-verification reference set ships as a seven-document academic-plus-deployment-plus-compliance-monitoring bundle that the LangChain plus AutoGen plus CrewAI plus Haystack plus Pydantic AI maintainer cohort defaults across all six verification surfaces, with the Friday-morning RC1 branch cuts on each project's main converting the prior mid-June commitment into a settled release runway. The Friday catalysts trace a clean close on what had still been the two open questions one business day earlier — the regulatory anchor and the operator-side measurement artifact. A Friday arxiv release (2605.08147) closes the business-week research cycle by adding an operator-side compliance-monitoring evaluation companion to the now-doubly-cleared loader-verification reference set, walking the per-operator compliance-monitoring telemetry across the first 24 hours of the federal-civilian directive's compliance-monitoring phase and reporting per-operator attestation-event rates landing inside the consolidation survey's predicted bounds for a third consecutive cross-section sample on an n-of-eleven operator sample. A Friday Simon Willison note characterizes the paper as the canonical operator-side close on the loader-verification line and observes that the timing — released the same business day the CISA federal-civilian directive transitioned into its compliance-monitoring phase at T-zero and the FMRB classified-annex record cleared eight-of-eight inside the same Friday session — completes a seven-document reference set the framework cohort can cite as a single coherent academic-plus-deployment-plus-compliance-monitoring end-to-end reference, converting the mid-June default-shipment commitment from a downhill release into a release-cycle execution detail. A Friday Hugging Face Blog post reports the maintainer cohort opening the formal mid-June default-shipment release-candidate cycle with a Friday-morning RC1 branch cut on each project's main, covering all six verification surfaces — load-time signed-checkpoint, manifest-allowlist with the nested-dependency-resolution canonicalization extension, workflow-state path-canonicalization, intermediate-state-serializer canonicalization, tenant-policy-attestation manifest, and the consolidation-survey end-to-end conformance run — with the cohort treating the RC1 cut as the formal transition from commitment to shipment runway. A Friday DeepMind note confirms the consolidated Python-and-Rust reference-implementation index ships a Friday-morning supplementary tag bundling Thursday's arxiv 2605.08019 applied-deployment evaluation companion alongside Wednesday's 2605.07891 consolidation survey as the canonical two-paper deployment reference, and Anthropic's Friday operations note documents the open-source verification harness executing the six-document end-to-end conformance run alongside the standard cross-tenant audit across all 74 gated tenants with cross-tenant compositional safety checks holding under 55 seconds. The structural force is that once an operator-side compliance-monitoring measurement artifact joins the existing six-document academic-plus-deployment cluster on the same business day a CISA federal-civilian directive transitions into compliance-monitoring mode and a FMRB classified-annex record clears eight-of-eight, the framework maintainer cohort opens formal RC1 branch cuts covering all six verification surfaces, the consolidated reference-implementation index bundles the canonical two-paper deployment reference as a supplementary tag, and the Anthropic open-source verification harness executes the conformance run cleanly across 74 gated tenants, the seven-document reference set's promotion from commitment to settled default-shipment anchor compresses to RC-cycle release-engineering rather than an unresolved verification question. The most likely landing is the seven-document reference set — the four-paper academic cluster plus arxiv 2605.07891 consolidation survey plus arxiv 2605.08019 applied-deployment companion plus arxiv 2605.08147 operator-side compliance-monitoring companion — shipping as the default verification surface bundle inside the mid-June default-shipment window, with the LangChain, AutoGen, CrewAI, Haystack, and Pydantic AI cohort each tagging stable from their Friday RC1 branches inside the mid-June release window, the Mistral Workflows plus Codex CLI plus Claude Code 3.0 plus Azure AI Foundry plus Vertex AI Agent Governance Center plus Amazon Bedrock Agent Registry interop matrix shipping general availability the same first week of June with default support, and the cleared CISA compliance-monitoring phase plus the cleared FMRB executive instrument cited together as the doubly-cleared regulatory backdrop. Bear case is that one of the five RC1 branches logs a schema-drift regression during the dry-run week ahead of mid-June and the default-shipment slips one minor release cycle into late June; absent that, mid-June 2026 lands the seven-document reference set as the framework default-shipment anchor.",
-          "prediction_short_label": "Loader-verification seven-document reference set ships as framework default by mid-June 2026",
-          "prediction_date": "2026-05-22"
-        },
-        {
-          "prediction_id": "prediction.4bc45b583998a76e",
-          "scope_id": "business",
-          "support_direction": "support",
-          "score": 0.0281,
-          "validation_date": "2026-05-25",
-          "prediction_summary": "By mid-June 2026 the agentic-AI loader-verification reference set settles as a six-document academic-plus-deployment baseline that the LangChain plus AutoGen plus CrewAI plus Haystack plus Pydantic AI maintainer cohort ships as the default verification surface bundle, with the framework default-shipment commitment treating the bundle as a downhill release rather than a question. The Thursday catalysts trace a clean convergence of academic, regulatory, and operational inputs landing on the same business day. A Thursday arxiv release (2605.08019) opens an applied-deployment-evaluation companion to the now-settled five-document loader-verification cluster, walking the end-to-end verification graph across a sample of the federal-civilian remediation-deadline cohort and reporting per-operator compliance arithmetic with the marginal incremental overhead landing inside the consolidation survey's predicted bounds across an n-of-eleven operator sample. A Thursday Simon Willison note characterizes the paper as the first applied-deployment companion to the loader-verification line and observes that the timing — released the same business day as the CISA federal-civilian remediation deadline cleared at the 12:00 ET intake mark — converts the academic reference set into a regulator-confirmed deployment record the framework cohort's mid-June default-shipment commitment can cite as a single coherent six-document end-to-end reference. A Thursday Hugging Face Blog post reports the maintainer cohort confirming the mid-June default-shipment commitment with covered surfaces unchanged — load-time signed-checkpoint, manifest-allowlist with the nested-dependency-resolution canonicalization extension, workflow-state path-canonicalization, intermediate-state-serializer canonicalization, and the tenant-policy-attestation manifest as the optional sixth verification surface — and notes the cohort now treating the mid-June ship as a downhill release. A Thursday DeepMind note confirms the consolidated Python-and-Rust reference-implementation index covering all eleven CVE-pattern instances now ships a single end-to-end conformance run across all six verification surfaces, and a Thursday InfoQ note on the six-vendor cross-orchestrator interop matrix conformance test suite reports the suite running the consolidation-survey end-to-end conformance run as a third confirmation pass holding green for a fourth consecutive weekday with no schema-drift regression. The structural force is that once a regulator-confirmed applied-deployment companion joins the five-document academic cluster on the same business day a federal-civilian remediation deadline clears at the 12:00 ET intake mark, the consolidated reference-implementation index runs a single end-to-end conformance pass across all six surfaces, the six-vendor cross-orchestrator interop matrix conformance suite holds green for a fourth consecutive weekday, and the maintainer cohort explicitly characterizes the mid-June ship as a downhill release, the bundle's promotion from a forward-looking commitment to a settled default-shipment anchor compresses to a release-cycle execution detail rather than an unresolved engineering question. The most likely landing is the six-document reference set — the four-paper academic cluster plus arxiv 2605.07891 consolidation survey plus arxiv 2605.08019 applied-deployment companion — shipping as the default verification surface bundle inside the mid-June default-shipment window, with the maintainer cohort citing the cleared CISA federal-civilian directive plus the six-document end-to-end reference as the single coherent stable-and-cleared baseline. Bear case is that one of the six-vendor interop matrix's conformance passes logs a schema-drift regression during the dry-run week ahead of mid-June and the default-shipment slips one minor release cycle into late June; absent that, mid-June 2026 lands the six-document reference set as the default-shipment anchor.",
-          "prediction_short_label": "Loader-verification six-document reference set settles as the mid-June default-shipment anchor",
-          "prediction_date": "2026-05-21"
-        },
-        {
-          "prediction_id": "prediction.07171c26f222ed34",
-          "scope_id": "tech",
-          "support_direction": "support",
-          "score": 0.0281,
-          "validation_date": "2026-05-25",
-          "prediction_summary": "By H2 2026 the agentic-AI loader-verification chain reaches its end-to-end signed configuration as a default across the framework, serving-stack, and fine-tuning cohorts, with a single signed reference running from training-run checkpoint through agent-loader through tenant-policy attestation gate. The Tuesday catalysts are concrete and converge on consolidation rather than a fresh surface. A Tuesday arxiv release (2605.07735) extends the loader-verification line one further surface — from Monday's training-pipeline checkpoint-provenance extension to a tenant-policy-attestation surface, presenting a verification model that binds the training-surface signed-checkpoint provenance chain to a per-tenant policy-attestation manifest covering the fifteen-jurisdiction reciprocity perimeter's tenant-policy field schemas. The paper is positioned as a third extension of the consolidated 2605.07241 framework after its 2605.07412 empirical companion and Monday's 2605.07588 training-surface extension, formalizing how the training-surface provenance chain composes with a tenant-policy-attestation manifest with only a marginal additional overhead. A Tuesday Simon Willison note characterizes the paper as the loader-verification line reaching its third documented extension within the May 16-19 four-day cluster, with the three papers plus the original framework now forming a unified four-document reference set the framework cohort's mid-June default-shipment commitment can cite as a single coherent surface. A Tuesday andrew.ooo reading confirms the paper's reproduction harness extends the existing DeepMind plus Meta AI plus Anthropic plus Microsoft consolidated reference-implementation index to cover the tenant-policy-attestation manifest, closing the loop from training surface to deployment-time tenant gate. The implementation cohort is already wiring the new hooks in: a Tuesday vLLM Blog operational note opens a v0.11.5 development branch that adds the training-surface checkpoint-provenance verification hook as a paving step on top of the existing five-surface mitigation set, a Tuesday Unsloth changelog confirms the optional training-surface checkpoint-provenance verification step is being wired directly into its router-only training driver, and a Tuesday InfoQ note reports the Mistral Workflows five-vendor cross-orchestrator interop matrix conformance test suite now includes a training-surface checkpoint-provenance check folded in from the same arxiv extension. The structural force is that once the four-document academic reference set is unified, a federal civilian operational directive runs on the same eleven-CVE taxonomy with a Friday May 22 compliance window, the framework maintainer cohort's coordinated mid-June default-shipment commitment covers all five existing mitigation surfaces, and the serving-stack plus fine-tuning cohorts are already wiring the new training-surface and tenant-policy hooks into their builds inside the same window, the chain cannot ship in its bounded mid-June default-only configuration when both upstream surfaces are concurrently being instrumented across the same cohort. The most likely landing is the loader-verification chain reaching its end-to-end signed configuration as a default in H2 2026, with the framework cohort's mid-June default-shipment shipping the five-surface bundle, vLLM v0.11.5 plus the next Unsloth release cycle plus the Mistral Workflows interop matrix general availability extending coverage to the training-surface and tenant-policy surfaces inside the second half, and the four-document arxiv cluster cited as the unified academic baseline. Bear case is that one of the two new upstream surfaces slips a release cycle and the H2 default-shipment ships training-surface-only with tenant-policy following in early 2027; absent that slip, H2 2026 lands the loader-verification chain end-to-end signed by default.",
-          "prediction_short_label": "Loader-verification chain ships training-to-tenant signed default by H2 2026",
-          "prediction_date": "2026-05-19"
-        }
-      ],
-      "evidence_id": "evidence.ea375c2d1fd4f3f7",
-      "title": "arxiv - 2605.08401 Monday Memorial Day federal holiday workshop overlay extension five paper applied deployment operator side compliance workshop consolidation workshop extension reference European Asian researcher cohort triply aged end to end measurement and verification first full federal holiday operating window compliance monitoring sixth consecutive cross section",
-      "url": "https://arxiv.org/abs/2605.08401",
-      "source_type": "news",
-      "reported_at": "2026-05-25",
-      "total_score": 0.1686
     }
   ]
 }
