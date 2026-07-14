@@ -1,0 +1,13 @@
+{
+  "scope_hint": "tech",
+  "title": "Agent-memory provenance tagging ships default-on in a major platform by H1 2027",
+  "body": "By H1 2027 at least one major agent platform — a frontier-model vendor's built-in agent memory or a widely adopted agent framework — ships memory-provenance tagging as a default-on control: every fact written to persistent memory carries a machine-checkable record of the input that produced it, so a stored claim can be traced back to the untrusted email, document, or page it came from and quarantined or down-weighted when the agent later reads it. The forcing event is MemGhost, disclosed by Nanyang Technological University, A*STAR's CFAR, and Johns Hopkins on July 6 and amplified in security coverage on July 13: a single crafted email drives a personal agent to write attacker-chosen facts into its long-term memory, reply as if nothing happened, and let those planted facts steer later unrelated sessions — succeeding in 87.5% of background-mode runs against the open-source OpenClaw agent and 71.4% against a Claude Code SDK agent, and transferring across architectures and memory backends. The authors' own first-listed mitigation is tagging the provenance of every stored fact, and because the disclosed agents currently write memory with no source record, no approval gate, and no audit log, provenance tagging is the lowest-friction of those defenses to make default. Signed memory stores and mandatory write-approval are heavier lifts that add cryptographic machinery or a user prompt on every write; provenance metadata attaches at the existing memory-write call and enables read-time trust decisions silently, which is why it lands first as the industry's baseline answer to single-interaction memory poisoning.",
+  "reasoning": {
+    "because": "MemGhost planted persistent false memories via one email at 87.5% and 71.4% success on two agents",
+    "given": "Disclosed agents write memory with no source tag, approval gate, or audit log on the write path",
+    "so_that": "≥1 major agent platform ships default-on provenance tagging on persistent-memory writes as its first poisoning defense",
+    "landing": "by H1 2027; ≥1 model-vendor or agent-framework memory feature, on by default",
+    "plain_language": "AI helpers save facts without noting where each came from, so one email can fool them; vendors will start tagging every memory with its source."
+  },
+  "summary": "MemGhost showed one crafted email can plant persistent false memories in a personal AI agent because its memory is written with no record of each fact's source. Expect a major agent platform to ship default-on memory-provenance tagging by H1 2027 as the baseline poisoning defense."
+}

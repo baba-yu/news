@@ -1,0 +1,61 @@
+{
+  "date": "2026-07-13",
+  "technical": [
+    {
+      "lead": "AMD logra compatibilidad nativa con ROCm para vime, el framework de post-entrenamiento por RL de vLLM",
+      "body": "El proyecto vLLM comunicó el 10 de julio que vime —su framework de post-entrenamiento por aprendizaje por refuerzo— ya funciona de extremo a extremo en las GPU AMD Instinct MI355X gracias a la compatibilidad nativa con ROCm, una adaptación atribuida a colaboradores de AMD que trabajaron con la comunidad de vime. vime divide una ejecución de RL en un pipeline desacoplado: el entrenamiento del modelo en Megatron, la generación y el rollout a través de vLLM, y un búfer de datos que hace de intermediario entre ambos. Así, el mismo motor de servicio que se convirtió en el estándar para la inferencia de modelos abiertos ahora también impulsa el bucle de recompensa. El lanzamiento se distribuye como un contenedor Docker precompilado que elimina la compilación desde el código fuente que durante mucho tiempo ha frenado la adopción de ROCm, junto con integraciones específicas de ROCm y ejecuciones validadas de extremo a extremo. En Qwen3-4B, Qwen3-8B y el modelo de mezcla de expertos Qwen3-30B-A3B, el throughput se mantuvo cerca de los 4.100 tokens por GPU y segundo a lo largo de 100 pasos de entrenamiento, la divergencia de log-probabilidad entre entrenamiento y rollout se quedó en torno a 0,012, y la recompensa subió de casi cero a alrededor de 0,5-0,6 hacia el paso 100: las señales de estabilidad numérica y convergencia que un laboratorio comprueba antes de confiar en silicio que no es de NVIDIA. Como el post-entrenamiento por aprendizaje por refuerzo, y no el preentrenamiento, es donde se exprimen la mayoría de los avances de frontera de este año, y esa fase ha estado casi por completo ligada a CUDA, un camino funcional en MI355X da a los desarrolladores de modelos abiertos un genuino segundo proveedor de hardware para su etapa que más cómputo consume.",
+      "citations": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ]
+    },
+    {
+      "lead": "MemGhost implanta recuerdos falsos persistentes en agentes de IA personales mediante un solo correo",
+      "body": "Un equipo de la Nanyang Technological University, el CFAR de A*STAR y Johns Hopkins detalló MemGhost —una técnica que envenena la memoria a largo plazo de un agente de IA personal con un único correo manipulado— en un artículo publicado en arXiv el 6 de julio y recogido por la cobertura de seguridad el 13 de julio. Cuando un agente que lee la bandeja de entrada de su propietario procesa el mensaje, MemGhost lo induce a escribir 'hechos' elegidos por el atacante en sus archivos de memoria persistente, a devolver una respuesta inocua que aparenta que nada ocurrió y, después, a dejar que esos hechos plantados dirijan su comportamiento en sesiones posteriores no relacionadas. El framework genera su carga útil de un solo disparo entrenando una política atacante con ajuste fino supervisado y aprendizaje por refuerzo frente a proxies que recompensan tanto la adopción del recuerdo como el sigilo conversacional. Se mide en WhisperBench, un banco de pruebas de 108 casos que abarca el envenenamiento de hechos y de preferencias sobre un flujo de correo IMAP/SMTP en vivo. Lo logró en el 87,5% de las ejecuciones en segundo plano contra el agente de código abierto OpenClaw sobre GPT-5.4 y en el 71,4% contra un agente del SDK de Claude Code sobre Sonnet 4.6, y se transfirió entre arquitecturas de agente y backends de memoria. No hay un parche limpio: las defensas propuestas —etiquetar la procedencia de cada hecho almacenado, exigir la aprobación del usuario antes de una escritura en memoria y registrar todos los cambios de memoria— son cambios arquitectónicos y no un interruptor que el usuario pueda accionar, lo que replantea la memoria de agentes de una función cómoda a una capa de persistencia sin auditar en la que un tercero puede escribir.",
+      "citations": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ]
+    },
+    {
+      "lead": "Informe de Orca: el 99,9% de las vulnerabilidades de IA subsanables sigue sin parchear",
+      "body": "El informe 2026 State of AI Security de Orca Security, resumido el 13 de julio, constató que el 99,9% de las alertas de vulnerabilidad relacionadas con IA que ya disponen de una corrección siguen sin parchear: una brecha en la postura defensiva que aflora la misma semana en que los investigadores demostraron ataques funcionales contra la memoria de agentes. A partir de escaneos de infraestructuras en la nube en producción, el informe indica que el 81,2% de las organizaciones que ejecutan paquetes de IA arrastra al menos una vulnerabilidad conocida y el 74,1% al menos un CVE crítico, mientras que entre el 87% y el 98% de las organizaciones en las principales nubes no ha habilitado claves de cifrado gestionadas por el cliente para sus servicios de IA. La exposición no se limita a los laboratorios de investigación: el 56% de quienes adoptan IA ya ha desplegado frameworks de agentes en producción y el 64% opera bases de datos vectoriales que conectan los modelos de lenguaje con los datos internos, pero casi el 30% guarda al menos una clave de API de IA en una ubicación insegura. La lectura de Orca es que los equipos están optimizando la velocidad de despliegue por encima de los fundamentos —parcheo, gestión de claves, cifrado— justo cuando los sistemas agénticos adquieren la autonomía y el acceso a herramientas que convierten un único fallo sin parchear en un incidente que se autopropaga. Situado junto a las divulgaciones de la semana sobre inyección de memoria y agentes de programación, el informe aporta el denominador: las técnicas de ataque son novedosas, pero la superficie sobre la que caen está, de forma abrumadora, sin parchear por defecto.",
+      "citations": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ]
+    },
+    {
+      "lead": "AMD Advancing AI abre en Moscone West el 22 y 23 de julio con MI450 y Zen 6 Venice",
+      "body": "La fecha más próxima en el calendario de IA es AMD Advancing AI 2026, en el Moscone West de San Francisco, los días 22 y 23 de julio, donde se espera que Lisa Su y sus socios detallen el acelerador Instinct MI450 y las CPU Zen 6 EPYC 'Venice': un contrapunto acertado al trabajo de aprendizaje por refuerzo de AMD sobre vLLM de este mes. La acción a corto plazo es registrarse, ya que el evento abre el 22 de julio. Ancla un itinerario de chips de IA e infraestructura que continúa con Hot Chips en Stanford, del 23 al 25 de agosto —cuya tarifa de inscripción anticipada cierra el 31 de julio—, y con el AI Infra Summit en el Santa Clara Convention Center, del 15 al 17 de septiembre.",
+      "citations": []
+    },
+    {
+      "lead": "La tanda de cumbres de IA se llena de agosto en adelante; se suma World Summit AI en Ámsterdam en octubre",
+      "body": "Más allá del evento de AMD de julio, el calendario de citas de IA se llena a partir de principios de agosto. El itinerario de seguridad se agrupa primero: Black Hat USA y el AI Village de DEF CON 34 en Las Vegas, del 1 al 6 de agosto; después, el AI Risk Summit de SecurityWeek en el Ritz-Carlton de Half Moon Bay, los días 11 y 12 de agosto; y OWASP Global AppSec USA a continuación en San Francisco, los días 5 y 6 de noviembre. El itinerario de desarrolladores y datos incluye Ai4 en The Venetian, del 4 al 6 de agosto; el Ray Summit de Anyscale en el San Francisco Marriott Marquis, del 24 al 26 de agosto; el ACM AI Leadership Summit en Atlanta, del 30 de agosto al 2 de septiembre; The AI Conference en el Pier 48, del 29 de septiembre al 1 de octubre; GitHub Universe, los días 28 y 29 de octubre; AWS re:Invent, del 30 de noviembre al 4 de diciembre; y NeurIPS cerrando el año en diciembre. Nuevo en el calendario esta semana, World Summit AI lleva su cita insignia, de unos 10.000 asistentes, al Taets Art & Event Park de Ámsterdam, los días 7 y 8 de octubre: un añadido práctico para quien ya esté trazando el circuito europeo de otoño. Acciones a corto plazo: asegurar la tarifa anticipada de Hot Chips del 31 de julio y reservar Black Hat y el AI Risk Summit de Half Moon Bay para el bloque de principios de agosto.",
+      "citations": [
+        {
+          "label": "World Summit AI - Amsterdam, Taets Art & Event Park, October 7-8, 2026",
+          "url": "https://worldsummit.ai/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Los chips de AMD ya pueden ejecutar entrenamiento de IA que requería Nvidia",
+    "Un solo correo puede implantar recuerdos falsos duraderos en un agente de IA",
+    "El 99,9% de los fallos de seguridad de IA subsanables sigue sin parchear",
+    "La próxima presentación de chips de IA de AMD abre el 22 de julio",
+    "Las fechas de las cumbres de IA se acumulan de agosto en adelante hacia el otoño"
+  ]
+}

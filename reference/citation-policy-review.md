@@ -14,8 +14,8 @@ Sorted by `count` descending, then host alphabetical.
 | host | count | first_seen | last_seen | sample_label |
 |---|---|---|---|---|
 | github.com | 214 | 2026-04-19 | 2026-07-08 | GitHub - QwenLM/Qwen3.6 |
-| arxiv.org | 170 | 2026-04-29 | 2026-07-12 | arXiv - Corpus2Skill (2604.14572) |
-| thehackernews.com | 140 | 2026-04-20 | 2026-07-12 | The Hacker News - nginx-ui CVE-2026-33032 |
+| arxiv.org | 179 | 2026-04-29 | 2026-07-13 | arXiv - Corpus2Skill (2604.14572) |
+| thehackernews.com | 148 | 2026-04-20 | 2026-07-13 | The Hacker News - nginx-ui CVE-2026-33032 |
 | anthropic.com | 129 | 2026-04-21 | 2026-07-01 | Anthropic - Anthropic and Amazon expand collaboration |
 | simonwillison.net | 128 | 2026-04-19 | 2026-07-08 | Simon Willison - Qwen3.6-27B |
 | siliconangle.com | 122 | 2026-04-23 | 2026-07-07 | SiliconANGLE - OpenAI workspace agents |
@@ -29,8 +29,8 @@ Sorted by `count` descending, then host alphabetical.
 | venturebeat.com | 78 | 2026-04-24 | 2026-07-04 | VentureBeat - Microsoft patched a Copilot Studio prompt inje |
 | the-decoder.com | 73 | 2026-04-23 | 2026-07-11 | The Decoder - Anthropic ships ten AI agents for finance |
 | datacenterdynamics.com | 70 | 2026-05-06 | 2026-07-06 | Datacenter Dynamics - AMD Helios double-wide rack 3 exaflops |
+| helpnetsecurity.com | 68 | 2026-04-19 | 2026-07-13 | Help Net Security - Indirect prompt injection is taking hold |
 | unsloth.ai | 67 | 2026-04-28 | 2026-07-08 | Unsloth - Updates Changelog |
-| helpnetsecurity.com | 62 | 2026-04-19 | 2026-06-14 | Help Net Security - Indirect prompt injection is taking hold |
 | marktechpost.com | 60 | 2026-04-22 | 2026-06-28 | MarkTechPost - Coding Tutorial for PrismML Bonsai 1-Bit LLM |
 | infoq.com | 59 | 2026-04-21 | 2026-06-02 | InfoQ - Cloudflare Builds High-Performance Infrastructure fo |
 | developer.apple.com | 54 | 2026-05-30 | 2026-06-05 | Apple Developer |
@@ -262,6 +262,7 @@ Sorted by `count` descending, then host alphabetical.
 | trendforce.com | 5 | 2026-07-12 | 2026-07-12 | TrendForce - Micron raises U.S. investment target to $250B t |
 | tweaktown.com | 5 | 2026-06-25 | 2026-06-25 | TweakTown - AMD announces Advancing AI 2026 event for July ( |
 | unit42.paloaltonetworks.com | 5 | 2026-06-17 | 2026-06-17 | Palo Alto Networks Unit 42 - Pickle in the Middle: Hijacking |
+| vllm.ai | 5 | 2026-07-13 | 2026-07-13 | vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD |
 | wallstreetwaves.com | 5 | 2026-04-30 | 2026-04-30 | WallStreet Waves - April 29 After-Hours Earnings |
 | agile-robots.com | 4 | 2026-04-26 | 2026-04-26 | Agile Robots - Humanoid Agile ONE embodies Physical AI at Ha |
 | ai-redteam.com | 4 | 2026-06-12 | 2026-06-12 | AI Red Team - AI Engineer World's Fair 2026 |
@@ -437,4 +438,5 @@ Sorted by `count` descending, then host alphabetical.
 | techfundingnews.com | 2 | 2026-06-18 | 2026-06-18 | Tech Funding News - Amazon, NVIDIA and Tether back NEURA Rob |
 | upcomingevents.com | 2 | 2026-06-10 | 2026-06-10 | UpcomingEvents - AI Infra Summit 2026, Santa Clara Conventio |
 | washingtonpost.com | 2 | 2026-06-19 | 2026-06-19 | Washington Post - House members want answers on export contr |
+| worldsummit.ai | 2 | 2026-07-13 | 2026-07-13 | World Summit AI - Amsterdam, Taets Art & Event Park, October |
 | huuphan.com | 1 | 2026-07-02 | 2026-07-02 | HuuPhan - Langflow CVE-2026-5027 RCE |

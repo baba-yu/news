@@ -1,0 +1,306 @@
+{
+  "date": "2026-07-13",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.cc109942df2a6460",
+        "short_label": "AMD Instinct emerges as second vendor for open RL post-training by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "vLLMプロジェクトが7月10日に、強化学習によるポストトレーニングのフレームワークvimeが、ネイティブなROCmサポートを通じてAMD Instinct MI355X GPU上でエンドツーエンドに動作するようになったと発表したことが、この予測の起点となるシグナルだ。この移植はAMDのコントリビューターによるもので、ROCm導入を長らく阻んできたソースからのビルドを不要にするビルド済みのDockerコンテナとして提供され、検証済みのエンドツーエンドの実行結果も伴っている。Qwen3-4B、Qwen3-8B、そしてMixture-of-ExpertsモデルのQwen3-30B-A3Bにおいて、スループットはGPU1基あたり毎秒約4,100トークンを保ち、学習時とロールアウト時の対数確率の乖離は約0.012にとどまり、報酬はステップ100までにほぼゼロから約0.5〜0.6へと上昇した。これらは、ポストトレーニングにNVIDIA以外のシリコンを信頼して用いる前にラボが確認する、数値的安定性と収束のシグナルである。\nそして今年のフロンティアの成果の大半が絞り出されているのは、事前学習ではなく強化学習によるポストトレーニングの段階であり、その段階はこれまでほぼ完全にCUDAに縛られてきた。だからこそ、動作するMI355Xの経路は、オープンモデル開発者にとって最も計算負荷の高いこの段階における、初めて信頼に足る第2のハードウェアベンダーとなる。ただし7月10日のリリースはAMD自身の手によるものだ。したがってこの予測の本当の試金石は、2027年上半期（H1 2027）までの外部からの検証——AMDから独立した研究グループがInstinct上でのエンドツーエンドの実行を公表するか、あるいはあるオープンウェイトモデルのポストトレーニングのレシピがAMD Instinctを名指しするか——であり、7月22〜23日のAMD Advancing AIイベントと、そこで見込まれるMI450アクセラレータが目先の勢いを加える。",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "vLLMの7月10日のネイティブROCm移植は、vimeのRLポストトレーニングのループ全体をInstinct MI355X上に乗せた。公表されたQwen3の実行結果——GPU1基・1秒あたり約4,100トークン、学習・ロールアウト間の乖離0.012、報酬がステップ100までにおよそ0.5へ上昇——は、最も計算負荷の高い段階にNVIDIA以外のシリコンを信頼して用いる前にラボが行う、まさにその数値的安定性の確認である。",
+        "coherence": 5,
+        "remaining_gap": "この移植はAMD自身の手によるものだ。AMDから独立したグループ、あるいはオープンウェイトモデルのポストトレーニングのレシピが、Instinct上でのエンドツーエンドの実行を再現したとき、確信は高まる。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4dba2dbfb8d2798b",
+        "short_label": "Agent-memory provenance tagging ships default-on in a major platform by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "MemGhostの開示は、この予測にとって引き金となる出来事だ。南洋理工大学（Nanyang Technological University）、A*STARのCFAR、そしてJohns Hopkinsによるこの手法——7月6日にarXivへ投稿され、7月13日にセキュリティ報道で広く取り上げられた——は、たった1通の細工したメールで個人向けAIエージェントの長期記憶を汚染する。エージェントがそのメッセージを取り込むと、攻撃者が選んだ事実を永続メモリのファイルに書き込み、何も起きていないように見える当たり障りのない返信を返し、そして植え込まれたその事実に、後の無関係なセッションでの振る舞いを操らせる。GPT-5.4上で動くオープンソースのOpenClawエージェントに対してはバックグラウンドモードでの実行の87.5%で、Sonnet 4.6上で動くClaude Code SDKエージェントに対しては71.4%で成功し、エージェントのアーキテクチャやメモリバックエンドをまたいで転移した。\n著者ら自身が第一に挙げる緩和策は、保存されるすべての事実の来歴にタグを付けることだ。開示された各エージェントは現在、出所の記録も、承認のゲートも、監査ログもないままメモリを書き込んでいる。そのため来歴タグ付けは、それらの防御策のなかで最も摩擦の少ない、デフォルト化しやすい手立てである。署名付きのメモリストアや書き込み承認の必須化は、暗号の仕組みや書き込みごとのユーザーへの確認を加える、より重い負担となる。一方、来歴メタデータは既存のメモリ書き込みの呼び出しに付随し、読み出し時の信頼判断を目立たず可能にする。だからこそこの予測は、2027年上半期（H1 2027）までに、来歴タグ付けが単一のやり取りによるメモリ汚染に対する業界の基本的な答えとして最初に定着すると見込んでいる。",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "MemGhostは、たった1通の細工したメールから、攻撃者が選んだ事実を個人向けエージェントに書き込ませる——OpenClawに対して87.5%、Claude Code SDKエージェントに対して71.4%、メモリバックエンドをまたいで転移する——。それは、これらのエージェントが保存する内容の出所を一切記録していないからだ。来歴タグ付けは既存の書き込みの呼び出しに付随し、最も摩擦の少ない最初の答えとなる。",
+        "coherence": 5,
+        "remaining_gap": "デフォルトオンの来歴タグ付けを出荷したベンダーはまだない。この開示は必要性を証明するものの、その基本的な制御は未構築のままである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ae0dd497b3c0ac0",
+        "short_label": "AI security posture tools ship auto-remediation for AI packages by Q4 2026",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "7月13日に要約されたOrca Securityの2026年「State of AI Security」レポートが、この予測の起点となるシグナルだ。すでに修正が提供されているAI関連の脆弱性アラートの99.9%が未適用のまま残り、AIを稼働させている組織の81.2%が既知の脆弱性を少なくとも1件、74.1%が重大なCVEを少なくとも1件抱えている——導入企業の56%がエージェントフレームワークを、64%がベクターデータベースを本番環境に組み込んでいるにもかかわらず、である。目を引く数字は、欠陥が存在することではなく、修正が提供されているのに手つかずのバックログだ。パッチは存在し、ただ適用されていないだけなのである。\nOrca自身は、従来型のクラウドリスクに対してすでに優先順位付けと修復を自動化するプラットフォームを持つ、エージェントレスのクラウドセキュリティ（CNAPP）ベンダーだ。そのため、この的確な統計を公表することは、製品ロードマップの示唆も兼ねている。この予測は、検知に偏ったAIセキュリティポスチャ管理市場が、2026年第4四半期（Q4 2026）までに修復の側で応じると見込む——AIパッケージやエージェントフレームワークのCVEを単に指摘するだけでなく、自動で優先順位付けされたパッチ適用ワークフローと、AI資産に絞った平均修復時間（MTTR）やパッチ適用率の指標を通じて、それらを減らしていく、名の付いた機能である。この逃れられない圧力にはタイミングがある。このレポートは、エージェントのメモリを狙う実際に動作する攻撃と同じ週に、そしてBlack Hat、DEF CONのAI Village、8月のAI Risk Summitの直前に届いた——どのポスチャベンダーも「99.9%が未適用」を、糾弾から出荷済みの答えへと変えたいと望む場である。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Orcaのレポートは、まさに問題となっているバックログを数値化している。修正可能なAI脆弱性の99.9%が未適用のまま放置され、AIを稼働させる組織の81.2%が既知の欠陥を、74.1%が重大なCVEを抱えている。修正はすでに存在し、ただ適用されないままだ——このギャップは、さらなる検知ではなく、自動修復が埋めるために作られたものである。",
+        "coherence": 5,
+        "remaining_gap": "名の付いたAI修復機能を出荷したポスチャベンダーはまだない。このレポートは、出荷済みの機能ではなく、ロードマップの示唆として読める。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5e0beac647793331",
+        "short_label": "AMD MI400 will market memory bandwidth over peak FLOPS at Advancing AI",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "AMDのAdvancing AIでの位置づけに関するこの予測は、7月の2つのシグナルから新たな裏づけを得る。AMDが7月10日にvimeをInstinct MI355XへネイティブにROCm移植したことは、メモリのフットプリントが効いてくるまさにその強化学習のワークロードにおいて、AMDのデータセンター向けアクセラレータの勢いに具体的な実体を与えた。そしてAIイベントのまとめは、Advancing AI 2026が7月22〜23日にMoscone Westで開幕し、そこでLisa Suとパートナー各社がInstinct MI450アクセラレータとZen 6 EPYC「Venice」CPUの詳細を明らかにすると見込まれることを裏づけている。\nこの証拠は、予測の具体的なマーケティングの主張そのものではなく、そのタイミングとプラットフォームを裏づけるものだ。いずれのシグナルも、AMDがMI400/MI450の売り込みでピークFLOPSよりメモリ帯域幅を前面に押し出す様子を、まだ示してはいない。裏づけられたのは、その打ち出し方を担うことになる会場とアクセラレータである。これは、メモリ帯域幅をピークFLOPSより優先して打ち出すメッセージが現れるまさにその瞬間である7月22〜23日の基調講演に向けた助走を強めるものの、メッセージの軸そのものを確認するには至らない。",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "AIイベントのまとめは、Advancing AIを7月22〜23日のMoscone Westに定め、そこでLisa SuがInstinct MI450の詳細を明らかにすると見込まれる。そして7月10日のROCmによるRL移植は、帯域幅の売り込みが前面に出すであろうまさにそのメモリ律速のワークロードにおいて、AMDに新たな実体を与える。会場と勢いは定まった。メッセージの軸は、まだ定まっていない。",
+        "coherence": 3,
+        "remaining_gap": "いずれのシグナルも、AMDがピークFLOPSよりメモリ帯域幅を前面に押し出す様子を示していない。マーケティングの打ち出し方を確認できるのは、7月22〜23日の基調講演そのものだけである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b29d00f310d8ad2c",
+        "short_label": "Second open-weight frontier model discloses non-NVIDIA ASIC training by Q2 2027",
+        "prediction_date": "2026-07-04"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "AMDが7月10日に、vLLMの強化学習によるポストトレーニングのフレームワークvimeをInstinct MI355XへネイティブにROCm移植したことは、この予測が属するより広範な「NVIDIA以外の計算基盤」という仮説を前進させる。最も計算負荷の高い学習段階について、動作し検証されたNVIDIA以外の経路を実証し、フロンティアの学習をNVIDIAに縛りつけてきたCUDAへのロックインを切り崩すからだ。\nその意味合いは、直接的というより主題的なものだ。AMD Instinctは市販の汎用GPUであって、この予測が名指す買い手設計のASICではない。そして公表されたQwen3の実行結果を伴うフレームワークの移植は、オープンウェイトモデルの学習に関する開示ではない。これは、NVIDIA以外のシリコンが本格的な学習作業にも使えるものになりつつあることを裏づけるが、この予測が求める、ASICでの学習開示という具体的な決着を動かすには至らない。",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "AMDによるvimeのROCm移植は、公表されたQwen3の実行結果とともに、NVIDIA以外のシリコンが最も計算負荷の高い学習段階をこなす様子を示し、この仮説が依拠するCUDAへのロックインを切り崩す。意味合いは主題的なものだ。Instinctは市販の汎用GPUであって、ここで名指される買い手設計のASICではなく、フレームワークの移植はモデルの学習開示ではない。",
+        "coherence": 2,
+        "remaining_gap": "確信のためには、あるオープンウェイトのフロンティアモデルが、買い手設計のNVIDIA以外のASICでの学習を開示することが必要だ。市販GPU向けのフレームワーク移植は、その決着を満たさない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f5e698fbeaa37461",
+        "short_label": "Companion-agent memory guardrails become binding rules in a second major market by Q4 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "MemGhostの開示は、この予測が規制当局に対処を期待する害を、具体的に実証したものだ。たった1通の細工したメールが、個人向けAIエージェントの長期記憶を攻撃者の選んだ事実で汚染し、その事実が後の無関係なセッションを密かに操る。オープンソースのOpenClawエージェントに対してはバックグラウンドモードでの実行の87.5%で成功し、エージェントのアーキテクチャやメモリバックエンドをまたいで転移した。これは、エージェントのメモリを利便性の機能から、部外者が書き込める監査されない永続化層へと変えてしまう。\nこの証拠は、駆動力——コンパニオンや個人向けエージェントが売りにする永続メモリ機能に対する、実証された成功率の高い攻撃——を強めるが、決着には触れていない。この予測は、第2の主要市場での拘束力ある規則を求める。一方MemGhostは研究上の開示であり、提案されている対策は構造的なもの（来歴タグ付け、書き込み承認、監査ログ）であって、まだ規制上の義務ではない。これは、いかなる規則も採用されないまま、メモリ安全性の義務の重要性を高めるにとどまる。",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "MemGhostは、コンパニオンエージェントのメモリを、利便性の機能から、部外者がたった1通のメールで書き込む監査されない永続化層へと変える——OpenClawに対して87.5%の成功率、アーキテクチャをまたいで転移する。これらのエージェントが売りにするまさにその機能への、具体的で成功率の高い攻撃は、規制当局が動く対象となりがちな、実証された害である。",
+        "coherence": 3,
+        "remaining_gap": "これは規則ではなく研究上の開示だ。第2の主要市場における拘束力あるメモリ安全性の義務は、まだ採用されておらず、通例、実証から数年遅れる。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3049b69e910c2279",
+        "short_label": "Autonomous-AI-agent intrusions become a named detection category by H1 2027",
+        "prediction_date": "2026-07-09"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "本日のシグナルのうち2つが、この予測を後押しする。MemGhostは、新たな自律エージェントの攻撃クラスを加える——たった1通のメールによる、ひそかな永続メモリへの注入であり、当たり障りのない返信の陰で改竄を隠し、後のセッションを操る。これは新しい108ケースのWhisperBench上で測定され、OpenClawエージェントとClaude Code SDKエージェントの双方に対して成功した。Orca Securityの2026年「State of AI Security」レポートは、その分母を与える。導入企業の56%が、大半がデフォルトで未適用のままの領域の上に、エージェントフレームワークを本番投入している。\nこの2つは相まって、エージェント固有の侵入がそれ自体の検知カテゴリを必要とするという論拠——防御の手薄な広大なエージェントの攻撃対象領域に新奇な手法が降りかかる、という論拠——を鋭くする。証拠は依然として方向性の段階にとどまる。SIEMやEDRの分類体系も、「AIエージェントの侵入」という名の付いた検知クラスも、本日は発表されていない。したがって駆動力は強まるが、分類化そのものは決着していない。",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "2つのシグナルが収束する。MemGhostは、改竄を隠して後のセッションを操る、ひそかな永続メモリ注入のクラスを加え、108ケースのWhisperBench上で測定された。一方Orcaは分母を与える——大半が未適用のままの領域の上でエージェントフレームワークを稼働させる導入企業が56%。防御の手薄な広大なエージェント領域における新奇な手法こそが、独立した検知カテゴリを迫るものだ。",
+        "coherence": 3,
+        "remaining_gap": "本日、SIEMやEDRの分類体系が「AIエージェントの侵入」という検知クラスを名づけることはなかった。駆動力は強まるが、分類化そのものは決着していない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.25bbb1fc4e3ce653",
+        "short_label": "Coding agents ship default-deny sandboxes for untrusted-repo audits by Q2 2027",
+        "prediction_date": "2026-07-11"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "MemGhostは、コーディングエージェントにとっての信頼できないコンテンツの攻撃対象領域を、新たな経路へと広げる。Sonnet 4.6上のClaude Code SDKエージェントは、取り込んだたった1通のメールから、実行の71.4%で攻撃者の選んだ事実を永続メモリに書き込まされた。これは、外部のコンテンツを処理するエージェントには、モデルレベルの信頼ではなく、堅牢化された実行と承認の境界が必要だという、この予測の前提を補強する。\nそのつながりは、「信頼できない入力がエージェントを侵害する」という共通の仮説に対するものであって、具体的な仕組みに対するものではない。MemGhostの経路は受信メールであり、そのペイロードは永続メモリへの書き込みだ。一方この予測は、信頼できないリポジトリの監査向けに、ネットワーク分離されたデフォルト拒否の実行サンドボックスを指定している。これは、実行環境の分離に向けた一般的な逃れられない圧力を強めるものの、リポジトリ監査のサンドボックスの体制そのものには直接かかわらない。",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "MemGhostは、取り込んだたった1通のメールから、実行の71.4%でClaude Code SDKエージェントに攻撃者の選んだ事実を書き込ませ、外部のコンテンツを扱うエージェントにはモデルレベルの信頼ではなく堅牢化された実行と承認の境界が必要だという、共通の前提を補強した。ここでの経路は受信メールとメモリへの書き込みであって、リポジトリの監査ではない。",
+        "coherence": 2,
+        "remaining_gap": "本日、信頼できないリポジトリの監査向けの、ネットワーク分離されたデフォルト拒否のサンドボックスを名指しで扱うものは何もない。動いたのは分離という一般的な前提だけであって、リポジトリ監査の体制ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.15eec0e8b46997d6",
+        "short_label": "Agentic vulnerability scanning ships at a second major vendor by Q1 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Orca Securityの2026年「State of AI Security」レポートは、この予測にとって直接の市場的文脈だ。修正可能なAI脆弱性の99.9%が未適用のまま放置され、組織の81.2%が既知のAIパッケージ脆弱性を少なくとも1件、74.1%が重大なCVEを抱えているというその発見は、エージェント型のスキャン・修復製品が狙うことになるバックログを、まさに定義している。そしてOrcaは、そうした機能を出荷しうる立ち位置にあるポスチャベンダーだ。\nこの証拠は、出荷された製品ではなく、需要とベンダーの動機の側にかかわる。この予測は、第2の主要ベンダーがエージェント型の脆弱性スキャンを投入することを求める。Orcaのレポートは問題を数値化し、ロードマップの示唆として読めるが、本日ローンチされた新たなエージェント型スキャン機能を挙げてはいない。これは、目前に迫るBlack HatとDEF CON AI Villageの機会によって鋭くなった競争上の引力を強めるものの、第2ベンダーの出荷を記すには至らない。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Orcaの発見は、需要を的確に定義する。修正可能なAI脆弱性の99.9%が未適用、組織の81.2%が既知のAIパッケージ欠陥を、74.1%が重大なCVEを抱える——スキャン・修復製品が消し込むために存在するバックログであり、それを出荷しうる立ち位置のポスチャベンダーが、Black HatとDEF CONの機会の直前に公表したものだ。",
+        "coherence": 3,
+        "remaining_gap": "このレポートは問題を数値化し、ロードマップの示唆として読めるが、ローンチされた機能を挙げてはいない。第2ベンダーによるエージェント型スキャンの出荷は起きていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.71c1acea4be80819",
+        "short_label": "Agent-runtime security folds into a hyperscaler-native defense tier by H1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Orca Securityの2026年「State of AI Security」レポートは、クラウドのAIランタイムという領域がデフォルトでどれだけ露出しているかを数値化することで、この予測にかかわってくる。主要クラウド全体で、組織の87%から98%が自社のAIサービスに顧客管理の暗号鍵を有効化しておらず、64%がモデルを内部データに接続するベクターデータベースを稼働させ、30%近くが少なくとも1つのAI APIキーを安全でない場所に保管している。\nこの発見は、予測の方向性——露出が自らの領域の内側にあるがゆえに、クラウドとハイパースケーラーのプラットフォームがエージェントランタイムの防御をネイティブなティアとして吸収していく、という方向性——を動機づける。ただしこのレポートは、ハイパースケーラーではなく独立系のCNAPPベンダーによるものであり、当事者による防御ティアではなく、そのギャップを記録したものだ。これは構造的な論拠を補強するが、ハイパースケーラー自製のエージェント防御ティアが発表されるには至っていない。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Orcaは、クラウドのAIランタイムという領域がデフォルトでどれだけ露出しているかを測る。主要クラウド全体で、組織の87〜98%が顧客管理の暗号鍵なしにAIサービスを稼働させ、64%がベクターデータベースを内部データに接続し、30%近くがAI APIキーを安全でないかたちで保管している——ハイパースケーラーの領域の内側にある露出であり、これが防御をネイティブに吸収する構造的な論拠となる。",
+        "coherence": 2,
+        "remaining_gap": "このレポートは独立系のCNAPPベンダーによるもので、ギャップを記録している。当事者としてのエージェントランタイム防御ティアを発表したハイパースケーラーはない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f3f7e18b691f1c39",
+        "short_label": "OpenClaw ships default-deny tool and network gating out-of-box by Q4 2026",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260623-2、シグナル: OpenClaw、最小権限の初期状態でのデフォルト、ツール呼び出しと外部ネットワークの拒否、ハーネス層での防御、StakeBenchがプロンプトインジェクションに耐える）。MemGhostの開示は、この休眠中の予測が名指す対象への直撃だ。攻撃は、オープンソースのOpenClawエージェントに対してバックグラウンドモードでの実行の87.5%で成功し、たった1通のメールから攻撃者の選んだ事実をその永続メモリに植え込み、メモリバックエンドをまたいで転移した。\nOpenClawに対して実証された87.5%という侵害率は、まさにこの予測が、最小権限でデフォルト拒否のゲートをハーネスの初期状態へと押し込むと見込む圧力そのものだ。その意味合いは、出荷ではなく動機にある。MemGhost自身が提案する防御策はメモリの来歴と書き込み承認の制御であり、デフォルト拒否のツールやネットワークのゲートを有効にするOpenClawのリリースは本日現れなかった。したがってこの復活は、決着には届かないまま駆動力を強めるものである。",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "MemGhostは、名指しされたハーネスを直接突いた——バックグラウンドモードでの実行の87.5%が、たった1通のメールからOpenClawへ攻撃者の選んだメモリを植え込み、バックエンドをまたいで転移した。まさに問題のエージェントに対するこれほど高い侵害率は、最小権限でデフォルト拒否のツールとネットワークのゲートを初期状態の体制へと押し込むと見込まれる圧力そのものである。",
+        "coherence": 4,
+        "remaining_gap": "デフォルト拒否のツールやネットワークのゲートを有効にするOpenClawのリリースは本日現れず、MemGhost自身の対策は別の制御であるメモリの来歴を対象としている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3e6e8b6ae1e7c76e",
+        "short_label": "AI-agent procurement adds a numeric prompt-injection-resistance bar by Q2 2027",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260623-3、シグナル: 定量化されたプロンプトインジェクション耐性スコア、名の付いたベンチマークによる契約上の基準、StakeBench、数値で示された最大注入成功率、監査可能な受け入れ基準）。MemGhostは、稼働中のIMAP/SMTPメールワークフロー上で事実と選好の汚染にまたがる108ケースのベンチマーク、WhisperBenchを導入し、数値の注入成功率——OpenClawに対して87.5%、Claude Code SDKエージェントに対して71.4%——を報告する。\n比較可能な数値の注入成功率を生み出す名の付いたベンチマークは、まさにこの予測が、調達において最大注入成功率という受け入れ基準へと明文化されると見込む素材だ。この証拠は、調達の決着ではなく測定の基盤を前進させる。WhisperBenchは研究用のベンチマークであって、まだ契約条項でも認証のしきい値でもない。したがってこの復活は、調達上の基準が採用されないまま、定量化の筋を強めるものである。",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "MemGhostは、稼働中のメールワークフロー上で事実と選好の汚染にまたがる108ケースのベンチマーク、WhisperBenchを導入し、比較可能な数値の注入成功率——2つのエージェントにわたって87.5%と71.4%——を報告する。直接比較できる数値を生み出す名の付いたベンチマークは、調達が最大注入成功率という受け入れ基準を明文化できるようになる前に必要とする、測定の基盤である。",
+        "coherence": 3,
+        "remaining_gap": "WhisperBenchは研究用のベンチマークであって、契約条項でも認証のしきい値でもない。数値のインジェクション耐性の基準を採用した調達プロセスはない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6ba7ca6e01ab313e",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260628-3、シグナル: Claude Code、信頼できないコンテンツ、致死的三点セットの上限設定、明示的な人間の承認のための一時停止、デフォルトオンの能力ゲート、Rule-of-Two）。MemGhostは、このゲートが対処する信頼できないコンテンツの危険の、まさに典型的な実例だ。信頼できないメールを取り込んだClaude Code SDKエージェントは、攻撃者の選んだ事実を永続メモリに書き込まされ、その後のセッションでそれに基づいて行動する。しかも改竄は、当たり障りのない返信の陰に隠されている。\nMemGhost自身が第一に挙げる防御策——メモリ書き込みの前にユーザーの承認を求めること——は、まさにこの予測がデフォルトオンの能力ゲートになると見込む、人間の承認を求めて一時停止する体制そのものだ。その意味合いは、出荷されたゲートではなく構造的な論拠にある。この開示は、信頼できないコンテンツと重大な帰結を伴う行動との組み合わせをオーケストレーション層で上限設定することを動機づけるが、あるプラットフォームがそうしたデフォルトを出荷したという証拠はない。",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "MemGhostは、このゲートが標的とする三点セットのパターンを体現する。Claude Code SDKエージェントが信頼できないメールを取り込み、攻撃者の選んだ事実を永続メモリに書き込み、その後それに基づいて行動する——改竄は当たり障りのない返信の陰に隠される。第一に挙げられた防御策、すなわちメモリ書き込みの前のユーザー承認は、まさにこのゲートがデフォルトにするであろう、承認を求めて一時停止する体制である。",
+        "coherence": 3,
+        "remaining_gap": "この開示は、信頼できないコンテンツと重大な帰結を伴う行動との組み合わせをオーケストレーション層で上限設定することを動機づけるが、そうした三点セットのゲートをデフォルトで有効にして出荷したプラットフォームはない。"
+      }
+    }
+  ]
+}

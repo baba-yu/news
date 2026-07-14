@@ -1,0 +1,61 @@
+{
+  "date": "2026-07-13",
+  "technical": [
+    {
+      "lead": "AMD、vLLM の RL 事後学習フレームワーク vime にネイティブな ROCm 対応をもたらす",
+      "body": "vLLM プロジェクトは7月10日、同プロジェクトの強化学習による事後学習フレームワーク vime が、ネイティブな ROCm 対応によって AMD Instinct MI355X GPU 上でエンドツーエンドに動作するようになったと発表した。この移植は、vime のコミュニティと協働した AMD の貢献者によるものとされる。vime は、RL の実行を疎結合のパイプラインに分ける。Megatron 上でのモデル学習、vLLM による生成とロールアウト、そして両者を仲介するデータバッファだ。これにより、オープンモデルの推論で標準となった同じサービングエンジンが、いまや報酬ループも動かす。このリリースは事前ビルド済みの Docker コンテナとして提供され、ROCm の採用を長く阻んできたソースからのビルドを不要にする。あわせて、ROCm 固有の統合と、検証済みのエンドツーエンドの実行結果も含む。Qwen3-4B、Qwen3-8B、そして混合エキスパートモデルの Qwen3-30B-A3B では、スループットが100回の学習ステップを通じて毎秒約4,100トークン/GPU を維持し、学習時とロールアウト時の対数確率の乖離は約0.012にとどまり、報酬は100ステップ目までにほぼゼロから約0.5〜0.6へと上昇した。いずれも、非 NVIDIA のシリコンを信頼する前にラボが確認する数値的安定性と収束の指標である。今年のフロンティアでの性能向上の大半は、事前学習ではなく強化学習による事後学習から絞り出されており、その段階はこれまでほぼ完全に CUDA に縛られてきた。だからこそ、動作する MI355X の経路は、最も計算資源を要する段階について、オープンモデルの開発者に真の意味での第2のハードウェア供給元をもたらす。",
+      "citations": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ]
+    },
+    {
+      "lead": "MemGhost、1通のメールで個人向け AI エージェントに永続する偽の記憶を植え付ける",
+      "body": "Nanyang Technological University、A*STAR の CFAR、そして Johns Hopkins のチームは、個人向け AI エージェントの長期メモリを巧妙な1通のメールで汚染する手法 MemGhost を、7月6日に arXiv へ投稿した論文で詳述し、7月13日のセキュリティ報道で取り上げられた。持ち主の受信箱を読むエージェントがそのメッセージを取り込むと、MemGhost はエージェントに、攻撃者の選んだ「事実」を永続メモリのファイルへ書き込ませる。そのうえで、何も起きていないように見える無害な返信を返させ、植え付けられた事実に後の無関係なセッションでの挙動を操らせる。このフレームワークは、メモリへの取り込みと会話上の隠密性の双方に報酬を与える代理指標に対し、教師ありファインチューニングと強化学習で攻撃者の方策を学習させ、単発のペイロードを生成する。評価には、実際の IMAP/SMTP メールのワークフロー上で事実の汚染と選好の汚染にまたがる108件のベンチマーク WhisperBench を用いた。GPT-5.4 上のオープンソース OpenClaw エージェントに対してはバックグラウンドモードの実行の87.5%で成功し、Sonnet 4.6 上の Claude Code SDK エージェントに対しては71.4%で成功した。さらに、異なるエージェントのアーキテクチャやメモリバックエンドをまたいで通用した。すっきりとしたパッチは存在しない。提案された防御策、すなわち保存されるすべての事実に来歴のタグを付けること、メモリ書き込みの前にユーザーの承認を求めること、そしてすべてのメモリ変更を記録することは、ユーザーが切り替えられるスイッチではなく、アーキテクチャ上の変更だ。これは、エージェントメモリを便利な機能から、外部の者が書き込める、監査されない永続化の層へと捉え直させる。",
+      "citations": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ]
+    },
+    {
+      "lead": "Orca の報告書、修正可能な AI 脆弱性の99.9%が未適用のままと指摘",
+      "body": "7月13日に要約された Orca Security の「2026 State of AI Security」報告書は、修正がすでに提供されている AI 関連の脆弱性アラートの99.9%が未適用のまま残っていることを明らかにした。これは、研究者がエージェントメモリへの実際に機能する攻撃を実証したのと同じ週に浮かび上がった、防御体制の隙間だ。稼働中のクラウド環境のスキャンに基づき、報告書は、AI パッケージを運用する組織の81.2%が既知の脆弱性を少なくとも1つ抱え、74.1%が深刻な CVE を少なくとも1つ抱えているとする。一方で、主要なクラウド全体で87%から98%の組織が、自社の AI サービスに顧客管理の暗号鍵を有効にしていない。この露出は研究所に限られない。AI 導入企業の56%がすでにエージェントフレームワークを本番環境に展開し、64%が言語モデルを社内データにつなぐベクトルデータベースを運用している。それでいて、30%近くが AI の API キーを少なくとも1つ、安全でない場所に保存している。Orca の見立てでは、各チームは基礎、すなわちパッチ適用、鍵管理、暗号化よりも、展開の速さを優先している。まさに、エージェント型のシステムが、未適用の1つの欠陥を自己増殖するインシデントに変えるだけの自律性とツールへのアクセスを獲得しつつある局面でだ。今週のメモリ注入やコーディングエージェントに関する公表と並べると、報告書は母数を与える。攻撃の手法は新しくても、それが及ぶ対象領域は、既定では圧倒的に未適用のままなのだ。",
+      "citations": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ]
+    },
+    {
+      "lead": "AMD Advancing AI、MI450 と Zen 6 Venice を掲げ7月22〜23日に Moscone West で開幕",
+      "body": "AI のカレンダーで最も近い日程は、7月22〜23日にサンフランシスコの Moscone West で開かれる AMD Advancing AI 2026 だ。ここでは Lisa Su とパートナーが、Instinct MI450 アクセラレータと Zen 6 EPYC「Venice」CPU について詳しく説明すると見込まれる。今月の AMD と vLLM による強化学習の取り組みへのふさわしい対照でもある。イベントは7月22日に始まるため、当面の行動は参加登録だ。この日程は、AI チップとインフラの流れの起点となる。流れはその後、8月23〜25日にスタンフォードで開かれる Hot Chips（早期登録料金の締め切りは7月31日）、そして9月15〜17日にサンタクララ・コンベンションセンターで開かれる AI Infra Summit へと続く。",
+      "citations": []
+    },
+    {
+      "lead": "AI サミットの連なり、8月以降が埋まる。World Summit AI が10月のアムステルダム開催で加わる",
+      "body": "AMD の7月のイベントの先も、AI イベントのカレンダーは8月初旬から埋まっていく。まずセキュリティ系が集中する。8月1〜6日にラスベガスで Black Hat USA と DEF CON 34 の AI Village、続いて8月11〜12日に Half Moon Bay のリッツ・カールトンで SecurityWeek の AI Risk Summit、そして11月5〜6日にサンフランシスコで OWASP Global AppSec USA が続く。開発者・データ系では、8月4〜6日に The Venetian で Ai4、8月24〜26日に San Francisco Marriott Marquis で Anyscale の Ray Summit、8月30日から9月2日までアトランタで ACM AI Leadership Summit、9月29日から10月1日まで Pier 48 で The AI Conference、10月28〜29日に GitHub Universe、11月30日から12月4日まで AWS re:Invent、そして12月に NeurIPS が年を締めくくる。今週カレンダーに加わったのが World Summit AI で、約1万人規模の主力イベントを10月7〜8日にアムステルダムの Taets Art & Event Park で開く。すでにヨーロッパの秋の巡回を計画している人には実際的な追加だ。当面の行動としては、7月31日の Hot Chips 早期料金を確保し、8月初旬の枠として Black Hat と Half Moon Bay の AI Risk Summit を予約しておくこと。",
+      "citations": [
+        {
+          "label": "World Summit AI - Amsterdam, Taets Art & Event Park, October 7-8, 2026",
+          "url": "https://worldsummit.ai/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "AMD のチップで、これまで Nvidia を必要とした AI 学習が動くようになった",
+    "1通のメールで、AI エージェントに消えない偽の記憶を植え付けられる",
+    "修正可能な AI セキュリティ欠陥の99.9%が未適用のまま",
+    "AMD の次の AI チップ発表会が7月22日に開幕",
+    "AI サミットの日程が、8月から秋にかけて積み重なる"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "date": "2026-07-13",
+  "sections": [
+    {
+      "category": "Nagdadala ang AMD ng native ROCm support sa vime, ang reinforcement-learning post-training framework ng vLLM project, kaya ang large-scale na RL fine-tuning ng mga open model ay tumatakbo na ngayon nang end-to-end sa mga Instinct MI355X GPU mula sa isang prebuilt container",
+      "bullets": [
+        {
+          "body": "Inihayag ng vLLM project noong July 10 na ang <a href=\"https://vllm.ai/blog/2026-07-10-vime-rocm\">vime, ang reinforcement-learning post-training framework nito, ay tumatakbo na ngayon nang end-to-end sa mga AMD Instinct MI355X GPU sa pamamagitan ng native ROCm support</a>, isang port na iniuugnay ng post sa mga AMD contributor na nakikipagtulungan sa vime community. Hinahati ng vime ang isang RL run sa isang decoupled na pipeline — model training sa Megatron, generation at rollout sa vLLM, at isang data buffer na namamagitan sa dalawa — kaya ang serving engine na naging default para sa open-model inference ay nagpapatakbo na rin ngayon ng reward loop. Inihahatid ang release bilang prebuilt Docker container na nag-aalis sa from-source build na matagal nang humahadlang sa pag-adopt ng ROCm, kasabay ng mga ROCm-specific na integration at mga na-validate na end-to-end run. Sa mga inilathalang resulta sa Qwen3-4B, Qwen3-8B, at sa Qwen3-30B-A3B mixture-of-experts na modelo, nanatili ang throughput malapit sa 4,100 token kada GPU kada segundo sa 100 training step, nanatili sa palibot ng 0.012 ang divergence sa pagitan ng training at rollout na log-probability, at umakyat ang reward mula halos sero patungong mga 0.5 hanggang 0.6 pagsapit ng step 100 — ang mga senyales ng numerical stability at convergence na sinusuri ng isang lab bago magtiwala sa non-NVIDIA na silicon para sa post-training. Mahalaga ito dahil ang reinforcement-learning post-training, hindi ang pre-training, ang pinagpipigaan ng karamihan sa mga frontier gain ngayong taon, at halos buong-buong nakatali sa CUDA ang yugtong iyon; ang isang gumaganang MI355X na landas ay nagbibigay sa mga open-model builder ng tunay na ikalawang hardware vendor para sa kanilang pinaka-gutom-sa-compute na yugto.",
+          "citations": [
+            {
+              "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+              "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Inilantad ng mga researcher ang MemGhost, isang awtomatikong atake na nagtatanim ng mga permanenteng huwad na memory sa mga personal AI agent mula sa isang email, na itinatago ang pakikialam sa user habang pinapatnubayan ang mga sagot ng agent sa mga susunod na session",
+      "bullets": [
+        {
+          "body": "Inilarawan ng isang team mula sa Nanyang Technological University, sa CFAR ng A*STAR, at sa Johns Hopkins ang <a href=\"https://arxiv.org/abs/2607.05189\">MemGhost, isang teknik na nagpapalason sa long-term memory ng isang personal AI agent gamit ang isang crafted na email</a>, sa isang papel na inilathala sa arXiv noong July 6 at kinuha sa <a href=\"https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html\">security coverage noong July 13</a>. Kapag natanggap ng isang agent na bumabasa ng inbox ng may-ari nito ang mensahe, inuudyok ito ng MemGhost na isulat ang mga \"fact\" na pinili ng umaatake sa mga persistent memory file nito, magbalik ng isang inosenteng tugon na nagpapakitang walang nangyari, at pagkatapos ay hayaang hubugin ng mga itinanim na fact na iyon ang gawi nito sa mga susunod at walang-kaugnayang usapan. Bumubuo ang framework ng one-shot payload nito sa pamamagitan ng pagsasanay sa isang attacker policy gamit ang supervised fine-tuning at reinforcement learning laban sa mga proxy na gumagantimpala kapwa sa pag-adopt ng memory at sa conversational stealth, at sinusukat ito ng mga may-akda sa WhisperBench, isang 108-case na benchmark na sumasaklaw sa fact at preference poisoning sa isang live na IMAP/SMTP email workflow. Nagtagumpay ito sa 87.5% ng mga background-mode run laban sa open-source na OpenClaw agent sa GPT-5.4 at 71.4% laban sa isang Claude Code SDK agent sa Sonnet 4.6, at lumipat ito sa iba't ibang agent architecture at memory backend. Walang malinis na patch: itinuturing ng patakaran ng OpenClaw na labas sa saklaw ang prompt injection maliban kung tumawid ito sa isang authorization boundary, at ang mga iminungkahing depensa ng mga researcher — ang pag-tag sa provenance ng bawat naka-imbak na fact, ang pag-require ng user approval bago ang isang memory write, at ang pag-log sa lahat ng pagbabago sa memory — ay mga pagbabagong arkitektural sa halip na isang switch na maaaring i-flip ng user. Ang resulta ay nagre-reframe sa agent memory, na karaniwang ibinebenta bilang convenience feature, bilang isang hindi-naa-audit na persistence layer na kayang sulatan ng isang tagalabas.",
+          "citations": [
+            {
+              "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+              "url": "https://arxiv.org/abs/2607.05189"
+            },
+            {
+              "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+              "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Natuklasan ng 2026 State of AI Security report ng Orca Security na 99.9% ng mga naaayos na AI vulnerability ay nananatiling hindi na-patch, kahit na itinulak na ng karamihan sa mga adopter ang mga agent framework at vector database sa production",
+      "bullets": [
+        {
+          "body": "Natuklasan ng <a href=\"https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/\">2026 State of AI Security report ng Orca Security, na binuod noong July 13, na 99.9% ng mga AI-related na vulnerability alert na may available nang fix ay nananatiling hindi na-patch</a> — isang puwang sa depensang postura na lumilitaw sa parehong linggo na ipinakita ng mga researcher ang mga gumaganang atake sa agent memory. Batay sa mga scan ng live na cloud estate, sinasabi ng ulat na 81.2% ng mga organisasyong nagpapatakbo ng AI package ay may hindi bababa sa isang kilalang vulnerability at 74.1% ang may hindi bababa sa isang critical na CVE, habang sa pagitan ng 87% at 98% ng mga organisasyon sa mga malalaking cloud ay hindi pa na-enable ang mga customer-managed encryption key para sa kanilang mga AI service. Hindi nakakulong sa mga research lab ang exposure: 56% ng mga AI adopter ay nag-deploy na ng agent framework sa production at 64% ang nagpapatakbo ng vector database na nag-uugnay sa mga language model sa internal data, ngunit halos 30% ang nag-iimbak ng hindi bababa sa isang AI API key sa isang hindi ligtas na lokasyon. Ang pagbasa ng Orca ay ino-optimize ng mga team ang bilis ng deployment kaysa sa mga pundasyon — patching, key management, encryption — mismo habang nakakamit ng mga agentic system ang autonomy at tool access na gumagawa sa isang hindi na-patch na depekto na isang self-propagating na insidente. Inilagay katabi ng mga memory-injection at coding-agent na disclosure ng linggo, ibinibigay ng ulat ang denominador: bago ang mga teknik ng atake, ngunit ang saklaw na tinatamaan nila ay halos hindi na-patch bilang default.",
+          "citations": [
+            {
+              "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+              "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mga AI event na dapat planuhin ngayon: bubukas ang AMD Advancing AI sa Moscone sa July 22-23, tapos ay isang takbo mula August ng mga summit ng chip, security, at developer, kasama ang World Summit AI na bagong dagdag sa kalendaryo para sa Amsterdam sa October",
+      "bullets": [
+        {
+          "body": "Nananatiling pinakamalapit na petsa ang AMD Advancing AI 2026 sa Moscone West ng San Francisco sa July 22-23, kung saan inaasahang ilalatag nina Lisa Su at ng mga partner ang Instinct MI450 accelerator at ang Zen 6 EPYC \"Venice\" CPU — isang angkop na katapat sa AMD-on-vLLM reinforcement-learning na gawa ngayong buwan. Ang AI-chip at infrastructure na track sa likod nito ay tumatakbo sa Hot Chips sa Stanford sa August 23-25 (magsasara ang early-registration rate sa July 31) at sa AI Infra Summit sa Santa Clara Convention Center sa September 15-17. Nagkukumpol ang AI-security na track mula unang bahagi ng August: ang Black Hat USA at ang AI Village ng DEF CON 34 sa Las Vegas sa August 1-6, ang AI Risk Summit ng SecurityWeek sa Ritz-Carlton sa Half Moon Bay sa August 11-12, ang OWASP Global AppSec USA sa San Francisco sa November 5-6, at ang AI Agent Security Summit series ng Zenity para sa mga team na gumagawa ng depensa laban sa agent-hijack at sa MCP layer. Sa developer, data, at Bay Area na track, tumatakbo ang Ray Summit ng Anyscale sa August 24-26 sa San Francisco Marriott Marquis, dumarating ang susunod na AI Tinkerers San Francisco meetup sa August sa nakagawiang working-demo na format, pinupuno ng Ai4 2026 ang The Venetian sa Las Vegas sa August 4-6, tumatakbo ang ACM AI Leadership Summit mula August 30 hanggang September 2 sa Atlanta, babalik ang The AI Conference sa Pier 48 sa San Francisco sa September 29 hanggang October 1, ang GitHub Universe ay sa October 28-29, tumatakbo ang AWS re:Invent mula November 30 hanggang December 4 sa Las Vegas, at magsasara ng taon ang NeurIPS 2026 sa December. Bago sa calendar ngayong linggo: <a href=\"https://worldsummit.ai/\">dinadala ng World Summit AI ang humigit-kumulang 10,000-dadalo nitong flagship sa Taets Art & Event Park ng Amsterdam sa October 7-8</a>, isang praktikal na dagdag para sa sinumang nagmamapa na ng European autumn circuit. Mga panandaliang hakbang: magparehistro para sa AMD Advancing AI bago ang July 22 na pagbubukas, i-lock ang July 31 na Hot Chips early rate, at i-book ang Black Hat kasama ang AI Risk Summit sa Half Moon Bay para sa security block sa unang bahagi ng August.",
+          "citations": [
+            {
+              "label": "World Summit AI - Amsterdam, Taets Art & Event Park, October 7-8, 2026",
+              "url": "https://worldsummit.ai/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

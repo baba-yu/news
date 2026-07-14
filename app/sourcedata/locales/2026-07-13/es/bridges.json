@@ -1,0 +1,306 @@
+{
+  "date": "2026-07-13",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.cc109942df2a6460",
+        "short_label": "AMD Instinct emerges as second vendor for open RL post-training by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "El anuncio del proyecto vLLM, el 10 de julio, de que vime —su framework de post-entrenamiento por aprendizaje por refuerzo— ya se ejecuta de extremo a extremo en las GPU AMD Instinct MI355X gracias al soporte nativo de ROCm es la señal de origen de este pronóstico. La portación se atribuye a colaboradores de AMD, se distribuye como un contenedor Docker precompilado que elimina la compilación desde el código fuente que durante mucho tiempo frenaba la adopción de ROCm, y llega con ejecuciones validadas de extremo a extremo: en Qwen3-4B, Qwen3-8B y el modelo de mezcla de expertos Qwen3-30B-A3B, el rendimiento se mantuvo cerca de 4.100 tokens por GPU por segundo, la divergencia de log-probabilidad entre entrenamiento y rollout se mantuvo en torno a 0,012, y la recompensa subió desde aproximadamente cero hasta alrededor de 0,5-0,6 hacia el paso 100: las señales de estabilidad numérica y de convergencia que un laboratorio comprueba antes de fiarse de silicio que no es de NVIDIA para el post-entrenamiento.\nComo es el post-entrenamiento por aprendizaje por refuerzo, y no el preentrenamiento, donde se está exprimiendo la mayor parte de los avances de frontera de este año, y como esa fase ha estado casi por completo ligada a CUDA, un camino funcional sobre MI355X es el primer segundo proveedor de hardware creíble para la etapa más ávida de cómputo de los desarrolladores de modelos abiertos. Ahora bien, el lanzamiento del 10 de julio es obra de AMD, así que la verdadera prueba de la predicción es la validación externa —un grupo independiente que publique una ejecución de extremo a extremo en Instinct, o un modelo de pesos abiertos cuya receta de post-entrenamiento mencione AMD Instinct— antes del H1 2027, con el evento Advancing AI de AMD del 22 y 23 de julio y el esperado acelerador MI450 aportando impulso a corto plazo.",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La portación nativa a ROCm de vLLM, el 10 de julio, sitúa todo el bucle de post-entrenamiento por RL de vime en Instinct MI355X. Las ejecuciones de Qwen3 publicadas —cerca de 4.100 tokens por GPU-segundo, 0,012 de divergencia entre entrenamiento y rollout, la recompensa subiendo hasta aproximadamente 0,5 hacia el paso 100— son exactamente las comprobaciones de estabilidad numérica que un laboratorio realiza antes de fiarse de silicio que no es de NVIDIA para su etapa más ávida de cómputo.",
+        "coherence": 5,
+        "remaining_gap": "La portación es obra de AMD; la confianza aumentará cuando un grupo independiente de AMD, o la receta de post-entrenamiento de un modelo de pesos abiertos, reproduzca una ejecución de extremo a extremo en Instinct."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4dba2dbfb8d2798b",
+        "short_label": "Agent-memory provenance tagging ships default-on in a major platform by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "La divulgación de MemGhost es el evento detonante de este pronóstico: una técnica de la Nanyang Technological University, el CFAR de A*STAR y Johns Hopkins —publicada en arXiv el 6 de julio y amplificada por la cobertura de seguridad el 13 de julio— envenena la memoria a largo plazo de un agente de IA personal con un único correo manipulado. Cuando el agente ingiere el mensaje, escribe en sus archivos de memoria persistente hechos elegidos por el atacante, devuelve una respuesta inocua que aparenta que no ha pasado nada y luego deja que esos hechos plantados guíen su comportamiento en sesiones posteriores no relacionadas. Tuvo éxito en el 87,5% de las ejecuciones en modo de fondo contra el agente de código abierto OpenClaw sobre GPT-5.4 y en el 71,4% contra un agente del SDK de Claude Code sobre Sonnet 4.6, transfiriéndose entre arquitecturas de agentes y backends de memoria.\nLa primera mitigación que enumeran los propios autores es etiquetar la procedencia de cada hecho almacenado, y como los agentes divulgados escriben actualmente en memoria sin registro de origen, sin puerta de aprobación y sin registro de auditoría, el etiquetado de procedencia es la de menor fricción de esas defensas para convertir en valor por defecto. Los almacenes de memoria firmados y la aprobación de escritura obligatoria son cargas más pesadas que añaden maquinaria criptográfica o una solicitud al usuario en cada escritura. En cambio, los metadatos de procedencia se adjuntan en la llamada de escritura de memoria ya existente y habilitan de forma silenciosa decisiones de confianza en el momento de la lectura, razón por la que la predicción espera que se materialice primero como la respuesta de referencia del sector al envenenamiento de memoria en una sola interacción antes del H1 2027.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "MemGhost lleva a un agente personal a escribir hechos elegidos por el atacante a partir de un solo correo manipulado —el 87,5% contra OpenClaw, el 71,4% contra un agente del SDK de Claude Code, transfiriéndose entre backends de memoria— porque esos agentes no registran el origen de nada de lo que almacenan. El etiquetado de procedencia se adjunta en la llamada de escritura ya existente, lo que lo convierte en la primera respuesta de menor fricción.",
+        "coherence": 5,
+        "remaining_gap": "Ningún proveedor ha lanzado todavía el etiquetado de procedencia activado por defecto; la divulgación demuestra la necesidad, pero deja sin construir el control de referencia."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ae0dd497b3c0ac0",
+        "short_label": "AI security posture tools ship auto-remediation for AI packages by Q4 2026",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "El informe 2026 State of AI Security de Orca Security, resumido el 13 de julio, es la señal de origen de este pronóstico: el 99,9% de las alertas de vulnerabilidad relacionadas con la IA que ya cuentan con una corrección disponible siguen sin parchear, con el 81,2% de las organizaciones que ejecutan IA arrastrando al menos una vulnerabilidad conocida y el 74,1% al menos un CVE crítico, incluso cuando el 56% de los adoptantes han llevado frameworks de agentes y el 64% han conectado bases de datos vectoriales a producción. La cifra que llama la atención no es la presencia de fallos, sino la acumulación de correcciones disponibles pero sin aplicar: el parche existe y sencillamente no se instala.\nOrca es, ella misma, un proveedor de seguridad en la nube sin agentes (CNAPP) cuya plataforma ya automatiza la priorización y la remediación del riesgo convencional en la nube, así que publicar esta estadística tan precisa funciona también como una pista sobre su hoja de ruta de producto. La predicción espera que el mercado de gestión de la postura de seguridad de IA, hoy centrado en la detección, responda por el lado de la remediación antes del Q4 2026: una función con nombre propio que no se limite a señalar los CVE de paquetes de IA y de frameworks de agentes, sino que los reduzca mediante flujos de parcheo priorizados automáticamente y una métrica de tiempo medio de remediación o de cobertura de parches acotada a los activos de IA. El factor que fuerza está sincronizado en el tiempo: el informe llega la misma semana que ataques funcionales contra la memoria de los agentes e inmediatamente antes de Black Hat, la AI Village de DEF CON y la AI Risk Summit de agosto, donde cada proveedor de postura querrá convertir el '99,9% sin parchear' de una acusación en una respuesta lanzada.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El informe de Orca cuantifica exactamente la acumulación en cuestión: el 99,9% de las vulnerabilidades de IA con corrección disponible están sin parchear, con el 81,2% de las organizaciones que ejecutan IA arrastrando un fallo conocido y el 74,1% un CVE crítico. La corrección ya existe y sencillamente no se aplica: la brecha que la auto-remediación, y no más detección, está construida para cerrar.",
+        "coherence": 5,
+        "remaining_gap": "Ningún proveedor de postura ha lanzado todavía una función de remediación de IA con nombre propio; el informe se lee como una pista de hoja de ruta, no como una capacidad ya lanzada."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5e0beac647793331",
+        "short_label": "AMD MI400 will market memory bandwidth over peak FLOPS at Advancing AI",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Este pronóstico sobre el posicionamiento de AMD en Advancing AI recibe apoyo nuevo de dos señales de julio. La portación nativa a ROCm de vime sobre Instinct MI355X, realizada por AMD el 10 de julio, da sustancia concreta al impulso de los aceleradores de centro de datos de AMD en exactamente la carga de trabajo de aprendizaje por refuerzo donde más pesa la huella de memoria. Por su parte, el resumen de eventos de IA confirma que Advancing AI 2026 abre en Moscone West el 22 y 23 de julio, donde se espera que Lisa Su y sus socios detallen el acelerador Instinct MI450 y las CPU Zen 6 EPYC 'Venice'.\nLa evidencia corrobora el momento y la plataforma de la predicción más que su afirmación de marketing concreta. Ninguna de las dos señales muestra todavía a AMD poniendo en primer plano el ancho de banda de memoria por encima de los FLOPS pico en el discurso comercial del MI400/MI450; confirman la sede y el acelerador que llevarían ese encuadre. Refuerza la antesala de la keynote del 22 y 23 de julio —el momento preciso en que afloraría el mensaje de ancho de banda por encima de los FLOPS— sin confirmar el propio eje del mensaje.",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "El resumen de eventos de IA sitúa Advancing AI en Moscone West el 22 y 23 de julio, donde se espera que Lisa Su detalle el Instinct MI450, y la portación de RL a ROCm del 10 de julio da a AMD sustancia nueva en exactamente las cargas de trabajo limitadas por la memoria que un discurso de ancho de banda pondría en primer plano. La sede y el impulso están fijados; el eje del mensaje, no.",
+        "coherence": 3,
+        "remaining_gap": "Ninguna señal muestra a AMD poniendo en primer plano el ancho de banda de memoria por encima de los FLOPS pico; solo la propia keynote del 22 y 23 de julio puede confirmar el encuadre de marketing."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b29d00f310d8ad2c",
+        "short_label": "Second open-weight frontier model discloses non-NVIDIA ASIC training by Q2 2027",
+        "prediction_date": "2026-07-04"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "La portación nativa a ROCm de vime —el framework de post-entrenamiento por aprendizaje por refuerzo de vLLM— sobre Instinct MI355X, realizada por AMD el 10 de julio, hace avanzar la tesis más amplia de cómputo ajeno a NVIDIA en la que se enmarca esta predicción: demuestra un camino funcional y validado ajeno a NVIDIA para la etapa de entrenamiento más ávida de cómputo, haciendo mella en la dependencia de CUDA que ha mantenido el entrenamiento de frontera atado a NVIDIA.\nLa incidencia es temática más que directa. AMD Instinct es una GPU comercial, no el ASIC de diseño propio del comprador que nombra esta predicción, y la portación de un framework con ejecuciones de Qwen3 publicadas no es la divulgación de entrenamiento de un modelo de pesos abiertos. Corrobora que el silicio ajeno a NVIDIA se está volviendo viable para trabajo de entrenamiento serio sin acercar el desenlace concreto —la divulgación de entrenamiento en ASIC— que la predicción exige.",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - vime + ROCm: End-to-End RL Post-Training on AMD Instinct GPUs",
+          "url": "https://vllm.ai/blog/2026-07-10-vime-rocm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "La portación de vime a ROCm de AMD muestra silicio ajeno a NVIDIA gestionando la etapa de entrenamiento más ávida de cómputo con ejecuciones de Qwen3 publicadas, haciendo mella en la dependencia de CUDA sobre la que se apoya la tesis. La incidencia es temática: Instinct es una GPU comercial, no el ASIC de diseño propio del comprador que se nombra aquí, y la portación de un framework no es la divulgación de entrenamiento de un modelo.",
+        "coherence": 2,
+        "remaining_gap": "La confianza necesita un modelo de frontera de pesos abiertos que divulgue entrenamiento en un ASIC ajeno a NVIDIA de diseño propio del comprador; la portación de un framework sobre GPU comercial no satisface ese desenlace."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f5e698fbeaa37461",
+        "short_label": "Companion-agent memory guardrails become binding rules in a second major market by Q4 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "La divulgación de MemGhost es una demostración concreta del daño que esta predicción espera que aborden los reguladores: un único correo manipulado envenena la memoria a largo plazo de un agente de IA personal con hechos elegidos por el atacante que guían en silencio sesiones posteriores no relacionadas. Tuvo éxito en el 87,5% de las ejecuciones en modo de fondo contra el agente de código abierto OpenClaw y se transfirió entre arquitecturas de agentes y backends de memoria, convirtiendo la memoria del agente de una comodidad en una capa de persistencia sin auditar en la que un tercero puede escribir.\nLa evidencia refuerza el motor —un ataque documentado y de alta tasa de éxito contra la función de memoria persistente que venden los agentes de compañía y personales— sin tocar el desenlace. La predicción exige una norma vinculante en un segundo mercado importante; MemGhost es una divulgación de investigación cuyas correcciones propuestas son arquitectónicas (etiquetado de procedencia, aprobación de escritura, registros de auditoría), no todavía un mandato regulatorio. Eleva la relevancia de las obligaciones de seguridad de la memoria sin que se adopte ninguna norma.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "MemGhost convierte la memoria de los agentes de compañía de una comodidad en una capa de persistencia sin auditar en la que un tercero escribe con un solo correo —un 87,5% de éxito contra OpenClaw, transfiriéndose entre arquitecturas—. Un ataque concreto y de alta tasa de éxito contra la función misma que venden estos agentes es el daño documentado contra el que los reguladores suelen actuar.",
+        "coherence": 3,
+        "remaining_gap": "Se trata de una divulgación de investigación, no de una norma; un mandato vinculante de seguridad de la memoria en un segundo mercado importante sigue sin adoptarse y suele ir años por detrás de las demostraciones."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3049b69e910c2279",
+        "short_label": "Autonomous-AI-agent intrusions become a named detection category by H1 2027",
+        "prediction_date": "2026-07-09"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Dos de las señales de hoy alimentan esta predicción. MemGhost añade una nueva clase de ataque a agentes autónomos —inyección sigilosa en la memoria persistente a partir de un único correo que oculta la manipulación tras una respuesta inocua y dirige sesiones posteriores—, medida sobre el nuevo WhisperBench de 108 casos y con éxito tanto contra el agente OpenClaw como contra un agente del SDK de Claude Code. El informe 2026 State of AI Security de Orca Security aporta el denominador: el 56% de los adoptantes han llevado frameworks de agentes a producción sobre una superficie que, por defecto, está abrumadoramente sin parchear.\nJuntas, afinan el argumento de que las intrusiones específicas de agentes merecen su propia categoría de detección: técnicas novedosas que caen sobre una superficie de agentes amplia y mal defendida. La evidencia sigue siendo direccional: hoy no se anunció ninguna taxonomía de SIEM o EDR ni ninguna clase de detección con el nombre de 'intrusión de agente de IA', así que el motor se refuerza sin que la propia categorización llegue a concretarse.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Dos señales convergen: MemGhost añade una clase de inyección sigilosa en la memoria persistente que oculta la manipulación y dirige sesiones posteriores, medida sobre el WhisperBench de 108 casos, mientras que Orca aporta el denominador: el 56% de los adoptantes ejecutando frameworks de agentes sobre una superficie abrumadoramente sin parchear. Técnicas novedosas sobre una superficie de agentes amplia y mal defendida es lo que fuerza una categoría de detección diferenciada.",
+        "coherence": 3,
+        "remaining_gap": "Ninguna taxonomía de SIEM o EDR nombró hoy una clase de detección de 'intrusión de agente de IA'; el motor se refuerza, pero la categorización en sí no se ha concretado."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.25bbb1fc4e3ce653",
+        "short_label": "Coding agents ship default-deny sandboxes for untrusted-repo audits by Q2 2027",
+        "prediction_date": "2026-07-11"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "MemGhost extiende la superficie de ataque de contenido no confiable de los agentes de programación hacia un nuevo vector: un agente del SDK de Claude Code sobre Sonnet 4.6 fue inducido a escribir hechos elegidos por el atacante en su memoria persistente en el 71,4% de las ejecuciones a partir de un único correo que ingirió. Refuerza la premisa de la predicción de que un agente que procesa contenido externo necesita una frontera de ejecución y aprobación reforzada, y no confianza a nivel del modelo.\nLa conexión es con la tesis compartida de que 'la entrada no confiable compromete al agente', no con el mecanismo concreto. El vector de MemGhost es el correo de la bandeja de entrada y su carga útil es una escritura en la memoria persistente, mientras que esta predicción especifica un sandbox de ejecución con denegación por defecto y aislado de la red para las auditorías de repositorios no confiables. Refuerza el factor que fuerza general del aislamiento del entorno de ejecución sin incidir directamente en la postura del sandbox de auditoría de repositorios.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "MemGhost indujo a un agente del SDK de Claude Code a escribir hechos elegidos por el atacante a partir de un único correo ingerido en el 71,4% de las ejecuciones, reforzando la premisa compartida de que un agente que maneja contenido externo necesita una frontera de ejecución y aprobación reforzada, y no confianza a nivel del modelo. Aquí el vector es el correo de la bandeja de entrada y una escritura en memoria, no una auditoría de repositorio.",
+        "coherence": 2,
+        "remaining_gap": "Nada de hoy aborda específicamente el sandbox aislado de la red y con denegación por defecto para las auditorías de repositorios no confiables; solo se mueve la premisa general de aislamiento, no la postura de auditoría de repositorios."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.15eec0e8b46997d6",
+        "short_label": "Agentic vulnerability scanning ships at a second major vendor by Q1 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "El informe 2026 State of AI Security de Orca Security es contexto de mercado directo para esta predicción: su hallazgo de que el 99,9% de las vulnerabilidades de IA con corrección disponible están sin parchear, con el 81,2% de las organizaciones arrastrando al menos una vulnerabilidad conocida de un paquete de IA y el 74,1% un CVE crítico, define exactamente la acumulación que un producto agéntico de escaneo y remediación buscaría atacar, y Orca es un proveedor de postura en posición de lanzar tal capacidad.\nLa evidencia incide en el lado de la demanda y del incentivo del proveedor, más que en un producto ya lanzado. La predicción exige que un segundo gran proveedor despliegue escaneo agéntico de vulnerabilidades; el informe de Orca cuantifica el problema y se lee como una pista de hoja de ruta, pero no nombra ninguna función nueva de escaneo agéntico lanzada hoy. Refuerza el tirón competitivo —agudizado por la inminente ventana de Black Hat y la AI Village de DEF CON— sin marcar el lanzamiento de un segundo proveedor.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El hallazgo de Orca define la demanda con precisión: el 99,9% de las vulnerabilidades de IA con corrección disponible sin parchear, el 81,2% de las organizaciones arrastrando un fallo conocido de un paquete de IA, el 74,1% un CVE crítico: la acumulación que un producto de escaneo y remediación existe para reducir, publicada por un proveedor de postura en posición de lanzar uno justo antes de la ventana de Black Hat y DEF CON.",
+        "coherence": 3,
+        "remaining_gap": "El informe cuantifica el problema y se lee como una pista de hoja de ruta, pero no nombra ninguna función lanzada; no se ha producido el lanzamiento de escaneo agéntico de un segundo proveedor."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.71c1acea4be80819",
+        "short_label": "Agent-runtime security folds into a hyperscaler-native defense tier by H1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "El informe 2026 State of AI Security de Orca Security incide en esta predicción al cuantificar cuánta de la superficie del entorno de ejecución de IA en la nube queda expuesta por defecto: entre el 87% y el 98% de las organizaciones en las principales nubes no han habilitado claves de cifrado gestionadas por el cliente para sus servicios de IA, el 64% ejecuta bases de datos vectoriales que conectan los modelos con datos internos, y casi el 30% almacena al menos una clave de API de IA en una ubicación insegura.\nEl hallazgo motiva la dirección de la predicción —las plataformas de nube e hiperescalador absorbiendo la defensa del entorno de ejecución de agentes como un nivel nativo porque la exposición reside dentro de sus propios entornos—, pero el informe está firmado por un proveedor CNAPP independiente, no por un hiperescalador, y documenta la brecha en lugar de un nivel de defensa propio. Refuerza el argumento estructural sin que se anuncie un nivel de defensa de agentes nativo de hiperescalador.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - 99.9% of fixable AI vulnerabilities remain unpatched (Orca Security 2026 State of AI Security report)",
+          "url": "https://www.helpnetsecurity.com/2026/07/13/ai-infrastructure-security-risks-report/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Orca mide cuánta superficie del entorno de ejecución de IA en la nube queda expuesta por defecto: entre el 87% y el 98% de las organizaciones en las principales nubes ejecutan servicios de IA sin claves de cifrado gestionadas por el cliente, el 64% conecta bases de datos vectoriales con datos internos, y casi el 30% almacena una clave de API de IA de forma insegura. Es una exposición que reside dentro de los entornos de los hiperescaladores, lo que constituye el argumento estructural para absorber la defensa de forma nativa.",
+        "coherence": 2,
+        "remaining_gap": "El informe está firmado por un proveedor CNAPP independiente y documenta la brecha; ningún hiperescalador ha anunciado un nivel propio de defensa del entorno de ejecución de agentes."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f3f7e18b691f1c39",
+        "short_label": "OpenClaw ships default-deny tool and network gating out-of-box by Q4 2026",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Coincidencia con la reserva latente (20260623-2, señales: OpenClaw, valor por defecto de mínimo privilegio de serie, denegar llamadas a herramientas red saliente, defensa en la capa del harness, StakeBench resiste la inyección de prompts). La divulgación de MemGhost es un impacto directo sobre el sujeto nombrado de esta predicción latente: el ataque tuvo éxito en el 87,5% de las ejecuciones en modo de fondo contra el agente de código abierto OpenClaw, plantando hechos elegidos por el atacante en su memoria persistente a partir de un único correo y transfiriéndose entre backends de memoria.\nUna tasa de compromiso demostrada del 87,5% contra OpenClaw es exactamente la presión que esta predicción espera que fuerce el control de mínimo privilegio y de denegación por defecto en el harness, de serie. La incidencia recae sobre la motivación, no sobre el lanzamiento: las propias defensas propuestas por MemGhost son controles de procedencia de memoria y de aprobación de escritura, y hoy no ha aparecido ninguna versión de OpenClaw que active el control de herramientas o de red con denegación por defecto, así que la reactivación refuerza el motor sin alcanzar el desenlace.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "MemGhost golpeó directamente al harness nombrado: el 87,5% de las ejecuciones en modo de fondo plantaron memoria elegida por el atacante en OpenClaw a partir de un solo correo, transfiriéndose entre backends. Una tasa de compromiso tan alta contra el agente mismo en cuestión es precisamente la presión que se espera que fuerce el control de herramientas y de red de mínimo privilegio y con denegación por defecto en la postura de serie.",
+        "coherence": 4,
+        "remaining_gap": "Hoy no apareció ninguna versión de OpenClaw que active el control de herramientas o de red con denegación por defecto, y las propias correcciones de MemGhost apuntan a la procedencia de la memoria, un control distinto."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3e6e8b6ae1e7c76e",
+        "short_label": "AI-agent procurement adds a numeric prompt-injection-resistance bar by Q2 2027",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Coincidencia con la reserva latente (20260623-3, señales: puntuación cuantificada de resistencia a la inyección de prompts, umbral contractual de benchmark con nombre, StakeBench, tasa numérica máxima de éxito de inyección, criterio de aceptación auditable). MemGhost introduce WhisperBench, un benchmark de 108 casos que abarca el envenenamiento de hechos y de preferencias sobre un flujo de trabajo de correo IMAP/SMTP en vivo, y reporta tasas numéricas de éxito de inyección: el 87,5% contra OpenClaw y el 71,4% contra un agente del SDK de Claude Code.\nUn benchmark con nombre que produce cifras numéricas comparables de éxito de inyección es exactamente la materia prima que esta predicción espera que la contratación codifique en un umbral de aceptación de éxito máximo de inyección. La evidencia hace avanzar el sustrato de medición más que el desenlace de contratación: WhisperBench es un benchmark de investigación, todavía no una cláusula contractual ni un umbral de certificación, así que la reactivación refuerza el hilo de la cuantificación sin que se adopte un umbral de contratación.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "MemGhost introduce WhisperBench, un benchmark de 108 casos que abarca el envenenamiento de hechos y de preferencias sobre un flujo de trabajo de correo en vivo, y reporta tasas numéricas comparables de éxito de inyección: el 87,5% y el 71,4% en dos agentes. Un benchmark con nombre que produce cifras directamente comparables es el sustrato de medición que la contratación necesitaría antes de poder codificar un umbral de aceptación de éxito máximo de inyección.",
+        "coherence": 3,
+        "remaining_gap": "WhisperBench es un benchmark de investigación, no una cláusula contractual ni un umbral de certificación; ningún proceso de contratación ha adoptado un umbral numérico de resistencia a la inyección."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6ba7ca6e01ab313e",
+        "short_label": "Coding-agent platform ships trifecta capability gate as default by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Coincidencia con la reserva latente (20260628-3, señales: Claude Code, contenido no confiable, acotar la tríada letal, pausa para aprobación humana explícita, puerta de capacidades activada por defecto, Rule-of-Two). MemGhost es una instancia clara del peligro de contenido no confiable que aborda esta puerta: un agente del SDK de Claude Code que ingiere un correo no confiable es inducido a escribir hechos elegidos por el atacante en su memoria persistente y luego a actuar sobre ellos en sesiones posteriores, con la manipulación oculta tras una respuesta inocua.\nLa primera defensa que enumera el propio MemGhost —exigir la aprobación del usuario antes de una escritura en memoria— es precisamente la postura de pausa para aprobación humana que esta predicción espera que se convierta en una puerta de capacidades activada por defecto. La incidencia recae sobre el argumento estructural más que sobre una puerta ya lanzada: la divulgación motiva acotar la combinación de contenido no confiable y acción de consecuencias en la capa de orquestación, sin evidencia de que ninguna plataforma haya lanzado un valor por defecto así.",
+      "reference_links": [
+        {
+          "label": "arXiv - When Claws Remember but Do Not Tell: Stealthy Memory Injection in Persistent Personal Agents",
+          "url": "https://arxiv.org/abs/2607.05189"
+        },
+        {
+          "label": "The Hacker News - New MemGhost Attack Plants Persistent False Memories in AI Agents Through One Email",
+          "url": "https://thehackernews.com/2026/07/new-memghost-attack-plants-persistent.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "MemGhost materializa el patrón de la tríada que aborda esta puerta: un agente del SDK de Claude Code ingiere un correo no confiable, escribe hechos elegidos por el atacante en la memoria persistente y luego actúa sobre ellos —con la manipulación oculta tras una respuesta inocua—. Su primera defensa enumerada, la aprobación del usuario antes de una escritura en memoria, es exactamente la postura de pausa para aprobación que la puerta convertiría en valor por defecto.",
+        "coherence": 3,
+        "remaining_gap": "La divulgación motiva acotar la combinación de contenido no confiable y acción de consecuencias en la capa de orquestación, pero ninguna plataforma ha lanzado una puerta de la tríada así, activada por defecto."
+      }
+    }
+  ]
+}
