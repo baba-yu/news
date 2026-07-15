@@ -14,7 +14,7 @@ Sorted by `count` descending, then host alphabetical.
 | host | count | first_seen | last_seen | sample_label |
 |---|---|---|---|---|
 | github.com | 214 | 2026-04-19 | 2026-07-08 | GitHub - QwenLM/Qwen3.6 |
-| arxiv.org | 179 | 2026-04-29 | 2026-07-13 | arXiv - Corpus2Skill (2604.14572) |
+| arxiv.org | 185 | 2026-04-29 | 2026-07-15 | arXiv - Corpus2Skill (2604.14572) |
 | thehackernews.com | 148 | 2026-04-20 | 2026-07-13 | The Hacker News - nginx-ui CVE-2026-33032 |
 | anthropic.com | 129 | 2026-04-21 | 2026-07-01 | Anthropic - Anthropic and Amazon expand collaboration |
 | simonwillison.net | 128 | 2026-04-19 | 2026-07-08 | Simon Willison - Qwen3.6-27B |
@@ -132,6 +132,7 @@ Sorted by `count` descending, then host alphabetical.
 | webflow.sysdig.com | 12 | 2026-06-27 | 2026-06-27 | Sysdig - Understanding Langflow CVE-2026-55255, and why high |
 | badhost.org | 11 | 2026-06-02 | 2026-06-02 | BadHost - CVE-2026-48710 Starlette host-header auth bypass |
 | cloud.google.com | 11 | 2026-04-23 | 2026-04-27 | Google Cloud - Introducing Gemini Enterprise Agent Platform |
+| gist.github.com | 11 | 2026-07-15 | 2026-07-15 | cereblab - What xAI's Grok build CLI sends to xAI: a wire-le |
 | nsa.gov | 11 | 2026-06-06 | 2026-06-06 | NSA - Press release: Security Design Considerations for AI-D |
 | tradingkey.com | 11 | 2026-04-22 | 2026-05-03 | tradingkey - Anthropic Moving Toward AI Chips for Claude |
 | vfuturemedia.com | 11 | 2026-04-30 | 2026-05-03 | V Future Media - Humanoid Robots 2026 |
@@ -163,6 +164,7 @@ Sorted by `count` descending, then host alphabetical.
 | events.linuxfoundation.org | 9 | 2026-06-20 | 2026-06-22 | Linux Foundation - Confidential Computing Summit 2026 (June |
 | faq.com.tw | 9 | 2026-06-02 | 2026-06-02 | FAQ - Microsoft Build 2026: the MAI model family that signal |
 | freshfields.com | 9 | 2026-06-06 | 2026-06-06 | Freshfields - Trump Executive Order on AI: Voluntary Framewo |
+| mindgard.ai | 9 | 2026-07-15 | 2026-07-15 | Mindgard - Cursor 0day: When Full Disclosure Becomes the Onl |
 | mlq.ai | 9 | 2026-06-25 | 2026-07-11 | MLQ - AMD sets July date for Advancing AI 2026 flagship even |
 | nextgov.com | 9 | 2026-06-05 | 2026-06-19 | Nextgov/FCW - Lawmakers propose AI framework that would pree |
 | research.google | 9 | 2026-04-29 | 2026-05-03 | Google Research - TurboQuant |
@@ -225,6 +227,7 @@ Sorted by `count` descending, then host alphabetical.
 | newatlas.com | 6 | 2026-04-25 | 2026-04-27 | New Atlas - Physical AI humanoids at BMW factory |
 | packworld.com | 6 | 2026-06-24 | 2026-06-24 | Packaging World - Physical AI dominates Automate 2026's open |
 | pandaily.com | 6 | 2026-06-07 | 2026-06-18 | Pandaily - BYD Secretly Develops Humanoid Robot Codename 'Ya |
+| prismml.com | 6 | 2026-07-15 | 2026-07-15 | PrismML - Bonsai 27B: A 27B-Class Model That Runs on a Phone |
 | qualcomm.com | 6 | 2026-06-29 | 2026-06-29 | Qualcomm - Qualcomm Unveils Comprehensive Data Center Roadma |
 | sacra.com | 6 | 2026-05-02 | 2026-05-03 | Sacra - OpenAI revenue |
 | zerohedge.com | 6 | 2026-06-12 | 2026-06-12 | ZeroHedge - SpaceX Prices Biggest Ever IPO At $135 Per Share |
@@ -288,6 +291,7 @@ Sorted by `count` descending, then host alphabetical.
 | groq.com | 4 | 2026-05-28 | 2026-05-28 | Groq blog - LPU-v3 Inference Network commercial availability |
 | group.mercedes-benz.com | 4 | 2026-05-27 | 2026-05-27 | Mercedes-Benz Group - Apptronik Apollo Gen 2 Tuscaloosa fina |
 | hai.stanford.edu | 4 | 2026-04-27 | 2026-04-30 | Stanford HAI - Upcoming Events |
+| ieee-ras.org | 4 | 2026-07-15 | 2026-07-15 | IEEE RAS - 2026 IEEE-RAS 25th International Conference on Hu |
 | introl.com | 4 | 2026-07-02 | 2026-07-02 | Introl - AI memory supercycle HBM 2026 |
 | kiplinger.com | 4 | 2026-04-28 | 2026-04-29 | Kiplinger - April Fed Meeting: Live Updates and Commentary |
 | leetllm.com | 4 | 2026-05-04 | 2026-05-04 | LeetLLM - 2026 Inference Engine Showdown |
@@ -304,6 +308,7 @@ Sorted by `count` descending, then host alphabetical.
 | promptquorum.com | 4 | 2026-04-25 | 2026-04-26 | PromptQuorum - Local LLMs 2026 |
 | security.apple.com | 4 | 2026-06-14 | 2026-06-14 | Apple Security Research - Expanding Private Cloud Compute |
 | semiwiki.com | 4 | 2026-07-03 | 2026-07-03 | SemiWiki - Hot Chips 2026 |
+| summit.runwayml.com | 4 | 2026-07-15 | 2026-07-15 | Runway AI Summit - September 30, 2026, The Masonic, San Fran |
 | techzine.eu | 4 | 2026-06-12 | 2026-06-12 | Techzine - As Anthropic claims the enterprise, OpenAI fights |
 | testingcatalog.com | 4 | 2026-06-01 | 2026-06-01 | Testing Catalog - Microsoft readies new MAI voice and image |
 | thecyberthrone.in | 4 | 2026-04-27 | 2026-04-27 | TheCyberThrone - CISA Adds Eight Actively Exploited Vulnerab |
@@ -377,6 +382,7 @@ Sorted by `count` descending, then host alphabetical.
 | 9to5google.com | 2 | 2026-04-26 | 2026-04-26 | 9to5Google - Google investing up to $40 billion in Anthropic |
 | action1.com | 2 | 2026-04-19 | 2026-04-20 | Action1 - Patch Tuesday April 2026 |
 | agendahero.com | 2 | 2026-05-29 | 2026-05-29 | agendahero |
+| agisummit.ai | 2 | 2026-07-15 | 2026-07-15 | AGI Summit 2026 - July 18-19, Palace of Fine Arts, San Franc |
 | ai21.com | 2 | 2026-04-28 | 2026-04-29 | AI21 - AI Dev 26 events page (Kiro / B-Capital partnership c |
 | aiconference.com | 2 | 2026-07-09 | 2026-07-10 | The AI Conference 2026 (Pier 48, San Francisco, Sep 29-Oct 1 |
 | alignment.openai.com | 2 | 2026-06-21 | 2026-06-21 | OpenAI - Reinforcement learning towards broadly and persiste |
