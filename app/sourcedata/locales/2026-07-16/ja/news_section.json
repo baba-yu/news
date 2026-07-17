@@ -1,0 +1,74 @@
+{
+  "date": "2026-07-16",
+  "sections": [
+    {
+      "category": "Thinking Machines が Inkling を公開。貸し出すためではなく、ファインチューニングされるために作られた 975B のオープンウェイトのマルチモーダル MoE で、276B の Inkling-Small プレビュー版も併せて出荷",
+      "bullets": [
+        {
+          "body": "Mira Murati の Thinking Machines Lab は7月15日、<a href=\"https://thinkingmachines.ai/news/introducing-inkling/\">初のゼロから学習したモデルとなる Inkling を、オープンウェイトで公開した</a>。アーキテクチャは Mixture-of-Experts のトランスフォーマーで、総パラメータ数は 975B、トークンあたりのアクティブなパラメータは 41B。テキスト、画像、音声、映像にまたがる45兆トークンで事前学習され、コンテキストウィンドウは最大 1M トークンに達する。総パラメータ 276B / アクティブ 12B の Inkling-Small プレビュー版が、同じレシピのまま、レイテンシに敏感な用途向けに併せて出荷される。同ラボは、Inkling がオープンかクローズドかを問わず最強のモデルではないと、はっきり述べている。賭けているのは、企業が求めるのは借り物のフロンティアのエンドポイントではなく、自分たちで作り替えられるベースモデルだという読みだ。公開されたウェイトは、同社のファインチューニング基盤である Tinker へそのままつながり、そこでは Inkling を 64K と 256K のコンテキストの選択肢で利用できる。配布は足並みをそろえて行われた。<a href=\"https://www.together.ai/models/inkling\">Together AI は初日から Inkling の提供を始め</a>、OpenAI 互換のエンドポイントの背後で、テキスト、画像、音声の入力と、リクエストごとの推論強度の調整を扱っている。ローカル LLM のエコシステムにとっての意味はこうだ。この夏の中国発の MoE の波に続いて、2つ目の米国の新興ラボが、ゼロから学習したフロンティア規模のモデルをオープンウェイトで公開し、ファインチューニングを後付けではなく、明確な事業モデルとして据えたのである。",
+          "citations": [
+            {"label": "Thinking Machines Lab - Inkling: Our open-weights model", "url": "https://thinkingmachines.ai/news/introducing-inkling/"},
+            {"label": "Together AI - Inkling", "url": "https://www.together.ai/models/inkling"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Unsloth が v0.1.49-beta を出荷。Inkling への即日対応、4段階のツール呼び出し許可システム、Vulkan による Intel GPU 推論を載せる",
+      "bullets": [
+        {
+          "body": "Unsloth の <a href=\"https://github.com/unslothai/unsloth/releases/tag/v0.1.49-beta\">7月15日に公開された v0.1.49-beta</a> は、総パラメータ 975B / アクティブ 41B、最大 1M のコンテキストウィンドウを備えた新しいオープンモデルである Inkling を、モデル本体と同じニュースサイクルのうちに取り込んだ。主要なオープンウェイトの公開に即日で対応するという、このプロジェクトの流儀の続きだ。セキュリティ面で意味を持つ変更は、4段階のツール呼び出し許可セレクタ(Ask、Approve for me、Off、Full access)が、ワークスペースの分離とともに入り、従来の二値のトグルを置き換えたことである。今年のエージェントによる情報流出の一連の事案の後にコーディングエージェントが採用した、許可を段階で与える語彙へと、ファインチューニングのツールまでもが歩み寄っている。注目に値する収斂だ。ハードウェアの間口も広がる。これまで CPU 頼みだった Intel GPU が、新しい Vulkan llama.cpp 対応を通じて GPU による推論を得た。さらに、NVFP4 モデルコレクションが動的 NVFP4 対応で拡充され、7月7日の v0.1.48 で出荷された、学習後の NVFP4/FP8/imatrix-GGUF のエクスポート経路を広げている。",
+          "citations": [
+            {"label": "Unsloth - v0.1.49-beta release notes", "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.49-beta"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Microsoft の過去最多570件の CVE を修正した Patch Tuesday、Copilot の致命的なリモートコード実行の欠陥と GitHub Copilot / VS Code の欠陥群を含む。件数の押し上げ役として挙げられたのは、AI による脆弱性の発見",
+      "bullets": [
+        {
+          "body": "Microsoft の7月14日の Patch Tuesday は、<a href=\"https://www.bleepingcomputer.com/news/microsoft/microsoft-july-2026-patch-tuesday-fixes-massive-570-flaws-3-zero-days/\">過去最多の570件の脆弱性を修正した。うち3件はゼロデイで、2件は実際に悪用されていた</a>。注意して読むべきは AI まわりの欠陥群だ。CVE-2026-48561 は Microsoft Copilot 自体における致命的なリモートコード実行の欠陥で、これに GitHub Copilot の RCE(CVE-2026-50510)、Copilot / VS Code のセキュリティ機能バイパス(CVE-2026-41109)、Copilot / VS Code のトークン漏えいの欠陥(CVE-2026-47282)が並ぶ。アシスタントと、それが住まうエディタは、もはや珍しい一度きりの話ではなく、Patch Tuesday の定番の区分になった。570件のうち59件が致命的と評価され、そのうち48件が RCE であり、Windows Media Foundation、DirectX、DHCP にわたって CVSS 8.0 超の項目が複数ある。件数の理由そのものも、また AI の話だ。Microsoft はこの急増を、自社の AI を使った内部の脆弱性発見システムによるものだと説明している。そして Adobe は同じ日付で月2回の情報公開へ移行し、AI で加速した発見が、開示から悪用までの時間を縮めていることを理由に挙げた。",
+          "citations": [
+            {"label": "BleepingComputer - Microsoft July 2026 Patch Tuesday fixes massive 570 flaws, 3 zero-days", "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-july-2026-patch-tuesday-fixes-massive-570-flaws-3-zero-days/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "xAI、通信レベルのアップロード解析を受けて、Grok Build コーディングエージェント全体を Apache 2.0 でオープンソース化。Google Cloud へのディレクトリアップロード経路は完全に無効化",
+      "bullets": [
+        {
+          "body": "xAI は、リポジトリ、git の履歴、伏せ字なしの .env の秘密情報が Google Cloud のバケットへ流れていることを示した、今週の Grok build CLI の通信レベルの解析に対して、7月15日、<a href=\"https://github.com/xai-org/grok-build\">エージェント全体を xai-org/grok-build として Apache 2.0 でオープンソース化する</a>ことで応じた。Rust で書かれた844,530行、およそ97%が独自コードで、内部モノレポから定期的に同期されるエクスポートとして公開される。反発の引き金となったアップロード機能は無効化され、残された Google Cloud のコードは、いまはハードコードされた利用不可エラーを返す。リリースは、データ保持をオフにした、ローカルファーストの動作をうたう。<a href=\"https://simonwillison.net/2026/Jul/15/grok-build/\">Simon Willison によるコードベースの通読</a>は、ベンダーがふつう伏せておく細部を明るみに出している。エージェントとサブエージェントの完全なシステムプロンプト(サブエージェントは、自らのプロンプトを利用者から隠すよう指示されている)、Codex や Claude Code を含む競合エージェントから移植されたツールの実装、そしてターミナルエージェントの標準を大きく上回る規模のコードベースだ。情報公開が引き出した結果としては、今年のエージェントの信頼をめぐる一連の事案のなかで、これまでで最も強い。変更履歴での謝罪ではなく、ソース全体の公開である。そしてこれは、出荷されているエージェントがアップロード、ツール呼び出し、許可を実際にどう配線しているのかについて、セキュリティ研究者に、まれな完全版の参照例を手渡すものだ。",
+          "citations": [
+            {"label": "GitHub - xai-org/grok-build", "url": "https://github.com/xai-org/grok-build"},
+            {"label": "Simon Willison - xAI open-sources Grok Build", "url": "https://simonwillison.net/2026/Jul/15/grok-build/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "TSMC、AI 需要で記録的な四半期。売上高は前年比36%増、純利益は77%増で、初めて数字の出た四半期に 2nm がウェハ売上の3%に到達",
+      "bullets": [
+        {
+          "body": "TSMC の<a href=\"https://pr.tsmc.com/english/news/3326\">7月16日に公表された第2四半期決算</a>は、AI アクセラレータの需要がこのファウンドリをどこまで引っ張っているかを数字にした。売上高は NT$1,270.38 billion(US$40.20 billion。NT ドル建てで前年同期比36.0%増、前四半期比12.0%増)、純利益は NT$706.56 billion で77.4%増。利益率は、2年前のファウンドリならあり得なかった水準だ。粗利益率67.7%、営業利益率60.3%、純利益率55.6%である。先行きを示すシグナルはノードの構成にある。2ナノメートルは、初めて意味のある数字が出た四半期でウェハ売上の3%を占め、3nm は30%を保ち、先端ノード(7nm 以下)が全体の77%を占めた。CFO の Wendell Huang は、「2ナノメートル技術の急峻な立ち上がり」を根拠に第3四半期の売上を US$44.6-45.8 billion と見通し、同社は2026年の設備投資計画を US$60-64 billion のレンジへ引き上げた。下流のすべて、すなわち NVIDIA と AMD のアクセラレータの割り当て、ハイパースケーラーの建設スケジュール、同じ最先端の生産能力に相乗りするオンデバイス NPU のロードマップにとって、制約の構図は変わらない。需要はウェハの供給によって割り当てられており、TSMC はそれに見合う投資をしている。",
+          "citations": [
+            {"label": "TSMC - TSMC Reports Second Quarter EPS of NT$27.25", "url": "https://pr.tsmc.com/english/news/3326"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま予定を組むべき AI イベント:AGI Summit が今週末にサンフランシスコで開幕、AMD Advancing AI が7月22〜23日に続き、OpenAI DevDay は9月29日、すでに混み合う9月下旬の日程のなか Fort Mason に決定",
+      "bullets": [
+        {
+          "body": "最も近い判断は変わらないまま、いよいよ差し迫った。AGI Summit は7月18〜19日、サンフランシスコの Palace of Fine Arts で開かれる。この週末だ。そのすぐ後ろに、7月22〜23日、Moscone West での AMD Advancing AI 2026 が控える。ここでは、Lisa Su とパートナーが、Instinct MI450 アクセラレータと Zen 6 EPYC「Venice」CPU について詳しく説明すると見込まれる。AI チップとインフラの流れは、その後、8月23〜25日にスタンフォードでの Hot Chips(早期登録は7月31日締め切り)、9月15〜17日にサンタクララ・コンベンションセンターでの AI Infra Summit と続く。AI セキュリティの一角は8月初旬から集中する。8月1〜6日にラスベガスで Black Hat USA と DEF CON 34 の AI Village、8月11〜12日に Half Moon Bay で SecurityWeek の AI Risk Summit、11月5〜6日にサンフランシスコで OWASP Global AppSec USA、そして、エージェントの乗っ取りや MCP 層の防御に取り組むチーム向けの Zenity の AI Agent Security Summit シリーズが並ぶ。開発者とデータの流れでは、Ai4 2026 が8月4〜6日にラスベガスの The Venetian で、Anyscale の Ray Summit が8月24〜26日に San Francisco Marriott Marquis で、AI Tinkerers San Francisco のミートアップが8月に、ACM AI Leadership Summit が8月30日〜9月2日にアトランタで、The AI Conference が9月29日〜10月1日に Pier 48 で、Runway AI Summit が9月30日に The Masonic で、World Summit AI が10月7〜8日にアムステルダムで、GitHub Universe が10月28〜29日、AWS re:Invent が11月30日〜12月4日に開かれ、年の締めくくりには NeurIPS、12月7〜9日にサンタクララ・コンベンションセンターでの IEEE-RAS Humanoids、そして12月9〜10日の The AI Summit New York が並ぶ。今週の追加は2つある。まず、<a href=\"https://devday.openai.com/\">OpenAI DevDay 2026 が9月29日(火)、サンフランシスコの Fort Mason で開かれることが決まった</a>。現地参加の応募はすでに締め切られており(選ばれた場合は $650)、基調講演は登録すれば無料で配信され、年内には東京、ベルリン、ロンドンを含む8都市で DevDay Exchanges が続く。これにより、The AI Conference の Day Zero と同じ9月29日という日付と、Runway AI Summit の前夜とが、サンフランシスコの一大過密週間として一つに重なった。もう一つ、<a href=\"https://pytorch.org/event/pytorch-conference-2026/\">PyTorch Conference North America 2026 が10月20〜21日にサンノゼで開かれる</a>。PyTorch、vLLM、DeepSpeed、Ray を扱い、セキュリティとフルスタックのトラックを備え、早期割引の登録がいま開いている。当面の行動はこうだ。土曜までに AGI Summit への参加を決め、7月22日より前に AMD Advancing AI に登録し、7月31日の Hot Chips 早期料金を確保し、8月初旬のラスベガスのセキュリティ枠を予約する。そして、9月29日の重なりについては、どちらに出るかを決めておく。DevDay の基調講演の視聴登録は無料なので、Pier 48 に出る場合でも登録して損はない。",
+          "citations": [
+            {"label": "OpenAI - DevDay 2026, September 29, Fort Mason, San Francisco", "url": "https://devday.openai.com/"},
+            {"label": "PyTorch Foundation - PyTorch Conference North America 2026, October 20-21, San Jose", "url": "https://pytorch.org/event/pytorch-conference-2026/"}
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -13,11 +13,11 @@ Sorted by `count` descending, then host alphabetical.
 
 | host | count | first_seen | last_seen | sample_label |
 |---|---|---|---|---|
-| github.com | 214 | 2026-04-19 | 2026-07-08 | GitHub - QwenLM/Qwen3.6 |
+| github.com | 242 | 2026-04-19 | 2026-07-16 | GitHub - QwenLM/Qwen3.6 |
 | arxiv.org | 185 | 2026-04-29 | 2026-07-15 | arXiv - Corpus2Skill (2604.14572) |
 | thehackernews.com | 148 | 2026-04-20 | 2026-07-13 | The Hacker News - nginx-ui CVE-2026-33032 |
+| simonwillison.net | 138 | 2026-04-19 | 2026-07-16 | Simon Willison - Qwen3.6-27B |
 | anthropic.com | 129 | 2026-04-21 | 2026-07-01 | Anthropic - Anthropic and Amazon expand collaboration |
-| simonwillison.net | 128 | 2026-04-19 | 2026-07-08 | Simon Willison - Qwen3.6-27B |
 | siliconangle.com | 122 | 2026-04-23 | 2026-07-07 | SiliconANGLE - OpenAI workspace agents |
 | huggingface.co | 98 | 2026-04-22 | 2026-06-28 | Hugging Face - prism-ml/Bonsai-8B-gguf |
 | aws.amazon.com | 93 | 2026-04-19 | 2026-06-21 | AWS - Amazon Bedrock AgentCore adds new features |
@@ -77,6 +77,7 @@ Sorted by `count` descending, then host alphabetical.
 | ai-infra-summit.com | 19 | 2026-06-05 | 2026-07-05 | AI Infra Summit 2026 |
 | roboticsandautomationnews.com | 19 | 2026-04-22 | 2026-05-30 | Robotics & Automation News - Nvidia and partners showcase AI |
 | shadowserver.org | 19 | 2026-05-07 | 2026-05-19 | Shadowserver - n8n CVE-2026-21858 First Week Scan Report |
+| thinkingmachines.ai | 19 | 2026-07-03 | 2026-07-16 | Thinking Machines Lab - Learning to Replicate Expert Judgmen |
 | aikido.dev | 18 | 2026-05-06 | 2026-05-10 | Aikido - n8n Critical Vulnerability CVE-2026-21858 Unauthent |
 | blackhat.com | 18 | 2026-06-05 | 2026-06-27 | Black Hat USA 2026 |
 | ciodive.com | 18 | 2026-05-31 | 2026-05-31 | CIO Dive |
@@ -96,6 +97,7 @@ Sorted by `count` descending, then host alphabetical.
 | variety.com | 16 | 2026-05-31 | 2026-05-31 | Variety |
 | aboutamazon.com | 15 | 2026-04-21 | 2026-06-21 | About Amazon - New Amazon Bedrock AgentCore capabilities |
 | aitoolly.com | 15 | 2026-04-24 | 2026-06-23 | AIToolly - Cerebras Systems Targets Blockbuster IPO With 26. |
+| bleepingcomputer.com | 15 | 2026-04-25 | 2026-07-16 | BleepingComputer - Critical Nginx UI auth bypass flaw |
 | blog.trailofbits.com | 15 | 2026-05-08 | 2026-05-14 | Trail of Bits - Inference stack red team sweep post Cerebras |
 | blogs.nvidia.com | 15 | 2026-04-22 | 2026-06-14 | NVIDIA Blog - GPT-5.5 Powers Codex on NVIDIA Infrastructure |
 | invezz.com | 15 | 2026-04-22 | 2026-05-04 | Invezz - Anthropic forms JV with Wall Street firms |
@@ -125,6 +127,7 @@ Sorted by `count` descending, then host alphabetical.
 | nvidianews.nvidia.com | 12 | 2026-04-20 | 2026-06-01 | NVIDIA Newsroom - NVIDIA Vera Rubin Platform |
 | obsidiansecurity.com | 12 | 2026-06-06 | 2026-06-06 | Obsidian Security - 1-Click RCE in Flowise (CVE-2026-40933): |
 | ostif.org | 12 | 2026-06-02 | 2026-06-02 | OSTIF - Disclosing the BadHost vulnerability in Starlette |
+| pr.tsmc.com | 12 | 2026-07-16 | 2026-07-16 | TSMC - TSMC Reports Second Quarter EPS of NT$27.25 |
 | qwen.ai | 12 | 2026-04-27 | 2026-05-02 | Qwen Research - Qwen3.6-27B: Flagship-Level Coding in a 27B |
 | stocktwits.com | 12 | 2026-06-04 | 2026-06-07 | Stocktwits - SpaceX IPO Pricing At $135 Per Share Will Value |
 | tipranks.com | 12 | 2026-04-27 | 2026-06-06 | TipRanks - Cathie Wood Sheds $70M+ AMD Stock |
@@ -183,6 +186,7 @@ Sorted by `count` descending, then host alphabetical.
 | notebookcheck.net | 8 | 2026-06-01 | 2026-06-01 | Notebookcheck - Microsoft Build 2026 what to expect from the |
 | techxplore.com | 8 | 2026-04-25 | 2026-07-12 | TechXplore - DeepSeek V4 1M context |
 | thetechportal.com | 8 | 2026-04-30 | 2026-06-12 | The Tech Portal - OpenAI targets 122M ChatGPT subscribers by |
+| together.ai | 8 | 2026-07-16 | 2026-07-16 | Together AI - Together AI brings Thinking Machines Lab's new |
 | zenity.io | 8 | 2026-04-24 | 2026-07-01 | Zenity Newsroom - FedRAMP In Process Status |
 | ai-dev.deeplearning.ai | 7 | 2026-04-27 | 2026-05-02 | AI Dev 26 x SF — DeepLearning.AI |
 | banklesstimes.com | 7 | 2026-06-01 | 2026-06-01 | BanklessTimes - Nvidia and Microsoft Partner to Power AI PCs |
@@ -262,7 +266,6 @@ Sorted by `count` descending, then host alphabetical.
 | relvehq.com | 5 | 2026-06-14 | 2026-07-06 | Relve - Databricks Data + AI Summit 2026 (June 15-18, San Fr |
 | spknowledge.com | 5 | 2026-04-19 | 2026-04-26 | Knowledge Share - Mastering Azure Foundry Local |
 | tenable.com | 5 | 2026-04-20 | 2026-04-25 | Tenable - Copilot Studio Security |
-| thinkingmachines.ai | 5 | 2026-07-03 | 2026-07-03 | Thinking Machines Lab - Learning to Replicate Expert Judgmen |
 | threat-modeling.com | 5 | 2026-07-01 | 2026-07-01 | Threat-Modeling.com - Microsoft AutoGen Studio code executio |
 | trendforce.com | 5 | 2026-07-12 | 2026-07-12 | TrendForce - Micron raises U.S. investment target to $250B t |
 | tweaktown.com | 5 | 2026-06-25 | 2026-06-25 | TweakTown - AMD announces Advancing AI 2026 event for July ( |
@@ -324,7 +327,6 @@ Sorted by `count` descending, then host alphabetical.
 | aimagazine.com | 3 | 2026-05-02 | 2026-05-03 | AI Magazine - Apptronik |
 | anandtech.com | 3 | 2026-05-28 | 2026-05-28 | Anandtech - Groq LPU-v3 technical deep dive 2.4x energy effi |
 | basenor.com | 3 | 2026-04-28 | 2026-04-29 | Basenor - Tesla Optimus V3 Reveal Set for Late July |
-| bleepingcomputer.com | 3 | 2026-04-25 | 2026-04-25 | BleepingComputer - Critical Nginx UI auth bypass flaw |
 | breakingdefense.com | 3 | 2026-05-03 | 2026-05-03 | Breaking Defense - Pentagon clears 8 tech firms for classifi |
 | brecorder.com | 3 | 2026-06-19 | 2026-06-19 | Business Recorder - Hyundai to buy SoftBank's remaining stak |
 | byteiota.com | 3 | 2026-04-23 | 2026-04-23 | byteiota - Qwen3.6-27B on RTX 4090 |
@@ -400,6 +402,7 @@ Sorted by `count` descending, then host alphabetical.
 | crowdstrike.com | 2 | 2026-04-19 | 2026-04-20 | CrowdStrike - April 2026 Patch Tuesday Analysis |
 | cybernews.com | 2 | 2026-04-23 | 2026-04-23 | CyberNews - Discord group accessed Mythos |
 | cyberscoop.com | 2 | 2026-04-27 | 2026-04-27 | CyberScoop - Vuln in Google's Antigravity AI agent manager c |
+| devday.openai.com | 2 | 2026-07-16 | 2026-07-16 | OpenAI - DevDay 2026, September 29, Fort Mason, San Francisc |
 | docs.nvidia.com | 2 | 2026-04-22 | 2026-04-22 | NVIDIA Docs - NemoClaw Developer Guide |
 | electrek.co | 2 | 2026-04-22 | 2026-04-23 | Electrek - Tesla Q1 2026 Financial Results |
 | english.news.cn | 2 | 2026-04-25 | 2026-04-25 | Xinhua - DeepSeek unveils new AI model |
@@ -437,6 +440,7 @@ Sorted by `count` descending, then host alphabetical.
 | platform.claude.com | 2 | 2026-05-01 | 2026-05-01 | Anthropic - Claude API Release Notes |
 | prateeksinghphd.in | 2 | 2026-04-21 | 2026-04-26 | Prateek Singh PhD - The Agent Wars: OpenClaw, NemoClaw, Herm |
 | promarket.org | 2 | 2026-04-27 | 2026-04-27 | ProMarket - The Antitrust Risks of Anthropic's Project Glass |
+| pytorch.org | 2 | 2026-07-16 | 2026-07-16 | PyTorch Foundation - PyTorch Conference North America 2026, |
 | redhat.com | 2 | 2026-07-12 | 2026-07-12 | Red Hat - Red Hat at AMD Advancing AI 2026 (Moscone West, Sa |
 | reinvent.awsevents.com | 2 | 2026-06-18 | 2026-06-18 | AWS re:Invent 2026 (November 30-December 4, Las Vegas) |
 | robohorizon.com | 2 | 2026-04-28 | 2026-04-28 | RoboHorizon - Figure AI Now Builds a Humanoid Every 90 Minut |
