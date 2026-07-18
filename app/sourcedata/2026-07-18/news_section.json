@@ -1,0 +1,101 @@
+{
+  "date": "2026-07-18",
+  "sections": [
+    {
+      "category": "Anthropic reverses course and keeps Claude Fable 5 in Max and Team Premium plans at 50% of limits, while Pro and Team Standard drop to a one-time credit and then API rates",
+      "bullets": [
+        {
+          "body": "Anthropic <a href=\"https://simonwillison.net/2026/Jul/18/claude-make-fable-5-permanent/\">announced that beginning July 20, Claude Fable 5 will be included in all Max and Team Premium plans at 50% of limits</a> — a reversal of its original plan to pull the model out of subscriptions entirely and sell it only per-token. Pro and Team Standard subscribers do not get that inclusion: they receive a one-time $100 usage credit, after which continued Fable 5 access bills at API rates. Because Max plans start in the $100-$200 per month range, the practical effect is that the $20 tier loses subscription-included access to the model once that credit is spent. The arithmetic is less generous than the headline reads — <a href=\"https://the-decoder.com/anthropic-slashes-claude-fable-5-limits-in-max-and-team-premium-and-pushes-pro-users-toward-api-pricing/\">the underlying weekly limits are themselves being cut by about a third on the same date</a>, so the 50% allowance applies to a smaller base, and the temporary boost to Claude Code weekly rate limits expires alongside it. Anthropic framed the move around Fable demand being hard to manage and frustrating to users, while acknowledging OpenAI's GPT-5.6 Sol as delivering comparable performance at a fraction of the cost. It is the clearest public instance yet of frontier-model subscription economics being repriced by competitive pressure rather than by capacity alone, with the open-weight wave sitting directly behind that pressure.",
+          "citations": [
+            {
+              "label": "Simon Willison - Claude make Fable 5 permanent",
+              "url": "https://simonwillison.net/2026/Jul/18/claude-make-fable-5-permanent/"
+            },
+            {
+              "label": "the decoder - Anthropic slashes Claude Fable 5 limits in Max and Team Premium",
+              "url": "https://the-decoder.com/anthropic-slashes-claude-fable-5-limits-in-max-and-team-premium-and-pushes-pro-users-toward-api-pricing/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "OpenAI discloses GPT-Red, an adversarial self-play red-teamer that beats human red teams 84% to 13% and cuts prompt-injection failures sixfold",
+      "bullets": [
+        {
+          "body": "OpenAI on July 16 <a href=\"https://www.helpnetsecurity.com/2026/07/16/openai-gpt-red-prompt-injection-test/\">disclosed GPT-Red</a>, an automated red-teaming model trained by adversarial self-play: the attacker earns reward for successful prompt injections while a set of diverse defender models earn reward for resisting them without losing capability on legitimate tasks, both training concurrently into an escalating arms race. The comparative numbers are the headline. On novel indirect prompt-injection scenarios outside its training data, GPT-Red reached an 84% attack success rate against GPT-5.1, against 13% for human red teamers on identical scenarios, and it fully compromised a simulated AI vending machine across all three objectives. Feeding those attacks back into training produced the defensive half: GPT-5.6 Sol records six times fewer failures on the direct prompt-injection benchmark than GPT-5.5, a 0.05% failure rate against GPT-Red's own direct injections, and above 97% accuracy on indirect-injection benchmarks covering developer tools and browsing, while fake chain-of-thought attacks that succeeded north of 95% of the time against GPT-5.1 now land below 10%. <a href=\"https://thehackernews.com/2026/07/openais-gpt-red-automates-prompt.html\">OpenAI says the findings have been folded into production model training since GPT-5.3</a>, with capability and refusal scores holding steady through the hardening. The structural change is that red-teaming moves from a pre-launch gate to a continuous loop inside the training pipeline — the same direction of travel as the agent-permission guardrails and MCP-layer defenses vendors have been shipping since this year's exfiltration incidents, but applied at the weights rather than the harness.",
+          "citations": [
+            {
+              "label": "Help Net Security - GPT-Red beat human red teamers on a prompt injection test",
+              "url": "https://www.helpnetsecurity.com/2026/07/16/openai-gpt-red-prompt-injection-test/"
+            },
+            {
+              "label": "The Hacker News - OpenAI's GPT-Red automates prompt injection testing to harden GPT-5.6 Sol",
+              "url": "https://thehackernews.com/2026/07/openais-gpt-red-automates-prompt.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Walden Robotics leaves stealth with a $300M seed at a $1.1B valuation and robots already doing production work inside a Toyota plant",
+      "bullets": [
+        {
+          "body": "<a href=\"https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth\">Walden Robotics launched out of stealth on July 15 with $300 million in seed funding at a $1.1 billion valuation</a>, co-led by Toyota — through Toyota Motor Corporation, Toyota Invention Partners and Toyota Ventures — and Deviation Capital, with NVIDIA, Boeing, Samsung Ventures, Prologis Ventures, CoreWeave Ventures, AE Ventures, Calibrate Ventures, Shine Capital, NextView Ventures and Menlo Ventures among the participants. The company is led by co-founder and CEO Russ Tedrake, the MIT professor who previously ran Large Behavior Models at Toyota Research Institute, and the technical approach follows that lineage directly: Large Behavior Models paired with Diffusion Policy, the adaptation of image-generation diffusion models to robot manipulation, so the machines acquire new tasks through real-world practice rather than hand-scripted motion. What separates this from the usual humanoid funding announcement is that the deployment predates the raise — Walden says its robots have been doing useful work at a Toyota plant in North America since February 2026, moving from first pilot to real production tasks in under two months, with target environments spanning automotive, aerospace, semiconductors, electronics, logistics and life sciences. The investor mix is its own signal: a manufacturer, an aerospace prime, a chip vendor and a warehouse REIT's venture arm on the same cap table describes a company being underwritten by its prospective customers rather than by robotics enthusiasm.",
+          "citations": [
+            {
+              "label": "Walden Robotics - Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today",
+              "url": "https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Colibri streams a 744B-parameter mixture-of-experts model off disk to run GLM-5.2 on a 25GB-RAM machine with no GPU",
+      "bullets": [
+        {
+          "body": "<a href=\"https://github.com/JustVugg/colibri\">Colibri</a>, an Apache 2.0 inference engine written in dependency-free C, has gathered roughly 15.9k GitHub stars behind a single premise: treat VRAM, RAM and disk as one managed memory hierarchy so a 744-billion-parameter mixture-of-experts model fits on consumer hardware. Running GLM-5.2, only about 40B of the 744B parameters activate per token, so the roughly 17B of dense layers stay resident in RAM while the 19,456 routed experts stream in from disk on demand under an LRU cache. That puts the floor at about 25GB of RAM — 9.9GB resident plus cache — against a roughly 370GB int4 model container on disk, with optional CUDA and Metal backends, MLA and DSA sparse attention, speculative decoding and grammar-forced generation, plus a pre-converted int4 build on Hugging Face. The caveat is stated plainly by the author: 0.05 to 0.1 tokens per second on a 12-core WSL2 machine, with community reports reaching 1.23 on high-end hardware. That is batch-job territory rather than interactive chat, but it inverts the usual local-inference constraint — instead of quantizing a model down until it fits in memory, it trades wall-clock time for the ability to run a frontier-scale open model at all on hardware that could never hold its weights.",
+          "citations": [
+            {
+              "label": "GitHub - JustVugg/colibri",
+              "url": "https://github.com/JustVugg/colibri"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Anaconda acquires Kilo Code, folding an agentic coding platform that routes ~10 trillion tokens a month into its enterprise governance stack",
+      "bullets": [
+        {
+          "body": "Anaconda <a href=\"https://www.anaconda.com/blog/anaconda-acquires-kilo-code\">announced on July 15 that it has acquired Kilo Code</a>, an agentic engineering platform the company says orchestrates close to 10 trillion tokens a month across more than 3 million developers, fronted by a model gateway that routes across 500-plus models spanning open-weight, frontier-cloud and self-hosted endpoints with no single-vendor lock-in. Financial terms were not disclosed. Kilo remains available on its own for individual builders, teams and organizations while being integrated into the broader Anaconda Platform, and the stated thesis is governance rather than raw capability: pairing agent orchestration with Anaconda's package-provenance and policy layer so enterprises can see what their coding agents are actually doing and which models they are calling. Anaconda cites early customers seeing 30-50% reductions in token consumption once intelligent routing and governance operate together — a cost argument that arrives in the same week Anthropic repriced its own subscription tiers upward in effective terms. The read-through is that the agent-harness market is starting to consolidate around vendors who can answer procurement and audit questions, not only benchmark ones, and that the model-routing gateway is becoming the layer where both spend control and policy enforcement get applied.",
+          "citations": [
+            {
+              "label": "Anaconda - Anaconda Acquires Kilo Code",
+              "url": "https://www.anaconda.com/blog/anaconda-acquires-kilo-code"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI events to plan around now: the AGI Summit is underway in San Francisco this weekend, WAIC closes July 20, and AMD Advancing AI opens July 22 ahead of the July 31 Hot Chips rate cutoff",
+      "bullets": [
+        {
+          "body": "The nearest decision is a walk-up one: the <a href=\"https://www.eventbrite.com/e/agi-summit-2026-where-agi-converges-july-1819-palace-of-fine-art-tickets-1985545163032\">AGI Summit runs today and tomorrow, July 18-19, from 9 AM to 5 PM at the Palace of Fine Arts, 3301 Lyon Street in San Francisco</a>, doors at 7 AM, tickets from $199 with a $49 student rate on a valid .edu address, and speakers drawn from OpenAI, Anthropic, Google DeepMind, Stanford, Berkeley and MIT. WAIC 2026 in Shanghai closes July 20. After this weekend the calendar's next fixed points are AMD's Advancing AI at Moscone West on July 22-23, then the July 31 cutoff for the Hot Chips early registration rate; <a href=\"https://hotchips.org/program/tutorials/\">Hot Chips opens August 23 at Stanford with tutorials on HBM evolution under AI data demand and on RISC-V standards and automotive adoption</a>, drawing Samsung, SK Hynix, NVIDIA and Infineon, and runs through August 25. The AI-security track clusters in early August — Black Hat USA and DEF CON 34's AI Village in Las Vegas August 1-6, then SecurityWeek's AI Risk Summit at Half Moon Bay August 11-12 — with OWASP Global AppSec USA in San Francisco November 5-6 later in the year, and Zenity's AI Agent Security Summit series continuing for agent-hijack and MCP-layer defenders. On the developer and infrastructure side: Ai4 in Las Vegas August 4-6, the AI Tinkerers San Francisco meetup in August, Ray Summit at the San Francisco Marriott Marquis August 24-26, the ACM AI Leadership Summit in Atlanta August 30 through September 2, the AI Infra Summit in Santa Clara September 15-17, OpenAI DevDay at Fort Mason September 29, The AI Conference at Pier 48 September 29 through October 1, the Runway AI Summit September 30, World Summit AI in Amsterdam October 7-8, PyTorch Conference in San Jose October 20-21, GitHub Universe October 28-29, AWS re:Invent November 30 through December 4, NeurIPS in December, IEEE-RAS Humanoids in Santa Clara December 7-9, and The AI Summit New York December 9-10 closing out the year. Practical sequencing: the AGI Summit is a decision to make this morning, AMD Advancing AI registration closes before July 22, and the Hot Chips early rate needs locking by July 31 before the early-August Las Vegas security block absorbs the budget.",
+          "citations": [
+            {
+              "label": "Eventbrite - AGI Summit 2026, July 18-19, Palace of Fine Arts, San Francisco",
+              "url": "https://www.eventbrite.com/e/agi-summit-2026-where-agi-converges-july-1819-palace-of-fine-art-tickets-1985545163032"
+            },
+            {
+              "label": "Hot Chips 2026 - Tutorials program",
+              "url": "https://hotchips.org/program/tutorials/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,561 @@
+{
+  "date": "2026-07-18",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.16c7b8053e39aa1f",
+        "short_label": "Disk-streaming expert offload ships in a mainstream local runtime by H1 2027",
+        "prediction_date": "2026-07-18"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "本日が起点となる出来事である。Colibri は、Apache 2.0 のもとで公開された依存関係を持たない C の推論エンジンで、GitHub のスター数はおよそ 15.9k だ。VRAM・RAM・ディスクを一つの管理されたメモリ階層として扱うことで、GLM-5.2 の 744B パラメータを、RAM 約 25GB・GPU なしのマシンで動かす。およそ 17B 分の dense 層が常駐し続ける一方、19,456 のルーティング対象エキスパートは、およそ 370GB の int4 コンテナから LRU キャッシュを介して読み込まれる。\n公表されている代償は、12 コアのマシンで毎秒 0.05〜0.1 トークンである。ハイエンドのハードウェアでは 1.23 に達したというコミュニティからの報告もある。主流のランタイムはすでに、エキスパートのテンソルをシステムメモリへ追い出し、それを超える分は OS のページキャッシュに委ねている。メモリ下限を明示したうえでアプリケーション側が管理するエキスパートキャッシュ——これこそ、llama.cpp・Ollama・LM Studio・vLLM のいずれもサポート対象の経路としては提供していない部分だ。",
+      "reference_links": [
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Colibri は、起点となる証拠をそのまま体現している。依存関係を持たない C のエンジンが、およそ 17B の dense 層を常駐させたまま、19,456 のルーティング対象エキスパートを 370GB のディスク上のコンテナから LRU キャッシュ経由で流し込む。こうして GLM-5.2 の 744B パラメータが、RAM 25GB・GPU なしで動く。およそ 15.9k のスターは、主流のランタイムが応えるべき需要の大きさを示している。",
+        "coherence": 5,
+        "remaining_gap": "llama.cpp・Ollama・LM Studio・vLLM のいずれも、ディスクからのエキスパートのストリーミングを文書化していない。しかも毎秒 0.05〜0.1 トークンという速度は、これを製品化することに逆行する材料だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b3f518670e4c9f6e",
+        "short_label": "OpenAI or Google ends flat-rate flagship access on its $20 tier by Q1 2027",
+        "prediction_date": "2026-07-18"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "本日が起点となる出来事である。7 月 20 日から Anthropic は、Claude Fable 5 を Max と Team Premium のすべてのプランに上限の 50% で残す。サブスクリプションから同モデルを完全に外すという当初の方針を撤回した形だ。ただし Pro と Team Standard には一切含まれず、渡されるのは一度限りの $100 の利用クレジットのみで、それを使い切れば Fable 5 は API 料金での請求になる。Max は月額 $100〜$200 の帯から始まるため、およそ $20 の階層は定額でのフロンティアモデル利用を丸ごと失う。\n算術は見出しほど甘くない。土台となる週次の上限そのものが同じ日におよそ 3 分の 1 削られるため、50% という枠はより小さな母数に掛かる。しかも Claude Code の週次レート上限の一時的な引き上げも、同時に失効する。Anthropic はこの変更を、Fable の需要が管理しづらいという文脈で説明しつつ、OpenAI の GPT-5.6 Sol が同等の性能をはるかに低いコストで提供していることを挙げた。容量の問題ではなく採算の問題であり、より安価な競合に対して従量制でない個人向けサブスクリプションを売るラボであれば、どこも同じ時期に直面する問題である。",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Claude make Fable 5 permanent",
+          "url": "https://simonwillison.net/2026/Jul/18/claude-make-fable-5-permanent/"
+        },
+        {
+          "label": "the decoder - Anthropic slashes Claude Fable 5 limits in Max and Team Premium",
+          "url": "https://the-decoder.com/anthropic-slashes-claude-fable-5-limits-in-max-and-team-premium-and-pushes-pro-users-toward-api-pricing/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Anthropic の 7 月 20 日の価格改定は、起点となる事実をそのまま満たしている。Max と Team Premium は Fable 5 を上限の半分で維持し、Pro と Team Standard は $100 のクレジット 1 回のあとは API 料金になる。しかもベンダー自身が、原因として容量ではなく採算を挙げた。ただし、これが加入者の反発を受けた部分的な撤回である点は逆向きに働く。",
+        "coherence": 4,
+        "remaining_gap": "OpenAI も Google も、$20 の階層には手をつけていない。そして Anthropic 自身の措置も、加入者が反発するや完全撤去からは後退したものだ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.04ff49878f99c77f",
+        "short_label": "Learned-manipulation robot makers land two customer-co-led rounds by H1 2027",
+        "prediction_date": "2026-07-18"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "本日が起点となる出来事である。Walden Robotics は 7 月 15 日にステルスを解き、評価額 $1.1 billion で $300 million のシードを発表した。共同リードはトヨタ——Toyota Motor Corporation、Toyota Invention Partners、Toyota Ventures の 3 社を通じて——と Deviation Capital であり、参加企業には NVIDIA、Boeing、Samsung Ventures、Prologis Ventures、CoreWeave Ventures が名を連ねる。\nシグナルは規模ではなく順序にある。ロボットは 2026 年 2 月から北米のトヨタ工場で実務をこなしており、最初のパイロットから本番の生産タスクまで 2 か月足らずで到達した。つまり、産業界の買い手が、すでに自社が顧客であるベンダーのラウンドを共同リードしたことになる。技術的な前提は、CEO の Russ Tedrake——以前は Toyota Research Institute で Large Behavior Models を率いた MIT の教授——のもとでの、Large Behavior Models と Diffusion Policy の組み合わせだ。これにより機械は、人手で記述した動作ではなく実世界での練習を通じてタスクを習得する。",
+      "reference_links": [
+        {
+          "label": "Walden Robotics - Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today",
+          "url": "https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Walden は、起点となる結び付きをそっくり供給している。産業界の事業者がトヨタ系 3 つの投資主体を通じてラウンドを共同リードし、発表は、これから始まるパイロットではなく、2 月から北米の工場で本番の生産作業を回している実配備を挙げている。ロボティクスに戦略投資マネーが入ること自体は珍しくない。調達と同時に稼働中のラインを開示することは珍しい。",
+        "coherence": 5,
+        "remaining_gap": "これは、この予測が必要とする 2 件のラウンドのうち 1 件目にすぎない。事業者が共同リードした $100 million 以上の調達は、2 件目がまだ発表されていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b3c111f1938357a9",
+        "short_label": "Open-weight model tops Artificial Analysis Intelligence Index by H1 2027",
+        "prediction_date": "2026-07-17"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "本日、指標の結果は一つも出ていない。Artificial Analysis Intelligence Index 上で計測されたモデルはなく、昨日の Kimi K3 の筋は本日の記事群にまったく引き継がれていない。\n本日供給されたのは、間接的で構造的な材料だ。Colibri の前提はまるごと、744B パラメータのオープンウェイト Mixture-of-Experts モデルである GLM-5.2 を、RAM 25GB・GPU なしのコンシューマー機で実行することにある。これはフロンティア規模のオープンなチェックポイントを実際に動かせる層を広げる。そして Anthropic の価格改定の説明は、自社のサブスクリプション経済のすぐ背後にある圧力として、オープンウェイトの波を挙げた。いずれもオープンウェイトの到達範囲と競争圧力を語るものであり、この予測が懸かっている指標上の順位を語るものではない。",
+      "reference_links": [
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        },
+        {
+          "label": "Simon Willison - Claude make Fable 5 permanent",
+          "url": "https://simonwillison.net/2026/Jul/18/claude-make-fable-5-permanent/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "本日、順位を計測したものは何もない。届いたのは、前提を取り巻く傍証だ。フロンティア規模の中国製オープンチェックポイントが、いまやデスクトップで実行できる。そして Anthropic は、自社の旗艦モデルの価格改定の背景にある圧力として、オープンウェイトの波を挙げた。到達範囲と商業的な圧力は、能力指標上の位置とは別物である。",
+        "coherence": 2,
+        "remaining_gap": "本日、Artificial Analysis Intelligence Index に動きはない。Kimi K3 のウェイトも未公開のままであり、単独首位という条件は未検証のまま残っている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0ad3c58ce5c240d0",
+        "short_label": "Together or Baseten raises at a $5B-plus valuation by Q4 2027",
+        "prediction_date": "2026-07-17"
+      },
+      "today_relevance": 1,
+      "evidence_summary": "この筋については本当に何もない。Together AI も Baseten も本日の記事群のどこにも登場せず、本日の資本イベント 2 件はいずれも別の方向を向いている。Walden Robotics の $300 million のシードは身体性のあるハードウェアであり、Anaconda による Kilo Code の買収は条件非開示でのエージェントハーネス層の統合であって、マネージド推論層での調達ではない。\nWalden の資本構成に入った CoreWeave Ventures が、本日ネオクラウドが登場した最も近い例だが、これは資金を出す側であって調達する側ではない。隣接性を無理に引き伸ばすのではなく、シグナルなしとして記録する。",
+      "reference_links": [
+        {
+          "label": "Walden Robotics - Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today",
+          "url": "https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth"
+        },
+        {
+          "label": "Anaconda - Anaconda Acquires Kilo Code",
+          "url": "https://www.anaconda.com/blog/anaconda-acquires-kilo-code"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "本日、この予測に与えるものは何もない。挙げられた 2 社はどちらも登場せず、本日の資本イベント 2 件はマネージド推論から離れた方向を指している。身体性ハードウェアのシードと、エージェントハーネス層での条件非開示の買収だ。ネオクラウドとして最も近い存在は CoreWeave Ventures だが、それも資金を調達する側ではなく出資する側として現れている。",
+        "coherence": 1,
+        "remaining_gap": "Together AI からも Baseten からも、ラウンド・評価額・調達に関する話は出ていない。この筋は本日、単に動かなかった。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e4dd413b5cb0ee24",
+        "short_label": "HBM-free near-memory accelerators gain a second Chinese entrant by H2 2027",
+        "prediction_date": "2026-07-17"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "本日、2 社目の HBM 非搭載の中国製アクセラレータを挙げた材料はない。記事群にある唯一のメモリロードマップ関連の項目は、むしろ逆を向いている。Hot Chips は 8 月 23 日に Stanford で開幕し、AI のデータ需要のもとでの HBM の進化を扱うチュートリアルを用意する。Samsung、SK Hynix、NVIDIA、Infineon が顔をそろえる——業界の答えは、HBM を迂回するのではなく HBM を増やす方向で描かれている。\nColibri は同じメモリの天井に、シリコンではなくソフトウェアから挑む。19,456 のルーティング対象エキスパートをディスクから流し込み、744B パラメータのモデルを HBM なし・GPU なしで動かす。これは帯域幅の壁を越える 3 つ目の道筋だ。容量を実時間と引き換えにできるのであれば、ニアメモリのシリコン参入者が解消するはずだった圧力は、わずかながら弱まる。",
+      "reference_links": [
+        {
+          "label": "Hot Chips 2026 - Tutorials program",
+          "url": "https://hotchips.org/program/tutorials/"
+        },
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "どちらのシグナルも助けにならない。Hot Chips は 8 月の業界の答えを、AI 需要のもとでの HBM の進化として描き、メモリベンダー自身を集めている——迂回ではなく増設の方向だ。一方 Colibri は、実時間を差し出すことで同じ容量の天井をソフトウェアで越える。帯域幅の壁を越える 3 つ目の道筋は、ニアメモリの参入者が応えるはずだった圧力をいくらか和らげてしまう。",
+        "coherence": 2,
+        "remaining_gap": "本日、2 社目の中国ベンダーが HBM 非搭載のニアメモリ製品を発表した例はない。DF1000 の帯域幅の主張を実際のワークロードで検証したものも出ていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7a5df26a9276e045",
+        "short_label": "Microsoft breaks Patch Tuesday's monthly cadence for AI-surface fixes by Q2 2027",
+        "prediction_date": "2026-07-16"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "OpenAI の GPT-Red の公開は、この予測が拠って立つ構造変化について、これまでで最も明快な言明だ。レッドチームは、公開前の関門から、学習パイプラインの内側で回り続ける環へと移り、GPT-5.3 以降は本番のモデル学習に組み込まれている。堅牢化はリリースの境界ではなく、ウェイトそのものに施される。\n計測された成果は、GPT-5.6 Sol が直接的プロンプトインジェクションでの失敗を GPT-5.5 の 6 分の 1 に減らしたこと、GPT-Red 自身の直接注入に対する失敗率が 0.05% であること、間接注入のベンチマークで 97% を超える正答率を示したことであり、しかも能力と拒否のスコアは安定して保たれた。ベンダーが AI に関わる領域で定期的な関門を捨てて継続的な環に移るという論理は、月次の更新提供という定期スケジュールを崩す論理と同じものだ。ただし、そのベンダーは OpenAI であり、対象はモデルのウェイトであって、Microsoft 自身の配信頻度は本日まったく動いていない。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - GPT-Red beat human red teamers on a prompt injection test",
+          "url": "https://www.helpnetsecurity.com/2026/07/16/openai-gpt-red-prompt-injection-test/"
+        },
+        {
+          "label": "The Hacker News - OpenAI's GPT-Red automates prompt injection testing to harden GPT-5.6 Sol",
+          "url": "https://thehackernews.com/2026/07/openais-gpt-red-automates-prompt.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "GPT-Red は、この推進役をこれまでで最も明快に測ったものだ。自動化された攻撃側は、新規の間接注入の 84% を突破した。同じ場面での人間のチームは 13% にとどまる。発見が人間のレビューを追い越すことこそ、定期的な関門を成り立たなくする。そして OpenAI 自身の答えも、公開前の関門を捨てて継続的な環に移ることだった。",
+        "coherence": 3,
+        "remaining_gap": "ベンダーは OpenAI であり、対象はモデルのウェイトだ。Microsoft の月次の更新提供は手つかずのままで、より速い Copilot 向けの配信チャネルも存在しない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c972282fc42c88b6",
+        "short_label": "Sub-2-bit quantization fits a second 20B-class model under 5 GB by Q2 2027",
+        "prediction_date": "2026-07-15"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "本日のローカル推論の成果は、この筋に沿うのではなく逆行している。Colibri が掲げる前提は、積極的な量子化の裏返しだ。モデルをメモリに収まるまで圧縮するのではなく、およそ 370GB の 4 ビットのコンテナをディスク上に保ち、ルーティング対象のエキスパートを必要に応じて流し込む。毎秒 0.05〜0.1 トークンという速度と引き換えに、フロンティア規模のモデルをそもそも動かせるようにするのだ。\n落ち着いた精度の下限は 2 ビット未満ではなく 4 ビットであり、緩めた制約はビット幅ではなく容量である。新たな 2 ビット未満の成果も、5 GB を切る 20B クラスのモデルも、本日はどこにも現れなかった。コンシューマー向けローカル推論の関心は、代わりにメモリ階層の道筋へ移っている。",
+      "reference_links": [
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "本日のローカル推論の成果は、逆の方向を主張している。Colibri は 4 ビットに落ち着き、370GB のコンテナをディスク上に置いたまま、ビット幅ではなく容量のほうを緩める。その前提はまるごと、モデルを収まるまで圧縮する必要はない、というものだ。これは、どのモデル階級が持ち運べるかは重みあたりのビット数だけで決まる、という想定を切り崩す。",
+        "coherence": 2,
+        "remaining_gap": "2 ビット未満の成果も、5 GB を切る 20B クラスのモデルも、本日はどこにも現れなかった。Bonsai が狙う携帯端末のメモリ枠は手つかずのままだ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.98c20322cf3f2161",
+        "short_label": "Action-level guardrails become first-class agent-framework controls by H1 2027",
+        "prediction_date": "2026-07-14"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "ここでは GPT-Red が双方向に効く。まず、この予測が応えようとする脅威を裏づける。新規の間接的プロンプトインジェクションで GPT-5.1 に対する攻撃成功率は 84% に達し、同じ場面での人間のレッドチームは 13% にとどまった。模擬された AI 自動販売機は 3 つの目的すべてで完全に侵害され、ベンチマークは開発者向けツールとブラウジングを対象としている。\nしかし OpenAI が選んだ対策は、明確にもう一方の置き場所だ。フレームワーク層に制御を足すのではなく、ウェイトに焼き込んだ堅牢化を GPT-5.3 以降ずっと回し続けている。モデル側の耐性が本当に、直接注入での失敗率 0.05%、間接ベンチマークで 97% 超に届くのであれば、エージェントフレームワーク内部の一級のアクション単位ガードレールを求める圧力の一部は、モデルベンダー側へ戻る。これはこの予測が描く成立の姿を補強するのではなく、むしろ込み入らせる。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - GPT-Red beat human red teamers on a prompt injection test",
+          "url": "https://www.helpnetsecurity.com/2026/07/16/openai-gpt-red-prompt-injection-test/"
+        },
+        {
+          "label": "The Hacker News - OpenAI's GPT-Red automates prompt injection testing to harden GPT-5.6 Sol",
+          "url": "https://thehackernews.com/2026/07/openais-gpt-red-automates-prompt.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "脅威の側は重く効く。新規の間接注入での成功率は 84%、模擬された自動販売機は開発者向けツールとブラウジングのベンチマークで 3 つの目的すべてにわたり完全に侵害された。対策の側は逆を向く。OpenAI はウェイトを堅牢化し、GPT-5.3 以降それを継続してきた。これは修正の場所を、フレームワーク層から完全に引き離すものだ。",
+        "coherence": 2,
+        "remaining_gap": "モデル側の耐性が失敗率 0.05% を保つのであれば、フレームワーク内部に一級のツール呼び出し分類器を置く根拠は、強まるどころか弱まる。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f123d894ca5c7207",
+        "short_label": "Whole-body manipulation runs untethered on Thor-class compute by H1 2027",
+        "prediction_date": "2026-07-14"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Walden Robotics の機械は、2026 年 2 月から北米のトヨタ工場で生産作業をこなしており、Large Behavior Models と Diffusion Policy の組み合わせのもとで、実世界での練習を通じてタスクを学んでいる。学習型のマニピュレーションが、ラボの実演ではなく稼働中の産業現場で動いているということであり、対象環境は自動車・航空宇宙・半導体・エレクトロニクス・物流・ライフサイエンスにまたがる。\nしかし今回の発表は、オンボードの演算については何も明かしていない。アクセラレータの名前も、外部につなぐかどうかという問題も、推論に割く計算予算も示されていない。本日は、この節目が乗っている展開の背景を補強するにとどまり、オンボード演算の主張そのものには触れていない。",
+      "reference_links": [
+        {
+          "label": "Walden Robotics - Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today",
+          "url": "https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Walden は学習型のマニピュレーションを、ラボの実験台ではなく稼働中の組立ラインに置いた。外部につなぐかどうかという問いが重みを持つのは、まさにこの設定においてである。だが発表は、アクセラレータも、推論の計算予算も、方策がどこで動くのかも一切明かしていない。この節目が懸かっている関門は、まったく手つかずのまま残る。",
+        "coherence": 2,
+        "remaining_gap": "全身マニピュレーションを、外部につながずオンボードの Thor クラスの演算だけで実行したと報告したベンダーはない。Walden は演算モジュールにも接続方式にも言及していない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4dba2dbfb8d2798b",
+        "short_label": "Agent-memory provenance tagging ships default-on in a major platform by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "2 つの筋がここに触れる。GPT-Red は、信頼できないコンテンツがどれほど確実にエージェントを操れるかを数値にした。新規の間接的プロンプトインジェクションでの成功率は 84%、堅牢化前の GPT-5.1 に対しては、偽の思考連鎖（chain-of-thought）を用いる攻撃が 95% を超える割合で通用していた。これはまさに、来歴タグ付けが封じ込めるために存在する汚染の問題である。\nAnaconda による Kilo Code の買収は、可観測性の側からその答えに近づく。エージェントのオーケストレーションを、パッケージの来歴とポリシーの層と組み合わせ、企業が自社のコーディングエージェントの実際の挙動と、500 を超えるモデルのうちどれを呼んでいるかを把握できるようにする——月におよそ 10 兆トークン、300 万人を超える開発者にわたる規模でだ。ただしそれは、ルーティングとパッケージの層に適用された来歴であって、この予測が求める、エージェントの永続メモリへの書き込みに対するタグ付けという具体的なデフォルトではない。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - GPT-Red beat human red teamers on a prompt injection test",
+          "url": "https://www.helpnetsecurity.com/2026/07/16/openai-gpt-red-prompt-injection-test/"
+        },
+        {
+          "label": "Anaconda - Anaconda Acquires Kilo Code",
+          "url": "https://www.anaconda.com/blog/anaconda-acquires-kilo-code"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "部分的な合致が 2 つある。GPT-Red は、信頼できないコンテンツがどれほど確実にエージェントを操れるかを測った。新規の間接注入で 84%、偽の推論ステップは堅牢化前には 95% を超える割合で通用していた。これは来歴タグ付けが封じ込めるために存在する汚染そのものだ。一方 Anaconda は、層を取り違えた側から答えている。パッケージの来歴とモデルルーティングのポリシーであって、メモリ書き込み経路への出所タグではない。",
+        "coherence": 3,
+        "remaining_gap": "永続メモリへの書き込みに対する既定で有効な来歴タグ付けを出荷したプラットフォームはまだない。本日、書き込み経路そのものに触れたものもない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ae0dd497b3c0ac0",
+        "short_label": "AI security posture tools ship auto-remediation for AI packages by Q4 2026",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Anaconda による Kilo Code の買収は、パッケージガバナンスの側からのこれまでで最も近い動きだ。掲げられた狙いは素の能力ではなくガバナンスにあり、500 を超えるモデルにわたって月におよそ 10 兆トークンを振り分けるエージェント型プラットフォームを、Anaconda のパッケージ来歴とポリシーの層に取り込む。ルーティングとガバナンスが一体で働くようになった初期顧客では、トークン消費が 30〜50% 減ったとされる。\nこれは AI パッケージの来歴とエージェントのポリシーを、単一の適用点——自動修復が動くことになる土台——へと束ねる。ただし本日発表された内容に、何かを自動的に修復するものはない。有用な示唆は Anaconda 自身の見立てだ。この市場は、ベンチマークだけでなく調達と監査の問いに答えられるベンダーを軸に統合しつつある。それこそ、この予測が頼りにする購買圧力である。",
+      "reference_links": [
+        {
+          "label": "Anaconda - Anaconda Acquires Kilo Code",
+          "url": "https://www.anaconda.com/blog/anaconda-acquires-kilo-code"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Anaconda による Kilo Code の買収は、自動修復が動くことになる土台を組み上げる。パッケージの来歴とポリシーを、500 を超えるモデルを振り分けるゲートウェイと融合させ、能力ではなくガバナンスを前面に売っている。この市場は調達と監査に答えるベンダーを軸に統合していく、という同社自身の見立てが、この予測に必要な購買圧力そのものだ。",
+        "coherence": 3,
+        "remaining_gap": "本日発表された内容に、何かを自動的に修復するものはない。Q4 2026 の期限が迫るなか、CNAPP や AI-SPM のベンダーが該当する機能を挙げた例もない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b1812fc905cd31ea",
+        "short_label": "Humanoid whole-body control adopts force-aware contact evaluation by H1 2027",
+        "prediction_date": "2026-07-12"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Walden Robotics は学習型マニピュレーションの実配備だ。Large Behavior Models と、画像生成の拡散モデルをロボットのマニピュレーションに応用した Diffusion Policy の組み合わせにより、機械は人手で記述した動作ではなく実世界での練習を通じて、接触の多いタスクを習得する。しかもすでにトヨタの工場で生産作業を回している。\n接触の多い学習型制御が生産現場に入ることは、力を考慮した評価が意味を持つ設定そのものだ。しかし今回の発表は、ベンチマークも、評価手法も、いかなる接触力の計測も報告していない。本日は展開の証拠であって、評価基準の証拠ではない。",
+      "reference_links": [
+        {
+          "label": "Walden Robotics - Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today",
+          "url": "https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Diffusion Policy が稼働中の工場のなかで、実世界での練習を通じて接触の多いタスクを学ぶ——これはまさに、力を考慮した評価が意味を持つ展開だ。しかも Walden は、同じ工場群へ攻め込む新しい名前である。だが発表は、ベンチマークも、評価手法も、いかなる接触力の計測も報告していない。",
+        "coherence": 2,
+        "remaining_gap": "実際の接触力のもとでの全身制御の成果を報告したヒューマノイドメーカーや独立系グループはない。本日は展開の証拠であって、評価の証拠ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.02bf6210bbfa3a6e",
+        "short_label": "Frontier-flagship LLM pricing re-anchors to the $10/$50 premium band by Q3 2026",
+        "prediction_date": "2026-06-10"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260610-2、シグナル: Claude Fable 5 $10 input $50 output per million tokens, usage-credit gating after June 22, free Pro/Max/Team/Enterprise cliff, stratified frontier pricing, credit-metered access reference shape, premium-gated top tier）。本日は、その形がそっくり成立した日だ。7 月 20 日から Fable 5 は Max と Team Premium に上限の 50% で残る一方、Pro と Team Standard には一度限りの $100 の利用クレジットが渡され、その後は API 料金を支払うことになる。土台となる週次の上限も同じ日におよそ 3 分の 1 削られるため、この枠は縮む母数に掛かる。\nサブスクリプションの階層で層別された、プレミアムで囲われた旗艦モデルへのクレジット従量制のアクセス——これこそ、この可能性の低い予測が挙げた参照形そのものだ。緊張があるのは構造ではなく価格水準のほうである。Anthropic は GPT-5.6 Sol が同等の性能をはるかに低いコストで提供していることを明示的に認めた。つまりプレミアム帯は、より安価な競合に対して定価を守ることではなく、量を配給することで守られている。",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Claude make Fable 5 permanent",
+          "url": "https://simonwillison.net/2026/Jul/18/claude-make-fable-5-permanent/"
+        },
+        {
+          "label": "the decoder - Anthropic slashes Claude Fable 5 limits in Max and Team Premium",
+          "url": "https://the-decoder.com/anthropic-slashes-claude-fable-5-limits-in-max-and-team-premium-and-pushes-pro-users-toward-api-pricing/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "成立条件の半分は 7 月 20 日に、しかも期限の内側で動き出す。階層で層別され、クレジットで囲われた Fable へのアクセスであり、Pro には $100 のクレジットが 1 回渡されたあとは API 料金となる。もう半分は逆に動いている。Anthropic 自身が、GPT-5.6 Sol がはるかに低いコストで肩を並べると認めた。競合はこの価格帯に加わるのではなく、下から切り崩している。",
+        "coherence": 3,
+        "remaining_gap": "競合するラボで、自社の旗艦モデルをこの価格帯かそれ以上に値付けしたり位置づけ直したりしたところはない。しかも、より安価だと認められた競合は逆方向へ引いている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.1ce328e19c9e6685",
+        "short_label": "Captive in-house fleets will lead paid humanoid deployment by H1 2028",
+        "prediction_date": "2026-06-22"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260622-1、シグナル: captive in-house fleet, automaker logistics giant deploy internally first, at-scale industrial production unit count, ownership consolidation, unit economics labor and downtime）。Walden Robotics の機械は 2026 年 2 月から北米のトヨタ工場で生産作業をこなしており、そのうえでトヨタが、自社の 3 つの投資主体を通じて評価額 $1.1 billion での $300 million のシードを共同リードした。自動車メーカーが最初の本格展開を自社工場の内側で回し、そこで見たものを根拠に出資したということだ。\nこれは、この仮説が予測した内製優先のパターンであり、想定した日程より速く到来している。最初のパイロットから本番の生産タスクまで 2 か月足らずだ。ずれているのは所有形態である。トヨタは完全子会社の計画を運営しているのではなく、第三者ベンダーの少数株主にとどまる。したがってこれは、この予測がいう厳密な意味での自社保有フリートというより、顧客が裏書きしたベンダーと読める。",
+      "reference_links": [
+        {
+          "label": "Walden Robotics - Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today",
+          "url": "https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "内製優先という順序はぴたりと合う。トヨタは 2 月から自社工場で機械を動かし、そこで見たものを根拠に、自社の 3 つの投資主体を通じてラウンドを共同リードした。分かれるのは所有の形だ。第三者ベンダーへの少数株式の保有は、顧客が供給元を裏書きしているのであって、自社保有のフリートではない。",
+        "coherence": 3,
+        "remaining_gap": "台数の開示も、完全子会社としての計画も、どの展開モデルが規模で先行するかを示す証拠もない。トヨタが持っているのは株式であって、フリートではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.ef0bb943bcd4a5d3",
+        "short_label": "Rival humanoid maker lands $500M-plus chip-and-cloud strategic round by Q4 2026",
+        "prediction_date": "2026-06-18"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260618-2、シグナル: Nvidia Amazon Qualcomm Bosch cap table, chip-and-cloud strategics equity, full-stack robot maker, $500 million-plus strategic round, downstream compute-silicon-fleet demand anchor）。Walden Robotics の $300 million のシードは、資本構成をほぼそのまま再現している。チップベンダーとしての NVIDIA、演算の供給元としての CoreWeave Ventures、Samsung Ventures、航空宇宙の元請けとしての Boeing、倉庫事業者のベンチャー部門としての Prologis Ventures が並び、トヨタが共同リードを務める。\n事業会社系の投資家が、川下のシリコンとフリートの需要を押さえるためにロボットメーカーの株式を取る——これがこの予測の描く仕組みであり、投資家の顔ぶれは、見込み顧客に裏書きされた会社という姿を示している。ただし 2 点が基準に届かない。ラウンドは $500 million 超ではなく $300 million であり、Walden が作るのは、この予測が挙げるヒューマノイドの形態ではなく汎用のマニピュレーションロボットだ。",
+      "reference_links": [
+        {
+          "label": "Walden Robotics - Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today",
+          "url": "https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "資本構成の仕組みは、ほぼ文字どおりに再現されている。チップベンダーとしての NVIDIA、演算の供給元としての CoreWeave Ventures、そしてトヨタと並ぶ Samsung、Boeing、倉庫 REIT のベンチャー部門だ。事業会社系の投資家が、川下のシリコンとフリートの需要を押さえるために席を買う——これがそのパターンである。届かない基準が 2 つある。$500 million ではなく $300 million であること、そしてヒューマノイドではなく汎用のマニピュレータであることだ。",
+        "coherence": 3,
+        "remaining_gap": "$500 million 超の戦略ラウンドを発表したヒューマノイドメーカーはない。Walden の形態も、この予測が対象とする範疇の外にある。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.568eecc474844ffb",
+        "short_label": "General-purpose mobile cobots cross 100K production-operation hours by H1 2027",
+        "prediction_date": "2026-06-24"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260624-3、シグナル: general-purpose mobile manipulation, deployment metric not pilot or demo, cumulative cross-customer fleet operating record, hospitals manufacturing logistics）。Walden Robotics は、自社のロボットが 2026 年 2 月からトヨタ工場で実務をこなし、2 か月以内に本番の生産タスク——明示的にパイロットではない——へ到達したと述べている。対象環境は自動車・航空宇宙・半導体・エレクトロニクス・物流・ライフサイエンスにまたがる。\n2 社目の汎用マニピュレーションベンダーが実際の生産時間を積み上げていることは、6 桁のフリート稼働時間という数字がいずれ出てくる母集団を広げる。実演よりも生産作業を強調する姿勢も、この予測が評価する報告のあり方と同じだ。欠けているのは数字そのものである。Walden が開示したのは開始日と業種のリストであって、監査済みの稼働時間でも、顧客横断の稼働記録でもない。",
+      "reference_links": [
+        {
+          "label": "Walden Robotics - Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today",
+          "url": "https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "2 社目の汎用マニピュレーションベンダーが実際の生産時間を積み上げ、しかもこの予測が評価する言葉づかいでそれを語っている——2 月から動いている、明示的にパイロットではない生産タスクだ、と。これは 6 桁のフリート稼働時間という数字が出てくる母集団を広げる。もっとも Walden が公開したのは開始日と業種のリストであって、時間数ではない。",
+        "coherence": 2,
+        "remaining_gap": "顧客横断のフリート稼働時間を監査付きで開示したベンダーはどこにもない。Walden の展開も単一顧客であり、100,000 時間の集計は空欄のままだ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3e6e8b6ae1e7c76e",
+        "short_label": "AI-agent procurement adds a numeric prompt-injection-resistance bar by Q2 2027",
+        "prediction_date": "2026-06-23"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260623-3、シグナル: quantified prompt-injection-resistance score, numeric maximum injection-success rate, named benchmark contract bar, auditable acceptance criterion, indirect 41.67-68.16 percent direct above 79 percent, vendor self-attestation replaced）。OpenAI の GPT-Red の公開は、調達基準が引用するであろう数字をそのまま並べている。新規の間接的プロンプトインジェクションで GPT-5.1 に対する攻撃成功率 84%、同じ場面での人間のレッドチームは 13%、GPT-5.6 Sol の直接注入での失敗率 0.05%、開発者向けツールとブラウジングを対象とする間接注入のベンチマークで 97% を超える正答率、GPT-5.5 に対して 6 分の 1 への削減、そして偽の思考連鎖を用いる攻撃の成功率が 95% 超から 10% 未満へ低下したことだ。\nフロンティアラボが、注入耐性の定量値で公然と競い始めたことこそ、そもそもその数値を契約に書ける状態にする。難点は、この予測が織り込んでいたとおりのものだ。どの数字もベンダーの自己申告であり、しかもベンダー自身の攻撃側に対して計測されている。これは、独立した名前付きベンチマークによる基準が置き換えるはずの自己証明そのものである。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - GPT-Red beat human red teamers on a prompt injection test",
+          "url": "https://www.helpnetsecurity.com/2026/07/16/openai-gpt-red-prompt-injection-test/"
+        },
+        {
+          "label": "The Hacker News - OpenAI's GPT-Red automates prompt injection testing to harden GPT-5.6 Sol",
+          "url": "https://thehackernews.com/2026/07/openais-gpt-red-automates-prompt.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "フロンティアラボが、注入耐性を散文ではなく数字で公然と競い始めた。直接注入での失敗率 0.05%、開発者向けツールとブラウジングを対象とする間接ベンチマークで 97% 超、前世代モデルに対して 6 倍の改善である。ベンダーが自ら差し出す数字は、買い手がいずれ契約に書き込める数字だ。基準はそうやって形になる。",
+        "coherence": 4,
+        "remaining_gap": "どの数字も、ベンダー自身の攻撃側に対する自己申告だ——独立した名前付きベンチマークによる調達関門が置き換えるはずの、まさにその自己証明である。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5e0beac647793331",
+        "short_label": "AMD MI400 will market memory bandwidth over peak FLOPS at Advancing AI",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260702-3、シグナル: AMD MI400, Advancing AI July 22-23 Moscone, KV-cache long-context footprint, HBM sold out through 2026, Hot Chips Stanford August 23-25）。決着の舞台は 4 日後に迫り、本日のカレンダー上で確定している——AMD の Advancing AI が 7 月 22-23 日に Moscone West で開かれ、登録は開幕前に締め切られる。続いて Hot Chips が 8 月 23 日に Stanford で、AI のデータ需要のもとでの HBM の進化をまさに主題としたチュートリアルを開き、Samsung、SK Hynix、NVIDIA、Infineon が顔をそろえる。\nColibri は同じ軸をソフトウェアの側から論じている。その成果はまるごと、744B パラメータのモデルがそもそも動くかどうかを決めるのは演算のスループットではなくメモリの容量と階層である、というものだ。メモリを第一に置く見方が広がっているのは明らかだが、AMD はこの製品をどう位置づけるかについてまだ何も語っていない。決着そのものは、この先に残っている。",
+      "reference_links": [
+        {
+          "label": "Hot Chips 2026 - Tutorials program",
+          "url": "https://hotchips.org/program/tutorials/"
+        },
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "決着の舞台は 4 日後に迫り、日程も確定している——Moscone West、7 月 22-23 日だ。その周りで、この見方は広がり続けている。Hot Chips は 8 月 23 日に開幕し、HBM の進化を扱うチュートリアルに Samsung、SK Hynix、NVIDIA、Infineon を集める。一方 Colibri は同じ主張をソフトウェアで示す。何が動くかを決めるのは演算ではなく、容量と階層だ、と。",
+        "coherence": 3,
+        "remaining_gap": "AMD は、この製品をどう位置づけるかについて何も語っていない。この予測を決める基調講演は、まだ行われていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.82599b6cfd05751b",
+        "short_label": "Consumer-GPU coding agents displace cloud-only APIs for 30% of devs by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260426-3、シグナル: consumer-GPU coding agent, cloud-only API, hybrid harness, local-first toggle, 75% off API, Cursor Windsurf Kiro Power）。本日は両方向に同時に押している。置き換えを促す側では、Anthropic の価格改定がおよそ $20 の階層から定額でのフロンティアモデル利用を取り去った——これはまさに、開発者をローカルの計算資源探しへ向かわせるコストの衝撃だ。さらに Kilo Code のゲートウェイは、オープンウェイト・フロンティアクラウド・自社ホストのエンドポイントにまたがって振り分け、初期顧客はトークン消費を 30〜50% 削っている。\n逆向きには、Colibri のフロンティア規模のローカル実行が毎秒 0.05〜0.1 トークンにとどまり、対話的なコーディングには使えない。そして Kilo 単体で、300 万人を超える開発者にわたり月におよそ 10 兆トークンを差配している——実際の作業がどこで行われているかを示す、クラウド規模の量だ。この予測が頼りにする価格圧力は現実であり、しかも強まっている。ただしローカルの代替は、それを吸収できるだけの速さにまだ達していない。",
+      "reference_links": [
+        {
+          "label": "Simon Willison - Claude make Fable 5 permanent",
+          "url": "https://simonwillison.net/2026/Jul/18/claude-make-fable-5-permanent/"
+        },
+        {
+          "label": "Anaconda - Anaconda Acquires Kilo Code",
+          "url": "https://www.anaconda.com/blog/anaconda-acquires-kilo-code"
+        },
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Kilo Code のゲートウェイは確かに、オープンウェイト・自社ホスト・フロンティアクラウドのエンドポイントにまたがって振り分けている——ハイブリッドの姿だ。そして Anthropic の価格改定は、開発者をローカルへ押しやるはずのコストの衝撃を供給する。だが計測値は逆を示す。Kilo 単体で 300 万人の開発者のために月におよそ 10 兆トークンを動かし、Colibri は毎秒 0.1 トークンの速さで這っている。",
+        "coherence": 2,
+        "remaining_gap": "Cursor・Windsurf・Kiro のいずれからも、ローカル優先を既定にする切り替えは出ていない。開発者シェアの計測もないまま、Q3 2026 の期限が閉じつつある。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.bcace95fe3e753d1",
+        "short_label": "27B Dense + 1M context becomes default enterprise local-LLM recipe by Q3 2026",
+        "prediction_date": "2026-04-23"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260423-2、シグナル: 27B Dense, no MoE, VRAM floor, on-prem inference, RTX 4090, RTX 6000, H100）。本日のローカル推論の話題は、このレシピの真逆に位置する。Colibri は 744B パラメータのスパースな Mixture-of-Experts モデルを、19,456 のルーティング対象エキスパートを LRU キャッシュのもとでディスクから流し込みつつ動かし、トークンあたりで活性化するのは約 40B にとどまる。しかもマシンの RAM は 25GB、GPU は一切ない——dense ではなくスパース、VRAM に縛られるのではなくディスク常駐であり、この dense な中規模レシピを生んだ「収まるまで量子化する」やり方を明確に退けている。\nこの予測が拠り所とする VRAM の下限は、容量を実時間と引き換えにできるようになった時点で、拘束力のある制約ではなくなる。本日、dense な 27B を既定とする材料は何もない。ローカル推論における関心は逆方向へ動いている。",
+      "reference_links": [
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "本日のローカル推論の話題は、このレシピの真逆に位置する。Colibri は 744B パラメータのスパースな Mixture-of-Experts モデルを、ルーティング対象のエキスパートをディスクから流し込みながら、GPU が一切ないマシンで動かす——dense ではなくスパース、VRAM 依存ではなくディスク常駐だ。このレシピが拠り所とする汎用 VRAM の下限は、容量が実時間と引き換えになった時点で拘束力を失う。",
+        "coherence": 1,
+        "remaining_gap": "dense な中規模モデルを既定とする材料は本日どこにもない。20〜30B の dense モデルをベンダーが公開した例もなく、Q3 2026 の期限はほぼ使い切られている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a2d6a1d80d9edd87",
+        "short_label": "Orchestration benchmarks add a latency-disclosure column by Q1 2027",
+        "prediction_date": "2026-06-24"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260624-2、シグナル: quality bought with wall-clock time, accuracy-only leaderboards, latency end-to-end wall-clock reporting axis, per-task time-to-completion disclosure）。Colibri は、能力の主張と同じ息で処理速度の代償を公表している。12 コアのマシンで毎秒 0.05〜0.1 トークン、ハイエンドのハードウェアでは 1.23 に達したというコミュニティからの報告、そして、これは対話的なチャットではなくバッチ処理の領域だという作者自身の位置づけだ。\n何が動かせるかと並べて実時間を明示すること——能力だけを報告して時間の代償を暗黙のままにしないこと——は、この予測がベンチマークに定式化を期待する開示の規範であり、ここではプロジェクト自身から自発的に現れた。ただしこれはリーダーボードの列ではなくプロジェクトの README であり、本日、レイテンシの項目を追加したオーケストレーションのベンチマークはない。",
+      "reference_links": [
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "開示の規範が、自発的に、しかも思わぬ方向から現れた。Colibri は能力の主張と同じ息で処理速度の代償を述べている——毎秒 0.05〜0.1 トークン、コミュニティからの報告では 1.23 まで。そして作者は、時間の代償を暗黙にとどめず、この成果をバッチ処理の領域として位置づけている。",
+        "coherence": 3,
+        "remaining_gap": "これはベンチマークの列ではなくプロジェクトの README だ。本日、オーケストレーションの同等性の主張について、レイテンシやタスクあたりのコストという軸を定式化した評価機関はない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.9eb6e9888959d4b6",
+        "short_label": "Local-LLM runtimes ship in-model speculative decoding on by default by Q2 2027",
+        "prediction_date": "2026-07-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260705-1、シグナル: llama.cpp vLLM MLX-LM opt-in, LM Studio, Ollama, paired-draft on-by-default, on-device-to-hosted throughput gap）。Colibri は、MLA と DSA のスパースアテンション、文法で制約した生成、任意の CUDA・Metal バックエンドと並んで、投機的デコーディングを機能一覧に載せて出荷している。生まれたばかりのローカルエンジンが、投機的デコーディングを上級者向けの任意設定ではなく標準装備として扱っているということだ。\nさらに、この予測が懸かっている処理速度の差も際立たせる。毎秒 0.05〜0.1 トークンは、ローカルの利用者が容量と引き換えに差し出す限界の端を示すからだ。予測との隔たりはこうだ。Colibri は、挙げられている主流のランタイムのひとつではなく、依存関係を持たない若い C のプロジェクトである。そしてその投機的デコーディングは、一覧に載った機能であって、既定で有効だと文書化された経路ではない。",
+      "reference_links": [
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "生まれたばかりのエンジンが、スパースアテンションや文法で制約した生成と並べて、投機的デコーディングを基本機能に載せている。上級者向けのつまみではなく標準装備としての扱いであり、技術が既定になるのはこの経路だ。ただし毎秒 0.1 トークンの世界では高速化はほとんど体感できず、Colibri は挙げられている主流のランタイムのひとつでもない。",
+        "coherence": 2,
+        "remaining_gap": "リリースノートで投機的デコーディングを既定で有効に切り替えた、2 つ目の主流ランタイムは出ていない。Colibri が載せているのは機能であって、文書化された既定ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c92cd5fcd22d0200",
+        "short_label": "Snowflake ships a metered Claude-in-Cortex governed-data agent tier by Q4 2026",
+        "prediction_date": "2026-06-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 休眠プールとの一致（20260602-2、シグナル: governed data no egress, compliance wedge finance healthcare public-sector, credit-based consumption SKU, per-agent-run per-token pricing, named growth line）。このパターンの両半分が、本日それぞれ別の名前で現れている。Anaconda による Kilo Code の買収は、統制されたエージェント階層を作る——エージェントのオーケストレーションをパッケージの来歴とポリシー層と組み合わせ、企業が自社のコーディングエージェントの挙動と、どのモデルを呼んでいるかを監査できるようにするものだ。一方 Anthropic は、Pro と Team Standard の加入者を一度限りの $100 のクレジット、その後は API 料金という形に置いた。クレジット従量制のエージェント利用が、主流の課金形態として出荷されたことになる。\nガバナンスという切り口も、従量課金の SKU も、同じ週にそろって裏づけられている。ただし Snowflake によってではない。本日、Cortex にも、Claude-in-Cortex の統合にも、いかなる Snowflake のエージェント階層にも言及したものはない。",
+      "reference_links": [
+        {
+          "label": "Anaconda - Anaconda Acquires Kilo Code",
+          "url": "https://www.anaconda.com/blog/anaconda-acquires-kilo-code"
+        },
+        {
+          "label": "Simon Willison - Claude make Fable 5 permanent",
+          "url": "https://simonwillison.net/2026/Jul/18/claude-make-fable-5-permanent/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "このパターンの両半分が、本日それぞれ別の名前で現れている。Anaconda はオーケストレーションをパッケージの来歴とポリシーに融合させ、統制されたエージェント階層を作る。Anthropic はクレジット従量制での旗艦モデル利用を、主流の課金形態として出荷する。この予測の背後にある市場の論理は、Snowflake ではない 2 社によって、Cortex ではない土台の上で裏づけられている。",
+        "coherence": 2,
+        "remaining_gap": "本日、Snowflake にも Cortex にも Claude-in-Cortex の SKU にも言及したものはない。Q4 2026 の期限が狭まるなか、消費量に関する言及も現れていない。"
+      }
+    }
+  ]
+}
