@@ -1,0 +1,105 @@
+{
+  "date": "2026-07-17",
+  "sections": [
+    {
+      "category": "Moonshot AI、2.8兆パラメータのオープンウェイト MoE「Kimi K3」を公開。Frontend Code Arena で首位、全重みは7月27日公開予定",
+      "bullets": [
+        {
+          "body": "Moonshot AI は7月16日、<a href=\"https://www.kimi.com/blog/kimi-k3\">Kimi K3 を公開した</a>。同社がこれまでに構築された中で最大のオープンウェイトモデルと称する本モデルは、総パラメータ2.8兆のスパースな Mixture-of-Experts トランスフォーマーで、Stable LatentMoE フレームワークにより896個のエキスパートのうち実質16個を活性化させる。あわせて、ネイティブの100万トークンのコンテキストウィンドウ、常時オンの推論モード、ネイティブの視覚理解を備える。リリースを支えるのは、自社開発の2つのアーキテクチャ変更だ。1つはハイブリッドな線形アテンション機構である Kimi Delta Attention、もう1つは標準的な残差接続をそのまま置き換える Attention Residuals で、後者は表現を層全体で一律に積み上げるのではなく、深さ方向に選択的に取り出す。ベンチマークでは、Frontend Code Arena で1,679を記録して首位に立ち、Claude Fable 5、GPT-5.6 Sol、GLM-5.2 を上回った。Artificial Analysis Intelligence Index では約57で、189モデル中4位につけ、Claude Opus 4.8 および GPT-5.5 と並ぶ。モデルは現在 API 経由で利用でき、料金は入力100万トークンあたり約 $3、出力100万トークンあたり約 $15。Moonshot は7月27日までに全重みを公開するとしており、同日一括での公開ではなく、まず API で先行し、オープンウェイトを後から届ける形になる。<a href=\"https://simonwillison.net/2026/Jul/16/kimi-k3/\">Simon Willison の解説</a>は、これを、米国のコンピュート輸出規制を回避しつつ最前線に迫る成果を上げた、また一つの中国の研究所の事例として位置づけている。",
+          "citations": [
+            {
+              "label": "Moonshot AI - Kimi K3",
+              "url": "https://www.kimi.com/blog/kimi-k3"
+            },
+            {
+              "label": "Simon Willison - Kimi K3, and what we can still learn from the pelican benchmark",
+              "url": "https://simonwillison.net/2026/Jul/16/kimi-k3/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Fireworks AI、評価額 $17.5B で $1.5B のシリーズ D を調達。ARR は $1B を、処理量は1日40兆トークンを超え、特化型モデルの推論基盤を拡大へ",
+      "bullets": [
+        {
+          "body": "Fireworks AI は今週、<a href=\"https://fireworks.ai/blog/series-d-announcement\">評価額 $17.5 billion で $1.505 billion のシリーズ D を発表した</a>。Atreides Management、Index Ventures、TCV が主導し、NVIDIA、Lightspeed Venture Partners、Bessemer Venture Partners、Menlo Ventures ほかが参加した。同社によれば、年率換算収益は $1 billion を超え、前回ラウンドからおよそ5倍に伸びた。処理量はいまや1日40兆トークンを超え、その95%超は、汎用のフロンティアのエンドポイントではなく、顧客自身の独自データで特化させたモデルからのものだという。同社の売りは、マネージド推論の層にある。すなわち、200を超えるモデルを載せた高性能な提供スタックの上で、汎用モデルを同社の言う「特化型知能」へと作り替え、新しいオープンウェイトの公開にも即日で対応する。これにより、Together や Baseten、そして同業のホスティング型推論の各社と肩を並べ、いまやフロンティア級の経済性を持つに至った領域に位置づけられる。調達資金は、計算資源の増強、エンジニアの増員、そしてプラットフォームに充てられる。企業が、借り物のフロンティアのエンドポイントを使う側から、特化させたモデルを自ら持つ側へと移るなか、NVIDIA が株主に名を連ねていることは、提供とファインチューニングの層がいかに戦略的になったかを浮き彫りにする。",
+          "citations": [
+            {
+              "label": "Fireworks AI - Fireworks Secures $1.5 Billion in Series D Funding",
+              "url": "https://fireworks.ai/blog/series-d-announcement"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Claude Code、v2.1.212 を公開。エージェントの安全策を既定で有効化。WebSearch の呼び出しとサブエージェントの生成に上限を設け、Bash の許可チェックを安全側に倒す修正も加える",
+      "bullets": [
+        {
+          "body": "Anthropic の Claude Code は7月17日、<a href=\"https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md\">バージョン 2.1.212 に到達した</a>。目玉となる追加は、機能というよりエージェントの安全対策のガードレールだ。新たに、セッション全体の上限が WebSearch ツールの呼び出しを既定で200回に制限し(CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION で調整可能)、セッションごとの上限がサブエージェントの生成を既定で200に制限する(CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION)。いずれも、暴走する検索と委任のループを止めるためのもので、/clear でこの上限がリセットされる。さらに /fork は、会話を専用のバックグラウンドのエージェントセッションに複製するようになり、委任した一連の作業がメインスレッドを塞がずに進む。許可システムの修正は、セキュリティ上の核心だ。Bash の許可チェックは、bash が許可の解析器とは異なる解釈をするファイルディスクリプタのリダイレクト形式に対して、安全側に倒れて拒否するようになった。Windows PowerShell 5.1 のセッションに影響する許可チェックのバイパスはふさがれ、10,000文字を超えるコマンドは自動実行されず、常に確認を求めるようになった。これは、暴走ループを抑える上限と、安全側に倒れる許可の制御——今年のエージェントによる情報流出の一連の事案の後に、ローカルのファインチューニングツールや MCP セキュリティのベンダーが採り入れた語彙——が、主流のコーディングエージェントの内部に、既定で有効な形で載り始めたことの、具体的な証しだ。",
+          "citations": [
+            {
+              "label": "Anthropic - Claude Code CHANGELOG (v2.1.212)",
+              "url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "WAIC 2026 が上海で開幕。108個のチップと208の身体性 AI システムが並び、Dongfang Suanxin の HBM 非搭載・14nm チップ DF1000 を筆頭に国産シリコンへの注力が際立つ",
+      "bullets": [
+        {
+          "body": "<a href=\"https://news.cgtn.com/news/2026-07-17/AI-conference-opens-in-Shanghai-with-over-300-global-product-debuts-1OQQf08iaqs/p.html\">2026年の世界人工知能大会(WAIC)が7月17日、上海で開幕した</a>。会期は7月20日まで、出展者は1,100を超え、展示は3,000を超え、世界初公開の製品は300を超える。主催者は会場に、108個のチップ、261の基盤モデル、208の身体性知能の端末を数える。人型のサービスロボットが目玉の一つで、大会は、競争がソフトウェアを越えて計算能力と知的ハードウェアへと広がっていることを、明確に前面に押し出している。最も鋭いハードウェアのシグナルは、米国の輸出規制を織り込んで設計された国産シリコンだ。ステルスを脱したばかりの上海のスタートアップ Dongfang Suanxin は、<a href=\"https://www.trendforce.com/news/2026/07/14/news-chinas-dongfang-suanxin-unveils-hbm-free-14nm-ai-chip-claims-higher-memory-bandwidth-than-nvidia-h200/\">DF1000 アクセラレータを発表した</a>。成熟した14nm ノードで作られ、HBM を使わず、ソフトウェア定義の設計と3D 積層のニアメモリコンピューティングを用いて、BF16 で520 TFLOPS、メモリ帯域幅で6.4 TB/s をうたう。帯域幅では NVIDIA の H200 をおよそ33%上回る一方、生の演算性能は H200 の半分ほどにとどまる。量産は2026年末を目標とし、第4四半期には性能を2倍にした DF2000 が予告されている。十社を超える中国の汎用計算チップのベンダーがそろって出展するなか、WAIC は、中国が、プロセスの微細化ではなく、ノードの選択と先端パッケージングによって最先端のリソグラフィと HBM を回避しようとする姿を、今週最もはっきりと切り取った一枚だ。",
+          "citations": [
+            {
+              "label": "CGTN - AI conference opens in Shanghai with over 300 global product debuts",
+              "url": "https://news.cgtn.com/news/2026-07-17/AI-conference-opens-in-Shanghai-with-over-300-global-product-debuts-1OQQf08iaqs/p.html"
+            },
+            {
+              "label": "TrendForce - China's Dongfang Suanxin unveils HBM-free 14nm AI chip",
+              "url": "https://www.trendforce.com/news/2026/07/14/news-chinas-dongfang-suanxin-unveils-hbm-free-14nm-ai-chip-claims-higher-memory-bandwidth-than-nvidia-h200/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Check Point の『AI Security Report 2026』、AI がいまや実際の侵入を自律的に実行していると指摘。セッションごとに読み込み直されるエージェントの設定ファイルに仕込まれた、永続的なジェイルブレイクにも警鐘",
+      "bullets": [
+        {
+          "body": "Check Point は今週、<a href=\"https://research.checkpoint.com/2026/ai-security-report-2026/\">『AI Security Report 2026』を公表した</a>。<a href=\"https://www.helpnetsecurity.com/2026/07/15/check-point-ai-security-report-2026/\">7月15日の分析</a>は、小刻みな更新ではなく、一線を越えた出来事として読める。報告書は、AI が開発の補助役から、実際に攻撃を実行する主体へと移ったと論じる。AI がエクスプロイトの手順を自律的に進めた侵入が記録されており、そこでは、人間の指示を最小限に、数十のセッションにわたって数千のコマンドが生成された。ある攻撃者が AI を使って、88,000行のコマンド&コントロール(C2)フレームワーク VoidLink を1週間足らずで作り上げた事例もある。エージェントを運用する者にとって、際立つ構造的な発見が2つある。1つは、攻撃者が単発のプロンプトよりも、エージェントの仕組みそのものを悪用する傾向を強めていることだ。具体的には、エージェントがセッションをまたいで自動で読み込む設定ファイルに悪意ある指示を仕込む、永続的な回避手法である。これは、エージェントが利用者に代わって読み込む、リポジトリやコンテキストファイルの類だ。もう1つは、より長い悪意あるペイロードの検知が、2026年3月から5月にかけておよそ5倍に増え、観測されたプロンプトの1%に迫ったことである。高リスクの AI とのやり取りは前年比で倍増し、プロンプトの約4%に達した。訓練を受けたレビュアーが AI 生成の顔を正しく見分けられたのは、およそ41%にとどまった。これは、コンテキストファイルの汚染と自律的なエクスプロイトを、実験室の実演ではなく、運用上の大規模な問題として、今年の Cursor や MCP の事案と並べて俎上に載せるものだ。",
+          "citations": [
+            {
+              "label": "Check Point Research - AI Security Report 2026",
+              "url": "https://research.checkpoint.com/2026/ai-security-report-2026/"
+            },
+            {
+              "label": "Help Net Security - Check Point AI Security Report 2026",
+              "url": "https://www.helpnetsecurity.com/2026/07/15/check-point-ai-security-report-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま予定に組み込むべき AI イベント:AGI Summit が今週末サンフランシスコで開催、AMD Advancing AI が7月22〜23日に続き、秋のベイエリアはチップ・セキュリティ・開発の各トラックで日程が積み上がる",
+      "bullets": [
+        {
+          "body": "最も近い判断は、もう待ったなしだ。<a href=\"https://luma.com/agisummit2026\">AGI Summit は7月18〜19日、サンフランシスコの Palace of Fine Arts で、この週末に開かれる</a>。Anthropic、OpenAI、Microsoft、Meta、Tesla が顔ぶれに並ぶ、200名を超える登壇者の集まりだ。そのすぐ後ろに、7月22〜23日、Moscone West での AMD Advancing AI 2026 が続く。ここでは、Lisa Su とパートナーが、Instinct MI450 アクセラレータと Zen 6 EPYC「Venice」CPU について詳しく説明すると見込まれる。AI チップとインフラの流れでは、カレンダーはその後、8月23〜25日にスタンフォードでの Hot Chips(早期登録は7月31日締め切り)、そして<a href=\"https://ai-infra-summit.com/events/ai-infra-summit\">9月15〜17日にサンタクララ・コンベンションセンターでの AI Infra Summit</a>へと進む。後者は、シリコン、AI データセンター、フィジカル AI を扱う。AI セキュリティの一角は8月初旬に集中する。8月1〜6日にラスベガスで Black Hat USA と DEF CON 34 の AI Village、8月11〜12日に Half Moon Bay で SecurityWeek の AI Risk Summit、11月5〜6日にサンフランシスコで OWASP Global AppSec USA、そして、エージェントの乗っ取りや MCP 層の防御に取り組むチーム向けの Zenity の AI Agent Security Summit シリーズが並ぶ。開発者とデータの流れでは、Ai4 2026 が8月4〜6日にラスベガスで、Anyscale の Ray Summit が8月24〜26日にサンフランシスコで、AI Tinkerers San Francisco のミートアップが8月に、ACM AI Leadership Summit が8月30日〜9月2日にアトランタで開かれる。The AI Conference(Pier 48)と OpenAI DevDay(Fort Mason)はいずれも9月29日で、Runway AI Summit がその翌日に続く。さらに、PyTorch Conference North America が10月20〜21日にサンノゼで、World Summit AI が10月7〜8日にアムステルダムで、GitHub Universe が10月28〜29日、AWS re:Invent が11月30日〜12月4日に開かれ、12月には NeurIPS、12月7〜9日にサンタクララ・コンベンションセンターで IEEE-RAS Humanoids、そして12月9〜10日の The AI Summit New York が年を締めくくる。当面の行動はこうだ。土曜までに AGI Summit への参加を決め、7月22日より前に AMD Advancing AI に登録し、8月初旬のラスベガスのセキュリティ枠を予約する前に、7月31日の Hot Chips の早期料金を確保する。",
+          "citations": [
+            {
+              "label": "AGI Summit 2026 - July 18-19, Palace of Fine Arts, San Francisco",
+              "url": "https://luma.com/agisummit2026"
+            },
+            {
+              "label": "AI Infra Summit 2026 - September 15-17, Santa Clara Convention Center",
+              "url": "https://ai-infra-summit.com/events/ai-infra-summit"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
