@@ -1,0 +1,125 @@
+{
+  "date": "2026-07-19",
+  "sections": [
+    {
+      "category": "Alibaba、2.4兆パラメータの Qwen3.8 をプレビュー公開し、オープンウェイトでの提供を約束。1兆パラメータの線を越えた同社初のマルチモーダルモデル",
+      "bullets": [
+        {
+          "body": "Alibaba の Qwen チームは本日、<a href=\"https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/\">Qwen3.8 を2.4兆パラメータで投入し、オープンウェイトでも公開する</a>と述べた。画像、動画、文書を受け取る、1兆パラメータの線を越えた Qwen 初のマルチモーダルモデルである。ただし、実際に使える順序は逆だ。Qwen3.8-Max-Preview は、Alibaba の Token Plan、Qoder、QoderWork を通じて、通常の10分の1の価格ですでに提供が始まっている。一方、オープンウェイトでの公開は約束されただけで、日付がない。Alibaba の主張は、このモデルが一般提供されている系のなかで Claude Fable 5 に次ぐ位置にあり、コーディングと複雑な生産性の作業では Qwen3.7-Max を上回るはずだ、というものだ。だが<a href=\"https://officechai.com/ai/alibaba-qwen-3-8/\">そのどちらの主張についても、裏づけとなるベンチマークの結果は公開されていない</a>。注目に値するのは、プレビューが先、公開が後という、この順序そのものである。Alibaba は、発表と同時に重みも手に入る形で最上位のモデルを出すことによって評判を築いてきた。Qwen3.8 は、まずプレビューの期間を収益化するという Qwen3.6-Max の型をなぞっており、つまり今回の発表は、提供ではなく約束だということになる。時期としては、2.8兆パラメータの Kimi K3 を出した Moonshot の3日後にあたる。その Moonshot は年間経常収益がおよそ $300 million と伝えられ、半年以内の IPO を目指しているとされる。パラメータ数の競争と、資本市場での競争とが、いまや同じ時計の上を動いているわけだ。オープンとクローズドの差を追う立場からすれば、長く残る観察はこうなる。世界で発表済みの最大のオープンウェイトのモデル2つは、どちらも中国のもので、どちらも2兆パラメータを超え、そしてどちらも同じ1週間のうちに発表された。",
+          "citations": [
+            {
+              "label": "the decoder - Alibaba's Qwen takes on Kimi K3 with open-weight Qwen 3.8",
+              "url": "https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/"
+            },
+            {
+              "label": "OfficeChai - Alibaba Announces 2.4 Trillion-Parameter Open-Weight Qwen 3.8",
+              "url": "https://officechai.com/ai/alibaba-qwen-3-8/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "NadMesh と呼ばれるボットネットが、公開状態の Ollama、ComfyUI、Langflow のインスタンスをインターネット上で探し出し、クラウドの認証情報を抜き取る",
+      "bullets": [
+        {
+          "body": "QiAnXin の XLab が、<a href=\"https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html\">NadMesh と名づけたボットネットの分析を公開した</a>。狙うのは通常の Web の標的ではなく、自前で運用されている AI の基盤である。公開状態の ComfyUI、Ollama、n8n、Open WebUI、Langflow、Gradio の各インスタンスだ。侵入した後に持ち去るのは、計算資源ではなく認証情報である。環境変数からのクラウドの鍵、Kubernetes のサービスアカウントのトークン、~/.aws/config、.env、~/.docker/config.json の中身。それに加えて、モデルへのアクセスと、そのホストから呼び出せる MCP のツール一式も持っていく。7月10日に取得された運用者自身のダッシュボードは、直近100件の記録で3,811個の重複しない AWS の鍵と、47回の認証情報の収集を主張していた。一方、XLab のセンサーが観測したのは、1日あたりおよそ139の異なる送信元 IP である。運用者側のこれらの数字は疑ってかかるべきだ。同じダッシュボードには、累計17,700という配備の計数の上に、直近24時間で95,700と称する導線が載っており、その両方が同時に成り立つことはありえない。最初の侵入口は、AI に固有の何かではなく、ありふれた設定の誤りに偏っている。観測された通信のうち、Docker API を介した遠隔でのコード実行が30.31%、Jenkins のスクリプトコンソールでの実行が22.28%、telnet の弱いパスワードが10.36%、Redis が8.29%を占める。勧められている対処は身も蓋もない。8188、11434、7860、5678 の各ポートを認証の後ろに置くか、公開のインターネットから外す。そして、到達可能だった認証情報はすべて入れ替える。構造として変わったのは、ローカル推論の一式が、それ自体として認証情報の窃取の標的になったことだ。これらのツールを気持ちよく動かせるようにしていた既定値——広く待ち受け、認証を省き、鍵を環境変数に置いたまま——は、いまや列挙された攻撃対象領域である。クラウドの認証情報のファイルの隣で Ollama を動かしているワークステーションは、趣味の環境ではなく、そのファイルが持つアカウントへ横方向に入り込むための経路なのだ。",
+          "citations": [
+            {
+              "label": "The Hacker News - New NadMesh botnet hunts exposed AI services for cloud keys and Kubernetes tokens",
+              "url": "https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Moonshine Micro、音声の検出、音声認識、ニューラル音声合成を、80セントのマイクロコントローラの RAM 470KB に収める",
+      "bullets": [
+        {
+          "body": "Moonshine AI が <a href=\"https://github.com/moonshine-ai/moonshine/tree/main/micro\">Moonshine Micro</a> を公開した。MIT ライセンスの音声処理の一式で、音声区間の検出、音声認識、ニューラル音声合成という一連の流れ全体を、マイクロコントローラの上で動かす。参照プラットフォームは Raspberry Pi RP2350、小売価格は80セント前後である。主張の中身はメモリの見積もりのほうにある。検出におよそフラッシュ89 KiB と SRAM 36 KiB、SpellingCNN の認識器におよそフラッシュ1.3 MiB と SRAM 346 KiB、ニューラルのダイフォン方式の音声パックにおよそ1.8 MiB と 340 KiB。組み上げたデモは、処理の段どうしでメモリを分け合うことによってフラッシュ3.6 MiB 前後、SRAM およそ468 KiB に収まり、全体が RP2350 の 520 KiB の内側に入る。認識できるのは独自の語や言い回しがおよそ50件で、アプリケーション自身の語彙へ学習し直すことができる。音声を入れてから音声が出るまでは、TensorFlow Lite Micro の上でおよそ0.7〜1.0秒である。<a href=\"https://blog.adafruit.com/2026/07/15/voice-activity-detection-speech-to-text-and-text-to-speech-all-on-rp2040\">参照用のデモでは、利用者が wifi の接続設定を声だけで済ませる</a>。これが主張の縮図だ。クラウドへの往復もなく、API キーもなく、アカウントもいらない。これは、フロンティア級の能力をワークステーションに押し込める方向とは、ローカルモデルの帯の反対の端に位置する。大きなモデルを収まるまで縮めるのではなく、本当に役に立つ言語の入り口として最小のものは何かを問い、<a href=\"https://www.hackster.io/news/voice-control-goes-ultra-low-cost-with-moonshine-micro-ea2817ec9d20\">使い捨ての機器に載せられるほど安い部品表</a>で答えている。7月18日に Hacker News の首位に達したが、その理由はおそらく、2つの前提を同時に外したことにある。音声の操作には、電話並みのシステムオンチップか、ネットワークの接続か、そのどちらかが要るとされてきた。これはどちらも要らない。",
+          "citations": [
+            {
+              "label": "GitHub - moonshine-ai/moonshine (micro)",
+              "url": "https://github.com/moonshine-ai/moonshine/tree/main/micro"
+            },
+            {
+              "label": "Adafruit Blog - Voice-activity detection, speech to text, and text to speech all on RP2040",
+              "url": "https://blog.adafruit.com/2026/07/15/voice-activity-detection-speech-to-text-and-text-to-speech-all-on-rp2040"
+            },
+            {
+              "label": "Hackster.io - Voice Control Goes Ultra-Low-Cost with Moonshine Micro",
+              "url": "https://www.hackster.io/news/voice-control-goes-ultra-low-cost-with-moonshine-micro-ea2817ec9d20"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "研究者ひとりの10ページのプロンプトで、GPT-5.6 が1996年から残っていた、微分を使わない凸最適化のオラクル計算量の隔たりを埋める",
+      "bullets": [
+        {
+          "body": "<a href=\"https://arxiv.org/abs/2607.13335\">Phillip Kerger が7月14日に証明を投稿した</a>。d 次元のユークリッド球の上で凸なリプシッツ関数を最小化する際、決定的な手続きで、しかも厳密な関数値だけを用いるのであれば、精度 Theta(d^-1/2) において Omega(d^2 / log(d+1)) 回の問い合わせが必要になる、という内容である。これによって、既知の下界 Omega(d) と、Protasov による関数値のみの O(d^2 log^2 d) の手法との間に1996年から空いていた隔たりが、多重対数の因子を除いて埋まった。同じ道具立ては混合整数の場合にも及び、連続変数 d 個と離散変数 n 個に対しておよそ d^2 かける 2^n 回の問い合わせとなる。その来歴が表に出たのは7月18日、Kerger が<a href=\"https://news.ycombinator.com/item?id=48957779\">その過程を公に語った</a>ときだ。この問題に自分でおよそ1年取り組み、GPT-5.4 と GPT-5.5 では成果が出ず、そのうえで、文献にある妥当な筋道を並べた、およそ10ページに及ぶプロンプトを書いた。その後 GPT-5.6 が議論を組み立て、あわせて Lean による形式化まで生成した。本人の言い方では、解そのものではなく、AI という請負人に設計上の方向を与えたのだという。そして、この1年に及ぶ失敗の積み重ねこそが10ページのプロンプトを書けるようにしたのだ、とコメント欄はすかさず指摘した。64のエージェントを並列に走らせ、いまだ形式化も査読もされていない OpenAI の Cycle Double Cover の発表と並べると、こちらのほうが小さいがゆえに重みのある事例である。モデルの実体は1つ、主張の責任を負う人間の著者は1人、そして最後に残るのは機械で検証できる成果物だ。この種の結果が積み上がるかどうかを決める変数は、エージェントの数ではなく検証である。",
+          "citations": [
+            {
+              "label": "arXiv:2607.13335 - Closing the Oracle-Complexity Gap in Derivative-Free Convex Optimization",
+              "url": "https://arxiv.org/abs/2607.13335"
+            },
+            {
+              "label": "Hacker News - GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
+              "url": "https://news.ycombinator.com/item?id=48957779"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "DeepSeek、評価額 $74 billion で2か月に2度目の調達を並べる一方、上海の STAR Market への上場の検討を開始",
+      "bullets": [
+        {
+          "body": "<a href=\"https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/\">DeepSeek が、およそ5,000億元、$74 billion 前後の評価額で資金調達を準備している</a>。調達額は最大500億元。6月のラウンドでポストマネー評価額4,500億元前後、約 $7.4 billion を集めてから、わずか数週間での引き上げである。あわせて同社は、上海の STAR Market(科創板)への上場について早い段階の検討を始めており、年内に IPO の申請を終えるという社内の目標を置いている。条件も日程もどちらも定まっていないとされ、米国での上場は、中国の AI 企業に対する米議会の監視を踏まえると現実的ではないと扱われている。押さえておく価値があるのは、6月のラウンドの株主の顔ぶれだ。創業者の梁文鋒が個人で200億元を拠出し、Tencent が100億元、電池メーカーの CATL が50億元を投じて、外部では最大の保有者となった。そして<a href=\"https://www.gulf-times.com/article/729325/business/chinas-deepseek-seen-to-raise-fresh-capital-at-74bn-valuation-ahead-of-onshore-ipo/amp\">中国の国家 AI 投資基金が、外部としては唯一の取締役会の議決権を握っている</a>。これを見出しではなく分水嶺にしているのは、何が置き換わるかである。DeepSeek は長年、梁氏のクオンツファンド High-Flyer の資金で回ってきた。その自前の資金こそが、外部の資本にも四半期ごとの締め切りにも答えることなく、安価なオープンウェイトのモデルを出し続けることを可能にしていた。2か月で2度の調達に加えて申請の目標があるということは、計算資源、データセンターの容量、人材の費用が、ヘッジファンドの貸借対照表で吸収できる範囲を超えたということだ。フロンティアの仕事は安くできると証明して名を上げたラボが、いまやほかのみなと同じやり方でそれを賄っている。",
+          "citations": [
+            {
+              "label": "Capacity - DeepSeek eyes $74bn valuation in fresh funding round ahead of China IPO",
+              "url": "https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/"
+            },
+            {
+              "label": "Gulf Times - China's DeepSeek seen to raise fresh capital at $74bn valuation ahead of onshore IPO",
+              "url": "https://www.gulf-times.com/article/729325/business/chinas-deepseek-seen-to-raise-fresh-capital-at-74bn-valuation-ahead-of-onshore-ipo/amp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま予定に組み込むべき AI イベント:AGI Summit は本日閉幕、WAIC は明日閉幕、AMD Advancing AI は開幕の3日前に現地参加の枠が満席",
+      "bullets": [
+        {
+          "body": "いちばん近いのは今日だ。AGI Summit は最終日の7月19日、午前9時から午後5時まで、サンフランシスコの Lyon Street 3301、Palace of Fine Arts で開かれる。登壇者は OpenAI、Anthropic、Google DeepMind、Stanford、Berkeley、MIT から。当日券は $199 から、有効な .edu のアドレスがあれば学生料金は $49 だった。上海の WAIC 2026 は明日7月20日に閉幕する。その後、日程の上で最初の動かせない区切りは、<a href=\"https://www.moscone.com/events/amd-advancing-ai\">7月22日から23日、Moscone West での AMD の Advancing AI</a> である。ここで先週から変わったのは、予定を立てるうえで効いてくる事実のほうだ。現地参加の登録はすでに満席となり、入口は<a href=\"https://www.amd.com/en/corporate/events/advancing-ai/keynote.html\">7月23日午前9時30分(PT)からの Lisa Su の基調講演で、AMD の YouTube チャンネルでライブ配信される</a>。その周りには100を超える分科会、技術講演、ワークショップが並ぶが、そちらはすでにバッジを持っている人向けである。チップとハードウェアの筋では、7月31日を予定に入れておきたい。この金曜日の午後11時59分(PDT)が Hot Chips の早期登録の料金の締め切りで、取り消しは8月19日まで受け付けられる。Hot Chips 自体は8月23日に Stanford で開幕し、AI のデータ需要のもとでの HBM の進化と、RISC-V の標準および自動車での採用についてのチュートリアルが並ぶ。Samsung、SK Hynix、NVIDIA、Infineon が集まり、8月25日まで続く。同じ筋のもう少し先では、<a href=\"https://www.ai-infra-summit.com/registration-options\">AI Infra Summit が9月15日から17日、Santa Clara Convention Center を使う</a>。参加者はおよそ8,000人、登壇者は400人超で、計算資源、AI のデータセンター、データの移動、そして物理世界の AI にわたる。全日程の参加は $1,497。銀行、製薬、小売、製造、自動車の事業会社の技術者と、ハイパースケーラーの技術者には、無料のパスが用意されている。NVIDIA の GTC が San Jose に戻ってくるのは2027年3月15日から18日で、それまではない。\n\nAI のセキュリティの筋は8月の初めに固まっており、1週間前よりも形がはっきりしてきた。Black Hat USA は8月1日から6日、Las Vegas の Mandalay Bay で開かれる。トレーニングが8月1日から4日、ブリーフィングが8月5日から6日、専門の AI Summit は8月4日である。<a href=\"https://aivillage.org/events/defcon-34/\">DEF CON 34 が8月6日から9日と続き、その AI Village では、デモ、CTF、そしてエージェントとエージェント型のシステムに対する敵対的な攻撃を扱う新設のポスター発表が行われる</a>。SecurityWeek の AI Risk Summit は8月11日から12日、Half Moon Bay の Ritz-Carlton を会場とする。秋の駆け込みではなく、いま押さえておきたい後発の2件がある。<a href=\"https://www.sans.org/cyber-security-training-events/ai-summit-fall-2026\">SANS は11月2日から3日、Hilton Arlington Rosslyn で AI Cybersecurity Summit を開く</a>。現地参加は $525、オンラインでの参加は無料、ホテルの料金の締め切りは10月9日、払い戻しは10月14日まで。もう1件は Zenity の AI Agent Security Summit の連続開催で、10月8日にロンドン、10月21日にニューヨークと続く。OWASP Global AppSec USA は11月5日から6日、サンフランシスコで開かれる。\n\n開発と基盤の側では、Ai4 が8月4日から6日に Las Vegas。AI Tinkerers のサンフランシスコの集まりが8月9日午後6時から9時、Founders Inc にて。参加は事前申込制で、席には限りがある。Ray Summit が8月24日から26日、San Francisco Marriott Marquis。ACM AI Leadership Summit が8月30日から9月2日、Atlanta。OpenAI DevDay が9月29日、Fort Mason。The AI Conference が9月29日から10月1日、Pier 48。Runway AI Summit が9月30日。World Summit AI が10月7日から8日、アムステルダム。PyTorch Conference が10月20日から21日、San Jose。GitHub Universe が10月28日から29日。AWS re:Invent が11月30日から12月4日。NeurIPS が12月。IEEE-RAS Humanoids が12月7日から9日、Santa Clara。The AI Summit New York が12月9日から10日。この2週間の実務的な順序はこうだ。今日が AGI Summit の最後の機会。木曜の Advancing AI の基調講演は、街を横切る移動ではなくブラウザのタブになった。そして Hot Chips の早期料金は7月31日までに押さえること——8月初めの Las Vegas のセキュリティの塊が、日程と予算の両方を飲み込んでしまう前に。",
+          "citations": [
+            {
+              "label": "Moscone Center - AMD Advancing AI, July 22-23, Moscone West",
+              "url": "https://www.moscone.com/events/amd-advancing-ai"
+            },
+            {
+              "label": "AMD - Advancing AI 2026 Keynote",
+              "url": "https://www.amd.com/en/corporate/events/advancing-ai/keynote.html"
+            },
+            {
+              "label": "AI Village - DEF CON 34, August 6-9, Las Vegas",
+              "url": "https://aivillage.org/events/defcon-34/"
+            },
+            {
+              "label": "SANS - AI Cybersecurity Summit Fall 2026, November 2-3, Arlington VA",
+              "url": "https://www.sans.org/cyber-security-training-events/ai-summit-fall-2026"
+            },
+            {
+              "label": "AI Infra Summit 2026 - Registration options, September 15-17, Santa Clara",
+              "url": "https://www.ai-infra-summit.com/registration-options"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

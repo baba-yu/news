@@ -1,0 +1,271 @@
+{
+  "week_ending": "2026-07-19",
+  "judgements": [
+    {
+      "prediction_id": "prediction.1ce328e19c9e6685",
+      "stream": "reasoning",
+      "entry_id": "prediction.1ce328e19c9e6685",
+      "verdict": "stale",
+      "reason": "Bridge -> Reasoning. The 2026-07-18 bridge (validation.2fd74050bb4f0f6a, rel=4, dim=given) is both the row that set huge_longshot_hit_at and the source of the relevance_drift (rel=2 on 07-12 -> rel=4 on 07-18), and it records a divergence the reasoning does not accommodate: Toyota ran Walden Robotics machines in its own North American plant from February 2026, then co-led the $300M seed, and the bridge states outright that 'a minority equity position in a third-party vendor is a customer underwriting a supplier, not a captive fleet'. reasoning.given asserts 'only captive owners have both the capital to buy a robot maker and the in-house demand to run it' -- Toyota has both and chose partner-not-acquire, so the exclusivity claim now has a live counter-example. Reframe `given` to state the captive thesis against the internal-deployment-without-ownership path rather than treating acquisition as the only route. reasoning.because (SoftBank put-option exit, Hyundai absorbing 100% of Boston Dynamics) remains historically true and needs no change; note separately that Hyundai, Boston Dynamics and Atlas -- the actors named in reasoning.landing -- drew zero coverage in the whole 7-day window.",
+      "cross_stream_evidence": [
+        "bridge:validation.2fd74050bb4f0f6a (2026-07-18, rel=4, dim=given) -- ownership form diverges",
+        "bridge:validation.973decd18aff66a9 (2026-07-12, rel=2, dim=given) -- prior-window low mark that makes the drift fire",
+        "signal:landed_this_week (huge_longshot_hit_at=2026-07-18)",
+        "signal:relevance_drift (observed_relevance 2 -> 4)"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.1ce328e19c9e6685",
+      "stream": "bridge",
+      "entry_id": "prediction.1ce328e19c9e6685",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 3 bridges (validation.2fd74050bb4f0f6a 07-18 rel=4; validation.973decd18aff66a9 07-12 rel=2; validation.4611ba73b8aceb49 06-24 rel=4). All are correctly attached to this prediction's subject, all carry dim=given, and every prediction_evidence_links row is support_direction=support with contradiction_score 0.0. The 07-18 row is accurate precisely because it declines to overclaim -- it separates the sequencing that holds from the ownership form that diverges. That makes it the input to the reasoning reframe, not a bridge defect. Historical record stands as written.",
+      "cross_stream_evidence": [
+        "reasoning: the 07-18 bridge drives the reasoning.given rewrite; the bridge text itself is correct and needs no change"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.1ce328e19c9e6685",
+      "stream": "needs",
+      "entry_id": "prediction.1ce328e19c9e6685",
+      "verdict": "broken",
+      "reason": "Data inconsistency in the derived runway window; verdict covers the whole Need-set. needs_tasks.target_* is documented in schema.sql as the actor's RUNWAY -- explicitly 'NOT the prediction's landing destination (which lives in predictions.target_*)'. Task need_task.9c353465709b9205 has when_text 'Through 2026-2027 ramp toward the H1 2028 landing' but stored target 2028-01-01..2028-06-30, which is exactly predictions.target_start_date..target_end_date. The 2026-2027 runway was discarded and the landing window substituted, so prediction_needs.target_* for the lead Need also reads 2028-01-01..2028-06-30. Root cause is app/src/timewindow.py parse_time_window: it matches by pattern-type precedence (quarter, then half-year, then month/year) using re.search rather than by position, so a trailing landing quarter/half beats an earlier runway span in the same string. Repo-wide this collapses 431 of 809 parsed needs_tasks (53%) onto their parent prediction's window, with 185 (23%) demonstrably dropping an earlier runway start named in the text. Cross-stream: the collapsed window says this actor's work begins in 2028, which the 07-18 bridge contradicts directly -- machines were doing production work in-plant from February 2026. Escalate; do NOT auto-fix. A Step-2 JSON rewrite cannot hold, because the value is re-derived by the parser on every ingest -- the fix belongs in timewindow.py (prefer the earliest recognized period, or return the span across all matches).",
+      "cross_stream_evidence": [
+        "bridge:validation.2fd74050bb4f0f6a -- in-plant work from Feb 2026 contradicts a 2028-start runway",
+        "schema:needs_tasks.target_start_date comment -- runway, NOT the landing destination",
+        "code:app/src/timewindow.py parse_time_window pattern-type precedence"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.1ce328e19c9e6685",
+      "stream": "readings",
+      "entry_id": "prediction.1ce328e19c9e6685",
+      "verdict": "fresh",
+      "reason": "No prediction_chain edges and no prediction_relations rows attached, and nothing this week creates an edge candidate: the gate fired on landed_this_week and relevance_drift, not new_chain_edge or new_relation. No Need was achieved, so the Needs -> Readings path opens nothing either. Walden Robotics is a new actor in the thread but there is no sibling prediction to link it to. Conservative default holds.",
+      "cross_stream_evidence": [
+        "needs: no task flipped to done this week, so no new downstream chain-edge candidate is opened"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.72
+    },
+
+    {
+      "prediction_id": "prediction.70512b58e932f532",
+      "stream": "reasoning",
+      "entry_id": "prediction.70512b58e932f532",
+      "verdict": "fresh",
+      "reason": "The week reinforced the trace rather than undercutting it. reasoning.because (Together's $800M at $8.3B led by Prosperity7, framed IPO-bound) is a historical fact and unchanged. reasoning.given (a capitalized tier of Together/Fireworks/Baseten outgrowing private capital) was strengthened by the 07-17 Fireworks AI $1.505B Series D at $17.5B, past $1B ARR and 40T tokens/day, which the bridge reads as the tier 'scaling toward public-market size'. The relevance_drift is downward (rel=5 on 07-05 -> rel=2 on 07-19) but that reflects the newest bridge being off-target, not the reasoning failing: DeepSeek's STAR Market deliberation is a weights producer, not an inference neocloud, and the bridge says so. Recording one honest tension rather than hiding it: a $1.5B private round is mild evidence that private capital can still underwrite the buildout, which slightly softens 'outgrow private capital' -- not enough to falsify a Q4 2027 claim, so no rewrite.",
+      "cross_stream_evidence": [
+        "bridge:validation.cca768b345fbec01 (2026-07-17, rel=3, dim=given) -- Fireworks Series D strengthens `given`",
+        "bridge:validation.4c6f8b739bcbdc51 (2026-07-19, rel=2, dim=landing) -- drift is off-target evidence, not a reasoning failure"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.70512b58e932f532",
+      "stream": "bridge",
+      "entry_id": "prediction.70512b58e932f532",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 3 bridges (validation.4c6f8b739bcbdc51 07-19 rel=2 dim=landing; validation.cca768b345fbec01 07-17 rel=3 dim=given; validation.5188956e3e2c4259 07-05 rel=5 dim=so_that). Attachment, dimension tagging and relevance scoring are all defensible, and the 07-19 row is a model of correct low-relevance grading -- it recognizes the right shape (an actual listing step inside the open-model economy) while naming the mismatch, 'wrong end of the stack'. No mis-attachment, no contradict rows, contradiction_score 0.0 throughout.",
+      "cross_stream_evidence": [
+        "reasoning: bridges support the `given` and `landing` dimensions without contradicting any of them"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.70512b58e932f532",
+      "stream": "needs",
+      "entry_id": "prediction.70512b58e932f532",
+      "verdict": "broken",
+      "reason": "Data inconsistency in the derived runway window; verdict covers the whole Need-set. Two of three tasks collapsed onto the prediction's landing window: need_task.8d8b49a4736af495 when_text 'H2 2026 through 2027, ahead of a Q4 2027 filing' and need_task.04a8d746881fdfa3 when_text 'the runway into 2027, before a Q4 2027 listing step' both store 2027-10-01..2027-12-31, identical to predictions.target_start_date..target_end_date, discarding the H2-2026 and into-2027 runway the text names. The third, need_task.075d19439da8d687 'the seventeen-plus-month runway following the July 2026 round', collapses the other way to a single month 2026-07-01..2026-07-31. Root cause is shared with the rest of this batch: app/src/timewindow.py parse_time_window resolves by pattern-type precedence (quarter before half-year before month/year) via re.search, so the trailing landing quarter wins over an earlier runway span. Repo-wide 431/809 parsed needs_tasks (53%) now equal their parent prediction's window. The Need prose itself (actors, jobs, outcomes, 5W1H cells) is accurate and current -- only the derived dates are wrong. Escalate; do NOT auto-fix, and do NOT dispatch a Step-2 rewrite: the parser re-derives the same value on the next ingest.",
+      "cross_stream_evidence": [
+        "schema:needs_tasks.target_start_date comment -- runway, NOT the landing destination",
+        "schema:prediction_needs.target_* -- union of task runways, so the collapse propagates to the Need deadline",
+        "code:app/src/timewindow.py parse_time_window pattern-type precedence"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.70512b58e932f532",
+      "stream": "readings",
+      "entry_id": "prediction.70512b58e932f532",
+      "verdict": "stale",
+      "reason": "Bridge -> Readings. The same 2026-07-17 Fireworks Series D that produced bridge validation.cca768b345fbec01 also minted a new sibling prediction this week: prediction.0ad3c58ce5c240d0, 'Together or Baseten raises at a $5B-plus valuation by Q4 2027' (prediction_date 2026-07-17, target 2027-10-01..2027-12-31). It names the same two companies from this prediction's `given` and lands in exactly the same quarter, yet no prediction_chain or prediction_relations row connects them -- this prediction currently has zero edges of either kind. A further private mega-round at a $5B-plus mark is plausibly the upstream precondition for the listing step (chain edge, source=prediction.0ad3c58ce5c240d0 -> downstream=prediction.70512b58e932f532); if the writer judges them independent facets instead, a `parallel` relation is the correct minimum. Add the edge. Context for the reviewer: no prediction_chain or prediction_relations row has been written repo-wide since 2026-06-10, so the extract-chain-effects pass may simply have stopped running -- worth confirming before treating this as a one-off gap.",
+      "cross_stream_evidence": [
+        "bridge:validation.cca768b345fbec01 (2026-07-17) -- same source event as the new sibling prediction",
+        "readings:prediction.0ad3c58ce5c240d0 -- created 2026-07-17, same actors, same Q4 2027 landing, no edge",
+        "reasoning: `given` names Together/Fireworks/Baseten as the tier, which is the sibling prediction's subject"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.74
+    },
+
+    {
+      "prediction_id": "prediction.f3f7e18b691f1c39",
+      "stream": "reasoning",
+      "entry_id": "prediction.f3f7e18b691f1c39",
+      "verdict": "stale",
+      "reason": "Bridge -> Reasoning, and this is new since last Sunday (the 2026-07-12 run judged this stream fresh at 0.82 on evidence through 07-12). The 07-13 MemGhost disclosure behind bridge validation.e8d792db7829e4ce carried a second fact the bridge did not absorb: OpenClaw's maintainers treat prompt injection as out of scope unless it crosses an authorization boundary, and the proposed defenses are architectural rather than a switch a user can flip. reasoning.because currently frames OpenClaw as mid-trajectory -- '2026.6.x already hardened sandbox, CDP, SSH, and length limits, but gating stays opt-in' -- i.e. one default-flip away. An explicit maintainer out-of-scope policy is a new negative precondition that inverts that reading and materially weakens the Q4 2026 landing on the named harness. Meanwhile the class moved without OpenClaw: bridge validation.7dbe6cb60aff89f1 (07-17) records Claude Code v2.1.212 shipping genuine default-on gating (fail-closed Bash permission checks, session caps on WebSearch and subagent spawns), and the 07-19 NadMesh bridge notes 'the named harness is nowhere in the slate'. Reframe `because` to state the maintainer-policy blocker, and reconsider whether `landing` should stay pinned to OpenClaw or widen to the named-harness class where the defaults are actually flipping. reasoning.given (defense must move to the harness) is unaffected and in fact hardened.",
+      "cross_stream_evidence": [
+        "bridge:validation.e8d792db7829e4ce (2026-07-13, rel=3, dim=because) -- MemGhost 87.5% against OpenClaw; source item also carries the out-of-scope policy",
+        "bridge:validation.7dbe6cb60aff89f1 (2026-07-17, rel=3, dim=so_that) -- a different harness flipped defaults first",
+        "bridge:validation.3b599334445786cf (2026-07-19, rel=3, dim=because) -- named harness absent; remedy offered is operator hygiene",
+        "prior:2026-07-12 judgement rated reasoning fresh on pre-07-13 evidence"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.76
+    },
+    {
+      "prediction_id": "prediction.f3f7e18b691f1c39",
+      "stream": "bridge",
+      "entry_id": "prediction.f3f7e18b691f1c39",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 7 bridges (07-19 validation.3b599334445786cf, 07-17 validation.7dbe6cb60aff89f1, 07-15 validation.b1bb18f39e53161d, 07-14 validation.0716125a998c13ea, 07-13 validation.e8d792db7829e4ce, 07-11 validation.d74b8471ba9cfb72, 06-27 validation.88d892b89489158c). All correctly attached to the harness-hardening subject, dimensions sensibly split across because/so_that, all support_direction=support with contradiction_score 0.0. The set is unusually honest: 07-11 states 'the rationale hardened; the named project did not move', and 07-19 states the named harness is absent from the affected slate. Those are the observations feeding the reasoning rewrite; as historical rows they are correct and need no change.",
+      "cross_stream_evidence": [
+        "reasoning: bridge rows are the evidence for the reasoning reframe, not defects themselves"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.f3f7e18b691f1c39",
+      "stream": "needs",
+      "entry_id": "prediction.f3f7e18b691f1c39",
+      "verdict": "broken",
+      "reason": "Data inconsistency in the derived runway window; verdict covers the whole Need-set. need_task.7add3a39d4565451 when_text 'From the June 2026.6.x patches through Q4 2026' and need_task.f212389b3a189ddc when_text 'During the 2026 runway toward Q4 2026' both store 2026-10-01..2026-12-31 -- identical to predictions.target_start_date..target_end_date -- dropping the June-2026 and 2026-runway starts the text names. Same root cause as the rest of this batch: app/src/timewindow.py parse_time_window uses pattern-type precedence with re.search, so a trailing landing quarter beats an earlier runway span; repo-wide 431/809 parsed needs_tasks (53%) now equal their parent prediction's window. Cross-stream, the collapse is actively misleading here: it dates the maintainer's default-flip work to Q4 2026 only, while the bridges track that work across June-July 2026 and the 07-13 evidence indicates the maintainer has not started it at all. Note the Need content itself is accurate and last week's fresh verdict on task.status still holds -- all three tasks remain open. Escalate; do NOT auto-fix and do NOT dispatch a rewrite, since the parser re-derives the value at every ingest.",
+      "cross_stream_evidence": [
+        "bridge:validation.d74b8471ba9cfb72 (2026-07-11) -- 'the named project did not move', inconsistent with a Q4-2026-only runway",
+        "schema:needs_tasks.target_start_date comment -- runway, NOT the landing destination",
+        "code:app/src/timewindow.py parse_time_window pattern-type precedence"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.f3f7e18b691f1c39",
+      "stream": "readings",
+      "entry_id": "prediction.f3f7e18b691f1c39",
+      "verdict": "fresh",
+      "reason": "No prediction_chain edges and no prediction_relations rows, and nothing this week creates an edge candidate: the gate fired on landed_this_week and relevance_drift, not new_chain_edge or new_relation, and no Need was achieved. The Claude Code v2.1.212 default-flip is a same-direction datapoint but there is no sibling prediction covering it to link to. Same conservative default last week's run applied, and nothing has changed on this stream since.",
+      "cross_stream_evidence": [
+        "needs: all three tasks still open, so the Needs -> Readings path opens no downstream edge"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+
+    {
+      "prediction_id": "prediction.0b8bcb868b9c8fa5",
+      "stream": "reasoning",
+      "entry_id": "prediction.0b8bcb868b9c8fa5",
+      "verdict": "fresh",
+      "reason": "Nothing this week touched the trace. reasoning.because (Meta pricing Muse Spark at $1.25/M input on July 9) is historical and unchanged; reasoning.given (Terra having halved mid-tier cost, Meta's ad-funded balance sheet making API margin optional) is unchanged. Meta, OpenAI and Google published no API price change at all in the 7-day window, and Muse Spark, Terra and Luna appear nowhere in it. The relevance_drift (rel=5 on 07-10 -> rel=3 on 07-19) is entirely a function of the newest bridge being tangential rather than the thesis weakening: Alibaba's Qwen3.8-Max-Preview cut is a top-of-line promotion by a vendor outside the named four, and the bridge itself says it 'executes at the top of the line as a promotion, not on a mid-tier list'. Anthropic's 07-18 Fable 5 repricing is subscription-tier and net upward at the $20 level, so it neither supports nor contradicts a per-token mid-tier claim. Genuinely a quiet week for this thesis -- no rewrite warranted.",
+      "cross_stream_evidence": [
+        "bridge:validation.c0fa581c02e142a9 (2026-07-19, rel=3) -- off-thesis tier, explains the drift without implicating the reasoning",
+        "needs: no Need actor delivered, so no forward reframe of `because`/`given` is available yet"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.0b8bcb868b9c8fa5",
+      "stream": "bridge",
+      "entry_id": "prediction.0b8bcb868b9c8fa5",
+      "verdict": "fresh",
+      "reason": "Verdict covers both bridges (validation.c0fa581c02e142a9 07-19 rel=3 dim=because; validation.c33cd497b1abf0b0 07-10 rel=5 dim=given). Both correctly attached, support_direction=support, contradiction_score 0.0, and the 07-19 row grades itself down honestly by distinguishing a promotional top-of-line discount from a mid-tier list price. One minor observation not worth a rewrite: the 07-19 row is tagged dim=because although its content argues a structural mechanism (published weights ending a preview's pricing power), which reads closer to `given`; the prose is accurate either way and bridges are historical records.",
+      "cross_stream_evidence": [
+        "reasoning: the 07-19 bridge is the sole driver of the relevance_drift signal and is correctly scored"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.84
+    },
+    {
+      "prediction_id": "prediction.0b8bcb868b9c8fa5",
+      "stream": "needs",
+      "entry_id": "prediction.0b8bcb868b9c8fa5",
+      "verdict": "broken",
+      "reason": "Data inconsistency in the derived runway window; verdict covers the whole Need-set. need_task.5384b332af3ecede when_text 'Late 2026 through Q2 2027, following Meta's GA round.' and need_task.8bfe22b39a16a251 when_text 'Continuously through the runway to Q2 2027.' both store 2027-04-01..2027-06-30, identical to predictions.target_start_date..target_end_date, discarding the late-2026 and continuous runway starts. The control case sits in the same Need-set and confirms the mechanism: need_task.fc8d99e71c99fd37, whose when_text 'H2 2026, during the preview-to-GA transition window.' names no quarter, parses correctly to 2026-07-01..2026-12-31. So the defect fires exactly when a trailing landing quarter is present -- app/src/timewindow.py parse_time_window checks the quarter pattern before half-year and month/year and uses re.search, so position in the string is ignored. Repo-wide 431/809 parsed needs_tasks (53%) equal their parent prediction's window; 185 (23%) demonstrably drop an earlier runway start. This prediction is post-2026-07-06 with clean sourcedata, so the defect is independent of any id-keying issue. Escalate; do NOT auto-fix -- the fix belongs in timewindow.py, not in a per-prediction JSON delta.",
+      "cross_stream_evidence": [
+        "schema:needs_tasks.target_start_date comment -- runway, NOT the landing destination",
+        "code:app/src/timewindow.py parse_time_window pattern-type precedence",
+        "control:need_task.fc8d99e71c99fd37 parses correctly when no landing quarter is present"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.0b8bcb868b9c8fa5",
+      "stream": "readings",
+      "entry_id": "prediction.0b8bcb868b9c8fa5",
+      "verdict": "fresh",
+      "reason": "No prediction_chain edges and no prediction_relations rows. The gate fired on relevance_drift alone -- no new_chain_edge, no new_relation, no Need achieved, and no sibling prediction was minted this week on API pricing. Nothing opens an edge candidate. Conservative default holds.",
+      "cross_stream_evidence": [
+        "needs: no task flipped to done, so the Needs -> Readings path opens no downstream edge"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.74
+    },
+
+    {
+      "prediction_id": "prediction.15eec0e8b46997d6",
+      "stream": "reasoning",
+      "entry_id": "prediction.15eec0e8b46997d6",
+      "verdict": "fresh",
+      "reason": "The week strengthened the trace on both halves. reasoning.because (Microsoft's 100-agent MDASH harness at Windows scale, 16 flaws including 4 critical RCEs) is historical and unchanged, and bridge validation.3010e99ae99487de (07-16, rel=4) adds Microsoft publicly crediting its AI-powered internal discovery system for the bulk of a record 570-CVE cycle -- demand-side confirmation of the same precondition. reasoning.given (attackers gain the same AI speed; multi-agent orchestration is commodity) was reinforced independently by the week's autonomous-intrusion reporting. The counting event in reasoning.so_that simply has not occurred: no second OS/cloud vendor announced anything, and Google, Apple, Amazon, Red Hat and SUSE are absent from the window entirely. Adobe's move to twice-monthly bulletins is the week's only real cadence break and is worth noting, but Adobe is not an OS/cloud vendor and falls outside the reasoning.landing candidate list by design -- that specificity is the claim, and adjacent-vendor evidence does not invalidate a precondition. An absent counting event with intact preconditions is a fresh prediction, not a stale one.",
+      "cross_stream_evidence": [
+        "bridge:validation.3010e99ae99487de (2026-07-16, rel=4, dim=because) -- reinforces `because` and drives the drift upward",
+        "needs: no Need actor delivered, so there is no satisfied precondition to reframe forward"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.78
+    },
+    {
+      "prediction_id": "prediction.15eec0e8b46997d6",
+      "stream": "bridge",
+      "entry_id": "prediction.15eec0e8b46997d6",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 4 bridges (validation.3010e99ae99487de 07-16 rel=4; validation.2a9a0a95c3cf30ed 07-13 rel=3; validation.1491cf823f1efe1d 07-11 rel=2; validation.ab2b5796d0301927 07-10 rel=5). All correctly attached, dimensions split sensibly between because and given, support_direction=support with contradiction_score 0.0 throughout. The 07-11 row is a good-faith negative -- it opens 'today's evidence cuts against as much as for' and records that security-review agents executed the malware they were auditing -- so the set is not one-sidedly favourable. No mis-attachment of the kind escalated on 2026-06-28 and 2026-07-05.",
+      "cross_stream_evidence": [
+        "reasoning: bridge evidence supports `because` and `given` without contradicting the unmet `so_that`"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.83
+    },
+    {
+      "prediction_id": "prediction.15eec0e8b46997d6",
+      "stream": "needs",
+      "entry_id": "prediction.15eec0e8b46997d6",
+      "verdict": "broken",
+      "reason": "Data inconsistency in the derived runway window; verdict covers the whole Need-set. need_task.a0f21b190fb52339 when_text 'harness build-out through H2 2026 into Q1 2027' and need_task.813662278e42dc4f when_text 'process redesign through late 2026 into Q1 2027' both store 2027-01-01..2027-03-31, identical to predictions.target_start_date..target_end_date, discarding the H2-2026 and late-2026 build-out periods the text explicitly names. As with prediction.0b8bcb868b9c8fa5 the control is in the same Need-set: need_task.11c8273c974b78a4, when_text 'API rollouts across H2 2026 ahead of vendor adoption', names no quarter and parses correctly to 2026-07-01..2026-12-31. Root cause is app/src/timewindow.py parse_time_window resolving by pattern-type precedence (quarter before half-year before month/year) via re.search, so the trailing landing quarter wins regardless of position; repo-wide 431/809 parsed needs_tasks (53%) now equal their parent prediction's window. The practical harm here is direct: the whole prediction turns on a rival vendor doing build-out work during H2 2026, and the stored window erases that runway, leaving the Need looking as though the work starts only in the landing quarter. Escalate; do NOT auto-fix -- a Step-2 rewrite would be overwritten at the next ingest.",
+      "cross_stream_evidence": [
+        "reasoning: `landing` is Q1 2027 while the Need's work must occur across H2 2026 -- the collapse destroys exactly that distinction",
+        "schema:needs_tasks.target_start_date comment -- runway, NOT the landing destination",
+        "control:need_task.11c8273c974b78a4 parses correctly when no landing quarter is present"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.15eec0e8b46997d6",
+      "stream": "readings",
+      "entry_id": "prediction.15eec0e8b46997d6",
+      "verdict": "fresh",
+      "reason": "No prediction_chain edges and no prediction_relations rows, and nothing this week changes that: the gate fired on relevance_drift alone, no Need was achieved, and no sibling prediction was minted. Noted for the reviewer but deliberately not judged stale, because it predates this week's window and belongs to extract-chain-effects rather than maintenance: prediction.c99c991b7d54c82a ('Subagent orchestration becomes a first-class frontier-API primitive by Q1 2027', same origin day 2026-07-10, same Q1 2027 landing) is effectively this prediction's reasoning.given restated as its own forecast and is the subject of Need actor 'frontier-model platform product manager for security workloads', so an upstream chain edge is a plausible candidate whenever that pass next runs. It is also in this week's candidate queue in its own right.",
+      "cross_stream_evidence": [
+        "readings:prediction.c99c991b7d54c82a -- same origin day and landing quarter, no edge; pre-existing, not a change this week",
+        "needs:need.7360b90986d78134 -- its actor is the subject of that sibling prediction"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "date": "2026-07-19",
+  "note": "No search_log.json exists for this run. Semantic verdicts are judged from news_section.json against the reference/news-topics.md rubric alone. With no writer self-report to compare against, there is no observable over- or under-reporting, so search_log_alignment is 'consistent' for every topic by construction.",
+  "verifications": [
+    {
+      "topic": "LLM Workflow",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "A botnet called NadMesh scans the internet for exposed Ollama, ComfyUI and Langflow instances and strips cloud credentials out of them"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The NadMesh bullet substantively concerns n8n and Langflow deployments, both named in this topic's scope row, and its remediation guidance (port 5678 for n8n, 7860 for Gradio) is directly actionable for orchestration-platform operators. But the news pattern is security-ness, not orchestration-ness: nothing shipped, changed or released in any workflow platform today, so this is a borderline read rather than a clean match."
+    },
+    {
+      "topic": "Multi-profiling for Local LLM (e.g. Multica)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "News-driven-only topic and no trigger fired: no bullet references Multica or multi-profile local-LLM serving. Correctly absent rather than skipped in error."
+    },
+    {
+      "topic": "Agent Harness (OpenClaw, NemoClaw, Hermes Agents, etc.)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "Qoder and QoderWork appear in the Qwen3.8 bullet only as access channels for the preview, and MCP tooling appears in the NadMesh bullet only as something an attacker can reach. Neither is coding-agent, agentic-IDE or autonomous-dev-tool news; no harness released, updated or changed today."
+    },
+    {
+      "topic": "Platform for Local LLM (vLLM, SGLang, etc.)",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "A botnet called NadMesh scans the internet for exposed Ollama, ComfyUI and Langflow instances and strips cloud credentials out of them"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Ollama serving is explicitly inside this topic's scope row and the NadMesh bullet is materially about exposed Ollama instances, naming port 11434 in its remediation. As with the LLM Workflow row this is security news about a serving stack rather than a serving-stack release, so the match is real but off-pattern."
+    },
+    {
+      "topic": "Ecosystems for Local LLM Embedded System (Foundry Local, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Moonshine Micro fits voice detection, speech recognition and neural text-to-speech into 470KB of RAM on an 80-cent microcontroller"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Moonshine Micro is a direct match for on-device and embedded inference: a full VAD plus ASR plus neural TTS loop running on TensorFlow Lite Micro inside the RP2350's 520 KiB of SRAM, with no cloud round trip. Squarely edge-LLM-runtime news even though the vendor is not one of the row's named examples."
+    },
+    {
+      "topic": "Local LLM Models",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Alibaba previews Qwen3.8 at 2.4 trillion parameters and promises an open-weight release, its first multimodal model above the trillion-parameter line"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Qwen3.8 is a new model in an explicitly listed open-weight family, announced at 2.4T parameters with an open-weight release committed, and the bullet also carries Kimi K3 at 2.8T as comparison. The weights are promised rather than dropped, but a new-model-family announcement in a named open family is model-release-ness."
+    },
+    {
+      "topic": "Local LLM Optimization, Fine-tuning (Unsloth — every run)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "Unsloth shipped nothing inside the window: GitHub releases top out at v0.1.49-beta from Jul 15, PyPI at 2026.7.3 from Jul 15, and there is no docs changelog entry for Jul 16-19. The writer searched and correctly omitted the bullet rather than inertia-filling it per ADR-002 Rule 2, which is the honest outcome for a constant-coverage topic with no fresh state-change. Moonshine Micro's retrainable vocabulary was deliberately NOT counted here: the rubric assigns compressed on-device model stacks to the embedded-systems row, not to fine-tuning tooling."
+    },
+    {
+      "topic": "Ecosystems for LLM on PaaS (AWS Bedrock, Azure AI Foundry, etc.)",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "Alibaba previews Qwen3.8 at 2.4 trillion parameters and promises an open-weight release, its first multimodal model above the trillion-parameter line"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The Qwen3.8 bullet reports a genuine hosted-LLM-API state change: a 2.4T frontier model live now through Alibaba's Token Plan at a tenth of standard pricing, with access explicitly starting proprietary. That is frontier-model-API and managed-inference substance, but it is one strand of a bullet whose center is the model release, so it falls short of a clean PaaS match."
+    },
+    {
+      "topic": "AI Security",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A botnet called NadMesh scans the internet for exposed Ollama, ComfyUI and Langflow instances and strips cloud credentials out of them"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "NadMesh is an unambiguous match: credential and cloud-key exfiltration, Kubernetes service-account token theft, MCP tool-call abuse and model access taken from self-hosted AI infrastructure, with concrete initial-access percentages and port-level remediation. The bullet also applies healthy skepticism to the operator's own dashboard figures."
+    },
+    {
+      "topic": "CVE update on score ≥ 8.0",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No scored CVE disclosure appears today. The NadMesh bullet's Docker API RCE, Jenkins script-console execution, weak telnet and Redis vectors are exposure and misconfiguration paths with no CVE identifier or CVSS score attached, so they do not satisfy a score-gated CVE row."
+    },
+    {
+      "topic": "Hardware",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "Moonshine Micro fits voice detection, speech recognition and neural text-to-speech into 470KB of RAM on an 80-cent microcontroller"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The Moonshine Micro bullet is built around a specific silicon part and its budget: the RP2350 at roughly 80 cents with 520 KiB of SRAM, against detailed per-stage flash and SRAM figures. But the silicon did not change today, a commodity microcontroller is not an AI accelerator or data-center part, and the announcement is a software stack targeting existing hardware, so this is chip-adjacent rather than chip news."
+    },
+    {
+      "topic": "Physical AI",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No robotics or embodied-AI news today. IEEE-RAS Humanoids and the AI Infra Summit's physical-AI track appear only inside the events bullet as forward-event context, which the rubric assigns to the events row rather than to this one."
+    },
+    {
+      "topic": "LLM-related research and papers",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A single researcher's ten-page prompt gets GPT-5.6 to close an oracle-complexity gap in derivative-free convex optimization that had stood since 1996"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Direct match: an arXiv preprint (2607.13335) establishing an Omega(d^2 / log(d+1)) oracle-complexity lower bound, closing a gap open since 1996, with a Lean formalization produced alongside it. The bullet also reports the provenance and the model's role, which is itself LLM-research substance."
+    },
+    {
+      "topic": "Stock prices and corporate activity",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "DeepSeek lines up a second raise in two months at a $74 billion valuation while opening deliberations on a Shanghai STAR Market listing"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "A funding round at a roughly $74 billion valuation plus early STAR Market IPO deliberations with a filing target this year, including the shareholder register and the state AI fund's board voting rights. The Qwen3.8 bullet reinforces the row with Moonshot's reported ARR and six-month IPO target."
+    },
+    {
+      "topic": "Bay Area / SV AI meet-up events",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "AI events to plan around now: the AGI Summit closes today, WAIC closes tomorrow, and AMD Advancing AI has sold out its in-person capacity three days before it opens"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Carry-forward rule satisfied in full: all 24 distinct events from the 2026-07-18 events bullet reappear today, none dropped, with two additions (SANS AI Cybersecurity Summit Nov 2-3 and NVIDIA GTC March 2027) and firmer dates on several carried items including AI Tinkerers SF, Zenity London and New York, and DEF CON 34. All three mandatory sub-tracks are present: mainstream dev and data, AI-security, and AI-chip and hardware. Every item is still forward-looking on 2026-07-19, including the AGI Summit which runs until 5 PM today, so no past event sits at the bullet's center."
+    },
+    {
+      "topic": "Other standing-out topics",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A single researcher's ten-page prompt gets GPT-5.6 to close an oracle-complexity gap in derivative-free convex optimization that had stood since 1996",
+        "Moonshine Micro fits voice detection, speech recognition and neural text-to-speech into 470KB of RAM on an 80-cent microcontroller"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Two bullets stand out beyond their home rows. The Kerger result is a single-author, machine-checkable AI-assisted proof set against OpenAI's unformalized 64-agent Cycle Double Cover, making verification rather than agent count the load-bearing variable. Moonshine Micro topped Hacker News on July 18 by removing the assumption that voice interfaces need either a phone-class SoC or a network connection."
+    }
+  ]
+}

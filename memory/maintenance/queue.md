@@ -11,6 +11,12 @@ Predictions / glossary terms trimmed by Step 0 caps. Entries here are force-prom
 
 Predictions / glossary terms trimmed by Step 0 caps. Entries here are force-promoted on a 4-week starvation guarantee. See design/scheduled/6_weekly_maintenance.md.
 
+
+Predictions / glossary terms trimmed by Step 0 caps. Entries here are force-promoted on a 4-week starvation guarantee. See design/scheduled/6_weekly_maintenance.md.
+
+
+Predictions / glossary terms trimmed by Step 0 caps. Entries here are force-promoted on a 4-week starvation guarantee. See design/scheduled/6_weekly_maintenance.md.
+
 ## 2026-05-05
 
 | id | first_seen_week | weeks_starved |
@@ -100,3 +106,13 @@ Predictions / glossary terms trimmed by Step 0 caps. Entries here are force-prom
 | prediction.ed9d8bdccfe9d082 | 2026-06-14 | 3 |
 | prediction.f960d058dc42c7c6 | 2026-06-14 | 3 |
 | prediction.fe9e46055f4a05b9 | 2026-06-14 | 3 |
+## 2026-07-19
+
+| id | first_seen_week | weeks_starved |
+|---|---|---|
+| prediction.a383fd5162ecf409 | 2026-07-19 | 2 |
+| prediction.a96ff0bdaae351aa | 2026-07-19 | 2 |
+| prediction.bcace95fe3e753d1 | 2026-07-19 | 4 |
+| prediction.c92cd5fcd22d0200 | 2026-07-19 | 2 |
+| prediction.cb8447f5c6e4c65d | 2026-07-19 | 2 |
+| prediction.ef0bb943bcd4a5d3 | 2026-07-19 | 2 |

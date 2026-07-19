@@ -1,0 +1,125 @@
+{
+  "date": "2026-07-19",
+  "sections": [
+    {
+      "category": "Ipinreview ng Alibaba ang Qwen3.8 sa 2.4 trilyong parameter at nangako ng open-weight na paglabas, ang una nitong multimodal model na lampas sa linyang isang trilyong parameter",
+      "bullets": [
+        {
+          "body": "Sinabi ngayong araw ng Qwen team ng Alibaba na <a href=\"https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/\">inilulunsad ang Qwen3.8 at magiging open-weight ito, sa 2.4 trilyong parameter</a> — ang unang multimodal model ng Qwen na lampas sa linyang isang trilyong parameter, at tumatanggap ito ng imahe, video at dokumento. Nagsisimula ang access bilang proprietary. Buhay na ngayon ang Qwen3.8-Max-Preview sa pamamagitan ng Token Plan, Qoder at QoderWork ng Alibaba sa ikasampung bahagi ng karaniwang presyo, samantalang nangako lamang ng open-weight na paglabas nang walang petsa. Ang inaangkin ng Alibaba ay pangalawa lamang ang model sa Claude Fable 5 sa hanay ng mga generally available na sistema, at dapat nitong talunin ang Qwen3.7-Max sa coding at sa masalimuot na productivity work. Ngunit <a href=\"https://officechai.com/ai/alibaba-qwen-3-8/\">walang inilathalang benchmark na sumusuporta sa alinman sa dalawang pahayag na iyon</a>. Ang mismong pagkakasunod-sunod — preview muna bago bukás — ang kapansin-pansin. Naitayo ng Alibaba ang reputasyon nito sa paglalabas ng mga nangungunang model na may weights na agad makukuha sa araw ng paglunsad. Inuulit ng Qwen3.8 ang paraan ng Qwen3.6-Max na kitain muna ang bintana ng preview, kaya isa itong pangako sa halip na isang naihatid nang produkto. Tatlong araw itong nahuhuli sa Kimi K3 ng Moonshot na nasa 2.8 trilyong parameter, at iniulat na nasa mga $300 milyon ang annual recurring revenue ng Moonshot na may target na IPO sa loob ng anim na buwan. Iisang orasan na ngayon ang tinatakbo ng karera sa bilang ng parameter at ng karera sa capital markets. Para sa sinumang sumusubaybay sa agwat ng open laban sa closed, ito ang matibay na obserbasyon: parehong Tsino ang dalawang pinakamalaking inanunsyong open-weight na model sa mundo, parehong lampas sa 2 trilyong parameter, at parehong inanunsyo sa loob ng iisang linggo.",
+          "citations": [
+            {
+              "label": "the decoder - Alibaba's Qwen takes on Kimi K3 with open-weight Qwen 3.8",
+              "url": "https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/"
+            },
+            {
+              "label": "OfficeChai - Alibaba Announces 2.4 Trillion-Parameter Open-Weight Qwen 3.8",
+              "url": "https://officechai.com/ai/alibaba-qwen-3-8/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Sinusuyod ng isang botnet na tinatawag na NadMesh ang internet para sa mga nakalantad na Ollama, ComfyUI at Langflow instance, at kinukuha nito ang mga cloud credential mula sa mga ito",
+      "bullets": [
+        {
+          "body": "<a href=\"https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html\">Naglathala ng pagsusuri ang XLab ng QiAnXin tungkol sa isang botnet na tinatawag nitong NadMesh</a>. Sa halip na karaniwang target sa web, hinahanap nito ang self-hosted na AI infrastructure — mga nakalantad na instance ng ComfyUI, Ollama, n8n, Open WebUI, Langflow at Gradio. Credential ang kinukuha nito kapag nakapasok na, hindi compute: mga cloud key mula sa environment variable, Kubernetes service-account token, ang laman ng ~/.aws/config, .env at ~/.docker/config.json, saka model access at kung anong MCP tool ang kayang tawagin ng host. Ayon sa sariling dashboard ng operator na nakuhanan noong July 10, umabot sa 3,811 natatanging AWS key at 47 hakot ng credential ang huling 100 record nito. Samantala, mga 139 natatanging source IP kada araw ang naobserbahan ng mga sensor ng XLab. Nararapat pagdudahan ang mga bilang ng operator. Sa parehong dashboard, may counter na 17,700 kabuuang deploy na nakapatong sa isang funnel na nag-aangking 95,700 sa nakaraang 24 oras, at hindi maaaring parehong totoo ang dalawa. Karaniwang misconfiguration ang pangunahing daan papasok, hindi anumang bagay na tanging sa AI: remote code execution sa Docker API sa 30.31% ng naobserbahang trapiko, script-console execution sa Jenkins sa 22.28%, mahihinang telnet password sa 10.36%, at Redis sa 8.29%. Prangka ang inirerekomendang tugon. Ilagay ang mga port 8188, 11434, 7860 at 5678 sa likod ng authentication o alisin ang mga ito sa pampublikong internet, at i-rotate ang anumang naabot. Ito ang istruktural na pagbabago: naging target na mismo ng pagnanakaw ng credential ang local-inference stack. Ang mga default na nagpadali sa paggamit ng mga tool na ito — malawak na pag-bind, walang auth, at mga key na naiiwan sa environment — ay isa nang nakalistang attack surface. Ang isang workstation na nagpapatakbo ng Ollama katabi ng isang cloud credential file ay daan na para sa lateral movement, hindi isang setup para sa libangan.",
+          "citations": [
+            {
+              "label": "The Hacker News - New NadMesh botnet hunts exposed AI services for cloud keys and Kubernetes tokens",
+              "url": "https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Kasya sa Moonshine Micro ang voice detection, speech recognition at neural text-to-speech sa loob ng 470KB na RAM sa isang microcontroller na 80 sentimo",
+      "bullets": [
+        {
+          "body": "Inilathala ng Moonshine AI ang <a href=\"https://github.com/moonshine-ai/moonshine/tree/main/micro\">Moonshine Micro</a>, isang voice stack na may MIT license na nagpapatakbo ng buong loop — voice-activity detection, speech recognition at neural text-to-speech — sa isang microcontroller, kung saan ang Raspberry Pi RP2350 ang reference platform sa retail na presyong malapit sa 80 sentimo. Ang badyet sa memory ang mismong nilalaman ng inaangkin. Umaabot ang detection sa mga 89 KiB ng flash at 36 KiB ng SRAM, ang SpellingCNN recognizer sa mga 1.3 MiB ng flash at 346 KiB ng SRAM, at ang isang neural diphone voice pack sa mga 1.8 MiB at 340 KiB. Nasa mga 3.6 MiB ng flash at mga 468 KiB ng SRAM ang buong demo kapag pinagsama-sama, dahil pinaghahatian ng mga yugto ng pipeline ang memory upang kasya ang kabuuan sa 520 KiB ng RP2350. Nakikilala nito ang mga 50 custom na salita o parirala, na maaaring i-retrain sa sariling bokabularyo ng isang application, at ginagawa nitong lumalabas na boses ang pumapasok na boses sa loob ng mga 0.7 hanggang 1.0 segundo sa TensorFlow Lite Micro. <a href=\"https://blog.adafruit.com/2026/07/15/voice-activity-detection-speech-to-text-and-text-to-speech-all-on-rp2040\">Sa reference demo, ginagabayan ang isang user sa pag-set up ng koneksyon sa wifi gamit lamang ang boses</a>. Iyon ang buong argumento sa maliit na anyo: walang pagbiyahe papuntang cloud, walang API key, walang account. Nasa kabilang dulo ito ng espektro ng local model kumpara sa pagsisiksik ng frontier na kakayahan sa isang workstation. Sa halip na paliitin ang isang malaking model hanggang kumasya ito, itinatanong nito kung ano ang pinakamaliit na tunay na kapaki-pakinabang na language interface, at ang sagot ay <a href=\"https://www.hackster.io/news/voice-control-goes-ultra-low-cost-with-moonshine-micro-ea2817ec9d20\">isang bill of materials na sapat ang mura para sa disposable na hardware</a>. Umabot ito sa tuktok ng Hacker News noong July 18. Malamang na ito ang dahilan: sabay nitong inaalis ang dalawang palagay. Ipinapalagay na kailangan ng voice interface ng isang system-on-chip na kasinlakas ng nasa telepono o kaya ay ng koneksyon sa network, at wala ni isa sa dalawa ang kailangan nito.",
+          "citations": [
+            {
+              "label": "GitHub - moonshine-ai/moonshine (micro)",
+              "url": "https://github.com/moonshine-ai/moonshine/tree/main/micro"
+            },
+            {
+              "label": "Adafruit Blog - Voice-activity detection, speech to text, and text to speech all on RP2040",
+              "url": "https://blog.adafruit.com/2026/07/15/voice-activity-detection-speech-to-text-and-text-to-speech-all-on-rp2040"
+            },
+            {
+              "label": "Hackster.io - Voice Control Goes Ultra-Low-Cost with Moonshine Micro",
+              "url": "https://www.hackster.io/news/voice-control-goes-ultra-low-cost-with-moonshine-micro-ea2817ec9d20"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Napasara ng sampung-pahinang prompt ng iisang mananaliksik, sa tulong ng GPT-5.6, ang isang agwat sa oracle complexity sa derivative-free convex optimization na nakatayo mula pa noong 1996",
+      "bullets": [
+        {
+          "body": "<a href=\"https://arxiv.org/abs/2607.13335\">Nag-post ng patunay si Phillip Kerger</a> noong July 14 na nagtatatag na ang pag-minimize ng isang convex Lipschitz function sa isang d-dimensional na Euclidean ball, nang deterministiko at gamit lamang ang eksaktong function value, ay nangangailangan ng Omega(d^2 / log(d+1)) na query sa katumpakang Theta(d^-1/2). Isinasara nito, hanggang sa mga polylogarithmic na factor, ang isang agwat na bukás mula pa noong 1996 sa pagitan ng kilalang Omega(d) na lower bound at ng O(d^2 log^2 d) na value-only na paraan ni Protasov. Umaabot din ang parehong makinarya sa mga mixed-integer na instance sa mga d^2 beses 2^n na query para sa d na tuloy-tuloy at n na diskretong variable. Lumitaw ang pinagmulan noong July 18, nang <a href=\"https://news.ycombinator.com/item?id=48957779\">hayagang ilarawan ni Kerger ang proseso</a>: mga isang taon ng sarili niyang pagtatrabaho sa problema, mga pagsubok na hindi nagtagumpay sa GPT-5.4 at GPT-5.5, at pagkatapos ay isang prompt na umaabot sa mga sampung pahina na naglatag ng mga makatwirang paraan mula sa literatura. Pagkatapos noon, ang GPT-5.6 na ang gumawa ng argumento at bumuo ng Lean formalization kasabay nito. Ayon sa sarili niyang paglalarawan, nagbigay siya ng arkitektural na direksyon sa isang AI contractor, hindi ng isang solusyon. Mabilis namang napansin ng mga komentarista na ang taon ng mga bigong pagsubok ang mismong dahilan kung bakit naging posible ang isang sampung-pahinang prompt. Kung ihahambing sa anunsyo ng OpenAI tungkol sa Cycle Double Cover, na nagpatakbo ng 64 parallel agent at nananatiling hindi pormalisado at hindi pa napapadaan sa peer review, ito ang mas matimbang na datos dahil mas maliit ito: iisang model instance, iisang pinangalanang taong may-akda na may pananagutan sa inaangkin, at isang artifact na kayang suriin ng makina sa dulo nito. Ang variable na magpapasya kung magpapatung-patong ang mga resultang tulad nito ay ang beripikasyon, hindi ang bilang ng agent.",
+          "citations": [
+            {
+              "label": "arXiv:2607.13335 - Closing the Oracle-Complexity Gap in Derivative-Free Convex Optimization",
+              "url": "https://arxiv.org/abs/2607.13335"
+            },
+            {
+              "label": "Hacker News - GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
+              "url": "https://news.ycombinator.com/item?id=48957779"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Naghahanda ang DeepSeek ng pangalawang raise sa loob ng dalawang buwan sa valuation na $74 bilyon, habang binubuksan nito ang deliberasyon sa isang listing sa STAR Market ng Shanghai",
+      "bullets": [
+        {
+          "body": "<a href=\"https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/\">Naghahanda ang DeepSeek ng fundraise sa mga 500 bilyong yuan, mga $74 bilyon</a>, at naghahangad ito ng aabot sa 50 bilyong yuan. Isa itong pag-angat na dumarating ilang linggo lamang matapos ang isang round noong June na nakalikom ng mga $7.4 bilyon sa post-money na valuation na malapit sa 450 bilyong yuan. Kasabay nito, sinimulan ng kompanya ang maagang deliberasyon sa paglilista sa STAR Market ng Shanghai, na may panloob na target na matapos ang IPO filing sa taong ito. Inilalarawang hindi pa tapos ang mga termino at ang timetable, at itinuturing na hindi praktikal ang isang listing sa US dahil sa pagsisiyasat ng Kongreso sa mga kompanyang AI na Tsino. Ang talaan ng mga shareholder mula sa round noong June ang bahaging dapat tandaan. Personal na nag-abot si founder Liang Wenfeng ng 20 bilyong yuan, naglagay ang Tencent ng 10 bilyon at ang battery maker na CATL ng 5 bilyon upang maging pinakamalalaking panlabas na may hawak, samantalang <a href=\"https://www.gulf-times.com/article/729325/business/chinas-deepseek-seen-to-raise-fresh-capital-at-74bn-valuation-ahead-of-onshore-ipo/amp\">ang state AI investment fund ng Tsina ang tanging panlabas na may karapatang bumoto sa board</a>. Ang ginagawa nitong hangganan sa halip na simpleng balita ay kung ano ang pinapalitan nito. Ilang taong umandar ang DeepSeek sa High-Flyer, ang quantitative fund ni Liang, at ang self-funding na iyon mismo ang nagpahintulot dito na maglabas ng murang open-weight na model nang hindi sumasagot sa panlabas na kapital o sa isang quarterly na iskedyul. Ang dalawang raise sa loob ng dalawang buwan kasama ang isang target na filing ay nangangahulugang nalampasan na ng gastos sa compute, sa kapasidad ng data centre at sa talento ang kayang tiisin ng balance sheet ng isang hedge fund. Ang lab na kinilala dahil sa pagpapatunay na kayang gawing mura ang frontier work ay pinopondohan na ngayon ito sa parehong paraan ng lahat.",
+          "citations": [
+            {
+              "label": "Capacity - DeepSeek eyes $74bn valuation in fresh funding round ahead of China IPO",
+              "url": "https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/"
+            },
+            {
+              "label": "Gulf Times - China's DeepSeek seen to raise fresh capital at $74bn valuation ahead of onshore IPO",
+              "url": "https://www.gulf-times.com/article/729325/business/chinas-deepseek-seen-to-raise-fresh-capital-at-74bn-valuation-ahead-of-onshore-ipo/amp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mga AI event na dapat planuhin ngayon: nagsasara ngayong araw ang AGI Summit, bukas naman ang WAIC, at naubos na ang in-person na kapasidad ng AMD Advancing AI tatlong araw bago ito magbukas",
+      "bullets": [
+        {
+          "body": "Ngayong araw ang pinakamalapit na item. Huling araw na ngayon ng AGI Summit, July 19, 9 AM hanggang 5 PM sa Palace of Fine Arts, 3301 Lyon Street sa San Francisco, kasama ang mga speaker mula sa OpenAI, Anthropic, Google DeepMind, Stanford, Berkeley at MIT. Nagsimula sa $199 ang mga walk-up na tiket, at may $49 na student rate para sa may balidong .edu na address. Bukas na, July 20, magsasara ang WAIC 2026 sa Shanghai. Pagkatapos noon, ang unang di-matitinag na petsa sa kalendaryo ay ang <a href=\"https://www.moscone.com/events/amd-advancing-ai\">Advancing AI ng AMD sa Moscone West sa July 22-23</a>, at nagbago ang katotohanan doon mula noong nakaraang linggo: puno na ngayon ang in-person na rehistrasyon. Kaya ang natitirang daan papasok ay ang <a href=\"https://www.amd.com/en/corporate/events/advancing-ai/keynote.html\">keynote ni Lisa Su sa 9:30 AM PT ng July 23, na ililivestream sa YouTube channel ng AMD</a>, habang ang mahigit 100 breakout, tech talk at workshop sa paligid nito ay para na lamang sa mga may hawak nang badge. Sa track ng chip at hardware, July 31 ang petsang dapat ilagay sa kalendaryo. Ang 11:59 PM PDT ng Biyernes na iyon ang hangganan para sa early-registration rate ng Hot Chips, at tinatanggap ang mga kanselasyon hanggang August 19. Magbubukas naman ang mismong Hot Chips sa August 23 sa Stanford, may mga tutorial tungkol sa ebolusyon ng HBM sa ilalim ng pangangailangan ng AI sa datos at tungkol sa mga pamantayan ng RISC-V at sa pag-ampon nito sa automotive, at dinadagsa ito ng Samsung, SK Hynix, NVIDIA at Infineon. Tatagal ito hanggang August 25. Mas malayo pa sa parehong track, <a href=\"https://www.ai-infra-summit.com/registration-options\">gagamitin ng AI Infra Summit ang Santa Clara Convention Center sa September 15-17</a> na may mga 8,000 dadalo at mahigit 400 speaker sa compute, AI data centre, paggalaw ng datos at physical AI. Nasa $1,497 ang full access, at may mga libreng pass para sa mga enterprise technologist sa banking, parmasyutika, retail, pagmamanupaktura at automotive, gayundin para sa mga teknikal na staff ng hyperscaler. Hindi babalik sa San Jose ang GTC ng NVIDIA hanggang March 15-18, 2027.\n\nNagsisiksikan sa unang bahagi ng August ang track ng AI security, at mas malinaw na ang hugis nito kaysa noong nakaraang linggo. Tatakbo ang Black Hat USA sa August 1-6 sa Mandalay Bay sa Las Vegas: Trainings sa August 1-4, Briefings sa August 5-6, at may nakalaang AI Summit sa August 4. <a href=\"https://aivillage.org/events/defcon-34/\">Susunod ang DEF CON 34 sa August 6-9, at magpapatakbo ang AI Village nito ng mga demo, capture-the-flag at isang bagong poster track tungkol sa mga adversarial na pag-atake laban sa mga agent at agentic system</a>. Gagamitin ng AI Risk Summit ng SecurityWeek ang Ritz-Carlton sa Half Moon Bay sa August 11-12. May dalawang mas huling dagdag na mas mabuting i-book na ngayon kaysa sa pagkakagulo sa taglagas. <a href=\"https://www.sans.org/cyber-security-training-events/ai-summit-fall-2026\">Magpapatakbo ang SANS ng AI Cybersecurity Summit sa November 2-3 sa Hilton Arlington Rosslyn</a>, $525 kung personal at libre ang live-online na pagdalo, may deadline sa hotel rate sa October 9 at may refund hanggang October 14. Nagpapatuloy naman ang serye ng AI Agent Security Summit ng Zenity sa London sa October 8 at sa New York sa October 21. Dadaong ang OWASP Global AppSec USA sa San Francisco sa November 5-6.\n\nSa panig naman ng developer at imprastraktura: Ai4 sa Las Vegas sa August 4-6; ang meetup ng AI Tinkerers San Francisco sa August 9, 6 hanggang 9 PM sa Founders Inc, na nangangailangan ng RSVP at may limitadong puwesto; Ray Summit sa San Francisco Marriott Marquis sa August 24-26; ang ACM AI Leadership Summit sa Atlanta mula August 30 hanggang September 2; OpenAI DevDay sa Fort Mason sa September 29; The AI Conference sa Pier 48 mula September 29 hanggang October 1; ang Runway AI Summit sa September 30; World Summit AI sa Amsterdam sa October 7-8; PyTorch Conference sa San Jose sa October 20-21; GitHub Universe sa October 28-29; AWS re:Invent mula November 30 hanggang December 4; NeurIPS sa December; IEEE-RAS Humanoids sa Santa Clara sa December 7-9; at The AI Summit New York sa December 9-10. Ito ang praktikal na pagkakasunod-sunod para sa susunod na dalawang linggo. Ngayong araw ang huling pagkakataon para sa AGI Summit. Ang keynote ng Advancing AI sa Huwebes ay isa nang browser tab sa halip na biyahe patawid ng lungsod. At kailangang ma-lock ang early rate ng Hot Chips bago mag-July 31, bago sakupin ng security block sa Las Vegas sa unang bahagi ng August ang kalendaryo at ang badyet nang sabay.",
+          "citations": [
+            {
+              "label": "Moscone Center - AMD Advancing AI, July 22-23, Moscone West",
+              "url": "https://www.moscone.com/events/amd-advancing-ai"
+            },
+            {
+              "label": "AMD - Advancing AI 2026 Keynote",
+              "url": "https://www.amd.com/en/corporate/events/advancing-ai/keynote.html"
+            },
+            {
+              "label": "AI Village - DEF CON 34, August 6-9, Las Vegas",
+              "url": "https://aivillage.org/events/defcon-34/"
+            },
+            {
+              "label": "SANS - AI Cybersecurity Summit Fall 2026, November 2-3, Arlington VA",
+              "url": "https://www.sans.org/cyber-security-training-events/ai-summit-fall-2026"
+            },
+            {
+              "label": "AI Infra Summit 2026 - Registration options, September 15-17, Santa Clara",
+              "url": "https://www.ai-infra-summit.com/registration-options"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

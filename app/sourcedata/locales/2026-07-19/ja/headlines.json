@@ -1,0 +1,82 @@
+{
+  "date": "2026-07-19",
+  "technical": [
+    {
+      "lead": "Alibaba、2.4兆パラメータの Qwen3.8 をプレビュー公開。オープンウェイトは約束のみ",
+      "body": "Alibaba の Qwen チームは本日、Qwen3.8 を2.4兆パラメータで投入し、オープンウェイトでも公開すると述べた。画像、動画、文書を受け取る、1兆パラメータの線を越えた Qwen 初のマルチモーダルモデルである。ただし、使える入口はオープンのほうではなく専有のほうから始まる。Qwen3.8-Max-Preview は、Alibaba の Token Plan、Qoder、QoderWork を通じて通常の10分の1の価格ですでに動いている。一方、オープンウェイトでの公開は約束されただけで、日付がない。Alibaba 自身の主張は、このモデルが一般提供されている系のなかで Claude Fable 5 に次ぐ位置にあり、コーディングと複雑な生産性の作業では Qwen3.7-Max を上回るはずだ、というものだ。だが、そのどちらの主張についても裏づけとなるベンチマークの結果は公開されていない。効いてくるのは、この順序のほうである。Alibaba は、発表と同時に重みも手に入る形で最上位のモデルを出すことによって評判を築いてきた。Qwen3.8 は、まずプレビューの期間を収益化するという Qwen3.6-Max の型をなぞっており、そのぶん今回は、提供ではなく意思の表明ということになる。時期としては、2.8兆パラメータの Kimi K3 を出した Moonshot の3日後だ。その Moonshot は年間経常収益がおよそ $300 million と伝えられ、半年以内の IPO を目指しているとされる。パラメータ数の競争と資本市場での競争が、いまや一つの時計の上を動いているわけだ。オープンとクローズドの差を追う立場からすれば、長く残る観察はこうなる。世界で発表済みの最大のオープンウェイトのモデル2つは、どちらも中国のもので、どちらも2兆パラメータを超え、そしてどちらも同じ1週間のうちに発表された。",
+      "citations": [
+        {
+          "label": "the decoder - Alibaba's Qwen takes on Kimi K3 with open-weight Qwen 3.8",
+          "url": "https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/"
+        },
+        {
+          "label": "OfficeChai - Alibaba Announces 2.4 Trillion-Parameter Open-Weight Qwen 3.8",
+          "url": "https://officechai.com/ai/alibaba-qwen-3-8/"
+        }
+      ]
+    },
+    {
+      "lead": "NadMesh ボットネット、公開状態の Ollama と ComfyUI のホストを探してクラウドの鍵を狙う",
+      "body": "QiAnXin の XLab が、NadMesh と呼ぶボットネットの分析を公開した。向かう先は通常の Web の標的ではなく、自前で運用されている AI の基盤である。公開状態の ComfyUI、Ollama、n8n、Open WebUI、Langflow、Gradio の各インスタンスだ。求めているのは計算資源ではなく認証情報である。環境変数から抜き取ったクラウドの鍵、Kubernetes のサービスアカウントのトークン、~/.aws/config、.env、~/.docker/config.json の中身。さらに、モデルへのアクセスと、乗っ取ったホストから届く MCP のツール一式である。7月10日に取得された運用者自身のダッシュボードは、直近100件の記録で3,811個の重複しない AWS の鍵と、47回の認証情報の収集を主張していた。一方、XLab 自身のセンサーが観測したのは、1日あたりおよそ139の異なる送信元 IP である。運用者側の数字は疑ってかかったほうがいい。同じダッシュボードには、累計17,700という配備の計数の上に、直近24時間で95,700と称する導線が載っており、その両方が成り立つことはありえない。目を引くのは、入口が AI に固有の何かではなく、ありふれた設定の誤りだという点である。観測された通信のうち、Docker API を介した遠隔でのコード実行が30.31%、Jenkins のスクリプトコンソールでの実行が22.28%、telnet の弱いパスワードが10.36%、Redis が8.29%を占める。手当てもそれに見合って身も蓋もない。8188、11434、7860、5678 の各ポートを認証の後ろに置くか、公開のインターネットから外す。そして、到達可能だった認証情報はすべて入れ替える。構造として変わったのは、ローカル推論の一式が、それ自体として認証情報の窃取の標的になったことだ。これらのツールを気持ちよく動かせるようにしていた既定値——広く待ち受け、認証を省き、鍵を環境変数に置いたまま——は、列挙された攻撃対象領域になった。クラウドの認証情報のファイルの隣で Ollama を動かしているワークステーションは、趣味の環境ではなく、そのファイルが持つアカウントへ横方向に入り込むための経路である。",
+      "citations": [
+        {
+          "label": "The Hacker News - New NadMesh botnet hunts exposed AI services for cloud keys and Kubernetes tokens",
+          "url": "https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html"
+        }
+      ]
+    },
+    {
+      "lead": "Moonshine Micro、80セントのマイクロコントローラで音声の入出力を完結させる",
+      "body": "Moonshine AI が Moonshine Micro を公開した。MIT ライセンスの音声処理の一式で、音声区間の検出、音声認識、ニューラル音声合成という流れの全体を、マイクロコントローラの上で動かす。参照プラットフォームは Raspberry Pi RP2350、小売価格は80セント前後である。主張の中身はメモリの見積もりにある。検出におよそフラッシュ89 KiB と SRAM 36 KiB、SpellingCNN の認識器におよそフラッシュ1.3 MiB と SRAM 346 KiB、ニューラルのダイフォン方式の音声パックにおよそ1.8 MiB と 340 KiB。組み上げたデモは、処理の段どうしでメモリを分け合うことによってフラッシュ3.6 MiB 前後、SRAM およそ468 KiB に収まり、全体が RP2350 の 520 KiB の内側に入る。認識できるのは独自の語や言い回しがおよそ50件で、アプリケーション自身の語彙へ学習し直すことができる。音声を入れてから音声が出るまでは、TensorFlow Lite Micro の上でおよそ0.7〜1.0秒である。参照用のデモでは、利用者が wifi の接続設定を声だけで済ませる。これが主張の縮図だ。クラウドへの往復もなく、API キーもなく、アカウントもいらない。これは、フロンティア級の能力をワークステーションに押し込める方向とは、ローカルモデルの帯の反対の端に位置する。大きなモデルを収まるまで縮めるのではなく、本当に役に立つ言語の入り口として最小のものは何かを問い、使い捨ての機器に載せられるほど安い部品表で答えている。7月18日に Hacker News の首位に達したのは、おそらく2つの前提を同時に外したからだ。音声の操作には、電話並みのシステムオンチップか、ネットワークの接続か、そのどちらかが要るとされてきた。これはどちらも要らない。",
+      "citations": [
+        {
+          "label": "GitHub - moonshine-ai/moonshine (micro)",
+          "url": "https://github.com/moonshine-ai/moonshine/tree/main/micro"
+        },
+        {
+          "label": "Adafruit Blog - Voice-activity detection, speech to text, and text to speech all on RP2040",
+          "url": "https://blog.adafruit.com/2026/07/15/voice-activity-detection-speech-to-text-and-text-to-speech-all-on-rp2040"
+        },
+        {
+          "label": "Hackster.io - Voice Control Goes Ultra-Low-Cost with Moonshine Micro",
+          "url": "https://www.hackster.io/news/voice-control-goes-ultra-low-cost-with-moonshine-micro-ea2817ec9d20"
+        }
+      ]
+    },
+    {
+      "lead": "Kerger と GPT-5.6、微分を使わない最適化で1996年以来の隔たりを埋める",
+      "body": "Phillip Kerger が7月14日に証明を投稿した。d 次元のユークリッド球の上で凸なリプシッツ関数を最小化する際、決定的な手続きで、しかも厳密な関数値だけを用いるのであれば、精度 Theta(d^-1/2) において Omega(d^2 / log(d+1)) 回の問い合わせが必要になる、という内容である。これによって、既知の下界 Omega(d) と、Protasov による関数値のみの O(d^2 log^2 d) の手法との間に1996年から空いていた隔たりが、多重対数の因子を除いて埋まった。同じ道具立ては混合整数の場合にも及び、連続変数 d 個と離散変数 n 個に対しておよそ d^2 かける 2^n 回の問い合わせとなる。その来歴が表に出たのは7月18日、Kerger がその過程を公に語ったときだ。この問題に自分でおよそ1年取り組み、GPT-5.4 と GPT-5.5 では成果が出ず、そのうえで、文献にある妥当な筋道を並べた、およそ10ページに及ぶプロンプトを書いた。その後 GPT-5.6 が議論を組み立て、あわせて Lean による形式化まで生成した。本人の言い方では、解そのものではなく、AI という請負人に設計上の方向を与えたのだという。そして、この1年に及ぶ失敗の積み重ねこそが10ページのプロンプトを書けるようにしたのだ、とコメント欄はすかさず述べた。64のエージェントを並列に走らせ、いまだ形式化も査読もされていない OpenAI の Cycle Double Cover の発表と並べると、こちらのほうが小さいがゆえに重みのある事例である。モデルの実体は1つ、主張の責任を負う人間の著者は1人、そして最後に残るのは機械で検証できる成果物だ。この種の結果が積み上がるかどうかを決める変数は、エージェントの数ではなく検証である。",
+      "citations": [
+        {
+          "label": "arXiv:2607.13335 - Closing the Oracle-Complexity Gap in Derivative-Free Convex Optimization",
+          "url": "https://arxiv.org/abs/2607.13335"
+        },
+        {
+          "label": "Hacker News - GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
+          "url": "https://news.ycombinator.com/item?id=48957779"
+        }
+      ]
+    },
+    {
+      "lead": "DeepSeek、評価額 $74B で調達し、上海への上場を検討",
+      "body": "DeepSeek が、およそ5,000億元、$74 billion 前後の評価額で資金調達を準備している。調達額は最大500億元。6月のラウンドでポストマネー評価額4,500億元前後、約 $7.4 billion を集めてから、わずか数週間での引き上げである。あわせて同社は、上海の STAR Market への上場について早い段階の検討を始めており、年内に IPO の申請を終えるという社内の目標を置いている。条件も日程もどちらも定まっていないとされ、米国での上場は、中国の AI 企業に対する米議会の監視を踏まえると現実的ではないと扱われている。押さえておく価値があるのは、6月のラウンドの株主の顔ぶれだ。創業者の梁文鋒が個人で200億元を拠出し、Tencent が100億元、電池メーカーの CATL が50億元を投じて、外部では最大の保有者となった。そして中国の国家 AI 投資基金が、外部としては唯一の取締役会の議決権を握っている。これを見出しではなく分水嶺にしているのは、何が置き換わるかである。DeepSeek は長年、梁氏のクオンツファンド High-Flyer の資金で回ってきた。その自前の資金こそが、外部の資本にも四半期ごとの締め切りにも答えることなく、安価なオープンウェイトのモデルを出し続けることを可能にしていた。2か月で2度の調達に加えて申請の目標があるということは、計算資源、データセンターの容量、人材の費用が、ヘッジファンドの貸借対照表で吸収できる範囲を超えたということだ。フロンティアの仕事は安くできると証明して名を上げたラボが、いまやほかのみなと同じやり方でそれを賄っている。",
+      "citations": [
+        {
+          "label": "Capacity - DeepSeek eyes $74bn valuation in fresh funding round ahead of China IPO",
+          "url": "https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/"
+        },
+        {
+          "label": "Gulf Times - China's DeepSeek seen to raise fresh capital at $74bn valuation ahead of onshore IPO",
+          "url": "https://www.gulf-times.com/article/729325/business/chinas-deepseek-seen-to-raise-fresh-capital-at-74bn-valuation-ahead-of-onshore-ipo/amp"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Alibaba が巨大な AI モデルを先に見せる。誰でも使える版の日付は未定",
+    "ボットネットが自前運用の AI ツールを襲い、クラウドの鍵を盗む",
+    "80セントのチップで、クラウドを使わずに声のやりとりが完結する",
+    "研究者と AI が、30年ものの数学の難問を解く",
+    "DeepSeek がまた資金を集め、今度は株式の上場を狙う"
+  ]
+}

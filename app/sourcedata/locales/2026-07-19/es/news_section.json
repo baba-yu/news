@@ -1,0 +1,125 @@
+{
+  "date": "2026-07-19",
+  "sections": [
+    {
+      "category": "Alibaba presenta en vista previa Qwen3.8 con 2,4 billones de parámetros y promete una publicación de pesos abiertos, su primer modelo multimodal por encima del umbral del billón de parámetros",
+      "bullets": [
+        {
+          "body": "El equipo Qwen de Alibaba anunció hoy que <a href=\"https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/\">Qwen3.8 llega con 2,4 billones de parámetros y tendrá pesos abiertos</a>: es el primer modelo multimodal de Qwen por encima del umbral del billón de parámetros y admite imágenes, vídeo y documentos. El acceso arranca en modo propietario. Qwen3.8-Max-Preview ya está disponible a través del Token Plan de Alibaba, Qoder y QoderWork a la décima parte del precio estándar, mientras que la publicación de los pesos abiertos está prometida pero sin fecha. Alibaba sostiene que el modelo solo queda por detrás de Claude Fable 5 entre los sistemas de disponibilidad general y que debería superar a Qwen3.7-Max en programación y en trabajo de productividad complejo, pero <a href=\"https://officechai.com/ai/alibaba-qwen-3-8/\">no se ha publicado ningún resultado de benchmark que respalde ninguna de las dos afirmaciones</a>. Lo llamativo es el orden mismo: primero la vista previa, después la apertura. Alibaba construyó su reputación lanzando modelos punteros con los pesos disponibles desde el día del lanzamiento, y Qwen3.8 repite el patrón de Qwen3.6-Max de rentabilizar antes una ventana de vista previa, de modo que el anuncio es un compromiso y no una entrega. El calendario lo sitúa tres días por detrás del Kimi K3 de Moonshot, de 2,8 billones de parámetros, y a Moonshot se le atribuyen unos 300 millones de dólares de ingresos recurrentes anuales con una IPO prevista en menos de seis meses: la carrera por el recuento de parámetros y la carrera por los mercados de capitales responden ya al mismo calendario. Para quien siga la brecha entre lo abierto y lo cerrado, la observación duradera es que los dos mayores modelos de pesos abiertos anunciados en el mundo son ambos chinos, ambos superan los 2 billones de parámetros y ambos se han anunciado dentro de una misma semana.",
+          "citations": [
+            {
+              "label": "the decoder - Alibaba's Qwen takes on Kimi K3 with open-weight Qwen 3.8",
+              "url": "https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/"
+            },
+            {
+              "label": "OfficeChai - Alibaba Announces 2.4 Trillion-Parameter Open-Weight Qwen 3.8",
+              "url": "https://officechai.com/ai/alibaba-qwen-3-8/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Una botnet llamada NadMesh rastrea internet en busca de instancias expuestas de Ollama, ComfyUI y Langflow y les extrae las credenciales de nube",
+      "bullets": [
+        {
+          "body": "XLab, de QiAnXin, <a href=\"https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html\">publicó el análisis de una botnet a la que llama NadMesh</a>, que persigue infraestructura de IA autoalojada en lugar de objetivos web convencionales: instancias expuestas de ComfyUI, Ollama, n8n, Open WebUI, Langflow y Gradio. Lo que se lleva una vez dentro son credenciales, no capacidad de cómputo. Extrae claves de nube de las variables de entorno, tokens de cuentas de servicio de Kubernetes y el contenido de ~/.aws/config, .env y ~/.docker/config.json, además del acceso al modelo y de las herramientas MCP que el equipo comprometido pueda invocar. El propio panel del operador, capturado el 10 de julio, declaraba 3.811 claves de AWS únicas y 47 botines de credenciales en sus últimos 100 registros, mientras que los sensores de XLab observaron en torno a 139 IP de origen distintas al día. Esas cifras del operador merecen escepticismo: ese mismo panel muestra un contador de 17.700 despliegues totales situado encima de un embudo que declara 95.700 en las 24 horas anteriores, y ambas cosas no pueden ser ciertas a la vez. El acceso inicial se inclina hacia la mala configuración corriente y no hacia nada específico de la IA: ejecución remota de código en la API de Docker en el 30,31% del tráfico observado, ejecución por consola de scripts de Jenkins en el 22,28%, contraseñas débiles de telnet en el 10,36% y Redis en el 8,29%. La respuesta recomendada es contundente: poner los puertos 8188, 11434, 7860 y 5678 detrás de autenticación o fuera de internet, y rotar todo lo que haya estado accesible. El cambio estructural es que la pila de inferencia local se ha convertido en un objetivo de robo de credenciales por derecho propio. Los valores por defecto que hacían agradable ejecutar estas herramientas —escuchar en todas las interfaces, saltarse la autenticación y dejar las claves en el entorno— son hoy una superficie de ataque enumerada, y una estación de trabajo que ejecuta Ollama junto a un archivo de credenciales de nube es una vía de movimiento lateral, no un montaje de aficionado.",
+          "citations": [
+            {
+              "label": "The Hacker News - New NadMesh botnet hunts exposed AI services for cloud keys and Kubernetes tokens",
+              "url": "https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Moonshine Micro mete la detección de voz, el reconocimiento del habla y la síntesis de voz neuronal en 470KB de RAM sobre un microcontrolador de 80 centavos",
+      "bullets": [
+        {
+          "body": "Moonshine AI publicó <a href=\"https://github.com/moonshine-ai/moonshine/tree/main/micro\">Moonshine Micro</a>, una pila de voz con licencia MIT que ejecuta el ciclo entero —detección de actividad de voz, reconocimiento del habla y síntesis de voz neuronal— sobre un microcontrolador, con la Raspberry Pi RP2350 como plataforma de referencia a un precio de venta cercano a los 80 centavos. El presupuesto de memoria es la sustancia de la afirmación. La detección ocupa unos 89 KiB de flash y 36 KiB de SRAM, el reconocedor SpellingCNN unos 1,3 MiB de flash y 346 KiB de SRAM, y un paquete de voz neuronal por difonos unos 1,8 MiB y 340 KiB. La demo ya ensamblada se queda cerca de 3,6 MiB de flash y en torno a 468 KiB de SRAM porque comparte memoria entre las etapas de la cadena, de modo que el total cabe dentro de los 520 KiB del RP2350. Reconoce unas 50 palabras o frases personalizadas, reentrenables al vocabulario propio de cada aplicación, y convierte voz de entrada en voz de salida en aproximadamente 0,7 a 1,0 segundos sobre TensorFlow Lite Micro. <a href=\"https://blog.adafruit.com/2026/07/15/voice-activity-detection-speech-to-text-and-text-to-speech-all-on-rp2040\">La demo de referencia guía al usuario para configurar una conexión wifi enteramente por voz</a>, que es el argumento en miniatura: sin viaje de ida y vuelta a la nube, sin clave de API, sin cuenta. Esto se sitúa en el extremo opuesto del espectro de los modelos locales respecto a comprimir capacidad de frontera en una estación de trabajo. En lugar de encoger un modelo grande hasta que quepa, pregunta cuál es la interfaz de lenguaje más pequeña que resulta genuinamente útil, y responde con <a href=\"https://www.hackster.io/news/voice-control-goes-ultra-low-cost-with-moonshine-micro-ea2817ec9d20\">una lista de materiales lo bastante barata para hardware desechable</a>. Llegó a lo más alto de Hacker News el 18 de julio, y la razón probable es que elimina dos supuestos a la vez: se daba por hecho que las interfaces de voz exigían o bien un system-on-chip de clase teléfono o bien una conexión de red, y esto no necesita ninguna de las dos cosas.",
+          "citations": [
+            {
+              "label": "GitHub - moonshine-ai/moonshine (micro)",
+              "url": "https://github.com/moonshine-ai/moonshine/tree/main/micro"
+            },
+            {
+              "label": "Adafruit Blog - Voice-activity detection, speech to text, and text to speech all on RP2040",
+              "url": "https://blog.adafruit.com/2026/07/15/voice-activity-detection-speech-to-text-and-text-to-speech-all-on-rp2040"
+            },
+            {
+              "label": "Hackster.io - Voice Control Goes Ultra-Low-Cost with Moonshine Micro",
+              "url": "https://www.hackster.io/news/voice-control-goes-ultra-low-cost-with-moonshine-micro-ea2817ec9d20"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "El prompt de diez páginas de un único investigador lleva a GPT-5.6 a cerrar una brecha de complejidad de oráculo en optimización convexa sin derivadas que seguía abierta desde 1996",
+      "bullets": [
+        {
+          "body": "<a href=\"https://arxiv.org/abs/2607.13335\">Phillip Kerger publicó el 14 de julio una demostración</a> que establece que minimizar una función convexa de Lipschitz sobre una bola euclídea de dimensión d, de forma determinista y usando solo valores exactos de la función, requiere Omega(d^2 / log(d+1)) consultas con una precisión Theta(d^-1/2). Eso cierra, salvo factores polilogarítmicos, una brecha abierta desde 1996 entre la cota inferior conocida Omega(d) y el método basado solo en valores O(d^2 log^2 d) de Protasov. La misma maquinaria se extiende a instancias de enteros mixtos con aproximadamente d^2 por 2^n consultas para d variables continuas y n discretas. La procedencia salió a la luz el 18 de julio, cuando Kerger <a href=\"https://news.ycombinator.com/item?id=48957779\">describió públicamente el proceso</a>: cerca de un año de trabajo propio sobre el problema, intentos fallidos con GPT-5.4 y GPT-5.5, y después un prompt de unas diez páginas que exponía los enfoques razonables de la literatura. A partir de ahí, GPT-5.6 produjo el argumento y generó junto a él la formalización en Lean. Él mismo lo planteó como haber dado a un contratista de IA dirección arquitectónica y no una solución, y los comentaristas no tardaron en observar que el año de intentos fallidos es precisamente lo que hizo posible un prompt de diez páginas. Frente al anuncio del Cycle Double Cover de OpenAI, que empleó 64 agentes en paralelo y sigue sin formalizar y sin revisión por pares, este es el dato que más peso soporta, y lo es por ser más pequeño: una sola instancia del modelo, un único autor humano con nombre que asume la responsabilidad de la afirmación, y un artefacto verificable por máquina al final del recorrido. La variable que determina si resultados como este se acumulan es la verificación, no el número de agentes.",
+          "citations": [
+            {
+              "label": "arXiv:2607.13335 - Closing the Oracle-Complexity Gap in Derivative-Free Convex Optimization",
+              "url": "https://arxiv.org/abs/2607.13335"
+            },
+            {
+              "label": "Hacker News - GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
+              "url": "https://news.ycombinator.com/item?id=48957779"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "DeepSeek prepara una segunda ronda en dos meses con una valoración de 74.000 millones de dólares mientras abre deliberaciones sobre cotizar en el STAR Market de Shanghái",
+      "bullets": [
+        {
+          "body": "<a href=\"https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/\">DeepSeek prepara una ronda de financiación con una valoración cercana a los 500.000 millones de yuanes, unos 74.000 millones de dólares</a>, y busca captar hasta 50.000 millones de yuanes. El salto llega apenas unas semanas después de una ronda de junio que recogió unos 7.400 millones de dólares con una valoración post-money próxima a los 450.000 millones de yuanes. En paralelo, la compañía ha iniciado deliberaciones preliminares sobre cotizar en el STAR Market de Shanghái, con un objetivo interno de completar la solicitud de IPO este año; las condiciones y el calendario se describen como no cerrados, y una salida a bolsa en Estados Unidos se considera impracticable dado el escrutinio del Congreso sobre las empresas chinas de IA. El registro de accionistas de la ronda de junio es la parte que conviene retener: el fundador Liang Wenfeng comprometió 20.000 millones de yuanes a título personal, Tencent puso 10.000 millones y el fabricante de baterías CATL 5.000 millones para convertirse en los mayores tenedores externos, mientras que <a href=\"https://www.gulf-times.com/article/729325/business/chinas-deepseek-seen-to-raise-fresh-capital-at-74bn-valuation-ahead-of-onshore-ipo/amp\">el fondo estatal chino de inversión en IA posee los únicos derechos de voto externos en el consejo</a>. Lo que convierte esto en un umbral y no en un titular es aquello a lo que sustituye. DeepSeek funcionó durante años con High-Flyer, el fondo cuantitativo de Liang, y esa autofinanciación es exactamente lo que le permitió lanzar modelos de pesos abiertos baratos sin rendir cuentas a capital externo ni a un calendario trimestral. Dos rondas en dos meses más un objetivo de solicitud significan que los costes de cómputo, de capacidad de centro de datos y de talento han superado lo que puede absorber el balance de un fondo de cobertura. El laboratorio que se hizo un nombre demostrando que el trabajo de frontera podía salir barato lo financia ya igual que todos los demás.",
+          "citations": [
+            {
+              "label": "Capacity - DeepSeek eyes $74bn valuation in fresh funding round ahead of China IPO",
+              "url": "https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/"
+            },
+            {
+              "label": "Gulf Times - China's DeepSeek seen to raise fresh capital at $74bn valuation ahead of onshore IPO",
+              "url": "https://www.gulf-times.com/article/729325/business/chinas-deepseek-seen-to-raise-fresh-capital-at-74bn-valuation-ahead-of-onshore-ipo/amp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Eventos de IA que planificar ahora: el AGI Summit cierra hoy, WAIC cierra mañana y AMD Advancing AI ha agotado su aforo presencial tres días antes de abrir",
+      "bullets": [
+        {
+          "body": "Lo más inmediato es hoy. El AGI Summit está en su jornada de clausura, el 19 de julio, de 9:00 a 17:00 en el Palace of Fine Arts, 3301 Lyon Street, San Francisco, con ponentes de OpenAI, Anthropic, Google DeepMind, Stanford, Berkeley y el MIT; las entradas en taquilla partían de 199 dólares, con una tarifa de estudiante de 49 dólares para direcciones .edu válidas. WAIC 2026, en Shanghái, cierra mañana, 20 de julio. Después, la primera parada firme del calendario es <a href=\"https://www.moscone.com/events/amd-advancing-ai\">Advancing AI de AMD, en Moscone West los días 22 y 23 de julio</a>, y ahí el dato de planificación ha cambiado desde la semana pasada: el registro presencial está ya completo, así que la vía de entrada es <a href=\"https://www.amd.com/en/corporate/events/advancing-ai/keynote.html\">la keynote de Lisa Su a las 9:30 PT del 23 de julio, retransmitida en directo en el canal de YouTube de AMD</a>, con más de 100 sesiones paralelas, charlas técnicas y talleres a su alrededor para quienes ya tengan acreditación. En la vía de chips y hardware, el 31 de julio es la fecha que hay que marcar: las 23:59 PDT de ese viernes son el límite de la tarifa de inscripción anticipada de Hot Chips, con cancelaciones admitidas hasta el 19 de agosto. Hot Chips abre el 23 de agosto en Stanford con tutoriales sobre la evolución de HBM ante la demanda de datos de la IA y sobre los estándares RISC-V y su adopción en automoción, atrae a Samsung, SK Hynix, NVIDIA e Infineon, y se prolonga hasta el 25 de agosto. Más adelante en esa misma vía, <a href=\"https://www.ai-infra-summit.com/registration-options\">el AI Infra Summit ocupa el Santa Clara Convention Center del 15 al 17 de septiembre</a> con unos 8.000 asistentes y más de 400 ponentes sobre cómputo, centros de datos de IA, movimiento de datos e IA física; el acceso completo cuesta 1.497 dólares y se ofrecen pases de cortesía a técnicos de empresa de banca, farmacia, comercio minorista, industria y automoción, así como al personal técnico de los hiperescaladores. El GTC de NVIDIA no vuelve a San José hasta el 15-18 de marzo de 2027.\n\nLa vía de seguridad en IA se concentra a principios de agosto y tiene ya una forma más firme que hace una semana. Black Hat USA se celebra del 1 al 6 de agosto en el Mandalay Bay de Las Vegas —Trainings del 1 al 4 y Briefings el 5 y el 6— con su AI Summit dedicado el 4 de agosto. <a href=\"https://aivillage.org/events/defcon-34/\">DEF CON 34 sigue del 6 al 9 de agosto, y su AI Village organiza demos, capture-the-flag y una nueva vía de pósteres sobre ataques adversariales contra agentes y sistemas agénticos</a>. El AI Risk Summit de SecurityWeek ocupa el Ritz-Carlton de Half Moon Bay los días 11 y 12 de agosto. Dos incorporaciones posteriores conviene reservarlas ahora y no en las prisas del otoño: <a href=\"https://www.sans.org/cyber-security-training-events/ai-summit-fall-2026\">SANS organiza un AI Cybersecurity Summit los días 2 y 3 de noviembre en el Hilton Arlington Rosslyn</a>, a 525 dólares en presencial y con asistencia en directo en línea gratuita, con fecha límite de tarifa de hotel el 9 de octubre y reembolsos hasta el 14 de octubre; y la serie AI Agent Security Summit de Zenity continúa en Londres el 8 de octubre y en Nueva York el 21 de octubre. OWASP Global AppSec USA aterriza en San Francisco los días 5 y 6 de noviembre.\n\nEn el lado de desarrollo e infraestructura: Ai4 en Las Vegas del 4 al 6 de agosto; el meetup de AI Tinkerers en San Francisco el 9 de agosto, de 18:00 a 21:00 en Founders Inc, con acceso por RSVP y plazas limitadas; Ray Summit en el San Francisco Marriott Marquis del 24 al 26 de agosto; el ACM AI Leadership Summit en Atlanta del 30 de agosto al 2 de septiembre; OpenAI DevDay en Fort Mason el 29 de septiembre; The AI Conference en el Pier 48 del 29 de septiembre al 1 de octubre; el Runway AI Summit el 30 de septiembre; World Summit AI en Ámsterdam el 7 y el 8 de octubre; PyTorch Conference en San José el 20 y el 21 de octubre; GitHub Universe el 28 y el 29 de octubre; AWS re:Invent del 30 de noviembre al 4 de diciembre; NeurIPS en diciembre; IEEE-RAS Humanoids en Santa Clara del 7 al 9 de diciembre; y The AI Summit New York el 9 y el 10 de diciembre. Secuencia práctica para la próxima quincena: hoy es la última oportunidad del AGI Summit, la keynote de Advancing AI del jueves es ya una pestaña del navegador y no un viaje al otro lado de la ciudad, y la tarifa anticipada de Hot Chips hay que cerrarla antes del 31 de julio, justo antes de que el bloque de seguridad de principios de agosto en Las Vegas absorba a la vez el calendario y el presupuesto.",
+          "citations": [
+            {
+              "label": "Moscone Center - AMD Advancing AI, July 22-23, Moscone West",
+              "url": "https://www.moscone.com/events/amd-advancing-ai"
+            },
+            {
+              "label": "AMD - Advancing AI 2026 Keynote",
+              "url": "https://www.amd.com/en/corporate/events/advancing-ai/keynote.html"
+            },
+            {
+              "label": "AI Village - DEF CON 34, August 6-9, Las Vegas",
+              "url": "https://aivillage.org/events/defcon-34/"
+            },
+            {
+              "label": "SANS - AI Cybersecurity Summit Fall 2026, November 2-3, Arlington VA",
+              "url": "https://www.sans.org/cyber-security-training-events/ai-summit-fall-2026"
+            },
+            {
+              "label": "AI Infra Summit 2026 - Registration options, September 15-17, Santa Clara",
+              "url": "https://www.ai-infra-summit.com/registration-options"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

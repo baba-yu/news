@@ -1,0 +1,82 @@
+{
+  "date": "2026-07-19",
+  "technical": [
+    {
+      "lead": "Alibaba presenta Qwen3.8 con 2,4 billones de parámetros y promete pesos abiertos",
+      "body": "El equipo Qwen de Alibaba anunció hoy que Qwen3.8 llega con 2,4 billones de parámetros y tendrá pesos abiertos: es el primer modelo multimodal de Qwen por encima del umbral del billón de parámetros y admite imágenes, vídeo y documentos. El acceso arranca en modo propietario y no abierto. Qwen3.8-Max-Preview ya está disponible a través del Token Plan de Alibaba, Qoder y QoderWork a la décima parte del precio estándar, mientras que la publicación de los pesos abiertos está prometida pero no lleva fecha. Alibaba sostiene que el modelo solo queda por detrás de Claude Fable 5 entre los sistemas de disponibilidad general y que debería superar a Qwen3.7-Max en programación y en trabajo de productividad complejo, pero no se ha publicado ningún resultado de benchmark que respalde ninguna de las dos afirmaciones. Lo que importa aquí es el orden. Alibaba construyó su reputación lanzando modelos punteros con los pesos disponibles desde el día del lanzamiento, y Qwen3.8 repite el patrón de Qwen3.6-Max de rentabilizar antes una ventana de vista previa, lo que convierte esto en un anuncio de intenciones y no en una entrega. El calendario lo sitúa tres días por detrás del Kimi K3 de Moonshot, de 2,8 billones de parámetros, y a Moonshot se le atribuyen unos 300 millones de dólares de ingresos recurrentes anuales y una IPO prevista en menos de seis meses, así que la carrera por el recuento de parámetros y la carrera por los mercados de capitales responden ya a un mismo calendario. Para quien siga la brecha entre lo abierto y lo cerrado, la observación duradera es que los dos mayores modelos de pesos abiertos anunciados en el mundo son ambos chinos, ambos superan los 2 billones de parámetros y ambos se han anunciado dentro de una misma semana.",
+      "citations": [
+        {
+          "label": "the decoder - Alibaba's Qwen takes on Kimi K3 with open-weight Qwen 3.8",
+          "url": "https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/"
+        },
+        {
+          "label": "OfficeChai - Alibaba Announces 2.4 Trillion-Parameter Open-Weight Qwen 3.8",
+          "url": "https://officechai.com/ai/alibaba-qwen-3-8/"
+        }
+      ]
+    },
+    {
+      "lead": "La botnet NadMesh busca claves de nube en equipos expuestos de Ollama y ComfyUI",
+      "body": "XLab, de QiAnXin, publicó el análisis de una botnet a la que llama NadMesh, que va tras infraestructura de IA autoalojada en lugar de objetivos web convencionales: instancias expuestas de ComfyUI, Ollama, n8n, Open WebUI, Langflow y Gradio. El botín que busca son credenciales, no capacidad de cómputo: claves de nube sacadas de las variables de entorno, tokens de cuentas de servicio de Kubernetes, el contenido de ~/.aws/config, .env y ~/.docker/config.json, además del acceso al modelo y de las herramientas MCP que alcance el equipo comprometido. El propio panel del operador, capturado el 10 de julio, declaraba 3.811 claves de AWS únicas y 47 botines de credenciales en sus últimos 100 registros, mientras que los sensores de XLab observaron en torno a 139 IP de origen distintas al día. Conviene tratar con escepticismo las cifras del operador: ese mismo panel muestra un contador de 17.700 despliegues totales encima de un embudo que declara 95.700 en las 24 horas anteriores, y ambas cosas no pueden ser ciertas. Cabe destacar que la puerta de entrada es la mala configuración corriente y no algo específico de la IA: la ejecución remota de código en la API de Docker supone el 30,31% del tráfico observado, la ejecución por consola de scripts de Jenkins el 22,28%, las contraseñas débiles de telnet el 10,36% y Redis el 8,29%. La remediación es igual de contundente: poner los puertos 8188, 11434, 7860 y 5678 detrás de autenticación o fuera de internet, y rotar todo lo que haya estado accesible. El cambio estructural es que la pila de inferencia local es ya un objetivo de robo de credenciales por derecho propio. Los valores por defecto que hacían agradable ejecutar estas herramientas —escuchar en todas las interfaces, saltarse la autenticación, dejar las claves en el entorno— se han convertido en una superficie de ataque enumerada, y una estación de trabajo que ejecuta Ollama junto a un archivo de credenciales de nube es una vía de movimiento lateral, no un montaje de aficionado.",
+      "citations": [
+        {
+          "label": "The Hacker News - New NadMesh botnet hunts exposed AI services for cloud keys and Kubernetes tokens",
+          "url": "https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html"
+        }
+      ]
+    },
+    {
+      "lead": "Moonshine Micro ejecuta voz de entrada y de salida en un microcontrolador de 80 centavos",
+      "body": "Moonshine AI publicó Moonshine Micro, una pila de voz con licencia MIT que ejecuta el ciclo completo —detección de actividad de voz, reconocimiento del habla y síntesis de voz neuronal— sobre un microcontrolador, con la Raspberry Pi RP2350 como plataforma de referencia a un precio de venta cercano a los 80 centavos. El presupuesto de memoria es la sustancia de la afirmación. La detección ocupa unos 89 KiB de flash y 36 KiB de SRAM, el reconocedor SpellingCNN unos 1,3 MiB de flash y 346 KiB de SRAM, y un paquete de voz neuronal por difonos unos 1,8 MiB y 340 KiB; la demo ya ensamblada se queda cerca de 3,6 MiB de flash y en torno a 468 KiB de SRAM al compartir memoria entre las etapas de la cadena, de modo que el total cabe dentro de los 520 KiB del RP2350. Reconoce unas 50 palabras o frases personalizadas, reentrenables al vocabulario propio de cada aplicación, y convierte la voz de entrada en voz de salida en aproximadamente 0,7 a 1,0 segundos sobre TensorFlow Lite Micro. La demo de referencia guía al usuario para configurar una conexión wifi enteramente por voz, que es el argumento en miniatura: sin viaje de ida y vuelta a la nube, sin clave de API, sin cuenta. Esto se sitúa en el extremo opuesto del espectro de los modelos locales respecto a comprimir capacidad de frontera en una estación de trabajo: en lugar de encoger un modelo grande hasta que quepa, pregunta cuál es la interfaz de lenguaje más pequeña que resulta genuinamente útil, y responde con una lista de materiales lo bastante barata para hardware desechable. Llegó a lo más alto de Hacker News el 18 de julio, y es plausible que sea porque elimina dos supuestos a la vez: se daba por hecho que las interfaces de voz exigían o bien un system-on-chip de clase teléfono o bien una conexión de red, y esto no necesita ninguna de las dos cosas.",
+      "citations": [
+        {
+          "label": "GitHub - moonshine-ai/moonshine (micro)",
+          "url": "https://github.com/moonshine-ai/moonshine/tree/main/micro"
+        },
+        {
+          "label": "Adafruit Blog - Voice-activity detection, speech to text, and text to speech all on RP2040",
+          "url": "https://blog.adafruit.com/2026/07/15/voice-activity-detection-speech-to-text-and-text-to-speech-all-on-rp2040"
+        },
+        {
+          "label": "Hackster.io - Voice Control Goes Ultra-Low-Cost with Moonshine Micro",
+          "url": "https://www.hackster.io/news/voice-control-goes-ultra-low-cost-with-moonshine-micro-ea2817ec9d20"
+        }
+      ]
+    },
+    {
+      "lead": "Kerger y GPT-5.6 cierran una brecha de 1996 en optimización sin derivadas",
+      "body": "Phillip Kerger publicó el 14 de julio una demostración que establece que minimizar una función convexa de Lipschitz sobre una bola euclídea de dimensión d, de forma determinista y usando solo valores exactos de la función, requiere Omega(d^2 / log(d+1)) consultas con una precisión Theta(d^-1/2). Eso cierra, salvo factores polilogarítmicos, una brecha abierta desde 1996 entre la cota inferior conocida Omega(d) y el método basado solo en valores O(d^2 log^2 d) de Protasov, y la misma maquinaria se extiende a instancias de enteros mixtos con aproximadamente d^2 por 2^n consultas para d variables continuas y n discretas. La procedencia salió a la luz el 18 de julio, cuando Kerger describió públicamente el proceso: cerca de un año de trabajo propio sobre el problema, intentos fallidos con GPT-5.4 y GPT-5.5, y después un prompt de unas diez páginas que exponía los enfoques razonables de la literatura. A partir de ahí, GPT-5.6 produjo el argumento y generó junto a él la formalización en Lean. Él mismo lo planteó como haber dado a un contratista de IA dirección arquitectónica y no una solución, y los comentaristas no tardaron en señalar que el año de intentos fallidos es precisamente lo que hizo posible un prompt de diez páginas. Frente al anuncio del Cycle Double Cover de OpenAI, que empleó 64 agentes en paralelo y sigue sin formalizar y sin revisión por pares, este es el dato que más peso soporta, y lo es por ser más pequeño: una sola instancia del modelo, un único autor humano con nombre que asume la responsabilidad de la afirmación, y un artefacto verificable por máquina al final del recorrido. La variable que determina si resultados como este se acumulan es la verificación, no el número de agentes.",
+      "citations": [
+        {
+          "label": "arXiv:2607.13335 - Closing the Oracle-Complexity Gap in Derivative-Free Convex Optimization",
+          "url": "https://arxiv.org/abs/2607.13335"
+        },
+        {
+          "label": "Hacker News - GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
+          "url": "https://news.ycombinator.com/item?id=48957779"
+        }
+      ]
+    },
+    {
+      "lead": "DeepSeek capta fondos con una valoración de $74B y sopesa cotizar en Shanghái",
+      "body": "DeepSeek prepara una ronda de financiación con una valoración cercana a los 500.000 millones de yuanes, unos 74.000 millones de dólares, y busca captar hasta 50.000 millones de yuanes; el salto llega apenas unas semanas después de una ronda de junio que recogió unos 7.400 millones de dólares con una valoración post-money próxima a los 450.000 millones de yuanes. En paralelo, la compañía ha iniciado deliberaciones preliminares sobre cotizar en el STAR Market de Shanghái, con un objetivo interno de completar la solicitud de IPO este año. Las condiciones y el calendario se describen como no cerrados, y una salida a bolsa en Estados Unidos se considera impracticable dado el escrutinio del Congreso sobre las empresas chinas de IA. El registro de accionistas de la ronda de junio es la parte que conviene retener: el fundador Liang Wenfeng comprometió 20.000 millones de yuanes a título personal, Tencent puso 10.000 millones y el fabricante de baterías CATL 5.000 millones para convertirse en los mayores tenedores externos, mientras que el fondo estatal chino de inversión en IA posee los únicos derechos de voto externos en el consejo. Lo que convierte esto en un umbral y no en un titular es aquello a lo que sustituye. DeepSeek funcionó durante años con High-Flyer, el fondo cuantitativo de Liang, y esa autofinanciación es exactamente lo que le permitió lanzar modelos de pesos abiertos baratos sin rendir cuentas a capital externo ni a un calendario trimestral. Dos rondas en dos meses más un objetivo de solicitud significan que los costes de cómputo, de capacidad de centro de datos y de talento han superado lo que puede absorber el balance de un fondo de cobertura. El laboratorio que se hizo un nombre demostrando que el trabajo de frontera podía salir barato lo financia ya igual que todos los demás.",
+      "citations": [
+        {
+          "label": "Capacity - DeepSeek eyes $74bn valuation in fresh funding round ahead of China IPO",
+          "url": "https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/"
+        },
+        {
+          "label": "Gulf Times - China's DeepSeek seen to raise fresh capital at $74bn valuation ahead of onshore IPO",
+          "url": "https://www.gulf-times.com/article/729325/business/chinas-deepseek-seen-to-raise-fresh-capital-at-74bn-valuation-ahead-of-onshore-ipo/amp"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Alibaba presenta un modelo de IA enorme; la versión abierta no tiene fecha",
+    "Una botnet asalta herramientas de IA autoalojadas para robar claves de nube",
+    "Hablar y escuchar, sin nube, en un chip de 80 centavos",
+    "Un investigador y una IA resuelven un problema matemático de 30 años",
+    "DeepSeek vuelve a captar dinero y ahora mira hacia la bolsa"
+  ]
+}
