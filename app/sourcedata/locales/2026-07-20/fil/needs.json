@@ -1,0 +1,179 @@
+{
+  "date": "2026-07-20",
+  "by_prediction": {
+    "prediction.5ef12dddaef42be2": [
+      {
+        "actor": "Punong maintainer ng open-source na inference engine na nagtatakda ng bilis sa wide expert-parallel",
+        "job": "Patibayin ang wide expert-parallelism at prefill-decode disaggregation mula sa isang opt-in sa v0.6.0 tungo sa recipe na unang idinodokumento ng engine para sa 2T MoE.",
+        "outcome": "Ang disaggregated at wide-expert-parallel na deployment ang tumatayong dokumentadong reference recipe ng engine na ito para sa paghahain ng mga dalawang-trilyong-parameter na open MoE model.",
+        "motivation": "Ang pagiging engine na gumagawa sa pinakamalalaking libreng model na pinakamura ihain ang siyang nagwawagi ng adoption na tumutukoy sa pamantayan ng open inference.",
+        "task": {
+          "who": "Mga maintainer ng expert-parallel at disaggregation subsystem",
+          "what": "Iangat ang split-pool na serving mula opt-in tungo sa dokumentadong default",
+          "where": "Ang serving core, mga benchmark at dokumentasyon sa deployment ng engine",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang pinakamurang paghahain ng libreng 2T weights ang nagwawagi ng adoption sa ekosistema",
+          "how": "Wide expert parallelism na may KV-cache transfer sa Mooncake at NIXL"
+        }
+      },
+      {
+        "actor": "Team ng maintainer ng karibal na open-source na inference engine na nagkakarera tungo sa feature parity",
+        "job": "Tumbasan ang mga kakayahan sa wide expert-parallel at disaggregated na serving na inilabas sa v0.25.0, tapos magkarera sa mga constant hanggang maging inirerekomendang default ang split-pool na recipe.",
+        "outcome": "Idinodokumento rin ng engine na ito ang disaggregated wide-expert-parallel na serving bilang unang-linyang deployment nito para sa 2T-class na open MoE, na tumutugon sa kondisyong pareho-ang-dalawang-engine.",
+        "motivation": "Ang pagkahuli sa paghahain ng pinakamalalaking open model ay nagbibigay ng mga user sa karibal na engine, kaya't ang parity at pagkatapos ay isang mas mabilis na default ay usapin ng kaligtasan.",
+        "task": {
+          "who": "Mga maintainer ng core serving at distributed-execution",
+          "what": "Abutin ang parity tapos gawing default ang disaggregated expert-parallel na serving",
+          "where": "Ang scheduler, KV-cache transfer layer at mga docs ng engine",
+          "when": "H2 2026 through H1 2027",
+          "why": "Pinipigilan ng serving-parity na tumiwalag ang pinakamalalaking user ng open model",
+          "how": "Prefill-decode disaggregation na may mga networked na KV-cache backend"
+        }
+      },
+      {
+        "actor": "Team ng produkto sa serving infrastructure ng isang managed inference platform",
+        "job": "Magtayo ng isang naupahang managed na alok na naghahain ng isang dalawang-trilyong-parameter na open MoE na naka-enable bilang default ang prefill-decode disaggregation at wide expert parallelism.",
+        "outcome": "Isang naupahang managed na endpoint na naghahain ng isang 2T-class na open model na naka-on bilang default ang disaggregation, na tumutugon sa sugnay ng plataporma sa hula.",
+        "motivation": "Ang pag-upa ng pinakamurang token sa pinakamalalaking open model ay nagwawagi ng mga kustomer lamang kung turnkey ang disaggregated na serving, hindi isang opsyong inaayos ng kustomer.",
+        "task": {
+          "who": "Mga team sa platform serving, kapasidad at product engineering",
+          "what": "Maglabas ng isang 2T open-MoE na endpoint na naka-on bilang default ang disaggregation",
+          "where": "Naupahang fleet ng GPU-rack at katalogo ng produkto ng managed inference",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang turnkey at murang paghahain ng libreng weights ang nagwawagi ng mga kustomer sa pag-upa",
+          "how": "Split-pool na deployment sa mga rack na GB200 NVL72-class"
+        }
+      },
+      {
+        "actor": "Mga engineer ng KV-cache transport backend para sa cross-pool na disaggregated na serving",
+        "job": "Gawing sapat na mabilis at maaasahan ang networked na KV-cache transfer sa pagitan ng prefill at decode na pool upang maging isang ligtas na default ang disaggregation, hindi isang opsyong inaayos nang manu-mano.",
+        "outcome": "Isang KV-cache transfer layer na sapat ang tibay upang mailabas ng dalawang engine ang prefill-decode disaggregation bilang default sa halip na isang opt-in na para lamang sa mga eksperto.",
+        "motivation": "Bumabagsak ang panalo ng disaggregation sa throughput kung mabagal o hindi maaasahan ang KV-cache hop, kaya't ang kalidad ng transport layer ang nagtatakda kung maaaring maging default ang split-pool.",
+        "task": {
+          "who": "Mga maintainer ng networked na KV-cache transfer backend",
+          "what": "Patibayin ang cross-pool na KV-cache transfer para sa default-on na disaggregation",
+          "where": "Mga KV-cache transport backend na nag-uugnay sa prefill at decode na GPU pool",
+          "when": "H2 2026 through H1 2027",
+          "why": "Binubura ng isang mabagal na KV hop ang bentaha ng disaggregation sa throughput",
+          "how": "Networked na KV-cache streaming sa mga backend na Mooncake at NIXL"
+        }
+      }
+    ],
+    "prediction.be558a872c776c23": [
+      {
+        "actor": "Core maintainer ng open-source na vector database na nagtatakda ng mga default sa network security",
+        "job": "Magpasya na gawing isang ipinadadalang fail-closed na bind default ang payong post-CVE na sarado-ang-port at naka-on-ang-auth mula sa runbook sa susunod na release cycle.",
+        "outcome": "Isang breaking na release na nagbabago sa default at tumatanggi sa isang non-loopback na bind na walang authentication credential, na nakadokumento sa release notes sa halip na sa isang opsyonal na gabay sa hardening.",
+        "motivation": "Ang isang 9.8 na walang-authentication na RCE na may pinangalanan at nakaharap-sa-internet na install base ay gumagawa sa ipinadadalang default, hindi sa runbook, bilang obligasyon ng maintainer sa reputasyon.",
+        "task": {
+          "who": "Mga core maintainer at may-ari ng mga default sa networking sa steering group ng proyekto",
+          "what": "Ampunin ang fail-closed na bind bilang isang breaking na default sa release",
+          "where": "Ang release roadmap at ang default na configuration ng server ng proyekto",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang ipinadadalang default lamang ang umaabot sa mga operator na nilalaktawan ang mga pahina sa hardening",
+          "how": "Ang precedent ng protected-mode ng Redis at MongoDB"
+        }
+      },
+      {
+        "actor": "Engineer sa server-networking ng open-source na vector database",
+        "job": "Ipatupad ang startup guard na tumatanggi sa isang na-rutang bind na walang dalang credential, ibinababa ito sa loopback, o hinaharangan ito sa likod ng tahasang pagkilala.",
+        "outcome": "Server code na tumatanggi sa isang non-loopback na bind na walang authentication, ibinababa sa loopback, o nangangailangan ng tahasang pagkilala bago magsimula.",
+        "motivation": "Nabigo ang perimeter hygiene dahil umabot sa mga pampublikong IP ang libu-libong RAG instance; isang in-process na check lamang ang makakapigil sa susunod na nakalantad na store.",
+        "task": {
+          "who": "Mga engineer sa server, transport at startup-configuration",
+          "what": "Magdagdag ng isang production check na tumatanggi sa na-rutang bind na walang credential",
+          "where": "Ang code path ng server bootstrap at interface-binding",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang in-process na pagpapatupad ay mas nagtatagal kaysa sa perimeter hygiene na nalilimutan ng mga operator",
+          "how": "Loopback na default na bind kasama ang isang fail-closed na startup assertion"
+        }
+      },
+      {
+        "actor": "Release manager at may-ari ng release-notes ng open-source na vector database",
+        "job": "Isunod ang fail-closed na default sa isang versioned na release at idokumento ito bilang isang breaking na pagbabago sa default, hindi isang opsyonal na tala sa hardening.",
+        "outcome": "Release notes na nagtatala sa auth-on na bind default bilang isang breaking change, na ibinubukod ito sa isang opsyonal na gabay sa hardening na binabalewala ng mga operator.",
+        "motivation": "Ang isang default na nakabaon bilang opsyonal na hardening ay hindi kailanman umaabot sa mga operator na ayaw mag-upgrade, kaya't ang isang na-flag na breaking change lamang ang pumipilit sa ligtas na configuration.",
+        "task": {
+          "who": "Mga staff sa release management at developer-documentation",
+          "what": "Idokumento ang auth-on na bind default bilang isang breaking change",
+          "where": "Ang versioned na release notes at ang gabay sa upgrade migration",
+          "when": "H2 2026 through H1 2027",
+          "why": "Pinipilit ng balangkas na breaking-change ang ligtas na default sa mga nag-a-upgrade",
+          "how": "Major bump sa semantic-version na may dokumentadong migration path"
+        }
+      },
+      {
+        "actor": "Tagasuri ng seguridad sa procurement ng isang enterprise RAG-platform",
+        "job": "Gawing isang item sa checklist ng mamimili ang 9.8 na CVE at ang pinangalanang nakaharap-sa-internet na install base, na humihingi ng auth-on-by-default mula sa mga vendor ng vector store.",
+        "outcome": "Isang kinakailangan sa procurement na tumatanggi sa mga vector store na walang fail-closed na bind default, na lumilikha ng demand na nagtatakda ng iskedyul ng paglalabas ng mga maintainer.",
+        "motivation": "Ang isang paglabag sa retrieval layer ay muling bumubuo sa pribadong teksto na ipinakain sa mga model, kaya't ginagawa ng mga mamimili ang ipinadadalang default bilang isang kondisyon sa pagbili.",
+        "task": {
+          "who": "Mga tungkulin sa pagsusuri ng seguridad, vendor-risk at procurement",
+          "what": "Kailanganin ang auth-on-by-default bilang isang pamantayan sa pagbili ng vector store",
+          "where": "Mga questionnaire sa seguridad para sa vendor at mga checklist sa procurement ng RAG platform",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang presyon sa procurement, hindi ang konsensya, ang nagtatakda ng iskedyul ng mga maintainer",
+          "how": "CVSS 9.8 na severity gate sa mga nakaharap-sa-internet na embedding store"
+        }
+      }
+    ],
+    "prediction.dadde44ea0dbf2e0": [
+      {
+        "actor": "Pamunuan sa produkto at negosyo ng data-center GPU ng isang rack-scale na AI accelerator vendor",
+        "job": "I-package ang MI450 accelerator, ang double-wide na Helios rack at ang Zen 6 Venice EPYC CPU tungo sa iisang naibebentang rack-scale na sistema na may multi-generation na roadmap.",
+        "outcome": "Isang pampublikong isiniwalat at binilang na deployment ng Helios o MI450 mula sa isang pinangalanang mamimili, na nakasaad sa gigawatt o bilang ng rack, sa halip na isang ayos na pagbabahagi ng requirement.",
+        "motivation": "Ang isang pinangalanan at nakatalang volume commitment ang naghihiwalay sa isang kapani-paniwalang hamon sa antas ng rack mula sa isang item sa roadmap.",
+        "task": {
+          "who": "Pamamahala sa produkto ng Instinct data-center GPU at pamunuan ng data-center business unit",
+          "what": "I-package ang MI450, Helios at Venice bilang iisang naibebentang rack-scale na sistema",
+          "where": "Ang positioning sa Advancing AI keynote at ang roadmap ng produkto ng data-center",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang mga nakatalang commitment ang naghihiwalay sa isang kapani-paniwalang hamon mula sa isang roadmap",
+          "how": "Positioning bilang rack-scale na sistema na sumasaklaw sa MI450 hanggang sa MI500 na kasunod"
+        }
+      },
+      {
+        "actor": "Rack platform at systems hardware engineering ng isang rack-scale na AI accelerator vendor",
+        "job": "Bumuo at maglabas ng double-wide na Helios rack na nagsasama ng 72 MI455X na parte, 31TB ng HBM4 at humigit-kumulang 3 AI exaflops bilang isang naide-deploy na yunit.",
+        "outcome": "Isang ipinapadala at nabe-benchmark na Helios rack na maaaring pagtalagahan ng kapasidad ng isang mamimili, hindi isang preview sa roadmap ng iisang accelerator.",
+        "motivation": "Naglalagay lamang ang isang mamimili ng nakatalagang kapasidad sa rekord sa likod ng hardware na ipinapadala nang bilang isang rack, hindi bilang isang slide.",
+        "task": {
+          "who": "Rack systems, HBM memory integration at platform hardware engineering",
+          "what": "Isama ang MI455X, HBM4 at Venice EPYC sa Helios rack",
+          "where": "Ang plataporma ng double-wide na Helios rack at ang mga lab sa hardware validation",
+          "when": "H2 2026 through H1 2027",
+          "why": "Sumusunod ang nakatalagang kapasidad sa hardware na ipinapadala bilang isang rack",
+          "how": "72-GPU na double-wide na rack na may 31TB HBM4, humigit-kumulang 3 exaflops"
+        }
+      },
+      {
+        "actor": "Pamunuan sa compute-infrastructure at capacity-procurement ng isang frontier AI lab",
+        "job": "Ipasa ang mga requirement sa memory-footprint at rack-topology sa programang MI450, tapos lumipat mula sa papel na pagbabahagi ng requirement tungo sa isang nakatalagang pagbili ng kapasidad.",
+        "outcome": "Isang pampubliko at binilang na pahayag ng laki ng deployment ng Helios o MI450, sa gigawatt o bilang ng rack, na inilalagay ng lab sa rekord.",
+        "motivation": "Ang isang lab na humubog sa memory footprint at rack topology ng chip ay nagbabalak bumili nang malakihan, hindi lamang magpayo sa vendor.",
+        "task": {
+          "who": "Mga staff sa AI compute-infrastructure, capacity planning at procurement ng accelerator vendor",
+          "what": "Gawing isang nakatalagang pagbili ng kapasidad ang co-design ng MI450",
+          "where": "Capacity planning ng datacenter at mga negosasyon sa accelerator vendor",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang malalim na co-design ay senyales ng intensyong bumili nang malakihan",
+          "how": "Pagbabahagi ng requirement sa memory footprint at rack topology, tapos pagbili"
+        }
+      },
+      {
+        "actor": "Team sa strategic-accounts sales at partnerships ng isang rack-scale na AI accelerator vendor",
+        "job": "Kunin ang bagong anchor na kustomer na inilaan para sa keynote at bumalangkas ng isang deal na isisiwalat ng isang pinangalanang mamimili bilang nakatalagang rack-scale na kapasidad.",
+        "outcome": "Isang nilagdaang anchor commitment na isinasaad ng isang pinangalanang hyperscaler o lab sa rekord sa gigawatt o bilang ng rack ng kapasidad ng Helios.",
+        "motivation": "Ang isang pinangalanang mamimili sa rekord ay gumagawa sa isang kuwento ng co-design tungo sa patunay ng isang umaandar na negosyo sa antas ng rack, na nagbubukas ng iba pang account.",
+        "task": {
+          "who": "Mga team sa strategic-accounts sales, business development at partnership deal",
+          "what": "Isara at ianunsyo ang isang pinangalanang anchor na rack-scale na commitment",
+          "where": "Mga negosasyon sa account ng hyperscaler at frontier-lab at mga pagsisiwalat sa keynote",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang isang pinangalanang mamimili sa rekord ay nagpapatunay ng isang negosyo sa antas ng rack",
+          "how": "Pagbalangkas ng deal sa anchor-customer na may binilang na pagsisiwalat sa gigawatt o bilang ng rack"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-20",
+  "predictions": [
+    {
+      "id": "prediction.5ef12dddaef42be2",
+      "scope_hint": "tech",
+      "title": "Disaggregated expert-parallel serving becomes the default for 2T MoE by H1 2027",
+      "body": "The open-weight parameter race has produced models—Moonshot's Kimi K3 at 2.8 trillion parameters, Alibaba's Qwen3.8 at 2.4 trillion—that almost nobody can serve with a single-pool setup, and this week the two dominant open inference engines shipped the machinery to run them. SGLang's v0.6.0 leads on wide expert parallelism, spreading a mixture-of-experts model's hundreds of experts across many GPUs, paired with prefill-decode disaggregation, which puts the compute-bound prompt phase on one GPU pool and the bandwidth-bound generation phase on another and ships the KV cache between them over the network through backends like Mooncake and NIXL. vLLM's v0.25.0 landed the same two capabilities within days, the feature-parity-then-race-on-constants cadence these projects have held all year. On a GB200 NVL72 rack the split-pool design already reports roughly 2.7 times the throughput of a single-pool baseline for a trillion-parameter-class MoE. The prediction is that this configuration stops being an advanced opt-in and becomes the default path for 2-trillion-parameter open MoE. By H1 2027 the disaggregated, wide-expert-parallel recipe is the reference deployment both SGLang and vLLM document first for these models, and at least one rentable managed inference offering serves a 2T-class open model with disaggregation switched on by default. The force behind the call is economic rather than technical. With the weights free, the cost of running one of these models is governed almost entirely by whether an operator can stand up disaggregated, expert-parallel serving at all; a 2.4-trillion-parameter checkpoint that cannot be served efficiently undercuts a frontier API only on paper, and the release that makes it servable on a rack you can rent is the one that actually moves the cost curve. Once the cheapest way to run the largest open models is the split-pool recipe, the ecosystem converges on it as the standard, much as tensor parallelism became the unspoken default for dense models a generation earlier. What would falsify this is a simpler winner. If a single-pool or purely tensor-parallel setup stays the documented default for 2T-class open MoE through H1 2027, or if disaggregation remains a hand-tuned, expert-only option rather than the recommended recipe, the call is wrong.",
+      "reasoning": {
+        "because": "SGLang v0.6.0 and vLLM v0.25.0 both shipped wide expert-parallel, disaggregated serving this week",
+        "given": "Free weights make serving efficiency the cost driver for 2T open MoE, rewarding one standard recipe",
+        "so_that": "So disaggregated expert-parallel serving becomes the default both engines and a rented platform ship for 2T open MoE",
+        "landing": "by H1 2027; both SGLang and vLLM plus one rented platform default to it",
+        "plain_language": "These giant free AI models are too big to run simply, so spreading the work across many chips becomes the normal way to serve them."
+      },
+      "summary": "SGLang v0.6.0 and vLLM v0.25.0 both shipped wide expert-parallel, disaggregated serving this week for 2-trillion-parameter open MoE models. With the weights free, serving efficiency sets cost, so this split-pool recipe should become the default both engines and a rented platform ship by H1 2027."
+    },
+    {
+      "id": "prediction.dadde44ea0dbf2e0",
+      "scope_hint": "business",
+      "title": "AMD converts MI450 co-design into a firm rack-scale commitment by H1 2027",
+      "body": "AMD arrives at its July 23 Advancing AI keynote having reframed the Instinct MI450, the double-wide Helios rack and the Zen 6 EPYC 'Venice' CPU as a single rack-scale system rather than a loose accelerator, with a Helios rack specified at 72 MI455X parts, 31TB of HBM4 and roughly 3 AI exaflops. The commercially load-bearing detail is the customer relationship behind the silicon: OpenAI has been feeding requirements into the MI450 program, and AMD is already discussing the follow-on MI500 with buyers. Co-design of that depth is rarely disinterested — a frontier lab that shapes a chip's memory footprint and rack topology is a lab that means to buy it at volume, not merely advise. AMD has also stopped previewing MI450 as a roadmap item and started selling it as a shipping rack, and it is holding a fresh anchor customer for the keynote itself. The prediction follows from what that co-design implies rather than from any single reveal. By H1 2027, AMD converts at least one of these co-design relationships into a publicly disclosed, quantified rack-scale commitment — a named hyperscaler or frontier lab stating a specific Helios or MI450 deployment scale, in gigawatts or rack count, rather than a requirements-sharing arrangement. That is the milestone separating a credible rack-level challenger from a roadmap: not that the MI450 benchmarks against Nvidia's Vera Rubin generation, but that a named buyer puts committed capacity behind it on the record.",
+      "reasoning": {
+        "because": "OpenAI is feeding requirements into MI450; AMD holds a fresh anchor customer for its keynote",
+        "given": "A lab that shapes a chip's memory and rack topology intends to buy it at volume, not just advise",
+        "so_that": "A named hyperscaler or frontier lab commits quantified Helios/MI450 capacity on the record, not just a co-design role",
+        "landing": "by H1 2027; a named buyer discloses a firm Helios/MI450 rack-scale commitment",
+        "plain_language": "OpenAI is helping AMD design its new AI chips. Soon a big customer will publicly promise to buy lots of AMD's rack computers."
+      },
+      "summary": "AMD reaches its July 23 Advancing AI keynote having recast the MI450, Helios rack and EPYC Venice as one rack-scale system, with OpenAI co-designing the silicon. By H1 2027, that co-design converts into a disclosed, quantified rack-scale commitment from a named buyer."
+    },
+    {
+      "id": "prediction.be558a872c776c23",
+      "scope_hint": "cross",
+      "title": "Open-source vector databases ship authentication-on-by-default by H1 2027",
+      "body": "CVE-2026-59218 is a 9.8-rated, unauthenticated path to remote code execution in Milvus, the most widely deployed open-source vector database and the store that holds the embeddings behind retrieval-augmented generation. The maintainers shipped a patch, but the durable advice was operational: pull public instances off the internet, close the ports, and rotate any credential the process could read. That is perimeter hygiene, not software enforcement, and it lands on the same fault the exposed-inference stories keep finding — vector stores were built to sit on a trusted private subnet, so open ports and no authentication read as sane defaults, and RAG deployments then pushed thousands of them onto public IPs to serve chatbots. What makes the retrieval layer a worse breach than a generic database is what leaks: the private text an organization fed its models is reconstructable from the stored embeddings and the source chunks kept beside them. The prediction is that the correction arrives in the software rather than the runbook. This is the cycle Redis, MongoDB and Elasticsearch each ran — mass scanning of open instances forced a protected mode, a loopback default bind, and production checks that refuse a routable bind with no credential — and vector databases have not been through it yet. By H1 2027, at least two of the major open-source vector stores — among Milvus, Qdrant, Weaviate, Chroma and the pgvector serving front ends — ship a release in which binding to a non-loopback interface without an authentication credential is refused, downgraded to loopback, or gated behind an explicit acknowledgement, and documented as a breaking default change in the release notes rather than offered as an optional hardening guide. The schedule is set by procurement, not conscience: a 9.8 CVE with a named, internet-facing install base turns ports-closed, auth-on from a support-forum suggestion into a buyer's checklist item, and the shipped default is the only control that reaches the operators who never open the hardening page.",
+      "reasoning": {
+        "because": "CVE-2026-59218 is unauthenticated remote code execution on Milvus, the top open-source vector store",
+        "given": "Redis and MongoDB both shipped fail-closed network defaults after their open instances were scanned",
+        "so_that": "Two or more major open-source vector stores refuse a non-loopback bind that carries no authentication credential",
+        "landing": "by H1 2027; a breaking default-change release from at least two vector stores",
+        "plain_language": "A nasty bug let hackers break into the databases storing a company's private AI documents, so these tools will soon require a password by default."
+      },
+      "summary": "CVE-2026-59218 is a 9.8, unauthenticated RCE in Milvus, the vector store behind many RAG systems, exposing private embeddings. Redis, MongoDB and Elasticsearch all moved to fail-closed network defaults after similar scanning; expect two or more major vector databases to follow by H1 2027."
+    }
+  ]
+}

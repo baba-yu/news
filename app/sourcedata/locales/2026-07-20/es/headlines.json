@@ -1,0 +1,83 @@
+{
+  "date": "2026-07-20",
+  "technical": [
+    {
+      "lead": "AMD presenta MI450, Helios y EPYC Venice como un desafío a nivel de rack contra Nvidia",
+      "body": "A dos días de la keynote Advancing AI de AMD, los días 22 y 23 de julio, las señales previas al evento se han consolidado en una única propuesta: la serie Instinct MI450, el rack Helios de doble ancho y la CPU Zen 6 EPYC 'Venice', vendidos como un único sistema a escala de rack y no como un acelerador suelto. Las cifras que constan ya fijan el marco: un rack Helios integra 72 unidades MI455X, 31TB de HBM4 y unos 3 exaflops de IA, mientras que cada MI450 lleva 432GB de HBM4 y unos 20 petaflops FP8. Lo que ha cambiado en la antesala es el posicionamiento: AMD se apoya en la inferencia como mercado de volumen, con el argumento de que sus mayores despliegues comprometidos son de inferencia y no de entrenamiento, y de que la capacidad de memoria por GPU es donde aventaja en configuración al rack de Nvidia. Los analistas enmarcan ahora el MI450 como la primera respuesta creíble de AMD a nivel de rack a la generación Vera Rubin, más que como una alternativa de un solo socket. Y OpenAI ha estado aportando requisitos al programa MI450, mientras AMD ya habla con clientes del MI500 posterior. El hecho genuinamente nuevo es más estrecho que cualquier especificación: la compañía ha dejado de presentar el MI450 como un elemento de hoja de ruta y ha empezado a venderlo como un rack que ya se comercializa, dos días antes de tener que demostrarlo en el escenario.",
+      "citations": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+          "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ]
+    },
+    {
+      "lead": "SGLang v0.6.0 y vLLM v0.25.0 lanzan servicio desagregado con paralelismo amplio de expertos",
+      "body": "La carrera por el número de parámetros de pesos abiertos que produjo el Kimi K3 de Moonshot con 2,8 billones de parámetros y el Qwen3.8 de Alibaba con 2,4 billones tiene una consecuencia inmediata aguas abajo: casi nadie puede servir esos modelos con una configuración ingenua, y los dos motores de inferencia abierta dominantes dedicaron esta semana a lanzar la maquinaria para hacerlo. La v0.6.0 de SGLang lidera en paralelismo amplio de expertos, repartiendo los cientos de expertos de un modelo de mezcla de expertos entre muchas GPUs, combinada con la desagregación prefill-decode, en la que la fase de procesamiento del prompt, limitada por cómputo, se ejecuta en un pool de GPUs y la fase de generación de tokens, limitada por el ancho de banda de memoria, en otro, con la caché KV enviada entre ambos por la red. La cifra destacada es un rendimiento en un rack GB200 NVL72 de unas 2,7 veces el de una línea base de pool único para un MoE de clase billón de parámetros, usando Mooncake y NIXL como backends de transferencia de KV. La v0.25.0 de vLLM incorpora las mismas dos capacidades en cuestión de días, la misma pauta que estos proyectos han mantenido todo el año: alcanzar rápido la paridad de funciones y competir después en los factores constantes. El punto duradero es que la economía de los gigantescos modelos abiertos la fija ahora menos la licencia del modelo, que es gratuita, que la capacidad de un operador para montar siquiera un servicio desagregado con paralelismo de expertos. La versión que hace servible un modelo de 2,4 billones de parámetros en un rack que se puede alquilar es la que de verdad mueve la curva de costes, y llegó esta semana en lugar de con los propios modelos.",
+      "citations": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ]
+    },
+    {
+      "lead": "Un fallo crítico en Milvus, CVE-2026-59218, permite RCE no autenticado en bases de datos vectoriales",
+      "body": "Una vulnerabilidad crítica en Milvus, registrada como CVE-2026-59218 y calificada con 9,8 en CVSS, permite a un atacante no autenticado alcanzar la ejecución remota de código contra la base de datos vectorial de código abierto más desplegada, el componente que almacena los embeddings que hay detrás de la generación aumentada por recuperación. El fallo es accesible a través de un endpoint del plano de datos expuesto que acepta peticiones manipuladas sin autenticación. Un impacto exitoso entrega no solo el servidor sino también el corpus incrustado que reside en él: a menudo documentos internos de una empresa, su historial de soporte o su código fuente, vectorizados y consultables. Los mantenedores han publicado una versión parcheada e instan a los operadores a retirar las instancias públicas de internet y a rotar cualquier credencial que el proceso pudiera leer. El problema estructural es que las bases de datos vectoriales se construyeron para situarse en lo profundo de una red de confianza, con puertos abiertos y sin autenticación por defecto porque el modelo de amenaza asumía una subred privada, y los despliegues de RAG han empujado en silencio miles de ellas a IP públicas para servir chatbots. Un almacén vectorial comprometido es peor que una brecha de base de datos genérica por lo que filtra: el texto privado exacto que una organización alimentó a sus modelos es reconstruible a partir de los embeddings y los fragmentos de origen que Milvus guarda junto a ellos. La lectura práctica es que la capa de datos de RAG necesita ahora la misma higiene de red que la capa de servicio se ha visto obligada a aprender: autenticación activada, puertos cerrados y nada que contenga embeddings accesible desde la internet abierta.",
+      "citations": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ]
+    },
+    {
+      "lead": "LangGraph v1.1.0 lanza ejecución duradera para responder a Temporal en agentes reanudables",
+      "body": "La pregunta que reorganiza en silencio la infraestructura de agentes en 2026 no es qué framework escribe el bucle de agente más elegante, sino cuál sobrevive a un reinicio del servidor a mitad de tarea. Esta semana produjo un movimiento concreto. LangChain lanzó la ejecución duradera para LangGraph en su versión v1.1.0, guardando un punto de control de cada paso de la ejecución de un agente en estado persistente para que un worker caído o redesplegado se reanude desde el último nodo completado en lugar de reiniciar la tarea o perderla. Esa es una respuesta directa a la propuesta que ha convertido a Temporal en el sustrato por defecto de los agentes de larga ejecución: el motor de ejecución duradera sobre el que OpenAI ejecuta Codex y que se sitúa por debajo del producto Workflows de Mistral. Los tres comparten el enfoque de que un agente en producción es en realidad un flujo de trabajo distribuido: de decenas de segundos a varios minutos por petición, muchas llamadas al modelo e invocaciones de herramientas intercaladas, fallos de red y despliegues por medio. La garantía interesante, en ese marco, no es la inteligencia sino la capacidad de supervivencia. Que LangGraph alcance la ejecución duradera de forma nativa, en lugar de obligar a los equipos a acoplar su bucle de agente a un motor de flujos de trabajo aparte, funde dos capas en una para el bando del código primero. Lo que cambia más allá de una nota de versión es el aspecto de una caída de agente: el modo de fallo deja de ser «el agente olvidó lo que estaba haciendo» y pasa a ser «el agente se pausó y retomó donde lo había dejado». Esa es la diferencia entre una demo y algo que un banco ejecutará en producción. El mercado de la orquestación se está consolidando en torno a esa propiedad, y los frameworks que la trataron como opcional son los que ahora la incorporan a posteriori.",
+      "citations": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+          "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+        },
+        {
+          "label": "GitHub - langchain-ai/langgraph v1.1.0 release",
+          "url": "https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "AMD prepara un desafío a escala de rack contra Nvidia",
+    "SGLang y vLLM se actualizan para servir modelos abiertos gigantes",
+    "Un fallo crítico en Milvus abre a los atacantes las bases de datos de RAG",
+    "Los agentes de LangGraph ahora se reanudan tras un fallo en vez de reiniciarse"
+  ]
+}

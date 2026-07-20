@@ -1,0 +1,179 @@
+{
+  "date": "2026-07-20",
+  "by_prediction": {
+    "prediction.5ef12dddaef42be2": [
+      {
+        "actor": "Mantenedor principal del motor de inferencia de código abierto que marca el ritmo del paralelismo amplio de expertos",
+        "job": "Consolidar el paralelismo amplio de expertos y la desagregación prefill-decode, de una opción activable en v0.6.0 a la receta que el motor documenta primero para los MoE de 2 billones.",
+        "outcome": "El despliegue desagregado con paralelismo amplio de expertos queda como la receta de referencia documentada de este motor para servir modelos MoE abiertos de 2 billones de parámetros.",
+        "motivation": "Ser el motor que hace más barato servir los mayores modelos gratuitos gana la adopción que define el estándar de inferencia abierta.",
+        "task": {
+          "who": "Mantenedores de los subsistemas de paralelismo de expertos y de desagregación",
+          "what": "Promover el servicio de pools separados de opción activable a valor por defecto documentado",
+          "where": "El núcleo de servicio del motor, los benchmarks y la documentación de despliegue",
+          "when": "H2 2026 through H1 2027",
+          "why": "El servicio más barato de los pesos gratuitos de 2 billones gana la adopción del ecosistema",
+          "how": "Paralelismo amplio de expertos con transferencia de caché KV sobre Mooncake y NIXL"
+        }
+      },
+      {
+        "actor": "Equipo mantenedor del motor de inferencia de código abierto rival que corre hacia la paridad de funciones",
+        "job": "Igualar las capacidades de paralelismo amplio de expertos y de servicio desagregado lanzadas en v0.25.0, y luego competir en las constantes hasta que la receta de pools separados sea el valor por defecto recomendado.",
+        "outcome": "Este motor también documenta el servicio desagregado con paralelismo amplio de expertos como su despliegue de primera línea para los MoE abiertos de clase 2 billones, cumpliendo la condición de aterrizaje de ambos motores.",
+        "motivation": "Quedarse atrás en servir los mayores modelos abiertos cede usuarios al motor rival, así que la paridad y luego un valor por defecto más rápido son supervivencia.",
+        "task": {
+          "who": "Mantenedores del núcleo de servicio y de la ejecución distribuida",
+          "what": "Alcanzar la paridad y luego adoptar por defecto el servicio desagregado con paralelismo de expertos",
+          "where": "El planificador del motor, la capa de transferencia de caché KV y la documentación",
+          "when": "H2 2026 through H1 2027",
+          "why": "La paridad de servicio evita que los usuarios de los mayores modelos abiertos deserten",
+          "how": "Desagregación prefill-decode con backends de caché KV en red"
+        }
+      },
+      {
+        "actor": "Equipo de producto de la infraestructura de servicio de una plataforma de inferencia gestionada",
+        "job": "Montar una oferta gestionada y alquilable que sirva un MoE abierto de 2 billones de parámetros con la desagregación prefill-decode y el paralelismo amplio de expertos activados por defecto.",
+        "outcome": "Un endpoint gestionado y alquilable que sirve un modelo abierto de clase 2 billones con la desagregación activada por defecto, que cumple la cláusula de plataforma de la predicción.",
+        "motivation": "Alquilar los tokens más baratos de los mayores modelos abiertos solo gana clientes si el servicio desagregado es llave en mano, no una opción que el cliente deba ajustar.",
+        "task": {
+          "who": "Equipos de servicio, de capacidad y de ingeniería de producto de la plataforma",
+          "what": "Lanzar un endpoint de MoE abierto de 2 billones con la desagregación activada por defecto",
+          "where": "Flota de racks de GPU alquilables y catálogo de productos de inferencia gestionada",
+          "when": "H2 2026 through H1 2027",
+          "why": "El servicio barato y llave en mano de pesos gratuitos gana clientes de alquiler",
+          "how": "Despliegue de pools separados en racks de clase GB200 NVL72"
+        }
+      },
+      {
+        "actor": "Ingenieros del backend de transporte de caché KV para el servicio desagregado entre pools",
+        "job": "Hacer que la transferencia de caché KV en red entre los pools de prefill y de decode sea lo bastante rápida y fiable como para que la desagregación sea un valor por defecto seguro, no una opción ajustada a mano.",
+        "outcome": "Una capa de transferencia de caché KV lo bastante robusta como para que ambos motores lancen la desagregación prefill-decode como valor por defecto y no como una opción reservada a expertos.",
+        "motivation": "La ganancia de rendimiento de la desagregación se desmorona si el salto de la caché KV es lento o inestable, así que la calidad de la capa de transporte determina si los pools separados pueden ser el valor por defecto.",
+        "task": {
+          "who": "Mantenedores del backend de transferencia de caché KV en red",
+          "what": "Consolidar la transferencia de caché KV entre pools para una desagregación activada por defecto",
+          "where": "Backends de transporte de caché KV que conectan los pools de GPU de prefill y de decode",
+          "when": "H2 2026 through H1 2027",
+          "why": "Un salto de KV lento borra la ventaja de rendimiento de la desagregación",
+          "how": "Streaming de caché KV en red sobre los backends Mooncake y NIXL"
+        }
+      }
+    ],
+    "prediction.be558a872c776c23": [
+      {
+        "actor": "Mantenedor del núcleo de una base de datos vectorial de código abierto que fija los valores por defecto de seguridad de red",
+        "job": "Decidir convertir el consejo del manual de operaciones posterior al CVE —puertos cerrados, autenticación activada— en un enlace por defecto que falla en cerrado y se distribuye a lo largo del siguiente ciclo de versiones.",
+        "outcome": "Una versión con un cambio por defecto que rompe la compatibilidad y que rechaza un enlace distinto de loopback sin credencial de autenticación, documentado en las notas de versión y no en una guía opcional de fortalecimiento.",
+        "motivation": "Una RCE no autenticada de 9,8 con una base instalada nombrada y expuesta a internet convierte el valor por defecto que se distribuye, y no el manual de operaciones, en la obligación reputacional del mantenedor.",
+        "task": {
+          "who": "Mantenedores del núcleo y responsables de los valores por defecto de red en el grupo directivo del proyecto",
+          "what": "Adoptar el enlace que falla en cerrado como valor por defecto de versión que rompe la compatibilidad",
+          "where": "La hoja de ruta de versiones del proyecto y la configuración por defecto del servidor",
+          "when": "H2 2026 through H1 2027",
+          "why": "Solo un valor por defecto distribuido alcanza a los operadores que se saltan las páginas de fortalecimiento",
+          "how": "El precedente del modo protegido de Redis y MongoDB"
+        }
+      },
+      {
+        "actor": "Ingeniero de redes de servidor de una base de datos vectorial de código abierto",
+        "job": "Implementar la salvaguarda de arranque que rechaza un enlace enrutable que no lleve credencial, lo degrada a loopback o lo condiciona a una confirmación explícita.",
+        "outcome": "Código de servidor que rechaza un enlace distinto de loopback sin autenticación, lo degrada a loopback o exige una confirmación explícita antes de arrancar.",
+        "motivation": "La higiene de perímetro falló porque miles de instancias de RAG llegaron a IP públicas; solo una comprobación dentro del proceso detiene el próximo almacén expuesto.",
+        "task": {
+          "who": "Ingenieros de servidor, de transporte y de configuración de arranque",
+          "what": "Añadir una comprobación de producción que rechace el enlace enrutable sin credencial",
+          "where": "La ruta de arranque del servidor y de enlace de interfaz",
+          "when": "H2 2026 through H1 2027",
+          "why": "La imposición dentro del proceso perdura más que la higiene de perímetro que los operadores olvidan",
+          "how": "Enlace por defecto a loopback más una aserción de arranque que falla en cerrado"
+        }
+      },
+      {
+        "actor": "Responsable de versiones y de las notas de versión de una base de datos vectorial de código abierto",
+        "job": "Programar el valor por defecto que falla en cerrado en una versión numerada y documentarlo como un cambio de comportamiento por defecto que rompe la compatibilidad, no como una nota opcional de fortalecimiento.",
+        "outcome": "Unas notas de versión que registran el enlace por defecto con autenticación activada como un cambio que rompe la compatibilidad, distinguiéndolo de una guía opcional de fortalecimiento que los operadores ignoran.",
+        "motivation": "Un valor por defecto enterrado como fortalecimiento opcional nunca llega a los operadores reacios a actualizar, así que solo un cambio señalado como ruptura de compatibilidad fuerza la configuración segura.",
+        "task": {
+          "who": "Personal de gestión de versiones y de documentación para desarrolladores",
+          "what": "Documentar el enlace por defecto con autenticación activada como un cambio que rompe la compatibilidad",
+          "where": "Las notas de versión numeradas y la guía de migración de la actualización",
+          "when": "H2 2026 through H1 2027",
+          "why": "El marco de ruptura de compatibilidad impone el valor por defecto seguro a quienes actualizan",
+          "how": "Salto de versión mayor en versionado semántico con una ruta de migración documentada"
+        }
+      },
+      {
+        "actor": "Revisor de seguridad de compras de una plataforma de RAG empresarial",
+        "job": "Convertir el CVE de 9,8 y la base instalada nombrada y expuesta a internet en un punto de la lista de verificación del comprador que exija la autenticación activada por defecto a los proveedores de almacenes vectoriales.",
+        "outcome": "Un requisito de compras que rechaza los almacenes vectoriales sin un enlace por defecto que falla en cerrado, creando la demanda que fija el calendario de distribución de los mantenedores.",
+        "motivation": "Una brecha en la capa de recuperación reconstruye el texto privado alimentado a los modelos, así que los compradores hacen del valor por defecto distribuido una condición previa de compra.",
+        "task": {
+          "who": "Funciones de seguridad, de riesgo de proveedores y de revisión de compras",
+          "what": "Exigir la autenticación activada por defecto como criterio de compra de almacenes vectoriales",
+          "where": "Cuestionarios de seguridad para proveedores y listas de verificación de compras de plataformas de RAG",
+          "when": "H2 2026 through H1 2027",
+          "why": "La presión de compras, no la conciencia, fija el calendario de los mantenedores",
+          "how": "Umbral de severidad CVSS 9,8 sobre los almacenes de embeddings expuestos a internet"
+        }
+      }
+    ],
+    "prediction.dadde44ea0dbf2e0": [
+      {
+        "actor": "Dirección de producto y de negocio de GPU de centro de datos del proveedor de aceleradores de IA a escala de rack",
+        "job": "Empaquetar el acelerador MI450, el rack Helios de doble ancho y la CPU Zen 6 Venice EPYC en un único sistema a escala de rack vendible, con una hoja de ruta de varias generaciones.",
+        "outcome": "Un despliegue de Helios o MI450 de un comprador con nombre, cuantificado y divulgado públicamente, expresado en gigavatios o en número de racks, en lugar de un acuerdo de intercambio de requisitos.",
+        "motivation": "Un compromiso de volumen con nombre y de constancia pública es lo que separa a un aspirante creíble a nivel de rack de un elemento de hoja de ruta.",
+        "task": {
+          "who": "Gestión de producto de GPU de centro de datos Instinct y dirección de la unidad de negocio de centro de datos",
+          "what": "Empaquetar MI450, Helios y Venice como un único sistema a escala de rack vendible",
+          "where": "El posicionamiento de la keynote Advancing AI y la hoja de ruta de productos de centro de datos",
+          "when": "H2 2026 through H1 2027",
+          "why": "Los compromisos de constancia pública separan a un aspirante creíble de una hoja de ruta",
+          "how": "Posicionamiento de sistema a escala de rack que abarca del MI450 al MI500 posterior"
+        }
+      },
+      {
+        "actor": "Ingeniería de plataforma de rack y de hardware de sistemas del proveedor de aceleradores de IA a escala de rack",
+        "job": "Construir y distribuir el rack Helios de doble ancho que integra 72 unidades MI455X, 31TB de HBM4 y unos 3 exaflops de IA como una unidad desplegable.",
+        "outcome": "Un rack Helios que ya se comercializa y admite benchmarks, al que un comprador puede comprometer capacidad, y no una vista previa de hoja de ruta de un solo acelerador.",
+        "motivation": "Un comprador solo pone capacidad comprometida por escrito detrás de hardware que ya se comercializa como un rack, no de una diapositiva.",
+        "task": {
+          "who": "Ingeniería de sistemas de rack, de integración de memoria HBM y de hardware de plataforma",
+          "what": "Integrar MI455X, HBM4 y Venice EPYC en el rack Helios",
+          "where": "La plataforma del rack Helios de doble ancho y los laboratorios de validación de hardware",
+          "when": "H2 2026 through H1 2027",
+          "why": "La capacidad comprometida sigue al hardware que se comercializa como un rack",
+          "how": "Rack de doble ancho de 72 GPU con 31TB de HBM4 y unos 3 exaflops"
+        }
+      },
+      {
+        "actor": "Dirección de infraestructura de cómputo y de compra de capacidad de un laboratorio de IA de frontera",
+        "job": "Aportar requisitos de huella de memoria y de topología de rack al programa MI450, y luego pasar de un papel de intercambio de requisitos a una compra de capacidad comprometida.",
+        "outcome": "Una declaración pública y cuantificada de la escala de despliegue de Helios o MI450, en gigavatios o en número de racks, que el laboratorio hace constar.",
+        "motivation": "Un laboratorio que dio forma a la huella de memoria del chip y a la topología del rack pretende comprar en volumen, no solo asesorar al proveedor.",
+        "task": {
+          "who": "Personal de infraestructura de cómputo de IA, de planificación de capacidad y de compra al proveedor de aceleradores",
+          "what": "Convertir el codiseño del MI450 en una compra de capacidad comprometida",
+          "where": "Planificación de capacidad de centro de datos y negociaciones con el proveedor de aceleradores",
+          "when": "H2 2026 through H1 2027",
+          "why": "Un codiseño profundo señala una intención de comprar en volumen",
+          "how": "Intercambio de requisitos sobre la huella de memoria y la topología del rack, y después la compra"
+        }
+      },
+      {
+        "actor": "Equipo de ventas de cuentas estratégicas y de alianzas del proveedor de aceleradores de IA a escala de rack",
+        "job": "Asegurar el nuevo cliente ancla reservado para la keynote y estructurar un acuerdo que un comprador con nombre revele como capacidad comprometida a escala de rack.",
+        "outcome": "Un compromiso de cliente ancla firmado que un hiperescalador o laboratorio con nombre declara de forma pública en gigavatios o en número de racks de capacidad Helios.",
+        "motivation": "Un solo comprador con nombre y de constancia pública convierte una historia de codiseño en la prueba de un negocio a nivel de rack que ya vende, lo que desbloquea nuevas cuentas.",
+        "task": {
+          "who": "Equipos de ventas de cuentas estratégicas, de desarrollo de negocio y de acuerdos de alianza",
+          "what": "Cerrar y anunciar un compromiso a escala de rack de un cliente ancla con nombre",
+          "where": "Negociaciones de cuentas con hiperescaladores y laboratorios de frontera y anuncios en la keynote",
+          "when": "H2 2026 through H1 2027",
+          "why": "Un comprador con nombre y de constancia pública demuestra un negocio a nivel de rack",
+          "how": "Estructuración del acuerdo de cliente ancla con una divulgación cuantificada en gigavatios o en número de racks"
+        }
+      }
+    ]
+  }
+}

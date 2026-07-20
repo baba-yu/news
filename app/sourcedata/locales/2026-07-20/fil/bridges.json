@@ -1,0 +1,668 @@
+{
+  "date": "2026-07-20",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.6d69ea882242fb30",
+        "short_label": "Self-hosted AI tools refuse unauthenticated remote binding by H1 2027",
+        "prediction_date": "2026-07-19"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Malapit ito sa mismong paksa ng prediksyon. Ang Milvus ay isang self-hosted na AI tool, ang pinakalaganap na open-source na vector database, at ang CVE-2026-59218 ay isang depektong may marka na 9.8 na naaabot sa pamamagitan ng isang nakalantad na data-plane endpoint na tumatanggap ng mga ginawang request nang walang authentication. Iyon mismo ang unauthenticated na remote-binding na pagkabigo na inaasahan ng prediksyong ito na simulang tanggihan ng mga tool. Ang gabay ng mga maintainer ay ang bersyong-perimeter ng lunas: alisin sa internet ang mga pampublikong instance, isara ang mga port, at palitan ang anumang kredensyal na kayang basahin ng proseso.\n\nAng pumipigil dito sa ibaba ng tuktok ay operational ang inaalok na pagwawasto sa halip na nakabaon sa software. Ang diyagnosis ngayong araw ay ganito: naging bukas ang mga port at walang auth ang mga vector store bilang default dahil ipinapalagay ng threat model ang isang pribadong subnet, at pagkatapos ay itinulak ng mga RAG deployment ang libu-libo papunta sa mga pampublikong IP. Iyon mismo ang default na gustong baligtarin ng prediksyong ito sa naipapadalang produkto. Ngunit walang self-hosted na AI tool na naglabas ng bersyong tumatanggi sa isang non-loopback na bind kung walang kredensyal. Dumating ang pangyayaring pumipilit, hindi ang naipadalang default.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang CVE-2026-59218 ng Milvus, isang 9.8 na unauthenticated na daan sa remote-code sa pamamagitan ng isang nakalantad na data-plane endpoint, ay isang bagong halimbawa ng pagkakalantad na inaasahan ng tawag na ito na simulang tanggihan ng mga self-hosted na AI tool. Ngunit ang Milvus ay isang vector store, hindi isang pinangalanang runtime, at ang lunas ay gabay sa perimeter, hindi isang naipadalang default na tumatanggi sa mga unauthenticated na non-loopback na bind.",
+        "coherence": 4,
+        "remaining_gap": "Walang pinangalanang runtime na naglabas ng release na tumatanggi sa isang unauthenticated na non-loopback na bind. Ang lunas ngayong araw ay operational na hardening, hindi ang bumabaligtad na software default na kailangan ng tawag."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c762a8078d707dee",
+        "short_label": "Durable ask-user checkpoints become a standard harness primitive by H1 2027",
+        "prediction_date": "2026-06-11"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] Parehong pumutok ang keyword at semantic layer: pinapangalanan ng mga senyales ng row na ito ang LangGraph at Temporal nang tuwiran at inilalarawan ang isang checkpoint na nakakaligtas sa restart ng server, at ngayong araw ay iyon mismo ang inilabas ng LangChain. Nagche-checkpoint ang durable execution ng LangGraph v1.1.0 sa bawat hakbang ng isang takbo ng agent tungo sa persistent state, kaya ang isang nag-crash o na-redeploy na worker ay nagpapatuloy mula sa huling natapos na node sa halip na simulan muli o mawala ang gawain. Iyon ang suspend-and-resume na tibay na itinuturing ng row na ito bilang ang primitive na dapat bantayan, na inihatid nang natibo sa halip na ikabit ang agent loop sa isang hiwalay na workflow engine.\n\nAng agwat ay ang pagiging tiyak sa human-in-the-loop. Ang prediksyong ito ay tungkol sa isang durable na ask-user checkpoint: i-suspend, tanungin ang user, itago ang naka-suspend na usapan, magpatuloy sa sagot. Ang release ngayong araw ay pangkalahatang durable execution sa mga crash at deploy, hindi tiyak na isang clarification-and-approval gate. Ang durable-execution na substrate na kauupuan ng ask-user primitive ay naging isang naipadala at mainstream na tampok ng framework. Ang ask-user na bahagi sa ibabaw nito ang piraso na hindi pa naipapakita.",
+      "reference_links": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+          "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Nagche-checkpoint ang durable execution ng LangGraph v1.1.0 sa bawat hakbang kaya nagpapatuloy ang isang nag-crash na worker mula sa huling node. Iyon ang tibay na nakakaligtas-sa-restart na itinuturing ng tawag na ito bilang substrate, na naipadala na ngayon nang natibo sa isang mainstream na framework sa halip na ikabit sa hiwalay na engine. Ang hindi nito naidaragdag ay ang bahaging human-in-the-loop: i-suspend, tanungin ang user, magpatuloy sa sagot.",
+        "coherence": 3,
+        "remaining_gap": "Walang harness na naglabas ng isang dokumentadong suspend-ask-user-resume na primitive. Ang release ngayong araw ay pangkalahatang durable execution sa mga crash, hindi isang clarification-and-approval gate na nananatili sa kabila ng restart."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5e0beac647793331",
+        "short_label": "AMD MI400 will market memory bandwidth over peak FLOPS at Advancing AI",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] Parehong pumutok nang malakas ang keyword at semantic layer: ang prediksyong ito ay tungkol sa kung paano ipinoposisyon ng AMD ang bahaging Instinct nito sa keynote ng Advancing AI, at ang ngayong araw ay ang dalawang-araw-bago na preview ng keynote na iyon. Nakasandal ang AMD sa memorya kaysa sa hilaw na compute nang eksakto sa inaasahan. Ang naitalang balangkas ay 432GB na HBM4 kada MI450 at 31TB kada Helios rack, na may tahasang argumento na ang kapasidad ng memorya kada GPU ang lugar kung saan nadadaig ng AMD ang rack ng Nvidia, at na ang pinakamalalaking nakatakdang deployment nito ay inference, kung saan pinakamahalaga ang memory footprint.\n\nPinapangalanan ng prediksyon ang MI400 samantalang ang naipapadalang bahagi ay ang serye ng MI450, ngunit iyon ay ang parehong linya ng Instinct sa parehong kaganapan, at ang axis ng marketing, kapasidad at bandwidth ng memorya bilang pangunahin sa halip na peak FLOPS, ay eksaktong lumitaw. Ang hindi pa inilalabas ay ang keynote mismo: nakalaan para sa entablado ang mga bintana ng availability, ang susunod na release ng ROCm at ang anumang anchor customer, kaya nakumpirma ang pagpoposisyon nang dalawang araw nang maaga habang nakabinbin pa ang pormal na paglalahad.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Dalawang araw bago ang Advancing AI, ang pagpoposisyon ng AMD ay eksaktong ang balangkas na memorya-higit-sa-FLOPS na pinangalanan ng tawag na ito: 432GB na HBM4 kada MI450, 31TB kada Helios rack, at isang tahasang argumento na ang kapasidad ng memorya kada GPU ay nadadaig ang Nvidia, na inference ang malawakang merkado. Ang pinangalanang bahagi ay MI450 sa halip na MI400, ngunit iyon ay ang parehong linya ng Instinct sa parehong keynote.",
+        "coherence": 4,
+        "remaining_gap": "Ang keynote mismo ay dalawang araw pa ang layo. Nakalaan para sa entablado ang mga bintana ng availability, ang susunod na release ng ROCm at ang anumang anchor customer, kaya nakabinbin pa rin ang pormal na naitalang pagbabalangkas."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cc109942df2a6460",
+        "short_label": "AMD Instinct emerges as second vendor for open RL post-training by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Dalawang araw bago ang keynote ng Advancing AI ng AMD, ang linya ng Instinct ang sentro ng slate: ang serye ng MI450, ang double-wide na Helios rack at ang Zen 6 EPYC 'Venice' CPU na iniaalok bilang isang rack-scale na sistema, isang Helios rack na may dalang 72 bahaging MI455X, 31TB na HBM4 at halos 3 AI exaflops. Walang-alinlangang ang AMD Instinct ang second-vendor na silicon na pinagsulatan ng prediksyong ito, at ang pagpapasok ng OpenAI ng mga requirement sa programa ng MI450 ay eksaktong ang hila ng frontier-lab na sasakyan ng isang foothold sa post-training.\n\nGayunpaman, sa kabilang direksyon tumatakbo ang diin. Nakasandal nang husto ang AMD sa inference bilang malawakang merkado, na nangangatwirang inference sa halip na training ang pinakamalalaking nakatakdang deployment nito at na ang kapasidad ng memorya kada GPU ang lugar kung saan nadadaig nito ang Nvidia. Gusto ng prediksyong ito na mapangalanan ang AMD Instinct bilang pangalawang vendor para sa open RL post-training, isang workload ng training, at ang pagpoposisyon ngayong araw ay isang sinadyang paglipat tungo sa inference. Kaya nagkakaroon ng katanyagan ang silicon habang hindi nababanggit ang tiyak na foothold sa panig ng training na pinapangalanan ng tawag.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Inilalagay ng preview ng Advancing AI ng AMD ang silicon ng Instinct sa sentro: MI450, ang Helios rack, ang OpenAI na nagpapasok ng mga requirement. Kinukumpirma niyon ang AMD bilang isang kapani-paniwalang second-source na accelerator. Ngunit nakasandal nang husto ang pitch sa inference bilang malawakang merkado, ang kabaligtaran ng workload na RL post-training na kailangan ng tawag na ito ng foothold. Walang anuman ngayong araw ang humihipo sa isang takbo ng RL sa open-model sa Instinct.",
+        "coherence": 2,
+        "remaining_gap": "Walang grupong hindi-AMD na naglathala ng isang end-to-end na takbo ng RL post-training sa open-model sa Instinct, at iniiwang hindi natutugunan ng diin sa inference ngayong araw ang foothold sa panig ng training."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.546732d279b0a395",
+        "short_label": "Open inference engines adopt a named release-gating security track by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Parehong naglabas ng may-bersyong release ang dalawang pinangalanang engine ngayong linggo, ang SGLang v0.6.0 at ang vLLM v0.25.0, na siyang eksaktong sasakyang binabantayan ng prediksyong ito para sa paglitaw ng isang security track. Ang mga release mismo ay tungkol sa kakayahan sa halip na seguridad: wide expert parallelism at prefill-decode disaggregation para sa trilyong-parameter na MoE, na ipinapadala ang KV cache sa pagitan ng mga GPU pool sa pamamagitan ng Mooncake at NIXL. Walang release-gating na pamantayan sa seguridad, walang koordinadong proseso ng CVE-disclosure at walang public-endpoint fuzzing gate na nabanggit sa alinman.\n\nAng presyon sa seguridad na magbibigay-motibo sa gayong track ay nasa ibang bahagi ng slate ngayong araw. Ang kritikal na depekto sa Milvus na CVE-2026-59218 ay naglalagay ng isang 9.8 na unauthenticated na RCE sa pinakalaganap na open-source na vector database, na ang argumento ay ito: ang mga bahagi ng AI-infrastructure na binuo para sa isang pinagkakatiwalaang subnet ay nakaharap na ngayon sa internet at nangangailangan ng network hygiene na kailangang matutunan ng serving layer. Iyon ang parehong aral na iko-code ng isang security track ng inference engine, na dumarating isang bahagi ang layo sa halip na sa loob ng vLLM o SGLang.",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        },
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Parehong naglabas ng may-bersyong release ang dalawang pinangalanang engine ngayong linggo, ang SGLang v0.6.0 at ang vLLM v0.25.0, ang eksaktong sasakyang binabantayan ng tawag na ito, ngunit pareho itong nanguna sa kakayahan (wide expert parallelism, disaggregation) nang walang release-gating na pamantayan sa seguridad o koordinadong-disclosure na track. Ang aral sa seguridad ay dumapo isang bahagi ang layo, sa 9.8 na RCE ng Milvus, sa halip na sa loob ng mga serving engine.",
+        "coherence": 2,
+        "remaining_gap": "Wala sa dalawang release na nagpangalan ng isang security track, hardening gate, o proseso ng CVE-disclosure bilang release-blocking. Nagpapatuloy ang karera sa kakayahan habang nananatiling hindi naipapadala ang pormal na axis ng seguridad."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.16c7b8053e39aa1f",
+        "short_label": "Disk-streaming expert offload ships in a mainstream local runtime by H1 2027",
+        "prediction_date": "2026-07-18"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang mga serving release ngayong araw ay ang sagot ng datacenter sa parehong suliranin na inilalatag ng prediksyong ito sa lokal: mga mixture-of-experts na model na ang mga expert ay hindi kumakasya kung saan mo gustong patakbuhin. Nanguna ang SGLang v0.6.0 sa wide expert parallelism, ang pagkalat ng daan-daang expert ng isang MoE model sa maraming GPU, at parehong tinatarget ng mga engine ang 2-trilyong-parameter na open model, ang Kimi K3 sa 2.8 trilyon at ang Qwen3.8 sa 2.4 trilyon, na hindi kayang paglingkuran nang basta-basta ng iisang pool.\n\nAng mekanismo ay ang salamin na imahe ng prediksyon sa halip na ang prediksyon mismo. Ikinakalat ng wide expert parallelism ang mga expert sa isang GPU fabric na ipinapadala ang KV cache sa network. Gusto ng tawag na ito na i-stream ang mga expert mula sa disk papasok sa iisang mainstream na lokal na runtime. Pareho itong sagot sa isang hanay ng expert na napakalaki para sa isang device, at ang sa ngayong araw ay ang rack-scale. Walang lokal na runtime na naglabas o nag-anunsyo ng disk-streaming na expert offload, kaya humihigpit ang kaso ng pangangailangan habang hindi dumarating ang pinangalanang paghahatid.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang mga higanteng sparse na model na pinagsulatan ng tawag na ito ay ang paksa ngayong araw, ang Kimi K3 sa 2.8 trilyon, ang Qwen3.8 sa 2.4 trilyon, kaya humihigpit ang pangangailangan sa pagpapatakbo ng isang hanay ng expert na napakalaki para sa isang device. Ngunit ang sagot ngayong araw ay ang salamin na imahe: ikinakalat ng wide expert parallelism ng SGLang ang mga expert sa isang datacenter fabric, hindi mula sa disk papasok sa isang lokal na runtime.",
+        "coherence": 2,
+        "remaining_gap": "Walang lokal na runtime, llama.cpp, Ollama, LM Studio o vLLM, na naglabas o nag-anunsyo ng dokumentadong disk-streaming na expert offload para sa mga model na 500B-pataas sa ilalim ng 32GB na RAM."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ae0dd497b3c0ac0",
+        "short_label": "AI security posture tools ship auto-remediation for AI packages by Q4 2026",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Iniaabot ng paghahayag sa Milvus sa mga tool ng posture ang isang malinis na target at iniiwang tuluyang manwal ang lunas. Ang CVE-2026-59218 ay isang 9.8 na unauthenticated na RCE sa vector database na nag-iimbak ng mga embedding sa likod ng retrieval-augmented generation, at ang naitalang remediation ay gawaing operator: alisin sa internet ang mga pampublikong instance, isara ang mga port, palitan ang anumang kredensyal na kayang basahin ng proseso. Ang isang pinangalanan, nakaharap-sa-internet, at kritikal na pagkakalantad sa isang AI package na iniwan sa operator ang pag-aayos ang siyang paunang kondisyong inaasahan ng prediksyong ito na papalitan ng mga tool ng posture.\n\nWalang tool na nagsara ng loop na iyon ngayong araw. Gusto ng tawag ng isang produkto ng AI security posture na naglalabas ng awtomatikong remediation laban sa eksaktong ganitong uri ng nakalantad na AI-package. Ang umiiral ay isang na-patch na release kasama ang payo sa hardening. Humigpit ang presyon sa pagbili, dahil ang isang 9.8 na CVE na may malaking nakaharap-sa-internet na base ng install ay isang hindi maiiwasang puwersa sa procurement, ngunit walang vendor na nagpangalan ng isang awtomatikong aksyon laban dito.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Ang paghahayag sa Milvus ngayong araw ay isang malinis na halimbawa ng agwat na iniikutan ng tawag na ito: isang 9.8 na kritikal na RCE sa isang vector database, isang AI package sa likod ng RAG, na tuluyang iniwan sa operator ang remediation, alisin sa internet ang mga instance, isara ang mga port, palitan ang mga kredensyal. Humihigpit niyon ang presyon sa pagbili, ngunit walang posture vendor na nagpangalan ng isang awtomatikong aksyon laban sa pagkakalantad ngayong araw.",
+        "coherence": 2,
+        "remaining_gap": "Walang CNAPP o AI-SPM na vendor na naglabas ng isang pinangalanang tampok ng auto-remediation na nakatuon sa mga AI package. Ang umiiral ay isang na-patch na release kasama ang manwal na payo sa hardening."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.625a7234dd6e9ed1",
+        "short_label": "ML registry servers log a second max-severity deserialization RCE by Q1 2027",
+        "prediction_date": "2026-06-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Pumutok ang keyword layer sa isang max-severity na unauthenticated na RCE laban sa isang naaabot-sa-network na ML data-plane store. Ang Milvus ang pinakalaganap na open-source na vector database, ang bahaging humahawak ng mga embedding sa likod ng retrieval-augmented generation, at ang CVE-2026-59218 ay may marka na 9.8, naaabot sa pamamagitan ng isang nakalantad na data-plane endpoint na tumatanggap ng mga ginawang request bago ang anumang pagsusuri sa authentication. Iyon ay estrukturang ang pangalawang max-severity, unauthenticated, at pre-auth na RCE sa isang open-source na ML data-plane na proyekto na pinagsulatan ng row na ito na asahan matapos ang CVE-2026-56121 ng Feast.\n\nSa mekanismo lumuluwag ang pagkakatugma. Pinapangalanan ng prediksyong ito ang unsafe deserialization nang tiyak, mga dill, pickle o joblib payload sa pamamagitan ng isang serialized-transform endpoint, at inilalarawan ng pag-uulat sa Milvus ngayong araw ang isang nakalantad na unauthenticated na data-plane endpoint nang hindi sinasabing deserialization ang vector. Kaya dumapo nang tumpak ang hugis na data-plane-RCE habang hindi nakumpirma sa inihayag ang eksaktong mekanismong deserialization na tinutukoy ng tawag.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Ang CVE-2026-59218 ay estrukturang ang binabantayan ng tawag na ito: isang pangalawang maximum-severity (9.8), unauthenticated, at pre-auth na RCE sa isang open-source na ML data-plane store, na dumarating matapos ang CVE-2026-56121 ng Feast. Lumuluwag ang pagkakatugma sa mekanismo. Pinapangalanan ng prediksyon ang unsafe deserialization nang tiyak, at ang inihayag na vector ng Milvus ay isang nakalantad na data-plane endpoint na hindi sinasabing isang bug sa deserialization.",
+        "coherence": 3,
+        "remaining_gap": "Ang inihayag na vector ng Milvus ay hindi nakumpirma bilang unsafe deserialization (dill/pickle/joblib), ang eksaktong ugat na sanhi na kailangan ng tawag. Kung wala iyon, ang pagkakatugma sa pangalawang-RCE ay estruktural, hindi sa mekanismo."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8ae347c6052558e0",
+        "short_label": "AMD Helios plus MI450 commitment book clears 15GW threshold by H2 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Pumutok ang keyword layer sa AMD Helios, MI450 at MI455X, na lahat ay pinangalanan sa preview ngayong araw, at nahuli ng semantic layer ang temang commitment-book na sinusubaybayan ng row na ito. Tumigil na ang AMD sa pag-preview ng MI450 bilang isang aytem sa roadmap at sinimulan itong ibenta bilang isang naipapadalang rack, nagpapasok ang OpenAI ng mga requirement sa programa ng MI450, tinatalakay na ng AMD ang kasunod na MI500 sa mga mamimili, at may hawak itong isang bagong anchor customer para sa keynote. Pawang senyales iyon ng isang aklat ng demand na binubuo sa likod ng Helios.\n\nAng hindi dumating ay ang na-quantify na threshold. Nagreresolba ang prediksyong ito sa nakatakdang kapasidad na lumalampas sa isang tiyak na hanggahan sa gigawatt, at ang mga pigura ngayong araw ay mga spec ng hardware, hindi isang pinagsama-samang aklat ng pangako: walang pinangalanang mamimili na naglagay ng isang bilang sa gigawatt o bilang ng rack sa talaan, na tahasang nakalaan para sa entablado ang mga paghahayag na iyon. Kitang-kitang napupuno ang aklat ng pangako. Hindi na-quantify ngayong araw ang linyang 15GW na iginuguhit ng tawag.",
+      "reference_links": [
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        },
+        {
+          "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+          "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ipinapakita ng preview ng AMD ang aklat ng demand na napupuno nang kuwalitatibo: MI450 na ibinebenta bilang isang naipapadalang rack, OpenAI na nagpapasok ng mga requirement, MI500 na tinatalakay sa mga mamimili, isang bagong anchor customer na inilaan para sa keynote sa Huwebes, eksaktong ang dinamikang entablado-bilang-katalista na ipinapalagay ng tawag na ito. Ngunit walang bilang na dumating: walang mamimiling naglagay ng pigura sa gigawatt o bilang ng rack sa talaan, nakalaan para sa entablado ang mga paglalahad na iyon.",
+        "coherence": 3,
+        "remaining_gap": "Kailangan ng resolusyong 15GW ang pinagsama-samang nakatakdang kapasidad sa talaan. Nagbigay ang ngayong araw ng mga spec ng hardware at kuwalitatibong senyales ng demand, hindi ang pangako sa gigawatt o bilang ng rack ng isang pinangalanang mamimili."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cbba6275f880fc04",
+        "short_label": "Second hyperscaler names non-Nvidia data-center inference silicon by Q4 2027",
+        "prediction_date": "2026-06-29"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Pumutok ang semantic layer sa isang pinangalanang frontier na mamimiling nangangako sa isang non-Nvidia na inference silicon. Sa preview ngayong araw ay nagpapasok ang OpenAI ng mga requirement sa programa ng MI450 habang nakasandal ang AMD sa inference bilang malawakang merkado nito, na nangangatwirang inference sa halip na training ang pinakamalalaking nakatakdang deployment nito. Ang isang frontier lab na humuhubog sa memory footprint at topolohiya ng rack ng isang non-Nvidia na bahaging pang-inference ang uri ng senyales ng pinangalanang-mamimili na binabantayan ng prediksyong ito.\n\nHindi ganap ang pagkakaangkop sa dalawang axis. Ang OpenAI ay isang frontier lab sa halip na isa sa mga hyperscaler na iniikutan ng tawag, at ang pagbabahagi ng requirement ay co-design sa halip na ang naitalang pangako sa procurement na gustong mapangalanan ng row. Walang-alinlangang ang AMD ay non-Nvidia na inference silicon na may kalakip na pinangalanang lab, kaya tama ang direksyon. Naghihintay sa nakalaang anchor ng keynote ang tiyak na milestone na pinapangalanan-ito-ng-hyperscaler-bilang-nakatakdang-mamimili.",
+      "reference_links": [
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        },
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Ang inference-first na pitch ng AMD, kasama ang OpenAI na nagpapasok ng mga requirement sa programa ng MI450, ay ang hugis na binabantayan ng tawag na ito: isang pinangalanang frontier na mamimiling nakakabit sa non-Nvidia na inference silicon. Nagkukulang ang pagkakaangkop sa dalawang axis. Ang OpenAI ay isang frontier lab, hindi isa sa mga hyperscaler na iniikutan ng tawag, at ang pagbabahagi ng requirement ay co-design, hindi ang naitalang pangako sa procurement na gustong mapangalanan ng prediksyon.",
+        "coherence": 2,
+        "remaining_gap": "Walang pangalawang hyperscaler na nagpangalan ng isang partner na non-Nvidia inference-silicon bilang isang nakatakdang mamimili. Ang nakalaang anchor customer ng keynote ang lugar kung saan dadapo ang milestone na iyon."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cfaa5b5838122b38",
+        "short_label": "Reservoir routing ships as default vLLM and SGLang serving knob by H2 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Pumutok ang keyword layer sa vLLM, SGLang at MoE expert routing, na lahat ay sentro sa mga release ngayong araw. Naglabas ang SGLang v0.6.0 at vLLM v0.25.0 ng wide expert parallelism, ang pagkalat ng daan-daang expert ng isang mixture-of-experts na model sa maraming GPU, na ipinares sa prefill-decode disaggregation, na naghatid ng mga bagong knob sa MoE-serving sa eksaktong dalawang engine na pinapangalanan ng prediksyong ito bilang target ng default-adoption.\n\nIba ang tiyak na knob. Ang tawag na ito ay tungkol sa reservoir routing, isang stateful na router-bank na primitive para sa multi-turn na agentic MoE inference, na nagiging isang default na opsyon sa serving ng vLLM at SGLang, at ang inilabas ay wide expert parallelism kasama ang KV-cache disaggregation sa pamamagitan ng Mooncake at NIXL, isang naiibang mekanismo sa MoE-serving. Nakumpirma ang pattern na tinataya ng prediksyon, dumarapo sa mga engine na ito bilang default ang mga knob sa MoE routing at serving, samantalang hindi ang pinangalanang reservoir-routing na primitive ang dumating ngayong linggo.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Naghatid nga ang SGLang v0.6.0 at vLLM v0.25.0 ng mga bagong knob sa MoE-serving bilang default sa eksaktong dalawang engine na pinapangalanan ng tawag na ito, na nagkukumpirma sa pattern na mabilis sinisipsip ng mga proyektong ito ang mga mekanismo sa MoE routing at serving. Ngunit ang inilabas ay wide expert parallelism at KV-cache disaggregation, hindi ang stateful na router-bank na reservoir-routing na primitive na tinutukoy ng prediksyon.",
+        "coherence": 2,
+        "remaining_gap": "Wala sa dalawang release na may kasamang reservoir routing bilang isang knob sa serving, lalo nang bilang default, at walang hosted na inference tier na naglabas nito. Isang naiibang mekanismong MoE ang inilabas sa halip."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a4f83081580b9a3d",
+        "short_label": "Launch-day vLLM/SGLang + Ollama support becomes open-weight MoE release bar",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Malinis na pumutok ang semantic layer: pinaninindigan ng prediksyong ito na ang suporta sa serving sa vLLM at SGLang ay nagiging hanggahan ng release para sa mga open-weight na MoE model, at ang ngayong araw ay ang paggulang ng suportang iyon sa paligid ng pinakabagong 2-trilyong-parameter na mga drop. Naglabas ang SGLang v0.6.0 at vLLM v0.25.0 ng wide expert parallelism at disaggregated serving na direktang nakatuon sa Kimi K3 sa 2.8 trilyong parameter at Qwen3.8 sa 2.4 trilyon. Ang argumento ay halos walang makakapagsilbi sa mga model na iyon sa isang basta-bastang setup, kaya ang suporta ng engine ang gumagawa sa kanilang magamit man lamang.\n\nAng pagbasa na ang ekonomiya ng mga higanteng open na model ay itinatakda ng kung kaya ng isang operator na magtayo ng disaggregated at expert-parallel na serving ay eksaktong ang tesis ng row na ito na ang suporta ng serving-stack ang gating bar. Ang hindi inaayos ng ngayong araw ay ang tiyempo sa araw-ng-paglulunsad at ang bahaging Ollama: dumating ang mga release matapos ang mga model sa halip na kasabay ng isang tiyak na paglulunsad, at walang anuman dito ang tungkol sa suporta ng Ollama para sa isang MoE na klaseng 2T. Lumakas ang dinamika ng pagtatakda-ng-hanggahan. Hindi naipakita ang pagiging tiyak sa araw-mismo at tatlong-runtime na pinapangalanan ng tawag.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Ang kuwento ngayong araw ay ang tesis ng tawag na ito na isinasagawa: umiiral ang SGLang v0.6.0 at vLLM v0.25.0 dahil halos walang makakapagsilbi sa Kimi K3 o Qwen3.8 sa isang basta-bastang setup, kaya ang suporta ng serving-stack ang gumagawa sa mga higanteng open na model na magamit man lamang, ang gating bar na pinapangalanan ng prediksyon. Ang hindi nito naipapakita ay ang tiyempo sa araw-ng-paglulunsad o ang bahaging Ollama.",
+        "coherence": 3,
+        "remaining_gap": "Sumunod ang mga release sa mga model sa halip na maipadala kasabay ng isang tiyak na paglulunsad, at walang anuman dito ang tungkol sa packaging ng Ollama para sa isang MoE na klaseng 2T. Hindi naipapakita ang hanggahang araw-mismo at tatlong-runtime."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.42a2372350593ef7",
+        "short_label": "SK Hynix sustains triple-digit YoY revenue growth through Q3 2026",
+        "prediction_date": "2026-07-09"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang rack-scale na pitch ng AMD ay isang malaking order ng HBM na nakabalatkayo: ang isang Helios rack ay tinukoy sa 31TB na HBM4, bawat MI450 ay may dalang 432GB, at nangangatwiran ang AMD na ang kapasidad ng memorya kada GPU ang mismong lugar kung saan nadadaig nito ang Nvidia. Iyon ay downstream na demand para sa high-bandwidth memory na ibinebenta ng SK Hynix, na dumarating dalawang araw bago ang isang keynote na inaasahang magkakabit ng laki ng nakatakdang deployment dito.\n\nAng layo sa prediksyong ito ay walang anuman sa slate ngayong araw na isang naiulat na numero mula sa SK Hynix. Nagreresolba ang tawag sa quarterly na kita na nagpapanatili ng triple-digit na paglago taon-sa-taon, at ang ngayong araw ay nagbibigay ng senyales sa panig ng demand para sa HBM sa halip na isang naiulat na numero mula sa supplier. Pinatitibay ng memory-heavy na configuration ng AMD ang backdrop na kinasasandigan ng tesis nang hindi ginagalaw ang pigurang iniikutan nito.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang rack-scale na pitch ng AMD ay isang malaking order ng HBM na nakabalatkayo: 31TB na HBM4 kada Helios rack, 432GB kada MI450, memorya na iniaalok bilang bentahe nito laban sa Nvidia, downstream na demand para sa eksaktong ibinebenta ng SK Hynix. Ngunit walang anuman ngayong araw na isang naiulat na numero mula sa SK Hynix. Nagreresolba ang tawag sa isang naiulat na quarterly na numero ng kita, at ito ay isang backdrop lamang ng demand.",
+        "coherence": 2,
+        "remaining_gap": "Umiikot ang prediksyon sa kita ng SK Hynix sa Q2 at Q3 na lumalampas sa triple-digit na paglago YoY. Walang pigura ng kita ng supplier na naiulat ngayong araw."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a31a93089cef22da",
+        "short_label": "Samsung answers memory-capex race with fresh HBM capacity buildout by Q1 2027",
+        "prediction_date": "2026-07-12"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Kinu-quantify ng preview ng AMD ang panig ng demand ng karera sa memory-capex na binabantayan ng prediksyong ito: 31TB na HBM4 kada Helios rack, 432GB kada MI450, at isang tahasang argumento na ang kapasidad ng memorya kada GPU ang bentahe ng AMD laban sa rack ng Nvidia. Ang isang kapani-paniwalang pangalawang rack-scale na mamimili ng HBM4 sa gayong dami ang eksaktong hila na sasagutin ng isang bagong pangako sa kapasidad ng Samsung.\n\nAng nawawala ay anumang galaw mula sa Samsung mismo. Nagreresolba ang tawag na ito sa isang pinangalanang buildout ng kapasidad sa HBM o advanced-DRAM na inihayag ng Samsung, at ang ngayong araw ay pagpoposisyon ng produkto ng isang vendor ng accelerator, hindi isang linya ng capex ng isang supplier ng memorya. Tumitibay ang senyales ng demand. Hindi lumitaw ang pangako sa panig ng supplier na pinapangalanan ng prediksyon.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Kinu-quantify ng preview ng AMD ang panig ng demand ng karera sa memory-capex, 31TB na HBM4 kada Helios rack, 432GB kada MI450, kapasidad ng memorya kada GPU na iniaalok bilang bentahe nito laban sa Nvidia. Ang isang kapani-paniwalang pangalawang rack-scale na mamimili ng HBM4 sa gayong dami ang hila na sasagutin ng isang bagong pangako ng Samsung. Ngunit ang ngayong araw ay pagpoposisyon ng isang vendor ng accelerator, hindi isang linya ng capex ng isang supplier ng memorya.",
+        "coherence": 2,
+        "remaining_gap": "Walang galaw mula sa Samsung, o sa alinmang supplier ng memorya, na lumitaw ngayong araw. Nagreresolba ang tawag sa isang pinangalanang pangako sa kapasidad ng Samsung sa HBM o advanced-DRAM na nakatali sa demand ng AI."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.43bff01be9e1af7e",
+        "short_label": "Transformer-only inference ASICs gain a first-class serving-stack backend by H1 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang mga serving stack na pinapangalanan ng prediksyong ito bilang target ng integrasyon, ang vLLM, SGLang at TensorRT-LLM, ay eksaktong kung saan dumapo ang aksyon ngayong linggo. Naglabas ang SGLang v0.6.0 at vLLM v0.25.0 ng wide expert parallelism at disaggregated na prefill-decode serving para sa trilyong-parameter na MoE sa loob ng ilang araw sa isa't isa, na nagkukumpirma sa dalawang proyektong ito bilang ang lugar kung saan unang naiipon ang kakayahan sa serving.\n\nGayunpaman, ang kakayahang dumapo ay hindi isang fixed-function na backend. Tinatarget ng mga release ngayong araw ang multi-GPU na expert parallelism at ang paglilipat ng KV-cache sa pamamagitan ng Mooncake at NIXL sa mga GB200 NVL72 rack, GPU serving, hindi isang transformer-only na daan ng ASIC. Gusto ng tawag na ito ng isang dokumentadong first-class na target ng deployment para sa hard-wired na inference silicon sa loob ng mga stack na iyon, at ang inilabas ay isang GPU-oriented na tampok ng MoE. Kaya aktibo ang sasakyan habang hindi nagagalaw ang tiyak na ASIC backend na pinapangalanan ng prediksyon.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Ang mga serving stack na pinapangalanan ng tawag na ito bilang target ng integrasyon, ang vLLM, SGLang at TensorRT-LLM, ay eksaktong kung saan dumapo ang aksyon ngayong linggo, na nagkukumpirma sa kanila bilang kung saan unang naiipon ang kakayahan sa serving. Ngunit ang inilabas ay wide expert parallelism at paglilipat ng KV-cache para sa GPU MoE, hindi isang fixed-function na backend. Walang anuman ang humihipo sa isang transformer-only na daan ng deployment ng ASIC.",
+        "coherence": 2,
+        "remaining_gap": "Walang mainstream na serving stack na naglabas ng isang fixed-function na transformer-ASIC na backend bilang isang dokumentadong target ng deployment. Ang mga release ngayong araw ay mga GPU-oriented na tampok ng MoE."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0b8bcb868b9c8fa5",
+        "short_label": "Frontier mid-tier API pricing falls below $1 per million input tokens by Q2 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ginagalaw ng mga release ngayong araw ang cost curve na tinutugaygayan ng prediksyong ito sa huli. Ang matibay na punto ng gawaing SGLang at vLLM ay ito: ang ekonomiya ng mga higanteng open na model ay itinatakda nang hindi gaanong ng lisensya, na libre, kundi ng kung kaya man lamang ng isang operator na magtayo ng disaggregated at expert-parallel na serving. At ang isang GB200 NVL72 rack ay nag-uulat na ngayon ng humigit-kumulang 2.7 beses ng isang single-pool baseline para sa isang MoE na klaseng trilyong-parameter. Ang mas murang serving ng magagaling na open na model ay tuloy-tuloy na presyon pababa sa kung magkano ang kayang singilin ninuman kada token.\n\nDi-tuwiran ang kawing patungo sa isang sub-$1 na presyo sa listahan ng gitnang antas. Walang vendor na naglathala ng presyo ng API ngayong araw, at ang isang multiplier ng throughput sa mga inuupahang rack ay umaabot sa sahig ng gitnang antas sa pamamagitan lamang ng competitive na pagpapasa na ipinapalagay ng tawag. Lumakas ang puwersa sa likod ng prediksyon. Walang naka-post na numero na gumalaw.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ginagalaw ng gawaing SGLang at vLLM ang cost curve na tinutugaygayan ng tawag na ito sa huli: ang isang GB200 NVL72 rack ay nag-uulat na ngayon ng humigit-kumulang 2.7 beses ng isang single-pool baseline para sa isang trilyong-parameter na MoE, tuloy-tuloy na presyon pababa sa kung magkano ang kayang singilin ninuman kada token. Ngunit walang vendor na naglathala ng presyo ng API ngayong araw, at ang pakinabang sa throughput ay umaabot sa isang presyo sa listahan ng gitnang antas sa pamamagitan lamang ng di-tuwirang competitive na pagpapasa.",
+        "coherence": 2,
+        "remaining_gap": "Nagreresolba ang tawag sa dalawang vendor na nagpo-post ng sub-$1 na presyo ng input sa gitnang antas. Walang presyo sa listahan na gumalaw ngayong araw, at ang kawing mula sa kahusayan ng serving ay dumadaan sa competitive na pagpapasa."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c99c991b7d54c82a",
+        "short_label": "Subagent orchestration becomes a first-class frontier-API primitive by Q1 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Dumadapo ang durable execution ng LangGraph v1.1.0 sa orchestration layer na binabantayan ng prediksyong ito, at ang pagbabalangkas sa paligid nito, na ang isang production agent ay talagang isang distributed na workflow ng maraming magkakasalit na model at tool call, ay ang parehong substrate na kauupuan ng isang subagent-orchestration na primitive. Inilalarawan ngayong araw ang merkado ng orchestration bilang nagkokonsolida sa paligid ng isang tiyak na katangian.\n\nAng katangiang iyon ay survivability, hindi fan-out. Nagche-checkpoint ang durable execution sa isang takbo ng agent kaya nagpapatuloy ang isang nag-crash na worker mula sa huling node. Ang tawag na ito ay tungkol sa mga provider na naglalantad ng multi-agent na decomposition bilang isang nasisingil at server-side na API primitive. Inililipat ng LangGraph ang orchestration papasok sa framework sa halip na sa API, na masasabing ang kabaligtarang direksyon. Kaya buhay ang tema habang walang galaw ang tiyak na frontier-API na primitive na pinapangalanan ng prediksyon.",
+      "reference_links": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+          "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Dumadapo ang durable execution ng LangGraph v1.1.0 sa orchestration layer na binabantayan ng tawag na ito, ngunit ang katangiang ginagawa nitong natibo ay survivability, isang nag-crash na worker na nagpapatuloy mula sa huling node, hindi ang multi-agent na fan-out na tinutukoy ng prediksyon. At inililipat nito ang orchestration papasok sa framework sa halip na ilantad ito bilang isang nasisingil at server-side na API primitive, na masasabing ang kabaligtarang direksyon.",
+        "coherence": 1,
+        "remaining_gap": "Walang frontier na provider na naglantad ng server-side na subagent orchestration bilang isang nasisingil at may-metro na API primitive. Ang galaw ngayong araw ay nasa panig ng framework at tungkol sa durability, hindi ang fan-out sa panig ng provider."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.eca92ec7ee67c161",
+        "short_label": "Unsloth ships day-of fine-tuning for the next 1T+ open-weight release by Q1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang mga open-weight na release na ikinakabit ng prediksyong ito ay eksaktong ang paksa ngayong araw: ang Kimi K3 ng Moonshot sa 2.8 trilyong parameter at ang Qwen3.8 ng Alibaba sa 2.4 trilyon, ang mga model na ang serving ay ginugol ng dalawang nangingibabaw na inference engine sa buong linggo. Ang 1T-pataas na open-weight na frontier na binabantayan ng tawag para sa suporta sa fine-tuning sa araw-mismo ay pinupuno na ngayon nang malayong lampas sa isang trilyong parameter.\n\nAng aksyon ngayong linggo ay nasa panig ng serving, hindi fine-tuning. Naglabas ang SGLang at vLLM ng makinarya para patakbuhin ang mga model na ito. Walang anuman ngayong araw ang tungkol sa Unsloth o sa isang same-day na daan ng low-VRAM na tuning para sa kanila. Kailangan ng prediksyong ito na makasabay ang toolchain ng fine-tuning sa isang 1T-pataas na drop, at ngayong araw ang toolchain ng inference ang gumalaw. Kaya naroon ang mga model habang hindi nasusubok ang milestone ng fine-tuning-lag.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Ang mga open-weight na release na ikinakabit ng tawag na ito ay eksaktong ang paksa ngayong araw, ang Kimi K3 sa 2.8 trilyon, ang Qwen3.8 sa 2.4 trilyon, kaya mahusay nang napupuno ang 1T-pataas na frontier. Ngunit ang aksyon ngayong linggo ay tuluyang nasa panig ng serving: naglabas ang SGLang at vLLM ng makinarya para patakbuhin ang mga model na ito, at walang anuman ang humihipo sa Unsloth o sa isang same-day na daan ng low-VRAM na tuning.",
+        "coherence": 2,
+        "remaining_gap": "Kailangan ng milestone ng fine-tuning-lag ang isang pampublikong build ng Unsloth na nagtu-tune ng isang 1T-pataas na release sa loob ng isang linggo. Ngayong araw ang toolchain ng inference ang gumalaw, hindi ang sa tuning."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0ad3c58ce5c240d0",
+        "short_label": "Together or Baseten raises at a $5B-plus valuation by Q4 2027",
+        "prediction_date": "2026-07-17"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang mga pag-usad sa serving ngayong araw ay ang tesis ng demand sa ilalim ng valuation ng isang open-model na inference neocloud. Ang release na gumagawa sa isang 2.4-trilyong-parameter na model na maipagkakaloob sa isang rack na maaari mong upahan ay inilalarawan bilang ang tunay na gumagalaw sa cost curve, at ang pagtatayo ng disaggregated at wide-expert-parallel na serving ay eksaktong ang kakayahang ipinagbibili ng access ng Together at Baseten. Ang isang mundo kung saan ang pinakamalalaking open na model ay maipagkakaloob lamang nang matipid sa pamamagitan ng makinaryang ito ay isang paborable para sa kanilang negosyo.\n\nGayunpaman, walang kaganapan sa pagpopondo na lumitaw. Nagreresolba ang prediksyong ito sa isang pinangalanang round na $5-bilyon-pataas sa isa sa dalawang provider na iyon, at ang ngayong araw ay isang release sa inhinyeriya, hindi isang term sheet. Tumibay ang estratehikong kaso para sa serving tier habang walang nakita ang milestone ng valuation na pinapangalanan ng tawag.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang mga pag-usad sa serving ngayong araw ay ang tesis ng demand sa ilalim ng valuation ng isang open-model na inference neocloud: ang pagtatayo ng disaggregated at wide-expert-parallel na serving, ang kakayahang ipinagbibili ng access ng Together at Baseten, ang gumagawa sa isang 2.4-trilyong-parameter na model na maipagkakaloob man lamang nang matipid. Ngunit ang ngayong araw ay isang release sa inhinyeriya, hindi isang term sheet. Walang kaganapan sa pagpopondo na lumitaw.",
+        "coherence": 2,
+        "remaining_gap": "Nagreresolba ang tawag sa isang pinangalanang round na $5-bilyon-pataas sa Together o Baseten. Pinatitibay ng ngayong araw ang estratehikong kaso para sa serving tier ngunit walang hinihipo itong valuation."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b3c111f1938357a9",
+        "short_label": "Open-weight model tops Artificial Analysis Intelligence Index by H1 2027",
+        "prediction_date": "2026-07-17"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang mga kandidatong open-weight na model na iniikutan ng prediksyong ito ay direktang pinapangalanan sa kuwento ng serving ngayong araw: ang Kimi K3 sa 2.8 trilyong parameter at ang Qwen3.8 sa 2.4 trilyon, ang dalawang checkpoint na ang laki ang pumilit sa gawaing serving ngayong linggo. Ang kanilang presensya sa tuktok ng karera sa parameter ng open-weight ang panig ng suplay na kailangan ng tawag.\n\nGayunpaman, walang karapat-dapat-sa-index na nagbago. Ang entry ngayong araw ay tungkol sa pagpapatakbo ng mga model na ito, hindi sa pag-iskor sa kanila, at walang resulta ng Artificial Analysis Intelligence Index na inilathala para sa alinman. Nagreresolba ang prediksyon sa isang maida-download na open-weight na checkpoint na papasok sa tuktok ng pampublikong index na iyon. Pinapangalanan ang mga model bilang mga workload sa serving, na hindi nagalaw ngayong araw ang sinukat nilang katayuan.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Ang mga kandidatong open-weight na model na iniikutan ng tawag na ito ay direktang pinapangalanan ngayong araw, ang Kimi K3 sa 2.8 trilyon, ang Qwen3.8 sa 2.4 trilyon, ngunit bilang mga workload sa serving lamang na ang laki ang pumilit sa gawaing engine ngayong linggo. Walang resulta ng Artificial Analysis Intelligence Index na inilathala para sa alinman. Ang ngayong araw ay tungkol sa pagpapatakbo ng mga model na ito, hindi sa pag-iskor sa kanila.",
+        "coherence": 2,
+        "remaining_gap": "Kailangan ng prediksyon ang isang maida-download na open-weight na checkpoint sa tuwirang tuktok ng index. Hindi nagalaw ngayong araw ang sinukat na katayuan ng mga model."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.89cd61b0ff2ea3ca",
+        "short_label": "Qwen3.8 open weights arrive after published benchmarks, not before Q4 2026",
+        "prediction_date": "2026-07-19"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Lumilitaw ang Qwen3.8 sa kuwento ng serving ngayong araw bilang isa sa mga 2-trilyong-parameter na open model na tinatarget ng bagong makinarya, sa 2.4 trilyong parameter kasama ang Kimi K3 sa 2.8 trilyon. Sinusubaybayan ng prediksyong ito ang pagkakasunod-sunod ng tiyak na release na iyon, kung ang mga nailathalang resulta ng benchmark ay nauuna sa open weights o sumusunod sa mga ito.\n\nWalang idinaragdag ang ngayong araw sa pagkakasunod-sunod na iyon. Tinutukoy ang model bilang isang workload sa serving, na walang bagong paglalathala ng benchmark at walang kalakip na petsa ng paglabas ng weights. Ang tanong sa pagkakaayos na iniikutan ng tawag, mga sinukat na resulta bago ang maida-download na weights, o pagkatapos, ay eksaktong nasa dating kalagayan. Kaya pinananatili ng pagbanggit ang Qwen3.8 sa tanaw nang hindi isinusulong ang timeline ng paglabas nito.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Lumilitaw ang Qwen3.8 ngayong araw bilang isa lamang sa mga 2-trilyong-parameter na open model na tinatarget ng bagong makinarya ng serving, sa 2.4 trilyon kasama ang Kimi K3. Ang tanong sa pagkakasunod-sunod na iniikutan ng tawag na ito, kung ang mga nailathalang benchmark ay nauuna sa open weights o sumusunod sa mga ito, ay walang nakukuhang bagong datos: walang paglalathala ng benchmark at walang kalakip na petsa ng paglabas ng weights.",
+        "coherence": 1,
+        "remaining_gap": "Pinananatili ng pagbanggit ang Qwen3.8 sa tanaw nang hindi isinusulong ang timeline ng paglabas nito. Ang pagkakaayos na benchmark-laban-sa-weights ay nakatayo nang eksakto kung saan ito noon."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e3f72a21ed13fcec",
+        "short_label": "Agent-sandbox isolation becomes a named procurement requirement by H1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang kuwento ng Milvus ngayong araw ay tahasang ibinalangkas sa paligid ng procurement, na siyang mekanismo ng prediksyong ito. Ang pagbasang inaalok ay ito: ginagawa ng isang 9.8 na CVE na may pinangalanan at nakaharap-sa-internet na base ng install ang isara-ang-port at buksan-ang-authentication mula sa isang mungkahi sa support-forum tungo sa isang aytem sa checklist ng mamimili. Iyon ang parehong galaw mula sa opsyonal na hardening tungo sa isang kinakailangan sa pagkuha na inaasahan ng tawag para sa isolation ng agent-sandbox.\n\nKatabi ang paksa sa halip na ang pinangalanan. Ang prediksyong ito ay tungkol sa runtime na isolation ng mga agent sandbox na lumilitaw bilang isang kinakailangan sa procurement sa mga RFP at questionnaire sa seguridad. Ang pagkakalantad ng Milvus ay isang network-auth na default ng vector-database, hindi isang agent sandbox. Ang lohika ng procurement na ipinapakita ngayong araw ay eksaktong ang sinasakyan ng tesis, na dumarating laban sa RAG data layer sa halip na sa hangganan ng agent-runtime.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Ang kuwento ng Milvus ngayong araw ay tahasang ibinalangkas sa paligid ng procurement, ang pagbasa na ginagawa ng isang 9.8 na CVE na may pinangalanan at nakaharap-sa-internet na base ng install ang isara-ang-port at buksan-ang-auth mula sa isang mungkahi sa support-forum tungo sa isang aytem sa checklist ng mamimili. Iyon mismo ang galaw na opsyonal-na-hardening-tungo-sa-kinakailangan-sa-pagkuha na inaasahan ng tawag na ito, na dumarating laban sa RAG data layer sa halip na sa hangganan ng agent-sandbox na pinapangalanan nito.",
+        "coherence": 2,
+        "remaining_gap": "Kailangan ng prediksyon ang runtime na isolation ng agent-sandbox bilang isang pinangalanang seksyon sa mga RFP at questionnaire sa seguridad. Ang presyon sa procurement ngayong araw ay dumapo sa isang vector database, hindi sa agent runtime."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7a5df26a9276e045",
+        "short_label": "Microsoft breaks Patch Tuesday's monthly cadence for AI-surface fixes by Q2 2027",
+        "prediction_date": "2026-07-16"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Isang kritikal na kahinaan sa AI-surface ang nakakuha ng isang out-of-band na pag-aayos ngayong araw, na siyang pattern na binabantayan ng prediksyong ito, ngunit hindi mula sa Microsoft. Naglabas ang mga maintainer ng Milvus ng isang na-patch na release para sa CVE-2026-59218 sa labas ng anumang buwanang rollup, dahil ang daan ng pag-aayos ng isang open-source na proyekto ay isang release ng proyekto sa likas nito, at ang isang 9.8 na unauthenticated na RCE na may malaking nakaharap-sa-internet na base ay hindi naghihintay sa isang ritmo.\n\nAng layo sa tawag ay ang vendor. Nagreresolba ang prediksyong ito sa Microsoft na tiyak na binabasag ang buwanang ritmo ng Patch Tuesday para sa isang pag-aayos sa AI-surface, at ang pagkakalantad ngayong araw ay nasa isang third-party na vector database na walang kasangkot na code ng Microsoft. Nakalantad ang pangkalahatang presyon, ang mga kritikal na depekto sa AI-infrastructure na pumipilit ng mga pag-aayos sa labas ng isang nakatakdang iskedyul, isang vendor ang layo mula sa pinapangalanan ng prediksyon.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Isang kritikal na depekto sa AI-surface ang nakakuha nga ng isang out-of-band na pag-aayos ngayong araw, na-patch ng mga maintainer ng Milvus ang CVE-2026-59218 sa labas ng anumang buwanang rollup, na umaalingawngaw sa presyon na binabantayan ng tawag na ito. Ngunit ang daan ng pag-aayos ng isang open-source na proyekto ay nasa-labas-ng-ritmo sa likas nito, at ito ay isang third-party na vector database na walang kasangkot na code ng Microsoft, hindi ang vendor na pinapangalanan ng prediksyon.",
+        "coherence": 1,
+        "remaining_gap": "Nagreresolba ang tawag sa Microsoft na tiyak na nag-aanunsyo ng isang mas-mabilis-kaysa-buwanang ritmo ng pagseserbisyo sa Copilot o AI-surface. Ang pag-aayos na labas-sa-iskedyul ngayong araw ay pag-aari ng isang walang-kaugnayang open-source na proyekto."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.98c20322cf3f2161",
+        "short_label": "Action-level guardrails become first-class agent-framework controls by H1 2027",
+        "prediction_date": "2026-07-14"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Ang paglalabas ng LangGraph v1.1.0 ng durable execution ay nagpapakita ng isang agent framework na nagtataas ng isang runtime na katangian tungo sa isang first-class at built-in na kontrol, nagche-checkpoint sa bawat hakbang kaya nagpapatuloy ang isang nag-crash na worker mula sa huling natapos na node. Ang isang garantiya sa pagpapatupad na natibo na ngayon sa framework sa halip na ikabit sa isang hiwalay na engine ay ang parehong hugis na gusto ng prediksyong ito para sa action-level na mga guardrail.\n\nIba ang tiyak na kontrol. Ang durable execution ay tungkol sa survivability sa mga restart. Ang tawag na ito ay tungkol sa per-action na gating, ang paghahangganan kung aling mga pagtawag sa tool ang maaaring gawin ng isang agent, bilang isang first-class na kontrol ng framework. Gumawa ang LangGraph ng isang naiibang garantiya na natibo ngayong araw. Kaya kitang-kitang gumagalaw ang direksyong sinisipsip-ng-framework-ang-mga-kontrol na inaasahan ng prediksyon habang hindi ang action-level na guardrail mismo ang inilabas.",
+      "reference_links": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "GitHub - langchain-ai/langgraph v1.1.0 release",
+          "url": "https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang pagtataas ng LangGraph v1.1.0 ng durable execution tungo sa isang natibo at built-in na garantiya ay nagpapakita ng isang agent framework na sumisipsip sa isang runtime na katangian bilang isang first-class na kontrol sa halip na isang bolt-on, ang parehong hugis na gusto ng tawag na ito para sa action-level na mga guardrail. Ngunit ang garantiyang ginawang natibo ay survivability sa mga restart, hindi ang per-action na gating kung aling mga tool call ang maaaring gawin ng isang agent.",
+        "coherence": 2,
+        "remaining_gap": "Walang framework na naglabas ng inline at action-level na klasipikasyon ng tool-call bilang isang first-class na guardrail. Ang natibong garantiya ngayong araw ay durability, isang naiibang kontrol mula sa per-action na gating."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f960d058dc42c7c6",
+        "short_label": "KV-cache-compression dtype ships as inference-stack deployment knob by Q4 2026",
+        "prediction_date": "2026-04-29"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Pumutok ang keyword layer sa KV cache na nakaupo sa sentro ng mga serving release ngayong araw, sa mga stack ng vLLM at SGLang na pinapangalanan ng row na ito. Hinahati ng prefill-decode disaggregation ang compute-bound na yugto ng prompt at ang bandwidth-bound na yugto ng generation tungo sa magkahiwalay na GPU pool at ipinapadala ang KV cache sa pagitan ng mga ito sa network sa pamamagitan ng Mooncake at NIXL. Ang KV cache ang bagay na iniikutan ng buong disenyo.\n\nAng operasyon dito ay paglilipat, hindi compression. Gusto ng prediksyong ito ng isang KV-cache-compression na dtype na inilantad bilang isang knob ng deployment, isang kontrol na tulad ng kv-cache-dtype na pumapaliit sa cache sa memorya, at inililipat ng gawaing ngayong araw ang cache sa isang network fabric sa pagitan ng mga pool sa halip na paliitin ito. Walang-pagkakamaling ang KV cache ang larangan ng labanan sa serving na inaasahan ng tawag. Hindi inilabas sa mga release na ito ang tiyak na compression-dtype na knob na pinapangalanan nito.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Nakaupo ang KV cache sa sentro ng mga serving release ngayong araw sa eksaktong mga stack ng vLLM at SGLang na pinapangalanan ng tawag na ito, ipinapadala ito ng prefill-decode disaggregation sa pagitan ng mga GPU pool sa pamamagitan ng Mooncake at NIXL, na nagkukumpirma sa cache bilang ang larangan ng labanan sa serving. Ngunit ang operasyon ay paglilipat sa isang fabric, hindi ang in-memory na compression-dtype na knob na gustong ilantad ng prediksyon.",
+        "coherence": 2,
+        "remaining_gap": "Walang release na naglantad ng isang kv-cache-dtype na compression knob (TurboQuant o isang alternatibo), at walang hyperscaler na nag-tier ng presyo kada token sa isang opsyong compressed-cache. Inilipat ng ngayong araw ang cache, hindi pinaliit ito."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.41589b1968c4543f",
+        "short_label": "AMD breaks out AI-accelerator revenue as 10-Q segment footnote by Q3 2026",
+        "prediction_date": "2026-05-04"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Pumutok ang keyword layer sa AMD, MI450 at Helios, na lahat ay sentro ngayong araw, ngunit ang tunay na paksa ng row, isang linya ng financial-disclosure, ay wala. Ang preview ngayong araw ay pagpoposisyon ng produkto dalawang araw bago ang keynote ng Advancing AI: ang serye ng MI450, ang Helios rack at ang EPYC Venice na ibinebenta bilang isang rack-scale na sistema, na muling ibinalangkas ang inference bilang malawakang merkado at ang kapasidad ng memorya bilang bentahe laban sa Nvidia. Walang anuman dito na isang artifact ng kita.\n\nNagreresolba ang prediksyong ito sa AMD na naghihiwalay ng kita mula sa AI-accelerator bilang isang segment footnote sa isang 10-Q, at ang ngayong araw ay walang dalang pigura ng kita, walang filing at walang kaganapan sa kita. Tumataas ang katanyagan ng linya ng accelerator, na siyang presyon na sa bandang huli ay pumipilit ng isang nakahiwalay na disclosure, ngunit ang disclosure mismo ay wala kahit saan sa slate ngayong araw. Ang mga paglalahad na mahalaga ay inilalaan para sa entablado, hindi para sa SEC.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+          "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sentro ng slate ngayong araw ang AMD, MI450 at Helios, ngunit ang tunay na paksa ng row, isang linya ng financial-disclosure, ay wala. Ang preview ay pagpoposisyon ng produkto dalawang araw bago ang keynote: walang pigura ng kita, walang filing, walang kaganapan sa kita. Ang tumataas na katanyagan ng linya ng accelerator ang presyon na sa bandang huli ay pumipilit ng isang nakahiwalay na disclosure, ngunit ang disclosure mismo ay wala kahit saan ngayong araw.",
+        "coherence": 2,
+        "remaining_gap": "Nagreresolba ang prediksyon sa AMD na naghihiwalay ng kita mula sa AI-accelerator bilang isang segment footnote sa 10-Q. Ang ngayong araw ay walang dalang filing o pigura ng kita, na inilalaan para sa entablado ang mga paglalahad."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Pumutok ang semantic layer sa exfiltration ng lihim at datos mula sa AI infrastructure. Ang isang kompromiso sa Milvus sa pamamagitan ng CVE-2026-59218 ay nagbubunga hindi lamang ng server kundi ng naka-embed na corpus na nakaupo rito, kadalasang mga panloob na dokumento ng isang kompanya, kasaysayan ng suporta o source code, na na-vectorize at nahahanap, at hinihimok ng mga maintainer na palitan ang anumang kredensyal na kayang basahin ng proseso. Ang datos na ipinakain ng isang organisasyon sa mga model nito na muling mabubuo mula sa mga embedding at source chunk ang bunga ng exfiltration na pinag-uukulan ng kategoryang panganib na ito.\n\nAng nawawalang elemento ay ang agent sa loop. Ang prediksyong ito ay tungkol sa isang agent na inaakay, sa pamamagitan ng di-tuwirang prompt injection, tungo sa pagtagas ng isang lihim, at ang mekanismo ngayong araw ay isang unauthenticated na abot sa network papasok sa isang nakalantad na vector database, na walang paghatol ng agent na sangkot sa anumang hakbang. Walang katawang nagtataguyod ng listahan na naglathala ng rebisyon ng ranggo ngayong araw. Kaya tumitigas ang temang exfiltration habang ang tiyak na daang dinadaanan-ng-agent at ang pormal na paglalagay sa CIS/OWASP ay parehong nanatili kung saan sila noon.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Ang isang kompromiso sa Milvus sa pamamagitan ng CVE-2026-59218 ay nagbubunga ng naka-embed na corpus, kadalasang mga panloob na dokumento, kasaysayan ng suporta o source code, at hinihimok ng mga maintainer na palitan ang anumang kredensyal na kayang basahin ng proseso, na nagpapatigas sa malawak na temang exfiltration-ng-lihim-mula-sa-AI-infrastructure. Ngunit ang mekanismo ay isang unauthenticated na abot sa network, na walang paghatol ng agent na sangkot, at walang rebisyon sa listahan ng CIS o OWASP na inilathala ngayong araw.",
+        "coherence": 2,
+        "remaining_gap": "Kailangan ng prediksyon ang isang agent na inaakay sa pamamagitan ng prompt injection tungo sa pagtagas ng isang lihim, kasama ang isang natatangi at pinangalanang entry sa top-list ng CIS/OWASP. Parehong nanatili ang mga ito kung saan sila noon."
+      }
+    }
+  ]
+}

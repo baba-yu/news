@@ -1,0 +1,668 @@
+{
+  "date": "2026-07-20",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.6d69ea882242fb30",
+        "short_label": "Self-hosted AI tools refuse unauthenticated remote binding by H1 2027",
+        "prediction_date": "2026-07-19"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "This sits close to the prediction's own subject matter. Milvus is a self-hosted AI tool — the most widely deployed open-source vector database — and CVE-2026-59218 is a 9.8-rated flaw reachable through an exposed data-plane endpoint that accepts crafted requests without authentication, the exact unauthenticated remote-binding failure this prediction expects tools to start refusing. The maintainers' guidance is the perimeter version of the fix: pull public instances off the internet, close the ports, and rotate any credential the process could read.\n\nWhat holds this below the top is that the correction on offer is operational rather than built into the software. The diagnosis it lands on today is that vector stores defaulted to open ports and no auth because the threat model assumed a private subnet, and RAG deployments then pushed thousands onto public IPs — which is precisely the default this prediction wants reversed in the shipped product. But no self-hosted AI tool released a version that refuses a non-loopback bind without a credential; the forcing event arrived, the shipped default did not.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Milvus's CVE-2026-59218, a 9.8 unauthenticated remote-code path through an exposed data-plane endpoint, is a fresh instance of the exposure this call expects self-hosted AI tools to start refusing. But Milvus is a vector store, not a named runtime, and the fix is perimeter guidance, not a shipped default refusing unauthenticated non-loopback binds.",
+        "coherence": 4,
+        "remaining_gap": "No named runtime shipped a release refusing an unauthenticated non-loopback bind; today's fix is operational hardening, not the breaking software default the call requires."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c762a8078d707dee",
+        "short_label": "Durable ask-user checkpoints become a standard harness primitive by H1 2027",
+        "prediction_date": "2026-06-11"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] Keyword and semantic layers both fire: this row's signals name LangGraph and Temporal directly and describe a checkpoint that survives a server restart, and today LangChain shipped exactly that. LangGraph v1.1.0's durable execution checkpoints every step of an agent run to persistent state so a crashed or redeployed worker resumes from the last completed node rather than restarting the task or losing it — the suspend-and-resume durability this row treats as the primitive to watch, delivered natively rather than by bolting the agent loop onto a separate workflow engine.\n\nThe gap is the human-in-the-loop specificity. This prediction is about a durable ask-user checkpoint — suspend, ask the user, persist the suspended conversation, resume on the answer — and today's release is general durable execution across crashes and deploys, not specifically a clarification-and-approval gate. The durable-execution substrate the ask-user primitive would sit on just became a shipped, mainstream framework feature; the ask-user surface on top of it is the piece still unshown.",
+      "reference_links": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+          "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "LangGraph v1.1.0's durable execution checkpoints every step so a crashed worker resumes from the last node — the restart-surviving durability this call treats as the substrate, now shipped natively in a mainstream framework rather than bolted onto a separate engine. What it does not add is the human-in-the-loop leg: suspend, ask the user, resume on the answer.",
+        "coherence": 3,
+        "remaining_gap": "No harness shipped a documented suspend-ask-user-resume primitive; today's release is general durable execution across crashes, not a clarification-and-approval gate that persists across restart."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5e0beac647793331",
+        "short_label": "AMD MI400 will market memory bandwidth over peak FLOPS at Advancing AI",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] Keyword and semantic layers both fire hard: this prediction is about how AMD positions its Instinct part at the Advancing AI keynote, and today is that keynote's two-days-out preview. AMD is leaning on memory over raw compute exactly as anticipated — the on-record frame is 432GB of HBM4 per MI450 and 31TB per Helios rack, with the explicit argument that per-GPU memory capacity is where AMD out-configures Nvidia's rack, and that its largest committed deployments are inference, where the memory footprint matters most.\n\nThe prediction names the MI400 while the shipping part is the MI450 series, but that is the same Instinct line at the same event, and the marketing axis — memory capacity and bandwidth as the headline rather than peak FLOPS — is precisely what surfaced. What is still held back is the keynote itself: availability windows, the next ROCm release and any anchor customer are reserved for the stage, so the positioning is confirmed two days early while the formal reveal is pending.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Two days before Advancing AI, AMD's positioning is exactly the memory-over-FLOPS frame this call named: 432GB of HBM4 per MI450, 31TB per Helios rack, and an explicit argument that per-GPU memory capacity out-configures Nvidia, with inference as the volume market. The named part is MI450 rather than MI400, but it is the same Instinct line at the same keynote.",
+        "coherence": 4,
+        "remaining_gap": "The keynote itself is two days out; availability windows, the next ROCm release and any anchor customer are reserved for the stage, so the formal on-record framing is still pending."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cc109942df2a6460",
+        "short_label": "AMD Instinct emerges as second vendor for open RL post-training by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Two days out from AMD's Advancing AI keynote, the Instinct line is the center of the slate: the MI450 series, the double-wide Helios rack and the Zen 6 EPYC 'Venice' CPU pitched as one rack-scale system, a Helios rack carrying 72 MI455X parts, 31TB of HBM4 and roughly 3 AI exaflops. AMD Instinct is unambiguously the second-vendor silicon this prediction is written around, and OpenAI feeding requirements into the MI450 program is exactly the frontier-lab pull a post-training foothold would ride in on.\n\nThe emphasis runs the other way, though. AMD is leaning hard on inference as the volume market, arguing its largest committed deployments are inference rather than training and that per-GPU memory capacity is where it out-configures Nvidia. This prediction wants AMD Instinct named as a second vendor for open RL post-training — a training workload — and today's positioning is a deliberate move toward inference, so the silicon gains prominence while the specific training-side foothold the call names goes unmentioned.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "AMD's Advancing AI preview puts Instinct silicon at the center — MI450, the Helios rack, OpenAI feeding requirements — confirming AMD as a credible second-source accelerator. But the pitch leans hard on inference as the volume market, the opposite of the RL post-training workload this call needs a foothold in; nothing today touches an open-model RL run on Instinct.",
+        "coherence": 2,
+        "remaining_gap": "No non-AMD group has published an end-to-end open-model RL post-training run on Instinct, and today's inference emphasis leaves the training-side foothold unaddressed."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.546732d279b0a395",
+        "short_label": "Open inference engines adopt a named release-gating security track by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Both named engines shipped versioned releases this week — SGLang v0.6.0 and vLLM v0.25.0 — which is the exact vehicle this prediction watches for a security track to appear in. The releases themselves are about capability rather than security: wide expert parallelism and prefill-decode disaggregation for trillion-parameter MoE, with the KV cache shipped between GPU pools over Mooncake and NIXL. No release-gating security criteria, coordinated CVE-disclosure process or public-endpoint fuzzing gate is mentioned in either.\n\nThe security pressure that would motivate such a track is elsewhere in today's slate. The critical Milvus flaw CVE-2026-59218 puts a 9.8-rated unauthenticated RCE on the most widely deployed open-source vector database, the argument being that AI-infrastructure components built for a trusted subnet are now internet-facing and need the network hygiene the serving layer has had to learn. That is the same lesson an inference-engine security track would encode, arriving one component over rather than inside vLLM or SGLang.",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        },
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Both named engines shipped versioned releases this week — SGLang v0.6.0, vLLM v0.25.0 — the exact vehicle this call watches, but both lead on capability (wide expert parallelism, disaggregation) with no release-gating security criteria or coordinated-disclosure track. The security lesson lands one component over, in the 9.8 Milvus RCE, rather than inside the serving engines.",
+        "coherence": 2,
+        "remaining_gap": "Neither release names a security track, hardening gate, or CVE-disclosure process as release-blocking; the capability race continues while the formal security axis stays unshipped."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.16c7b8053e39aa1f",
+        "short_label": "Disk-streaming expert offload ships in a mainstream local runtime by H1 2027",
+        "prediction_date": "2026-07-18"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Today's serving releases are the datacenter answer to the same problem this prediction poses locally: mixture-of-experts models whose experts do not fit where you want to run them. SGLang v0.6.0 leads on wide expert parallelism — spreading a MoE model's hundreds of experts across many GPUs — and both engines target the 2-trillion-parameter open models, Kimi K3 at 2.8 trillion and Qwen3.8 at 2.4 trillion, that no single pool can serve naively.\n\nThe mechanism is the mirror image of the prediction rather than the prediction itself. Wide expert parallelism spreads experts across a GPU fabric with the KV cache shipped over the network; this call wants experts streamed off disk into a single mainstream local runtime. Both are answers to an expert set too large for one device, and today's is the rack-scale one. No local runtime shipped or announced disk-streaming expert offload, so the demand case sharpens while the named delivery does not arrive.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The giant sparse models this call is written around are today's subject — Kimi K3 at 2.8 trillion, Qwen3.8 at 2.4 trillion — so demand for running an expert set too large for one device sharpens. But today's answer is the mirror image: SGLang's wide expert parallelism spreads experts across a datacenter fabric, not off disk into a local runtime.",
+        "coherence": 2,
+        "remaining_gap": "No local runtime — llama.cpp, Ollama, LM Studio or vLLM — shipped or announced documented disk-streaming expert offload for 500B-plus models under 32GB of RAM."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ae0dd497b3c0ac0",
+        "short_label": "AI security posture tools ship auto-remediation for AI packages by Q4 2026",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The Milvus disclosure hands posture tooling a clean target and leaves the fix entirely manual. CVE-2026-59218 is a 9.8-rated unauthenticated RCE on the vector database that stores the embeddings behind retrieval-augmented generation, and the remediation on record is operator work: pull public instances off the internet, close the ports, rotate any credential the process could read. A named, internet-facing, critical exposure in an AI package with the fix left to the operator is the precondition this prediction expects posture tools to supersede.\n\nNo tooling closed that loop today. The call wants an AI security posture product shipping automated remediation against exactly this kind of exposed AI-package surface; what exists is a patched release plus hardening advice. The buying pressure sharpened — a 9.8 CVE with a large internet-facing install base is a procurement forcing function — without any vendor naming an automated action against it.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Today's Milvus disclosure is a clean instance of the gap this call turns on: a 9.8 critical RCE in a vector database, an AI package behind RAG, with remediation left entirely to the operator, pull instances off the internet, close ports, rotate credentials. That sharpens the buying pressure, but no posture vendor named an automated action against the exposure today.",
+        "coherence": 2,
+        "remaining_gap": "No CNAPP or AI-SPM vendor shipped a named auto-remediation feature scoped to AI packages; what exists is a patched release plus manual hardening advice."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.625a7234dd6e9ed1",
+        "short_label": "ML registry servers log a second max-severity deserialization RCE by Q1 2027",
+        "prediction_date": "2026-06-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Keyword layer fires on a max-severity unauthenticated RCE against a network-reachable ML data-plane store. Milvus is the most widely deployed open-source vector database — the component that holds the embeddings behind retrieval-augmented generation — and CVE-2026-59218 is rated 9.8, reachable through an exposed data-plane endpoint that accepts crafted requests before any authentication check. That is structurally the second max-severity, unauthenticated, pre-auth RCE on an open-source ML data-plane project this row was written to expect after Feast's CVE-2026-56121.\n\nThe mechanism is where the match loosens. This prediction names unsafe deserialization specifically — dill, pickle or joblib payloads through a serialized-transform endpoint — and today's Milvus reporting describes an exposed unauthenticated data-plane endpoint without stating that the vector is deserialization. So the data-plane-RCE shape lands squarely while the exact deserialization mechanism the call specifies is unconfirmed in what was disclosed.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "CVE-2026-59218 is structurally what this call watches for: a second maximum-severity (9.8), unauthenticated, pre-auth RCE on an open-source ML data-plane store, arriving after Feast's CVE-2026-56121. The match loosens on mechanism — the prediction names unsafe deserialization specifically, and Milvus's disclosed vector is an exposed data-plane endpoint not stated to be a deserialization bug.",
+        "coherence": 3,
+        "remaining_gap": "The disclosed Milvus vector is not confirmed as unsafe deserialization (dill/pickle/joblib), the exact root cause the call requires; without that, the second-RCE match is structural, not on mechanism."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8ae347c6052558e0",
+        "short_label": "AMD Helios plus MI450 commitment book clears 15GW threshold by H2 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Keyword layer fires on AMD Helios, MI450 and MI455X, all named in today's preview, and the semantic layer catches the commitment-book theme this row tracks. AMD has stopped previewing MI450 as a roadmap item and started selling it as a shipping rack, OpenAI has been feeding requirements into the MI450 program, AMD is already discussing the follow-on MI500 with buyers, and it is holding a fresh anchor customer for the keynote — all signs of a demand book being assembled behind Helios.\n\nWhat did not arrive is the quantified threshold. This prediction resolves on committed capacity clearing a specific gigawatt bar, and today's figures are hardware specs, not a summed commitment book: no named buyer has put a gigawatt or rack-count number on the record, with those disclosures explicitly reserved for the stage. The commitment book is visibly filling; the 15GW line the call draws was not quantified today.",
+      "reference_links": [
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        },
+        {
+          "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+          "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "AMD's preview shows the demand book filling qualitatively — MI450 sold as a shipping rack, OpenAI feeding requirements, MI500 discussed with buyers, a fresh anchor customer held for Thursday's keynote, exactly the stage-as-catalyst dynamic this call assumes. But no number arrived: no buyer put a gigawatt or rack-count figure on the record, those reveals reserved for the stage.",
+        "coherence": 3,
+        "remaining_gap": "The 15GW resolution needs summed committed capacity on the record; today gave hardware specs and qualitative demand signals, not a named buyer's gigawatt or rack-count commitment."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cbba6275f880fc04",
+        "short_label": "Second hyperscaler names non-Nvidia data-center inference silicon by Q4 2027",
+        "prediction_date": "2026-06-29"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Semantic layer fires on a named frontier buyer committing to non-Nvidia inference silicon. Today's preview has OpenAI feeding requirements into the MI450 program while AMD leans on inference as its volume market, arguing its largest committed deployments are inference rather than training. A frontier lab shaping a non-Nvidia inference part's memory footprint and rack topology is the kind of named-customer signal this prediction watches for.\n\nThe fit is imperfect on two axes. OpenAI is a frontier lab rather than one of the hyperscalers the call frames around, and requirements-sharing is co-design rather than the on-record procurement commitment the row wants named. AMD is unambiguously non-Nvidia inference silicon with a named lab attached, so the direction is right; the specific hyperscaler-names-it-as-a-committed-customer milestone waits on the keynote's held-back anchor.",
+      "reference_links": [
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        },
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "AMD's inference-first pitch, with OpenAI feeding requirements into the MI450 program, is the shape this call watches: a named frontier buyer attached to non-Nvidia inference silicon. The fit misses on two axes — OpenAI is a frontier lab, not one of the hyperscalers the call frames around, and requirements-sharing is co-design, not the on-record procurement commitment the prediction wants named.",
+        "coherence": 2,
+        "remaining_gap": "No second hyperscaler has named a non-Nvidia inference-silicon partner as a committed customer; the keynote's held-back anchor customer is where that milestone would land."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cfaa5b5838122b38",
+        "short_label": "Reservoir routing ships as default vLLM and SGLang serving knob by H2 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Keyword layer fires on vLLM, SGLang and MoE expert routing, all central to today's releases. SGLang v0.6.0 and vLLM v0.25.0 shipped wide expert parallelism — spreading a mixture-of-experts model's hundreds of experts across many GPUs — paired with prefill-decode disaggregation, landing new MoE-serving knobs in exactly the two engines this prediction names as the default-adoption target.\n\nThe specific knob differs. This call is about reservoir routing — a stateful router-bank primitive for multi-turn agentic MoE inference — becoming a default vLLM and SGLang serving option, and what shipped is wide expert parallelism plus KV-cache disaggregation over Mooncake and NIXL, a different MoE-serving mechanism. The pattern the prediction bets on is confirmed — MoE routing and serving knobs are landing in these engines as defaults — while the named reservoir-routing primitive is not the one that arrived this week.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "SGLang v0.6.0 and vLLM v0.25.0 did land new MoE-serving knobs as defaults in exactly the two engines this call names — confirming the pattern that these projects absorb MoE routing and serving mechanisms fast. But what shipped is wide expert parallelism and KV-cache disaggregation, not the stateful router-bank reservoir-routing primitive the prediction specifies.",
+        "coherence": 2,
+        "remaining_gap": "Neither release includes reservoir routing as a serving knob, let alone a default, and no hosted inference tier surfaced it; a different MoE mechanism shipped instead."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a4f83081580b9a3d",
+        "short_label": "Launch-day vLLM/SGLang + Ollama support becomes open-weight MoE release bar",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Semantic layer fires cleanly: this prediction holds that serving support in vLLM and SGLang is becoming the release bar for open-weight MoE models, and today is that support maturing around the newest 2-trillion-parameter drops. SGLang v0.6.0 and vLLM v0.25.0 shipped wide expert parallelism and disaggregated serving aimed squarely at Kimi K3 at 2.8 trillion parameters and Qwen3.8 at 2.4 trillion — the argument being that almost nobody can serve those models with a naive setup, so the engine support is what makes them usable at all.\n\nThe reading that the economics of the giant open models are set by whether an operator can stand up disaggregated, expert-parallel serving is precisely this row's thesis that serving-stack support is the gating bar. What today does not settle is the launch-day timing and the Ollama leg: the releases arrived after the models rather than alongside a specific launch, and nothing here concerns Ollama support for a 2T-class MoE. The bar-setting dynamic strengthened; the day-of, three-runtime specificity the call names was not demonstrated.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Today's story is this call's thesis in action: SGLang v0.6.0 and vLLM v0.25.0 exist because almost nobody can serve Kimi K3 or Qwen3.8 with a naive setup, so serving-stack support is what makes the giant open models usable at all — the gating bar the prediction names. What it does not show is launch-day timing or the Ollama leg.",
+        "coherence": 3,
+        "remaining_gap": "The releases trailed the models rather than shipping alongside a specific launch, and nothing here concerns Ollama packaging for a 2T-class MoE; the day-of, three-runtime bar is undemonstrated."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.42a2372350593ef7",
+        "short_label": "SK Hynix sustains triple-digit YoY revenue growth through Q3 2026",
+        "prediction_date": "2026-07-09"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "AMD's rack-scale pitch is a large HBM order in disguise: a single Helios rack is specified at 31TB of HBM4, each MI450 carries 432GB, and AMD is arguing that memory capacity per GPU is precisely where it out-configures Nvidia. That is downstream demand for the high-bandwidth memory SK Hynix sells, arriving two days before a keynote expected to attach committed deployment scale to it.\n\nThe distance to this prediction is that nothing in today's slate is an SK Hynix print. The call resolves on quarterly revenue sustaining triple-digit year-over-year growth, and today supplies a demand-side signal for HBM rather than a reported number from the supplier. AMD's memory-heavy configuration strengthens the backdrop the thesis rests on without moving the figure it turns on.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "AMD's rack-scale pitch is a large HBM order in disguise — 31TB of HBM4 per Helios rack, 432GB per MI450, memory pitched as its edge over Nvidia — downstream demand for exactly what SK Hynix sells. But nothing today is an SK Hynix print; the call resolves on a reported quarterly revenue number, and this is only a demand backdrop.",
+        "coherence": 2,
+        "remaining_gap": "The prediction turns on SK Hynix's Q2 and Q3 earnings clearing triple-digit YoY growth; no supplier revenue figure was reported today."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a31a93089cef22da",
+        "short_label": "Samsung answers memory-capex race with fresh HBM capacity buildout by Q1 2027",
+        "prediction_date": "2026-07-12"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "The AMD preview quantifies the demand side of the memory-capex race this prediction watches: 31TB of HBM4 per Helios rack, 432GB per MI450, and an explicit argument that per-GPU memory capacity is AMD's edge over Nvidia's rack. A credible second rack-scale buyer of HBM4 at that volume is exactly the pull a fresh Samsung capacity commitment would answer.\n\nWhat is missing is any move from Samsung itself. This call resolves on a named HBM or advanced-DRAM capacity buildout disclosed by Samsung, and today is an accelerator vendor's product positioning, not a memory supplier's capex line. The demand signal firms up; the supplier-side commitment the prediction names did not appear.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "AMD's preview quantifies the demand side of the memory-capex race, 31TB of HBM4 per Helios rack, 432GB per MI450, per-GPU memory capacity pitched as its edge over Nvidia. A credible second rack-scale buyer of HBM4 at that volume is the pull a fresh Samsung commitment would answer. But today is an accelerator vendor's positioning, not a memory supplier's capex line.",
+        "coherence": 2,
+        "remaining_gap": "No move from Samsung, or any memory supplier, appeared today; the call resolves on a named Samsung HBM or advanced-DRAM capacity commitment tied to AI demand."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.43bff01be9e1af7e",
+        "short_label": "Transformer-only inference ASICs gain a first-class serving-stack backend by H1 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "The serving stacks this prediction names as the integration target — vLLM, SGLang, TensorRT-LLM — are exactly where this week's action landed. SGLang v0.6.0 and vLLM v0.25.0 shipped wide expert parallelism and disaggregated prefill-decode serving for trillion-parameter MoE within days of each other, confirming these two projects as the place serving capability accrues first.\n\nThe capability that landed is not a fixed-function backend, though. Today's releases target multi-GPU expert parallelism and KV-cache transfer over Mooncake and NIXL on GB200 NVL72 racks — GPU serving, not a transformer-only ASIC path. This call wants a documented first-class deployment target for hard-wired inference silicon inside those stacks, and what shipped is a GPU-oriented MoE feature, so the vehicle is active while the specific ASIC backend the prediction names is untouched.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "The serving stacks this call names as the integration target — vLLM, SGLang, TensorRT-LLM — are exactly where this week's action landed, confirming them as where serving capability accrues first. But what shipped is wide expert parallelism and KV-cache transfer for GPU MoE, not a fixed-function backend; nothing touches a transformer-only ASIC deployment path.",
+        "coherence": 2,
+        "remaining_gap": "No mainstream serving stack exposed a fixed-function transformer-ASIC backend as a documented deployment target; today's releases are GPU-oriented MoE features."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0b8bcb868b9c8fa5",
+        "short_label": "Frontier mid-tier API pricing falls below $1 per million input tokens by Q2 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Today's releases move the cost curve this prediction ultimately tracks. The durable point of the SGLang and vLLM work is that the economics of the giant open models are set less by the licence, which is free, than by whether an operator can stand up disaggregated, expert-parallel serving at all — and a GB200 NVL72 rack now reports roughly 2.7 times a single-pool baseline for a trillion-parameter-class MoE. Cheaper serving of capable open models is sustained downward pressure on what anyone can charge per token.\n\nThe link to a sub-$1 mid-tier list price is indirect. No vendor published API pricing today, and a throughput multiplier on rented racks reaches the mid-tier floor only through the competitive pass-through the call assumes. The force behind the prediction strengthened; no posted number moved.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The SGLang and vLLM work moves the cost curve this call ultimately tracks: a GB200 NVL72 rack now reports roughly 2.7 times a single-pool baseline for a trillion-parameter MoE, sustained downward pressure on what anyone can charge per token. But no vendor published API pricing today, and the throughput gain reaches a mid-tier list price only through indirect competitive pass-through.",
+        "coherence": 2,
+        "remaining_gap": "The call resolves on two vendors posting sub-$1 mid-tier input pricing; no list price moved today, and the link from serving efficiency runs through competitive pass-through."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c99c991b7d54c82a",
+        "short_label": "Subagent orchestration becomes a first-class frontier-API primitive by Q1 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "LangGraph v1.1.0's durable execution lands in the orchestration layer this prediction watches, and the framing around it — that a production agent is really a distributed workflow of many interleaved model and tool calls — is the same substrate a subagent-orchestration primitive would sit on. The orchestration market is described today as consolidating around a specific property.\n\nThat property is survivability, not fan-out. Durable execution checkpoints an agent run so a crashed worker resumes from the last node; this call concerns providers exposing multi-agent decomposition as a billable, server-side API primitive. LangGraph is moving orchestration into the framework rather than the API, which is arguably the opposite direction, so the theme is live while the specific frontier-API primitive the prediction names sees no motion.",
+      "reference_links": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+          "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "LangGraph v1.1.0's durable execution lands in the orchestration layer this call watches, but the property it makes native is survivability — a crashed worker resuming from the last node — not the multi-agent fan-out the prediction concerns. And it moves orchestration into the framework rather than exposing it as a billable server-side API primitive, arguably the opposite direction.",
+        "coherence": 1,
+        "remaining_gap": "No frontier provider exposed server-side subagent orchestration as a billable, metered API primitive; today's motion is framework-side and about durability, not provider-side fan-out."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.eca92ec7ee67c161",
+        "short_label": "Unsloth ships day-of fine-tuning for the next 1T+ open-weight release by Q1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "The open-weight releases this prediction is pinned to are exactly today's subject: Moonshot's Kimi K3 at 2.8 trillion parameters and Alibaba's Qwen3.8 at 2.4 trillion, the models whose serving the two dominant inference engines spent the week enabling. The 1T-plus open-weight frontier the call watches for day-of fine-tuning support is now populated well past a trillion parameters.\n\nThe action this week is on the serving side, not fine-tuning. SGLang and vLLM shipped the machinery to run these models; nothing today concerns Unsloth or a same-day low-VRAM tuning path for them. This prediction needs the fine-tuning toolchain to keep pace with a 1T-plus drop, and today the inference toolchain is what moved, so the models are present while the fine-tuning-lag milestone is untested.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "The open-weight releases this call is pinned to are exactly today's subject — Kimi K3 at 2.8 trillion, Qwen3.8 at 2.4 trillion — so the 1T-plus frontier is well populated. But this week's action is entirely serving-side: SGLang and vLLM shipped the machinery to run these models, and nothing touches Unsloth or a same-day low-VRAM tuning path.",
+        "coherence": 2,
+        "remaining_gap": "The fine-tuning-lag milestone needs a public Unsloth build tuning a 1T-plus release within a week; today the inference toolchain moved, not the tuning one."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0ad3c58ce5c240d0",
+        "short_label": "Together or Baseten raises at a $5B-plus valuation by Q4 2027",
+        "prediction_date": "2026-07-17"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Today's serving advances are the demand thesis under an open-model inference neocloud's valuation. The release that makes a 2.4-trillion-parameter model servable on a rack you can rent is described as the one that actually moves the cost curve, and standing up disaggregated, wide-expert-parallel serving is precisely the capability Together and Baseten sell access to. A world where the largest open models are only economically serveable through this machinery is a favourable one for their business.\n\nNo financing event appeared, however. This prediction resolves on a named $5-billion-plus round at one of those two providers, and today is an engineering release, not a term sheet. The strategic case for the serving tier firmed up while the valuation milestone the call names saw nothing.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Today's serving advances are the demand thesis under an open-model inference neocloud's valuation: standing up disaggregated, wide-expert-parallel serving — the capability Together and Baseten sell access to — is what makes a 2.4-trillion-parameter model economically servable at all. But today is an engineering release, not a term sheet; no financing event appeared.",
+        "coherence": 2,
+        "remaining_gap": "The call resolves on a named $5-billion-plus round at Together or Baseten; today strengthens the strategic case for the serving tier but touches no valuation."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b3c111f1938357a9",
+        "short_label": "Open-weight model tops Artificial Analysis Intelligence Index by H1 2027",
+        "prediction_date": "2026-07-17"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "The candidate open-weight models this prediction turns on are named directly in today's serving story: Kimi K3 at 2.8 trillion parameters and Qwen3.8 at 2.4 trillion, the two checkpoints whose size forced this week's serving work. Their presence at the top of the open-weight parameter race is the supply side the call requires.\n\nNothing index-eligible changed, though. Today's entry is about running these models, not scoring them, and no Artificial Analysis Intelligence Index result was published for either. The prediction resolves on a downloadable open-weight checkpoint placing at the top of that public index; the models are named as serving workloads, with their measured standing untouched today.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "The candidate open-weight models this call turns on are named directly today — Kimi K3 at 2.8 trillion, Qwen3.8 at 2.4 trillion — but only as serving workloads whose size forced this week's engine work. No Artificial Analysis Intelligence Index result was published for either; today is about running these models, not scoring them.",
+        "coherence": 2,
+        "remaining_gap": "The prediction needs a downloadable open-weight checkpoint at the outright top of the index; the models' measured standing was untouched today."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.89cd61b0ff2ea3ca",
+        "short_label": "Qwen3.8 open weights arrive after published benchmarks, not before Q4 2026",
+        "prediction_date": "2026-07-19"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Qwen3.8 appears in today's serving story as one of the 2-trillion-parameter open models the new machinery targets, at 2.4 trillion parameters alongside Kimi K3 at 2.8 trillion. This prediction tracks the sequencing of that specific release — whether published benchmark results precede the open weights or trail them.\n\nToday adds nothing to that sequence. The model is referenced as a serving workload, with no new benchmark publication and no weight-release date attached. The ordering question the call turns on — measured results before downloadable weights, or after — is exactly where it stood, so the mention keeps Qwen3.8 in view without advancing its release timeline.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Qwen3.8 appears today only as one of the 2-trillion-parameter open models the new serving machinery targets, at 2.4 trillion alongside Kimi K3. The sequencing question this call turns on — whether published benchmarks precede the open weights or trail them — gets no new data: no benchmark publication and no weight-release date attached.",
+        "coherence": 1,
+        "remaining_gap": "The mention keeps Qwen3.8 in view without advancing its release timeline; the benchmarks-versus-weights ordering stands exactly where it did."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e3f72a21ed13fcec",
+        "short_label": "Agent-sandbox isolation becomes a named procurement requirement by H1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Today's Milvus story is framed explicitly around procurement, which is this prediction's mechanism. The reading offered is that a 9.8 CVE with a named, internet-facing install base turns ports-closed, authentication-on from a support-forum suggestion into a buyer's checklist item — the same move from optional hardening to acquisition requirement the call expects for agent-sandbox isolation.\n\nThe surface is adjacent rather than the named one. This prediction concerns runtime isolation of agent sandboxes appearing as a procurement requirement in RFPs and security questionnaires; the Milvus exposure is a vector-database network-auth default, not an agent sandbox. The procurement logic today makes visible is exactly the one the thesis rides, arriving against the RAG data layer instead of the agent-runtime boundary.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Today's Milvus story is framed explicitly around procurement — the reading that a 9.8 CVE with a named, internet-facing install base turns ports-closed, auth-on from a support-forum suggestion into a buyer's checklist item. That is exactly the optional-hardening-to-acquisition-requirement move this call expects, arriving against the RAG data layer rather than the agent-sandbox boundary it names.",
+        "coherence": 2,
+        "remaining_gap": "The prediction needs runtime agent-sandbox isolation as a named section in RFPs and security questionnaires; today's procurement pressure lands on a vector database, not the agent runtime."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7a5df26a9276e045",
+        "short_label": "Microsoft breaks Patch Tuesday's monthly cadence for AI-surface fixes by Q2 2027",
+        "prediction_date": "2026-07-16"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "A critical AI-surface vulnerability drew an out-of-band fix today, which is the pattern this prediction watches — but not from Microsoft. Milvus's maintainers shipped a patched release for CVE-2026-59218 outside any monthly rollup, because an open-source project's fix path is a project release by nature, and a 9.8-rated unauthenticated RCE with a large internet-facing base does not wait for a cadence.\n\nThe distance to the call is the vendor. This prediction resolves on Microsoft specifically breaking Patch Tuesday's monthly cadence for an AI-surface fix, and today's exposure sits in a third-party vector database with no Microsoft code involved. The general pressure — critical AI-infrastructure flaws forcing fixes off a fixed schedule — is on display, one vendor removed from the one the prediction names.",
+      "reference_links": [
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "A critical AI-surface flaw did draw an out-of-band fix today — Milvus's maintainers patched CVE-2026-59218 outside any monthly rollup — echoing the pressure this call watches. But an open-source project's fix path is off-cadence by nature, and it is a third-party vector database with no Microsoft code involved, not the vendor the prediction names.",
+        "coherence": 1,
+        "remaining_gap": "The call resolves on Microsoft specifically announcing a faster-than-monthly Copilot or AI-surface servicing cadence; today's off-schedule fix belongs to an unrelated open-source project."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.98c20322cf3f2161",
+        "short_label": "Action-level guardrails become first-class agent-framework controls by H1 2027",
+        "prediction_date": "2026-07-14"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "LangGraph v1.1.0 shipping durable execution shows an agent framework promoting a runtime property to a first-class, built-in control — checkpointing every step so a crashed worker resumes from the last completed node. That an execution guarantee is now native to the framework rather than bolted on with a separate engine is the same shape this prediction wants for action-level guardrails.\n\nThe specific control differs. Durable execution is about survivability across restarts; this call concerns per-action gating — bounding which tool invocations an agent may make — as a first-class framework control. LangGraph made a different guarantee native today, so the frameworks-absorb-controls direction the prediction depends on is visibly in motion while the action-level guardrail itself is not what shipped.",
+      "reference_links": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "GitHub - langchain-ai/langgraph v1.1.0 release",
+          "url": "https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "LangGraph v1.1.0 promoting durable execution to a native, built-in guarantee shows an agent framework absorbing a runtime property as a first-class control rather than a bolt-on — the same shape this call wants for action-level guardrails. But the guarantee made native is survivability across restarts, not per-action gating of which tool calls an agent may make.",
+        "coherence": 2,
+        "remaining_gap": "No framework shipped inline, action-level tool-call classification as a first-class guardrail; today's native guarantee is durability, a different control from per-action gating."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f960d058dc42c7c6",
+        "short_label": "KV-cache-compression dtype ships as inference-stack deployment knob by Q4 2026",
+        "prediction_date": "2026-04-29"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Keyword layer fires on the KV cache sitting at the center of today's serving releases, in the vLLM and SGLang stacks this row names. Prefill-decode disaggregation splits the compute-bound prompt phase and the bandwidth-bound generation phase onto separate GPU pools and ships the KV cache between them over the network through Mooncake and NIXL — the KV cache is the object the whole design moves around.\n\nThe operation on it is transfer, not compression. This prediction wants a KV-cache-compression dtype exposed as a deployment knob — a kv-cache-dtype style control that shrinks the cache in memory — and today's work moves the cache across a network fabric between pools rather than compressing it. The KV cache is unmistakably the serving battleground the call anticipated; the specific compression-dtype knob it names did not ship in these releases.",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The KV cache sits at the center of today's serving releases in the exact vLLM and SGLang stacks this call names — prefill-decode disaggregation ships it between GPU pools over Mooncake and NIXL, confirming the cache as the serving battleground. But the operation is transfer across a fabric, not the in-memory compression-dtype knob the prediction wants exposed.",
+        "coherence": 2,
+        "remaining_gap": "No release exposed a kv-cache-dtype compression knob (TurboQuant or an alternative), and no hyperscaler tiered per-token pricing on a compressed-cache option; today moved the cache, not shrank it."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.41589b1968c4543f",
+        "short_label": "AMD breaks out AI-accelerator revenue as 10-Q segment footnote by Q3 2026",
+        "prediction_date": "2026-05-04"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Keyword layer fires on AMD, MI450 and Helios, all central today, but the row's actual subject — a financial-disclosure line — is absent. Today's preview is product positioning two days before the Advancing AI keynote: the MI450 series, the Helios rack and EPYC Venice sold as one rack-scale system, with inference reframed as the volume market and memory capacity as the edge over Nvidia. Nothing in it is an earnings artifact.\n\nThis prediction resolves on AMD breaking out AI-accelerator revenue as a segment footnote in a 10-Q, and today carries no revenue figure, no filing and no earnings event. The prominence of the accelerator line rises — which is the pressure that eventually forces a standalone disclosure — but the disclosure itself is nowhere in today's slate; the reveals that matter are being held for the stage, not the SEC.",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+          "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "AMD, MI450 and Helios are central to today's slate, but the row's actual subject — a financial-disclosure line — is absent. The preview is product positioning two days before the keynote: no revenue figure, no filing, no earnings event. The accelerator line's rising prominence is the pressure that eventually forces a standalone disclosure, but the disclosure itself is nowhere today.",
+        "coherence": 2,
+        "remaining_gap": "The prediction resolves on AMD breaking out AI-accelerator revenue as a 10-Q segment footnote; today carries no filing or revenue figure, with reveals held for the stage."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Semantic layer fires on secret and data exfiltration from AI infrastructure. A Milvus compromise via CVE-2026-59218 yields not just the server but the embedded corpus sitting on it — often a company's internal documents, support history or source code, vectorized and searchable — and the maintainers urge rotating any credential the process could read. Data an organization fed its models being reconstructable from the embeddings and source chunks is the exfiltration outcome this risk category is about.\n\nThe missing element is the agent in the loop. This prediction concerns an agent being steered — via indirect prompt injection — into leaking a secret, and today's mechanism is an unauthenticated network reach into an exposed vector database, with no agent's judgment engaged at any step. No list-maintaining body published a ranking revision today, so the exfiltration theme hardens while the specific agent-mediated pathway and the formal CIS/OWASP placement both stay where they were.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "A Milvus compromise via CVE-2026-59218 yields the embedded corpus — often internal documents, support history or source code — and the maintainers urge rotating any credential the process could read, hardening the broad secret-exfiltration-from-AI-infrastructure theme. But the mechanism is an unauthenticated network reach, with no agent's judgment engaged, and no CIS or OWASP list revision published today.",
+        "coherence": 2,
+        "remaining_gap": "The prediction needs an agent steered via prompt injection into leaking a secret, plus a discrete named CIS/OWASP top-list entry; both stayed where they were."
+      }
+    }
+  ]
+}
