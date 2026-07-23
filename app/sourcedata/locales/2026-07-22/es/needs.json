@@ -1,0 +1,137 @@
+{
+  "date": "2026-07-22",
+  "by_prediction": {
+    "prediction.0594fdd206cf2981": [
+      {
+        "actor": "equipo mantenedor de un agente de código",
+        "job": "Integrar en el agente una comprobación de verificación previa a la instalación que revise la procedencia del paquete y las señales de typosquatting antes de que se ejecute cualquier instalación de dependencias",
+        "outcome": "Una comprobación de disponibilidad general, activada por defecto, en al menos dos de los principales agentes de código que se niega a instalar en silencio los paquetes que no superan la verificación",
+        "motivation": "Impedir que se dirija al agente a descargar dependencias envenenadas o suplantadas por typosquatting en nombre del usuario",
+        "task": {
+          "who": "ingeniería de resolución de dependencias / de seguridad del agente",
+          "what": "añadir una comprobación de verificación de procedencia y typosquatting previa a la instalación",
+          "where": "la ruta de código de instalación de dependencias del agente",
+          "when": "H2 2026 through H1 2027",
+          "why": "bloquear la instalación silenciosa de dependencias envenenadas",
+          "how": "atestaciones de PyPI, procedencia Sigstore de npm, cribado de typosquatting"
+        }
+      },
+      {
+        "actor": "ingeniería de seguridad del registro de paquetes",
+        "job": "Lanzar y estabilizar las primitivas de procedencia firmada, de atestación de publicador de confianza y de señales de typosquatting que un agente de código pueda consultar antes de instalar una dependencia",
+        "outcome": "Endpoints de procedencia y atestación consumibles por máquina en PyPI y npm que los agentes consultan en el momento de la instalación para verificar un paquete",
+        "motivation": "Cerrar agujeros del registro como las versiones antiguas mutables para que los agentes aguas abajo hereden señales de confianza verificables en lugar de nombres a ciegas",
+        "task": {
+          "who": "ingeniería de seguridad del registro / de confianza y seguridad",
+          "what": "exponer endpoints de consulta de procedencia y atestación",
+          "where": "la infraestructura de los registros PyPI y npm",
+          "when": "H2 2026 through H1 2027",
+          "why": "suministrar a los agentes señales de confianza verificables en la instalación",
+          "how": "Trusted Publishing, atestaciones de publicación, procedencia Sigstore"
+        }
+      },
+      {
+        "actor": "colaborador de estándares de procedencia de la cadena de suministro",
+        "job": "Endurecer los estándares de atestación y de verificación de procedencia en los que se apoya un agente de código para decidir si una instalación es fiable en los distintos registros",
+        "outcome": "Especificaciones de verificación interoperables que los agentes implementan para comprobar de forma uniforme la procedencia firmada y las atestaciones de publicador de confianza en PyPI, npm y otros registros",
+        "motivation": "Hacer que la verificación de procedencia sea lo bastante interoperable como para que todos los principales agentes de código puedan adoptarla activada por defecto",
+        "task": {
+          "who": "grupo de trabajo de estándares de seguridad de la cadena de suministro",
+          "what": "endurecer las especificaciones de atestación y de verificación de procedencia",
+          "where": "los foros de estándares de Sigstore y de procedencia de paquetes",
+          "when": "H2 2026 through H1 2027",
+          "why": "posibilitar la adopción por defecto de la verificación por parte de los agentes",
+          "how": "Sigstore, SLSA, especificaciones de atestación de publicador de confianza"
+        }
+      }
+    ],
+    "prediction.70b4b143e969eb36": [
+      {
+        "actor": "equipo de investigación de seguridad ofensiva",
+        "job": "Envolver modelos de pesos abiertos en andamiajes de agente autónomo y ejecutarlos contra objetivos realistas para demostrar una capacidad de intrusión de extremo a extremo",
+        "outcome": "Una demostración publicada que muestra a un modelo de pesos abiertos descargable encadenando de forma autónoma credenciales, explotación, escalada de privilegios y movimiento lateral hasta alcanzar la RCE",
+        "motivation": "Probar y advertir que los pesos abiertos eliminan el entrenamiento en rechazos como último control sobre la capacidad ofensiva autónoma",
+        "task": {
+          "who": "función de red-team / de evaluación de capacidades",
+          "what": "ejecutar un modelo de pesos abiertos a lo largo de una cadena de intrusión autónoma completa",
+          "where": "un campo controlado de evaluación ofensiva y un entorno de laboratorio",
+          "when": "H2 2026 through H1 2027",
+          "why": "demostrar la capacidad de exploits autónoma de extremo a extremo con pesos abiertos",
+          "how": "andamiaje de agente, campo de CTF, instrumental de explotación"
+        }
+      },
+      {
+        "actor": "ajustador de des-alineación de modelos de pesos abiertos",
+        "job": "Ajustar modelos de pesos abiertos ya publicados para eliminar los rechazos cibernéticos y envolverlos en andamiajes de agente autónomo para tareas ofensivas",
+        "outcome": "Un modelo de pesos abiertos despojado de rechazos, incrustado en un agente autónomo que planifica y ejecuta pasos de intrusión sin elección humana",
+        "motivation": "Mostrar que el entrenamiento en rechazos de un laboratorio no es un control duradero una vez que los pesos del modelo son públicos",
+        "task": {
+          "who": "subequipo de fine-tuning / de des-alineación",
+          "what": "eliminar los rechazos cibernéticos mediante fine-tuning y añadir un andamiaje de agente",
+          "where": "una tubería local de fine-tuning sobre pesos abiertos ya publicados",
+          "when": "H2 2026 through H1 2027",
+          "why": "probar que los rechazos son eliminables una vez que los pesos son públicos",
+          "how": "des-alineación por SFT/LoRA más un framework de agente"
+        }
+      },
+      {
+        "actor": "mantenedor de campos de CTF y de arneses de evaluación ofensiva",
+        "job": "Construir y mantener campos de capture-the-flag y arneses de evaluación ofensiva que aportan objetivos realistas y el bucle de orquestación para agentes autónomos",
+        "outcome": "Campos públicos y arneses de evaluación que permiten a un modelo autónomo encadenar la explotación hasta la RCE contra un objetivo que no se le entregó directamente",
+        "motivation": "Proporcionar benchmarks de capacidad ofensiva estandarizados y reproducibles que la comunidad investigadora pueda ejecutar contra cualquier modelo",
+        "task": {
+          "who": "equipo de ingeniería de benchmarks / de campos de prueba",
+          "what": "mantener los campos de CTF y el bucle de orquestación de la evaluación",
+          "where": "la infraestructura pública de arneses de evaluación ofensiva y de CTF",
+          "when": "H2 2026 through H1 2027",
+          "why": "suministrar objetivos reproducibles para agentes autónomos",
+          "how": "campo de CTF más instrumental de arnés de evaluación"
+        }
+      }
+    ],
+    "prediction.7d1483078ba923a6": [
+      {
+        "actor": "responsable de divulgación de relaciones con inversores de un hiperescalador (Microsoft, Meta, Oracle)",
+        "job": "Preparar las llamadas de resultados y las presentaciones ante la SEC del ejercicio FY2026-27, decidiendo si el capex de centro de datos se presenta de forma agregada o desglosado por proveedor de chips",
+        "outcome": "Una línea de capex agregada que no lleva ninguna cifra en dólares, racks o GPU de AMD Helios/MI450: la ausencia declarada que sostiene la predicción",
+        "motivation": "El capex agregado es práctica estándar, protege la confidencialidad de los precios del proveedor y ninguna norma obliga a desglosar a un único proveedor de chips",
+        "task": {
+          "who": "equipo de relaciones con inversores y de información financiera del hiperescalador",
+          "what": "presentar el capex de forma agregada sin desglose por proveedor",
+          "where": "las llamadas de resultados y las presentaciones 8-K y 10-Q",
+          "when": "H2 2026 through H1 2027",
+          "why": "proteger la confidencialidad; seguir la información agregada estándar",
+          "how": "presentación agregada del capex según los GAAP"
+        }
+      },
+      {
+        "actor": "función de planificación de capex y de compras del hiperescalador",
+        "job": "Traducir el compromiso de potencia de AMD en recuentos internos de racks, volúmenes de GPU y reservas en dólares para la planificación del despliegue de Helios/MI450",
+        "outcome": "Las compras cuantificadas se quedan a nivel interno; ninguna declaración de capex de primera parte hace aparecer externamente una cifra en dólares, racks o GPU específica de AMD",
+        "motivation": "La planificación interna necesita cifras exactas, pero los acuerdos de confidencialidad con el proveedor y la información externa agregada mantienen esas cifras sin publicar",
+        "task": {
+          "who": "planificación de infraestructura y de compras del hiperescalador",
+          "what": "reservar la capacidad de AMD a nivel interno sin cuantificación externa",
+          "where": "los sistemas internos de planificación de capex y de compras",
+          "when": "H2 2026 through H1 2027",
+          "why": "los NDA del proveedor y las normas de información agregada bloquean la divulgación",
+          "how": "sistemas internos de compras y de órdenes de compra"
+        }
+      },
+      {
+        "actor": "equipo financiero de salida al mercado (GTM) de centro de datos de AMD",
+        "job": "Estructurar y anunciar los compromisos de 12GW de MI450/Helios como cifras de titular denominadas en potencia, sostenidas por la propia autoridad de AMD",
+        "outcome": "Los compromisos siguen enmarcados en gigavatios sin ninguna divulgación de dólares, racks o GPU cofirmada por el cliente: se sostiene el marco denominado en potencia",
+        "motivation": "El marco de potencia maximiza la escala del titular a la vez que blinda los precios y los términos de volumen por cliente frente a competidores y analistas",
+        "task": {
+          "who": "GTM de centro de datos y finanzas de AMD",
+          "what": "publicar cifras de compromiso denominadas en gigavatios",
+          "where": "la keynote y las comunicaciones a inversores",
+          "when": "H2 2026 through H1 2027",
+          "why": "proteger la confidencialidad de los precios y el volumen del cliente",
+          "how": "marco de gigavatios denominado en potencia"
+        }
+      }
+    ]
+  }
+}
