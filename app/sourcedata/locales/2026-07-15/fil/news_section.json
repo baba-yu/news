@@ -1,0 +1,87 @@
+{
+  "date": "2026-07-15",
+  "sections": [
+    {
+      "category": "Naghahatid ang PrismML ng Bonsai 27B, ang unang 27B-class na model na kasya sa memory budget ng isang telepono, na may 1-bit na build na 3.9 GB lamang at humahawak sa 90% ng kalidad sa full precision",
+      "bullets": [
+        {
+          "body": "Noong July 14, <a href=\"https://prismml.com/news/bonsai-27b\">inilabas ng PrismML ang Bonsai 27B, na inihahain nito bilang unang 27B-class na model na tumatakbo sa isang telepono</a>. Nagmumula ang model sa Qwen3.6 27B. Pinapanatili nito ang isang 262K-token na context window kasama ang multimodal input sa pamamagitan ng isang 4-bit na vision tower. Dumarating ito sa dalawang extreme-quantization na build: isang ternary variant na humahawak sa mga weight sa {-1, 0, +1} na may FP16 scaling sa 1.71 effective bits kada weight at 5.9 GB, at isang 1-bit variant na may binary {-1, +1} na weight sa 1.125 effective bits kada weight at 3.9 GB. Sa 15 benchmark, pinapanatili ng ternary build ang 95% ng full-precision na baseline at ang 1-bit build ang 90%, habang nagde-decode sa 134 at 163 token kada segundo ayon sa pagkakabanggit sa isang RTX 5090. Ang 1-bit build ang tunay na layunin ng buong ehersisyo: sa 3.9 GB, kasya ito sa humigit-kumulang 6 GB na magagamit na memory na natitira sa isang iPhone 17 Pro pagkatapos ng KV cache at mga activation — isang budget na tuluyang nagtabi sa mga 27B-class na weight palabas ng mga handset. Apache 2.0 ang mga weight sa Hugging Face at GitHub, na may hosted access sa pamamagitan ng Together AI. Ang PrismML ay isang kompanyang itinatag sa Caltech, sinusuportahan ng Khosla Ventures, Cerberus, at Google, na may tulong mula sa Samsung. Mahalaga ito dahil nalilimitahan ang on-device inference ng memory, hindi ng compute, at ang naging paraan hanggang ngayon ay paliitin ang model hanggang sa maiwan na rin ang kakayahan nito. Ang isang sub-2-bit na encoding na nagbibigay ng 5-10% ng benchmark quality para makalampas sa isang hardware threshold ay nagbabago kung aling klase ng model ang maituturing na portable. Sa parehong araw, iminungkahi ng isang arXiv preprint ang <a href=\"https://arxiv.org/abs/2607.13027\">PalmClaw, isang native na on-device agent framework para sa mga mobile phone</a> — ang runtime layer na kakailanganin ng isang 27B na model na nakatira sa telepono para makagawa ng higit pa sa pagsagot ng iisang prompt.",
+          "citations": [
+            {
+              "label": "PrismML - Bonsai 27B: A 27B-Class Model That Runs on a Phone",
+              "url": "https://prismml.com/news/bonsai-27b"
+            },
+            {
+              "label": "arXiv:2607.13027 - PalmClaw: A Native On-Device Agent Framework for Mobile Phones",
+              "url": "https://arxiv.org/abs/2607.13027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Natuklasan ng isang wire-level na pagsusuri sa Grok CLI ng xAI na ina-upload nito ang buong repository, git history, at hindi na-redact na .env secret sa isang Google Cloud bucket anuman ang aktuwal na binabasa ng agent",
+      "bullets": [
+        {
+          "body": "Naglathala ang isang independiyenteng mananaliksik ng isang <a href=\"https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547\">wire-level na pagsusuri sa ipinapadala ng Grok build CLI ng xAI habang normal na gumagana</a>, na kinuha gamit ang mitmproxy laban sa grok 0.2.93 sa macOS. Tatlong natuklasan ang tumatampok. Nakakarating sa xAI ang laman ng file nang verbatim at hindi na-redact, kabilang ang mga .env secret, na dumarating kapwa sa live na model turn at sa naka-archive na session state na itinutulak sa isang /v1/storage endpoint na nagbabalik ng HTTP 200. Hindi nakalimita ang upload sa binabasa ng agent: ipinapadala ng CLI ang laman ng bawat naka-track na file kasama ang git history, at ang isang 12 GB na test repository ay nagbunga ng 5.10 GiB na upload sa 73 chunk na tig-humigit-kumulang 75 MB — isang byte ratio na mga 27,800 beses na mas malaki kaysa sa maipapaliwanag ng traffic ng model turn. Ang destinasyon ay isang Google Cloud Storage bucket na tinatawag na grok-code-session-traces, na natukoy mula sa mga binary string at metadata. Bukod sa dalawang channel na iyon, nag-uulat din ang CLI sa Mixpanel at sa isang events endpoint ng grok.com. Maingat ang may-akda sa saklaw: pinapatunayan ng capture ang paghahatid at pag-iimbak, hindi ang paggamit sa training, na isang hiwalay na tanong sa patakaran. Umakit ang natuklasan ng tatlong magkakahiwalay na front-page thread sa Hacker News sa July 12-14. Mahalaga ito dahil hindi isang attacker na nakakalusot sa isang hangganan ang panganib dito, kundi ang sariling default na landas ng tool: walang matututunan ang isang developer na sumusuri kung aling file ang inutusang basahin ng agent tungkol sa kung aling file ang umalis sa makina, at walang magagawa ang isang secret-scanning na workflow na nagbabantay sa mga commit laban sa isang channel na nag-a-upload ng working tree bago pa man mayroong anumang commit.",
+          "citations": [
+            {
+              "label": "cereblab - What xAI's Grok build CLI sends to xAI: a wire-level analysis",
+              "url": "https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Naglathala ang Mindgard ng isang hindi pa naaayos na code-execution na depekto sa Cursor pagkatapos ng pitong buwang katahimikan ng vendor, at iginiit na ang buong disclosure na lamang ang natitirang proteksyon para sa mga user ng IDE",
+      "bullets": [
+        {
+          "body": "Noong July 14, <a href=\"https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left\">naglathala ang AI-security na vendor na Mindgard ng isang hindi pa naaayos na arbitrary-code-execution na depekto sa Cursor IDE sa Windows</a>, na binali ang coordinated disclosure pagkatapos ng pitong buwan na walang remedyo. Karaniwan lang ang mekanismo, at iyon mismo ang dahilan kung bakit ito epektibo: naghahanap ang Cursor sa ilang lokasyon sa filesystem ng isang Git binary kapag ini-initialize nito ang isang proyekto, at hindi nito sinusuri ang mga executable na natatagpuan sa mismong directory ng repository. Ang pagbukas ng isang repository na may dalang malisyosong git.exe sa ugat nito ay nagpapatakbo sa binary na iyon gamit ang mga pribilehiyo ng user — walang prompt, walang approval dialog, walang interaksyon maliban sa pagbukas ng folder — at paulit-ulit ang paghahanap sa regular na dalas hangga't nakabukas ang proyekto. Sapat na ang pag-clone ng isang untrusted na repository para lang basahin ito. Iniulat ng Mindgard na natuklasan nila ang isyu noong December 15, 2025, na nag-file sila sa HackerOne noong January 15 matapos ma-stall ang unang channel, na tinanggihan at pagkatapos ay binuksang muli at kinumpirma ang ulat sa pagitan ng January 16 at 20, at pagkatapos ay wala silang natanggap na makabuluhang tugon mula February hanggang April. Walang CVE na naitalaga at walang severity score na nailathala. Ang nakasaad na katwiran ng Mindgard sa paglalathala ay pagkatapos ng pitong buwan, \"ang pagpigil sa impormasyon ay hindi na naglilingkod sa mga user, naglilingkod ito sa katahimikan.\" Mahalaga ito dahil ang orasan ng disclosure, hindi ang bug, ang tunay na kuwento: ang isang depekto sa hindi-sinusuring paghahanap ng binary sa isang editor na may mahigit 7 milyong user ay naaayos, ngunit ang isang proseso ng seguridad ng vendor na nag-iiwan nitong bukas sa loob ng pitong buwan ay istruktural, at ang isang pinangalanang vendor na bumabali sa embargo ay nagtatakda ng isang reference point na susukatan ngayon ng ibang mananaliksik na may hawak na natuklasan tungkol sa agentic IDE.",
+          "citations": [
+            {
+              "label": "Mindgard - Cursor 0day: When Full Disclosure Becomes the Only Protection Left",
+              "url": "https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Natuklasan ng isang population-scale na audit sa x402 agent-payment protocol na ginawa-gawa ang ikalima ng 136.7 milyong settlement nito at hindi umaalis ang karamihan sa halaga sa mga magkakaugnay na wallet cluster",
+      "bullets": [
+        {
+          "body": "Tinatanong ng isang July 14 na arXiv preprint nina Shengchen Ling, Yajin Zhou, Lei Wu, at Cong Wang <a href=\"https://arxiv.org/abs/2607.12575\">kung gaano karami sa aktibidad ng agentic commerce sa x402 protocol ang totoo</a>, at sinasagot ito sa pamamagitan ng pagsukat sa halip na pagbibilang. Sinasara ng x402 ang mga bayad ng AI agent bilang on-chain na stablecoin na transaksyon, kaya nagiging masusuri ang pangunahing sukatan nito ng adopsyon — ang bilang ng settlement — sa paraang hindi kayang gawin sa karamihan ng mga pahayag tungkol sa adopsyon ng agent. Sa 280 araw ng aktibidad sa Base chain, natuklasan ng mga may-akda ang 136.7 milyong settlement na naglilipat ng $44.1 milyon, kung saan 21.20% ang ginawa-gawa at 63.78% ang mga panloob na paglilipat sa loob ng mga magkakaugnay na cluster. Sa paglilimita sa natitira, ang halagang mapapatunayang nakakarating sa mga pinangalanang independiyenteng serbisyo ay $187,861.35; ang pinakamaluwag na hangganan, na binibilang ang lahat ng hindi mapapatunayang ginawa-gawa, ay $20.2 milyon, o 45.92%. Sukdulan ang konsentrasyon sa bawat aspeto, na lampas 0.98 ang Gini coefficient para sa nagbabayad, tumatanggap, at halaga. At ang ginawa-gawang bahagi ay lumilitaw bilang isang magkakaugnay na ekonomiyang pinapatakbo ng mga operator na inilalarawan ng mga may-akda bilang hugis-bituin, machine-timed, at gas-subsidized. Ang framing nila ay ganito: sinusukat ng bilang ng settlement kung gaano kamura magawa-gawa ang mga transaksyon, hindi kung ilang agent ang talagang bumibili ng anuman. Mahalaga ito dahil ini-underwrite ang agentic commerce sa ganitong mismong uri ng throughput number, at ito ang bihirang pagkakataon na sapat na pampubliko ang ledger para suriin ito — isang tatlong-order-of-magnitude na agwat sa pagitan ng iniulat na bilang at ng maipagtatanggol na sahig ay isang babalang kumakalat nang higit pa sa iisang protocol.",
+          "citations": [
+            {
+              "label": "arXiv:2607.12575 - How Agentic Is Agentic Commerce? A Population-Scale Measurement of x402 Adoption and Authenticity",
+              "url": "https://arxiv.org/abs/2607.12575"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mga AI event na dapat planuhin ngayon: pinupuno ng AGI Summit ang Palace of Fine Arts ng San Francisco ngayong weekend sa July 18-19, bago ang AMD Advancing AI sa Moscone at isang takbo sa August ng mga summit ng chip, security, at developer",
+      "bullets": [
+        {
+          "body": "Bago sa calendar at malapit na ang pinakamalapit na petsa: <a href=\"https://agisummit.ai/\">tumatakbo ang AGI Summit sa July 18-19 sa Palace of Fine Arts sa San Francisco</a>, isang weekend slot na dumarating bago pa magbukas ang natitirang bahagi ng summer schedule. Kasunod ang AMD Advancing AI 2026 sa Moscone West sa July 22-23, kung saan inaasahang ilalatag nina Lisa Su at ng mga partner ang Instinct MI450 accelerator at ang Zen 6 EPYC \"Venice\" CPU. Ang natitirang bahagi ng AI-chip at infrastructure na track ay tumatakbo sa Hot Chips sa Stanford sa August 23-25, na magsasara ang early-registration rate sa July 31, at sa AI Infra Summit sa Santa Clara Convention Center sa September 15-17. Nagkukumpol ang AI-security na track mula unang bahagi ng August: ang Black Hat USA at ang AI Village ng DEF CON 34 sa Las Vegas sa August 1-6, ang AI Risk Summit ng SecurityWeek sa Ritz-Carlton sa Half Moon Bay sa August 11-12, ang OWASP Global AppSec USA sa San Francisco sa November 5-6, at ang AI Agent Security Summit series ng Zenity para sa mga team na gumagawa ng depensa laban sa agent-hijack at sa MCP layer. Sa developer, data, at Bay Area na track, tumatakbo ang Ray Summit ng Anyscale sa August 24-26 sa San Francisco Marriott Marquis, dumarating ang susunod na AI Tinkerers San Francisco meetup sa August sa nakagawiang working-demo na format, pinupuno ng Ai4 2026 ang The Venetian sa Las Vegas sa August 4-6, tumatakbo ang ACM AI Leadership Summit mula August 30 hanggang September 2 sa Atlanta, babalik ang The AI Conference sa Pier 48 sa San Francisco sa September 29 hanggang October 1, dinadala ng World Summit AI ang flagship nito sa Taets Art & Event Park ng Amsterdam sa October 7-8, ang GitHub Universe ay sa October 28-29, tumatakbo ang AWS re:Invent mula November 30 hanggang December 4 sa Las Vegas, at magsasara ng taon ang NeurIPS 2026 at ang The AI Summit New York sa Javits Center sa December 9-10. Dalawa pang dagdag ngayong linggo, pareho itong dapat i-pin para sa sinumang sumusubaybay sa embodied AI: <a href=\"https://summit.runwayml.com/\">kinukuha ng Runway AI Summit ang The Masonic sa San Francisco sa September 30</a>, na may programa sa physical AI, real-time video, at patakaran na itinatampok sina Quan Vuong ng Physical Intelligence, Ming-Yu Liu ng NVIDIA Cosmos Lab, at Robert Nishihara ng Anyscale, sa $350 early-bird; at <a href=\"https://www.ieee-ras.org/event/2026-ieee-ras-25th-international-conference-on-humanoid-robots-humanoids-68892/\">dumarating ang IEEE-RAS Humanoids 2026, ang pangunahing akademikong lugar ng larangan, sa Santa Clara Convention Center sa December 7-9</a>. Mga panandaliang hakbang: magdesisyon tungkol sa AGI Summit bago ang Sabado, magparehistro para sa AMD Advancing AI bago ang July 22 na pagbubukas, i-lock ang July 31 na Hot Chips early rate, at i-book ang Black Hat kasama ang AI Risk Summit sa Half Moon Bay para sa security block sa unang bahagi ng August.",
+          "citations": [
+            {
+              "label": "AGI Summit 2026 - July 18-19, Palace of Fine Arts, San Francisco",
+              "url": "https://agisummit.ai/"
+            },
+            {
+              "label": "Runway AI Summit - September 30, 2026, The Masonic, San Francisco",
+              "url": "https://summit.runwayml.com/"
+            },
+            {
+              "label": "IEEE RAS - 2026 IEEE-RAS 25th International Conference on Humanoid Robots (Humanoids)",
+              "url": "https://www.ieee-ras.org/event/2026-ieee-ras-25th-international-conference-on-humanoid-robots-humanoids-68892/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

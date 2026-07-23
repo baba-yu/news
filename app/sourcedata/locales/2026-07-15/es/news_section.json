@@ -1,0 +1,87 @@
+{
+  "date": "2026-07-15",
+  "sections": [
+    {
+      "category": "PrismML lanza Bonsai 27B, el primer modelo de clase 27B que cabe en el presupuesto de memoria de un teléfono, con una versión de 1 bit que ocupa 3,9 GB y conserva el 90% de la calidad en precisión completa",
+      "bullets": [
+        {
+          "body": "PrismML <a href=\"https://prismml.com/news/bonsai-27b\">lanzó el 14 de julio Bonsai 27B, que presenta como el primer modelo de clase 27B capaz de ejecutarse en un teléfono</a>. El modelo desciende de Qwen3.6 27B, conserva una ventana de contexto de 262K tokens y admite entrada multimodal a través de una torre de visión de 4 bits. Se distribuye en dos versiones de cuantización extrema: una variante ternaria que almacena los pesos en {-1, 0, +1} con escalado FP16, a 1,71 bits efectivos por peso y 5,9 GB, y una variante de 1 bit con pesos binarios {-1, +1}, a 1,125 bits efectivos por peso y 3,9 GB. En 15 benchmarks, la versión ternaria conserva el 95% de la línea base en precisión completa y la de 1 bit, el 90%, mientras decodifican a 134 y 163 tokens por segundo respectivamente en una RTX 5090. La versión de 1 bit es la razón de ser del ejercicio: con 3,9 GB cabe dentro de los aproximadamente 6 GB de memoria utilizable que deja un iPhone 17 Pro tras la caché KV y las activaciones, un presupuesto que había mantenido los pesos de clase 27B completamente fuera de los teléfonos. Los pesos están bajo Apache 2.0 en Hugging Face y GitHub, con acceso alojado a través de Together AI. PrismML es una compañía fundada en Caltech y respaldada por Khosla Ventures, Cerberus y Google, con el apoyo de Samsung. Importa porque la inferencia en el dispositivo ha estado limitada por la memoria, no por el cómputo, y hasta ahora la salida consistía en encoger el modelo hasta que la capacidad se iba con él. Una codificación por debajo de 2 bits que cede entre el 5% y el 10% de calidad en los benchmarks para cruzar un umbral de hardware cambia qué clase de modelo cuenta como portátil. Ese mismo día, un preprint de arXiv propuso <a href=\"https://arxiv.org/abs/2607.13027\">PalmClaw, un framework nativo de agentes en el dispositivo para teléfonos móviles</a>: la capa de ejecución que necesitaría un modelo de 27B residente en el teléfono para hacer algo más que responder a prompts sueltos.",
+          "citations": [
+            {
+              "label": "PrismML - Bonsai 27B: A 27B-Class Model That Runs on a Phone",
+              "url": "https://prismml.com/news/bonsai-27b"
+            },
+            {
+              "label": "arXiv:2607.13027 - PalmClaw: A Native On-Device Agent Framework for Mobile Phones",
+              "url": "https://arxiv.org/abs/2607.13027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Un análisis a nivel de red del CLI de Grok de xAI revela que sube repositorios enteros, el historial de git y secretos .env sin redactar a un bucket de Google Cloud, con independencia de lo que el agente lea realmente",
+      "bullets": [
+        {
+          "body": "Un investigador independiente publicó un <a href=\"https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547\">análisis a nivel de red de lo que el CLI de desarrollo Grok de xAI transmite durante su funcionamiento normal</a>, capturado con mitmproxy contra grok 0.2.93 en macOS. Destacan tres hallazgos. El contenido de los archivos llega a xAI literal y sin redactar, secretos .env incluidos, y lo hace tanto en los turnos en vivo del modelo como en el estado de sesión archivado que se envía a un endpoint /v1/storage que responde HTTP 200. La subida no se limita a lo que el agente lee: el CLI envía el contenido de todos los archivos versionados más el historial de git, y un repositorio de prueba de 12 GB generó 5,10 GiB de subidas repartidas en 73 fragmentos de unos 75 MB cada uno, una proporción de bytes unas 27.800 veces mayor de lo que el tráfico de los turnos del modelo podría justificar. El destino es un bucket de Google Cloud Storage llamado grok-code-session-traces, identificado a partir de cadenas del binario y de metadatos. Junto a esos dos canales, el CLI también reporta a Mixpanel y a un endpoint de eventos de grok.com. El autor es cuidadoso con el alcance: la captura demuestra transmisión y almacenamiento, no uso para entrenamiento, que es una cuestión de política aparte. El hallazgo generó tres hilos distintos en la portada de Hacker News entre el 12 y el 14 de julio. Importa porque el riesgo no está en un atacante que burla una frontera, sino en la ruta por defecto de la propia herramienta: un desarrollador que audite qué archivos se le pidió leer al agente no averigua nada sobre qué archivos salieron de la máquina, y un flujo de escaneo de secretos que controla los commits no puede hacer nada frente a un canal que sube el árbol de trabajo antes de que exista commit alguno.",
+          "citations": [
+            {
+              "label": "cereblab - What xAI's Grok build CLI sends to xAI: a wire-level analysis",
+              "url": "https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mindgard publica una vulnerabilidad de ejecución de código sin parchear en Cursor tras siete meses de silencio del fabricante, y sostiene que la divulgación completa se ha convertido en la única protección que les queda a los usuarios del IDE",
+      "bullets": [
+        {
+          "body": "El fabricante de seguridad de IA Mindgard <a href=\"https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left\">publicó el 14 de julio una vulnerabilidad de ejecución arbitraria de código sin parchear en el IDE Cursor para Windows</a>, rompiendo la divulgación coordinada tras siete meses sin corrección. El mecanismo es anodino y precisamente por eso resulta eficaz: Cursor busca un binario de Git en varias ubicaciones del sistema de archivos cuando inicializa un proyecto, y no valida los ejecutables que encuentra en el propio directorio del repositorio. Abrir un repositorio que lleve un git.exe malicioso en su raíz ejecuta ese binario con los privilegios del usuario —sin aviso, sin diálogo de aprobación, sin más interacción que abrir la carpeta— y la búsqueda se repite periódicamente mientras el proyecto siga abierto. Basta con clonar un repositorio no confiable para leerlo. Mindgard sitúa el descubrimiento el 15 de diciembre de 2025 y la notificación por HackerOne el 15 de enero, después de que el canal inicial se estancara; el informe fue rechazado y luego reabierto y confirmado entre el 16 y el 20 de enero, y a partir de ahí no hubo respuesta sustantiva de febrero a abril. No se ha asignado ningún CVE ni publicado puntuación de gravedad. La razón que Mindgard alega para hacerlo público es que, después de siete meses, «retener la información ya no sirve a los usuarios, sirve al silencio». Importa porque la historia es el reloj de la divulgación, no el fallo: un error de búsqueda de binarios sin validar en un editor con más de 7 millones de usuarios es un defecto corregible, pero un proceso de seguridad del fabricante que lo deja abierto durante siete meses es estructural, y que un fabricante con nombre propio rompa el embargo fija una referencia con la que van a medirse ahora otros investigadores que guardan hallazgos sobre IDE agénticos.",
+          "citations": [
+            {
+              "label": "Mindgard - Cursor 0day: When Full Disclosure Becomes the Only Protection Left",
+              "url": "https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Una auditoría a escala poblacional del protocolo de pagos entre agentes x402 concluye que una quinta parte de sus 136,7 millones de liquidaciones son ficticias y que la mayor parte del valor nunca sale de clústeres de monederos vinculados",
+      "bullets": [
+        {
+          "body": "Un preprint de arXiv del 14 de julio, firmado por Shengchen Ling, Yajin Zhou, Lei Wu y Cong Wang, se pregunta <a href=\"https://arxiv.org/abs/2607.12575\">qué parte de la actividad de comercio agéntico del protocolo x402 es real</a>, y lo responde midiendo en lugar de contar. x402 liquida los pagos entre agentes de IA como transacciones de stablecoin en cadena, lo que hace que su métrica estrella de adopción —el número de liquidaciones— sea auditable de un modo que no lo son la mayoría de las afirmaciones sobre adopción de agentes. A lo largo de 280 días de actividad en la cadena Base, los autores encuentran 136,7 millones de liquidaciones que mueven 44,1 millones de dólares, de las cuales el 21,20% son ficticias y el 63,78% son transferencias internas dentro de clústeres vinculados. Al acotar lo que queda, el valor que demostrablemente llega a servicios independientes identificados es de 187.861,35 dólares; la cota más generosa, que cuenta todo aquello cuya fabricación no puede probarse, es de 20,2 millones de dólares, un 45,92%. La concentración es extrema en todos los ejes: los coeficientes de Gini de pagador, receptor y valor superan todos el 0,98, y el componente fabricado se resuelve en una economía coherente y dirigida por operadores que los autores describen como radial, sincronizada por máquinas y subvencionada en gas. Su planteamiento es que un recuento de liquidaciones mide lo barato que resulta fabricar transacciones, no cuántos agentes están comprando algo. Importa porque el comercio agéntico se está respaldando justo sobre esta clase de cifra de volumen, y este es el raro caso en que el libro mayor es lo bastante público como para comprobarla: una brecha de tres órdenes de magnitud entre la cifra declarada y el suelo defendible es una advertencia que se generaliza mucho más allá de un solo protocolo.",
+          "citations": [
+            {
+              "label": "arXiv:2607.12575 - How Agentic Is Agentic Commerce? A Population-Scale Measurement of x402 Adoption and Authenticity",
+              "url": "https://arxiv.org/abs/2607.12575"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Eventos de IA que conviene planificar ya: el AGI Summit llena el Palace of Fine Arts de San Francisco este fin de semana, los días 18 y 19 de julio, antes de AMD Advancing AI en Moscone y de una tanda de cumbres de chips, seguridad y desarrolladores en agosto",
+      "bullets": [
+        {
+          "body": "La fecha más próxima es a la vez nueva en el calendario y cercana: <a href=\"https://agisummit.ai/\">el AGI Summit se celebra los días 18 y 19 de julio en el Palace of Fine Arts de San Francisco</a>, un hueco de fin de semana que cae antes de que se abra el resto del programa de verano. AMD Advancing AI 2026 le sigue en el Moscone West los días 22 y 23 de julio, donde se espera que Lisa Su y sus socios detallen el acelerador Instinct MI450 y las CPU Zen 6 EPYC \"Venice\". El resto del itinerario de chips de IA e infraestructura lo componen Hot Chips en Stanford, del 23 al 25 de agosto, cuya tarifa de inscripción anticipada cierra el 31 de julio, y el AI Infra Summit en el Santa Clara Convention Center, del 15 al 17 de septiembre. El itinerario de seguridad de IA se agrupa desde principios de agosto: Black Hat USA y el AI Village de DEF CON 34 en Las Vegas, del 1 al 6 de agosto; el AI Risk Summit de SecurityWeek en el Ritz-Carlton de Half Moon Bay, los días 11 y 12 de agosto; OWASP Global AppSec USA en San Francisco, los días 5 y 6 de noviembre; y la serie AI Agent Security Summit de Zenity, para equipos que trabajan en la defensa contra el secuestro de agentes y en la capa MCP. En el itinerario de desarrolladores, datos y del Área de la Bahía, el Ray Summit de Anyscale se celebra del 24 al 26 de agosto en el San Francisco Marriott Marquis, el próximo encuentro de AI Tinkerers San Francisco llega en agosto en su habitual formato de demos funcionales, Ai4 2026 llena The Venetian de Las Vegas del 4 al 6 de agosto, el ACM AI Leadership Summit se celebra del 30 de agosto al 2 de septiembre en Atlanta, The AI Conference regresa al Pier 48 de San Francisco del 29 de septiembre al 1 de octubre, World Summit AI lleva su cita insignia al Taets Art & Event Park de Ámsterdam los días 7 y 8 de octubre, GitHub Universe es los días 28 y 29 de octubre, AWS re:Invent se celebra del 30 de noviembre al 4 de diciembre en Las Vegas, y tanto NeurIPS 2026 como The AI Summit New York, en el Javits Center los días 9 y 10 de diciembre, cierran el año. Otras dos incorporaciones esta semana, ambas dignas de apuntar para quien siga la IA encarnada: <a href=\"https://summit.runwayml.com/\">el Runway AI Summit toma The Masonic de San Francisco el 30 de septiembre</a>, con un programa de IA física, vídeo en tiempo real y política pública en el que participan Quan Vuong, de Physical Intelligence, Ming-Yu Liu, del NVIDIA Cosmos Lab, y Robert Nishihara, de Anyscale, a 350 dólares en tarifa anticipada; y <a href=\"https://www.ieee-ras.org/event/2026-ieee-ras-25th-international-conference-on-humanoid-robots-humanoids-68892/\">IEEE-RAS Humanoids 2026, el principal foro académico del campo, aterriza en el Santa Clara Convention Center del 7 al 9 de diciembre</a>. Acciones a corto plazo: decidir sobre el AGI Summit antes del sábado, inscribirse en AMD Advancing AI antes de la apertura del 22 de julio, asegurar la tarifa anticipada de Hot Chips del 31 de julio, y reservar Black Hat y el AI Risk Summit de Half Moon Bay para el bloque de seguridad de principios de agosto.",
+          "citations": [
+            {
+              "label": "AGI Summit 2026 - July 18-19, Palace of Fine Arts, San Francisco",
+              "url": "https://agisummit.ai/"
+            },
+            {
+              "label": "Runway AI Summit - September 30, 2026, The Masonic, San Francisco",
+              "url": "https://summit.runwayml.com/"
+            },
+            {
+              "label": "IEEE RAS - 2026 IEEE-RAS 25th International Conference on Humanoid Robots (Humanoids)",
+              "url": "https://www.ieee-ras.org/event/2026-ieee-ras-25th-international-conference-on-humanoid-robots-humanoids-68892/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

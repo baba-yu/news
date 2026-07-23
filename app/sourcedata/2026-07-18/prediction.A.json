@@ -1,0 +1,14 @@
+{
+  "id": "prediction.0000000000000000",
+  "scope_hint": "tech",
+  "title": "Disk-streaming expert offload ships in a mainstream local runtime by H1 2027",
+  "body": "Colibri, an Apache 2.0 inference engine written in dependency-free C, has gathered roughly 15.9k GitHub stars behind a single idea: treat GPU memory, RAM and disk as one managed hierarchy so that a 744-billion-parameter mixture-of-experts model runs on a machine that could never hold its weights. Serving GLM-5.2, only about 40B of those parameters activate per token, so the roughly 17B of dense layers stay resident while the 19,456 routed experts stream in on demand from a roughly 370GB four-bit container on disk, held behind an explicit least-recently-used cache. The floor lands at about 25GB of RAM — 9.9GB resident plus cache — with no GPU required at all. The cost is throughput: 0.05 to 0.1 tokens per second on a 12-core consumer machine, with community reports reaching 1.23 on high-end hardware. That is batch-job territory rather than interactive chat, but it inverts the usual local-inference constraint, trading wall-clock time for the ability to run a frontier-scale open model at all instead of quantizing one down until it fits. Mainstream runtimes already push expert tensors out to system memory and then lean on the operating system's page cache for anything larger; an application-managed expert cache with a published memory floor is the piece none of them ship as a supported path. The prediction is that by H1 2027 at least one of llama.cpp, Ollama, LM Studio or vLLM ships disk-streaming expert offload as a documented feature — release-note visible, with published guidance for running a model of 500B parameters or more on a machine holding under 32GB of RAM and no discrete GPU. The forcing function is release cadence: sparse frontier-scale open checkpoints keep landing, and the gap between the parameter counts labs publish and the memory an enthusiast actually owns keeps widening.",
+  "reasoning": {
+    "because": "Colibri runs a 744B-parameter mixture-of-experts model off disk on 25GB of RAM with no GPU",
+    "given": "Open labs keep shipping sparse frontier-scale weights far beyond what enthusiast memory can hold",
+    "so_that": "A mainstream local runtime ships documented disk-streaming expert offload for 500B-plus models under 32GB of RAM",
+    "landing": "by H1 2027; llama.cpp, Ollama, LM Studio or vLLM ships a supported feature",
+    "plain_language": "A free tool now runs a giant AI model off your hard drive instead of memory. Popular local AI apps will copy it."
+  },
+  "summary": "Colibri, a dependency-free C engine, streams a 744B-parameter mixture-of-experts model off disk to run GLM-5.2 on 25GB of RAM with no GPU, at 0.05 to 0.1 tokens per second. A mainstream runtime likely ships the same disk-streaming expert offload as a documented feature by H1 2027."
+}

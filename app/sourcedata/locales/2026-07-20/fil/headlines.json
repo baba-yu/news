@@ -1,0 +1,83 @@
+{
+  "date": "2026-07-20",
+  "technical": [
+    {
+      "lead": "Iniharap ng AMD ang MI450, Helios at EPYC Venice bilang isang hamon sa antas ng rack laban sa Nvidia",
+      "body": "Dalawang araw bago ang Advancing AI keynote ng AMD sa July 22-23, nagsanib ang mga senyales bago ang event tungo sa iisang pitch: ang Instinct MI450 series, ang double-wide na Helios rack at ang Zen 6 EPYC 'Venice' CPU na ibinebenta bilang iisang rack-scale na sistema sa halip na isang hiwalay na accelerator. Ang mga numerong nasa rekord ang nagtatakda ng balangkas — may 72 MI455X na parte, 31TB ng HBM4 at humigit-kumulang 3 AI exaflops ang isang Helios rack, samantalang may dalang 432GB ng HBM4 at mga 20 FP8 petaflops ang bawat MI450. Ang nagbago sa mga huling araw ay ang positioning: iginigiit ng AMD ang inference bilang ang volume market, at ang argumento ay inference, hindi training, ang pinakamalalaking nakatakdang deployment nito, at ang kapasidad ng memory kada GPU ang lugar kung saan nalalamangan nito ang rack ng Nvidia. Itinuturing na ngayon ng mga analista ang MI450 bilang unang kapani-paniwalang sagot ng AMD sa antas ng rack sa henerasyong Vera Rubin, sa halip na isang single-socket na alternatibo, at nagpapasa ang OpenAI ng mga requirement sa programang MI450 habang kausap na ng AMD ang mga kustomer tungkol sa MI500 na kasunod nito. Mas makitid sa anumang spec ang tunay na bagong impormasyon: itinigil na ng kompanya ang pag-preview sa MI450 bilang isang item sa roadmap at sinimulan itong ibenta bilang isang rack na ipinapadala na, dalawang araw bago nito kailangang patunayan iyon sa entablado.",
+      "citations": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+          "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ]
+    },
+    {
+      "lead": "Naglabas ang SGLang v0.6.0 at vLLM v0.25.0 ng wide expert-parallel na disaggregated na serving",
+      "body": "Ang karera sa bilang ng parameter ng open weight na nagluwal sa Kimi K3 ng Moonshot sa 2.8 trilyong parameter at sa Qwen3.8 ng Alibaba sa 2.4 trilyon ay may agarang bunga sa hulihan: halos walang makapaghahain ng mga model na iyon gamit ang isang payak na setup. Kaya ginugol ng dalawang nangungunang open inference engine ang linggong ito sa paglalabas ng makinaryang gagawa nito. Nangunguna ang v0.6.0 ng SGLang sa wide expert parallelism — na ikinakalat ang daan-daang expert ng isang mixture-of-experts na model sa maraming GPU — kasama ang prefill-decode disaggregation, kung saan pinatatakbo sa isang GPU pool ang compute-bound na yugto ng pagproseso ng prompt at sa iba naman ang memory-bandwidth-bound na yugto ng pagbuo ng token, habang ipinapadala sa pagitan ng dalawa ang KV cache sa network. Ang pangunahing numero ay throughput sa isang GB200 NVL72 rack na humigit-kumulang 2.7 beses ng isang single-pool na baseline para sa isang MoE na nasa uri ng trilyong parameter, gamit ang Mooncake at NIXL bilang mga KV-transfer backend. Naghatid ang v0.25.0 ng vLLM ng parehong dalawang kakayahan sa loob lamang ng ilang araw, ang paraang hawak ng mga proyektong ito buong taon: mabilis maabot ang feature parity, tapos karera sa mga constant factor. Ang matibay na punto ay hindi na gaanong itinatakda ng lisensya ng model, na libre, ang ekonomiya ng mga higanteng open model, kundi kung kaya ba ng isang operator na magtayo man lamang ng disaggregated at expert-parallel na serving — ang release na gumagawa nitong mahahain sa isang naupahang rack ang isang 2.4-trilyong-parameter na model ang siyang tunay na naggagalaw sa curve ng gastos, at dumating ito ngayong linggo, hindi kasabay ng mismong mga model.",
+      "citations": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ]
+    },
+    {
+      "lead": "Nagbibigay-daan ang kritikal na depekto sa Milvus na CVE-2026-59218 sa walang-authentication na RCE sa mga vector DB",
+      "body": "Isang kritikal na kahinaan sa Milvus, na sinusubaybayan bilang CVE-2026-59218 at na-rate ng 9.8 sa CVSS, ang nagpapahintulot sa isang walang-authentication na umaatake na umabot sa remote code execution laban sa pinakamalawak na nakadeploy na open-source na vector database — ang bahaging nag-iimbak ng mga embedding sa likod ng retrieval-augmented generation. Naaabot ang depekto sa pamamagitan ng isang nakalantad na data-plane endpoint na tumatanggap ng mga ginawang request nang walang authentication, at ang isang matagumpay na atake ay nagbibigay hindi lamang ng server kundi pati ng naka-embed na corpus na nakapatong dito: kadalasang panloob na dokumento, kasaysayan ng suporta o source code ng isang kompanya, na naka-vector at masasaliksik. Naglabas na ng na-patch na release ang mga maintainer at hinimok ang mga operator na alisin sa internet ang mga pampublikong instance at i-rotate ang anumang credential na mababasa ng proseso. Ang istruktural na problema ay itinayo ang mga vector database upang umupo nang malalim sa loob ng isang pinagkakatiwalaang network, na ang default ay bukás na port at walang auth dahil ipinapalagay ng threat model na isang pribadong subnet ito, at tahimik na itinulak ng mga RAG deployment ang libu-libo sa mga ito papunta sa mga pampublikong IP upang paglingkuran ang mga chatbot. Ang ikinasasama ng isang kompromiso sa vector store kaysa sa isang karaniwang paglabag sa database ay kung ano ang tumatagas nito: mabubuo muli ang eksaktong pribadong teksto na ipinakain ng isang organisasyon sa mga model nito mula sa mga embedding at sa mga source chunk na iniingatan ng Milvus katabi ng mga ito. Ang praktikal na pagbasa ay kailangan na ngayon ng RAG data layer ng parehong network hygiene na napilitang matutunan ng serving layer — naka-on ang authentication, sarado ang mga port, walang anumang may dalang embedding na naaabot mula sa bukás na internet.",
+      "citations": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ]
+    },
+    {
+      "lead": "Naglabas ang LangGraph v1.1.0 ng durable execution bilang sagot sa Temporal sa mga resumable na agent",
+      "body": "Ang tanong na tahimik na muling nag-aayos sa imprastraktura ng agent sa 2026 ay hindi kung aling framework ang sumusulat ng pinakamagandang agent loop, kundi kung alin ang nakakaligtas sa isang server restart sa gitna ng gawain, at ngayong linggo, nagbunga ito ng isang konkretong hakbang. Naglabas ang LangChain ng durable execution para sa LangGraph sa v1.1.0 release nito, na nagche-checkpoint sa bawat hakbang ng isang agent run tungo sa persistent na state upang ang isang nag-crash o na-redeploy na worker ay magpatuloy mula sa huling natapos na node, sa halip na simulan muli ang gawain o mawala ito. Direktang sagot iyon sa pitch na gumawa sa Temporal bilang default na base para sa mga matagal-tumakbong agent — ang durable-execution engine na pinagpapatakbuhan ng OpenAI sa Codex, at ang nasa ilalim ng produktong Workflows ng Mistral. Iisa ang balangkas na hawak ng tatlo: ang isang production agent ay talagang isang distributed workflow — sampung segundo hanggang ilang minuto kada request, maraming model call at tool invocation na magkakasalabid, mga network failure at deploy sa gitna — at ang kawili-wiling garantiya ay hindi ang katalinuhan kundi ang kakayahang makaligtas. Ang pag-abot ng LangGraph sa durable execution nang natibo, sa halip na atasan ang mga team na ikabit ang agent loop nila sa isang hiwalay na workflow engine, ay pinagsasama ang dalawang layer tungo sa isa para sa code-first na kampo. Ang nagbabago nang higit sa isang version note ay ang failure mode: tumitigil itong maging 'nakalimutan ng agent ang ginagawa nito' at nagiging 'huminto ang agent at ipinagpatuloy kung saan ito huminto,' ang pagkakaiba ng isang demo sa isang bagay na patatakbuhin ng isang bangko sa produksyon. Nagko-consolidate ang orchestration market sa katangiang iyon, at ang mga framework na itinuring itong opsyonal ang siya na ngayong nagre-retrofit nito.",
+      "citations": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+          "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+        },
+        {
+          "label": "GitHub - langchain-ai/langgraph v1.1.0 release",
+          "url": "https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Inihanay ng AMD ang isang hamon sa antas ng rack laban sa Nvidia",
+    "Nag-update ang SGLang at vLLM para paglingkuran ang mga higanteng open model",
+    "May kritikal na bug sa Milvus na nagpapapasok sa mga umaatake sa mga RAG database",
+    "Nagpapatuloy na ngayon ang mga LangGraph agent matapos ang isang crash, hindi na nagre-restart"
+  ]
+}

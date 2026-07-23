@@ -1,0 +1,74 @@
+{
+  "date": "2026-07-15",
+  "technical": [
+    {
+      "lead": "Bonsai 27B's 1-bit build fits a phone at 3.9 GB, holding 90% of baseline",
+      "body": "PrismML released Bonsai 27B on July 14, pitching it as the first 27B-class model that runs on a phone. It descends from Qwen3.6 27B, keeps a 262K-token context window, and takes multimodal input through a 4-bit vision tower. Two extreme-quantization builds ship: a ternary variant storing weights in {-1, 0, +1} with FP16 scaling at 1.71 effective bits per weight and 5.9 GB, and a 1-bit variant with binary {-1, +1} weights at 1.125 effective bits and 3.9 GB. Across 15 benchmarks the ternary build retains 95% of full-precision quality and the 1-bit build 90%, decoding at 134 and 163 tokens per second on an RTX 5090. The 1-bit figure is the one that carries the release: 3.9 GB clears the roughly 6 GB of usable memory an iPhone 17 Pro has left after KV cache and activations, a ceiling that has kept 27B-class weights off handsets outright. Weights are Apache 2.0 on Hugging Face and GitHub, with hosted access via Together AI; PrismML is Caltech-founded and backed by Khosla Ventures, Cerberus, and Google, with Samsung support. It matters because on-device inference has been bounded by memory rather than compute, and the standing workaround — shrink the model until the capability leaves with it — is exactly what a sub-2-bit encoding sidesteps. Spending 5-10% of benchmark quality to cross a hardware threshold redraws the line between models that are portable and models that are not. A same-day preprint proposing PalmClaw, a native on-device agent framework for phones, sketches the runtime layer such a model would need in order to do more than answer one prompt at a time.",
+      "citations": [
+        {
+          "label": "PrismML - Bonsai 27B: A 27B-Class Model That Runs on a Phone",
+          "url": "https://prismml.com/news/bonsai-27b"
+        },
+        {
+          "label": "arXiv:2607.13027 - PalmClaw: A Native On-Device Agent Framework for Mobile Phones",
+          "url": "https://arxiv.org/abs/2607.13027"
+        }
+      ]
+    },
+    {
+      "lead": "Grok CLI uploads whole repos, git history, and .env secrets to a cloud bucket",
+      "body": "A wire-level capture of xAI's Grok build CLI, run against grok 0.2.93 on macOS with mitmproxy, records what the tool transmits during normal operation. File contents reach xAI verbatim and unredacted — .env secrets included — arriving both in live model turns and in archived session state pushed to a /v1/storage endpoint that answers HTTP 200. The traffic is not scoped to what the agent was asked to read: the CLI ships every tracked file's content plus git history, and a 12 GB test repository produced 5.10 GiB of uploads across 73 chunks of roughly 75 MB each, a byte ratio some 27,800 times larger than the model-turn traffic could account for. Binary strings and metadata identify the destination as a Google Cloud Storage bucket named grok-code-session-traces; alongside those channels the CLI also reports to Mixpanel and a grok.com events endpoint. The researcher is precise about the limit of the evidence: the capture establishes transmission and storage, not training use, which stays a separate policy question. The writeup drew three separate Hacker News front-page threads between July 12 and 14. It matters because nothing here involves an attacker defeating a boundary — this is the tool's own default path. Auditing which files an agent was instructed to open tells a developer nothing about which files left the machine, and secret-scanning that gates commits has no purchase on a channel that uploads the working tree before any commit exists.",
+      "citations": [
+        {
+          "label": "cereblab - What xAI's Grok build CLI sends to xAI: a wire-level analysis",
+          "url": "https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547"
+        }
+      ]
+    },
+    {
+      "lead": "Mindgard publishes an unpatched Cursor code-execution flaw after 7 months",
+      "body": "AI-security vendor Mindgard on July 14 published an unpatched arbitrary-code-execution flaw in the Cursor IDE on Windows, breaking coordinated disclosure after seven months without a fix. The mechanism is mundane, which is what makes it work: Cursor searches several filesystem locations for a Git binary when it initializes a project and does not validate executables found in the repository directory itself. Opening a repository carrying a malicious git.exe at its root runs that binary with the user's privileges — no prompt, no approval dialog, no interaction beyond opening the folder — and the lookup repeats on a cadence for as long as the project stays open. Cloning an untrusted repository merely to read it is enough. Mindgard dates discovery to December 15, 2025, filing through HackerOne on January 15 after the initial channel stalled, rejection and then reopening and confirmation between January 16 and 20, and no substantive response from February through April. No CVE has been assigned and no severity score published. Mindgard's stated rationale for going public is that after seven months, \"withholding information no longer serves users, it serves silence.\" It matters because the disclosure clock rather than the bug is the story here: an unvalidated-binary-lookup defect in an editor with more than 7 million users is fixable, but a vendor security process that leaves it open for seven months is structural, and a named vendor breaking embargo sets a reference point other researchers sitting on agentic-IDE findings will now measure against.",
+      "citations": [
+        {
+          "label": "Mindgard - Cursor 0day: When Full Disclosure Becomes the Only Protection Left",
+          "url": "https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left"
+        }
+      ]
+    },
+    {
+      "lead": "Population-scale x402 audit finds 21.20% of 136.7M settlements fictitious",
+      "body": "A July 14 arXiv preprint by Shengchen Ling, Yajin Zhou, Lei Wu, and Cong Wang asks how much of the agentic-commerce activity on the x402 protocol is real, and answers it by measuring rather than counting. Because x402 settles AI-agent payments as on-chain stablecoin transactions, its headline adoption metric — settlement count — is auditable in a way most agent-adoption claims are not. Across 280 days of Base chain activity the authors find 136.7 million settlements moving $44.1 million, of which 21.20% are fictitious and 63.78% are internal transfers inside linked clusters. Bounding what survives, the value that demonstrably reaches named independent services is $187,861.35; the most generous bound, crediting everything not provably manufactured, is $20.2 million, or 45.92%. Concentration is extreme on every axis, with payer, recipient, and value Gini coefficients all above 0.98, and the manufactured component resolves into a coherent operator-driven economy the authors characterize as star-shaped, machine-timed, and gas-subsidized. Their framing is that a settlement count measures how cheaply transactions can be manufactured, not how many agents are buying anything. It matters because agentic commerce is being underwritten on exactly this class of throughput number, and this is the rare case where the ledger is public enough to check one. A three-order-of-magnitude gap between the reported figure and the defensible floor is a caution that travels well past a single protocol.",
+      "citations": [
+        {
+          "label": "arXiv:2607.12575 - How Agentic Is Agentic Commerce? A Population-Scale Measurement of x402 Adoption and Authenticity",
+          "url": "https://arxiv.org/abs/2607.12575"
+        }
+      ]
+    },
+    {
+      "lead": "AGI Summit takes the Palace of Fine Arts July 18-19, ahead of AMD July 22",
+      "body": "The nearest date is both new to the calendar and close: the AGI Summit runs July 18-19 at the Palace of Fine Arts in San Francisco, a weekend slot that opens the summer schedule. AMD Advancing AI 2026 follows at Moscone West on July 22-23, where Lisa Su and partners are expected to detail the Instinct MI450 accelerator and Zen 6 EPYC 'Venice' CPUs. The chip and infrastructure track continues with Hot Chips at Stanford on August 23-25, whose early-registration rate closes July 31, and the AI Infra Summit at the Santa Clara Convention Center on September 15-17. Security clusters from early August: Black Hat USA and DEF CON 34's AI Village in Las Vegas on August 1-6, SecurityWeek's AI Risk Summit at the Ritz-Carlton in Half Moon Bay on August 11-12, OWASP Global AppSec USA in San Francisco on November 5-6, and Zenity's AI Agent Security Summit series for teams working agent-hijack and MCP-layer defense. On the developer and data track, Ai4 2026 fills The Venetian in Las Vegas on August 4-6, Anyscale's Ray Summit runs August 24-26 at the San Francisco Marriott Marquis, the next AI Tinkerers San Francisco meetup lands in August in its usual working-demo format, the ACM AI Leadership Summit runs August 30 to September 2 in Atlanta, The AI Conference returns to Pier 48 in San Francisco on September 29 to October 1, World Summit AI brings its flagship to Amsterdam's Taets Art & Event Park on October 7-8, GitHub Universe is October 28-29, AWS re:Invent runs November 30 to December 4 in Las Vegas, and NeurIPS 2026 plus The AI Summit New York at the Javits Center on December 9-10 close the year. Two additions this week both point at embodied AI: the Runway AI Summit takes The Masonic in San Francisco on September 30 with a physical-AI, real-time-video, and policy program featuring Physical Intelligence's Quan Vuong, NVIDIA Cosmos Lab's Ming-Yu Liu, and Anyscale's Robert Nishihara, at $350 early-bird; and IEEE-RAS Humanoids 2026, the field's main academic venue, lands at the Santa Clara Convention Center on December 7-9. Near-term actions: decide on the AGI Summit before Saturday, register for AMD Advancing AI ahead of the July 22 open, lock the July 31 Hot Chips early rate, and book Black Hat plus the Half Moon Bay AI Risk Summit for the early-August security block.",
+      "citations": [
+        {
+          "label": "AGI Summit 2026 - July 18-19, Palace of Fine Arts, San Francisco",
+          "url": "https://agisummit.ai/"
+        },
+        {
+          "label": "Runway AI Summit - September 30, 2026, The Masonic, San Francisco",
+          "url": "https://summit.runwayml.com/"
+        },
+        {
+          "label": "IEEE RAS - 2026 IEEE-RAS 25th International Conference on Humanoid Robots (Humanoids)",
+          "url": "https://www.ieee-ras.org/event/2026-ieee-ras-25th-international-conference-on-humanoid-robots-humanoids-68892/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "A big AI model now fits on a phone with 90% of its skill",
+    "Grok's coding tool uploads your whole project and secrets",
+    "Cursor bug still unfixed: opening a folder can run malware",
+    "Audit finds a fifth of 137M AI agent payments are fake",
+    "A major AI summit opens this weekend; more all summer"
+  ]
+}

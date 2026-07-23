@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "Independent security researcher auditing coding-agent network egress",
+    "job": "Capturing a closed-binary coding agent's outbound traffic through a proxy and reconciling uploaded bytes against what its own tool log says it read.",
+    "outcome": "A published intercepted-traffic analysis showing a coding agent other than Grok CLI transmits file contents the user never directed it to read.",
+    "motivation": "The method is cheap and repeatable in an afternoon, the Grok capture drew three front-page threads, and full disclosure now has a named-vendor precedent.",
+    "task": {
+      "who": "solo researcher or a small security lab's tooling-audit effort",
+      "what": "intercept and log a coding agent's outbound TLS traffic",
+      "where": "a proxy between the agent binary and its telemetry endpoint",
+      "when": "H2 2026 through early 2027",
+      "why": "documentation and tool logs cannot reveal actual harness egress",
+      "how": "mitmproxy capture plus byte-ratio accounting against the tool-call log"
+    }
+  },
+  {
+    "actor": "Coding-agent vendor's harness and telemetry engineer",
+    "job": "Shipping closed-binary agents that upload broad repository context and git history to vendor-controlled endpoints, without publishing a transmitted-data manifest specific enough to check against.",
+    "outcome": "A shipped harness whose real egress exceeds what its tool-call log accounts for, capturable by any proxy placed in front of it.",
+    "motivation": "Broad repository context improves agent answers and telemetry drives product analytics; no manifest is required and few competitors publish one.",
+    "task": {
+      "who": "the vendor's agent-harness and product-telemetry engineering teams",
+      "what": "ship context-collection and telemetry uploads inside a closed agent binary",
+      "where": "the agent's release builds and its cloud storage endpoints",
+      "when": "H2 2026 through early 2027",
+      "why": "broad context improves answers; telemetry drives analytics; no manifest required",
+      "how": "closed-binary releases with chunked uploads to vendor-controlled cloud buckets"
+    }
+  },
+  {
+    "actor": "Agentic-tooling vulnerability researcher publishing under a full-disclosure policy",
+    "job": "Publishing named-vendor findings on coding agents and agentic editors once a response deadline lapses, without waiting for a vendor fix.",
+    "outcome": "A precedent that agentic-tooling findings can be published against a named vendor with no patch in hand, lowering the bar for the next publisher.",
+    "motivation": "Seven months of vendor silence on an unpatched Cursor flaw showed that indefinite embargo protects the vendor rather than the users at risk.",
+    "task": {
+      "who": "the firm's vulnerability research and coordinated-disclosure team",
+      "what": "publish unpatched agentic-tooling findings against named vendors",
+      "where": "public research advisories and developer-news aggregator front pages",
+      "when": "H2 2026 through early 2027",
+      "why": "each published finding weakens the embargo norm further",
+      "how": "full-disclosure policy with a fixed vendor-response deadline"
+    }
+  }
+]

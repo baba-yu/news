@@ -1,0 +1,82 @@
+{
+  "date": "2026-07-19",
+  "technical": [
+    {
+      "lead": "Alibaba previews Qwen3.8 at 2.4T parameters, open weights promised",
+      "body": "Alibaba's Qwen team said today that Qwen3.8 is launching at 2.4 trillion parameters and will go open-weight — the first Qwen multimodal model above the trillion-parameter line, taking images, video and documents. Access starts proprietary rather than open: Qwen3.8-Max-Preview is live now through Alibaba's Token Plan, Qoder and QoderWork at a tenth of standard pricing, while the open-weight drop is promised but carries no date. Alibaba's own claim is that the model sits second only to Claude Fable 5 among generally available systems and should beat Qwen3.7-Max on coding and complex productivity work, but no benchmark results have been published to support either statement. The sequencing is the part that matters. Alibaba built its reputation shipping top models with weights available at launch, and Qwen3.8 repeats the Qwen3.6-Max pattern of monetizing a preview window first, which makes this an announcement of intent rather than a delivery. Timing puts it three days behind Moonshot's Kimi K3 at 2.8 trillion parameters, with Moonshot reported at roughly $300 million in annual recurring revenue and an IPO targeted inside six months, so the parameter-count race and the capital-markets race are now running on one clock. For anyone tracking the open-versus-closed gap, the durable observation is that the two largest announced open-weight models in the world are both Chinese, both above 2 trillion parameters, and both announced inside a single week.",
+      "citations": [
+        {
+          "label": "the decoder - Alibaba's Qwen takes on Kimi K3 with open-weight Qwen 3.8",
+          "url": "https://the-decoder.com/alibabas-qwen-takes-on-kimi-k3-with-open-weight-qwen-3-8-says-model-is-second-only-to-fable-5/"
+        },
+        {
+          "label": "OfficeChai - Alibaba Announces 2.4 Trillion-Parameter Open-Weight Qwen 3.8",
+          "url": "https://officechai.com/ai/alibaba-qwen-3-8/"
+        }
+      ]
+    },
+    {
+      "lead": "NadMesh botnet hunts exposed Ollama and ComfyUI hosts for cloud keys",
+      "body": "QiAnXin's XLab published analysis of a botnet it calls NadMesh, which goes after self-hosted AI infrastructure instead of conventional web targets — exposed instances of ComfyUI, Ollama, n8n, Open WebUI, Langflow and Gradio. The payoff it seeks is credentials, not compute: cloud keys lifted from environment variables, Kubernetes service-account tokens, the contents of ~/.aws/config, .env and ~/.docker/config.json, plus model access and whatever MCP tools the compromised host can reach. The operator's own dashboard, captured July 10, claimed 3,811 unique AWS keys and 47 credential hauls across its last 100 records, while XLab's own sensors observed around 139 distinct source IPs per day. Treat the operator numbers with skepticism: the same dashboard shows a 17,700 total-deploy counter sitting above a funnel claiming 95,700 in the preceding 24 hours, and both cannot be true. Notably, the way in is ordinary misconfiguration rather than anything AI-specific — Docker API remote code execution accounts for 30.31% of observed traffic, Jenkins script-console execution 22.28%, weak telnet passwords 10.36% and Redis 8.29%. The remediation is correspondingly blunt: put ports 8188, 11434, 7860 and 5678 behind authentication or off the public internet, and rotate anything that was reachable. The structural shift is that the local-inference stack is now a credential-theft target in its own right. The defaults that made these tools pleasant to run — binding broadly, skipping auth, leaving keys in the environment — have become an enumerated attack surface, and a workstation running Ollama beside a cloud credential file is a lateral-movement path rather than a hobby setup.",
+      "citations": [
+        {
+          "label": "The Hacker News - New NadMesh botnet hunts exposed AI services for cloud keys and Kubernetes tokens",
+          "url": "https://thehackernews.com/2026/07/new-nadmesh-botnet-hunts-exposed-ai.html"
+        }
+      ]
+    },
+    {
+      "lead": "Moonshine Micro runs speech in and out on an 80-cent microcontroller",
+      "body": "Moonshine AI published Moonshine Micro, an MIT-licensed voice stack that runs the whole loop — voice-activity detection, speech recognition and neural text-to-speech — on a microcontroller, with the Raspberry Pi RP2350 as reference platform at a retail price near 80 cents. The memory budget is the substance of the claim. Detection takes about 89 KiB of flash and 36 KiB of SRAM, the SpellingCNN recognizer about 1.3 MiB of flash and 346 KiB of SRAM, and a neural diphone voice pack about 1.8 MiB and 340 KiB; the assembled demo lands near 3.6 MiB of flash and roughly 468 KiB of SRAM by sharing memory between pipeline stages, so the total fits inside the RP2350's 520 KiB. It recognizes about 50 custom words or phrases, retrainable to an application's own vocabulary, and turns speech in into speech out in roughly 0.7 to 1.0 seconds on TensorFlow Lite Micro. The reference demo walks a user through configuring a wifi connection entirely by voice, which is the argument in miniature: no cloud round trip, no API key, no account. This sits at the opposite end of the local-model spectrum from compressing frontier capability onto a workstation — rather than shrinking a large model until it fits, it asks what the smallest genuinely useful language interface is, and answers with a bill of materials cheap enough for disposable hardware. It reached the top of Hacker News on July 18, plausibly because it removes two assumptions at once: voice interfaces have been taken to require either a phone-class system-on-chip or a network connection, and this needs neither.",
+      "citations": [
+        {
+          "label": "GitHub - moonshine-ai/moonshine (micro)",
+          "url": "https://github.com/moonshine-ai/moonshine/tree/main/micro"
+        },
+        {
+          "label": "Adafruit Blog - Voice-activity detection, speech to text, and text to speech all on RP2040",
+          "url": "https://blog.adafruit.com/2026/07/15/voice-activity-detection-speech-to-text-and-text-to-speech-all-on-rp2040"
+        },
+        {
+          "label": "Hackster.io - Voice Control Goes Ultra-Low-Cost with Moonshine Micro",
+          "url": "https://www.hackster.io/news/voice-control-goes-ultra-low-cost-with-moonshine-micro-ea2817ec9d20"
+        }
+      ]
+    },
+    {
+      "lead": "Kerger and GPT-5.6 close a 1996 gap in derivative-free optimization",
+      "body": "Phillip Kerger posted a proof on July 14 establishing that minimizing a convex Lipschitz function over a d-dimensional Euclidean ball, deterministically and using only exact function values, requires Omega(d^2 / log(d+1)) queries at accuracy Theta(d^-1/2). That closes, up to polylogarithmic factors, a gap open since 1996 between the known Omega(d) lower bound and Protasov's O(d^2 log^2 d) value-only method, and the same machinery extends to mixed-integer instances at roughly d^2 times 2^n queries for d continuous and n discrete variables. The provenance surfaced on July 18, when Kerger described the process publicly: roughly a year of his own work on the problem, unsuccessful attempts with GPT-5.4 and GPT-5.5, and then a prompt running about ten pages that laid out the reasonable approaches from the literature — after which GPT-5.6 produced the argument and generated the Lean formalization alongside it. His own framing was that he gave an AI contractor architectural direction rather than a solution, and commenters were quick to note that the year of failed attempts is precisely what made a ten-page prompt possible. Set against OpenAI's Cycle Double Cover announcement, which ran 64 parallel agents and remains unformalized and un-peer-reviewed, this is the more load-bearing data point because it is smaller: one model instance, one named human author carrying responsibility for the claim, and a machine-checkable artifact at the end of it. The variable that determines whether results like this compound is verification, not agent count.",
+      "citations": [
+        {
+          "label": "arXiv:2607.13335 - Closing the Oracle-Complexity Gap in Derivative-Free Convex Optimization",
+          "url": "https://arxiv.org/abs/2607.13335"
+        },
+        {
+          "label": "Hacker News - GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
+          "url": "https://news.ycombinator.com/item?id=48957779"
+        }
+      ]
+    },
+    {
+      "lead": "DeepSeek raises at a $74B valuation and weighs a Shanghai listing",
+      "body": "DeepSeek is preparing a fundraise at roughly 500 billion yuan, about $74 billion, seeking as much as 50 billion yuan — a step up arriving only weeks after a June round that took in about $7.4 billion at a post-money valuation near 450 billion yuan. Alongside it the company has begun early deliberations on listing on Shanghai's STAR Market, with an internal target of completing an IPO filing this year. Terms and timetable are both described as unsettled, and a US listing is treated as impractical given Congressional scrutiny of Chinese AI firms. The June round's shareholder register is the part worth holding onto: founder Liang Wenfeng committed 20 billion yuan personally, Tencent put in 10 billion and battery maker CATL 5 billion to become the largest external holders, while China's state AI investment fund holds the only outside board voting rights. What makes this a threshold rather than a headline is what it replaces. DeepSeek ran for years on Liang's quantitative fund High-Flyer, and that self-funding is exactly what let it ship cheap open-weight models without answering to outside capital or a quarterly clock. Two raises inside two months plus a filing target means compute, data-centre capacity and talent costs have outrun what a hedge fund balance sheet can absorb — the lab that made its name proving frontier work could be done cheaply is now financing it the same way everybody else does.",
+      "citations": [
+        {
+          "label": "Capacity - DeepSeek eyes $74bn valuation in fresh funding round ahead of China IPO",
+          "url": "https://capacityglobal.com/news/deepseek-eyes-74bn-valuation/"
+        },
+        {
+          "label": "Gulf Times - China's DeepSeek seen to raise fresh capital at $74bn valuation ahead of onshore IPO",
+          "url": "https://www.gulf-times.com/article/729325/business/chinas-deepseek-seen-to-raise-fresh-capital-at-74bn-valuation-ahead-of-onshore-ipo/amp"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Alibaba previews a huge AI model, open version has no date",
+    "A botnet raids self-hosted AI tools to steal cloud keys",
+    "Speech in and out, no cloud, on an 80-cent chip",
+    "A researcher and an AI crack a 30-year-old math problem",
+    "DeepSeek raises money again and now eyes a stock listing"
+  ]
+}

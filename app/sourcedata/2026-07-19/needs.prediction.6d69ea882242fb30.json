@@ -1,0 +1,72 @@
+[
+  {
+    "actor": "Self-hosted AI inference project's core maintainer and security-triage lead",
+    "job": "Rewrite the network bind path so a non-loopback address without a configured credential is refused or downgraded back to loopback.",
+    "outcome": "A shipped release where the listen address and the authentication setting are one coupled check, not two independent flags.",
+    "motivation": "Perimeter advice never reaches operators who skip the hardening guide; the shipped default is the only control that reaches everyone.",
+    "task": {
+      "who": "Core maintainers with the project's security-triage volunteers",
+      "what": "Couple the bind address check to credential configuration",
+      "where": "Server startup path and configuration loader in the main repository",
+      "when": "H2 2026 through H1 2027",
+      "why": "Defaults reach operators who never read hardening guides",
+      "how": "Redis protected-mode pattern: refuse remote clients when no password set"
+    }
+  },
+  {
+    "actor": "Commercially backed AI-tooling vendor's product and security leadership",
+    "job": "Approve a breaking default across a major version and budget the support load from operators whose remote deployments stop working.",
+    "outcome": "A major-version release recording the refused non-loopback bind as an intentional breaking change with a supported migration path.",
+    "motivation": "A named slot on a botnet target list is a procurement objection, not a support-forum thread, once enterprise buyers are involved.",
+    "task": {
+      "who": "Product management with the security engineering and support leads",
+      "what": "Schedule the breaking default into a major version",
+      "where": "Release planning and the project roadmap governance process",
+      "when": "H2 2026 release cycles through H1 2027",
+      "why": "Named botnet targeting converts into lost enterprise deals",
+      "how": "Semantic-versioning major bump with a deprecation window first"
+    }
+  },
+  {
+    "actor": "Open-source AI project's release manager and documentation maintainer",
+    "job": "Write the breaking-change entry and migration path so the change lands as an enforced default rather than another optional hardening page.",
+    "outcome": "Release notes that name the refused bind as a breaking default change, with an explicit opt-out for operators needing remote access.",
+    "motivation": "Enforcement and advice look identical to an operator until the release note states which one actually shipped.",
+    "task": {
+      "who": "Release managers with documentation and developer-relations contributors",
+      "what": "Draft breaking-change notes and the operator migration path",
+      "where": "Changelog, upgrade guide and the version announcement post",
+      "when": "H2 2026 through H1 2027",
+      "why": "Only a release note distinguishes enforcement from optional advice",
+      "how": "Keep-a-changelog breaking-change section with an explicit override flag"
+    }
+  },
+  {
+    "actor": "Enterprise security architect governing self-hosted AI tooling adoption",
+    "job": "Turn the exposure findings into a written adoption condition that self-hosted AI services must fail closed on remote binding.",
+    "outcome": "Vendor questionnaires and platform standards that reject any AI tool binding remotely without an authentication credential.",
+    "motivation": "A workstation running local inference beside long-lived cloud credentials is a lateral-movement path into the account that owns it.",
+    "task": {
+      "who": "Security architecture with procurement and platform-engineering reviewers",
+      "what": "Add fail-closed binding to the tool approval checklist",
+      "where": "Vendor security questionnaires and internal platform standards",
+      "when": "H2 2026 procurement cycles into H1 2027",
+      "why": "Exposed inference hosts reach the cloud accounts behind them",
+      "how": "Questionnaire clauses citing the botnet's enumerated target list"
+    }
+  },
+  {
+    "actor": "Threat-intelligence team measuring internet-exposed AI service populations",
+    "job": "Keep publishing per-project counts of exposed instances and stolen credentials so the naming stays specific and current.",
+    "outcome": "Named, dated exposure telemetry per project that maintainers cite when justifying a breaking default to their users.",
+    "motivation": "Generic exposure warnings get discounted; a per-project instance count with a live botnet attached is hard for a maintainer to defer.",
+    "task": {
+      "who": "Botnet-tracking analysts with the sensor and scanning operations team",
+      "what": "Publish per-project exposure counts and credential-theft telemetry",
+      "where": "Threat-intelligence reports and coordinated maintainer disclosure",
+      "when": "H2 2026 into H1 2027",
+      "why": "Per-project counts are harder to defer than advisories",
+      "how": "Internet-wide port scanning on 8188, 11434, 7860 and 5678"
+    }
+  }
+]

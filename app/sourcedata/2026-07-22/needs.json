@@ -1,0 +1,137 @@
+{
+  "date": "2026-07-22",
+  "by_prediction": {
+    "prediction.0594fdd206cf2981": [
+      {
+        "actor": "coding-agent maintainer team",
+        "job": "Building a pre-install verification gate into the agent that checks package provenance and typosquat signals before any dependency install runs",
+        "outcome": "A generally available, on-by-default check in at least two major coding agents that refuses to silently install packages failing verification",
+        "motivation": "To stop the agent from being steered into fetching poisoned or typosquatted dependencies on the user's behalf",
+        "task": {
+          "who": "agent dependency-resolution / security engineering",
+          "what": "add pre-install provenance and typosquat verification gate",
+          "where": "the agent's dependency install code path",
+          "when": "H2 2026 through H1 2027",
+          "why": "block silent install of poisoned dependencies",
+          "how": "PyPI attestations, npm Sigstore provenance, typosquat screening"
+        }
+      },
+      {
+        "actor": "package-registry security engineering",
+        "job": "Shipping and stabilizing the signed-provenance, trusted-publisher attestation, and typosquat-signal primitives that a coding agent can query before installing a dependency",
+        "outcome": "Machine-consumable provenance and attestation endpoints on PyPI and npm that agents query at install time to verify a package",
+        "motivation": "To close registry holes like mutable old releases so downstream agents inherit verifiable trust signals rather than blind names",
+        "task": {
+          "who": "registry security / trust-and-safety engineering",
+          "what": "expose provenance and attestation query endpoints",
+          "where": "PyPI and npm registry infrastructure",
+          "when": "H2 2026 through H1 2027",
+          "why": "supply agents verifiable trust signals at install",
+          "how": "Trusted Publishing, publish attestations, Sigstore provenance"
+        }
+      },
+      {
+        "actor": "supply-chain provenance standards contributor",
+        "job": "Hardening the attestation and provenance-verification standards a coding agent relies on to decide whether an install is trustworthy across registries",
+        "outcome": "Interoperable verification specs agents implement to check signed provenance and trusted-publisher attestations uniformly across PyPI, npm, and other registries",
+        "motivation": "To make provenance verification interoperable enough that every major coding agent can adopt it on by default",
+        "task": {
+          "who": "supply-chain security standards working group",
+          "what": "harden attestation and provenance-verification specifications",
+          "where": "Sigstore and package-provenance standards venues",
+          "when": "H2 2026 through H1 2027",
+          "why": "enable default agent adoption of verification",
+          "how": "Sigstore, SLSA, trusted-publisher attestation specifications"
+        }
+      }
+    ],
+    "prediction.70b4b143e969eb36": [
+      {
+        "actor": "offensive-security research team",
+        "job": "Wrapping open-weights models in autonomous agent scaffolds and running them against realistic targets to demonstrate end-to-end intrusion capability",
+        "outcome": "A published demonstration showing a downloadable open-weights model autonomously chaining credentials, exploitation, privilege escalation, and lateral movement to reach RCE",
+        "motivation": "To prove and warn that open weights remove refusal training as the last control on autonomous offensive capability",
+        "task": {
+          "who": "red-team / capability-evaluation function",
+          "what": "run open-weights model through full autonomous intrusion chain",
+          "where": "controlled offensive-eval range and lab environment",
+          "when": "H2 2026 through H1 2027",
+          "why": "demonstrate open-weights autonomous end-to-end exploit capability",
+          "how": "agent scaffold, CTF range, exploitation tooling"
+        }
+      },
+      {
+        "actor": "open-weights model de-alignment fine-tuner",
+        "job": "Fine-tuning released open-weights models to remove cyber refusals and wrapping them in autonomous agent scaffolds for offensive tasks",
+        "outcome": "A refusal-stripped open-weights model embedded in an autonomous agent that plans and executes intrusion steps without human choice",
+        "motivation": "To show a lab's refusal training is not a durable control once model weights are public",
+        "task": {
+          "who": "fine-tuning / de-alignment sub-team",
+          "what": "fine-tune out cyber refusals, add agent scaffold",
+          "where": "local fine-tuning pipeline on released open weights",
+          "when": "H2 2026 through H1 2027",
+          "why": "prove refusals removable once weights public",
+          "how": "SFT/LoRA de-alignment plus agent framework"
+        }
+      },
+      {
+        "actor": "CTF-range and offensive-eval harness maintainer",
+        "job": "Building and maintaining capture-the-flag ranges and offensive-eval harnesses that supply realistic targets and the orchestration loop for autonomous agents",
+        "outcome": "Public ranges and eval harnesses letting an autonomous model chain exploitation to RCE against a target not directly handed",
+        "motivation": "To provide standardized, reproducible offensive-capability benchmarks the research community can run against any model",
+        "task": {
+          "who": "benchmark / range engineering team",
+          "what": "maintain CTF ranges and eval orchestration loop",
+          "where": "public offensive-eval harness and CTF infrastructure",
+          "when": "H2 2026 through H1 2027",
+          "why": "supply reproducible targets for autonomous agents",
+          "how": "CTF range plus eval harness tooling"
+        }
+      }
+    ],
+    "prediction.7d1483078ba923a6": [
+      {
+        "actor": "hyperscaler investor-relations disclosure lead (Microsoft, Meta, Oracle)",
+        "job": "Preparing FY2026-27 earnings calls and SEC filings, deciding whether datacenter capex is presented in aggregate or itemized by chip vendor",
+        "outcome": "Aggregate capex line carrying no AMD Helios/MI450 dollar, rack, or GPU figure - the disclosed absence that holds the prediction",
+        "motivation": "Aggregate capex is standard practice, protects vendor pricing confidentiality, and no rule compels itemizing a single chip supplier",
+        "task": {
+          "who": "hyperscaler IR and financial-reporting team",
+          "what": "present capex in aggregate without vendor itemization",
+          "where": "earnings calls, 8-K and 10-Q filings",
+          "when": "H2 2026 through H1 2027",
+          "why": "protect confidentiality; follow standard aggregate reporting",
+          "how": "GAAP aggregate capex presentation"
+        }
+      },
+      {
+        "actor": "hyperscaler capex-planning and procurement function",
+        "job": "Translating the AMD power pledge into internal rack counts, GPU volumes, and dollar bookings for Helios/MI450 deployment planning",
+        "outcome": "Quantified procurement stays internal; no first-party capex statement surfaces an AMD-specific dollar, rack, or GPU number externally",
+        "motivation": "Internal planning needs exact numbers, but vendor NDAs and aggregate external reporting keep those figures unpublished",
+        "task": {
+          "who": "hyperscaler infrastructure and procurement planning",
+          "what": "book AMD capacity internally without external quantification",
+          "where": "internal capex-planning and procurement systems",
+          "when": "H2 2026 through H1 2027",
+          "why": "vendor NDAs and aggregate-reporting norms block disclosure",
+          "how": "internal procurement and purchase-order systems"
+        }
+      },
+      {
+        "actor": "AMD datacenter GTM finance team",
+        "job": "Structuring and announcing the 12GW MI450/Helios commitments as power-denominated headline figures carried on AMD's own authority",
+        "outcome": "Commitments stay framed in gigawatts with no customer-cosigned dollar, rack, or GPU disclosure - sustaining the power-denominated framing",
+        "motivation": "Power framing maximizes headline scale while shielding per-customer pricing and volume terms from competitors and analysts",
+        "task": {
+          "who": "AMD datacenter GTM and finance",
+          "what": "publish gigawatt-denominated commitment figures",
+          "where": "keynote and investor communications",
+          "when": "H2 2026 through H1 2027",
+          "why": "protect customer pricing and volume confidentiality",
+          "how": "power-denominated gigawatt framing"
+        }
+      }
+    ]
+  }
+}

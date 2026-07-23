@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-18",
+  "predictions": [
+    {
+      "id": "prediction.16c7b8053e39aa1f",
+      "scope_hint": "tech",
+      "title": "Disk-streaming expert offload ships in a mainstream local runtime by H1 2027",
+      "body": "Colibri, an Apache 2.0 inference engine written in dependency-free C, has gathered roughly 15.9k GitHub stars behind a single idea: treat GPU memory, RAM and disk as one managed hierarchy so that a 744-billion-parameter mixture-of-experts model runs on a machine that could never hold its weights. Serving GLM-5.2, only about 40B of those parameters activate per token, so the roughly 17B of dense layers stay resident while the 19,456 routed experts stream in on demand from a roughly 370GB four-bit container on disk, held behind an explicit least-recently-used cache. The floor lands at about 25GB of RAM — 9.9GB resident plus cache — with no GPU required at all. The cost is throughput: 0.05 to 0.1 tokens per second on a 12-core consumer machine, with community reports reaching 1.23 on high-end hardware. That is batch-job territory rather than interactive chat, but it inverts the usual local-inference constraint, trading wall-clock time for the ability to run a frontier-scale open model at all instead of quantizing one down until it fits. Mainstream runtimes already push expert tensors out to system memory and then lean on the operating system's page cache for anything larger; an application-managed expert cache with a published memory floor is the piece none of them ship as a supported path. The prediction is that by H1 2027 at least one of llama.cpp, Ollama, LM Studio or vLLM ships disk-streaming expert offload as a documented feature — release-note visible, with published guidance for running a model of 500B parameters or more on a machine holding under 32GB of RAM and no discrete GPU. The forcing function is release cadence: sparse frontier-scale open checkpoints keep landing, and the gap between the parameter counts labs publish and the memory an enthusiast actually owns keeps widening.",
+      "reasoning": {
+        "because": "Colibri runs a 744B-parameter mixture-of-experts model off disk on 25GB of RAM with no GPU",
+        "given": "Open labs keep shipping sparse frontier-scale weights far beyond what enthusiast memory can hold",
+        "so_that": "A mainstream local runtime ships documented disk-streaming expert offload for 500B-plus models under 32GB of RAM",
+        "landing": "by H1 2027; llama.cpp, Ollama, LM Studio or vLLM ships a supported feature",
+        "plain_language": "A free tool now runs a giant AI model off your hard drive instead of memory. Popular local AI apps will copy it."
+      },
+      "summary": "Colibri, a dependency-free C engine, streams a 744B-parameter mixture-of-experts model off disk to run GLM-5.2 on 25GB of RAM with no GPU, at 0.05 to 0.1 tokens per second. A mainstream runtime likely ships the same disk-streaming expert offload as a documented feature by H1 2027."
+    },
+    {
+      "id": "prediction.b3f518670e4c9f6e",
+      "scope_hint": "business",
+      "title": "OpenAI or Google ends flat-rate flagship access on its $20 tier by Q1 2027",
+      "body": "Anthropic has reversed its plan to pull Claude Fable 5 out of subscriptions entirely and sell it only per-token: beginning July 20 the model stays included in Max and Team Premium at 50% of limits. The reversal is narrower than the headline reads. Pro and Team Standard subscribers get no inclusion at all — they receive a one-time $100 usage credit, after which continued Fable 5 use bills at API rates — and because Max plans start in the $100-$200 per month range, the practical effect is that the roughly $20-a-month tier loses flat-rate access to the frontier model altogether. The arithmetic behind the concession is thinner still: the underlying weekly limits are themselves being cut by about a third on the same date, so the 50% allowance applies to a smaller base, and the temporary boost to Claude Code weekly rate limits expires alongside it. What makes this generalizable rather than company-specific is the stated reasoning. Anthropic framed the move around Fable demand being hard to manage and frustrating to users, while acknowledging OpenAI's GPT-5.6 Sol as delivering comparable performance at a fraction of the cost. That is a margin problem rather than a capacity problem, and every lab selling an unmetered consumer subscription against a cheaper rival — with an open-weight floor rising underneath both — faces the same arithmetic on the same schedule. The prediction is that the flat-rate frontier subscription does not survive as an industry norm at the entry price point: by Q1 2027, either OpenAI or Google stops including its newest flagship model at flat rate on its roughly $20-a-month consumer tier, gating it instead behind a usage credit, metered per-token billing, or a higher-priced plan. One lab repricing its entry tier reads as a company-specific correction; a second doing it is what establishes that $20 a month no longer buys unmetered access to the frontier.",
+      "reasoning": {
+        "because": "Anthropic keeps Fable 5 in Max and Team Premium at 50% of limits but drops Pro to a one-time credit",
+        "given": "GPT-5.6 Sol matches Fable 5 at a fraction of the cost, with open-weight models pressing from below",
+        "so_that": "OpenAI or Google stops including its newest flagship at flat rate on the ~$20 tier, gating it behind credits",
+        "landing": "by Q1 2027; OpenAI or Google gates its newest flagship off the $20 tier",
+        "plain_language": "Anthropic's best model just left its cheap plan. Expect OpenAI or Google to follow, so twenty dollars a month stops buying the newest model."
+      },
+      "summary": "Anthropic keeps Claude Fable 5 in Max and Team Premium at 50% of limits from July 20, while Pro and Team Standard get a one-time $100 credit and then API rates — so the $20 tier loses flat-rate frontier access. OpenAI or Google is predicted to do the same on its own $20 tier by Q1 2027."
+    },
+    {
+      "id": "prediction.04ff49878f99c77f",
+      "scope_hint": "cross",
+      "title": "Learned-manipulation robot makers land two customer-co-led rounds by H1 2027",
+      "body": "Walden Robotics' $300 million seed at a $1.1 billion valuation is notable less for its size than for its sequencing: the robots were already doing production work at a Toyota plant in North America since February 2026, having gone from first pilot to real production tasks in under two months, and Toyota then co-led the round for a company it was already a customer of, with Boeing, Samsung Ventures and Prologis Ventures joining the cap table. That is a vendor underwritten by its prospective buyers on the evidence of a running deployment rather than by a financial thesis about humanoids. The technical precondition is what makes that sequencing possible: Large Behavior Models paired with Diffusion Policy let a machine acquire a task through real-world practice instead of hand-scripted motion, which collapses the integration work that historically kept factory automation on multi-year schedules and made in-plant proof-of-value impossible to show before a raise. Once a two-month pilot-to-production window is demonstrably achievable, the underwriting standard moves with it — an industrial buyer that can run the pilot cheaply holds both the information advantage and the incentive to take equity before a competitor does. By H1 2027, expect at least two more general-purpose robotics companies to close rounds of $100 million or more in which an industrial operator — a manufacturer, aerospace prime or logistics operator rather than a financial fund — is lead or co-lead, and in which the announcement names a deployment already performing production work rather than a pilot yet to begin. The falsifiable element is that conjunction: strategic participation in robotics megarounds is already routine, while a named live deployment disclosed at the raise is not.",
+      "reasoning": {
+        "because": "Walden's robots ran production work in a Toyota plant since February, months before its $300M seed",
+        "given": "Learned manipulation cuts pilot-to-production to two months, giving buyers evidence funds lack",
+        "so_that": "≥2 more robotics vendors close $100M+ rounds led or co-led by an industrial operator with a live deployment named",
+        "landing": "by H1 2027; ≥2 operator-co-led $100M+ robotics rounds naming live deployments",
+        "plain_language": "A robot startup got funded because its robots were already working in a Toyota factory — expect other factories to invest the same way."
+      },
+      "summary": "Walden Robotics raised $300M at $1.1B with Toyota co-leading, after its robots were already doing production work in a Toyota plant. Learned manipulation cut pilot-to-production to two months, so buyers can underwrite on evidence. Expect two more operator-co-led $100M+ rounds by H1 2027."
+    }
+  ]
+}

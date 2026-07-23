@@ -1,0 +1,74 @@
+{
+  "date": "2026-07-15",
+  "technical": [
+    {
+      "lead": "Bonsai 27B の1ビット版、3.9 GB でスマートフォンに収まり、基準の90%を保つ",
+      "body": "PrismML は7月14日、Bonsai 27B を公開し、スマートフォン上で動く初の 27B 級モデルだと打ち出した。Qwen3.6 27B の系譜に連なり、262K トークンのコンテキストウィンドウを保ち、4ビットのビジョンタワーを通じてマルチモーダル入力を受け取る。極端な量子化を施したビルドが2つ出荷される。一つは、ウェイトを {-1, 0, +1} で保持し FP16 でスケーリングする三値版で、ウェイトあたりの実効ビット数は1.71、サイズは 5.9 GB。もう一つは、ウェイトを二値 {-1, +1} で保持する1ビット版で、実効1.125ビット、3.9 GB だ。15のベンチマークにわたり、三値版はフル精度の品質の95%を、1ビット版は90%を保つ。RTX 5090 上でのデコードは、それぞれ毎秒134トークンと163トークンだ。このリリースを支えているのは、1ビットの数字である。3.9 GB は、iPhone 17 Pro が KV キャッシュとアクティベーションを差し引いた後に残す、およそ 6 GB の利用可能なメモリを下回る。この上限こそが、27B 級のウェイトを携帯端末から真っ向から締め出してきた。ウェイトは Apache 2.0 で Hugging Face と GitHub に置かれ、Together AI 経由のホスティングも用意される。PrismML は Caltech 発で、Khosla Ventures、Cerberus、Google が出資し、Samsung が支援している。これが重要なのは、オンデバイス推論を縛ってきたのが、計算能力ではなくメモリだからだ。そして、これまでの常套手段、すなわち能力もろともモデルを小さくするというやり方こそ、2ビット未満の符号化が回避してみせたものにほかならない。ベンチマークの品質を5〜10%費やしてハードウェアの壁を越えることは、持ち運べるモデルとそうでないモデルとの線引きを引き直す。同じ日のプレプリントは、スマートフォン向けのネイティブなオンデバイスエージェント基盤 PalmClaw を提案し、こうしたモデルが、一度に一つのプロンプトに答える以上のことをするために必要となる、ランタイムの層を素描している。",
+      "citations": [
+        {
+          "label": "PrismML - Bonsai 27B: A 27B-Class Model That Runs on a Phone",
+          "url": "https://prismml.com/news/bonsai-27b"
+        },
+        {
+          "label": "arXiv:2607.13027 - PalmClaw: A Native On-Device Agent Framework for Mobile Phones",
+          "url": "https://arxiv.org/abs/2607.13027"
+        }
+      ]
+    },
+    {
+      "lead": "Grok CLI、リポジトリ全体、git の履歴、.env の秘密情報をクラウドのバケットへ送信",
+      "body": "macOS 上の grok 0.2.93 に対して mitmproxy をあて、xAI の Grok build CLI の通信を捕捉した記録が、このツールが通常の動作中に何を送信しているかを写し出している。ファイルの中身は、伏せ字もかけられないまま、そのまま xAI へ届く。.env の秘密情報も含まれる。それは、実行中のモデルとのやり取りにも、HTTP 200 を返す /v1/storage エンドポイントへ送られる保存済みのセッション状態にも、どちらにも現れる。通信の範囲は、エージェントが読むよう指示されたものに絞られていない。この CLI は、追跡対象のすべてのファイルの中身と git の履歴を送る。12 GB のテストリポジトリでは、およそ 75 MB ずつ73個のチャンクに分けて 5.10 GiB がアップロードされた。これは、モデルとのやり取りで説明できる通信量のおよそ27,800倍にあたるバイト比だ。バイナリ内の文字列とメタデータからは、送信先が grok-code-session-traces という名前の Google Cloud Storage のバケットであることがわかる。これらの経路に加えて、CLI は Mixpanel と grok.com のイベントエンドポイントへも情報を送っている。研究者は、この証拠の限界について正確だ。捕捉が立証するのは送信と保存であって、学習への利用ではない。それは別のポリシー上の問いとして残る。この記事は、7月12日から14日にかけて、Hacker News のトップページに3つの別々のスレッドを生んだ。これが重要なのは、ここには、攻撃者が境界を破るという要素が一つもないからだ。これは、ツール自身の既定の経路なのである。エージェントがどのファイルを開くよう指示されたかを監査しても、どのファイルがマシンから出ていったかは、開発者には何もわからない。そして、コミットの手前で止める秘密情報スキャンは、コミットが存在するより前に作業ツリーをアップロードする経路には、まるで手が届かない。",
+      "citations": [
+        {
+          "label": "cereblab - What xAI's Grok build CLI sends to xAI: a wire-level analysis",
+          "url": "https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547"
+        }
+      ]
+    },
+    {
+      "lead": "Mindgard、7か月を経て未修正のまま Cursor のコード実行の欠陥を公表",
+      "body": "AI セキュリティ企業の Mindgard は7月14日、Windows 版 Cursor IDE における、未修正の任意コード実行の欠陥を公表した。7か月を経ても修正がなく、協調的な開示の枠組みを破ったかたちだ。仕組みは平凡で、それこそが効く理由でもある。Cursor はプロジェクトを初期化する際、Git のバイナリをファイルシステム上のいくつかの場所から探し、リポジトリのディレクトリ自体で見つかった実行ファイルを検証しない。悪意ある git.exe を直下に置いたリポジトリを開くと、そのバイナリが利用者の権限で実行される。確認も、承認のダイアログも、フォルダを開く以外の操作も、いっさい要らない。しかも、この探索は、プロジェクトを開いているあいだ、一定の間隔で繰り返される。信頼できないリポジトリを、ただ読むために clone するだけで十分だ。Mindgard は、発見を2025年12月15日と記す。最初の連絡経路が滞ったため、1月15日に HackerOne 経由で報告した。報告はいったん却下され、1月16日から20日のあいだに再開されて確認された。しかし、2月から4月にかけて、実質的な返答はなかった。CVE は採番されず、深刻度のスコアも公表されていない。Mindgard が公表に踏み切った理由はこうだ。7か月が経ったいま、「情報を伏せておくことは、もはや利用者のためにならず、沈黙のためにしかならない」。これが重要なのは、ここで語るべきものが、不具合そのものではなく、開示の時計だからだ。700万人を超える利用者を抱えるエディタで、バイナリの探索を検証しない欠陥が生じること自体は、直せる。しかし、それを7か月ものあいだ放置するベンダーのセキュリティ手続きは、構造の問題だ。そして、名の知れたベンダーが公表の猶予を破ったことは、エージェント型 IDE に関する発見を手元に抱える他の研究者が、これから引き比べる基準点となる。",
+      "citations": [
+        {
+          "label": "Mindgard - Cursor 0day: When Full Disclosure Becomes the Only Protection Left",
+          "url": "https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left"
+        }
+      ]
+    },
+    {
+      "lead": "母集団規模の x402 の監査、1億3,670万件の決済のうち21.20%が架空と判定",
+      "body": "Shengchen Ling、Yajin Zhou、Lei Wu、Cong Wang による7月14日の arXiv プレプリントは、x402 プロトコル上のエージェント商取引のうち、どれだけが実体を伴うのかを問い、数えるのではなく測ることで、それに答えている。x402 は、AI エージェントの支払いを、オンチェーンのステーブルコイン取引として決済する。そのため、看板となる普及の指標、すなわち決済件数は、たいていのエージェント普及の主張とは違って、外部から検証できる。Base チェーン上の280日分の活動を調べた著者らは、1億3,670万件の決済が $44.1 million を動かしていることを見出した。そのうち21.20%は架空であり、63.78%は連結したウォレット群の内部での送金だった。生き残る分の輪郭を描くと、名前の挙がった独立したサービスへ確かに届いた金額は $187,861.35 にとどまる。最も甘く見積もって、作られたものだと証明できないものすべてを認めても $20.2 million、全体の45.92%だ。集中度は、どの軸で見ても極端である。支払い側、受け取り側、金額のいずれのジニ係数も0.98を超える。そして、作られた分は、一貫した運営者主導の経済として立ち現れる。著者らはそれを、星形で、機械の時計で動き、ガス代が肩代わりされたものだと特徴づける。著者らの見立てはこうだ。決済件数が測っているのは、取引をどれだけ安く作り出せるかであって、何体のエージェントが実際に何かを買っているかではない。これが重要なのは、エージェント商取引が、まさにこの種の処理件数の数字を裏づけとして支えられているからだ。しかも、これは、台帳が十分に公開されていて実際に検証できる、まれな例でもある。報告された数字と、擁護できる下限とのあいだに3桁の開きがあるという事実は、一つのプロトコルの枠を大きく越えて通じる戒めだ。",
+      "citations": [
+        {
+          "label": "arXiv:2607.12575 - How Agentic Is Agentic Commerce? A Population-Scale Measurement of x402 Adoption and Authenticity",
+          "url": "https://arxiv.org/abs/2607.12575"
+        }
+      ]
+    },
+    {
+      "lead": "AGI Summit が7月18〜19日に Palace of Fine Arts で開幕、7月22日の AMD に先行",
+      "body": "最も近い日程は、カレンダーに新しく加わったものであり、しかもすぐそこに迫っている。AGI Summit が7月18〜19日、サンフランシスコの Palace of Fine Arts で開かれる。夏の日程の口火を切る、週末の枠だ。その後ろに、7月22〜23日に Moscone West で AMD Advancing AI 2026 が続く。ここでは、Lisa Su とパートナーが、Instinct MI450 アクセラレータと Zen 6 EPYC「Venice」CPU について詳しく説明すると見込まれる。チップとインフラの流れは、8月23〜25日にスタンフォードで開かれる Hot Chips（早期登録料金は7月31日締め切り）と、9月15〜17日にサンタクララ・コンベンションセンターで開かれる AI Infra Summit へと続く。セキュリティは8月初旬から集中する。8月1〜6日にラスベガスで Black Hat USA と DEF CON 34 の AI Village、8月11〜12日に Half Moon Bay のリッツ・カールトンで SecurityWeek の AI Risk Summit、11月5〜6日にサンフランシスコで OWASP Global AppSec USA、そして、エージェントの乗っ取りや MCP 層の防御に取り組むチーム向けの Zenity の AI Agent Security Summit シリーズが並ぶ。開発者とデータの流れでは、Ai4 2026 が8月4〜6日にラスベガスの The Venetian を埋め、Anyscale の Ray Summit が8月24〜26日に San Francisco Marriott Marquis で開かれ、次回の AI Tinkerers San Francisco のミートアップがいつもの実演デモ形式で8月に催され、ACM AI Leadership Summit が8月30日から9月2日までアトランタで、The AI Conference が9月29日から10月1日までサンフランシスコの Pier 48 で再び開かれ、World Summit AI が10月7〜8日にアムステルダムの Taets Art & Event Park に主力イベントを持ち込み、GitHub Universe が10月28〜29日、AWS re:Invent が11月30日から12月4日までラスベガスで、そして NeurIPS 2026 と、12月9〜10日に Javits Center で開かれる The AI Summit New York が年を締めくくる。今週の2つの追加は、どちらも身体性 AI を指している。Runway AI Summit が9月30日、サンフランシスコの The Masonic を会場に開かれる。物理 AI、リアルタイム映像、そして政策のプログラムが組まれ、Physical Intelligence の Quan Vuong、NVIDIA Cosmos Lab の Ming-Yu Liu、Anyscale の Robert Nishihara が登壇する。早期割引は $350 だ。そして、この分野の主要な学術会議である IEEE-RAS Humanoids 2026 が、12月7〜9日にサンタクララ・コンベンションセンターで開かれる。当面の行動としては、土曜までに AGI Summit への参加を決め、7月22日の開幕前に AMD Advancing AI へ参加登録し、7月31日の Hot Chips 早期料金を確保し、8月初旬のセキュリティ枠として Black Hat と Half Moon Bay の AI Risk Summit を予約しておくことだ。",
+      "citations": [
+        {
+          "label": "AGI Summit 2026 - July 18-19, Palace of Fine Arts, San Francisco",
+          "url": "https://agisummit.ai/"
+        },
+        {
+          "label": "Runway AI Summit - September 30, 2026, The Masonic, San Francisco",
+          "url": "https://summit.runwayml.com/"
+        },
+        {
+          "label": "IEEE RAS - 2026 IEEE-RAS 25th International Conference on Humanoid Robots (Humanoids)",
+          "url": "https://www.ieee-ras.org/event/2026-ieee-ras-25th-international-conference-on-humanoid-robots-humanoids-68892/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "大きな AI モデルが、能力の90%を保ったままスマートフォンに収まる",
+    "Grok のコーディングツールが、あなたのプロジェクトと秘密情報を丸ごと送信",
+    "Cursor の不具合は未修正のまま、フォルダを開くだけで悪意あるプログラムが動く",
+    "監査の結果、1億3,700万件の AI エージェント決済のうち5分の1が偽物と判明",
+    "主要な AI サミットが今週末に開幕、催しは夏じゅう続く"
+  ]
+}

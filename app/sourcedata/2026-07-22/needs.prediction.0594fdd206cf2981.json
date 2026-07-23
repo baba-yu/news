@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "coding-agent maintainer team",
+    "job": "Building a pre-install verification gate into the agent that checks package provenance and typosquat signals before any dependency install runs",
+    "outcome": "A generally available, on-by-default check in at least two major coding agents that refuses to silently install packages failing verification",
+    "motivation": "To stop the agent from being steered into fetching poisoned or typosquatted dependencies on the user's behalf",
+    "task": {
+      "who": "agent dependency-resolution / security engineering",
+      "what": "add pre-install provenance and typosquat verification gate",
+      "where": "the agent's dependency install code path",
+      "when": "H2 2026 through H1 2027",
+      "why": "block silent install of poisoned dependencies",
+      "how": "PyPI attestations, npm Sigstore provenance, typosquat screening"
+    }
+  },
+  {
+    "actor": "package-registry security engineering",
+    "job": "Shipping and stabilizing the signed-provenance, trusted-publisher attestation, and typosquat-signal primitives that a coding agent can query before installing a dependency",
+    "outcome": "Machine-consumable provenance and attestation endpoints on PyPI and npm that agents query at install time to verify a package",
+    "motivation": "To close registry holes like mutable old releases so downstream agents inherit verifiable trust signals rather than blind names",
+    "task": {
+      "who": "registry security / trust-and-safety engineering",
+      "what": "expose provenance and attestation query endpoints",
+      "where": "PyPI and npm registry infrastructure",
+      "when": "H2 2026 through H1 2027",
+      "why": "supply agents verifiable trust signals at install",
+      "how": "Trusted Publishing, publish attestations, Sigstore provenance"
+    }
+  },
+  {
+    "actor": "supply-chain provenance standards contributor",
+    "job": "Hardening the attestation and provenance-verification standards a coding agent relies on to decide whether an install is trustworthy across registries",
+    "outcome": "Interoperable verification specs agents implement to check signed provenance and trusted-publisher attestations uniformly across PyPI, npm, and other registries",
+    "motivation": "To make provenance verification interoperable enough that every major coding agent can adopt it on by default",
+    "task": {
+      "who": "supply-chain security standards working group",
+      "what": "harden attestation and provenance-verification specifications",
+      "where": "Sigstore and package-provenance standards venues",
+      "when": "H2 2026 through H1 2027",
+      "why": "enable default agent adoption of verification",
+      "how": "Sigstore, SLSA, trusted-publisher attestation specifications"
+    }
+  }
+]

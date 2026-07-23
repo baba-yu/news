@@ -1,0 +1,105 @@
+{
+  "date": "2026-07-17",
+  "sections": [
+    {
+      "category": "Inilabas ng Moonshot AI ang Kimi K3, isang 2.8-trillion-parameter open-weight MoE na nangunguna sa Frontend Code Arena; ilalabas ang buong weights sa July 27",
+      "bullets": [
+        {
+          "body": "Noong July 16, <a href=\"https://www.kimi.com/blog/kimi-k3\">inilabas ng Moonshot AI ang Kimi K3</a>, na tinawag nitong pinakamalaking open-weight model na naitayo hanggang ngayon. Ito ay isang sparse Mixture-of-Experts transformer na may 2.8 trillion na kabuuang parameter, at epektibong nag-a-activate ng 16 sa 896 na expert sa pamamagitan ng Stable LatentMoE framework. Mayroon itong native 1M-token context window, palaging-bukas na reasoning mode, at native na visual understanding. Dalawang in-house na pagbabago sa arkitektura ang pangunahing tampok ng release na ito: ang Kimi Delta Attention, isang hybrid linear-attention mechanism, at ang Attention Residuals, isang drop-in na kapalit ng standard residual connections na pumipili ng mga representation sa buong lalim sa halip na tipunin ang mga ito nang pantay-pantay. Sa benchmarks, umungos ito sa unang puwesto sa Frontend Code Arena sa 1,679, nangunguna kina Claude Fable 5, GPT-5.6 Sol at GLM-5.2. Nakakuha rin ito ng humigit-kumulang 57 sa Artificial Analysis Intelligence Index (pang-apat sa 189 na model, kapantay ng Claude Opus 4.8 at GPT-5.5). Live na ito ngayon sa pamamagitan ng API sa halagang mga $3 kada milyong input at $15 kada milyong output token. Ayon sa Moonshot, ilalathala nito ang buong weights bago mag-July 27, kaya isa itong API-first na debut na susundan ng open-weights sa halip na sabay-sabay na paglabas sa parehong araw. Sa <a href=\"https://simonwillison.net/2026/Jul/16/kimi-k3/\">write-up ni Simon Willison</a>, inilalarawan ito bilang isa na namang Chinese lab na umaabot sa frontier-adjacent na resulta habang iniiwasan ang mga limitasyon ng US sa compute-export.",
+          "citations": [
+            {
+              "label": "Moonshot AI - Kimi K3",
+              "url": "https://www.kimi.com/blog/kimi-k3"
+            },
+            {
+              "label": "Simon Willison - Kimi K3, and what we can still learn from the pelican benchmark",
+              "url": "https://simonwillison.net/2026/Jul/16/kimi-k3/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Nakalikom ang Fireworks AI ng $1.5B Series D sa $17.5B na valuation, lampas na sa $1B ARR at 40 trilyong token kada araw, para palakihin ang specialized-model inference",
+      "bullets": [
+        {
+          "body": "<a href=\"https://fireworks.ai/blog/series-d-announcement\">Inanunsyo ng Fireworks AI ngayong linggo ang isang $1.505 billion Series D sa $17.5 billion na valuation</a>, na pinangunahan ng Atreides Management, Index Ventures at TCV, kasama ang partisipasyon ng NVIDIA, Lightspeed Venture Partners, Bessemer Venture Partners, Menlo Ventures at iba pa. Ayon sa kompanya, lumampas na ito sa $1 billion na annualized revenue run-rate, mga 5x na mas mataas kaysa sa nakaraang round nito. Naghahatid na rin ito ngayon ng mahigit 40 trilyong token kada araw — mahigit 95% ng mga ito ay mula sa mga model na espesyalisado sa sariling proprietary data ng mga customer, hindi sa general-purpose na frontier endpoint. Ang alok nito ay ang managed-inference layer: ginagawang tinatawag nitong specialized intelligence ang mga general model sa isang high-performance serving stack na mahigit 200 model, na may same-day na suporta para sa mga bagong open-weight release. Dahil dito, kapantay na nito ang Together, Baseten at iba pang hosted-inference na katunggali sa isang kategoryang umaabot na sa frontier-scale na ekonomiks. Ang pondo ay mapupunta sa compute capacity, dami ng engineering staff, at sa platform. Ang presensya ng NVIDIA sa cap table ay nagbibigay-diin kung gaano kaestratehiko na ang serving-and-fine-tuning tier habang lumilipat ang mga enterprise mula sa pag-renta ng frontier endpoint tungo sa pagmamay-ari ng mga espesyalisadong bersyon.",
+          "citations": [
+            {
+              "label": "Fireworks AI - Fireworks Secures $1.5 Billion in Series D Funding",
+              "url": "https://fireworks.ai/blog/series-d-announcement"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Naglabas ang Claude Code ng v2.1.212 na may default-on na agent-safety limits — matitigas na cap sa WebSearch calls at subagent spawns, kasama ang fail-closed na mga pag-ayos sa Bash permission",
+      "bullets": [
+        {
+          "body": "Umabot ang Claude Code ng Anthropic sa <a href=\"https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md\">version 2.1.212 noong July 17</a>, at ang mga pangunahing dagdag ay mga agent-safety guardrail, hindi mga bagong feature. May bagong session-wide na cap na naglilimita sa WebSearch tool calls sa default na 200 (mababago sa pamamagitan ng CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION), at isang per-session na cap na naglilimita sa subagent spawns sa default na 200 (CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION). Parehong nilalayon ng mga ito na pigilan ang runaway na search at delegation loops, at nire-reset ng /clear ang budget. Kinokopya na ngayon ng /fork ang isang usapan tungo sa sarili nitong background agent session, kaya tumatakbo nang hindi hinaharangan ang main thread ang isang delegated na trabaho. Ang mga pag-ayos sa permission system ang ubod ng seguridad. Ang mga Bash permission check ay fail-closed na ngayon sa mga file-descriptor redirect form na iba ang pagbasa ng bash kaysa sa permission analyzer. Sinara rin ang isang permission-check bypass na umaapekto sa mga Windows PowerShell 5.1 session, at ang mga command na mahigit 10,000 karakter ay laging mag-po-prompt na ngayon sa halip na awtomatikong tumakbo. Isa itong konkretong tanda na ang runaway-loop budgets at fail-closed permission gating — ang bokabularyong ginamit ng mga lokal na fine-tuning tool at MCP-security vendor matapos ang mga agent-exfiltration incident ngayong taon — ay default-on nang inilalabas sa loob ng isang mainstream na coding agent.",
+          "citations": [
+            {
+              "label": "Anthropic - Claude Code CHANGELOG (v2.1.212)",
+              "url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Binuksan ang WAIC 2026 sa Shanghai na may 108 chip at 208 embodied-AI system na nakadispley, na tumatampok sa domestic-silicon push na pinangunahan ng HBM-free 14nm DF1000 ng Dongfang Suanxin",
+      "bullets": [
+        {
+          "body": "<a href=\"https://news.cgtn.com/news/2026-07-17/AI-conference-opens-in-Shanghai-with-over-300-global-product-debuts-1OQQf08iaqs/p.html\">Binuksan sa Shanghai noong July 17 ang 2026 World Artificial Intelligence Conference</a>, na tatagal hanggang July 20 na may mahigit 1,100 exhibitor, mahigit 3,000 exhibit at mahigit 300 global product debut. Ayon sa mga organizer, may 108 chip, 261 foundation model at 208 embodied-intelligence terminal sa palapag, kabilang sa mga pangunahing atraksyon ang mga humanoid service robot. Malinaw na iginuhit ang kompetisyon bilang lumalampas na sa software tungo sa computing power at matalinong hardware. Ang pinakamalinaw na senyales sa hardware ay ang domestic silicon na dinisenyo upang iwasan ang mga limitasyon ng US sa export. Ang Shanghai startup na Dongfang Suanxin, kalalabas lang sa stealth, ay <a href=\"https://www.trendforce.com/news/2026/07/14/news-chinas-dongfang-suanxin-unveils-hbm-free-14nm-ai-chip-claims-higher-memory-bandwidth-than-nvidia-h200/\">naglabas ng DF1000 accelerator</a> nito na nakatayo sa mature na 14nm node nang walang HBM. Gamit ang software-defined design at 3D-stacked near-memory computing, iginiit nito ang 520 TFLOPS ng BF16 at 6.4 TB/s na memory bandwidth — mga 33% na mas mataas kaysa sa H200 ng NVIDIA sa bandwidth, kahit na ang raw compute ay umaabot lang sa halos kalahati ng sa H200. Nakatakda ang mass production sa end-2026, at may ipinangakong DF2000 na dodoble ang performance sa fourth quarter. Sa mahigit sampung Chinese general-purpose compute-chip vendor na sabay-sabay na nag-e-exhibit, ang WAIC ang pinakamalinaw na iisang larawan ngayong linggo ng pagsisikap ng China na iwasan ang leading-edge lithography at HBM sa pamamagitan ng pagpili ng node at advanced packaging sa halip na process shrink.",
+          "citations": [
+            {
+              "label": "CGTN - AI conference opens in Shanghai with over 300 global product debuts",
+              "url": "https://news.cgtn.com/news/2026-07-17/AI-conference-opens-in-Shanghai-with-over-300-global-product-debuts-1OQQf08iaqs/p.html"
+            },
+            {
+              "label": "TrendForce - China's Dongfang Suanxin unveils HBM-free 14nm AI chip",
+              "url": "https://www.trendforce.com/news/2026/07/14/news-chinas-dongfang-suanxin-unveils-hbm-free-14nm-ai-chip-claims-higher-memory-bandwidth-than-nvidia-h200/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Natuklasan ng AI Security Report 2026 ng Check Point na kaya nang magpatakbo ng AI ng live na intrusion nang mag-isa, at itinatampok nito ang matitibay na jailbreak na itinatanim sa mga agent config file na muling nilo-load kada session",
+      "bullets": [
+        {
+          "body": "Inilathala ng Check Point ngayong linggo ang <a href=\"https://research.checkpoint.com/2026/ai-security-report-2026/\">AI Security Report 2026</a> nito, at ang <a href=\"https://www.helpnetsecurity.com/2026/07/15/check-point-ai-security-report-2026/\">July 15 analysis</a> nito ay mababasa bilang paglampas sa isang hangganan, hindi isang paunti-unting update. Iginigiit ng ulat na lumipat na ang AI mula sa pagiging katuwang sa development tungo sa pagiging live attack operator. Idinokumento nito ang mga intrusion kung saan nagpatakbo ang AI ng exploitation workflow nang mag-isa — bumubuo ng libu-libong command sa dose-dosenang session nang kaunti lang ang direksyon ng tao. May kaso rin kung saan ginamit ng isang operator ang AI upang lumikha ng VoidLink, isang 88,000-line command-and-control framework, sa loob ng wala pang isang linggo. Dalawang estruktural na natuklasan ang namumukod-tangi para sa sinumang nagpapatakbo ng mga agent. Una, lalong inaabuso ng mga umaatake ang agentic architecture sa halip na mga iisang prompt, gamit ang isang matibay na bypass na nagtatanim ng mga mapaminsalang tagubilin sa mga configuration file na awtomatikong nilo-load ng agent sa buong session — ang uri ng repo o context file na binabasa ng mga agent para sa user. Ikalawa, tumaas nang mga limang beses ang mga natukoy na mas mahahabang malisyosong payload sa pagitan ng March at May 2026, na umaabot na sa halos 1% ng mga naobserbahang prompt. Dumoble taon-sa-taon ang mga high-risk na interaksyon sa AI tungo sa mga 4% ng prompt, at tama lang na natukoy ng mga sanay na reviewer ang mga AI-generated na mukha sa mga 41% lamang ng pagkakataon. Dahil dito, ang context-file poisoning at autonomous exploitation ay nagiging operational at malakihang problema, hindi mga demonstrasyon lamang sa lab, katabi ng mga insidente ng Cursor at MCP ngayong taon.",
+          "citations": [
+            {
+              "label": "Check Point Research - AI Security Report 2026",
+              "url": "https://research.checkpoint.com/2026/ai-security-report-2026/"
+            },
+            {
+              "label": "Help Net Security - Check Point AI Security Report 2026",
+              "url": "https://www.helpnetsecurity.com/2026/07/15/check-point-ai-security-report-2026/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mga AI event na dapat planuhin ngayon: darating sa San Francisco ang AGI Summit ngayong weekend, susunod ang AMD Advancing AI sa July 22-23, at nagsisiksikan ang fall Bay Area calendar sa mga chip, security at dev track",
+      "bullets": [
+        {
+          "body": "Ang pinakamalapit na desisyon ay agaran: tatakbo ngayong weekend ang <a href=\"https://luma.com/agisummit2026\">AGI Summit sa July 18-19 sa Palace of Fine Arts sa San Francisco</a>, isang pagtitipon ng mahigit 200 speaker kasama sa listahan ang Anthropic, OpenAI, Microsoft, Meta at Tesla. Susunod naman ang Advancing AI 2026 ng AMD sa Moscone West sa July 22-23, kung saan inaasahang ilalahad nina Lisa Su at mga partner ang Instinct MI450 accelerator at Zen 6 EPYC Venice CPUs. Sa AI-chip at infrastructure track, susunod sa kalendaryo ang Hot Chips sa Stanford sa August 23-25 (magsasara ang early registration sa July 31) at ang <a href=\"https://ai-infra-summit.com/events/ai-infra-summit\">AI Infra Summit sa Santa Clara Convention Center sa September 15-17</a>, na sumasaklaw sa silicon, AI data center at physical AI. Nagsisiksikan ang AI-security block sa simula ng August: ang Black Hat USA at ang AI Village ng DEF CON 34 sa Las Vegas sa August 1-6, ang AI Risk Summit ng SecurityWeek sa Half Moon Bay sa August 11-12, ang OWASP Global AppSec USA sa San Francisco sa November 5-6, at ang AI Agent Security Summit series ng Zenity para sa mga tagatanggol laban sa agent-hijack at sa MCP-layer. Sa developer at data track: ang Ai4 2026 sa Las Vegas sa August 4-6, ang Ray Summit ng Anyscale sa August 24-26 sa San Francisco, ang AI Tinkerers San Francisco meetup sa August, ang ACM AI Leadership Summit sa Atlanta sa August 30-September 2, ang The AI Conference sa Pier 48 at ang OpenAI DevDay sa Fort Mason na parehong mapapasa-September 29 (kasama ang Runway AI Summit kinabukasan), ang PyTorch Conference North America sa San Jose sa October 20-21, ang World Summit AI sa Amsterdam sa October 7-8, ang GitHub Universe sa October 28-29, ang AWS re:Invent sa November 30-December 4, ang NeurIPS sa December, ang IEEE-RAS Humanoids sa Santa Clara Convention Center sa December 7-9, at ang The AI Summit New York sa December 9-10 na magtatapos sa taon. Mga aksyong dapat gawin sa malapit na panahon: magdesisyon tungkol sa AGI Summit bago mag-Sabado, magparehistro sa AMD Advancing AI bago ang July 22, at i-lock ang July 31 na early rate ng Hot Chips bago mag-book sa Las Vegas security block sa simula ng August.",
+          "citations": [
+            {
+              "label": "AGI Summit 2026 - July 18-19, Palace of Fine Arts, San Francisco",
+              "url": "https://luma.com/agisummit2026"
+            },
+            {
+              "label": "AI Infra Summit 2026 - September 15-17, Santa Clara Convention Center",
+              "url": "https://ai-infra-summit.com/events/ai-infra-summit"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

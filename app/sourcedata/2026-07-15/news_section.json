@@ -1,0 +1,87 @@
+{
+  "date": "2026-07-15",
+  "sections": [
+    {
+      "category": "PrismML ships Bonsai 27B, the first 27B-class model to fit inside a phone's memory budget, with a 1-bit build that occupies 3.9 GB and holds 90% of full-precision quality",
+      "bullets": [
+        {
+          "body": "PrismML on July 14 <a href=\"https://prismml.com/news/bonsai-27b\">released Bonsai 27B, which it bills as the first 27B-class model that runs on a phone</a>. The model derives from Qwen3.6 27B and keeps a 262K-token context window plus multimodal input through a 4-bit vision tower, and it ships in two extreme-quantization builds: a ternary variant holding weights in {-1, 0, +1} with FP16 scaling at 1.71 effective bits per weight and 5.9 GB, and a 1-bit variant with binary {-1, +1} weights at 1.125 effective bits per weight and 3.9 GB. Across 15 benchmarks the ternary build retains 95% of the full-precision baseline and the 1-bit build retains 90%, while decoding at 134 and 163 tokens per second respectively on an RTX 5090. The 1-bit build is the point of the exercise: at 3.9 GB it fits inside the roughly 6 GB usable memory an iPhone 17 Pro leaves after KV cache and activations, a budget that has kept 27B-class weights off handsets entirely. Weights are Apache 2.0 on Hugging Face and GitHub, with hosted access through Together AI. PrismML is a Caltech-founded company backed by Khosla Ventures, Cerberus, and Google, with Samsung support. It matters because on-device inference has been bounded by memory, not compute, and the workaround until now was to shrink the model until the capability went with it; a sub-2-bit encoding that gives up 5-10% of benchmark quality to cross a hardware threshold changes which class of model counts as portable. The same day, an arXiv preprint proposed <a href=\"https://arxiv.org/abs/2607.13027\">PalmClaw, a native on-device agent framework for mobile phones</a> — the runtime layer that a phone-resident 27B model would need to do more than answer single prompts.",
+          "citations": [
+            {
+              "label": "PrismML - Bonsai 27B: A 27B-Class Model That Runs on a Phone",
+              "url": "https://prismml.com/news/bonsai-27b"
+            },
+            {
+              "label": "arXiv:2607.13027 - PalmClaw: A Native On-Device Agent Framework for Mobile Phones",
+              "url": "https://arxiv.org/abs/2607.13027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "A wire-level teardown of xAI's Grok CLI finds it uploads entire repositories, git history, and unredacted .env secrets to a Google Cloud bucket regardless of what the agent actually reads",
+      "bullets": [
+        {
+          "body": "An independent researcher published a <a href=\"https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547\">wire-level analysis of what xAI's Grok build CLI transmits during normal operation</a>, captured with mitmproxy against grok 0.2.93 on macOS. Three findings stand out. File contents reach xAI verbatim and unredacted, including .env secrets, arriving both in live model turns and in archived session state pushed to a /v1/storage endpoint that returns HTTP 200. The upload is not scoped to what the agent reads: the CLI ships every tracked file's content plus git history, and a 12 GB test repository produced 5.10 GiB of uploads across 73 chunks of roughly 75 MB each, a byte ratio some 27,800 times larger than the model-turn traffic could account for. The destination is a Google Cloud Storage bucket named grok-code-session-traces, recovered from binary strings and metadata. Alongside those two channels the CLI also reports to Mixpanel and a grok.com events endpoint. The author is careful about scope: the capture proves transmission and storage, not training use, which is a separate policy question. The finding drew three separate Hacker News front-page threads across July 12-14. It matters because the risk here is not an attacker slipping past a boundary but the tool's own default path: a developer who audits which files an agent was asked to read learns nothing about which files left the machine, and a secret-scanning workflow that gates commits does nothing about a channel that uploads the working tree before any commit exists.",
+          "citations": [
+            {
+              "label": "cereblab - What xAI's Grok build CLI sends to xAI: a wire-level analysis",
+              "url": "https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mindgard publishes an unpatched Cursor code-execution flaw after seven months of vendor silence, arguing that full disclosure has become the only remaining protection for the IDE's users",
+      "bullets": [
+        {
+          "body": "AI-security vendor Mindgard on July 14 <a href=\"https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left\">published an unpatched arbitrary-code-execution flaw in the Cursor IDE on Windows</a>, breaking coordinated disclosure after seven months without remediation. The mechanism is mundane and therefore effective: Cursor searches several filesystem locations for a Git binary when it initializes a project, and does not validate executables found in the repository directory itself. Opening a repository that carries a malicious git.exe at its root runs that binary with the user's privileges — no prompt, no approval dialog, no interaction beyond opening the folder — and the lookup repeats on a cadence for as long as the project stays open. Cloning an untrusted repository to read it is enough. Mindgard reports discovering the issue on December 15, 2025, filing through HackerOne on January 15 after the initial channel stalled, having the report rejected and then reopened and confirmed between January 16 and 20, and then receiving no substantive response from February through April. No CVE has been assigned and no severity score published. Mindgard's stated rationale for going public is that after seven months, \"withholding information no longer serves users, it serves silence.\" It matters because the disclosure clock, not the bug, is the story: an unvalidated-binary-lookup bug in an editor with more than 7 million users is a fixable defect, but a vendor security process that leaves it open for seven months is a structural one, and a named vendor breaking embargo sets a reference point other researchers sitting on agentic-IDE findings will now measure against.",
+          "citations": [
+            {
+              "label": "Mindgard - Cursor 0day: When Full Disclosure Becomes the Only Protection Left",
+              "url": "https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "A population-scale audit of the x402 agent-payment protocol finds a fifth of its 136.7 million settlements are fictitious and most of the value never leaves linked wallet clusters",
+      "bullets": [
+        {
+          "body": "A July 14 arXiv preprint by Shengchen Ling, Yajin Zhou, Lei Wu, and Cong Wang asks <a href=\"https://arxiv.org/abs/2607.12575\">how much of the agentic-commerce activity on the x402 protocol is real</a>, and answers it by measuring rather than counting. x402 settles AI-agent payments as on-chain stablecoin transactions, which makes its headline adoption metric — settlement count — auditable in a way most agent-adoption claims are not. Across 280 days of Base chain activity the authors find 136.7 million settlements moving $44.1 million, of which 21.20% are fictitious and 63.78% are internal transfers inside linked clusters. Bounding what remains, the value that demonstrably reaches named independent services is $187,861.35; the most generous bound, counting everything not provably manufactured, is $20.2 million, or 45.92%. Concentration is extreme on every axis, with payer, recipient, and value Gini coefficients all above 0.98, and the manufactured component resolves into a coherent operator-driven economy the authors characterize as star-shaped, machine-timed, and gas-subsidized. Their framing is that a settlement count measures how cheaply transactions can be manufactured, not how many agents are buying anything. It matters because agentic commerce is being underwritten on exactly this kind of throughput number, and this is the rare case where the ledger is public enough to check it — a three-order-of-magnitude gap between the reported figure and the defensible floor is a caution that generalizes well past one protocol.",
+          "citations": [
+            {
+              "label": "arXiv:2607.12575 - How Agentic Is Agentic Commerce? A Population-Scale Measurement of x402 Adoption and Authenticity",
+              "url": "https://arxiv.org/abs/2607.12575"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI events to plan around now: the AGI Summit fills San Francisco's Palace of Fine Arts this weekend on July 18-19, ahead of AMD Advancing AI at Moscone and an August run of chip, security, and developer summits",
+      "bullets": [
+        {
+          "body": "The nearest date is new to the calendar and close: <a href=\"https://agisummit.ai/\">the AGI Summit runs July 18-19 at the Palace of Fine Arts in San Francisco</a>, a weekend slot that lands before the rest of the summer schedule opens. AMD Advancing AI 2026 follows at Moscone West on July 22-23, where Lisa Su and partners are expected to detail the Instinct MI450 accelerator and Zen 6 EPYC \"Venice\" CPUs. The rest of the AI-chip and infrastructure track runs Hot Chips at Stanford on August 23-25, whose early-registration rate closes July 31, and the AI Infra Summit at the Santa Clara Convention Center on September 15-17. The AI-security track clusters from early August: Black Hat USA and DEF CON 34's AI Village in Las Vegas on August 1-6, SecurityWeek's AI Risk Summit at the Ritz-Carlton in Half Moon Bay on August 11-12, OWASP Global AppSec USA in San Francisco on November 5-6, and Zenity's AI Agent Security Summit series for teams working agent-hijack and MCP-layer defense. On the developer, data, and Bay Area track, Anyscale's Ray Summit runs August 24-26 at the San Francisco Marriott Marquis, the next AI Tinkerers San Francisco meetup lands in August in its usual working-demo format, Ai4 2026 fills The Venetian in Las Vegas on August 4-6, the ACM AI Leadership Summit runs August 30 to September 2 in Atlanta, The AI Conference returns to Pier 48 in San Francisco on September 29 to October 1, World Summit AI brings its flagship to Amsterdam's Taets Art & Event Park on October 7-8, GitHub Universe is October 28-29, AWS re:Invent runs November 30 to December 4 in Las Vegas, and both NeurIPS 2026 and The AI Summit New York at the Javits Center on December 9-10 close the year. Two more additions this week, both worth pinning for anyone tracking embodied AI: <a href=\"https://summit.runwayml.com/\">the Runway AI Summit takes The Masonic in San Francisco on September 30</a> with a physical-AI, real-time-video, and policy program featuring Physical Intelligence's Quan Vuong, NVIDIA Cosmos Lab's Ming-Yu Liu, and Anyscale's Robert Nishihara, at $350 early-bird; and <a href=\"https://www.ieee-ras.org/event/2026-ieee-ras-25th-international-conference-on-humanoid-robots-humanoids-68892/\">IEEE-RAS Humanoids 2026, the field's main academic venue, lands at the Santa Clara Convention Center on December 7-9</a>. Near-term actions: decide on the AGI Summit before Saturday, register for AMD Advancing AI ahead of the July 22 open, lock the July 31 Hot Chips early rate, and book Black Hat plus the Half Moon Bay AI Risk Summit for the early-August security block.",
+          "citations": [
+            {
+              "label": "AGI Summit 2026 - July 18-19, Palace of Fine Arts, San Francisco",
+              "url": "https://agisummit.ai/"
+            },
+            {
+              "label": "Runway AI Summit - September 30, 2026, The Masonic, San Francisco",
+              "url": "https://summit.runwayml.com/"
+            },
+            {
+              "label": "IEEE RAS - 2026 IEEE-RAS 25th International Conference on Humanoid Robots (Humanoids)",
+              "url": "https://www.ieee-ras.org/event/2026-ieee-ras-25th-international-conference-on-humanoid-robots-humanoids-68892/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "date": "2026-07-16",
+  "sections": [
+    {
+      "category": "Thinking Machines lanza Inkling, un MoE multimodal de pesos abiertos de 975B concebido para el ajuste fino en lugar del alquiler, junto a una versión preliminar Inkling-Small de 276B",
+      "bullets": [
+        {
+          "body": "El laboratorio Thinking Machines de Mira Murati <a href=\"https://thinkingmachines.ai/news/introducing-inkling/\">lanzó el 15 de julio Inkling, su primer modelo entrenado desde cero, como pesos abiertos</a>. La arquitectura es un transformer de tipo Mixture-of-Experts con 975B parámetros totales y 41B activos por token, preentrenado con 45 billones de tokens de texto, imágenes, audio y vídeo, y con una ventana de contexto de hasta 1M de tokens; junto a él se publica una versión preliminar Inkling-Small, de 276B totales y 12B activos, con la misma receta y pensada para tareas sensibles a la latencia. El laboratorio es explícito en que Inkling no es el modelo más potente disponible, ni abierto ni cerrado: la apuesta es que las empresas quieren una base personalizable en lugar de un endpoint de frontera alquilado, y el lanzamiento desemboca directamente en Tinker, la plataforma de ajuste fino de la compañía, donde Inkling está disponible con opciones de contexto de 64K y 256K. La distribución estuvo coordinada: <a href=\"https://www.together.ai/models/inkling\">Together AI sirvió Inkling desde el día 0</a> tras un endpoint compatible con OpenAI que acepta entrada de texto, imagen y audio con control del esfuerzo de razonamiento por petición. Para el ecosistema de LLM locales, la relevancia está en que un segundo laboratorio emergente estadounidense —tras la oleada de MoE chinos del verano— pone bajo pesos abiertos un modelo de escala de frontera entrenado desde cero, con el ajuste fino como modelo de negocio explícito y no como una idea de última hora.",
+          "citations": [
+            {"label": "Thinking Machines Lab - Inkling: Our open-weights model", "url": "https://thinkingmachines.ai/news/introducing-inkling/"},
+            {"label": "Together AI - Inkling", "url": "https://www.together.ai/models/inkling"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Unsloth publica v0.1.49-beta con soporte de Inkling el mismo día, un sistema de permisos de llamadas a herramientas de cuatro niveles e inferencia en GPU de Intel respaldada por Vulkan",
+      "bullets": [
+        {
+          "body": "La <a href=\"https://github.com/unslothai/unsloth/releases/tag/v0.1.49-beta\">versión v0.1.49-beta de Unsloth, publicada el 15 de julio</a>, incorpora Inkling —el nuevo modelo abierto de 975B totales y 41B activos con ventana de contexto de hasta 1M— en el mismo ciclo de noticias que el propio modelo, continuando el patrón del proyecto de dar soporte el mismo día a los grandes lanzamientos de pesos abiertos. El cambio relevante para la seguridad es un selector de permisos de llamadas a herramientas de cuatro niveles (Ask, Approve for me, Off, Full access) con aislamiento de espacios de trabajo, que sustituye al interruptor binario anterior: una convergencia notable de las herramientas de ajuste fino hacia el vocabulario de control de permisos que los agentes de programación adoptaron tras los incidentes de exfiltración de agentes de este año. El alcance de hardware también se amplía: las GPU de Intel obtienen inferencia acelerada por GPU gracias al nuevo soporte de Vulkan en llama.cpp, donde antes estaban limitadas a la CPU, y la colección de modelos NVFP4 crece con soporte de NVFP4 dinámico, extendiendo la vía de exportación post-entrenamiento NVFP4/FP8/imatrix-GGUF que llegó en v0.1.48 el 7 de julio.",
+          "citations": [
+            {"label": "Unsloth - v0.1.49-beta release notes", "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.49-beta"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "El Patch Tuesday récord de Microsoft, con 570 CVE, incluye un fallo crítico de ejecución remota de código en Copilot y un grupo de fallos de GitHub Copilot / VS Code, con el descubrimiento asistido por IA señalado como el motor del volumen",
+      "bullets": [
+        {
+          "body": "El Patch Tuesday del 14 de julio de Microsoft <a href=\"https://www.bleepingcomputer.com/news/microsoft/microsoft-july-2026-patch-tuesday-fixes-massive-570-flaws-3-zero-days/\">corrigió un récord de 570 vulnerabilidades, incluidos tres zero-days, dos de ellos explotados activamente</a>. El grupo de fallos en superficies de IA es la parte que merece leerse con atención: CVE-2026-48561 es un fallo crítico de ejecución remota de código en el propio Microsoft Copilot, acompañado de un RCE en GitHub Copilot (CVE-2026-50510), una elusión de funciones de seguridad en Copilot / VS Code (CVE-2026-41109) y un fallo de divulgación de tokens en Copilot / VS Code (CVE-2026-47282): el asistente y el editor en el que vive son ya una categoría recurrente del Patch Tuesday y no una rareza puntual. Cincuenta y nueve de las 570 están calificadas como críticas, 48 de ellas RCE, con varias entradas por encima de CVSS 8.0 en Windows Media Foundation, DirectX y DHCP. La razón declarada del volumen es en sí misma una historia de IA: Microsoft atribuye el aumento a su sistema interno de descubrimiento de vulnerabilidades impulsado por IA, y Adobe pasó a boletines quincenales con efecto ese mismo día, alegando que el descubrimiento acelerado por IA comprime la ventana entre divulgación y explotación.",
+          "citations": [
+            {"label": "BleepingComputer - Microsoft July 2026 Patch Tuesday fixes massive 570 flaws, 3 zero-days", "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-july-2026-patch-tuesday-fixes-massive-570-flaws-3-zero-days/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "xAI libera como código abierto el agente de programación Grok Build completo bajo Apache 2.0 tras el análisis de las subidas a nivel de red, y desactiva por completo la vía de subida de directorios a Google Cloud",
+      "bullets": [
+        {
+          "body": "xAI respondió al análisis a nivel de red de esta semana de su CLI Grok build —que mostró repositorios, historial de git y secretos .env sin redactar fluyendo hacia un bucket de Google Cloud— <a href=\"https://github.com/xai-org/grok-build\">publicando el agente completo como xai-org/grok-build bajo Apache 2.0</a> el 15 de julio: 844.530 líneas de Rust, aproximadamente un 97% de código original, publicadas como una exportación sincronizada periódicamente del monorepo interno. La función de subida que desencadenó la polémica está desactivada, y el código residual de Google Cloud devuelve ahora errores de indisponibilidad fijados en el código; el lanzamiento se presenta como operación local primero y con la retención de datos desactivada. <a href=\"https://simonwillison.net/2026/Jul/15/grok-build/\">La lectura del código que hizo Simon Willison</a> saca a la luz los detalles que los fabricantes suelen mantener en privado: los prompts de sistema completos del agente y del subagente (al subagente se le instruye para que oculte su propio prompt a los usuarios), implementaciones de herramientas adaptadas de agentes de la competencia, incluidos Codex y Claude Code, y una base de código sustancialmente mayor que la norma de los agentes de terminal. Como desenlace impulsado por una divulgación, es el más contundente de los incidentes de confianza en agentes de este año —publicación completa del código fuente, no una disculpa en el changelog— y pone en manos de los investigadores de seguridad una referencia completa y poco habitual sobre cómo un agente en producción implementa realmente las subidas, las llamadas a herramientas y los permisos.",
+          "citations": [
+            {"label": "GitHub - xai-org/grok-build", "url": "https://github.com/xai-org/grok-build"},
+            {"label": "Simon Willison - xAI open-sources Grok Build", "url": "https://simonwillison.net/2026/Jul/15/grok-build/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "TSMC registra un trimestre récord gracias a la demanda de IA —ingresos un 36% arriba y beneficio neto un 77% arriba interanual— mientras los 2nm alcanzan el 3% de los ingresos por obleas en su primer trimestre reportado",
+      "bullets": [
+        {
+          "body": "Los <a href=\"https://pr.tsmc.com/english/news/3326\">resultados del segundo trimestre de TSMC, publicados el 16 de julio</a>, cuantifican hasta qué punto la demanda de aceleradores de IA está tirando de la fundición: ingresos de NT$1.270.380 millones (40.200 millones de dólares, un 36,0% más interanual en términos de NT$ y un 12,0% más secuencial), beneficio neto de NT$706.560 millones, un 77,4% más, y márgenes que habrían sido inverosímiles para una fundición hace dos años: 67,7% bruto, 60,3% operativo y 55,6% neto. La mezcla de nodos es la señal de cara al futuro: los 2 nanómetros aportaron el 3% de los ingresos por obleas en su primer trimestre significativo, los 3nm mantuvieron el 30% y los nodos avanzados (7nm y por debajo) se llevaron el 77% del total. El director financiero Wendell Huang guió el tercer trimestre hacia entre 44.600 y 45.800 millones de dólares apoyándose en \"la pronunciada aceleración de nuestra tecnología de 2 nanómetros\", y la compañía elevó su plan de inversión de capital para 2026 al rango de 60.000-64.000 millones de dólares. Para todos los que están aguas abajo —las asignaciones de aceleradores de NVIDIA y AMD, los calendarios de construcción de los hiperescaladores y las hojas de ruta de NPU en el dispositivo que dependen de la misma capacidad de vanguardia— el panorama de restricciones sigue siendo el mismo: la demanda se raciona por la oferta de obleas, y TSMC está gastando en consecuencia.",
+          "citations": [
+            {"label": "TSMC - TSMC Reports Second Quarter EPS of NT$27.25", "url": "https://pr.tsmc.com/english/news/3326"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Eventos de IA que conviene planificar ya: la AGI Summit abre este fin de semana en San Francisco, AMD Advancing AI sigue el 22 y 23 de julio y el OpenAI DevDay cae el 29 de septiembre en Fort Mason, en un calendario de finales de septiembre ya saturado",
+      "bullets": [
+        {
+          "body": "La decisión más próxima no cambia y ahora es urgente: la AGI Summit se celebra el 18 y 19 de julio en el Palace of Fine Arts de San Francisco, este mismo fin de semana, con AMD Advancing AI 2026 en el Moscone West el 22 y 23 de julio justo detrás, donde se espera que Lisa Su y sus socios detallen el acelerador Instinct MI450 y las CPU EPYC \"Venice\" con Zen 6. La pista de chips e infraestructura de IA continúa con Hot Chips en Stanford del 23 al 25 de agosto —la inscripción anticipada cierra el 31 de julio— y el AI Infra Summit en el Santa Clara Convention Center del 15 al 17 de septiembre. El bloque de seguridad de IA se concentra desde principios de agosto: Black Hat USA y el AI Village de DEF CON 34 en Las Vegas del 1 al 6 de agosto, el AI Risk Summit de SecurityWeek en Half Moon Bay el 11 y 12 de agosto, OWASP Global AppSec USA en San Francisco el 5 y 6 de noviembre, y la serie AI Agent Security Summit de Zenity para los equipos de defensa contra el secuestro de agentes y en la capa MCP. En la pista de desarrolladores y datos: Ai4 2026 en The Venetian de Las Vegas del 4 al 6 de agosto, el Ray Summit de Anyscale del 24 al 26 de agosto en el San Francisco Marriott Marquis, el meetup de AI Tinkerers San Francisco en agosto, el ACM AI Leadership Summit en Atlanta del 30 de agosto al 2 de septiembre, The AI Conference en el Pier 48 del 29 de septiembre al 1 de octubre, el Runway AI Summit en The Masonic el 30 de septiembre, el World Summit AI en Ámsterdam el 7 y 8 de octubre, GitHub Universe el 28 y 29 de octubre, AWS re:Invent del 30 de noviembre al 4 de diciembre, y cerrando el año NeurIPS, IEEE-RAS Humanoids en el Santa Clara Convention Center del 7 al 9 de diciembre y The AI Summit New York el 9 y 10 de diciembre. Dos novedades esta semana: <a href=\"https://devday.openai.com/\">el OpenAI DevDay 2026 queda fijado para el martes 29 de septiembre en Fort Mason, San Francisco</a> —las solicitudes presenciales ya están cerradas ($650 para los seleccionados), la keynote se retransmite gratis previa inscripción y los DevDay Exchanges llegarán después a ocho ciudades, incluidas Tokio, Berlín y Londres—, lo que apila la misma fecha del 29 de septiembre que el Day Zero de The AI Conference y la víspera del Runway AI Summit en una supersemana de San Francisco; y <a href=\"https://pytorch.org/event/pytorch-conference-2026/\">la PyTorch Conference North America 2026 se celebra el 20 y 21 de octubre en San José</a>, con cobertura de PyTorch, vLLM, DeepSpeed y Ray, pistas de seguridad y de pila completa, y con la inscripción anticipada con descuento ya abierta. Acciones a corto plazo: decidir sobre la AGI Summit antes del sábado, inscribirse en AMD Advancing AI antes del 22 de julio, asegurar la tarifa anticipada de Hot Chips antes del 31 de julio, reservar el bloque de seguridad de Las Vegas de principios de agosto y elegir carril para la colisión del 29 de septiembre: apuntarse a la keynote del DevDay no cuesta nada aunque al final se asista al Pier 48.",
+          "citations": [
+            {"label": "OpenAI - DevDay 2026, September 29, Fort Mason, San Francisco", "url": "https://devday.openai.com/"},
+            {"label": "PyTorch Foundation - PyTorch Conference North America 2026, October 20-21, San Jose", "url": "https://pytorch.org/event/pytorch-conference-2026/"}
+          ]
+        }
+      ]
+    }
+  ]
+}

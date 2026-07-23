@@ -1,0 +1,70 @@
+{
+  "date": "2026-07-18",
+  "technical": [
+    {
+      "lead": "Anthropic reverses Fable 5 cut for Max; Pro tier pushed to API rates",
+      "body": "Anthropic said on July 18 that beginning July 20 Claude Fable 5 will be included in all Max and Team Premium plans at 50% of limits, reversing its original plan to pull the model out of subscriptions entirely and sell it only per-token. Pro and Team Standard subscribers are excluded from that inclusion: they receive a one-time $100 usage credit, after which continued Fable 5 access bills at API rates. Because Max plans start in the $100-$200 per month range, the practical effect is that the $20 tier loses subscription-included access to the model once that credit is spent. The arithmetic is thinner than the headline reads — the underlying weekly limits are themselves being cut by about a third on the same date, so the 50% allowance applies to a smaller base, and the temporary boost to Claude Code weekly rate limits expires alongside it. Anthropic framed the move around Fable demand being hard to manage and frustrating to users, while acknowledging OpenAI's GPT-5.6 Sol as delivering comparable performance at a fraction of the cost. It is the clearest public instance yet of frontier-model subscription economics being repriced by competitive pressure rather than by capacity alone, with the open-weight wave sitting directly behind that pressure.",
+      "citations": [
+        {
+          "label": "Simon Willison - Claude make Fable 5 permanent",
+          "url": "https://simonwillison.net/2026/Jul/18/claude-make-fable-5-permanent/"
+        },
+        {
+          "label": "the decoder - Anthropic slashes Claude Fable 5 limits in Max and Team Premium",
+          "url": "https://the-decoder.com/anthropic-slashes-claude-fable-5-limits-in-max-and-team-premium-and-pushes-pro-users-toward-api-pricing/"
+        }
+      ]
+    },
+    {
+      "lead": "OpenAI's GPT-Red beats human red teams 84% to 13% on injections",
+      "body": "OpenAI on July 16 disclosed GPT-Red, an automated red-teaming model trained by adversarial self-play: the attacker earns reward for successful prompt injections while a set of diverse defender models earn reward for resisting them without losing capability on legitimate tasks, both training concurrently into an escalating arms race. The comparative numbers carry the disclosure. On novel indirect prompt-injection scenarios outside its training data, GPT-Red reached an 84% attack success rate against GPT-5.1, against 13% for human red teamers on identical scenarios, and it fully compromised a simulated AI vending machine across all three objectives. Feeding those attacks back into training produced the defensive half: GPT-5.6 Sol records six times fewer failures on the direct prompt-injection benchmark than GPT-5.5, a 0.05% failure rate against GPT-Red's own direct injections, and above 97% accuracy on indirect-injection benchmarks covering developer tools and browsing, while fake chain-of-thought attacks that succeeded north of 95% of the time against GPT-5.1 now land below 10%. OpenAI says the findings have been folded into production model training since GPT-5.3, with capability and refusal scores holding steady through the hardening. The structural change is that red-teaming moves from a pre-launch gate to a continuous loop inside the training pipeline, applied at the weights rather than at the harness.",
+      "citations": [
+        {
+          "label": "Help Net Security - GPT-Red beat human red teamers on a prompt injection test",
+          "url": "https://www.helpnetsecurity.com/2026/07/16/openai-gpt-red-prompt-injection-test/"
+        },
+        {
+          "label": "The Hacker News - OpenAI's GPT-Red automates prompt injection testing to harden GPT-5.6 Sol",
+          "url": "https://thehackernews.com/2026/07/openais-gpt-red-automates-prompt.html"
+        }
+      ]
+    },
+    {
+      "lead": "Walden Robotics exits stealth on $300M seed, robots in Toyota plant",
+      "body": "Walden Robotics launched out of stealth on July 15 with $300 million in seed funding at a $1.1 billion valuation, co-led by Toyota — through Toyota Motor Corporation, Toyota Invention Partners and Toyota Ventures — and Deviation Capital, with NVIDIA, Boeing, Samsung Ventures, Prologis Ventures, CoreWeave Ventures, AE Ventures, Calibrate Ventures, Shine Capital, NextView Ventures and Menlo Ventures among the participants. Co-founder and CEO Russ Tedrake is the MIT professor who previously ran Large Behavior Models at Toyota Research Institute, and the technical approach follows that lineage directly: Large Behavior Models paired with Diffusion Policy, the adaptation of image-generation diffusion models to robot manipulation, so the machines acquire new tasks through real-world practice rather than hand-scripted motion. What separates this from the usual humanoid funding announcement is that the deployment predates the raise — Walden says its robots have been doing useful work at a Toyota plant in North America since February 2026, moving from first pilot to real production tasks in under two months, with target environments spanning automotive, aerospace, semiconductors, electronics, logistics and life sciences. The investor mix is its own signal: a manufacturer, an aerospace prime, a chip vendor and a warehouse REIT's venture arm on the same cap table describes a company underwritten by its prospective customers rather than by robotics enthusiasm.",
+      "citations": [
+        {
+          "label": "Walden Robotics - Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today",
+          "url": "https://www.waldenrobotics.com/news/walden-robotics-launches-from-stealth"
+        }
+      ]
+    },
+    {
+      "lead": "Colibri runs a 744B-parameter model on 25GB of RAM, no GPU",
+      "body": "Colibri, an Apache 2.0 inference engine written in dependency-free C, has gathered roughly 15.9k GitHub stars behind a single premise: treat VRAM, RAM and disk as one managed memory hierarchy so a 744-billion-parameter mixture-of-experts model fits on consumer hardware. Running GLM-5.2, only about 40B of the 744B parameters activate per token, so the roughly 17B of dense layers stay resident in RAM while the 19,456 routed experts are pulled in from disk on demand under an LRU cache. That puts the floor at about 25GB of RAM — 9.9GB resident plus cache — against a roughly 370GB int4 model container on disk, with optional CUDA and Metal backends, MLA and DSA sparse attention, speculative decoding and grammar-forced generation, plus a pre-converted int4 build on Hugging Face. The caveat is stated plainly by the author: 0.05 to 0.1 tokens per second on a 12-core WSL2 machine, with community reports reaching 1.23 on high-end hardware. That is batch-job territory rather than interactive chat, but it inverts the usual local-inference constraint — instead of quantizing a model down until it fits in memory, it trades wall-clock time for the ability to run a frontier-scale open model at all on hardware that could never hold its weights.",
+      "citations": [
+        {
+          "label": "GitHub - JustVugg/colibri",
+          "url": "https://github.com/JustVugg/colibri"
+        }
+      ]
+    },
+    {
+      "lead": "Anaconda buys Kilo Code, an agent platform routing 10T tokens a month",
+      "body": "Anaconda announced on July 15 that it has acquired Kilo Code, an agentic engineering platform the company says orchestrates close to 10 trillion tokens a month across more than 3 million developers, fronted by a model gateway that routes across 500-plus models spanning open-weight, frontier-cloud and self-hosted endpoints with no single-vendor lock-in. Financial terms were not disclosed. Kilo remains available on its own for individual builders, teams and organizations while being integrated into the broader Anaconda Platform, and the stated thesis is governance rather than raw capability: pairing agent orchestration with Anaconda's package-provenance and policy layer so enterprises can see what their coding agents are actually doing and which models they are calling. Anaconda cites early customers seeing 30-50% reductions in token consumption once intelligent routing and governance operate together — a cost argument that arrives in the same week Anthropic repriced its own subscription tiers upward in effective terms. The read-through is that the agent-harness market is starting to consolidate around vendors who can answer procurement and audit questions, not only benchmark ones, and that the model-routing gateway is becoming the layer where both spend control and policy enforcement get applied.",
+      "citations": [
+        {
+          "label": "Anaconda - Anaconda Acquires Kilo Code",
+          "url": "https://www.anaconda.com/blog/anaconda-acquires-kilo-code"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Anthropic keeps its top model, but not on cheap plans",
+    "OpenAI builds an AI that out-hacks human security teams",
+    "New robot maker gets $300M; its bots already work at Toyota",
+    "Giant AI model runs on a normal PC, just very slowly",
+    "Anaconda buys a coding-agent tool to cut company AI bills"
+  ]
+}

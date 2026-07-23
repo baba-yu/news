@@ -1,0 +1,117 @@
+{
+  "date": "2026-07-15",
+  "verifications": [
+    {
+      "topic": "LLM Workflow",
+      "semantic_verdict": "ambiguous",
+      "search_log_alignment": "consistent",
+      "reason": "Borderline. The PalmClaw arXiv preprint (2607.13027), 'a native on-device agent framework for mobile phones', is an agent framework and therefore lands inside this topic's scope alongside siblings like AutoGen Studio — but it appears only as a one-sentence context aside closing the Bonsai 27B bullet, not as a bullet in its own right, and an on-device agent runtime sits closer to the embedded-ecosystem row than to workflow/DAG orchestration (n8n, Temporal, LangFlow). No orchestration platform, workflow builder, or pipeline story is the center of any bullet today.",
+      "matching_bullets": []
+    },
+    {
+      "topic": "Multi-profiling for Local LLM (e.g. Multica)",
+      "semantic_verdict": "uncovered",
+      "search_log_alignment": "consistent",
+      "reason": "News-driven-only topic with no trigger today: no bullet references Multica or multi-profiling. Bonsai 27B shipping in two extreme-quantization builds (ternary 5.9 GB, 1-bit 3.9 GB) is a model release with variants, not multi-profiling — per glossary.yml, Multica's category is an orchestrator that runs multiple LLM profiles (models, settings, routes) from one place, and no such orchestration or profile-routing news appeared.",
+      "matching_bullets": []
+    },
+    {
+      "topic": "Agent Harness (OpenClaw, NemoClaw, Hermes Agents, etc.)",
+      "semantic_verdict": "covered",
+      "search_log_alignment": "consistent",
+      "reason": "Two bullets center on coding agents / agentic IDEs, both squarely in this category: xAI's Grok build CLI (an agentic developer CLI, examined at the wire level) and the Cursor IDE, which the scope table names explicitly in its 2026 active brand set. Both stories are about the harness's own behavior — Grok CLI's default upload path and Cursor's project-init Git-binary lookup.",
+      "matching_bullets": ["Grok CLI wire-level teardown", "Mindgard Cursor 0day full disclosure"]
+    },
+    {
+      "topic": "Platform for Local LLM (vLLM, SGLang, etc.)",
+      "semantic_verdict": "uncovered",
+      "search_log_alignment": "consistent",
+      "reason": "No inference-engine or serving-stack news (vLLM, SGLang, TGI, llama.cpp serving, Ollama serving, LiteLLM, TensorRT-LLM). Bonsai 27B quotes decode throughput of 134 and 163 tokens per second on an RTX 5090, but that is a benchmark measurement of a model, not a serving-runtime release; Together AI hosting is a distribution detail belonging to the PaaS row.",
+      "matching_bullets": []
+    },
+    {
+      "topic": "Ecosystems for Local LLM Embedded System (Foundry Local, etc.)",
+      "semantic_verdict": "covered",
+      "search_log_alignment": "consistent",
+      "reason": "The lead bullet's center of gravity is on-device inference itself, which the scope table lists as a generic concept alongside 'edge LLM' and 'embedded LLM': Bonsai 27B's entire newsworthiness is a 1-bit build crossing the ~6 GB usable memory budget an iPhone 17 Pro leaves after KV cache and activations, with the bullet arguing on-device inference has been bounded by memory rather than compute. The PalmClaw preprint adds the on-device agent-runtime layer that a phone-resident model would need. This differs from the 2026-07-14 Booster T2 precedent, where edge inference was incidental to a robotics launch; here it is the story.",
+      "matching_bullets": ["PrismML Bonsai 27B on-device memory threshold", "PalmClaw on-device agent framework"]
+    },
+    {
+      "topic": "Local LLM Models",
+      "semantic_verdict": "covered",
+      "search_log_alignment": "consistent",
+      "reason": "Textbook match on multiple generic concepts from the scope table. PrismML's Bonsai 27B is an open-weight release derived from Qwen3.6 27B, Apache 2.0 on Hugging Face and GitHub, shipping as a quantization release in two builds (1.71 effective bits per weight ternary, 1.125 effective bits per weight binary) with published benchmark retention of 95% and 90% across 15 benchmarks.",
+      "matching_bullets": ["PrismML Bonsai 27B open-weight Apache 2.0 release"]
+    },
+    {
+      "topic": "Local LLM Optimization, Fine-tuning (Unsloth — every run)",
+      "semantic_verdict": "uncovered",
+      "search_log_alignment": "consistent",
+      "reason": "Constant-coverage topic searched this run per the every-run rule, with nothing dated in the 2026-07-12 to 07-15 window: releases top out at v0.1.48-beta (Jul 7), PyPI at 2026.7.2 (Jul 8), and the latest blog post is Jul 5, so the writer correctly omitted the bullet under ADR-002 Rule 2 rather than inertia-filling it. Searched honestly with a true-negative result is consistent, not an over-report. Bonsai 27B's extreme quantization was weighed as a possible match and rejected: the scope table assigns 'quantized release' and 'quantization release' explicitly to the Local LLM Models row, and the bullet reports a released artifact rather than a new optimization or fine-tuning technique, toolchain, or library.",
+      "matching_bullets": []
+    },
+    {
+      "topic": "Ecosystems for LLM on PaaS (AWS Bedrock, Azure AI Foundry, etc.)",
+      "semantic_verdict": "uncovered",
+      "search_log_alignment": "consistent",
+      "reason": "Together AI, a named sibling in this row, appears in the Bonsai bullet, but only as a single clause noting hosted access to the weights — a distribution detail of a model release, with no platform launch, capability, or pricing news attached. The Google Cloud Storage bucket in the Grok CLI story is an exfiltration destination, not a hosted-LLM platform. The vendor is present; the kind of news is not.",
+      "matching_bullets": []
+    },
+    {
+      "topic": "AI Security",
+      "semantic_verdict": "covered",
+      "search_log_alignment": "consistent",
+      "reason": "Two bullets hit named generic concepts from the scope table directly. The Grok CLI teardown is data exfiltration by an agent's own default path — whole repositories, git history, and unredacted .env secrets reaching a grok-code-session-traces GCS bucket, 5.10 GiB from a 12 GB test repo. The Cursor 0day is responsible disclosure plus arbitrary code execution via an unvalidated git.exe lookup, published by Mindgard, a vendor the scope table names in its emerging list.",
+      "matching_bullets": ["Grok CLI wire-level teardown", "Mindgard Cursor 0day full disclosure"]
+    },
+    {
+      "topic": "CVE update on score ≥ 8.0",
+      "semantic_verdict": "uncovered",
+      "search_log_alignment": "consistent",
+      "reason": "No CVE at any score today. The Cursor flaw is a serious unpatched RCE, but the bullet states explicitly that no CVE has been assigned and no severity score published — the absence of an identifier and score is in fact part of that story. No other bullet carries a CVE ID or CVSS rating.",
+      "matching_bullets": []
+    },
+    {
+      "topic": "Hardware",
+      "semantic_verdict": "uncovered",
+      "search_log_alignment": "consistent",
+      "reason": "Silicon appears throughout today's bullets only as context, never as the story: the RTX 5090 is a decode-benchmark platform, the iPhone 17 Pro is a memory envelope the model is measured against, and the Instinct MI450 and Zen 6 EPYC 'Venice' mention sits inside the events bullet as a preview of what AMD is expected to detail on July 22-23. No chip launch, accelerator announcement, data-center capex, fab, or process-node news today.",
+      "matching_bullets": []
+    },
+    {
+      "topic": "Physical AI",
+      "semantic_verdict": "uncovered",
+      "search_log_alignment": "consistent",
+      "reason": "No robotics or embodied-AI news: no robot launch, VLA or vision-language-action policy, deployment, or manipulation story. IEEE-RAS Humanoids 2026 and the Runway AI Summit's physical-AI program (Physical Intelligence's Quan Vuong, NVIDIA Cosmos Lab's Ming-Yu Liu) are event listings, and they count toward the events topic rather than as embodied-AI news in their own right.",
+      "matching_bullets": []
+    },
+    {
+      "topic": "LLM-related research and papers",
+      "semantic_verdict": "covered",
+      "search_log_alignment": "consistent",
+      "reason": "A paper is the center of a bullet: the July 14 arXiv preprint 2607.12575 by Ling, Zhou, Wu, and Wang, a population-scale measurement of x402 adoption and authenticity across 280 days of Base chain activity, reported with its methodology and findings (21.20% fictitious settlements, 63.78% internal transfers, Gini above 0.98 on payer, recipient, and value). The PalmClaw preprint 2607.13027 is cited as a second arXiv source in the Bonsai bullet.",
+      "matching_bullets": ["x402 agentic-commerce population-scale audit (arXiv 2607.12575)", "PalmClaw preprint (arXiv 2607.13027)"]
+    },
+    {
+      "topic": "Stock prices and corporate activity",
+      "semantic_verdict": "uncovered",
+      "search_log_alignment": "consistent",
+      "reason": "No funding round, M&A, IPO filing, SEC disclosure, analyst action, index event, or stock move today. PrismML being Caltech-founded and backed by Khosla Ventures, Cerberus, and Google with Samsung support is company background attached to a model release, carrying no round, size, valuation, or date. The x402 figures ($44.1M settled, $187,861.35 demonstrably reaching independent services) measure protocol throughput, not corporate financial activity.",
+      "matching_bullets": []
+    },
+    {
+      "topic": "Bay Area / SV AI meet-up events",
+      "semantic_verdict": "covered",
+      "search_log_alignment": "consistent",
+      "reason": "Carry-forward exception satisfied in full: every still-upcoming event from the 2026-07-14 bullet is retained (AMD Advancing AI, Hot Chips, AI Infra Summit, Black Hat/DEF CON AI Village, AI Risk Summit, OWASP, Zenity, Ray Summit, AI Tinkerers SF, Ai4, ACM AI Leadership Summit, The AI Conference, World Summit AI, GitHub Universe, re:Invent, NeurIPS, AI Summit NY), with none dropped, so there is no underreport. Three additions on top: the AGI Summit (July 18-19, Palace of Fine Arts), the Runway AI Summit (September 30, The Masonic), and IEEE-RAS Humanoids 2026 (December 7-9, Santa Clara). All three mandated sub-tracks are present — dev/data, AI-security, and AI-chip — and the bullet is Bay-Area-first. Every listed date is still future as of 2026-07-15, the nearest being July 18-19, so no past event anchors the bullet. Repetition without fresh state-change is expected here per ADR-002 Rule 5 and is not an over-report.",
+      "matching_bullets": ["AI events to plan around now: AGI Summit July 18-19, AMD Advancing AI July 22-23, August chip/security/developer run"]
+    },
+    {
+      "topic": "Other standing-out topics",
+      "semantic_verdict": "uncovered",
+      "search_log_alignment": "consistent",
+      "reason": "The catch-all is not needed today: all five bullets map cleanly onto named topics — Bonsai 27B to Local LLM Models and the embedded-ecosystem row, Grok CLI and the Cursor 0day to AI Security and Agent Harness, the x402 audit to LLM-related research and papers, and the calendar to the events topic. No orphan standout story is left unclaimed.",
+      "matching_bullets": []
+    }
+  ]
+}

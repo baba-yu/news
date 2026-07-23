@@ -1,0 +1,119 @@
+{
+  "date": "2026-07-20",
+  "sections": [
+    {
+      "category": "Days before its Advancing AI keynote, AMD lines up MI450, the Helios rack and EPYC Venice as a rack-level challenge to Nvidia, with OpenAI helping shape the silicon",
+      "bullets": [
+        {
+          "body": "With <a href=\"https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/\">AMD's Advancing AI keynote now two days out</a>, the pre-event signals have settled into a single coherent pitch: the Instinct MI450 series, the double-wide Helios rack and the Zen 6 EPYC 'Venice' CPU, sold as one rack-scale system rather than a loose accelerator. The numbers AMD has already put on the record are the frame for Wednesday, a Helios rack packing 72 MI455X parts, 31TB of HBM4 and roughly 3 AI exaflops, with the MI450 itself carrying 432GB of HBM4 and about 20 FP8 petaflops per GPU. What has shifted in the run-up is positioning rather than specs. Reporting this week has AMD leaning hard on inference as the volume market, the argument being that its largest committed deployments are inference rather than training, and that memory capacity per GPU is where it out-configures Nvidia's rack. <a href=\"https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level\">Analysts now frame MI450 as AMD's first credible rack-level answer</a> to the Vera Rubin generation rather than a single-socket alternative, which is the change from where the MI300 line sat. The other detail worth holding is co-design: <a href=\"https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/\">OpenAI has been feeding requirements into the MI450 program</a>, and AMD is already talking to customers about the MI500 behind it. None of the marquee reveals have landed yet, availability windows, the next ROCm release and any fresh anchor customer are being held for the keynote, so the genuinely new fact today is narrower: the company has stopped previewing MI450 as a roadmap item and started selling it as a shipping rack, two days before it has to prove that on stage.",
+          "citations": [
+            {
+              "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+              "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+            },
+            {
+              "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+              "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+            },
+            {
+              "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+              "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "SGLang and vLLM ship wide expert-parallel, disaggregated serving aimed squarely at the new two-trillion-parameter open MoE models",
+      "bullets": [
+        {
+          "body": "The open-weight parameter race that produced Moonshot's Kimi K3 at 2.8 trillion parameters and Alibaba's Qwen3.8 at 2.4 trillion has an immediate consequence downstream: almost nobody can serve those models with a naive setup, and the two dominant open inference engines spent this week shipping the machinery to do it. <a href=\"https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/\">SGLang's v0.6.0 release leads on wide expert parallelism</a>, spreading a mixture-of-experts model's hundreds of experts across many GPUs, paired with prefill-decode disaggregation, where the compute-bound prompt-processing phase runs on one pool of GPUs and the memory-bandwidth-bound token-generation phase on another, with the KV cache shipped between them over the network. The <a href=\"https://github.com/sgl-project/sglang/releases/tag/v0.6.0\">headline figure is throughput on a GB200 NVL72 rack roughly 2.7 times a single-pool baseline</a> for a trillion-parameter-class MoE, using Mooncake and NIXL as the KV-transfer backends. <a href=\"https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html\">vLLM's v0.25.0 lands the same two capabilities within days</a>, which is the pattern these two projects have held all year, feature parity reached fast, then a race on the constant factors. The durable point is that the economics of the giant open models are now set less by the model licence, which is free, than by whether an operator can stand up disaggregated, expert-parallel serving at all. A 2.4-trillion-parameter model you cannot serve efficiently is cheaper than a frontier API only on paper; the release that makes it servable on a rack you can rent is the one that actually moves the cost curve, and it arrived this week rather than with the models themselves.",
+          "citations": [
+            {
+              "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+              "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+            },
+            {
+              "label": "GitHub - sgl-project/sglang v0.6.0 release",
+              "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+            },
+            {
+              "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+              "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "A critical remote-code-execution flaw in Milvus exposes the vector databases behind RAG systems, and the internet-facing install base is large",
+      "bullets": [
+        {
+          "body": "<a href=\"https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html\">A critical vulnerability in Milvus, tracked as CVE-2026-59218</a>, lets an unauthenticated attacker reach remote code execution against the most widely deployed open-source vector database, the component that stores the embeddings behind retrieval-augmented generation. <a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-59218\">Rated 9.8 on CVSS</a>, the flaw is reachable through an exposed data-plane endpoint that accepts crafted requests without authentication, and a successful hit yields not just the server but the embedded corpus sitting on it, often a company's internal documents, support history or source code, vectorized and searchable. <a href=\"https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/\">The maintainers have shipped a patched release and urged operators to pull public instances off the internet</a> and rotate any credentials the process could read. The uncomfortable part is the one the exposed-inference stories keep landing on: vector databases were built to sit deep inside a trusted network, defaulting to open ports and no auth because the threat model assumed a private subnet, and RAG deployments have quietly pushed thousands of them onto public IPs to serve chatbots. What makes a vector-store compromise worse than a generic database breach is what it leaks, because the exact private text an organization fed its models is reconstructable from the embeddings and the source chunks Milvus keeps alongside them. The practical reading is that the RAG data layer now needs the same network hygiene the serving layer has been forced to learn: authentication on, ports closed, and nothing embedding-bearing reachable from the open internet.",
+          "citations": [
+            {
+              "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+              "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+            },
+            {
+              "label": "NVD - CVE-2026-59218",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+            },
+            {
+              "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+              "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Durable execution becomes the agent-orchestration battleground as LangGraph ships resumable, checkpointed runs to answer Temporal",
+      "bullets": [
+        {
+          "body": "The question quietly reorganizing agent infrastructure in 2026 is not which framework writes the nicest agent loop but which one survives a server restart mid-task, and this week it produced a concrete move. <a href=\"https://blog.langchain.com/langgraph-durable-execution-ga/\">LangChain shipped durable execution for LangGraph</a> in <a href=\"https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0\">its v1.1.0 release</a>, checkpointing every step of an agent run to persistent state so that a crashed or redeployed worker resumes from the last completed node rather than restarting the task or losing it. That is a direct answer to the pitch that has made <a href=\"https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/\">Temporal the default substrate for long-running agents</a>, the durable-execution engine that OpenAI runs Codex on and that sits underneath Mistral's Workflows product. The framing all three share is that a production agent is really a distributed workflow, tens of seconds to several minutes per request, many model calls and tool invocations interleaved, network failures and deploys in the middle, and that the interesting guarantee is not intelligence but survivability. LangGraph reaching durable execution natively, rather than requiring teams to bolt their agent loop onto a separate workflow engine, collapses two layers into one for the code-first camp. The reason this matters beyond a version note is that it changes what an agent outage looks like: the failure mode stops being 'the agent forgot what it was doing' and becomes 'the agent paused and picked up where it left off,' which is the difference between a demo and something a bank will run in production. The orchestration market is consolidating around that property, and the frameworks that treated it as optional are the ones now retrofitting it.",
+          "citations": [
+            {
+              "label": "LangChain Blog - Durable execution for LangGraph",
+              "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+            },
+            {
+              "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+              "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+            },
+            {
+              "label": "GitHub - langchain-ai/langgraph v1.1.0 release",
+              "url": "https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "AI events to plan around now: AMD's Advancing AI opens Wednesday, WAIC closes today, and the early-August security block is filling up",
+      "bullets": [
+        {
+          "body": "The nearest catalyst is two days out and on the chip track: AMD's Advancing AI runs July 22-23 at Moscone West, with Lisa Su's keynote at 9:30 AM PT on Thursday, July 23, livestreamed for anyone without an in-person badge, and the substance of what she unveils is covered above. WAIC 2026 in Shanghai closes today. After Advancing AI, the chip and hardware calendar's next fixed date is July 31 at 11:59 PM PDT, the cutoff for <a href=\"https://hotchips.org/schedule/\">Hot Chips' early-registration rate</a>; the conference itself runs August 23-25 at Stanford with tutorials on HBM evolution and RISC-V, drawing Samsung, SK Hynix, Nvidia and Infineon. Further out, the AI Infra Summit takes the Santa Clara Convention Center September 15-17, and Nvidia's GTC does not return to San Jose until March 15-18, 2027.\n\nThe AI-security track clusters in early August. Black Hat USA runs August 1-6 at Mandalay Bay in Las Vegas, Trainings then Briefings, with its <a href=\"https://www.blackhat.com/us-26/briefings/schedule/index.html\">AI Summit on August 4</a>; DEF CON 34 follows August 6-9, and <a href=\"https://defcon.org/html/defcon-34/dc-34-villages.html\">its AI Village is running demos, capture-the-flag and a poster track on attacks against agentic systems</a>. SecurityWeek's AI Risk Summit takes the Ritz-Carlton at Half Moon Bay on August 11-12. Booking further ahead is worth it here: SANS runs an AI Cybersecurity Summit November 2-3 in Arlington, Zenity's AI Agent Security Summit series continues in London on October 8 and New York on October 21, and OWASP Global AppSec USA lands in San Francisco November 5-6.\n\nOn the developer and infrastructure track: Ai4 in Las Vegas August 4-6; the AI Tinkerers San Francisco meetup on August 9; Ray Summit at the San Francisco Marriott Marquis August 24-26; the ACM AI Leadership Summit in Atlanta August 30 through September 2; OpenAI DevDay at Fort Mason September 29; The AI Conference at Pier 48 September 29 through October 1; the Runway AI Summit September 30; World Summit AI in Amsterdam October 7-8; PyTorch Conference in San Jose October 20-21; GitHub Universe October 28-29; AWS re:Invent November 30 through December 4; <a href=\"https://neurips.cc/Conferences/2026\">NeurIPS in December</a>; IEEE-RAS Humanoids in Santa Clara December 7-9; and The AI Summit New York December 9-10. Practical sequencing: Thursday's Advancing AI keynote is a browser tab rather than a trip across town, and the Hot Chips early rate has to be locked by July 31, before the early-August Las Vegas security block absorbs both the calendar and the budget.",
+          "citations": [
+            {
+              "label": "Hot Chips 2026 - Schedule and registration",
+              "url": "https://hotchips.org/schedule/"
+            },
+            {
+              "label": "Black Hat USA 2026 - Briefings schedule",
+              "url": "https://www.blackhat.com/us-26/briefings/schedule/index.html"
+            },
+            {
+              "label": "DEF CON 34 - Villages (AI Village)",
+              "url": "https://defcon.org/html/defcon-34/dc-34-villages.html"
+            },
+            {
+              "label": "NeurIPS 2026",
+              "url": "https://neurips.cc/Conferences/2026"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

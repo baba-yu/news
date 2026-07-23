@@ -1,0 +1,58 @@
+[
+  {
+    "actor": "Lead maintainer of the open-source inference engine setting the wide expert-parallel pace",
+    "job": "Harden wide expert-parallelism and prefill-decode disaggregation from a v0.6.0 opt-in into the recipe the engine documents first for 2T MoE.",
+    "outcome": "The disaggregated wide-expert-parallel deployment stands as this engine's documented reference recipe for serving 2-trillion-parameter open MoE models.",
+    "motivation": "Being the engine that makes the largest free models cheapest to serve wins the adoption that defines the open inference standard.",
+    "task": {
+      "who": "Expert-parallel and disaggregation subsystem maintainers",
+      "what": "Promote split-pool serving from opt-in to documented default",
+      "where": "The engine's serving core, benchmarks and deployment documentation",
+      "when": "H2 2026 through H1 2027",
+      "why": "Cheapest serving of free 2T weights wins ecosystem adoption",
+      "how": "Wide expert parallelism with KV-cache transfer over Mooncake and NIXL"
+    }
+  },
+  {
+    "actor": "Maintainer team of the rival open-source inference engine racing to feature parity",
+    "job": "Match the wide expert-parallel and disaggregated-serving capabilities shipped in v0.25.0, then race on constants until the split-pool recipe is the recommended default.",
+    "outcome": "This engine too documents disaggregated wide-expert-parallel serving as its first-line deployment for 2T-class open MoE, satisfying the both-engines landing condition.",
+    "motivation": "Falling behind on serving the biggest open models cedes users to the rival engine, so parity then a faster default is survival.",
+    "task": {
+      "who": "Core serving and distributed-execution maintainers",
+      "what": "Reach parity then default to disaggregated expert-parallel serving",
+      "where": "The engine's scheduler, KV-cache transfer layer and docs",
+      "when": "H2 2026 through H1 2027",
+      "why": "Serving-parity keeps the biggest open-model users from defecting",
+      "how": "Prefill-decode disaggregation with networked KV-cache backends"
+    }
+  },
+  {
+    "actor": "Managed inference platform's serving infrastructure product team",
+    "job": "Stand up a rentable managed offering that serves a 2-trillion-parameter open MoE with prefill-decode disaggregation and wide expert parallelism enabled by default.",
+    "outcome": "A rentable managed endpoint serving a 2T-class open model with disaggregation switched on by default, meeting the prediction's platform clause.",
+    "motivation": "Renting the cheapest tokens on the largest open models wins customers only if disaggregated serving is turnkey, not a customer-tuned option.",
+    "task": {
+      "who": "Platform serving, capacity and product engineering teams",
+      "what": "Ship a 2T open-MoE endpoint with disaggregation on by default",
+      "where": "Rentable GPU-rack fleet and managed inference product catalog",
+      "when": "H2 2026 through H1 2027",
+      "why": "Turnkey cheap serving of free weights wins rental customers",
+      "how": "Split-pool deployment on GB200 NVL72-class racks"
+    }
+  },
+  {
+    "actor": "KV-cache transport backend engineers for cross-pool disaggregated serving",
+    "job": "Make networked KV-cache transfer between prefill and decode pools fast and reliable enough that disaggregation is a safe default, not a hand-tuned option.",
+    "outcome": "A KV-cache transfer layer robust enough for both engines to ship prefill-decode disaggregation as the default rather than an expert-only opt-in.",
+    "motivation": "Disaggregation's throughput win collapses if the KV-cache hop is slow or flaky, so the transport layer's quality gates whether split-pool can be default.",
+    "task": {
+      "who": "Networked KV-cache transfer backend maintainers",
+      "what": "Harden cross-pool KV-cache transfer for default-on disaggregation",
+      "where": "KV-cache transport backends bridging prefill and decode GPU pools",
+      "when": "H2 2026 through H1 2027",
+      "why": "A slow KV hop erases disaggregation's throughput advantage",
+      "how": "Networked KV-cache streaming over Mooncake and NIXL backends"
+    }
+  }
+]

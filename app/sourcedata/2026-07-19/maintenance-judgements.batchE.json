@@ -1,0 +1,316 @@
+{
+  "week_ending": "2026-07-19",
+  "judgements": [
+    {
+      "prediction_id": "prediction.5e0beac647793331",
+      "stream": "reasoning",
+      "entry_id": "prediction.5e0beac647793331",
+      "verdict": "fresh",
+      "reason": "Landing is three days out and every reasoning field still matches the record. because ('reporting on MI400 leads with >2x MI350 memory bandwidth') and landing ('Advancing AI, July 22-23, 2026') are re-confirmed by this week's headlines ('AMD's next AI chip showcase opens July 22', news-20260713; news-20260714) and by the 2026-07-18 bridge, which fixes Moscone West and the date. No bridge in the 9-row set contradicts because/given/so_that, and the keynote has not happened, so there is no delivered outcome that would push reasoning forward to a next precondition. Nothing to reframe before the event resolves it.",
+      "cross_stream_evidence": [
+        "bridge:validation.d5c9ce0184ff4e9a (2026-07-18, dim=landing, rel=3) — venue and date fixed four days out",
+        "bridge:validation.edbb53b656398858 (2026-07-14, dim=given, rel=3) — Moscone West July 22-23 confirmed",
+        "news:report/en/news-20260713.md, news-20260714.md — 'AMD's AI chip show opens July 22'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.5e0beac647793331",
+      "stream": "bridge",
+      "entry_id": "prediction.5e0beac647793331",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 9 validation rows. Every bridge is on-topic for the MI400 memory-bandwidth-over-FLOPS framing, and the relevance ladder is honestly calibrated: the rows that only re-confirm the calendar are rated 2 and say so explicitly ('says nothing about how AMD will actually frame the part', 2026-07-06), while the 2026-07-17 Dongfang DF1000 row earns its 3 by naming a second vendor running the same bandwidth-first-over-peak-FLOPS pitch. No row overclaims the keynote as having happened. Note the 2026-07-13/07-16 rows say Lisa Su will detail the MI450 while the prediction says MI400 — checked, MI450 is the lead SKU of the MI400 series, so this is naming granularity, not an inconsistency.",
+      "cross_stream_evidence": [
+        "bridge:validation.10297053bfb7e075 (2026-07-17) — second-vendor confirmation of the marketing axis",
+        "bridge:validation.bbdeedd18777ba43 (2026-07-06, rel=2) — correctly self-limiting, 'the claim itself is untouched'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.5e0beac647793331",
+      "stream": "needs",
+      "entry_id": "prediction.5e0beac647793331",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 3 Needs. The actor coalition (keynote product-marketing lead, silicon/SKU architecture lead, HBM allocation planner) is the right causal set for a memory-first launch narrative and needs no refresh. All 3 tasks are correctly still 'open' — the keynote is three days away and no bridge documents any actor delivering. Time bounds are clean here, unlike the rest of this batch: need_task.80628f1eb97478f8 parsed 'July 2026 keynote preparation (weeks before July 22-23)' to 2026-07-01..2026-07-31, a genuine runway distinct from the prediction's 2026-07-22..2026-07-23 landing window, and the other two tasks are honestly NULL rather than collapsed.",
+      "cross_stream_evidence": [
+        "needs:need_task.80628f1eb97478f8 — runway 2026-07-01..2026-07-31 correctly distinct from prediction window 2026-07-22..2026-07-23",
+        "bridge:validation.d5c9ce0184ff4e9a — no actor delivery documented, so 'open' remains accurate"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.5e0beac647793331",
+      "stream": "readings",
+      "entry_id": "prediction.5e0beac647793331",
+      "verdict": "stale",
+      "reason": "Missing edge to prediction.9bc46d8a918d51a2 ('AMD Instinct MI400 launches with a named ship, memory, or rack spec by Q3 2026', 2026-06-27). Both predictions resolve at the same event three days from now, and this one is strictly narrower: if AMD leads the MI400 reveal with memory bandwidth, then a named memory spec has by definition been disclosed, so this entails the broader claim. Per the prediction_relations schema that is an 'entails' (narrower entails broader), and the schema forbids also writing a chain edge for the pair. Verified zero chain rows and zero relation rows between them. This matters now rather than later: both land in the same 72 hours and a reviewer scoring the keynote needs to see they are coupled. Broader context for the human — DB-wide there are 0 chain edges and 0 relation edges created since 2026-07-01, so edge extraction may be stalled rather than merely sparse.",
+      "cross_stream_evidence": [
+        "readings:prediction.9bc46d8a918d51a2 — same landing event (Advancing AI July 22-23), broader claim, no edge exists",
+        "bridge:validation.2c3d1a4a211e5458 (2026-07-16) — 'MI450 detail expected from Lisa Su's keynote', the shared resolution moment",
+        "db:prediction_chain + prediction_relations — 0 rows created since 2026-07-01 across all 282 predictions"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.72
+    },
+
+    {
+      "prediction_id": "prediction.64e162098784ed03",
+      "stream": "reasoning",
+      "entry_id": "prediction.64e162098784ed03",
+      "verdict": "stale",
+      "reason": "Bridge to Reasoning: the 2026-07-17 bridge documents Moonshot shipping the K3 successor (2.8T open MoE, first on Frontend Code Arena at 1,679, fourth of 189 on the Artificial Analysis index, full weights due July 27), and that materially changes the landing calculus this reasoning does not account for. given ('open downloadable weights and an agentic-coding target make community public-suite runs cheap') is still mechanically true, but cheapness was never the binding constraint — benchmarker attention is, and it has moved to the successor. An independent maintainer with finite GPU budget now has little reason to run the superseded K2.7-Code through SWE-bench Verified before the Q3 2026 close when K3 weights land July 27. Reframe given/so_that to name successor-model displacement as the live threat to landing, rather than implying the only question is whether someone bothers.",
+      "cross_stream_evidence": [
+        "bridge:validation.e2edb356aab208d7 (2026-07-17, dim=so_that, rel=3) — 'it is the K3 successor on an arena, not K2.7-Code on SWE-bench'",
+        "news:report/en/news-20260717.md — Kimi K3 tops Frontend Code Arena, full weights due 2026-07-27",
+        "needs:need_task.506f6fdde5e26ce0 + need_task.6ada57232fc87543 — both still 'open' with ~10 weeks left in the Q3 window"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.64e162098784ed03",
+      "stream": "bridge",
+      "entry_id": "prediction.64e162098784ed03",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 3 validation rows. Each is correctly scoped and none overclaims. The 2026-07-17 row is the model of an honest bridge — it credits the K3 arena result as an independent third-party score for the Moonshot coding line while stating plainly that it is 'the K3 successor on an arena, not K2.7-Code on SWE-bench'. The 2026-06-15 row goes further and rates itself down to 2 with 'Today's cycle brought no fresh signal on this'. The stale reasoning verdict above is driven by what these bridges correctly reported, so the bridges need no rewrite — they did their job.",
+      "cross_stream_evidence": [
+        "bridge:validation.e2edb356aab208d7 — correctly distinguishes K3 from K2.7-Code rather than claiming the landing",
+        "bridge:validation.7e769a1d7c1782e8 (2026-06-15, rel=2) — honest null result"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.64e162098784ed03",
+      "stream": "needs",
+      "entry_id": "prediction.64e162098784ed03",
+      "verdict": "fresh",
+      "reason": "Verdict covers both Needs. The actor pair (independent public-benchmark leaderboard maintainer, open-source agentic-coding community contributor) is exactly the coalition that would produce the predicted outcome, and remains correct even under the reasoning reframe above — K3 displacement changes the actors' incentive, not their identity. Both tasks correctly remain 'open' since no independent K2.7-Code score has landed on any of the four named suites. I did check the runway parse: when_text 'June through Q3 2026' and 'the weeks after the June 12 open-weight drop' both parsed to 2026-07-01, clipping roughly one month off the front. Judged immaterial — the window still covers the entire remaining runway to the Q3 close, so no consumer reads it wrongly. Flagging for contrast only: the same parser fails materially on the other four predictions in this batch.",
+      "cross_stream_evidence": [
+        "bridge:validation.e2edb356aab208d7 — no K2.7-Code delivery, so 'open' remains the accurate status",
+        "needs:need_task.506f6fdde5e26ce0 — runway clipped ~1 month, window still covers remaining runway"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.64e162098784ed03",
+      "stream": "readings",
+      "entry_id": "prediction.64e162098784ed03",
+      "verdict": "fresh",
+      "reason": "No edge is warranted, so absence of one is not drift. The nearest candidate is prediction.b3c111f1938357a9 ('Open-weight model tops Artificial Analysis Intelligence Index by H1 2027', 2026-07-17), which was originated by the same Kimi K3 event and therefore looks adjacent — but it tracks a different metric (aggregate intelligence index vs SWE-bench Verified), a different subject (any open-weight model vs one superseded Moonshot checkpoint), and a different claim (topping a ranking vs drawing an independent reproduction). The only relation that would apply is 'parallel', which the schema itself names as the default when no other relation applies, so writing it adds no information. Deliberately not manufacturing an edge here.",
+      "cross_stream_evidence": [
+        "readings:prediction.b3c111f1938357a9 — shares the K3 origin event only; relation would be 'parallel', the schema's no-op default",
+        "readings:prediction.a383fd5162ecf409 — also K3-bridged on 2026-07-17, same parallel-only reasoning"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+
+    {
+      "prediction_id": "prediction.69439c5e138d13eb",
+      "stream": "reasoning",
+      "entry_id": "prediction.69439c5e138d13eb",
+      "verdict": "fresh",
+      "reason": "because ('two CVSS 9.8 zero-click Cursor RCEs let ingested content write outside the workspace, fixed in 3.0') is a historical fact from 2026-07-01 that this week did not disturb. The one bridge that could have undermined it — 2026-07-15, on a different Cursor flaw unfixed after seven months with no CVE — explicitly declines to: it says 'confinement and canonical paths would not close a binary lookup anyway', i.e. the new flaw is out of scope for this prediction's mechanism rather than evidence against it. Landing is Q1 2027, over five months out, and no Need actor has delivered, so there is no satisfied precondition to reframe forward from.",
+      "cross_stream_evidence": [
+        "bridge:validation.6fbf6073baa3e6c3 (2026-07-15, dim=because) — deflating on a different flaw, explicitly out of scope for confinement",
+        "bridge:validation.31c1d703118a8a74 (2026-07-04, rel=5) — origin evidence intact",
+        "needs:all 3 tasks still 'open' — no precondition satisfied that would move reasoning forward"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.69439c5e138d13eb",
+      "stream": "bridge",
+      "entry_id": "prediction.69439c5e138d13eb",
+      "verdict": "fresh",
+      "reason": "Verdict covers both validation rows. The 2026-07-04 origin row (rel=5) accurately reports the Cato AI Labs disclosure that the prediction is built on. The 2026-07-15 row is a well-written negative: rather than stretching an unrelated unfixed Cursor flaw into support, it names the inversion directly ('unfixed after seven months, no CVE, no score') and disclaims applicability. Correctly rated 3 for topicality rather than 4-5 for support. No rewrite needed.",
+      "cross_stream_evidence": [
+        "bridge:validation.6fbf6073baa3e6c3 — self-limiting rather than overclaiming",
+        "bridge:validation.31c1d703118a8a74 — matches news-20260704 Cato AI Labs disclosure"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.69439c5e138d13eb",
+      "stream": "needs",
+      "entry_id": "prediction.69439c5e138d13eb",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY — escalate, do not auto-fix. All 3 needs_tasks have target_start_date/target_end_date collapsed exactly onto the prediction's landing window 2027-01-01..2027-03-31, while their own when_text says otherwise: 'July 2026 through Q1 2027' (need_task.7a883308ca4b0d05), 'July 2026 into Q1 2027' (need_task.d7f51b726497e1e2), 'the runway from disclosure through Q1 2027' (need_task.49d2b7d0c3c137e9). The schema comment on needs_tasks.target_* is explicit that these columns are the task's runway, 'NOT the prediction's landing destination (which lives in predictions.target_*)'. The timewindow parser is grabbing the trailing landing quarter instead of the leading runway start, so the DB now asserts no actor begins work until January 2027 — a five-month misstatement that any window filter or Needs-tab render will reproduce. This is systemic, not local: 431 of 809 tasks DB-wide with both windows populated are exactly equal to their prediction's window. The Need content itself is sound, so the remedy is a fix in app/src/timewindow.py plus a re-derive, not a content rewrite — hence proposed_action noop.",
+      "cross_stream_evidence": [
+        "needs:need_task.7a883308ca4b0d05 — when_text 'July 2026 through Q1 2027' -> 2027-01-01..2027-03-31",
+        "needs:need_task.d7f51b726497e1e2 — when_text 'July 2026 into Q1 2027' -> 2027-01-01..2027-03-31",
+        "needs:need_task.49d2b7d0c3c137e9 — when_text 'the runway from disclosure through Q1 2027' -> 2027-01-01..2027-03-31",
+        "db:431 of 809 windowed needs_tasks rows collapsed onto their prediction window — same defect DB-wide",
+        "schema:needs_tasks.target_* documented as runway, 'NOT the prediction's landing destination'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.69439c5e138d13eb",
+      "stream": "readings",
+      "entry_id": "prediction.69439c5e138d13eb",
+      "verdict": "fresh",
+      "reason": "No edge warranted. The two nearest neighbours share this prediction's 2026-07-04 Cursor origin event — prediction.6ba7ca6e01ab313e (trifecta capability gate) cites it in validation.9b997351d9d274d0, and prediction.cb8447f5c6e4c65d (sandboxed MCP tool execution) cites it in the FP-20260704 table — but shared origin evidence is not a relation. The mechanisms are genuinely distinct: workspace-root path confinement on the file-write path, versus capability-combination gating at the orchestration layer, versus transport sandboxing. All three can land independently, which is the definition of 'parallel', the schema's stated default when no other relation applies. Writing it would add no information. Not manufacturing an edge.",
+      "cross_stream_evidence": [
+        "readings:prediction.6ba7ca6e01ab313e — shares the 2026-07-04 Cursor origin event via validation.9b997351d9d274d0, but distinct mechanism",
+        "readings:prediction.cb8447f5c6e4c65d — transport sandboxing, not workspace-write confinement"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "reasoning",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "fresh",
+      "reason": "because (OWASP 2.01 mapping prompt injection to 6 of 10 agentic categories, naming coding agents the epicenter) is a fixed 2026-06-28 publication and given (injection is unpatchable, so the durable mitigation caps the trifecta at orchestration) was reinforced, not challenged, by six bridges this month. Considered whether the Needs-to-Reasoning rule fires — Claude Code v2.1.212 shipping default-on caps on 2026-07-17 is the Need actor moving — and concluded it does not yet: the bridge is explicit that this is general permission gating, not the Rule-of-Two trifecta gate, so the so_that precondition is not satisfied and there is no next precondition to reframe toward. With landing at Q1 2027 still five months out, partial movement in the predicted direction strengthens the call rather than dating it. Reasoning should be re-examined if a platform ships an explicit trifecta gate.",
+      "cross_stream_evidence": [
+        "bridge:validation.88a4ea3328e0d201 (2026-07-17) — 'general permission gating, not the explicit lethal-trifecta Rule-of-Two gate'",
+        "bridge:validation.7550e5c4c67857b1 (2026-06-28, rel=5) — OWASP 2.01 origin premise intact",
+        "bridge:validation.3d1a6ef99451e676 (2026-07-11) — premise demonstrated literally, 'no point patch exists'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "bridge",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 13 validation rows, the richest and best-calibrated set in this batch. Every row that reports movement toward the outcome also names the specific gap to the actual claim: 2026-07-17 ('not the explicit lethal-trifecta Rule-of-Two gate'), 2026-07-15 ('the specified cap would not have seen this'), 2026-07-19 ('it assembled without any agent making a decision'), 2026-06-30 ('the link is thematic, not direct evidence'). Relevance ratings track that honesty — the thematic rows sit at 2 and only the OWASP origin row reaches 5. Nothing here needs rewriting.",
+      "cross_stream_evidence": [
+        "bridge:validation.14962c0dbb483edb (2026-07-19, rel=2) — correctly discounts the NadMesh botnet as non-agentic",
+        "bridge:validation.0ba58e4450b60e93 (2026-06-30) — self-identifies as thematic, not evidence"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "needs",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY covering the whole Need-set — escalate, do not auto-fix. Both needs_tasks have target_start_date/target_end_date collapsed exactly onto the prediction's landing window 2027-01-01..2027-03-31 while their when_text describes runways that start much earlier: 'H2 2026 through Q1 2027' (need_task.58272020b02c4782) and 'ongoing through 2026 into Q1 2027' (need_task.cedfde5028b372f2). The second is especially wrong — 'ongoing' work is recorded as not starting for five months. Same timewindow parser defect as prediction.69439c5e138d13eb and prediction.81e76659807bd1fc in this batch, and systemic at 431 of 809 windowed tasks DB-wide. Content is sound; remedy is a parser fix plus re-derive, not a rewrite, hence noop. See the separate stale judgement on this same stream for the distinct task-status issue on the first Need.",
+      "cross_stream_evidence": [
+        "needs:need_task.58272020b02c4782 — when_text 'H2 2026 through Q1 2027' -> 2027-01-01..2027-03-31",
+        "needs:need_task.cedfde5028b372f2 — when_text 'ongoing through 2026 into Q1 2027' -> 2027-01-01..2027-03-31",
+        "db:431 of 809 windowed needs_tasks rows collapsed onto their prediction window",
+        "schema:needs_tasks.target_* documented as runway, 'NOT the prediction's landing destination'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "needs",
+      "entry_id": "coding-agent platform security/orchestration product lead",
+      "verdict": "stale",
+      "reason": "Bridge to Needs, scoped to this one Need and distinct from the whole-set parse defect flagged above. Three bridges this month document this actor class partially delivering on task need_task.58272020b02c4782 ('Implement default-on Rule-of-Two capability gate with human-approval pause'): Claude Code v2.1.212 turning on default permission caps and fail-closed gating (2026-07-17, corroborated by news-20260717 'Claude Code adds limits to rein in runaway AI agents'), SingGuard-NSFA open-sourcing a block-or-allow runtime interceptor at tool-call latency (2026-07-14), and Willison's llm-coding-agent 0.1a0 shipping a default-on permission model over all six file-and-shell tools (2026-07-08). The task status is still 'open', which reads as not started and understates three independent partial deliveries. It should move to 'in_progress' — explicitly not 'done', since every one of those bridges states the delivered thing is general permission gating rather than the Rule-of-Two trifecta gate. The Need's actor, job, outcome and motivation text all remain accurate; only status is drifting.",
+      "cross_stream_evidence": [
+        "bridge:validation.88a4ea3328e0d201 (2026-07-17) — Claude Code v2.1.212 default-on caps, explicitly not the Rule-of-Two gate",
+        "bridge:validation.31141fe750784c1d (2026-07-14) — SingGuard-NSFA runtime interceptor, 'exactly the runtime interceptor a default-on gate needs'",
+        "bridge:validation.39432d308e4ebae7 (2026-07-08) — Willison harness ships a default-on capability gate",
+        "news:report/en/news-20260717.md — 'Claude Code v2.1.212 ships default-on agent-safety limits'"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.72
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "readings",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "fresh",
+      "reason": "No edge warranted. Nearest neighbours are prediction.f3f7e18b691f1c39 ('OpenClaw ships default-deny tool and network gating out-of-box by Q4 2026') and prediction.69439c5e138d13eb (workspace-confined agent writes), both of which are independent facets of agent hardening that can each land without the others — 'parallel', the schema's explicit default when no other relation applies. Neither is a paraphrase (ruling out equivalent) and neither is implied by definition (ruling out entails): a default-deny tool/network gate on one product does not entail a lethal-trifecta capability gate on a coding-agent platform. Not manufacturing an edge.",
+      "cross_stream_evidence": [
+        "readings:prediction.f3f7e18b691f1c39 — different product and different gate semantics, parallel only",
+        "readings:prediction.69439c5e138d13eb — shared 2026-07-04 Cursor evidence via validation.9b997351d9d274d0, but distinct mechanism"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+
+    {
+      "prediction_id": "prediction.81e76659807bd1fc",
+      "stream": "reasoning",
+      "entry_id": "prediction.81e76659807bd1fc",
+      "verdict": "stale",
+      "reason": "Needs to Reasoning: the policy leg of this prediction has quietly expired. given ends 'as US norms near' and the summary opens 'As the White House readies a voluntary frontier-model standards framework' — that clause rests on Need need.f74c491dcd8625f4, whose task need_task.7586e403a138c98c was scheduled for 'week of July 7 2026'. The last trace of the framework anywhere in the corpus is future-prediction-20260703 line 40, still forward-looking ('the White House is expected to publish a voluntary frontier-model standards framework the week of July'). I swept news and future-prediction for 2026-07-03 through 2026-07-19 for 'White House', 'frontier-model standards', 'voluntary', 'standards framework': zero hits after that forward-looking mention. The expected anchor is now twelve days overdue with no coverage either way. Reframe given to drop or re-time the policy leg and stand the prediction on the security leg alone — which the 2026-07-19 bridge independently reports as thin ('Proximity is all there is'). Both legs weakening at once is what makes this a rewrite rather than a wait.",
+      "cross_stream_evidence": [
+        "needs:need_task.7586e403a138c98c — 'week of July 7 2026' window elapsed with no delivery",
+        "source:future-prediction/en/future-prediction-20260703.md line 40 — last mention, still forward-looking",
+        "corpus:zero hits for White House / frontier-model standards / voluntary standards framework across news + FP 2026-07-03..2026-07-19",
+        "bridge:validation.e8c9030d49baf886 (2026-07-19) — security leg reported as pure proximity"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.78
+    },
+    {
+      "prediction_id": "prediction.81e76659807bd1fc",
+      "stream": "bridge",
+      "entry_id": "validation.09f880fb970069a4",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY — escalate, do not auto-fix. This row's bridge_text is about Meituan's LongCat-2.0 and 'the Qwen, DeepSeek, and Mistral 3 families this prediction cites as the converging reference set' — but this prediction cites none of those. It cites Flowise, LiteLLM, Agent Zero, LangBot and Windsurf, and its subject is MCP stdio transport defaults, not open-weight model families or serving coverage. The row is internally contradictory: its own related_items_text is correctly about the Cursor/Cato disclosure and the Flowise stdio case. Traced to source — future-prediction/en/future-prediction-20260704.md line 19 carries the correct table row for this prediction, while line 56 carries the LongCat paragraph under this prediction's heading. Three sibling rows in the same file (validation.331a0aacf376fb3b, validation.265c9f216a6ee98a, validation.819ec65d7051482b) legitimately carry LongCat bridges, so this is a mis-attribution within that batch: the writer pasted the LongCat framing onto the wrong prediction heading. Downstream harm is real, not cosmetic — the row scores observed_relevance=4 on the strength of a paragraph that does not describe the prediction, and the 2026-07-18 realization snapshot reads relevance=4 / realization 0.8 / 'supported' off it, against relevance=2 / 0.4 / 'weakly_supported' on 2026-07-19. Remediation means editing published 2026-07-04 markdown plus its locale fan-out and re-ingesting, which is a human call.",
+      "cross_stream_evidence": [
+        "source:future-prediction/en/future-prediction-20260704.md line 56 — LongCat paragraph under the MCP-stdio prediction heading",
+        "source:future-prediction/en/future-prediction-20260704.md line 19 — correct table row for the same prediction, same file",
+        "bridge:validation.331a0aacf376fb3b, validation.265c9f216a6ee98a, validation.819ec65d7051482b — legitimate LongCat bridges in the same file",
+        "db:prediction_realization_snapshots 2026-07-18 relevance=4 / realization 0.8 / 'supported' derived from this row"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+    {
+      "prediction_id": "prediction.81e76659807bd1fc",
+      "stream": "bridge",
+      "entry_id": "validation.e8c9030d49baf886",
+      "verdict": "fresh",
+      "reason": "Scoped deliberately to this row so the broken verdict on validation.09f880fb970069a4 is not read as condemning the whole bridge set — this prediction has only two bridges and exactly one of them is defective. This 2026-07-19 row is sound and unusually disciplined: it reports the NadMesh botnet scanning n8n, Langflow, Open WebUI and Gradio, then refuses to claim it as support — 'Proximity is all there is... Changing the transport default would have altered no step of what was described; the way in was an exposed HTTP port.' Correctly rated 2 and correctly dimensioned to 'given'. No rewrite needed.",
+      "cross_stream_evidence": [
+        "bridge:validation.09f880fb970069a4 — the other bridge on this prediction, judged broken separately",
+        "news:report/en/news-20260719.md — 'A botnet raids self-hosted AI tools to steal cloud keys'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.81e76659807bd1fc",
+      "stream": "needs",
+      "entry_id": "prediction.81e76659807bd1fc",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY across all 3 Needs, with three distinct parse failures on the same parser — escalate, do not auto-fix. (1) need_task.816eba3266c62710: when_text 'July 2026 to Q1 2027' collapsed onto the prediction's landing window 2027-01-01..2027-03-31, the same defect seen on the other Q1-2027 predictions in this batch. (2) need_task.0be16429819e496d: when_text 'June 2026 to Q4 2026' parsed to 2026-10-01..2026-12-31, discarding four months of runway. (3) need_task.7586e403a138c98c: when_text 'week of July 7 2026 into Q1 2027' parsed to 2026-07-07..2026-07-07, a zero-width window that drops the 'into Q1 2027' tail entirely — a truncation failure rather than a collapse. Three tasks, three different mis-parses, one parser: this prediction is the clearest single reproduction case in the batch and worth handing to whoever fixes app/src/timewindow.py. Systemic context: 431 of 809 windowed needs_tasks rows DB-wide sit exactly on their prediction's window. Need content is sound, so noop rather than rewrite.",
+      "cross_stream_evidence": [
+        "needs:need_task.816eba3266c62710 — 'July 2026 to Q1 2027' -> 2027-01-01..2027-03-31 (collapse)",
+        "needs:need_task.0be16429819e496d — 'June 2026 to Q4 2026' -> 2026-10-01..2026-12-31 (4-month runway loss)",
+        "needs:need_task.7586e403a138c98c — 'week of July 7 2026 into Q1 2027' -> 2026-07-07..2026-07-07 (zero-width, tail dropped)",
+        "db:431 of 809 windowed needs_tasks rows collapsed onto their prediction window",
+        "schema:needs_tasks.target_* documented as runway, 'NOT the prediction's landing destination'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.81e76659807bd1fc",
+      "stream": "readings",
+      "entry_id": "prediction.81e76659807bd1fc",
+      "verdict": "stale",
+      "reason": "Missing edge to prediction.cb8447f5c6e4c65d ('Agent-builder frameworks ship sandboxed MCP tool execution by default by Q1 2027', 2026-07-01). These are near-paraphrases: same actor class (agent framework maintainers), same mechanism (sandbox or isolate MCP tool execution instead of spawning an unsandboxed stdio child), identical landing window 2027-01-01..2027-03-31, authored two days apart, and both drew their forcing bridge from the same Flowise CVE-2026-40933 proof-of-concept — cb8447f5 in future-prediction-20260703 line 14, this one in future-prediction-20260704 line 19. Per the prediction_relations schema that is 'equivalent', explicitly a merge candidate. A second edge to prediction.20a590c59cffd7fb ('MCP host runtimes ship sandboxed stdio tool execution as the default by Q2 2027', window 2027-04-01..2027-06-30) would be 'entails', this narrower Q1 claim implying the broader Q2 one. Verified zero chain rows and zero relation rows for all three pairs. Carrying two undetected near-duplicates in the active pool inflates apparent independent support for the same thesis, so this is worth acting on. Note for the human: 0 chain edges and 0 relations have been created DB-wide since 2026-07-01, so edge extraction may be stalled rather than merely sparse.",
+      "cross_stream_evidence": [
+        "readings:prediction.cb8447f5c6e4c65d — identical window 2027-01-01..2027-03-31, same mechanism, authored 2 days apart, no edge",
+        "readings:prediction.20a590c59cffd7fb — broader Q2 2027 claim, entails candidate, no edge",
+        "source:future-prediction-20260703 line 14 and future-prediction-20260704 line 19 — both forced by the same Flowise CVE-2026-40933 PoC",
+        "db:prediction_chain + prediction_relations — 0 rows created since 2026-07-01 across all 282 predictions"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.78
+    }
+  ]
+}

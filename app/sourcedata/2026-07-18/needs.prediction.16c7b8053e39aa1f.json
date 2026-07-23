@@ -1,0 +1,58 @@
+[
+  {
+    "actor": "Mainstream local-inference runtime core maintainer",
+    "job": "Extend expert offload past system RAM into an application-managed disk cache and promote it from experimental flag to supported path.",
+    "outcome": "Release-note-visible disk-streaming expert offload with published guidance for 500B-plus models under 32GB of RAM and no discrete GPU.",
+    "motivation": "Leaning on the operating system page cache no longer holds as published parameter counts outrun the memory enthusiasts actually own.",
+    "task": {
+      "who": "Core inference-engine maintainers, documentation owners and release managers",
+      "what": "Ship expert cache and document its memory floor",
+      "where": "Runtime offload code paths and versioned release notes",
+      "when": "H2 2026 through H1 2027",
+      "why": "Replace page-cache thrashing with a predictable supported floor",
+      "how": "Memory-mapped expert tensors behind explicit least-recently-used eviction"
+    }
+  },
+  {
+    "actor": "Dependency-free open-source inference-engine author",
+    "job": "Prove and publish that a unified GPU, RAM and disk hierarchy runs a 744B-parameter mixture-of-experts model on 25GB of RAM.",
+    "outcome": "A permissively licensed reference implementation and memory-floor benchmark that mainstream runtimes can port into a supported feature.",
+    "motivation": "Demonstrating a working floor beats arguing for one; a runnable Apache-licensed engine makes the design impossible for maintainers to ignore.",
+    "task": {
+      "who": "Solo engine author and upstream contributor community",
+      "what": "Publish streaming engine, benchmarks and documented memory floor",
+      "where": "Public repository, issue tracker and release notes",
+      "when": "H2 2026 through H1 2027",
+      "why": "Give mainstream maintainers a proven design to copy",
+      "how": "Apache 2.0 C implementation with reproducible hardware reports"
+    }
+  },
+  {
+    "actor": "Quantized model-container format and conversion-tooling maintainer",
+    "job": "Lay out low-bit weight files so individual routed experts stay separately addressable and page from disk without reading a whole tensor.",
+    "outcome": "A container layout and converter making per-expert random access from a 370GB four-bit file cheap enough to stream.",
+    "motivation": "An expert cache is only viable if the on-disk format lets a runtime fetch one expert instead of a whole layer.",
+    "task": {
+      "who": "Format specification maintainers and conversion tooling contributors",
+      "what": "Add per-expert tensor indexing and alignment to container",
+      "where": "Container format specification and quantization converters",
+      "when": "H2 2026 through H1 2027",
+      "why": "Make streaming one expert cheaper than a layer",
+      "how": "Aligned tensor offsets with memory-mapped random-access reads"
+    }
+  },
+  {
+    "actor": "Open-weight frontier lab model release engineering lead",
+    "job": "Keep shipping sparse mixture-of-experts checkpoints whose total parameter counts far exceed any consumer memory budget, alongside low-bit distribution containers.",
+    "outcome": "A steady cadence of 500B-plus open checkpoints that only disk-streaming offload can run on commodity hardware.",
+    "motivation": "Sparse activation buys frontier quality at modest compute per token, so total parameter count keeps climbing with every release.",
+    "task": {
+      "who": "Pretraining and model release engineering teams",
+      "what": "Release sparse frontier-scale weights in four-bit containers",
+      "where": "Public model hubs and open-weight license releases",
+      "when": "H2 2026 through H1 2027",
+      "why": "Widen the gap runtimes must close to stay usable",
+      "how": "Mixture-of-experts routing with post-training low-bit quantization"
+    }
+  }
+]

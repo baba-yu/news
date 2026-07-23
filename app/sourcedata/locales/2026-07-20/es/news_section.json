@@ -1,0 +1,119 @@
+{
+  "date": "2026-07-20",
+  "sections": [
+    {
+      "category": "A pocos días de su keynote Advancing AI, AMD alinea el MI450, el rack Helios y EPYC Venice como un desafío a nivel de rack contra Nvidia, con OpenAI ayudando a dar forma al silicio",
+      "bullets": [
+        {
+          "body": "Con <a href=\"https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/\">la keynote Advancing AI de AMD ya a dos días vista</a>, las señales previas al evento se han asentado en una única propuesta coherente: la serie Instinct MI450, el rack Helios de doble ancho y la CPU Zen 6 EPYC 'Venice', vendidos como un sistema a escala de rack y no como un acelerador suelto. Las cifras que AMD ya ha hecho públicas son el marco del miércoles: un rack Helios que integra 72 unidades MI455X, 31TB de HBM4 y unos 3 exaflops de IA, con el propio MI450 llevando 432GB de HBM4 y unos 20 petaflops FP8 por GPU. Lo que ha cambiado en la antesala es el posicionamiento, no las especificaciones. La cobertura de esta semana muestra a AMD apoyándose con fuerza en la inferencia como mercado de volumen, con el argumento de que sus mayores despliegues comprometidos son de inferencia y no de entrenamiento, y de que la capacidad de memoria por GPU es donde aventaja en configuración al rack de Nvidia. <a href=\"https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level\">Los analistas enmarcan ahora el MI450 como la primera respuesta creíble de AMD a nivel de rack</a> a la generación Vera Rubin, más que como una alternativa de un solo socket, que es el cambio respecto a donde se situaba la línea MI300. El otro detalle que conviene retener es el codiseño: <a href=\"https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/\">OpenAI ha estado aportando requisitos al programa MI450</a>, y AMD ya habla con clientes del MI500 posterior. Ninguna de las revelaciones estelares ha llegado todavía: las ventanas de disponibilidad, la próxima versión de ROCm y cualquier nuevo cliente ancla se reservan para la keynote. Así que el hecho genuinamente nuevo de hoy es más estrecho: la compañía ha dejado de presentar el MI450 como un elemento de hoja de ruta y ha empezado a venderlo como un rack que ya se comercializa, dos días antes de tener que demostrarlo en el escenario.",
+          "citations": [
+            {
+              "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+              "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+            },
+            {
+              "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+              "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+            },
+            {
+              "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+              "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "SGLang y vLLM lanzan servicio desagregado con paralelismo amplio de expertos, apuntando de lleno a los nuevos modelos MoE abiertos de 2 billones de parámetros",
+      "bullets": [
+        {
+          "body": "La carrera por el número de parámetros de pesos abiertos que produjo el Kimi K3 de Moonshot con 2,8 billones de parámetros y el Qwen3.8 de Alibaba con 2,4 billones tiene una consecuencia inmediata aguas abajo: casi nadie puede servir esos modelos con una configuración ingenua, y los dos motores de inferencia abierta dominantes dedicaron esta semana a lanzar la maquinaria para hacerlo. <a href=\"https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/\">La versión v0.6.0 de SGLang lidera en paralelismo amplio de expertos</a>, repartiendo los cientos de expertos de un modelo de mezcla de expertos entre muchas GPUs, combinada con la desagregación prefill-decode, en la que la fase de procesamiento del prompt, limitada por cómputo, se ejecuta en un pool de GPUs y la fase de generación de tokens, limitada por el ancho de banda de memoria, en otro, con la caché KV enviada entre ambos por la red. <a href=\"https://github.com/sgl-project/sglang/releases/tag/v0.6.0\">La cifra destacada es un rendimiento en un rack GB200 NVL72 de unas 2,7 veces el de una línea base de pool único</a> para un MoE de clase billón de parámetros, usando Mooncake y NIXL como backends de transferencia de KV. <a href=\"https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html\">La v0.25.0 de vLLM incorpora las mismas dos capacidades en cuestión de días</a>, que es la pauta que estos dos proyectos han mantenido todo el año: la paridad de funciones se alcanza rápido y luego llega la carrera en los factores constantes. El punto duradero es que la economía de los gigantescos modelos abiertos la fija ahora menos la licencia del modelo, que es gratuita, que la capacidad de un operador para montar siquiera un servicio desagregado con paralelismo de expertos. Un modelo de 2,4 billones de parámetros que no puedes servir de forma eficiente es más barato que una API de frontera solo sobre el papel. La versión que lo hace servible en un rack que se puede alquilar es la que de verdad mueve la curva de costes, y llegó esta semana en lugar de con los propios modelos.",
+          "citations": [
+            {
+              "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+              "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+            },
+            {
+              "label": "GitHub - sgl-project/sglang v0.6.0 release",
+              "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+            },
+            {
+              "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+              "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Un fallo crítico de ejecución remota de código en Milvus expone las bases de datos vectoriales que hay detrás de los sistemas de RAG, y la base instalada expuesta a internet es grande",
+      "bullets": [
+        {
+          "body": "<a href=\"https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html\">Una vulnerabilidad crítica en Milvus, registrada como CVE-2026-59218</a>, permite a un atacante no autenticado alcanzar la ejecución remota de código contra la base de datos vectorial de código abierto más desplegada, el componente que almacena los embeddings que hay detrás de la generación aumentada por recuperación. <a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-59218\">Calificada con 9,8 en CVSS</a>, el fallo es accesible a través de un endpoint del plano de datos expuesto que acepta peticiones manipuladas sin autenticación. Un impacto exitoso entrega no solo el servidor sino también el corpus incrustado que reside en él, a menudo documentos internos de una empresa, su historial de soporte o su código fuente, vectorizados y consultables. <a href=\"https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/\">Los mantenedores han publicado una versión parcheada e instan a los operadores a retirar las instancias públicas de internet</a> y a rotar cualquier credencial que el proceso pudiera leer. La parte incómoda es la misma en la que las historias de inferencia expuesta insisten una y otra vez. Las bases de datos vectoriales se construyeron para situarse en lo profundo de una red de confianza, con puertos abiertos y sin autenticación por defecto porque el modelo de amenaza asumía una subred privada, y los despliegues de RAG han empujado en silencio miles de ellas a IP públicas para servir chatbots. Un almacén vectorial comprometido es peor que una brecha de base de datos genérica por lo que filtra. El texto privado exacto que una organización alimentó a sus modelos es reconstruible a partir de los embeddings y los fragmentos de origen que Milvus guarda junto a ellos. La lectura práctica es que la capa de datos de RAG necesita ahora la misma higiene de red que la capa de servicio se ha visto obligada a aprender: autenticación activada, puertos cerrados y nada que contenga embeddings accesible desde la internet abierta.",
+          "citations": [
+            {
+              "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+              "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+            },
+            {
+              "label": "NVD - CVE-2026-59218",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+            },
+            {
+              "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+              "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "La ejecución duradera se convierte en el campo de batalla de la orquestación de agentes cuando LangGraph lanza ejecuciones reanudables y con puntos de control para responder a Temporal",
+      "bullets": [
+        {
+          "body": "La pregunta que reorganiza en silencio la infraestructura de agentes en 2026 no es qué framework escribe el bucle de agente más elegante, sino cuál sobrevive a un reinicio del servidor a mitad de tarea. Esta semana produjo un movimiento concreto. <a href=\"https://blog.langchain.com/langgraph-durable-execution-ga/\">LangChain lanzó la ejecución duradera para LangGraph</a> en <a href=\"https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0\">su versión v1.1.0</a>, guardando un punto de control de cada paso de la ejecución de un agente en estado persistente para que un worker caído o redesplegado se reanude desde el último nodo completado en lugar de reiniciar la tarea o perderla. Esa es una respuesta directa a la propuesta que ha convertido a <a href=\"https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/\">Temporal en el sustrato por defecto de los agentes de larga ejecución</a>: el motor de ejecución duradera sobre el que OpenAI ejecuta Codex y que se sitúa por debajo del producto Workflows de Mistral. Los tres comparten el enfoque de que un agente en producción es en realidad un flujo de trabajo distribuido: de decenas de segundos a varios minutos por petición, muchas llamadas al modelo e invocaciones de herramientas intercaladas, fallos de red y despliegues por medio. La garantía interesante, en ese marco, no es la inteligencia sino la capacidad de supervivencia. Que LangGraph alcance la ejecución duradera de forma nativa, en lugar de obligar a los equipos a acoplar su bucle de agente a un motor de flujos de trabajo aparte, funde dos capas en una para el bando del código primero. La razón por la que esto importa más allá de una nota de versión es que cambia el aspecto de una caída de agente. El modo de fallo deja de ser «el agente olvidó lo que estaba haciendo» y pasa a ser «el agente se pausó y retomó donde lo había dejado». Esa es la diferencia entre una demo y algo que un banco ejecutará en producción. El mercado de la orquestación se está consolidando en torno a esa propiedad, y los frameworks que la trataron como opcional son los que ahora la incorporan a posteriori.",
+          "citations": [
+            {
+              "label": "LangChain Blog - Durable execution for LangGraph",
+              "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+            },
+            {
+              "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+              "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+            },
+            {
+              "label": "GitHub - langchain-ai/langgraph v1.1.0 release",
+              "url": "https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Eventos de IA que planificar ahora: el Advancing AI de AMD abre el miércoles, WAIC cierra hoy y el bloque de seguridad de principios de agosto se está llenando",
+      "bullets": [
+        {
+          "body": "El catalizador más cercano está a dos días vista y en la vía de chips: el Advancing AI de AMD se celebra del 22 al 23 de julio en Moscone West, con la keynote de Lisa Su a las 9:30 PT del jueves 23 de julio, retransmitida en directo para quien no tenga acreditación presencial, y la sustancia de lo que desvele está cubierta más arriba. WAIC 2026, en Shanghái, cierra hoy. Después de Advancing AI, la siguiente fecha fija del calendario de chips y hardware es el 31 de julio a las 23:59 PDT, el límite de <a href=\"https://hotchips.org/schedule/\">la tarifa de inscripción anticipada de Hot Chips</a>; la conferencia en sí se celebra del 23 al 25 de agosto en Stanford con tutoriales sobre la evolución de HBM y RISC-V, y atrae a Samsung, SK Hynix, Nvidia e Infineon. Más adelante, el AI Infra Summit ocupa el Santa Clara Convention Center del 15 al 17 de septiembre, y el GTC de Nvidia no vuelve a San José hasta el 15-18 de marzo de 2027.\n\nLa vía de seguridad en IA se concentra a principios de agosto. Black Hat USA se celebra del 1 al 6 de agosto en el Mandalay Bay de Las Vegas —primero Trainings y luego Briefings— con su <a href=\"https://www.blackhat.com/us-26/briefings/schedule/index.html\">AI Summit el 4 de agosto</a>; DEF CON 34 sigue del 6 al 9 de agosto, y <a href=\"https://defcon.org/html/defcon-34/dc-34-villages.html\">su AI Village organiza demos, capture-the-flag y una vía de pósteres sobre ataques contra sistemas agénticos</a>. El AI Risk Summit de SecurityWeek ocupa el Ritz-Carlton de Half Moon Bay los días 11 y 12 de agosto. Aquí conviene reservar con más antelación: SANS organiza un AI Cybersecurity Summit los días 2 y 3 de noviembre en Arlington, la serie AI Agent Security Summit de Zenity continúa en Londres el 8 de octubre y en Nueva York el 21 de octubre, y OWASP Global AppSec USA aterriza en San Francisco los días 5 y 6 de noviembre.\n\nEn la vía de desarrollo e infraestructura: Ai4 en Las Vegas del 4 al 6 de agosto; el meetup de AI Tinkerers en San Francisco el 9 de agosto; Ray Summit en el San Francisco Marriott Marquis del 24 al 26 de agosto; el ACM AI Leadership Summit en Atlanta del 30 de agosto al 2 de septiembre; OpenAI DevDay en Fort Mason el 29 de septiembre; The AI Conference en el Pier 48 del 29 de septiembre al 1 de octubre; el Runway AI Summit el 30 de septiembre; World Summit AI en Ámsterdam el 7 y el 8 de octubre; PyTorch Conference en San José el 20 y el 21 de octubre; GitHub Universe el 28 y el 29 de octubre; AWS re:Invent del 30 de noviembre al 4 de diciembre; <a href=\"https://neurips.cc/Conferences/2026\">NeurIPS en diciembre</a>; IEEE-RAS Humanoids en Santa Clara del 7 al 9 de diciembre; y The AI Summit New York el 9 y el 10 de diciembre. Secuencia práctica: la keynote de Advancing AI del jueves es una pestaña del navegador y no un viaje al otro lado de la ciudad, y la tarifa anticipada de Hot Chips hay que cerrarla antes del 31 de julio, antes de que el bloque de seguridad de Las Vegas de principios de agosto absorba a la vez el calendario y el presupuesto.",
+          "citations": [
+            {
+              "label": "Hot Chips 2026 - Schedule and registration",
+              "url": "https://hotchips.org/schedule/"
+            },
+            {
+              "label": "Black Hat USA 2026 - Briefings schedule",
+              "url": "https://www.blackhat.com/us-26/briefings/schedule/index.html"
+            },
+            {
+              "label": "DEF CON 34 - Villages (AI Village)",
+              "url": "https://defcon.org/html/defcon-34/dc-34-villages.html"
+            },
+            {
+              "label": "NeurIPS 2026",
+              "url": "https://neurips.cc/Conferences/2026"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

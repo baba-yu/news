@@ -1,0 +1,668 @@
+{
+  "date": "2026-07-20",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.6d69ea882242fb30",
+        "short_label": "Self-hosted AI tools refuse unauthenticated remote binding by H1 2027",
+        "prediction_date": "2026-07-19"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "これは予測そのものの主題のすぐ近くに位置する。Milvus は自前で運用される AI ツールであり、最も広く使われているオープンソースのベクトルデータベースだ。そして CVE-2026-59218 は 9.8 と評価された欠陥で、認証を経ずに細工された要求を受け付ける、外部に露出したデータプレーンのエンドポイントを通じて到達できる。これはまさに、この予測がツールに拒み始めることを見込んでいる、認証なしの遠隔からの待ち受けの失敗だ。保守担当者の助言は、その修正の境界側の版にあたる。公開されたインスタンスをインターネットから外し、ポートを閉じ、その処理が読めた認証情報はすべて入れ替える、というものである。\n\nこれを首位まで押し上げさせないのは、差し出されている是正がソフトウェアに組み込まれたものではなく運用上のものだからだ。本日たどり着く診断はこうである。ベクトルストアは、脅威の見取り図が私的なサブネットを前提していたために、ポートを開き認証を省くのを既定にしていた。そこへ RAG の導入が、何千ものインスタンスを公開の IP に押し出した。これこそ、この予測が出荷される製品の側で反転させたい既定である。ただし、認証なしの非ループバックの待ち受けを拒む版を公開した自前運用の AI ツールは一つもない。引き金となる出来事は届いたが、出荷された既定は届いていない。",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Milvus の CVE-2026-59218 は、外部に露出したデータプレーンのエンドポイントを通る 9.8 の認証なしの遠隔コード実行の経路であり、この予測が自前運用の AI ツールに拒み始めることを見込んでいる露出の、新たな一例だ。ただし Milvus はベクトルストアであって、名前の挙がったランタイムではない。しかも修正は境界の助言であり、認証なしの非ループバックの待ち受けを拒む出荷済みの既定ではない。",
+        "coherence": 4,
+        "remaining_gap": "認証なしの非ループバックの待ち受けを拒む版を出荷した、名前の挙がったランタイムはない。本日の修正は運用面での固めであって、この予測が要る、ふるまいを変えるソフトウェアの既定ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c762a8078d707dee",
+        "short_label": "Durable ask-user checkpoints become a standard harness primitive by H1 2027",
+        "prediction_date": "2026-06-11"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] キーワードの層も意味の層も反応した。この行のシグナルは LangGraph と Temporal を直接名前で挙げ、サーバーの再起動を越えて残るチェックポイントを描いている。そして本日、LangChain がまさにそれを出荷した。LangGraph v1.1.0 の永続的な実行は、エージェントの実行の各段階を永続的な状態としてチェックポイントに刻む。だから、停止したワーカーや再配置されたワーカーは、作業をやり直したり失ったりするのではなく、直前に完了したノードから再開する。これは、この行が注視すべきプリミティブと見なしている中断と再開の永続性であり、エージェントのループを別のワークフローエンジンに継ぎ足すのではなく、ネイティブに実現されている。\n\n隔たりは、人間を介在させるという具体性のほうだ。この予測が扱うのは、永続的な、利用者への確認のチェックポイントである——中断し、利用者に問い、中断した対話を永続化し、答えが来たら再開する。一方で本日の公開は、クラッシュや配置替えをまたぐ一般的な永続実行であって、確認と承認の関門に限ったものではない。利用者への確認のプリミティブが乗るはずの永続実行の土台は、いままさに、出荷された主流フレームワークの機能になった。その上に立つ利用者への確認の仕組みは、まだ示されていない部分だ。",
+      "reference_links": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+          "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "LangGraph v1.1.0 の永続的な実行は各段階をチェックポイントに刻むので、停止したワーカーは直前のノードから再開する。これは、この予測が土台と見なす、再起動を越えて残る永続性であり、別のエンジンに継ぎ足すのではなく主流フレームワークにネイティブで出荷された。加わっていないのは、人間を介在させる軸だ。中断し、利用者に問い、答えが来たら再開する、という部分である。",
+        "coherence": 3,
+        "remaining_gap": "中断・利用者への確認・再開を文書化したプリミティブを出荷したハーネスはない。本日の公開はクラッシュをまたぐ一般的な永続実行であって、再起動を越えて残る確認と承認の関門ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5e0beac647793331",
+        "short_label": "AMD MI400 will market memory bandwidth over peak FLOPS at Advancing AI",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] キーワードの層も意味の層も強く反応した。この予測は、AMD が Advancing AI の基調講演で自社の Instinct 部品をどう位置づけるかについてのものであり、本日はその基調講演の二日前のプレビューだ。AMD は、まさに見込まれていたとおり、生の演算能力よりメモリに寄せている。公の場での枠組みは、MI450 一枚あたり 432GB の HBM4、Helios ラック一台あたり 31TB であり、GPU あたりのメモリ容量こそ AMD が Nvidia のラックを構成で上回るところだ、という明確な主張を伴う。そして最大の確約された導入は推論であり、そこではメモリの占有量が最も効く、という論も添えている。\n\n予測が挙げるのは MI400 だが、出荷される部品は MI450 系である。とはいえ同じ催しにおける同じ Instinct の系列であり、販促の軸——ピーク FLOPS ではなくメモリ容量と帯域を看板に据えること——は、まさに表に出たものだ。まだ伏せられているのは基調講演そのものである。提供時期、次の ROCm の公開、そして目玉となる顧客は舞台のために取ってあり、位置づけは二日早く確かめられた一方で、正式な公表はこれからだ。",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Advancing AI の二日前、AMD の位置づけは、この予測が挙げた「FLOPS よりメモリ」の枠組みそのものだ。MI450 一枚あたり 432GB の HBM4、Helios ラック一台あたり 31TB、そして GPU あたりのメモリ容量が Nvidia を構成で上回るという明確な主張、さらに推論を主力の市場とする論である。名前の挙がった部品は MI400 ではなく MI450 だが、同じ基調講演における同じ Instinct の系列だ。",
+        "coherence": 4,
+        "remaining_gap": "基調講演そのものは二日先だ。提供時期、次の ROCm の公開、そして目玉となる顧客は舞台のために取ってあり、公の場での正式な枠組みはこれからのままである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cc109942df2a6460",
+        "short_label": "AMD Instinct emerges as second vendor for open RL post-training by H1 2027",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "AMD の Advancing AI の基調講演まで二日、Instinct の系列が今回の目玉の中心にいる。MI450 系、横幅二倍の Helios ラック、そして Zen 6 の EPYC「Venice」CPU が、一つのラック規模のシステムとして売り込まれている。Helios ラック一台は 72 個の MI455X 部品、31TB の HBM4、そしておよそ 3 AI エクサフロップスを担う。AMD Instinct は、この予測がその周りに書かれている第二のベンダーのシリコンにまぎれもなく該当する。しかも OpenAI が MI450 の計画に要件を流し込んでいることは、事後学習の足がかりが乗って入ってくるであろう、フロンティアのラボからの引きそのものだ。\n\nただし力点は逆を向いている。AMD は推論を主力の市場として強く押し出し、最大の確約された導入は訓練ではなく推論であること、そして GPU あたりのメモリ容量こそ Nvidia を構成で上回るところだと論じている。この予測が求めるのは、AMD Instinct がオープンな RL 事後学習——訓練の作業だ——の第二のベンダーとして挙げられることである。ところが本日の位置づけは、意図して推論へ寄せた動きだ。だからシリコンは存在感を増す一方で、この予測が挙げる訓練側の足がかりは触れられないままだ。",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "AMD の Advancing AI のプレビューは Instinct のシリコンを中心に据えている——MI450、Helios ラック、要件を流し込む OpenAI——ので、AMD を確かな第二の調達先のアクセラレータとして裏づける。ただし売り込みは推論を主力の市場として強く押し出しており、これは、この予測が足がかりを必要とする RL 事後学習の作業とは逆だ。本日、Instinct 上でのオープンモデルの RL の実行に触れるものは何もない。",
+        "coherence": 2,
+        "remaining_gap": "AMD 以外のどの集団も、Instinct 上でのオープンモデルの端から端までの RL 事後学習の実行を公表していない。しかも本日の推論への力点は、訓練側の足がかりを手つかずのまま残している。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.546732d279b0a395",
+        "short_label": "Open inference engines adopt a named release-gating security track by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "名前の挙がった二つのエンジンは、今週いずれもバージョンを付けた版を出荷した——SGLang v0.6.0 と vLLM v0.25.0——これは、この予測がセキュリティの工程が現れるのを注視している、まさにその器だ。ただし公開そのものは、セキュリティではなく能力についてのものである。兆パラメータ級の MoE に向けた広域のエキスパート並列と、プリフィルとデコードの分離であり、KV キャッシュを Mooncake と NIXL 経由で GPU プールのあいだで受け渡す。リリースの可否を左右するセキュリティの基準も、協調的な CVE 公表の手続きも、公開エンドポイントへのファジングの関門も、どちらの版にも触れられていない。\n\nそうした工程を動機づけるはずのセキュリティの圧力は、本日の目玉の別のところにある。Milvus の重大な欠陥 CVE-2026-59218 は、最も広く使われているオープンソースのベクトルデータベースに 9.8 と評価された認証なしの RCE を置く。その論旨は、信頼されたサブネット向けに作られた AI 基盤の部品が、いまや外部に露出しており、提供の層が学ばざるをえなかったネットワークの衛生を必要としている、というものだ。それは、推論エンジンのセキュリティの工程が刻み込むであろう教訓と同じであり、vLLM や SGLang の内側ではなく一つ隣の部品に届いている。",
+      "reference_links": [
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        },
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "名前の挙がった二つのエンジンは今週いずれもバージョンを付けた版を出荷した——SGLang v0.6.0、vLLM v0.25.0——この予測が注視するまさにその器だ。だが両者とも能力を前面に出しており（広域のエキスパート並列、分離）、リリースの可否を左右するセキュリティの基準も協調的な公表の工程もない。セキュリティの教訓は一つ隣の部品、9.8 の Milvus の RCE に届いており、提供エンジンの内側ではない。",
+        "coherence": 2,
+        "remaining_gap": "どちらの版も、リリースを止めうるものとしてのセキュリティの工程も、固めの関門も、CVE 公表の手続きも挙げていない。能力の競争が続く一方で、正式なセキュリティの軸は出荷されないままだ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.16c7b8053e39aa1f",
+        "short_label": "Disk-streaming expert offload ships in a mainstream local runtime by H1 2027",
+        "prediction_date": "2026-07-18"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "本日の提供の版は、この予測がローカルで投げかけるのと同じ問題への、データセンター側の答えだ。混合エキスパート（MoE）のモデルは、そのエキスパートが、動かしたい場所に収まらない。SGLang v0.6.0 は広域のエキスパート並列——MoE モデルの数百のエキスパートを多数の GPU にまたがって分散させること——を前面に出す。そして両エンジンは、単一のプールでは素朴に提供できない 2 兆パラメータ級のオープンモデル、すなわち 2.8 兆パラメータの Kimi K3 と 2.4 兆パラメータの Qwen3.8 を狙っている。\n\nその仕組みは、予測そのものではなく、予測の鏡像だ。広域のエキスパート並列は、エキスパートを GPU のファブリックにまたがって分散させ、KV キャッシュをネットワーク越しに受け渡す。一方この予測が求めるのは、エキスパートをディスクから単一の主流のローカルランタイムへ流し込むことである。どちらも、一つのデバイスには大きすぎるエキスパートの集合への答えであり、本日のそれはラック規模のほうだ。ディスクからのエキスパートの読み込みを出荷または発表したローカルランタイムはない。だから需要の根拠は鋭くなる一方で、名前の挙がった実装は届かない。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "この予測がその周りに書かれている巨大なスパースモデルは、本日の主題そのものだ——2.8 兆パラメータの Kimi K3、2.4 兆パラメータの Qwen3.8——ので、一つのデバイスには大きすぎるエキスパートの集合を動かすことへの需要は鋭くなる。ただし本日の答えは鏡像である。SGLang の広域のエキスパート並列は、エキスパートをディスクからローカルランタイムへではなく、データセンターのファブリックにまたがって分散させる。",
+        "coherence": 2,
+        "remaining_gap": "500B を超えるモデルを 32GB の RAM 未満で動かす、ディスクからのエキスパートの読み込みを、文書化したうえで出荷または発表したローカルランタイム——llama.cpp、Ollama、LM Studio、vLLM——はない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ae0dd497b3c0ac0",
+        "short_label": "AI security posture tools ship auto-remediation for AI packages by Q4 2026",
+        "prediction_date": "2026-07-13"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Milvus の公表は、姿勢管理の道具立てに申し分のない標的を手渡し、そのうえで修正を丸ごと手作業に委ねている。CVE-2026-59218 は、検索拡張生成（RAG）の背後で埋め込みを蓄えるベクトルデータベースに対する、9.8 と評価された認証なしの RCE だ。記録に残る対処は運用者の仕事である。公開されたインスタンスをインターネットから外し、ポートを閉じ、その処理が読めた認証情報はすべて入れ替える。AI パッケージにおける、名前の付いた、外部に露出した、修正が運用者に委ねられたままの重大な露出——これこそ、この予測が、姿勢管理ツールが乗り越えると見込んでいる前提条件だ。\n\n本日、その環を閉じた道具立てはない。この予測が求めるのは、まさにこの種の露出した AI パッケージに対して自動の是正を出荷する、AI セキュリティの姿勢管理の製品である。存在するのは、修正を当てた版と固めの助言だけだ。購買の圧力は鋭くなった——大きな外部露出の導入基盤を抱えた 9.8 の CVE は、調達を動かす逃げ場のない圧力である——が、それに対する自動の措置を挙げたベンダーは一つもない。",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "本日の Milvus の公表は、この予測が要にしている隔たりの、申し分のない一例だ。ベクトルデータベース——RAG の背後にある AI パッケージ——における 9.8 の重大な RCE で、対処は丸ごと運用者に委ねられている。インスタンスをインターネットから外し、ポートを閉じ、認証情報を入れ替える、というものだ。それは購買の圧力を鋭くする。ただし本日、その露出に対する自動の措置を挙げた姿勢管理のベンダーはない。",
+        "coherence": 2,
+        "remaining_gap": "AI パッケージに限った、名前の付いた自動修復の機能を出荷した CNAPP や AI-SPM のベンダーはない。存在するのは、修正を当てた版と手作業の固めの助言だけだ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.625a7234dd6e9ed1",
+        "short_label": "ML registry servers log a second max-severity deserialization RCE by Q1 2027",
+        "prediction_date": "2026-06-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] キーワードの層が、ネットワークから到達できる ML のデータプレーンのストアに対する、最大深刻度の認証なしの RCE で反応した。Milvus は最も広く使われているオープンソースのベクトルデータベース——検索拡張生成（RAG）の背後で埋め込みを保持する部品——であり、CVE-2026-59218 は 9.8 と評価され、いかなる認証の確認より前に細工された要求を受け付ける、外部に露出したデータプレーンのエンドポイントを通じて到達できる。これは、Feast の CVE-2026-56121 に続いてこの行が見込むために書かれた、オープンソースの ML データプレーンのプロジェクトに対する、構造としては二件目の、最大深刻度で、認証前の RCE だ。\n\n一致が緩むのは、その仕組みのところだ。この予測が挙げるのは、とりわけ安全でないデシリアライズである——シリアライズされた変換のエンドポイントを通る dill、pickle、joblib のペイロード——のに対し、本日の Milvus の報道は、外部に露出した認証なしのデータプレーンのエンドポイントを描くだけで、その侵入路がデシリアライズだとは述べていない。だからデータプレーンの RCE という形はぴたりと当てはまる一方で、この予測が指定する厳密なデシリアライズの仕組みは、公表されたものの中では裏づけられていない。",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "CVE-2026-59218 は、この予測が注視しているものに構造として合致する。オープンソースの ML データプレーンのストアに対する、二件目の最大深刻度（9.8）で、認証なしの、認証前の RCE であり、Feast の CVE-2026-56121 に続いて届いた。一致が緩むのは仕組みの点だ。予測はとりわけ安全でないデシリアライズを挙げるが、Milvus の公表された侵入路は、外部に露出したデータプレーンのエンドポイントであって、デシリアライズの不具合とは述べられていない。",
+        "coherence": 3,
+        "remaining_gap": "公表された Milvus の侵入路は、この予測が要る厳密な根本原因である安全でないデシリアライズ（dill/pickle/joblib）だとは裏づけられていない。それがない以上、二件目の RCE という一致は構造の上のものであって、仕組みの上のものではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8ae347c6052558e0",
+        "short_label": "AMD Helios plus MI450 commitment book clears 15GW threshold by H2 2026",
+        "prediction_date": "2026-05-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] キーワードの層が、本日のプレビューでいずれも名前の挙がった AMD Helios、MI450、MI455X で反応し、意味の層が、この行が追う確約容量の積み上がりという主題を捉えた。AMD は MI450 をロードマップの項目としてプレビューするのをやめ、出荷されるラックとして売り始めた。OpenAI は MI450 の計画に要件を流し込み続けており、AMD はすでに後継の MI500 について買い手と話をしている。そのうえ、新たな目玉となる顧客を基調講演のために抱えている——どれも、Helios の背後で需要の帳簿が組み上げられている兆しだ。\n\n届かなかったのは、数量で示された基準である。この予測は、確約された容量が特定のギガワットの線を越えることで決着する。ところが本日の数字はハードウェアの仕様であって、合算された確約容量の積み上がりではない。ギガワットやラック数の数字を公の記録に載せた名前の挙がった買い手はおらず、それらの開示は舞台のためにはっきりと取ってある。確約容量の積み上がりは目に見えて満ちつつある。この予測が引く 15GW の線は、本日は数量で示されなかった。",
+      "reference_links": [
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        },
+        {
+          "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+          "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "AMD のプレビューは、需要の帳簿が質的に満ちていく様子を見せている——出荷されるラックとして売られる MI450、要件を流し込む OpenAI、買い手と話される MI500、木曜の基調講演のために抱えられた新たな目玉となる顧客——まさに、この予測が前提とする「舞台が触媒になる」動きだ。ただし数字は届かなかった。ギガワットやラック数の値を公の記録に載せた買い手はおらず、それらの公表は舞台のために取ってある。",
+        "coherence": 3,
+        "remaining_gap": "15GW での決着には、合算された確約容量が公の記録に載る必要がある。本日与えられたのはハードウェアの仕様と質的な需要の信号であって、名前の挙がった買い手のギガワットやラック数の確約ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cbba6275f880fc04",
+        "short_label": "Second hyperscaler names non-Nvidia data-center inference silicon by Q4 2027",
+        "prediction_date": "2026-06-29"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 意味の層が、名前の挙がったフロンティアの買い手が Nvidia 以外の推論シリコンに肩入れするという点で反応した。本日のプレビューでは、OpenAI が MI450 の計画に要件を流し込む一方で、AMD は推論を主力の市場として押し出し、最大の確約された導入は訓練ではなく推論だと論じている。フロンティアのラボが、Nvidia 以外の推論部品のメモリの占有量とラックの構成を形づくること——これは、この予測が注視している名前の挙がった顧客の信号にあたる。\n\n当てはまりは二つの軸で不完全だ。OpenAI は、この予測が枠組みの中心に据えるハイパースケーラーのどれでもなく、フロンティアのラボである。しかも要件の共有は協調設計であって、この行が明示を求める、公の記録に残る調達上の確約ではない。AMD はまぎれもなく Nvidia 以外の推論シリコンであり、名前の挙がったラボが付いているので、向きは正しい。だが、特定のハイパースケーラーがそれを確約した顧客として挙げるという節目は、基調講演で伏せられている目玉の顧客待ちだ。",
+      "reference_links": [
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        },
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "AMD の推論を最優先する売り込みは、OpenAI が MI450 の計画に要件を流し込むことと相まって、この予測が注視する形だ。Nvidia 以外の推論シリコンに紐づいた、名前の挙がったフロンティアの買い手である。当てはまりは二つの軸で外れる。OpenAI はフロンティアのラボであって、この予測が枠組みの中心に据えるハイパースケーラーのどれでもない。しかも要件の共有は協調設計であって、この予測が明示を求める、公の記録に残る調達上の確約ではない。",
+        "coherence": 2,
+        "remaining_gap": "第二のハイパースケーラーが、Nvidia 以外の推論シリコンの相手先を確約した顧客として挙げた例はない。基調講演で伏せられている目玉の顧客こそ、その節目が実現する場所だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cfaa5b5838122b38",
+        "short_label": "Reservoir routing ships as default vLLM and SGLang serving knob by H2 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] キーワードの層が、本日の公開のいずれでも中心にある vLLM、SGLang、そして MoE のエキスパートのルーティングで反応した。SGLang v0.6.0 と vLLM v0.25.0 は、広域のエキスパート並列——混合エキスパートのモデルの数百のエキスパートを多数の GPU にまたがって分散させること——を、プリフィルとデコードの分離と組み合わせて出荷した。これによって、この予測が既定として採用される対象として挙げる、まさにその二つのエンジンに、新しい MoE 提供の設定項目が着いた。\n\n具体の設定項目は異なる。この予測が扱うのは、リザーバルーティング——多ターンのエージェント的な MoE 推論のための、状態を持つルーターバンクのプリミティブ——が vLLM と SGLang の既定の提供の選択肢になることである。ところが出荷されたのは、広域のエキスパート並列と、Mooncake と NIXL 経由の KV キャッシュの分離という、別の MoE 提供の仕組みだ。この予測が賭ける型は裏づけられた——MoE のルーティングと提供の設定項目が、これらのエンジンに既定として着いている——一方で、名前の挙がったリザーバルーティングのプリミティブは、今週届いたものではない。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "SGLang v0.6.0 と vLLM v0.25.0 は、この予測が挙げるまさにその二つのエンジンに、新しい MoE 提供の設定項目を既定として着けた——これらのプロジェクトが MoE のルーティングと提供の仕組みを速く取り込むという型を裏づける。ただし出荷されたのは広域のエキスパート並列と KV キャッシュの分離であって、この予測が指定する、状態を持つルーターバンクのリザーバルーティングのプリミティブではない。",
+        "coherence": 2,
+        "remaining_gap": "どちらの版も、提供の設定項目としてのリザーバルーティングを、既定はもちろん、そもそも含んでいない。ホスト型の推論の階層でそれを打ち出したところもない。代わりに別の MoE の仕組みが出荷された。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a4f83081580b9a3d",
+        "short_label": "Launch-day vLLM/SGLang + Ollama support becomes open-weight MoE release bar",
+        "prediction_date": "2026-07-02"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 意味の層がはっきり反応した。この予測は、vLLM と SGLang での提供の対応が、オープンウェイトの MoE モデルのリリースの基準になりつつあると見る。そして本日は、その対応が最新の 2 兆パラメータ級の公開をめぐって成熟していく姿だ。SGLang v0.6.0 と vLLM v0.25.0 は、2.8 兆パラメータの Kimi K3 と 2.4 兆パラメータの Qwen3.8 を真っ向から狙った、広域のエキスパート並列と分離型の提供を出荷した。その論旨は、素朴な構成でそれらのモデルを提供できる者はほとんどおらず、だからエンジンの対応こそが、それらを使えるものにする唯一のものだ、というものである。\n\n巨大なオープンモデルの経済は、運用者が分離型でエキスパート並列の提供を立ち上げられるかどうかで決まる、という読みは、まさに、提供スタックの対応が可否を分ける基準だとするこの行の主張だ。本日が決着させないのは、公開当日という時機と、Ollama の側面である。版はモデルと同時の特定の公開に合わせてではなく、モデルの後に届いた。しかもここには、2T 級の MoE に対する Ollama の対応に関わるものは何もない。基準を定める動きは強まった。この予測が挙げる、公開当日で三つのランタイムという具体性は、実証されなかった。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "本日の話は、この予測の主張が実地に現れたものだ。SGLang v0.6.0 と vLLM v0.25.0 が存在するのは、素朴な構成で Kimi K3 や Qwen3.8 を提供できる者がほとんどいないからであり、だから提供スタックの対応こそが、巨大なオープンモデルを使えるものにする唯一のもの——この予測が挙げる、可否を分ける基準——だ。示されていないのは、公開当日という時機と Ollama の側面である。",
+        "coherence": 3,
+        "remaining_gap": "版は、特定の公開に合わせて出荷されるのではなく、モデルに後れて届いた。しかもここには、2T 級の MoE 向けの Ollama のパッケージングに関わるものは何もない。公開当日で三つのランタイムという基準は、実証されていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.42a2372350593ef7",
+        "short_label": "SK Hynix sustains triple-digit YoY revenue growth through Q3 2026",
+        "prediction_date": "2026-07-09"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "AMD のラック規模の売り込みは、大口の HBM の発注を装ったものだ。Helios ラック一台は 31TB の HBM4 と規定され、MI450 一枚は 432GB を積む。そして AMD は、GPU あたりのメモリ容量こそ Nvidia を構成で上回るところだと論じている。それは、SK Hynix が売る広帯域メモリへの川下の需要であり、確約された導入の規模をそこに結びつけると見られる基調講演の二日前に届いている。\n\nこの予測との距離は、本日の目玉のどこにも SK Hynix の数字がないことだ。この予測は、四半期の売上が 3 桁の前年同期比の成長を保つことで決着する。ところが本日供給されるのは、供給元から報告された数字ではなく、HBM への需要側の信号である。AMD のメモリ偏重の構成は、この主張が乗る背景を強めるが、それが要にする数字は動かさない。",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "AMD のラック規模の売り込みは、大口の HBM の発注を装ったものだ——Helios ラック一台あたり 31TB の HBM4、MI450 一枚あたり 432GB、Nvidia に対する強みとして売り込まれるメモリ——SK Hynix が売るまさにそのものへの川下の需要である。ただし本日、SK Hynix の数字にあたるものは何もない。この予測は報告された四半期の売上の数字で決着するのであり、これは需要の背景にすぎない。",
+        "coherence": 2,
+        "remaining_gap": "この予測は、SK Hynix の第 2 四半期と第 3 四半期の決算が 3 桁の前年同期比の成長を越えることを要にしている。本日、供給元の売上の数字は何も報告されていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a31a93089cef22da",
+        "short_label": "Samsung answers memory-capex race with fresh HBM capacity buildout by Q1 2027",
+        "prediction_date": "2026-07-12"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "AMD のプレビューは、この予測が注視するメモリの設備投資競争の、需要側を数量で示している。Helios ラック一台あたり 31TB の HBM4、MI450 一枚あたり 432GB、そして GPU あたりのメモリ容量が Nvidia のラックに対する AMD の強みだ、という明確な主張である。その物量で HBM4 を買う、信頼に足る第二のラック規模の買い手は、まさに、Samsung の新たな容量の確約が応えるであろう引きだ。\n\n欠けているのは、Samsung 自身からの動きである。この予測は、Samsung が開示する、名前の付いた HBM または先端 DRAM の容量の増設で決着する。ところが本日は、メモリの供給元の設備投資の項目ではなく、アクセラレータのベンダーの製品の位置づけだ。需要の信号は固まる。この予測が挙げる供給側の確約は、現れなかった。",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "AMD のプレビューは、メモリの設備投資競争の需要側を数量で示している。Helios ラック一台あたり 31TB の HBM4、MI450 一枚あたり 432GB、Nvidia に対する強みとして売り込まれる GPU あたりのメモリ容量だ。その物量で HBM4 を買う、信頼に足る第二のラック規模の買い手は、Samsung の新たな確約が応えるであろう引きである。ただし本日は、メモリの供給元の設備投資の項目ではなく、アクセラレータのベンダーの位置づけだ。",
+        "coherence": 2,
+        "remaining_gap": "Samsung から、あるいはどのメモリの供給元からも、本日動きは現れなかった。この予測は、AI の需要に結びついた、名前の付いた Samsung の HBM または先端 DRAM の容量の確約で決着する。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.43bff01be9e1af7e",
+        "short_label": "Transformer-only inference ASICs gain a first-class serving-stack backend by H1 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "この予測が統合先として挙げる提供スタック——vLLM、SGLang、TensorRT-LLM——は、まさに今週の動きが着いた場所だ。SGLang v0.6.0 と vLLM v0.25.0 は、兆パラメータ級の MoE に向けた広域のエキスパート並列と、プリフィルとデコードを分離した提供を、数日の間隔で出荷した。これは、提供の能力が最初に積み上がる場所として、この二つのプロジェクトを裏づける。\n\nただし着いた能力は、固定機能のバックエンドではない。本日の版が狙うのは、GB200 NVL72 のラック上での、複数 GPU にまたがるエキスパート並列と、Mooncake と NIXL 経由の KV キャッシュの転送——GPU での提供であって、トランスフォーマー専用の ASIC の経路ではない。この予測が求めるのは、それらのスタックの内側で、ハードワイヤードの推論シリコンを、文書化された第一級のデプロイ先として扱うことである。ところが出荷されたのは GPU 向けの MoE の機能だ。だから器は動いている一方で、この予測が挙げる ASIC のバックエンドは手つかずである。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "この予測が統合先として挙げる提供スタック——vLLM、SGLang、TensorRT-LLM——は、まさに今週の動きが着いた場所であり、提供の能力が最初に積み上がる場所として裏づけられる。ただし出荷されたのは GPU の MoE 向けの広域のエキスパート並列と KV キャッシュの転送であって、固定機能のバックエンドではない。トランスフォーマー専用の ASIC のデプロイの経路に触れるものは何もない。",
+        "coherence": 2,
+        "remaining_gap": "主流の提供スタックで、固定機能のトランスフォーマー ASIC のバックエンドを、文書化されたデプロイ先として提供したところはない。本日の版は GPU 向けの MoE の機能だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0b8bcb868b9c8fa5",
+        "short_label": "Frontier mid-tier API pricing falls below $1 per million input tokens by Q2 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "本日の版は、この予測が最終的に追う費用の曲線を動かす。SGLang と vLLM の作業の、長く残る要点はこうだ。巨大なオープンモデルの経済を決めるのは、無償であるライセンスよりも、運用者が分離型でエキスパート並列の提供をそもそも立ち上げられるかどうかである——そして GB200 NVL72 のラックはいま、兆パラメータ級の MoE について、単一プールの基準のおよそ 2.7 倍を報告している。能力のあるオープンモデルをより安く提供できることは、誰であれトークン単価にいくら付けられるかへの、継続した下押しの圧力だ。\n\n$1 を下回る中位階層の定価への結びつきは、間接的である。本日 API の価格を公表したベンダーはなく、借りたラックの上でのスループットの倍率が中位階層の下限に届くのは、この予測が前提とする競争を通じた転嫁を経てのみだ。この予測の背後にある力は強まった。掲示された数字は一つも動かなかった。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "SGLang と vLLM の作業は、この予測が最終的に追う費用の曲線を動かす。GB200 NVL72 のラックはいま、兆パラメータ級の MoE について単一プールの基準のおよそ 2.7 倍を報告しており、これは誰であれトークン単価にいくら付けられるかへの、継続した下押しの圧力だ。ただし本日 API の価格を公表したベンダーはなく、スループットの向上が中位階層の定価に届くのは、間接的な競争を通じた転嫁を経てのみである。",
+        "coherence": 2,
+        "remaining_gap": "この予測は、二つのベンダーが $1 を下回る中位階層の入力価格を掲示することで決着する。本日、定価は一つも動かず、提供の効率からの結びつきは競争を通じた転嫁を経由する。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c99c991b7d54c82a",
+        "short_label": "Subagent orchestration becomes a first-class frontier-API primitive by Q1 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "LangGraph v1.1.0 の永続的な実行は、この予測が注視するオーケストレーションの層に着く。そしてそれをめぐる枠組み——本番のエージェントとは、実のところ、多数の入り組んだモデル呼び出しとツール呼び出しからなる分散ワークフローである——は、サブエージェントのオーケストレーションのプリミティブが乗るであろう土台と同じものだ。オーケストレーションの市場は、本日、ある特定の性質を軸に集約しつつあると描かれている。\n\nその性質は、扇状の展開ではなく、生き延びる力のほうだ。永続的な実行は、エージェントの実行をチェックポイントに刻み、停止したワーカーが直前のノードから再開できるようにする。一方この予測が関わるのは、提供事業者が多エージェントへの分解を、課金できるサーバー側の API のプリミティブとして提供することである。LangGraph はオーケストレーションを API ではなくフレームワークの中へ動かしており、これはむしろ逆の向きだ。だから主題は生きている一方で、この予測が挙げる特定のフロンティア API のプリミティブには、何の動きも見られない。",
+      "reference_links": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+          "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "LangGraph v1.1.0 の永続的な実行は、この予測が注視するオーケストレーションの層に着く。ただし、それがネイティブにする性質は、生き延びる力——停止したワーカーが直前のノードから再開すること——であって、この予測が関わる多エージェントの扇状の展開ではない。しかもそれは、オーケストレーションを、課金できるサーバー側の API のプリミティブとして提供するのではなく、フレームワークの中へ動かしており、むしろ逆の向きだ。",
+        "coherence": 1,
+        "remaining_gap": "サーバー側のサブエージェントのオーケストレーションを、課金され、計量される API のプリミティブとして提供したフロンティアの事業者はない。本日の動きはフレームワーク側のもので、永続性についてのものであって、事業者側の扇状の展開ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.eca92ec7ee67c161",
+        "short_label": "Unsloth ships day-of fine-tuning for the next 1T+ open-weight release by Q1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "この予測が結びつけられているオープンウェイトの公開は、まさに本日の主題だ。Moonshot の 2.8 兆パラメータの Kimi K3 と、Alibaba の 2.4 兆パラメータの Qwen3.8——支配的な二つの推論エンジンが今週その提供を可能にしてきた、当のモデルである。この予測が公開当日のファインチューニングの対応を注視している 1T 超のオープンウェイトのフロンティアは、いまや 1 兆パラメータをはるかに超えて埋まっている。\n\n今週の動きは、ファインチューニングではなく提供の側にある。SGLang と vLLM は、これらのモデルを動かす仕掛けを出荷した。本日、Unsloth や、それらに向けた当日の低 VRAM での調整の経路に関わるものは何もない。この予測が要るのは、ファインチューニングのツールチェーンが 1T 超の公開に歩調を合わせることである。ところが本日動いたのは推論のツールチェーンだ。だからモデルはそろっている一方で、ファインチューニングの遅れという節目は試されていない。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "この予測が結びつけられているオープンウェイトの公開は、まさに本日の主題だ——2.8 兆パラメータの Kimi K3、2.4 兆パラメータの Qwen3.8——ので、1T 超のフロンティアは十分に埋まっている。ただし今週の動きは、丸ごと提供の側にある。SGLang と vLLM は、これらのモデルを動かす仕掛けを出荷したが、Unsloth や当日の低 VRAM での調整の経路に触れるものは何もない。",
+        "coherence": 2,
+        "remaining_gap": "ファインチューニングの遅れという節目には、1T 超の公開を一週間のうちに調整する、公開された Unsloth のビルドが要る。本日動いたのは推論のツールチェーンであって、調整のほうではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0ad3c58ce5c240d0",
+        "short_label": "Together or Baseten raises at a $5B-plus valuation by Q4 2027",
+        "prediction_date": "2026-07-17"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "本日の提供の進展は、オープンモデルの推論ネオクラウドの評価額の下にある需要の主張だ。2.4 兆パラメータのモデルを、借りられるラックの上で提供可能にする版は、費用の曲線を実際に動かすものとして描かれている。そして、分離型で広域のエキスパート並列の提供を立ち上げることは、まさに Together と Baseten が利用権を売っている能力である。最大のオープンモデルが、この仕掛けを通じてのみ採算に合って提供できる世界は、両社の事業にとって好都合だ。\n\nただし、資金調達の出来事は現れなかった。この予測は、その二社のうちいずれかでの、名前の挙がった $5 billion 超のラウンドで決着する。ところが本日はエンジニアリングの版であって、タームシートではない。提供の階層をめぐる戦略上の根拠は固まった一方で、この予測が挙げる評価額の節目には、何も見られなかった。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "本日の提供の進展は、オープンモデルの推論ネオクラウドの評価額の下にある需要の主張だ。分離型で広域のエキスパート並列の提供を立ち上げること——Together と Baseten が利用権を売っている能力——こそが、2.4 兆パラメータのモデルをそもそも採算に合って提供できるものにする。ただし本日はエンジニアリングの版であって、タームシートではない。資金調達の出来事は現れなかった。",
+        "coherence": 2,
+        "remaining_gap": "この予測は、Together または Baseten での、名前の挙がった $5 billion 超のラウンドで決着する。本日は提供の階層をめぐる戦略上の根拠を強めるが、評価額には何も触れていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b3c111f1938357a9",
+        "short_label": "Open-weight model tops Artificial Analysis Intelligence Index by H1 2027",
+        "prediction_date": "2026-07-17"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "この予測が要にする候補のオープンウェイトのモデルは、本日の提供の話に直接名前が挙がっている。2.8 兆パラメータの Kimi K3 と 2.4 兆パラメータの Qwen3.8——その大きさが今週の提供の作業を強いた、二つのチェックポイントだ。オープンウェイトのパラメータ競争の頂点に両者が居ることは、この予測が要る供給側にあたる。\n\nただし、指標に載る資格のあるものは何も変わらなかった。本日の項目は、これらのモデルを動かすことについてであって、採点することではない。そしてどちらについても、Artificial Analysis Intelligence Index の結果は公表されていない。この予測は、ダウンロードできるオープンウェイトのチェックポイントが、その公開の指標の頂点に立つことで決着する。モデルは提供の作業として名前が挙がり、その計測された立ち位置は本日手つかずである。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "この予測が要にする候補のオープンウェイトのモデルは、本日直接名前が挙がっている——2.8 兆パラメータの Kimi K3、2.4 兆パラメータの Qwen3.8——が、それはあくまで、その大きさが今週のエンジンの作業を強いた提供の作業としてだ。どちらについても、Artificial Analysis Intelligence Index の結果は公表されていない。本日は、これらのモデルを動かすことについてであって、採点することではない。",
+        "coherence": 2,
+        "remaining_gap": "この予測が要るのは、ダウンロードできるオープンウェイトのチェックポイントが、指標の文句なしの頂点に立つことだ。モデルの計測された立ち位置は、本日手つかずだった。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.89cd61b0ff2ea3ca",
+        "short_label": "Qwen3.8 open weights arrive after published benchmarks, not before Q4 2026",
+        "prediction_date": "2026-07-19"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Qwen3.8 は本日の提供の話に、新しい仕掛けが狙う 2 兆パラメータ級のオープンモデルの一つとして、2.4 兆パラメータで、2.8 兆パラメータの Kimi K3 と並んで現れる。この予測が追うのは、その特定の公開の順序である——公開されたベンチマークの結果がオープンウェイトに先行するのか、それとも後れるのか。\n\n本日はその順序に何も加えない。モデルは提供の作業として言及されるだけで、新しいベンチマークの公表も、重みの公開日も付いていない。この予測が要にする順序の問い——計測された結果がダウンロードできる重みの前か、後か——は、まさにそのままの位置にある。だからこの言及は、公開の時間軸を進めることなく Qwen3.8 を視野に留めておく。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Qwen3.8 は本日、新しい提供の仕掛けが狙う 2 兆パラメータ級のオープンモデルの一つとして、2.4 兆パラメータで Kimi K3 と並んで現れるにすぎない。この予測が要にする順序の問い——公開されたベンチマークがオープンウェイトに先行するのか後れるのか——には、新しいデータが何も付かない。ベンチマークの公表も、重みの公開日も添えられていない。",
+        "coherence": 1,
+        "remaining_gap": "この言及は、公開の時間軸を進めることなく Qwen3.8 を視野に留める。ベンチマークと重みのどちらが先かという順序は、まさにそのままの位置にある。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e3f72a21ed13fcec",
+        "short_label": "Agent-sandbox isolation becomes a named procurement requirement by H1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "本日の Milvus の話は、調達をはっきりと軸に据えて枠づけられており、それはこの予測の仕組みそのものだ。示される読みはこうである。名前の付いた、外部に露出した導入基盤を抱えた 9.8 の CVE は、ポートを閉じ認証を有効にすることを、支援フォーラムの提案から買い手の確認項目へと変える——これは、この予測がエージェントのサンドボックスの隔離について見込む、任意の固めから取得の要件への移行と同じ動きだ。\n\n対象は、名前の挙がったものではなく隣接するものだ。この予測が関わるのは、エージェントのサンドボックスの実行時の隔離が、RFP やセキュリティの質問票に調達の要件として現れることである。一方 Milvus の露出は、ベクトルデータベースのネットワーク認証の既定であって、エージェントのサンドボックスではない。本日の調達の理屈が可視にするものは、まさにこの主張が乗るものだ。ただしそれは、エージェントの実行時の境界に対してではなく、RAG のデータの層に対して届いている。",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "本日の Milvus の話は、調達をはっきりと軸に据えて枠づけられている——名前の付いた、外部に露出した導入基盤を抱えた 9.8 の CVE が、ポートを閉じ認証を有効にすることを、支援フォーラムの提案から買い手の確認項目へと変える、という読みだ。それはまさに、この予測が見込む、任意の固めから取得の要件への移行である。ただしそれは、この予測が挙げるエージェントのサンドボックスの境界に対してではなく、RAG のデータの層に対して届いている。",
+        "coherence": 2,
+        "remaining_gap": "この予測が要るのは、RFP やセキュリティの質問票における、名前の付いた項目としての実行時のエージェントのサンドボックスの隔離である。本日の調達の圧力は、エージェントのランタイムではなく、ベクトルデータベースに届いている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7a5df26a9276e045",
+        "short_label": "Microsoft breaks Patch Tuesday's monthly cadence for AI-surface fixes by Q2 2027",
+        "prediction_date": "2026-07-16"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "重大な AI の攻撃対象領域の脆弱性が、本日、定例外の修正を引き出した。これはこの予測が注視する型だ——ただし Microsoft からではない。Milvus の保守担当者は、CVE-2026-59218 に対する修正を当てた版を、月次の一括更新の外で出荷した。オープンソースのプロジェクトの修正の経路は、その性質からしてプロジェクトの公開であり、大きな外部露出の基盤を抱えた 9.8 の認証なしの RCE は、更新の周期を待たないからだ。\n\nこの予測との距離は、ベンダーである。この予測は、Microsoft がとりわけ、AI の攻撃対象領域の修正のために Patch Tuesday の月次の周期を破ることで決着する。ところが本日の露出は、Microsoft のコードが一切関わらない第三者のベクトルデータベースにある。一般的な圧力——重大な AI 基盤の欠陥が、固定された日程を外して修正を強いること——は現れているが、この予測が挙げるベンダーからは一つ隔たっている。",
+      "reference_links": [
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "重大な AI の攻撃対象領域の欠陥は、本日たしかに定例外の修正を引き出した——Milvus の保守担当者が CVE-2026-59218 を月次の一括更新の外で修正した——ので、この予測が注視する圧力と響き合う。ただしオープンソースのプロジェクトの修正の経路は、その性質からして定例外であり、しかもそれは Microsoft のコードが一切関わらない第三者のベクトルデータベースであって、この予測が挙げるベンダーではない。",
+        "coherence": 1,
+        "remaining_gap": "この予測は、Microsoft がとりわけ、月次より速い Copilot または AI の攻撃対象領域の保守の周期を発表することで決着する。本日の日程外の修正は、無関係なオープンソースのプロジェクトのものだ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.98c20322cf3f2161",
+        "short_label": "Action-level guardrails become first-class agent-framework controls by H1 2027",
+        "prediction_date": "2026-07-14"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "LangGraph v1.1.0 が永続的な実行を出荷したことは、エージェントのフレームワークが、実行時の性質を第一級の組み込みの制御へと引き上げる姿を示している——各段階をチェックポイントに刻み、停止したワーカーが直前に完了したノードから再開するようにするのだ。実行の保証が、別のエンジンで継ぎ足すのではなく、いまやフレームワークにネイティブであること——それは、この予測が操作単位のガードレールに求める形と同じである。\n\n具体の制御は異なる。永続的な実行は、再起動をまたいで生き延びることについてのものだ。一方この予測が関わるのは、操作ごとの関門——エージェントが行えるツール呼び出しを限ること——を、フレームワークの第一級の制御とすることである。LangGraph は本日、別の保証をネイティブにした。だから、この予測が頼りにする「フレームワークが制御を取り込む」向きは目に見えて動いている一方で、操作単位のガードレールそのものは、出荷されたものではない。",
+      "reference_links": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "GitHub - langchain-ai/langgraph v1.1.0 release",
+          "url": "https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "LangGraph v1.1.0 が永続的な実行を、ネイティブの組み込みの保証へ引き上げたことは、エージェントのフレームワークが、実行時の性質を継ぎ足しではなく第一級の制御として取り込む姿を示している——この予測が操作単位のガードレールに求める形と同じだ。ただしネイティブにされた保証は、再起動をまたいで生き延びることであって、エージェントが行えるツール呼び出しを操作ごとに関門で仕切ることではない。",
+        "coherence": 2,
+        "remaining_gap": "操作単位のツール呼び出しの分類を、処理の流れの中で行う第一級のガードレールとして出荷したフレームワークはない。本日のネイティブの保証は永続性であり、操作ごとの関門とは別の制御だ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f960d058dc42c7c6",
+        "short_label": "KV-cache-compression dtype ships as inference-stack deployment knob by Q4 2026",
+        "prediction_date": "2026-04-29"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] キーワードの層が、本日の提供の版の中心に座る KV キャッシュで、しかもこの行が挙げる vLLM と SGLang のスタックの中で反応した。プリフィルとデコードの分離は、計算に律速されるプロンプトの段階と、帯域に律速される生成の段階を別々の GPU プールに切り分け、KV キャッシュを Mooncake と NIXL を通じてネットワーク越しに両者のあいだで受け渡す——KV キャッシュは、この設計全体がその周りを動く対象なのだ。\n\nそれに対する操作は、圧縮ではなく転送である。この予測が求めるのは、KV キャッシュ圧縮の dtype がデプロイ時の設定項目として提供されること——キャッシュをメモリの中で縮める、kv-cache-dtype 型の制御——だ。ところが本日の作業は、キャッシュを圧縮するのではなく、プールのあいだのネットワークのファブリックにまたがって動かす。KV キャッシュは、まぎれもなく、この予測が見込んだ提供の主戦場だ。だが、それが挙げる特定の圧縮 dtype の設定項目は、これらの版では出荷されなかった。",
+      "reference_links": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "KV キャッシュは、この予測が挙げるまさにその vLLM と SGLang のスタックの中で、本日の提供の版の中心に座る——プリフィルとデコードの分離が、それを Mooncake と NIXL 経由で GPU プールのあいだで受け渡し、キャッシュを提供の主戦場として裏づける。ただし操作は、ファブリックにまたがる転送であって、この予測が提供を求める、メモリの中での圧縮 dtype の設定項目ではない。",
+        "coherence": 2,
+        "remaining_gap": "kv-cache-dtype の圧縮の設定項目（TurboQuant あるいは代替）を提供した版はなく、圧縮されたキャッシュの選択肢に対してトークン単価を段階づけたハイパースケーラーもない。本日はキャッシュを動かしたのであって、縮めたのではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.41589b1968c4543f",
+        "short_label": "AMD breaks out AI-accelerator revenue as 10-Q segment footnote by Q3 2026",
+        "prediction_date": "2026-05-04"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] キーワードの層が、本日いずれも中心にある AMD、MI450、Helios で反応した。だが、この行の本当の主題——財務開示の項目——は不在だ。本日のプレビューは、Advancing AI の基調講演の二日前の製品の位置づけである。MI450 系、Helios ラック、そして EPYC Venice が一つのラック規模のシステムとして売られ、推論が主力の市場として捉え直され、メモリ容量が Nvidia に対する強みとされている。そのどこにも、決算の成果物はない。\n\nこの予測は、AMD が AI アクセラレータの売上を 10-Q のセグメントの脚注として切り出すことで決着する。ところが本日は、売上の数字も、提出書類も、決算の出来事も伴わない。アクセラレータの項目の存在感は高まる——それは、いずれ独立した開示を強いる圧力だ——が、開示そのものは本日の目玉のどこにもない。意味のある公表は、SEC のためではなく、舞台のために取ってある。",
+      "reference_links": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+          "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "AMD、MI450、Helios は本日の目玉の中心にある。だが、この行の本当の主題——財務開示の項目——は不在だ。プレビューは基調講演の二日前の製品の位置づけであり、売上の数字も、提出書類も、決算の出来事もない。アクセラレータの項目の存在感が高まることは、いずれ独立した開示を強いる圧力だが、開示そのものは本日どこにもない。",
+        "coherence": 2,
+        "remaining_gap": "この予測は、AMD が AI アクセラレータの売上を 10-Q のセグメントの脚注として切り出すことで決着する。本日は、提出書類も売上の数字も伴わず、公表は舞台のために取ってある。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] 意味の層が、AI 基盤からの機密とデータの持ち出しで反応した。CVE-2026-59218 を通じた Milvus の侵害は、サーバーだけでなく、その上に載る埋め込まれたコーパス——多くは、ベクトル化され検索できるようにされた、企業の内部文書や、支援の履歴や、ソースコード——をもたらす。そして保守担当者は、その処理が読めた認証情報をすべて入れ替えるよう促している。組織が自らのモデルに与えたデータが、埋め込みとソースの断片から復元できること——それは、この危険の分類が扱う持ち出しの帰結だ。\n\n欠けている要素は、環のなかのエージェントである。この予測が関わるのは、エージェントが——間接的なプロンプトインジェクションを通じて——機密を漏らすよう誘導されることだ。ところが本日の仕組みは、外部に露出したベクトルデータベースへの、認証なしのネットワークからの到達であり、どの段階でもエージェントの判断は関わっていない。一覧を維持する団体で、順位の改訂を公表したところは本日ない。だから持ち出しという主題は固まる一方で、エージェントを介した特定の経路も、CIS/OWASP における正式な位置づけも、どちらも元の場所にとどまっている。",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "CVE-2026-59218 を通じた Milvus の侵害は、埋め込まれたコーパス——多くは内部文書、支援の履歴、ソースコード——をもたらし、保守担当者はその処理が読めた認証情報をすべて入れ替えるよう促している。これは、AI 基盤からの機密の持ち出しという広い主題を固める。ただし仕組みは認証なしのネットワークからの到達であって、エージェントの判断は関わらない。しかも本日、CIS や OWASP の一覧の改訂は公表されていない。",
+        "coherence": 2,
+        "remaining_gap": "この予測が要るのは、プロンプトインジェクションを通じて機密を漏らすよう誘導されるエージェントと、さらに、CIS/OWASP の上位一覧における、独立した名前の付いた項目である。どちらも元の場所にとどまった。"
+      }
+    }
+  ]
+}

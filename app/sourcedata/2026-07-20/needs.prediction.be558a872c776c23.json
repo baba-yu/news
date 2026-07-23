@@ -1,0 +1,58 @@
+[
+  {
+    "actor": "Open-source vector database core maintainer setting network-security defaults",
+    "job": "Decide to convert the post-CVE ports-closed, auth-on runbook advice into a shipped fail-closed bind default across the next release cycle.",
+    "outcome": "A breaking default-change release refusing a non-loopback bind with no authentication credential, documented in the release notes rather than an optional hardening guide.",
+    "motivation": "A 9.8 unauthenticated RCE with a named, internet-facing install base makes the shipped default, not the runbook, the maintainer's reputational obligation.",
+    "task": {
+      "who": "Core maintainers and networking-defaults owners on the project's steering group",
+      "what": "Adopt fail-closed bind as a breaking release default",
+      "where": "The project's release roadmap and default server configuration",
+      "when": "H2 2026 through H1 2027",
+      "why": "Only a shipped default reaches operators skipping hardening pages",
+      "how": "The Redis and MongoDB protected-mode precedent"
+    }
+  },
+  {
+    "actor": "Open-source vector database server-networking engineer",
+    "job": "Implement the startup guard that refuses a routable bind carrying no credential, downgrades it to loopback, or gates it behind explicit acknowledgement.",
+    "outcome": "Server code that refuses a non-loopback bind without authentication, downgrades to loopback, or requires an explicit acknowledgement before starting.",
+    "motivation": "Perimeter hygiene failed because thousands of RAG instances reached public IPs; only an in-process check stops the next exposed store.",
+    "task": {
+      "who": "Server, transport and startup-configuration engineers",
+      "what": "Add a production check refusing routable bind without credential",
+      "where": "The server bootstrap and interface-binding code path",
+      "when": "H2 2026 through H1 2027",
+      "why": "In-process enforcement outlasts perimeter hygiene operators forget",
+      "how": "Loopback default bind plus a fail-closed startup assertion"
+    }
+  },
+  {
+    "actor": "Open-source vector database release manager and release-notes owner",
+    "job": "Sequence the fail-closed default into a versioned release and document it as a breaking default change, not an optional hardening note.",
+    "outcome": "Release notes that record the auth-on bind default as a breaking change, distinguishing it from an optional hardening guide operators ignore.",
+    "motivation": "A default buried as optional hardening never reaches upgrade-averse operators, so only a flagged breaking change forces the safe configuration.",
+    "task": {
+      "who": "Release management and developer-documentation staff",
+      "what": "Document the auth-on bind default as a breaking change",
+      "where": "The versioned release notes and upgrade migration guide",
+      "when": "H2 2026 through H1 2027",
+      "why": "Breaking-change framing forces the safe default on upgraders",
+      "how": "Semantic-version major bump with a documented migration path"
+    }
+  },
+  {
+    "actor": "Enterprise RAG-platform procurement security reviewer",
+    "job": "Turn the 9.8 CVE and named internet-facing install base into a buyer's checklist item demanding auth-on-by-default from vector store vendors.",
+    "outcome": "A procurement requirement that rejects vector stores lacking a fail-closed bind default, creating the demand that sets the maintainers' shipping schedule.",
+    "motivation": "A retrieval-layer breach reconstructs the private text fed to the models, so buyers make the shipped default a purchasing precondition.",
+    "task": {
+      "who": "Security, vendor-risk and procurement review functions",
+      "what": "Require auth-on-by-default as a vector store purchasing criterion",
+      "where": "Vendor security questionnaires and RAG platform procurement checklists",
+      "when": "H2 2026 through H1 2027",
+      "why": "Procurement pressure, not conscience, sets the maintainers' schedule",
+      "how": "CVSS 9.8 severity gate on internet-facing embedding stores"
+    }
+  }
+]

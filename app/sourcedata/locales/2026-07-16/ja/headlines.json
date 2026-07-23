@@ -1,0 +1,70 @@
+{
+  "date": "2026-07-16",
+  "technical": [
+    {
+      "lead": "Thinking Machines、ファインチューニング前提の 975B マルチモーダル MoE、Inkling を公開",
+      "body": "Mira Murati の Thinking Machines Lab は7月15日、初のゼロから学習したモデルとなる Inkling を、オープンウェイトで公開した。アーキテクチャは Mixture-of-Experts のトランスフォーマーで、総パラメータ数は 975B、トークンあたりのアクティブなパラメータは 41B。テキスト、画像、音声、映像にまたがる45兆トークンで事前学習され、コンテキストウィンドウは最大 1M トークンに達する。総パラメータ 276B / アクティブ 12B の Inkling-Small プレビュー版が、同じレシピのまま、レイテンシに敏感な用途向けに併せて出荷される。同ラボは、Inkling がオープンかクローズドかを問わず最強のモデルではないと、めずらしいほど率直に述べている。賭けているのは、企業が求めるのは借り物のフロンティアのエンドポイントではなく、自分たちで作り替えられるベースモデルだという読みだ。公開されたウェイトは、同社のファインチューニング基盤である Tinker へまっすぐつながり、そこでは Inkling を 64K と 256K のコンテキストの選択肢で利用できる。配布は足並みをそろえて行われた。Together AI は初日から、テキスト、画像、音声の入力とリクエストごとの推論強度の調整を受け付ける OpenAI 互換のエンドポイントの背後で、Inkling の提供を始めた。ローカル LLM のエコシステムにとっての意味は、この夏の中国発の MoE の波に続いて、2つ目の米国の新興ラボが、ゼロから学習したフロンティア規模のモデルをオープンウェイトで公開し、ファインチューニングを後付けではなく明確な事業モデルとして据えたことにある。",
+      "citations": [
+        {
+          "label": "Thinking Machines Lab - Inkling: Our open-weights model",
+          "url": "https://thinkingmachines.ai/news/introducing-inkling/"
+        },
+        {
+          "label": "Together AI - Inkling",
+          "url": "https://www.together.ai/models/inkling"
+        }
+      ]
+    },
+    {
+      "lead": "Unsloth v0.1.49-beta:Inkling への即日対応、4段階のツール許可、Vulkan で Intel GPU",
+      "body": "Unsloth の v0.1.49-beta は7月15日に公開され、総パラメータ 975B / アクティブ 41B、最大 1M のコンテキストウィンドウを備えた新しいオープンモデルである Inkling を、モデル本体と同じニュースサイクルのうちに取り込んだ。主要なオープンウェイトの公開に即日で対応するという、このプロジェクトの流儀の続きだ。セキュリティ面で意味を持つ変更は、4段階のツール呼び出し許可セレクタ(Ask、Approve for me、Off、Full access)が、ワークスペースの分離とともに入り、従来の二値のトグルを置き換えたことである。今年のエージェントによる情報流出の一連の事案の後にコーディングエージェントが採用した、許可を段階で与える語彙へと、ファインチューニングのツールまでもが歩み寄っている。注目に値する収斂だ。ハードウェアの間口も広がる。これまで CPU 頼みだった Intel GPU が、新しい Vulkan llama.cpp 対応を通じて GPU による推論を得た。さらに、NVFP4 モデルコレクションが動的 NVFP4 対応で拡充され、7月7日の v0.1.48 で出荷された、学習後の NVFP4/FP8/imatrix-GGUF のエクスポート経路を広げている。",
+      "citations": [
+        {
+          "label": "Unsloth - v0.1.49-beta release notes",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.49-beta"
+        }
+      ]
+    },
+    {
+      "lead": "Microsoft の過去最多570件の CVE の Patch Tuesday、Copilot の致命的な RCE を含む",
+      "body": "Microsoft の7月14日の Patch Tuesday は、過去最多の570件の脆弱性を修正した。うち3件はゼロデイで、2件は実際に悪用されていた。注意して読むべきは AI まわりの欠陥群だ。CVE-2026-48561 は Microsoft Copilot 自体における致命的なリモートコード実行の欠陥で、これに GitHub Copilot の RCE(CVE-2026-50510)、Copilot / VS Code のセキュリティ機能バイパス(CVE-2026-41109)、Copilot / VS Code のトークン漏えいの欠陥(CVE-2026-47282)が並ぶ。アシスタントと、それが住まうエディタは、もはや珍しい一度きりの話ではなく、Patch Tuesday の定番の区分になった。570件のうち59件が致命的と評価され、そのうち48件が RCE であり、Windows Media Foundation、DirectX、DHCP にわたって CVSS 8.0 超の項目が複数ある。件数の理由そのものも、また AI の話だ。Microsoft はこの急増を、自社の AI を使った内部の脆弱性発見システムによるものだと説明している。そして Adobe は同じ日付で月2回の情報公開へ移行し、AI で加速した発見が、開示から悪用までの時間を縮めていることを理由に挙げた。",
+      "citations": [
+        {
+          "label": "BleepingComputer - Microsoft July 2026 Patch Tuesday fixes massive 570 flaws, 3 zero-days",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-july-2026-patch-tuesday-fixes-massive-570-flaws-3-zero-days/"
+        }
+      ]
+    },
+    {
+      "lead": "xAI、アップロード解析を受けて Grok Build を Apache 2.0 でオープンソース化",
+      "body": "xAI は、リポジトリ、git の履歴、伏せ字なしの .env の秘密情報が Google Cloud のバケットへ流れていることを示した、今週の Grok build CLI の通信レベルの解析に対して、7月15日、エージェント全体を xai-org/grok-build として Apache 2.0 でオープンソース化することで応じた。Rust で書かれた844,530行、およそ97%が独自コードで、内部モノレポから定期的に同期されるエクスポートとして公開される。反発の引き金となったアップロード機能は無効化され、残された Google Cloud のコードは、いまはハードコードされた利用不可エラーを返す。リリースは、データ保持をオフにした、ローカルファーストの動作をうたう。Simon Willison によるコードベースの通読は、ベンダーがふつう伏せておく細部を明るみに出している。エージェントとサブエージェントの完全なシステムプロンプト(サブエージェントは、自らのプロンプトを利用者から隠すよう指示されている)、Codex や Claude Code を含む競合エージェントから移植されたツールの実装、そしてターミナルエージェントの標準を大きく上回る規模のコードベースだ。情報公開が引き出した結果としては、今年のエージェントの信頼をめぐる一連の事案のなかで、これまでで最も強い。変更履歴での謝罪ではなく、ソース全体の公開である。そしてこれは、出荷されているエージェントがアップロード、ツール呼び出し、許可を実際にどう配線しているのかについて、セキュリティ研究者に、まれな完全版の参照例を手渡すものだ。",
+      "citations": [
+        {
+          "label": "GitHub - xai-org/grok-build",
+          "url": "https://github.com/xai-org/grok-build"
+        },
+        {
+          "label": "Simon Willison - xAI open-sources Grok Build",
+          "url": "https://simonwillison.net/2026/Jul/15/grok-build/"
+        }
+      ]
+    },
+    {
+      "lead": "TSMC 第2四半期:売上36%増、純利益77%増、2nm がウェハ売上の3%に到達",
+      "body": "TSMC の第2四半期決算は7月16日に公表され、AI アクセラレータの需要がこのファウンドリをどこまで引っ張っているかを数字にした。売上高は NT$1,270.38 billion(US$40.20 billion。NT ドル建てで前年同期比36.0%増、前四半期比12.0%増)、純利益は NT$706.56 billion で77.4%増。利益率は、2年前のファウンドリならあり得なかった水準だ。粗利益率67.7%、営業利益率60.3%、純利益率55.6%である。先行きを示すシグナルはノードの構成にある。2ナノメートルは、初めて意味のある数字が出た四半期でウェハ売上の3%を占め、3nm は30%を保ち、先端ノード(7nm 以下)が全体の77%を占めた。CFO の Wendell Huang は、2ナノメートル技術の急峻な立ち上がりを根拠に第3四半期の売上を US$44.6-45.8 billion と見通し、同社は2026年の設備投資計画を US$60-64 billion のレンジへ引き上げた。下流のすべて、すなわち NVIDIA と AMD のアクセラレータの割り当て、ハイパースケーラーの建設スケジュール、同じ最先端の生産能力に相乗りするオンデバイス NPU のロードマップにとって、制約の構図は変わらない。需要はウェハの供給によって割り当てられており、TSMC はそれに見合う投資をしている。",
+      "citations": [
+        {
+          "label": "TSMC - TSMC Reports Second Quarter EPS of NT$27.25",
+          "url": "https://pr.tsmc.com/english/news/3326"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "新しい巨大なオープン AI モデルは、あなたが作り替えるために作られている",
+    "人気の AI 学習ツールが、その新モデルに即日で対応した",
+    "Microsoft が過去最多の570件の欠陥を修正、AI ツールの欠陥も含む",
+    "Grok のコーディングツール、アップロード騒動を経てオープンソースに",
+    "最大手のチップメーカーが AI 需要で記録的な利益を計上"
+  ]
+}

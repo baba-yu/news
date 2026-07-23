@@ -1,0 +1,119 @@
+{
+  "date": "2026-07-20",
+  "sections": [
+    {
+      "category": "Advancing AI の基調講演を数日後に控え、AMD は MI450、Helios ラック、EPYC Venice を、Nvidia へのラック単位での挑戦としてそろえる。しかもそのシリコンの設計には OpenAI が関わっている",
+      "bullets": [
+        {
+          "body": "<a href=\"https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/\">AMD の Advancing AI の基調講演まで残り2日</a>となり、開幕前の各種のシグナルは、ひとつのまとまった訴えへと収れんしてきた。Instinct MI450 シリーズ、横幅2倍の Helios ラック、そして Zen 6 の EPYC「Venice」CPU を、ばらばらのアクセラレータではなく、ひとつのラック規模のシステムとして売る、というものだ。AMD がすでに公表している数字が、水曜日の枠組みになる。Helios ラックは 72 個の MI455X、31TB の HBM4、そしておよそ 3 AI エクサフロップスを積み、MI450 単体は 432GB の HBM4 と、GPU あたり約 20 FP8 ペタフロップスを備える。開幕前に動いたのは、仕様ではなく位置づけのほうだ。今週の報道では、AMD は数量の出る市場として推論を前面に押し出している。同社の最大の確定済みの配備は学習ではなく推論であり、GPU あたりのメモリ容量でこそ Nvidia のラックを上回る構成にできる、という論立てである。<a href=\"https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level\">アナリストはいまや MI450 を、単一ソケットの代替ではなく、Vera Rubin 世代へのラック単位での初めての実のある回答</a>と位置づけており、これは MI300 系が置かれていた立ち位置からの変化だ。もうひとつ押さえておきたいのは、協調設計である。<a href=\"https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/\">OpenAI は MI450 のプログラムに要件を送り込んできており</a>、AMD はその後継の MI500 について、すでに顧客と話している。目玉となる発表はまだどれも出ていない。提供の時期、次の ROCm のリリース、そして新たな軸となる顧客は、いずれも基調講演のために取り置かれている。だから今日ほんとうに新しい事実は、もっと狭い。同社は MI450 をロードマップ上の項目として予告するのをやめ、出荷されるラックとして売り始めた——それを壇上で証明しなければならない、その2日前に、である。",
+          "citations": [
+            {
+              "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+              "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+            },
+            {
+              "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+              "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+            },
+            {
+              "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+              "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "SGLang と vLLM が、広域のエキスパート並列で分離型のサービングを出荷。狙いは、新しい2兆パラメータのオープン MoE モデルにまっすぐ向いている",
+      "bullets": [
+        {
+          "body": "Moonshot の Kimi K3(2.8兆パラメータ)と Alibaba の Qwen3.8(2.4兆パラメータ)を生んだオープンウェイトのパラメータ競争は、その川下に直ちにひとつの帰結をもたらす。素朴な構成では、これらのモデルをほぼ誰も動かせないのだ。そして、支配的な2つのオープン推論エンジンは、それを可能にする仕掛けを今週そろって出荷した。<a href=\"https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/\">SGLang の v0.6.0 は、広域のエキスパート並列を前面に置く</a>。混合エキスパートのモデルが持つ数百のエキスパートを多数の GPU にまたがって展開し、これにプレフィルとデコードの分離を組み合わせる。計算律速のプロンプト処理の段はある GPU のプールで走らせ、メモリ帯域律速のトークン生成の段は別のプールで走らせて、その間で KV キャッシュをネットワーク越しにやり取りする、という方式だ。<a href=\"https://github.com/sgl-project/sglang/releases/tag/v0.6.0\">目を引く数字は、GB200 NVL72 ラックでのスループットが、兆パラメータ級の MoE で単一プールの基準のおよそ2.7倍</a>に達するというもので、KV の転送の裏方には Mooncake と NIXL を使う。<a href=\"https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html\">vLLM の v0.25.0 も、同じ2つの機能を数日のうちに載せてきた</a>。これは、この2つのプロジェクトが今年ずっと保ってきた型そのものである。機能の同等化はすぐに達し、その後は定数項での競争になる。長く効いてくる点はこうだ。巨大なオープンモデルの採算は、いまや無償であるモデルのライセンスよりも、運用者がそもそも分離型でエキスパート並列のサービングを立ち上げられるかどうかで決まる。効率よく動かせない2.4兆パラメータのモデルは、紙の上でしかフロンティアの API より安くない。実際にコストの曲線を動かすのは、借りられるラックの上でそれを動かせる状態にするリリースのほうであり、それはモデルそのものと一緒にではなく、今週やって来た。",
+          "citations": [
+            {
+              "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+              "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+            },
+            {
+              "label": "GitHub - sgl-project/sglang v0.6.0 release",
+              "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+            },
+            {
+              "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+              "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Milvus の深刻なリモートコード実行の欠陥が、RAG システムを支えるベクトルデータベースを危険にさらす。しかもインターネットに面した導入の母数は大きい",
+      "bullets": [
+        {
+          "body": "<a href=\"https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html\">Milvus の深刻な脆弱性、CVE-2026-59218 として追跡されているもの</a>は、認証を経ていない攻撃者に、最も広く配備されているオープンソースのベクトルデータベースに対するリモートコード実行を許す。これは、検索拡張生成(RAG)の背後で埋め込みを保持している部品である。<a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-59218\">CVSS で 9.8 と評価された</a>この欠陥は、認証なしに細工された要求を受け付ける、外部にさらされたデータ面のエンドポイントを通じて到達できる。そして一度当たれば、手に入るのはサーバーだけではない。その上に載っている埋め込み済みのコーパス——多くは企業の内部文書、サポートの履歴、あるいはソースコードで、ベクトル化され検索できる状態のもの——まで奪われる。<a href=\"https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/\">メンテナは修正版を出荷し、運用者に対して公開インスタンスをインターネットから外すよう促した</a>。あわせて、そのプロセスが読めた認証情報はすべて入れ替えるように、とも。居心地の悪い点は、外部にさらされた推論の話が繰り返したどり着くのと同じところにある。ベクトルデータベースは、信頼されたネットワークの奥深くに置かれることを前提に作られ、ポートは開けたまま認証もなしを既定としてきた。脅威モデルが私設のサブネットを想定していたからだ。そして RAG の配備は、チャットボットを動かすために、そのうちの数千を静かに公開の IP へ押し出した。ベクトルストアの侵害が、ありふれたデータベースの侵害より悪いのは、何が漏れるかによる。組織がモデルに与えた、まさにその非公開のテキストが、埋め込みと、その隣に Milvus が保持する元のチャンクとから復元できてしまうのだ。実務的な読み筋はこうだ。RAG のデータ層は、サービング層がいやおうなく学んだのと同じネットワークの衛生管理を、いまや必要としている。認証を有効にし、ポートを閉じ、埋め込みを抱えたものを公開のインターネットから届かないようにすること、である。",
+          "citations": [
+            {
+              "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+              "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+            },
+            {
+              "label": "NVD - CVE-2026-59218",
+              "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+            },
+            {
+              "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+              "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "永続的な実行が、エージェントのオーケストレーションの主戦場になる。LangGraph が、再開可能でチェックポイントを取る実行を出荷し、Temporal に応じたのだ",
+      "bullets": [
+        {
+          "body": "2026年にエージェントの基盤を静かに組み替えつつある問いは、どのフレームワークが最も美しいエージェントのループを書くか、ではない。作業の途中でサーバーが再起動しても生き延びるのはどれか、である。そして今週、それが具体的な一手を生んだ。<a href=\"https://blog.langchain.com/langgraph-durable-execution-ga/\">LangChain が LangGraph 向けに永続的な実行を出荷した</a>。<a href=\"https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0\">その v1.1.0 のリリース</a>で、エージェントの実行の各ステップを永続的な状態にチェックポイントとして残し、クラッシュしたり再デプロイされたワーカーが、作業をやり直したり失ったりせずに、最後に完了したノードから再開できるようにした。これは、<a href=\"https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/\">Temporal を、長時間動くエージェントの既定の土台にしてきた</a>訴えへの、まっすぐな回答である。Temporal は、OpenAI が Codex を動かしている永続的な実行のエンジンであり、Mistral の Workflows 製品の下にも座っている。3者が共有する見立てはこうだ。本番のエージェントとは、実のところ分散ワークフローである。1件あたり数十秒から数分、多数のモデル呼び出しとツールの起動が入り混じり、その途中でネットワークの障害やデプロイが起きる。そこで面白い保証は、知能ではなく、生き延びられることのほうだ。LangGraph が永続的な実行を、別のワークフローエンジンにエージェントのループを継ぎ足すのではなく、フレームワークそのものの中で実現したことは、コード優先の陣営にとって2つの層を1つに畳み込む。これがバージョンの注記を超えて効いてくるのは、エージェントの障害の見え方を変えるからだ。故障の型が「エージェントが何をしていたか忘れた」ではなくなり、「エージェントはいったん止まり、中断したところから引き継いだ」になる。これは、デモと、銀行が本番で回すものとの違いである。オーケストレーションの市場はその性質を軸に集約しつつあり、それを任意の機能として扱ってきたフレームワークは、いまになって後付けしている側なのだ。",
+          "citations": [
+            {
+              "label": "LangChain Blog - Durable execution for LangGraph",
+              "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+            },
+            {
+              "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+              "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+            },
+            {
+              "label": "GitHub - langchain-ai/langgraph v1.1.0 release",
+              "url": "https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "いま予定に組み込むべき AI イベント:AMD の Advancing AI は水曜開幕、WAIC は本日閉幕、そして8月初めのセキュリティの塊が埋まりつつある",
+      "bullets": [
+        {
+          "body": "いちばん近い催しは2日後、しかもチップの筋にある。AMD の Advancing AI は7月22日から23日、Moscone West で開かれ、Lisa Su の基調講演は木曜の7月23日、午前9時30分(PT)から、現地のバッジがない人にもライブ配信される。彼女が明かす中身は上で扱ったとおりだ。上海の WAIC 2026 は本日閉幕する。Advancing AI の後、チップとハードウェアの日程で次に動かせない日付は、7月31日の午後11時59分(PDT)、<a href=\"https://hotchips.org/schedule/\">Hot Chips の早期登録の料金</a>の締め切りである。会議そのものは8月23日から25日に Stanford で開かれ、HBM の進化と RISC-V のチュートリアルが並び、Samsung、SK Hynix、Nvidia、Infineon が集まる。さらに先では、AI Infra Summit が9月15日から17日に Santa Clara Convention Center を使い、Nvidia の GTC が San Jose に戻ってくるのは2027年3月15日から18日で、それまではない。\n\nAI セキュリティの筋は8月の初めに集まる。Black Hat USA は8月1日から6日、Las Vegas の Mandalay Bay で、まずトレーニング、続いてブリーフィングという流れで開かれ、<a href=\"https://www.blackhat.com/us-26/briefings/schedule/index.html\">AI Summit は8月4日</a>である。DEF CON 34 が8月6日から9日と続き、<a href=\"https://defcon.org/html/defcon-34/dc-34-villages.html\">その AI Village では、デモ、CTF、そしてエージェント型のシステムへの攻撃を扱うポスター発表が行われる</a>。SecurityWeek の AI Risk Summit は8月11日から12日、Half Moon Bay の Ritz-Carlton を会場とする。ここは先まで予約しておく値打ちがある。SANS は11月2日から3日に Arlington で AI Cybersecurity Summit を開き、Zenity の AI Agent Security Summit の連続開催は10月8日のロンドンと10月21日のニューヨークへと続き、OWASP Global AppSec USA は11月5日から6日にサンフランシスコへやって来る。\n\n開発と基盤の筋では、Ai4 が8月4日から6日に Las Vegas。AI Tinkerers のサンフランシスコの集まりが8月9日。Ray Summit が8月24日から26日、San Francisco Marriott Marquis。ACM AI Leadership Summit が8月30日から9月2日、Atlanta。OpenAI DevDay が9月29日、Fort Mason。The AI Conference が9月29日から10月1日、Pier 48。Runway AI Summit が9月30日。World Summit AI が10月7日から8日、アムステルダム。PyTorch Conference が10月20日から21日、San Jose。GitHub Universe が10月28日から29日。AWS re:Invent が11月30日から12月4日。<a href=\"https://neurips.cc/Conferences/2026\">NeurIPS が12月</a>。IEEE-RAS Humanoids が12月7日から9日、Santa Clara。そして The AI Summit New York が12月9日から10日。実務的な順序はこうだ。木曜の Advancing AI の基調講演は、街を横切る移動ではなくブラウザのタブである。そして Hot Chips の早期料金は7月31日までに押さえておくこと——8月初めの Las Vegas のセキュリティの塊が、日程と予算の両方を飲み込んでしまう前に。",
+          "citations": [
+            {
+              "label": "Hot Chips 2026 - Schedule and registration",
+              "url": "https://hotchips.org/schedule/"
+            },
+            {
+              "label": "Black Hat USA 2026 - Briefings schedule",
+              "url": "https://www.blackhat.com/us-26/briefings/schedule/index.html"
+            },
+            {
+              "label": "DEF CON 34 - Villages (AI Village)",
+              "url": "https://defcon.org/html/defcon-34/dc-34-villages.html"
+            },
+            {
+              "label": "NeurIPS 2026",
+              "url": "https://neurips.cc/Conferences/2026"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

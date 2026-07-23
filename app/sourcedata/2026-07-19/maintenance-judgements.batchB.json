@@ -1,0 +1,331 @@
+{
+  "week_ending": "2026-07-19",
+  "judgements": [
+    {
+      "prediction_id": "prediction.25bbb1fc4e3ce653",
+      "stream": "reasoning",
+      "entry_id": "prediction.25bbb1fc4e3ce653",
+      "verdict": "stale",
+      "reason": "Bridge -> Reasoning: the strongest post-origin bridge this week (validation.ba841ede13d1fd1f, 2026-07-15, relevance 5, dim=given) explicitly reports that Mindgard's Cursor disclosure reaches the execution-layer conclusion by a mechanism the premise never names -- cloning a repository merely to read it runs a planted binary with the user's privileges and no prompt at all, with no read-code-as-instructions confusion involved. The bridge author's own words: 'That is the execution-layer argument made without the read-code-as-instructions machinery the reasoning invoked... The conclusion holds by a route the premise never named.' reasoning.given currently reads 'Agents cannot separate read code from instructions, so mitigation must move to the execution layer', which is narrower than the accumulated evidence: GhostApproval (symlink-mediated write redirection, 07-12) and the Mindgard Cursor PATH-search flaw (07-15) both bypass the instruction-confusion pathway entirely. The conclusion and the landing window are unaffected -- only the stated structural force needs broadening to 'agents execute repository-supplied artifacts (code, binaries, symlinks) that the human never approved, so mitigation must move to the execution layer'. because/so_that/landing remain accurate and are confirmed by the 07-17 Claude Code v2.1.212 bridge.",
+      "cross_stream_evidence": [
+        "bridge:validation.ba841ede13d1fd1f",
+        "bridge:validation.6c350cf1d7c350b4",
+        "bridge:validation.65ebc6d2f4157099",
+        "evidence:Mindgard - Cursor 0day: When Full Disclosure Becomes the Only Protection Left (2026-07-15)"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.72
+    },
+    {
+      "prediction_id": "prediction.25bbb1fc4e3ce653",
+      "stream": "bridge",
+      "entry_id": "prediction.25bbb1fc4e3ce653",
+      "verdict": "fresh",
+      "reason": "All 6 bridges are correctly scoped and each states its own limits rather than overclaiming: 07-17 'this is general permission hardening, not a dedicated untrusted-repo audit sandbox'; 07-16 'it addresses the exfiltration incident's symptom rather than the untrusted-repository trust boundary the prediction actually targets'; 07-13 'the vector here is inbox email and a memory write, not a repository audit'. No row carries support_direction='contradict' and no evidence link shows a nonzero contradiction_score. The relevance_drift gate fired on honest dispersion (5 -> 2 -> 3 -> 5 -> 3 -> 4 across the week as evidence moved between on-target and adjacent), not on any bridge misstating its support. Bridge record is accurate as history; no rewrite warranted.",
+      "cross_stream_evidence": [
+        "bridge:validation.65ebc6d2f4157099",
+        "bridge:validation.78168c097f006724",
+        "bridge:validation.993bed82a46e29a8",
+        "db:prediction_evidence_links all support_direction='support', contradiction_score=0.0"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.25bbb1fc4e3ce653",
+      "stream": "needs",
+      "entry_id": "prediction.25bbb1fc4e3ce653",
+      "verdict": "fresh",
+      "reason": "Bridge -> Needs correlation considered and deliberately NOT applied: the 07-17 bridge (validation.65ebc6d2f4157099) cites Claude Code v2.1.212 shipping fail-closed Bash permission checks and default-on session caps, which is partial motion on need_task.c2e25d8f3c53bb5d ('ship default-on sandboxed, network-isolated audit execution'). But the bridge itself disclaims delivery -- 'though this is general permission hardening, not a dedicated untrusted-repo audit sandbox' -- so flipping task.status to 'done' would falsely satisfy the prediction's own landing condition (a vendor designating default-deny audit mode the shipping default). All 3 Needs stay 'open' correctly, the actor coalition (vendor security lead / enterprise procurement assessor / AI-security researcher) still matches the observed drivers, and all task windows parsed. No rewrite warranted.",
+      "cross_stream_evidence": [
+        "bridge:validation.65ebc6d2f4157099",
+        "needs_task:need_task.c2e25d8f3c53bb5d",
+        "prediction.reasoning_landing: 'by Q2 2027; >=1 major vendor's release notes make default-deny audit mode the default'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.25bbb1fc4e3ce653",
+      "stream": "readings",
+      "entry_id": "prediction.25bbb1fc4e3ce653",
+      "verdict": "stale",
+      "reason": "Zero prediction_chain and zero prediction_relations rows exist for this prediction, yet the evidence graph supports several edges. It shares 4 evidence items with prediction.b76fcb409546f23d (GhostApproval x2 on 07-12, Mindgard Cursor 0day on 07-15, Claude Code v2.1.212 CHANGELOG on 07-17) -- both predictions descend from the same July 8-9 disclosure week and both claim an AI coding agent hardens its execution/consent boundary by H1-Q2 2027, which is a 'parallel' relation at minimum. It shares 8 evidence items with prediction.01ab313e ('Coding-agent platform ships trifecta capability gate as default', 2026-06-28) and 5 with prediction.691f1c39 ('OpenClaw ships default-deny tool and network gating out-of-box', 2026-06-23); the latter is a near-identical claim shape and should be evaluated for 'entails' or 'equivalent' per the relation decision tree. Readings should add these edges. Systemic context for the human: no prediction originated after 2026-05-04 carries any edge, and the last readings delta file in sourcedata is 2026-05-04 -- see the batch report.",
+      "cross_stream_evidence": [
+        "prediction:prediction.b76fcb409546f23d (4 shared evidence items, same batch)",
+        "prediction:prediction.691f1c39 (5 shared evidence items, near-identical claim shape)",
+        "prediction:prediction.01ab313e (8 shared evidence items)",
+        "db:prediction_chain=0 rows, prediction_relations=0 rows for this prediction"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.74
+    },
+
+    {
+      "prediction_id": "prediction.3ee1d7d2f7b77bca",
+      "stream": "reasoning",
+      "entry_id": "prediction.3ee1d7d2f7b77bca",
+      "verdict": "fresh",
+      "reason": "All four reasoning cells hold. because (SpaceXAI shipped Grok 4.5 co-trained on Cursor's coding data as Cursor's day-one default) is a settled historical fact from 2026-07-08 and is unchallenged. The only post-origin bridge (validation.be4ca541eec04280, 07-15) touches given by showing harness-usage telemetry accruing to the lab through its own CLI rather than through a partnership channel, but the bridge explicitly declines the inference -- 'The capture stops short of training use, the step that matters' -- so it does not undercut the co-training economics the given asserts. so_that and landing (>=1 new lab-harness co-trained-default pairing by H1 2027) are untouched; no rival harness announced a pairing this week. Checked and cleared a possible naming inconsistency: the prediction says 'SpaceXAI' while last-7-day coverage says 'xAI' 48 times vs 'SpaceXAI' 3 times, but origin-day 2026-07-09 coverage used SpaceXAI 24 times vs xAI 8 and cites docs.x.ai as the source, so these are the same entity with the legacy brand persisting in URLs and CLI naming -- not a data defect.",
+      "cross_stream_evidence": [
+        "bridge:validation.be4ca541eec04280",
+        "bridge:validation.ca0da3e98002da87",
+        "report/en/news-20260709.md (SpaceXAI 24 mentions vs xAI 8 on origin day)"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.3ee1d7d2f7b77bca",
+      "stream": "bridge",
+      "entry_id": "prediction.3ee1d7d2f7b77bca",
+      "verdict": "fresh",
+      "reason": "Only 2 bridges in 10 days (origin 07-09 relevance 5, plus 07-15 relevance 3), both correctly scoped with no contradict-direction row. The 07-15 bridge is self-limiting by design, naming exactly the step the evidence does not reach. Thin coverage is the honest state of a prediction whose landing depends on a rival's unannounced partnership deal -- there is simply little to bridge to yet -- and thinness is not a defect in the bridge record. The relevance_drift gate fired on the 5 -> 3 step-down from origin evidence to adjacent telemetry, which the bridges represent accurately. No rewrite warranted.",
+      "cross_stream_evidence": [
+        "bridge:validation.ca0da3e98002da87",
+        "bridge:validation.be4ca541eec04280",
+        "db:prediction_evidence_links all support_direction='support'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.3ee1d7d2f7b77bca",
+      "stream": "needs",
+      "entry_id": "prediction.3ee1d7d2f7b77bca",
+      "verdict": "fresh",
+      "reason": "All 3 Needs stay 'open' and no Bridge documents any actor delivering. The coalition (rival harness head of model partnerships / frontier lab post-training lead / harness data-platform engineer) still describes the exact path the prediction requires, and the 07-15 wire-capture bridge, if anything, reinforces Need 3's premise that curated harness telemetry is the differentiating asset. All three task windows parsed cleanly from when_text. No actor delivered, so no Needs -> Reasoning forward-reframe is due.",
+      "cross_stream_evidence": [
+        "bridge:validation.be4ca541eec04280",
+        "needs_task:need_task.f7084f82a499d748",
+        "db:all 3 needs_tasks status='open', target windows non-null"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.3ee1d7d2f7b77bca",
+      "stream": "readings",
+      "entry_id": "prediction.3ee1d7d2f7b77bca",
+      "verdict": "fresh",
+      "reason": "Zero chain and zero relation edges, and unlike the other four predictions in this batch that absence looks correct rather than missing. Its strongest evidence-siblings share only 2 items each (prediction.89f68769 and prediction.ef1b188c, both origin 2026-07-01) and neither is close in claim shape -- one is a mid-tier agent-tuned model release, the other a vertical domain harness -- so neither clears the bar for parallel, entails, or equivalent under the relation decision tree. No upstream prediction landed or was contradicted this week that would shorten or weaken the H1 2027 landing, and no Need was achieved that would open a chain-edge candidate. Genuinely nothing to add.",
+      "cross_stream_evidence": [
+        "db:prediction_chain=0, prediction_relations=0 for this prediction",
+        "prediction:prediction.89f68769 (only 2 shared evidence items, unrelated claim shape)",
+        "prediction:prediction.ef1b188c (only 2 shared evidence items, unrelated claim shape)"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "reasoning",
+      "entry_id": "prediction.a31a93089cef22da",
+      "verdict": "fresh",
+      "reason": "because (Micron's $250B raise plus NY concrete pour and SK Hynix's EUV-earmarked listing in the same week) is settled history and unchallenged. given (HBM and advanced DRAM sold out ahead, two of three big memory makers committed fresh capital) was reinforced this week by the 07-16 TSMC bridge -- 36% revenue growth on accelerator demand, capex lifted to US$60-64B, and TSMC describing demand as rationed by wafer supply rather than price, which tightens the same bottleneck. so_that and landing are untouched: Samsung made no capacity or capex announcement this week and appears in last-7-day coverage only as a Walden Robotics investor and a Hot Chips tutorial participant. No Bridge -> Reasoning contradiction; nothing to reframe.",
+      "cross_stream_evidence": [
+        "bridge:validation.e6b077319f007834",
+        "bridge:validation.7d9e853bda64cf5d",
+        "report/en/news-20260713..19 (no Samsung capacity/capex announcement)"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "bridge",
+      "entry_id": "prediction.a31a93089cef22da",
+      "verdict": "fresh",
+      "reason": "All 3 bridges sit on the given dimension and are honestly graded. The 07-14 Intel Leixlip bridge is explicitly self-limiting -- 'the spend is explicitly distinct from memory fabs and touches neither Samsung nor HBM' -- and is correctly rated relevance 2 rather than inflated. The 07-16 TSMC bridge is rated 3 and confines itself to backdrop tightening. No contradict-direction row exists. The relevance_drift gate fired on the honest 5 -> 2 -> 3 walk from origin trigger to adjacent capex backdrop, which the bridge texts represent faithfully. No rewrite warranted.",
+      "cross_stream_evidence": [
+        "bridge:validation.b95f0bb0796d840d",
+        "bridge:validation.e6b077319f007834",
+        "bridge:validation.7d9e853bda64cf5d"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "needs",
+      "entry_id": "Large memory-maker's investor-relations and earnings-communications team",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY -- ESCALATE, DO NOT AUTO-FIX. needs_tasks.a84adf6acf942e1c has when_text 'Q3-2026 and Q4-2026 earnings-prep cycles', an unambiguous runway, but its derived target_start_date/target_end_date are both NULL, and that NULL propagates to prediction_needs.target_start_date/target_end_date for this Need (also NULL) which the schema says should equal the union of its tasks' windows. Root cause verified in app/src/timewindow.py: _QUARTER_RE is r'\\bQ([1-4])\\s*(20\\d{2})\\b|\\b(20\\d{2})\\s*Q([1-4])\\b', and \\s* matches whitespace only, not a hyphen, so the hyphenated 'Q3-2026' form cannot match. Empirically confirmed: parse_time_window('Q3-2026 and Q4-2026 earnings-prep cycles') returns (None, None) while the identical string with spaces, 'Q3 2026 and Q4 2026 earnings-prep cycles', returns ('2026-07-01', '2026-09-30'). The same prediction's first Need corroborates it -- when_text 'H2 2026, ahead of Q4-2026 earnings' parsed only because the spaced 'H2 2026' matched while the hyphenated 'Q4-2026' in the same string contributed nothing. The writer's text is correct; the parser is wrong. A Step-2 rewrite would be tempted to reword when_text to appease the parser, which would mask a defect affecting 16 NULL-window tasks across 14 predictions repo-wide. Fix belongs in _QUARTER_RE/_HALF_RE (admit [\\s-] as the separator), not in this Need.",
+      "cross_stream_evidence": [
+        "needs_task:need_task.a84adf6acf942e1c",
+        "parser:app/src/timewindow.py:_QUARTER_RE",
+        "needs_task:need_task.00dc4f447e05fa3f (same prediction: 'H2 2026, ahead of Q4-2026 earnings' parsed only via the spaced H2 token)",
+        "db:16 of 114 NULL-window needs_tasks carry an explicit period token the parser drops"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "needs",
+      "entry_id": "Large memory-maker's HBM/advanced-DRAM fab and process-engineering team",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY -- ESCALATE, DO NOT AUTO-FIX. Second, distinct parser gap on the same prediction. needs_tasks.9b7e0a61ff769577 has when_text 'Mid-to-late 2026 capacity-planning cycle' with derived target_start_date/target_end_date both NULL, propagating to a NULL window on prediction_needs for this Need. Root cause verified in app/src/timewindow.py: _MOD_MONTH_RE requires modifier + MONTH NAME + year (r'\\b(early|mid|late)[\\s-]({MONTH})\\s+(20\\d{2})\\b'), and no rule handles the bare modifier-plus-year form, so '<modifier> 2026' with no month name falls through every pattern. Empirically confirmed: parse_time_window('Mid-to-late 2026 capacity-planning cycle') and parse_time_window('Mid-to-late 2026') both return (None, None). This is the wider of the two gaps -- it also silently nulls 'Mid-2026 through early-2027' (prediction.348622ee), 'mid-2026 through early 2027 runway' (prediction.0767e4ca), 'late 2026 to early 2027' (prediction.df2a6460) and 10 more. Note _MOD_MONTH_RE already tolerates a hyphen in its separator, so the codebase knows about hyphenated modifiers in one place but not about month-less year forms anywhere. Writer text is correct; fix belongs in the parser, not in this Need.",
+      "cross_stream_evidence": [
+        "needs_task:need_task.9b7e0a61ff769577",
+        "parser:app/src/timewindow.py:_MOD_MONTH_RE and _MONTH_YEAR_RE",
+        "db:prediction.348622ee, prediction.0767e4ca, prediction.df2a6460 hit the same gap",
+        "db:16 of 114 NULL-window needs_tasks carry an explicit period token the parser drops"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "needs",
+      "entry_id": "Large memory-maker's corporate capital-allocation and capacity-strategy lead",
+      "verdict": "fresh",
+      "reason": "This Need is intact and is the one of the three whose window parsed (need_task.00dc4f447e05fa3f, when_text 'H2 2026, ahead of Q4-2026 earnings' -> 2026-07-01/2026-12-31). Status stays 'open' correctly: no Bridge documents Samsung's capital-allocation office approving a capex increase or capacity target, and last-7-day coverage carries no such announcement. The actor, job, outcome and motivation still describe the precondition the prediction depends on. Flagged for the human only as contrast -- its window survived by accident, because the spaced 'H2 2026' token matched while the hyphenated 'Q4-2026' in the same string did not, which is what isolates the parser defect reported on this prediction's other two Needs.",
+      "cross_stream_evidence": [
+        "needs_task:need_task.00dc4f447e05fa3f",
+        "bridge:validation.7d9e853bda64cf5d",
+        "parser:app/src/timewindow.py:_QUARTER_RE (contrast case)"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "readings",
+      "entry_id": "prediction.a31a93089cef22da",
+      "verdict": "stale",
+      "reason": "Zero chain and zero relation edges despite a strong sibling cluster. This prediction shares 4 evidence items with prediction.26d5d5aa ('SK Hynix converts ADR proceeds into booked EUV orders by Q2 2027', origin 2026-07-11) and 2 with prediction.50593ef7 ('SK Hynix sustains triple-digit YoY revenue growth through Q3 2026', origin 2026-07-09). All three descend from the same 2026-07-09 Micron/SK Hynix capital-surge trigger, share the because precondition almost verbatim, and have overlapping landing windows (Q1 2027 / Q2 2027 / Q3 2026) in one outcome space -- the AI-memory capacity race. At minimum a 'parallel' relation to both is warranted, and the 26d5d5aa pairing deserves evaluation for a chain edge since a booked SK Hynix EUV order would further tighten the competitive squeeze this prediction's given depends on. Readings should add the edges.",
+      "cross_stream_evidence": [
+        "prediction:prediction.26d5d5aa (4 shared evidence items, same 07-09 trigger)",
+        "prediction:prediction.50593ef7 (2 shared evidence items)",
+        "bridge:validation.7d9e853bda64cf5d (shared origin trigger)",
+        "db:prediction_chain=0, prediction_relations=0 for this prediction"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.75
+    },
+
+    {
+      "prediction_id": "prediction.b1812fc905cd31ea",
+      "stream": "reasoning",
+      "entry_id": "prediction.b1812fc905cd31ea",
+      "verdict": "fresh",
+      "reason": "because (TU Munich's ThorArena finding that whole-body controllers degrade once real contact forces enter) is settled origin fact. given ('Figure, Agility, Boston Dynamics push humanoids into factories where people physically contact them') was reinforced, not weakened, by the 07-18 Walden Robotics launch -- robots doing production work in a Toyota plant since February 2026, acquiring contact-rich tasks by real-world practice. Walden is a name outside the given's list, but the given cites those three as exemplars of a trend and the trend strengthened. so_that and landing are unmoved and correctly unmet: no humanoid maker or group reported whole-body control under active contact force this week. The downward relevance walk (5 -> 4 -> 2 for five straight days) reflects the absence of on-target evidence, not a reasoning defect.",
+      "cross_stream_evidence": [
+        "bridge:validation.bbb2a7795d375724",
+        "bridge:validation.978d96a49cc5a273",
+        "bridge:validation.5569f2c792c362f4",
+        "evidence:Walden Robotics launch 2026-07-18 (Toyota plant deployment since Feb 2026)"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.b1812fc905cd31ea",
+      "stream": "bridge",
+      "entry_id": "prediction.b1812fc905cd31ea",
+      "verdict": "fresh",
+      "reason": "This is the most scrupulous bridge set in the batch -- every low-relevance row states precisely why it is low rather than padding support. 07-18: 'the launch reports no benchmark, no evaluation methodology, and no contact-force measurement of any kind'. 07-17: 'the floor showed no whole-body control result under active contact force, so today reinforces the setting, not the milestone'. 07-15: 'A forum on the right timescale is a precondition for observing the landing, not evidence anyone will bring the measurement to it'. The relevance_drift gate fired precisely because these bridges refused to inflate backdrop evidence, which is the behavior we want. No contradict-direction row; no rewrite warranted.",
+      "cross_stream_evidence": [
+        "bridge:validation.bbb2a7795d375724",
+        "bridge:validation.09904274630027e7",
+        "bridge:validation.8b603a6114818daa",
+        "future-prediction/en/future-prediction-20260719.md ('the whole-body-manipulation and force-aware-evaluation rows both stay weak')"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.88
+    },
+    {
+      "prediction_id": "prediction.b1812fc905cd31ea",
+      "stream": "needs",
+      "entry_id": "prediction.b1812fc905cd31ea",
+      "verdict": "fresh",
+      "reason": "All 3 Needs stay 'open' and all task windows parsed. No Bridge documents any actor delivering: the benchmark group has not published a hardened public release, no independent group has replicated under applied force, and no commercial platform has reported force-aware results -- the 07-17 and 07-18 bridges explicitly confirm each absence. The 07-15 calendar bridge fixes IEEE-RAS Humanoids (Santa Clara, December 7-9) as a venue inside the landing window, which is where Need 2 and Need 3 would surface, but a venue is not a delivery. No Bridge -> Needs status flip and no Needs -> Reasoning forward-reframe is due.",
+      "cross_stream_evidence": [
+        "bridge:validation.09904274630027e7",
+        "bridge:validation.bbb2a7795d375724",
+        "bridge:validation.8b603a6114818daa",
+        "db:all 3 needs_tasks status='open', target windows non-null"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.b1812fc905cd31ea",
+      "stream": "readings",
+      "entry_id": "prediction.b1812fc905cd31ea",
+      "verdict": "stale",
+      "reason": "Zero chain and zero relation edges while the narrative layer already treats this prediction as half of a pair. It shares 5 evidence items with prediction.ca5c7207 ('Whole-body manipulation runs untethered on Thor-class compute', origin 2026-07-14) and 3 with prediction.9c9e6685 ('Captive in-house fleets will lead paid humanoid deployment', origin 2026-06-22). The 2026-07-19 future-prediction prose links the first pair explicitly -- 'the whole-body-manipulation and force-aware-evaluation rows both stay weak despite a live assembly' -- and the 07-19 news observes both share the same missing instrumentation ('no onboard accelerator, no tether, no benchmark, no contact-force measurement'). A 'parallel' relation to ca5c7207 is clearly warranted, and the shared instrumentation dependency makes a chain edge worth evaluating. Readings should add the edges.",
+      "cross_stream_evidence": [
+        "prediction:prediction.ca5c7207 (5 shared evidence items, paired in FP prose)",
+        "prediction:prediction.9c9e6685 (3 shared evidence items)",
+        "future-prediction/en/future-prediction-20260719.md (pairs the two rows explicitly)",
+        "db:prediction_chain=0, prediction_relations=0 for this prediction"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.75
+    },
+
+    {
+      "prediction_id": "prediction.b76fcb409546f23d",
+      "stream": "reasoning",
+      "entry_id": "prediction.b76fcb409546f23d",
+      "verdict": "stale",
+      "reason": "Bridge -> Reasoning, the clearest case in this batch. reasoning.given asserts 'Assigned CVEs and enterprise security review make show-the-real-write-target the baseline'. The 07-15 bridge (validation.6bf84eb5bb46b8aa, dim=given) is a direct counterexample to that forcing mechanism and says so outright: Mindgard's Cursor code-execution disclosure ran seven months with no CVE and no severity score, and the researcher broke embargo because silence was the only alternative. The bridge author's verdict is explicit -- 'The trust thesis survives; the mechanism meant to drive it does not.' The bridge stays as historical record; what needs reframing is the given, which should acknowledge that CVE assignment is unreliable in this vendor space and that the operative forcing function is public disclosure pressure plus enterprise procurement gating rather than formal CVE/standards machinery. Knock-on to reasoning.landing, which compounds a CWE/OWASP entry into the landing condition ('by H1 2027; Augment + Windsurf ship fixes; a CWE/OWASP entry names it') and inherits the same weakened mechanism -- last-7-day coverage shows no CWE or OWASP entry and no Augment or Windsurf fix, with OWASP appearing only as a November conference listing. Rewrite should address given and landing together. because and so_that remain accurate.",
+      "cross_stream_evidence": [
+        "bridge:validation.6bf84eb5bb46b8aa",
+        "bridge:validation.2d06555dba0fcd37",
+        "evidence:Mindgard - Cursor 0day: When Full Disclosure Becomes the Only Protection Left (2026-07-15)",
+        "report/en/news-20260713..19 (no CWE/OWASP entry, no Augment or Windsurf fix)"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.b76fcb409546f23d",
+      "stream": "bridge",
+      "entry_id": "prediction.b76fcb409546f23d",
+      "verdict": "fresh",
+      "reason": "The bridge record is accurate as history and needs no rewrite -- including validation.6bf84eb5bb46b8aa, the row that carries the disconfirmation driving this prediction's reasoning verdict. That row is correctly filed at relevance 3 on dim=given and states its own split finding cleanly ('The trust thesis survives; the mechanism meant to drive it does not'), which is exactly how a partially-disconfirming bridge should read. Per the spec's Bridge -> Reasoning guidance the bridge entry stays and the reasoning is what changes. The 07-19 row is likewise self-limiting ('The mechanism does not -- nothing here resolved a path'). No row overstates support and none is misfiled as contradict.",
+      "cross_stream_evidence": [
+        "bridge:validation.6bf84eb5bb46b8aa",
+        "bridge:validation.2d06555dba0fcd37",
+        "bridge:validation.886280a30077bab9",
+        "design/scheduled/6_weekly_maintenance.md (Bridge -> Reasoning: 'The bridge entry itself stays as historical record')"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.b76fcb409546f23d",
+      "stream": "needs",
+      "entry_id": "prediction.b76fcb409546f23d",
+      "verdict": "fresh",
+      "reason": "Correlation considered and deliberately not applied. The 07-15 Mindgard evidence that undercuts reasoning.given also weakens the stated motivation of Need 2 (the OWASP/CWE standards maintainer, whose motivation reads 'A named, documented weakness class turns a six-vendor scramble into an enforceable baseline'). But the Need's actor, job, outcome and task remain accurate descriptions of what would have to happen for the prediction to land -- what changed is the likelihood of that actor acting, not the description of the act. Rewriting a Need because its actor became less likely to deliver would be manufacturing work; the correct place to absorb that shift is reasoning.given, which is flagged stale on this prediction. All 3 Needs stay 'open' correctly (no vendor shipped a resolved-target consent prompt this week) and all task windows parsed.",
+      "cross_stream_evidence": [
+        "bridge:validation.6bf84eb5bb46b8aa",
+        "needs_task:need_task.76594e53b6560f3f",
+        "prediction.b76fcb409546f23d:reasoning stream flagged stale this run (absorbs the shift)",
+        "db:all 3 needs_tasks status='open', target windows non-null"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.b76fcb409546f23d",
+      "stream": "readings",
+      "entry_id": "prediction.b76fcb409546f23d",
+      "verdict": "stale",
+      "reason": "Zero chain and zero relation edges despite the densest sibling signal in the batch. It shares 4 evidence items with prediction.25bbb1fc4e3ce653 (also in this batch -- GhostApproval x2, Mindgard Cursor 0day, Claude Code v2.1.212 CHANGELOG), 4 with prediction.01ab313e ('Coding-agent platform ships trifecta capability gate as default'), 3 with prediction.8c9acc3f ('Agent-in-the-Loop Secret Exfiltration tops CIS/OWASP risk list', origin 2026-04-20) and 3 with prediction.cf3f2161 ('Action-level guardrails become first-class agent-framework contracts', origin 2026-07-14). The 8c9acc3f pairing is notable because that prediction does carry relation edges -- it originated before 2026-05-04, the cutoff after which no prediction has received any edge at all. Per the spec's Readings -> Bridge guidance, establishing these edges would also make sibling bridges surfaceable as transferable evidence here. Readings should add at least the parallel edges to 25bbb1fc4e3ce653 and cf3f2161.",
+      "cross_stream_evidence": [
+        "prediction:prediction.25bbb1fc4e3ce653 (4 shared evidence items, same batch)",
+        "prediction:prediction.01ab313e (4 shared evidence items)",
+        "prediction:prediction.8c9acc3f (3 shared evidence items; carries edges, origin pre-2026-05-04)",
+        "db:prediction_chain=0, prediction_relations=0 for this prediction"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.75
+    }
+  ]
+}

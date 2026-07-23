@@ -1,0 +1,83 @@
+{
+  "date": "2026-07-20",
+  "technical": [
+    {
+      "lead": "AMD、MI450、Helios、EPYC Venice を Nvidia へのラック単位の挑戦として描く",
+      "body": "AMD の Advancing AI の基調講演(7月22日から23日)まで2日となり、開幕前のシグナルはひとつの訴えに固まった。Instinct MI450 シリーズ、横幅2倍の Helios ラック、Zen 6 の EPYC「Venice」CPU を、ばらばらのアクセラレータではなく、ひとつのラック規模のシステムとして売る、というものだ。記録に残る数字が枠組みを定める——Helios ラックは 72 個の MI455X、31TB の HBM4、およそ 3 AI エクサフロップスを積み、MI450 単体は 432GB の HBM4 と約 20 FP8 ペタフロップスを備える。開幕前に動いたのは位置づけだ。AMD は数量の出る市場として推論を前面に押し出し、最大の確定済みの配備は学習ではなく推論であり、GPU あたりのメモリ容量でこそ Nvidia のラックを上回る構成にできる、と論じている。アナリストはいまや MI450 を、単一ソケットの代替ではなく、Vera Rubin 世代へのラック単位での初めての実のある回答と位置づけ、OpenAI は MI450 のプログラムに要件を送り込み、AMD はその背後の MI500 について、すでに顧客と話している。ほんとうに新しい事実は、どの仕様よりも狭い。同社は MI450 をロードマップ上の項目として予告するのをやめ、出荷されるラックとして売り始めた——それを壇上で証明しなければならない、その2日前に、である。",
+      "citations": [
+        {
+          "label": "The Next Platform - AMD Advancing AI 2026 preview: MI450, Helios and an inference-first pitch",
+          "url": "https://www.nextplatform.com/2026/07/20/amd-advancing-ai-2026-preview-mi450-helios-inference-first/"
+        },
+        {
+          "label": "Benzinga - AMD's MI450 could finally challenge Nvidia at the rack level",
+          "url": "https://www.benzinga.com/markets/tech/26/07/60478921/amds-mi450-could-finally-challenge-nvidia-at-the-rack-level"
+        },
+        {
+          "label": "ServeTheHome - AMD Advancing AI 2026 preview: Instinct MI450 and the Helios rack",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-preview-instinct-mi450-helios-rack/"
+        }
+      ]
+    },
+    {
+      "lead": "SGLang v0.6.0 と vLLM v0.25.0、広域のエキスパート並列で分離型のサービングを出荷",
+      "body": "Moonshot の Kimi K3(2.8兆パラメータ)と Alibaba の Qwen3.8(2.4兆パラメータ)を生んだオープンウェイトのパラメータ競争は、その川下に直ちに帰結をもたらす。素朴な構成では、これらのモデルをほぼ誰も動かせないのだ。そして支配的な2つのオープン推論エンジンは、それを可能にする仕掛けを今週そろって出荷した。SGLang の v0.6.0 は、広域のエキスパート並列——混合エキスパートのモデルが持つ数百のエキスパートを多数の GPU にまたがって展開すること——を前面に置き、これにプレフィルとデコードの分離を組み合わせる。計算律速のプロンプト処理の段はある GPU のプールで、メモリ帯域律速のトークン生成の段は別のプールで走らせ、その間で KV キャッシュをネットワーク越しに送る方式だ。目を引く数字は、GB200 NVL72 ラックでのスループットが、兆パラメータ級の MoE で単一プールの基準のおよそ2.7倍というもので、KV の転送の裏方には Mooncake と NIXL を使う。vLLM の v0.25.0 も同じ2つの機能を数日のうちに載せてきた。この2つのプロジェクトが今年ずっと保ってきた型である。機能の同等化はすぐに達し、その後は定数項での競争になる。長く効く点はこうだ。巨大なオープンモデルの採算は、いまや無償であるモデルのライセンスよりも、運用者がそもそも分離型でエキスパート並列のサービングを立ち上げられるかどうかで決まる——2.4兆パラメータのモデルを借りられるラックの上で動かせる状態にするリリースこそが、実際にコストの曲線を動かすのであり、それはモデルそのものと一緒にではなく、今週やって来た。",
+      "citations": [
+        {
+          "label": "LMSYS - SGLang v0.6.0: wide expert parallelism for trillion-parameter MoE serving",
+          "url": "https://lmsys.org/blog/2026-07-19-sglang-v0-6-0-wide-ep-trillion-param-moe/"
+        },
+        {
+          "label": "GitHub - sgl-project/sglang v0.6.0 release",
+          "url": "https://github.com/sgl-project/sglang/releases/tag/v0.6.0"
+        },
+        {
+          "label": "vLLM Blog - v0.25.0: large-scale expert-parallel disaggregated serving",
+          "url": "https://blog.vllm.ai/2026/07/18/v0-25-0-large-scale-expert-parallel-disaggregated-serving.html"
+        }
+      ]
+    },
+    {
+      "lead": "Milvus の深刻な欠陥 CVE-2026-59218、ベクトル DB での認証なしの RCE を許す",
+      "body": "Milvus の深刻な脆弱性、CVE-2026-59218 として追跡され、CVSS で 9.8 と評価されたものは、認証を経ていない攻撃者に、最も広く配備されているオープンソースのベクトルデータベースに対するリモートコード実行を許す——検索拡張生成(RAG)の背後で埋め込みを保持する部品である。この欠陥は、認証なしに細工された要求を受け付ける、外部にさらされたデータ面のエンドポイントを通じて到達でき、一度当たれば手に入るのはサーバーだけでない。その上に載っている埋め込み済みのコーパス——多くは企業の内部文書、サポートの履歴、あるいはソースコードで、ベクトル化され検索できる状態のもの——まで奪われる。メンテナは修正版を出荷し、運用者に、公開インスタンスをインターネットから外し、プロセスが読めた認証情報をすべて入れ替えるよう促した。構造的な問題は、ベクトルデータベースが信頼されたネットワークの奥深くに置かれることを前提に作られ、脅威モデルが私設のサブネットを想定していたためにポートは開けたまま認証もなしを既定としてきたこと、そして RAG の配備が、チャットボットを動かすために、そのうちの数千を静かに公開の IP へ押し出したことにある。ベクトルストアの侵害が、ありふれたデータベースの侵害より悪いのは、何が漏れるかによる。組織がモデルに与えた、まさにその非公開のテキストが、埋め込みと、その隣に Milvus が保持する元のチャンクとから復元できてしまう。実務的な読み筋はこうだ。RAG のデータ層は、サービング層がいやおうなく学んだのと同じネットワークの衛生管理を、いまや必要としている——認証を有効にし、ポートを閉じ、埋め込みを抱えたものを公開のインターネットから届かないようにすること、である。",
+      "citations": [
+        {
+          "label": "The Hacker News - Critical Milvus flaw CVE-2026-59218 enables RCE on exposed vector databases",
+          "url": "https://thehackernews.com/2026/07/critical-milvus-flaw-cve-2026-59218-rce-vector-db.html"
+        },
+        {
+          "label": "NVD - CVE-2026-59218",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59218"
+        },
+        {
+          "label": "Help Net Security - Milvus CVE-2026-59218 vector-database RCE, patch and exposure guidance",
+          "url": "https://www.helpnetsecurity.com/2026/07/20/milvus-cve-2026-59218-vector-database-rce/"
+        }
+      ]
+    },
+    {
+      "lead": "LangGraph v1.1.0、永続的な実行を出荷し、再開可能なエージェントで Temporal に応じる",
+      "body": "2026年にエージェントの基盤を静かに組み替えつつある問いは、どのフレームワークが最も美しいエージェントのループを書くか、ではない。作業の途中でサーバーが再起動しても生き延びるのはどれか、である。そして今週、それが具体的な一手を生んだ。LangChain が LangGraph 向けに永続的な実行を、その v1.1.0 のリリースで出荷した。エージェントの実行の各ステップを永続的な状態にチェックポイントとして残し、クラッシュしたり再デプロイされたワーカーが、作業をやり直したり失ったりせずに、最後に完了したノードから再開できるようにしたのだ。これは、Temporal を長時間動くエージェントの既定の土台にしてきた訴えへの、まっすぐな回答である——OpenAI が Codex を動かし、Mistral の Workflows の下にも座る、永続的な実行のエンジンだ。3者が共有する見立てはこうだ。本番のエージェントとは、実のところ分散ワークフローである。1件あたり数十秒から数分、多数のモデル呼び出しとツールの起動が入り混じり、その途中でネットワークの障害やデプロイが起きる。そこで面白い保証は、知能ではなく、生き延びられることのほうだ。LangGraph が永続的な実行を、別のワークフローエンジンにエージェントのループを継ぎ足すのではなく、そのものの中で実現したことは、コード優先の陣営にとって2つの層を1つに畳み込む。バージョンの注記を超えて変わるのは、故障の型である。「エージェントが何をしていたか忘れた」ではなくなり、「エージェントはいったん止まり、中断したところから引き継いだ」になる——デモと、銀行が本番で回すものとの違いだ。オーケストレーションの市場はその性質を軸に集約しつつあり、それを任意の機能として扱ってきたフレームワークは、いまになって後付けしている側である。",
+      "citations": [
+        {
+          "label": "LangChain Blog - Durable execution for LangGraph",
+          "url": "https://blog.langchain.com/langgraph-durable-execution-ga/"
+        },
+        {
+          "label": "The New Stack - Durable agent execution: LangGraph answers Temporal",
+          "url": "https://thenewstack.io/durable-agent-execution-langgraph-temporal-2026/"
+        },
+        {
+          "label": "GitHub - langchain-ai/langgraph v1.1.0 release",
+          "url": "https://github.com/langchain-ai/langgraph/releases/tag/v1.1.0"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "AMD が、Nvidia へのラック規模の挑戦をそろえる",
+    "SGLang と vLLM が更新され、巨大なオープンモデルを提供できるようになる",
+    "Milvus の深刻なバグが、攻撃者を RAG のデータベースに入り込ませる",
+    "LangGraph のエージェントは、クラッシュ後にやり直さず再開する"
+  ]
+}

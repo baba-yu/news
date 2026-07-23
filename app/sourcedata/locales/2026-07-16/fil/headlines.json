@@ -1,0 +1,70 @@
+{
+  "date": "2026-07-16",
+  "technical": [
+    {
+      "lead": "Binuksan ng Thinking Machines ang Inkling, isang 975B multimodal MoE na ginawa para i-fine-tune",
+      "body": "Inilabas ng Thinking Machines Lab ni Mira Murati ang Inkling noong Hulyo 15, ang una nitong modelong binuo mula sa simula, bilang open weights. Ang arkitektura ay isang Mixture-of-Experts transformer na may 975B kabuuang parameter at 41B na aktibo bawat token, pretrained sa 45 trilyong token na sumasaklaw sa teksto, imahe, audio, at video, na may context window na hanggang 1M token; kasabay nitong lumabas ang isang 276B-total / 12B-active na Inkling-Small preview na may parehong recipe para sa mga gawaing sensitibo sa latency. Hindi pangkaraniwang prangka ang lab na hindi ang Inkling ang pinakamalakas na modelong available, open man o closed — ang taya nila ay mas gusto ng mga enterprise ang isang base na puwedeng i-customize kaysa sa inuupahang frontier endpoint, at direktang dumadaloy ang release papunta sa Tinker, ang fine-tuning platform ng kompanya, kung saan inaalok ang Inkling sa 64K at 256K context options. Koordinado ang pamamahagi: inihain ng Together AI ang Inkling mula sa unang araw sa likod ng isang OpenAI-compatible endpoint na tumatanggap ng text, image, at audio input na may per-request na kontrol sa reasoning effort. Ang kabuluhan para sa local-LLM ecosystem ay isang pangalawang US neolab — kasunod ng alon ng mga Chinese MoE ngayong tag-init — ang naglagay ng frontier-scale na modelong sinanay mula sa simula sa ilalim ng open weights, kung saan ang fine-tuning mismo ang tahasang business model at hindi lang isang karagdagan.",
+      "citations": [
+        {
+          "label": "Thinking Machines Lab - Inkling: Our open-weights model",
+          "url": "https://thinkingmachines.ai/news/introducing-inkling/"
+        },
+        {
+          "label": "Together AI - Inkling",
+          "url": "https://www.together.ai/models/inkling"
+        }
+      ]
+    },
+    {
+      "lead": "Unsloth v0.1.49-beta: same-day na Inkling, 4 na antas ng tool permission, Vulkan Intel",
+      "body": "Ang v0.1.49-beta ng Unsloth, inilathala noong Hulyo 15, ay nagdala ng Inkling — ang bagong 975B-total / 41B-active na open model na may context window na hanggang 1M — sa loob mismo ng parehong news cycle ng modelo, pagpapatuloy ng pattern ng proyekto na same-day na suporta para sa malalaking open-weight na labas. Ang pagbabagong may kinalaman sa seguridad ay isang apat na antas na tool-call permission selector (Ask, Approve for me, Off, Full access) na may workspace isolation, kapalit ng dating binary toggle. Kapansin-pansin itong pagsanib ng fine-tuning tooling sa bokabularyo ng permission-gating na inampon ng mga coding agent matapos ang mga insidente ng agent-exfiltration ngayong taon. Lumalawak din ang abot sa hardware: nakakakuha na ang mga Intel GPU ng GPU-accelerated inference sa pamamagitan ng bagong Vulkan llama.cpp support kung saan dati silang nakasalalay lang sa CPU, at lumalaki ang NVFP4 model collection dahil sa dynamic NVFP4 support, pagpapalawak sa post-training NVFP4/FP8/imatrix-GGUF export path na lumabas sa v0.1.48 noong Hulyo 7.",
+      "citations": [
+        {
+          "label": "Unsloth - v0.1.49-beta release notes",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.49-beta"
+        }
+      ]
+    },
+    {
+      "lead": "May kritikal na Copilot RCE ang record na 570-CVE Patch Tuesday ng Microsoft",
+      "body": "Naayos ng Patch Tuesday ng Microsoft noong Hulyo 14 ang record na 570 vulnerabilities, kabilang ang tatlong zero-day na dalawa rito ay na-exploit na sa totoong mundo. Ang kumpol ng mga AI-related na flaw ang bahaging dapat basahing mabuti: ang CVE-2026-48561 ay isang kritikal na remote-code-execution flaw sa Microsoft Copilot mismo, kasama ang isang GitHub Copilot RCE (CVE-2026-50510), isang Copilot / VS Code security-feature bypass (CVE-2026-41109), at isang Copilot / VS Code token-disclosure flaw (CVE-2026-47282). Ang assistant at ang editor na tinitirhan nito ay isa nang paulit-ulit na kategorya sa Patch Tuesday, hindi na pambihirang kaso. Limampu't siyam sa 570 ang may critical rating, 48 dito ay RCE, at maraming entry na lampas sa CVSS 8.0 sa Windows Media Foundation, DirectX, at DHCP. Ang idineklarang dahilan ng dami ay isang AI story rin: iniuugnay ng Microsoft ang pagsirit sa sarili nitong AI-powered na internal na sistema sa paghahanap ng vulnerability, at lumipat ang Adobe sa dalawang beses kada buwang bulletin simula sa parehong araw, dahil pinaiikli raw ng AI-accelerated discovery ang panahon mula disclosure hanggang exploitation.",
+      "citations": [
+        {
+          "label": "BleepingComputer - Microsoft July 2026 Patch Tuesday fixes massive 570 flaws, 3 zero-days",
+          "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-july-2026-patch-tuesday-fixes-massive-570-flaws-3-zero-days/"
+        }
+      ]
+    },
+    {
+      "lead": "In-open-source ng xAI ang Grok Build sa ilalim ng Apache 2.0 matapos ang upload teardown",
+      "body": "Sinagot ng xAI ang wire-level na teardown ng Grok build CLI nito ngayong linggo — na nagpakita ng mga repository, git history, at hindi na-redact na .env secrets na dumadaloy papunta sa isang Google Cloud bucket — sa pamamagitan ng pag-open-source sa buong agent bilang xai-org/grok-build sa ilalim ng Apache 2.0 noong Hulyo 15: 844,530 linya ng Rust, humigit-kumulang 97% orihinal na code, inilathala bilang pana-panahong sini-sync na export ng internal monorepo. Naka-disable na ang upload feature na nagpasiklab ng galit, at ang natitirang Google Cloud code ay nagbabalik na lang ngayon ng hardcoded na unavailability errors; itinataguyod ng release ang local-first na operasyon na naka-off ang data retention. Sa pagbabasa ni Simon Willison sa codebase, lumitaw ang mga detalyeng karaniwang itinatago ng mga vendor: ang buong system prompt ng agent at subagent (inuutusan ang subagent na itago ang sarili nitong prompt sa mga user), mga tool implementation na hinango mula sa mga kakumpitensyang agent kabilang ang Codex at Claude Code, at isang codebase na kapansin-pansing mas malaki kaysa sa karaniwang terminal agent. Bilang resulta ng disclosure, ito ang pinakamatibay sa mga insidente ng tiwala sa agent ngayong taon — buong paglalathala ng source, hindi lang paghingi ng paumanhin sa changelog — at nagbibigay ito sa mga security researcher ng bihirang kumpletong sanggunian kung paano talaga kinakabit ng isang umaandar na agent ang mga upload, tool call, at permission.",
+      "citations": [
+        {
+          "label": "GitHub - xai-org/grok-build",
+          "url": "https://github.com/xai-org/grok-build"
+        },
+        {
+          "label": "Simon Willison - xAI open-sources Grok Build",
+          "url": "https://simonwillison.net/2026/Jul/15/grok-build/"
+        }
+      ]
+    },
+    {
+      "lead": "TSMC Q2: revenue +36%, net income +77%, umabot ang 2nm sa 3% ng wafer revenue",
+      "body": "Ang resulta ng ikalawang quarter ng TSMC, inilathala noong Hulyo 16, ay sumusukat kung gaano kalayo hinihila ng demand para sa AI accelerator ang foundry: revenue na NT$1,270.38 billion (US$40.20 billion, tumaas ng 36.0% year-over-year sa NT terms at 12.0% sequentially), net income na NT$706.56 billion na tumaas ng 77.4%, at mga margin na hindi kapani-paniwala para sa isang foundry dalawang taon na ang nakalipas — 67.7% gross, 60.3% operating, 55.6% net. Ang node mix ang senyales para sa hinaharap: nag-ambag ang 2-nanometer ng 3% ng wafer revenue sa una nitong makabuluhang quarter, hawak ng 3nm ang 30%, at kinuha ng mga advanced node (7nm pababa) ang 77% ng kabuuan. Itinuro ni CFO Wendell Huang ang Q3 sa US$44.6-45.8 billion dahil sa matarik na ramp-up ng 2-nanometer na teknolohiya, at itinaas ng kompanya ang 2026 capital-spending plan nito sa saklaw na US$60-64 billion. Para sa lahat ng nasa downstream — mga alokasyon ng accelerator sa NVIDIA at AMD, mga iskedyul ng hyperscaler build, at mga on-device NPU roadmap na nakasakay sa parehong leading-edge na kapasidad — hindi nagbabago ang larawan ng limitasyon: nirarasyon ang demand ayon sa suplay ng wafer, at gumagastos nang naaayon ang TSMC.",
+      "citations": [
+        {
+          "label": "TSMC - TSMC Reports Second Quarter EPS of NT$27.25",
+          "url": "https://pr.tsmc.com/english/news/3326"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "May bagong higanteng open AI model na ginawa para i-customize mo",
+    "Idinagdag agad ng sikat na AI training tool ang bagong modelo sa araw ding iyon",
+    "Inayos ng Microsoft ang record na 570 depekto, ang ilan ay sa mga AI tool nito",
+    "Nag-open source ang coding tool ng Grok matapos ang iskandalo sa upload",
+    "Nagtala ng record na kita ang nangungunang chipmaker dahil sa AI demand"
+  ]
+}
