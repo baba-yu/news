@@ -1,0 +1,44 @@
+[
+  {
+    "actor": "Open-source LLM fine-tuning framework maintainer (Axolotl, TRL, Llama-Factory, torchtune, PEFT class)",
+    "job": "Merging an official ROCm backend into their toolkit and benchmarking it to publish parity speed and VRAM numbers, not a best-effort mode.",
+    "outcome": "An official, documented ROCm backend posting the same speed and VRAM numbers as CUDA: one of the 2+ peer toolkits the prediction requires.",
+    "motivation": "A CUDA-only stack now reads as a liability; matching Unsloth's parity keeps their toolkit the default for AMD-equipped users.",
+    "task": {
+      "who": "Core maintainers and community backend/kernel contributors",
+      "what": "Port and benchmark a first-class ROCm backend",
+      "where": "The toolkit's GitHub repo, CI, and published docs",
+      "when": "H2 2026 through H1 2027",
+      "why": "Avoid ceding AMD users to parity-shipping rivals",
+      "how": "ROCm/HIP, Triton AMD backend, PyTorch ROCm builds"
+    }
+  },
+  {
+    "actor": "AMD ROCm platform engineer embedded with open-source fine-tuning toolkit teams",
+    "job": "Replicating the Unsloth playbook: co-engineering and co-funding parity ROCm ports across the rest of the open toolkit cohort.",
+    "outcome": "Vendor-funded ROCm backends landing at parity in 2+ more toolkits, making ROCm a first-class target rather than an afterthought.",
+    "motivation": "A credible second-source position needs the software moat closed; cohort-wide parity converts silicon capability into real design wins.",
+    "task": {
+      "who": "ROCm developer-enablement and AI software engineering team",
+      "what": "Embed engineers to build and upstream parity kernels",
+      "where": "Partner toolkit repos and ROCm libraries (rocBLAS, hipBLASLt, Composable Kernel)",
+      "when": "H2 2026 through H1 2027",
+      "why": "Close the tooling gap that sends users back to Nvidia",
+      "how": "Co-funded engineering embeds, ROCm libraries, HIP porting"
+    }
+  },
+  {
+    "actor": "Portable GPU-kernel and compiler engineer for fused fine-tuning kernels (Triton-AMD class)",
+    "job": "Making fused fine-tuning kernels compile and hit parity on ROCm so a new model's ops run on AMD the day it drops.",
+    "outcome": "Day-zero ROCm coverage for newly released open models at CUDA-equal speed: the second leg of the prediction's landing test.",
+    "motivation": "Breakage-prone follow-on ports are what kept ROCm second-class; single-source portable kernels remove the weeks-behind lag.",
+    "task": {
+      "who": "Kernel and compiler engineers on Triton and toolkit kernel teams",
+      "what": "Write single-source kernels targeting CUDA and ROCm together",
+      "where": "Triton AMD backend, kernel libraries, toolkit CI",
+      "when": "H2 2026 through H1 2027",
+      "why": "Eliminate the weeks-behind lag that marks second-class status",
+      "how": "Triton, Composable Kernel, shared autotune benchmarks"
+    }
+  }
+]
