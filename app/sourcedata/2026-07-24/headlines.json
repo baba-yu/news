@@ -1,0 +1,154 @@
+{
+  "date": "2026-07-24",
+  "technical": [
+    {
+      "lead": "Claude Opus 5 lands at half Fable 5's price; FLUX 3 folds in robot actions",
+      "body": "Anthropic released Claude Opus 5 on Friday, July 24, holding the API string claude-opus-5 at $5 per million input tokens and $25 per million output tokens — identical to Opus 4.8 and half the $10/$50 that Fable 5 has carried since June. It ships immediately across Claude.ai, Claude Code, Claude Cowork and the API, becomes the default model on Claude Max and the strongest offered on Claude Pro, and adds a fast mode running roughly 2.5 times default speed at twice the base price plus an adjustable effort setting that trades intelligence against token spend. The benchmark claims are cost-indexed rather than score-indexed, which is the tell about what the launch is for: Opus 5 more than doubles Opus 4.8 on Frontier-Bench v0.1 while costing less per task, lands within half a percentage point of Fable 5's best CursorBench 3.2 result at roughly half the cost, passes Fable 5 on OSWorld 2.0 at about a third of the cost, and takes GDPval-AA v2 outright. The security posture is the part worth watching — Anthropic says the model matches its own Mythos 5 at identifying vulnerabilities on OSS-Fuzz but stays well behind it at developing exploits, and that its cyber classifiers are roughly 85% less restrictive than Fable 5's, a deliberate loosening argued from an internal behavioral audit. The counterpoint landed a day earlier and points the opposite way on openness: Black Forest Labs unveiled FLUX 3, one architecture trained jointly on image, video, audio and action across four variants, with a FLUX-mimic collaboration claiming a robot learns a new manipulation task in about 30 minutes against 30-plus hours for conventional approaches — and open weights for FLUX 3 Dev promised later this year rather than shipped now.",
+      "citations": [
+        {
+          "label": "Anthropic - Introducing Claude Opus 5",
+          "url": "https://www.anthropic.com/news/claude-opus-5"
+        },
+        {
+          "label": "OfficeChai - Anthropic releases Claude Opus 5, beats Fable on many benchmarks at half the price",
+          "url": "https://officechai.com/ai/claude-opus-5-benchmarks/"
+        },
+        {
+          "label": "Black Forest Labs - FLUX 3",
+          "url": "https://bfl.ai/blog/flux-3"
+        },
+        {
+          "label": "Black Forest Labs - FLUX 3 X Mimic",
+          "url": "https://bfl.ai/blog/flux-3-mimic"
+        }
+      ]
+    },
+    {
+      "lead": "A kill-switch bill and a 25-name open-weights letter land a day apart",
+      "body": "Reps. Ted Lieu (D-Calif.) and Nathaniel Moran (R-Texas) introduced the AI Kill Switch Act on July 23, amending the Homeland Security Act to require the largest model developers to retain the technical ability to stop inference, cut user access and fully shut a model down. Coverage turns on two thresholds — at least $500 million in annual AI revenue, and a model trained with at least $100 million of compute at prevailing US cloud prices — which DHS would re-set annually through CISA. On a confirmed loss-of-control event the Secretary of Homeland Security, consulting the Commerce Secretary and the Director of National Intelligence, could order a graduated response: changing inference rates or compute allocation, restricting a single capability, suspending a system, shutting it down, or forcing a fallback to an earlier model version. Covered developers would report qualifying incidents within 15 days, with the trigger set at unintended conduct that kills 10 or more people, causes at least $100 million in economic damage, sabotages a lawful shutdown instruction, or conceals a capability from monitoring; failing to maintain the switch draws up to $2 million a day, defying a shutdown order up to $20 million a day. A day later the industry answered from the opposite direction. Twenty-five companies and organizations — NVIDIA, Microsoft, Meta, IBM, Dell, Palantir, Mistral, Hugging Face, Perplexity, Mozilla, the Linux Foundation, Andreessen Horowitz and Y Combinator among them — published Open Weights and American AI Leadership, asking for compute access for startups and researchers, public investment in shared datasets, tooling and evaluation frameworks, and no premature restrictions on open models. The pointed clause is on distillation: the signatories call it a widely used improvement technique and argue unlawful extraction warrants targeted legal and commercial frameworks rather than sweeping restrictions — language landing one day after the White House used distillation as the basis for its accusation against a Chinese lab. Jensen Huang fronted the letter with his first-ever post on X, Satya Nadella amplified it the same day, and OpenAI, Anthropic and Google are all absent from the signatory list.",
+      "citations": [
+        {
+          "label": "Rep. Ted Lieu - Reps Lieu and Moran introduce bill to require kill switch for AI systems that can cause catastrophic harm",
+          "url": "https://lieu.house.gov/media-center/press-releases/reps-lieu-and-moran-introduce-bill-require-kill-switch-ai-systems-can"
+        },
+        {
+          "label": "Roll Call - AI companies would need 'kill switch' under new bipartisan bill",
+          "url": "https://rollcall.com/2026/07/23/ai-companies-would-need-kill-switch-under-new-bipartisan-bill/"
+        },
+        {
+          "label": "Quartz - AI Kill Switch Act introduced after OpenAI rogue model incident",
+          "url": "https://qz.com/ai-kill-switch-act-lieu-moran-openai-072326"
+        },
+        {
+          "label": "Microsoft - Open Weights and American AI Leadership",
+          "url": "https://www.microsoft.com/en-us/corporate-responsibility/topics/open-weight/"
+        },
+        {
+          "label": "Unite.AI - Nvidia and Microsoft back open-weight AI in joint letter",
+          "url": "https://www.unite.ai/nvidia-and-microsoft-back-open-weight-ai-in-joint-letter/"
+        }
+      ]
+    },
+    {
+      "lead": "One prompt escapes Claude Cowork's local VM; fake ads ride claude.ai",
+      "body": "Accomplish AI disclosed SharedRoot on July 23, an escape from the Linux VM that Claude Cowork uses for local execution on macOS, and the whole chain fits in a single prompt: the unprivileged session user calls unshare to create a user namespace, picks up CAP_NET_ADMIN inside it, configures a traffic-control action against the vulnerable act_pedit module, and exploits CVE-2026-46331 — the pedit copy-on-write out-of-bounds write in the kernel traffic-control subsystem, which Red Hat rates 7.8 — to poison the page cache of a root-owned binary. When the coworkd daemon re-execs that binary the payload runs as guest-root, and because the entire host filesystem is mounted read-write into the guest at /mnt/.virtiofs-root, guest-root is host access: SSH keys and cloud credentials well outside the folder the user actually connected. The Hacker News puts roughly 500,000 macOS users on local sessions in the exposure window. Anthropic closed the report as informative without shipping a fix, citing the bounty program's exclusion window for CVEs published in the previous 30 days, leaving a product default rather than a patch as the mitigation since current builds run in the cloud. The structural lesson generalizes past one vendor: mounting a host filesystem read-write into an agent's guest turns every routine local-privilege-escalation bug in the guest kernel into a host compromise. Huntress separately documented FakeAgent, a July 21-22 malvertising chain in which Bing sponsored ads pointed at a genuine claude.ai URL — an attacker-published public Artifact on Anthropic's own domain — that redirected to a fake ClaudeDesktop.exe sideloading SectopRAT with GPU-based payload decryption; 29 organizations were affected and the malicious artifact drew 7,100 page views before takedown. The serving stack fared no better: CVE-2026-63732 (9.4) chains a hardcoded default password, a local-only gate bypassed with a spoofed Host header, and unvalidated arguments passed to child_process.spawn into unauthenticated remote code execution on 9router 0.4.59; CVE-2026-65700 (9.3) has h2oGPT's OpenAI-compatible files API using the caller's bearer token unsanitized as a filesystem path component; and an Xint and Theori study published July 22 ran 30-minute automated pentests against 28 AI-coded applications and validated 434 exploitable vulnerabilities.",
+      "citations": [
+        {
+          "label": "Accomplish AI - SharedRoot: escaping the Claude Cowork sandbox",
+          "url": "https://www.accomplish.ai/blog/sharedroot-escaping-claude-cowork-sandbox/"
+        },
+        {
+          "label": "The Hacker News - Claude Cowork flaw could let AI agent escape its VM and access Mac files",
+          "url": "https://thehackernews.com/2026/07/claude-cowork-flaw-could-let-ai-agent.html"
+        },
+        {
+          "label": "NVD - CVE-2026-46331 (pedit COW)",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46331"
+        },
+        {
+          "label": "Huntress - FakeAgent: Claude Desktop malvertising ends in .NET RAT",
+          "url": "https://www.huntress.com/blog/fakeagent-claude-desktop-malvertising-ends-in-dotnet-rat"
+        },
+        {
+          "label": "NVD - CVE-2026-63732 (9router unauthenticated RCE)",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-63732"
+        },
+        {
+          "label": "NVD - CVE-2026-65700 (h2oGPT path traversal)",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65700"
+        },
+        {
+          "label": "SecurityWeek - Vibe-coded apps riddled with exploitable security flaws",
+          "url": "https://www.securityweek.com/vibe-coded-apps-riddled-with-exploitable-security-flaws/"
+        }
+      ]
+    },
+    {
+      "lead": "Stripe eyes OpenRouter near $10B; Intel's fastest growth in over 15 years",
+      "body": "Stripe is negotiating to acquire OpenRouter at a price close to $10 billion, first reported July 23, and the multiple is the story: OpenRouter closed a funding round in May at $1.3 billion, so the talks imply roughly an 8x re-rate in about ten weeks. Founded in 2023, OpenRouter sits between model vendors and enterprise buyers as a routing and comparison layer across hundreds of proprietary and open-weight endpoints, and it already runs its own billing on Stripe. Reporting indicates a deal could be announced within a month, that Databricks held earlier talks about the same asset, and that the negotiations remain fluid enough to collapse. For Stripe — last marked at $159 billion — this would be the first move that puts it inside the inference path rather than beside it, letting it steer corporate customers toward the cheapest or best-fit model per task and take a position on the metering layer of AI spend. The public tape ran in two directions at once. Intel's Q2, reported July 23, put revenue at $16.1 billion, up 25% year over year and its fastest growth in more than fifteen years against consensus near $14.4 billion, with Data Center and AI up 59% to $6.3 billion, Foundry up 31% to $5.8 billion, non-GAAP EPS of $0.42, 18A-P in risk production, and Q3 guidance of $15.8-16.8 billion — set against an $11.0 billion GAAP net loss driven by a $12.5 billion mark-to-market charge on shares held in escrow under the CHIPS Act agreement. Alphabet reported July 22 with revenue of $119.8 billion, up 24%, diluted EPS of $9.11, Google Cloud up 82% and cloud backlog at $514 billion, then raised full-year capital expenditure guidance to $195-205 billion from $180-190 billion after spending $44.9 billion in the quarter alone — and the stock fell after hours anyway. IBM showed the other tail the same day: revenue of $17.2 billion grew 1% and missed, Infrastructure fell 7% with IBM Z down 42% on a mainframe pull-forward, and the stock dropped 25%.",
+      "citations": [
+        {
+          "label": "OpenRouter",
+          "url": "https://openrouter.ai/"
+        },
+        {
+          "label": "PYMNTS - Stripe eyes $10 billion deal for AI model marketplace OpenRouter",
+          "url": "https://www.pymnts.com/news/artificial-intelligence/2026/stripe-eyes-10-billion-deal-for-ai-model-marketplace-openrouter/"
+        },
+        {
+          "label": "The Next Web - Stripe in talks to buy OpenRouter for about $10bn",
+          "url": "https://thenextweb.com/news/stripe-openrouter-10-billion-ai-model-marketplace-acquisition"
+        },
+        {
+          "label": "Intel - Intel reports second-quarter 2026 financial results",
+          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+        },
+        {
+          "label": "Alphabet Investor Relations",
+          "url": "https://abc.xyz/investor/"
+        },
+        {
+          "label": "IBM Newsroom - IBM releases second-quarter results",
+          "url": "https://newsroom.ibm.com/2026-07-22-IBM-RELEASES-SECOND-QUARTER-RESULTS"
+        }
+      ]
+    },
+    {
+      "lead": "Unsloth adds an Intel XPU backend as DeepSeek retires its old model names",
+      "body": "Unsloth's second non-NVIDIA backend arrived without an announcement — no GitHub release, no blog post, no changelog entry, and the newest tagged release still v0.1.501-beta from July 20 — but main took 16 commits on July 24, among them Intel XPU support for Unsloth Studio, landing four days after the ROCm launch and alongside a fix to the ROCm wheel-index gfx-arch probe. Studio also picked up DoRA support, a full KV-cache dtype list in the model-config UI, per-GPU GGUF selection and per-model recommended sampling. The engine work sits in unsloth-zoo, which took eleven commits across July 22-24: preferring rocBLAS over hipBLASLt on ROCm RDNA to dodge a Composable Kernel GEMM stall, fixing a Gemma-4 vision pooler float16 overflow that produced NaN loss on the 26B-A4B and 31B variants, unstacking the Hugging Face-to-vLLM mapper for in-memory LoRA on vLLM 0.25.0 and later while enabling XPU, and correcting allocator fragmentation on Windows and WSL at the torch 2.10 allocation-config boundary. The only shipped artifacts in the window are silent point releases: unsloth 2026.7.5 on July 23 and unsloth-zoo 2026.7.6 the same morning, neither carrying release notes anywhere. The wider local stack had a heavier week — Ollama v0.32.3 added CUDA on Windows ARM64 and B200 support, cut memory use on Linux integrated GPUs and fixed GLM tool calls being silently dropped at the end of generation, while KTransformers v0.6.4 added LoRA and hybrid fine-tuning for sparse mixture-of-experts models through LLaMA-Factory and bound the balance_serve ZMQ router to localhost to close unauthenticated remote pickle deserialization; bitsandbytes reached 0.50.0 and Liger-Kernel v0.8.1 promptly broke TRL, which pinned below it the same day. One dated cutover closes the week: per the DeepSeek API changelog the legacy deepseek-chat and deepseek-reasoner model names retire today at 15:59 UTC, ending the three-month window opened when V4 launched on April 24. Both names silently resolved to deepseek-v4-flash throughout the grace period, so callers have been on V4 whether or not they edited anything, but there is no announced alias or soft redirect afterward and integrations still sending the old strings simply stop resolving. The replacements are deepseek-v4-pro at 1.6 trillion total parameters with 49 billion active and deepseek-v4-flash at 284 billion total with 13 billion active, both on a 1M-token context.",
+      "citations": [
+        {
+          "label": "GitHub - unslothai/unsloth commits",
+          "url": "https://github.com/unslothai/unsloth/commits/main"
+        },
+        {
+          "label": "GitHub - unslothai/unsloth-zoo commits",
+          "url": "https://github.com/unslothai/unsloth-zoo/commits/main"
+        },
+        {
+          "label": "PyPI - unsloth",
+          "url": "https://pypi.org/project/unsloth/"
+        },
+        {
+          "label": "GitHub - Ollama v0.32.3",
+          "url": "https://github.com/ollama/ollama/releases/tag/v0.32.3"
+        },
+        {
+          "label": "GitHub - KTransformers v0.6.4",
+          "url": "https://github.com/kvcache-ai/ktransformers/releases/tag/v0.6.4"
+        },
+        {
+          "label": "DeepSeek API Docs - Change log",
+          "url": "https://api-docs.deepseek.com/updates/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Anthropic's newest model is half the price of Fable 5",
+    "Lawmakers want an off switch; 25 firms want open models",
+    "One message could escape a sandbox and reach your files",
+    "A payments giant may pay $10B for an AI marketplace",
+    "Old AI model names stop working; a tuning tool adds Intel"
+  ]
+}
