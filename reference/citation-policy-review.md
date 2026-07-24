@@ -18,12 +18,12 @@ Sorted by `count` descending, then host alphabetical.
 | arxiv.org | 190 | 2026-04-29 | 2026-07-19 | arXiv - Corpus2Skill (2604.14572) |
 | simonwillison.net | 153 | 2026-04-19 | 2026-07-18 | Simon Willison - Qwen3.6-27B |
 | anthropic.com | 129 | 2026-04-21 | 2026-07-01 | Anthropic - Anthropic and Amazon expand collaboration |
-| siliconangle.com | 122 | 2026-04-23 | 2026-07-07 | SiliconANGLE - OpenAI workspace agents |
+| siliconangle.com | 128 | 2026-04-23 | 2026-07-23 | SiliconANGLE - OpenAI workspace agents |
 | huggingface.co | 108 | 2026-04-22 | 2026-07-21 | Hugging Face - prism-ml/Bonsai-8B-gguf |
 | aws.amazon.com | 93 | 2026-04-19 | 2026-06-21 | AWS - Amazon Bedrock AgentCore adds new features |
+| helpnetsecurity.com | 90 | 2026-04-19 | 2026-07-23 | Help Net Security - Indirect prompt injection is taking hold |
 | the-decoder.com | 89 | 2026-04-23 | 2026-07-19 | The Decoder - Anthropic ships ten AI agents for finance |
 | ai.engineer | 87 | 2026-05-30 | 2026-07-02 | AI Engineer World's Fair |
-| helpnetsecurity.com | 87 | 2026-04-19 | 2026-07-20 | Help Net Security - Indirect prompt injection is taking hold |
 | snowflake.com | 85 | 2026-05-30 | 2026-06-23 | Snowflake Summit 26 |
 | sf.aitinkerers.org | 83 | 2026-04-19 | 2026-07-10 | AI Tinkerers SF 2026 |
 | databricks.com | 81 | 2026-05-30 | 2026-06-17 | Databricks |
@@ -36,12 +36,12 @@ Sorted by `count` descending, then host alphabetical.
 | infoq.com | 59 | 2026-04-21 | 2026-06-02 | InfoQ - Cloudflare Builds High-Performance Infrastructure fo |
 | developer.apple.com | 54 | 2026-05-30 | 2026-06-05 | Apple Developer |
 | microsoft.com | 51 | 2026-04-24 | 2026-06-23 | Microsoft Security Blog - Zero Trust for AI |
+| openai.com | 51 | 2026-04-23 | 2026-07-23 | OpenAI - Introducing workspace agents in ChatGPT |
 | csoonline.com | 49 | 2026-04-22 | 2026-07-10 | CSO Online - Prompt injection turned Google's Antigravity fi |
 | nvd.nist.gov | 49 | 2026-05-05 | 2026-07-20 | NVD - CVE-2026-5760 Detail |
 | cloudsecurityalliance.org | 48 | 2026-04-24 | 2026-05-05 | CSA - The Agentic Trust Framework |
 | advisories.gitlab.com | 47 | 2026-05-06 | 2026-06-27 | GitLab Advisories - CVE-2026-41264 Flowise CSV Agent Prompt |
 | businesswire.com | 47 | 2026-04-24 | 2026-07-07 | BusinessWire - Anthropic Partners with Blackstone, Hellman & |
-| openai.com | 46 | 2026-04-23 | 2026-07-10 | OpenAI - Introducing workspace agents in ChatGPT |
 | techstartups.com | 46 | 2026-04-25 | 2026-07-21 | Tech Startups - Top Tech News Today, April 30, 2026 |
 | amd.com | 45 | 2026-05-05 | 2026-07-21 | AMD - AMD Reports First Quarter 2026 Financial Results |
 | thehackerwire.com | 45 | 2026-04-22 | 2026-05-03 | TheHackerWire - Xerte Online Toolkits RCE |
@@ -62,15 +62,16 @@ Sorted by `count` descending, then host alphabetical.
 | gurufocus.com | 30 | 2026-07-05 | 2026-07-05 | GuruFocus - Tenstorrent CEO Denies Qualcomm Acquisition Talk |
 | thurrott.com | 29 | 2026-05-30 | 2026-06-04 | session catalog |
 | mistral.ai | 28 | 2026-05-06 | 2026-07-02 | Mistral AI - Workflows for work that runs the business |
+| servethehome.com | 28 | 2026-06-06 | 2026-07-23 | ServeTheHome - Groq LPUs Join Vera Rubin Platform for Low-La |
 | standardbots.com | 28 | 2026-05-03 | 2026-05-19 | Standard Bots - Humanoid league table IROS GTC Fall 2026 upd |
 | airisksummit.com | 26 | 2026-06-08 | 2026-07-10 | SecurityWeek - AI Risk Summit 2026 |
 | ollama.com | 26 | 2026-07-05 | 2026-07-05 | Ollama Blog - Faster Gemma 4 on MLX with multi-token predict |
 | news.ycombinator.com | 25 | 2026-04-21 | 2026-07-19 | Hacker News - Qwen3.6-35B-A3B: Agentic coding power, now ope |
+| ai-infra-summit.com | 24 | 2026-06-05 | 2026-07-23 | AI Infra Summit 2026 |
 | wiz.io | 24 | 2026-05-07 | 2026-07-12 | Wiz Research - Joint MCP exposure baseline May 2026 |
-| ai-infra-summit.com | 23 | 2026-06-05 | 2026-07-22 | AI Infra Summit 2026 |
+| blackhat.com | 23 | 2026-06-05 | 2026-07-23 | Black Hat USA 2026 |
 | adversa.ai | 22 | 2026-05-05 | 2026-06-09 | Adversa AI - Top Agentic AI security resources May 2026 |
 | andrew.ooo | 22 | 2026-05-06 | 2026-05-19 | andrew.ooo - AISI Cyber Eval GPT-5.5 vs Mythos vs Opus May 2 |
-| blackhat.com | 22 | 2026-06-05 | 2026-07-21 | Black Hat USA 2026 |
 | blog.vllm.ai | 22 | 2026-04-27 | 2026-07-20 | vLLM Blog |
 | securityweek.com | 22 | 2026-04-20 | 2026-07-09 | SecurityWeek - Claude Code, Gemini CLI, GitHub Copilot Agent |
 | learn.microsoft.com | 21 | 2026-04-22 | 2026-06-02 | Microsoft Learn - Foundry What's new for April 2026 (RFT) |
@@ -116,7 +117,6 @@ Sorted by `count` descending, then host alphabetical.
 | justsecurity.org | 14 | 2026-05-10 | 2026-05-19 | Just Security - US cyber eval reciprocity outlier posture cu |
 | lawfaremedia.org | 14 | 2026-05-10 | 2026-05-19 | Lawfare - FMRB executive order Section 708 State Farm reason |
 | renovateqr.com | 14 | 2026-04-25 | 2026-05-03 | Renovate QR - Chinese AI Models in April 2026 |
-| servethehome.com | 14 | 2026-06-06 | 2026-07-20 | ServeTheHome - Groq LPUs Join Vera Rubin Platform for Low-La |
 | technode.com | 14 | 2026-06-07 | 2026-07-14 | TechNode - BYD is developing humanoid robots, according to s |
 | thestreet.com | 14 | 2026-04-28 | 2026-05-03 | TheStreet - Stock Market Today (Apr. 28, 2026) |
 | whitehouse.gov | 14 | 2026-06-06 | 2026-06-06 | White House - Promoting Advanced Artificial Intelligence Inn |
@@ -189,6 +189,7 @@ Sorted by `count` descending, then host alphabetical.
 | claude.com | 8 | 2026-05-30 | 2026-05-30 | claude.com |
 | computerworld.com | 8 | 2026-06-08 | 2026-06-08 | Computerworld - Why Apple's Foundation Models Framework matt |
 | computing.net | 8 | 2026-05-04 | 2026-05-04 | Computing.net - AMD Q1 2026 Earnings Preview |
+| cyberscoop.com | 8 | 2026-04-27 | 2026-07-23 | CyberScoop - Vuln in Google's Antigravity AI agent manager c |
 | defensenews.com | 8 | 2026-05-02 | 2026-07-14 | Defense News |
 | fedscoop.com | 8 | 2026-06-05 | 2026-06-05 | FedScoop - Bipartisan 'Great American AI Act' draft proposes |
 | futurumgroup.com | 8 | 2026-06-03 | 2026-06-03 | Futurum - Snowflake Summit 2026: four infrastructure bets th |
@@ -332,6 +333,7 @@ Sorted by `count` descending, then host alphabetical.
 | summit.runwayml.com | 4 | 2026-07-15 | 2026-07-15 | Runway AI Summit - September 30, 2026, The Masonic, San Fran |
 | techzine.eu | 4 | 2026-06-12 | 2026-06-12 | Techzine - As Anthropic claims the enterprise, OpenAI fights |
 | testingcatalog.com | 4 | 2026-06-01 | 2026-06-01 | Testing Catalog - Microsoft readies new MAI voice and image |
+| thecurrentga.org | 4 | 2026-07-23 | 2026-07-23 | The Current GA - $20 billion OpenAI data center to open in E |
 | thecyberthrone.in | 4 | 2026-04-27 | 2026-04-27 | TheCyberThrone - CISA Adds Eight Actively Exploited Vulnerab |
 | thesanfranciscotribune.com | 4 | 2026-06-12 | 2026-06-12 | San Francisco Tribune - Databricks brings Data + AI Summit b |
 | tradingview.com | 4 | 2026-05-02 | 2026-05-03 | TradingView - BofA $1.3T chips forecast |
@@ -385,6 +387,7 @@ Sorted by `count` descending, then host alphabetical.
 | proactiveinvestors.com | 3 | 2026-05-05 | 2026-05-05 | ProactiveInvestors - AMD reports Q1 earnings beat driven by |
 | proofpoint.com | 3 | 2026-04-24 | 2026-04-24 | Proofpoint - Anthropic Leak & Mercor Attack |
 | pulse2.com | 3 | 2026-04-30 | 2026-04-30 | Pulse 2.0 - Novita Sandbox Secures Autonomous Agent Systems |
+| qz.com | 3 | 2026-07-23 | 2026-07-23 | Quartz - OpenAI plans data center campus near Savannah, Geor |
 | reworked.co | 3 | 2026-05-04 | 2026-05-04 | Reworked - Zero Trust for AI Agents |
 | roborhythms.com | 3 | 2026-04-27 | 2026-04-27 | Roborhythms - Bonsai 1-Bit LLM Is Running Locally on 1GB of |
 | satellitetoday.com | 3 | 2026-04-27 | 2026-04-27 | Via Satellite - Anthropic Launches Project Glasswing for Cyb |
@@ -419,7 +422,6 @@ Sorted by `count` descending, then host alphabetical.
 | confidentialcomputingsummit.com | 2 | 2026-06-05 | 2026-06-05 | Confidential Computing Summit 2026 |
 | crowdstrike.com | 2 | 2026-04-19 | 2026-04-20 | CrowdStrike - April 2026 Patch Tuesday Analysis |
 | cybernews.com | 2 | 2026-04-23 | 2026-04-23 | CyberNews - Discord group accessed Mythos |
-| cyberscoop.com | 2 | 2026-04-27 | 2026-04-27 | CyberScoop - Vuln in Google's Antigravity AI agent manager c |
 | devday.openai.com | 2 | 2026-07-16 | 2026-07-16 | OpenAI - DevDay 2026, September 29, Fort Mason, San Francisc |
 | discuss.python.org | 2 | 2026-07-22 | 2026-07-22 | Python Discuss - Restricting open-ended releases on PyPI |
 | docs.nvidia.com | 2 | 2026-04-22 | 2026-04-22 | NVIDIA Docs - NemoClaw Developer Guide |
