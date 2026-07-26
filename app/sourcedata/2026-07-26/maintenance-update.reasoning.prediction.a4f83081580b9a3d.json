@@ -1,0 +1,11 @@
+{
+  "prediction_id": "prediction.a4f83081580b9a3d",
+  "stream": "reasoning",
+  "entry_id": "prediction.a4f83081580b9a3d",
+  "applied": false,
+  "_inert": "markers are write-only; nothing in app/ reads this file",
+  "reason": "Bridge -> Reasoning: the conjunction in `so_that`/`landing` is splitting apart. Both clauses bind serving-runtime support (vLLM/SGLang) and local-runtime packaging (Ollama/llama.cpp/MLX) into a single release bar, but validation.fc56dc41243ac20c (2026-07-20) reports SGLang v0.6.0 and vLLM v0.25.0 shipping wide expert parallelism and disaggregated serving precisely because 'almost nobody can serve Kimi K3 or Qwen3.8 with a naive setup' - and states plainly that what it does not show is 'launch-day timing or the Ollama leg'. The corpus explains why: the flagship open-MoE tier has grown past what local runtimes can host (future-prediction/en/future-prediction-20260725.md records Kimi K3's weights at roughly 1.4TB with a deployment floor near eighteen 80GB accelerators). Reframe so the serving-runtime leg and the local-runtime leg carry separate bars, or scope the Ollama leg to the dense/small variants only - as written, a single flagship release can never satisfy both halves. Secondary: `landing` sets Q4 2026, but validation.29d3c37333fe4a79 and validation.fbe59cebd0d0bd31 (07-07/07-08, both rel 4) show DeepSeek-V4 arriving with coordinated SGLang/vLLM endorsement and same-week Unsloth tuning, so the serving half is already landing in Q3 - the window may be shortenable.",
+  "proposed_action": "rewrite",
+  "confidence": 0.72,
+  "week_ending": "2026-07-26"
+}
