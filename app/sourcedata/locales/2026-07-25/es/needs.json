@@ -1,0 +1,249 @@
+{
+  "date": "2026-07-25",
+  "by_prediction": {
+    "prediction.359ad701e052546c": [
+      {
+        "actor": "Responsable de ingeniería de publicación de modelos, laboratorio de IA de frontera con pesos abiertos",
+        "job": "Entregar el checkpoint MXFP4 de 2,8 billones de parámetros con la disposición de fragmentos, la guía de despliegue y unos términos de licencia que permitan redistribuir artefactos de servicio modificados.",
+        "outcome": "Un checkpoint y una licencia publicados bajo los cuales terceros puedan publicar y redistribuir una receta de servicio modificada para un solo nodo.",
+        "motivation": "Su propio nivel alojado ya pausó nuevas suscripciones por la demanda de inferencia, así que el trabajo de servicio tiene que pasar al hardware de otros.",
+        "task": {
+          "who": "Equipo de publicación de modelos y de licencias de código abierto",
+          "what": "Publicar los pesos con términos de licencia permisivos para la redistribución",
+          "where": "Repositorio público del hub de modelos y la ficha de modelo que lo acompaña",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "La capacidad alojada tiene tope; servir fuera alivia la demanda",
+          "how": "Publicación en Hugging Face, fragmentos MXFP4, texto de licencia publicado"
+        }
+      },
+      {
+        "actor": "Mantenedor, runtime de inferencia de código abierto para modelos grandes",
+        "job": "Añadir una vía de ejecución con descarga de expertos que mantenga la atención y los expertos calientes en la memoria del acelerador mientras transmite los expertos fríos desde la DRAM del anfitrión.",
+        "outcome": "Una versión integrada en el proyecto principal que sirva los 896 expertos en ocho tarjetas de 80 GB sin poda, destilación ni cuantización adicional.",
+        "motivation": "Se disparan dieciséis de 896 expertos por token, así que la residencia completa en HBM compra latencia y no corrección, y desperdicia el hardware de la mayoría de los usuarios.",
+        "task": {
+          "who": "Mantenedores del runtime principal y de la ejecución de mezcla de expertos",
+          "what": "Implementar la descarga de expertos por capa y la gestión de residencia",
+          "where": "Repositorio principal del motor de inferencia, planificador de mezcla de expertos y asignador de memoria",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "La restricción real es la residencia, no el conjunto de trabajo",
+          "how": "Caché de expertos en DRAM del anfitrión, búferes fijados, precarga por capas"
+        }
+      },
+      {
+        "actor": "Ingeniero de kernels de baja precisión, equipo de software de inferencia",
+        "job": "Escribir kernels de pesos MXFP4 y activaciones MXFP8 que ejecuten la precisión publicada en aceleradores sin soporte hardware nativo para los formatos de microescalado.",
+        "outcome": "Kernels que ejecuten sin cambios los pesos MXFP4 publicados en aceleradores de 80 GB de amplia difusión, de modo que no haga falta cuantizar más.",
+        "motivation": "La ejecución nativa de MXFP4 pide silicio Blackwell o MI400, que quienes persiguen esta receta con un solo nodo no tienen.",
+        "task": {
+          "who": "Subequipo de ingeniería de kernels y cuantización",
+          "what": "Emular la descuantización MXFP4 en kernels GEMM fusionados",
+          "where": "Biblioteca de kernels del runtime para aceleradores de 80 GB de generación anterior",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "La precisión publicada debe sobrevivir en el hardware que la gente tiene",
+          "how": "GEMM con descuantización fusionada en CUTLASS o Triton, manejo de escalas por bloque"
+        }
+      },
+      {
+        "actor": "Investigador de sistemas de mezcla de expertos, grupo de eficiencia de modelos",
+        "job": "Perfilar la localidad de activación de los expertos para decidir cuáles quedan residentes y precargar el resto a partir de los logits del enrutador antes de usarlos.",
+        "outcome": "Una política de residencia y precarga de expertos calientes que oculte tras el cómputo la mayor parte de la transferencia del anfitrión al dispositivo durante la decodificación.",
+        "motivation": "Transmitir expertos fríos de forma ingenua convierte una decodificación limitada por memoria en algo mucho más lento, y un rendimiento malo mata la adopción de la receta.",
+        "task": {
+          "who": "Grupo de investigación en eficiencia de modelos y evaluación de sistemas",
+          "what": "Medir la reutilización de expertos y construir una política de precarga",
+          "where": "Trazas de decodificación instrumentadas sobre el checkpoint publicado de K3",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Lo que frena la publicación es el rendimiento, no la viabilidad",
+          "how": "Anticipación con logits del enrutador, caché LRU de expertos, perfilado de frecuencia de activación"
+        }
+      },
+      {
+        "actor": "Ingeniero de la ruta de datos de almacenamiento y memoria del anfitrión, infraestructura de inferencia",
+        "job": "Construir la vía de transmisión desde NVMe y DRAM fijada que alimente los pesos de expertos fríos por PCIe con la rapidez suficiente para que la decodificación siga avanzando.",
+        "outcome": "Una ruta de E/S de un solo nodo que sostenga la transmisión de expertos desde la DRAM del anfitrión o desde NVMe con un rendimiento de decodificación utilizable.",
+        "motivation": "La receta cambia capacidad de HBM por ancho de banda de PCIe, así que la vía de transferencia es donde todo el planteamiento triunfa o fracasa.",
+        "task": {
+          "who": "Equipo de ingeniería de rendimiento de almacenamiento y E/S",
+          "what": "Ajustar el rendimiento de transmisión de pesos de expertos de NVMe al dispositivo",
+          "where": "Un solo nodo con varios terabytes de DRAM de anfitrión y NVMe",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "El ancho de banda de PCIe sustituye a la capacidad de HBM que se cede",
+          "how": "GPUDirect Storage, búferes fijados en el anfitrión, motores de copia asíncronos"
+        }
+      },
+      {
+        "actor": "Ingeniero de despliegue en un solo nodo, laboratorio de IA con GPU limitadas",
+        "job": "Montar y evaluar una configuración de servicio del checkpoint completo en un nodo de ocho tarjetas, y publicar después la configuración, las cifras de rendimiento y los pasos de reproducción.",
+        "outcome": "Una receta pública y reproducible que sirva los 896 expertos con la precisión publicada dentro de 640 GB de memoria de acelerador.",
+        "motivation": "No pueden alquilar dieciséis nodos y tienen que optimizar contra el único nodo y la DRAM de anfitrión que realmente tienen.",
+        "task": {
+          "who": "Ingenieros de despliegue y evaluación de inferencia",
+          "what": "Evaluar y publicar una receta de servicio de pesos completos en ocho tarjetas",
+          "where": "Repositorio público, ficha en el hub de modelos y blog técnico",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Su propia restricción es un nodo, no dieciséis",
+          "how": "Imagen Docker, archivos de configuración, mediciones publicadas de tokens por segundo"
+        }
+      }
+    ],
+    "prediction.96b1b2cb6ad4924f": [
+      {
+        "actor": "Responsable de cadena de suministro de componentes y compras de memoria, startup de silicio de inferencia con ASIC de transformer",
+        "job": "Negociar asignación y precios de HBM plurianuales para cubrir la subida de Sohu desde un laboratorio de 10 MW hasta la escala de gigavatio en 2027.",
+        "outcome": "Un contrato de suministro de HBM firmado o una reserva de capacidad, divulgable aparte de la participación accionarial del proveedor de memoria en la ronda.",
+        "motivation": "La producción de HBM está comprometida antes de fabricarse, y los racks ya vendidos contra contratos firmados no pueden salir sin pilas aseguradas.",
+        "task": {
+          "who": "Cadena de suministro y aprovisionamiento estratégico junto a finanzas",
+          "what": "Negociar términos plurianuales de asignación y precio de HBM",
+          "where": "Negociación de contratos con proveedores y proceso de cualificación de componentes",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "La subida a escala de gigavatio en 2027 necesita reservar asignación pronto",
+          "how": "Términos take-or-pay de largo plazo, compromisos de volumen, pago anticipado"
+        }
+      },
+      {
+        "actor": "Responsable de cuentas estratégicas y desarrollo de negocio de memoria a medida, proveedor de memoria HBM",
+        "job": "Convertir una participación accionarial minoritaria en una startup de silicio de inferencia en una cuenta comercial con nombre, con volúmenes comprometidos y términos anunciables.",
+        "outcome": "Un acuerdo divulgado de suministro, reserva o desarrollo conjunto, declarado en los materiales propios del proveedor o en un anuncio conjunto.",
+        "motivation": "Una opción en el accionariado solo paga cuando se ejerce como ingresos, y nombrar una cuenta de ASIC que escala rápido demuestra alcance más allá de los compradores establecidos.",
+        "task": {
+          "who": "Equipo de cuentas estratégicas junto a desarrollo corporativo",
+          "what": "Estructurar y firmar un acuerdo de suministro de memoria con nombre",
+          "where": "Planificación de cuentas de cliente y proceso de aprobación de contratos",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "La opcionalidad accionarial solo se convierte en ingresos a través de contratos",
+          "how": "Términos de reserva de capacidad, programa de HBM a medida, nota de prensa conjunta"
+        }
+      },
+      {
+        "actor": "Arquitecto de silicio del sistema de memoria, startup de silicio de inferencia con ASIC de transformer",
+        "job": "Coespecificar el sistema de memoria de clúster que fusiona HBM y SRAM contra la hoja de ruta de pilas del proveedor, de modo que el Sohu de próxima generación dependa de piezas con nombre.",
+        "outcome": "Un programa de desarrollo conjunto que cubra la integración de pilas HBM, divulgado como colaboración de ingeniería y no como inversión.",
+        "motivation": "El diferencial del producto es el sistema de memoria, así que la hoja de ruta del proveedor está dentro del diseño y no al lado.",
+        "task": {
+          "who": "Arquitectura del subsistema de memoria e ingeniería de encapsulado",
+          "what": "Codefinir la interfaz de las pilas HBM para el Sohu de próxima generación",
+          "where": "Revisiones conjuntas de ingeniería con el proveedor de memoria",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "El diseño fusionado de HBM y SRAM ata la hoja de ruta del proveedor al producto",
+          "how": "Especificación de base-die a medida, codiseño de encapsulado, vehículos de prueba compartidos"
+        }
+      },
+      {
+        "actor": "Responsable de planificación de capacidad de HBM y asignación de fábrica, proveedor de memoria",
+        "job": "Encajar una cuenta nueva de ASIC ajena a los actores establecidos en unos planes de producción de HBM ya comprometidos antes de fabricar para los arranques de obleas de 2027.",
+        "outcome": "Capacidad de HBM de 2027 reservada y asignada a la cuenta, la base de volumen sobre la que se apoya cualquier acuerdo anunciado de suministro o reserva.",
+        "motivation": "La asignación que se decide ahora fija la mezcla de ingresos de 2027, y diversificar más allá de los compradores de GPU establecidos cubre una base de clientes concentrada.",
+        "task": {
+          "who": "Planificación de capacidad junto a operaciones de ventas y fabricación",
+          "what": "Reservar producción de HBM de 2027 para la cuenta nueva",
+          "where": "Ciclo anual de asignación de capacidad y planificación de demanda",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Un acuerdo con nombre necesita volumen comprometido detrás",
+          "how": "Revisión de la previsión de demanda, compromisos de arranque de obleas, reserva de capacidad de encapsulado"
+        }
+      },
+      {
+        "actor": "Responsable de compras de infraestructura de IA, comprador de capacidad de inferencia a gran escala",
+        "job": "Negociar términos de entrega y de garantía de suministro para pedidos de racks hechos contra silicio de inferencia que todavía no se ha entregado.",
+        "outcome": "Condiciones contractuales que exijan un acuerdo de suministro de memoria con nombre y divulgable que el comprador pueda señalar antes de comprometer más volumen.",
+        "motivation": "Hay más de mil millones de dólares firmados contra racks no entregados, y una línea en el accionariado no es una garantía de suministro.",
+        "task": {
+          "who": "Compras de infraestructura junto a la revisión de riesgo de suministro y legal",
+          "what": "Exigir en los términos de compra una garantía de suministro de memoria con nombre",
+          "where": "Negociación de contratos con proveedores y diligencia sobre riesgo de suministro",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Los racks no entregados llevan un riesgo de componentes que absorbe el comprador",
+          "how": "Hitos de entrega, cláusulas de continuidad de suministro, requisitos de segunda fuente"
+        }
+      },
+      {
+        "actor": "Responsable de comunicación corporativa y divulgación, startup de silicio de inferencia con ASIC de transformer",
+        "job": "Decidir qué publicar sobre el aprovisionamiento de memoria mientras clientes, inversores y mercado presionan por pruebas detrás de la afirmación de escala de gigavatio.",
+        "outcome": "Un anuncio conjunto o materiales de la empresa que nombren el acuerdo de memoria como contrato de suministro, reserva o codesarrollo.",
+        "motivation": "Vender por adelantado contra racks no entregados exige una prueba creíble de suministro, que una relación de aprovisionamiento sin anunciar no puede dar.",
+        "task": {
+          "who": "Comunicación junto a asesoría jurídica y dirección ejecutiva",
+          "what": "Redactar y aprobar un anuncio conjunto de asociación en memoria",
+          "where": "Aprobación de la nota de prensa y revisión de la comunicación con el socio",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "La divulgación convierte una relación discreta en una garantía visible para el comprador",
+          "how": "Nota de prensa conjunta, sesiones informativas con clientes, materiales para inversores"
+        }
+      }
+    ],
+    "prediction.b177dc0150808a3d": [
+      {
+        "actor": "Responsable de políticas de confianza y seguridad, proveedor de modelos de frontera de propósito general",
+        "job": "Redactar una excepción publicada en la política de uso que permita a los equipos de respuesta a incidentes con identidad verificada enviar malware, cadenas de exploits y registros con cargas útiles.",
+        "outcome": "Documentación pública que nombre un programa de defensores al que inscribirse, su listón de elegibilidad y los rechazos de ciberseguridad levantados para el tráfico inscrito.",
+        "motivation": "La buena voluntad caso por caso escala mal y deja al proveedor con la culpa cada vez que los filtros de rechazo atan a los equipos de respuesta de la víctima en lugar de al intruso.",
+        "task": {
+          "who": "Equipo de políticas y directrices de uso junto a la asesoría jurídica",
+          "what": "Redactar una exención publicada para defensores en la política de uso de ciberseguridad",
+          "where": "Políticas de uso, especificación del modelo y términos de la API",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Las excepciones por cliente sin documentar no escalan",
+          "how": "Criterios de elegibilidad por escrito, declaraciones responsables, términos de revocación y auditoría"
+        }
+      },
+      {
+        "actor": "Product manager de verificación de identidad e inscripción, plataforma de API de modelos de frontera",
+        "job": "Construir la solicitud, las comprobaciones de identidad de la organización y la concesión de derechos de uso que sitúan a los equipos de respuesta verificados en un nivel de defensor antes de que haya un incidente.",
+        "outcome": "Un carril de inscripción autoservicio que un equipo de respuesta pueda encontrar y solicitar, y que conceda un derecho de uso a nivel de cuenta capaz de sobrevivir a una auditoría.",
+        "motivation": "Una lista blanca extendida discretamente a unos pocos clientes con nombre no responde a los equipos que llegan en mitad de un incidente sin ningún sitio donde solicitarlo.",
+        "task": {
+          "who": "Producto de la plataforma de API junto a ingeniería de identidad y cumplimiento",
+          "what": "Entregar el flujo de inscripción de equipos de respuesta verificados y de derechos de uso de la cuenta",
+          "where": "Consola de desarrollador, ajustes de la organización y sistema de aprovisionamiento de cuentas",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Un carril localizable es mejor que un escalado en mitad del incidente",
+          "how": "Proveedor de verificación de identidad empresarial, derechos de uso a nivel de organización, declaración firmada del equipo de respuesta"
+        }
+      },
+      {
+        "actor": "Responsable de ingeniería de sistemas de seguridad, políticas de modelo e infraestructura de rechazos",
+        "job": "Rehacer los rechazos de ciberseguridad para que se activen por el derecho de uso de la cuenta que llama y no solo por el contenido de la carga útil, sin debilitar el comportamiento por defecto.",
+        "outcome": "Una vía de rechazo consciente de los derechos de uso que acepte malware y cadenas de exploits de las cuentas inscritas y mantenga la política por defecto para todos los demás.",
+        "motivation": "Los filtros que se activan por el contenido atan al equipo de respuesta y no al intruso, así que la exención tiene que vivir en la ruta de servicio.",
+        "task": {
+          "who": "Equipos de ingeniería del clasificador de seguridad y del servicio de inferencia",
+          "what": "Condicionar los rechazos de ciberseguridad al derecho de uso de la cuenta",
+          "where": "Clasificadores de moderación y capa de autorización de peticiones de la API",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Los filtros activados por el contenido bloquean a los defensores, no a los atacantes",
+          "how": "Marcas de política por clave, derechos de uso acotados, suites de evaluación diferencial"
+        }
+      },
+      {
+        "actor": "Enlace de inteligencia de ciberamenazas y red team, proveedor de modelos de frontera",
+        "job": "Fijar el listón de verificación, la vigilancia de abusos y las reglas de revocación que hagan una exención de envío de cargas útiles lo bastante difícil de obtener como para sobrevivir a una revisión.",
+        "outcome": "Un piloto verificado con equipos de respuesta a incidentes con nombre, más controles de abuso publicados que permitan lanzar el programa en lugar de que se atasque en revisión.",
+        "motivation": "Un carril de inscripción es también el carril de un atacante, y un ajuste de configuración era todo lo que separaba un arnés de evaluación de una intrusión.",
+        "task": {
+          "who": "Inteligencia de amenazas junto al red team y al equipo de sanciones",
+          "what": "Definir el listón de verificación y los controles de abuso para la inscripción",
+          "where": "Programa piloto con socios verificados de respuesta a incidentes y CERT",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "La excepción debe ser difícil de obtener",
+          "how": "Revisión adversaria, telemetría de uso, disparadores de revocación, referencias de socios"
+        }
+      },
+      {
+        "actor": "Responsable de respuesta a incidentes, operaciones de seguridad de la plataforma vulnerada",
+        "job": "Publicar un análisis forense que señale los rechazos de las API alojadas como el bloqueo, y plantear ante los proveedores de API la exención para el envío de cargas útiles como requisito.",
+        "outcome": "Una demanda con nombre y documentada, procedente de defensores creíbles, que un proveedor pueda señalar al justificar un carril de exención con inscripción.",
+        "motivation": "Una víctima que no puede apuntar las mejores herramientas a sus propios artefactos divulga más tarde y de forma más vaga, y lo paga en público.",
+        "task": {
+          "who": "Funciones de operaciones de seguridad, análisis forense y gestión de proveedores",
+          "what": "Plantear a los proveedores de API alojadas el requisito de exención para el envío de cargas útiles",
+          "where": "Informes públicos de incidentes y revisión de contratos de API empresariales",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Los rechazos empujaron el análisis forense hacia modelos de pesos abiertos",
+          "how": "Herramientas de respaldo de pesos abiertos, términos contractuales, informes públicos posteriores al incidente"
+        }
+      }
+    ]
+  }
+}
