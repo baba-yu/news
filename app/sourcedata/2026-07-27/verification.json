@@ -1,0 +1,141 @@
+{
+  "date": "2026-07-27",
+  "verifications": [
+    {
+      "topic": "LLM Workflow",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No agent / workflow / pipeline-orchestration platform shipped anything today: nothing in the n8n / LangFlow / Flowise / Temporal / Inngest / Prefect / AutoGen Studio class. Considered and rejected: LangChain and Cognition appear only as names inside the Open Secure AI Alliance's thirty-seven-partner roster, which is membership context rather than a product or release state change, and the AGNTCon / MCPCon listing naming the Goose agent framework and the AGENTS.md specification is event-ness carried by the events bullet."
+    },
+    {
+      "topic": "Multi-profiling for Local LLM (e.g. Multica)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "News-driven-only topic per the coverage rules, and no trigger fired. The literal string 'Multica' is absent from every category, body and citation. Considered and rejected: the Unsloth bullet's persisted per-machine backend preference (UNSLOTH_LLAMA_BACKEND, --llama-backend) is installer configuration for one machine's GPU, not multi-profile serving of several local model profiles."
+    },
+    {
+      "topic": "Agent Harness (OpenClaw, NemoClaw, Hermes Agents, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "NVIDIA convenes a thirty-seven-name Open Secure AI Alliance around the Hugging Face intrusion and contributes an open agent-governance framework, with OpenAI, Google and Anthropic absent from the roster"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Carried as a secondary but substantive facet of the alliance bullet rather than as its centre of gravity, which is AI Security. What makes it covered rather than ambiguous is that a concrete harness-ecosystem artifact actually shipped today: NVIDIA contributed the NVIDIA Labs Object-Oriented Agent, an open-source framework now on GitHub whose stated purpose is letting an agent harness integrate with a model so behaviour is testable, traceable, auditable and governable, and Microsoft contributed MDASH, a multi-model agentic scanning harness. OpenClaw — one of the three harnesses named in the topic string itself — is an inaugural partner alongside Cognition and LangChain, and the declared scope explicitly includes secure coding workflows. The rubric extends this row to the surrounding ecosystem (it names the MCP-server ecosystem), so harness-governance infrastructure counts."
+    },
+    {
+      "topic": "Platform for Local LLM (vLLM, SGLang, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Moonshot publishes the Kimi K3 weights: 2.8 trillion parameters, 1.56 TB on disk, and a bespoke license that gates commercial use by revenue rather than by field"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Clears the engine-state-change bar that July 26 set and July 26 failed. This is not a publisher's compatibility claim: vLLM shipped day-of serving support with a Kimi Delta Attention prefix-caching implementation contributed upstream by the Kimi team, published deployment floors (a single 8-way B300 node or 16 B200s), measured 118 tokens per second per user at TP16 on GB300 NVL72 at batch size one rising to 370 with its DSpark speculative decoder for a 3.14x gain, and launch support for AMD MI355X alongside Hopper and Blackwell — all sourced to a first-party vllm.ai post carried as its own citation."
+    },
+    {
+      "topic": "Ecosystems for Local LLM Embedded System (Foundry Local, etc.)",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "Unsloth's installer gains a Vulkan llama.cpp path for AMD cards that ROCm leaves behind, automatic on Windows and opt-in elsewhere"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Borderline. No edge runtime or NPU SDK announced anything of its own — nothing from Foundry Local, Ollama, LM Studio, llama.cpp upstream, MLX, OpenVINO or ExecuTorch — so there is no runtime-vendor state change to point at. But the Unsloth change is materially on-device plumbing: it selects between a Vulkan and a HIP llama.cpp backend for local AMD hardware, names the RX 480 as a card left below the HIP minimum, special-cases gfx1103 (the Phoenix / 780M integrated part), and respects ROCm family labels — squarely the on-device-inference and ROCm-edge territory the rubric describes. Two things hold it short of covered: the shipping party is a fine-tuning toolkit rather than an edge runtime, and the change is on main only, with the newest installable tag still v0.1.501-beta from July 20."
+    },
+    {
+      "topic": "Local LLM Models",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Moonshot publishes the Kimi K3 weights: 2.8 trillion parameters, 1.56 TB on disk, and a bespoke license that gates commercial use by revenue rather than by field"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Squarely covered. An open-weight release published to Hugging Face with a full model card: 2.8-trillion-parameter mixture-of-experts, 104 billion active per token, 16 of 896 experts routed, 93 layers split 69 Kimi Delta Attention to 24 gated-MLA, a 1,048,576-token context window, native vision through a 401-million-parameter MoonViT-V2 encoder, and MXFP4 weights with MXFP8 activations from quantization-aware training rather than post-hoc rounding. The licence caveat is carried honestly rather than elided — a bespoke Kimi K3 License tagged 'other' on the Hub, not Apache-2.0 or MIT, with Moonshot's own framing quoted as open weight, not open source."
+    },
+    {
+      "topic": "Local LLM Optimization, Fine-tuning (Unsloth — every run)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Unsloth's installer gains a Vulkan llama.cpp path for AMD cards that ROCm leaves behind, automatic on Windows and opt-in elsewhere"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "MANDATORY constant-coverage topic, and today it is genuinely covered by the Unsloth project itself rather than by a sibling brand or an adjacent project — the failure mode a prior run correctly rejected when a 1-bit quantization release was scored to Local LLM Models instead. The bullet's subject is unslothai/unsloth's own repository: pull request 7373 merged to main at 13:57 UTC teaching the installer to select a Vulkan llama.cpp backend instead of HIP for AMD cards below the HIP prebuilt minimum, with three distinct behaviours (explicit opt-in via UNSLOTH_LLAMA_BACKEND=vulkan, UNSLOTH_FORCE_VULKAN=1 or --llama-backend vulkan with the preference persisted across updates; automatic Vulkan fallback on Windows AMD hosts whose architecture is identifiable but absent from the HIP prebuilt; HIP retained as the default on mixed-card machines), twenty routing tests, and a same-day companion change (pull request 7482) stopping the Hub metadata probe under local_files_only on transformers 4.57.2 through 5.5.4. The release-status caveat is stated rather than glossed: neither change is installable, the newest tag is still v0.1.501-beta from July 20, and both currently exist only on main."
+    },
+    {
+      "topic": "Ecosystems for LLM on PaaS (AWS Bedrock, Azure AI Foundry, etc.)",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "Moonshot publishes the Kimi K3 weights: 2.8 trillion parameters, 1.56 TB on disk, and a bespoke license that gates commercial use by revenue rather than by field"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Borderline, and stronger than July 26's rejection but not decisively so. OpenRouter is named in the rubric's own list for this row, the fact is same-day rather than background (unlike July 26, where the hosted KAT-Coder-Pro was earlier-in-July context), it states a concrete price of 3 dollars per million input tokens and 15 per million output, and it carries its own openrouter.ai citation. What holds it short of covered is scale and subject: it is a single closing clause serving readers without a rack, with no platform-side announcement, no Bedrock / Azure AI Foundry / Vertex / Together / Fireworks activity anywhere else in the section, and a bullet whose subject throughout is the weight release and its licence."
+    },
+    {
+      "topic": "AI Security",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "NVIDIA convenes a thirty-seven-name Open Secure AI Alliance around the Hugging Face intrusion and contributes an open agent-governance framework, with OpenAI, Google and Anthropic absent from the roster"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Heavily covered and the bullet's own centre of gravity. The Open Secure AI Alliance's declared scope is the whole agent stack — identity, permissions, isolation, guardrails, logs, model formats, multi-model scanning and secure coding workflows — built on the Linux Foundation's Akrites initiative and OpenSSF, with five security projects contributed at formation (NVIDIA's NOOA, Hugging Face's Safetensors, HPE's SPIFFE and SPIRE, IBM and Red Hat's Lightwell for signed patch distribution, Microsoft's MDASH). The incident-response substance is concrete: during the Hugging Face intrusion, closed models could not distinguish attacker from defender and blocked the forensic work, so Hugging Face ran open-weight GLM 5.2 on its own infrastructure to reconstruct more than 17,000 recorded actions and contain it. Agent identity, agent takeover and supply-chain integrity are all live in the rubric's generic-concept list."
+    },
+    {
+      "topic": "CVE update on score ≥ 8.0",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No CVE identifier and no CVSS score appears anywhere in today's categories, bodies or citations — a cleaner call than July 26, where the Redis RESTORE story was the right shape but carried an explicit no-CVE / no-CVSS disclaimer and was scored ambiguous. The alliance bullet is intrusion response and industry governance, naming no scored vulnerability; the Hugging Face incident is discussed as forensics and containment rather than as a disclosed and scored flaw."
+    },
+    {
+      "topic": "Hardware",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "NVIDIA is reported to be guaranteeing a quarter-trillion dollars of OpenAI's Ohio lease, three days after a 500-billion-dollar letter of intent with SK Group, and the market marked the guarantor down about 5%",
+        "Moonshot publishes the Kimi K3 weights: 2.8 trillion parameters, 1.56 TB on disk, and a bespoke license that gates commercial use by revenue rather than by field"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Data-centre capacity, build and expansion plus HBM are all explicit generic concepts on this row, and the financing bullet is dense with them: a ten-gigawatt campus at Piketon on the former Portsmouth Gaseous Diffusion Plant site with an 800-megawatt first phase targeting 2028, a separate chip-financing track of as much as 350 billion dollars, a two-gigawatt SK Telecom AI factory as the first build on NVIDIA's DSX platform with Vera Rubin accelerators and HBM4 targeted for 2027, long-term AI-memory supply from SK hynix, and memory-market weakness after a large Shanghai listing by a Chinese memory manufacturer. The Kimi K3 bullet adds a secondary silicon datum in its serving matrix (8-way B300, 16 B200s, MI355X at launch alongside Hopper and Blackwell)."
+    },
+    {
+      "topic": "Physical AI",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No robotics or embodied-AI news: no humanoid, quadruped, VLA / vision-language-action policy, teleoperation, manipulation, end-effector or fleet-deployment item from any vendor. The two robotics-adjacent strings are both event-ness carried by the events bullet — 'physical AI' as one of the AI Infra Summit's five technical tracks, and IEEE-RAS Humanoids in Santa Clara December 6-9 — and a conference track name is not a state change. Same call as July 26."
+    },
+    {
+      "topic": "LLM-related research and papers",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No paper is any bullet's subject and no arXiv or preprint citation appears anywhere today — a step down from July 26, which was scored ambiguous precisely because arXiv 2607.05471 was cited. Considered and rejected: the Kimi K3 model card's self-reported evaluation table at maximum reasoning effort (93.5 GPQA Diamond, 88.3 Terminal-Bench 2.1, 67.5 DeepSWE) and its architecture disclosure (Kimi Delta Attention, gated MLA, MoonViT-V2, quantization-aware MXFP4 training) are release documentation rather than a reported empirical finding with method and results as the subject, and no technical report is cited behind them. The AISec 2026 paper cycle in the events bullet is conference logistics."
+    },
+    {
+      "topic": "Stock prices and corporate activity",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "NVIDIA is reported to be guaranteeing a quarter-trillion dollars of OpenAI's Ohio lease, three days after a 500-billion-dollar letter of intent with SK Group, and the market marked the guarantor down about 5%"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Squarely covered on both halves of the row. Corporate activity: reported talks for NVIDIA to guarantee roughly 250 billion dollars of financing behind OpenAI's Ohio lease, a separate chip-financing negotiation of up to 350 billion, a Friday letter of intent with SK Group valued above 500 billion, and balance-sheet context (disclosed guarantee exposure of 3.5 billion dollars with 712 million in escrow, 62.6 billion in cash at the January fiscal year end) against OpenAI's lack of an investment-grade rating. Prices: NVIDIA closing roughly 5% lower, AMD about 5%, Teradyne about 4%, the VanEck Semiconductor ETF off more than 2%, Sandisk down about 11%, with the Dow up 0.51%, the Nasdaq down 0.18% and the S&P 500 flat. Sourcing discipline is good — Reuters could not independently confirm the WSJ report, terms are unsettled, and neither company commented, all of which the bullet states."
+    },
+    {
+      "topic": "Bay Area / SV AI meet-up events",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Bay Area / SV AI meet-up events"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Carry-forward fully satisfied — diffed entry by entry against 2026-07-26's events bullet, and every event on yesterday's list survives into today's with no drops. Nothing was scheduled for July 26 or 27, so nothing was eligible to be retired, and nothing was. Three net additions sit on top of the floor: AGNTCon and MCPCon North America in San Jose October 22-23, Newcomer's Machine Earning AI Summit in San Francisco September 29, and the invite-only Cerebral Valley AI Summit in San Francisco November 12; the AI Tinkerers global-calendar survey is also new detail. All three mandatory sub-tracks carry their nearest still-upcoming item: AI-chip / hardware (Hot Chips early-rate cutoff July 31, symposium August 23-25 at Stanford, FMS August 4-6, AI Infra Summit September 15-17), AI-security (Black Hat USA August 1-6 with its August 4 AI Summit, DEF CON 34 AI Village August 6-9, SecurityWeek AI Risk Summit at Half Moon Bay August 11-12, Zenity Tokyo / London / New York, SANS, OWASP, AISec), and mainstream dev/data (Ai4 August 4-6, Ray Summit August 24-26 co-locating the vLLM Conference, OpenAI DevDay, GitHub Universe, PyTorch Conference). No past event is used as the bullet's centre: the AI Tinkerers San Francisco August 9 listing is correctly retired in place as an erratum rather than carried, and DEF CON's postponed Bahrain edition is reported as a postponement. Day-count and weekday arithmetic verified against Monday 2026-07-27 — Hot Chips 'four days out' to Friday July 31, the SecurityWeek rate step 'eleven days out' to Friday August 7, Black Hat's AI Summit on Tuesday August 4, AI Tinkerers Palo Alto on Tuesday August 18, and August 9 falling on a Sunday — all correct."
+    },
+    {
+      "topic": "Other standing-out topics",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Moonshot publishes the Kimi K3 weights: 2.8 trillion parameters, 1.56 TB on disk, and a bespoke license that gates commercial use by revenue rather than by field",
+        "NVIDIA convenes a thirty-seven-name Open Secure AI Alliance around the Hugging Face intrusion and contributes an open agent-governance framework, with OpenAI, Google and Anthropic absent from the roster"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Two genuine standing-out threads that exceed the enumerated rows they sit in. First, an open-weight licensing regime that gates commercial use by revenue rather than by field of use: a Model-as-a-Service operator whose revenue with affiliates passes 20 million dollars over any consecutive twelve months must sign a separate agreement before using the model at all, and any commercial product above 100 million monthly active users or 20 million dollars of monthly revenue must display Kimi K3 prominently in its interface, with internal use and access through Moonshot's own products or certified inference partners carved out — a licence-design story, not a model-release story. Second, industry-structure politics: a thirty-seven-name alliance whose roster reads as much by its absences (OpenAI, Google and Anthropic) as by its members, with NVIDIA arguing operationally rather than ideologically that defenders lose most when they cannot inspect, adapt and run advanced models on their own hardware."
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "date": "2026-07-27",
+  "sections": [
+    {
+      "category": "Moonshot publica los pesos de Kimi K3: 2,8 billones de parámetros, 1,56 TB en disco y una licencia a medida que condiciona el uso comercial por facturación y no por ámbito de aplicación",
+      "bullets": [
+        {
+          "body": "Moonshot AI subió los pesos de Kimi K3 a Hugging Face el lunes, y lo interesante acabó estando en el papeleo y no en la descarga. La ficha del modelo describe una mezcla de expertos de 2,8 billones de parámetros con 104.000 millones de parámetros activos por token, 16 de 896 expertos seleccionados por token y 93 capas repartidas entre 69 bloques de Kimi Delta Attention y 24 bloques gated-MLA, con una ventana de contexto de 1.048.576 tokens y visión nativa mediante un codificador MoonViT-V2 de 401 millones de parámetros; los pesos se distribuyen en MXFP4 con activaciones MXFP8 obtenidas mediante entrenamiento consciente de la cuantización y no por redondeo posterior. La tabla de evaluación de la propia ficha, con el máximo esfuerzo de razonamiento, recoge un 93,5 en GPQA Diamond, un 88,3 en Terminal-Bench 2.1 y un 67,5 en DeepSWE. Lo que no es esta publicación es Apache-2.0 ni MIT. El repositorio lleva una Kimi K3 License a medida, etiquetada en Hugging Face simplemente como other, cuya concesión de derechos tiene por lo demás forma de MIT (ejecutar, desplegar, ajustar, modificar, distribuir, vender) pero añade dos barreras comerciales. Cualquier operador de Model-as-a-Service cuya facturación, sumada la de sus filiales, supere los 20 millones de dólares en cualquier periodo de doce meses consecutivos tiene que firmar un acuerdo aparte con Moonshot antes siquiera de usar el modelo; cualquier producto comercial que supere los 100 millones de usuarios activos mensuales o los 20 millones de dólares de facturación mensual tiene que mostrar Kimi K3 de forma destacada en su interfaz de usuario. El uso interno y el acceso comprado a través de los propios productos de Moonshot o de sus socios de inferencia certificados quedan excluidos de ambas. La fórmula que emplea la propia Moonshot es pesos abiertos, no código abierto. El artefacto físico son 1,56 TB repartidos en 96 fragmentos safetensors, y vLLM, que publicó soporte de servicio ese mismo día con una implementación de caché de prefijos de Kimi Delta Attention aportada por el equipo de Kimi, sitúa el mínimo en un solo nodo B300 de ocho vías, con 16 B200 también soportados, y mide 111 tokens por segundo y usuario en TP8 y 118 en TP16 sobre GB300 NVL72 con tamaño de lote uno, cifras que suben a 331 y 370 respectivamente con su decodificador especulativo DSpark, unas tres veces más; el MI355X de AMD está soportado desde el lanzamiento junto a Hopper y Blackwell. Para quien no tenga un rack, OpenRouter ofrece el modelo alojado a 3 dólares por millón de tokens de entrada y 15 dólares por millón de salida.",
+          "citations": [
+            {
+              "label": "Moonshot AI - Kimi K3 model card",
+              "url": "https://huggingface.co/moonshotai/Kimi-K3"
+            },
+            {
+              "label": "Kimi K3 License text",
+              "url": "https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE"
+            },
+            {
+              "label": "Kimi K3 repository file listing - 1.56 TB across 96 shards",
+              "url": "https://huggingface.co/moonshotai/Kimi-K3/tree/main"
+            },
+            {
+              "label": "vLLM - Kimi K3 serving support at launch",
+              "url": "https://vllm.ai/blog/2026-07-27-k3"
+            },
+            {
+              "label": "OpenRouter - Kimi K3 hosted pricing",
+              "url": "https://openrouter.ai/moonshotai/kimi-k3"
+            },
+            {
+              "label": "Simon Willison on the Kimi K3 license terms",
+              "url": "https://simonwillison.net/2026/Jul/27/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "NVIDIA convoca una Open Secure AI Alliance de treinta y siete nombres en torno a la intrusión de Hugging Face y aporta un marco abierto de gobernanza de agentes, con OpenAI, Google y Anthropic ausentes de la lista",
+      "bullets": [
+        {
+          "body": "NVIDIA ha convertido la intrusión de Hugging Face en el argumento fundacional de un nuevo organismo sectorial. La Open Secure AI Alliance se anunció el lunes con treinta y siete socios fundadores nombrados, entre ellos Microsoft, IBM, Red Hat, Cisco, Cloudflare, CrowdStrike, Palo Alto Networks, Dell Technologies, HPE, Databricks, Snowflake, Salesforce, SAP, ServiceNow, Siemens, Palantir, Capital One, DoorDash, NAVER, SK Telecom, Synopsys, Cadence, Elastic, LangChain, Cognition, Reflection AI, Nous Research, Thinking Machines Lab, OpenClaw, la Linux Foundation y la propia Hugging Face como parte que sufrió la brecha. El alcance declarado es toda la pila de agentes: identidad, permisos, aislamiento, salvaguardas, registros, formatos de modelo, escaneo multimodelo y flujos de trabajo de programación segura, construidos sobre el trabajo que ya corre en la iniciativa Akrites de la Linux Foundation y en la comunidad OpenSSF. En la constitución se pusieron seis proyectos sobre la mesa. NVIDIA aportó el NVIDIA Labs Object-Oriented Agent (NOOA), un marco de investigación de código abierto ya disponible en GitHub que permite integrar un arnés de agente con un modelo para que su comportamiento resulte más fácil de probar, rastrear, auditar y gobernar. Hugging Face aportó Safetensors; HPE, SPIFFE y SPIRE; IBM y Red Hat, Lightwell para la distribución de parches firmados; Microsoft, MDASH, un arnés de escaneo agéntico multimodelo; y SpaceXAI liberó como código abierto Grok Build, un agente de programación para terminal, junto con un plan declarado de abrir los pesos de la línea Grok. La justificación declarada por NVIDIA es operativa y no ideológica: durante el incidente de Hugging Face, los modelos cerrados no supieron distinguir a un atacante de un defensor y bloquearon el trabajo forense, así que Hugging Face ejecutó el modelo de pesos abiertos GLM 5.2 en su propia infraestructura para reconstruir más de 17.000 acciones registradas y contener la intrusión. El planteamiento de NVIDIA es que el riesgo de uso indebido es real en los modelos abiertos pero no exclusivo de ellos, y que quienes más pierden son los defensores cuando no pueden inspeccionar, adaptar y ejecutar modelos avanzados en su propio hardware. Leer la lista buscando ausencias informa tanto como leerla buscando nombres: OpenAI, Google y Anthropic no figuran en ella.",
+          "citations": [
+            {
+              "label": "NVIDIA - Open Secure AI Alliance announcement and inaugural partner list",
+              "url": "https://blogs.nvidia.com/blog/open-secure-ai-alliance/"
+            },
+            {
+              "label": "Help Net Security on the alliance and its stated rationale",
+              "url": "https://www.helpnetsecurity.com/2026/07/27/nvidia-open-secure-ai-alliance/"
+            },
+            {
+              "label": "The Hacker News - thirty-seven members and the open-sourced NOOA framework",
+              "url": "https://thehackernews.com/2026/07/nvidia-forms-37-member-open-secure-ai.html"
+            },
+            {
+              "label": "Elastic - inaugural-member note",
+              "url": "https://www.elastic.co/blog/elastic-nvidia-inaugural-partner-osaia"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Se informa de que NVIDIA negocia garantizar un cuarto de billón de dólares del alquiler de OpenAI en Ohio, tres días después de una carta de intenciones de 500.000 millones de dólares con SK Group, y el mercado castigó en torno a un 5% al que sería el garante",
+      "bullets": [
+        {
+          "body": "The Wall Street Journal informó de que NVIDIA negocia garantizar unos 250.000 millones de dólares de la financiación que hay detrás del alquiler por parte de OpenAI de un campus de centros de datos de diez gigavatios en Piketon (Ohio), en el antiguo emplazamiento de la Portsmouth Gaseous Diffusion Plant, desarrollado por SB Energy, respaldada por SoftBank, con una negociación aparte que cubre hasta 350.000 millones de dólares para financiar los chips de NVIDIA que lo llenarían. La primera fase son 800 megavatios con horizonte en 2028. El motivo por el que se pide a un fabricante de chips que responda del alquiler de su propio cliente es concreto y poco halagüeño: OpenAI no tiene una calificación crediticia de grado de inversión, así que aquello contra lo que prestarían los prestamistas sería el balance de NVIDIA y no el de OpenAI. Reuters no pudo confirmar la información de forma independiente, las condiciones no están cerradas y el precio, la duración, las garantías y la devolución siguen todos sin revelarse; ninguna de las dos empresas hizo comentarios. Para calibrar la escala frente a lo que NVIDIA ya tiene en libros, su exposición declarada por avales se cifra en 3.500 millones de dólares con 712 millones en depósito de garantía, y cerró su ejercicio fiscal de enero con 62.600 millones en caja. La información llega tres días después de que NVIDIA y SK Group firmaran el viernes una carta de intenciones para una alianza valorada en más de 500.000 millones de dólares, que cubre una fábrica de IA de dos gigavatios de SK Telecom y el suministro a largo plazo de memoria para IA con SK hynix; sería la primera fábrica construida sobre la plataforma DSX de NVIDIA, con aceleradores Vera Rubin y HBM4, y apunta a 2027. El veredicto del mercado llegó en la misma sesión: NVIDIA cerró en torno a un 5% abajo, AMD alrededor de un 5% y Teradyne cerca de un 4%, el ETF VanEck Semiconductor perdió más de un 2% y Sandisk cayó cerca de un 11% por la debilidad de la memoria tras una gran salida a bolsa en Shanghái de un fabricante chino de memoria. Un desplome de más del 8% en el crudo impulsó al Dow un 0,51%; el Nasdaq cerró un 0,18% abajo y el S&P 500 quedó plano.",
+          "citations": [
+            {
+              "label": "Reuters via Investing.com - NVIDIA in talks to guarantee 250 billion dollars of OpenAI data-centre financing",
+              "url": "https://www.investing.com/news/stock-market-news/nvidia-in-talks-with-openai-to-guarantee-250-billion-financing-for-data-center-wsj-reports-4812926"
+            },
+            {
+              "label": "WinBuzzer - Piketon campus terms, chip-financing track and NVIDIA's disclosed guarantee exposure",
+              "url": "https://winbuzzer.com/2026/07/27/nvidia-weighs-250-billion-backstop-for-openai-ohio-campus-xcxwbn/"
+            },
+            {
+              "label": "NVIDIA Newsroom - SK Group letter of intent",
+              "url": "https://nvidianews.nvidia.com/news/sk-group-and-nvidia-expand-strategic-partnership-across-ai-factories-and-next-generation-memory"
+            },
+            {
+              "label": "Market close for July 27",
+              "url": "https://www.fool.com/coverage/stock-market-today/2026/07/27/stock-market-today-july-27-dow-rises-on-oil-retreat-and-sandisk-plunges-11-on-memory-weakness/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "El instalador de Unsloth suma una vía Vulkan de llama.cpp para las tarjetas AMD que ROCm deja atrás, automática en Windows y opcional en el resto",
+      "bullets": [
+        {
+          "body": "La cobertura de hardware de Unsloth creció el lunes a lo ancho y no hacia arriba. Un cambio fusionado en main a las 13:57 UTC enseña al instalador a recurrir a un backend Vulkan de llama.cpp en lugar de a uno HIP. Hasta ahora el instalador distribuía únicamente compilaciones HIP, así que las piezas AMD más antiguas que quedan por debajo del mínimo de HIP —el cambio nombra la RX 480— recibían una instalación que en realidad no podía ejecutarse. Se mueven tres cosas. Quien quiera puede activarlo de forma explícita con UNSLOTH_LLAMA_BACKEND=vulkan, UNSLOTH_FORCE_VULKAN=1 o el parámetro --llama-backend vulkan, y esa preferencia queda ahora guardada en la configuración entre actualizaciones. En equipos Windows con AMD cuya arquitectura de GPU es identificable pero no está en la compilación HIP, el instalador cambia a Vulkan por su cuenta en vez de entregar una compilación muerta. Y una máquina que tenga a la vez una tarjeta soportada y otra no soportada sigue quedándose en HIP por defecto salvo que se le indique lo contrario. El enrutado respeta las etiquetas de familia de ROCm y trata como caso especial gfx1103, la pieza Phoenix y 780M, con veinte pruebas de enrutado detrás. Un segundo cambio entró el mismo día por la vía sin conexión: las cargas de tokenizador hechas con local_files_only ya no consultan al Hub los metadatos en transformers 4.57.2 hasta 5.5.4, y resuelven en local la instantánea en caché, con el mismo tratamiento en el procesador de visión y en las rutas de guardado. Ninguno de los dos es instalable todavía. La etiqueta más reciente sigue siendo v0.1.501-beta, la versión de soporte para AMD cortada el 20 de julio, así que ambos cambios existen por ahora solo en la rama main.",
+          "citations": [
+            {
+              "label": "Unsloth pull request 7373 - opt-in Vulkan llama.cpp backend and AMD fallback",
+              "url": "https://github.com/unslothai/unsloth/pull/7373"
+            },
+            {
+              "label": "Unsloth pull request 7482 - skip the Hub metadata probe under local_files_only",
+              "url": "https://github.com/unslothai/unsloth/pull/7482"
+            },
+            {
+              "label": "Unsloth v0.1.501-beta release - July 20",
+              "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.501-beta"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Encuentros y eventos de IA en el Área de la Bahía / Silicon Valley",
+      "bullets": [
+        {
+          "body": "El plazo firme más cercano del calendario sigue siendo un cierre de inscripción y no una ponencia inaugural, y ya está a cuatro días: Hot Chips 2026 deja de aplicar la tarifa anticipada a las 11:59 PM PDT del viernes 31 de julio y admite solicitudes de reembolso hasta las 11:59 PM PDT del miércoles 19 de agosto, antes del simposio propiamente dicho, del 23 al 25 de agosto en el Memorial Auditorium de Stanford, cuya jornada de tutoriales del domingo dedica vías a tecnologías de memoria y a RISC-V. El evento de silicio más cercano en el Área de la Bahía, anterior al propio simposio, es FMS: The Future of Memory and Storage, del 4 al 6 de agosto en el Santa Clara Convention Center, donde el panel ejecutivo de IA del escenario principal del jueves lo organiza NVIDIA junto con KIOXIA, Samsung, Supermicro y VAST. El AI Infra Summit ocupa esa misma sala de Santa Clara del 15 al 17 de septiembre, con ponencias inaugurales de Jeff Dean, de Google, Lip-Bu Tan, de Intel, e Ian Buck, de NVIDIA, y cinco vías técnicas dedicadas a centro de datos de IA, cómputo, datos y modelos, movimiento de datos e IA física. Más adelante en la vía de hardware: el Edge AI and Vision Innovation Forum en San José el 16 de septiembre, el OCP Global Summit del 12 al 15 de octubre en San José, el GTC Berlín de NVIDIA del 20 al 22 de octubre y SC26 en Chicago del 15 al 20 de noviembre. El GTC de NVIDIA no vuelve a San José hasta marzo de 2027.\n\nLa vía de seguridad en IA sigue concentrada a principios de agosto. Black Hat USA se celebra del 1 al 6 de agosto en el Mandalay Bay de Las Vegas, con su AI Summit el martes 4 de agosto; DEF CON 34 le sigue del 6 al 9 de agosto en el West Hall del Las Vegas Convention Center, con su AI Village organizando un capture-the-flag contra sistemas agénticos. Lo más cercano a casa: el AI Risk Summit de SecurityWeek ocupa el Ritz-Carlton de Half Moon Bay del 11 al 12 de agosto, y su tarifa de conferencia completa sube de $1.895 a $2.195 después del viernes 7 de agosto, el segundo plazo real de esta lista, a once días. La edición insignia del AI Security Summit aterriza en San Francisco el 15 de octubre, con dos vías, más de 45 sesiones y más de 75 ponentes, y las propuestas de charla siguen abiertas; la misma serie tiene ediciones nórdica y de Sídney previstas para septiembre, con la ciudad nórdica anfitriona aún sin nombrar. El 19.º ACM Workshop on Artificial Intelligence and Security se reúne el 15 de noviembre en La Haya, coubicado con la 33.ª ACM Conference on Computer and Communications Security; su plazo de envío de artículos cerró en firme el 24 de julio, con notificaciones de aceptación el 3 de septiembre y versión final el 16 de septiembre, así que para quien no vaya a enviar nada la única decisión que queda es el viaje. Para reservar con más antelación: la serie AI Agent Security Summit de Zenity añade Tokio el 15 de septiembre, Londres el 8 de octubre y Nueva York el 21 de octubre; SANS celebra un AI Cybersecurity Summit del 2 al 3 de noviembre en Arlington, en formato híbrido, con su bloque de hotel cerrando el 9 de octubre; y OWASP Global AppSec USA aterriza en el Hyatt Regency San Francisco del 5 al 6 de noviembre, con formación desde el 2 de noviembre. Sigue en pie desde principios de semana: DEF CON ha pospuesto su edición de Oriente Medio en Baréin por preocupaciones de seguridad regional, y dice que DEF CON 34 en Las Vegas no se ve afectada.\n\nEn la vía de desarrollo e infraestructura, tres incorporaciones. AGNTCon y MCPCon North America, el evento insignia de la Agentic AI Foundation bajo la Linux Foundation, se celebra del 22 al 23 de octubre en San José, articulado en torno al Model Context Protocol, el marco de agentes Goose y la especificación AGENTS.md; su convocatoria de propuestas cerró el 7 de junio, así que lo único que queda es asistir. El Machine Earning AI Summit de Newcomer es el 29 de septiembre en San Francisco, lo que lo sitúa en el mismo día del calendario que OpenAI DevDay en Fort Mason y la apertura de The AI Conference en el Pier 48. Y el Cerebral Valley AI Summit, solo por invitación, vuelve a San Francisco el 12 de noviembre. En AI Tinkerers la situación no ha mejorado: el calendario global de la organización no lista ahora mismo nada en San Francisco ni en Palo Alto hasta principios de agosto, con Valencia, Manizales, Calgary y Seattle el día 28, seis ciudades más el 29, ocho el 30, Nueva York el 1 de agosto y Londres el 2 de agosto. Así que el encuentro de agosto del capítulo de Palo Alto, el martes 18 de agosto, de 6:30 a 9 de la tarde PDT, con solicitud previa de asistencia, unas 150 plazas y Dyssonance AI como patrocinador, sigue siendo la fecha más próxima del Área de la Bahía recogida aquí, y el anuncio del 9 de agosto del capítulo de San Francisco que sigue apareciendo en las búsquedas debe seguir dándose por cerrado y no por próximo: remite a una página antigua, y el 9 de agosto cae en domingo este año. El resto de la vía no cambia. Ai4 en The Venetian de Las Vegas del 4 al 6 de agosto; Ray Summit en el San Francisco Marriott Marquis del 24 al 26 de agosto, que coubica la vLLM Conference en la misma entrada con una agenda que nombra a Robert Nishihara, Ion Stoica y Bryan Catanzaro, de NVIDIA; el ACM AI Leadership Summit en Atlanta del 30 de agosto al 2 de septiembre; OpenAI DevDay en Fort Mason el 29 de septiembre, con las solicitudes ya cerradas; The AI Conference en el Pier 48 del 29 de septiembre al 1 de octubre, cuya vía de apertura del 29 de septiembre ha agotado las entradas; el Runway AI Summit el 30 de septiembre; World Summit AI en Ámsterdam del 7 al 8 de octubre; PyTorch Conference en San José del 20 al 21 de octubre; GitHub Universe en Fort Mason del 28 al 29 de octubre; el AI Engineer Code Summit de San Francisco, solo con solicitud, del 11 al 13 de noviembre, con el envío de propuestas de ponentes cerrando el 11 de octubre; AWS re:Invent del 30 de noviembre al 4 de diciembre; NeurIPS en diciembre; IEEE-RAS Humanoids en Santa Clara del 6 al 9 de diciembre, cuya convocatoria de artículos cerró el 24 de julio con más de 200 envíos previstos; y The AI Summit New York del 9 al 10 de diciembre.",
+          "citations": [
+            {
+              "label": "Hot Chips 2026 registration deadlines",
+              "url": "https://hotchips.org/registration/"
+            },
+            {
+              "label": "AI Infra Summit 2026 - Santa Clara, September 15-17",
+              "url": "https://www.ai-infra-summit.com/"
+            },
+            {
+              "label": "Black Hat USA 2026 AI Summit - August 4",
+              "url": "https://blackhat.theaisummit.com/"
+            },
+            {
+              "label": "AI Village at DEF CON 34",
+              "url": "https://aivillage.org/events/defcon-34/"
+            },
+            {
+              "label": "SecurityWeek AI Risk Summit - Half Moon Bay, August 11-12 and the August 7 rate step",
+              "url": "https://www.airisksummit.com/"
+            },
+            {
+              "label": "AI Security Summit - San Francisco flagship, October 15",
+              "url": "https://aisecuritysummit.com/"
+            },
+            {
+              "label": "AISec 2026 - The Hague, November 15",
+              "url": "https://aisec.cc/"
+            },
+            {
+              "label": "SANS AI Cybersecurity Summit - Arlington, November 2-3",
+              "url": "https://www.sans.org/cyber-security-training-events/ai-summit-fall-2026"
+            },
+            {
+              "label": "AGNTCon and MCPCon North America - San Jose, October 22-23",
+              "url": "https://events.linuxfoundation.org/agntcon-mcpcon-north-america/"
+            },
+            {
+              "label": "Newcomer summit calendar - Machine Earning September 29 and Cerebral Valley November 12",
+              "url": "https://newcomer.events/"
+            },
+            {
+              "label": "AI Tinkerers global event calendar",
+              "url": "https://aitinkerers.org/events"
+            },
+            {
+              "label": "AI Tinkerers Palo Alto chapter",
+              "url": "https://palo-alto.aitinkerers.org/"
+            },
+            {
+              "label": "Ray Summit 2026 - San Francisco, August 24-26",
+              "url": "https://www.anyscale.com/ray-summit/2026"
+            },
+            {
+              "label": "The AI Conference 2026 - Pier 48, September 29 to October 1",
+              "url": "https://aiconference.com/"
+            },
+            {
+              "label": "AI Engineer Code Summit - San Francisco, November 11-13",
+              "url": "https://www.ai.engineer/code/2026"
+            },
+            {
+              "label": "IEEE-RAS Humanoids 2026 - Santa Clara, December 6-9",
+              "url": "https://2026.ieee-humanoids.org/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
