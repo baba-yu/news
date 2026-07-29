@@ -1,0 +1,86 @@
+[
+  {
+    "actor": "Parameter-selection lead, HAWK submission design team",
+    "job": "Re-deriving HAWK's concrete security estimates under the published lattice symmetry and re-sizing the parameter sets that carry the claimed levels.",
+    "outcome": "A revised HAWK specification with enlarged HAWK-512 and HAWK-1024 parameter sets and re-computed gate-count tables restoring the claimed security levels.",
+    "motivation": "Enlarging parameters costs key and signature size but concedes nothing about how the symmetry was found; a rebuttal would cost the submission's credibility.",
+    "task": {
+      "who": "HAWK design team's parameter-selection and security-estimate subgroup",
+      "what": "Re-size HAWK-512 and HAWK-1024 parameter sets",
+      "where": "The HAWK specification and its security-analysis chapter",
+      "when": "H2 2026 through H1 2027",
+      "why": "Published parameters must support the level they claim",
+      "how": "Lattice-estimator gate-count recomputation against the disclosed symmetry"
+    }
+  },
+  {
+    "actor": "Standardisation process manager, NIST post-quantum signature programme",
+    "job": "Routing the published cryptanalysis onto the official comment record and asking the HAWK team for an on-record response before the round closes.",
+    "outcome": "A NIST-process posting carrying the HAWK team's answer, the enlarged parameter sets, into the standardisation round's public record.",
+    "motivation": "A round report cannot advance a candidate whose published gate counts no longer match the security level it was selected against.",
+    "task": {
+      "who": "NIST post-quantum standardisation staff and official-comment moderators",
+      "what": "Post the cryptanalysis and solicit the team's response",
+      "where": "The pqc-forum mailing list and official comments page",
+      "when": "Q3 2026",
+      "why": "The round record needs the design team on record",
+      "how": "Official-comment thread plus round status-report drafting"
+    }
+  },
+  {
+    "actor": "Lattice cryptanalysis group at an academic or industrial security lab",
+    "job": "Rerunning the HAWK-256 key recovery end to end to settle whether the claimed 2^38 work factor holds outside the publishing lab.",
+    "outcome": "An independent reproduction of the roughly three-hour key recovery, closing the gap a rebuttal would otherwise have room to exploit.",
+    "motivation": "Settling this claim costs one afternoon of rented compute, cheap enough that being first to check is worth more than waiting.",
+    "task": {
+      "who": "Academic lattice cryptanalysis group with a cloud compute budget",
+      "what": "Reproduce the 2^38 HAWK-256 challenge key recovery",
+      "where": "Rented 96-core servers, written up as a preprint",
+      "when": "Q3 2026",
+      "why": "An outside run removes the option of disputing the symmetry",
+      "how": "Rented 96-core server run against the challenge parameter set"
+    }
+  },
+  {
+    "actor": "Reference-implementation engineer, HAWK submission package",
+    "job": "Re-tuning and re-benchmarking the reference code at the enlarged parameters, then regenerating the key, signature and known-answer test vectors.",
+    "outcome": "An implementation and test-vector set matching the revised specification, so enlarged parameters ship as a usable submission rather than a table.",
+    "motivation": "The scheme's selling point is compact signatures, so the team must show what the enlargement actually costs before reviewers accept it.",
+    "task": {
+      "who": "HAWK reference-implementation and benchmarking engineers",
+      "what": "Re-benchmark key and signature sizes at enlarged parameters",
+      "where": "The HAWK reference codebase and known-answer test vectors",
+      "when": "H2 2026 through H1 2027",
+      "why": "A specification revision ships only with matching implementation numbers",
+      "how": "SUPERCOP-style benchmarking and regenerated known-answer test vectors"
+    }
+  },
+  {
+    "actor": "Responsible-disclosure lead, frontier-lab red team publishing the cryptanalysis",
+    "job": "Putting the challenge instance, its parameters and the verification path on record so third parties can settle the key-recovery claim unaided.",
+    "outcome": "A checkable artifact, challenge parameters plus verification steps, that makes reproducing the result cheaper than arguing about whether it holds.",
+    "motivation": "A result nobody can rerun stays a press claim; the lab's case for model-assisted cryptanalysis depends on outsiders confirming the numbers.",
+    "task": {
+      "who": "Frontier-lab red team and responsible-disclosure coordinators",
+      "what": "Publish the challenge instance and verification steps",
+      "where": "The lab's research write-up and accompanying artifact release",
+      "when": "Q3 2026",
+      "why": "Reproducibility is what makes conceding cheaper than contesting",
+      "how": "Coordinated disclosure to the design team plus public artifacts"
+    }
+  },
+  {
+    "actor": "Maintainer, open-source lattice security estimator",
+    "job": "Encoding the halving symmetry into the public cost model so any re-sized HAWK parameters are computed against a corrected estimate.",
+    "outcome": "A patched estimator whose gate-count output reflects the symmetry, giving the revised parameter sets a cost model reviewers already trust.",
+    "motivation": "Every lattice submission sizes its parameters against this tooling, so an estimator blind to the symmetry hands out numbers nobody can defend.",
+    "task": {
+      "who": "Lattice estimator maintainers and contributing cryptanalysts",
+      "what": "Encode the halving symmetry into the public cost model",
+      "where": "The open lattice-estimator repository and its regression suite",
+      "when": "Q4 2026",
+      "why": "Re-sized parameters need a cost model carrying the symmetry",
+      "how": "Cost-model patch with regression tests over known parameter sets"
+    }
+  }
+]

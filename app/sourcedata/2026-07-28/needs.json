@@ -1,0 +1,277 @@
+{
+  "date": "2026-07-28",
+  "by_prediction": {
+    "prediction.62237958df3c9d2a": [
+      {
+        "actor": "Parameter-selection lead, HAWK submission design team",
+        "job": "Re-deriving HAWK's concrete security estimates under the published lattice symmetry and re-sizing the parameter sets that carry the claimed levels.",
+        "outcome": "A revised HAWK specification with enlarged HAWK-512 and HAWK-1024 parameter sets and re-computed gate-count tables restoring the claimed security levels.",
+        "motivation": "Enlarging parameters costs key and signature size but concedes nothing about how the symmetry was found; a rebuttal would cost the submission's credibility.",
+        "task": {
+          "who": "HAWK design team's parameter-selection and security-estimate subgroup",
+          "what": "Re-size HAWK-512 and HAWK-1024 parameter sets",
+          "where": "The HAWK specification and its security-analysis chapter",
+          "when": "H2 2026 through H1 2027",
+          "why": "Published parameters must support the level they claim",
+          "how": "Lattice-estimator gate-count recomputation against the disclosed symmetry"
+        }
+      },
+      {
+        "actor": "Standardisation process manager, NIST post-quantum signature programme",
+        "job": "Routing the published cryptanalysis onto the official comment record and asking the HAWK team for an on-record response before the round closes.",
+        "outcome": "A NIST-process posting carrying the HAWK team's answer, the enlarged parameter sets, into the standardisation round's public record.",
+        "motivation": "A round report cannot advance a candidate whose published gate counts no longer match the security level it was selected against.",
+        "task": {
+          "who": "NIST post-quantum standardisation staff and official-comment moderators",
+          "what": "Post the cryptanalysis and solicit the team's response",
+          "where": "The pqc-forum mailing list and official comments page",
+          "when": "Q3 2026",
+          "why": "The round record needs the design team on record",
+          "how": "Official-comment thread plus round status-report drafting"
+        }
+      },
+      {
+        "actor": "Lattice cryptanalysis group at an academic or industrial security lab",
+        "job": "Rerunning the HAWK-256 key recovery end to end to settle whether the claimed 2^38 work factor holds outside the publishing lab.",
+        "outcome": "An independent reproduction of the three-hour-42-minute key recovery, closing the gap a rebuttal would otherwise have room to exploit.",
+        "motivation": "Settling this claim costs one afternoon of rented compute, cheap enough that being first to check is worth more than waiting.",
+        "task": {
+          "who": "Academic lattice cryptanalysis group with a cloud compute budget",
+          "what": "Reproduce the 2^38 HAWK-256 challenge key recovery",
+          "where": "Rented 96-core servers, written up as a preprint",
+          "when": "Q3 2026",
+          "why": "An outside run removes the option of disputing the symmetry",
+          "how": "Rented 96-core server run against the challenge parameter set"
+        }
+      },
+      {
+        "actor": "Reference-implementation engineer, HAWK submission package",
+        "job": "Re-tuning and re-benchmarking the reference code at the enlarged parameters, then regenerating the key, signature and known-answer test vectors.",
+        "outcome": "An implementation and test-vector set matching the revised specification, so enlarged parameters ship as a usable submission rather than a table.",
+        "motivation": "The scheme's selling point is compact signatures, so the team must show what the enlargement actually costs before reviewers accept it.",
+        "task": {
+          "who": "HAWK reference-implementation and benchmarking engineers",
+          "what": "Re-benchmark key and signature sizes at enlarged parameters",
+          "where": "The HAWK reference codebase and known-answer test vectors",
+          "when": "H2 2026 through H1 2027",
+          "why": "A specification revision ships only with matching implementation numbers",
+          "how": "SUPERCOP-style benchmarking and regenerated known-answer test vectors"
+        }
+      },
+      {
+        "actor": "Responsible-disclosure lead, frontier-lab red team publishing the cryptanalysis",
+        "job": "Putting the challenge instance, its parameters and the verification path on record so third parties can settle the key-recovery claim unaided.",
+        "outcome": "A checkable artifact, challenge parameters plus verification steps, that makes reproducing the result cheaper than arguing about whether it holds.",
+        "motivation": "A result nobody can rerun stays a press claim; the lab's case for model-assisted cryptanalysis depends on outsiders confirming the numbers.",
+        "task": {
+          "who": "Frontier-lab red team and responsible-disclosure coordinators",
+          "what": "Publish the challenge instance and verification steps",
+          "where": "The lab's research write-up and accompanying artifact release",
+          "when": "Q3 2026",
+          "why": "Reproducibility is what makes conceding cheaper than contesting",
+          "how": "Coordinated disclosure to the design team plus public artifacts"
+        }
+      },
+      {
+        "actor": "Maintainer, open-source lattice security estimator",
+        "job": "Encoding the halving symmetry into the public cost model so any re-sized HAWK parameters are computed against a corrected estimate.",
+        "outcome": "A patched estimator whose gate-count output reflects the symmetry, giving the revised parameter sets a cost model reviewers already trust.",
+        "motivation": "Every lattice submission sizes its parameters against this tooling, so an estimator blind to the symmetry hands out numbers nobody can defend.",
+        "task": {
+          "who": "Lattice estimator maintainers and contributing cryptanalysts",
+          "what": "Encode the halving symmetry into the public cost model",
+          "where": "The open lattice-estimator repository and its regression suite",
+          "when": "Q4 2026",
+          "why": "Re-sized parameters need a cost model carrying the symmetry",
+          "how": "Cost-model patch with regression tests over known parameter sets"
+        }
+      }
+    ],
+    "prediction.7c6c746c4b355b4d": [
+      {
+        "actor": "Enforcement counsel, communications regulator's equipment authorisation programme",
+        "job": "Assembling per-grant evidentiary records against Chinese humanoid, quadruped and inverter authorisations already issued, to support revoking specific grants.",
+        "outcome": "A revocation order naming at least one already-authorised Chinese robot or inverter model, the instrument the prediction requires.",
+        "motivation": "The commission reserved revocation power on July 28; using it is the cheapest way to close its own prospective-only gap.",
+        "task": {
+          "who": "Enforcement bureau equipment-authorisation staff and national-security counsel",
+          "what": "Build revocation records against named already-authorised grants",
+          "where": "Equipment authorisation grant files and enforcement docket",
+          "when": "Q3 2026 through Q4 2026",
+          "why": "Revocation needs a per-grant record before any order issues",
+          "how": "Equipment authorisation system records and covered-list cross-checks"
+        }
+      },
+      {
+        "actor": "Rulemaking engineer, communications regulator's engineering and technology office",
+        "job": "Drafting the follow-on item that would subject already-cleared Chinese robot and inverter models to the same authorisation bar.",
+        "outcome": "A further notice or order whose text reaches the already-authorised population, not only models seeking new authorisation.",
+        "motivation": "A rule written against unreleased models cannot answer the Volt Typhoon precedent, which is about gear already bought and installed.",
+        "task": {
+          "who": "Office of engineering and technology rule-drafting team",
+          "what": "Draft retroactive-reach language for a follow-on item",
+          "where": "Internal rulemaking drafts and commission circulation",
+          "when": "Q4 2026 through Q1 2027",
+          "why": "The stated security rationale does not respect a prospective-only line",
+          "how": "Further notice of proposed rulemaking under existing authorisation authority"
+        }
+      },
+      {
+        "actor": "Professional staff, congressional select committee on strategic competition with China",
+        "job": "Pressing the commission in letters, hearings and draft legislation to extend the July 28 bar to already-authorised models.",
+        "outcome": "A public record of congressional demand that makes a retroactive commission step the expected next move rather than an escalation.",
+        "motivation": "The committee's chair welcomed the action as strengthening domestic robotics; a carve-out leaving Chinese units on sale undercuts that claim.",
+        "task": {
+          "who": "Select-committee professional staff and member offices",
+          "what": "Draft oversight letters and bill text on existing authorisations",
+          "where": "Committee correspondence, hearing records and introduced legislation",
+          "when": "H2 2026 through H1 2027",
+          "why": "Congressional demand converts a reserved power into an expected step",
+          "how": "Oversight letters, hearing testimony and secure-equipment bill amendments"
+        }
+      },
+      {
+        "actor": "Sanctions policy officer, treasury department China and technology desk",
+        "job": "Developing designation packages against Chinese AI, robotics and inverter firms on the intellectual-property-theft grounds the treasury secretary flagged.",
+        "outcome": "A designation reaching firms whose equipment is already sold, giving the commission a listed-entity hook for revoking existing grants.",
+        "motivation": "Sanctions bite on the installed base a forward-only authorisation bar leaves untouched, and the secretary has already warned of them.",
+        "task": {
+          "who": "Treasury sanctions policy and interagency review staff",
+          "what": "Assemble designation packages on intellectual-property-theft grounds",
+          "where": "Interagency sanctions review and evidentiary case files",
+          "when": "H2 2026 through H1 2027",
+          "why": "A designation reaches units already sold and installed",
+          "how": "Intellectual-property-theft evidence and interagency designation review"
+        }
+      },
+      {
+        "actor": "Manufacturing and field-operations lead, US humanoid robot maker",
+        "job": "Standing up the Fremont physical-AI facility and hiring roughly 200 technical and field-operations staff to deliver Digit v5 orders.",
+        "outcome": "A domestic humanoid shipping at volume, so a retroactive bar strands buyers into a substitute rather than into nothing.",
+        "motivation": "More than 300 million dollars of multi-year orders convert to revenue only if the contractual milestone deliveries actually happen.",
+        "task": {
+          "who": "Plant engineering, production and field-deployment teams",
+          "what": "Bring the Fremont facility to milestone delivery capacity",
+          "where": "60,000-square-foot Fremont physical-AI development facility",
+          "when": "H2 2026 through H1 2027",
+          "why": "A funded substitute makes stranding the installed base affordable",
+          "how": "Roughly 200 added technical and field-operations hires"
+        }
+      },
+      {
+        "actor": "Capital-markets lead, special-purpose acquisition sponsor funding a domestic robot maker",
+        "job": "Closing the definitive business combination at 2.5 billion dollars pre-money and releasing more than 620 million dollars of gross proceeds.",
+        "outcome": "A funded, publicly listed domestic humanoid maker: the substitute whose existence lowers the political cost of reaching backwards.",
+        "motivation": "The combination is expected to close during 2026, and the proceeds are what pay for the Fremont build-out and hiring.",
+        "task": {
+          "who": "Sponsor capital-markets team, target finance leadership and counsel",
+          "what": "Close the business combination and release trust proceeds",
+          "where": "Registration statement, shareholder vote and closing mechanics",
+          "when": "H2 2026",
+          "why": "Proceeds fund the domestic substitute the retroactive step assumes",
+          "how": "Special-purpose acquisition closing with sponsor and investor commitments"
+        }
+      },
+      {
+        "actor": "Grid asset-security lead, US electric utility and solar operator",
+        "job": "Inventorying already-installed Chinese inverters across owned generation and distribution assets and costing a phased replacement of affected units.",
+        "outcome": "A known and priced installed base of already-authorised inverters, which is what makes a retroactive bar operable rather than merely disruptive.",
+        "motivation": "Remote commandeering of grid-connected inverters is the exact harm the commission cites, and the operator carries that exposure.",
+        "task": {
+          "who": "Asset management, procurement and operational-technology security teams",
+          "what": "Inventory and cost replacement of installed Chinese inverters",
+          "where": "Utility asset registers and operational-technology network inventories",
+          "when": "Q1 2027",
+          "why": "A retroactive bar needs a known and replaceable installed base",
+          "how": "Asset register audits and vendor-of-origin supply-chain review"
+        }
+      }
+    ],
+    "prediction.bf63e1f0fcd11568": [
+      {
+        "actor": "Government affairs policy lead, frontier AI developer advocating pre-release testing",
+        "job": "Turning the 'sufficiently capable' ask into filed threshold language: a specific capability line plus a named cyber, biological and alignment battery.",
+        "outcome": "Threshold text plus a named pre-release test entering a US federal rulemaking docket or a bill draft.",
+        "motivation": "Having conceded the ban question, the pre-release gate is the only ask left, and an unwritten threshold binds nobody.",
+        "task": {
+          "who": "Frontier lab policy team, safety researchers and outside regulatory counsel",
+          "what": "Draft capability-threshold and pre-release test language for filing",
+          "where": "Federal rulemaking dockets and congressional staff drafting sessions",
+          "when": "H2 2026 through H1 2027",
+          "why": "An unspecified threshold gates nothing and binds no release",
+          "how": "Responsible scaling tiers, model cards, formal comment filings"
+        }
+      },
+      {
+        "actor": "Committee counsel drafting AI legislation for a US congressional committee",
+        "job": "Converting a contested capability threshold into statutory text: which releases the gate touches, who runs the battery, what trips it.",
+        "outcome": "Introduced bill text carrying an explicit capability line and a named pre-release cyber, biological and alignment test.",
+        "motivation": "An origin-keyed restriction cannot reach a domestic open-weight release, which leaves the capability-keyed line as the drafting option.",
+        "task": {
+          "who": "Committee counsel, legislative aides and legislative drafting staff",
+          "what": "Write the capability threshold into bill text",
+          "where": "Committee markups, hearings and legislative counsel drafts",
+          "when": "Q4 2026 through Q1 2027",
+          "why": "Statutory text needs a line an agency can apply",
+          "how": "Hearing testimony, agency technical assistance, stakeholder comment records"
+        }
+      },
+      {
+        "actor": "Evaluation program staff at the US federal AI standards body",
+        "job": "Specifying the cyber, biological and alignment evaluations a binding instrument can cite by name, and the capability levels that trigger them.",
+        "outcome": "A published, citable federal test battery and tiering that rule text can incorporate by reference.",
+        "motivation": "A rule cannot name a test that does not exist, and the toolkit for pacing the frontier is admittedly missing.",
+        "task": {
+          "who": "Federal AI standards evaluation staff and their national lab partners",
+          "what": "Publish a referencable pre-release evaluation battery and tiers",
+          "where": "Standards drafts, public comment periods and evaluation pilots",
+          "when": "H2 2026 through H1 2027",
+          "why": "Instrument text can only name a test that exists",
+          "how": "Red-team exercises, cyber ranges, uplift trials, alignment probes"
+        }
+      },
+      {
+        "actor": "Policy director for the open-weights coalition of chip vendors, model publishers and foundations",
+        "job": "Arguing where the capability line sits and who holds the pen, now that the coalition has conceded the ban question.",
+        "outcome": "Comment filings and counter-drafts contesting threshold placement and test custody rather than the right to publish weights.",
+        "motivation": "A line set too low turns every open-weight release into a gated one and hands the pen to a rival.",
+        "task": {
+          "who": "Coalition policy staff, member-company counsel and signatory technical leads",
+          "what": "File counter-drafts contesting threshold placement and test custody",
+          "where": "Federal comment dockets and coalition working groups",
+          "when": "Q3 2026 through Q4 2026",
+          "why": "A low line would gate ordinary open-weight releases",
+          "how": "Signatory bloc letters, docket comments, benchmarking rebuttals"
+        }
+      },
+      {
+        "actor": "Specification editor at a multi-signatory frontier AI industry consortium",
+        "job": "Assembling one spec text both camps will sign: a capability threshold, a named pre-release battery, and who administers it.",
+        "outcome": "A signed multi-signatory industry specification carrying the threshold and the named cyber, biological and alignment test.",
+        "motivation": "An industry spec can land before federal text does, and whoever ships first sets the line others argue against.",
+        "task": {
+          "who": "Consortium secretariat, member policy leads and the working group chair",
+          "what": "Negotiate signable threshold and test-administration clauses",
+          "where": "Consortium working groups and member sign-off reviews",
+          "when": "Q4 2026 through Q1 2027",
+          "why": "A signed spec beats an unwritten federal rule",
+          "how": "Working group drafts, member ballots, published conformance criteria"
+        }
+      },
+      {
+        "actor": "Technical director at an independent model evaluation organization",
+        "job": "Building cyber, biological and alignment evaluations reproducible enough that instrument text can name them and an outsider can rerun them.",
+        "outcome": "Named, versioned public evaluations that drafters cite instead of writing a threshold with no test behind it.",
+        "motivation": "An origin-neutral gate only works if any lab's release can be measured by an outsider on the same battery.",
+        "task": {
+          "who": "Independent evaluation engineers, biosecurity advisors and cyber range operators",
+          "what": "Ship versioned, reproducible pre-release risk evaluations",
+          "where": "Public evaluation repositories and third-party audit engagements",
+          "when": "H2 2026 through H1 2027",
+          "why": "Drafters need a battery an outsider can rerun",
+          "how": "Open benchmark repos, held-out test sets, audited scoring protocols"
+        }
+      }
+    ]
+  }
+}

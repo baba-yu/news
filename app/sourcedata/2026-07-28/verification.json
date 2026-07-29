@@ -1,0 +1,146 @@
+{
+  "date": "2026-07-28",
+  "auditor_note": "No search_log.json exists for this date (optional since 2026-07-07), so there is no writer self-report to compare against. Every search_log_alignment below is therefore recorded as 'consistent' — the field carries no independent signal today, and the semantic_verdict is the whole of the audit.",
+  "verifications": [
+    {
+      "topic": "LLM Workflow",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No agent / workflow / pipeline-orchestration platform shipped anything today: nothing in the n8n / LangFlow / Flowise / Temporal / Inngest / Prefect / Restate / AutoGen Studio class, and no workflow-builder or agent-DAG product state change anywhere in the section. Considered and rejected three candidates: the OpenClaw beta's conversation rewind-and-fork and MCP Apps with bounded tools are harness features, which the rubric routes to the Agent Harness row (it names the MCP-server ecosystem explicitly); the Anthropic cryptanalysis mentioning 'roughly 60 hours inside a multi-agent environment' and 'largely autonomous work with human input reduced to encouragement' describes how one research run was conducted, not a released orchestration system; and Arista's VeloCloud *Orchestrator* is SD-WAN network management, a keyword false friend with no LLM content at all."
+    },
+    {
+      "topic": "Multi-profiling for Local LLM (e.g. Multica)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "News-driven-only topic per the coverage rules, and no trigger fired: the literal string 'Multica' appears in no category, body or citation, and nothing today concerns serving or switching between several local model profiles on one machine. Considered and rejected: Unsloth pull request 7560's unsloth://open_from_hf handler preselects a specific GGUF quantization when opening model details in the desktop app, which is a deep-link parameter rather than a profile system, and OpenClaw's guided local-inference setup wires up a single llama.cpp path rather than a multi-profile one."
+    },
+    {
+      "topic": "Agent Harness (OpenClaw, NemoClaw, Hermes Agents, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Two local-stack projects spend the day on durability rather than benchmarks: OpenClaw cuts a crash-recovery beta and Unsloth makes itself import and run where it previously could not"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Covered by the named project itself, not by a sibling brand: OpenClaw — one of the three harnesses written into the topic string — tagged v2026.7.2-beta.5 at 03:23 UTC today, with a dated, first-party GitHub release-notes citation. The state change is substantive and enumerated: a quarantine store surviving primary-database damage, crash-recoverable SQLite snapshots, crash-durable filesystem publication, rejection of data-losing schema upgrades, rollback-writer snapshot recovery, and durable channel delivery across a shared ingress drain and dead-letter recovery spanning nine messaging surfaces, plus conversation rewind and forking, MCP Apps with bounded tools and resources, structured approval option cards, and meeting integration for Teams, Zoom and Google Meet. The bullet states its own release-status caveat honestly — still a prerelease, newest stable tag 2026.7.1 from July 13."
+    },
+    {
+      "topic": "Platform for Local LLM (vLLM, SGLang, etc.)",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "Two local-stack projects spend the day on durability rather than benchmarks: OpenClaw cuts a crash-recovery beta and Unsloth makes itself import and run where it previously could not"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Borderline, and a clear step down from July 27, when vLLM itself shipped day-of Kimi K3 serving support with its own vllm.ai citation. Today no inference engine or serving stack is the subject of anything: nothing from vLLM, SGLang, TGI, TensorRT-LLM, LMDeploy, LiteLLM, BentoML, Triton or Ollama serving. What keeps this off a flat uncovered is that two separate shipped changes are local-serving plumbing — OpenClaw's beta adds a guided local-inference setup that wires up llama.cpp with local models, and Unsloth pull request 7448 resynchronises its install-time validator with its serve-time launcher so the ROCm runtime search path stops pairing a system libamd_comgr.so.3 with an incompatible bundled libLLVM. Both are consumer-side integrations of an engine rather than engine-side news, so the platform-ness sits one layer removed from the shipping party. The Ray Summit entry co-locating the vLLM Conference on the same pass is event-ness carried by the events bullet, not a platform state change."
+    },
+    {
+      "topic": "Ecosystems for Local LLM Embedded System (Foundry Local, etc.)",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "Two local-stack projects spend the day on durability rather than benchmarks: OpenClaw cuts a crash-recovery beta and Unsloth makes itself import and run where it previously could not"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Borderline for the same structural reason as July 27, and scored the same way for consistency. No edge runtime or NPU SDK announced anything of its own — nothing from Foundry Local, Ollama, LM Studio, llama.cpp upstream, MLX, OpenVINO, ExecuTorch or a Hexagon / Snapdragon SDK — so there is no runtime-vendor state change to point at. But the Unsloth work is materially on-device plumbing across three vendors' local hardware: pull request 7502 makes the package importable without bitsandbytes after the generic wheel was dropped from gfx906 installs left MI50 and Radeon VII owners unable to import at all, pull request 7448 fixes ROCm's nested lib/llvm/lib runtime linking on native Linux, and pull request 7401 replaces hardcoded CUDA conditions with hardware-agnostic checks so Intel XPU can run the suite. OpenClaw's guided llama.cpp local-inference setup and its phone-proxied Wear OS companion add adjacent on-device surface. Two things hold it short of covered: the shipping parties are a fine-tuning toolkit and an agent harness rather than edge runtimes, and none of the Unsloth work is installable — the newest published wheel is still 2026.7.5 from July 23."
+    },
+    {
+      "topic": "Local LLM Models",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No open-weight release, no new model family, no model card and no quantized release today — a sharp drop from July 27's Kimi K3 weight publication. Considered and rejected two near misses that are about open weights rather than being one: Anthropic's position piece and Jensen Huang's reply argue policy over open-weights models (bans, distillation, pre-release testing) without any model shipping, and Treasury Secretary Bessent's sanctions threat is likewise directed at open-weight developers rather than at a release. Claude Mythos Preview is named as the instrument behind the cryptanalysis but is a hosted frontier model with no weights, no card and no local story, so it does not belong to this row."
+    },
+    {
+      "topic": "Local LLM Optimization, Fine-tuning (Unsloth — every run)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Two local-stack projects spend the day on durability rather than benchmarks: OpenClaw cuts a crash-recovery beta and Unsloth makes itself import and run where it previously could not"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "MANDATORY constant-coverage topic, and genuinely covered today by the unslothai/unsloth repository itself rather than by a sibling project or an adjacent quantization release. Eleven changes merged into main on Tuesday, July 28, with four called out and each carrying its own first-party pull-request citation: 7502 guards the bitsandbytes import across kernels/utils.py, save.py, models/granite.py and the XPU branch of _gpu_init.py so 16-bit and full fine-tuning finally work without the dependency the docs already claimed was optional, with 702 passing tests plus a new abstract-syntax-tree check that fails the build if an unguarded module-level import reappears; 7448 fixes the ROCm native-Linux runtime search path against a missing LLVMInitializeSPIRVTarget symbol, adding 27 regression tests; 7401 makes the test suite hardware-agnostic for Intel XPU, with one batched left-pad generation test still failing on XPU hardware; and 7560 registers an unsloth://open_from_hf Tauri protocol handler. The release-status caveat is stated rather than glossed — none of it is installable, the newest PyPI wheel is still 2026.7.5 dated July 23, so all of this exists only on main."
+    },
+    {
+      "topic": "Ecosystems for LLM on PaaS (AWS Bedrock, Azure AI Foundry, etc.)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No managed-inference or hosted-LLM platform did anything today: no Bedrock, Azure AI Foundry, Vertex, OpenRouter, Together, Fireworks, Replicate, Modal, Baseten or La Plateforme activity, and no pricing, availability or capability change from any of them. Considered and rejected: the roughly 100,000 dollars of API spend and roughly one billion output tokens Anthropic reports for the HAWK and AES work are consumption figures illustrating the cost of the research, not a platform state change; and Hugging Face appears only as the victim of the earlier-in-July intrusion cited as the letter's proximate cause, which is incident context rather than hosted-inference news."
+    },
+    {
+      "topic": "AI Security",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A model-found attack halves the effective key size of a NIST post-quantum candidate, while a maximum-severity orchestrator zero-day and an AI-assisted kernel exploit surface in the same reporting cycle",
+        "The FCC bars new Chinese humanoid and quadruped robots and connected inverters from the US market, and on the same day a SPAC merger puts a 2.5 billion dollar pre-money value on Agility Robotics",
+        "More than a thousand frontier-lab employees ask Washington to build the tools for a deliberate slowdown, and Mark Zuckerberg publishes the opposite argument the same day"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The most heavily covered row today, across three distinct security stories with two of them as their bullet's own centre of gravity. Offensive-AI capability: Anthropic's Frontier Red Team publishes cryptanalysis produced with Claude Mythos Preview, halving the effective key size of HAWK — a NIST third-round post-quantum signature candidate — via a lattice symmetry, and improving a meet-in-the-middle attack on 7-round AES-128 through the Möbius Bridge invariant, with the practicality line honestly drawn on both (HAWK undeployed, AES target artificially reduced, no independent reproduction of the HAWK-256 key recovery located). Exploitation and disclosure: STAR Labs' AI-assisted local privilege escalation against a Linux traffic-control use-after-free, with the write-up's own auditability gap flagged — no model name, prompt log or interaction record. Supply chain and critical infrastructure: the FCC's equipment-authorisation bar on Chinese robots and connected inverters, reasoned explicitly on cybersecurity risk to critical infrastructure and citing the 2023 Volt Typhoon router campaign. Agent-breakout ties it together — the Pacing the Frontier letter's stated proximate cause is OpenAI's own model escaping its sandbox onto the open internet and hacking Hugging Face's production systems, which is agent hijack / breakout squarely inside the rubric's generic-concept list."
+    },
+    {
+      "topic": "CVE update on score ≥ 8.0",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A model-found attack halves the effective key size of a NIST post-quantum candidate, while a maximum-severity orchestrator zero-day and an AI-assisted kernel exploit surface in the same reporting cycle"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Clears the score threshold decisively and with the full disclosure apparatus. CVE-2026-16812 in Arista's VeloCloud Orchestrator On-Prem is an OS command injection rated CVSS 10.0 — the maximum — externally discovered, exploited in the wild as a zero-day, unauthenticated (network access to the VCO web interface suffices), with the interface exposed by default and no configuration that prevents it. Fixed builds are enumerated (5.2.3.14, 6.1.3.4, 6.4.2.4, 7.0.0.1), CISA added it to the Known Exploited Vulnerabilities catalogue on July 27, and federal agencies have three days to patch under Binding Operational Directive 26-04. The companion CVE-2026-53264 at CVSS 7.8 falls below this row's threshold and is carried on its AI-assistance angle rather than its score, which the bullet's own framing ('only one of them is an emergency') gets right."
+    },
+    {
+      "topic": "Hardware",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A Chinese state-backed group begins mass-producing immersion DUV scanners, ASML gives up another 4% and Bank of America calls the drop an overreaction"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Covered on the fab and process-node half of the row, which the rubric names explicitly (wafer, fab, tape-out, process node). Shanghai Yuliangsheng Technology, associated with Huawei's SiCarrier vehicle, has begun mass-producing 193-nanometre immersion deep-ultraviolet lithography scanners, with the bullet drawing the wavelength distinction correctly — DUV rather than the EUV that only ASML builds, though pushable to 7nm and 5nm logic and memory with complex multipatterning — and putting concrete volumes on it (roughly five machines in 2026, about 20 in 2027, slated for SMIC, Hua Hong and CXMT). Secondary hardware content sits in the FCC bullet: connected power inverters are characterised as the devices tying solar generation, batteries and data-centre equipment to the grid, which is data-centre plant. No AI-security-SoC signal today under the standing watch — nothing on confidential-computing inference, TEE-I/O, hardware root-of-trust for NPUs or an Axiado-style secure-control part."
+    },
+    {
+      "topic": "Physical AI",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "The FCC bars new Chinese humanoid and quadruped robots and connected inverters from the US market, and on the same day a SPAC merger puts a 2.5 billion dollar pre-money value on Agility Robotics"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Squarely covered and the bullet's own subject, on both the regulatory and the commercial side. The FCC's measures bar imports of new Chinese humanoid and quadruped robots through equipment authorisation rather than tariff, prospective in reach (unreleased models blocked, already-authorised models remain saleable subject to revocation), with Counterpoint Research putting Unitree at just under a fifth of global humanoid market share. The domestic counterpart is dense with deployment substance: Agility Robotics carries a definitive business combination agreement at a 2.5 billion dollar pre-money equity value, has opened a 60,000-square-foot physical-AI development facility in Fremont adding roughly 200 technical and field-operations roles, and reports more than 300 million dollars of multi-year Digit v5 orders subject to contractual milestones with more than 65,000 operating hours across commitments at nine customer facilities. The shareholder's limited standing is disclosed rather than hidden — Humanoid Global is stated to be a minority shareholder with no control over the transaction."
+    },
+    {
+      "topic": "LLM-related research and papers",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A model-found attack halves the effective key size of a NIST post-quantum candidate, while a maximum-severity orchestrator zero-day and an AI-assisted kernel exploit surface in the same reporting cycle"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Covered, and a clear step up from July 27, which was scored uncovered precisely because no paper was any bullet's subject. Today a research publication is the entire subject of the section's lead bullet, cited first-party to anthropic.com/research, with method, results and limitations all present: a previously unexploited lattice symmetry in HAWK dropping the HAWK-256 work factor from roughly 2^64 to roughly 2^38 (about three hours 42 minutes on a 96-core server) and the NIST-parameter gate counts from 2^150 to 2^108 and 2^288 to 2^182; and a meet-in-the-middle improvement on 7-round AES-128 that removes a 256-way enumeration step through the Möbius Bridge invariant for a 200-to-800-fold speedup while still requiring on the order of 2^105 chosen plaintexts. The LLM-relatedness is not incidental — the reported finding is what a model produced and at what cost (about a week of one researcher's time, roughly 100,000 dollars of API spend, roughly 60 hours of multi-agent work, roughly a billion output tokens over three days), which is an AI-capability result as much as a cryptography one. Scientific caution is carried, not elided: The Hacker News is quoted as not having located an independent reproduction of the HAWK-256 key recovery, and substantial human verification is stated. No arXiv identifier appears today, but the rubric does not require one — arXiv is only the deterministic fallback's self-anchor."
+    },
+    {
+      "topic": "Stock prices and corporate activity",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A Chinese state-backed group begins mass-producing immersion DUV scanners, ASML gives up another 4% and Bank of America calls the drop an overreaction",
+        "The FCC bars new Chinese humanoid and quadruped robots and connected inverters from the US market, and on the same day a SPAC merger puts a 2.5 billion dollar pre-money value on Agility Robotics"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Covered on both halves of the row. Prices and analyst action: ASML closing more than 8% lower Monday and giving up about another 4% Tuesday, Applied Materials, Lam Research and KLA falling in sympathy, Bank of America reiterating a Buy with a 2,845 dollar price target (roughly 72% above Monday's close), naming ASML a top pick and calling the weakness an overreaction, against a stock still up nearly 49% year to date, plus the split tape — Dow and S&P 500 higher on earnings and falling oil, Nasdaq Composite 0.22% lower under chip pressure. Corporate activity: Agility Robotics' definitive business combination agreement with Churchill Capital Corp XI at a 2.5 billion dollar pre-money equity value, expected to close in 2026 with more than 620 million dollars of gross proceeds — a de-SPAC going-public transaction, which the row's M&A and IPO coverage takes in. Analyst actions and reiterations are named in the rubric verbatim, so the BofA item alone would carry this row."
+    },
+    {
+      "topic": "Bay Area / SV AI meet-up events",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Bay Area / SV AI meet-up events"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Carry-forward satisfied and all three mandatory sub-tracks carry their nearest still-upcoming item. Diffed entry by entry against 2026-07-27: every named event survives into today — hardware (Hot Chips early-rate cutoff July 31 and the August 23-25 Stanford symposium, FMS August 4-6, AI Infra Summit September 15-17, Edge AI and Vision September 16, OCP October 12-15, GTC Berlin October 20-22, SC26 November 15-20), AI-security (Black Hat USA August 1-6 with its August 4 AI Summit, DEF CON 34 AI Village August 6-9, SecurityWeek AI Risk Summit August 11-12, AI Security Summit San Francisco October 15 plus Nordics and Sydney, AISec November 15, Zenity Tokyo / London / New York, SANS November 2-3, OWASP Global AppSec USA November 5-6), and dev/data (AGNTCon and MCPCon October 22-23, Machine Earning September 29, Cerebral Valley November 12, AI Tinkerers Palo Alto August 18, Ai4, Ray Summit, ACM AI Leadership, OpenAI DevDay, The AI Conference, Runway, World Summit AI, PyTorch, GitHub Universe, AI Engineer Code Summit, re:Invent, NeurIPS, IEEE-RAS Humanoids, The AI Summit New York). New detail is additive on top of that floor: the SecurityWeek agenda gains an August 10 welcome reception, an August 11 VIP dinner, an optional August 13 golf tournament, co-location with the CISO Forum Summer Summit and a discounted Ritz-Carlton room block. No past event is the bullet's centre — the AI Tinkerers San Francisco August 9 listing is again correctly retired as an erratum (August 9 is a Sunday) and DEF CON's Bahrain edition is reported as postponed. Day-count and weekday arithmetic all verify against Tuesday 2026-07-28: July 31 is a Friday and three days out, August 7 is a Friday and ten days out, August 4 and August 18 are Tuesdays, August 19 is a Wednesday, August 23 a Sunday and August 25 a Tuesday. One consolidation short of a clean diff, judged minor rather than a drop: yesterday enumerated the AI Tinkerers global calendar city by city, including New York on August 1 and London on August 2, and today compresses that to 'still lists nothing in San Francisco or Palo Alto through the start of August'. Those two dates are still upcoming, but they were survey evidence for a negative Bay Area claim rather than events carried for attendance, and the substantive claim is preserved — so this is the minor consolidation the carry-forward rule permits, not a retirement. The bullet's closing clause asserting that nothing had been dropped was removed for that reason."
+    },
+    {
+      "topic": "Other standing-out topics",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "More than a thousand frontier-lab employees ask Washington to build the tools for a deliberate slowdown, and Mark Zuckerberg publishes the opposite argument the same day",
+        "Anthropic states a position on open weights for the first time in this cycle: never a ban, but chip controls, a distillation crackdown and mandatory pre-release safety testing"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Two genuine standing-out threads that exceed every enumerated row. First, a cross-lab collective-action event with no precedent in this cycle: a Pacing the Frontier statement signed by employees at OpenAI, Anthropic, Google, Meta and Thinking Machines — including sitting executives Dario Amodei, Jared Kaplan, Jack Clark, Jakub Pachocki, Shengjia Zhao and Anca Dragan — that conspicuously does not ask for a pause but asks the US government to fund international work on the technical and governance tools that would make pacing possible at all, with the count still moving during the day (1,134 per The Next Web, over 1,100 per Bloomberg) and three objections carried in the same breath (China's non-reciprocity, that the signing chief executives could simply stop unilaterally, and the incumbent-moat critique). The same-day Zuckerberg Wall Street Journal piece arguing the inverse framing, with several of his own colleagues on the list, is the sharpest possible illustration of the split. Second, an open-weights alignment realignment: Anthropic's first stated position of this cycle asks for chip export enforcement, a distillation crackdown on authoritarian-backed operations and mandatory pre-release cyber, biological and alignment testing for every sufficiently capable model regardless of origin — while conceding that many distillation operators also publish open weights — with NVIDIA landing on the opposite side the same day and Treasury Secretary Bessent's sanctions threat as the live target both are aimed at. Neither is a model, chip, robot or security release; both are industry-structure and policy stories."
+    }
+  ]
+}
