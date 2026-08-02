@@ -1,0 +1,78 @@
+{
+  "date": "2026-08-01",
+  "technical": [
+    {
+      "lead": "OpenAI credits ten advances on stalled problems, each with a Lean proof",
+      "body": "OpenAI published ten results in mathematics and theoretical computer science on Saturday, August 1 and credits every one of them to an internal build of Astra, the model it describes as its next major one and has not released. Each of the ten is a problem whose main result, by OpenAI's account, had not moved in at least a decade: an improved asymptotic upper bound for high-dimensional sphere packing, exponentially stronger bounds for binary and spherical codes, a construction settling the existence of non-sofic groups, a disproof of Connes's rigidity conjecture, arithmetic circuit complexity, quantum parallel repetition, the closest vector problem, Ehrhart's volume conjecture, multicolor Ramsey numbers and extremal number conjectures. The unusual part is what shipped alongside the write-up. Every one of the ten comes with a Lean 4 formalisation in a public Apache-2.0 repository built against Lean 4.32.0, mathlib and Lake, with a file per result, an aggregate build target and a directory of challenges for anyone who wants to re-check the proofs against an independent checker rather than take the paper's word. OpenAI puts the token spend at under $2,000 per result at GPT-5.6 Sol rates rather than at Astra's own, which it has not published. What it does not say is how many other problems absorbed a comparable spend and produced nothing, which is the number that would turn ten successes into a hit rate.",
+      "citations": [
+        {
+          "label": "GitHub - openai/ten-proofs, Lean certificates accompanying the ten results",
+          "url": "https://github.com/openai/ten-proofs"
+        },
+        {
+          "label": "Simon Willison - Ten advances in mathematics and theoretical computer science",
+          "url": "https://simonwillison.net/2026/Aug/1/ten-advances-in-mathematics/"
+        }
+      ]
+    },
+    {
+      "lead": "Lean's creator posts a kernel bug that let a metaprogram prove False",
+      "body": "On the same day, Leonardo de Moura, who created Lean, published a postmortem on a soundness bug in the Lean 4 kernel that allowed a metaprogram to construct a proof of False using no axioms at all — and with `#print axioms` reporting none, so the usual audit trail showed a clean proof. The kernel was accepting a projection whose structure name did not match the value being projected: nested inductive types with phantom parameters, meaning parameters that no constructor field uses, lost those parameters in the auxiliary types Lean generates, and ill-typed arguments slipped through. It surfaced on July 25, when Ramana Kumar published an AI-assisted disproof of the Collatz conjecture that turned out to be exploiting the hole rather than solving the problem. Kiran Gopinathan reduced it to a minimal proof of False and filed issue #14576 on July 28 against the 4.34.0 nightly dated July 27; a fix went up within an hour of that report, a follow-up added stricter parameter validation, and patch releases went out the same week. De Moura's framing is that this is an implementation bug rather than a hole in Lean's meta-theory, and that it was reachable only by handing an inductive declaration straight to the kernel from a metaprogram, not from ordinary Lean source. It is the right thing to hold next to the Lean 4 certificates OpenAI shipped for its ten results the same day.",
+      "citations": [
+        {
+          "label": "Leonardo de Moura - Postmortem for kernel soundness bug #14576",
+          "url": "https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/"
+        },
+        {
+          "label": "GitHub - lean4 issue #14576, kernel accepts wrong-structure projections",
+          "url": "https://github.com/leanprover/lean4/issues/14576"
+        }
+      ]
+    },
+    {
+      "lead": "DeepSeek's V4-Flash exits preview with new post-training, unchanged price",
+      "body": "DeepSeek moved V4-Flash out of preview on Friday, July 31 and put the 0731 build behind the same `deepseek-v4-flash` API name, so callers get the new checkpoint without changing a line. The architecture did not move: 284B total parameters with 13B active per token, one shared expert plus 256 routed experts per layer with six routed experts firing per token, and a one-million-token context. The Hugging Face repository reports 304B because it carries a DSpark speculative-decoding draft module on top of that 284B base, and the weights are MIT-licensed. What changed is the post-training pass, re-run on agent and coding data. DeepSeek's own before-and-after columns put Terminal-Bench 2.1 at 82.7 against the preview's 61.8, NL2Repo at 54.2 against 39.4, Cybergym at 76.7 against 38.7, DeepSWE at 54.4 against 7.3 and Toolathlon-Verified at 70.3 against 49.7, and it claims the smaller Flash now beats the V4-Pro preview on every agentic benchmark it published. The checkpoint also speaks the Responses API natively and is tuned for Codex, and exposes low, high and max reasoning effort with a 384K output ceiling at the top two settings. Pricing is where the preview left it: $0.14 per million input tokens on a cache miss, $0.0028 on a cache hit and $0.28 per million output tokens. Every one of those benchmark figures is vendor-reported on a harness nobody outside DeepSeek has run.",
+      "citations": [
+        {
+          "label": "Hugging Face - deepseek-ai/DeepSeek-V4-Flash-0731 model card",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"
+        },
+        {
+          "label": "MarkTechPost - DeepSeek upgrades DeepSeek-V4-Flash-0731 with major agentic and coding gains",
+          "url": "https://www.marktechpost.com/2026/07/31/deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains/"
+        }
+      ]
+    },
+    {
+      "lead": "Y Combinator open-sources qm, its multiplayer agent harness for work",
+      "body": "Y Combinator has an agent harness of its own now, and it is public. The `qm` repository — described as a multiplayer agent harness for work, in Slack and on the web — was created on July 29 under an MIT licence and announced on Friday, July 31; by Saturday, August 1 it was at roughly 5,300 stars and 547 forks, with commits still landing. The design argument is scope rather than capability: every person and every room gets its own memory, files, keychain view, permissions, cron jobs, web apps and a durable sandbox in which installed tools stay installed, instead of the single-user, single-session model most coding harnesses assume. It is deliberately not tied to one vendor — the same workspace can run Pi, OpenCode, Codex or Claude Code and switch between them — and it ships three security postures: Strict, where every tool call waits for approval; Auto, the default, which screens content; and Dangerous, which screens nothing and never pauses. The stack is TypeScript on Fastify with Postgres behind it and a web interface built on Vite and Lit, and the README makes a point of keeping the core byte-identical to upstream so a company can run a private fork and still track releases.",
+      "citations": [
+        {
+          "label": "GitHub - yc-software/qm, multiplayer agent harness for work",
+          "url": "https://github.com/yc-software/qm"
+        }
+      ]
+    },
+    {
+      "lead": "The EU AI Act's transparency rules apply from Sunday, August 2",
+      "body": "The EU AI Act's transparency obligations begin to apply on Sunday, August 2. Article 50 requires providers to tell people when they are dealing with an AI system unless that is obvious to a reasonably informed person, and to mark synthetic audio, image, video and text in a machine-readable format as artificially generated or manipulated. It requires deployers to notify people exposed to emotion-recognition or biometric-categorisation systems, to disclose deepfake material with carve-outs for creative work, and to disclose AI-generated text published on matters of public interest unless a human editor signed off on it. There is one grace period and it is narrow: systems already placed on the market before August 2 have until December 2 this year to implement the machine-readable marking under Article 50(2), and that extension covers nothing else in the article. Breaches carry fines of up to €15 million or 3% of worldwide annual turnover, whichever is higher. The high-risk regime that used to share the August 2, 2026 date has moved out from under it — the Digital Omnibus on AI pushed stand-alone Annex III systems, the ones covering employment, creditworthiness, education, biometrics and essential services, to December 2, 2027, and high-risk AI embedded in regulated products to August 2, 2028. That leaves labelling, not conformity assessment, as the live deadline for anyone shipping generative output into the EU.",
+      "citations": [
+        {
+          "label": "European Commission - Regulatory framework for AI, application timeline",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+        },
+        {
+          "label": "Jones Walker - Yes, August 2 still matters: the EU approved a high-risk AI delay but most transparency obligations remain",
+          "url": "https://www.joneswalker.com/en/insights/blogs/ai-law-blog/yes-august-2-still-matters-the-eu-approved-a-high-risk-ai-delay-but-most-trans.html"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "OpenAI says an unreleased model solved ten old problems",
+    "A bug in Lean let a program prove something false",
+    "DeepSeek's small model exits preview, price unchanged",
+    "Y Combinator releases its own agent tool for teams",
+    "Europe's new AI labelling rules start tomorrow"
+  ]
+}

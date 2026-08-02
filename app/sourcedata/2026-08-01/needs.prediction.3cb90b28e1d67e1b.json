@@ -1,0 +1,114 @@
+[
+  {
+    "actor": "Hosted-API model lifecycle product manager, DeepSeek platform",
+    "job": "Deciding how V4-Flash checkpoints are addressed after the 0731 build replaced the preview behind the unchanged deepseek-v4-flash name.",
+    "outcome": "A second, version-identified V4-Flash model id in the API model list, served alongside the floating name with no announced shutdown date.",
+    "motivation": "Customers who qualified the preview now hold sign-offs their API key cannot reach, and a pinned id is the cheapest answer.",
+    "task": {
+      "who": "DeepSeek API platform product management and model release owners",
+      "what": "Specify a two-address scheme for V4-Flash",
+      "where": "DeepSeek platform roadmap and model-naming design review",
+      "when": "Q4 2026",
+      "why": "A single address hides checkpoint substitution from paying callers",
+      "how": "Dated immutable id strings mapped to one frozen checkpoint"
+    }
+  },
+  {
+    "actor": "API gateway and model-routing engineer, DeepSeek serving platform",
+    "job": "Building the binding that resolves a model string to a checkpoint, today one floating name that silently re-based callers onto the 0731 build.",
+    "outcome": "Routing that holds one string immutable against a named checkpoint while the floating name keeps advancing, both live on the same endpoint.",
+    "motivation": "Without a routing layer addressing two checkpoints at once, the decision to publish a pinned id has nothing to ship on.",
+    "task": {
+      "who": "DeepSeek API gateway, model registry and request-routing engineers",
+      "what": "Bind an immutable model string to one checkpoint",
+      "where": "DeepSeek model registry and request-routing layer",
+      "when": "October 2026",
+      "why": "The floating name cannot also promise a fixed build",
+      "how": "Model registry entries keyed to checkpoint digests, not aliases"
+    }
+  },
+  {
+    "actor": "Inference serving and fleet capacity engineer, DeepSeek hosted platform",
+    "job": "Planning how long the superseded V4-Flash preview weights stay resident and routable on serving hardware now carrying the re-tuned 0731 checkpoint.",
+    "outcome": "An older checkpoint kept warm and addressable, so a version-identified id has something to serve rather than pointing at a retired build.",
+    "motivation": "If the earlier build stops being served entirely, no second address can exist and the two-address scheme fails on capacity alone.",
+    "task": {
+      "who": "DeepSeek inference infrastructure and serving capacity planning staff",
+      "what": "Reserve capacity for a superseded V4-Flash checkpoint",
+      "where": "DeepSeek inference fleet capacity and retirement planning",
+      "when": "Q3 2026",
+      "why": "A pinned id needs live weights behind it",
+      "how": "Checkpoint residency budgets weighed against current-model serving demand"
+    }
+  },
+  {
+    "actor": "Commercial and pricing lead for hosted inference, DeepSeek API business",
+    "job": "Deciding whether a frozen-checkpoint address is sold as a re-priced tier or handed over free, after the preview rates were held flat.",
+    "outcome": "A pinned V4-Flash id offered at the existing rate card, removing the pricing objection that would otherwise keep it unpublished.",
+    "motivation": "Holding the price flat across a better checkpoint spent the lever for charging for a pin, leaving publication as the cheapest concession.",
+    "task": {
+      "who": "DeepSeek pricing, revenue and API commercial policy owners",
+      "what": "Price a frozen-checkpoint address against current rates",
+      "where": "DeepSeek rate card and margin review for hosted inference",
+      "when": "November 2026",
+      "why": "A free pin retains buyers a re-price would lose",
+      "how": "Margin models comparing pinned-route cost to churn exposure"
+    }
+  },
+  {
+    "actor": "Developer documentation writer for model and pricing pages, DeepSeek API platform",
+    "job": "Maintaining the model list and pricing tables that are the only artifact settling which V4-Flash checkpoints a caller can address.",
+    "outcome": "A documented model-id entry stating the pinned string keeps serving one specific checkpoint, published beside the floating name without an expiry.",
+    "motivation": "Documentation, not a release note, is what a buyer's change-control process can cite when it needs tomorrow to return what today returned.",
+    "task": {
+      "who": "DeepSeek developer documentation and API reference maintainers",
+      "what": "Publish a pinned V4-Flash id in model docs",
+      "where": "DeepSeek API model list and pricing documentation pages",
+      "when": "December 2026",
+      "why": "Only first-party documentation settles what the endpoint promises",
+      "how": "Model reference table entries with per-id checkpoint descriptions"
+    }
+  },
+  {
+    "actor": "Enterprise account and developer-support lead, DeepSeek API platform",
+    "job": "Fielding escalations from callers whose agents changed behaviour when deepseek-v4-flash began returning the 0731 checkpoint on an unchanged invoice.",
+    "outcome": "A prioritised internal request for a version-identified id, carrying named accounts that cannot re-qualify on the vendor's schedule.",
+    "motivation": "Support tickets are the only place the missing invoice signal surfaces, since a flat price told no one the artifact had changed.",
+    "task": {
+      "who": "DeepSeek enterprise account management and developer support staff",
+      "what": "Escalate customer demand for a frozen V4-Flash address",
+      "where": "DeepSeek support queue and platform product backlog",
+      "when": "August 2026",
+      "why": "Churn risk turns a naming question into a roadmap item",
+      "how": "Ticket triage tagging re-base complaints against named accounts"
+    }
+  },
+  {
+    "actor": "Model risk and change-control lead for production agent deployments, enterprise AI buyer",
+    "job": "Re-qualifying a production agent whose sign-off described the V4-Flash preview, after the same API name began returning a re-tuned checkpoint.",
+    "outcome": "A filed change-control finding and a stated supplier requirement for an immutable model id, raised with DeepSeek before the next re-base.",
+    "motivation": "A sign-off naming an artifact the API key can no longer reach is not a control, and the next audit will say so.",
+    "task": {
+      "who": "Enterprise model risk, platform engineering and vendor management staff",
+      "what": "File a pinned-model-id requirement against the DeepSeek endpoint",
+      "where": "Internal change-control record and the DeepSeek support channel",
+      "when": "September 2026",
+      "why": "Buyer-side demand is what makes publishing a pin worthwhile",
+      "how": "Regression-suite diffs between the preview and 0731 behaviour"
+    }
+  },
+  {
+    "actor": "Model platform product manager at a metered hosted-inference vendor",
+    "job": "Continuing to ship dated, immutable model ids beside floating aliases, with published deprecation windows, as the standing convention for hosted models.",
+    "outcome": "A market baseline in which one address per model reads as a disclosure gap rather than a deliberately short product menu.",
+    "motivation": "Buyers comparing endpoints price reproducibility as a feature, so vendors keep the two-address convention visible in their own documentation.",
+    "task": {
+      "who": "Model lifecycle product management and API documentation teams at hosted-inference vendors",
+      "what": "Publish dated model ids with stated deprecation windows",
+      "where": "Vendor model catalogues and deprecation policy pages",
+      "when": "H2 2026",
+      "why": "Convention makes a single floating address look like an omission",
+      "how": "Versioned model catalogues with per-id availability commitments"
+    }
+  }
+]

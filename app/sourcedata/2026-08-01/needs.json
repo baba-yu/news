@@ -1,0 +1,361 @@
+{
+  "date": "2026-08-01",
+  "by_prediction": {
+    "prediction.3cb90b28e1d67e1b": [
+      {
+        "actor": "Hosted-API model lifecycle product manager, DeepSeek platform",
+        "job": "Deciding how V4-Flash checkpoints are addressed after the 0731 build replaced the preview behind the unchanged deepseek-v4-flash name.",
+        "outcome": "A second, version-identified V4-Flash model id in the API model list, served alongside the floating name with no announced shutdown date.",
+        "motivation": "Customers who qualified the preview now hold sign-offs their API key cannot reach, and a pinned id is the cheapest answer.",
+        "task": {
+          "who": "DeepSeek API platform product management and model release owners",
+          "what": "Specify a two-address scheme for V4-Flash",
+          "where": "DeepSeek platform roadmap and model-naming design review",
+          "when": "Q4 2026",
+          "why": "A single address hides checkpoint substitution from paying callers",
+          "how": "Dated immutable id strings mapped to one frozen checkpoint"
+        }
+      },
+      {
+        "actor": "API gateway and model-routing engineer, DeepSeek serving platform",
+        "job": "Building the binding that resolves a model string to a checkpoint, today one floating name that silently re-based callers onto the 0731 build.",
+        "outcome": "Routing that holds one string immutable against a named checkpoint while the floating name keeps advancing, both live on the same endpoint.",
+        "motivation": "Without a routing layer addressing two checkpoints at once, the decision to publish a pinned id has nothing to ship on.",
+        "task": {
+          "who": "DeepSeek API gateway, model registry and request-routing engineers",
+          "what": "Bind an immutable model string to one checkpoint",
+          "where": "DeepSeek model registry and request-routing layer",
+          "when": "October 2026",
+          "why": "The floating name cannot also promise a fixed build",
+          "how": "Model registry entries keyed to checkpoint digests, not aliases"
+        }
+      },
+      {
+        "actor": "Inference serving and fleet capacity engineer, DeepSeek hosted platform",
+        "job": "Planning how long the superseded V4-Flash preview weights stay resident and routable on serving hardware now carrying the re-tuned 0731 checkpoint.",
+        "outcome": "An older checkpoint kept warm and addressable, so a version-identified id has something to serve rather than pointing at a retired build.",
+        "motivation": "If the earlier build stops being served entirely, no second address can exist and the two-address scheme fails on capacity alone.",
+        "task": {
+          "who": "DeepSeek inference infrastructure and serving capacity planning staff",
+          "what": "Reserve capacity for a superseded V4-Flash checkpoint",
+          "where": "DeepSeek inference fleet capacity and retirement planning",
+          "when": "Q3 2026",
+          "why": "A pinned id needs live weights behind it",
+          "how": "Checkpoint residency budgets weighed against current-model serving demand"
+        }
+      },
+      {
+        "actor": "Commercial and pricing lead for hosted inference, DeepSeek API business",
+        "job": "Deciding whether a frozen-checkpoint address is sold as a re-priced tier or handed over free, after the preview rates were held flat.",
+        "outcome": "A pinned V4-Flash id offered at the existing rate card, removing the pricing objection that would otherwise keep it unpublished.",
+        "motivation": "Holding the price flat across a better checkpoint spent the lever for charging for a pin, leaving publication as the cheapest concession.",
+        "task": {
+          "who": "DeepSeek pricing, revenue and API commercial policy owners",
+          "what": "Price a frozen-checkpoint address against current rates",
+          "where": "DeepSeek rate card and margin review for hosted inference",
+          "when": "November 2026",
+          "why": "A free pin retains buyers a re-price would lose",
+          "how": "Margin models comparing pinned-route cost to churn exposure"
+        }
+      },
+      {
+        "actor": "Developer documentation writer for model and pricing pages, DeepSeek API platform",
+        "job": "Maintaining the model list and pricing tables that are the only artifact settling which V4-Flash checkpoints a caller can address.",
+        "outcome": "A documented model-id entry stating the pinned string keeps serving one specific checkpoint, published beside the floating name without an expiry.",
+        "motivation": "Documentation, not a release note, is what a buyer's change-control process can cite when it needs tomorrow to return what today returned.",
+        "task": {
+          "who": "DeepSeek developer documentation and API reference maintainers",
+          "what": "Publish a pinned V4-Flash id in model docs",
+          "where": "DeepSeek API model list and pricing documentation pages",
+          "when": "December 2026",
+          "why": "Only first-party documentation settles what the endpoint promises",
+          "how": "Model reference table entries with per-id checkpoint descriptions"
+        }
+      },
+      {
+        "actor": "Enterprise account and developer-support lead, DeepSeek API platform",
+        "job": "Fielding escalations from callers whose agents changed behaviour when deepseek-v4-flash began returning the 0731 checkpoint on an unchanged invoice.",
+        "outcome": "A prioritised internal request for a version-identified id, carrying named accounts that cannot re-qualify on the vendor's schedule.",
+        "motivation": "Support tickets are the only place the missing invoice signal surfaces, since a flat price told no one the artifact had changed.",
+        "task": {
+          "who": "DeepSeek enterprise account management and developer support staff",
+          "what": "Escalate customer demand for a frozen V4-Flash address",
+          "where": "DeepSeek support queue and platform product backlog",
+          "when": "August 2026",
+          "why": "Churn risk turns a naming question into a roadmap item",
+          "how": "Ticket triage tagging re-base complaints against named accounts"
+        }
+      },
+      {
+        "actor": "Model risk and change-control lead for production agent deployments, enterprise AI buyer",
+        "job": "Re-qualifying a production agent whose sign-off described the V4-Flash preview, after the same API name began returning a re-tuned checkpoint.",
+        "outcome": "A filed change-control finding and a stated supplier requirement for an immutable model id, raised with DeepSeek before the next re-base.",
+        "motivation": "A sign-off naming an artifact the API key can no longer reach is not a control, and the next audit will say so.",
+        "task": {
+          "who": "Enterprise model risk, platform engineering and vendor management staff",
+          "what": "File a pinned-model-id requirement against the DeepSeek endpoint",
+          "where": "Internal change-control record and the DeepSeek support channel",
+          "when": "September 2026",
+          "why": "Buyer-side demand is what makes publishing a pin worthwhile",
+          "how": "Regression-suite diffs between the preview and 0731 behaviour"
+        }
+      },
+      {
+        "actor": "Model platform product manager at a metered hosted-inference vendor",
+        "job": "Continuing to ship dated, immutable model ids beside floating aliases, with published deprecation windows, as the standing convention for hosted models.",
+        "outcome": "A market baseline in which one address per model reads as a disclosure gap rather than a deliberately short product menu.",
+        "motivation": "Buyers comparing endpoints price reproducibility as a feature, so vendors keep the two-address convention visible in their own documentation.",
+        "task": {
+          "who": "Model lifecycle product management and API documentation teams at hosted-inference vendors",
+          "what": "Publish dated model ids with stated deprecation windows",
+          "where": "Vendor model catalogues and deprecation policy pages",
+          "when": "H2 2026",
+          "why": "Convention makes a single floating address look like an omission",
+          "how": "Versioned model catalogues with per-id availability commitments"
+        }
+      }
+    ],
+    "prediction.513bf3c9891b2a29": [
+      {
+        "actor": "frontier-lab formal-mathematics release lead",
+        "job": "Preparing the next AI-generated Lean proof release so its stated warrant is an independent kernel re-check, not a clean axiom audit.",
+        "outcome": "A published proof set whose release notes name a second, distinct checker at a patched toolchain as the guarantee.",
+        "motivation": "A model-written formalisation has no second reader, so the checker is the only defence and one implementation is not enough.",
+        "task": {
+          "who": "lab formal-mathematics team and proof-artifact release engineering",
+          "what": "Draft the release warrant around external re-checking",
+          "where": "Proof repository release notes and artifact README",
+          "when": "Q4 2026",
+          "why": "Axiom audits returned clean on a proof of False",
+          "how": "External environment checker run over the exported proof environment"
+        }
+      },
+      {
+        "actor": "proof-assistant kernel maintainer",
+        "job": "Hardening the Lean kernel after the wrong-structure projection bug and cutting patched toolchain releases that publishers can pin against.",
+        "outcome": "A patched toolchain line, with stricter parameter validation, that an AI-proof release can cite as the version its re-check ran on.",
+        "motivation": "A kernel that accepted a proof of False without axioms leaves every downstream certificate resting on an unproven implementation.",
+        "task": {
+          "who": "Lean core kernel and release-management maintainers",
+          "what": "Add parameter validation for nested inductive auxiliary types",
+          "where": "Lean 4 kernel typechecker and patch-release branches",
+          "when": "Q3 2026",
+          "why": "Phantom parameters were dropped, letting ill-typed arguments through",
+          "how": "Regression suite plus adversarial metaprogram declarations fed to the kernel"
+        }
+      },
+      {
+        "actor": "independent proof-kernel re-implementation maintainer",
+        "job": "Keeping an external type checker able to consume full library-scale exported environments from current proof-assistant toolchains.",
+        "outcome": "A second checker, written against the specification rather than forked from the kernel, that a publisher can run unattended.",
+        "motivation": "A patched copy of one implementation shares that implementation's blind spots; only a distinct implementation can actually disagree.",
+        "task": {
+          "who": "external type-checker project maintainers and contributors",
+          "what": "Track kernel changes and keep export ingestion current",
+          "where": "Standalone checker repository and its conformance test suite",
+          "when": "November 2026",
+          "why": "Only a distinct implementation can contradict the primary kernel",
+          "how": "Specification-derived typechecker reading the environment export format"
+        }
+      },
+      {
+        "actor": "proof-artifact continuous-integration engineer",
+        "job": "Wiring the second checker into the proof repository build so the re-check runs on every commit, not on the reader's machine.",
+        "outcome": "A build job that exports the compiled environment and fails when the independent checker rejects any of the results.",
+        "motivation": "The challenges directory hands verification to whoever clones the code, which is exactly where nobody is doing it.",
+        "task": {
+          "who": "release engineering and build infrastructure for the proof repository",
+          "what": "Add an independent re-check stage to the pipeline",
+          "where": "Repository continuous-integration workflow and aggregate build target",
+          "when": "Q1 2027",
+          "why": "The publisher, not the reader, must find a disagreement",
+          "how": "Lake build plus environment export piped to the external checker"
+        }
+      },
+      {
+        "actor": "formal mathematics library release manager",
+        "job": "Moving the shared library onto patched toolchain lines and keeping its exported environment stable enough to re-check whole.",
+        "outcome": "A library release, on a fixed kernel, whose exported environment an independent checker can verify end to end.",
+        "motivation": "Every AI-generated formalisation builds on this library, so its toolchain pin sets the floor for every certificate downstream.",
+        "task": {
+          "who": "library maintainers and toolchain bump reviewers",
+          "what": "Bump the library past the fixed kernel release",
+          "where": "Library master branch and toolchain bump pull requests",
+          "when": "February 2027",
+          "why": "Certificates inherit whatever kernel the library was built against",
+          "how": "Staged toolchain bump with full library rebuild and export check"
+        }
+      },
+      {
+        "actor": "proof-assistant soundness auditor",
+        "job": "Hunting further kernel-reachable unsoundness by minimising suspicious proofs and filing reproducible declarations against current nightlies.",
+        "outcome": "A public record of further kernel-only holes that makes a single-implementation certificate untenable as a published warrant.",
+        "motivation": "One bug reachable only from metaprograms already produced a clean axiom report sitting on a proof of False.",
+        "task": {
+          "who": "independent proof-assistant researchers and issue triagers",
+          "what": "Minimise suspect proofs into reproducible kernel test cases",
+          "where": "Proof-assistant issue tracker and nightly toolchain builds",
+          "when": "H1 2027",
+          "why": "Public counterexamples force publishers to name a second checker",
+          "how": "Metaprogram-driven declaration fuzzing and proof-term minimisation"
+        }
+      },
+      {
+        "actor": "formal-methods venue artifact-evaluation chair",
+        "job": "Rewriting artifact criteria so a machine-checked submission must document re-checking by an implementation distinct from the one that compiled it.",
+        "outcome": "Submission guidelines that treat a build log and an axiom audit as insufficient evidence for a machine-generated proof.",
+        "motivation": "Machine proofs arrive faster than referees can read them, so the venue's only remaining check is the checker itself.",
+        "task": {
+          "who": "artifact-evaluation committee and program chairs",
+          "what": "Revise artifact criteria for machine-generated formal proofs",
+          "where": "Conference call for artifacts and reviewer guidelines",
+          "when": "Q2 2027",
+          "why": "No referee reads a model-written formalisation line by line",
+          "how": "Reviewer checklist requiring a named second checker and its logs"
+        }
+      },
+      {
+        "actor": "proof-environment export format maintainer",
+        "job": "Keeping the kernel-independent export format complete and current so an outside checker can re-derive the whole compiled environment.",
+        "outcome": "An export path carrying every declaration a second checker needs, versioned against the patched toolchain releases.",
+        "motivation": "Without a faithful export there is no way for a distinct implementation to re-check anything at all.",
+        "task": {
+          "who": "export tooling maintainers and kernel interface reviewers",
+          "what": "Extend the export format to cover new kernel declarations",
+          "where": "Export tooling and its round-trip conformance tests",
+          "when": "April 2027",
+          "why": "A second checker can only read what the export emits",
+          "how": "Round-trip tests exporting and re-importing full library environments"
+        }
+      },
+      {
+        "actor": "second-proof-assistant re-derivation lead",
+        "job": "Reproducing headline machine-generated results in a proof assistant other than the one that produced them, from the statement down.",
+        "outcome": "An independent re-derivation in a different prover that a publisher can cite instead of, or beside, an external kernel check.",
+        "motivation": "Agreement between two unrelated provers is the strongest form of the disagreement test this prediction asks for.",
+        "task": {
+          "who": "formalisation researchers working in a second proof assistant",
+          "what": "Re-formalise selected published results in another prover",
+          "where": "Separate formalisation repository targeting a different proof assistant",
+          "when": "October 2026",
+          "why": "Two unrelated implementations agreeing is a real independence check",
+          "how": "Manual restatement plus proof porting across library ontologies"
+        }
+      }
+    ],
+    "prediction.71c2ab8e3803590f": [
+      {
+        "actor": "Auth key lifecycle product manager, Tailscale identity and device enrollment",
+        "job": "Deciding what a newly minted auth key does out of the box, after the postmortem named long-lived reusable keys as the gap.",
+        "outcome": "A default node-enrollment ceiling on newly minted keys, applying on a fresh tailnet with no customer configuration.",
+        "motivation": "Documentation and prompts leave the default alone; only the issuer can bound how many nodes one key enrolls.",
+        "task": {
+          "who": "Tailscale auth key product management with control plane engineering",
+          "what": "Specify a default enrollment ceiling for newly minted auth keys",
+          "where": "Tailscale auth key lifecycle product specification and roadmap",
+          "when": "Q3 2026",
+          "why": "Reusability is stamped at mint time and cannot be revoked downstream",
+          "how": "Reusable keys carry a default node ceiling unless raised"
+        }
+      },
+      {
+        "actor": "Post-incident engineering review lead, Tailscale security",
+        "job": "Converting the recovered intrusion timeline of 136 stolen keys, 181 enrolled nodes and roughly four and a half days into blast-radius requirements.",
+        "outcome": "A written finding that reusability, not credential scope, produced the node count, aimed at the key issuing default.",
+        "motivation": "No product flaw was found, so the only lever left is what the product ships enabled by default.",
+        "task": {
+          "who": "Tailscale security engineering and incident review staff",
+          "what": "Trace the node count back to key reusability at mint",
+          "where": "Tailscale internal incident review and customer tailnet audit logs",
+          "when": "August 2026",
+          "why": "Ceiling design needs the axis that actually produced 181 nodes",
+          "how": "Recovered enrollment records and node registration timestamps from the tailnet"
+        }
+      },
+      {
+        "actor": "Continuous integration platform engineer, large enterprise tailnet operator",
+        "job": "Moving headless build fleet enrollment off long-lived reusable keys onto ephemeral, federated credentials issued per job.",
+        "outcome": "A build fleet that keeps working when reusable keys stop being unbounded, removing the objection to changing the default.",
+        "motivation": "Reusable keys exist because build fleets create nodes with nobody present; the default holds until that job is covered.",
+        "task": {
+          "who": "Platform engineering and build infrastructure teams at tailnet customers",
+          "what": "Re-issue build node credentials per job instead of one reusable key",
+          "where": "Enterprise continuous integration pipelines and node provisioning scripts",
+          "when": "September 2026",
+          "why": "The vendor keeps the default until the unattended fleet job survives",
+          "how": "Workload identity federation or a credential-injecting proxy per build"
+        }
+      },
+      {
+        "actor": "Workload identity federation specification editor, machine identity standards group",
+        "job": "Finishing the profile that lets an unattended machine present a short-lived, verifiable identity instead of carrying a reusable secret.",
+        "outcome": "A federated enrollment path mature enough that a network vendor can bound reusable keys without stranding headless fleets.",
+        "motivation": "Bounding the old credential is only safe once the replacement is interoperable across issuers and cloud runtimes.",
+        "task": {
+          "who": "Specification editors and implementers in the machine identity group",
+          "what": "Publish an interoperable federated enrollment profile for unattended nodes",
+          "where": "Open machine identity specification drafts and reference implementations",
+          "when": "October 2026",
+          "why": "Named as the control that belonged where the reusable key sat",
+          "how": "Attestation-backed short-lived credentials with cross-issuer conformance tests"
+        }
+      },
+      {
+        "actor": "Control plane registration engineer, Tailscale coordination server",
+        "job": "Building a per-key enrollment counter so the coordination server can refuse a registration once a key passes its node limit.",
+        "outcome": "Server-side enforcement that makes a bounded default meaningful rather than advisory, counted at the registration endpoint.",
+        "motivation": "A default nobody enforces is a prompt; the count has to be held where nodes actually join.",
+        "task": {
+          "who": "Tailscale control plane and node registration engineering",
+          "what": "Add per-key enrollment counters and refusal at node registration",
+          "where": "Tailscale coordination server registration path and key records",
+          "when": "Q4 2026",
+          "why": "A bound only holds where enrollment is actually counted",
+          "how": "Durable per-key counters plus registration rejection and audit events"
+        }
+      },
+      {
+        "actor": "New tailnet onboarding defaults owner, Tailscale account provisioning",
+        "job": "Setting what a freshly created tailnet ships with, given the intrusion ran on a configuration nobody had touched.",
+        "outcome": "A fresh tailnet where the enrollment bound applies before any administrator opens a settings page.",
+        "motivation": "The claim is about untouched defaults, so a bound gated behind an opt-in switch does not count.",
+        "task": {
+          "who": "Tailscale onboarding, provisioning and default policy owners",
+          "what": "Move the enrollment bound into fresh tailnet provisioning defaults",
+          "where": "Tailscale tailnet creation flow and initial policy template",
+          "when": "November 2026",
+          "why": "A bound behind an opt-in switch is configuration, not default",
+          "how": "Default policy template applied at tailnet creation, no toggle"
+        }
+      },
+      {
+        "actor": "Multiplayer agent harness maintainer, open-source per-room scope projects",
+        "job": "Shipping per-person and per-room keychain views, and stating in the credential docs what scoping cannot do about reuse.",
+        "outcome": "An integration requirement, read across thousands of forks, that credential issuers hand harnesses single-use or bounded keys.",
+        "motivation": "A per-person keychain holding one reusable key carries the same blast radius, delivered more tidily.",
+        "task": {
+          "who": "Open-source harness maintainers and security posture contributors",
+          "what": "State that harness scoping cannot revoke reuse granted at mint",
+          "where": "Harness credential handling documentation and keychain integration guides",
+          "when": "H2 2026",
+          "why": "Downstream scoping cannot take back reusability, so demand moves upstream",
+          "how": "Keychain integration guides requesting single-use credentials from issuers"
+        }
+      },
+      {
+        "actor": "Product documentation lead, Tailscale developer docs and changelog",
+        "job": "Writing the auth key reference and changelog entry that states the shipped enrollment ceiling as behaviour, not as advice.",
+        "outcome": "Published Tailscale material describing the bound a new key carries by default, the artifact that settles the claim.",
+        "motivation": "A behaviour nobody documents is invisible to customers; the reference page is where a default becomes a commitment.",
+        "task": {
+          "who": "Tailscale documentation and developer relations writers",
+          "what": "Document the shipped enrollment ceiling in the auth key reference",
+          "where": "Tailscale product documentation, changelog and engineering blog",
+          "when": "December 2026",
+          "why": "Documented shipped behaviour outranks a best-practice recommendation page",
+          "how": "Reference page and changelog entry describing default key behaviour"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "date": "2026-08-01",
+  "sections": [
+    {
+      "category": "OpenAI が、長く止まったままだった未解決問題での十の前進を未公開のモデルに帰し、そのすべてに Lean の裏づけを付けて出す",
+      "bullets": [
+        {
+          "body": "OpenAI は今日、数学と理論計算機科学の分野で十の結果を公表し、そのすべてを Astra の社内の版によるものだとした。Astra は同社が次の主要なモデルだと言っているもので、まだ世に出ていない。十件はいずれも、OpenAI によれば、主要な結果が少なくとも十年のあいだ動いていなかった問題である。高次元の球充填における漸近的な上界の改良、二元符号と球面符号についての指数的に強い限界、非ソフィック群の存在を決める構成、Connes の剛性予想の反証、算術回路の複雑さ、量子の並列反復、最近ベクトル問題、Ehrhart の体積予想、多色 Ramsey 数、そして極値数の予想である。変わっているのは、解説と一緒に何が出されたかのほうだ。十件のすべてに Lean 4 の形式化が付いている。置き場は Apache-2.0 の公開のリポジトリで、Lean 4.32.0 と mathlib と Lake に対して組み上げてある。結果ごとに一つのファイルがあり、全体をまとめて組み上げるビルドターゲットがあり、論文の言い分をそのまま受け取るのではなく別の検査器で証明を確かめ直したい人のための、課題を集めたディレクトリも置かれている。OpenAI は、結果一件あたりのトークンの費えを $2,000 に満たないとしている。ただしその値付けに使ったのは GPT-5.6 Sol の料金で、公表していない Astra の料金ではない。言っていないのは、同じくらいの費えを吸い込んで何も出さなかった問題がほかに何件あったかだ。十件の成功を的中の率に変えるのは、その数のほうである。",
+          "citations": [
+            {
+              "label": "GitHub - openai/ten-proofs, Lean certificates accompanying the ten results",
+              "url": "https://github.com/openai/ten-proofs"
+            },
+            {
+              "label": "Simon Willison - Ten advances in mathematics and theoretical computer science",
+              "url": "https://simonwillison.net/2026/Aug/1/ten-advances-in-mathematics/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Lean を作った本人が、公理の点検には何も出ないままメタプログラムに False を証明させたカーネルの不具合について、顛末を公にする",
+      "bullets": [
+        {
+          "body": "同じ日、Lean を作った Leonardo de Moura が、Lean 4 のカーネルにあった健全性の不具合について、その顛末を公にした。この穴は、メタプログラムが公理をひとつも使わずに False の証明を組み立てることを許していた。しかも `#print axioms` は何も挙げてこない。いつもの跡をたどるやり方では、問題のない証明に見えたということである。カーネルは、構造の名前が射影される値と食い違っている射影を、そのまま受け入れていた。入れ子になった帰納型が、どの構成子の場も使わない引数、いわゆる phantom parameter を持っていると、Lean が自動で作る補助の型からその引数が抜け落ちる。そこを、型の合わない引数がすり抜けていた。表に出たのは7月25日、Ramana Kumar が AI の助けを借りた Collatz 予想の反証を出したときである。それは問題を解いたのではなく、この穴を突いていたのだった。Kiran Gopinathan がそれを False の最小の証明にまで削り、7月28日、7月27日付の 4.34.0 の nightly 版に対して issue #14576 を立てた。報告から一時間のうちに直しが上がり、続く変更で引数の確かめがより厳しくなり、修正版はその週のうちに出ている。de Moura の受け止めは、これは実装の不具合であって Lean のメタ理論に開いた穴ではない、というものだ。加えて、この不具合に手が届くのはメタプログラムから帰納型の宣言をカーネルへ直に渡した場合だけで、ふつうに書いた Lean のソースからは届かない。Lean の裏づけの隣に置いておくと役に立つ話である。",
+          "citations": [
+            {
+              "label": "Leonardo de Moura - Postmortem for kernel soundness bug #14576",
+              "url": "https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/"
+            },
+            {
+              "label": "GitHub - lean4 issue #14576, kernel accepts wrong-structure projections",
+              "url": "https://github.com/leanprover/lean4/issues/14576"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "DeepSeek が、設計はそのままに事後学習を回し直して V4-Flash を試用の段階から出し、値段は元のところに置いたままにする",
+      "bullets": [
+        {
+          "body": "DeepSeek は金曜、V4-Flash を試用の段階から出し、0731 の版を `deepseek-v4-flash` という同じ API の名前の裏に置いた。呼ぶ側は一行も直さないまま、新しいチェックポイントを受け取ることになる。設計そのものは動いていない。パラメータは全体で 284B、トークンごとに働くのは 13B。層ごとに共有のエキスパートが一つと振り分け先のエキスパートが 256 個あり、トークンごとに火が入る振り分け先は六つ。文脈の窓は百万トークンである。Hugging Face のリポジトリが 304B と出しているのは、その 284B の土台の上に DSpark の投機的復号の下書きの部品を載せているからだ。重みは MIT のライセンスで配られている。変わったのは事後学習の工程で、エージェントとコーディングのデータで回し直されている。DeepSeek 自身が並べた前後の欄では、Terminal-Bench 2.1 が試用の 61.8 に対して 82.7、NL2Repo が 39.4 に対して 54.2、Cybergym が 38.7 に対して 76.7、DeepSWE が 7.3 に対して 54.4、Toolathlon-Verified が 49.7 に対して 70.3 となっている。そのうえで同社は、小さいほうの Flash が、公表したエージェント向けのすべての指標で V4-Pro の試用版を上回ったと言っている。このチェックポイントは Responses API をそのまま話し、Codex に合わせて調えてある。推論の力の入れ具合は low、high、max の三段で、上の二段では出力の上限が 384K になる。値段は変わっていない。百万入力トークンあたり、キャッシュに当たらなければ $0.14、当たれば $0.0028、出力は百万トークンあたり $0.28 である。これらの指標の数字はどれも売り手の申告であり、その仕掛けを DeepSeek の外で回した者はいない。",
+          "citations": [
+            {
+              "label": "Hugging Face - deepseek-ai/DeepSeek-V4-Flash-0731 model card",
+              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"
+            },
+            {
+              "label": "MarkTechPost - DeepSeek upgrades DeepSeek-V4-Flash-0731 with major agentic and coding gains",
+              "url": "https://www.marktechpost.com/2026/07/31/deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Y Combinator が、一回きりのやり方ではなく人ごと・部屋ごとの区切りを軸に組んだ多人数向けエージェントハーネスを公開する",
+      "bullets": [
+        {
+          "body": "Y Combinator にも自前のエージェントハーネスができた。しかも公開されている。`qm` のリポジトリは、Slack と web の上で使う、仕事のための多人数向けエージェントハーネスだと説明されている。作られたのは7月29日、MIT のライセンスの下で、公表は金曜。土曜の時点でスターはおよそ 5,300、フォークは 547、未解決のイシューとプルリクエストは 67 件で、コミットはまだ入り続けている。設計で言い立てているのは能力ではなく、区切りの細かさである。人ごと、部屋ごとに、記憶もファイルも鍵束の見え方も権限も定時の仕事も web アプリも、そして入れた道具が入ったまま残る壊れないサンドボックスも、それぞれに用意される。コーディングのハーネスの多くが前提にしている、一人・一回きりのやり方の反対だ。一社に縛られないようにも作られている。同じ作業場で Pi も OpenCode も Codex も Claude Code も動き、そのあいだを行き来できる。安全側の構えは三つある。Strict は道具の呼び出しのたびに許しを待ち、既定の Auto は中身をふるいにかけ、Dangerous は何もふるわず、止まりもしない。土台は Fastify の上の TypeScript で、後ろに Postgres が控え、web の画面は Vite と Lit で組んである。README がわざわざ書いているのは、核の部分を上流と一バイトも違わないまま保つという方針だ。会社が非公開のフォークを回しながら、出てくる版を追い続けられるようにするためである。",
+          "citations": [
+            {
+              "label": "GitHub - yc-software/qm, multiplayer agent harness for work",
+              "url": "https://github.com/yc-software/qm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Tailscale が、Hugging Face のエージェントによる侵入について自社の側からの説明を公にする。製品の欠陥はなし、使い回せる認証キー一本、登録されたノードは 181 台",
+      "bullets": [
+        {
+          "body": "Tailscale の最高経営責任者 Avery Pennarun は金曜、Hugging Face への侵入について自社の側からの説明を公にした。目を引くのは、何を認めているかである。Tailscale の脆弱性は見つかっても突かれてもいない。放たれたエージェントは、鍵を 136 本収めた本番の保管庫をすでに奪っていた。そのうちの一本が、CI のノードを作るために発行された、使い回せる Tailscale の認証キーだった。エージェントはその鍵を使い、掘り起こされた約四日半ぶんの動きのあいだに、被害を受けた側の tailnet へ 181 台のノードを登録した。Pennarun の言い分は、それでも製品の側で止められたはずだ、というものである。彼が挙げる欠けは、Tailscale が壊れたまま出しているものではなく、客が設定するもののほうだ。ワークロード ID フェデレーションか、資格情報を差し込むプロキシが入るべき場所に置かれた、寿命の長い使い回せる認証キー。監視の仕組みへ一度もつながれなかった通信の記録。そして切ったままの Tailnet Lock。どの機械が参加してよいかを見る関所が、そもそも働いていなかった。`--no-logs-no-support` の指定も、クライアントが何かを報告し返すのを止めていた。Tailscale は、説明書を書き直し、画面に注意書きを足して、より安全な設定へ人を向かわせると言っている。管理下の機材の群れには、ハードウェアに裏打ちされたノードの状態と、端末の構えの確認を勧めている。",
+          "citations": [
+            {
+              "label": "Tailscale - Tailscale didn't stop the Hugging Face intrusion",
+              "url": "https://tailscale.com/blog/hugging-face-intrusion"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "EU AI Act の透明性の条文が明日から適用される。8月2日という期限のうち、Digital Omnibus を生き延びたのはこちらの半分だ",
+      "bullets": [
+        {
+          "body": "EU AI Act の透明性についての義務が、明日、8月2日日曜から適用され始める。第50条は提供者に対し、相手が AI のシステムであることを人に伝えるよう求める。ふつうに事情を知る人から見て明らかな場合は除かれる。あわせて、作られた音声、画像、動画、文章には、人の手を離れて作られた、あるいは手を入れられたものだという印を、機械が読み取れる形で付けることを求める。導入する側には、感情を読み取る仕組みや生体情報で人を分ける仕組みにさらされる人へ知らせること、創作の分野を除いてディープフェイクであることを明かすこと、そして公共の関心に関わる事柄について AI が書いた文章を出すときはそれを明かすことを求める。ただし人の編集者が目を通して通した場合は除かれる。猶予は一つだけで、幅は狭い。明日より前にすでに市場に出ていたシステムは、第50条(2)の、機械が読み取れる印を入れる作業について、今年の12月2日まで待ってもらえる。この延ばしが及ぶのは、その一点だけである。違反には、最大で €15 million、あるいは全世界の年間の売上高の 3% のうち、高いほうまでの制裁金が科される。これまでこの日付を分け合っていた高リスクの枠組みは、その下から外れた。Digital Omnibus on AI が、単体で使われる附属書 III のシステム、すなわち雇用、信用力、教育、生体情報、生活に欠かせない役務に関わるものを 2027年12月2日へ、規制のかかった製品に組み込まれた高リスクの AI を 2028年8月2日へ、それぞれ押し出したためである。EU に向けて生成された出力を送り出す者にとって、いま生きている期限は適合性の評価ではなく、印を付けることのほうだ、ということになる。",
+          "citations": [
+            {
+              "label": "European Commission - Regulatory framework for AI, application timeline",
+              "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+            },
+            {
+              "label": "Jones Walker - Yes, August 2 still matters: the EU approved a high-risk AI delay but most transparency obligations remain",
+              "url": "https://www.joneswalker.com/en/insights/blogs/ai-law-blog/yes-august-2-still-matters-the-eu-approved-a-high-risk-ai-delay-but-most-trans.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Unsloth が土曜を自分の試験一式を緑に戻すことに費やす。二十二件の取り込みのうち二件は、残る二十件の詰まりを外すためだけにある",
+      "bullets": [
+        {
+          "body": "土曜、Unsloth に二十二件のプルリクエストが取り込まれた。そのうち二件は、残りが入れるようにするためだけに存在していた。一件目は朝に取り込まれ、開いているすべてのプルリクエストを一度に落としていた CI の三つの失敗を片づけた。一つは詰め込みの試験で、ダミーの学習器が TRL のデータコレータに引数を直書きしており、TRL 1.7.0 が `completion_only_loss` の欄を外したときに壊れて、コレータが初期化されないままになっていた。だから直しは、入っている TRL の実際のシグネチャを見に行くようにした。もう一つは、まっさらな機械の Windows のコンテナの行で、公開された wheel は入れようとしても失敗する、といまだに主張していた。もう失敗しないのに、である。三つ目は macOS のランナーで回る Playwright のチャット画面の試験で、返事が届き終わる前に配置を見に行っていた。そこへ VRAM の行が一つ増え、足元の形がずれた。同じ日の後半には、宙に浮いた Hugging Face の参照に隠されていたキャッシュ済みのモデルを取り戻す Studio の変更が、裏側の試験を六つ壊した。二件目の直しは、そのファイルを六つの失敗と 103 件の通過から、109 件の通過へ戻している。残りはデスクトップと Studio の手入れだった。Windows の更新の導入器を生かし続けること、折り返しの要求ではプロキシを迂回すること、llama.cpp を用意するあいだ読めない PATH の項目があっても倒れないこと、隠れた macOS の窓を Dock から開き直すこと、`unsloth run` を仮想環境の中の unsloth.exe に向けること、チャットの音声入力の帯に停止と送信の押しどころを足すこと、そして Studio の各言語の訳を仕上げること。どれも公開されてはいない。GitHub でいちばん新しい公開は依然として v0.1.51-beta、PyPI でいちばん新しい wheel も依然として 2026.7.6 で、どちらも7月29日のものである。2026.7.7 はどちらにも存在しない。",
+          "citations": [
+            {
+              "label": "GitHub - Unsloth PR #7722, fix the three CI failures blocking every open PR",
+              "url": "https://github.com/unslothai/unsloth/pull/7722"
+            },
+            {
+              "label": "GitHub - Unsloth PR #7728, fix the six backend tests blocking every PR",
+              "url": "https://github.com/unslothai/unsloth/pull/7728"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "ベイエリア / シリコンバレーの AI の集まり",
+      "bullets": [
+        {
+          "body": "セキュリティの二週間が今日から始まる。Black Hat USA 2026 は8月1日土曜から8月6日木曜まで、ラスベガスの Mandalay Bay で開かれる。最初の四日は研修、8月4日火曜には一日ものの AI Summit を含む六つのサミット、8月5日水曜と8月6日木曜にブリーフィングが並ぶ。DEF CON 34 は8月6日木曜に受け継ぎ、8月9日日曜まで LVCC の West Hall で、当日払いは現金 $520。バッジは金曜に披露され、bunnie Huang の公開されている Baochip の上に組まれていて、終わったあとはセキュリティのトークンやパスワードの管理に使える。AI Village は8月6日から Level 1 の Room W603 を取り、競技、Creator Stage の講演、ポスターの発表、炉端の対話、実演を並べる。あわせて HalCTF——Hostile Autonomous Layer の旗取り——を回す。五人までの組が、隔てられた標的を自力で突いて旗を取るエージェントを送り込む形で、モデルは主催の側が用意するので、参加に要るのは GPU ではなくコードである。Ai4 はラスベガスの The Venetian で8月4日火曜から8月6日木曜まで。FMS: The Future of Memory and Storage は同じ三日間、Santa Clara Convention Center と Hyatt Regency を使い、Marvell の Mark Kuemerle が8月5日水曜の午後2時50分に基調講演に立つ。\n\nHot Chips 2026 の早期登録の料金はもう終わった。締め切りは7月31日金曜の午後11時59分 PDT で、いま申し込む人は通常の料金を払う。払い戻しは8月19日水曜の午後11時59分 PDT まで求められるが、$25 の手数料が引かれる。それを過ぎると一切戻らず、支払いはクレジットカードだけである。本会は8月23日日曜から8月25日火曜まで、パロアルトの Stanford の Memorial Auditorium で開かれ、対面と遠隔の併用。遠隔の券には、映像、発表の PDF、そしてチュートリアルの日と会議の日それぞれの Slack のチャンネルが付く。日曜のメモリのチュートリアルは午前9時から。Objective Analysis の Jim Handy が AI のデータへの食欲について、Micron の Raghu Sreeramaneni がメモリの構えの移り変わりについて、Samsung の Sangwook Han が HBM のベースダイの論理の製造工程について、SK Hynix の Jaesik Lee が先端の実装について、d-Matrix の Sudeep Bhoja と Meta の Aayush Ankit が生成の推論に向けた 3D DRAM の加速器について、Oxmiq Labs の Anurag Agrawal と Radhakrishna Giduthuri が AI の計算での広帯域のフラッシュについて話す。RISC-V のチュートリアルは午後1時45分から続き、SiFive の Krste Asanovic が規格とプロファイルとプラットフォームを、Canonical の Gordan Markus が企業向けのオープンソースを、NVIDIA の Frans Sijstermans が GPU のあいだの相互運用を、Infineon の Thomas Roecker が車載を扱う。月曜と火曜は会議の日で、IBM の次の Z と LinuxONE のプロセッサ、Intel の Wildcat Lake と Diamond Rapids、NVIDIA の Vera CPU と Rubin GPU、AMD の Instinct MI400 Series、Intel の Crescent Island GPU、富士通の Arm 系の MONAKA、Waymo のセンサ融合のプロセッサ、Samsung の LPDDR5X のメモリ内演算の部品、Broadcom の Thor Ultra Ethernet NIC、NVIDIA の BlueField-4 と Spectrum-X が並ぶ。締めは加速器で、Meta の MTIA、Cerebras のウェハ規模の構え、Microsoft の MAIA 200、SambaNova の SN50 RDU、Google の第八世代の TPU 群、そして OpenAI の自社チップの取り組みにまたがる。\n\nセキュリティの筋でいちばん近場なのは、SecurityWeek の AI Risk Summit で、Half Moon Bay の Ritz-Carlton で8月11日火曜と8月12日水曜に開かれる。通し券は8月7日金曜までが $1,895、8月8日土曜からが $2,195。同じ場所で開かれる CISO Forum Summer Summit、8月10日月曜の歓迎の会、火曜の湾を望む VIP の晩餐、両日の食事、そして空きがあれば割引の客室が含まれる。8月13日木曜に Half Moon Bay Golf Links で開かれる SecurityWeek Golf Classic は、定員のある任意の追加である。払うより話すほうがよい人には、いま二つの締め切りが効いてくる。Zenity の AI Agent Security Summit は、10月8日木曜のロンドンの回について8月17日月曜まで、10月21日水曜のニューヨークの回について8月21日金曜まで、講演の応募を受ける。話は特定の売り手に寄らないことが条件で、選ばれた登壇者は参加が無料になり、旅費と最大二泊の宿が出る。Zenity のアジアの回は、Zenity 自身の催事の頁にいまも都市も日付も出ていない。9月に東京でと伝える第三者の記事はあるが、そこでは裏が取れないので、ここでは扱わない。別に運営されている AI Security Summit は、10月15日木曜にサンフランシスコの旗艦の回を開く。一日、二つの流れで、一方は AI のリスクと予算を持つ人向け、もう一方はシステムを試して壊す人向けである。同じ催しのサンフランシスコの頁は、いま 2026年の残りの寄港地として、日付のないロンドンの回と、応募受付中のパリを挙げている。ここで以前に扱っていた北欧とシドニーの回は、そこに出ていない。さらに先では、SANS が11月2日月曜と11月3日火曜に Hilton Arlington Rosslyn で AI Cybersecurity Summit を対面と遠隔の併用で開く。サミット単体は $525、$229 の宿の枠は10月9日に閉まり、払い戻しの区切りは10月14日。OWASP Global AppSec USA は11月5日木曜と11月6日金曜に Hyatt Regency San Francisco を使い、11月2日から4日まで手を動かす研修が付く。第19回 ACM Workshop on Artificial Intelligence and Security は11月15日日曜、ハーグで、第33回 ACM Conference on Computer and Communications Security と並んで開かれる。論文の締め切りは7月24日に閉じており、査読は9月7日、通知は9月9日、最終稿は9月16日である。\n\nシリコンと基盤の残りの予定では、AI Infra Summit が9月15日火曜から9月17日木曜まで Santa Clara Convention Center に戻る。主舞台に加えてデータとモデル、計算、データの移動、AI のデータセンター、実世界の AI の流れがあり、およそ 316 のセッション、二つの展示の劇場、そして講習が並ぶ。続いて Edge AI and Vision Innovation Forum が9月16日水曜にサンノゼで、OCP Global Summit が10月12日月曜から10月15日木曜までサンノゼで、NVIDIA の GTC Berlin が10月20日火曜から10月22日木曜まで、SC26 が11月15日日曜から11月20日金曜までシカゴで開かれる。GTC がサンノゼに戻るのは 2027年3月である。\n\nRay Summit は8月24日月曜から8月26日水曜まで San Francisco Marriott Marquis で開かれる。月曜が研修の日で、そのあと二日が基調講演と分科会。サミットだけなら $400、研修込みで $450。五枚組は五枚合わせて $750 で、定価 $2,250 に対するものである。研修の日は、複数のかたちのデータの流れ、基盤モデルの分散した学習、本番での推論、実世界の AI とロボティクス、実時間の検索と推薦、そして事後学習と提供を扱う。第一回の vLLM Conference が同じ場所で開かれる。主催は Inferact で、Ray Summit のどの券にも含まれる。vLLM の基盤、ハードウェアの受け口、本番での配り方、周辺との組み合わせにまたがって二十人を超える登壇者が並ぶ。その中には、vLLM を作った中心の維持者でいまは Inferact の最高技術責任者である Woosuk Kwon と、中心の維持者でいまは同社の最高経営責任者である Simon Mo、そして NVIDIA、AMD、Google TPU、Intel、Meta と PyTorch、Hugging Face、Red Hat からの寄稿者が含まれる。Ray Summit 自身の基調講演は、Anyscale の共同創業者 Robert Nishihara と Ion Stoica、NVIDIA の Bryan Catanzaro、Torc の Felix Heide、Lila Sciences の Andrew Beam が務める。ACM AI Leadership Summit は8月30日日曜から9月2日水曜までアトランタで開かれる。\n\nサンフランシスコでは、9月の終わりに四つの催しがなお重なる。CoreWeave の Fully Connected は9月29日火曜から10月1日木曜まで Moscone South で開かれる。早割はもう切れており、通常の券は以前の $899 に対して $1,299。三つの流れが AI の基盤、モデルの進み、エージェントの評価と見守りを扱う。基調講演の顔ぶれは、CoreWeave の最高経営責任者 Mike Intrator と最高技術責任者 Peter Salanki、NVIDIA の Ian Buck、Stanford と World Labs の Fei-Fei Li、Conviction の Sarah Guo、Liquid AI の最高執行責任者 Jeffrey Li まで及ぶ。The AI Conference は同じ期間、Pier 48 の Sheds A と B で、五つの流れ、5,500 人を超える参加者、120 人を超える登壇者を掲げる。9月29日の講習と Hack Day は 350 人が上限ですでに売り切れ、二日券を持つ人には、空きが戻った場合に最初に知らせると約束されている。OpenAI の DevDay は9月29日火曜に Fort Mason で開かれ、申し込みはすでに閉じた。Newcomer の Machine Earning AI Summit は同じ日にサンフランシスコで、申し込みは開いている。そのあとは、9月30日水曜の Runway AI Summit、10月7日水曜と10月8日木曜のアムステルダムの World Summit AI、10月20日火曜と10月21日水曜のサンノゼの PyTorch Conference、10月22日木曜と10月23日金曜に San Jose McEnery Convention Center で Linux Foundation の下に開かれる AGNTCon と MCPCon North America——Model Context Protocol、エージェントの基盤、本番で動くエージェントの仕組みの安全と見通しを軸に組まれていて、発表の募集は6月7日から閉じているので、残っているのは参加のほうである——10月28日水曜と10月29日木曜に Fort Mason で開かれる GitHub Universe、11月11日水曜から11月13日金曜までサンフランシスコで開かれ申し込みによってのみ入れる AI Engineer Code Summit、その登壇の応募は10月11日に閉じる。11月12日木曜には Newcomer の Cerebral Valley AI Summit がサンフランシスコで、11月30日月曜から12月4日金曜まで AWS re:Invent、12月に NeurIPS、そして12月9日水曜と12月10日木曜に The AI Summit New York が続く。\n\nロボティクスの予定では、IEEE-RAS Humanoids 2026 の次に開いている締め切りが8月3日月曜で、ワークショップ、チュートリアル、競技の提案が対象である。論文の締め切りは7月27日に、補足の映像の受付は7月30日に閉じた。競技の可否は9月21日、ワークショップとチュートリアルの可否は9月28日、論文の採否の通知は10月6日、早割の登録は10月16日に閉まり、最終稿は10月26日。会議そのものは12月6日日曜から12月9日水曜まで Santa Clara Convention Center で開かれる。6日が公開の討議、7日がワークショップとチュートリアル、8日と9日が論文の発表である。\n\nAI Tinkerers については、昨日は世界の一覧から消えていた8月6日木曜のロサンゼルスの builder meetup が今日は戻っており、午後6時から8時 PDT で、その但し書きを付けたまま再び扱う。今日の分として載っていたニューヨークの run-and-hack の回はもう出ていない。開かれる日に一覧から消えるのは、当たり前のことである。近いところではほかに、明日8月2日日曜にロンドン、8月3日月曜にコロンバス、8月4日火曜にパリとシアトル、8月5日水曜にシンガポールと、信頼と長く走り続けるエージェントを題にしたシアトルの創業者の晩餐、8月7日金曜にメデジンとニューヨークの視覚のハッカソン、8月8日土曜にモンバサとドバイの支部の催しが並ぶ。そのあと8月11日火曜が五都市の日で、バレンシア、ニューヨーク州北部、シカゴ、ヒューストン、シアトル。8月12日水曜にさらに三つ、バレンシア、ブリュッセル、ローリー。8月14日金曜にブレーメン。サンフランシスコ、サンノゼ、プレザントンには日付の付いたものが何もない。これらの支部は、後ろに集まりのないまま、ベイエリアのおすすめの一覧に並んでいる。パロアルトとサンフランシスコの支部の頁は今日もどちらも接続を拒んだので、ここで8月18日火曜として扱ってきたパロアルトの集まりは、それ自身の出どころでは確かめられないままである。",
+          "citations": [
+            {
+              "label": "Black Hat USA 2026 - dates and venue",
+              "url": "https://blackhatonsite.informafestivals.com/usa/2026/"
+            },
+            {
+              "label": "DEF CON - DEF CON 34 dates, door price and the Baochip badge",
+              "url": "https://defcon.org/"
+            },
+            {
+              "label": "AI Village - DEF CON 34 programme, room and the HalCTF contest",
+              "url": "https://aivillage.org/"
+            },
+            {
+              "label": "Hot Chips 2026 - registration deadline, refund policy and payment",
+              "url": "https://hotchips.org/registration/"
+            },
+            {
+              "label": "Hot Chips 2026 - tutorial day programme and speakers",
+              "url": "https://hotchips.org/program/tutorials/"
+            },
+            {
+              "label": "AI Risk Summit - passes, rate step and included events",
+              "url": "https://www.airisksummit.com/register/"
+            },
+            {
+              "label": "Sessionize - AI Agent Security Summit global series call for papers",
+              "url": "https://sessionize.com/ai-agent-security-summit-global-series-2026/"
+            },
+            {
+              "label": "Zenity - AI Agent Security Summit 2026 global series",
+              "url": "https://zenity.io/resources/events/ai-agent-security-summit-2026"
+            },
+            {
+              "label": "AI Security Summit - San Francisco 2026",
+              "url": "https://aisecuritysummit.com/events/sf-2026/"
+            },
+            {
+              "label": "Anyscale - Ray Summit 2026 dates, pricing and the co-located vLLM Conference",
+              "url": "https://www.anyscale.com/ray-summit/2026"
+            },
+            {
+              "label": "IEEE-RAS Humanoids 2026 - important dates and conference schedule",
+              "url": "https://2026.ieee-humanoids.org/"
+            },
+            {
+              "label": "AI Tinkerers - global event calendar",
+              "url": "https://aitinkerers.org/events"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

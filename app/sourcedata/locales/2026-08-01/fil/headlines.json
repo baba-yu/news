@@ -1,0 +1,78 @@
+{
+  "date": "2026-08-01",
+  "technical": [
+    {
+      "lead": "Iniuugnay ng OpenAI ang sampung pagsulong sa mga natigil na problema, bawat isa ay may Lean proof",
+      "body": "Naglathala ang OpenAI ng sampung resulta sa matematika at teoretikal na agham pangkompyuter noong Sabado, Agosto 1, at iniuugnay nito ang bawat isa sa mga ito sa isang internal na build ng Astra, ang modelong inilalarawan nitong susunod na pangunahing modelo nito at hindi pa inilalabas. Ang bawat isa sa sampu ay problemang, ayon sa salaysay ng OpenAI, ay hindi umusad ang pangunahing resulta sa loob ng hindi bababa sa isang dekada: isang pinahusay na asymptotic upper bound para sa high-dimensional sphere packing, mga eksponensiyal na mas matibay na bound para sa binary at spherical codes, isang konstruksiyong nagpapasya sa pag-iral ng mga non-sofic group, isang pagpapabulaan sa rigidity conjecture ni Connes, arithmetic circuit complexity, quantum parallel repetition, ang closest vector problem, ang volume conjecture ni Ehrhart, mga multicolor Ramsey number at mga extremal number conjecture. Ang hindi pangkaraniwan ay kung ano ang lumabas kasama ng nakasulat na ulat. May kalakip na Lean 4 formalisation ang bawat isa sa sampu, nasa isang pampublikong Apache-2.0 repository na binuo laban sa Lean 4.32.0, mathlib at Lake, na may isang file kada resulta, isang aggregate build target at isang direktoryo ng mga challenge para sa sinumang gustong suriing muli ang mga patunay gamit ang isang independiyenteng checker sa halip na paniwalaan ang papel. Inilalagay ng OpenAI ang gastos sa token sa mababa sa $2,000 kada resulta sa rate ng GPT-5.6 Sol at hindi sa sariling rate ng Astra, na hindi pa nito inilalathala. Ang hindi nito sinasabi ay kung ilan pang problema ang sumipsip ng katulad na gastos at walang naibunga, at iyon ang bilang na magpapaging hit rate sa sampung tagumpay.",
+      "citations": [
+        {
+          "label": "GitHub - openai/ten-proofs, Lean certificates accompanying the ten results",
+          "url": "https://github.com/openai/ten-proofs"
+        },
+        {
+          "label": "Simon Willison - Ten advances in mathematics and theoretical computer science",
+          "url": "https://simonwillison.net/2026/Aug/1/ten-advances-in-mathematics/"
+        }
+      ]
+    },
+    {
+      "lead": "Inilathala ng lumikha ng Lean ang isang kernel bug na nagpahintulot sa isang metaprogram na patunayan ang False",
+      "body": "Sa parehong araw, naglathala si Leonardo de Moura, na siyang lumikha ng Lean, ng postmortem tungkol sa isang soundness bug sa Lean 4 kernel na nagpahintulot sa isang metaprogram na makabuo ng patunay ng False nang walang anumang axiom — at walang iniulat ang `#print axioms`, kaya malinis na patunay ang ipinakita ng karaniwang audit trail. Tinatanggap ng kernel ang isang projection na ang structure name ay hindi tugma sa halagang ipinuprojekta: nawawala ang mga phantom parameter, ibig sabihin ay mga parameter na walang constructor field ang gumagamit, sa mga auxiliary type na binubuo ng Lean para sa nested inductive types, at nakalulusot ang mga ill-typed na argumento. Lumitaw ito noong Hulyo 25, nang maglathala si Ramana Kumar ng isang AI-assisted na pagpapabulaan sa Collatz conjecture na lumabas na nakikinabang lamang pala sa butas sa halip na lutasin ang problema. Pinaliit ito ni Kiran Gopinathan tungo sa isang minimal na patunay ng False at inihain ang issue #14576 noong Hulyo 28 laban sa 4.34.0 nightly na may petsang Hulyo 27; umakyat ang ayos sa loob ng isang oras mula sa ulat na iyon, nagdagdag ng mas mahigpit na parameter validation ang kasunod, at lumabas ang mga patch release sa parehong linggo. Ang balangkas ni de Moura ay implementation bug ito, hindi butas sa meta-theory ng Lean, at naaabot lamang ito kapag diretsong iniabot sa kernel ang isang inductive declaration mula sa isang metaprogram, hindi mula sa ordinaryong Lean source. Ito ang tamang bagay na itabi sa mga Lean 4 certificate na inilabas ng OpenAI para sa sampung resulta nito sa parehong araw.",
+      "citations": [
+        {
+          "label": "Leonardo de Moura - Postmortem for kernel soundness bug #14576",
+          "url": "https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/"
+        },
+        {
+          "label": "GitHub - lean4 issue #14576, kernel accepts wrong-structure projections",
+          "url": "https://github.com/leanprover/lean4/issues/14576"
+        }
+      ]
+    },
+    {
+      "lead": "Lumabas sa preview ang V4-Flash ng DeepSeek na may bagong post-training at hindi nagbagong presyo",
+      "body": "Inilipat ng DeepSeek ang V4-Flash palabas ng preview noong Biyernes, Hulyo 31 at inilagay ang 0731 build sa likod ng parehong `deepseek-v4-flash` API name, kaya nakukuha ng mga caller ang bagong checkpoint nang walang binabagong linya. Hindi kumilos ang arkitektura: 284B kabuuang parameter na may 13B active kada token, isang shared expert kasama ang 256 routed expert kada layer kung saan anim na routed expert ang gumagana kada token, at isang one-million-token na context. Nag-uulat ng 304B ang Hugging Face repository dahil may dala itong DSpark speculative-decoding draft module na nakapatong sa 284B base na iyon, at MIT-licensed ang mga weight. Ang nagbago ay ang post-training pass, na muling pinatakbo sa agent at coding data. Inilagay ng sariling before-and-after na kolum ng DeepSeek ang Terminal-Bench 2.1 sa 82.7 laban sa 61.8 ng preview, ang NL2Repo sa 54.2 laban sa 39.4, ang Cybergym sa 76.7 laban sa 38.7, ang DeepSWE sa 54.4 laban sa 7.3 at ang Toolathlon-Verified sa 70.3 laban sa 49.7, at sinasabi nitong tinatalo na ng mas maliit na Flash ang V4-Pro preview sa bawat agentic benchmark na inilathala nito. Natural ding nagsasalita ang checkpoint ng Responses API at inayos ito para sa Codex, at nag-aalok ito ng low, high at max na reasoning effort na may 384K output ceiling sa dalawang pinakamataas na setting. Nasa iniwan ng preview ang presyo: $0.14 kada milyong input token sa cache miss, $0.0028 sa cache hit at $0.28 kada milyong output token. Bawat isa sa mga bilang na iyon sa benchmark ay iniulat ng vendor sa isang harness na wala pang nakapagpapatakbo sa labas ng DeepSeek.",
+      "citations": [
+        {
+          "label": "Hugging Face - deepseek-ai/DeepSeek-V4-Flash-0731 model card",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"
+        },
+        {
+          "label": "MarkTechPost - DeepSeek upgrades DeepSeek-V4-Flash-0731 with major agentic and coding gains",
+          "url": "https://www.marktechpost.com/2026/07/31/deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains/"
+        }
+      ]
+    },
+    {
+      "lead": "Ini-open-source ng Y Combinator ang qm, ang multiplayer agent harness nito para sa trabaho",
+      "body": "May sariling agent harness na ngayon ang Y Combinator, at pampubliko ito. Ang `qm` na repository, na inilalarawang isang multiplayer agent harness para sa trabaho, nasa Slack at sa web, ay ginawa noong Hulyo 29 sa ilalim ng MIT licence at inanunsiyo noong Biyernes, Hulyo 31; pagsapit ng Sabado, Agosto 1 nasa humigit-kumulang 5,300 star at 547 fork na ito, at patuloy pa ring dumarating ang mga commit. Saklaw, hindi kakayahan, ang argumento sa disenyo: may sariling memory, file, keychain view, permission, cron job, web app at matibay na sandbox ang bawat tao at bawat room, at nananatiling naka-install doon ang mga tool na na-install, sa halip na ang single-user at single-session na modelong ipinapalagay ng karamihan sa coding harness. Sinadyang hindi ito nakatali sa isang vendor — kayang patakbuhin ng parehong workspace ang Pi, OpenCode, Codex o Claude Code at magpalit-palit sa mga ito — at may inilalabas itong tatlong security posture: Strict, kung saan naghihintay ng pag-apruba ang bawat tool call; Auto, ang default, na sinasala ang nilalaman; at Dangerous, na walang sinasala at hindi kailanman humihinto. Ang stack ay TypeScript sa Fastify na may Postgres sa likod nito at isang web interface na binuo sa Vite at Lit, at ipinipilit ng README na panatilihing byte-identical sa upstream ang core para makapagpatakbo ang isang kompanya ng pribadong fork at masundan pa rin ang mga release.",
+      "citations": [
+        {
+          "label": "GitHub - yc-software/qm, multiplayer agent harness for work",
+          "url": "https://github.com/yc-software/qm"
+        }
+      ]
+    },
+    {
+      "lead": "Iiral ang mga tuntunin sa transparency ng EU AI Act mula Linggo, Agosto 2",
+      "body": "Magsisimulang umiral ang mga obligasyon sa transparency ng EU AI Act sa Linggo, Agosto 2. Inaatas ng Article 50 sa mga provider na sabihin sa mga tao kapag isang AI system ang kaharap nila, maliban kung halata na iyon sa isang makatuwirang may-alam na tao, at markahan ang synthetic na audio, larawan, video at teksto sa isang machine-readable na format bilang artipisyal na nilikha o binago. Inaatas nito sa mga deployer na abisuhan ang mga taong nahaharap sa emotion-recognition o biometric-categorisation na sistema, isiwalat ang deepfake na materyal na may mga eksepsiyon para sa malikhaing gawa, at isiwalat ang AI-generated na tekstong inilathala hinggil sa mga usaping may interes ng publiko maliban kung may editor na taong pumirma rito. Iisa ang palugit at makitid ito: ang mga sistemang nailagay na sa merkado bago mag-Agosto 2 ay may hanggang Disyembre 2 ngayong taon para ipatupad ang machine-readable na pagmamarka sa ilalim ng Article 50(2), at wala nang ibang saklaw ang palugit na iyon sa artikulo. May multang aabot sa €15 milyon o 3% ng pandaigdigang taunang kita ang mga paglabag, alinman ang mas mataas. Lumipat na palabas ng petsang ito ang high-risk na rehimeng dating kabahagi ng Agosto 2, 2026 — itinulak ng Digital Omnibus on AI ang mga stand-alone na sistema sa Annex III, ang mga sumasaklaw sa trabaho, pagkakautang, edukasyon, biometrics at mahahalagang serbisyo, tungo sa Disyembre 2, 2027, at ang high-risk na AI na nakabaon sa mga reguladong produkto tungo sa Agosto 2, 2028. Kaya pagmamarka, hindi conformity assessment, ang buhay na deadline para sa sinumang naghahatid ng generative na output papasok sa EU.",
+      "citations": [
+        {
+          "label": "European Commission - Regulatory framework for AI, application timeline",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+        },
+        {
+          "label": "Jones Walker - Yes, August 2 still matters: the EU approved a high-risk AI delay but most transparency obligations remain",
+          "url": "https://www.joneswalker.com/en/insights/blogs/ai-law-blog/yes-august-2-still-matters-the-eu-approved-a-high-risk-ai-delay-but-most-trans.html"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Sabi ng OpenAI, nalutas ng isang hindi pa inilalabas na modelo ang sampung lumang problema",
+    "Isang bug sa Lean ang nagpahintulot sa isang programa na patunayan ang isang bagay na mali",
+    "Lumabas sa preview ang maliit na modelo ng DeepSeek, hindi nagbago ang presyo",
+    "Inilabas ng Y Combinator ang sarili nitong agent tool para sa mga koponan",
+    "Magsisimula bukas ang bagong tuntunin ng Europa sa pagmamarka ng AI"
+  ]
+}

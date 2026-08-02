@@ -1,0 +1,128 @@
+[
+  {
+    "actor": "frontier-lab formal-mathematics release lead",
+    "job": "Preparing the next AI-generated Lean proof release so its stated warrant is an independent kernel re-check, not a clean axiom audit.",
+    "outcome": "A published proof set whose release notes name a second, distinct checker at a patched toolchain as the guarantee.",
+    "motivation": "A model-written formalisation has no second reader, so the checker is the only defence and one implementation is not enough.",
+    "task": {
+      "who": "lab formal-mathematics team and proof-artifact release engineering",
+      "what": "Draft the release warrant around external re-checking",
+      "where": "Proof repository release notes and artifact README",
+      "when": "Q4 2026",
+      "why": "Axiom audits returned clean on a proof of False",
+      "how": "External environment checker run over the exported proof environment"
+    }
+  },
+  {
+    "actor": "proof-assistant kernel maintainer",
+    "job": "Hardening the Lean kernel after the wrong-structure projection bug and cutting patched toolchain releases that publishers can pin against.",
+    "outcome": "A patched toolchain line, with stricter parameter validation, that an AI-proof release can cite as the version its re-check ran on.",
+    "motivation": "A kernel that accepted a proof of False without axioms leaves every downstream certificate resting on an unproven implementation.",
+    "task": {
+      "who": "Lean core kernel and release-management maintainers",
+      "what": "Add parameter validation for nested inductive auxiliary types",
+      "where": "Lean 4 kernel typechecker and patch-release branches",
+      "when": "Q3 2026",
+      "why": "Phantom parameters were dropped, letting ill-typed arguments through",
+      "how": "Regression suite plus adversarial metaprogram declarations fed to the kernel"
+    }
+  },
+  {
+    "actor": "independent proof-kernel re-implementation maintainer",
+    "job": "Keeping an external type checker able to consume full library-scale exported environments from current proof-assistant toolchains.",
+    "outcome": "A second checker, written against the specification rather than forked from the kernel, that a publisher can run unattended.",
+    "motivation": "A patched copy of one implementation shares that implementation's blind spots; only a distinct implementation can actually disagree.",
+    "task": {
+      "who": "external type-checker project maintainers and contributors",
+      "what": "Track kernel changes and keep export ingestion current",
+      "where": "Standalone checker repository and its conformance test suite",
+      "when": "November 2026",
+      "why": "Only a distinct implementation can contradict the primary kernel",
+      "how": "Specification-derived typechecker reading the environment export format"
+    }
+  },
+  {
+    "actor": "proof-artifact continuous-integration engineer",
+    "job": "Wiring the second checker into the proof repository build so the re-check runs on every commit, not on the reader's machine.",
+    "outcome": "A build job that exports the compiled environment and fails when the independent checker rejects any of the results.",
+    "motivation": "The challenges directory hands verification to whoever clones the code, which is exactly where nobody is doing it.",
+    "task": {
+      "who": "release engineering and build infrastructure for the proof repository",
+      "what": "Add an independent re-check stage to the pipeline",
+      "where": "Repository continuous-integration workflow and aggregate build target",
+      "when": "Q1 2027",
+      "why": "The publisher, not the reader, must find a disagreement",
+      "how": "Lake build plus environment export piped to the external checker"
+    }
+  },
+  {
+    "actor": "formal mathematics library release manager",
+    "job": "Moving the shared library onto patched toolchain lines and keeping its exported environment stable enough to re-check whole.",
+    "outcome": "A library release, on a fixed kernel, whose exported environment an independent checker can verify end to end.",
+    "motivation": "Every AI-generated formalisation builds on this library, so its toolchain pin sets the floor for every certificate downstream.",
+    "task": {
+      "who": "library maintainers and toolchain bump reviewers",
+      "what": "Bump the library past the fixed kernel release",
+      "where": "Library master branch and toolchain bump pull requests",
+      "when": "February 2027",
+      "why": "Certificates inherit whatever kernel the library was built against",
+      "how": "Staged toolchain bump with full library rebuild and export check"
+    }
+  },
+  {
+    "actor": "proof-assistant soundness auditor",
+    "job": "Hunting further kernel-reachable unsoundness by minimising suspicious proofs and filing reproducible declarations against current nightlies.",
+    "outcome": "A public record of further kernel-only holes that makes a single-implementation certificate untenable as a published warrant.",
+    "motivation": "One bug reachable only from metaprograms already produced a clean axiom report sitting on a proof of False.",
+    "task": {
+      "who": "independent proof-assistant researchers and issue triagers",
+      "what": "Minimise suspect proofs into reproducible kernel test cases",
+      "where": "Proof-assistant issue tracker and nightly toolchain builds",
+      "when": "H1 2027",
+      "why": "Public counterexamples force publishers to name a second checker",
+      "how": "Metaprogram-driven declaration fuzzing and proof-term minimisation"
+    }
+  },
+  {
+    "actor": "formal-methods venue artifact-evaluation chair",
+    "job": "Rewriting artifact criteria so a machine-checked submission must document re-checking by an implementation distinct from the one that compiled it.",
+    "outcome": "Submission guidelines that treat a build log and an axiom audit as insufficient evidence for a machine-generated proof.",
+    "motivation": "Machine proofs arrive faster than referees can read them, so the venue's only remaining check is the checker itself.",
+    "task": {
+      "who": "artifact-evaluation committee and program chairs",
+      "what": "Revise artifact criteria for machine-generated formal proofs",
+      "where": "Conference call for artifacts and reviewer guidelines",
+      "when": "Q2 2027",
+      "why": "No referee reads a model-written formalisation line by line",
+      "how": "Reviewer checklist requiring a named second checker and its logs"
+    }
+  },
+  {
+    "actor": "proof-environment export format maintainer",
+    "job": "Keeping the kernel-independent export format complete and current so an outside checker can re-derive the whole compiled environment.",
+    "outcome": "An export path carrying every declaration a second checker needs, versioned against the patched toolchain releases.",
+    "motivation": "Without a faithful export there is no way for a distinct implementation to re-check anything at all.",
+    "task": {
+      "who": "export tooling maintainers and kernel interface reviewers",
+      "what": "Extend the export format to cover new kernel declarations",
+      "where": "Export tooling and its round-trip conformance tests",
+      "when": "April 2027",
+      "why": "A second checker can only read what the export emits",
+      "how": "Round-trip tests exporting and re-importing full library environments"
+    }
+  },
+  {
+    "actor": "second-proof-assistant re-derivation lead",
+    "job": "Reproducing headline machine-generated results in a proof assistant other than the one that produced them, from the statement down.",
+    "outcome": "An independent re-derivation in a different prover that a publisher can cite instead of, or beside, an external kernel check.",
+    "motivation": "Agreement between two unrelated provers is the strongest form of the disagreement test this prediction asks for.",
+    "task": {
+      "who": "formalisation researchers working in a second proof assistant",
+      "what": "Re-formalise selected published results in another prover",
+      "where": "Separate formalisation repository targeting a different proof assistant",
+      "when": "October 2026",
+      "why": "Two unrelated implementations agreeing is a real independence check",
+      "how": "Manual restatement plus proof porting across library ontologies"
+    }
+  }
+]

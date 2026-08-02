@@ -1,0 +1,361 @@
+{
+  "date": "2026-08-01",
+  "by_prediction": {
+    "prediction.3cb90b28e1d67e1b": [
+      {
+        "actor": "Responsable de producto del ciclo de vida de modelos en API alojada, plataforma DeepSeek",
+        "job": "Decidir cómo se direccionan los checkpoints de V4-Flash después de que la build 0731 sustituyera a la preview detrás del nombre deepseek-v4-flash sin cambiar.",
+        "outcome": "Un segundo identificador de modelo de V4-Flash con versión en la lista de modelos de la API, servido junto al nombre flotante y sin fecha de apagado anunciada.",
+        "motivation": "Los clientes que cualificaron la preview sostienen ahora aprobaciones a las que su clave de API no llega, y un identificador fijado es la respuesta más barata.",
+        "task": {
+          "who": "Gestión de producto de la plataforma de API de DeepSeek y responsables de lanzamiento de modelos",
+          "what": "Especificar un esquema de dos direcciones para V4-Flash",
+          "where": "Hoja de ruta de la plataforma DeepSeek y revisión de diseño del nombrado de modelos",
+          "when": "Q4 2026",
+          "why": "Una sola dirección oculta la sustitución de checkpoint a quienes pagan por llamar",
+          "how": "Cadenas de identificador inmutables y fechadas mapeadas a un checkpoint congelado"
+        }
+      },
+      {
+        "actor": "Ingeniero de pasarela de API y enrutado de modelos, plataforma de servicio de DeepSeek",
+        "job": "Construir el enlace que resuelve una cadena de modelo a un checkpoint, hoy un único nombre flotante que reasignó en silencio a quienes llamaban hacia la build 0731.",
+        "outcome": "Un enrutado que mantiene una cadena inmutable contra un checkpoint con nombre mientras el nombre flotante sigue avanzando, ambos vivos en el mismo endpoint.",
+        "motivation": "Sin una capa de enrutado que direccione dos checkpoints a la vez, la decisión de publicar un identificador fijado no tiene sobre qué enviarse.",
+        "task": {
+          "who": "Ingenieros de pasarela de API, registro de modelos y enrutado de peticiones de DeepSeek",
+          "what": "Ligar una cadena de modelo inmutable a un solo checkpoint",
+          "where": "Registro de modelos y capa de enrutado de peticiones de DeepSeek",
+          "when": "Octubre de 2026",
+          "why": "El nombre flotante no puede además prometer una build fija",
+          "how": "Entradas del registro de modelos indexadas por digest de checkpoint, no por alias"
+        }
+      },
+      {
+        "actor": "Ingeniero de servicio de inferencia y capacidad de flota, plataforma alojada de DeepSeek",
+        "job": "Planificar cuánto tiempo siguen residentes y enrutables los pesos ya superados de la preview de V4-Flash en un hardware de servicio que ahora lleva el checkpoint 0731 reajustado.",
+        "outcome": "Un checkpoint más antiguo mantenido caliente y direccionable, para que un identificador con versión tenga algo que servir en vez de apuntar a una build retirada.",
+        "motivation": "Si la build anterior deja de servirse por completo, no puede existir ninguna segunda dirección y el esquema de dos direcciones fracasa solo por capacidad.",
+        "task": {
+          "who": "Personal de infraestructura de inferencia y planificación de capacidad de servicio de DeepSeek",
+          "what": "Reservar capacidad para un checkpoint de V4-Flash ya superado",
+          "where": "Planificación de capacidad y de retirada de la flota de inferencia de DeepSeek",
+          "when": "Q3 2026",
+          "why": "Un identificador fijado necesita pesos vivos detrás",
+          "how": "Presupuestos de residencia de checkpoints sopesados frente a la demanda de servicio del modelo actual"
+        }
+      },
+      {
+        "actor": "Responsable comercial y de precios para inferencia alojada, negocio de API de DeepSeek",
+        "job": "Decidir si una dirección de checkpoint congelado se vende como un nivel re-tarificado o se entrega gratis, después de que las tarifas de la preview se mantuvieran planas.",
+        "outcome": "Un identificador fijado de V4-Flash ofrecido con la tarifa vigente, eliminando la objeción de precio que si no lo mantendría sin publicar.",
+        "motivation": "Mantener el precio plano sobre un checkpoint mejor gastó la palanca para cobrar por una fijación, dejando su publicación como la concesión más barata.",
+        "task": {
+          "who": "Responsables de precios, ingresos y política comercial de la API de DeepSeek",
+          "what": "Tarificar una dirección de checkpoint congelado frente a las tarifas actuales",
+          "where": "Tarifario de DeepSeek y revisión de márgenes para inferencia alojada",
+          "when": "Noviembre de 2026",
+          "why": "Una fijación gratuita retiene a compradores que una re-tarificación perdería",
+          "how": "Modelos de margen que comparan el coste de la ruta fijada con la exposición a la fuga de clientes"
+        }
+      },
+      {
+        "actor": "Redactor de documentación para desarrolladores de las páginas de modelos y precios, plataforma de API de DeepSeek",
+        "job": "Mantener la lista de modelos y las tablas de precios, que son el único artefacto que zanja a qué checkpoints de V4-Flash puede dirigirse quien llama.",
+        "outcome": "Una entrada documentada de identificador de modelo que afirme que la cadena fijada sigue sirviendo un checkpoint concreto, publicada junto al nombre flotante y sin caducidad.",
+        "motivation": "Lo que el proceso de control de cambios de un comprador puede citar cuando necesita que mañana devuelva lo que devolvió hoy es la documentación, no una nota de versión.",
+        "task": {
+          "who": "Mantenedores de la documentación para desarrolladores y de la referencia de API de DeepSeek",
+          "what": "Publicar un identificador fijado de V4-Flash en la documentación de modelos",
+          "where": "Páginas de documentación de la lista de modelos y de precios de la API de DeepSeek",
+          "when": "Diciembre de 2026",
+          "why": "Solo la documentación de primera parte zanja qué promete el endpoint",
+          "how": "Entradas de la tabla de referencia de modelos con descripciones de checkpoint por identificador"
+        }
+      },
+      {
+        "actor": "Responsable de cuentas empresariales y soporte a desarrolladores, plataforma de API de DeepSeek",
+        "job": "Atender escalados de quienes llaman y cuyos agentes cambiaron de comportamiento cuando deepseek-v4-flash empezó a devolver el checkpoint 0731 con una factura sin cambios.",
+        "outcome": "Una petición interna priorizada de un identificador con versión, que lleva nombres de cuentas que no pueden recualificar al ritmo que marque el proveedor.",
+        "motivation": "Los tickets de soporte son el único sitio donde aflora la señal de factura que falta, ya que un precio plano no le dijo a nadie que el artefacto había cambiado.",
+        "task": {
+          "who": "Personal de gestión de cuentas empresariales y soporte a desarrolladores de DeepSeek",
+          "what": "Escalar la demanda de los clientes de una dirección congelada de V4-Flash",
+          "where": "Cola de soporte de DeepSeek y backlog de producto de la plataforma",
+          "when": "Agosto de 2026",
+          "why": "El riesgo de fuga convierte una cuestión de nombres en un punto de la hoja de ruta",
+          "how": "Triaje de tickets etiquetando las quejas por reasignación contra cuentas con nombre"
+        }
+      },
+      {
+        "actor": "Responsable de riesgo de modelos y control de cambios para despliegues de agentes en producción, comprador empresarial de IA",
+        "job": "Recualificar un agente en producción cuya aprobación describía la preview de V4-Flash, después de que el mismo nombre de API empezara a devolver un checkpoint reajustado.",
+        "outcome": "Un hallazgo de control de cambios registrado y un requisito declarado al proveedor de un identificador de modelo inmutable, planteado a DeepSeek antes de la próxima reasignación.",
+        "motivation": "Una aprobación que nombra un artefacto al que la clave de API ya no llega no es un control, y la próxima auditoría lo dirá.",
+        "task": {
+          "who": "Personal empresarial de riesgo de modelos, ingeniería de plataforma y gestión de proveedores",
+          "what": "Registrar un requisito de identificador de modelo fijado contra el endpoint de DeepSeek",
+          "where": "Registro interno de control de cambios y el canal de soporte de DeepSeek",
+          "when": "Septiembre de 2026",
+          "why": "La demanda del comprador es lo que justifica publicar una fijación",
+          "how": "Diferencias de la batería de regresión entre el comportamiento de la preview y el de la 0731"
+        }
+      },
+      {
+        "actor": "Responsable de producto de plataforma de modelos en un proveedor de inferencia alojada de pago por uso",
+        "job": "Seguir enviando identificadores de modelo fechados e inmutables junto a alias flotantes, con ventanas de obsolescencia publicadas, como convención vigente para los modelos alojados.",
+        "outcome": "Una línea base de mercado en la que una sola dirección por modelo se lee como un vacío de divulgación y no como un menú de producto deliberadamente corto.",
+        "motivation": "Los compradores que comparan endpoints valoran la reproducibilidad como una prestación, así que los proveedores mantienen visible la convención de dos direcciones en su propia documentación.",
+        "task": {
+          "who": "Equipos de gestión de producto del ciclo de vida de modelos y de documentación de API en proveedores de inferencia alojada",
+          "what": "Publicar identificadores de modelo fechados con ventanas de obsolescencia declaradas",
+          "where": "Catálogos de modelos de los proveedores y páginas de política de obsolescencia",
+          "when": "H2 2026",
+          "why": "La convención hace que una sola dirección flotante parezca una omisión",
+          "how": "Catálogos de modelos versionados con compromisos de disponibilidad por identificador"
+        }
+      }
+    ],
+    "prediction.513bf3c9891b2a29": [
+      {
+        "actor": "responsable de publicación de matemáticas formales en un laboratorio de frontera",
+        "job": "Preparar la siguiente publicación de demostraciones en Lean generadas por IA para que su garantía declarada sea una reverificación independiente del núcleo, y no una auditoría de axiomas limpia.",
+        "outcome": "Un conjunto de demostraciones publicado cuyas notas de versión nombren como garantía un segundo verificador distinto sobre una cadena de herramientas parcheada.",
+        "motivation": "Una formalización escrita por un modelo no tiene un segundo lector, así que el verificador es la única defensa y una sola implementación no basta.",
+        "task": {
+          "who": "equipo de matemáticas formales del laboratorio e ingeniería de publicación de artefactos de demostración",
+          "what": "Redactar la garantía de la publicación en torno a la reverificación externa",
+          "where": "Notas de versión del repositorio de demostraciones y README del artefacto",
+          "when": "Q4 2026",
+          "why": "Las auditorías de axiomas salieron limpias sobre una demostración de False",
+          "how": "Verificador de entornos externo ejecutado sobre el entorno de demostración exportado"
+        }
+      },
+      {
+        "actor": "mantenedor del núcleo del asistente de demostración",
+        "job": "Endurecer el núcleo de Lean tras el fallo de proyección con estructura equivocada y cortar versiones parcheadas de la cadena de herramientas contra las que los publicadores puedan fijarse.",
+        "outcome": "Una línea de cadena de herramientas parcheada, con validación de parámetros más estricta, que una publicación de demostraciones por IA pueda citar como la versión sobre la que corrió su reverificación.",
+        "motivation": "Un núcleo que aceptó una demostración de False sin axiomas deja todo certificado aguas abajo apoyado en una implementación no demostrada.",
+        "task": {
+          "who": "mantenedores del núcleo central de Lean y de la gestión de versiones",
+          "what": "Añadir validación de parámetros para los tipos auxiliares inductivos anidados",
+          "where": "Comprobador de tipos del núcleo de Lean 4 y ramas de versiones de parche",
+          "when": "Q3 2026",
+          "why": "Los parámetros fantasma se perdían, dejando pasar argumentos mal tipados",
+          "how": "Batería de regresión más declaraciones adversarias de metaprogramas entregadas al núcleo"
+        }
+      },
+      {
+        "actor": "mantenedor de una reimplementación independiente del núcleo de demostración",
+        "job": "Mantener un comprobador de tipos externo capaz de consumir entornos exportados a escala de biblioteca completa desde las cadenas de herramientas actuales del asistente de demostración.",
+        "outcome": "Un segundo verificador, escrito contra la especificación y no bifurcado del núcleo, que un publicador pueda ejecutar sin supervisión.",
+        "motivation": "Una copia parcheada de una implementación comparte los puntos ciegos de esa implementación; solo una implementación distinta puede discrepar de verdad.",
+        "task": {
+          "who": "mantenedores y contribuyentes del proyecto del comprobador de tipos externo",
+          "what": "Seguir los cambios del núcleo y mantener al día la ingesta de exportaciones",
+          "where": "Repositorio del verificador autónomo y su batería de tests de conformidad",
+          "when": "Noviembre de 2026",
+          "why": "Solo una implementación distinta puede contradecir al núcleo primario",
+          "how": "Comprobador de tipos derivado de la especificación que lee el formato de exportación del entorno"
+        }
+      },
+      {
+        "actor": "ingeniero de integración continua de artefactos de demostración",
+        "job": "Conectar el segundo verificador a la compilación del repositorio de demostraciones para que la reverificación corra en cada commit y no en la máquina del lector.",
+        "outcome": "Un trabajo de compilación que exporte el entorno compilado y falle cuando el verificador independiente rechace cualquiera de los resultados.",
+        "motivation": "El directorio de retos entrega la verificación a quien clone el código, que es exactamente donde nadie la hace.",
+        "task": {
+          "who": "ingeniería de publicación e infraestructura de compilación del repositorio de demostraciones",
+          "what": "Añadir una etapa de reverificación independiente al pipeline",
+          "where": "Flujo de integración continua del repositorio y objetivo de compilación agregado",
+          "when": "Q1 2027",
+          "why": "Quien publica, y no quien lee, debe encontrar una discrepancia",
+          "how": "Compilación con Lake más exportación del entorno canalizada al verificador externo"
+        }
+      },
+      {
+        "actor": "gestor de versiones de la biblioteca de matemáticas formales",
+        "job": "Llevar la biblioteca compartida a líneas de cadena de herramientas parcheadas y mantener su entorno exportado lo bastante estable como para reverificarlo entero.",
+        "outcome": "Una versión de la biblioteca, sobre un núcleo corregido, cuyo entorno exportado un verificador independiente pueda verificar de principio a fin.",
+        "motivation": "Toda formalización generada por IA se apoya en esta biblioteca, así que su cadena de herramientas fijada marca el suelo de cada certificado aguas abajo.",
+        "task": {
+          "who": "mantenedores de la biblioteca y revisores de las subidas de la cadena de herramientas",
+          "what": "Subir la biblioteca más allá de la versión corregida del núcleo",
+          "where": "Rama principal de la biblioteca y pull requests de subida de la cadena de herramientas",
+          "when": "Febrero de 2027",
+          "why": "Los certificados heredan el núcleo contra el que se compilara la biblioteca",
+          "how": "Subida escalonada de la cadena de herramientas con recompilación completa de la biblioteca y comprobación de la exportación"
+        }
+      },
+      {
+        "actor": "auditor de solidez del asistente de demostración",
+        "job": "Cazar más casos de falta de solidez alcanzables desde el núcleo minimizando demostraciones sospechosas y abriendo declaraciones reproducibles contra las nightlies actuales.",
+        "outcome": "Un registro público de más agujeros exclusivos del núcleo que haga insostenible un certificado de una sola implementación como garantía publicada.",
+        "motivation": "Un fallo alcanzable solo desde metaprogramas ya produjo un informe de axiomas limpio sobre una demostración de False.",
+        "task": {
+          "who": "investigadores independientes del asistente de demostración y triadores de incidencias",
+          "what": "Minimizar demostraciones sospechosas hasta casos de prueba reproducibles del núcleo",
+          "where": "Gestor de incidencias del asistente de demostración y compilaciones nightly de la cadena de herramientas",
+          "when": "H1 2027",
+          "why": "Los contraejemplos públicos obligan a los publicadores a nombrar un segundo verificador",
+          "how": "Fuzzing de declaraciones dirigido por metaprogramas y minimización de términos de demostración"
+        }
+      },
+      {
+        "actor": "presidente de evaluación de artefactos de un congreso de métodos formales",
+        "job": "Reescribir los criterios de artefactos para que un envío verificado por máquina tenga que documentar la reverificación por una implementación distinta de la que lo compiló.",
+        "outcome": "Unas directrices de envío que traten un registro de compilación y una auditoría de axiomas como prueba insuficiente para una demostración generada por máquina.",
+        "motivation": "Las demostraciones automáticas llegan más rápido de lo que los revisores pueden leerlas, así que la única comprobación que le queda al congreso es el propio verificador.",
+        "task": {
+          "who": "comité de evaluación de artefactos y presidencias del programa",
+          "what": "Revisar los criterios de artefactos para demostraciones formales generadas por máquina",
+          "where": "Convocatoria de artefactos del congreso y directrices para revisores",
+          "when": "Q2 2027",
+          "why": "Ningún revisor lee línea por línea una formalización escrita por un modelo",
+          "how": "Lista de comprobación del revisor que exige un segundo verificador con nombre y sus registros"
+        }
+      },
+      {
+        "actor": "mantenedor del formato de exportación del entorno de demostración",
+        "job": "Mantener completo y al día el formato de exportación independiente del núcleo para que un verificador externo pueda rederivar el entorno compilado entero.",
+        "outcome": "Una vía de exportación que lleve todas las declaraciones que un segundo verificador necesita, versionada contra las versiones parcheadas de la cadena de herramientas.",
+        "motivation": "Sin una exportación fiel no hay manera de que una implementación distinta reverifique nada en absoluto.",
+        "task": {
+          "who": "mantenedores de las herramientas de exportación y revisores de la interfaz del núcleo",
+          "what": "Extender el formato de exportación para cubrir nuevas declaraciones del núcleo",
+          "where": "Herramientas de exportación y sus tests de conformidad de ida y vuelta",
+          "when": "Abril de 2027",
+          "why": "Un segundo verificador solo puede leer lo que la exportación emite",
+          "how": "Tests de ida y vuelta que exportan y reimportan entornos completos de biblioteca"
+        }
+      },
+      {
+        "actor": "responsable de rederivación en un segundo asistente de demostración",
+        "job": "Reproducir los resultados generados por máquina más destacados en un asistente de demostración distinto del que los produjo, desde el enunciado hacia abajo.",
+        "outcome": "Una rederivación independiente en un demostrador distinto que un publicador pueda citar en lugar de, o junto a, una comprobación externa del núcleo.",
+        "motivation": "La coincidencia entre dos demostradores sin relación entre sí es la forma más fuerte de la prueba de discrepancia que pide esta predicción.",
+        "task": {
+          "who": "investigadores de formalización que trabajan en un segundo asistente de demostración",
+          "what": "Reformalizar resultados publicados seleccionados en otro demostrador",
+          "where": "Repositorio de formalización aparte, dirigido a un asistente de demostración distinto",
+          "when": "Octubre de 2026",
+          "why": "Que dos implementaciones sin relación coincidan es una comprobación real de independencia",
+          "how": "Reenunciado manual más portado de demostraciones entre ontologías de bibliotecas"
+        }
+      }
+    ],
+    "prediction.71c2ab8e3803590f": [
+      {
+        "actor": "Responsable de producto del ciclo de vida de claves de autenticación, identidad y alta de dispositivos de Tailscale",
+        "job": "Decidir qué hace de fábrica una clave de autenticación recién acuñada, después de que el postmortem señalara como carencia las claves reutilizables de larga vida.",
+        "outcome": "Un tope de alta de nodos por defecto en las claves recién acuñadas, que se aplique en una tailnet nueva sin configuración del cliente.",
+        "motivation": "La documentación y los avisos dejan el valor por defecto intacto; solo el emisor puede acotar cuántos nodos da de alta una clave.",
+        "task": {
+          "who": "Gestión de producto de claves de autenticación de Tailscale junto con ingeniería del plano de control",
+          "what": "Especificar un tope de alta por defecto para las claves de autenticación recién acuñadas",
+          "where": "Especificación de producto y hoja de ruta del ciclo de vida de claves de autenticación de Tailscale",
+          "when": "Q3 2026",
+          "why": "La reutilizabilidad se estampa en el momento de acuñar y no se puede revocar aguas abajo",
+          "how": "Las claves reutilizables llevan un tope de nodos por defecto salvo que se eleve"
+        }
+      },
+      {
+        "actor": "Responsable de la revisión técnica posterior al incidente, seguridad de Tailscale",
+        "job": "Convertir la cronología recuperada de la intrusión —136 claves robadas, 181 nodos dados de alta y unos cuatro días y medio— en requisitos de radio de daño.",
+        "outcome": "Un hallazgo por escrito de que fue la reutilizabilidad, y no el alcance de la credencial, lo que produjo el recuento de nodos, dirigido al valor por defecto de emisión de claves.",
+        "motivation": "No se encontró ningún fallo de producto, así que la única palanca que queda es lo que el producto envía activado por defecto.",
+        "task": {
+          "who": "Personal de ingeniería de seguridad y revisión de incidentes de Tailscale",
+          "what": "Rastrear el recuento de nodos hasta la reutilizabilidad de la clave en el momento de acuñarla",
+          "where": "Revisión interna de incidentes de Tailscale y registros de auditoría de la tailnet del cliente",
+          "when": "Agosto de 2026",
+          "why": "El diseño del tope necesita el eje que produjo de verdad los 181 nodos",
+          "how": "Registros de alta recuperados y marcas de tiempo de registro de nodos de la tailnet"
+        }
+      },
+      {
+        "actor": "Ingeniero de plataforma de integración continua, operador de una tailnet empresarial grande",
+        "job": "Sacar el alta de la flota de compilación sin interfaz de las claves reutilizables de larga vida y llevarla a credenciales efímeras y federadas emitidas por trabajo.",
+        "outcome": "Una flota de compilación que siga funcionando cuando las claves reutilizables dejen de ser ilimitadas, eliminando la objeción a cambiar el valor por defecto.",
+        "motivation": "Las claves reutilizables existen porque las flotas de compilación crean nodos sin nadie presente; el valor por defecto se mantiene hasta que ese trabajo esté cubierto.",
+        "task": {
+          "who": "Equipos de ingeniería de plataforma e infraestructura de compilación en clientes con tailnet",
+          "what": "Reemitir las credenciales de los nodos de compilación por trabajo en lugar de una clave reutilizable",
+          "where": "Pipelines de integración continua empresariales y scripts de aprovisionamiento de nodos",
+          "when": "Septiembre de 2026",
+          "why": "El proveedor mantiene el valor por defecto hasta que sobreviva el trabajo de la flota sin supervisión",
+          "how": "Federación de identidad de cargas de trabajo o un proxy que inyecta credenciales por compilación"
+        }
+      },
+      {
+        "actor": "Editor de la especificación de federación de identidad de cargas de trabajo, grupo de estándares de identidad de máquina",
+        "job": "Terminar el perfil que permite a una máquina sin supervisión presentar una identidad verificable de vida corta en lugar de llevar un secreto reutilizable.",
+        "outcome": "Una vía de alta federada lo bastante madura como para que un proveedor de red pueda acotar las claves reutilizables sin dejar tiradas a las flotas sin interfaz.",
+        "motivation": "Acotar la credencial antigua solo es seguro cuando el reemplazo es interoperable entre emisores y entornos de ejecución en la nube.",
+        "task": {
+          "who": "Editores de la especificación e implementadores del grupo de identidad de máquina",
+          "what": "Publicar un perfil de alta federada interoperable para nodos sin supervisión",
+          "where": "Borradores abiertos de la especificación de identidad de máquina e implementaciones de referencia",
+          "when": "Octubre de 2026",
+          "why": "Señalado como el control que correspondía donde estaba la clave reutilizable",
+          "how": "Credenciales de vida corta respaldadas por atestación con tests de conformidad entre emisores"
+        }
+      },
+      {
+        "actor": "Ingeniero de registro del plano de control, servidor de coordinación de Tailscale",
+        "job": "Construir un contador de altas por clave para que el servidor de coordinación pueda rechazar un registro en cuanto una clave pase su límite de nodos.",
+        "outcome": "Una aplicación del lado del servidor que haga que un valor por defecto acotado sea efectivo y no meramente orientativo, contado en el endpoint de registro.",
+        "motivation": "Un valor por defecto que nadie aplica es un aviso; la cuenta tiene que llevarse donde los nodos se unen de verdad.",
+        "task": {
+          "who": "Ingeniería del plano de control y del registro de nodos de Tailscale",
+          "what": "Añadir contadores de alta por clave y rechazo en el registro de nodos",
+          "where": "Ruta de registro del servidor de coordinación de Tailscale y fichas de las claves",
+          "when": "Q4 2026",
+          "why": "Un tope solo se sostiene donde el alta se cuenta de verdad",
+          "how": "Contadores duraderos por clave más rechazo de registro y eventos de auditoría"
+        }
+      },
+      {
+        "actor": "Responsable de los valores por defecto de incorporación de tailnets nuevas, aprovisionamiento de cuentas de Tailscale",
+        "job": "Fijar con qué sale una tailnet recién creada, dado que la intrusión corrió sobre una configuración que nadie había tocado.",
+        "outcome": "Una tailnet nueva en la que el tope de alta se aplica antes de que ningún administrador abra una página de ajustes.",
+        "motivation": "Lo que se afirma es sobre valores por defecto sin tocar, así que un tope detrás de un interruptor opcional no cuenta.",
+        "task": {
+          "who": "Responsables de incorporación, aprovisionamiento y política por defecto de Tailscale",
+          "what": "Llevar el tope de alta a los valores por defecto de aprovisionamiento de tailnets nuevas",
+          "where": "Flujo de creación de tailnets de Tailscale y plantilla de política inicial",
+          "when": "Noviembre de 2026",
+          "why": "Un tope detrás de un interruptor opcional es configuración, no valor por defecto",
+          "how": "Plantilla de política por defecto aplicada al crear la tailnet, sin interruptor"
+        }
+      },
+      {
+        "actor": "Mantenedor de arneses multijugador de agentes, proyectos de código abierto con alcance por sala",
+        "job": "Enviar vistas del llavero por persona y por sala, y declarar en la documentación de credenciales qué no puede hacer el acotado respecto a la reutilización.",
+        "outcome": "Un requisito de integración, leído en miles de forks, de que los emisores de credenciales entreguen a los arneses claves de un solo uso o acotadas.",
+        "motivation": "Un llavero por persona que guarde una sola clave reutilizable tiene el mismo radio de daño, solo que entregado con más orden.",
+        "task": {
+          "who": "Mantenedores de arneses de código abierto y contribuyentes de posturas de seguridad",
+          "what": "Declarar que el acotado del arnés no puede revocar una reutilización concedida al acuñar",
+          "where": "Documentación de manejo de credenciales del arnés y guías de integración del llavero",
+          "when": "H2 2026",
+          "why": "El acotado aguas abajo no puede retirar la reutilizabilidad, así que la demanda se mueve aguas arriba",
+          "how": "Guías de integración del llavero que piden credenciales de un solo uso a los emisores"
+        }
+      },
+      {
+        "actor": "Responsable de documentación de producto, documentación para desarrolladores y changelog de Tailscale",
+        "job": "Escribir la referencia de claves de autenticación y la entrada de changelog que declare el tope de alta enviado como comportamiento, no como consejo.",
+        "outcome": "Material publicado por Tailscale que describa el tope que una clave nueva lleva por defecto, el artefacto que zanja la afirmación.",
+        "motivation": "Un comportamiento que nadie documenta es invisible para los clientes; la página de referencia es donde un valor por defecto se convierte en un compromiso.",
+        "task": {
+          "who": "Redactores de documentación y de relaciones con desarrolladores de Tailscale",
+          "what": "Documentar el tope de alta enviado en la referencia de claves de autenticación",
+          "where": "Documentación de producto, changelog y blog de ingeniería de Tailscale",
+          "when": "Diciembre de 2026",
+          "why": "Un comportamiento enviado y documentado tiene más peso que una página de recomendaciones de buenas prácticas",
+          "how": "Página de referencia y entrada de changelog describiendo el comportamiento por defecto de las claves"
+        }
+      }
+    ]
+  }
+}
