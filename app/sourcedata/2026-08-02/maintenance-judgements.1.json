@@ -1,0 +1,415 @@
+{
+  "week_ending": "2026-08-02",
+  "judgements": [
+    {
+      "prediction_id": "prediction.42a2372350593ef7",
+      "stream": "reasoning",
+      "entry_id": "prediction.42a2372350593ef7",
+      "verdict": "stale",
+      "reason": "Bridge->Reasoning, the clearest case in this batch. validation.ccad9d16472621b9 (2026-07-29, observed_relevance 5, support_dimension so_that) reports SK Hynix's Q2 2026 print at revenue 79.32tn won, up 257% YoY and 51% QoQ, operating profit up 557% YoY. reasoning_landing reads 'by Q4 2026, in SK Hynix's next two quarterly earnings reports' and reasoning_so_that reads 'holds triple-digit YoY revenue growth for at least one more post-IPO quarter' -- the first of those two reports has now printed and cleared the bar, so the so_that clause is satisfied history, not a forward claim. reasoning_because still anchors on the stale Q1 figures (~200% YoY, ~260% YTD) when a stronger in-window datum exists. Rewrite should re-anchor because on the 07-29 print, narrow landing to the single remaining October Q3 print, and restate the base-effect falsifier against a 2025 comparison base that now includes the run-up. Two qualifiers the rewrite must carry, both from the same bridge: the market read the print as a miss against ~64.22tn won modelled operating profit and marked the shares down 9.6%, and the company said DRAM output was short because bits went into HBM.",
+      "cross_stream_evidence": [
+        "bridge:validation.ccad9d16472621b9",
+        "bridge:validation.6d98aad8420d7a21",
+        "need:need.c1b1f0ed8322abcb"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.88
+    },
+    {
+      "prediction_id": "prediction.42a2372350593ef7",
+      "stream": "bridge",
+      "entry_id": "prediction.42a2372350593ef7",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 7 validation_rows. Both rows added this week are honestly self-limiting: validation.ccad9d16472621b9 (07-29, rel 5, so_that) reports the print and immediately names the two cautions (only the first of two prints, shares -9.6% on a modelled miss); validation.6d98aad8420d7a21 (07-31, rel 3, given) records the 29.95% limit-up plus Amazon's and Apple's memory-scarcity statements and then concedes 'the growth rate the claim turns on is not restated anywhere in it'. I read every bridge_text rather than relying on a signal column: prediction_evidence_links is 100% support_direction='support' with contradiction_score 0.0 on all 8258 rows DB-wide, so no contradicting bridge could ever be surfaced by query. None of the 7 texts contradicts the prediction on reading.",
+      "cross_stream_evidence": [
+        "bridge:validation.ccad9d16472621b9",
+        "bridge:validation.6d98aad8420d7a21"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.42a2372350593ef7",
+      "stream": "needs",
+      "entry_id": "prediction.42a2372350593ef7",
+      "verdict": "stale",
+      "reason": "Bridge->Needs across the whole three-actor Need-set. need.c1b1f0ed8322abcb's outcome text reads 'Two consecutive quarters of shipped HBM/DRAM volume that ... keep reported YoY revenue growth at or above 100%' -- validation.ccad9d16472621b9 (07-29) delivers the first of those two quarters at +257%, so half the outcome is now history and the Need-set should be reframed forward onto the single remaining Q3 (October) print. The same bridge also documents the fab-allocation Need partially delivering in the actor's own words -- DRAM output was sacrificed because bits went into HBM, and HBM4 mass production began in-quarter and expands through H2 -- which is exactly need.c1b1f0ed8322abcb's job text. Note that no status flip is available as evidence either way: needs_tasks.status is 'open' on all 1167 rows DB-wide, 'done' has never been written.",
+      "cross_stream_evidence": [
+        "bridge:validation.ccad9d16472621b9",
+        "need:need.c1b1f0ed8322abcb",
+        "need:need.84a3d860f4d31869"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.78
+    },
+    {
+      "prediction_id": "prediction.42a2372350593ef7",
+      "stream": "needs",
+      "entry_id": "AI-accelerator and hyperscaler memory-procurement organization",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY -- escalate, do not auto-fix. need.2e8ce027e874b9f1 and its task need_task.24eb29e48949c28f both carry target_start_date 2026-09-01 / target_end_date 2026-09-30, but the task's own when_text reads 'Runway Jul-Sep 2026 (Q3 buildout quarter)'. The parser kept only the trailing month of the stated range and dropped two thirds of the runway, so the Need reads as a September-only obligation. The other two Needs on this prediction parsed the same quarter correctly to 2026-07-01/2026-09-30, which is what makes this a parse defect rather than an authoring choice. Consequence: any window-based liveness check on this Need is wrong for July and August, and no status field can compensate because needs_tasks.status is 100% 'open' DB-wide.",
+      "cross_stream_evidence": [
+        "task:need_task.24eb29e48949c28f",
+        "need:need.c1b1f0ed8322abcb"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.42a2372350593ef7",
+      "stream": "readings",
+      "entry_id": "prediction.42a2372350593ef7",
+      "verdict": "broken",
+      "reason": "PIPELINE OUTAGE, not a per-prediction gap. This prediction has zero prediction_chain edges in either direction and zero prediction_relations rows, but so does most of the corpus: prediction_chain MAX(created_at) is 2026-06-10T10:34:13Z and prediction_relations MAX(created_at) is 2026-06-09T18:25:42Z, and only 48 of 324 predictions carry any chain edge at all. Edge extraction has produced nothing for eight weeks. Earlier maintenance runs recorded 'no chain or relation edges recorded; nothing to reframe' as a fresh verdict, which laundered a dead pipeline into per-prediction health -- that is why this is broken and not fresh. No per-prediction rewrite can fix it; escalate the extractor. Separately, prediction_relations.relation_type is CHECK-constrained to parallel|exclusive_variant|negation|entails|equivalent, so 'contradicts' cannot be recorded even once extraction resumes.",
+      "cross_stream_evidence": [
+        "db:prediction_chain MAX(created_at)=2026-06-10",
+        "db:prediction_relations MAX(created_at)=2026-06-09",
+        "db:48 of 324 predictions have any chain edge"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+
+    {
+      "prediction_id": "prediction.4dba2dbfb8d2798b",
+      "stream": "reasoning",
+      "entry_id": "prediction.4dba2dbfb8d2798b",
+      "verdict": "fresh",
+      "reason": "All four clauses hold and two were directly restated this week. reasoning_because (MemGhost at 87.5% / 71.4% against two agents) is a fixed 2026-07-06 disclosure. reasoning_given ('Disclosed agents write memory with no source tag, approval gate, or audit log on the write path') was reinforced twice: validation.6f42a03e676a63af (07-30, rel 5) documents Ruflo's AgentDB learning store writable through an unauthenticated MCP bridge where the 3.16.3 patch 'closes the door to the store, but nothing in the release tags what is already inside it, gates a write, or logs one', and validation.3d9457948bed563e (08-01, rel 2) finds no provenance tag, write-approval step or audit log in YC's qm. Target window H1 2027 is untouched. One watch item recorded here rather than as a stale call: qm is a clean-sheet design that answered memory poisoning with per-person/per-room scoping instead of provenance, which is a fourth option the prediction_summary's 'provenance is the lowest-friction defense so it lands first' argument does not enumerate. It weakens the mechanism without touching any reasoning clause; revisit if a second greenfield platform picks scoping.",
+      "cross_stream_evidence": [
+        "bridge:validation.6f42a03e676a63af",
+        "bridge:validation.3d9457948bed563e"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.4dba2dbfb8d2798b",
+      "stream": "bridge",
+      "entry_id": "prediction.4dba2dbfb8d2798b",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 8 validation_rows, read in full. The set is well calibrated including the negatives: validation.20be7cfb9e6309e3 (07-19) is graded rel 1 / support_dimension 'none' and says so plainly ('The slate is thick with agent security and empty of provenance'), and validation.4c2d6691e84a84cb (07-18) names Anaconda answering 'from the wrong layer'. This week's two rows are correctly bounded -- 6f42a03e676a63af closes on 'No platform announced provenance tagging, a write-approval gate or an audit log on the memory path', and 3d9457948bed563e on 'Memory got partitioned, not labelled'. No row contradicts the prediction on reading, which is the only way to establish that here.",
+      "cross_stream_evidence": [
+        "bridge:validation.6f42a03e676a63af",
+        "bridge:validation.3d9457948bed563e",
+        "bridge:validation.20be7cfb9e6309e3"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.84
+    },
+    {
+      "prediction_id": "prediction.4dba2dbfb8d2798b",
+      "stream": "needs",
+      "entry_id": "prediction.4dba2dbfb8d2798b",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY covering the whole three-actor Need-set -- escalate, do not auto-fix. All three Needs (need.b09d55a6093d6872, need.66d763eb31059833, need.0be50997b5d4ad5f) and all three of their tasks carry target_start_date 2027-01-01 / target_end_date 2027-06-30, which is exactly the prediction's own target window, while every task's when_text reads 'July 2026 through H1 2027'. The eighteen months of runway the authors wrote are gone and the Needs read as starting only when the prediction resolves. This is the same quarter-token-wins parse defect escalated on 2026-07-19 for prediction.6ba7ca6e01ab313e; it was never applied, so it recurs unchanged. Substantively the actor set is otherwise sound: no vendor or framework has shipped default-on provenance tagging, confirmed by validation.6f42a03e676a63af and validation.3d9457948bed563e.",
+      "cross_stream_evidence": [
+        "task:need_task.8d35e5156d91e021",
+        "task:need_task.21d5716e0d15ca5a",
+        "task:need_task.5e12a3bc10078783",
+        "bridge:validation.6f42a03e676a63af"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.4dba2dbfb8d2798b",
+      "stream": "readings",
+      "entry_id": "prediction.4dba2dbfb8d2798b",
+      "verdict": "broken",
+      "reason": "PIPELINE OUTAGE. Zero prediction_chain edges and zero prediction_relations rows for this prediction, against a corpus where prediction_chain stopped at 2026-06-10 and prediction_relations at 2026-06-09 and only 48 of 324 predictions carry any edge. The omission is especially visible here: this prediction and prediction.6ba7ca6e01ab313e both bridge the same MemGhost disclosure on 2026-07-13 (validation.d446dc29a9fb544c and validation.0023f0070b92de25) and both bridge the same YC qm launch on 2026-08-01 (validation.3d9457948bed563e and validation.290226ed37d475b5) -- an obvious 'parallel' relation candidate that no extractor run will produce while the pipeline is dead. Escalate the extractor rather than rewriting this prediction.",
+      "cross_stream_evidence": [
+        "prediction:prediction.6ba7ca6e01ab313e",
+        "bridge:validation.3d9457948bed563e",
+        "bridge:validation.290226ed37d475b5",
+        "db:prediction_chain MAX(created_at)=2026-06-10"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.88
+    },
+
+    {
+      "prediction_id": "prediction.6b1c8cb1541ca0a5",
+      "stream": "reasoning",
+      "entry_id": "prediction.6b1c8cb1541ca0a5",
+      "verdict": "stale",
+      "reason": "Bridge->Reasoning, forward framing rather than factual invalidation. reasoning_because (Micron's fiscal-Q3-2026 print of 2026-06-25) remains true but is now the weakest of four supply-side anchors: validation.88f02c5e38fce41b (07-29, rel 4, landing) has SK Hynix stating in its own results that HBM gated what else the fab could produce, and validation.371702f0db42e614 (07-30, rel 5, so_that) has Samsung quantifying it -- 60% to 70% of capacity to be placed under long-term contract, constraints through 2028, and a wider 2027 supply-demand gap than 2026. Meanwhile validation.d6f4a8eaa52f7bca (07-31, rel 4) narrows the residual gap to a single distinction the current reasoning never draws: Amazon's Jassy said $220bn of 2026 capex will not meet demand and Olsavsky attributed the $20bn increase to memory cost -- naming memory as a cost driver, not as an allocation ceiling. Rewrite should re-anchor because on the 07-29/07-30 supplier disclosures and sharpen so_that to state explicitly that a cost complaint from a buyer does not satisfy the claim; only an allocation- or volume-denominated shipment limit does. The Q2 2027 landing window is unchanged.",
+      "cross_stream_evidence": [
+        "bridge:validation.371702f0db42e614",
+        "bridge:validation.d6f4a8eaa52f7bca",
+        "bridge:validation.88f02c5e38fce41b"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.72
+    },
+    {
+      "prediction_id": "prediction.6b1c8cb1541ca0a5",
+      "stream": "bridge",
+      "entry_id": "prediction.6b1c8cb1541ca0a5",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 9 validation_rows; five were added this week and every one names its own shortfall against the claim -- 'a letter of intent is not a filing' (07-27), 'no accelerator vendor or hyperscaler drew a shipment limit from it' (07-29), 'still the seller describing a shortage rather than a buyer conceding' (07-30), 'Cost is not allocation' (07-31), 'Nobody who ships accelerators said anything about allocation' (08-02). Grades track that discipline, 2 to 5. Read directly rather than by signal column, since all prediction_evidence_links rows are support with contradiction_score 0.0. Caveat for the update step, not a defect in the rows: app/sourcedata/2026-08-02/bridges.json already contains this prediction_id from the daily run, so _stale_applied Form 3 (weekly_maintenance.py:726) would treat any bridge-stream stale verdict on this prediction as already applied. Immaterial here because the verdict is fresh.",
+      "cross_stream_evidence": [
+        "bridge:validation.371702f0db42e614",
+        "bridge:validation.d6f4a8eaa52f7bca",
+        "bridge:validation.7a5fac6b80a22c76"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.6b1c8cb1541ca0a5",
+      "stream": "needs",
+      "entry_id": "prediction.6b1c8cb1541ca0a5",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY covering both Needs -- escalate, do not auto-fix. need.6dd3597d8c06609b, need.3711eb25f9d4f14a and both tasks carry target_start_date 2027-04-01 / target_end_date 2027-06-30, identical to the prediction's own target window, while both when_texts read 'today through Q2 2027 runway'. The quarter token won and the explicit 'today through' start was discarded, so both Needs read as beginning nine months after the work must start. Same root cause as the defect escalated on 2026-07-19 for prediction.6ba7ca6e01ab313e and recurring here unfixed. On substance the two-sided actor set is correct and both sides moved this week -- the supplier side delivered visibly (validation.371702f0db42e614, Samsung placing 60-70% of capacity under long-term contract) while the accelerator-vendor side named cost instead of allocation (validation.d6f4a8eaa52f7bca) -- so the actors need no rewrite, only correct windows.",
+      "cross_stream_evidence": [
+        "task:need_task.9a64e170f8047f2f",
+        "task:need_task.001e67d9bc371e78",
+        "bridge:validation.371702f0db42e614",
+        "bridge:validation.d6f4a8eaa52f7bca"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.78
+    },
+    {
+      "prediction_id": "prediction.6b1c8cb1541ca0a5",
+      "stream": "readings",
+      "entry_id": "prediction.6b1c8cb1541ca0a5",
+      "verdict": "broken",
+      "reason": "PIPELINE OUTAGE. Zero chain edges and zero relations for this prediction against a corpus where prediction_chain stopped at 2026-06-10 and prediction_relations at 2026-06-09, with only 48 of 324 predictions carrying any edge. The missing edge is concrete and cross-checkable this week: this prediction and prediction.a31a93089cef22da both bridge the identical Samsung 2026-07-30 Q2 release, and they read it in opposite directions -- validation.371702f0db42e614 grades it rel 5 supporting so_that ('Samsung named the cap, from the side that sets it') while validation.5c1dc15555584996 grades the same document rel 4 on landing as a documented non-event ('did not make one'). Both readings are correct because the claims differ, and precisely that is what a relation edge should encode. Escalate the extractor; no per-prediction rewrite applies.",
+      "cross_stream_evidence": [
+        "prediction:prediction.a31a93089cef22da",
+        "bridge:validation.371702f0db42e614",
+        "bridge:validation.5c1dc15555584996",
+        "db:prediction_relations MAX(created_at)=2026-06-09"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.88
+    },
+
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "reasoning",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "stale",
+      "reason": "Bridge->Reasoning, and the only counter-signal in this batch that no query could ever surface. validation.290226ed37d475b5 (08-01, rel 3, so_that) documents YC's qm, a clean-sheet coding-agent harness created 2026-07-29, shipping three postures -- Strict (every tool call waits for approval), Auto (screens content), Dangerous (never pauses) -- with Auto as the default and Strict opt-in, and at ~5,300 stars / 547 forks within days, so 'whatever it encodes is being copied quickly'. The prediction's mechanism is that 'competitive pressure plus advisory volume will push the largest platforms there first'; a greenfield entrant with no legacy constraint built the pause and declined to default it, which is direct evidence against that mechanism, not for it. reasoning_because (OWASP 2.01, fixed 2026-06-28) and reasoning_given (injection unpatchable) survive; what needs rewriting is so_that/landing, which should distinguish shipping a gate from defaulting it on, and should absorb validation.88a4ea3328e0d201 (07-17, Claude Code v2.1.212 default permission caps and fail-closed gating -- general permission gating, still not a Rule-of-Two trifecta gate). Note prediction_evidence_links carries support_direction='support' and contradiction_score 0.0 for every row on this prediction; this verdict rests entirely on reading bridge_text.",
+      "cross_stream_evidence": [
+        "bridge:validation.290226ed37d475b5",
+        "bridge:validation.88a4ea3328e0d201",
+        "bridge:validation.79870a8c3f3ee44d"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.76
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "bridge",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 17 validation_rows, the largest and best-calibrated set in this batch. Both rows added this week hold the standard: validation.79870a8c3f3ee44d (07-29, rel 4) works the Hugging Face intrusion timeline as a trifecta case study and then concedes 'No such gate shipped on Wednesday, July 29'; validation.290226ed37d475b5 (08-01, rel 3) reports the qm posture set and states 'Nothing published describes a rule capping which capabilities may be combined in one session'. Rows that only touch the theme are graded down to 2 with the reason attached (07-19: 'Nothing was persuaded by untrusted content -- a misconfigured service simply answered'). No bridge needs rewriting; the qm row's implication for the thesis is handled in the reasoning verdict rather than by editing the row, per the spec's rule that the bridge stays as historical record.",
+      "cross_stream_evidence": [
+        "bridge:validation.290226ed37d475b5",
+        "bridge:validation.79870a8c3f3ee44d"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "needs",
+      "entry_id": "coding-agent platform security/orchestration product lead",
+      "verdict": "stale",
+      "reason": "Third consecutive week stale for this same Need, and correctly so rather than as a duplicate: it was judged stale on 2026-07-19 and 2026-07-26, markers exist at app/sourcedata/2026-07-19/maintenance-update.needs.prediction.6ba7ca6e01ab313e.json and the 2026-07-26 equivalent, but _stale_applied (weekly_maintenance.py:722) only calls .is_file() on them and nothing reads their contents, so need.262db198b3d721da's text is unchanged in the DB. New evidence this week sharpens the rewrite rather than repeating it: the Need's outcome reads 'A shipped, default-on Rule-of-Two gate that pauses an agent run for human approval before combining a third dangerous property', and validation.290226ed37d475b5 (08-01) shows YC's qm shipping exactly that pause as its Strict posture while defaulting to Auto. The actor has now demonstrably built the mechanism and chosen not to default it, so the Need should be reframed from 'implement a gate' to 'flip an existing gate to default-on', with the qm posture set named as the reference implementation.",
+      "cross_stream_evidence": [
+        "bridge:validation.290226ed37d475b5",
+        "bridge:validation.88a4ea3328e0d201",
+        "task:need_task.58272020b02c4782"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "needs",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY covering the whole Need-set -- escalate, do not auto-fix. Re-affirming the 2026-07-19 escalation, verified unchanged today: need_task.58272020b02c4782 has when_text 'H2 2026 through Q1 2027' and need_task.cedfde5028b372f2 has when_text 'ongoing through 2026 into Q1 2027', yet both tasks and both Needs carry target_start_date 2027-01-01 / target_end_date 2027-03-31, identical to the prediction's own target window. The quarter token wins and the stated 2026 runway is discarded, so a Need that must be worked now reads as beginning only when the prediction resolves. Unfixed for three weeks because the 07-19 broken verdict was logged, not applied. The same defect is present this week on prediction.4dba2dbfb8d2798b and prediction.6b1c8cb1541ca0a5, so treat it as a parser ticket, not three prediction-level edits.",
+      "cross_stream_evidence": [
+        "task:need_task.58272020b02c4782",
+        "task:need_task.cedfde5028b372f2",
+        "prediction:prediction.4dba2dbfb8d2798b",
+        "prediction:prediction.6b1c8cb1541ca0a5"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.86
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "readings",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "broken",
+      "reason": "PIPELINE OUTAGE, reclassified from the 'fresh' this stream received on 2026-07-12, 2026-07-19 and 2026-07-26. Those verdicts read 'no chain or relation edges recorded; nothing to reframe' as evidence of health; the corpus-level numbers say otherwise -- prediction_chain MAX(created_at) 2026-06-10, prediction_relations MAX(created_at) 2026-06-09, 48 of 324 predictions with any edge. This prediction is among the strongest edge candidates in the corpus and still has none: it shares the 2026-07-13 MemGhost bridge with prediction.4dba2dbfb8d2798b (validation.0023f0070b92de25 / validation.d446dc29a9fb544c) and the 2026-08-01 YC qm bridge with the same prediction (validation.290226ed37d475b5 / validation.3d9457948bed563e), a textbook 'parallel' pair. Escalate the extractor; no rewrite of this prediction would produce an edge.",
+      "cross_stream_evidence": [
+        "prediction:prediction.4dba2dbfb8d2798b",
+        "bridge:validation.0023f0070b92de25",
+        "bridge:validation.290226ed37d475b5",
+        "db:48 of 324 predictions have any chain edge"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.88
+    },
+
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "reasoning",
+      "entry_id": "prediction.a31a93089cef22da",
+      "verdict": "stale",
+      "reason": "Bridge->Reasoning, and the premise the whole thesis rests on broke this week. The prediction is framed on Samsung being 'the one large memory maker absent from this week's capital surge' facing pressure 'to signal its own capacity path rather than cede the narrative'. validation.5c1dc15555584996 (07-30, rel 4, support_dimension landing) reports Samsung's Q2 release -- consolidated revenue KRW 171.5tn, operating profit KRW 89.5tn, Device Solutions KRW 89.2tn operating profit, record share of server revenue, HBM4 scaling, industry-first HBM4E samples -- and states flatly 'There is no new fab, no expanded line, no raised memory capital-expenditure figure and no capacity target anywhere in it', closing with 'Samsung is the most profitable of the three suppliers now, not the conspicuously absent one'. Samsung answered the scarcity with contracting instead: 60-70% of capacity under long-term agreement, which the bridge calls 'the opposite move to adding new ones'. reasoning_because (Micron's $250bn raise plus SK Hynix's EUV-earmarked listing, 2026-07-09) stays true as history; what must be rewritten is reasoning_given and reasoning_so_that, which assume an absence and a competitive-shame motive that a record quarter and a contracting strategy have removed. Retire is premature -- the Q3 (late October) and Q4 releases fall inside the Q1 2027 window -- but the rewrite must state the new falsifier: Samsung may satisfy demand by allocation rather than by capex, in which case the prediction fails without any contrary announcement ever appearing.",
+      "cross_stream_evidence": [
+        "bridge:validation.5c1dc15555584996",
+        "bridge:validation.3ddff5ab2c2378f3",
+        "prediction:prediction.6b1c8cb1541ca0a5"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "bridge",
+      "entry_id": "prediction.a31a93089cef22da",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 7 validation_rows. The two added this week are the most valuable in the set precisely because they record non-events accurately: validation.5c1dc15555584996 (07-30, rel 4, landing) identifies the Q2 release as 'the document such an announcement would have arrived in' and reports its absence with the segment figures to back it, and validation.3ddff5ab2c2378f3 (07-31, rel 3, landing) refuses to read a record 26.81% single-session gain as a commitment -- 'Samsung was repriced, not committed ... The move is a price, not a plan'. Older rows remain honestly self-limiting (07-14 Intel Leixlip graded 2 with 'the spend is explicitly distinct from memory fabs'). No bridge needs rewriting; their implication for the thesis is carried in the reasoning verdict, since the spec keeps the bridge as historical record.",
+      "cross_stream_evidence": [
+        "bridge:validation.5c1dc15555584996",
+        "bridge:validation.3ddff5ab2c2378f3"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "needs",
+      "entry_id": "prediction.a31a93089cef22da",
+      "verdict": "stale",
+      "reason": "Bridge->Needs across the three-actor set. need.5d9a923bd537d65f's outcome reads 'Public announcement -- earnings call, filing, or press release -- stating the AI-memory capacity/capex commitment', and validation.5c1dc15555584996 (07-30) records that exact venue arriving with the opposite content, so the Need should be re-pointed at the Q3-2026 release in late October with the Q2 non-announcement named as prior. need.33cbcc782a0de2d1's motivation ('Ensure sold-out HBM/advanced-DRAM demand can be met') is now in direct tension with Samsung's disclosed strategy of placing 60-70% of existing capacity under long-term contract, which meets demand by allocation rather than by new lines. need.ebf3e53f7f2a2f2f (capital-allocation lead, window 2026-07-01/2026-12-31, the one that parsed correctly) is intact and remains the linchpin. No status signal exists to corroborate any of this: needs_tasks.status is 'open' on all 1167 rows DB-wide.",
+      "cross_stream_evidence": [
+        "bridge:validation.5c1dc15555584996",
+        "need:need.5d9a923bd537d65f",
+        "need:need.33cbcc782a0de2d1"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.78
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "needs",
+      "entry_id": "Large memory-maker's investor-relations and earnings-communications team",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY -- escalate, do not auto-fix. Re-affirming the 2026-07-19 escalation and verified unchanged today: need.5d9a923bd537d65f and need_task.a84adf6acf942e1c both have target_start_date and target_end_date NULL, despite the task's when_text reading 'Q3-2026 and Q4-2026 earnings-prep cycles', an unambiguous parseable runway. The 07-19 broken verdict was recorded but never applied because the maintenance update path only writes a marker file that nothing reads. This is worse than a mis-parse: a NULL window makes the Need invisible to any expiry or liveness check, and it matters this week because validation.5c1dc15555584996 shows the Q3 half of that stated runway is now the only remaining venue before the prediction's Q1 2027 deadline.",
+      "cross_stream_evidence": [
+        "task:need_task.a84adf6acf942e1c",
+        "bridge:validation.5c1dc15555584996"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.88
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "needs",
+      "entry_id": "Large memory-maker's HBM/advanced-DRAM fab and process-engineering team",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY, second and distinct instance on the same prediction -- escalate, do not auto-fix. need.33cbcc782a0de2d1 and need_task.9b7e0a61ff769577 both have target_start_date and target_end_date NULL while the task's when_text reads 'Mid-to-late 2026 capacity-planning cycle'. Re-affirming the 2026-07-19 escalation, verified unchanged today. Kept separate from the sibling NULL-window Need above so the pair does not collapse into one entry under the merge's (prediction_id, stream, entry_id) dedupe, preserving the 07-19 granularity. Note the contrast that proves the parser can succeed here: the third Need on this same prediction, need.ebf3e53f7f2a2f2f, parsed 'H2 2026, ahead of Q4-2026 earnings' correctly to 2026-07-01/2026-12-31.",
+      "cross_stream_evidence": [
+        "task:need_task.9b7e0a61ff769577",
+        "need:need.ebf3e53f7f2a2f2f"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.88
+    },
+    {
+      "prediction_id": "prediction.a31a93089cef22da",
+      "stream": "readings",
+      "entry_id": "prediction.a31a93089cef22da",
+      "verdict": "broken",
+      "reason": "PIPELINE OUTAGE. This stream was judged stale on 2026-07-19 with a proposed edge to a sibling cluster; that verdict was never applied and the prediction still has zero prediction_chain edges and zero prediction_relations rows. Re-judging it stale would repeat a request the update path cannot fulfil, because the cause is corpus-wide, not per-prediction: prediction_chain MAX(created_at) 2026-06-10, prediction_relations MAX(created_at) 2026-06-09, 48 of 324 predictions with any edge. This week supplies a sharp missing-edge example -- this prediction and prediction.6b1c8cb1541ca0a5 bridge the identical Samsung 2026-07-30 Q2 release in opposite directions (rel 4 landing non-event here, rel 5 so_that support there). Escalate the extractor.",
+      "cross_stream_evidence": [
+        "prediction:prediction.6b1c8cb1541ca0a5",
+        "bridge:validation.5c1dc15555584996",
+        "bridge:validation.371702f0db42e614",
+        "db:prediction_chain MAX(created_at)=2026-06-10"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.88
+    },
+
+    {
+      "prediction_id": "prediction.c43f854e46b748b1",
+      "stream": "reasoning",
+      "entry_id": "prediction.c43f854e46b748b1",
+      "verdict": "stale",
+      "reason": "Bridge->Reasoning. validation.f6d77f072fdbe7c9 (08-01, rel 4) reports OpenAI publishing ten mathematics and TCS results on 2026-08-01, each shipped with a Lean 4 formalisation in a public Apache-2.0 repository built against Lean 4.32.0 and mathlib, at under $2,000 of tokens per result -- 'the laboratory formalises before publishing', attached rather than awaited. That moves reasoning_given ('Math norms demand formalization and Lean sprints routinely settle headline claims in months') from a community-sprint model to a lab-internal, pre-publication model, and it makes the Cycle Double Cover proof's exclusion from that batch a signal in its own right, which the current reasoning has no place for. The same bridge carries a second change the landing criterion cannot absorb as written: Lean's creator published a postmortem on a kernel bug that let a metaprogram construct a proof of False with the axiom audit reporting no axioms, surfaced 2026-07-25 when an AI-assisted Collatz disproof turned out to be exploiting it. reasoning_landing reads 'public Lean formalization progress or a named-mathematician rebuttal'; a Lean certificate is no longer self-certifying, so the rewrite must say what counts -- kernel version, axiom audit, independent re-check -- rather than treating formalisation as a clean binary.",
+      "cross_stream_evidence": [
+        "bridge:validation.f6d77f072fdbe7c9",
+        "bridge:validation.1edc4455b1f2f851",
+        "bridge:validation.a243ac60b12aeb94"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.78
+    },
+    {
+      "prediction_id": "prediction.c43f854e46b748b1",
+      "stream": "bridge",
+      "entry_id": "prediction.c43f854e46b748b1",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 4 validation_rows, the smallest set in this batch but well graded. validation.f6d77f072fdbe7c9 (08-01, rel 4) reports the ten Lean-certified results and then draws the limit itself -- 'The particular proof at issue is not among them' -- and pairs it with the Lean kernel-bug postmortem in the same entry, which is the honest reading. validation.a243ac60b12aeb94 (07-28, rel 3) uses the HAWK-256 / AES-128 pair to make a settlement-cost argument about where a long combinatorial proof sits, correctly graded down as analogy rather than direct evidence. validation.1edc4455b1f2f851 (07-19, rel 5, landing) is the strongest row and remains accurate. No row contradicts the claim on reading.",
+      "cross_stream_evidence": [
+        "bridge:validation.f6d77f072fdbe7c9",
+        "bridge:validation.a243ac60b12aeb94"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.c43f854e46b748b1",
+      "stream": "needs",
+      "entry_id": "prediction.c43f854e46b748b1",
+      "verdict": "stale",
+      "reason": "Bridge->Needs, reweighting the three-actor set. need.f1844db8d964894b ('frontier-lab research program lead for verified mathematics ... stand up a funded Lean formalization project', how_text 'subagent autoformalization runs checked against Lean's kernel') was the speculative actor when written; validation.f6d77f072fdbe7c9 (08-01) shows the lab doing exactly that ten times over in a public Apache-2.0 repository at under $2,000 per result, so the capability, the tooling and the workflow now demonstrably exist and the Need's job description should shift from 'stand up a project' to 'extend the existing pipeline to the CDC proof, or state why it was excluded'. Correspondingly need.d0a3be51205c166c (mathlib sprint organizer) is now the less load-bearing path, and its motivation ('Headline claims are the community's best recruiting events') is weakened when the lab formalises pre-publication. The set is otherwise intact.",
+      "cross_stream_evidence": [
+        "bridge:validation.f6d77f072fdbe7c9",
+        "need:need.f1844db8d964894b",
+        "need:need.d0a3be51205c166c"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.72
+    },
+    {
+      "prediction_id": "prediction.c43f854e46b748b1",
+      "stream": "needs",
+      "entry_id": "graph theorist specializing in the Cycle Double Cover problem",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY -- escalate, do not auto-fix. need.83f1723ce464d3b5 and need_task.62fc1ff29a2a8c22 carry target_start_date 2026-07-01 / target_end_date 2026-07-31 while the task's own when_text reads 'refereeing push from July 2026 into early 2027'. The parser kept the leading month and discarded the stated end, so the window expired on 2026-07-31, two days before this week's close, on a Need that is manifestly still live -- no named mathematician has published a verdict, and validation.f6d77f072fdbe7c9 (08-01) shows the CDC proof still outside the batch of ten results OpenAI shipped with Lean certificates. Nothing in the system will surface the expiry: needs_tasks.status is 'open' on all 1167 rows DB-wide and 'done' has never been written, so there is no status path that could mark this Need met or unmet. It is also the only expired window in this batch, which makes it the highest-priority instance of the when_text parse defect.",
+      "cross_stream_evidence": [
+        "task:need_task.62fc1ff29a2a8c22",
+        "bridge:validation.f6d77f072fdbe7c9",
+        "db:needs_tasks.status is 'open' on 1167 of 1167 rows"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.87
+    },
+    {
+      "prediction_id": "prediction.c43f854e46b748b1",
+      "stream": "readings",
+      "entry_id": "prediction.c43f854e46b748b1",
+      "verdict": "broken",
+      "reason": "PIPELINE OUTAGE. Zero prediction_chain edges and zero prediction_relations rows, against prediction_chain MAX(created_at) 2026-06-10, prediction_relations MAX(created_at) 2026-06-09 and only 48 of 324 predictions carrying any edge -- eight weeks with no extraction. This prediction is 2026-07-11, entirely inside the dead window, so it has never had a chance to acquire an edge. Recording that as fresh (as prior runs did for siblings, on the ground that there is 'nothing to reframe') converts an outage into a health signal, which is why the verdict is broken. Escalate the extractor. Note for whoever fixes it that prediction_relations.relation_type is CHECK-constrained to parallel|exclusive_variant|negation|entails|equivalent, so a contradicting relationship still has no representable value once edges resume.",
+      "cross_stream_evidence": [
+        "db:prediction_chain MAX(created_at)=2026-06-10",
+        "db:prediction_relations MAX(created_at)=2026-06-09",
+        "db:relation_type CHECK excludes 'contradicts'"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    }
+  ]
+}

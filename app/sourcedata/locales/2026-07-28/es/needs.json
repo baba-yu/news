@@ -1,0 +1,277 @@
+{
+  "date": "2026-07-28",
+  "by_prediction": {
+    "prediction.62237958df3c9d2a": [
+      {
+        "actor": "Responsable de selección de parámetros, equipo de diseño de la propuesta HAWK",
+        "job": "Volver a derivar las estimaciones concretas de seguridad de HAWK bajo la simetría reticular publicada y redimensionar los conjuntos de parámetros que sostienen los niveles declarados.",
+        "outcome": "Una especificación de HAWK revisada, con conjuntos de parámetros ampliados para HAWK-512 y HAWK-1024 y tablas de recuento de puertas recalculadas que restituyen los niveles de seguridad declarados.",
+        "motivation": "Ampliar los parámetros cuesta tamaño de clave y de firma, pero no concede nada sobre cómo se encontró la simetría; una refutación costaría la credibilidad de la propuesta.",
+        "task": {
+          "who": "Subgrupo de selección de parámetros y estimación de seguridad del equipo de diseño de HAWK",
+          "what": "Redimensionar los conjuntos de parámetros de HAWK-512 y HAWK-1024",
+          "where": "La especificación de HAWK y su capítulo de análisis de seguridad",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Los parámetros publicados deben sostener el nivel que declaran",
+          "how": "Recálculo del recuento de puertas con el estimador de retículos frente a la simetría revelada"
+        }
+      },
+      {
+        "actor": "Responsable del proceso de normalización, programa de firmas post-cuánticas del NIST",
+        "job": "Llevar el criptoanálisis publicado al registro oficial de comentarios y pedir al equipo de HAWK una respuesta que conste antes de que cierre la ronda.",
+        "outcome": "Una publicación en el proceso del NIST que lleve la respuesta del equipo de HAWK, los conjuntos de parámetros ampliados, al registro público de la ronda de normalización.",
+        "motivation": "El informe de una ronda no puede hacer avanzar a un candidato cuyos recuentos de puertas publicados ya no se corresponden con el nivel de seguridad para el que fue elegido.",
+        "task": {
+          "who": "Personal de normalización post-cuántica del NIST y moderadores de los comentarios oficiales",
+          "what": "Publicar el criptoanálisis y recabar la respuesta del equipo",
+          "where": "La lista de correo pqc-forum y la página de comentarios oficiales",
+          "when": "Q3 2026",
+          "why": "El registro de la ronda necesita que el equipo de diseño conste por escrito",
+          "how": "Hilo de comentarios oficiales más redacción del informe de estado de la ronda"
+        }
+      },
+      {
+        "actor": "Grupo de criptoanálisis de retículos en un laboratorio de seguridad académico o industrial",
+        "job": "Repetir de extremo a extremo la recuperación de clave de HAWK-256 para zanjar si el factor de trabajo declarado de 2^38 se sostiene fuera del laboratorio que lo publicó.",
+        "outcome": "Una reproducción independiente de la recuperación de clave de tres horas y 42 minutos, que cierra el hueco que de otro modo una refutación tendría margen para aprovechar.",
+        "motivation": "Zanjar esta afirmación cuesta una tarde de cómputo alquilado, lo bastante barato como para que ser el primero en comprobarlo valga más que esperar.",
+        "task": {
+          "who": "Grupo académico de criptoanálisis de retículos con presupuesto de cómputo en la nube",
+          "what": "Reproducir la recuperación de clave de 2^38 del reto HAWK-256",
+          "where": "Servidores alquilados de 96 núcleos, con los resultados redactados como preprint",
+          "when": "Q3 2026",
+          "why": "Una ejecución externa elimina la opción de discutir la simetría",
+          "how": "Ejecución en un servidor alquilado de 96 núcleos contra el conjunto de parámetros del reto"
+        }
+      },
+      {
+        "actor": "Ingeniero de la implementación de referencia, paquete de la propuesta HAWK",
+        "job": "Reajustar y volver a medir el código de referencia con los parámetros ampliados, y regenerar después los vectores de prueba de clave, de firma y de respuesta conocida.",
+        "outcome": "Una implementación y un conjunto de vectores de prueba acordes con la especificación revisada, para que los parámetros ampliados se entreguen como una propuesta utilizable y no como una tabla.",
+        "motivation": "El argumento de venta del esquema son las firmas compactas, así que el equipo tiene que enseñar cuánto cuesta realmente la ampliación antes de que los revisores la acepten.",
+        "task": {
+          "who": "Ingenieros de la implementación de referencia y de medición de HAWK",
+          "what": "Volver a medir los tamaños de clave y de firma con los parámetros ampliados",
+          "where": "El código de referencia de HAWK y sus vectores de prueba de respuesta conocida",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Una revisión de la especificación solo se entrega con números de implementación que la acompañen",
+          "how": "Mediciones al estilo SUPERCOP y vectores de prueba de respuesta conocida regenerados"
+        }
+      },
+      {
+        "actor": "Responsable de divulgación coordinada, equipo rojo del laboratorio de frontera que publica el criptoanálisis",
+        "job": "Dejar por escrito la instancia del reto, sus parámetros y la vía de verificación para que terceros puedan zanjar por su cuenta la afirmación sobre la recuperación de clave.",
+        "outcome": "Un artefacto comprobable —parámetros del reto más pasos de verificación— que hace más barato reproducir el resultado que discutir si se sostiene.",
+        "motivation": "Un resultado que nadie puede repetir se queda en afirmación de prensa; el argumento del laboratorio a favor del criptoanálisis asistido por modelos depende de que gente de fuera confirme los números.",
+        "task": {
+          "who": "Equipo rojo del laboratorio de frontera y coordinadores de divulgación coordinada",
+          "what": "Publicar la instancia del reto y los pasos de verificación",
+          "where": "El artículo de investigación del laboratorio y la publicación de artefactos que lo acompaña",
+          "when": "Q3 2026",
+          "why": "La reproducibilidad es lo que hace más barato ceder que pleitear",
+          "how": "Divulgación coordinada con el equipo de diseño más artefactos públicos"
+        }
+      },
+      {
+        "actor": "Mantenedor del estimador de seguridad de retículos de código abierto",
+        "job": "Codificar en el modelo público de costes la simetría que reduce a la mitad el tamaño efectivo de clave, para que cualquier parámetro de HAWK redimensionado se calcule contra una estimación corregida.",
+        "outcome": "Un estimador parcheado cuya salida de recuento de puertas refleje la simetría, lo que da a los conjuntos de parámetros revisados un modelo de costes en el que los revisores ya confían.",
+        "motivation": "Toda propuesta basada en retículos dimensiona sus parámetros contra esta herramienta, así que un estimador ciego a la simetría reparte números que nadie puede defender.",
+        "task": {
+          "who": "Mantenedores del estimador de retículos y criptoanalistas colaboradores",
+          "what": "Codificar en el modelo público de costes la simetría que reduce a la mitad",
+          "where": "El repositorio abierto del estimador de retículos y su batería de regresión",
+          "when": "Q4 2026",
+          "why": "Los parámetros redimensionados necesitan un modelo de costes que incorpore la simetría",
+          "how": "Parche del modelo de costes con pruebas de regresión sobre conjuntos de parámetros conocidos"
+        }
+      }
+    ],
+    "prediction.7c6c746c4b355b4d": [
+      {
+        "actor": "Abogado de cumplimiento, programa de autorización de equipos del regulador de comunicaciones",
+        "job": "Reunir expedientes probatorios concesión por concesión contra las autorizaciones chinas de humanoides, cuadrúpedos e inversores ya emitidas, para sostener la revocación de concesiones concretas.",
+        "outcome": "Una orden de revocación que nombre al menos un modelo chino de robot o de inversor ya autorizado, el instrumento que exige la predicción.",
+        "motivation": "La comisión se reservó la potestad de revocación el 28 de julio; usarla es la vía más barata de cerrar su propio hueco de solo hacia delante.",
+        "task": {
+          "who": "Personal de autorización de equipos de la oficina de cumplimiento y abogados de seguridad nacional",
+          "what": "Construir expedientes de revocación contra concesiones ya autorizadas y nombradas",
+          "where": "Los expedientes de concesión de autorización de equipos y el registro de cumplimiento",
+          "when": "Del Q3 2026 al Q4 2026",
+          "why": "La revocación necesita un expediente por concesión antes de que se dicte ninguna orden",
+          "how": "Registros del sistema de autorización de equipos y contrastes con la lista de entidades cubiertas"
+        }
+      },
+      {
+        "actor": "Ingeniero de normativa, oficina de ingeniería y tecnología del regulador de comunicaciones",
+        "job": "Redactar la medida de seguimiento que sometería los modelos chinos de robot y de inversor ya autorizados al mismo veto de autorización.",
+        "outcome": "Un aviso u orden adicional cuyo texto alcance al parque ya autorizado y no solo a los modelos que buscan una nueva autorización.",
+        "motivation": "Una norma redactada contra modelos aún no lanzados no puede responder al precedente Volt Typhoon, que trata de equipos ya comprados e instalados.",
+        "task": {
+          "who": "Equipo de redacción normativa de la oficina de ingeniería y tecnología",
+          "what": "Redactar el articulado de alcance retroactivo para una medida de seguimiento",
+          "where": "Borradores normativos internos y circulación dentro de la comisión",
+          "when": "Del Q4 2026 al Q1 2027",
+          "why": "El razonamiento de seguridad declarado no respeta una línea de solo hacia delante",
+          "how": "Aviso adicional de propuesta normativa al amparo de la potestad de autorización existente"
+        }
+      },
+      {
+        "actor": "Personal técnico, comité selecto del Congreso sobre competencia estratégica con China",
+        "job": "Presionar a la comisión mediante cartas, comparecencias y borradores legislativos para que extienda el veto del 28 de julio a los modelos ya autorizados.",
+        "outcome": "Un registro público de exigencia parlamentaria que convierta un paso retroactivo de la comisión en el siguiente movimiento esperado y no en una escalada.",
+        "motivation": "El presidente del comité celebró la medida por reforzar la robótica nacional; una excepción que deja a la venta unidades chinas socava esa afirmación.",
+        "task": {
+          "who": "Personal técnico del comité selecto y oficinas de sus miembros",
+          "what": "Redactar cartas de supervisión y texto legislativo sobre las autorizaciones existentes",
+          "where": "Correspondencia del comité, actas de comparecencias y proyectos de ley presentados",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "La exigencia parlamentaria convierte una potestad reservada en un paso esperado",
+          "how": "Cartas de supervisión, testimonios en comparecencias y enmiendas a la ley de equipos seguros"
+        }
+      },
+      {
+        "actor": "Responsable de política de sanciones, mesa de China y tecnología del departamento del Tesoro",
+        "job": "Elaborar los expedientes de designación contra empresas chinas de IA, robótica e inversores por los motivos de robo de propiedad intelectual que señaló el secretario del Tesoro.",
+        "outcome": "Una designación que alcance a empresas cuyo equipamiento ya está vendido, y que dé a la comisión un asidero de entidad listada para revocar concesiones existentes.",
+        "motivation": "Las sanciones muerden en el parque instalado que un veto de autorización solo hacia delante deja intacto, y el secretario ya ha advertido de ellas.",
+        "task": {
+          "who": "Personal de política de sanciones del Tesoro y de revisión interagencias",
+          "what": "Reunir expedientes de designación por motivos de robo de propiedad intelectual",
+          "where": "Revisión interagencias de sanciones y expedientes probatorios",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Una designación alcanza a las unidades ya vendidas e instaladas",
+          "how": "Pruebas de robo de propiedad intelectual y revisión interagencias de la designación"
+        }
+      },
+      {
+        "actor": "Responsable de fabricación y operaciones de campo, fabricante estadounidense de robots humanoides",
+        "job": "Poner en marcha las instalaciones de IA física de Fremont y contratar a unos 200 empleados técnicos y de operaciones de campo para entregar los pedidos de Digit v5.",
+        "outcome": "Un humanoide nacional entregándose en volumen, de modo que un veto retroactivo deje a los compradores con un sustituto y no sin nada.",
+        "motivation": "Más de 300 millones de dólares en pedidos plurianuales se convierten en ingresos solo si las entregas de los hitos contractuales llegan a producirse.",
+        "task": {
+          "who": "Equipos de ingeniería de planta, producción y despliegue en campo",
+          "what": "Llevar las instalaciones de Fremont a la capacidad de entrega de los hitos",
+          "where": "Instalaciones de desarrollo de IA física de 60.000 pies cuadrados en Fremont",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Un sustituto con financiación hace asequible dejar colgado el parque instalado",
+          "how": "Unas 200 contrataciones añadidas, técnicas y de operaciones de campo"
+        }
+      },
+      {
+        "actor": "Responsable de mercados de capitales, patrocinador de la sociedad de adquisición con propósito especial que financia a un fabricante nacional de robots",
+        "job": "Cerrar la combinación empresarial definitiva a 2.500 millones de dólares pre-money y liberar más de 620 millones de dólares de ingresos brutos.",
+        "outcome": "Un fabricante nacional de humanoides financiado y cotizado: el sustituto cuya existencia abarata políticamente actuar hacia atrás.",
+        "motivation": "Se espera que la combinación cierre durante 2026, y los ingresos son los que pagan la construcción de Fremont y las contrataciones.",
+        "task": {
+          "who": "Equipo de mercados de capitales del patrocinador, dirección financiera de la sociedad objetivo y sus abogados",
+          "what": "Cerrar la combinación empresarial y liberar los fondos del fideicomiso",
+          "where": "Documento de registro, junta de accionistas y mecánica de cierre",
+          "when": "H2 2026",
+          "why": "Los fondos financian el sustituto nacional que el paso retroactivo da por supuesto",
+          "how": "Cierre de la adquisición con propósito especial con compromisos del patrocinador y de los inversores"
+        }
+      },
+      {
+        "actor": "Responsable de seguridad de activos de red, eléctrica estadounidense y operador solar",
+        "job": "Inventariar los inversores chinos ya instalados en los activos propios de generación y distribución y presupuestar una sustitución por fases de las unidades afectadas.",
+        "outcome": "Un parque instalado de inversores ya autorizados conocido y valorado, que es lo que hace que un veto retroactivo sea operable y no solo disruptivo.",
+        "motivation": "La toma de control remoto de inversores conectados a la red es exactamente el daño que cita la comisión, y el operador es quien carga con esa exposición.",
+        "task": {
+          "who": "Equipos de gestión de activos, compras y seguridad de tecnología operacional",
+          "what": "Inventariar y presupuestar la sustitución de los inversores chinos instalados",
+          "where": "Registros de activos de la eléctrica e inventarios de red de tecnología operacional",
+          "when": "Q1 2027",
+          "why": "Un veto retroactivo necesita un parque instalado conocido y sustituible",
+          "how": "Auditorías del registro de activos y revisión de la cadena de suministro por proveedor de origen"
+        }
+      }
+    ],
+    "prediction.bf63e1f0fcd11568": [
+      {
+        "actor": "Responsable de política de asuntos públicos, desarrollador de IA de frontera que defiende las pruebas previas a la publicación",
+        "job": "Convertir la petición de 'suficientemente capaz' en articulado de umbral presentado: una línea de capacidad concreta más una batería de pruebas cibernéticas, biológicas y de alineamiento identificada por su nombre.",
+        "outcome": "Texto de umbral más una prueba previa a la publicación identificada por su nombre entrando en un expediente normativo federal estadounidense o en un borrador de proyecto de ley.",
+        "motivation": "Cedida ya la cuestión de la prohibición, la barrera previa a la publicación es la única petición que queda, y un umbral no escrito no obliga a nadie.",
+        "task": {
+          "who": "Equipo de política del laboratorio de frontera, investigadores de seguridad y abogados regulatorios externos",
+          "what": "Redactar para su presentación el articulado del umbral de capacidad y de la prueba previa a la publicación",
+          "where": "Expedientes normativos federales y sesiones de redacción con el personal del Congreso",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Un umbral sin especificar no filtra nada ni obliga a ninguna publicación",
+          "how": "Niveles de escalado responsable, fichas de modelo y presentación formal de comentarios"
+        }
+      },
+      {
+        "actor": "Abogado de comisión que redacta legislación sobre IA para una comisión del Congreso de Estados Unidos",
+        "job": "Convertir un umbral de capacidad en disputa en texto legal: a qué publicaciones alcanza la barrera, quién administra la batería de pruebas y qué la dispara.",
+        "outcome": "Texto de un proyecto de ley presentado que lleve una línea de capacidad explícita y una prueba previa a la publicación, identificada por su nombre, de riesgo cibernético, biológico y de alineamiento.",
+        "motivation": "Una restricción anclada al origen no puede alcanzar una publicación nacional de pesos abiertos, lo que deja la línea anclada a la capacidad como la opción de redacción.",
+        "task": {
+          "who": "Abogados de la comisión, asesores legislativos y personal de redacción legislativa",
+          "what": "Plasmar el umbral de capacidad en el texto del proyecto de ley",
+          "where": "Debates de enmiendas en comisión, comparecencias y borradores de los servicios jurídicos legislativos",
+          "when": "Del Q4 2026 al Q1 2027",
+          "why": "El texto legal necesita una línea que una agencia pueda aplicar",
+          "how": "Testimonios en comparecencias, asistencia técnica de las agencias y registros de comentarios de las partes interesadas"
+        }
+      },
+      {
+        "actor": "Personal del programa de evaluación del organismo federal estadounidense de normas de IA",
+        "job": "Especificar las evaluaciones cibernéticas, biológicas y de alineamiento que un instrumento vinculante pueda citar por su nombre, y los niveles de capacidad que las activan.",
+        "outcome": "Una batería federal de pruebas publicada y citable, con sus niveles, que el texto normativo pueda incorporar por referencia.",
+        "motivation": "Una norma no puede nombrar una prueba que no existe, y el instrumental para regular el ritmo de la frontera falta por admisión propia.",
+        "task": {
+          "who": "Personal de evaluación del organismo federal de normas de IA y sus socios de los laboratorios nacionales",
+          "what": "Publicar una batería de evaluación previa a la publicación citable y sus niveles",
+          "where": "Borradores de normas, periodos de comentarios públicos y pilotos de evaluación",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "El texto de un instrumento solo puede nombrar una prueba que exista",
+          "how": "Ejercicios de equipo rojo, campos de ciberentrenamiento, ensayos de incremento de capacidad y sondeos de alineamiento"
+        }
+      },
+      {
+        "actor": "Director de política de la coalición de pesos abiertos formada por fabricantes de chips, publicadores de modelos y fundaciones",
+        "job": "Discutir dónde se sitúa la línea de capacidad y quién sostiene la pluma, ahora que la coalición ha cedido en la cuestión de la prohibición.",
+        "outcome": "Escritos de comentarios y contrapropuestas que discuten dónde se coloca el umbral y quién custodia las pruebas, y no el derecho a publicar pesos.",
+        "motivation": "Una línea fijada demasiado baja convierte cada publicación de pesos abiertos en una publicación con barrera y entrega la pluma a un rival.",
+        "task": {
+          "who": "Personal de política de la coalición, abogados de las empresas miembro y responsables técnicos de las firmantes",
+          "what": "Presentar contrapropuestas que discutan la colocación del umbral y la custodia de las pruebas",
+          "where": "Expedientes federales de comentarios y grupos de trabajo de la coalición",
+          "when": "Del Q3 2026 al Q4 2026",
+          "why": "Una línea baja pondría barrera a las publicaciones corrientes de pesos abiertos",
+          "how": "Cartas del bloque de firmantes, comentarios en el expediente y refutaciones con mediciones"
+        }
+      },
+      {
+        "actor": "Editor de especificaciones en un consorcio sectorial de IA de frontera con múltiples firmantes",
+        "job": "Componer un único texto de especificación que ambos bandos firmen: un umbral de capacidad, una batería previa a la publicación identificada por su nombre y quién la administra.",
+        "outcome": "Una especificación sectorial firmada por múltiples partes que lleve el umbral y la prueba, identificada por su nombre, de riesgo cibernético, biológico y de alineamiento.",
+        "motivation": "Una especificación sectorial puede llegar antes que el texto federal, y quien la publique primero fija la línea contra la que discuten los demás.",
+        "task": {
+          "who": "Secretaría del consorcio, responsables de política de las empresas miembro y presidencia del grupo de trabajo",
+          "what": "Negociar cláusulas firmables de umbral y de administración de las pruebas",
+          "where": "Grupos de trabajo del consorcio y revisiones de aprobación de los miembros",
+          "when": "Del Q4 2026 al Q1 2027",
+          "why": "Una especificación firmada gana a una norma federal sin escribir",
+          "how": "Borradores del grupo de trabajo, votaciones de los miembros y criterios de conformidad publicados"
+        }
+      },
+      {
+        "actor": "Director técnico en una organización independiente de evaluación de modelos",
+        "job": "Construir evaluaciones cibernéticas, biológicas y de alineamiento lo bastante reproducibles como para que el texto de un instrumento pueda nombrarlas y alguien de fuera pueda repetirlas.",
+        "outcome": "Evaluaciones públicas con nombre y versión que quienes redactan citen en lugar de escribir un umbral sin prueba detrás.",
+        "motivation": "Una barrera neutral respecto al origen solo funciona si la publicación de cualquier laboratorio puede medirla alguien de fuera con la misma batería.",
+        "task": {
+          "who": "Ingenieros de evaluación independientes, asesores de bioseguridad y operadores de campos de ciberentrenamiento",
+          "what": "Entregar evaluaciones de riesgo previas a la publicación versionadas y reproducibles",
+          "where": "Repositorios públicos de evaluación y encargos de auditoría de terceros",
+          "when": "Del H2 2026 al H1 2027",
+          "why": "Quienes redactan necesitan una batería que alguien de fuera pueda repetir",
+          "how": "Repositorios de referencia abiertos, conjuntos de prueba reservados y protocolos de puntuación auditados"
+        }
+      }
+    ]
+  }
+}

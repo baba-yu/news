@@ -1,0 +1,114 @@
+[
+  {
+    "actor": "Auth key lifecycle product manager, Tailscale identity and device enrollment",
+    "job": "Deciding what a newly minted auth key does out of the box, after the postmortem named long-lived reusable keys as the gap.",
+    "outcome": "A default node-enrollment ceiling on newly minted keys, applying on a fresh tailnet with no customer configuration.",
+    "motivation": "Documentation and prompts leave the default alone; only the issuer can bound how many nodes one key enrolls.",
+    "task": {
+      "who": "Tailscale auth key product management with control plane engineering",
+      "what": "Specify a default enrollment ceiling for newly minted auth keys",
+      "where": "Tailscale auth key lifecycle product specification and roadmap",
+      "when": "Q3 2026",
+      "why": "Reusability is stamped at mint time and cannot be revoked downstream",
+      "how": "Reusable keys carry a default node ceiling unless raised"
+    }
+  },
+  {
+    "actor": "Post-incident engineering review lead, Tailscale security",
+    "job": "Converting the recovered intrusion timeline of 136 stolen keys, 181 enrolled nodes and roughly four and a half days into blast-radius requirements.",
+    "outcome": "A written finding that reusability, not credential scope, produced the node count, aimed at the key issuing default.",
+    "motivation": "No product flaw was found, so the only lever left is what the product ships enabled by default.",
+    "task": {
+      "who": "Tailscale security engineering and incident review staff",
+      "what": "Trace the node count back to key reusability at mint",
+      "where": "Tailscale internal incident review and customer tailnet audit logs",
+      "when": "August 2026",
+      "why": "Ceiling design needs the axis that actually produced 181 nodes",
+      "how": "Recovered enrollment records and node registration timestamps from the tailnet"
+    }
+  },
+  {
+    "actor": "Continuous integration platform engineer, large enterprise tailnet operator",
+    "job": "Moving headless build fleet enrollment off long-lived reusable keys onto ephemeral, federated credentials issued per job.",
+    "outcome": "A build fleet that keeps working when reusable keys stop being unbounded, removing the objection to changing the default.",
+    "motivation": "Reusable keys exist because build fleets create nodes with nobody present; the default holds until that job is covered.",
+    "task": {
+      "who": "Platform engineering and build infrastructure teams at tailnet customers",
+      "what": "Re-issue build node credentials per job instead of one reusable key",
+      "where": "Enterprise continuous integration pipelines and node provisioning scripts",
+      "when": "September 2026",
+      "why": "The vendor keeps the default until the unattended fleet job survives",
+      "how": "Workload identity federation or a credential-injecting proxy per build"
+    }
+  },
+  {
+    "actor": "Workload identity federation specification editor, machine identity standards group",
+    "job": "Finishing the profile that lets an unattended machine present a short-lived, verifiable identity instead of carrying a reusable secret.",
+    "outcome": "A federated enrollment path mature enough that a network vendor can bound reusable keys without stranding headless fleets.",
+    "motivation": "Bounding the old credential is only safe once the replacement is interoperable across issuers and cloud runtimes.",
+    "task": {
+      "who": "Specification editors and implementers in the machine identity group",
+      "what": "Publish an interoperable federated enrollment profile for unattended nodes",
+      "where": "Open machine identity specification drafts and reference implementations",
+      "when": "October 2026",
+      "why": "Named as the control that belonged where the reusable key sat",
+      "how": "Attestation-backed short-lived credentials with cross-issuer conformance tests"
+    }
+  },
+  {
+    "actor": "Control plane registration engineer, Tailscale coordination server",
+    "job": "Building a per-key enrollment counter so the coordination server can refuse a registration once a key passes its node limit.",
+    "outcome": "Server-side enforcement that makes a bounded default meaningful rather than advisory, counted at the registration endpoint.",
+    "motivation": "A default nobody enforces is a prompt; the count has to be held where nodes actually join.",
+    "task": {
+      "who": "Tailscale control plane and node registration engineering",
+      "what": "Add per-key enrollment counters and refusal at node registration",
+      "where": "Tailscale coordination server registration path and key records",
+      "when": "Q4 2026",
+      "why": "A bound only holds where enrollment is actually counted",
+      "how": "Durable per-key counters plus registration rejection and audit events"
+    }
+  },
+  {
+    "actor": "New tailnet onboarding defaults owner, Tailscale account provisioning",
+    "job": "Setting what a freshly created tailnet ships with, given the intrusion ran on a configuration nobody had touched.",
+    "outcome": "A fresh tailnet where the enrollment bound applies before any administrator opens a settings page.",
+    "motivation": "The claim is about untouched defaults, so a bound gated behind an opt-in switch does not count.",
+    "task": {
+      "who": "Tailscale onboarding, provisioning and default policy owners",
+      "what": "Move the enrollment bound into fresh tailnet provisioning defaults",
+      "where": "Tailscale tailnet creation flow and initial policy template",
+      "when": "November 2026",
+      "why": "A bound behind an opt-in switch is configuration, not default",
+      "how": "Default policy template applied at tailnet creation, no toggle"
+    }
+  },
+  {
+    "actor": "Multiplayer agent harness maintainer, open-source per-room scope projects",
+    "job": "Shipping per-person and per-room keychain views, and stating in the credential docs what scoping cannot do about reuse.",
+    "outcome": "An integration requirement, read across thousands of forks, that credential issuers hand harnesses single-use or bounded keys.",
+    "motivation": "A per-person keychain holding one reusable key carries the same blast radius, delivered more tidily.",
+    "task": {
+      "who": "Open-source harness maintainers and security posture contributors",
+      "what": "State that harness scoping cannot revoke reuse granted at mint",
+      "where": "Harness credential handling documentation and keychain integration guides",
+      "when": "H2 2026",
+      "why": "Downstream scoping cannot take back reusability, so demand moves upstream",
+      "how": "Keychain integration guides requesting single-use credentials from issuers"
+    }
+  },
+  {
+    "actor": "Product documentation lead, Tailscale developer docs and changelog",
+    "job": "Writing the auth key reference and changelog entry that states the shipped enrollment ceiling as behaviour, not as advice.",
+    "outcome": "Published Tailscale material describing the bound a new key carries by default, the artifact that settles the claim.",
+    "motivation": "A behaviour nobody documents is invisible to customers; the reference page is where a default becomes a commitment.",
+    "task": {
+      "who": "Tailscale documentation and developer relations writers",
+      "what": "Document the shipped enrollment ceiling in the auth key reference",
+      "where": "Tailscale product documentation, changelog and engineering blog",
+      "when": "December 2026",
+      "why": "Documented shipped behaviour outranks a best-practice recommendation page",
+      "how": "Reference page and changelog entry describing default key behaviour"
+    }
+  }
+]

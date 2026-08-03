@@ -1,0 +1,86 @@
+[
+  {
+    "actor": "Security maintainer, open-source in-memory database project",
+    "job": "Triaging inbound memory-corruption reports against stream and module deserialization paths, writing the fix, and drafting the release note that characterizes impact.",
+    "outcome": "A published security release whose notes state possible remote code execution in the maintainers' own words, with no identifier attached.",
+    "motivation": "Users running the affected branches need the patch and an honest impact description immediately, not after an external assignment loop finishes.",
+    "task": {
+      "who": "Core maintainers and security triage group",
+      "what": "Patch deserialization paths and write the impact notice",
+      "where": "Project source tree and public release notes",
+      "when": "H2 2026 through H1 2027",
+      "why": "Users need the patch before the paperwork arrives",
+      "how": "Sanitizer-verified reproducers, private security branch, coordinated tag"
+    }
+  },
+  {
+    "actor": "Disclosure process owner, open-source project security team",
+    "job": "Deciding publication sequencing: ship the patch and impact notice first, then pursue identifier assignment and scoring through the slower external loop.",
+    "outcome": "Release notes that go out carrying impact language and interim mitigations but neither an identifier nor a severity score.",
+    "motivation": "Waiting days or weeks on a request-and-review loop leaves users unpatched while public proof-of-concept code already circulates.",
+    "task": {
+      "who": "Project security contact and advisory publication owners",
+      "what": "Publish advisory text and interim mitigation guidance immediately",
+      "where": "Release notes, project security page and announcement channels",
+      "when": "H2 2026 through H1 2027",
+      "why": "Patched users matter more than a scored vector",
+      "how": "Capability revocation advice, network isolation guidance, deferred identifier request"
+    }
+  },
+  {
+    "actor": "Release engineer, multi-branch open-source database project",
+    "job": "Backporting the same memory-safety fixes onto every maintained branch and cutting, testing and tagging all of them inside a single publication window.",
+    "outcome": "Every supported branch shipping the fix simultaneously, so patch availability never waits on identifier assignment or scoring.",
+    "motivation": "Leaving one supported branch unpatched while others ship publicly reveals the bug to anyone reading the diff.",
+    "task": {
+      "who": "Release engineering and build automation team",
+      "what": "Backport, build and tag every maintained branch together",
+      "where": "Continuous integration pipeline and public release channels",
+      "when": "H2 2026 through H1 2027",
+      "why": "Simultaneous shipping prevents diff-derived exploitation of lagging branches",
+      "how": "Automated backport tooling, matrix builds, scripted tagging and publishing"
+    }
+  },
+  {
+    "actor": "Maintainer, bundled probabilistic data-structure database modules",
+    "job": "Hardening the deserialization decoders in the bundled filter and quantile-sketch modules so crafted restore payloads cannot drive out-of-bounds writes.",
+    "outcome": "Bounds-checked module load paths whose fixes ride into the core project's coordinated security release.",
+    "motivation": "Modules ship inside the server, so a module memory bug is a server memory bug the maintainer must own.",
+    "task": {
+      "who": "Module engineering and serialization maintainers",
+      "what": "Add bounds validation to module restore decoders",
+      "where": "Bundled module repositories and their serialization code",
+      "when": "H2 2026 through H1 2027",
+      "why": "Bundled module flaws become server-level code-execution risk",
+      "how": "Fuzzed round-trip tests, length validation, sanitizer builds"
+    }
+  },
+  {
+    "actor": "Memory-safety fuzzing engineer, open-source infrastructure security program",
+    "job": "Writing and maintaining fuzz harnesses over serialization, stream and module entry points, running them continuously under sanitizers against maintained branches.",
+    "outcome": "A steady stream of reproducible memory-corruption findings reported upstream, each one a candidate for the next security release.",
+    "motivation": "Hand-written parsers over attacker-supplied binary payloads keep yielding bugs, and automated harnesses find them far cheaper than manual review.",
+    "task": {
+      "who": "Fuzzing infrastructure and crash triage engineers",
+      "what": "Generate harnesses and triage crashes into upstream reports",
+      "where": "Continuous fuzzing fleet and the project's security inbox",
+      "when": "H2 2026 through H1 2027",
+      "why": "Findings are what create the next security release",
+      "how": "Coverage-guided fuzzers, AddressSanitizer builds, debugger-assisted crash minimization"
+    }
+  },
+  {
+    "actor": "Vulnerability researcher running agent-driven bug-hunting pipelines",
+    "job": "Pointing automated agent pipelines at widely deployed data stores, confirming crashes into working proofs of concept, and reporting them to maintainers.",
+    "outcome": "Reported code-execution-class findings arriving faster than identifier assignment, forcing maintainers to publish patches ahead of the paperwork.",
+    "motivation": "Demonstrating that automated pipelines find real flaws in hard targets is the proof their research programme is built to produce.",
+    "task": {
+      "who": "Independent security research team and their agent operators",
+      "what": "Run agent swarms and validate exploitable crash candidates",
+      "where": "Instrumented builds of maintained releases in isolated lab environments",
+      "when": "H2 2026 through H1 2027",
+      "why": "Report volume outpaces the human-paced assignment loop",
+      "how": "Coordinated model-driven agents, sanitizer instrumentation, proof-of-concept construction"
+    }
+  }
+]

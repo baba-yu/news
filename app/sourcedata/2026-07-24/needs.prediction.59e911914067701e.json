@@ -1,0 +1,72 @@
+[
+  {
+    "actor": "Frontier AI vendor product-security architect owning the user-publishing surface",
+    "job": "Writing the threat model that treats attacker-published pages on the primary product domain as a reputation-borrowing delivery channel, not a content problem.",
+    "outcome": "An approved architecture decision relocating user-published pages off the primary product domain onto a separate registrable name.",
+    "motivation": "Takedowns and upload scanning cannot repair domain reputation, the one asset ad networks and endpoint tooling read as intent.",
+    "task": {
+      "who": "Product security and application-security review function",
+      "what": "Draft domain-isolation threat model for the publish surface",
+      "where": "Internal security design review and roadmap prioritization",
+      "when": "H2 2026 through H1 2027",
+      "why": "Domain reputation is the asset a takedown cannot restore",
+      "how": "Same-site and cookie-boundary analysis against the github.io precedent"
+    }
+  },
+  {
+    "actor": "Frontier AI vendor platform engineer for the artifact hosting and serving stack",
+    "job": "Standing up a separate registrable serving domain for published pages, migrating existing artifact URLs and splitting the cookie and same-origin boundary.",
+    "outcome": "Published pages served from a separate registrable domain that browsers treat as a different site from the product.",
+    "motivation": "Only a different registrable name stops an untrusted page inheriting the parent's reputation, cookies and same-origin reach.",
+    "task": {
+      "who": "Artifact hosting platform and edge-serving engineering team",
+      "what": "Register and cut published-page serving to a new domain",
+      "where": "Edge serving config, DNS, and the publish pipeline",
+      "when": "H2 2026 through H1 2027",
+      "why": "A separate name cannot borrow the product's reputation",
+      "how": "Public Suffix List submission plus per-page subdomain isolation"
+    }
+  },
+  {
+    "actor": "Frontier AI vendor trust-and-safety abuse operations lead for publishing features",
+    "job": "Instrumenting published-page abuse telemetry and building the case that malvertising through the publish feature is structural rather than an isolated campaign.",
+    "outcome": "A public vendor statement naming abuse, not performance, as the reason published pages moved to a separate domain.",
+    "motivation": "One campaign drew 7,100 views and hit twenty-nine organizations before takedown; faster takedowns alone do not close the channel.",
+    "task": {
+      "who": "Trust and safety abuse operations with security communications",
+      "what": "Quantify publish-feature malvertising abuse and publish the finding",
+      "where": "Abuse telemetry pipeline and the vendor security blog",
+      "when": "H2 2026 through H1 2027",
+      "why": "A public abuse rationale is what the move requires",
+      "how": "Takedown case data, ad-network reports, redirect-domain registration pivots"
+    }
+  },
+  {
+    "actor": "Managed-detection threat intelligence researcher tracking malvertising delivery chains",
+    "job": "Documenting further campaigns that stage payloads behind pages published on AI vendors' own domains, and pivoting on shared registration infrastructure.",
+    "outcome": "Published research that keeps the publish-to-trusted-domain abuse class visible enough to force a vendor's domain split.",
+    "motivation": "The security cost stayed theoretical until an operator monetized it; continued documentation is what keeps it priced.",
+    "task": {
+      "who": "Threat intelligence and detection engineering research team",
+      "what": "Track and report publish-to-trusted-domain malvertising campaigns",
+      "where": "Incident telemetry across managed endpoint estates, public write-ups",
+      "when": "H2 2026 through H1 2027",
+      "why": "Documented recurrence turns a theoretical cost into a priced one",
+      "how": "Registrant-email pivots, sponsored-ad destination tracing, sandbox payload analysis"
+    }
+  },
+  {
+    "actor": "Public Suffix List maintainer reviewing private-section domain submissions",
+    "job": "Reviewing and merging a vendor's private-section entry so browsers treat the new published-page domain as a distinct site.",
+    "outcome": "A merged Public Suffix List entry that makes the separate serving domain a real browser-enforced boundary.",
+    "motivation": "Without the list entry the split is a naming change, not the cookie and same-site boundary the move is for.",
+    "task": {
+      "who": "Volunteer list maintainers and submission reviewers",
+      "what": "Review and merge the vendor's private-section domain submission",
+      "where": "The public suffix list repository pull-request queue",
+      "when": "H2 2026 through H1 2027",
+      "why": "Browser site boundaries follow the list, not the vendor",
+      "how": "Public Suffix List submission and validation process"
+    }
+  }
+]

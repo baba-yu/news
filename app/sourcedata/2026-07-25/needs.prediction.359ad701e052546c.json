@@ -1,0 +1,86 @@
+[
+  {
+    "actor": "Model release engineering lead, open-weights frontier AI lab",
+    "job": "Shipping the 2.8-trillion-parameter MXFP4 checkpoint with shard layout, deployment guidance and license terms that permit redistributing modified serving artifacts.",
+    "outcome": "A published checkpoint and license under which third parties may release and redistribute a modified single-node serving recipe.",
+    "motivation": "Its own hosted tier already paused new subscriptions under inference demand, so serving work must move onto other people's hardware.",
+    "task": {
+      "who": "Model release and open-source licensing team",
+      "what": "Publish weights with redistribution-permissive license terms",
+      "where": "Public model hub repository and accompanying model card",
+      "when": "H2 2026 through H1 2027",
+      "why": "Hosted capacity is capped; external serving relieves demand",
+      "how": "Hugging Face release, MXFP4 shards, published license text"
+    }
+  },
+  {
+    "actor": "Maintainer, open-source large-model inference runtime",
+    "job": "Adding an expert-offload execution path that keeps attention and hot experts in accelerator memory while streaming cold experts from host DRAM.",
+    "outcome": "A merged upstream release serving all 896 experts on eight 80GB cards without pruning, distillation or further quantization.",
+    "motivation": "Sixteen of 896 experts fire per token, so full HBM residency buys latency rather than correctness and wastes most users' hardware.",
+    "task": {
+      "who": "Core runtime and MoE execution maintainers",
+      "what": "Implement per-layer expert offload and residency management",
+      "where": "Upstream inference-engine repository, MoE scheduler and memory allocator",
+      "when": "H2 2026 through H1 2027",
+      "why": "Residency, not working set, is the real constraint",
+      "how": "Host-DRAM expert cache, pinned buffers, layer-wise prefetch"
+    }
+  },
+  {
+    "actor": "Low-precision kernel engineer, inference software team",
+    "job": "Writing MXFP4 weight and MXFP8 activation kernels that run the released precision on accelerators lacking native microscaling-format hardware support.",
+    "outcome": "Kernels executing the released MXFP4 weights unchanged on widely held 80GB accelerators, so no further quantization is needed.",
+    "motivation": "Native MXFP4 execution wants Blackwell or MI400 silicon, which the single-node builders chasing this recipe do not own.",
+    "task": {
+      "who": "Kernel and quantization engineering sub-team",
+      "what": "Emulate MXFP4 dequantization in fused GEMM kernels",
+      "where": "Runtime kernel library for prior-generation 80GB accelerators",
+      "when": "H2 2026 through H1 2027",
+      "why": "Released precision must survive on hardware people own",
+      "how": "CUTLASS or Triton fused dequant-GEMM, block-scale handling"
+    }
+  },
+  {
+    "actor": "Mixture-of-experts systems researcher, model efficiency group",
+    "job": "Profiling expert activation locality to decide which experts stay resident and to prefetch the rest from router logits ahead of use.",
+    "outcome": "A hot-expert residency and prefetch policy that hides most host-to-device transfer behind compute during decode.",
+    "motivation": "Streaming cold experts naively converts memory-bound decode into something far slower, and bad throughput kills adoption of the recipe.",
+    "task": {
+      "who": "Model efficiency research and systems benchmarking group",
+      "what": "Measure expert reuse and build a prefetch policy",
+      "where": "Instrumented decode traces on the published K3 checkpoint",
+      "when": "H2 2026 through H1 2027",
+      "why": "Throughput, not feasibility, is what stops publication",
+      "how": "Router-logit lookahead, LRU expert cache, activation-frequency profiling"
+    }
+  },
+  {
+    "actor": "Storage and host-memory data-path engineer, inference infrastructure",
+    "job": "Building the NVMe and pinned-DRAM streaming path that feeds cold expert weights across PCIe fast enough to keep decode moving.",
+    "outcome": "A single-node I/O path sustaining expert streaming from host DRAM or NVMe at usable decode throughput.",
+    "motivation": "The recipe trades HBM capacity for PCIe bandwidth, so the transfer path is where the whole approach succeeds or fails.",
+    "task": {
+      "who": "Storage and I/O performance engineering team",
+      "what": "Tune NVMe-to-device expert weight streaming throughput",
+      "where": "Single node with multi-terabyte host DRAM and NVMe",
+      "when": "H2 2026 through H1 2027",
+      "why": "PCIe bandwidth replaces the HBM capacity given up",
+      "how": "GPUDirect Storage, pinned host buffers, asynchronous copy engines"
+    }
+  },
+  {
+    "actor": "Single-node deployment engineer, GPU-constrained AI lab",
+    "job": "Assembling and benchmarking a full-checkpoint serving configuration on one eight-card node, then publishing the configuration, throughput numbers and reproduction steps.",
+    "outcome": "A public, reproducible recipe serving all 896 experts at released precision within 640GB of accelerator memory.",
+    "motivation": "They cannot rent sixteen nodes, and must optimize against the single node and host DRAM they actually have.",
+    "task": {
+      "who": "Inference deployment and evaluation engineers",
+      "what": "Benchmark and publish an eight-card full-weights serving recipe",
+      "where": "Public repository, model hub write-up and technical blog",
+      "when": "H2 2026 through H1 2027",
+      "why": "Their own constraint is one node, not sixteen",
+      "how": "Docker image, config files, reported tokens-per-second measurements"
+    }
+  }
+]

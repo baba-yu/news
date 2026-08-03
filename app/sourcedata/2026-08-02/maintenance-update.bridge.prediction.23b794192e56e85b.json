@@ -1,0 +1,16 @@
+{
+  "prediction_id": "prediction.23b794192e56e85b",
+  "stream": "bridge",
+  "entry_id": "prediction.23b794192e56e85b",
+  "origin_date": "2026-08-02",
+  "verdict": "stale",
+  "proposed_action": "rewrite",
+  "reason": "Coverage gap, applying to the whole 2-row bridge set. The last validation_row is validation.14ee1f3abcaf904c dated 2026-07-27 - six days before week end - yet prediction_realization_snapshots keep emitting observed_relevance=2 / realization 0.4 every day from 07-27 through 08-02 off that one row, so the dashboard shows a current-looking relevance number that is really a carried-forward value with no observation behind it. That frozen line is also what produced the `relevance_drift` signal that queued this prediction (a 5->2 step on 07-27 against the 07-24..07-26 run of 5s), so the queue entry is an artifact of a single non-event bridge rather than of new information. Action is to write a bridge covering 07-28..08-02, including the one adjacent fact the 07-27 row surfaced - Moonshot's licence obliging large Model-as-a-Service operators to sign a separate agreement before serving K3, which bears on what a router may resell.",
+  "cross_stream_evidence": [
+    "signal:relevance_drift",
+    "db:prediction_realization_snapshots flat at 0.4 from 2026-07-27 to 2026-08-02"
+  ],
+  "confidence": 0.55,
+  "applied": false,
+  "applied_note": "NOT APPLIED. maintenance-update markers are write-only: weekly_maintenance._stale_applied checks only file existence and no ingest path reads this content. The change described in `reason` has not reached app/data/analytics.sqlite."
+}

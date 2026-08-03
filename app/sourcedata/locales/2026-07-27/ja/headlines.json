@@ -1,0 +1,174 @@
+{
+  "date": "2026-07-27",
+  "technical": [
+    {
+      "lead": "Moonshot が Kimi K3 の重みを、売上で仕切るライセンスのもとで出す",
+      "body": "Moonshot AI は7月27日月曜、Kimi K3 の重みを Hugging Face で公開した。そして効いてくる制約は、設計ではなく書類のほうに座っている。モデルカードが述べているのは、2.8 兆パラメータの混合エキスパートである。トークンごとに 1,040 億パラメータが動き、896 のエキスパートのうち 16 がトークンごとに選ばれ、93 の層は 69 の Kimi Delta Attention のブロックと 24 の gated-MLA のブロックに分かれる。コンテキストウィンドウは 1,048,576 トークンで、視覚は 4 億 100 万パラメータの MoonViT-V2 のエンコーダとして最初から備わっている。重みは MXFP4、活性は MXFP8 で配られるが、これは後から丸めたものではなく、量子化を織り込んだ学習で作られたものだ。推論の労力を最大にした設定で、カード自身の評価の表は GPQA Diamond に 93.5、Terminal-Bench 2.1 に 88.3、DeepSWE に 67.5 を並べている。リポジトリが載せていないのは、Apache 2.0 と MIT である。載っているのは独自の Kimi K3 License で、Hugging Face の上では単に other と札が付く。許諾そのものは MIT と同じ形——動かす、配備する、微調整する、改変する、頒布する、売る——で、そこに商用の関門が二つ足してある。関連会社と合わせた売上が、連続する任意の十二か月で 2,000 万米ドルを超える Model-as-a-Service の事業者は、そもそもこのモデルを使う前に、Moonshot と別途の合意を結ばなければならない。月間アクティブユーザーが 1 億人を超える、あるいは月の売上が 2,000 万ドルを超える商用の製品は、Kimi K3 の名を利用者の画面に目立つ形で出さなければならない。社内での利用と、Moonshot 自身の製品や認定を受けた推論のパートナーを通して買った利用は、どちらの関門からも外してある。Moonshot 自身の言い方は、オープンな重みであって、オープンソースではない、というものだ。現物は 96 の safetensors のシャードにまたがる 1.56 TB である。vLLM は同じ日に提供の対応を出した。Kimi のチームが寄せた Kimi Delta Attention の接頭辞のキャッシュの実装を伴うもので、ハードウェアの下限を 8 枚構成の B300 のノード一台に置き、B200 なら 16 枚でも動くとする。GB300 NVL72 でバッチの大きさ 1 のとき、利用者ごとに毎秒 111 トークンが TP8、118 トークンが TP16 で、投機的デコーダの DSpark を使うとそれぞれ 331 と 370 まで上がる。およそ三倍である。AMD の MI355X も、Hopper と Blackwell と並んで公開の時点から対応している。ラックを持たない人には、OpenRouter がホスト提供の同じモデルを、入力 100 万トークンあたり 3 ドル、出力 100 万トークンあたり 15 ドルで載せている。",
+      "citations": [
+        {
+          "label": "Moonshot AI - Kimi K3 model card",
+          "url": "https://huggingface.co/moonshotai/Kimi-K3"
+        },
+        {
+          "label": "Kimi K3 License text",
+          "url": "https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE"
+        },
+        {
+          "label": "Kimi K3 repository file listing - 1.56 TB across 96 shards",
+          "url": "https://huggingface.co/moonshotai/Kimi-K3/tree/main"
+        },
+        {
+          "label": "vLLM - Kimi K3 serving support at launch",
+          "url": "https://vllm.ai/blog/2026-07-27-k3"
+        },
+        {
+          "label": "OpenRouter - Kimi K3 hosted pricing",
+          "url": "https://openrouter.ai/moonshotai/kimi-k3"
+        },
+        {
+          "label": "Simon Willison on the Kimi K3 license terms",
+          "url": "https://simonwillison.net/2026/Jul/27/"
+        }
+      ]
+    },
+    {
+      "lead": "37社が NVIDIA の Open Secure AI Alliance に加わる",
+      "body": "NVIDIA は、今月の Hugging Face の侵入事案を、新しい業界の団体を立ち上げる根拠に変えた。発表は7月27日月曜である。Open Secure AI Alliance は、発足時のパートナーとして 37 の名を掲げて出発した。そのなかには Microsoft、IBM、Red Hat、Cisco、Cloudflare、CrowdStrike、Palo Alto Networks、Dell Technologies、HPE、Databricks、Snowflake、Salesforce、SAP、ServiceNow、Siemens、Palantir、Capital One、DoorDash、NAVER、SK Telecom、Synopsys、Cadence、Elastic、LangChain、Cognition、Reflection AI、Nous Research、Thinking Machines Lab、OpenClaw、Linux Foundation、そして侵害を受けた当事者である Hugging Face 自身がいる。掲げられている範囲はエージェントの積み重ね全体である——同一性、権限、隔離、ガードレール、ログ、モデルの形式、複数のモデルにまたがる走査、そして安全なコーディングの手順——そしてそれを、Linux Foundation の Akrites の取り組みと OpenSSF の共同体ですでに動いている仕事の上に載せる。発足の場には六つのプロジェクトが並んだ。NVIDIA が寄せたのは NVIDIA Labs Object-Oriented Agent (NOOA) で、いまは GitHub にあるオープンソースの研究用の枠組みである。エージェントの外枠をモデルと組み合わせられるようにし、振る舞いを試し、追い、監査し、統べることを易しくする。Hugging Face は Safetensors を、HPE は SPIFFE と SPIRE を寄せた。IBM と Red Hat は署名付きのパッチを配るための Lightwell を、Microsoft は複数のモデルにまたがるエージェント的な走査の外枠 MDASH を寄せた。そして SpaceXAI は、端末で動く AI のコーディングのエージェント Grok Build をオープンソースにし、あわせて Grok の系列のモデルの重みを公開する計画も表明している。NVIDIA が挙げる理由は、思想ではなく現場のものだ。Hugging Face の事案のあいだ、閉じたモデルは攻める側と守る側を見分けられず、フォレンジックの作業を止めてしまった。そのため Hugging Face は、オープンな重みの GLM 5.2 を自社の基盤で動かし、記録に残る 17,000 を超える動作を組み直して、侵入を封じ込めた。NVIDIA の立場はこうである。誤用の危うさはオープンなモデルにも現にあるが、それはオープンなモデルに固有のものではない。そして最も損をするのは、進んだモデルを自分の手元の機械で調べ、直し、動かせない守る側だ、と。名簿は、載っている名前と同じくらい、その欠けたところが物を言う。OpenAI と Google と Anthropic は、そこにいない。",
+      "citations": [
+        {
+          "label": "NVIDIA - Open Secure AI Alliance announcement and inaugural partner list",
+          "url": "https://blogs.nvidia.com/blog/open-secure-ai-alliance/"
+        },
+        {
+          "label": "Help Net Security - NVIDIA forms the Open Secure AI Alliance",
+          "url": "https://www.helpnetsecurity.com/2026/07/27/nvidia-open-secure-ai-alliance/"
+        },
+        {
+          "label": "The Hacker News - thirty-seven members and the open-sourced agent framework",
+          "url": "https://thehackernews.com/2026/07/nvidia-forms-37-member-open-secure-ai.html"
+        },
+        {
+          "label": "Elastic - inaugural-member note",
+          "url": "https://www.elastic.co/blog/elastic-nvidia-inaugural-partner-osaia"
+        }
+      ]
+    },
+    {
+      "lead": "NVIDIA が OpenAI の Ohio の用地の賃借に $250B の後ろ盾を検討する",
+      "body": "The Wall Street Journal は7月27日月曜、NVIDIA が、OpenAI による Ohio 州 Piketon の 10 ギガワットのデータセンターの用地の賃借の裏にある資金繰りのうち、およそ 2,500 億ドルを保証する方向で話し合っていると報じた。用地はかつての Portsmouth Gaseous Diffusion Plant の跡地にあり、SoftBank が後ろ盾の SB Energy が開発する。そこを埋める NVIDIA の半導体の資金を付けるための、最大 3,500 億ドルに及ぶ別の交渉もあるという。第一期は 800 メガワットで、2028年を目指す。半導体を売る側が自社の客の家賃の後ろに立つよう求められている理由は、具体的で、体裁のよいものではない。OpenAI は投資適格の格付けを持っていない。だから貸し手が返済の裏付けとするのは、OpenAI ではなく NVIDIA の貸借対照表のほうになる。Reuters はこの報道を独自に確かめられていない。条件は固まっておらず、価格も期間も担保も返済も、すべて明かされていない。どちらの会社も論評していない。NVIDIA のいまの帳簿と比べるために言えば、開示されている保証の残高は 35 億ドル、うち 7 億 1,200 万ドルがエスクローにあると伝えられ、1月に終えた会計年度は 626 億ドルの現金で締めている。この報道は、NVIDIA と SK Group が7月24日金曜に 5,000 億ドルを超える価値の意向表明の書簡を交わした三日後に届いた。中身は、2 ギガワットの SK Telecom の AI 工場と、SK hynix からの長期の AI 向けメモリの供給である——工場は NVIDIA の DSX の基盤の上に建つ最初のもので、Vera Rubin のアクセラレータと HBM4 を用い、2027年を目指す。市場の判断は同じ立会いのうちに出た。NVIDIA はおよそ 5% 下げて引け、AMD はおよそ 5%、Teradyne はおよそ 4% 下げた。VanEck の半導体 ETF は 2% を超えて下げ、Sandisk は、中国のメモリの製造企業による上海での大型の上場に続くメモリ市況の弱さで、およそ 11% 下げた。原油が 8% を超えて滑り落ちたことが Dow を 0.51% 押し上げた一方、Nasdaq は 0.18% 下げて引け、S&P 500 は横ばいだった。",
+      "citations": [
+        {
+          "label": "Reuters via Investing.com - NVIDIA in talks to guarantee 250 billion dollars of OpenAI data-centre financing",
+          "url": "https://www.investing.com/news/stock-market-news/nvidia-in-talks-with-openai-to-guarantee-250-billion-financing-for-data-center-wsj-reports-4812926"
+        },
+        {
+          "label": "WinBuzzer - Piketon campus terms, chip-financing track and NVIDIA's disclosed guarantee exposure",
+          "url": "https://winbuzzer.com/2026/07/27/nvidia-weighs-250-billion-backstop-for-openai-ohio-campus-xcxwbn/"
+        },
+        {
+          "label": "NVIDIA Newsroom - SK Group letter of intent",
+          "url": "https://nvidianews.nvidia.com/news/sk-group-and-nvidia-expand-strategic-partnership-across-ai-factories-and-next-generation-memory"
+        },
+        {
+          "label": "Market close for July 27",
+          "url": "https://www.fool.com/coverage/stock-market-today/2026/07/27/stock-market-today-july-27-dow-rises-on-oil-retreat-and-sandisk-plunges-11-on-memory-weakness/"
+        }
+      ]
+    },
+    {
+      "lead": "Unsloth が、ROCm に見放された AMD のカードを Vulkan の llama.cpp のビルドへ振り分ける",
+      "body": "Unsloth のハードウェアの守備範囲は7月27日月曜、上へではなく横へ広がった。13:57 UTC に main へ取り込まれた変更が、インストーラに、HIP ではなく Vulkan の llama.cpp のバックエンドへ手を伸ばすことを教える。これまでインストーラは HIP の事前ビルドしか配っておらず、HIP の最低要件を下回る古い AMD の部品——変更が挙げているのは RX 480 である——には、実際には動かせない導入が渡っていた。動くのは三つ。まず、UNSLOTH_LLAMA_BACKEND=vulkan、UNSLOTH_FORCE_VULKAN=1、あるいは --llama-backend vulkan の指定で、利用者がはっきりと選び取れる。その選択は、更新をまたいで設定に残るようになった。次に、Windows の AMD の機体で、GPU の設計は判別できるのに HIP の事前ビルドに入っていない場合、インストーラは死んだビルドを渡す代わりに、自ら Vulkan へ切り替える。そして、対応しているカードと対応していないカードの両方を挿した機械は、言われない限りいまも HIP のままである。振り分けは ROCm の系統の名札に従い、Phoenix と 780M にあたる gfx1103 を特別に扱う。背後には二十件の振り分けの試験がある。同じ日、手元だけで動かす経路にもう一つの変更が降りた。transformers の 4.57.2 から 5.5.4 で、local_files_only を付けたトークナイザの読み込みが、メタデータを取りに Hub へ出かけなくなり、代わりに手元にあるキャッシュの写しを解決する。視覚の処理器と保存の経路にも同じ扱いが入っている。どちらの変更もまだ導入できない。最も新しいタグはいまも v0.1.501-beta、7月20日に切られた AMD 対応の版であり、どちらも main の枝の上にしかない。",
+      "citations": [
+        {
+          "label": "Unsloth pull request 7373 - opt-in Vulkan llama.cpp backend and AMD fallback",
+          "url": "https://github.com/unslothai/unsloth/pull/7373"
+        },
+        {
+          "label": "Unsloth pull request 7482 - skip the Hub metadata probe under local_files_only",
+          "url": "https://github.com/unslothai/unsloth/pull/7482"
+        },
+        {
+          "label": "Unsloth v0.1.501-beta release, July 20",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.501-beta"
+        }
+      ]
+    },
+    {
+      "lead": "Hot Chips の早期の料金は7月31日金曜で終わり、残り四日",
+      "body": "この予定表で最も近い動かせない締切は、いまも基調講演ではなく登録の締切であり、残り四日である。Hot Chips 2026 は7月31日金曜の午後11時59分 PDT で早期の料金の発行を止め、払い戻しの申し出は8月19日水曜の午後11時59分 PDT まで受け付ける。そのあと8月23日から25日、Stanford の Memorial Auditorium で本体の会が開かれ、初日の日曜はメモリ技術と RISC-V のトラックを走らせるチュートリアルの日で幕を開ける。二つ目の本当の締切は残り十一日。Half Moon Bay の Ritz-Carlton で8月11日から12日に開かれる SecurityWeek の AI Risk Summit は、全日程の料金を8月7日金曜を過ぎると $1,895 から $2,195 へ上げる。その二つの日付のあいだに、ベイエリアで最も近い半導体の催しがある。FMS: The Future of Memory and Storage で、8月4日から6日、Santa Clara Convention Center である。木曜の本会場の、経営層による AI のパネルは、NVIDIA が KIOXIA、Samsung、Supermicro、VAST とともに主催する。同じ会場は9月15日から17日に AI Infra Summit が使い、五つの技術のトラックにまたがって、Google の Jeff Dean、Intel の Lip-Bu Tan、NVIDIA の Ian Buck が基調講演に立つ。AI のセキュリティの筋は8月の初めに固まっている。Black Hat USA は8月1日から6日、Las Vegas の Mandalay Bay で開かれ、その AI Summit は8月4日火曜である。DEF CON 34 はそれに続いて8月6日から9日、Las Vegas Convention Center West Hall で開かれ、その AI Village ではエージェント的な系を相手に capture-the-flag が走る。DEF CON は、地域の安全上の懸念による Bahrain での中東の回の延期は Las Vegas の日程に影響しないと述べている。開発者と基盤の筋に新しく加わるもの。AGNTCon と MCPCon North America は、Linux Foundation のもとにある Agentic AI Foundation の主催格の催しで、10月22日から23日に San Jose、Model Context Protocol、Goose のエージェントの枠組み、AGENTS.md の仕様を軸に据え、発表の募集は6月7日に閉じている。Newcomer の Machine Earning AI Summit は9月29日、San Francisco へ降りてくる。これは Fort Mason の OpenAI DevDay、そして Pier 48 の The AI Conference の開幕と同じ暦の日である。そして招待制の Cerebral Valley AI Summit は11月12日、San Francisco に戻ってくる。AI Tinkerers の状況は良くなっていない。世界の予定表には、8月の初めまで San Francisco にも Palo Alto にも何も載っておらず、載っているのは7月28日に Valencia、Manizales、Calgary、Seattle、7月29日にさらに六都市、7月30日に八都市、8月1日に New York、8月2日に London である。だから Palo Alto 支部の8月18日火曜の集まり、午後6時30分から9時 PDT——応募して参加する形で、席はおよそ150、Dyssonance AI が後援する——が、ここに載せているなかで最も近いベイエリアの日付のままである。そして検索に浮かび続ける San Francisco 支部の8月9日の掲示は、これからの予定ではなく、閉じたものとして扱うべきである。行き着く先は古いページであり、今年の8月9日は日曜にあたる。残りの筋に変わりはない。Las Vegas の The Venetian で8月4日から6日に Ai4。San Francisco Marriott Marquis で8月24日から26日に Ray Summit があり、同じ参加券で vLLM Conference を併せて開き、演目には Robert Nishihara、Ion Stoica、NVIDIA の Bryan Catanzaro の名が並ぶ。Atlanta で8月30日から9月2日に ACM AI Leadership Summit。9月29日に Fort Mason で OpenAI DevDay、応募はすでに締め切られている。9月29日から10月1日に Pier 48 で The AI Conference があり、9月29日の開幕のトラックは売り切れた。9月30日に Runway AI Summit。10月7日から8日に Amsterdam で World Summit AI。10月12日から15日に San Jose で OCP Global Summit。10月15日に AI Security Summit の San Francisco の主催格の回があり、二つのトラックにまたがって45を超える講演と75人を超える登壇者、発表の応募はまだ開いている。10月20日から21日に San Jose で PyTorch Conference。10月20日から22日に NVIDIA の GTC Berlin。10月28日から29日に Fort Mason で GitHub Universe。11月2日から3日に Arlington で SANS の AI Cybersecurity Summit、対面と遠隔の併用で、宿の枠は10月9日に閉じる。11月5日から6日に Hyatt Regency San Francisco で OWASP Global AppSec USA、研修は11月2日から。11月11日から13日に San Francisco で応募制の AI Engineer Code Summit、登壇の応募は10月11日で閉じる。11月15日に The Hague で第19回 ACM Workshop on Artificial Intelligence and Security、第33回 ACM Conference on Computer and Communications Security と同じ場所に置かれ、論文の締切は7月24日で固く閉じ、通知は9月3日、最終原稿は9月16日である。11月15日から20日に Chicago で SC26。11月30日から12月4日に AWS re:Invent。12月に NeurIPS。12月6日から9日に Santa Clara で IEEE-RAS Humanoids があり、論文の募集は7月24日に閉じて200を超える応募が見込まれている。そして12月9日から10日に The AI Summit New York である。NVIDIA の GTC が San Jose に戻るのは2027年3月である。",
+      "citations": [
+        {
+          "label": "Hot Chips 2026 - registration deadlines",
+          "url": "https://hotchips.org/registration/"
+        },
+        {
+          "label": "SecurityWeek AI Risk Summit - Half Moon Bay, August 11-12 and the August 7 rate step",
+          "url": "https://www.airisksummit.com/"
+        },
+        {
+          "label": "AI Infra Summit 2026 - Santa Clara, September 15-17",
+          "url": "https://www.ai-infra-summit.com/"
+        },
+        {
+          "label": "Black Hat USA 2026 - AI Summit, August 4",
+          "url": "https://blackhat.theaisummit.com/"
+        },
+        {
+          "label": "AI Village - DEF CON 34",
+          "url": "https://aivillage.org/events/defcon-34/"
+        },
+        {
+          "label": "AGNTCon and MCPCon North America - San Jose, October 22-23",
+          "url": "https://events.linuxfoundation.org/agntcon-mcpcon-north-america/"
+        },
+        {
+          "label": "Newcomer summit calendar - Machine Earning September 29 and Cerebral Valley November 12",
+          "url": "https://newcomer.events/"
+        },
+        {
+          "label": "AI Tinkerers - global event calendar",
+          "url": "https://aitinkerers.org/events"
+        },
+        {
+          "label": "AI Tinkerers Palo Alto - August meetup, Tuesday August 18",
+          "url": "https://palo-alto.aitinkerers.org/"
+        },
+        {
+          "label": "AI Security Summit - San Francisco flagship, October 15",
+          "url": "https://aisecuritysummit.com/"
+        },
+        {
+          "label": "AISec 2026 - 19th ACM Workshop on AI and Security, The Hague, November 15",
+          "url": "https://aisec.cc/"
+        },
+        {
+          "label": "SANS AI Cybersecurity Summit - Arlington, November 2-3",
+          "url": "https://www.sans.org/cyber-security-training-events/ai-summit-fall-2026"
+        },
+        {
+          "label": "Ray Summit 2026 - San Francisco, August 24-26",
+          "url": "https://www.anyscale.com/ray-summit/2026"
+        },
+        {
+          "label": "The AI Conference 2026 - Pier 48, September 29 to October 1",
+          "url": "https://aiconference.com/"
+        },
+        {
+          "label": "AI Engineer Code Summit - San Francisco, November 11-13",
+          "url": "https://www.ai.engineer/code/2026"
+        },
+        {
+          "label": "IEEE-RAS Humanoids 2026 - Santa Clara, December 6-9",
+          "url": "https://2026.ieee-humanoids.org/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "巨大なモデルは動かすのは自由だが、大きく売り直すのは自由ではない",
+    "NVIDIA が37社を集め、AI のエージェントをより安全にする",
+    "NVIDIA が OpenAI のデータセンターの家賃 $250 billion を裏書きするかもしれない",
+    "古い AMD のカードに直しが入ったが、まだ配られていない",
+    "半導体の催しの安い料金は7月31日で終わり、残り四日"
+  ]
+}

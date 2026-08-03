@@ -1,0 +1,16 @@
+{
+  "prediction_id": "prediction.e997117d0c9d145c",
+  "stream": "bridge",
+  "entry_id": "validation.0ca33e2148ef6ae6",
+  "origin_date": "2026-08-02",
+  "verdict": "stale",
+  "proposed_action": "rewrite",
+  "reason": "This bridge is written in the future tense against a date that has now passed inside the maintenance window: 'The White House's voluntary frontier-model framework is due to be finalized by Saturday, August 1'. Week ending is 2026-08-02. I searched headlines.json, change_log.json and news_section.json for 2026-08-01 and 2026-08-02 for 'white house', 'voluntary frontier', 'frontier-model framework', 'clearinghouse', 'cisa', 'attestation', 'framework' and 'executive order': the only governance item on those two days is the EU AI Act Article 50 transparency obligations taking effect on 08-02. The August 1 US milestone elapsed with no recorded outcome, so the bridge now reads to a reader as still-upcoming when it is not. It also contains a signal that cuts against `so_that` - 'participation is a choice, and one of the largest model publishers has declined' - while being stored as support_direction='support' with contradiction_score 0.0, which is the only value that column ever takes (8258 of 8258 rows). Rewrite to past tense and state the outcome, or the explicit non-outcome.",
+  "cross_stream_evidence": [
+    "reasoning:prediction.e997117d0c9d145c",
+    "sourcedata:2026-08-01,2026-08-02 news slates carry no framework item"
+  ],
+  "confidence": 0.7,
+  "applied": false,
+  "applied_note": "NOT APPLIED. maintenance-update markers are write-only: weekly_maintenance._stale_applied checks only file existence and no ingest path reads this content. The change described in `reason` has not reached app/data/analytics.sqlite."
+}

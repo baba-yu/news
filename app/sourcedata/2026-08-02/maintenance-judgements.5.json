@@ -1,0 +1,285 @@
+{
+  "week_ending": "2026-08-02",
+  "judgements": [
+    {
+      "prediction_id": "prediction.16c7b8053e39aa1f",
+      "stream": "reasoning",
+      "entry_id": "prediction.16c7b8053e39aa1f",
+      "verdict": "stale",
+      "reason": "Bridge to Reasoning. reasoning_given states only the demand half ('open labs keep shipping sparse frontier-scale weights far beyond what enthusiast memory can hold'), and four consecutive bridges now show the demand half strengthening while every shipped answer takes a competing route: validation.89b8dba663cd3ba4 (2026-07-19) 'Moonshine reaches usable local speech by building small rather than by paging a large model'; validation.96fe3259cd716f12 (2026-07-20) 'SGLang's wide expert parallelism spreads experts across a datacenter fabric, not off disk into a local runtime'; validation.4e59ca3ae9fd796f (2026-07-24, dim=landing) 'Two of the four named runtimes shipped this week and neither carried the feature'; and this week's validation.693121d262f24853 (2026-07-31 benchmark, 2026-08-02 row) 'no offload of any kind appears - nothing streams cold experts from host memory or disk'. The reasoning bundle carries no trace of the three rival mechanisms (shrink-the-model, spread-across-a-fabric, hold-it-all-in-HBM) that are actually shipping, so it cannot state what would distinguish its route from theirs. This accumulating counter-signal is invisible to the scoring layer: all 5 evidence links for this prediction are support_direction='support' with contradiction_score=0.0, as are all 8258 links project-wide, so the spec's Bridge-to-Reasoning contradiction rule could never have fired here. First-time stale for this prediction - no prior maintenance-update marker exists for it in any week.",
+      "cross_stream_evidence": [
+        "bridge:validation.693121d262f24853",
+        "bridge:validation.4e59ca3ae9fd796f",
+        "bridge:validation.96fe3259cd716f12",
+        "bridge:validation.89b8dba663cd3ba4"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.72
+    },
+    {
+      "prediction_id": "prediction.16c7b8053e39aa1f",
+      "stream": "bridge",
+      "entry_id": "prediction.16c7b8053e39aa1f",
+      "verdict": "fresh",
+      "reason": "All 5 bridges read correctly against their sources and the relevance track (5, 3, 3, 2, 2) honestly records a founding datapoint followed by adjacent-but-not-confirming evidence. This week's validation.693121d262f24853 is the freshest and is self-critical about it ('The measurement cuts the other way on the remedy'). Two structural defects are attached to the stream rather than to its content, and neither is prediction-specific: (a) contributes_to_task_id is NULL on this bridge and on all 1808 validation_rows project-wide, so the spec's Bridge-to-Needs correlation ('a bridge cited an actor delivering on a Need's task.what') has no wiring anywhere and had to be reconstructed by reading bridge text; (b) the 2026-08-02 row renders to readers with its literal '[REVIVED]' prefix - confirmed at future-prediction/en/future-prediction-20260802.md line 37, one of 12 such occurrences in that file - on a row whose own body ends 'No local runtime shipped a streaming feature today'. Content verdict is fresh; the two defects are escalated separately.",
+      "cross_stream_evidence": ["bridge:validation.693121d262f24853"],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.16c7b8053e39aa1f",
+      "stream": "needs",
+      "entry_id": "prediction.16c7b8053e39aa1f",
+      "verdict": "stale",
+      "reason": "Applies to the whole Need-set. All four needs (need.708171f0c16abe6e, need.bcbb82def269d3af, need.092850c920d697fd, need.c319aa474086132c) carry target window 2026-07-01..2026-12-31, which closes on 2026-12-31 - the day before the prediction's own target window (2027-01-01..2027-06-30) opens - while every one of their tasks states when='H2 2026 through H1 2027'. The structured windows contradict the task text and expire before the landing they are meant to enable. Needs to Reasoning: nothing in the Need-set has been delivered, and the bridge record agrees (validation.4e59ca3ae9fd796f, 2026-07-24: 'No release note from llama.cpp, Ollama...'), so this is a window-authoring defect, not a delivery event. needs_tasks.status cannot corroborate either way: it is 'open' on all 1167 rows project-wide and 'done' has never been written.",
+      "cross_stream_evidence": ["bridge:validation.4e59ca3ae9fd796f"],
+      "proposed_action": "rewrite",
+      "confidence": 0.65
+    },
+    {
+      "prediction_id": "prediction.16c7b8053e39aa1f",
+      "stream": "readings",
+      "entry_id": "prediction.16c7b8053e39aa1f",
+      "verdict": "broken",
+      "reason": "Edge-extraction outage, not a healthy stream. This prediction has zero prediction_chain rows and zero prediction_relations rows in either direction. That is not a property of the prediction: prediction_chain holds 127 rows whose created_at range is 2026-06-09T18:25:42Z..2026-06-10T10:34:13Z and prediction_relations holds 200 rows all stamped 2026-06-09T18:25:42Z, so no edge of either kind has been written project-wide in roughly eight weeks, and only 48 and 52 of 324 predictions carry any chain or relation edge respectively. The prediction was minted 2026-07-18, entirely inside the dead window, so it could never have received an edge. Escalate as a pipeline outage; a per-prediction rewrite cannot fix it and marking this stream 'fresh' would launder the outage into per-prediction health.",
+      "cross_stream_evidence": [],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.1ce328e19c9e6685",
+      "stream": "reasoning",
+      "entry_id": "prediction.1ce328e19c9e6685",
+      "verdict": "stale",
+      "reason": "Bridge to Reasoning, on two clauses now. The 2026-07-19 run judged this stale and wrote app/sourcedata/2026-07-19/maintenance-update.reasoning.prediction.1ce328e19c9e6685.json with a replacement 'given'; it was never applied - the DB still reads reasoning_given='only captive owners have both the capital to buy a robot maker and the in-house demand to run it', and the marker's replacement text appears nowhere in the row. That clause is still contradicted by validation.2fd74050bb4f0f6a (2026-07-18, relevance 4): Toyota ran Walden Robotics machines in its own North American plant from February and then took minority equity, which the bridge itself calls 'a customer underwriting a supplier, not a captive fleet' - an actor with both the capital and the captive demand that chose partner-not-acquire. Since that unapplied verdict a second clause has been hit: validation.28509240c3f7bca4 (2026-07-28, relevance 4, dim=so_that) reports the only humanoid operating-hours figure disclosed that week - 65,000+ hours across nine customer facilities plus $300M of Digit v5 orders - accrued by a merchant maker selling into other people's sites, which is the third-party RaaS outcome reasoning_so_that says will lose, while no captive fleet disclosed anything. Restating stale is correct, not duplicative: markers are write-only and the text is unchanged.",
+      "cross_stream_evidence": [
+        "bridge:validation.28509240c3f7bca4",
+        "bridge:validation.2fd74050bb4f0f6a",
+        "marker:app/sourcedata/2026-07-19/maintenance-update.reasoning.prediction.1ce328e19c9e6685.json"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.1ce328e19c9e6685",
+      "stream": "bridge",
+      "entry_id": "prediction.1ce328e19c9e6685",
+      "verdict": "fresh",
+      "reason": "Four bridges, all accurate against their cited sources, and the two most recent are candid where the evidence runs against the thesis - validation.2fd74050bb4f0f6a separates the sequencing that holds from the ownership form that diverges, and validation.28509240c3f7bca4 states plainly that 'a captive owner has no customers to count'. No bridge overstates support. The stream needs no rewrite; what needs the rewrite is the reasoning it now undercuts (judged separately). Note that contributes_to_task_id is NULL here as on all 1808 validation_rows, so the Bridge-to-Needs link below was established by reading bridge text, not from the column.",
+      "cross_stream_evidence": ["bridge:validation.28509240c3f7bca4"],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.1ce328e19c9e6685",
+      "stream": "needs",
+      "entry_id": "strategic-acquisition corporate-development lead",
+      "verdict": "stale",
+      "reason": "Needs to Reasoning: need.19b68be950704991 is already historical. Its job - 'Executing the ownership-consolidation buyout that absorbs the robot maker whole when the venture IPO exit fails' - is written prospectively but describes the event that is the prediction's own reasoning_because: SoftBank took its put-option exit and Hyundai absorbed 100% of Boston Dynamics. Its task need_task.64787b0fa80f6dac says when='At the IPO-deadline put-option exit window, mid-2026 onward', a window that has already run. Per the spec's Needs-to-Reasoning rule this Need should be reframed forward to the NEXT precondition (converting whole ownership into installed captive units), not left standing as an outstanding ask. Two of the three needs on this prediction (need.19b68be950704991, need.cc59bb6c01119d19) additionally carry NULL target_start_date and target_end_date on both the need and its task, so neither can be windowed or aged. Absence of a 'done' status is not evidence to the contrary - needs_tasks.status is 'open' on all 1167 rows project-wide.",
+      "cross_stream_evidence": ["reasoning:prediction.1ce328e19c9e6685"],
+      "proposed_action": "rewrite",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.1ce328e19c9e6685",
+      "stream": "readings",
+      "entry_id": "prediction.1ce328e19c9e6685",
+      "verdict": "broken",
+      "reason": "Edge-extraction outage. Zero prediction_chain and zero prediction_relations rows in either direction. Project-wide, prediction_chain's created_at range is 2026-06-09..2026-06-10 (127 rows) and prediction_relations is entirely 2026-06-09 (200 rows); nothing has been extracted for roughly eight weeks and only 48/324 and 52/324 predictions carry any edge. This prediction dates from 2026-06-22, after both cut-offs, so it has never been eligible. Escalate as an outage; no per-prediction rewrite can produce edges while the extractor is dead.",
+      "cross_stream_evidence": [],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.25bbb1fc4e3ce653",
+      "stream": "reasoning",
+      "entry_id": "prediction.25bbb1fc4e3ce653",
+      "verdict": "stale",
+      "reason": "Bridge to Reasoning; the 2026-07-19 stale verdict was never applied and a new bridge has since added a second reason. The DB still reads reasoning_given='Agents cannot separate read code from instructions, so mitigation must move to the execution layer', i.e. the broadened text in app/sourcedata/2026-07-19/maintenance-update.reasoning.prediction.25bbb1fc4e3ce653.json never reached the row. That clause is still too narrow: validation.ba841ede13d1fd1f (2026-07-15, relevance 5) reports Mindgard's Cursor disclosure reaching the same execution-layer conclusion by a route the premise never named - cloning a repository merely to read it runs a planted git binary with the user's privileges, no prompt, no instruction confusion at all - and validation.6c350cf1d7c350b4 (2026-07-12, GhostApproval symlink redirection) bypasses the instruction-confusion pathway the same way. New this week: validation.431928ffdb98b30e (2026-07-30, dim=so_that) records the described posture shipping by default in a neighbouring product class (Ruflo 3.16.3, terminal execution opt-in, bridge bound to loopback) while 'the vendors named here did not ship it', and states the asymmetry the reasoning does not carry - 'an agent reviewing a repository has to read the hostile input to do the job at all'. reasoning_so_that names only Anthropic or OpenAI and cannot absorb a default arriving elsewhere first.",
+      "cross_stream_evidence": [
+        "bridge:validation.431928ffdb98b30e",
+        "bridge:validation.ba841ede13d1fd1f",
+        "bridge:validation.6c350cf1d7c350b4",
+        "marker:app/sourcedata/2026-07-19/maintenance-update.reasoning.prediction.25bbb1fc4e3ce653.json"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.25bbb1fc4e3ce653",
+      "stream": "bridge",
+      "entry_id": "prediction.25bbb1fc4e3ce653",
+      "verdict": "fresh",
+      "reason": "Eight bridges spanning 2026-07-11 to 2026-07-30, each grounded in a dated, linked source, with relevance tracking the actual distance from the claim (5 for the AI Now origin and the Mindgard disclosure, 3 for adjacent vectors such as MemGhost's email-and-memory path, which the bridge itself flags as 'not a repository audit'). The newest row is honest that the posture shipped in a different product class. Content is sound. Flagging one merge-layer hazard rather than a content problem: _stale_applied (app/skills/weekly_maintenance.py:722) treats a bridge judgement as already applied if app/sourcedata/<week>/bridges.json merely contains the prediction id, so any bridge-stream rewrite for a prediction that received a bridge that day would be silently marked done - verified live for prediction.16c7b8053e39aa1f in this week's bridges.json.",
+      "cross_stream_evidence": ["bridge:validation.431928ffdb98b30e"],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.25bbb1fc4e3ce653",
+      "stream": "needs",
+      "entry_id": "coding-agent vendor agent-security platform lead",
+      "verdict": "stale",
+      "reason": "Bridge to Needs: need.31fd8de6a99f8cbd has been half-delivered and its text cannot express that. Its job is 'Converting existing sandbox, permission-prompt, and allowlist pieces into a default-deny, network-isolated execution mode for untrusted-repo review', and validation.65ebc6d2f4157099 (2026-07-17, relevance 4) documents Claude Code v2.1.212 shipping exactly the generic half by default - Bash permission checks failing closed on file-descriptor redirect forms, a Windows PowerShell 5.1 bypass closed, commands over 10,000 characters always prompting, default-on session caps - while the bridge itself notes 'this is general permission hardening, not a dedicated untrusted-repo audit sandbox'. The Need should be split so the delivered generic hardening is recorded and the outstanding ask is the untrusted-repo-specific audit mode named in its own outcome. Nothing in the data would have surfaced this: contributes_to_task_id is NULL on this bridge and all 1808 validation_rows, and needs_tasks.status is 'open' on all 1167 rows project-wide, so the delivery had to be read out of the bridge text.",
+      "cross_stream_evidence": ["bridge:validation.65ebc6d2f4157099"],
+      "proposed_action": "rewrite",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.25bbb1fc4e3ce653",
+      "stream": "readings",
+      "entry_id": "prediction.25bbb1fc4e3ce653",
+      "verdict": "broken",
+      "reason": "Edge-extraction outage with a documented, never-applied fix. app/sourcedata/2026-07-19/maintenance-update.readings.prediction.25bbb1fc4e3ce653.json already enumerated three verified edges for this prediction - chain edges from prediction.f3f7e18b691f1c39 and prediction.6ba7ca6e01ab313e, and a relation_type='parallel' pair with prediction.b76fcb409546f23d - and the live DB still shows zero prediction_chain and zero prediction_relations rows in either direction. The marker is write-only (_stale_applied checks only .is_file()), so the edges were never inserted. Root cause is project-wide, not per-prediction: prediction_chain last wrote 2026-06-10T10:34:13Z, prediction_relations 2026-06-09T18:25:42Z. Escalate the extractor; do not re-issue the same rewrite into a path that cannot apply it.",
+      "cross_stream_evidence": [
+        "marker:app/sourcedata/2026-07-19/maintenance-update.readings.prediction.25bbb1fc4e3ce653.json"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.299950dc17b30ddd",
+      "stream": "reasoning",
+      "entry_id": "prediction.299950dc17b30ddd",
+      "verdict": "stale",
+      "reason": "Bridge to Reasoning. reasoning_so_that asserts that CISA, FDA, NHTSA and ENISA publish joint disclosure-and-remediation guidance, and the newest bridge is a direct observation of the opposite: validation.4d1ed88cbce397cd (2026-07-28, relevance 4, dim=so_that) records two AI-found or AI-assisted flaws surfacing on the same day into 'entirely different disclosure regimes, with nothing connecting them' - HAWK producing a standardisation problem with no identifier at all, CVE-2026-53264 carrying a CVSS 7.8 and backports to seven stable lines but 'no KEV entry, no cross-sector advisory, and public exploit code'. That is the prediction's own stated bear case (parallel-but-unreconciled sectoral responses) showing up as the observed default, and the four-clause reasoning bundle carries no hedge for it. Separately, reasoning_given rests on three forcing functions - EU CRA 2027 in-force, the FDA 2027 refresh, the CISA Secure by Design pledge - and across the only three bridges this prediction has ever received (2026-06-01, 2026-06-06, 2026-07-28) nothing touches the pledge programme or the FDA refresh; the one institutional datapoint, the June 6 executive order's AI Cybersecurity Clearinghouse, is a different vehicle than the one reasoning_landing names ('four-authority MoU or joint advisory'). Reframe given and landing to the mechanism the evidence actually shows moving.",
+      "cross_stream_evidence": [
+        "bridge:validation.4d1ed88cbce397cd",
+        "bridge:validation.39d7df3278e7eead"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.299950dc17b30ddd",
+      "stream": "bridge",
+      "entry_id": "prediction.299950dc17b30ddd",
+      "verdict": "fresh",
+      "reason": "The three bridges (2026-06-01, 2026-06-06, 2026-07-28) are each accurate against their sources and the newest is the most rigorous of them, refusing to score a non-connection as support. No rewrite needed. Recording the coverage gap rather than treating it as a content fault: this prediction has drawn three bridges in the nine weeks since 2026-05-30, with a seven-week silence between 2026-06-06 and 2026-07-28, so the evidence base under a Q3 2027 four-authority claim is thin by volume rather than by quality.",
+      "cross_stream_evidence": ["bridge:validation.4d1ed88cbce397cd"],
+      "proposed_action": "noop",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.299950dc17b30ddd",
+      "stream": "needs",
+      "entry_id": "CISA inter-agency coordination lead inside the Joint Cyber Defense Collaborative",
+      "verdict": "broken",
+      "reason": "Data inconsistency on the lead Need. need.155ec97511478170 - the CISA JCDC need that drafts the four-authority MoU, i.e. the Need the entire prediction hangs on - carries target_start_date=2026-04-01 and target_end_date=2026-06-30. That window opens before the prediction itself was made (prediction_date 2026-05-30), closed five weeks ago, and directly contradicts its own task need_task.6d536473951543c0, whose when text reads 'Q2 2026 through Q2 2027 MoU drafting and inter-agency clearance window' - and it sits a full year before the prediction's target window of 2027-07-01..2027-09-30. Nothing has been delivered against it: validation.4d1ed88cbce397cd (2026-07-28) records no cross-sector advisory issued for either of that day's AI-found flaws. The task's own text supplies the unambiguous correction (extend to 2027-06-30), so this is broken-with-clear-fix rather than a judgement call. Note that status cannot be used as a cross-check: needs_tasks.status is 'open' on all 1167 rows project-wide and 'done' has never been written.",
+      "cross_stream_evidence": ["bridge:validation.4d1ed88cbce397cd"],
+      "proposed_action": "rewrite",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.299950dc17b30ddd",
+      "stream": "readings",
+      "entry_id": "prediction.299950dc17b30ddd",
+      "verdict": "broken",
+      "reason": "Edge-extraction outage. Zero prediction_chain and zero prediction_relations rows in either direction, despite this prediction sharing source_file_id source.0c139537e17c33b8 and its whole wolfSSL CVE-2026-5194 / Project Glasswing substrate with prediction.2d800e2dfed12361 - a pairing that should carry an edge on any working extractor. Both were ingested 2026-06-09T18:25:45, three seconds after the last prediction_relations write (2026-06-09T18:25:42Z) and before the last prediction_chain write (2026-06-10T10:34:13Z), so they fell just outside the final extraction pass and nothing has run since. Escalate the extractor rather than patching one pair by hand.",
+      "cross_stream_evidence": ["readings:prediction.2d800e2dfed12361"],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.2d800e2dfed12361",
+      "stream": "reasoning",
+      "entry_id": "prediction.2d800e2dfed12361",
+      "verdict": "stale",
+      "reason": "Restating the 2026-07-26 stale verdict, which was never applied, on the same unabsorbed counter-datapoint - and no new evidence has arrived to change it. The DB still reads reasoning_given='One frontier-lab AI-vuln cohort at this scale forces peer labs + maintainer CI to ingest or rebut', unchanged by app/sourcedata/2026-07-26/maintenance-update.reasoning.prediction.2d800e2dfed12361.json. The counter-datapoint stands: validation.5b732ffe3f54c82f (2026-07-26, relevance 5, dim=so_that) documents Redis shipping seven patched branches on 2026-07-23 for two RESTORE bug classes its own notes say may result in remote code execution, with no CVE identifier, no CVSS score and no statement of what found them - 'the outcome a shared format exists to prevent, arriving in its place' - at a data store in broad production use, and nobody objected. Both reasoning_given and reasoning_so_that rest on coordination pressure being felt at maintainer scale; the unstandardised equilibrium held instead. Cross-week note on selection: this prediction received no new bridge at all in the 2026-07-27..2026-08-02 window (last bridge 2026-07-26), so its 'landed_this_week' signal is the same huge_longshot_hit_at=2026-07-26 stamp that selected it last week - the gate window is huge_longshot_hit_at >= today-7d and the column is monotone max, never cleared, so a Sunday-dated revival qualifies in two consecutive runs.",
+      "cross_stream_evidence": [
+        "bridge:validation.5b732ffe3f54c82f",
+        "marker:app/sourcedata/2026-07-26/maintenance-update.reasoning.prediction.2d800e2dfed12361.json"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.2d800e2dfed12361",
+      "stream": "bridge",
+      "entry_id": "prediction.2d800e2dfed12361",
+      "verdict": "fresh",
+      "reason": "Six bridges from 2026-06-01 to 2026-07-26 are each grounded and correctly scored, and the strongest (validation.5b732ffe3f54c82f, relevance 5) is a counter-example that the writer scored high precisely because it cuts against the thesis - the right behaviour. No rewrite needed. Recording for the parent that the stream produced nothing in this week's window: the most recent bridge predates 2026-07-27, so the prediction spent the whole review week without new evidence while being carried as a 'landed_this_week' candidate.",
+      "cross_stream_evidence": ["bridge:validation.5b732ffe3f54c82f"],
+      "proposed_action": "noop",
+      "confidence": 0.78
+    },
+    {
+      "prediction_id": "prediction.2d800e2dfed12361",
+      "stream": "needs",
+      "entry_id": "Peer frontier-lab security research lead",
+      "verdict": "stale",
+      "reason": "Bridge to Needs on two counts. need.d15f66168c5781c5's outcome names a closed actor list - 'shipped before Q1 2027 by OpenAI, DeepMind, xAI, or Mistral' - and the two bridges that actually moved cohort mass name neither: validation.ca8f326b98dabdd6 (2026-07-10) reports Microsoft's MDASH disclosing 16 machine-found Windows flaws including four critical RCEs in its own vendor-specific idiom, and validation.b292cf395c3c8816 (2026-07-16) reports Microsoft attributing a record 570-CVE Patch Tuesday to AI-powered discovery while Adobe moved to twice-monthly bulletins the same day. The nearest thing to a named-list hit, validation.ad98adf638bda783 (2026-07-22), is explicitly 'one lab's ad hoc disclosure, not a standard adopted across programs'. The Need's actor list is now too narrow to describe what the evidence shows. Second, need.d3c3652d6ec7e92e (the standards-body working group) carries target window 2026-07-01..2026-09-30 while its own task need_task.438805d25700ed08 says when='Q3 2026 through Q1 2027' and the prediction lands 2027-01-01..2027-03-31 - the window closes a full quarter before the outcome it gates. status is no help either way: 'open' on all 1167 needs_tasks rows project-wide.",
+      "cross_stream_evidence": [
+        "bridge:validation.ca8f326b98dabdd6",
+        "bridge:validation.b292cf395c3c8816",
+        "bridge:validation.ad98adf638bda783"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.2d800e2dfed12361",
+      "stream": "readings",
+      "entry_id": "prediction.2d800e2dfed12361",
+      "verdict": "broken",
+      "reason": "Edge-extraction outage with a documented, never-applied fix. app/sourcedata/2026-07-26/maintenance-update.readings.prediction.2d800e2dfed12361.json already identified the edge to write - a relation_type='parallel' pair with prediction.9cfa3212e98d1f5c ('Redis ships another possible-RCE fix with no CVE and no CVSS by H1 2027'), minted 2026-07-26 from the same Redis evidence that produced this prediction's own 2026-07-26 bridge and asserting the persistence of exactly the non-standardised disclosure this prediction expects resolved by Q1 2027. The live DB still shows zero prediction_chain and zero prediction_relations rows. The marker is inert by construction and the extractor has written nothing since 2026-06-09/2026-06-10 project-wide. Escalate the pipeline; the unwritten edge also means the reader never sees the two claims' tension surfaced.",
+      "cross_stream_evidence": [
+        "marker:app/sourcedata/2026-07-26/maintenance-update.readings.prediction.2d800e2dfed12361.json"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.3049b69e910c2279",
+      "stream": "reasoning",
+      "entry_id": "prediction.3049b69e910c2279",
+      "verdict": "stale",
+      "reason": "Bridge to Reasoning on landing and given; the 2026-07-26 stale verdict was never applied and five new bridges have since sharpened the case. reasoning_landing reads 'By H1 2027; two-plus threat-intel vendors or a MITRE ATT&CK technique', and validation.8b87ea3a3d9ed16a (2026-07-30, relevance 5, dim=landing) shows why that wording now mis-scores the claim: 'The landing condition asks for two vendors, and today supplies the second: Sysdig's ransomware account earlier, Palo Alto Networks' campaign reconstruction now. What neither supplies is a name for the class.' As written the clause is satisfiable by two publications, which have now happened, while the actual claim - a named, documented detection category - has not; the landing must be re-pinned to the naming act rather than the publisher count. reasoning_given ('Agents weaponize known, cataloged CVEs within the hours-long patch window CISA's sprint exposed') is separately undercut twice: validation.5a2902415a41f31a (2026-07-31, relevance 5) states 'no vulnerability identifier appears anywhere in the account, and the compromise ran on credential theft and SQL injection, techniques no patch window governs', and validation.2b74e0d99bda31cc (2026-08-01) records a stolen long-lived Tailscale auth key enrolling 181 nodes with 'no exploited flaw, no rushed use of a catalogued vulnerability'. The cataloged-CVE patch-window premise is not the mechanism the observed intrusions used. The DB text is unchanged from before app/sourcedata/2026-07-26/maintenance-update.reasoning.prediction.3049b69e910c2279.json, so this is a live defect, not a duplicate.",
+      "cross_stream_evidence": [
+        "bridge:validation.8b87ea3a3d9ed16a",
+        "bridge:validation.5a2902415a41f31a",
+        "bridge:validation.2b74e0d99bda31cc",
+        "marker:app/sourcedata/2026-07-26/maintenance-update.reasoning.prediction.3049b69e910c2279.json"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.9
+    },
+    {
+      "prediction_id": "prediction.3049b69e910c2279",
+      "stream": "bridge",
+      "entry_id": "prediction.3049b69e910c2279",
+      "verdict": "fresh",
+      "reason": "The densest and best-behaved bridge stream in this batch: 15 rows from 2026-07-09 to 2026-08-01, each tied to a dated, linked source, and the relevance track rises with the evidence (5 for the JADEPUFFER origin, then 4s across the Hugging Face attribution arc, then 5s for the Unit 42 and Hugging Face technical-timeline artefacts). It includes an explicit non-event scored honestly - validation.311d29b934381fc3 (2026-07-15) carries support_dimension='none' and states 'Nothing today involves a machine acting as the attacker' - which is the correct handling and one of only 120 'none' rows in 1808. Content needs no rewrite; the bridges' own observations are what force the reasoning rewrite judged above.",
+      "cross_stream_evidence": ["bridge:validation.8b87ea3a3d9ed16a", "bridge:validation.311d29b934381fc3"],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.3049b69e910c2279",
+      "stream": "needs",
+      "entry_id": "Threat-intelligence research analyst at a major security vendor",
+      "verdict": "broken",
+      "reason": "Degenerate window on the lead Need. need.42b1cd2555aa159b - the threat-intel analyst who publishes the named autonomous-agent category, i.e. the Need that delivers the prediction's landing - carries target_start_date=target_end_date=2026-07-08, a single day that predates the prediction itself (prediction_date 2026-07-09) and closed 26 days before this review, while its own task need_task.49540afe078f1d85 reads when='H2 2026, ramping investigation after the July 8 2026 JADEPUFFER disclosure.' The window was evidently populated from the source article's date rather than the task's stated horizon; it is one of 54 single-day need windows project-wide. Substantively the Need is unmet and the bridges say so precisely - validation.8b87ea3a3d9ed16a (2026-07-30) records a second vendor publishing without naming the class - so the fix is a window correction, not a content rewrite: extend to the prediction's target window (2026-07-08..2027-06-30) per the task text. Cross-check unavailable by design: needs_tasks.status is 'open' on all 1167 rows and 'done' has never been written, so the elapsed window cannot be read as either delivery or failure.",
+      "cross_stream_evidence": ["bridge:validation.8b87ea3a3d9ed16a"],
+      "proposed_action": "rewrite",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.3049b69e910c2279",
+      "stream": "readings",
+      "entry_id": "prediction.3049b69e910c2279",
+      "verdict": "broken",
+      "reason": "Edge-extraction outage with a documented, never-applied fix. app/sourcedata/2026-07-26/maintenance-update.readings.prediction.3049b69e910c2279.json already named the edges to write - a chain edge from prediction.70b4b143e969eb36 ('Open-weights models reproduce end-to-end autonomous exploit chains by H1 2027', upstream of this prediction's reasoning_given), plus prediction.b177dc0150808a3d and prediction.9cfa3212e98d1f5c on the authorization axis. The live DB still shows zero prediction_chain and zero prediction_relations rows. This is the worst-affected stream in the batch by cost: fifteen bridges of dense, cross-referencing evidence have accumulated on a prediction with no graph edges at all, because prediction_chain last wrote 2026-06-10T10:34:13Z and prediction_relations 2026-06-09T18:25:42Z, a month before this prediction existed. Escalate the extractor; a per-prediction rewrite writes into a marker nothing reads.",
+      "cross_stream_evidence": [
+        "marker:app/sourcedata/2026-07-26/maintenance-update.readings.prediction.3049b69e910c2279.json"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    }
+  ]
+}

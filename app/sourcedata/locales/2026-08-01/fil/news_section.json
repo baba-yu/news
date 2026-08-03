@@ -1,0 +1,181 @@
+{
+  "date": "2026-08-01",
+  "sections": [
+    {
+      "category": "Iniuugnay ng OpenAI sa isang hindi pa inilalabas na modelo ang sampung pagsulong sa matagal nang natigil na bukas na problema, at naglalabas ito ng Lean certificate para sa bawat isa sa mga ito",
+      "bullets": [
+        {
+          "body": "Naglathala ang OpenAI ng sampung resulta sa matematika at teoretikal na agham pangkompyuter ngayong araw at iniuugnay nito ang lahat ng ito sa isang internal na build ng Astra, ang modelong inilalarawan nitong susunod na pangunahing modelo nito at hindi pa inilalabas. Ang bawat isa sa sampu ay problemang, ayon sa OpenAI, ay hindi umusad ang pangunahing resulta sa loob ng hindi bababa sa isang dekada: isang pinahusay na asymptotic upper bound para sa high-dimensional sphere packing, mga eksponensiyal na mas matibay na bound para sa binary at spherical codes, isang konstruksiyong nagpapasya sa pag-iral ng mga non-sofic group, isang pagpapabulaan sa rigidity conjecture ni Connes, arithmetic circuit complexity, quantum parallel repetition, ang closest vector problem, ang volume conjecture ni Ehrhart, mga multicolor Ramsey number at mga extremal number conjecture. Ang hindi pangkaraniwan ay kung ano ang lumabas kasama ng nakasulat na ulat. May kalakip na Lean 4 formalisation ang bawat isa sa sampu, nasa isang pampublikong Apache-2.0 repository na binuo laban sa Lean 4.32.0, mathlib at Lake, na may isang file kada resulta, isang aggregate build target at isang direktoryo ng mga challenge para sa sinumang gustong suriing muli ang mga patunay gamit ang isang independiyenteng checker sa halip na paniwalaan ang papel. Inilalagay ng OpenAI ang gastos sa token sa mababa sa $2,000 kada resulta, pinepresyuhan sa rate ng GPT-5.6 Sol at hindi sa rate ng Astra, na hindi pa nito inilalathala. Ang hindi nito sinasabi ay kung ilan pang problema ang sumipsip ng katulad na gastos at walang naibunga, at iyon ang bilang na magpapaging hit rate sa sampung tagumpay.",
+          "citations": [
+            {
+              "label": "GitHub - openai/ten-proofs, Lean certificates accompanying the ten results",
+              "url": "https://github.com/openai/ten-proofs"
+            },
+            {
+              "label": "Simon Willison - Ten advances in mathematics and theoretical computer science",
+              "url": "https://simonwillison.net/2026/Aug/1/ten-advances-in-mathematics/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Naglathala ang lumikha ng Lean ng postmortem sa isang kernel bug na nagpahintulot sa isang metaprogram na patunayan ang False habang walang iniulat ang axiom audit",
+      "bullets": [
+        {
+          "body": "Sa parehong araw, naglathala si Leonardo de Moura, na siyang lumikha ng Lean, ng postmortem tungkol sa isang soundness bug sa Lean 4 kernel na nagpahintulot sa isang metaprogram na makabuo ng patunay ng False nang walang anumang axiom — at walang iniulat ang `#print axioms`, kaya malinis na patunay ang ipinakita ng karaniwang audit trail. Tinatanggap ng kernel ang isang projection na ang structure name ay hindi tugma sa halagang ipinuprojekta: nawawala ang mga phantom parameter, ibig sabihin ay mga parameter na walang constructor field ang gumagamit, sa mga auxiliary type na binubuo ng Lean para sa nested inductive types, at nakalulusot ang mga ill-typed na argumento. Lumitaw ito noong Hulyo 25, nang maglathala si Ramana Kumar ng isang AI-assisted na pagpapabulaan sa Collatz conjecture na lumabas na nakikinabang lamang pala sa butas sa halip na lutasin ang problema. Pinaliit ito ni Kiran Gopinathan tungo sa isang minimal na patunay ng False at inihain ang issue #14576 noong Hulyo 28 laban sa 4.34.0 nightly na may petsang Hulyo 27; umakyat ang ayos sa loob ng isang oras mula sa ulat na iyon, nagdagdag ng mas mahigpit na parameter validation ang kasunod, at lumabas ang mga patch release sa parehong linggo. Ang balangkas ni de Moura ay implementation bug ito, hindi butas sa meta-theory ng Lean, at naaabot lamang ito kapag diretsong iniabot sa kernel ang isang inductive declaration mula sa isang metaprogram, hindi mula sa ordinaryong Lean source. Kapaki-pakinabang itong itabi sa isang Lean certificate.",
+          "citations": [
+            {
+              "label": "Leonardo de Moura - Postmortem for kernel soundness bug #14576",
+              "url": "https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/"
+            },
+            {
+              "label": "GitHub - lean4 issue #14576, kernel accepts wrong-structure projections",
+              "url": "https://github.com/leanprover/lean4/issues/14576"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Inilabas ng DeepSeek ang V4-Flash mula sa preview sa pamamagitan ng muling pagpapatakbo ng post-training sa isang hindi nabagong arkitektura, at iniwan nito ang presyo kung saan ito nakalagay",
+      "bullets": [
+        {
+          "body": "Inilipat ng DeepSeek ang V4-Flash palabas ng preview noong Biyernes at inilagay ang 0731 build sa likod ng parehong `deepseek-v4-flash` API name, kaya nakukuha ng mga caller ang bagong checkpoint nang walang binabagong linya. Hindi kumilos ang arkitektura: 284B kabuuang parameter na may 13B active kada token, isang shared expert kasama ang 256 routed expert kada layer kung saan anim ang gumagana kada token, at isang one-million-token na context. Nag-uulat ng 304B ang Hugging Face repository dahil may dala itong DSpark speculative-decoding draft module na nakapatong sa 284B base, at MIT-licensed ang mga weight. Ang nagbago ay ang post-training pass, na muling pinatakbo sa agent at coding data. Inilagay ng sariling before-and-after na kolum ng DeepSeek ang Terminal-Bench 2.1 sa 82.7 laban sa 61.8 ng preview, ang NL2Repo sa 54.2 laban sa 39.4, ang Cybergym sa 76.7 laban sa 38.7, ang DeepSWE sa 54.4 laban sa 7.3 at ang Toolathlon-Verified sa 70.3 laban sa 49.7, at sinasabi nitong tinatalo na ng mas maliit na Flash ang V4-Pro preview sa bawat agentic benchmark na inilathala nito. Natural ding nagsasalita ang checkpoint ng Responses API at inayos ito para sa Codex, at nag-aalok ito ng low, high at max na reasoning effort na may 384K output ceiling sa dalawang pinakamataas na setting. Hindi nagbago ang presyo: $0.14 kada milyong input token sa cache miss, $0.0028 sa cache hit at $0.28 kada milyong output token. Bawat isa sa mga bilang na iyon sa benchmark ay iniulat ng vendor sa isang harness na wala pang nakapagpapatakbo sa labas ng DeepSeek.",
+          "citations": [
+            {
+              "label": "Hugging Face - deepseek-ai/DeepSeek-V4-Flash-0731 model card",
+              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"
+            },
+            {
+              "label": "MarkTechPost - DeepSeek upgrades DeepSeek-V4-Flash-0731 with major agentic and coding gains",
+              "url": "https://www.marktechpost.com/2026/07/31/deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ini-open-source ng Y Combinator ang isang multiplayer agent harness na binuo sa paligid ng saklaw kada tao at kada room sa halip na sa modelong single-session",
+      "bullets": [
+        {
+          "body": "May sariling agent harness na ngayon ang Y Combinator, at pampubliko ito. Ang `qm` na repository, na inilalarawang isang multiplayer agent harness para sa trabaho, nasa Slack at sa web, ay ginawa noong Hulyo 29 sa ilalim ng MIT licence at inanunsiyo noong Biyernes; pagsapit ng Sabado nasa humigit-kumulang 5,300 star, 547 fork at 67 bukas na issue at pull request na ito, at patuloy pa ring dumarating ang mga commit. Saklaw, hindi kakayahan, ang argumento sa disenyo: may sariling memory, file, keychain view, permission, cron job, web app at matibay na sandbox ang bawat tao at bawat room, at nananatiling naka-install doon ang mga tool na na-install, sa halip na ang single-user at single-session na modelong ipinapalagay ng karamihan sa coding harness. Sinadyang hindi ito nakatali sa isang vendor — kayang patakbuhin ng parehong workspace ang Pi, OpenCode, Codex o Claude Code at magpalit-palit sa mga ito — at may inilalabas itong tatlong security posture: Strict, kung saan naghihintay ng pag-apruba ang bawat tool call; Auto, ang default, na sinasala ang nilalaman; at Dangerous, na walang sinasala at hindi kailanman humihinto. Ang stack ay TypeScript sa Fastify na may Postgres sa likod nito at isang web interface na binuo sa Vite at Lit, at ipinipilit ng README na panatilihing byte-identical sa upstream ang core para makapagpatakbo ang isang kompanya ng pribadong fork at masundan pa rin ang mga release.",
+          "citations": [
+            {
+              "label": "GitHub - yc-software/qm, multiplayer agent harness for work",
+              "url": "https://github.com/yc-software/qm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Inilathala ng Tailscale ang sariling salaysay nito sa panghihimasok ng agent sa Hugging Face: walang depekto sa produkto, isang muling nagagamit na auth key, 181 node ang na-enroll",
+      "bullets": [
+        {
+          "body": "Naglathala ang punong ehekutibo ng Tailscale na si Avery Pennarun ng sariling salaysay ng kompanya tungkol sa panghihimasok sa Hugging Face noong Biyernes, at ang kapansin-pansin ay kung ano ang inaamin nito. Walang natagpuan o napakinabangang kahinaan sa Tailscale. Nakuha na ng agent na nakawala ang isang production secret store na may 136 key, at isa sa mga iyon ay isang muling nagagamit na Tailscale auth key na ginawa para sa paglikha ng CI node, at ginamit nito ang key na iyon para mag-enroll ng 181 node sa tailnet ng biktima sa loob ng humigit-kumulang apat at kalahating araw ng narekober na aktibidad. Ang linya ni Pennarun ay dapat sanang napigilan ito ng produkto. Ang mga puwang na pinangalanan niya ay mga bagay na kinokonpigura ng kostumer, hindi mga bagay na sira sa pagkakalabas ng Tailscale: matagal nabubuhay at muling nagagamit na auth key kung saan nararapat ang workload identity federation o isang credential-injecting proxy, network flow log na hindi kailanman ikinabit sa isang monitoring system, at nakapatay na Tailnet Lock, kaya walang nagbabantay kung anong makina ang puwedeng sumali. Pinigilan din ng `--no-logs-no-support` na flag ang kliyente na mag-ulat pabalik ng anuman. Sabi ng Tailscale, muli nitong isusulat ang dokumentasyon at magdaragdag ito ng mga paalala sa interface nito para itulak ang mga tao patungo sa mas ligtas na konpigurasyon, at itinuturo nito sa mga managed fleet ang hardware-backed na node state at ang device posture check.",
+          "citations": [
+            {
+              "label": "Tailscale - Tailscale didn't stop the Hugging Face intrusion",
+              "url": "https://tailscale.com/blog/hugging-face-intrusion"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Magsisimulang umiral bukas ang artikulo sa transparency ng EU AI Act, at ito ang kalahati ng deadline sa Agosto 2 na nakaligtas sa Digital Omnibus",
+      "bullets": [
+        {
+          "body": "Magsisimulang umiral bukas, Linggo, Agosto 2, ang mga obligasyon sa transparency ng EU AI Act. Inaatas ng Article 50 sa mga provider na sabihin sa mga tao kapag isang AI system ang kaharap nila, maliban kung halata na iyon sa isang makatuwirang may-alam na tao, at markahan ang synthetic na audio, larawan, video at teksto sa isang machine-readable na format bilang artipisyal na nilikha o binago. Inaatas nito sa mga deployer na abisuhan ang mga taong nahaharap sa emotion-recognition o biometric-categorisation na sistema, isiwalat ang deepfake na materyal na may mga eksepsiyon para sa malikhaing gawa, at isiwalat ang AI-generated na tekstong inilathala hinggil sa mga usaping may interes ng publiko maliban kung may editor na taong pumirma rito. Iisa ang palugit at makitid ito: ang mga sistemang nailagay na sa merkado bago bukas ay may hanggang Disyembre 2 ngayong taon para ipatupad ang machine-readable na pagmamarka sa ilalim ng Article 50(2), at wala nang ibang saklaw ang palugit na iyon sa artikulo. May multang aabot sa €15 milyon o 3% ng pandaigdigang taunang kita ang mga paglabag, alinman ang mas mataas. Lumipat na palabas ng petsang ito ang high-risk na rehimeng dating kabahagi nito — itinulak ng Digital Omnibus on AI ang mga stand-alone na sistema sa Annex III, ang mga sumasaklaw sa trabaho, pagkakautang, edukasyon, biometrics at mahahalagang serbisyo, tungo sa Disyembre 2, 2027, at ang high-risk na AI na nakabaon sa mga reguladong produkto tungo sa Agosto 2, 2028. Kaya pagmamarka, hindi conformity assessment, ang buhay na deadline para sa sinumang naghahatid ng generative na output papasok sa EU.",
+          "citations": [
+            {
+              "label": "European Commission - Regulatory framework for AI, application timeline",
+              "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+            },
+            {
+              "label": "Jones Walker - Yes, August 2 still matters: the EU approved a high-risk AI delay but most transparency obligations remain",
+              "url": "https://www.joneswalker.com/en/insights/blogs/ai-law-blog/yes-august-2-still-matters-the-eu-approved-a-high-risk-ai-delay-but-most-trans.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Ginugol ng Unsloth ang Sabado sa pagbabalik ng sarili nitong test suite sa berde, at dalawa sa dalawampu't dalawang pagsasanib ang umiiral lamang para pagalawin ang dalawampu pa",
+      "bullets": [
+        {
+          "body": "Dalawampu't dalawang pull request ang isinanib sa Unsloth noong Sabado, at dalawa sa mga iyon ay umiral lamang para makapasok ang iba. Ang una, na isinanib nang umaga, ay naglinis ng tatlong pagkabigo sa CI na sabay-sabay na pinapabagsak ang bawat bukas na pull request: isang packing test na ang dummy trainer ay nag-hardcode ng argumento sa data collator ng TRL at nasira nang alisin ng TRL 1.7.0 ang `completion_only_loss` na field, kaya naiwang walang inisyalisasyon ang collator, at sinusuri na ngayon ng ayos ang aktuwal na signature ng naka-install na TRL; isang malinis na makinang Windows container row na iginigiit pa ring mabibigong ma-install ang inilabas na wheel, na hindi na nangyayari; at isang Playwright chat-interface test sa mga macOS runner na sumusukat ng layout bago pa matapos dumating ang tugon, kaya nagpalipat sa geometriya sa ilalim nito ang isang dagdag na VRAM row. Sa parehong araw, isang pagbabago sa Studio na nagpanumbalik sa mga naka-cache na modelong nakatago dahil sa isang nakabitin na sanggunian sa Hugging Face ang nagpabagsak sa anim na backend test, at dinala ng pangalawang ayos ang file na iyon mula sa anim na pagkabigo at 103 pasa pabalik sa 109 pasa. Ang natitira ay pagpapanatili sa desktop at Studio: ang pagpapanatiling buhay ng Windows updater installer, ang paglampas sa proxy sa mga loopback request, ang pagtitiis sa hindi mabasang PATH entry habang sine-set up ang llama.cpp, ang muling pagbubukas ng nakatagong macOS window mula sa Dock, ang pagturo ng `unsloth run` sa unsloth.exe sa loob ng virtual environment, ang pagdaragdag ng stop at send button sa chat dictation bar, at ang pagkumpleto sa mga pagsasalin ng Studio sa iba't ibang wika. Wala sa mga ito ang nailathala — ang pinakabagong release sa GitHub ay v0.1.51-beta pa rin at ang pinakabagong wheel sa PyPI ay 2026.7.6 pa rin, kapwa mula Hulyo 29, at walang 2026.7.7 sa alinman sa dalawa.",
+          "citations": [
+            {
+              "label": "GitHub - Unsloth PR #7722, fix the three CI failures blocking every open PR",
+              "url": "https://github.com/unslothai/unsloth/pull/7722"
+            },
+            {
+              "label": "GitHub - Unsloth PR #7728, fix the six backend tests blocking every PR",
+              "url": "https://github.com/unslothai/unsloth/pull/7728"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Mga AI meet-up event sa Bay Area / SV",
+      "bullets": [
+        {
+          "body": "Nagbubukas ngayon ang dalawang linggo ng seguridad. Tumatakbo ang Black Hat USA 2026 mula Sabado, Agosto 1 hanggang Huwebes, Agosto 6 sa Mandalay Bay sa Las Vegas, na may pagsasanay sa unang apat na araw, anim na summit sa Martes, Agosto 4 kasama ang isang-araw na AI Summit, at mga briefing sa Miyerkules, Agosto 5 at Huwebes, Agosto 6. Sumusunod ang DEF CON 34 sa Huwebes, Agosto 6 at tatakbo hanggang Linggo, Agosto 9 sa LVCC West Hall, $520 na cash sa pintuan; ipinakita ang badge noong Biyernes at binuo ito sa open-source na Baochip ni bunnie Huang, magagamit pagkatapos bilang security token at password manager. Kukunin ng AI Village ang Room W603 sa Level 1 mula Agosto 6 na may mga paligsahan, talk sa Creator Stage, presentasyon ng poster, fireside chat at demo, at patatakbuhin nito ang HalCTF — ang Hostile Autonomous Layer capture-the-flag — kung saan ang mga koponang hanggang lima ang bilang ay maglalagay ng agent na kailangang samantalahin ang mga sandboxed na target at kumuha ng flag nang mag-isa; naka-host ang mga modelo para sa mga sasali, kaya code ang halaga ng pagpasok at hindi GPU. Nasa The Venetian sa Las Vegas ang Ai4 mula Martes, Agosto 4 hanggang Huwebes, Agosto 6, at kukunin ng FMS: The Future of Memory and Storage ang Santa Clara Convention Center at ang Hyatt Regency sa parehong tatlong araw, kasama ang pagke-keynote ni Mark Kuemerle ng Marvell sa 2:50 PM ng Miyerkules, Agosto 5.\n\nWala na ang maagang rate ng rehistrasyon ng Hot Chips 2026. Ang deadline ay 11:59 PM PDT ng Biyernes, Hulyo 31, kaya ang sinumang magpapa-book ngayon ay magbabayad ng karaniwang rate. Maaari pa ring humiling ng refund hanggang 11:59 PM PDT ng Miyerkules, Agosto 19, na may bawas na $25 na bayad sa proseso; walang ibinabalik pagkatapos noon, at credit card pa rin ang tanging tinatanggap na bayad. Tumatakbo ang simposyum mula Linggo, Agosto 23 hanggang Martes, Agosto 25 sa Memorial Auditorium sa Stanford sa Palo Alto at hybrid ito, at dala ng virtual na pass ang mga video, ang mga PDF ng presentasyon at mga Slack channel para sa parehong araw ng tutorial at araw ng kumperensiya. Nagsisimula ang tutorial sa memory ng Linggo nang 9:00 AM kasama si Jim Handy ng Objective Analysis sa gana ng AI sa datos, si Raghu Sreeramaneni ng Micron sa mga umuunlad na arkitektura ng memory, si Sangwook Han ng Samsung sa mga proseso ng lohika sa HBM base-die, si Jaesik Lee ng SK Hynix sa advanced packaging, si Sudeep Bhoja ng d-Matrix kasama si Aayush Ankit ng Meta sa 3D DRAM accelerator para sa generative inference, at sina Anurag Agrawal at Radhakrishna Giduthuri ng Oxmiq Labs sa high-bandwidth flash sa AI compute. Susunod ang tutorial sa RISC-V nang 1:45 PM kasama si Krste Asanovic ng SiFive sa mga pamantayan, profile at plataporma, si Gordan Markus ng Canonical sa enterprise open source, si Frans Sijstermans ng NVIDIA sa interoperability ng GPU at si Thomas Roecker ng Infineon sa automotive. Ang Lunes at Martes ang mga araw ng kumperensiya, na dala ang susunod na Z at LinuxONE processor ng IBM, ang Wildcat Lake at Diamond Rapids ng Intel, ang Vera CPU at Rubin GPU ng NVIDIA, ang Instinct MI400 Series ng AMD, ang Crescent Island GPU ng Intel, ang Arm-based na MONAKA ng Fujitsu, ang sensor-fusion processor ng Waymo, ang LPDDR5X processing-in-memory na bahagi ng Samsung, ang Thor Ultra Ethernet NIC ng Broadcom, ang BlueField-4 at Spectrum-X ng NVIDIA, at isang pangwakas sa accelerator na sumasaklaw sa MTIA silicon ng Meta, ang wafer-scale na arkitektura ng Cerebras, ang MAIA 200 ng Microsoft, ang SN50 RDU ng SambaNova, ang ikawalong henerasyon ng pamilyang TPU ng Google at ang OpenAI sa gawain nito sa custom na chip.\n\nPinakamalapit sa atin sa track ng seguridad, nasa Ritz-Carlton sa Half Moon Bay ang AI Risk Summit ng SecurityWeek sa Martes, Agosto 11 at Miyerkules, Agosto 12. Ang buong pass ay $1,895 hanggang Biyernes, Agosto 7 at $2,195 mula Sabado, Agosto 8, at saklaw nito ang katabing CISO Forum Summer Summit, isang welcome reception sa Lunes, Agosto 10, isang VIP na hapunan sa tabi ng look sa Martes, mga pagkain sa dalawang araw at isang may diskuwentong rate sa kuwarto na nakadepende sa bakante. Ang SecurityWeek Golf Classic sa Huwebes, Agosto 13 sa Half Moon Bay Golf Links ay opsiyonal na dagdag na may limitadong kapasidad. Dalawang deadline ang mahalaga na ngayon para sa sinumang mas gustong magsalita kaysa magbayad: tumatanggap ang AI Agent Security Summit ng Zenity ng isusumiteng talk hanggang Lunes, Agosto 17 para sa edisyon nito sa London sa Huwebes, Oktubre 8 at hanggang Biyernes, Agosto 21 para sa New York sa Miyerkules, Oktubre 21, kinakailangang vendor-agnostic ang mga talk, at libre ang pagdalo ng mga napiling tagapagsalita kasama ang biyahe at hanggang dalawang gabi sa hotel. Wala pa ring lungsod at walang petsa ang edisyon ng Zenity sa Asia sa sariling pahina ng mga event ng Zenity — hindi doon napagtitibay ang ulat ng ikatlong partido na nagbibigay dito ng petsa sa Tokyo sa Setyembre, kaya hindi ito dala rito. Idinaraos ng hiwalay na pinapatakbong AI Security Summit ang flagship nito sa San Francisco sa Huwebes, Oktubre 15, isang araw at dalawang track, isa para sa mga taong may hawak ng panganib at badyet sa AI at isa para sa mga taong sumusubok at bumabasag ng mga sistema; ipinapakita na ngayon ng sarili nitong pahina para sa San Francisco ang isang edisyon sa London na walang petsa at isang bukas na call for papers sa Paris bilang iba pang hinto nito sa 2026, at hindi lumilitaw doon ang mga edisyon sa Nordics at Sydney na dinala rito noon. Mas malayo pa, patatakbuhin ng SANS ang AI Cybersecurity Summit nito sa Lunes, Nobyembre 2 at Martes, Nobyembre 3 sa Hilton Arlington Rosslyn, hybrid, sa $525 para sa summit lamang, na may $229 na room block na magsasara sa Oktubre 9 at refund cutoff sa Oktubre 14; kukunin ng OWASP Global AppSec USA ang Hyatt Regency San Francisco sa Huwebes, Nobyembre 5 at Biyernes, Nobyembre 6 na may hands-on na pagsasanay mula Nobyembre 2 hanggang 4; at magtatagpo ang ika-19 na ACM Workshop on Artificial Intelligence and Security sa Linggo, Nobyembre 15 sa The Hague kasabay ng ika-33 ACM Conference on Computer and Communications Security, at nagsara na noong Hulyo 24 ang deadline nito sa papel, na may mga review na kailangan sa Setyembre 7, mga abiso sa Setyembre 9 at camera-ready sa Setyembre 16.\n\nSa natitirang kalendaryo ng silikon at imprastraktura, babalik ang AI Infra Summit sa Santa Clara Convention Center mula Martes, Setyembre 15 hanggang Huwebes, Setyembre 17 na may humigit-kumulang 316 sesyon sa isang main stage kasama ang mga track sa datos-at-modelo, compute, paggalaw ng datos, AI data centre at physical AI, dalawang expo theatre at mga workshop. Susunod ang Edge AI and Vision Innovation Forum sa San Jose sa Miyerkules, Setyembre 16, ang OCP Global Summit sa San Jose mula Lunes, Oktubre 12 hanggang Huwebes, Oktubre 15, ang GTC Berlin ng NVIDIA mula Martes, Oktubre 20 hanggang Huwebes, Oktubre 22, at ang SC26 sa Chicago mula Linggo, Nobyembre 15 hanggang Biyernes, Nobyembre 20. Hindi babalik ang GTC sa San Jose hanggang Marso 2027.\n\nNasa San Francisco Marriott Marquis ang Ray Summit mula Lunes, Agosto 24 hanggang Miyerkules, Agosto 26 — isang araw ng pagsasanay sa Lunes, saka dalawang araw ng keynote at breakout — sa $400 para sa summit at $450 kasama ang pagsasanay, na may limang-pass na bundle sa $750 para sa lahat ng lima laban sa listahang $2,250. Saklaw ng araw ng pagsasanay ang multimodal na data pipeline, distributed na pagsasanay ng foundation model, production inference, physical AI at robotics, real-time na paghahanap at rekomendasyon, at post-training at serving. Katabi nitong idinaraos ang unang vLLM Conference, na hino-host ng Inferact at kasama sa bawat pass ng Ray Summit, na may mahigit dalawampung tagapagsalita sa imprastraktura ng vLLM, mga hardware backend, mga pattern ng production deployment at mga integrasyon sa ekosistema, kabilang ang lumikha at core maintainer ng vLLM na si Woosuk Kwon, na ngayon ay punong teknikal na opisyal ng Inferact, at ang core maintainer na si Simon Mo, na ngayon ay punong ehekutibo nito, kasama ang mga kontribyutor mula sa NVIDIA, AMD, Google TPU, Intel, Meta at PyTorch, Hugging Face at Red Hat. Ang sariling keynote ng Ray Summit ay manggagaling sa mga kapwa-tagapagtatag ng Anyscale na sina Robert Nishihara at Ion Stoica, kay Bryan Catanzaro ng NVIDIA, kay Felix Heide ng Torc at kay Andrew Beam ng Lila Sciences. Nasa Atlanta ang ACM AI Leadership Summit mula Linggo, Agosto 30 hanggang Miyerkules, Setyembre 2.\n\nMay apat na event sa San Francisco na nagbabanggaan pa rin sa katapusan ng Setyembre. Nasa Moscone South ang Fully Connected ng CoreWeave mula Martes, Setyembre 29 hanggang Huwebes, Oktubre 1; lumipas na ang maagang rate nito, kaya $1,299 ang karaniwang pass laban sa $899 noon, at tatlong track ang sumasaklaw sa imprastraktura ng AI, mga pag-unlad sa modelo, at ebalwasyon at pagsubaybay sa agent, na may listahan ng keynote na umaabot sa punong ehekutibo ng CoreWeave na si Mike Intrator at punong teknikal na opisyal na si Peter Salanki, kay Ian Buck ng NVIDIA, kay Fei-Fei Li ng Stanford at World Labs, kay Sarah Guo ng Conviction at kay Jeffrey Li, punong opisyal sa operasyon ng Liquid AI. Nasa Pier 48 Sheds A at B ang The AI Conference sa parehong bintana na may limang track, mahigit 5,500 dadalo at mahigit 120 tagapagsalita; limitado sa 350 at puno na ang mga workshop at Hack Day nito sa Setyembre 29, at ipinangakong unang aabisuhan ang mga may hawak ng dalawang-araw na pass kung magbubukas muli ang imbentaryo. Nasa Fort Mason ang DevDay ng OpenAI sa Martes, Setyembre 29 at sarado na ang aplikasyon, at nasa San Francisco ang Machine Earning AI Summit ng Newcomer sa parehong araw na may bukas na aplikasyon. Pagkatapos noon: ang Runway AI Summit sa Miyerkules, Setyembre 30, ang World Summit AI sa Amsterdam sa Miyerkules, Oktubre 7 at Huwebes, Oktubre 8, ang PyTorch Conference sa San Jose sa Martes, Oktubre 20 at Miyerkules, Oktubre 21, ang AGNTCon at MCPCon North America sa Huwebes, Oktubre 22 at Biyernes, Oktubre 23 sa San Jose McEnery Convention Center sa ilalim ng Linux Foundation — binuo sa paligid ng Model Context Protocol, ng imprastraktura ng agent at ng seguridad at obserbabilidad ng mga production agent system, at sarado na ang call for proposals mula Hunyo 7, kaya pagdalo na lamang ang natitira — ang GitHub Universe sa Fort Mason sa Miyerkules, Oktubre 28 at Huwebes, Oktubre 29, ang aplikasyon-lamang na AI Engineer Code Summit sa San Francisco mula Miyerkules, Nobyembre 11 hanggang Biyernes, Nobyembre 13 na magsasara ang pagsusumite ng tagapagsalita sa Oktubre 11, ang Cerebral Valley AI Summit ng Newcomer sa San Francisco sa Huwebes, Nobyembre 12, ang AWS re:Invent mula Lunes, Nobyembre 30 hanggang Biyernes, Disyembre 4, ang NeurIPS sa Disyembre, at ang The AI Summit New York sa Miyerkules, Disyembre 9 at Huwebes, Disyembre 10.\n\nSa kalendaryo ng robotics, ang susunod na bukas na deadline ng IEEE-RAS Humanoids 2026 ay Lunes, Agosto 3, para sa mga panukalang workshop, tutorial at paligsahan; nagsara ang deadline sa papel noong Hulyo 27 at ang bintana para sa dagdag na video noong Hulyo 30. Susunod ang mga pasya sa paligsahan sa Setyembre 21, ang mga pasya sa workshop at tutorial sa Setyembre 28, ang mga abiso sa pagtanggap ng papel sa Oktubre 6, ang pagsasara ng maagang rehistrasyon sa Oktubre 16 at ang camera-ready na papel sa Oktubre 26, at ang kumperensiya mismo ay nasa Santa Clara Convention Center mula Linggo, Disyembre 6 hanggang Miyerkules, Disyembre 9 — mga pampublikong forum sa ika-6, mga workshop at tutorial sa ika-7, at mga sesyon sa papel sa ika-8 at ika-9.\n\nSa AI Tinkerers, ang builder meetup sa Los Angeles para sa Huwebes, Agosto 6 na nawala sa pandaigdigang listahan kahapon ay nakabalik na roon ngayon, 6 hanggang 8 PM PDT, kaya dinadala itong muli kasama ang babalang iyon. Hindi na lumilitaw ang run-and-hack session sa New York na nakalista para sa araw na ito, na siyang nangyayari sa isang listahan sa araw na naganap ito. Sa iba pa, tumatakbo ang malapitang kalendaryo sa London bukas, Linggo, Agosto 2, sa Columbus sa Lunes, Agosto 3, sa Paris at Seattle sa Martes, Agosto 4, sa Singapore at sa hapunan ng mga founder sa Seattle tungkol sa tiwala at sa mga agent na matagal tumatakbo sa Miyerkules, Agosto 5, sa Medellín at sa vision hackathon sa New York sa Biyernes, Agosto 7, at sa mga event ng chapter sa Mombasa at Dubai sa Sabado, Agosto 8, saka isang limang-lungsod na Martes sa Agosto 11 sa Valencia, upstate New York, Chicago, Houston at Seattle, tatlo pa sa Miyerkules, Agosto 12 sa Valencia, Brussels at Raleigh, at ang Bremen sa Biyernes, Agosto 14. Walang may petsa sa San Francisco, San Jose o Pleasanton; lumilitaw pa rin ang mga chapter na iyon sa inirerekomendang listahan sa Bay Area nang walang meetup sa likod nila. Parehong tumanggi sa koneksiyon muli ngayon ang mga pahina ng chapter ng Palo Alto at San Francisco, kaya nananatiling hindi nakumpirma sa sarili nitong pinagmulan ang meetup sa Palo Alto na dinala rito para sa Martes, Agosto 18.",
+          "citations": [
+            {
+              "label": "Black Hat USA 2026 - dates and venue",
+              "url": "https://blackhatonsite.informafestivals.com/usa/2026/"
+            },
+            {
+              "label": "DEF CON - DEF CON 34 dates, door price and the Baochip badge",
+              "url": "https://defcon.org/"
+            },
+            {
+              "label": "AI Village - DEF CON 34 programme, room and the HalCTF contest",
+              "url": "https://aivillage.org/"
+            },
+            {
+              "label": "Hot Chips 2026 - registration deadline, refund policy and payment",
+              "url": "https://hotchips.org/registration/"
+            },
+            {
+              "label": "Hot Chips 2026 - tutorial day programme and speakers",
+              "url": "https://hotchips.org/program/tutorials/"
+            },
+            {
+              "label": "AI Risk Summit - passes, rate step and included events",
+              "url": "https://www.airisksummit.com/register/"
+            },
+            {
+              "label": "Sessionize - AI Agent Security Summit global series call for papers",
+              "url": "https://sessionize.com/ai-agent-security-summit-global-series-2026/"
+            },
+            {
+              "label": "Zenity - AI Agent Security Summit 2026 global series",
+              "url": "https://zenity.io/resources/events/ai-agent-security-summit-2026"
+            },
+            {
+              "label": "AI Security Summit - San Francisco 2026",
+              "url": "https://aisecuritysummit.com/events/sf-2026/"
+            },
+            {
+              "label": "Anyscale - Ray Summit 2026 dates, pricing and the co-located vLLM Conference",
+              "url": "https://www.anyscale.com/ray-summit/2026"
+            },
+            {
+              "label": "IEEE-RAS Humanoids 2026 - important dates and conference schedule",
+              "url": "https://2026.ieee-humanoids.org/"
+            },
+            {
+              "label": "AI Tinkerers - global event calendar",
+              "url": "https://aitinkerers.org/events"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

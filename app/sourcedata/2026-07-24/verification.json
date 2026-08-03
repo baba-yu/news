@@ -1,0 +1,155 @@
+{
+  "date": "2026-07-24",
+  "note": "No search_log.json exists for this run (optional since 2026-07-07). search_log_alignment is therefore judged against the shipped artifact itself rather than a writer self-report: 'consistent' means the bullets and the topic rubric agree with no evidence of over- or under-claimed coverage.",
+  "verifications": [
+    {
+      "topic": "LLM Workflow",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No agent/workflow/pipeline-orchestration-platform news today (no n8n / LangFlow / Temporal / Inngest-class release, no agent-DAG or workflow-builder story). Zapier's AutomationBench appears only as a benchmark name inside the Opus 5 scorecard, which is evaluation data rather than orchestration-platform news."
+    },
+    {
+      "topic": "Multi-profiling for Local LLM (e.g. Multica)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "News-driven-only topic and no bullet references Multica or a multi-profile management tool, so the news-driven trigger correctly did not fire. The nearest adjacency is Unsloth Studio picking up a full KV-cache dtype list in the model-config UI, per-GPU GGUF selection and per-model recommended sampling, but that is configuration surface inside a fine-tuning studio, not multi-profile management of local models."
+    },
+    {
+      "topic": "Agent Harness (OpenClaw, NemoClaw, Hermes Agents, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A single-message escape from Claude Cowork's local VM, a malware campaign served off the real claude.ai domain, and a cluster of six CVSS-8-plus CVEs in the AI serving stack",
+        "Two frontier launches inside 48 hours: Anthropic prices Claude Opus 5 at half of Fable 5, Black Forest Labs folds robot actions into FLUX 3's backbone"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The SharedRoot bullet is a direct analysis of an agent harness's execution architecture — Claude Cowork's local VM, the host filesystem mounted read-write into the agent guest at /mnt/.virtiofs-root, and the coworkd daemon re-exec path — plus CVE-2026-63732 landing on MCP plugin registration in 9router, which the rubric puts explicitly in the MCP-server ecosystem. The Opus 5 bullet adds harness delivery surfaces (Claude Code, Claude Cowork), beta mid-conversation tool changes and automatic fallbacks, and CursorBench 3.2 / OSWorld 2.0 agentic-IDE and computer-use scoring."
+    },
+    {
+      "topic": "Platform for Local LLM (vLLM, SGLang, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Unsloth quietly adds an Intel XPU backend four days after its AMD launch, as the local-inference stack ships a dense week and DeepSeek's legacy model names stop resolving at 15:59 UTC today"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Dense serving-stack coverage: Ollama v0.32.3, KTransformers v0.6.4 (including a security fix binding the balance_serve ZMQ router to localhost to close unauthenticated remote pickle deserialization), llama.cpp build and NVFP4 CUDA work, and the unsloth-zoo Hugging Face-to-vLLM mapper unstacking for in-memory LoRA on vLLM 0.25.0 and later. These are inference engines and serving runtimes in the rubric's core sense."
+    },
+    {
+      "topic": "Ecosystems for Local LLM Embedded System (Foundry Local, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Unsloth quietly adds an Intel XPU backend four days after its AMD launch, as the local-inference stack ships a dense week and DeepSeek's legacy model names stop resolving at 15:59 UTC today"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Multiple on-device / edge-runtime state changes: Unsloth's new Intel XPU backend, Ollama v0.32.3 adding CUDA on Windows ARM64 and cutting memory use on Linux CUDA and ROCm integrated GPUs, bitsandbytes 0.50.0 shipping an improved MPS (Apple Silicon) backend plus Windows ARM64 wheels with NEON, and the allocator-fragmentation fix for Windows and WSL. Ollama and llama.cpp are named edge runtimes in the rubric and NPU/integrated-GPU/ARM targets are the topic's generic scope."
+    },
+    {
+      "topic": "Local LLM Models",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Unsloth quietly adds an Intel XPU backend four days after its AMD launch, as the local-inference stack ships a dense week and DeepSeek's legacy model names stop resolving at 15:59 UTC today",
+        "Two frontier launches inside 48 hours: Anthropic prices Claude Opus 5 at half of Fable 5, Black Forest Labs folds robot actions into FLUX 3's backbone"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The DeepSeek cutover carries the replacement family specs directly — deepseek-v4-pro at 1.6T total / 49B active and deepseek-v4-flash at 284B / 13B active on a 1M-token context — with DeepSeek an existing open-weight family in the rubric, alongside Gemma-4 26B-A4B / 31B and Qwen3-30B-A3B handling and llama.cpp's NVFP4 W4A4 activation quantization (a quantization release in the topic's generic scope). Secondary: FLUX 3 launches as a new four-variant model family with FLUX 3 Dev open weights promised later this year, explicitly so robots can run it locally."
+    },
+    {
+      "topic": "Local LLM Optimization, Fine-tuning (Unsloth — every run)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Unsloth quietly adds an Intel XPU backend four days after its AMD launch, as the local-inference stack ships a dense week and DeepSeek's legacy model names stop resolving at 15:59 UTC today"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Mandatory constant-coverage topic, and Unsloth is not merely present but is the bullet's anchor: a second non-NVIDIA backend (Intel XPU) landing four days after ROCm, evidenced by 16 commits on unsloth/main dated July 24 and eleven unsloth-zoo commits across July 22-24 (rocBLAS over hipBLASLt on ROCm RDNA, the Gemma-4 vision pooler float16 NaN-loss fix, the in-memory LoRA vLLM mapper with XPU enablement, the torch 2.10 allocator-fragmentation fix), plus shipped artifacts unsloth 2026.7.5 and unsloth-zoo 2026.7.6. Concrete dated state-change with commit- and PyPI-level sourcing; the wider fine-tuning stack (KTransformers LoRA and hybrid fine-tuning for sparse MoE, bitsandbytes 0.50.0 4-bit GEMM kernels, Liger-Kernel v0.8.1, DoRA in Studio) reinforces it."
+    },
+    {
+      "topic": "Ecosystems for LLM on PaaS (AWS Bedrock, Azure AI Foundry, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Stripe opens talks to buy OpenRouter near $10B while Intel books its fastest growth in more than fifteen years against an $11B quarterly loss and Alphabet lifts capex guidance to as much as $205B",
+        "A single-message escape from Claude Cowork's local VM, a malware campaign served off the real claude.ai domain, and a cluster of six CVSS-8-plus CVEs in the AI serving stack"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "OpenRouter is named explicitly in this topic's rubric row, and the Stripe acquisition talks are described exactly in hosted-inference terms — a routing and comparison layer across hundreds of proprietary and open-weight endpoints, with the bullet reading the ~$10B mark as value accruing to the switch above the frontier endpoints rather than to any one of them. Azure AI Search's 8.5 SSRF adds a managed-AI-platform security item."
+    },
+    {
+      "topic": "AI Security",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A single-message escape from Claude Cowork's local VM, a malware campaign served off the real claude.ai domain, and a cluster of six CVSS-8-plus CVEs in the AI serving stack",
+        "Two frontier launches inside 48 hours: Anthropic prices Claude Opus 5 at half of Fable 5, Black Forest Labs folds robot actions into FLUX 3's backbone",
+        "Washington opens two fronts on model control inside 48 hours: a bipartisan kill-switch bill, then a 25-signatory open-weights letter that OpenAI, Anthropic and Google are all absent from"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "An entire bullet of security-ness: an agent sandbox escape / breakout chain, a malvertising campaign abusing a publish-to-a-trusted-domain feature to deliver SectopRAT, an AI-serving-stack CVE cluster, and an empirical pentest of AI-coded applications. The Opus 5 bullet carries model-security posture (OSS-Fuzz vulnerability identification versus exploit development, cyber classifiers roughly 85% less restrictive, an internal alignment/behavioral audit), and the Kill Switch Act bullet is agent-control governance — loss-of-control response, sabotaged shutdown instructions, capability concealed from monitoring."
+    },
+    {
+      "topic": "CVE update on score ≥ 8.0",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A single-message escape from Claude Cowork's local VM, a malware campaign served off the real claude.ai domain, and a cluster of six CVSS-8-plus CVEs in the AI serving stack"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Six distinct vulnerabilities at or above 8.0 with scores stated: CVE-2026-63732 at 9.4 (9router unauthenticated RCE via MCP plugin registration), CVE-2026-65700 at 9.3 (h2oGPT arbitrary file read/write/delete), Vanna path traversal at 8.8, Suna message-queue access control at 8.7, Azure AI Search SSRF at 8.5, and open-webui terminal proxy at 8.0. CVE-2026-46331 (7.8) is correctly presented as sub-threshold chain context rather than as a headline item."
+    },
+    {
+      "topic": "Hardware",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Stripe opens talks to buy OpenRouter near $10B while Intel books its fastest growth in more than fifteen years against an $11B quarterly loss and Alphabet lifts capex guidance to as much as $205B",
+        "Unsloth quietly adds an Intel XPU backend four days after its AMD launch, as the local-inference stack ships a dense week and DeepSeek's legacy model names stop resolving at 15:59 UTC today"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Process-node and capacity news throughout: Intel 18A-P entering risk production with high-volume manufacturing for a subset of Core Ultra Series 3, Intel Foundry up 31% and DCAI up 59%, SK hynix's board approving a ₩7.09 trillion advanced-packaging investment at Cheongju explicitly to secure AI-memory capacity, and Alphabet's $195-205B capex guide split roughly 60% servers / 40% data centers and networking. Silicon-level detail also runs through the local-stack bullet — B200 via CUDA 12, RTX 5090 and EPYC 9355, Blackwell cuTile/CuTe backends, Intel XPU and ROCm RDNA."
+    },
+    {
+      "topic": "Physical AI",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Two frontier launches inside 48 hours: Anthropic prices Claude Opus 5 at half of Fable 5, Black Forest Labs folds robot actions into FLUX 3's backbone"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "FLUX 3 trains image, video, audio and action jointly and ships a FLUX 3 Action variant, and the FLUX-mimic collaboration produces a video-action model claimed to teach a robot a new manipulation task in about 30 minutes against 30-plus hours conventionally, with Audi named as a deployment. Vision-language-action policy, manipulation and embodied AI are named generic concepts in this topic's scope; the open-weights hold on FLUX 3 Dev is justified in the bullet by local deployment for robotic control. The IEEE-RAS Humanoids mention in the events bullet is an event listing, not a Physical AI story."
+    },
+    {
+      "topic": "LLM-related research and papers",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A single-message escape from Claude Cowork's local VM, a malware campaign served off the real claude.ai domain, and a cluster of six CVSS-8-plus CVEs in the AI serving stack",
+        "Two frontier launches inside 48 hours: Anthropic prices Claude Opus 5 at half of Fable 5, Black Forest Labs folds robot actions into FLUX 3's backbone"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The Xint and Theori study published July 22 is a reported empirical finding with stated method and results — 30-minute automated pentests across 28 AI-coded applications, 434 validated exploitable vulnerabilities, resource exhaustion at 93 findings (21%) and authorization / IDOR at 88 as the top categories — and the SharedRoot disclosure is applied vulnerability research with a full published exploit chain. Supporting: the Opus 5 evaluation results across Frontier-Bench v0.1, CursorBench 3.2, OSWorld 2.0, GDPval-AA v2 and ARC-AGI-3 plus an internal behavioral-alignment audit. No arXiv or peer-reviewed paper landed today, so the coverage is industry research rather than academic."
+    },
+    {
+      "topic": "Stock prices and corporate activity",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Stripe opens talks to buy OpenRouter near $10B while Intel books its fastest growth in more than fifteen years against an $11B quarterly loss and Alphabet lifts capex guidance to as much as $205B",
+        "Two frontier launches inside 48 hours: Anthropic prices Claude Opus 5 at half of Fable 5, Black Forest Labs folds robot actions into FLUX 3's backbone"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The densest topic today: M&A (Stripe-OpenRouter near $10B against a $1.3B May round, with Databricks named as an earlier bidder and Stripe marked at $159B), three sets of quarterly results with guidance and market reaction (Intel's $16.1B beat against a $11.0B GAAP loss from a $12.5B CHIPS-escrow mark-to-market; Alphabet's $119.8B, $9.11 diluted EPS, $514B cloud backlog and capex raise with the stock still falling after hours; IBM's miss and record 25% single-day decline), plus Texas Instruments, ServiceNow's $1B ACV and SK hynix's board-approved ₩7.09 trillion capital commitment at 5.88% of equity. The FLUX bullet adds Black Forest Labs' $3.25B valuation on $450M-plus raised from a16z, Salesforce Ventures, NVIDIA, Adobe Ventures and Figma Ventures."
+    },
+    {
+      "topic": "Bay Area / SV AI meet-up events",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Bay Area / SV AI meet-up events"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Carry-forward floor fully honored: every still-upcoming event in yesterday's (2026-07-23) events bullet is present today, with no drops. AMD's Advancing AI closed July 23 so its removal as the anchor is correct, and it appears only as an explicit off-the-calendar note rather than as the bullet's center. All three mandatory sub-tracks carry their nearest still-upcoming item — AI-chip/hardware (Hot Chips early rate closing 11:59 PM PDT Friday July 31, then FMS August 4-6 in Santa Clara), AI-security (Black Hat USA August 1-6 with its AI Summit Tuesday August 4, DEF CON 34 AI Village August 6-9, SecurityWeek AI Risk Summit August 11-12 at Half Moon Bay with a Friday August 7 rate step), and mainstream dev/data (Ai4 August 4-6, AI Tinkerers SF August 9, Ray Summit August 24-26 now co-locating the vLLM Conference). New forward events added on top: FMS, Edge AI and Vision Innovation Forum, OCP Global Summit, GTC Berlin, SC26 and the AI Engineer Code Summit. Every weekday assertion checks out against the calendar (Jul 31 Friday, Aug 4 Tuesday, Aug 6 Thursday, Aug 7 Friday, Aug 23 Sunday). Per the events-topic exception, repetition without fresh state-change is required here and is not an over-report."
+    },
+    {
+      "topic": "Other standing-out topics",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Washington opens two fronts on model control inside 48 hours: a bipartisan kill-switch bill, then a 25-signatory open-weights letter that OpenAI, Anthropic and Google are all absent from",
+        "A single-message escape from Claude Cowork's local VM, a malware campaign served off the real claude.ai domain, and a cluster of six CVSS-8-plus CVEs in the AI serving stack"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The AI Kill Switch Act paired with the 25-signatory open-weights letter is a standout cross-cutting policy story that no single named topic owns — a statutory shutdown authority with dollar-denominated thresholds and penalties landing one day before an industry coalition argues against premature restriction, with OpenAI, Anthropic and Google absent from the letter. The FakeAgent campaign is a second standout pattern: sponsored ads pointing at a genuine claude.ai URL, turning a publish-to-a-trusted-domain feature into a malware delivery channel that inherits the vendor's domain reputation."
+    }
+  ]
+}

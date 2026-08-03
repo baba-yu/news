@@ -1,0 +1,249 @@
+{
+  "date": "2026-07-25",
+  "by_prediction": {
+    "prediction.359ad701e052546c": [
+      {
+        "actor": "Pinuno ng engineering sa paglabas ng model, open-weights na frontier AI lab",
+        "job": "Ipinapadala ang 2.8-trilyong-parameter na MXFP4 checkpoint kasama ang shard layout, gabay sa deployment at mga terminong pinapayagan ang muling pamamahagi ng binagong serving artifact.",
+        "outcome": "Isang nailathalang checkpoint at lisensiyang sa ilalim nito ay maaaring maglabas at muling mamahagi ang mga ikatlong panig ng binagong recipe ng paghahain sa iisang node.",
+        "motivation": "Huminto na sa mga bagong subscription ang sarili nitong hosted tier dahil sa hinihinging inference, kaya dapat lumipat ang gawain ng paghahain sa hardware ng ibang tao.",
+        "task": {
+          "who": "Pangkat sa paglabas ng model at sa lisensiyang open-source",
+          "what": "Ilathala ang weights na may lisensiyang pumapayag sa muling pamamahagi",
+          "where": "Pampublikong repository sa model hub at kalakip na model card",
+          "when": "H2 2026 through H1 2027",
+          "why": "May takda ang hosted na kapasidad; ginagaan ng panlabas na paghahain ang demand",
+          "how": "Paglabas sa Hugging Face, mga MXFP4 shard, nailathalang teksto ng lisensiya"
+        }
+      },
+      {
+        "actor": "Tagapangalaga, open-source na inference runtime para sa malalaking model",
+        "job": "Nagdaragdag ng execution path na expert-offload na pinananatili ang attention at ang mainit na mga expert sa accelerator memory habang isinasalin ang malalamig na expert mula sa host DRAM.",
+        "outcome": "Isang na-merge na upstream release na naghahain ng lahat ng 896 na expert sa walong 80GB na card nang walang pruning, distillation o karagdagang quantization.",
+        "motivation": "Labing-anim sa 896 na expert ang gumagana kada token, kaya bumibili ng latency at hindi ng katumpakan ang buong residency sa HBM, at sinasayang nito ang hardware ng karamihan ng gumagamit.",
+        "task": {
+          "who": "Mga tagapangalaga ng core runtime at ng MoE execution",
+          "what": "Ipatupad ang expert offload kada layer at ang pamamahala ng residency",
+          "where": "Upstream na repository ng inference engine, MoE scheduler at memory allocator",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang residency, hindi ang working set, ang tunay na hadlang",
+          "how": "Expert cache sa host DRAM, mga pinned buffer, prefetch kada layer"
+        }
+      },
+      {
+        "actor": "Inhinyero ng low-precision kernel, pangkat ng inference software",
+        "job": "Sumusulat ng mga kernel para sa MXFP4 weight at MXFP8 activation na nagpapatakbo ng inilabas na precision sa mga accelerator na walang katutubong suporta ng hardware sa microscaling format.",
+        "outcome": "Mga kernel na nagpapatakbo sa inilabas na MXFP4 weights nang hindi binabago sa mga laganap na 80GB accelerator, kaya hindi na kailangan ng karagdagang quantization.",
+        "motivation": "Humihingi ang katutubong MXFP4 execution ng Blackwell o MI400 na silikon, na hindi naman pag-aari ng mga taga-buo ng iisang node na humahabol sa recipe na ito.",
+        "task": {
+          "who": "Sub-pangkat ng inhinyeriya sa kernel at quantization",
+          "what": "Gayahin ang MXFP4 dequantization sa mga fused GEMM kernel",
+          "where": "Runtime kernel library para sa naunang henerasyong 80GB accelerator",
+          "when": "H2 2026 through H1 2027",
+          "why": "Dapat mabuhay ang inilabas na precision sa hardware na pag-aari ng mga tao",
+          "how": "CUTLASS o Triton na fused dequant-GEMM, paghawak ng block scale"
+        }
+      },
+      {
+        "actor": "Mananaliksik ng mixture-of-experts systems, pangkat ng kahusayan ng model",
+        "job": "Sinusuri ang lokalidad ng pag-activate ng expert upang matukoy kung aling mga expert ang mananatiling residente at upang i-prefetch ang iba mula sa router logits bago pa gamitin.",
+        "outcome": "Isang patakaran sa residency at prefetch ng mainit na expert na itinatago ang halos lahat ng paglilipat mula host tungong device sa likod ng compute habang nagde-decode.",
+        "motivation": "Ginagawang mas mabagal pa ng basta-bastang pag-stream ng malamig na expert ang decode na nakatali na sa memorya, at pinapatay ng masamang throughput ang pagtanggap sa recipe.",
+        "task": {
+          "who": "Pangkat ng pananaliksik sa kahusayan ng model at ng systems benchmarking",
+          "what": "Sukatin ang muling paggamit ng expert at bumuo ng patakaran sa prefetch",
+          "where": "Mga instrumentadong decode trace sa nailathalang K3 checkpoint",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ang throughput, hindi ang posibilidad, ang humahadlang sa paglalathala",
+          "how": "Lookahead sa router logit, LRU expert cache, pagsusuri ng dalas ng activation"
+        }
+      },
+      {
+        "actor": "Inhinyero ng data path sa storage at host memory, imprastraktura ng inference",
+        "job": "Bumubuo ng streaming path na NVMe at pinned DRAM na sapat ang bilis sa pagpapakain ng malamig na expert weights sa PCIe upang patuloy na gumalaw ang decode.",
+        "outcome": "Isang I/O path sa iisang node na napapanatili ang pag-stream ng expert mula sa host DRAM o NVMe sa magagamit na throughput ng decode.",
+        "motivation": "Ipinagpapalit ng recipe ang kapasidad ng HBM sa bandwidth ng PCIe, kaya nasa daan ng paglilipat kung magtatagumpay o babagsak ang buong paraan.",
+        "task": {
+          "who": "Pangkat ng inhinyeriya sa performance ng storage at I/O",
+          "what": "I-tune ang throughput ng pag-stream ng expert weight mula NVMe tungong device",
+          "where": "Iisang node na may host DRAM at NVMe na maraming terabyte",
+          "when": "H2 2026 through H1 2027",
+          "why": "Pinapalitan ng bandwidth ng PCIe ang isinukong kapasidad ng HBM",
+          "how": "GPUDirect Storage, mga pinned host buffer, asynchronous na copy engine"
+        }
+      },
+      {
+        "actor": "Inhinyero ng deployment sa iisang node, AI lab na kapos sa GPU",
+        "job": "Binubuo at binebenchmark ang isang konpigurasyon ng paghahain ng buong checkpoint sa iisang walong-card na node, saka inilalathala ang konpigurasyon, mga bilang ng throughput at mga hakbang sa pag-uulit.",
+        "outcome": "Isang pampubliko at nauulit na recipe na naghahain ng lahat ng 896 na expert sa inilabas na precision sa loob ng 640GB na accelerator memory.",
+        "motivation": "Hindi sila makakapag-upa ng labing-anim na node, at kailangan nilang mag-optimize laban sa iisang node at host DRAM na talagang hawak nila.",
+        "task": {
+          "who": "Mga inhinyero ng deployment at evaluation ng inference",
+          "what": "I-benchmark at ilathala ang recipe ng paghahain ng buong weights sa walong card",
+          "where": "Pampublikong repository, write-up sa model hub at teknikal na blog",
+          "when": "H2 2026 through H1 2027",
+          "why": "Iisang node ang sariling hadlang nila, hindi labing-anim",
+          "how": "Docker image, mga config file, iniulat na sukat ng token kada segundo"
+        }
+      }
+    ],
+    "prediction.96b1b2cb6ad4924f": [
+      {
+        "actor": "Pinuno ng supply chain ng bahagi at ng pagkuha ng memorya, startup ng transformer-ASIC inference silicon",
+        "job": "Nakikipagnegosasyon sa maraming-taong alokasyon at pagpepresyo ng HBM upang saklawin ang pag-akyat ng Sohu mula sa 10MW na lab tungo sa gigawatt-scale sa 2027.",
+        "outcome": "Isang nilagdaang kontrata sa supply ng HBM o reserbasyon ng kapasidad, na maaaring ilahad nang hiwalay sa paglahok sa equity ng memory vendor sa round.",
+        "motivation": "Nakatakda na ang output ng HBM bago pa ang produksiyon, at hindi maipadadala ang mga rack na naibenta na laban sa nilagdaang kontrata kung walang natiyak na stack.",
+        "task": {
+          "who": "Supply chain at estratehikong pagkuha kasama ang pinansiya",
+          "what": "Makipagnegosasyon sa maraming-taong alokasyon at termino ng presyo ng HBM",
+          "where": "Negosasyon ng kontrata sa supplier at proseso ng kuwalipikasyon ng bahagi",
+          "when": "H2 2026 through H1 2027",
+          "why": "Kailangang maagang mai-book ang alokasyon para sa gigawatt-scale na pag-akyat sa 2027",
+          "how": "Mahabang-abisong take-or-pay na termino, mga pangako sa dami, paunang bayad"
+        }
+      },
+      {
+        "actor": "Pinuno ng estratehikong account at ng business development sa custom memory, supplier ng HBM memory",
+        "job": "Ginagawang pinangalanang komersiyal na account na may nakatakdang dami at maianunsiyong termino ang minoryang posisyon sa equity sa isang inference-silicon startup.",
+        "outcome": "Isang inilahad na kasunduan sa supply, reserbasyon o magkasanib na pagbuo na nakasaad sa sariling materyal ng supplier o sa isang magkasanib na anunsiyo.",
+        "motivation": "Nagbabayad lamang ang opsiyon sa cap table kapag ginamit na ito bilang kita, at ang pagpangalan sa isang mabilis lumagong ASIC account ay senyales ng abot na lampas sa mga nangungunang bumibili.",
+        "task": {
+          "who": "Pangkat ng estratehikong account kasama ang corporate development",
+          "what": "Ibalangkas at lagdaan ang isang pinangalanang kasunduan sa supply ng memorya",
+          "where": "Pagpaplano ng account ng kustomer at proseso ng pag-apruba ng kontrata",
+          "when": "H2 2026 through H1 2027",
+          "why": "Nagiging kita ang opsiyonalidad ng equity sa pamamagitan lamang ng mga kontrata",
+          "how": "Mga termino ng reserbasyon ng kapasidad, programang custom HBM, magkasanib na press release"
+        }
+      },
+      {
+        "actor": "Arkitekto ng silikon ng memory system, startup ng transformer-ASIC inference silicon",
+        "job": "Magkasamang tinutukoy ang pinagsanib na HBM-at-SRAM na cluster memory system laban sa roadmap ng stack ng supplier upang umasa sa mga pinangalanang piyesa ang susunod na henerasyon ng Sohu.",
+        "outcome": "Isang programa ng magkasanib na pagbuo na sumasaklaw sa integrasyon ng HBM stack, inilahad bilang kolaborasyon sa inhinyeriya at hindi bilang pamumuhunan.",
+        "motivation": "Ang memory system ang kaibahan ng produkto, kaya nasa loob ng disenyo ang roadmap ng supplier at hindi sa tabi nito.",
+        "task": {
+          "who": "Arkitektura ng memory subsystem at inhinyeriya sa packaging",
+          "what": "Magkasamang tukuyin ang interface ng HBM stack para sa susunod na henerasyon ng Sohu",
+          "where": "Magkasanib na pagsusuri sa inhinyeriya kasama ang supplier ng memorya",
+          "when": "H2 2026 through H1 2027",
+          "why": "Iniuugnay ng pinagsanib na disenyong HBM-SRAM ang roadmap ng supplier sa produkto",
+          "how": "Espesipikasyon ng custom base die, magkasanib na disenyo ng packaging, ibinabahaging test vehicle"
+        }
+      },
+      {
+        "actor": "Pinuno ng pagpaplano ng kapasidad ng HBM at ng alokasyon sa fab, supplier ng memorya",
+        "job": "Isinisingit ang isang bagong ASIC account na hindi nangunguna sa mga plano ng output ng HBM na nakatakda na bago pa ang produksiyon para sa mga wafer start sa 2027.",
+        "outcome": "Nakareserbang kapasidad ng HBM sa 2027 na nakatalaga sa account, ang batayan ng daming sinasandigan ng anumang inanunsiyong kasunduan sa supply o reserbasyon.",
+        "motivation": "Ang alokasyong napagdedesisyunan ngayon ang nagtatakda ng halo ng kita sa 2027, at ang pagpapalawak lampas sa mga nangungunang bumibili ng GPU ay pananggalang sa isang nakapokus na base ng kustomer.",
+        "task": {
+          "who": "Pagpaplano ng kapasidad kasama ang sales operations at pagmamanupaktura",
+          "what": "Ireserba ang output ng HBM sa 2027 para sa bagong account",
+          "where": "Taunang alokasyon ng kapasidad at ikot ng pagpaplano ng demand",
+          "when": "H2 2026 through H1 2027",
+          "why": "Kailangan ng pinangalanang kasunduan ang nakatakdang dami sa likod nito",
+          "how": "Pagsusuri ng forecast ng demand, mga pangako sa wafer start, pag-book ng kapasidad sa packaging"
+        }
+      },
+      {
+        "actor": "Pinuno ng pagkuha ng AI infrastructure, bumibili ng malakihang kapasidad ng inference",
+        "job": "Nakikipagnegosasyon sa mga termino ng paghahatid at ng katiyakan ng supply para sa mga order ng rack na inilagay laban sa inference silicon na hindi pa naipapadala.",
+        "outcome": "Mga kondisyon sa kontratang humihingi ng pinangalanan at maipapahayag na kaayusan sa supply ng memorya na maituturo ng bumibili bago mangako ng karagdagang dami.",
+        "motivation": "Mahigit isang bilyong dolyar ang nilagdaan laban sa mga rack na hindi pa naihahatid, at hindi katiyakan ng supply ang isang linya sa cap table.",
+        "task": {
+          "who": "Pagkuha ng imprastraktura kasama ang pagsusuri ng panganib sa supply at ang legal",
+          "what": "Ipag-utos ang pinangalanang katiyakan sa supply ng memorya sa mga termino ng pagbili",
+          "where": "Negosasyon ng kontrata sa vendor at masusing pagsusuri ng panganib sa supply",
+          "when": "H2 2026 through H1 2027",
+          "why": "May dalang panganib sa bahagi ang mga rack na hindi pa naihahatid na sinasagot ng bumibili",
+          "how": "Mga milestone sa paghahatid, sugnay sa pagpapatuloy ng supply, kahilingan sa pangalawang pinagkukunan"
+        }
+      },
+      {
+        "actor": "Pinuno ng komunikasyong korporado at ng paglalahad, startup ng transformer-ASIC inference silicon",
+        "job": "Nagpapasya kung ano ang ilalathala tungkol sa pinagkukunan ng memorya habang naghihingi ng ebidensiya ang mga kustomer, investor at merkado sa likod ng pahayag na gigawatt-scale.",
+        "outcome": "Isang magkasanib na anunsiyo o mga materyal ng kompanyang pinangangalanan ang kaayusan sa memorya bilang kasunduan sa supply, reserbasyon o magkasanib na pagbuo.",
+        "motivation": "Humihingi ng kapani-paniwalang patunay ng supply ang pagbebenta nang paunahan laban sa mga rack na hindi pa naihahatid, at hindi ito kayang ibigay ng isang hindi inanunsiyong ugnayan sa pinagkukunan.",
+        "task": {
+          "who": "Komunikasyon kasama ang legal at ang pamunuang ehekutibo",
+          "what": "Idrapt at ipa-apruba ang isang magkasanib na anunsiyo ng partnership sa memorya",
+          "where": "Pag-apruba ng press release at pagsusuri ng komunikasyon sa partner",
+          "when": "H2 2026 through H1 2027",
+          "why": "Ginagawa ng paglalahad ang isang tahimik na ugnayan na katiyakang nakikita ng bumibili",
+          "how": "Magkasanib na press release, mga briefing sa kustomer, materyal para sa investor"
+        }
+      }
+    ],
+    "prediction.b177dc0150808a3d": [
+      {
+        "actor": "Pinuno ng patakaran sa trust and safety, frontier na general-purpose na provider ng model",
+        "job": "Nagdadrapt ng nailathalang eksempsiyon sa patakaran sa paggamit na nagpapahintulot sa mga incident responder na beripikado ang pagkakakilanlan na magsumite ng malware, exploit chain at mga log na may dalang payload.",
+        "outcome": "Pampublikong dokumentasyong pinangangalanan ang isang programang maaaring salihan ng mga tagapagtanggol, ang pamantayan ng pagiging karapat-dapat dito, at ang mga cyber-safety refusal na inaalis para sa naka-enroll na trapiko.",
+        "motivation": "Hindi lumalaki nang maayos ang kabutihang-loob kada kaso at naiiwang sinisisi ang provider tuwing ang mga responder ng biktima ang naigagapos ng mga refusal filter at hindi ang nanghihimasok.",
+        "task": {
+          "who": "Pangkat ng patakaran at ng gabay sa paggamit kasama ang legal counsel",
+          "what": "Idrapt ang nailathalang eksempsiyon ng tagapagtanggol sa patakaran sa paggamit ng cyber safety",
+          "where": "Mga patakaran sa paggamit, model spec at termino ng API",
+          "when": "H2 2026 through H1 2027",
+          "why": "Hindi lumalaki ang mga hindi nadokumentong eksempsiyon kada kustomer",
+          "how": "Nakasulat na pamantayan ng pagiging karapat-dapat, mga atestasyon, termino ng pagbawi at ng pag-awdit"
+        }
+      },
+      {
+        "actor": "Product manager ng beripikasyon ng pagkakakilanlan at ng pagpapa-enroll, plataporma ng API ng frontier model",
+        "job": "Bumubuo ng aplikasyon, pagsusuri ng pagkakakilanlan ng organisasyon at pagkakaloob ng entitlement na naglalagay sa mga beripikadong incident responder sa isang defender tier bago pa ang isang insidente.",
+        "outcome": "Isang self-serve na daan ng pagpapa-enroll na mahahanap at maaaplayan ng isang responder, na nagkakaloob ng entitlement sa antas ng account na tumatagal sa pag-awdit.",
+        "motivation": "Hindi sinasagot ng isang allowlist na tahimik na iniabot sa ilang pinangalanang kustomer ang mga responder na dumarating sa gitna ng insidente na walang mapag-aplayan.",
+        "task": {
+          "who": "Produkto ng plataporma ng API kasama ang inhinyeriya ng pagkakakilanlan at ng pagsunod",
+          "what": "Ipadala ang daloy ng pagpapa-enroll ng beripikadong responder at ng entitlement ng account",
+          "where": "Developer console, mga setting ng organisasyon at sistema ng provisioning ng account",
+          "when": "H2 2026 through H1 2027",
+          "why": "Mas mabuti ang isang mahahanap na daan kaysa sa escalation sa gitna ng insidente",
+          "how": "Vendor ng beripikasyon ng pagkakakilanlan ng negosyo, mga entitlement sa antas ng organisasyon, nilagdaang atestasyon ng responder"
+        }
+      },
+      {
+        "actor": "Pinuno ng inhinyeriya ng safety systems, patakaran sa model at imprastraktura ng refusal",
+        "job": "Muling binubuo ang mga cyber-safety refusal upang ibase ang mga ito sa entitlement ng tumatawag na account sa halip na sa nilalaman lamang ng payload, nang hindi pinapahina ang default.",
+        "outcome": "Isang daan ng refusal na may kamalayan sa entitlement, na tumatanggap ng malware at exploit chain mula sa mga naka-enroll na account habang pinananatili ang default na patakaran para sa lahat ng iba.",
+        "motivation": "Naigagapos ng mga filter na nakabatay sa nilalaman ang responder at hindi ang nanghihimasok, kaya dapat manirahan ang eksempsiyon sa daan ng paghahain.",
+        "task": {
+          "who": "Mga pangkat ng inhinyeriya sa safety classifier at sa paghahain ng inference",
+          "what": "Gawing nakasalalay sa entitlement ng account ang mga cyber-safety refusal",
+          "where": "Mga moderation classifier at ang layer ng pagpapahintulot ng request sa API",
+          "when": "H2 2026 through H1 2027",
+          "why": "Hinaharangan ng mga filter na nakabatay sa nilalaman ang mga tagapagtanggol, hindi ang mga umaatake",
+          "how": "Mga policy flag kada key, may-saklaw na entitlement, magkaibang eval suite"
+        }
+      },
+      {
+        "actor": "Tagapag-ugnay sa cyber threat intelligence at red team, provider ng frontier model",
+        "job": "Nagtatakda ng pamantayan sa pagsusuri, ng pagsubaybay sa abuso at ng mga tuntunin sa pagbawi na sapat ang hirap upang makuha ang eksempsiyon sa pagsusumite ng payload at makaligtas ito sa pagrepaso.",
+        "outcome": "Isang nasuring pilot kasama ang mga pinangalanang incident-response team, dagdag ang mga nailathalang kontrol sa abuso na nagpapalabas sa programa sa halip na maipit ito sa pagrepaso.",
+        "motivation": "Daan din ng isang umaatake ang daan ng pagpapa-enroll, at isang configuration setting lamang ang naghiwalay sa isang eval harness at sa isang panghihimasok.",
+        "task": {
+          "who": "Threat intelligence kasama ang red team at ang pagpapatupad",
+          "what": "Tukuyin ang pamantayan sa pagsusuri at ang mga kontrol sa abuso para sa pagpapa-enroll",
+          "where": "Programang pilot kasama ang mga nasuring incident-response at CERT na partner",
+          "when": "H2 2026 through H1 2027",
+          "why": "Dapat mahirap makuha ang eksempsiyon",
+          "how": "Pagsusuring adbersaryal, telemetry ng paggamit, mga trigger ng pagbawi, sanggunian ng partner"
+        }
+      },
+      {
+        "actor": "Pinuno ng incident response, security operations ng nalabag na plataporma",
+        "job": "Naglalathala ng forensics na pinangangalanan ang mga refusal ng hosted API bilang siyang humaharang, at inihahain ang eksempsiyon sa pagsusumite ng payload bilang kahilingan sa mga API vendor.",
+        "outcome": "Pinangalanan at nadokumentong hinihingi mula sa mga kapani-paniwalang tagapagtanggol na maituturo ng isang provider kapag binibigyang-katwiran ang isang daan ng eksempsiyong maaaring salihan.",
+        "motivation": "Ang biktimang hindi maituro ang pinakamahusay na kasangkapan sa sarili nitong mga artifact ay naglalahad nang mas huli at mas malabo, at binabayaran nito ito sa publiko.",
+        "task": {
+          "who": "Mga tungkulin sa security operations, forensics at pamamahala ng vendor",
+          "what": "Ihain ang kahilingan sa eksempsiyon sa pagsusumite ng payload sa mga hosted API vendor",
+          "where": "Mga pampublikong write-up ng insidente at pagsusuri ng kontrata sa enterprise API",
+          "when": "H2 2026 through H1 2027",
+          "why": "Itinulak ng mga refusal ang forensics tungo sa mga open-weight na model",
+          "how": "Kasangkapang pang-fallback na open-weight, termino ng kontrata, pampublikong ulat matapos ang insidente"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "date": "2026-08-01",
+  "technical": [
+    {
+      "lead": "OpenAI が、止まっていた問題での十の前進を未公開のモデルに帰し、それぞれに Lean の証明を添える",
+      "body": "OpenAI は8月1日土曜、数学と理論計算機科学の分野で十の結果を公表し、そのすべてを Astra の社内の版によるものだとした。Astra は同社が次の主要なモデルだと言っているもので、まだ世に出ていない。十件はいずれも、OpenAI の言い分では、主要な結果が少なくとも十年のあいだ動いていなかった問題である。高次元の球充填における漸近的な上界の改良、二元符号と球面符号についての指数的に強い限界、非ソフィック群の存在を決める構成、Connes の剛性予想の反証、算術回路の複雑さ、量子の並列反復、最近ベクトル問題、Ehrhart の体積予想、多色 Ramsey 数、そして極値数の予想である。変わっているのは、解説と一緒に何が出されたかのほうだ。十件のすべてに Lean 4 の形式化が付いている。置き場は Apache-2.0 の公開のリポジトリで、Lean 4.32.0 と mathlib と Lake に対して組み上げてある。結果ごとに一つのファイルがあり、全体をまとめて組み上げるビルドターゲットがあり、論文の言い分をそのまま受け取るのではなく別の検査器で証明を確かめ直したい人のための、課題を集めたディレクトリも置かれている。OpenAI は、結果一件あたりのトークンの費えを $2,000 に満たないとしている。ただしその値付けに使ったのは GPT-5.6 Sol の料金で、公表していない Astra 自身の料金ではない。言っていないのは、同じくらいの費えを吸い込んで何も出さなかった問題がほかに何件あったかだ。十件の成功を的中の率に変えるのは、その数のほうである。",
+      "citations": [
+        {
+          "label": "GitHub - openai/ten-proofs, Lean certificates accompanying the ten results",
+          "url": "https://github.com/openai/ten-proofs"
+        },
+        {
+          "label": "Simon Willison - Ten advances in mathematics and theoretical computer science",
+          "url": "https://simonwillison.net/2026/Aug/1/ten-advances-in-mathematics/"
+        }
+      ]
+    },
+    {
+      "lead": "Lean を作った本人が、メタプログラムに False を証明させたカーネルの不具合を公にする",
+      "body": "同じ日、Lean を作った Leonardo de Moura が、Lean 4 のカーネルにあった健全性の不具合について、その顛末を公にした。この穴は、メタプログラムが公理をひとつも使わずに False の証明を組み立てることを許していた。しかも `#print axioms` は何も挙げてこない。いつもの跡をたどるやり方では、問題のない証明に見えたということである。カーネルは、構造の名前が射影される値と食い違っている射影を、そのまま受け入れていた。入れ子になった帰納型が、どの構成子の場も使わない引数、いわゆる phantom parameter を持っていると、Lean が自動で作る補助の型からその引数が抜け落ちる。そこを、型の合わない引数がすり抜けていた。表に出たのは7月25日、Ramana Kumar が AI の助けを借りた Collatz 予想の反証を出したときである。それは問題を解いたのではなく、この穴を突いていたのだった。Kiran Gopinathan がそれを False の最小の証明にまで削り、7月28日、7月27日付の 4.34.0 の nightly 版に対して issue #14576 を立てた。報告から一時間のうちに直しが上がり、続く変更で引数の確かめがより厳しくなり、修正版はその週のうちに出ている。de Moura の受け止めは、これは実装の不具合であって Lean のメタ理論に開いた穴ではない、というものだ。加えて、この不具合に手が届くのはメタプログラムから帰納型の宣言をカーネルへ直に渡した場合だけで、ふつうに書いた Lean のソースからは届かない。同じ日に OpenAI が十件の結果に付けて出した Lean 4 の裏づけの隣には、この話を置くのがふさわしい。",
+      "citations": [
+        {
+          "label": "Leonardo de Moura - Postmortem for kernel soundness bug #14576",
+          "url": "https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/"
+        },
+        {
+          "label": "GitHub - lean4 issue #14576, kernel accepts wrong-structure projections",
+          "url": "https://github.com/leanprover/lean4/issues/14576"
+        }
+      ]
+    },
+    {
+      "lead": "DeepSeek の V4-Flash が、事後学習をやり直して試用を抜ける。値段は据え置き",
+      "body": "DeepSeek は7月31日金曜、V4-Flash を試用の段階から出し、0731 の版を `deepseek-v4-flash` という同じ API の名前の裏に置いた。呼ぶ側は一行も直さないまま、新しいチェックポイントを受け取ることになる。設計そのものは動いていない。パラメータは全体で 284B、トークンごとに働くのは 13B。層ごとに共有のエキスパートが一つと振り分け先のエキスパートが 256 個あり、トークンごとに火が入る振り分け先は六つ。文脈の窓は百万トークンである。Hugging Face のリポジトリが 304B と出しているのは、その 284B の土台の上に DSpark の投機的復号の下書きの部品を載せているからだ。重みは MIT のライセンスで配られている。変わったのは事後学習の工程で、エージェントとコーディングのデータで回し直されている。DeepSeek 自身が並べた前後の欄では、Terminal-Bench 2.1 が試用の 61.8 に対して 82.7、NL2Repo が 39.4 に対して 54.2、Cybergym が 38.7 に対して 76.7、DeepSWE が 7.3 に対して 54.4、Toolathlon-Verified が 49.7 に対して 70.3 となっている。そのうえで同社は、小さいほうの Flash が、公表したエージェント向けのすべての指標で V4-Pro の試用版を上回ったと言っている。このチェックポイントは Responses API をそのまま話し、Codex に合わせて調えてある。推論の力の入れ具合は low、high、max の三段で、上の二段では出力の上限が 384K になる。値段は試用のときのままだ。百万入力トークンあたり、キャッシュに当たらなければ $0.14、当たれば $0.0028、出力は百万トークンあたり $0.28 である。これらの指標の数字はどれも売り手の申告であり、その仕掛けを DeepSeek の外で回した者はいない。",
+      "citations": [
+        {
+          "label": "Hugging Face - deepseek-ai/DeepSeek-V4-Flash-0731 model card",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"
+        },
+        {
+          "label": "MarkTechPost - DeepSeek upgrades DeepSeek-V4-Flash-0731 with major agentic and coding gains",
+          "url": "https://www.marktechpost.com/2026/07/31/deepseek-upgrades-deepseek-v4-flash-0731-with-major-agentic-and-coding-gains/"
+        }
+      ]
+    },
+    {
+      "lead": "Y Combinator が、仕事のための多人数向けエージェントハーネス qm を公開する",
+      "body": "Y Combinator にも自前のエージェントハーネスができた。しかも公開されている。`qm` のリポジトリは、Slack と web の上で使う、仕事のための多人数向けエージェントハーネスだと説明されている。作られたのは7月29日、MIT のライセンスの下で、公表は7月31日金曜。8月1日土曜の時点でスターはおよそ 5,300、フォークは 547 で、コミットはまだ入り続けている。設計で言い立てているのは能力ではなく、区切りの細かさである。人ごと、部屋ごとに、記憶もファイルも鍵束の見え方も権限も定時の仕事も web アプリも、そして入れた道具が入ったまま残る壊れないサンドボックスも、それぞれに用意される。コーディングのハーネスの多くが前提にしている、一人・一回きりのやり方の反対だ。一社に縛られないようにも作られている。同じ作業場で Pi も OpenCode も Codex も Claude Code も動き、そのあいだを行き来できる。安全側の構えは三つある。Strict は道具の呼び出しのたびに許しを待ち、既定の Auto は中身をふるいにかけ、Dangerous は何もふるわず、止まりもしない。土台は Fastify の上の TypeScript で、後ろに Postgres が控え、web の画面は Vite と Lit で組んである。README がわざわざ書いているのは、核の部分を上流と一バイトも違わないまま保つという方針だ。会社が非公開のフォークを回しながら、出てくる版を追い続けられるようにするためである。",
+      "citations": [
+        {
+          "label": "GitHub - yc-software/qm, multiplayer agent harness for work",
+          "url": "https://github.com/yc-software/qm"
+        }
+      ]
+    },
+    {
+      "lead": "EU AI Act の透明性の決まりが、8月2日日曜から適用される",
+      "body": "EU AI Act の透明性についての義務が、8月2日日曜から適用され始める。第50条は提供者に対し、相手が AI のシステムであることを人に伝えるよう求める。ふつうに事情を知る人から見て明らかな場合は除かれる。あわせて、作られた音声、画像、動画、文章には、人の手を離れて作られた、あるいは手を入れられたものだという印を、機械が読み取れる形で付けることを求める。導入する側には、感情を読み取る仕組みや生体情報で人を分ける仕組みにさらされる人へ知らせること、創作の分野を除いてディープフェイクであることを明かすこと、そして公共の関心に関わる事柄について AI が書いた文章を出すときはそれを明かすことを求める。ただし人の編集者が目を通して通した場合は除かれる。猶予は一つだけで、幅は狭い。8月2日より前にすでに市場に出ていたシステムは、第50条(2)の、機械が読み取れる印を入れる作業について、今年の12月2日まで待ってもらえる。この延ばしが及ぶのは、その一点だけである。違反には、最大で €15 million、あるいは全世界の年間の売上高の 3% のうち、高いほうまでの制裁金が科される。2026年8月2日という同じ日付を分け合っていた高リスクの枠組みは、その下から外れた。Digital Omnibus on AI が、単体で使われる附属書 III のシステム、すなわち雇用、信用力、教育、生体情報、生活に欠かせない役務に関わるものを 2027年12月2日へ、規制のかかった製品に組み込まれた高リスクの AI を 2028年8月2日へ、それぞれ押し出したためである。EU に向けて生成された出力を送り出す者にとって、いま生きている期限は適合性の評価ではなく、印を付けることのほうだ、ということになる。",
+      "citations": [
+        {
+          "label": "European Commission - Regulatory framework for AI, application timeline",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+        },
+        {
+          "label": "Jones Walker - Yes, August 2 still matters: the EU approved a high-risk AI delay but most transparency obligations remain",
+          "url": "https://www.joneswalker.com/en/insights/blogs/ai-law-blog/yes-august-2-still-matters-the-eu-approved-a-high-risk-ai-delay-but-most-trans.html"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "OpenAI が、未公開のモデルが十の古い問題を解いたと言う",
+    "Lean の不具合が、偽のことをプログラムに証明させていた",
+    "DeepSeek の小さいモデルが試用を抜ける。値段はそのまま",
+    "Y Combinator が、集まりで使う自前のエージェントの道具を出す",
+    "欧州の新しい AI の表示の決まりが明日から始まる"
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "date": "2026-08-02",
+  "by_prediction": {
+    "prediction.8598785e784a209e": [
+      {
+        "actor": "Responsable de ingeniería de lanzamiento de modelos, equipo Kimi de Moonshot AI",
+        "job": "Definir qué envía una publicación de Kimi además de los pesos, después de que un checkpoint borrador ajeno decidiera cuál es la forma más barata de servir K3.",
+        "outcome": "Un checkpoint borrador de descodificación especulativa publicado bajo el espacio de nombres de la propia Moonshot, en la misma entrega que los pesos base.",
+        "motivation": "El veredicto por dólar sobre su propio modelo lo fija hoy un artefacto que ellos ni publicaron ni controlan.",
+        "task": {
+          "who": "Ingeniería de lanzamiento de modelos y responsables de la lista de verificación de publicación de Moonshot AI",
+          "what": "Añadir un checkpoint borrador al paquete de publicación",
+          "where": "Lista de verificación de lanzamiento de Kimi y canalización de publicación",
+          "when": "Q4 2026",
+          "why": "Los pesos por sí solos dejan el eje de coste en manos ajenas",
+          "how": "Manifiestos de publicación que listan artefactos base y borrador emparejados"
+        }
+      },
+      {
+        "actor": "Ingeniero de investigación en descodificación especulativa, grupo de post-entrenamiento de Moonshot AI",
+        "job": "Destilar un modelo borrador a partir de un objetivo Kimi congelado, trabajo que un grupo externo hizo a posteriori para K3.",
+        "outcome": "Un checkpoint borrador propio con una tasa de aceptación lo bastante alta como para justificar enviarlo junto a los pesos base.",
+        "motivation": "Un borrador destilado durante el entrenamiento cuesta mucho menos que uno reconstruido después por desconocidos desde un endpoint servido.",
+        "task": {
+          "who": "Investigadores de post-entrenamiento, destilación y evaluación de Moonshot AI",
+          "what": "Destilar un borrador propio a partir del objetivo congelado",
+          "where": "Clúster de entrenamiento de Moonshot y arnés de evaluación de tasa de aceptación del borrador",
+          "when": "Q3 2026",
+          "why": "Hoy es un borrador ajeno el que fija la configuración barata",
+          "how": "Destilación servida por el objetivo contra un checkpoint congelado vía SGLang"
+        }
+      },
+      {
+        "actor": "Ingeniero de rendimiento de inferencia, equipo de servicio de Moonshot AI",
+        "job": "Medir el rendimiento de descodificación de los checkpoints de Kimi en aceleradores con nombre, cifras que hoy solo aparecen en análisis de benchmarks de terceros.",
+        "outcome": "Una cifra de descodificación medida sobre hardware nombrado, declarada en la propia publicación en lugar de dejarla a un benchmark ajeno.",
+        "motivation": "Si la cifra de rendimiento viaja con la publicación, es quien publica y no quien reseña el que define la historia de coste del modelo.",
+        "task": {
+          "who": "Ingenieros de rendimiento de servicio y de benchmarking de Moonshot AI",
+          "what": "Publicar tasas de descodificación medidas en aceleradores con nombre",
+          "where": "Notas de versión de Moonshot y banco de pruebas interno",
+          "when": "Q1 2027",
+          "why": "La cifra tiene que viajar con los pesos",
+          "how": "Perfiles fijos de tokens de entrada y de salida por configuración"
+        }
+      },
+      {
+        "actor": "Responsable de lanzamiento de modelos, equipo de modelos de pesos abiertos de DeepSeek",
+        "job": "Decidir si el próximo MoE a escala de billón de DeepSeek envía su trabajo de predicción multi-token como un artefacto borrador descargable en lugar de como una nota de arquitectura.",
+        "outcome": "Un artefacto borrador descargable por separado bajo el espacio de nombres de DeepSeek, con el flag de la pila de servicio documentado en la publicación.",
+        "motivation": "Una cabeza de predicción descrita a la que ninguna pila de servicio puede apuntar no compra nada de la ventaja por dólar.",
+        "task": {
+          "who": "Responsables de lanzamiento de modelos y de publicación de pesos abiertos de DeepSeek",
+          "what": "Convertir la cabeza de predicción en un artefacto enviable",
+          "where": "Repositorio de publicación y ficha de modelo de DeepSeek",
+          "when": "Noviembre de 2026",
+          "why": "Un diagrama no es una dependencia desplegable",
+          "how": "Exportaciones de pesos empaquetadas como un repositorio borrador independiente"
+        }
+      },
+      {
+        "actor": "Mantenedor de descodificación especulativa, proyecto de pila de servicio SGLang",
+        "job": "Mantener el flag de modelo borrador estable y documentado en compilaciones de ROCm y de CUDA, para que una publicación pueda nombrarlo directamente.",
+        "outcome": "Un flag de servicio documentado que quien publica pueda citar en una nota de versión sin fijarse a una rama sin publicar.",
+        "motivation": "Quien publica no va a documentar un flag de arranque cuyo nombre o semántica se mueven entre versiones puntuales de la pila de servicio.",
+        "task": {
+          "who": "Mantenedores de descodificación especulativa y de documentación de SGLang",
+          "what": "Estabilizar y documentar el flag de servicio del modelo borrador",
+          "where": "Referencia de argumentos del servidor de SGLang y notas de versión",
+          "when": "Septiembre de 2026",
+          "why": "Las publicaciones citan flags solo cuando los nombres aguantan",
+          "how": "Política de obsolescencia que cubra los nombres de argumentos de descodificación especulativa"
+        }
+      },
+      {
+        "actor": "Ingeniero de software de inferencia en ROCm, grupo de software de IA de AMD",
+        "job": "Subir a upstream los parches de ROCm que permiten ejecutar descodificación especulativa en aceleradores de la serie MI sin que quien hace el benchmark parchee la pila.",
+        "outcome": "Descodificación con modelo borrador funcionando desde una compilación de ROCm publicada, para que quien publica pueda citar cifras de AMD en su propia versión.",
+        "motivation": "Una cifra de descodificación de primera parte sobre hardware nombrado solo es citable si la ruta funciona fuera del árbol privado de quien hace el benchmark.",
+        "task": {
+          "who": "Ingenieros de kernel de ROCm y de habilitación de frameworks de inferencia de AMD",
+          "what": "Subir a upstream los parches de descodificación especulativa de ROCm a las compilaciones publicadas",
+          "where": "Runtime de ROCm e integración continua de SGLang sobre ROCm",
+          "when": "Octubre de 2026",
+          "why": "Las cifras citables necesitan una pila enviada, no parcheada",
+          "how": "Trabajos de regresión en nodos de la serie MI por cada versión de servicio"
+        }
+      },
+      {
+        "actor": "Responsable de producto de metadatos del hub de modelos, Hugging Face",
+        "job": "Definir cómo se declara un checkpoint borrador frente a su modelo base para que una publicación emparejada se lea como una sola unidad.",
+        "outcome": "Metadatos de ficha de modelo y de repositorio que nombren el emparejamiento base-borrador, haciendo descubrible un borrador de primera parte en el momento de la descarga.",
+        "motivation": "Sin un emparejamiento declarado, el borrador propio de quien publica parece idéntico a las subidas de la comunidad a las que viene a sustituir.",
+        "task": {
+          "who": "Responsables de metadatos del hub y de estándares de ficha de modelo de Hugging Face",
+          "what": "Definir metadatos de emparejamiento base-borrador para los repositorios de modelos",
+          "where": "Especificación de ficha de modelo del hub y esquema de metadatos de repositorio",
+          "when": "Diciembre de 2026",
+          "why": "Los borradores de primera parte deben distinguirse de las subidas de la comunidad",
+          "how": "Campos de ficha de modelo validados en el momento del push al repositorio"
+        }
+      },
+      {
+        "actor": "Ingeniero de incorporación de modelos de pesos abiertos, plataforma de inferencia de Together AI",
+        "job": "Llevar modelos nuevos de pesos abiertos a escala de billón a un endpoint tarifado, donde el precio por token depende de si existe un borrador emparejado.",
+        "outcome": "Un requisito de incorporación declarado que obligue a quien publica a enviar su propio borrador, planteado a los laboratorios antes de su siguiente publicación.",
+        "motivation": "Esperar semanas a que alguien destile un borrador son semanas sirviendo el modelo al peor precio.",
+        "task": {
+          "who": "Ingenieros de incorporación de modelos y de economía del servicio de Together AI",
+          "what": "Exigir un borrador enviado por quien publica en los criterios de incorporación de modelos",
+          "where": "Lista de verificación de incorporación de modelos de Together AI y conversaciones con laboratorios",
+          "when": "Febrero de 2027",
+          "why": "La demanda de los compradores hace que redactar borradores de primera parte compense",
+          "how": "Modelos de coste por token que comparan el servicio con borrador y sin él"
+        }
+      }
+    ],
+    "prediction.044fff5549fe4f09": [
+      {
+        "actor": "Autor de sondas de horizonte largo y publicador de relatos en primera persona, Andrej Karpathy",
+        "job": "Disparar prompts únicos de horizonte largo contra los modelos de frontera nuevos y publicar el artefacto jugable junto a un relato en primera persona de la ejecución.",
+        "outcome": "Ejecuciones repetidas de un prompt en un modelo, con cada escena alojada y enlazada desde un artículo que nombre el presupuesto por ejecución.",
+        "motivation": "Dijo que el campo había dejado atrás el pelícano, y un formato que él nombró tiene que demostrar que su resultado se repite antes de que nadie lo adopte.",
+        "task": {
+          "who": "Karpathy trabajando en solitario en sondas personales de capacidad de modelos de frontera",
+          "what": "Reejecutar tres veces el prompt de la escena de Tolkien",
+          "where": "Flujo de trabajo personal de sondas y la página de artefactos de karpathy.ai",
+          "when": "Q3 2026",
+          "why": "Una sola extracción no puede sostener una afirmación de capacidad",
+          "how": "Claude Opus 5 con un presupuesto fijo de un millón de tokens por ejecución"
+        }
+      },
+      {
+        "actor": "Archivista de sondas públicas y curador de benchmarks de prompts, Simon Willison",
+        "job": "Curar la etiqueta en curso del pelícano en bicicleta en su blog y publicar resultados frescos de sondas con el código y las salidas a medida que salen modelos.",
+        "outcome": "Ejecuciones repetidas de un prompt de horizonte largo publicadas una junto a otra con sus artefactos, en la forma habitual del archivo de publicar y enlazar.",
+        "motivation": "El valor del archivo venía de la repetición barata, y un sucesor de dos horas conserva ese valor solo si alguien lo dispara más de una vez.",
+        "task": {
+          "who": "Willison escribiendo y manteniendo en solitario el archivo público de sondas",
+          "what": "Publicar los artefactos de ejecuciones repetidas de un prompt de horizonte largo",
+          "where": "Entradas de simonwillison.net y la colección de resultados enlazada",
+          "when": "Octubre de 2026",
+          "why": "Los artefactos publicados son lo que permite al lector juzgar la dispersión",
+          "how": "Una página por ejecución enlazada desde una sola entrada, como se hizo con el pelícano multiturno"
+        }
+      },
+      {
+        "actor": "Investigadores de evaluación de tareas de horizonte largo, METR",
+        "job": "Medir cuánto puede durar una tarea que los modelos de frontera terminan sin supervisión, muestreando cada tarea repetidamente porque las ejecuciones sueltas varían mucho.",
+        "outcome": "Recuentos de ejecuciones por tarea y dispersión de éxito publicados para ejecuciones sin supervisión de varias horas, con las transcripciones publicadas junto a las cifras.",
+        "motivation": "Sus cifras principales de horizonte temporal solo son defendibles si la varianza por ejecución que hay detrás se declara en vez de darse por supuesta.",
+        "task": {
+          "who": "Personal de metodología de evaluación y de conjuntos de tareas de METR",
+          "what": "Reportar la varianza por tarea a lo largo de ejecuciones repetidas sin supervisión",
+          "where": "Informes de evaluación de METR y el repositorio público del conjunto de tareas",
+          "when": "Q4 2026",
+          "why": "Las afirmaciones de horizonte temporal se apoyan en una dispersión por ejecución no declarada",
+          "how": "Varias muestras por tarea con las transcripciones de ejecución publicadas"
+        }
+      },
+      {
+        "actor": "Personal de metodología y resultados de benchmarks, Epoch AI",
+        "job": "Ejecutar modelos de frontera en benchmarks de forma repetida y publicar la incertidumbre resultante en lugar de una puntuación principal por modelo.",
+        "outcome": "Un coste por ejecución y un recuento de repeticiones declarados junto a las evaluaciones de larga duración en el hub público de benchmarking.",
+        "motivation": "Una casa de evaluación que reporta una sola extracción por modelo está vendiendo una cifra que no puede defender en cuanto alguien la reejecute.",
+        "task": {
+          "who": "Ingenieros de benchmarking y personal de publicación de datos de Epoch AI",
+          "what": "Adjuntar recuentos de repeticiones y coste a las evaluaciones de larga duración",
+          "where": "Páginas del hub de benchmarking de Epoch AI y notas de metodología",
+          "when": "Noviembre de 2026",
+          "why": "Una extracción por modelo esconde el error de muestreo",
+          "how": "Muestreo repetido con intervalos de confianza publicados"
+        }
+      },
+      {
+        "actor": "Equipo de lanzamiento de modelos y ciclo de vida de la API, Anthropic",
+        "job": "Mantener direccionable una instantánea fechada de Claude Opus 5 y publicado su precio por token mientras hay ejecuciones largas sin supervisión todavía en curso.",
+        "outcome": "Un único identificador de modelo congelado y un tarifario que tres ejecuciones distintas de dos horas puedan citar, haciendo comparables las repeticiones.",
+        "motivation": "Un estudio de repeticiones no vale nada si el checkpoint se movió entre ejecuciones, y los identificadores fechados y fijados ya son la forma en que se vende la API.",
+        "task": {
+          "who": "Responsables de ciclo de vida de modelos, plataforma de API y precios de Anthropic",
+          "what": "Mantener servido un identificador de instantánea fechada de Opus 5",
+          "where": "Lista de modelos de la API de Anthropic y páginas de precios publicadas",
+          "when": "Diciembre de 2026",
+          "why": "Las repeticiones solo comparan si el checkpoint se quedó quieto",
+          "how": "Identificadores de modelo fechados e inmutables junto al alias flotante"
+        }
+      },
+      {
+        "actor": "Personal de Spaces y de la plataforma de artefactos comunitarios, Hugging Face",
+        "job": "Operar alojamiento estático e interactivo gratuito donde un investigador pueda aparcar varias salidas de modelo jugables en el navegador bajo una misma cuenta.",
+        "outcome": "Tres escenas jugables distintas del mismo prompt alojadas una junto a otra, para que un lector pueda abrir cada una y compararlas.",
+        "motivation": "El alojamiento es el obstáculo declarado para publicar repeticiones, y la plataforma que lo elimine se lleva los artículos y su tráfico.",
+        "task": {
+          "who": "Ingenieros de producto y de experiencia de desarrollo de Hugging Face Spaces",
+          "what": "Alojar varios artefactos jugables bajo una misma página de comparación",
+          "where": "Alojamiento estático de Hugging Face Spaces y almacenamiento de repositorios",
+          "when": "Septiembre de 2026",
+          "why": "Ningún lector puede comparar escenas que no están alojadas",
+          "how": "Spaces estáticos que sirven un paquete three.js por ejecución"
+        }
+      },
+      {
+        "actor": "Analistas independientes de benchmarking de modelos, Artificial Analysis",
+        "job": "Publicar ejecuciones estandarizadas de modelos de frontera con el coste en tokens de cada evaluación declarado junto a la puntuación que produjo.",
+        "outcome": "Un coste por ejecución y un recuento de repeticiones publicados para tareas largas sin supervisión, estableciendo la convención de presupuesto declarado que esta predicción exige.",
+        "motivation": "El coste por ejecución es su factor diferencial, así que una sonda de dos horas sin presupuesto declarado es un hueco visible en su cobertura.",
+        "task": {
+          "who": "Personal de benchmarking y de metodología de datos de Artificial Analysis",
+          "what": "Declarar el presupuesto de tokens por ejecución en las evaluaciones de horizonte largo",
+          "where": "Páginas de comparación y documentación de metodología de Artificial Analysis",
+          "when": "H2 2026",
+          "why": "Las horas transcurridas por sí solas dejan el presupuesto sin declarar",
+          "how": "Contabilidad de tokens por evaluación publicada junto a cada puntuación"
+        }
+      },
+      {
+        "actor": "Equipo de operaciones de clasificación, LMArena",
+        "job": "Operar arenas por pares donde los lectores comparan salidas renderizadas de modelos una junto a otra sin sostener ninguna rúbrica escrita.",
+        "outcome": "Una superficie de comparación capaz de sostener varias ejecuciones de un mismo prompt en un mismo modelo, convirtiendo las repeticiones en algo legible.",
+        "motivation": "Su arena ya resuelve el problema de la rúbrica para artefactos renderizados, y las repeticiones sobre un mismo modelo son el caso que todavía no cubre.",
+        "task": {
+          "who": "Ingeniería de clasificaciones y personal de producto de arena de LMArena",
+          "what": "Soportar comparaciones de repeticiones sobre un mismo modelo en una arena renderizada",
+          "where": "Interfaz web de duelos de LMArena y canalización de votos",
+          "when": "Agosto de 2026",
+          "why": "Los lectores comparan ejecuciones sin ninguna rúbrica que sostener",
+          "how": "Duelos por pares en paralelo sobre salidas renderizadas en el navegador"
+        }
+      }
+    ],
+    "prediction.e70d2a8f61b7fb42": [
+      {
+        "actor": "Ingeniero de detección de procedencia en la ingesta de medios, Meta Platforms",
+        "job": "Levantar la extracción de manifiestos en toda imagen y vídeo que entra en Instagram, Facebook y Threads, y no solo en los elementos que produjo el generador de la propia Meta.",
+        "outcome": "Una comprobación de procedencia ya ejecutada sobre todo el corpus subido, de modo que responder por un elemento cueste una consulta y no un escaneo nuevo.",
+        "motivation": "La plataforma no puede saber en la ingesta cuáles de los futuros espectadores de un elemento serán californianos, así que la comprobación tiene que cubrirlo todo.",
+        "task": {
+          "who": "Equipos de infraestructura de medios e ingeniería de integridad de contenido de Meta",
+          "what": "Extraer manifiestos de procedencia en la ingesta de todas las subidas",
+          "where": "Canalización de subida de medios y procesamiento de activos de Meta",
+          "when": "Q3 2026",
+          "why": "La pregunta de un californiano no puede esperar a un escaneo posterior",
+          "how": "Bibliotecas de validación de manifiestos conectadas a los procesos de subida"
+        }
+      },
+      {
+        "actor": "Mantenedor del SDK de verificación de Content Credentials, Content Authenticity Initiative de Adobe",
+        "job": "Endurecer las bibliotecas de validación de procedencia de código abierto que las plataformas incrustan, para que las comprobaciones de manifiesto aguanten el caudal de una plataforma y entradas truncadas o adversarias.",
+        "outcome": "Una biblioteca de verificación que una plataforma cubierta pueda ejecutar sobre todo su corpus sin escribir su propio analizador de manifiestos firmados.",
+        "motivation": "La adopción por parte de las plataformas se atasca en el punto en el que una plataforma tendría que construir y mantener ella misma la validación de firmas.",
+        "task": {
+          "who": "Mantenedores de las bibliotecas de código abierto de Adobe y de la Content Authenticity Initiative",
+          "what": "Endurecer la biblioteca de verificación de procedencia de código abierto para escala de plataforma",
+          "where": "Los repositorios de código abierto de Content Credentials y sus versiones de herramientas",
+          "when": "Septiembre de 2026",
+          "why": "Las plataformas no van a escribirse a mano un analizador de manifiestos firmados",
+          "how": "Bibliotecas en Rust y JavaScript enviadas con vectores de prueba de conformidad"
+        }
+      },
+      {
+        "actor": "Ingeniero de transcodificación y distribución de vídeo, plataforma YouTube de Google",
+        "job": "Mantener los manifiestos de procedencia firmados adjuntos a lo largo de la recodificación, la generación de miniaturas y la distribución, pasos que hoy descartan casi todos los metadatos incrustados en un medio.",
+        "outcome": "Medios distribuidos que siguen llevando sus datos de procedencia, para que la plataforma pueda ofrecer inspección o descarga con los datos adjuntos.",
+        "motivation": "El texto legal prohíbe eliminar a sabiendas la procedencia, lo que convierte en un defecto de cumplimiento un codificador que descarta manifiestos en silencio.",
+        "task": {
+          "who": "Ingenieros de procesamiento de medios, transcodificación y distribución de contenido de YouTube",
+          "what": "Preservar los manifiestos de procedencia firmados a través de la transcodificación y la distribución",
+          "where": "Escalera de codificación y canalización de distribución de contenido de YouTube",
+          "when": "Octubre de 2026",
+          "why": "Eliminar la procedencia en el codificador es ya una infracción",
+          "how": "Perfiles de codificador que preservan el manifiesto más pruebas de regresión sobre los activos de salida"
+        }
+      },
+      {
+        "actor": "Asesoría jurídica regulatoria de plataforma, Snap Inc.",
+        "job": "Acotar qué obliga a detectar y a mostrar el segundo tramo californiano a Snapchat, y si el control de visualización se puede restringir por geografía.",
+        "outcome": "Un alcance de cumplimiento por escrito que trate la detección como algo de todo el corpus y sitúe el control de cara al usuario en una sola ruta de código y no en dos.",
+        "motivation": "Cinco mil dólares por infracción y por día, con tres clases de demandante, convierten una segunda ruta de código ambigua en la opción cara.",
+        "task": {
+          "who": "Asesoría jurídica, de privacidad y de cumplimiento regulatorio de Snap",
+          "what": "Acotar el deber de procedencia como plataforma cubierta para Snapchat",
+          "where": "Revisión de cumplimiento regulatorio y visto bueno jurídico de producto de Snap",
+          "when": "Noviembre de 2026",
+          "why": "Las sanciones que se acumulan a diario premian la superficie de cumplimiento menos ambigua",
+          "how": "Mapeo legal línea a línea contra las superficies de distribución de Snapchat"
+        }
+      },
+      {
+        "actor": "Abogado de aplicación en protección al consumidor, Departamento de Justicia de California",
+        "job": "Preparar la aplicación del tramo de plataformas de la AI Transparency Act, incluido qué especificaciones de procedencia cuentan como ampliamente adoptadas y adoptadas por un organismo de normalización.",
+        "outcome": "Una posición de aplicación declarada que nombre las especificaciones de procedencia que califican, cerrando la lectura según la cual una plataforma no detecta nada y no muestra nada.",
+        "motivation": "Un texto legal que no nombra ni la especificación ni el organismo deja a las plataformas cubiertas una defensa que el fiscal general tiene que cerrar.",
+        "task": {
+          "who": "Personal de protección al consumidor y de aplicación tecnológica de la Fiscalía General de California",
+          "what": "Publicar una posición de aplicación sobre qué especificaciones de procedencia califican",
+          "where": "Orientación y planificación de aplicación del Departamento de Justicia de California",
+          "when": "Diciembre de 2026",
+          "why": "Una especificación sin nombrar es la salida más barata para las plataformas",
+          "how": "Interpretación legal contrastada con las publicaciones adoptadas por organismos de normalización"
+        }
+      },
+      {
+        "actor": "Responsable de especificación y del programa de conformidad, Coalition for Content Provenance and Authenticity",
+        "job": "Llevar la especificación de procedencia de contenido a través de un organismo de normalización reconocido y operar el programa de conformidad que dice qué implementaciones cuentan.",
+        "outcome": "Una especificación de procedencia que la asesoría jurídica de una plataforma pueda citar como ampliamente adoptada y adoptada por un organismo de normalización establecido.",
+        "motivation": "Hasta que la especificación no tenga rango de norma, una plataforma cubierta puede argumentar que nada califica y no enviar ningún control.",
+        "task": {
+          "who": "Editores de la especificación de C2PA y administradores del programa de conformidad",
+          "what": "Avanzar la especificación de procedencia a través de un organismo de normalización reconocido",
+          "where": "Grupos de trabajo de C2PA y registro del programa de conformidad",
+          "when": "Q4 2026",
+          "why": "El texto legal se remite a un organismo que se niega a nombrar",
+          "how": "Presentación a un organismo de normalización más un registro público de conformidad de implementaciones"
+        }
+      },
+      {
+        "actor": "Responsable de producto de consumo para transparencia de contenido, TikTok",
+        "job": "Diseñar la superficie por elemento que informa de si hay datos de procedencia adjuntos a un vídeo y nombra el sistema generativo o el dispositivo de captura encontrado.",
+        "outcome": "Un control de detalle de procedencia sobre un elemento corriente, al alcance de una cuenta corriente a la que la plataforma no sitúe en California.",
+        "motivation": "Una vez que la detección corre sobre todo el corpus, esconder el control tras una comprobación de geolocalización compra una segunda ruta de código y una historia que nadie quiere.",
+        "task": {
+          "who": "Equipos de gestión de producto y de diseño de transparencia de contenido de TikTok",
+          "what": "Enviar un control de detalle de procedencia por elemento dentro del producto",
+          "where": "Superficies de detalle de elemento e información de contenido dentro de la app de TikTok",
+          "when": "Enero de 2027",
+          "why": "Una página de políticas no puede satisfacer una obligación de interfaz de usuario",
+          "how": "Interfaz a nivel de elemento que lee el índice de procedencia ya calculado"
+        }
+      },
+      {
+        "actor": "Responsable de aplicación en transparencia, Oficina de IA de la Comisión Europea",
+        "job": "Exigir el deber de marcado legible por máquina del artículo 50 y operar el Code of Practice de transparencia que sus firmantes usan para demostrar el cumplimiento.",
+        "outcome": "Medios sintéticos marcados en todo el mercado único, dando a la capa de detección de una plataforma el mismo sustrato que lee un control de procedencia californiano.",
+        "motivation": "Una obligación de marcado sin contenido marcado detrás produce una detección que no encuentra nada y un control que nadie se molesta en enviar.",
+        "task": {
+          "who": "Unidad de transparencia de la Oficina de IA y autoridades nacionales de vigilancia del mercado",
+          "what": "Exigir el marcado legible por máquina de los medios generados por IA",
+          "where": "Expedientes de vigilancia del mercado de la UE y el proceso del código de transparencia",
+          "when": "Q1 2027",
+          "why": "La detección necesita contenido marcado antes de encontrar nada",
+          "how": "El Code of Practice voluntario de transparencia y su lista de firmantes"
+        }
+      },
+      {
+        "actor": "Ingeniero de firmware de cámara para firma de procedencia en cámara, Sony",
+        "job": "Enviar firmware que firme los metadatos de captura en el propio cuerpo de la cámara, por delante del tramo de dispositivos de captura que ese mismo texto legal californiano fecha en 2028.",
+        "outcome": "Imágenes firmadas por la cámara circulando en plataformas cubiertas, para que un control de procedencia tenga dispositivos de captura que nombrar y no solo sistemas generativos.",
+        "motivation": "Un control que solo llega a reportar sistemas generativos responde a la mitad del texto legal, y la firma en cámara es la mitad que los fabricantes controlan.",
+        "task": {
+          "who": "Equipos de firmware de imagen y de ingeniería de firma digital de Sony",
+          "what": "Extender la firma de procedencia en cámara a los cuerpos de cámara que ya se venden",
+          "where": "Versiones de firmware de Sony Alpha e infraestructura de claves de firma",
+          "when": "Febrero de 2027",
+          "why": "Las plataformas solo pueden nombrar un dispositivo de captura que haya firmado",
+          "how": "Claves de firma respaldadas por hardware que escriben declaraciones de procedencia en la captura"
+        }
+      }
+    ]
+  }
+}

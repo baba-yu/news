@@ -1,0 +1,250 @@
+{
+  "week_ending": "2026-08-02",
+  "judgements": [
+    {
+      "prediction_id": "prediction.6d2fa8b171b201e4",
+      "stream": "reasoning",
+      "entry_id": "prediction.6d2fa8b171b201e4",
+      "verdict": "stale",
+      "reason": "Bridge -> Reasoning. `given` asserts \"Export control is a mature enforcement instrument; model-distillation has no equivalent statute\", and two bridges this week attack both halves. The 2026-07-26 bridge (validation.92ea7a5157b125ad) carries NYT reporting that Washington's preferred mechanism is deliberately NOT a docketed instrument - \"sanctions, procurement pressure and soft signalling assembled into a slow-motion ban rather than announced as one\", leaving \"no single instrument a self-hoster can read and comply with\" - which undercuts the inference from mature machinery to the `so_that`/`landing` requirement of a publicly filed action naming Moonshot or the Thailand route. The 2026-07-28 bridge (validation.51a5d1c91b207ab3) then records Treasury Secretary Bessent warning Chinese AI firms could face sanctions over intellectual-property theft - a named instrument pointed at the distillation half, which is the prediction's own second falsifier. Reframe `given` to distinguish \"has an instrument\" from \"will use a filed instrument\", and acknowledge that a sanctions track now exists on the provenance side. `because` remains accurate as historical fact.",
+      "cross_stream_evidence": ["bridge:validation.92ea7a5157b125ad", "bridge:validation.51a5d1c91b207ab3"],
+      "proposed_action": "rewrite",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.6d2fa8b171b201e4",
+      "stream": "bridge",
+      "entry_id": "validation.51a5d1c91b207ab3",
+      "verdict": "broken",
+      "reason": "Data inconsistency, not a text problem. This bridge exists with observed_relevance=4 and 2026-07-28 has 147 prediction_evidence_links across 33 predictions, but prediction_realization_snapshots has ZERO rows for validation_date='2026-07-28' repo-wide (every other date 2026-07-20..2026-08-02 has 500+). So the scoring pass skipped that day entirely: this bridge's relevance never reached realization_score, latest_observation_status, or the confidence_drift_score that selected this prediction as a candidate. The eight bridges 07-23..07-30 are otherwise well-written and honestly record non-events (07-25, 07-29, 07-30 at relevance 2, dimension 'none'). Fix is a re-score of 2026-07-28, not a rewrite - escalate rather than auto-apply. Note also that support_direction is 100% 'support' with contradiction_score 0.0 across all 8258 evidence links repo-wide, so the 07-26 and 07-28 counter-signals above are invisible to any automated contradiction check.",
+      "cross_stream_evidence": ["reasoning:prediction.6d2fa8b171b201e4", "bridge:validation.92ea7a5157b125ad"],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+    {
+      "prediction_id": "prediction.6d2fa8b171b201e4",
+      "stream": "needs",
+      "entry_id": "prediction.6d2fa8b171b201e4",
+      "verdict": "broken",
+      "reason": "Two structural defects across the 3-Need set. (1) need_task.b531f05014db14a6 (Need actor \"US sanctions designation officer, Treasury OFAC\") has how_text NULL while status='open'; the needs_tasks schema comment states the orchestrator marks status='blocked' when the 5W1H extraction is partial. 17 partial rows exist repo-wide and 0 are blocked, so the rule is unimplemented. (2) All 3 tasks carry when_text \"H2 2026 through H1 2027\" but parse to target_start_date 2026-07-01 / target_end_date 2026-12-31 - the \"through H1 2027\" half is silently dropped (158 rows repo-wide share this exact mis-parse). The consequence here is that the Need runway closes 2026-12-31, six months BEFORE this prediction's landing window (2027-01-01..2027-06-30) opens, so no Need can ever overlap its own landing. Content is otherwise coherent; escalate the parser and the blocked-status rule rather than rewriting text. Cross-stream: the 07-28 bridge points the OFAC actor at the distillation charge rather than the Thailand route this Need describes.",
+      "cross_stream_evidence": ["bridge:validation.51a5d1c91b207ab3", "reasoning:prediction.6d2fa8b171b201e4"],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.6d2fa8b171b201e4",
+      "stream": "readings",
+      "entry_id": "prediction.6d2fa8b171b201e4",
+      "verdict": "broken",
+      "reason": "Extraction outage, not per-prediction health. Zero prediction_chain edges and zero prediction_relations rows touch this prediction. prediction_chain last wrote 2026-06-10T10:34:13Z and prediction_relations 2026-06-09T18:25:42Z; of the 160 predictions dated after 2026-06-10, ZERO have any chain or relation edge. This prediction is dated 2026-07-23, i.e. entirely inside the dead window, so an empty readings stream carries no information about it and must not be scored 'fresh'. The loss is concrete this week: this prediction's 2026-07-27 bridge and prediction.70b4b143e969eb36's 2026-07-27 bridge both turn on the same Kimi K3 weights release, an obvious relation candidate that no extractor was alive to record. Escalate as a pipeline outage; there is nothing per-prediction to rewrite.",
+      "cross_stream_evidence": ["bridge:validation.ad181852d176f751", "prediction:prediction.70b4b143e969eb36"],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.70b4b143e969eb36",
+      "stream": "reasoning",
+      "entry_id": "prediction.70b4b143e969eb36",
+      "verdict": "stale",
+      "reason": "Bridge -> Reasoning, on both `because` and `given`. The 2026-07-30 bridge (validation.9d04fd325ceba399) carries Unit 42's first reconstruction of an open-weight model - DeepSeek wired into the Hermes Agent framework - running an offensive campaign with no human in the loop: enumeration across ten product families, PoC retrieval, FOFA target discovery, version checks and attempted exploitation, with Unit 42 concluding a functional end-to-end autonomous offensive capability. That makes `because` (\"OpenAI's own models chained a real zero-day to autonomous RCE\") historical rather than the live precondition, and moves the open gap from AUTONOMY to EFFICACY - every exploit the agent attempted failed, and the actual breaches were by hand. `given` is worse off: it claims the mechanism is \"anyone can fine-tune out refusals\", but the observed operator did no de-alignment at all - the same bridge and validation.50650b2e4ae81cd8 record OpenAI refusing his requests and disabling his account, after which he simply switched to a model that never refused. The real mechanism is model substitution, not refusal removal. Also reframe against validation.a451d0ab93c7e9ca (07-26: open-weight Kimi K3 driving 32 agents to 19 Redis zero-days and a 27-minute authenticated RCE PoC) and validation.acc41140f80c524d (07-29: Hugging Face published the full step-indexed 17,600-action chain, a public blueprint a reproducer can work from).",
+      "cross_stream_evidence": ["bridge:validation.9d04fd325ceba399", "bridge:validation.a451d0ab93c7e9ca", "bridge:validation.acc41140f80c524d"],
+      "proposed_action": "rewrite",
+      "confidence": 0.9
+    },
+    {
+      "prediction_id": "prediction.70b4b143e969eb36",
+      "stream": "bridge",
+      "entry_id": "validation.c63521c1afad2738",
+      "verdict": "broken",
+      "reason": "Same 2026-07-28 scoring blackout as the rest of the batch: this bridge exists with observed_relevance=4, but prediction_realization_snapshots holds zero rows for validation_date='2026-07-28' across the whole DB, so it never entered realization_score or latest_observation_status. The eight-bridge run 07-24..07-31 is otherwise the strongest in the batch and is notably willing to argue against its own prediction (07-28 and 07-31 both score the day's results as misses). All 8 rows have contributes_to_task_id NULL and bridge_target_start_date/bridge_target_end_date NULL, matching the repo-wide 0/1808 fill rate on both. Escalate a re-score of 2026-07-28; do not rewrite the bridge text.",
+      "cross_stream_evidence": ["reasoning:prediction.70b4b143e969eb36", "needs:prediction.70b4b143e969eb36"],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+    {
+      "prediction_id": "prediction.70b4b143e969eb36",
+      "stream": "needs",
+      "entry_id": "prediction.70b4b143e969eb36",
+      "verdict": "stale",
+      "reason": "Bridge -> Needs: the actor coalition is wrong for the path the evidence actually took. The 3 Needs name an \"offensive-security research team\", an \"open-weights model de-alignment fine-tuner\" (need.90733e2f11cc1c7e, job: fine-tune out cyber refusals) and a \"CTF-range and offensive-eval harness maintainer\". The 2026-07-30 bridge (validation.9d04fd325ceba399) shows the nearest-to-landing artifact was produced by none of them: a criminal operator tracked as knaithe, in Zhuhai, using an off-the-shelf agent framework driven from Telegram against live internet targets - no fine-tuning, no research team, no CTF range. Add the threat-actor / threat-intelligence-publisher pair as the actors who will actually generate the falsifying or confirming artifact, and drop or demote the de-alignment Need whose mechanism the week's evidence contradicts. Separately, all 3 tasks carry when_text \"H2 2026 through H1 2027\" mis-parsed to a 2026-07-01..2026-12-31 window that ends before the prediction's 2027-01-01..2027-06-30 landing opens; and needs_tasks.status is 'open' on all 1167 rows repo-wide, so delivery can never be recorded.",
+      "cross_stream_evidence": ["bridge:validation.9d04fd325ceba399", "reasoning:prediction.70b4b143e969eb36"],
+      "proposed_action": "rewrite",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.70b4b143e969eb36",
+      "stream": "readings",
+      "entry_id": "prediction.70b4b143e969eb36",
+      "verdict": "broken",
+      "reason": "Extraction outage. Zero chain edges and zero relations touch this prediction, which is dated 2026-07-22 - after prediction_chain's last write (2026-06-10) and prediction_relations' last write (2026-06-09). All 160 post-2026-06-10 predictions have zero edges, so 'no edges' here is an artifact of a dead extractor, not a finding about this prediction. The cost is unusually visible in this batch: this prediction's 2026-07-26 bridge is the same Kimi-K3-versus-Redis campaign that is prediction.9cfa3212e98d1f5c's originating event, and its `because` (the Hugging Face intrusion) is also prediction.b177dc0150808a3d's `because`. Two clear relation candidates between predictions in a single 6-item batch, both unrecorded. Escalate the outage; nothing per-prediction to rewrite.",
+      "cross_stream_evidence": ["prediction:prediction.9cfa3212e98d1f5c", "prediction:prediction.b177dc0150808a3d", "bridge:validation.a451d0ab93c7e9ca"],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.91ae7c2c7675fd1c",
+      "stream": "reasoning",
+      "entry_id": "prediction.91ae7c2c7675fd1c",
+      "verdict": "stale",
+      "reason": "Bridge -> Reasoning. `given` names grid interconnection as the binding constraint and `so_that` expects a second lab to copy the self-financed structure, but the 2026-07-27 bridge (validation.8270b709dcd9facf) has the originator of the template doing the opposite at larger scale: OpenAI's ten-gigawatt Piketon campus is a LEASE from SoftBank-backed SB Energy, with NVIDIA reportedly asked to guarantee roughly $250bn behind it because OpenAI holds no investment-grade credit rating, and NVIDIA's SK Group letter of intent runs the same vendor-anchored way. That introduces a second binding constraint the reasoning does not mention - counterparty credit - which pushes toward leasing and vendor guarantees rather than lab-funded interconnection. The 2026-07-28 bridge (validation.64f9ea8fe72ab143) compounds it: FCC action on connected power inverters narrows the supplier list for a lab that funds its own grid hardware, raising the cost of exactly the route this prediction expects to spread. Reframe `given` to weigh interconnection against financing structure, and state why a second lab would self-finance when the first is leasing.",
+      "cross_stream_evidence": ["bridge:validation.8270b709dcd9facf", "bridge:validation.64f9ea8fe72ab143"],
+      "proposed_action": "rewrite",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.91ae7c2c7675fd1c",
+      "stream": "bridge",
+      "entry_id": "validation.64f9ea8fe72ab143",
+      "verdict": "broken",
+      "reason": "Same 2026-07-28 scoring blackout: this bridge holds observed_relevance=3 and there are no prediction_realization_snapshots rows for that date anywhere in the DB. It is also the last bridge this prediction received - coverage runs 07-23, 07-24, 07-27, 07-28 and then stops, and a keyword sweep of report/en and future-prediction/en for 07-29..08-02 finds essentially no power/utility/interconnection coverage (1 hit total), so the topic left the feed rather than the writer skipping it. Meanwhile prediction_realization_snapshots forward-fills relevance 3 for this prediction on 07-29, 07-30, 07-31, 08-01 and 08-02 - five days of scored relevance with no bridge behind them. Escalate the 07-28 re-score; the forward-fill is a separate design question worth flagging to a human.",
+      "cross_stream_evidence": ["reasoning:prediction.91ae7c2c7675fd1c"],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.91ae7c2c7675fd1c",
+      "stream": "needs",
+      "entry_id": "prediction.91ae7c2c7675fd1c",
+      "verdict": "stale",
+      "reason": "Bridge -> Needs: a decisive actor is missing. The 3 Needs cover the lab's energy procurement lead, the utility's large-load origination manager and the PUC tariff reviewer - the right coalition for a self-financed deal. The 2026-07-27 bridge (validation.8270b709dcd9facf) shows the actor who actually determines whether the structure is self-financed or leased is the vendor/financier standing behind the lease (NVIDIA guaranteeing OpenAI's Piketon rent because the lab lacks an investment-grade rating). Add the chip-vendor-as-credit-guarantor and the lab's own capital-markets/credit function, since they gate the choice this prediction turns on. Runway defect too: all 3 tasks carry when_text \"H2 2026 through H1 2027\" but parse to 2026-07-01..2026-12-31, while this prediction lands H2 2027 (2027-07-01..2027-12-31) - an 18-month gap, the widest in the batch, so the Need windows are unusable for any landing-proximity check.",
+      "cross_stream_evidence": ["bridge:validation.8270b709dcd9facf", "reasoning:prediction.91ae7c2c7675fd1c"],
+      "proposed_action": "rewrite",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.91ae7c2c7675fd1c",
+      "stream": "readings",
+      "entry_id": "prediction.91ae7c2c7675fd1c",
+      "verdict": "broken",
+      "reason": "Extraction outage. Zero chain edges and zero relations; prediction dated 2026-07-23, well after prediction_chain's last write (2026-06-10) and prediction_relations' last write (2026-06-09), and all 160 post-outage predictions are equally empty. An empty readings stream is therefore uninformative here and must not be laundered into 'fresh'. Escalate the dead extractor; nothing per-prediction to rewrite.",
+      "cross_stream_evidence": ["bridge:validation.8270b709dcd9facf"],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.96b1b2cb6ad4924f",
+      "stream": "reasoning",
+      "entry_id": "prediction.96b1b2cb6ad4924f",
+      "verdict": "fresh",
+      "reason": "The only reasoning bundle in the batch the week reinforced rather than undermined. `because` (SK hynix joined the Series C as an investor with no HBM supply deal announced) was re-verified on the exact disclosure channel the prediction names: the 2026-07-29 bridge (validation.4271c9094f3b9fe6) has SK hynix using its quarterly results to describe roughly ten long-term supply agreements and HBM4E samples to \"major customers\" while naming no counterparty - the channel came and went empty, which is precisely the state `because` asserts. `given` (\"HBM at gigawatt scale is sold on long-lead terms\") was independently corroborated by a third supplier in the 2026-07-30 bridge (validation.d65f52939f7dbbfb): Samsung placing 60-70% of capacity under multi-year contract with constraints through 2028. No bridge this week contradicts `so_that` or `landing`, and the H1 2027 window is untouched. No rewrite warranted.",
+      "cross_stream_evidence": ["bridge:validation.4271c9094f3b9fe6", "bridge:validation.d65f52939f7dbbfb"],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.96b1b2cb6ad4924f",
+      "stream": "bridge",
+      "entry_id": "prediction.96b1b2cb6ad4924f",
+      "verdict": "fresh",
+      "reason": "Three bridges (07-25, 07-29, 07-30) and the only prediction in this batch with no 2026-07-28 row, so it escapes that date's repo-wide scoring blackout. All three are accurate and well-targeted: the 07-29 row is a disciplined non-event written against the right channel (SK hynix earnings, no counterparty named), and the 07-30 row correctly discounts a Samsung datapoint as mechanism-not-evidence. Two caveats recorded rather than penalised, both systemic: prediction_realization_snapshots forward-fills relevance 5 on 07-26 and 07-27 and relevance 2 on 07-31..08-02 with no bridge behind those days; and contributes_to_task_id and bridge_target_start_date/bridge_target_end_date are NULL on all three rows, matching the repo-wide 0/1808 fill rate. Neither is a defect in these bridges' content.",
+      "cross_stream_evidence": ["reasoning:prediction.96b1b2cb6ad4924f", "needs:prediction.96b1b2cb6ad4924f"],
+      "proposed_action": "noop",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.96b1b2cb6ad4924f",
+      "stream": "needs",
+      "entry_id": "prediction.96b1b2cb6ad4924f",
+      "verdict": "broken",
+      "reason": "Content is the strongest Need-set in the batch - six Needs covering both sides of the deal (Etched sourcing lead, SK hynix strategic-accounts BD lead, memory-system architect, HBM capacity planner, rack buyer, comms lead) - and needs no rewrite. What is broken is the plumbing. The spec's Bridge -> Needs rule wants the 2026-07-29 bridge (validation.4271c9094f3b9fe6) to attach to need.508b15d1e3735d48 and need.616e2e843b048aeb: SK hynix's own results describe ~10 long-term supply agreements and 2027 allocation visibility, i.e. the exact actors doing the exact job and declining the deliverable. That link cannot be recorded - contributes_to_task_id is NULL on 1808 of 1808 validation_rows repo-wide, and needs_tasks.status is 'open' on 1167 of 1167 rows, so no Need has ever been marked delivered or blocked. Compounding it, all six tasks carry when_text \"H2 2026 through H1 2027\" mis-parsed to 2026-07-01..2026-12-31, closing the runway before the 2027-01-01..2027-06-30 landing opens. Escalate; do not rewrite.",
+      "cross_stream_evidence": ["bridge:validation.4271c9094f3b9fe6", "reasoning:prediction.96b1b2cb6ad4924f"],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.96b1b2cb6ad4924f",
+      "stream": "readings",
+      "entry_id": "prediction.96b1b2cb6ad4924f",
+      "verdict": "broken",
+      "reason": "Extraction outage. Zero chain edges and zero relations; prediction dated 2026-07-25, six weeks after prediction_chain's last write (2026-06-10) and prediction_relations' last write (2026-06-09), and all 160 post-outage predictions are equally empty. Not evidence of an isolated prediction - evidence of a dead extractor - so it must not be scored 'fresh'. Escalate the outage; nothing per-prediction to rewrite.",
+      "cross_stream_evidence": ["bridge:validation.670620cf41a4966e"],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.9cfa3212e98d1f5c",
+      "stream": "reasoning",
+      "entry_id": "prediction.9cfa3212e98d1f5c",
+      "verdict": "stale",
+      "reason": "Bridge -> Reasoning: `given` took two independent counter-cases in one week. It claims \"Fix cadence is automating while identifier assignment stays human-paced and request-driven\". The 2026-07-28 bridge (validation.4c45723536f64ffc) records both of that day's vulnerabilities arriving fully labelled - CVE-2026-16812 at CVSS 10.0 with named fixed builds, a KEV entry and a three-day federal patch clock, and CVE-2026-53264 at CVSS 7.8 backported to seven stable lines - and the bridge itself flags the second as awkward, because a seven-branch backport is exactly the cadence the claim expects identifiers to fall behind, and identification kept up. The 2026-07-30 bridge (validation.a85bd5714ef4f884) is sharper still: Ruflo shipped a fix within 24 hours of disclosure carrying CVE-2026-59726, a CVSS 10.0 and a vendor-assigned name - fast fix and complete labelling on the same event. Reframe `given` away from \"assignment cannot keep up\" toward the narrower and still-supported mechanism the 07-30 bridge points at: Redis's own publication sequencing, plus unscored defaults (the unauthenticated MongoDB that bridge notes) that the identifier system never covers. `because` (the July 23 seven-branch release) stands as fact.",
+      "cross_stream_evidence": ["bridge:validation.4c45723536f64ffc", "bridge:validation.a85bd5714ef4f884"],
+      "proposed_action": "rewrite",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.9cfa3212e98d1f5c",
+      "stream": "bridge",
+      "entry_id": "validation.4c45723536f64ffc",
+      "verdict": "broken",
+      "reason": "The 2026-07-28 scoring blackout bites hardest here. This prediction has only three bridges, and this one - observed_relevance=3, the strongest counter-case against its own `given` - falls on the single date for which prediction_realization_snapshots holds zero rows repo-wide, while 147 prediction_evidence_links were written that same day. The counter-evidence therefore never reached realization_score or latest_observation_status, and could not have influenced the confidence_drift_score that queued this prediction. Because contradiction_score is 0.0 on all 8258 evidence links and support_direction is 100% 'support', nothing else in the pipeline would have caught it either. Escalate a re-score of 2026-07-28; the bridge text itself is accurate and needs no rewrite.",
+      "cross_stream_evidence": ["reasoning:prediction.9cfa3212e98d1f5c", "bridge:validation.a85bd5714ef4f884"],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+    {
+      "prediction_id": "prediction.9cfa3212e98d1f5c",
+      "stream": "needs",
+      "entry_id": "prediction.9cfa3212e98d1f5c",
+      "verdict": "stale",
+      "reason": "Bridge -> Needs: the actor the prediction actually turns on is absent. All six Needs sit on the supply side of the flaw - Redis security maintainer, disclosure process owner, release engineer, module maintainer, fuzzing engineer, agent-driven bug hunter. None covers the CNA / identifier-assignment body, yet the whole claim is whether that actor keeps up, and this week's two counter-cases (validation.4c45723536f64ffc on 07-28, validation.a85bd5714ef4f884 on 07-30) are both about that actor performing well. Add a Need for the assigning authority - its job, its runway and what would make it fall behind - or the Need-set cannot describe the falsifier. Also note need.07f16b5364c99b7f frames deferred assignment as a deliberate sequencing choice, which the 07-30 Ruflo case shows is not forced. Runway defect applies as elsewhere: all six tasks say \"H2 2026 through H1 2027\" but parse to 2026-07-01..2026-12-31, ending before the 2027-01-01..2027-06-30 landing opens.",
+      "cross_stream_evidence": ["bridge:validation.4c45723536f64ffc", "bridge:validation.a85bd5714ef4f884", "reasoning:prediction.9cfa3212e98d1f5c"],
+      "proposed_action": "rewrite",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.9cfa3212e98d1f5c",
+      "stream": "readings",
+      "entry_id": "prediction.9cfa3212e98d1f5c",
+      "verdict": "broken",
+      "reason": "Extraction outage. Zero chain edges and zero relations; prediction dated 2026-07-26, and prediction_chain last wrote 2026-06-10 while prediction_relations last wrote 2026-06-09, with all 160 post-outage predictions equally empty. A concrete edge is being lost in this very batch: this prediction's originating event - Kimi K3 driving 32 agents to 19 Redis zero-days - is the same event carried in prediction.70b4b143e969eb36's 2026-07-26 bridge, a plain 'parallel' relation candidate between two predictions the same judge is holding, and no extractor is alive to write it. Escalate the outage; nothing per-prediction to rewrite.",
+      "cross_stream_evidence": ["prediction:prediction.70b4b143e969eb36", "bridge:validation.1002a6f1c4c08949"],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    },
+
+    {
+      "prediction_id": "prediction.b177dc0150808a3d",
+      "stream": "reasoning",
+      "entry_id": "prediction.b177dc0150808a3d",
+      "verdict": "stale",
+      "reason": "Bridge -> Reasoning on both `because` and `given`. `given` states \"Refusal filters key on content, not on who asks, so they bind the responder and not the intruder\" - and the 2026-07-30 bridge (validation.50650b2e4ae81cd8) records the opposite from Unit 42: OpenAI's safety systems refused the knaithe operator's policy-violating requests and disabled the account linked to the activity, i.e. refusal bound the intruder, and bound him BY ACCOUNT rather than by content, which is exactly the mechanism `given` says refusal filters lack. The bridge draws the conclusion explicitly, that this weakens the case for exemptions rather than strengthening it. Separately `because` omits known prior art surfaced by the 2026-07-26 bridge (validation.0451730d678a8dd3): a tiered-access program for defenders was already named in a post dated December 10, 2025 - seven months before the intrusion the `because` cites - with nothing enrollable behind it. That changes the claim from \"will a provider invent this\" to \"will an announced program acquire an enrollment route\", which is a different and better-specified prediction. Rewrite both cells; `so_that` and `landing` can stand.",
+      "cross_stream_evidence": ["bridge:validation.50650b2e4ae81cd8", "bridge:validation.0451730d678a8dd3", "bridge:validation.00a2627ffae80422"],
+      "proposed_action": "rewrite",
+      "confidence": 0.9
+    },
+    {
+      "prediction_id": "prediction.b177dc0150808a3d",
+      "stream": "bridge",
+      "entry_id": "validation.db8532b688105663",
+      "verdict": "broken",
+      "reason": "Same 2026-07-28 scoring blackout: this bridge carries observed_relevance=4 and prediction_realization_snapshots has zero rows for that date across the whole DB, so it never reached realization_score or latest_observation_status. The seven-bridge run 07-25..08-01 is the densest and most recent in this batch and is unusually honest - three of the seven (07-30, 07-31, 08-01) argue against the prediction rather than for it, which is the behaviour the contradiction machinery is supposed to detect and cannot, since support_direction is 100% 'support' and contradiction_score is 0.0 on all 8258 evidence links. Escalate the 07-28 re-score; the bridge text needs no rewrite.",
+      "cross_stream_evidence": ["reasoning:prediction.b177dc0150808a3d", "bridge:validation.50650b2e4ae81cd8"],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+    {
+      "prediction_id": "prediction.b177dc0150808a3d",
+      "stream": "needs",
+      "entry_id": "prediction.b177dc0150808a3d",
+      "verdict": "stale",
+      "reason": "Needs -> Reasoning: two of the five Needs describe as future work something this week's bridges show already partly shipped. need.c11c0e00b95e8236 asks safety engineering to rebuild refusals \"to key on the calling account's entitlement rather than on payload content alone\" - but the 2026-07-30 bridge (validation.50650b2e4ae81cd8) documents OpenAI already enforcing by account, disabling the operator's account rather than only filtering his content. The account-keying is built; what is missing is the GRANT direction, so that Need should be narrowed from \"make refusals entitlement-aware\" to \"add a positive entitlement that lifts the default\". Likewise need.a3fc33c8103e1561 (policy lead drafting the published carve-out) is partly delivered given the December 10, 2025 tiered-access post in validation.0451730d678a8dd3 - the document exists, the eligibility test and application route do not. Reframe both forward to the next unmet precondition. Runway defect applies: all five tasks say \"H2 2026 through H1 2027\" but parse to 2026-07-01..2026-12-31, ending before the 2027-01-01..2027-06-30 landing opens.",
+      "cross_stream_evidence": ["bridge:validation.50650b2e4ae81cd8", "bridge:validation.0451730d678a8dd3", "reasoning:prediction.b177dc0150808a3d"],
+      "proposed_action": "rewrite",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.b177dc0150808a3d",
+      "stream": "readings",
+      "entry_id": "prediction.b177dc0150808a3d",
+      "verdict": "broken",
+      "reason": "Extraction outage. Zero chain edges and zero relations; prediction dated 2026-07-25, with prediction_chain last writing 2026-06-10 and prediction_relations 2026-06-09, and all 160 post-outage predictions equally empty. The specific loss: this prediction's `because` is the Hugging Face intrusion, which is also prediction.70b4b143e969eb36's `because` - the same originating event grounding two predictions in one batch, with no relation row to connect them and no extractor alive to write one. Escalate the outage; nothing per-prediction to rewrite.",
+      "cross_stream_evidence": ["prediction:prediction.70b4b143e969eb36", "bridge:validation.e2d14c3890391ac1"],
+      "proposed_action": "noop",
+      "confidence": 0.95
+    }
+  ]
+}

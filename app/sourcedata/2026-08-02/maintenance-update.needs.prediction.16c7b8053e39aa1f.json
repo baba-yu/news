@@ -1,0 +1,15 @@
+{
+  "prediction_id": "prediction.16c7b8053e39aa1f",
+  "stream": "needs",
+  "entry_id": "prediction.16c7b8053e39aa1f",
+  "origin_date": "2026-08-02",
+  "verdict": "stale",
+  "proposed_action": "rewrite",
+  "reason": "Applies to the whole Need-set. All four needs (need.708171f0c16abe6e, need.bcbb82def269d3af, need.092850c920d697fd, need.c319aa474086132c) carry target window 2026-07-01..2026-12-31, which closes on 2026-12-31 - the day before the prediction's own target window (2027-01-01..2027-06-30) opens - while every one of their tasks states when='H2 2026 through H1 2027'. The structured windows contradict the task text and expire before the landing they are meant to enable. Needs to Reasoning: nothing in the Need-set has been delivered, and the bridge record agrees (validation.4e59ca3ae9fd796f, 2026-07-24: 'No release note from llama.cpp, Ollama...'), so this is a window-authoring defect, not a delivery event. needs_tasks.status cannot corroborate either way: it is 'open' on all 1167 rows project-wide and 'done' has never been written.",
+  "cross_stream_evidence": [
+    "bridge:validation.4e59ca3ae9fd796f"
+  ],
+  "confidence": 0.65,
+  "applied": false,
+  "applied_note": "NOT APPLIED. maintenance-update markers are write-only: weekly_maintenance._stale_applied checks only file existence and no ingest path reads this content. The change described in `reason` has not reached app/data/analytics.sqlite."
+}

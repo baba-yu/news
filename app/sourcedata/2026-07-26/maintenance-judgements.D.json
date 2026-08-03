@@ -1,0 +1,344 @@
+{
+  "week_ending": "2026-07-26",
+  "judgements": [
+    {
+      "prediction_id": "prediction.64e162098784ed03",
+      "stream": "reasoning",
+      "entry_id": "prediction.64e162098784ed03",
+      "verdict": "stale",
+      "reason": "REPEAT-BUT-STRENGTHENED. reasoning was judged stale on 2026-07-19 (batchE, conf 0.75) and the Step-2 marker maintenance-update.reasoning.prediction.64e162098784ed03.json was written but never applied, so the text below is unchanged; this is not new drift on top of a rewrite. Judged afresh on today's evidence it is stale for a stronger reason than last week's. Bridge -> Reasoning: the new 2026-07-25 bridge validation.a4950cc5c4a2bfd6 states outright that verification inside the window 'looks less likely after today, not more' -- evaluation attention and scarce harness capacity have moved to Kimi K3 (2.8T params, ~1.4TB of weights, loading floor near eighteen 80GB accelerators), and observed_relevance fell 3 -> 2 on that date. Separately, `given` ('open downloadable weights and an agentic-coding target make community public-suite runs cheap') is now directly threatened by regulatory developments this week that no bridge captured: the 2026-07-23 White House accusation that Moonshot distilled Anthropic's Fable and used export-banned Nvidia chips through Thailand, and the 2026-07-26 change_log item 'Washington said to prefer bans on named Chinese open-weight models over a blanket rule'. A named-model ban makes US leaderboard maintainers and community contributors -- both of this prediction's Needs actors -- less able and less willing to run the weights, which is the exact mechanism `given` assumes is cheap. With the target window closing 2026-09-30 (~9 weeks out) and still zero independent results on any of the four named suites, `landing` and `given` both need reframing to price in successor displacement plus export/ban risk.",
+      "cross_stream_evidence": [
+        "bridge:validation.a4950cc5c4a2bfd6",
+        "bridge:validation.e2edb356aab208d7",
+        "needs:need.e34db4522491adb8",
+        "needs:need.41a8a28d9f30c43c",
+        "snapshot:2026-07-25 observed_relevance 3->2, realization 0.6->0.4",
+        "changelog:2026-07-26 Washington prefers bans on named Chinese open-weight models",
+        "unapplied-prior:maintenance-update.reasoning.prediction.64e162098784ed03.json (2026-07-19)"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.64e162098784ed03",
+      "stream": "bridge",
+      "entry_id": "prediction.64e162098784ed03",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 4 validation rows. The new row this week, validation.a4950cc5c4a2bfd6 (2026-07-25, rel=2, dim=landing), is well calibrated: it declines to read successor news as support and states the negative directly. The older rows are equally honest -- validation.e2edb356aab208d7 credits the K3 Frontend Code Arena result while saying plainly it is 'the K3 successor on an arena, not K2.7-Code on SWE-bench', and validation.7e769a1d7c1782e8 self-rates down to 2. Considered marking the set stale because the 2026-07-23 Moonshot export-control story and the 2026-07-26 named-model-ban story went unattached, but that thread is correctly routed to prediction.6d2fa8b171b201e4 ('Moonshot's chip-export exposure draws a filed US enforcement action by H1 2027', shares 2 evidence items with this prediction), so the omission is routing, not a bridge defect. Noted as a limitation rather than a fault: validation_rows carries no direction field and prediction_evidence_links.support_direction is 'support' on all 7295 project rows, so a substantively contradicting bridge like the 2026-07-25 one is still stored as support.",
+      "cross_stream_evidence": [
+        "reasoning:prediction.64e162098784ed03",
+        "readings:prediction.6d2fa8b171b201e4 (shared evidence 2, owns the export-control thread)"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.64e162098784ed03",
+      "stream": "needs",
+      "entry_id": "prediction.64e162098784ed03",
+      "verdict": "fresh",
+      "reason": "Verdict covers both Needs. The actor pair -- independent public-benchmark leaderboard maintainer (need.e34db4522491adb8) and open-source agentic-coding community contributor (need.41a8a28d9f30c43c) -- is exactly the coalition that would produce the predicted outcome and survives the reasoning reframe intact: successor displacement and export-ban risk change these actors' incentives and capacity, not their identity. No bridge documents either actor delivering, so no Bridge -> Needs flip is warranted. Both windows (2026-07-01..2026-09-30) match the prediction window and both task when_texts describe a June-2026-onward runway, which is the project-wide when_text-vs-stored-window collapse noted in the DEFECT line, not a per-prediction inconsistency; not re-escalated here.",
+      "cross_stream_evidence": [
+        "bridge:validation.a4950cc5c4a2bfd6",
+        "reasoning:prediction.64e162098784ed03"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.78
+    },
+    {
+      "prediction_id": "prediction.64e162098784ed03",
+      "stream": "readings",
+      "entry_id": "prediction.64e162098784ed03",
+      "verdict": "stale",
+      "reason": "A missing `parallel` edge that last week's pass did not consider. prediction.9c47cdbe5841bfb7 ('MiniMax M3 ships weights but trails its SWE-Bench Pro claim on rerun by Q3 2026') shares 3 evidence items with this prediction and carries an identical target window 2026-07-01..2026-09-30, with a mechanism that is the same shape end to end: an open-weight model's vendor-reported coding-benchmark claim meeting an independent third-party rerun on a named public suite inside Q3 2026. `parallel` is the schema default when no stronger relation applies (179 of 200 project relations are parallel) and it fits: either can land without the other, but they resolve on the same harness capacity and the same reviewer pool. This is a different candidate from the one the 2026-07-19 pass examined and rejected (prediction.b3c111f1938357a9 / prediction.a383fd5162ecf409, which track an aggregate intelligence index on a 2027 window), so the prior `fresh` does not cover it. Caveat for the parent, per the DEFECT line: prediction_relations has not been written since 2026-06-09, so a Step-2 rewrite has no writer path today.",
+      "cross_stream_evidence": [
+        "relation-candidate:prediction.9c47cdbe5841bfb7 (parallel; 3 shared evidence items; identical 2026-07-01..2026-09-30 window)",
+        "reasoning:prediction.64e162098784ed03",
+        "db:prediction_relations rows for this prediction = 0; prediction_chain rows = 0"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.7
+    },
+
+    {
+      "prediction_id": "prediction.69439c5e138d13eb",
+      "stream": "reasoning",
+      "entry_id": "prediction.69439c5e138d13eb",
+      "verdict": "fresh",
+      "reason": "`because` (two CVSS 9.8 zero-click Cursor RCEs, fixed in Cursor 3.0) is a fixed 2026-07-01 fact this week did not disturb. The new bridge validation.b0d8b5cdb0ade214 (2026-07-24, rel=4, dim=given) reports the SharedRoot escape of the Claude Cowork local VM and reads as reinforcement, not contradiction: it extends `given` ('same tool-boundary escape seen in Flowise and Langflow now proven against a mainstream coding IDE') one rung up the ladder to a mainstream agent product with the host filesystem mounted read-write. Weighed marking it stale on the ground that the observed vendor response to SharedRoot was infrastructure relocation rather than the workspace-root confinement this prediction names -- i.e. a divergent mitigation -- but SharedRoot is a VM/sandbox escape in a non-IDE product, so it neither confirms nor refutes the IDE file-write mechanism, and the target window (2027-01-01..2027-03-31) leaves ample runway. Realization held at 0.8 / 'supported' since 2026-07-24. Flagging for next cycle: if a second escape draws the same relocate-the-runtime response instead of path confinement, `so_that` will need a forward reframe.",
+      "cross_stream_evidence": [
+        "bridge:validation.b0d8b5cdb0ade214",
+        "bridge:validation.6fbf6073baa3e6c3",
+        "readings:prediction.71c1acea4be80819 (shares the 2026-07-24 SharedRoot evidence pair)"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.69439c5e138d13eb",
+      "stream": "bridge",
+      "entry_id": "prediction.69439c5e138d13eb",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 3 validation rows. validation.b0d8b5cdb0ade214 (2026-07-24) is the only new one and is correctly scoped -- it names placement rather than privilege as the flaw and explains why a read-write host mount converts guest-root into host access, which is a defensible read of `given`. rel=4 is a shade generous for a non-IDE product on a prediction about coding IDEs, but the text does not overclaim. validation.6fbf6073baa3e6c3 (2026-07-15) remains a model negative bridge: it names the inversion ('unfixed after seven months, no CVE, no score') instead of stretching an unrelated Cursor flaw into support. No unattached on-thesis event this week.",
+      "cross_stream_evidence": [
+        "reasoning:prediction.69439c5e138d13eb"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.69439c5e138d13eb",
+      "stream": "needs",
+      "entry_id": "prediction.69439c5e138d13eb",
+      "verdict": "fresh",
+      "reason": "Verdict covers the whole 3-Need set. All three actors -- coding-agent IDE platform engineer, agent-security jailbreak-severity framework co-author, offensive AI-tooling security research lab -- remain exactly the coalition the outcome requires, and the 2026-07-24 SharedRoot disclosure is fresh delivery by the third actor class rather than a reason to re-scope the set. No Bridge -> Needs flip: no bridge documents an IDE shipping workspace-root confinement, and needs_tasks.status is 'open' on all 1013 project rows so status carries no signal. The when_text-vs-stored-window collapse on all 3 tasks (when_text 'July 2026 through Q1 2027' etc. vs stored 2027-01-01..2027-03-31) was escalated as `broken` on 2026-07-19 (batchE, conf 0.85); it is unchanged, is project-wide (14 of 15 task rows across this batch), and is reported once in the DEFECT line rather than re-escalated per prediction, so this stream is judged on actor/coalition merit alone.",
+      "cross_stream_evidence": [
+        "bridge:validation.b0d8b5cdb0ade214",
+        "unapplied-prior:2026-07-19 batchE needs=broken (window parse), unchanged"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.69439c5e138d13eb",
+      "stream": "readings",
+      "entry_id": "prediction.69439c5e138d13eb",
+      "verdict": "fresh",
+      "reason": "A new `parallel` edge candidate to prediction.71c1acea4be80819 did appear this week -- both predictions took a 2026-07-24 bridge built from the same two SharedRoot evidence rows (evidence.0193ea707214189e, evidence.79e2037efe9c4c83), the first time their evidence sets converged. Recording the verdict as fresh on this side deliberately: a relation edge is symmetric, so the edge is proposed once, on prediction.71c1acea4be80819 (the side with the richer overlap and the newer signal), and double-counting one symmetric edge as two stale verdicts would overstate the work. No other edge is warranted -- the 2 shared items with prediction.cb8447f5c6e4c65d and prediction.a4ee0b5435860b21 are shared origin evidence only, and shared origin is not a relation.",
+      "cross_stream_evidence": [
+        "relation-candidate:prediction.71c1acea4be80819 (parallel; proposed on the reciprocal side to avoid double-counting)",
+        "evidence:evidence.0193ea707214189e",
+        "evidence:evidence.79e2037efe9c4c83"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+
+    {
+      "prediction_id": "prediction.6b1c8cb1541ca0a5",
+      "stream": "reasoning",
+      "entry_id": "prediction.6b1c8cb1541ca0a5",
+      "verdict": "fresh",
+      "reason": "`because` (Micron fiscal-Q3-2026: HBM sold out through 2026, fillable to half-to-two-thirds of demand, ~$100B take-or-pay) is fixed history, and `given` was reinforced rather than challenged this week. The new bridge validation.8a981ec774219f29 (2026-07-25, rel=3, dim=given) covers SK hynix taking equity in Etched and is careful to state the limit -- equity participation is not a supply contract -- so it does not inflate the premise. AMD's 2026-07-23 Advancing AI keynote named Anthropic and OpenAI capacity for Helios racks but named customers, not HBM allocation, so `so_that` ('an accelerator vendor or hyperscaler names HBM allocation as a stated gating limit') remains cleanly unrealized with the window still 2027-04-01..2027-06-30. Realization steady at 0.6 / 'weakly_supported' all week. No Bridge -> Reasoning, Needs -> Reasoning or Readings -> Reasoning trigger fires.",
+      "cross_stream_evidence": [
+        "bridge:validation.8a981ec774219f29",
+        "bridge:validation.ba2c49e13d9cdeb2"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.6b1c8cb1541ca0a5",
+      "stream": "bridge",
+      "entry_id": "prediction.6b1c8cb1541ca0a5",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 4 validation rows. The new row validation.8a981ec774219f29 (2026-07-25) is the best-disciplined in this batch: it names the distinction the prediction lives on -- 'a memory supplier taking equity in a customer before any contract exists is queue behaviour' -- and rates itself down to 3 rather than treating the SK hynix / Etched round as allocation disclosure. The 2026-06-29 origin row (rel=5, dim=because) and the 2026-07-02 and 2026-07-09 rows are correctly dimensioned to `given` and none asserts a vendor has named a cap. The week's on-thesis events (AMD Helios in production 2026-07-23; Etched $300M at $10.3B with >$1B signed contracts 2026-07-25) are attached here or to prediction.96b1b2cb6ad4924f, which owns the Etched-to-HBM-agreement thread.",
+      "cross_stream_evidence": [
+        "reasoning:prediction.6b1c8cb1541ca0a5",
+        "readings:prediction.96b1b2cb6ad4924f (shares 2 evidence items; owns the Etched/SK hynix contract thread)"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.6b1c8cb1541ca0a5",
+      "stream": "needs",
+      "entry_id": "prediction.6b1c8cb1541ca0a5",
+      "verdict": "fresh",
+      "reason": "Verdict covers both Needs. The two-sided actor set -- accelerator-vendor capacity-and-supply planner (need.6dd3597d8c06609b) and HBM supplier sales-and-contracting lead (need.3711eb25f9d4f14a) -- correctly models both ends of the take-or-pay mechanism, and this week's SK hynix equity move is that supplier actor behaving exactly as the Need describes without yet producing the disclosure the outcome requires. No Bridge -> Needs flip warranted: no bridge documents either actor naming an allocation cap in a filing. Both windows track the prediction window; the when_text-vs-stored-window collapse is the project-wide issue in the DEFECT line, not per-prediction drift.",
+      "cross_stream_evidence": [
+        "bridge:validation.8a981ec774219f29",
+        "reasoning:prediction.6b1c8cb1541ca0a5"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.6b1c8cb1541ca0a5",
+      "stream": "readings",
+      "entry_id": "prediction.6b1c8cb1541ca0a5",
+      "verdict": "fresh",
+      "reason": "No edge warranted. This prediction's overlap profile is broad and shallow -- eight neighbours at exactly 2 shared evidence items each (prediction.b0ee98f79df6fe54, prediction.96b1b2cb6ad4924f, prediction.cbba6275f880fc04, prediction.42a2372350593ef7 and others) with no concentration and no window alignment; that is the signature of a shared news beat, not of a relation. The nearest genuine candidate, prediction.b0ee98f79df6fe54 ('OpenAI locks equity-coupled HBM allocation with a memory maker by Q4 2026'), resolves on a different window and a different act (a buyer signing an allocation deal vs. any vendor disclosing allocation as a cap), so `parallel` would add noise rather than structure. Absence of an edge here is a correct absence, not drift.",
+      "cross_stream_evidence": [
+        "db:prediction_relations rows = 0; prediction_chain rows = 0",
+        "overlap:8 neighbours at 2 shared evidence items, none concentrated"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.74
+    },
+
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "reasoning",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "fresh",
+      "reason": "`because` (OWASP 2.01 mapping prompt injection to 6 of 10 agentic categories and naming coding agents the epicenter) is a fixed 2026-06-28 publication, and `given` (injection is unpatchable, so the durable mitigation caps the trifecta at orchestration) was reinforced by both new bridges this week. Weighed a forward reframe on the ground that the premise has moved from contested to empirically demonstrated -- AI Now PoC 07-11, GhostApproval 07-12, MemGhost 07-13, Grok CLI 07-15, NadMesh 07-19, the OpenAI escaped-model intrusion 07-22 -- but the two new bridges both close by stating the claim is still open: validation.a4e9ebfe4b2df96c says 'no platform shipped a default-on gate' and validation.9c15040092466244 says OpenAI Presence 'ships no default-on two-of-three gate'. The reasoning is therefore accurate as written and the accumulating demonstrations belong in the bridge record, which already holds them. Realization steady at 0.4 / 'weakly_supported'; window 2027-01-01..2027-03-31.",
+      "cross_stream_evidence": [
+        "bridge:validation.a4e9ebfe4b2df96c",
+        "bridge:validation.9c15040092466244",
+        "bridge:validation.3d1a6ef99451e676",
+        "needs:need.262db198b3d721da"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.78
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "bridge",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 15 validation rows, the richest and best-calibrated set in this batch. Both new rows this week hold the line: validation.a4e9ebfe4b2df96c (2026-07-22) credits the escaped-model intrusion as the trifecta realized and then says 'no platform shipped a default-on gate'; validation.9c15040092466244 (2026-07-23) credits OpenAI Presence's approved-action allowlist and human sign-off and then names both disqualifiers -- it governs voice-and-chat support agents, not a coding-agent platform, and ships no two-of-three gate. Every row that reports movement also names the specific gap to the actual claim. The only quibble is routing rather than quality: the Presence row is arguably a better fit for prediction.71c1acea4be80819, which is flagged on that prediction's bridge stream, not here.",
+      "cross_stream_evidence": [
+        "reasoning:prediction.6ba7ca6e01ab313e",
+        "bridge:validation.9c15040092466244 -> also transferable to prediction.71c1acea4be80819"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.82
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "needs",
+      "entry_id": "coding-agent platform security/orchestration product lead",
+      "verdict": "stale",
+      "reason": "REPEAT OF AN UNAPPLIED VERDICT, with one new supporting bridge. This exact Need was judged stale on 2026-07-19 (batchE, conf 0.72) and maintenance-update.needs.prediction.6ba7ca6e01ab313e.json was written but never reached the DB, so need.262db198b3d721da is verbatim unchanged -- the parent should count this as one unapplied item, not as new drift. Judged on today's evidence it remains stale, and the case is now four bridges deep rather than three. Bridge -> Needs: this actor class keeps part-delivering on need_task.58272020b02c4782 ('Implement default-on Rule-of-Two capability gate with human-approval pause') without closing it -- Claude Code v2.1.212 default permission caps and fail-closed gating (validation.88a4ea3328e0d201, 2026-07-17), SingGuard-NSFA inline per-tool-call scoring at ~50ms (validation.31141fe750784c1d, 2026-07-14), and now OpenAI Presence's approved-action allowlist plus mandatory human sign-off (validation.9c15040092466244, 2026-07-23). The Need is still framed as though nothing has shipped; it should be reframed forward to the residual gap -- generic per-tool permission gating now exists at several vendors, so what remains unbuilt is specifically the two-of-three capability accounting that pauses on the third property. No status flip is available or implied: needs_tasks.status is 'open' on all 1013 project rows.",
+      "cross_stream_evidence": [
+        "bridge:validation.88a4ea3328e0d201",
+        "bridge:validation.31141fe750784c1d",
+        "bridge:validation.9c15040092466244",
+        "unapplied-prior:maintenance-update.needs.prediction.6ba7ca6e01ab313e.json (2026-07-19)"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.76
+    },
+    {
+      "prediction_id": "prediction.6ba7ca6e01ab313e",
+      "stream": "readings",
+      "entry_id": "prediction.6ba7ca6e01ab313e",
+      "verdict": "fresh",
+      "reason": "No edge proposed, though this is the closest call in the batch. The overlap is real and heavy -- 8 shared evidence items with prediction.25bbb1fc4e3ce653 ('Coding agents ship default-deny sandboxes for untrusted-repo audits by Q2 2027'), 7 with prediction.f3f7e18b691f1c39, 6 with prediction.4dba2dbfb8d2798b -- but that is this prediction sitting at the centre of a dense agent-hardening news beat where roughly a dozen predictions draw on the same daily security items. Each of those neighbours can land or fail entirely independently of this one, and minting `parallel` edges to eight of them would encode beat co-occurrence as structure. Distinct from prediction.71c1acea4be80819, where the overlap concentrates on two neighbours with identical target windows and a shared mechanism; there an edge is proposed. Absence here is a correct absence.",
+      "cross_stream_evidence": [
+        "db:prediction_relations rows = 0; prediction_chain rows = 0",
+        "overlap:prediction.25bbb1fc4e3ce653 (8 shared), prediction.f3f7e18b691f1c39 (7), prediction.4dba2dbfb8d2798b (6) -- beat co-occurrence, not relation"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+
+    {
+      "prediction_id": "prediction.70512b58e932f532",
+      "stream": "reasoning",
+      "entry_id": "prediction.70512b58e932f532",
+      "verdict": "stale",
+      "reason": "Two things moved that the reasoning does not price. First, `because` and `given` are built around Together AI as the anchor of the tier at $8.3B, but bridge validation.cca768b345fbec01 (2026-07-17) records Fireworks AI at a $17.5B valuation, past $1B ARR and 40 trillion tokens a day -- Fireworks is now roughly twice Together's mark, so the named anchor whose capital needs are supposed to force the listing is no longer the company the reasoning names. Second, and new since the 2026-07-19 pass judged this fresh: the 2026-07-25 report carries Stripe opening talks to buy OpenRouter near $10B. That is an alternative liquidity path materialising inside the open-model inference layer -- trade sale to a payments incumbent rather than a public listing -- which is a live competing resolution to the `so_that` clause ('one open-model inference neocloud takes a disclosed public-listing step'). It went unattached as a bridge, so the reasoning is the right place to absorb it. Recommend reframing `because`/`given` around the tier rather than around Together specifically, and having `so_that` acknowledge M&A as the rival exit route. Confidence held below 0.7 because both `because` and `given` remain literally true as history and the window (2027-10-01..2027-12-31) is long; this is a framing-currency problem, not a falsification.",
+      "cross_stream_evidence": [
+        "bridge:validation.cca768b345fbec01",
+        "bridge:validation.4c6f8b739bcbdc51",
+        "readings:prediction.0ad3c58ce5c240d0",
+        "news:2026-07-25 Stripe opens talks to buy OpenRouter near $10B (unattached)"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.68
+    },
+    {
+      "prediction_id": "prediction.70512b58e932f532",
+      "stream": "bridge",
+      "entry_id": "prediction.70512b58e932f532",
+      "verdict": "fresh",
+      "reason": "Verdict covers all 3 validation rows; no new row was added this week. validation.4c6f8b739bcbdc51 (2026-07-19, rel=2, dim=landing) is exemplary low-relevance grading -- it recognises that a real listing step happened inside the open-model economy (DeepSeek's early STAR Market deliberations with an internal target of filing this year) and then disqualifies it in one clause, 'wrong end of the stack, though -- this is the company that makes the weights'. validation.cca768b345fbec01 and the 2026-07-05 origin row are correctly dimensioned. The unattached Stripe/OpenRouter item is charged to the reasoning stream rather than here, since a missing attachment is not a defective bridge text.",
+      "cross_stream_evidence": [
+        "reasoning:prediction.70512b58e932f532"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.70512b58e932f532",
+      "stream": "needs",
+      "entry_id": "sovereign-scale growth investor managing director on the neocloud board",
+      "verdict": "broken",
+      "reason": "DATA INCONSISTENCY, scoped to this one Need -- escalate, do not auto-fix. need.566124b2a5c6c6b0 and its task need_task.075d19439da8d687 both store target_start_date 2026-07-01 / target_end_date 2026-07-31: a one-month window that expires today, sits roughly fifteen months before the prediction's landing window of 2027-10-01..2027-12-31, and contradicts its own when_text, 'the seventeen-plus-month runway following the July 2026 round'. It is also the sole row in this entire 6-prediction batch (1 of 15 task rows) whose window differs from its prediction's window, and it differs in the opposite direction from the project-wide collapse: too early rather than collapsed onto the landing window. Consequence is real -- a Need whose window closes 2026-07-31 will read as lapsed on the dashboard while the prediction it belongs to runs to Q4 2027. This is distinct from and was missed by the 2026-07-19 batchA `needs=broken`, which used a whole-Need-set entry_id and described only the two tasks collapsed onto the landing window. The actor and job text themselves are sound; only the dates are wrong.",
+      "cross_stream_evidence": [
+        "db:prediction_needs.need.566124b2a5c6c6b0 window 2026-07-01..2026-07-31 vs predictions window 2027-10-01..2027-12-31",
+        "db:needs_tasks.need_task.075d19439da8d687 when_text 'the seventeen-plus-month runway following the July 2026 round'",
+        "prior:2026-07-19 batchA needs=broken (whole-set entry_id) did not cover this Need"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.86
+    },
+    {
+      "prediction_id": "prediction.70512b58e932f532",
+      "stream": "readings",
+      "entry_id": "prediction.70512b58e932f532",
+      "verdict": "stale",
+      "reason": "REPEAT OF AN UNAPPLIED VERDICT. readings was judged stale on 2026-07-19 (batchA, conf 0.74) and maintenance-update.readings.prediction.70512b58e932f532.json was written but never reached the DB; the edge it proposed is still absent, so the parent should count this as one unapplied item rather than new drift. Verified afresh today and it still holds: prediction.0ad3c58ce5c240d0 ('Together or Baseten raises at a $5B-plus valuation by Q4 2027', prediction_date 2026-07-17) shares 3 evidence items with this prediction, names the same two companies that appear in this prediction's `given`, and carries an identical target window 2027-10-01..2027-12-31. `parallel` is the right type -- a peer round and a listing step can each occur without the other, but both are the same tier converting private capitalisation into a liquidity event. Caveat per the DEFECT line: prediction_relations has had no writes since 2026-06-09, so Step 2 has no writer path today.",
+      "cross_stream_evidence": [
+        "relation-candidate:prediction.0ad3c58ce5c240d0 (parallel; 3 shared evidence; identical 2027-10-01..2027-12-31 window; names Together and Baseten)",
+        "bridge:validation.cca768b345fbec01",
+        "unapplied-prior:maintenance-update.readings.prediction.70512b58e932f532.json (2026-07-19)"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.74
+    },
+
+    {
+      "prediction_id": "prediction.71c1acea4be80819",
+      "stream": "reasoning",
+      "entry_id": "prediction.71c1acea4be80819",
+      "verdict": "stale",
+      "reason": "Needs -> Reasoning: the load-bearing precondition has been partly satisfied, so the reasoning should be reframed forward. `because` cites 'Straiker's $64M round and a same-week Claude Cowork sandbox escape' -- but bridge validation.38dcc33c50d5adc0 (2026-07-24, rel=4, dim=so_that) documents a second Claude Cowork sandbox escape (SharedRoot, disclosed 2026-07-23) and, more importantly, the platform owner's response to it: 'the platform owner answered a containment failure by moving the runtime onto infrastructure it controls, closing the report as informative and leaning on a product default rather than a patch'. That is the first-party absorption of the containment boundary this prediction forecasts, occurring in partial form eighteen months before the target window. Corroborated by validation.c944db40f4039fb2 (2026-07-12), where Amazon Q Developer and Google Antigravity patched their own coding agents within days. The open question is therefore no longer whether incumbents will absorb agent-runtime defense -- they are already doing it reactively -- but whether it ships as the named, GA, first-party three-part tier the prediction specifies (discovery + pre-deployment red-teaming + behavioral runtime guardrails) rather than as ad-hoc containment hardening. `because` should be restated with the July escapes and the observed absorption as the new baseline, and `so_that` sharpened to distinguish a productised tier from incident-driven hardening.",
+      "cross_stream_evidence": [
+        "bridge:validation.38dcc33c50d5adc0",
+        "bridge:validation.c944db40f4039fb2",
+        "bridge:validation.0b99ac695da64dfc",
+        "needs:need.d364814694f1dda8"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.74
+    },
+    {
+      "prediction_id": "prediction.71c1acea4be80819",
+      "stream": "bridge",
+      "entry_id": "prediction.71c1acea4be80819",
+      "verdict": "stale",
+      "reason": "Readings -> Bridge: the single most on-thesis event of the week for this prediction is attached to a neighbouring prediction instead of to this one. OpenAI shipped Presence on 2026-07-22/23 -- a governance layer for production agents built on an approved-action allowlist, boundary guardrails, and mandatory human sign-off before any behavioral change reaches production. That is an agent-platform incumbent shipping a first-party agent-defense tier, which is precisely this prediction's `so_that`. It was bridged onto prediction.6ba7ca6e01ab313e as validation.9c15040092466244, where the bridge text itself has to disqualify it twice ('governs voice-and-chat support agents, not a coding-agent platform', 'ships no default-on two-of-three gate'). This prediction is scoped to 'a major cloud or agent-platform incumbent' with no coding-agent restriction, so the evidence fits here and does not fit there; it should be added as a bridge on this prediction, dimensioned to `so_that`, with the honest limit stated (a governance tier for support agents, not the discovery + red-teaming + runtime-guardrail tier the prediction names). The nine existing rows are individually sound -- validation.38dcc33c50d5adc0 and validation.0b99ac695da64dfc are both well calibrated -- so this is an omission in the set, not a defect in any row.",
+      "cross_stream_evidence": [
+        "bridge:validation.9c15040092466244 (attached to prediction.6ba7ca6e01ab313e; transferable here)",
+        "news:2026-07-23 OpenAI ships Presence, governance layer for production agents",
+        "reasoning:prediction.71c1acea4be80819"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.71c1acea4be80819",
+      "stream": "needs",
+      "entry_id": "prediction.71c1acea4be80819",
+      "verdict": "fresh",
+      "reason": "Verdict covers the whole 3-Need set. The ship-or-acquire framing is well modelled by the actor triple -- hyperscaler agent-platform security PM (need.d364814694f1dda8), incumbent corp-dev lead (need.9f0ba6f9a8a588cd), and agentic-security pure-play GTM lead (need.71a3d5f86e36167b) -- and this week's fresh capital into the pure-play side (Neo $100M, Empirical $25M, validation.19845c5ad5ab9cf6) is that third actor behaving exactly as its Need describes. The 2026-07-24 partial delivery by the first actor is charged to the reasoning stream rather than here: it is one bridge, one week old, and touches only the runtime-containment leg, leaving discovery and pre-deployment red-teaming untouched, so the Need's forward framing does not yet lag its evidence. Deliberately distinguished from prediction.6ba7ca6e01ab313e's needs=stale, where the same pattern is four bridges deep across three vendors and was already flagged a week ago. No status flip available: needs_tasks.status is 'open' on all 1013 project rows.",
+      "cross_stream_evidence": [
+        "bridge:validation.38dcc33c50d5adc0",
+        "bridge:validation.19845c5ad5ab9cf6",
+        "reasoning:prediction.71c1acea4be80819"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.72
+    },
+    {
+      "prediction_id": "prediction.71c1acea4be80819",
+      "stream": "readings",
+      "entry_id": "prediction.71c1acea4be80819",
+      "verdict": "stale",
+      "reason": "The strongest missing-edge case in this batch, and it has both concentration and window alignment rather than mere beat co-occurrence. prediction.3049b69e910c2279 ('Autonomous-AI-agent intrusions become a named detection category by H1 2027') shares 9 evidence items and carries the identical target window 2027-01-01..2027-06-30; prediction.e3f72a21ed13fcec ('Agent-sandbox isolation becomes a named procurement requirement by H1 2027') shares 7 and is also 2027-01-01..2027-06-30. All three resolve on the same question from different sides -- whether agent-runtime risk gets institutionalised as a named category, a named procurement requirement, or a native platform tier -- which is the textbook `parallel` shape. New this week, prediction.69439c5e138d13eb entered the same cluster: both predictions took a 2026-07-24 bridge built from the same two SharedRoot evidence rows (evidence.0193ea707214189e, evidence.79e2037efe9c4c83), their first evidence convergence. Propose parallel edges to prediction.3049b69e910c2279, prediction.e3f72a21ed13fcec and prediction.69439c5e138d13eb from this side; the reciprocal on prediction.69439c5e138d13eb is recorded fresh so the symmetric edge is not counted twice. Caveat per the DEFECT line: prediction_relations has had no writes since 2026-06-09, so Step 2 has no writer path today.",
+      "cross_stream_evidence": [
+        "relation-candidate:prediction.3049b69e910c2279 (parallel; 9 shared evidence; identical 2027-01-01..2027-06-30 window)",
+        "relation-candidate:prediction.e3f72a21ed13fcec (parallel; 7 shared evidence; identical window)",
+        "relation-candidate:prediction.69439c5e138d13eb (parallel; new 2026-07-24 SharedRoot convergence)",
+        "evidence:evidence.0193ea707214189e",
+        "evidence:evidence.79e2037efe9c4c83",
+        "db:prediction_relations rows for this prediction = 0; prediction_chain rows = 0"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.72
+    }
+  ]
+}

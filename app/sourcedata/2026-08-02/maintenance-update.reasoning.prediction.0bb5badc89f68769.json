@@ -1,0 +1,17 @@
+{
+  "prediction_id": "prediction.0bb5badc89f68769",
+  "stream": "reasoning",
+  "entry_id": "prediction.0bb5badc89f68769",
+  "origin_date": "2026-08-02",
+  "verdict": "stale",
+  "proposed_action": "rewrite",
+  "reason": "Re-issuing the 2026-07-12 stale verdict because the rewrite was never applied. The marker app/sourcedata/2026-07-12/maintenance-update.reasoning.prediction.0bb5badc89f68769.json claims '\"applied\": true' and carries a full replacement bundle, but predictions.reasoning_because in the database is still the original 'Sonnet 5 launched at $2/$10 with claimed Opus-parity...' and reasoning_landing is still 'A rival frontier lab ships an agent-tuned mid-tier tier by Q4 2026' - the marker's text appears nowhere. The underlying cross-stream case has strengthened since: validation.4e85e1d8960df09b (2026-07-10, support_dimension='landing', rel=5) records OpenAI's Terra at $2.50/$15 shipping into Copilot and Codex the same day - a sub-$3 agent-forward mid-tier from a named lab, roughly five months ahead of the Q4 2026 window - and the newest bridge validation.273e8dd9209add75 (2026-07-31) shows the second-lab leg still open, with two Gemini Flash tiers placed in Oracle Fusion and NetSuite but 'no price and no benchmark... positioning language, not a competitive rate card'. Reframe forward: the first leg landed, the open question is durability of the tier plus a confirming second lab.",
+  "cross_stream_evidence": [
+    "bridge:validation.4e85e1d8960df09b (2026-07-10, dim=landing, rel=5) - predicted event arriving ~5 months early",
+    "bridge:validation.273e8dd9209add75 (2026-07-31) - Google named two Flash tiers for agent work but published neither price nor benchmark, so the second-lab leg stays open",
+    "marker:app/sourcedata/2026-07-12/maintenance-update.reasoning.prediction.0bb5badc89f68769.json - applied:true is false; DB text unchanged"
+  ],
+  "confidence": 0.75,
+  "applied": false,
+  "applied_note": "NOT APPLIED. maintenance-update markers are write-only: weekly_maintenance._stale_applied checks only file existence and no ingest path reads this content. The change described in `reason` has not reached app/data/analytics.sqlite."
+}

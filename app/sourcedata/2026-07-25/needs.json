@@ -1,0 +1,249 @@
+{
+  "date": "2026-07-25",
+  "by_prediction": {
+    "prediction.359ad701e052546c": [
+      {
+        "actor": "Model release engineering lead, open-weights frontier AI lab",
+        "job": "Shipping the 2.8-trillion-parameter MXFP4 checkpoint with shard layout, deployment guidance and license terms that permit redistributing modified serving artifacts.",
+        "outcome": "A published checkpoint and license under which third parties may release and redistribute a modified single-node serving recipe.",
+        "motivation": "Its own hosted tier already paused new subscriptions under inference demand, so serving work must move onto other people's hardware.",
+        "task": {
+          "who": "Model release and open-source licensing team",
+          "what": "Publish weights with redistribution-permissive license terms",
+          "where": "Public model hub repository and accompanying model card",
+          "when": "H2 2026 through H1 2027",
+          "why": "Hosted capacity is capped; external serving relieves demand",
+          "how": "Hugging Face release, MXFP4 shards, published license text"
+        }
+      },
+      {
+        "actor": "Maintainer, open-source large-model inference runtime",
+        "job": "Adding an expert-offload execution path that keeps attention and hot experts in accelerator memory while streaming cold experts from host DRAM.",
+        "outcome": "A merged upstream release serving all 896 experts on eight 80GB cards without pruning, distillation or further quantization.",
+        "motivation": "Sixteen of 896 experts fire per token, so full HBM residency buys latency rather than correctness and wastes most users' hardware.",
+        "task": {
+          "who": "Core runtime and MoE execution maintainers",
+          "what": "Implement per-layer expert offload and residency management",
+          "where": "Upstream inference-engine repository, MoE scheduler and memory allocator",
+          "when": "H2 2026 through H1 2027",
+          "why": "Residency, not working set, is the real constraint",
+          "how": "Host-DRAM expert cache, pinned buffers, layer-wise prefetch"
+        }
+      },
+      {
+        "actor": "Low-precision kernel engineer, inference software team",
+        "job": "Writing MXFP4 weight and MXFP8 activation kernels that run the released precision on accelerators lacking native microscaling-format hardware support.",
+        "outcome": "Kernels executing the released MXFP4 weights unchanged on widely held 80GB accelerators, so no further quantization is needed.",
+        "motivation": "Native MXFP4 execution wants Blackwell or MI400 silicon, which the single-node builders chasing this recipe do not own.",
+        "task": {
+          "who": "Kernel and quantization engineering sub-team",
+          "what": "Emulate MXFP4 dequantization in fused GEMM kernels",
+          "where": "Runtime kernel library for prior-generation 80GB accelerators",
+          "when": "H2 2026 through H1 2027",
+          "why": "Released precision must survive on hardware people own",
+          "how": "CUTLASS or Triton fused dequant-GEMM, block-scale handling"
+        }
+      },
+      {
+        "actor": "Mixture-of-experts systems researcher, model efficiency group",
+        "job": "Profiling expert activation locality to decide which experts stay resident and to prefetch the rest from router logits ahead of use.",
+        "outcome": "A hot-expert residency and prefetch policy that hides most host-to-device transfer behind compute during decode.",
+        "motivation": "Streaming cold experts naively converts memory-bound decode into something far slower, and bad throughput kills adoption of the recipe.",
+        "task": {
+          "who": "Model efficiency research and systems benchmarking group",
+          "what": "Measure expert reuse and build a prefetch policy",
+          "where": "Instrumented decode traces on the published K3 checkpoint",
+          "when": "H2 2026 through H1 2027",
+          "why": "Throughput, not feasibility, is what stops publication",
+          "how": "Router-logit lookahead, LRU expert cache, activation-frequency profiling"
+        }
+      },
+      {
+        "actor": "Storage and host-memory data-path engineer, inference infrastructure",
+        "job": "Building the NVMe and pinned-DRAM streaming path that feeds cold expert weights across PCIe fast enough to keep decode moving.",
+        "outcome": "A single-node I/O path sustaining expert streaming from host DRAM or NVMe at usable decode throughput.",
+        "motivation": "The recipe trades HBM capacity for PCIe bandwidth, so the transfer path is where the whole approach succeeds or fails.",
+        "task": {
+          "who": "Storage and I/O performance engineering team",
+          "what": "Tune NVMe-to-device expert weight streaming throughput",
+          "where": "Single node with multi-terabyte host DRAM and NVMe",
+          "when": "H2 2026 through H1 2027",
+          "why": "PCIe bandwidth replaces the HBM capacity given up",
+          "how": "GPUDirect Storage, pinned host buffers, asynchronous copy engines"
+        }
+      },
+      {
+        "actor": "Single-node deployment engineer, GPU-constrained AI lab",
+        "job": "Assembling and benchmarking a full-checkpoint serving configuration on one eight-card node, then publishing the configuration, throughput numbers and reproduction steps.",
+        "outcome": "A public, reproducible recipe serving all 896 experts at released precision within 640GB of accelerator memory.",
+        "motivation": "They cannot rent sixteen nodes, and must optimize against the single node and host DRAM they actually have.",
+        "task": {
+          "who": "Inference deployment and evaluation engineers",
+          "what": "Benchmark and publish an eight-card full-weights serving recipe",
+          "where": "Public repository, model hub write-up and technical blog",
+          "when": "H2 2026 through H1 2027",
+          "why": "Their own constraint is one node, not sixteen",
+          "how": "Docker image, config files, reported tokens-per-second measurements"
+        }
+      }
+    ],
+    "prediction.96b1b2cb6ad4924f": [
+      {
+        "actor": "Component supply-chain and memory procurement lead, transformer-ASIC inference silicon startup",
+        "job": "Negotiating multi-year HBM allocation and pricing to cover the Sohu ramp from a 10MW lab to gigawatt scale in 2027.",
+        "outcome": "A signed HBM supply contract or capacity reservation, disclosable separately from the memory vendor's equity participation in the round.",
+        "motivation": "HBM output is spoken for ahead of production, and racks already sold against signed contracts cannot ship without secured stacks.",
+        "task": {
+          "who": "Supply chain and strategic sourcing with finance",
+          "what": "Negotiate multi-year HBM allocation and pricing terms",
+          "where": "Supplier contract negotiation and component qualification process",
+          "when": "H2 2026 through H1 2027",
+          "why": "Gigawatt-scale 2027 ramp needs allocation booked early",
+          "how": "Long-lead take-or-pay terms, volume commitments, prepayment"
+        }
+      },
+      {
+        "actor": "Strategic accounts and custom-memory business development lead, HBM memory supplier",
+        "job": "Converting a minority equity position in an inference-silicon startup into a named commercial account with committed volumes and announceable terms.",
+        "outcome": "A disclosed supply, reservation or joint-development agreement stated in the supplier's own materials or a joint announcement.",
+        "motivation": "A cap-table option only pays once exercised as revenue, and naming a fast-scaling ASIC account signals reach beyond incumbent buyers.",
+        "task": {
+          "who": "Strategic accounts team with corporate development",
+          "what": "Structure and sign a named memory supply agreement",
+          "where": "Customer account planning and contract approval process",
+          "when": "H2 2026 through H1 2027",
+          "why": "Equity optionality converts to revenue only through contracts",
+          "how": "Capacity reservation terms, custom-HBM program, joint press release"
+        }
+      },
+      {
+        "actor": "Memory-system silicon architect, transformer-ASIC inference silicon startup",
+        "job": "Co-specifying the fused HBM-and-SRAM cluster memory system against the supplier's stack roadmap so next-generation Sohu depends on named parts.",
+        "outcome": "A joint development program covering HBM stack integration, disclosed as an engineering collaboration rather than an investment.",
+        "motivation": "The product's differentiator is the memory system, so the supplier's roadmap sits inside the design rather than beside it.",
+        "task": {
+          "who": "Memory subsystem architecture and packaging engineering",
+          "what": "Co-define HBM stack interface for next-generation Sohu",
+          "where": "Joint engineering reviews with the memory supplier",
+          "when": "H2 2026 through H1 2027",
+          "why": "Fused HBM-SRAM design binds supplier roadmap to product",
+          "how": "Custom base-die specification, packaging co-design, shared test vehicles"
+        }
+      },
+      {
+        "actor": "HBM capacity planning and fab allocation lead, memory supplier",
+        "job": "Slotting a new non-incumbent ASIC account into HBM output plans already committed ahead of production for 2027 wafer starts.",
+        "outcome": "Reserved 2027 HBM capacity assigned to the account, the volume basis any announced supply or reservation agreement rests on.",
+        "motivation": "Allocation decided now sets 2027 revenue mix, and diversifying beyond incumbent GPU buyers hedges a concentrated customer base.",
+        "task": {
+          "who": "Capacity planning with sales operations and manufacturing",
+          "what": "Reserve 2027 HBM output for the new account",
+          "where": "Annual capacity allocation and demand-planning cycle",
+          "when": "H2 2026 through H1 2027",
+          "why": "A named agreement needs committed volume behind it",
+          "how": "Demand forecast review, wafer-start commitments, packaging capacity booking"
+        }
+      },
+      {
+        "actor": "AI infrastructure procurement lead, large-scale inference capacity buyer",
+        "job": "Negotiating delivery and supply-assurance terms for rack orders placed against inference silicon that has not yet shipped.",
+        "outcome": "Contract conditions requiring a named, disclosable memory supply arrangement the buyer can point at before committing further volume.",
+        "motivation": "More than a billion dollars is signed against undelivered racks, and a cap-table line is not supply assurance.",
+        "task": {
+          "who": "Infrastructure procurement with supply-risk and legal review",
+          "what": "Require named memory supply assurance in purchase terms",
+          "where": "Vendor contract negotiation and supply-risk diligence",
+          "when": "H2 2026 through H1 2027",
+          "why": "Undelivered racks carry component risk the buyer absorbs",
+          "how": "Delivery milestones, supply-continuity clauses, second-source requirements"
+        }
+      },
+      {
+        "actor": "Corporate communications and disclosure lead, transformer-ASIC inference silicon startup",
+        "job": "Deciding what to publish about memory sourcing as customers, investors and the market press for evidence behind the gigawatt-scale claim.",
+        "outcome": "A joint announcement or company materials naming the memory arrangement as a supply, reservation or co-development agreement.",
+        "motivation": "Selling forward against undelivered racks demands credible proof of supply, which an unannounced sourcing relationship cannot provide.",
+        "task": {
+          "who": "Communications with legal and executive leadership",
+          "what": "Draft and clear a joint memory-partnership announcement",
+          "where": "Press-release approval and partner communications review",
+          "when": "H2 2026 through H1 2027",
+          "why": "Disclosure converts a quiet relationship into buyer-visible assurance",
+          "how": "Joint press release, customer briefings, investor materials"
+        }
+      }
+    ],
+    "prediction.b177dc0150808a3d": [
+      {
+        "actor": "Trust-and-safety policy lead, frontier general-purpose model provider",
+        "job": "Drafting a published usage-policy carve-out that lets identity-verified incident responders submit malware, exploit chains and payload-bearing logs.",
+        "outcome": "Public documentation naming an enrollable defender program, its eligibility bar, and the cyber-safety refusals lifted for enrolled traffic.",
+        "motivation": "Case-by-case goodwill scales badly and leaves the provider blamed whenever refusal filters bind the victim's responders instead of the intruder.",
+        "task": {
+          "who": "Policy and usage-guidelines team with legal counsel",
+          "what": "Draft published defender exemption to cyber-safety usage policy",
+          "where": "Usage policies, model spec and API terms",
+          "when": "H2 2026 through H1 2027",
+          "why": "Undocumented per-customer exceptions do not scale",
+          "how": "Written eligibility criteria, attestations, revocation and audit terms"
+        }
+      },
+      {
+        "actor": "Identity-verification and enrollment product manager, frontier model API platform",
+        "job": "Building the application, organization-identity checks and entitlement grant that put verified incident responders into a defender tier before an incident.",
+        "outcome": "A self-serve enrollment lane a responder can find and apply to, granting an account-level entitlement that survives audit.",
+        "motivation": "An allowlist quietly extended to a few named customers does not answer responders who arrive mid-incident with nowhere to apply.",
+        "task": {
+          "who": "API platform product with identity and compliance engineering",
+          "what": "Ship verified-responder enrollment and account entitlement flow",
+          "where": "Developer console, organization settings and account provisioning system",
+          "when": "H2 2026 through H1 2027",
+          "why": "A findable lane beats mid-incident escalation",
+          "how": "Business-identity verification vendor, org-level entitlements, signed responder attestation"
+        }
+      },
+      {
+        "actor": "Safety-systems engineering lead, model policy and refusal infrastructure",
+        "job": "Rebuilding cyber-safety refusals to key on the calling account's entitlement rather than on payload content alone, without weakening the default.",
+        "outcome": "An entitlement-aware refusal path accepting malware and exploit chains from enrolled accounts while holding the default policy for everyone else.",
+        "motivation": "Filters that key on content bind the responder and not the intruder, so the exemption must live in the serving path.",
+        "task": {
+          "who": "Safety classifier and inference-serving engineering teams",
+          "what": "Make cyber-safety refusals conditional on account entitlement",
+          "where": "Moderation classifiers and request-authorization layer of the API",
+          "when": "H2 2026 through H1 2027",
+          "why": "Content-keyed filters block defenders, not attackers",
+          "how": "Per-key policy flags, scoped entitlements, differential eval suites"
+        }
+      },
+      {
+        "actor": "Cyber threat-intelligence and red-team liaison, frontier model provider",
+        "job": "Setting the vetting bar, abuse monitoring and revocation rules that make a payload-submission exemption hard enough to obtain to survive review.",
+        "outcome": "A vetted pilot with named incident-response teams, plus published abuse controls letting the program launch instead of stalling in review.",
+        "motivation": "An enrollment lane is an attacker's lane too, and a configuration setting was all that separated an eval harness from an intrusion.",
+        "task": {
+          "who": "Threat intelligence with red team and enforcement",
+          "what": "Define vetting bar and abuse controls for enrollment",
+          "where": "Pilot program with vetted incident-response and CERT partners",
+          "when": "H2 2026 through H1 2027",
+          "why": "The exception must be hard to obtain",
+          "how": "Adversarial review, usage telemetry, revocation triggers, partner references"
+        }
+      },
+      {
+        "actor": "Incident-response lead, breached platform security operations",
+        "job": "Publishing forensics that name hosted-API refusals as the blocker, and filing payload-submission exemption as a requirement with API vendors.",
+        "outcome": "Named, documented demand from credible defenders that a provider can point at when justifying an enrollable exemption lane.",
+        "motivation": "A victim that cannot point the best tooling at its own artifacts discloses later and vaguer, and pays for it publicly.",
+        "task": {
+          "who": "Security operations, forensics and vendor-management functions",
+          "what": "File payload-submission exemption requirement with hosted API vendors",
+          "where": "Public incident write-ups and enterprise API contract review",
+          "when": "H2 2026 through H1 2027",
+          "why": "Refusals forced forensics onto open-weight models",
+          "how": "Open-weight fallback tooling, contract terms, public post-incident reports"
+        }
+      }
+    ]
+  }
+}
