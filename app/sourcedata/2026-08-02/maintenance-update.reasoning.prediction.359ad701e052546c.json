@@ -1,0 +1,16 @@
+{
+  "prediction_id": "prediction.359ad701e052546c",
+  "stream": "reasoning",
+  "entry_id": "prediction.359ad701e052546c",
+  "origin_date": "2026-08-02",
+  "verdict": "stale",
+  "proposed_action": "rewrite",
+  "reason": "Bridge -> Reasoning, and the hardest instance in this batch: `because` asserts 'a 1.4TB 4-bit checkpoint', a number taken from pre-release arithmetic. Bridge validation.4099e1d9f4f037b1 (2026-07-27, observed_relevance=5) reports the published repository listing at 1.56 TB across 96 safetensors shards, 'about eleven percent above the 1.4 TB', and 'twenty 80GB parts rather than eighteen'. The premise figure is falsified by the artifact itself. The same bridge also removes the mechanism's driver - 'vLLM's supported floor keeps every weight resident on Blackwell-class memory, which removes the pressure that would have produced a streaming recipe' - and validation.7462e20b917722dd (2026-08-02) confirms it empirically: two configurations held the full checkpoint in a single node at 119 and 196 tokens/sec/GPU, and 'The trade this rests on went untested.' Single-node serving of the full weights is now demonstrated with no expert offload at all, which is one of the falsifier conditions the prediction wrote for itself ('a node of 192GB-class cards that simply holds the whole file'). Rewrite `because` to the published 1.56 TB / twenty-part floor and reframe `given` to acknowledge that high-capacity single-node parts, not offload, are currently absorbing the pressure. None of this is visible via prediction_evidence_links: 36 rows, all 'support', contradiction_score 0.0.",
+  "cross_stream_evidence": [
+    "bridge:validation.4099e1d9f4f037b1",
+    "bridge:validation.7462e20b917722dd"
+  ],
+  "confidence": 0.9,
+  "applied": false,
+  "applied_note": "NOT APPLIED. maintenance-update markers are write-only: weekly_maintenance._stale_applied checks only file existence and no ingest path reads this content. The change described in `reason` has not reached app/data/analytics.sqlite."
+}

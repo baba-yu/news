@@ -1,0 +1,18 @@
+{
+  "prediction_id": "prediction.0b8bcb868b9c8fa5",
+  "stream": "reasoning",
+  "entry_id": "prediction.0b8bcb868b9c8fa5",
+  "origin_date": "2026-08-02",
+  "verdict": "stale",
+  "proposed_action": "rewrite",
+  "reason": "The resolution criterion is being overtaken from outside its own vendor whitelist, and two new bridges since the 2026-07-19 fresh verdict make that concrete. reasoning.landing restricts the count to 'at least two of OpenAI, Meta, Anthropic, and Google'. Bridge validation.c5afdf03c01a74a3 (2026-08-01) records DeepSeek holding V4-Flash at $0.14 per million input tokens on a cache miss - already seven times below the $1 threshold, from a vendor the landing clause cannot count - and states 'Nothing repriced, which is the first thing to say... That tightens the floor the named vendors have to price against.' Meanwhile the origin row validation.c33cd497b1abf0b0 (2026-07-10) records that OpenAI's Luna already listed at $1/$6 on July 9, i.e. one named vendor sat exactly on the threshold at mint. Bridge validation.e8a86f3501a41320 (2026-07-27) adds the opposite bound: OpenRouter lists Kimi K3 at $3/M, a serving-cost floor for a 2.8T MoE. So the sub-$1 bar is simultaneously nearly pre-satisfied inside the whitelist and already smashed outside it, while reasoning.because/given still frame it as a forward competitive question. Rewrite the landing clause to say whether a non-whitelisted vendor counts and whether $1.00 exactly counts.",
+  "cross_stream_evidence": [
+    "bridge:validation.c5afdf03c01a74a3 (2026-08-01) - DeepSeek at $0.14/M input, outside the four-vendor whitelist",
+    "bridge:validation.c33cd497b1abf0b0 (2026-07-10) - 'Luna at $1/$6 for high-volume pipelines' at mint, one named vendor already on the line",
+    "bridge:validation.e8a86f3501a41320 (2026-07-27) - $3/M OpenRouter listing establishes a serving-cost floor, not a mid-tier ceiling",
+    "needs:need.f175789c89f52636 ('published mid-tier price cut below $1') inherits the same ambiguity"
+  ],
+  "confidence": 0.6,
+  "applied": false,
+  "applied_note": "NOT APPLIED. maintenance-update markers are write-only: weekly_maintenance._stale_applied checks only file existence and no ingest path reads this content. The change described in `reason` has not reached app/data/analytics.sqlite."
+}

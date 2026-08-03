@@ -1,0 +1,17 @@
+{
+  "prediction_id": "prediction.6ba7ca6e01ab313e",
+  "stream": "needs",
+  "entry_id": "coding-agent platform security/orchestration product lead",
+  "origin_date": "2026-08-02",
+  "verdict": "stale",
+  "proposed_action": "rewrite",
+  "reason": "Third consecutive week stale for this same Need, and correctly so rather than as a duplicate: it was judged stale on 2026-07-19 and 2026-07-26, markers exist at app/sourcedata/2026-07-19/maintenance-update.needs.prediction.6ba7ca6e01ab313e.json and the 2026-07-26 equivalent, but _stale_applied (weekly_maintenance.py:722) only calls .is_file() on them and nothing reads their contents, so need.262db198b3d721da's text is unchanged in the DB. New evidence this week sharpens the rewrite rather than repeating it: the Need's outcome reads 'A shipped, default-on Rule-of-Two gate that pauses an agent run for human approval before combining a third dangerous property', and validation.290226ed37d475b5 (08-01) shows YC's qm shipping exactly that pause as its Strict posture while defaulting to Auto. The actor has now demonstrably built the mechanism and chosen not to default it, so the Need should be reframed from 'implement a gate' to 'flip an existing gate to default-on', with the qm posture set named as the reference implementation.",
+  "cross_stream_evidence": [
+    "bridge:validation.290226ed37d475b5",
+    "bridge:validation.88a4ea3328e0d201",
+    "task:need_task.58272020b02c4782"
+  ],
+  "confidence": 0.8,
+  "applied": false,
+  "applied_note": "NOT APPLIED. maintenance-update markers are write-only: weekly_maintenance._stale_applied checks only file existence and no ingest path reads this content. The change described in `reason` has not reached app/data/analytics.sqlite."
+}

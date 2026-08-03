@@ -1,0 +1,17 @@
+{
+  "prediction_id": "prediction.1ce328e19c9e6685",
+  "stream": "reasoning",
+  "entry_id": "prediction.1ce328e19c9e6685",
+  "origin_date": "2026-08-02",
+  "verdict": "stale",
+  "proposed_action": "rewrite",
+  "reason": "Bridge to Reasoning, on two clauses now. The 2026-07-19 run judged this stale and wrote app/sourcedata/2026-07-19/maintenance-update.reasoning.prediction.1ce328e19c9e6685.json with a replacement 'given'; it was never applied - the DB still reads reasoning_given='only captive owners have both the capital to buy a robot maker and the in-house demand to run it', and the marker's replacement text appears nowhere in the row. That clause is still contradicted by validation.2fd74050bb4f0f6a (2026-07-18, relevance 4): Toyota ran Walden Robotics machines in its own North American plant from February and then took minority equity, which the bridge itself calls 'a customer underwriting a supplier, not a captive fleet' - an actor with both the capital and the captive demand that chose partner-not-acquire. Since that unapplied verdict a second clause has been hit: validation.28509240c3f7bca4 (2026-07-28, relevance 4, dim=so_that) reports the only humanoid operating-hours figure disclosed that week - 65,000+ hours across nine customer facilities plus $300M of Digit v5 orders - accrued by a merchant maker selling into other people's sites, which is the third-party RaaS outcome reasoning_so_that says will lose, while no captive fleet disclosed anything. Restating stale is correct, not duplicative: markers are write-only and the text is unchanged.",
+  "cross_stream_evidence": [
+    "bridge:validation.28509240c3f7bca4",
+    "bridge:validation.2fd74050bb4f0f6a",
+    "marker:app/sourcedata/2026-07-19/maintenance-update.reasoning.prediction.1ce328e19c9e6685.json"
+  ],
+  "confidence": 0.85,
+  "applied": false,
+  "applied_note": "NOT APPLIED. maintenance-update markers are write-only: weekly_maintenance._stale_applied checks only file existence and no ingest path reads this content. The change described in `reason` has not reached app/data/analytics.sqlite."
+}

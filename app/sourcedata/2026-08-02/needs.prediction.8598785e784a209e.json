@@ -1,0 +1,114 @@
+[
+  {
+    "actor": "Model release engineering lead, Moonshot AI Kimi team",
+    "job": "Defining what a Kimi release ships beyond weights, after an outside draft checkpoint decided the cheapest way to serve K3.",
+    "outcome": "A speculative-decoding draft checkpoint published under Moonshot's own namespace in the same drop as the base weights.",
+    "motivation": "The per-dollar verdict on their own model is currently set by an artifact they did not publish or control.",
+    "task": {
+      "who": "Moonshot AI model release engineering and launch checklist owners",
+      "what": "Add a draft checkpoint to the release bundle",
+      "where": "Kimi release checklist and publication pipeline",
+      "when": "Q4 2026",
+      "why": "Weights alone leave the cost axis to outsiders",
+      "how": "Release manifests listing paired base and draft artifacts"
+    }
+  },
+  {
+    "actor": "Speculative-decoding research engineer, Moonshot AI post-training group",
+    "job": "Distilling a draft model from a frozen Kimi target, work an outside group did after the fact for K3.",
+    "outcome": "An in-house draft checkpoint with an acceptance rate high enough to justify shipping it beside the base weights.",
+    "motivation": "A draft distilled during training costs far less than one reconstructed later from a served endpoint by strangers.",
+    "task": {
+      "who": "Moonshot AI post-training, distillation and evaluation researchers",
+      "what": "Distil an in-house draft from the frozen target",
+      "where": "Moonshot training cluster and draft acceptance-rate evaluation harness",
+      "when": "Q3 2026",
+      "why": "An outside draft currently sets the cheap configuration",
+      "how": "Target-served distillation against a frozen checkpoint via SGLang"
+    }
+  },
+  {
+    "actor": "Inference performance engineer, Moonshot AI serving team",
+    "job": "Measuring decode throughput for Kimi checkpoints on named accelerators, numbers that today only appear in third-party benchmark write-ups.",
+    "outcome": "A measured decode figure on named hardware stated in the release itself rather than left to an outside benchmark.",
+    "motivation": "If the throughput number travels with the release, the publisher rather than a reviewer defines the model's cost story.",
+    "task": {
+      "who": "Moonshot AI serving performance and benchmarking engineers",
+      "what": "Publish measured decode rates on named accelerators",
+      "where": "Moonshot release notes and internal benchmark rig",
+      "when": "Q1 2027",
+      "why": "The number has to travel with the weights",
+      "how": "Fixed input and output token profiles per configuration"
+    }
+  },
+  {
+    "actor": "Model release lead, DeepSeek open-weight model team",
+    "job": "Deciding whether DeepSeek's next trillion-scale MoE ships its multi-token-prediction work as a downloadable draft artifact rather than an architecture note.",
+    "outcome": "A separately downloadable draft artifact under DeepSeek's namespace, with the serving-stack flag documented in the release.",
+    "motivation": "A described prediction head that no serving stack can be pointed at buys none of the per-dollar advantage.",
+    "task": {
+      "who": "DeepSeek model release and open-weight publication owners",
+      "what": "Convert the prediction head into a shippable artifact",
+      "where": "DeepSeek release repository and model card",
+      "when": "November 2026",
+      "why": "A diagram is not a deployable dependency",
+      "how": "Weight exports packaged as a standalone draft repository"
+    }
+  },
+  {
+    "actor": "Speculative-decoding maintainer, SGLang serving-stack project",
+    "job": "Keeping the draft-model flag stable and documented across ROCm and CUDA builds so a release can name it directly.",
+    "outcome": "A documented serving flag a publisher can cite in a release note without pinning to an unreleased branch.",
+    "motivation": "Publishers will not document a launch flag whose name or semantics move between serving-stack point releases.",
+    "task": {
+      "who": "SGLang speculative decoding and documentation maintainers",
+      "what": "Stabilise and document the draft-model serving flag",
+      "where": "SGLang server arguments reference and release notes",
+      "when": "September 2026",
+      "why": "Releases cite flags only when the names hold",
+      "how": "Deprecation policy covering speculative-decoding argument names"
+    }
+  },
+  {
+    "actor": "ROCm inference software engineer, AMD AI software group",
+    "job": "Upstreaming the ROCm fixes that let speculative decoding run on MI-series accelerators without a benchmark author patching the stack.",
+    "outcome": "Draft-model decoding working from a released ROCm build, so a publisher can quote AMD numbers in its own release.",
+    "motivation": "A first-party decode figure on named hardware is only quotable if the path works outside the benchmarker's private tree.",
+    "task": {
+      "who": "AMD ROCm kernel and inference-framework enablement engineers",
+      "what": "Upstream ROCm speculative-decoding fixes into released builds",
+      "where": "ROCm runtime and SGLang ROCm continuous integration",
+      "when": "October 2026",
+      "why": "Quotable numbers need a stack shipped, not patched",
+      "how": "Regression jobs on MI-series nodes per serving release"
+    }
+  },
+  {
+    "actor": "Model hub metadata product manager, Hugging Face",
+    "job": "Defining how a draft checkpoint is declared against its base model so a paired release reads as one unit.",
+    "outcome": "Model-card and repository metadata that names the base-draft pairing, making a first-party draft discoverable at download time.",
+    "motivation": "Without a declared pairing, a publisher's own draft looks identical to the community uploads it is meant to replace.",
+    "task": {
+      "who": "Hugging Face hub metadata and model-card standards owners",
+      "what": "Define base-to-draft pairing metadata for model repositories",
+      "where": "Hub model-card specification and repository metadata schema",
+      "when": "December 2026",
+      "why": "First-party drafts must be distinguishable from community uploads",
+      "how": "Model-card fields validated at repository push time"
+    }
+  },
+  {
+    "actor": "Open-weight model onboarding engineer, Together AI inference platform",
+    "job": "Bringing new trillion-scale open-weight models onto a metered endpoint, where per-token price depends on whether a matched draft exists.",
+    "outcome": "A stated onboarding requirement that a publisher ship its own draft, raised with model labs before their next release.",
+    "motivation": "Waiting weeks for somebody to distil a draft is weeks of serving the model at the worse price.",
+    "task": {
+      "who": "Together AI model onboarding and serving economics engineers",
+      "what": "Require a publisher-shipped draft in model onboarding criteria",
+      "where": "Together AI model onboarding checklist and lab conversations",
+      "when": "February 2027",
+      "why": "Buyer demand makes first-party drafting worth the effort",
+      "how": "Per-token cost models comparing drafted and undrafted serving"
+    }
+  }
+]

@@ -1,0 +1,374 @@
+{
+  "week_ending": "2026-08-02",
+  "judgements": [
+    {
+      "prediction_id": "prediction.fd7bdbc998adaac2",
+      "stream": "reasoning",
+      "entry_id": "prediction.fd7bdbc998adaac2",
+      "verdict": "fresh",
+      "reason": "Checked the strongest contradiction candidate by reading bridge text directly (prediction_evidence_links carries 32/32 support and contradiction_score 0.0, so the column can never surface one). That candidate is validation.6763a7e29ca24ad9 (2026-07-27): Moonshot published Kimi K3 under a bespoke licence whose two gates attach to commercial serving above a MaaS revenue line while leaving download, fine-tune and internal use untouched. That is the exact serving-not-download shape reasoning.so_that predicts, arriving from the Chinese licensor instead of Washington - it pre-empts the instrument, it does not falsify it. Every other bridge this week reinforces reasoning.given ('procurement pressure needs a counterparty'): 07-28 Amodei names the possession question only to dismiss it and the FCC withholds market access rather than possession; 07-29 two Chinese checkpoints move through US-facing download paths unimpeded; 07-30 Unit 42 gives the cleanest asymmetry demo (OpenAI could disable an account, nobody could disable DeepSeek weights on the operator's own machines); 08-01 DeepSeek ships V4-Flash under MIT and serves it with no American action on either half. reasoning.because is a citation of a 2026-07-25 NYT report that has not been retracted, and the 07-28 Anthropic/Nvidia opposition to blanket bans strengthens rather than weakens the 'targeted, not categorical' premise. Target window is H1 2027; nothing is overdue.",
+      "cross_stream_evidence": [
+        "bridge:validation.6763a7e29ca24ad9 (2026-07-27, dim=given, rel=3) - serving-side gate instantiated by the licensor, not Washington; pre-empts so_that rather than contradicting it",
+        "bridge:validation.3f03cea67926ee47 (2026-07-30, rel=4) - Unit 42 asymmetry demonstration directly supports reasoning.given",
+        "needs:need.b9cdb64a3d664113 - the 'named-model guidance short of a categorical ban' actor is still the live coalition; nothing delivered against it this week"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.fd7bdbc998adaac2",
+      "stream": "bridge",
+      "entry_id": "prediction.fd7bdbc998adaac2",
+      "verdict": "fresh",
+      "reason": "Verdict covers all six validation_rows (2026-07-26 through 2026-08-01). Each is accurately attached and several grade themselves down honestly - the 07-29 row states plainly 'Nothing was restricted, and nothing needed to be', and the 08-01 row calls the EU labelling duty 'right structure, wrong jurisdiction'. No [REVIVED] leakage on this prediction and huge_longshot_hit_at is correctly NULL. Noted but not escalated: the dimension spread is 6/6 support_dimension='given' with zero because, so_that or landing rows, so seven consecutive daily runs produced no coverage at all of the so_that leg (a US provider or catalog publicly refusing a named model). That is an honest reflection of a non-event rather than a defect in any individual row, but it means the bridge set currently tests only the premise, never the resolution criterion.",
+      "cross_stream_evidence": [
+        "reasoning:reasoning_so_that names a US-provider refusal that no bridge dimension has yet been opened against"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.65
+    },
+    {
+      "prediction_id": "prediction.fd7bdbc998adaac2",
+      "stream": "needs",
+      "entry_id": "prediction.fd7bdbc998adaac2",
+      "verdict": "broken",
+      "reason": "Verdict covers the whole seven-actor Need-set. All 7 needs_tasks carry when_text 'H2 2026 through H1 2027' but store target_start_date..target_end_date = 2026-07-01..2026-12-31. Reproduced against the live parser: app.src.timewindow.parse_time_window('H2 2026 through H1 2027') returns ('2026-07-01','2026-12-31') - the parser binds the first half-year token and silently discards the span end, so the stored runway closes six months before the writer said it does and before the prediction's own target_start_date (2027-01-01). app/src/schema.sql documents needs_tasks.target_* as 'the runway period during which the actor's work happens', so this is a wrong value, not a modelling choice. Same defect class was escalated as broken for prediction.0b8bcb868b9c8fa5 on 2026-07-19 and is unfixed three weeks later; it hits 20 of the 21 needs_tasks across this batch. Secondary, not the basis for the verdict: bridge validation.6763a7e29ca24ad9 (07-27) and the 08-01 DeepSeek MIT release both bear on need.65f082d1ebeaa249, whose task how_text names 'Apache 2.0 license' specifically while the two actual releases used a bespoke serving-gated licence and MIT.",
+      "cross_stream_evidence": [
+        "code:app/src/timewindow.py parse_time_window - span end dropped, verified by direct call",
+        "schema:app/src/schema.sql needs_tasks.target_* documented as the runway, not the landing window",
+        "prior:app/sourcedata/2026-07-19 needs/prediction.0b8bcb868b9c8fa5 verdict=broken, same parser, never fixed",
+        "bridge:validation.6763a7e29ca24ad9 - licence form diverges from need.65f082d1ebeaa249 task how_text"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.fd7bdbc998adaac2",
+      "stream": "readings",
+      "entry_id": "prediction.fd7bdbc998adaac2",
+      "verdict": "broken",
+      "reason": "Zero prediction_chain rows and zero prediction_relations rows. This is a pipeline outage, not a healthy empty set: prediction_chain max(created_at) is 2026-06-10T10:34:13Z and prediction_relations max(created_at) is 2026-06-09T18:25:42Z, so edge extraction has produced nothing for 54 days and this prediction (minted 2026-07-26) was never eligible for an edge. Concrete edges that should exist and do not: this prediction shares three evidence_items with prediction.0b8bcb868b9c8fa5 - evidence.00b5103d1c36e8fc (OpenRouter Kimi K3 hosted pricing), evidence.c89447e4cc8f9029 (DeepSeek V4-Flash-0731 model card) and evidence.f9581a7992e1c0cb (Kimi K3 License text) - and one with prediction.14cd36ae7a6a8633, evidence.7372d8cb937a6ab6 (Moonshot Kimi K3 model card), with 0 relation rows and 0 chain rows on either pair. Escalate the extractor, not this prediction; scoring this stream fresh would launder a system outage into per-prediction health.",
+      "cross_stream_evidence": [
+        "db:prediction_chain max created_at 2026-06-10, prediction_relations max created_at 2026-06-09 (127 and 200 rows, both frozen)",
+        "prediction:prediction.0b8bcb868b9c8fa5 - 3 shared evidence_items, 0 relation rows",
+        "prediction:prediction.14cd36ae7a6a8633 - shared evidence.7372d8cb937a6ab6, 0 relation rows"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+
+    {
+      "prediction_id": "prediction.04ff49878f99c77f",
+      "stream": "reasoning",
+      "entry_id": "prediction.04ff49878f99c77f",
+      "verdict": "stale",
+      "reason": "Bridge validation.fedfba549f5e1e4d (2026-07-28, support_dimension='so_that', rel=3) documents a live counter-mechanism that reasoning.so_that has no slot for. Agility Robotics carried exactly the evidence this thesis says converts into operator equity - more than $300M of multi-year Digit v5 orders and more than 65,000 operating hours across nine customer facilities - and the capital beside it arrived through a blank-cheque vehicle: a definitive business combination with Churchill Capital Corp XI at $2.5B pre-money, >$620M gross proceeds. The row states outright 'No customer appears as an investor, and no industrial operator is named as a lead.' So deployment evidence demonstrably converts to purchase orders rather than to a co-led round, which is the mechanism reasoning.given asserts ('learned manipulation cuts pilot-to-production to two months, giving buyers evidence funds lack'). reasoning.because (Walden running production work at Toyota since February) is settled history and stands. Rewrite so_that/landing to state why a customer buying output rather than equity does not count toward the '>=2 operator-co-led $100M+ rounds' bar, or widen the bar to admit it. This is new since the 2026-07-26 fresh verdict, which was issued before the 07-28 bridge existed.",
+      "cross_stream_evidence": [
+        "bridge:validation.fedfba549f5e1e4d (2026-07-28, dim=so_that) - deployment evidence present, operator co-lead absent, SPAC route taken instead",
+        "needs:need.b8f8ea42aef12b13 outcome ('a signed lead or co-lead commitment of $100M+ into a vendor already deployed in the operator's facilities') has no counterpart actor for the purchase-order path the 07-28 row records"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.65
+    },
+    {
+      "prediction_id": "prediction.04ff49878f99c77f",
+      "stream": "bridge",
+      "entry_id": "validation.fedfba549f5e1e4d",
+      "verdict": "broken",
+      "reason": "Two defects in one row, both verified. (1) related_items_text begins with the literal marker '[REVIVED]', which is not stripped anywhere - the same string reaches readers verbatim in the rendered markdown (future-prediction/en/future-prediction-20260802.md carries five such rows). (2) That same string is the sole trigger for the prediction-level landing signal: app/src/ingest.py:504 stamps predictions.huge_longshot_hit_at whenever '[REVIVED]' appears in related_items_text, which is why this prediction shows huge_longshot_hit_at=2026-07-28 and why it entered this week's queue with change_signal 'landed_this_week' and confidence_drift_score 0.5. The row's own body records the opposite of a landing: no operator led, no customer invested, the money came from Churchill Capital Corp XI. The bridge text itself is accurate and well written - 'Buying the robots and buying into the company are different decisions' - so the fix is in the marker handling and the signal derivation, not in the prose. Four of the five huge_longshot_hit_at stamps in this batch sit on bridges whose text records a non-event or a wrong-mechanism event.",
+      "cross_stream_evidence": [
+        "code:app/src/ingest.py:500-509 - huge_longshot_hit_at stamped on the literal string '[REVIVED]', not on any resolution",
+        "render:future-prediction/en/future-prediction-20260802.md lines 26-30 - [REVIVED] shipped to readers unstripped",
+        "queue:app/sourcedata/2026-08-02/maintenance-candidates.json - this prediction's only change_signal is 'landed_this_week', derived from this row"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.04ff49878f99c77f",
+      "stream": "needs",
+      "entry_id": "prediction.04ff49878f99c77f",
+      "verdict": "broken",
+      "reason": "Verdict covers the whole four-actor Need-set. All 4 needs_tasks carry when_text 'H2 2026 through H1 2027' and store 2026-07-01..2026-12-31, dropping the entire second half of the writer's stated runway - reproduced directly against app.src.timewindow.parse_time_window. The 2026-07-26 judge saw this and wrote 'noted but not escalated'; a second week of the same wrong value with a live repro is an escalation, not a note. Substantively the coalition is also now incomplete: the 07-28 bridge shows the industrial operator delivering >$300M of purchase orders instead of the equity commitment need.b8f8ea42aef12b13 describes, and no Need in the set covers that path. needs_tasks.status is 'open' on all four and cannot be read as evidence either way - 'done' has never been written to that column anywhere in the database.",
+      "cross_stream_evidence": [
+        "code:app/src/timewindow.py parse_time_window('H2 2026 through H1 2027') -> ('2026-07-01','2026-12-31')",
+        "bridge:validation.fedfba549f5e1e4d - purchase-order path unrepresented in the Need coalition",
+        "prior:2026-07-26 needs judgement recorded the window defect and declined to escalate"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.04ff49878f99c77f",
+      "stream": "readings",
+      "entry_id": "prediction.04ff49878f99c77f",
+      "verdict": "broken",
+      "reason": "Still zero prediction_chain and zero prediction_relations rows. This stream was judged stale with a rewrite action on 2026-07-26 and the named partner - prediction.59142f2f89f0fd9d, 'FLUX 3's action head stays unpublished through H1 2027', minted the same day from the same Black Forest Labs evidence that produced this prediction's 07-24 bridge validation.7fa9c9113bd6d734 - is still unlinked. The 2026-07-26 update marker itself records why: it carries '\"applied\": false' and the note 'markers are write-only; nothing in app/ reads this file'. Re-judging as broken rather than stale because the cause is not a missed edge on this prediction but a dead extractor: prediction_chain has produced nothing since 2026-06-10 and prediction_relations nothing since 2026-06-09. Note also that relation_type='contradicts' is not expressible - the CHECK constraint allows only parallel, exclusive_variant, negation, entails, equivalent - so 'parallel' is the strongest available encoding for the 59142f2f pair.",
+      "cross_stream_evidence": [
+        "prediction:prediction.59142f2f89f0fd9d - named as the missing edge partner on 2026-07-26, still unlinked",
+        "marker:app/sourcedata/2026-07-26/maintenance-update.readings.prediction.04ff49878f99c77f.json - applied:false, write-only",
+        "db:prediction_chain frozen at 2026-06-10, prediction_relations frozen at 2026-06-09"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+
+    {
+      "prediction_id": "prediction.0b8bcb868b9c8fa5",
+      "stream": "reasoning",
+      "entry_id": "prediction.0b8bcb868b9c8fa5",
+      "verdict": "stale",
+      "reason": "The resolution criterion is being overtaken from outside its own vendor whitelist, and two new bridges since the 2026-07-19 fresh verdict make that concrete. reasoning.landing restricts the count to 'at least two of OpenAI, Meta, Anthropic, and Google'. Bridge validation.c5afdf03c01a74a3 (2026-08-01) records DeepSeek holding V4-Flash at $0.14 per million input tokens on a cache miss - already seven times below the $1 threshold, from a vendor the landing clause cannot count - and states 'Nothing repriced, which is the first thing to say... That tightens the floor the named vendors have to price against.' Meanwhile the origin row validation.c33cd497b1abf0b0 (2026-07-10) records that OpenAI's Luna already listed at $1/$6 on July 9, i.e. one named vendor sat exactly on the threshold at mint. Bridge validation.e8a86f3501a41320 (2026-07-27) adds the opposite bound: OpenRouter lists Kimi K3 at $3/M, a serving-cost floor for a 2.8T MoE. So the sub-$1 bar is simultaneously nearly pre-satisfied inside the whitelist and already smashed outside it, while reasoning.because/given still frame it as a forward competitive question. Rewrite the landing clause to say whether a non-whitelisted vendor counts and whether $1.00 exactly counts.",
+      "cross_stream_evidence": [
+        "bridge:validation.c5afdf03c01a74a3 (2026-08-01) - DeepSeek at $0.14/M input, outside the four-vendor whitelist",
+        "bridge:validation.c33cd497b1abf0b0 (2026-07-10) - 'Luna at $1/$6 for high-volume pipelines' at mint, one named vendor already on the line",
+        "bridge:validation.e8a86f3501a41320 (2026-07-27) - $3/M OpenRouter listing establishes a serving-cost floor, not a mid-tier ceiling",
+        "needs:need.f175789c89f52636 ('published mid-tier price cut below $1') inherits the same ambiguity"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.6
+    },
+    {
+      "prediction_id": "prediction.0b8bcb868b9c8fa5",
+      "stream": "bridge",
+      "entry_id": "validation.c5afdf03c01a74a3",
+      "verdict": "broken",
+      "reason": "The row's first sentence is 'The rate did not move, and that is most of what happened.' It is an explicit non-event, and it is the row that stamped predictions.huge_longshot_hit_at=2026-08-01 and put this prediction in the queue under change_signal 'landed_this_week'. Cause is mechanical: related_items_text opens with the literal '[REVIVED]' and app/src/ingest.py:504 stamps the column on that string alone, with no reference to resolution. The same leak is on validation.e8a86f3501a41320 (2026-07-27), which also opens '[REVIVED]' and whose text likewise says 'No vendor repriced a mid-tier model today, in either direction.' Both marker strings reach readers unstripped in the rendered future-prediction markdown. The prose in both rows is accurate and appropriately hedged; the defect is the marker and the signal derived from it.",
+      "cross_stream_evidence": [
+        "code:app/src/ingest.py:500-509",
+        "bridge:validation.e8a86f3501a41320 - second [REVIVED] leak on the same prediction, same non-event character",
+        "queue:maintenance-candidates.json change_signal 'landed_this_week' for this prediction derives entirely from this stamp"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.0b8bcb868b9c8fa5",
+      "stream": "needs",
+      "entry_id": "prediction.0b8bcb868b9c8fa5",
+      "verdict": "broken",
+      "reason": "Re-affirming the broken verdict issued on 2026-07-19; nothing was applied and the wrong values are still in the database. need_task.5384b332af3ecede when_text 'Late 2026 through Q2 2027, following Meta's GA round.' stores 2027-04-01..2027-06-30, and need_task.8bfe22b39a16a251 when_text 'Continuously through the runway to Q2 2027.' stores the same - both discarding the runway start and collapsing onto predictions.target_start_date..target_end_date exactly. Reproduced live: parse_time_window returns ('2027-04-01','2027-06-30') for both strings, because the landing quarter token outranks the runway phrase. need_task.fc8d99e71c99fd37 ('H2 2026, during the preview-to-GA transition window') parses correctly and is the control that isolates the defect to spanning phrases. This is not a duplicate judgement: last week's marker file was never read by anything, so re-reporting the identical defect is the correct outcome.",
+      "cross_stream_evidence": [
+        "prior:app/sourcedata/2026-07-19 needs/prediction.0b8bcb868b9c8fa5 verdict=broken, identical finding, unapplied",
+        "code:app/src/timewindow.py parse_time_window - landing-quarter precedence over runway phrase, verified by direct call",
+        "control:need_task.fc8d99e71c99fd37 parses correctly with no landing quarter present"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+    {
+      "prediction_id": "prediction.0b8bcb868b9c8fa5",
+      "stream": "readings",
+      "entry_id": "prediction.0b8bcb868b9c8fa5",
+      "verdict": "broken",
+      "reason": "Zero chain edges and zero relation rows, and this prediction is the densest missing hub in the batch: it shares evidence.54ee76ae9206d639 (OpenAI GPT-5.6 launch) with prediction.0bb5badc89f68769, evidence.276435801946ac94 (Kimi K3 repository file listing) with prediction.14cd36ae7a6a8633, and evidence.00b5103d1c36e8fc / evidence.c89447e4cc8f9029 / evidence.f9581a7992e1c0cb with prediction.fd7bdbc998adaac2 - five co-citations across three sibling predictions, all with 0 relation rows and 0 chain rows. The 2026-07-19 judge called this stream fresh on the grounds that 'nothing opens an edge candidate'; that conclusion does not survive the co-citation query, and it was reached while the extractor had already been dead for 39 days. prediction_chain last wrote 2026-06-10, prediction_relations 2026-06-09. Escalate the extractor.",
+      "cross_stream_evidence": [
+        "prediction:prediction.0bb5badc89f68769 - shared evidence.54ee76ae9206d639, 0 relation rows (both are mid-tier model-pricing claims)",
+        "prediction:prediction.14cd36ae7a6a8633 - shared evidence.276435801946ac94, 0 relation rows",
+        "prediction:prediction.fd7bdbc998adaac2 - 3 shared evidence_items, 0 relation rows",
+        "prior:2026-07-19 readings verdict=fresh contradicted by the co-citation data"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+
+    {
+      "prediction_id": "prediction.0bb5badc89f68769",
+      "stream": "reasoning",
+      "entry_id": "prediction.0bb5badc89f68769",
+      "verdict": "stale",
+      "reason": "Re-issuing the 2026-07-12 stale verdict because the rewrite was never applied. The marker app/sourcedata/2026-07-12/maintenance-update.reasoning.prediction.0bb5badc89f68769.json claims '\"applied\": true' and carries a full replacement bundle, but predictions.reasoning_because in the database is still the original 'Sonnet 5 launched at $2/$10 with claimed Opus-parity...' and reasoning_landing is still 'A rival frontier lab ships an agent-tuned mid-tier tier by Q4 2026' - the marker's text appears nowhere. The underlying cross-stream case has strengthened since: validation.4e85e1d8960df09b (2026-07-10, support_dimension='landing', rel=5) records OpenAI's Terra at $2.50/$15 shipping into Copilot and Codex the same day - a sub-$3 agent-forward mid-tier from a named lab, roughly five months ahead of the Q4 2026 window - and the newest bridge validation.273e8dd9209add75 (2026-07-31) shows the second-lab leg still open, with two Gemini Flash tiers placed in Oracle Fusion and NetSuite but 'no price and no benchmark... positioning language, not a competitive rate card'. Reframe forward: the first leg landed, the open question is durability of the tier plus a confirming second lab.",
+      "cross_stream_evidence": [
+        "bridge:validation.4e85e1d8960df09b (2026-07-10, dim=landing, rel=5) - predicted event arriving ~5 months early",
+        "bridge:validation.273e8dd9209add75 (2026-07-31) - Google named two Flash tiers for agent work but published neither price nor benchmark, so the second-lab leg stays open",
+        "marker:app/sourcedata/2026-07-12/maintenance-update.reasoning.prediction.0bb5badc89f68769.json - applied:true is false; DB text unchanged"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.0bb5badc89f68769",
+      "stream": "bridge",
+      "entry_id": "validation.273e8dd9209add75",
+      "verdict": "broken",
+      "reason": "This row stamped predictions.huge_longshot_hit_at=2026-07-31 and is the sole source of this prediction's 'landed_this_week' change_signal, yet its own text is an explicit non-event on the prediction's terms: 'the premise is a price and a benchmark, and Google published neither. Flash-Lite was described as high-efficiency and Flash as better at complex reasoning, which is positioning language, not a competitive rate card.' The stamp fires purely on the literal '[REVIVED]' prefix in related_items_text (app/src/ingest.py:504) with no reference to whether anything resolved, and that prefix is shipped to readers unstripped. The analytical content of the row is correct and usefully sceptical - the defect is the marker leak and the false landing signal derived from it.",
+      "cross_stream_evidence": [
+        "code:app/src/ingest.py:500-509 - huge_longshot_hit_at derived from a string, not from resolution",
+        "reasoning:the real landing candidate is validation.4e85e1d8960df09b (07-10), which carries no [REVIVED] marker and produced no signal"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.0bb5badc89f68769",
+      "stream": "needs",
+      "entry_id": "prediction.0bb5badc89f68769",
+      "verdict": "broken",
+      "reason": "Window defect across the whole two-actor Need-set. need_task.2ea6e129ba9233ed when_text 'Now through Q4 2026' stores 2026-10-01..2026-12-31 and need_task.0ed4cad5f2a64825 when_text 'Model-training runway through Q4 2026 launch' stores the same - in both cases the runway start the writer explicitly named ('Now', 'runway') is discarded and the window collapses onto the landing quarter, identical to predictions.target_start_date..target_end_date. Verified live against app.src.timewindow.parse_time_window. Consequence is not cosmetic: the tasks describe work happening from July 2026 onward and the stored runway does not open until October, so any runway-window aggregation misses the quarter in which the 07-09 Terra launch actually occurred. Same parser defect escalated for prediction.0b8bcb868b9c8fa5 on 2026-07-19 and unfixed.",
+      "cross_stream_evidence": [
+        "code:app/src/timewindow.py parse_time_window('Now through Q4 2026') -> ('2026-10-01','2026-12-31')",
+        "bridge:validation.4e85e1d8960df09b (2026-07-10) - the delivering event falls outside the stored runway window",
+        "prior:2026-07-19 broken verdict on the same parser for prediction.0b8bcb868b9c8fa5"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.8
+    },
+    {
+      "prediction_id": "prediction.0bb5badc89f68769",
+      "stream": "needs",
+      "entry_id": "Rival frontier lab model-product lead",
+      "verdict": "stale",
+      "reason": "Bridge to Needs: need.60e48112346fe454's outcome is 'a released mid-tier model explicitly sold on agentic-search and computer-use benchmark parity, priced to undercut or match Sonnet 5's runtime cost', and validation.4e85e1d8960df09b (2026-07-10, dim=landing, rel=5) records OpenAI shipping precisely that shape - Terra at $2.50/$15, GPT-5.5-class at roughly half cost, inside an agent-forward family pushed into Copilot and Codex the same day. Per the spec's Bridge to Needs rule the task should flip to done and the coalition should refresh for the next phase; it cannot, because needs_tasks.status is 'open' on every row in the database and 'done' has never been written, so the absence of a done flag carries no information. The actionable part is the coalition refresh: with the first-lab leg delivered, the Need-set no longer describes the live question, which is durability of the shipped tier plus a confirming second lab. The one residual doubt the 07-10 bridge itself raises - whether Terra's tuning is agent-specific - is exactly what need.b474b3726e706c9a's benchmark actor should now be pointed at, since no bridge in the three weeks since has resolved it.",
+      "cross_stream_evidence": [
+        "bridge:validation.4e85e1d8960df09b (2026-07-10, dim=landing, rel=5) - Need outcome materially delivered",
+        "bridge:validation.273e8dd9209add75 (2026-07-31) - second-lab leg still unresolved, so the refreshed coalition has a target",
+        "db:needs_tasks.status is 100% 'open' project-wide; 'done' never written, so status is not evidence"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.65
+    },
+    {
+      "prediction_id": "prediction.0bb5badc89f68769",
+      "stream": "readings",
+      "entry_id": "prediction.0bb5badc89f68769",
+      "verdict": "broken",
+      "reason": "Zero chain edges and zero relation rows, and there is a concrete missing edge: this prediction and prediction.0b8bcb868b9c8fa5 ('Frontier mid-tier API pricing falls below $1 per million input tokens by Q2 2027') both link evidence.54ee76ae9206d639, the OpenAI GPT-5.6 launch, and both turn on the same mid-tier repricing dynamic - a 'parallel' relation at minimum. Zero relation rows and zero chain rows exist for that pair. The 2026-07-12 judge scored this stream fresh at confidence 0.9 with the reason 'no chain or relation edges exist for this prediction; nothing to assess', which is the outage being laundered into per-prediction health: prediction_chain last wrote 2026-06-10 and prediction_relations 2026-06-09, both before this prediction was minted on 2026-07-01, so it has never been eligible for an edge. Escalate the extractor.",
+      "cross_stream_evidence": [
+        "prediction:prediction.0b8bcb868b9c8fa5 - shared evidence.54ee76ae9206d639, 0 relation rows, 0 chain rows",
+        "db:prediction_chain frozen 2026-06-10 / prediction_relations frozen 2026-06-09, both predating this prediction's 2026-07-01 mint",
+        "prior:2026-07-12 readings verdict=fresh conf=0.9 on the same empty set"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+
+    {
+      "prediction_id": "prediction.1401756144573103",
+      "stream": "reasoning",
+      "entry_id": "prediction.1401756144573103",
+      "verdict": "stale",
+      "reason": "The prediction's own bridge undercuts its method clause. reasoning.given asserts 'Only an outside proxy reveals harness egress', and reasoning.landing narrows the resolution to 'an independent researcher, via published captured traffic'. Bridge validation.c2a6305a25854e90 (2026-07-16, rel=4) records xAI answering the wire-level teardown by open-sourcing the whole agent as xai-org/grok-build under Apache 2.0, and the bridge text says the effect directly: it 'hands researchers 844,530 lines showing exactly how a shipping agent wires uploads and permissions - an inspection template that lowers the cost of auditing rivals'. Source inspection is now a cheaper route to the same finding than a proxy capture, so the 'only an outside proxy' premise no longer holds and the landing clause excludes the method most likely to produce the next finding. Bridge validation.b1b0a2d8d1370b1b (2026-07-22) points the same way from the other side - Codex CLI's one-command import widens what a harness moves - while explicitly noting it 'is not the intercepted wire-level capture that would be a second finding'. Rewrite given and landing to admit source-derived disclosures, or state deliberately why they are excluded.",
+      "cross_stream_evidence": [
+        "bridge:validation.c2a6305a25854e90 (2026-07-16, rel=4) - full source publication weakens reasoning.given's 'only an outside proxy' premise",
+        "bridge:validation.b1b0a2d8d1370b1b (2026-07-22) - widening data surface, explicitly not the method reasoning.landing requires",
+        "needs:need.cca583b7e5f96b5b task how_text is 'mitmproxy capture plus byte-ratio accounting', inheriting the same over-narrow method"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.1401756144573103",
+      "stream": "bridge",
+      "entry_id": "validation.6cdaf9caf30058af",
+      "verdict": "broken",
+      "reason": "Internal inconsistency between this row's two text fields, plus a dimension tag its own body refuses. The row is tagged support_dimension='landing' and its rendered bridge_text asserts flatly 'This reads as the second instance arriving' - but its related_items_text says the opposite in the same row: 'whether it is genuinely distinct from the prior Grok finding or the same behavior resurfacing is not established today', and 'a cleanly documented, discrete second instance is the piece still loose'. The subject is xAI's Grok Build, which is the same harness as the origin finding (the 2026-07-15 mitmproxy capture of Grok build CLI 0.2.93, open-sourced as xai-org/grok-build on 07-16). need.cca583b7e5f96b5b's outcome requires 'a coding agent other than Grok CLI' and reasoning.so_that requires 'another coding agent', so a landing-tagged row on the origin harness cannot be the landing. The rendered summary drops the hedge that the source row carries, which is the part readers see. There is no contradiction column to catch this - prediction_evidence_links is 100% support_direction='support' with contradiction_score 0.0 throughout the database - so it had to be read out of the text.",
+      "cross_stream_evidence": [
+        "needs:need.cca583b7e5f96b5b outcome explicitly excludes Grok CLI, the subject of this row",
+        "reasoning:reasoning_so_that requires 'another coding agent'",
+        "bridge:validation.42be34fe71c6268f (2026-07-15) and validation.c2a6305a25854e90 (2026-07-16) establish Grok Build as the origin harness",
+        "db:prediction_evidence_links contradiction_score max = 0.0, so the flagship Bridge-contradicts-Reasoning signal is unreachable from data"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.75
+    },
+    {
+      "prediction_id": "prediction.1401756144573103",
+      "stream": "bridge",
+      "entry_id": "validation.b3ac1960e4966959",
+      "verdict": "broken",
+      "reason": "Separate defect from the 07-21 row. This row opens with the literal '[REVIVED]' in related_items_text and therefore stamped predictions.huge_longshot_hit_at=2026-07-31 via app/src/ingest.py:504, which is the entire basis for this prediction's 'landed_this_week' change_signal in maintenance-candidates.json. The row's own text disqualifies itself on both halves of the claim: 'This egress surfaced by reading transcripts the operator already held, not from anyone sitting on the wire... What left the machine was a package the model wrote, not a user's files.' A Claude Mythos 5 evaluation incident publishing a package to PyPI is neither a harness upload of user files nor an outside-interceptor finding. The marker string also renders to readers unstripped. Content of the row is honest; the stamp and the marker are the defects.",
+      "cross_stream_evidence": [
+        "code:app/src/ingest.py:500-509",
+        "queue:maintenance-candidates.json - 'landed_this_week' for this prediction traces solely to this stamp",
+        "render:future-prediction/en/future-prediction-20260802.md - [REVIVED] present verbatim in the shipped table"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.1401756144573103",
+      "stream": "needs",
+      "entry_id": "prediction.1401756144573103",
+      "verdict": "broken",
+      "reason": "All three needs_tasks carry when_text 'H2 2026 through early 2027' and store 2026-07-01..2026-12-31, silently discarding 'early 2027' - reproduced live, parse_time_window('H2 2026 through early 2027') returns ('2026-07-01','2026-12-31'). The prediction's own target window is 2027-01-01..2027-03-31, so every Need runway now closes before the landing window opens, which is incoherent on its face: the actors' work is recorded as finishing before the outcome they enable can occur. Same parser defect escalated for prediction.0b8bcb868b9c8fa5 on 2026-07-19 and still unfixed; it affects 20 of the 21 needs_tasks in this batch. Content of the three Needs is otherwise well-formed and maps cleanly onto the resolution bar.",
+      "cross_stream_evidence": [
+        "code:app/src/timewindow.py parse_time_window('H2 2026 through early 2027') -> ('2026-07-01','2026-12-31')",
+        "db:predictions.target_start_date 2027-01-01 begins after every Need runway ends",
+        "prior:2026-07-19 broken verdict on the same parser, unapplied"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.1401756144573103",
+      "stream": "readings",
+      "entry_id": "prediction.1401756144573103",
+      "verdict": "broken",
+      "reason": "Zero prediction_chain rows and zero prediction_relations rows. Reported as broken rather than fresh because the cause is an extractor outage, not an absence of candidates: prediction_chain has written nothing since 2026-06-10T10:34:13Z and prediction_relations nothing since 2026-06-09T18:25:42Z, so this prediction (minted 2026-07-15) has never been eligible for an edge and no per-prediction verdict about its edge health is meaningful. Unlike the pricing cluster in this batch, this prediction shares no evidence_items with the other five, so there is no in-batch edge to name - the finding is the outage itself. Escalate the extractor; a fresh verdict here would launder a 54-day pipeline failure into per-prediction health, which is what prior runs did.",
+      "cross_stream_evidence": [
+        "db:prediction_chain max created_at 2026-06-10T10:34:13Z (127 rows), prediction_relations max created_at 2026-06-09T18:25:42Z (200 rows)",
+        "db:no evidence_items shared with the other five predictions in this batch, so no in-batch edge candidate is nameable"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    },
+
+    {
+      "prediction_id": "prediction.14cd36ae7a6a8633",
+      "stream": "reasoning",
+      "entry_id": "prediction.14cd36ae7a6a8633",
+      "verdict": "stale",
+      "reason": "The mechanism named in reasoning.so_that is being bypassed, and the bridge says so in as many words. reasoning.so_that is engine-side competitive parity - 'rival OSS serving stacks adopt quantized-by-default loading and tiered KV offload as defaults to keep cost parity' - with reasoning.landing naming SGLang, TensorRT-LLM and TGI. Bridge validation.5fb27e4950a9e4d5 (2026-07-27, dim=because, rel=4) records Kimi K3 shipping as MXFP4 weights with MXFP8 activations produced by quantization-aware training, with no full-precision release to compress at all, and vLLM shipping a loader for that exact format the same day. The row's own conclusion: 'That is the baseline this claim describes arriving from the model side rather than the engine side - the release makes low-bit loading mandatory instead of optional.' If publishers ship QAT-only checkpoints, rivals adopt quantized loading because there is no alternative artifact, not to defend throughput-per-dollar against vLLM, and the prediction would resolve true for a reason its because/given do not contain. The row is careful to bound this ('what today does not show is the same default reaching the smaller checkpoints'), so this is a reframe rather than a retirement.",
+      "cross_stream_evidence": [
+        "bridge:validation.5fb27e4950a9e4d5 (2026-07-27, dim=because, rel=4) - 'the baseline arrived from the model side rather than the engine side'",
+        "bridge:validation.63b7b6826537cb7c (2026-07-05) - Ollama optimising against nvfp4 as the assumed substrate, same publisher-side direction",
+        "needs:need.d6d4c7b358d4b9ab motivation is stated purely as competitive parity with vLLM, and inherits the same gap"
+      ],
+      "proposed_action": "rewrite",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.14cd36ae7a6a8633",
+      "stream": "bridge",
+      "entry_id": "validation.5fb27e4950a9e4d5",
+      "verdict": "broken",
+      "reason": "Marker leak plus a misnamed signal, on an otherwise excellent row. related_items_text opens with the literal '[REVIVED]', which app/src/ingest.py:504 turns into predictions.huge_longshot_hit_at=2026-07-27 and which the maintenance selector then reads as change_signal 'landed_this_week' - but nothing landed: the prediction's window is H1 2027 and the row documents a precondition hardening, not a resolution. The same string ships to readers unstripped in the rendered future-prediction markdown. Unlike the other three [REVIVED] rows in this batch, this one at least records a substantive supporting event (Kimi K3 MXFP4/MXFP8 from QAT, vLLM launch-day loader, published throughput figures), so the defect is confined to the marker and the derived signal, not to the analysis. Noted: the row's dimension spread across this prediction is 2 given plus 2 because with zero so_that and zero landing rows, so no bridge yet tests the SGLang/TensorRT-LLM/TGI resolution criterion.",
+      "cross_stream_evidence": [
+        "code:app/src/ingest.py:500-509 - huge_longshot_hit_at keyed on the '[REVIVED]' literal",
+        "queue:maintenance-candidates.json - this prediction's only change_signal is 'landed_this_week', from this stamp",
+        "reasoning:reasoning_landing targets H1 2027; no landing-dimension bridge exists for it"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.7
+    },
+    {
+      "prediction_id": "prediction.14cd36ae7a6a8633",
+      "stream": "needs",
+      "entry_id": "prediction.14cd36ae7a6a8633",
+      "verdict": "broken",
+      "reason": "Both needs_tasks store a runway that opens after the work the bridges already document. need_task.45b5e922afd55485 when_text is 'Now through H1 2027 release cycles' and need_task.5cde43a31c11397d is 'After upstream engines ship, through H1 2027'; both store 2027-01-01..2027-06-30, identical to predictions.target_start_date..target_end_date. Reproduced live: parse_time_window('Now through H1 2027 release cycles') returns ('2027-01-01','2027-06-30') - the landing half-year token outranks the 'Now' start, exactly the precedence defect escalated for prediction.0b8bcb868b9c8fa5 on 2026-07-19 and never fixed. The consequence is visible in this prediction's own bridge record: vLLM shipped a launch-day MXFP4 loader on 2026-07-27 and Ollama shipped nvfp4-optimised defaults on 2026-07-05, both squarely inside the runway the writer meant by 'Now' and both outside the window the database stores. Same defect class in fd7bdbc998adaac2, 04ff49878f99c77f, 0bb5badc89f68769 and 1401756144573103 - fixing one occurrence would leave the siblings.",
+      "cross_stream_evidence": [
+        "code:app/src/timewindow.py parse_time_window('Now through H1 2027 release cycles') -> ('2027-01-01','2027-06-30')",
+        "bridge:validation.5fb27e4950a9e4d5 (2026-07-27) and validation.63b7b6826537cb7c (2026-07-05) - actor work occurring five months before the stored runway opens",
+        "prior:2026-07-19 broken verdict on the same parser for prediction.0b8bcb868b9c8fa5"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.85
+    },
+    {
+      "prediction_id": "prediction.14cd36ae7a6a8633",
+      "stream": "readings",
+      "entry_id": "prediction.14cd36ae7a6a8633",
+      "verdict": "broken",
+      "reason": "Zero chain edges and zero relation rows despite a nameable candidate: this prediction shares evidence.276435801946ac94 (Kimi K3 repository file listing, 1.56 TB across 96 shards) with prediction.0b8bcb868b9c8fa5 and evidence.7372d8cb937a6ab6 (Moonshot Kimi K3 model card) with prediction.fd7bdbc998adaac2, and the serving-cost argument runs through all three - 0b8bcb868b9c8fa5's 07-27 bridge reads the same Kimi K3 listing as a serving-cost floor while this prediction reads it as the quantized-by-default baseline. Both pairs have 0 relation rows and 0 chain rows. The cause is systemic rather than prediction-specific: prediction_chain last wrote 2026-06-10 and prediction_relations 2026-06-09, both after this prediction was minted on 2026-06-30 but before any of its bridges existed. Escalate the extractor; note also that 'contradicts' is not an expressible relation_type under the CHECK constraint, so even a working extractor could not encode a disagreement between these siblings.",
+      "cross_stream_evidence": [
+        "prediction:prediction.0b8bcb868b9c8fa5 - shared evidence.276435801946ac94, 0 relation rows, opposite readings of the same artifact",
+        "prediction:prediction.fd7bdbc998adaac2 - shared evidence.7372d8cb937a6ab6, 0 relation rows",
+        "db:prediction_chain frozen 2026-06-10, prediction_relations frozen 2026-06-09",
+        "schema:prediction_relations.relation_type CHECK allows only parallel, exclusive_variant, negation, entails, equivalent"
+      ],
+      "proposed_action": "noop",
+      "confidence": 0.9
+    }
+  ]
+}
