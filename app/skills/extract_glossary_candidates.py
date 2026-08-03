@@ -5,6 +5,9 @@ proper nouns, acronyms, and technical terms that aren't already in
 `glossary_terms`. Adds new candidate rows and bumps the daily
 occurrence ledger so `define-glossary-terms` can promote them later.
 
+Only prose is scanned: citation link targets are blanked first, so
+hostnames and URL path segments never become candidates.
+
 Skill spec: `design/skills/extract-glossary-candidates.md`.
 
 Usage:
@@ -68,6 +71,68 @@ _BLOCKLIST: frozenset[str] = frozenset(
     {"AI", "API", "URL", "ID", "GPU", "CPU", "CEO", "CFO", "CTO",
      "USA", "EU", "UK", "US", "EN", "JA", "ES", "FIL"}
 )
+
+# Citation URLs reach the news markdown in exactly two shapes — an inline
+# `<a href="https://host/path">label</a>` and a trailing reference link
+# `[label](https://host/path)`. Neither the hostname nor the path segments
+# are vocabulary, but both satisfy the `[a-z]+\.[a-z]+` token shape above:
+# `pypi.org` and `www.benzinga.com` from the host, `index.html` and
+# `install.sh` from the path. Harvested that way they land in `candidate`
+# and then auto-promote on `distinct_days_14d >= 3` like any real term, so
+# they have to be dropped here rather than hand-retired afterwards.
+#
+# Only the *target* is blanked; the visible label is prose and does carry
+# real terms, so `[LWN.net - PyPI rejects new files](https://lwn.net/...)`
+# keeps its label and loses its URL.
+_LINK_TARGET_RE = re.compile(
+    r"""
+      \]\([^)]*\)                       # ](target) — markdown inline link
+    | <\s*a\b[^>]*>                     # <a href="target"> — href is in the tag
+    | ^[ \t]{0,3}\[[^\]]+\]:[ \t]*\S+   # [ref]: target — reference definition
+    | \b[a-z][a-z0-9+.\-]*://\S+        # bare scheme://… anywhere else
+    """,
+    re.VERBOSE | re.MULTILINE | re.IGNORECASE,
+)
+
+# TLDs that mark a bare token as a hostname rather than a term. Covers the
+# 38 TLDs the citation corpus actually uses plus the mainstream gTLD/ccTLD
+# set; vanity gTLDs are unbounded (`.engineer`, `.ooo`, `.toyota` all
+# appear), which is why `_LINK_TARGET_RE` — not this list — is the primary
+# defence. This one only has to catch a host typed into visible prose or a
+# link label, where no URL wraps it. Add TLDs here if new ones leak through.
+_HOSTNAME_TLDS: frozenset[str] = frozenset(
+    """
+    com net org info biz edu gov mil int pro name mobi asia
+    ai app blog cloud dev tech news online site xyz io co me tv fm live
+    media press network security events engineer ooo ceo email systems
+    solutions services digital agency studio design software technology
+    institute foundation center academy global world today zone tools
+    works team group company page wiki chat social space club life
+    fyi one link click sport fund capital ventures partners google toyota
+    us uk ca au nz ie de fr es it nl be ch at se no dk fi pl pt gr cz sk
+    hu ro bg hr si ee lv lt is lu mt cy ru ua by kz jp cn kr tw hk sg in
+    id my th vn ph tr il ae sa za ng ke eg br mx ar cl pe co eu am re st
+    sh md rs so ml to as im do cc ly gl gg vc
+    """.split()
+)
+
+
+def _is_hostname(token: str) -> bool:
+    """True when `token` is a bare hostname (`pypi.org`, `www.benzinga.com`).
+
+    Requires the token to be all-lowercase, which is how hosts are written
+    in citations. That keeps the guard narrow enough that it can only ever
+    take a host-shaped string, never a capitalised term that happens to end
+    in a TLD-looking suffix. Terms whose suffix isn't a TLD are unaffected
+    either way — `.cpp` in `llama.cpp` and `.compile` in `torch.compile`
+    are not TLDs.
+    """
+    if token != token.lower():
+        return False
+    labels = token.split(".")
+    if len(labels) < 2 or not labels[-1]:
+        return False
+    return labels[0] == "www" or labels[-1] in _HOSTNAME_TLDS
 
 
 SEED_MODES = ("insert", "upsert")
@@ -212,10 +277,19 @@ def _seed_without_yaml(conn: sqlite3.Connection, seed_yaml: Path) -> int:
     return inserted
 
 
+def strip_link_targets(news_text: str) -> str:
+    """Blank every citation URL, keeping the visible prose and link labels.
+
+    Replaces with a space rather than deleting so neighbouring words can't
+    fuse into a token that matches on the seam.
+    """
+    return _LINK_TARGET_RE.sub(" ", news_text)
+
+
 def extract_candidates(news_text: str) -> dict[str, int]:
     """Return a {term: hit_count} dict for all candidate-shaped tokens."""
     counts: dict[str, int] = {}
-    for m in _TOKEN_RE.finditer(news_text):
+    for m in _TOKEN_RE.finditer(strip_link_targets(news_text)):
         tok = m.group(1)
         if tok in _BLOCKLIST:
             continue
@@ -223,6 +297,10 @@ def extract_candidates(news_text: str) -> dict[str, int]:
             continue
         # Drop tokens that are pure year/number after stripping decoration.
         if re.fullmatch(r"\d+", tok.replace("-", "").replace(".", "")):
+            continue
+        # Hostnames aren't vocabulary. Link targets are already gone; this
+        # catches a host typed into prose or into a link label.
+        if _is_hostname(tok):
             continue
         counts[tok] = counts.get(tok, 0) + 1
     return counts
