@@ -15,7 +15,24 @@ from __future__ import annotations
 import argparse
 import sys
 
-from . import db, export, ingest, score
+from . import db, export, ingest, prediction_cascade, score
+
+
+def _sweep_orphans(conn) -> None:
+    """Remove child rows left behind by a prediction re-key, and say so.
+
+    ``prediction_id`` hashes the body, so editing a prediction mints a
+    new id and the ingest layer — pure upsert, no DELETE — leaves the
+    pre-edit child rows behind. Sweeping here, after ingest and before
+    score/export, is what keeps the debris from reaching any statistic
+    computed off those tables. See :mod:`app.src.prediction_cascade`.
+
+    Prints unconditionally: a sweep that silently does nothing is
+    indistinguishable from a sweep that never ran.
+    """
+    removed = prediction_cascade.sweep_orphans(conn)
+    conn.commit()
+    print(f"orphan-sweep: {prediction_cascade.format_counts(removed)}")
 
 
 def _cmd_init(args: argparse.Namespace) -> int:
@@ -42,6 +59,7 @@ def _cmd_ingest_sourcedata(args: argparse.Namespace) -> int:
     try:
         summary = _isd.ingest_day(conn, db.repo_root(), args.date)
         loc_summary = _isd.ingest_day_locales(conn, db.repo_root(), args.date)
+        _sweep_orphans(conn)
     finally:
         conn.close()
     print(
@@ -126,6 +144,14 @@ def _cmd_update(args: argparse.Namespace) -> int:
     # sourcedata-derived values.
     sd_totals = _run_sourcedata_pre_ingest()
     ing = ingest.run_ingest(skip_dates=sd_totals.get("ingested_dates"))
+    # Between ingest and score: score/export are the consumers that read
+    # the child tables, so the debris has to be gone before they run or
+    # the inflated counts land in docs/data/*.json.
+    conn = db.connect()
+    try:
+        _sweep_orphans(conn)
+    finally:
+        conn.close()
     sco = score.run_score()
     exp = export.run_export()
     # evidence-reverse.json is generated outside run_export() (separate skill),
