@@ -42,9 +42,67 @@ import sqlite3
 import sys
 from pathlib import Path
 
+from app.src import prediction_cascade
 from app.src.timewindow import parse_time_window
 
 LOCALES = ("ja", "es", "fil")
+
+
+# ---------------------------------------------------------------------------
+# Referential integrity (DB-wide, not per-date)
+# ---------------------------------------------------------------------------
+
+
+def _check_orphan_rows(conn: sqlite3.Connection) -> list[str]:
+    """Fail when a child table references a prediction that no longer exists.
+
+    ``prediction_id`` is a hash of the prediction body, so editing a body
+    mints a new id; ingest is pure upsert and never deletes, so the
+    pre-edit child rows survive unless something removes them. This debris
+    silently inflates every statistic computed off these tables without a
+    join back to ``predictions`` — the 2026-08-03 measurement had category
+    dominance reading 69.8% / 73.0% instead of 69.4%.
+
+    ``app.src.prediction_cascade.sweep_orphans`` runs in the ingest/update
+    CLI path, so a clean run should never trip this. Tripping it means
+    something wrote to the DB outside that path — historically a
+    hand-written ``design/_scratch/rekey_*.py`` with an incomplete table
+    list, opened via bare ``sqlite3.connect()`` where FK enforcement is
+    off. The remedy is a sweep, not a schema change.
+    """
+    counts = prediction_cascade.count_orphans(conn)
+    errs: list[str] = []
+    for key, n in counts.items():
+        if not n:
+            continue
+        table, column = key.split(".", 1)
+        if table == "needs_tasks":
+            detail = (
+                f"{n} row(s) in needs_tasks whose need_id is absent from "
+                f"prediction_needs (needs_tasks has no prediction_id column, "
+                f"so it orphans via the need_id join)"
+            )
+            sample_sql = (
+                "SELECT task_id FROM needs_tasks WHERE need_id NOT IN "
+                "(SELECT need_id FROM prediction_needs) LIMIT 3"
+            )
+        else:
+            detail = (
+                f"{n} row(s) in {table} whose {column} is absent from "
+                f"predictions"
+            )
+            sample_sql = (
+                f"SELECT {column} FROM {table} WHERE {column} IS NOT NULL AND "
+                f"{column} NOT IN (SELECT prediction_id FROM predictions) "
+                f"LIMIT 3"
+            )
+        sample = [str(r[0]) for r in conn.execute(sample_sql).fetchall()]
+        errs.append(
+            f"{detail}; e.g. {', '.join(sample)} — run "
+            f"`python -m app.src.cli update` (its orphan-sweep step clears "
+            f"this) or call app.src.prediction_cascade.sweep_orphans"
+        )
+    return errs
 
 # ---------------------------------------------------------------------------
 # Predictions
@@ -535,6 +593,14 @@ def main(argv: list[str] | None = None) -> int:
     conn.row_factory = sqlite3.Row
     all_pass = True
     try:
+        # DB-wide referential integrity — not scoped to --date, so it runs
+        # in every check set. Orphan debris is invisible to the per-date
+        # shape checks below (their queries all filter by date) and is the
+        # one defect class that corrupts aggregate statistics rather than
+        # a single row.
+        all_pass &= _run_check(
+            "orphan rows (DB-wide)", _check_orphan_rows(conn)
+        )
         if args.check in ("news", "all"):
             all_pass &= _run_check(
                 f"locale files (news, {args.date})",

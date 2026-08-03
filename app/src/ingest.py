@@ -433,17 +433,38 @@ def _upsert_candidate(
     *,
     scope_id: str,
     prediction_id: str,
+    prediction_date: str,
+    source_row_index: int,
     label: str,
     short_label: str,
     description: str,
 ) -> None:
-    candidate_id = _hash_id("candidate", scope_id, prediction_id)
+    # candidate_id is keyed on the prediction's *slot* — (date, position
+    # within that day's predictions.json) — deliberately NOT on
+    # prediction_id. prediction_id is a hash of the body, so editing a
+    # prediction re-keys it, and keying the candidate on prediction_id
+    # minted a SECOND candidate row for the same prediction on every
+    # body edit. That corrupted the promotion signal itself: the
+    # 2026-08-02 theme review found the only cluster that appeared to
+    # clear the "≥3 pending hits" threshold was in fact 3 sha1 variants
+    # of one prediction. (date, source_row_index) survives a body edit
+    # while still separating genuinely different predictions, so a real
+    # cluster still forms.
+    candidate_id = _hash_id(
+        "candidate", scope_id, prediction_date, str(source_row_index)
+    )
     conn.execute(
         """
-        INSERT OR IGNORE INTO theme_candidates (
+        INSERT INTO theme_candidates (
           candidate_id, scope_id, suggested_theme_label, suggested_short_label,
           suggested_description, origin_prediction_id, candidate_reason, status
         ) VALUES (?, ?, ?, ?, ?, ?, 'no_keyword_match', 'pending')
+        ON CONFLICT(candidate_id) DO UPDATE SET
+          suggested_theme_label = excluded.suggested_theme_label,
+          suggested_short_label = excluded.suggested_short_label,
+          suggested_description = excluded.suggested_description,
+          origin_prediction_id  = excluded.origin_prediction_id,
+          updated_at            = ?
         """,
         (
             candidate_id,
@@ -452,8 +473,16 @@ def _upsert_candidate(
             short_label,
             description,
             prediction_id,
+            _now_iso(),
         ),
     )
+    # NOTE: the DO UPDATE deliberately omits `status` and
+    # `promoted_theme_id`. Those are DB-owned lifecycle state
+    # (pending → promoted / merged / rejected / ignored) and
+    # design/memory-policy.md §6 is explicit that the candidate
+    # lifecycle inside SQLite must not be silently overwritten by a
+    # routine re-ingest. A re-key refreshes the wording and the origin
+    # pointer; it must not resurrect a rejected candidate as pending.
 
 
 def _upsert_validation_row(
@@ -620,6 +649,8 @@ def _ingest_prediction_summary(
                 conn,
                 scope_id=scope_id,
                 prediction_id=prediction_id,
+                prediction_date=report_date,
+                source_row_index=pred.index,
                 label=pred.short_label,
                 short_label=pred.short_label,
                 description=pred.summary[:280],
@@ -1127,6 +1158,8 @@ def _ingest_localized_news_group(
                     conn,
                     scope_id=scope_id,
                     prediction_id=prediction_id,
+                    prediction_date=canon_report.report_date,
+                    source_row_index=pred.index,
                     label=pred.short_label,
                     short_label=pred.short_label,
                     description=pred.summary[:280],

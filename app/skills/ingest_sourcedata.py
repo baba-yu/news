@@ -274,6 +274,8 @@ def _ingest_predictions_file(
                     conn,
                     scope_id=scope_id,
                     prediction_id=prediction_id,
+                    prediction_date=pf.date,
+                    source_row_index=idx,
                     label=pred.title,
                     short_label=pred.title,
                     description=pred.body[:280],
