@@ -65,7 +65,7 @@ def _cmd_ingest_sourcedata(args: argparse.Namespace) -> int:
 
 def _cmd_score(args: argparse.Namespace) -> int:
     db.init_db()
-    result = score.run_score()
+    result = score.run_score(as_of=getattr(args, "date", None))
     print("score:", result)
     return 0
 
@@ -127,6 +127,11 @@ def _cmd_update(args: argparse.Namespace) -> int:
     sd_totals = _run_sourcedata_pre_ingest()
     ing = ingest.run_ingest(skip_dates=sd_totals.get("ingested_dates"))
     sco = score.run_score()
+    # A single score run can only stamp ONE date. On a catch-up session
+    # the pre-ingest above lands two days at once, so the earlier day
+    # would silently get no activity rows (this is how 2026-07-28 was
+    # lost). Re-score any in-series date that has none.
+    healed = score.backfill_missing()
     exp = export.run_export()
     # evidence-reverse.json is generated outside run_export() (separate skill),
     # but daily flow needs it fresh — without this call the EVIDENCE / Probe NEWS
@@ -143,13 +148,19 @@ def _cmd_update(args: argparse.Namespace) -> int:
         sd_part = " | sourcedata={dates}d/{predictions}p/{needs}n/{bridges}b".format(
             **sd_totals
         )
+    heal_part = ""
+    if healed:
+        heal_part = " | backfilled {}".format(
+            ",".join(h.get("as_of", "?") for h in healed)
+        )
     print(
-        "update: news={} validation={}{} | latest={} theme_rows={} | wrote {} export files + evidence-reverse ({} rows)".format(
+        "update: news={} validation={}{} | latest={} theme_rows={}{} | wrote {} export files + evidence-reverse ({} rows)".format(
             ing["news_files"],
             ing["validation_files"],
             sd_part,
             sco.get("latest", "-"),
             sco.get("theme_activity_rows", 0),
+            heal_part,
             len(exp["files"]),
             ber_data["evidence_count"],
         )
@@ -169,7 +180,20 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_isd.add_argument("--date", required=True, help="ISO date (YYYY-MM-DD).")
     p_isd.set_defaults(func=_cmd_ingest_sourcedata)
-    sub.add_parser("score").set_defaults(func=_cmd_score)
+    p_score = sub.add_parser(
+        "score", help="Compute activity rows for one date (default: latest)."
+    )
+    p_score.add_argument(
+        "--date",
+        default=None,
+        help=(
+            "ISO date (YYYY-MM-DD) to score. Omit for the latest report "
+            "date. Use this to score a day that a catch-up session "
+            "skipped; scoring a past date restricts the assignment "
+            "roster to what existed then."
+        ),
+    )
+    p_score.set_defaults(func=_cmd_score)
     sub.add_parser("export").set_defaults(func=_cmd_export)
     sub.add_parser("update").set_defaults(func=_cmd_update)
 

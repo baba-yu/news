@@ -844,9 +844,18 @@ CREATE TABLE IF NOT EXISTS embedding_runs (
 -- flow (2_future_prediction) maps today's SUPPORT to a contributing
 -- task via `validation_rows.contributes_to_task_id`.
 --
--- Actor granularity is role-abstract (e.g. "enterprise security
--- buyer") — never down to the individual company; that's a writer
--- rule, not a schema constraint.
+-- Actor granularity is a role scoped to the organisation that has to
+-- act, head-first: "Investor relations director, Amazon";
+-- "DRAM capacity planner, high-bandwidth memory supplier". The role
+-- always leads; never a bare personal name, never an executive
+-- standing in for their company. That's a writer rule, not a schema
+-- constraint — full statement in design/skills/extract-needs.md
+-- "Actor granularity".
+--
+-- `actor` is id-bearing: need_id = sha1(prediction_id|actor) in
+-- app/skills/extract_needs.py, written INSERT OR REPLACE, and no code
+-- path DELETEs from prediction_needs / needs_tasks. Editing an
+-- existing `actor` re-keys its Need and strands the old row.
 --
 -- (Historical note: these tables were originally named `prediction_jtbd`
 -- and `jtbd_tasks`. Renamed in Phase 2 because "JTBD" framed the actor
@@ -858,7 +867,7 @@ CREATE TABLE IF NOT EXISTS embedding_runs (
 CREATE TABLE IF NOT EXISTS prediction_needs (
   need_id TEXT PRIMARY KEY,
   prediction_id TEXT NOT NULL,
-  actor TEXT NOT NULL,                  -- role abstract; "enterprise security buyer"
+  actor TEXT NOT NULL,                  -- role, scoped to its organisation; "Investor relations director, Amazon"
   job TEXT NOT NULL,                    -- the job this actor is doing that drives the prediction toward landing
   outcome TEXT,                         -- the concrete deliverable that realizes the prediction's claim (≤ 25 words)
   motivation TEXT,                      -- why this actor pushes the work forward (≤ 25 words)

@@ -5,7 +5,31 @@ This is deliberately simple: for each ``(scope, theme, window)`` we
 compute a single aggregate metric bundle based on the prediction
 assignments in that scope/theme plus their evidence links inside the
 window. We store only one activity row per theme — the one dated at
-``latest_report_date``.
+``as_of``.
+
+Dating
+------
+``run_score(as_of=...)`` scores exactly ONE date. When ``as_of`` is
+omitted it defaults to ``MAX(source_files.report_date)``.
+
+That default is why a catch-up session silently loses a day: a single
+run can only ever stamp one date, so if two days' sourcedata are
+ingested before ``score`` runs, the earlier day never gets an activity
+row at all. That is what happened to 2026-07-28 (ingested 2026-07-29
+15:43, one hour before 2026-07-29's own ingest; the only score run that
+day came after both). Pass ``--date`` to score a specific day, or let
+``cli update`` call :func:`backfill_missing`, which re-scores any
+in-series date that has no activity rows.
+
+Carry-forward semantics
+-----------------------
+A prediction gets a realization snapshot on EVERY scored date, not only
+on dates where it actually had a bridge. On a date with no new
+validation row for that prediction, the snapshot carries forward its
+most recent observed relevance (see :func:`_snapshot_predictions`).
+The series is therefore step-wise, not sparse: a flat run of identical
+``realization_score`` values means "no new evidence since <date>", NOT
+"re-confirmed daily". Nothing decays it.
 """
 
 from __future__ import annotations
@@ -60,32 +84,94 @@ def _earliest_report_date(conn: sqlite3.Connection) -> date | None:
     return parse_iso_date(row["d"])
 
 
-def run_score(db_path: Path | None = None) -> dict:
-    """Compute and upsert daily activity rows."""
+def _report_dates(conn: sqlite3.Connection) -> list[str]:
+    cur = conn.execute(
+        "SELECT DISTINCT report_date FROM source_files "
+        "WHERE file_type = 'daily_report' AND report_date IS NOT NULL "
+        "ORDER BY report_date"
+    )
+    return [r["report_date"] for r in cur.fetchall()]
+
+
+def unscored_dates(conn: sqlite3.Connection) -> list[str]:
+    """Report dates inside the scored era that have no activity rows.
+
+    Bounded below by the earliest date that HAS activity rows. The
+    corpus contains ~50 daily reports from 2026-04-19..2026-06-08 that
+    predate daily scoring entirely (they were backfilled as markdown
+    long after the fact); re-scoring those would invent a history the
+    series never had. Only gaps that opened up *after* the series
+    started are real gaps.
+    """
+    cur = conn.execute("SELECT MIN(activity_date) AS d FROM topic_daily_activity")
+    row = cur.fetchone()
+    first_scored = row["d"] if row else None
+    if not first_scored:
+        return []
+    cur = conn.execute("SELECT DISTINCT activity_date FROM topic_daily_activity")
+    scored = {r["activity_date"] for r in cur.fetchall()}
+    return [
+        d for d in _report_dates(conn) if d >= first_scored and d not in scored
+    ]
+
+
+def run_score(db_path: Path | None = None, *, as_of: date | str | None = None) -> dict:
+    """Compute and upsert daily activity rows for a single date.
+
+    ``as_of`` defaults to the latest ``daily_report`` report date. Pass
+    an explicit date to score a day that was skipped (see the module
+    docstring). Scoring a PAST date switches on three guards, so a
+    backfill reconstructs that day rather than stamping today onto it:
+
+    * the assignment roster is restricted to assignments that already
+      existed on that date (``prediction_scope_assignments.assigned_at``,
+      which the ingest upsert leaves untouched on conflict);
+    * the theme roster is restricted the same way via ``themes.created_at``;
+    * ``latest_observation_status`` on the assignment row is left alone,
+      since a past day's status must not overwrite the current one.
+
+    Raises ``ValueError`` if the corpus has no daily report for
+    ``as_of`` — a typo must not mint a phantom date.
+    """
     conn = connect(db_path) if db_path else connect()
     try:
         latest = _latest_report_date(conn)
         if latest is None:
             return {"status": "no-data"}
 
+        if as_of is None:
+            target = latest
+        else:
+            target = parse_iso_date(as_of) if isinstance(as_of, str) else as_of
+            if target.isoformat() not in set(_report_dates(conn)):
+                raise ValueError(
+                    f"no daily_report source file for {target.isoformat()} — "
+                    "refusing to score a date the corpus has no report for"
+                )
+        backfill = target < latest
+
         # 1. theme daily activity per window/scope
         theme_rows = 0
         for scope_id in ("tech", "business"):
-            theme_rows += _score_themes(conn, scope_id=scope_id, latest=latest)
+            theme_rows += _score_themes(
+                conn, scope_id=scope_id, as_of=target, backfill=backfill
+            )
 
         # 2. category daily activity per window/scope (aggregated from themes)
         category_rows = 0
         for scope_id in ("tech", "business"):
             category_rows += _score_categories(
-                conn, scope_id=scope_id, latest=latest
+                conn, scope_id=scope_id, as_of=target
             )
 
         # 3. prediction realization snapshots per window/scope
-        pred_rows = _snapshot_predictions(conn, latest=latest)
+        pred_rows = _snapshot_predictions(conn, as_of=target, backfill=backfill)
 
         conn.commit()
         return {
-            "latest": latest.isoformat(),
+            "latest": target.isoformat(),
+            "as_of": target.isoformat(),
+            "backfill": backfill,
             "theme_activity_rows": theme_rows,
             "category_activity_rows": category_rows,
             "prediction_snapshots": pred_rows,
@@ -94,27 +180,71 @@ def run_score(db_path: Path | None = None) -> dict:
         conn.close()
 
 
+def backfill_missing(db_path: Path | None = None) -> list[dict]:
+    """Score every in-series date that has no activity rows.
+
+    Called by ``cli update`` so a catch-up session self-heals instead of
+    leaving a permanent hole. Returns one :func:`run_score` result per
+    date healed (empty list when there is nothing to do).
+    """
+    conn = connect(db_path) if db_path else connect()
+    try:
+        pending = unscored_dates(conn)
+    finally:
+        conn.close()
+    return [run_score(db_path, as_of=d) for d in pending]
+
+
 # ---------------------------------------------------------------------------
 # Theme scoring
 # ---------------------------------------------------------------------------
 
 
+def _themes_predate(conn: sqlite3.Connection, as_of: date) -> bool:
+    """True when the themes table was populated on or before ``as_of``.
+
+    Distinguishes "this theme is newer than the day I'm scoring" from
+    "the whole DB was rebuilt after that day, so created_at tells me
+    nothing".
+    """
+    row = conn.execute("SELECT MIN(created_at) AS d FROM themes").fetchone()
+    if not row or not row["d"]:
+        return False
+    return str(row["d"])[:10] <= as_of.isoformat()
+
+
 def _score_themes(
-    conn: sqlite3.Connection, *, scope_id: str, latest: date
+    conn: sqlite3.Connection, *, scope_id: str, as_of: date, backfill: bool = False
 ) -> int:
+    # `first_seen_date` is NULL on every seeded theme, so `created_at` is
+    # the only usable "existed by" signal when backfilling. Without it a
+    # backfill hands the old day themes the weekly review promoted since
+    # (e.g. tech.ai_infra_private_capital, created 2026-08-03).
+    #
+    # Guard: the whole table gets a fresh `created_at` whenever the DB is
+    # rebuilt from schema.sql (the documented recovery path in db.py). In
+    # that state every theme postdates every past date, so the filter
+    # would silently score an old day with ZERO themes. Only apply it
+    # when the table demonstrably predates `as_of`.
+    theme_clause = ""
+    params: tuple = (scope_id,)
+    if backfill and _themes_predate(conn, as_of):
+        theme_clause = " AND substr(created_at, 1, 10) <= ?"
+        params = (scope_id, as_of.isoformat())
     cur = conn.execute(
-        """
+        f"""
         SELECT theme_id, category_id, first_seen_date
         FROM themes
         WHERE scope_id = ? AND status IN ('active', 'candidate')
+        {theme_clause}
         """,
-        (scope_id,),
+        params,
     )
     themes = cur.fetchall()
     inserted = 0
     for theme in themes:
         for window_id, days in WINDOWS:
-            start, end = window_range(latest, days)
+            start, end = window_range(as_of, days)
             metrics = _theme_window_metrics(
                 conn,
                 scope_id=scope_id,
@@ -124,7 +254,7 @@ def _score_themes(
             )
             _upsert_topic_activity(
                 conn,
-                activity_date=latest.isoformat(),
+                activity_date=as_of.isoformat(),
                 window_id=window_id,
                 scope_id=scope_id,
                 category_id=theme["category_id"],
@@ -322,7 +452,7 @@ def _upsert_topic_activity(
 
 
 def _score_categories(
-    conn: sqlite3.Connection, *, scope_id: str, latest: date
+    conn: sqlite3.Connection, *, scope_id: str, as_of: date
 ) -> int:
     cur = conn.execute(
         "SELECT category_id FROM categories WHERE scope_id = ? AND active = 1",
@@ -341,7 +471,7 @@ def _score_categories(
                 WHERE scope_id = ? AND category_id = ? AND window_id = ?
                   AND activity_level = 'theme' AND activity_date = ?
                 """,
-                (scope_id, category_id, window_id, latest.isoformat()),
+                (scope_id, category_id, window_id, as_of.isoformat()),
             )
             rows = cur.fetchall()
             if not rows:
@@ -389,7 +519,7 @@ def _score_categories(
                 }
             _upsert_category_activity(
                 conn,
-                activity_date=latest.isoformat(),
+                activity_date=as_of.isoformat(),
                 window_id=window_id,
                 scope_id=scope_id,
                 category_id=category_id,
@@ -443,23 +573,75 @@ def _upsert_category_activity(
 # ---------------------------------------------------------------------------
 
 
-def _snapshot_predictions(conn: sqlite3.Connection, *, latest: date) -> int:
+def _snapshot_predictions(
+    conn: sqlite3.Connection, *, as_of: date, backfill: bool = False
+) -> int:
+    """Snapshot every assignment's realization state as of ``as_of``.
+
+    CARRY-FORWARD IS INTENTIONAL AND LOSSLESS-BY-DESIGN, BUT UNDECAYED.
+    Every ``(prediction, scope)`` pair gets a row on every scored date,
+    whether or not it had a bridge that day. The relevance written is
+    the prediction's most recent ``validation_rows.observed_relevance``
+    *at or before* ``as_of`` — so a prediction whose last bridge was on
+    2026-07-28 keeps reporting that relevance on every later date until
+    a new bridge replaces it. Consumers must read a flat run as "no new
+    evidence since <first date of the run>", not as daily
+    re-confirmation. There is no decay and no staleness flag; the only
+    way to tell a fresh 3 from a six-week-old 3 is to join back to
+    ``validation_rows`` on ``validation_date``.
+
+    This reads the historized ``validation_rows`` rather than the
+    denormalized ``prediction_scope_assignments.latest_*`` columns.
+    Those columns are last-writer-wins with no date attached, so they
+    only describe *today*; using them made every date impossible to
+    score except the newest one.
+    """
+    roster_clause = ""
+    params: tuple = (as_of.isoformat(),)
+    if backfill:
+        # Assignments minted after `as_of` did not exist on that date.
+        # `assigned_at` is INSERT-stable: _upsert_assignment's ON
+        # CONFLICT branch updates `updated_at` only.
+        #
+        # The `prediction_date = ?` arm is load-bearing for exactly the
+        # catch-up case this function exists to repair: when day D is
+        # ingested on D+1, the assignments for D's OWN new predictions
+        # get `assigned_at` = D+1. Without that arm, the three
+        # predictions introduced on 2026-07-28 were excluded from their
+        # own day. It must stay `=` and not `<=`: an older prediction
+        # re-assigned later (what the weekly theme review does) really
+        # did not have that assignment on `as_of`.
+        roster_clause = (
+            " WHERE psa.assigned_at IS NULL"
+            " OR substr(psa.assigned_at, 1, 10) <= ?"
+            " OR p.prediction_date = ?"
+        )
+        params = (as_of.isoformat(), as_of.isoformat(), as_of.isoformat())
+
     cur = conn.execute(
-        """
+        f"""
         SELECT p.prediction_id, psa.scope_id,
-               psa.latest_observed_relevance,
-               psa.latest_realization_score,
-               psa.latest_contradiction_score
+               (SELECT v.observed_relevance
+                  FROM validation_rows v
+                 WHERE v.prediction_id = p.prediction_id
+                   AND v.validation_date <= ?
+                   AND v.observed_relevance IS NOT NULL
+                 ORDER BY v.validation_date DESC, v.validation_row_id DESC
+                 LIMIT 1) AS observed_relevance
         FROM predictions p
         JOIN prediction_scope_assignments psa ON p.prediction_id = psa.prediction_id
-        """
+        {roster_clause}
+        """,
+        params,
     )
     rows = cur.fetchall()
     n = 0
     for row in rows:
-        realization = row["latest_realization_score"] or 0.0
         contradiction = 0.0  # retired; column kept for schema compat.
-        new_rel = normalize_relevance(row["latest_observed_relevance"])
+        # ingest sets latest_realization_score = normalize_relevance(
+        # observed_relevance), so realization and new_evidence_relevance
+        # are the same number by construction.
+        realization = normalize_relevance(row["observed_relevance"])
         status = prediction_status(realization)
         for window_id, _days in WINDOWS:
             conn.execute(
@@ -474,17 +656,21 @@ def _snapshot_predictions(conn: sqlite3.Connection, *, latest: date) -> int:
                 (
                     row["prediction_id"],
                     row["scope_id"],
-                    latest.isoformat(),
+                    as_of.isoformat(),
                     window_id,
-                    new_rel,
+                    realization,
                     0.0,
-                    row["latest_observed_relevance"],
+                    row["observed_relevance"],
                     realization,
                     contradiction,
                     status,
                 ),
             )
+            n += 1
+        if not backfill:
             # Update latest_observation_status on assignment for convenience.
+            # Skipped when backfilling: a past day's status must not
+            # overwrite the current one.
             conn.execute(
                 """
                 UPDATE prediction_scope_assignments
@@ -493,5 +679,4 @@ def _snapshot_predictions(conn: sqlite3.Connection, *, latest: date) -> int:
                 """,
                 (status, row["prediction_id"], row["scope_id"]),
             )
-            n += 1
     return n
