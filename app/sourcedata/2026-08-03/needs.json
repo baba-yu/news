@@ -1,0 +1,361 @@
+{
+  "date": "2026-08-03",
+  "by_prediction": {
+    "prediction.11fc575584e8e05b": [
+      {
+        "actor": "Inference benchmark working-group chair, MLCommons",
+        "job": "Running the MLPerf Inference submission rounds and the peer review that turns a vendor's own measurement into a consortium-published serving number.",
+        "outcome": "A published round holding end-to-end throughput for a non-NVIDIA part, with model, precision, batch size and sequence length disclosed.",
+        "motivation": "The consortium's whole value is that its disclosure rules and review belong to it rather than to whoever is selling the hardware.",
+        "task": {
+          "who": "MLCommons inference working group and its results review committee",
+          "what": "Admit machine-generated kernel stacks to a submission division",
+          "where": "MLPerf Inference rules repository and submission review calls",
+          "when": "Q4 2026",
+          "why": "Consortium review is what makes a submitter's number independent",
+          "how": "MLPerf Inference open division rules with mandatory configuration disclosure"
+        }
+      },
+      {
+        "actor": "MLPerf submission engineer, challenger inference accelerator vendor",
+        "job": "Preparing a full end-to-end serving submission for a non-NVIDIA part whose kernel layer was written by a code-generation agent.",
+        "outcome": "A reviewed submission stating the stack was machine-written, carrying tokens per second at a named model, precision and sequence length.",
+        "motivation": "Percent-of-peak stopped moving buyers, and a reviewed round is the cheapest way to publish a number the seller did not grade.",
+        "task": {
+          "who": "Vendor performance engineering and benchmark submission staff",
+          "what": "File an end-to-end serving result for review",
+          "where": "MLPerf Inference submission repository and the vendor's qualification cluster",
+          "when": "Q1 2027",
+          "why": "A graded round outranks any blog the vendor writes",
+          "how": "Reference serving harness run at fixed batch and context"
+        }
+      },
+      {
+        "actor": "Developer access and evaluation program manager, d-Matrix Corsair",
+        "job": "Putting Corsair parts and remote evaluation access into the hands of outside labs and buyers who run their own serving measurements.",
+        "outcome": "Unaffiliated evaluators holding enough Corsair time to measure a named model end to end and publish what they saw.",
+        "motivation": "A challenger part converts on outside numbers, and every figure in the current account is first-party.",
+        "task": {
+          "who": "d-Matrix developer relations and evaluation hardware allocation staff",
+          "what": "Grant outside evaluators standing Corsair cluster access",
+          "where": "Remote evaluation cluster and loaner card allocation queue",
+          "when": "October 2026",
+          "why": "Nobody unaffiliated can measure hardware they cannot reach",
+          "how": "Time-boxed remote tenancy plus loaner cards under evaluation agreements"
+        }
+      },
+      {
+        "actor": "Kernel generation platform engineering lead, Infinity Ignition team",
+        "job": "Pushing the agent-written stack past tensor-parallel matmul into the attention, key-value cache and sampling operators an end-to-end serve actually touches.",
+        "outcome": "A machine-written stack that serves a named model well enough for an outside party to benchmark and label as agent-generated.",
+        "motivation": "A stack can sit near peak on one kernel and still lose on tokens per second, and the seed round priced the stronger claim.",
+        "task": {
+          "who": "Infinity kernel generation, autotuning and correctness test engineers",
+          "what": "Extend generated coverage to attention and cache operators",
+          "where": "Ignition kernel generation, test and autotune pipeline",
+          "when": "November 2026",
+          "why": "Unbenchmarked operators are the ones that stall serving",
+          "how": "Agent-emitted Triton and MLIR kernels checked against reference outputs"
+        }
+      },
+      {
+        "actor": "Inference systems benchmarking researcher, university computer architecture lab",
+        "job": "Running named models end to end on challenger accelerators and publishing throughput with the full run configuration a reader would need.",
+        "outcome": "A preprint reporting tokens per second on a non-NVIDIA part with a machine-written kernel layer, model, precision and context stated.",
+        "motivation": "Agent-written kernel stacks are an open systems question, and the only numbers in circulation come from the companies selling them.",
+        "task": {
+          "who": "Graduate students and faculty in a systems performance group",
+          "what": "Measure end-to-end serving throughput on a challenger accelerator",
+          "where": "University cluster tenancy on loaned challenger accelerator hardware",
+          "when": "February 2027",
+          "why": "Every circulating figure still comes from the seller",
+          "how": "Open serving harness with per-run configuration logged in the artifact"
+        }
+      },
+      {
+        "actor": "Hardware backend plugin maintainer, vLLM project",
+        "job": "Keeping the out-of-tree accelerator backend interface stable so a non-NVIDIA part can be served by the harness evaluators already use.",
+        "outcome": "A serving path where a machine-written kernel layer plugs in and reports throughput comparable to runs on any other backend.",
+        "motivation": "A benchmark nobody can reproduce on a common harness stays a vendor claim, which is exactly what the project's users distrust.",
+        "task": {
+          "who": "vLLM hardware plugin and platform interface maintainers",
+          "what": "Hold the out-of-tree accelerator plugin interface stable",
+          "where": "vLLM platform plugin interface and its backend conformance tests",
+          "when": "Q3 2026",
+          "why": "Comparable numbers need one harness across every backend",
+          "how": "Versioned plugin API with per-run configuration in the benchmark output"
+        }
+      },
+      {
+        "actor": "Inference fleet capacity engineer at a metered hosted-inference vendor",
+        "job": "Qualifying non-NVIDIA accelerators against the incumbent fleet and writing up what the swap did to tokens per second and latency.",
+        "outcome": "A customer-authored engineering post reporting served throughput at a stated model, precision, concurrency and context on the challenger part.",
+        "motivation": "The buyer carries the cost of a bad port, so it measures for itself before committing capacity, and publishing costs nothing extra.",
+        "task": {
+          "who": "Fleet capacity planning and serving performance engineers",
+          "what": "Benchmark a challenger accelerator against the production fleet",
+          "where": "Staging serving tier alongside the live inference fleet",
+          "when": "December 2026",
+          "why": "A bad port lands on the buyer's margin",
+          "how": "Shadow traffic replay at fixed concurrency and sequence length"
+        }
+      },
+      {
+        "actor": "Independent inference benchmarking methodology lead, Artificial Analysis",
+        "job": "Publishing standardized throughput and latency measurements per endpoint, with the accelerator and run configuration named alongside the score.",
+        "outcome": "Coverage extended to endpoints served on non-NVIDIA silicon, each row carrying the hardware, the model and the measured serving rate.",
+        "motivation": "Their entire product is a number a reader did not have to take from the seller, and challenger silicon is an open gap.",
+        "task": {
+          "who": "Artificial Analysis benchmarking and methodology publication staff",
+          "what": "Add non-NVIDIA served endpoints to the comparison tables",
+          "where": "Artificial Analysis comparison pages and methodology documentation",
+          "when": "March 2027",
+          "why": "Challenger silicon is the gap in their coverage",
+          "how": "Standard endpoint harness at declared concurrency and output length"
+        }
+      }
+    ],
+    "prediction.265957eba17f4dd2": [
+      {
+        "actor": "Accreditation scheme manager, CREST penetration testing standards team",
+        "job": "Turning the July 28 Domain 7 and Annex B text into assessable requirements and processing the first applications through the scheme.",
+        "outcome": "A named company published in CREST's accreditation listing as holding the AI-enabled penetration testing annex.",
+        "motivation": "CREST said it expected a first accredited organisation within about a month, and an unheld standard accredits nobody.",
+        "task": {
+          "who": "CREST standards and accreditation operations staff",
+          "what": "Publish assessor guidance for the AI annex",
+          "where": "CREST company and penetration testing accreditation standards",
+          "when": "Q3 2026",
+          "why": "Applications opened the day the standard published",
+          "how": "Domain 7 and Annex B requirement mapping"
+        }
+      },
+      {
+        "actor": "Lead assessor for AI-enabled penetration testing, CREST assessment panel",
+        "job": "Assessing applicant firms against Domain 7 and Annex B by sampling their engagement records rather than their tooling claims.",
+        "outcome": "An assessment report that clears a platform vendor for listing, or names the evidence gaps blocking it.",
+        "motivation": "Independent assessment is the whole value of the artefact; a waved-through applicant would make the listing worth nothing.",
+        "task": {
+          "who": "CREST-appointed assessors working the applicant queue",
+          "what": "Sample engagement files for human oversight evidence",
+          "where": "Applicant scoping records, test reports and sign-off logs",
+          "when": "Q4 2026",
+          "why": "The annex requires judgement, not tool output",
+          "how": "Documentary review plus assessor interviews on site"
+        }
+      },
+      {
+        "actor": "Compliance and accreditation programme lead, Horizon3.ai",
+        "job": "Assembling the company application for CREST's AI additions and carrying it through assessment on Horizon3's own legal entity.",
+        "outcome": "Horizon3 listed by CREST under Domain 7 and Annex B, not a partner or delivery affiliate.",
+        "motivation": "Its payment-card offering already puts certified humans on the invoice; accreditation makes that signature independently assessed instead of self-asserted.",
+        "task": {
+          "who": "Horizon3 compliance function with legal and services leads",
+          "what": "Submit the company application to CREST",
+          "where": "CREST's application process for the company standard",
+          "when": "Q4 2026",
+          "why": "Assessment takes quarters and the window is short",
+          "how": "Evidence pack mapped clause by clause"
+        }
+      },
+      {
+        "actor": "Responsible AI governance owner, autonomous penetration-testing platform vendor",
+        "job": "Writing the organisational AI governance, oversight and transparency policy set that Domain 7 asks a provider to hold and evidence.",
+        "outcome": "An approved AI use policy, model inventory and oversight register an assessor can test against Domain 7.",
+        "motivation": "Domain 7 sits in the company general requirements, so no engagement-level work counts until the organisational governance exists.",
+        "task": {
+          "who": "Security governance and risk function inside the vendor",
+          "what": "Draft the AI oversight and transparency policy",
+          "where": "Company management system and internal policy register",
+          "when": "Q3 2026",
+          "why": "Domain 7 gates the whole company application",
+          "how": "Clause-by-clause mapping to Domain 7 wording"
+        }
+      },
+      {
+        "actor": "Offensive services delivery manager, Horizon3.ai certified testing practice",
+        "job": "Standardising how the human testers scope, review and sign engagements so an assessor sampling any file finds the same record.",
+        "outcome": "A consistent engagement file per client showing named tester accountability across scoping, review and the delivered report.",
+        "motivation": "Annex B is about the conduct of the engagement, and an assessor samples files rather than reading a datasheet.",
+        "task": {
+          "who": "Certified testers and report QA reviewers at Horizon3",
+          "what": "Rework engagement records for assessor sampling",
+          "where": "Delivery workflow behind the customer test report",
+          "when": "Q1 2027",
+          "why": "Assessors sample files, not capability claims",
+          "how": "Standard scoping, review and sign-off templates"
+        }
+      },
+      {
+        "actor": "Platform product manager for engagement audit trail, AI-driven penetration-testing vendor",
+        "job": "Shipping the per-finding record that shows which output the platform produced and which qualified human reviewed and accepted it.",
+        "outcome": "Exportable evidence attributing every reported finding to a named reviewer, ready for an assessor to sample.",
+        "motivation": "The annex is written so AI enhances professional judgement, and only the product can prove where the judgement happened.",
+        "task": {
+          "who": "Platform engineering team owning reporting and audit logs",
+          "what": "Add reviewer attribution to every reported finding",
+          "where": "Reporting pipeline and the customer-facing findings export",
+          "when": "Q4 2026",
+          "why": "Human judgement must be evidenced, not asserted",
+          "how": "Immutable review log exported with the report"
+        }
+      },
+      {
+        "actor": "Compliance programme lead, UK-headquartered AI-driven penetration-testing platform vendor",
+        "job": "Moving early on the AI annex while CREST's home-market framework buyers are already writing accreditation into their renewal requirements.",
+        "outcome": "A CREST-listed platform vendor outside the United States holding the AI annex before the larger US-anchored competitors.",
+        "motivation": "CREST's pull is heaviest in the United Kingdom, the Gulf and Singapore, where the accreditation already clears procurement.",
+        "task": {
+          "who": "Compliance and bid team at the UK vendor",
+          "what": "Apply under the new AI annex early",
+          "where": "CREST company and penetration testing applications",
+          "when": "Q3 2026",
+          "why": "Home-market tenders already ask for CREST accreditation",
+          "how": "Existing CREST membership extended to the annex"
+        }
+      },
+      {
+        "actor": "Third-party assurance lead, regulated-enterprise security procurement",
+        "job": "Rewriting penetration-testing tender requirements so an AI-run engagement must come from a firm accredited under the new annex.",
+        "outcome": "Purchase orders and tenders that name the AI annex, giving platform vendors a revenue reason to apply.",
+        "motivation": "Its auditors accept an accountable signature rather than a capability claim, and the annex is the first assessed artefact.",
+        "task": {
+          "who": "Security assurance and procurement function at the buyer",
+          "what": "Add the AI annex to tender requirements",
+          "where": "Penetration testing tender and supplier assurance questionnaires",
+          "when": "Q1 2027",
+          "why": "Auditors accept an assessed accreditation, not marketing",
+          "how": "Supplier accreditation clause in the standard contract"
+        }
+      },
+      {
+        "actor": "Corporate development lead, venture-funded autonomous penetration-testing platform company",
+        "job": "Spending Series E proceeds to buy or build the accredited testing entity, then holding the accreditation on the platform company.",
+        "outcome": "The accreditation recorded against the platform company itself rather than a reseller, partner or delivery affiliate.",
+        "motivation": "A bundled meter cannot ship an accountable signature, and a freshly repriced balance sheet can pay for one.",
+        "task": {
+          "who": "Corporate development with the general counsel's office",
+          "what": "Model buy-versus-build for the accredited entity",
+          "where": "Post-round capital allocation and diligence review",
+          "when": "Q4 2026",
+          "why": "Accreditation must sit on the platform company",
+          "how": "Diligence on CREST-accredited testing firms"
+        }
+      }
+    ],
+    "prediction.ed22f8669ea280de": [
+      {
+        "actor": "Xet storage protocol engineer, Hugging Face Xet team",
+        "job": "Building stall recovery inside the Xet transfer path itself — tighter stall detection, chunk-level resume and retry — rather than an exit to HTTP.",
+        "outcome": "A stalled large-repository pull that resumes on the Xet path from its own partial chunks, with no cross-protocol handoff in the client default.",
+        "motivation": "Xet is the product Hugging Face built to replace a plain file pull; a default bail-out would concede in shipped code that it fails.",
+        "task": {
+          "who": "Hugging Face Xet transfer protocol and client integration engineers",
+          "what": "Ship chunk-level resume for interrupted Xet transfers",
+          "where": "The hf_xet transfer client and its chunk cache",
+          "when": "Q4 2026",
+          "why": "In-path resume removes the reason to leave Xet",
+          "how": "Content-defined chunking with cached partial-chunk reuse"
+        }
+      },
+      {
+        "actor": "Download path maintainer, huggingface_hub client library",
+        "job": "Maintaining the download entry point that selects the Xet getter or the HTTP getter once, before any bytes move, and keeping that structure.",
+        "outcome": "Released huggingface_hub versions where path selection stays a pre-transfer decision and no handler moves a live file between the two getters.",
+        "motivation": "A mid-flight handoff discards partial state and restarts a terabyte-class file on the slower route, so it stays out of the default.",
+        "task": {
+          "who": "huggingface_hub file-download and cache maintainers",
+          "what": "Keep getter selection a single pre-transfer decision",
+          "where": "The hf_hub_download path and its Xet availability check",
+          "when": "Q3 2026",
+          "why": "A mid-flight handoff would restart the whole file",
+          "how": "Existing hf_xet-present branch plus the HF_HUB_DISABLE_XET switch"
+        }
+      },
+      {
+        "actor": "Issue triage engineer, Hugging Face hub client and Xet support",
+        "job": "Working the open stalled-transfer reports and routing each to a Xet-side fix or a retry gap, rather than to a cross-protocol feature request.",
+        "outcome": "Closed stall reports whose fixes land inside Xet or in plain HTTP retry, leaving no shipped default that switches protocol mid-transfer.",
+        "motivation": "The still-open report of a plain HTTP pull dying at 17.3 of 42.5 gigabytes shows the escape hatch is not more reliable.",
+        "task": {
+          "who": "Hugging Face hub client issue triage and support engineers",
+          "what": "Resolve the open plain-HTTP no-retry download report",
+          "where": "The huggingface_hub GitHub issue tracker and download tests",
+          "when": "October 2026",
+          "why": "The escape route currently has no retry of its own",
+          "how": "Reproduction on multi-gigabyte pulls with cache-state inspection"
+        }
+      },
+      {
+        "actor": "Content delivery operations engineer, Hugging Face Xet delivery infrastructure",
+        "job": "Raising throughput and cutting stall rate on the Xet delivery tier so long multi-shard pulls finish on the fast path they started on.",
+        "outcome": "Measurably fewer stalled terabyte-class transfers, removing the operational pressure that would otherwise force a cross-protocol default into the client.",
+        "motivation": "Faster infrastructure inside Xet is the fix the storage layer can ship without admitting the transport it built cannot carry its own artefacts.",
+        "task": {
+          "who": "Hugging Face Xet delivery and storage reliability operations staff",
+          "what": "Cut stall rate on multi-shard weight transfers",
+          "where": "Xet content-addressed storage and its edge delivery tier",
+          "when": "Q1 2027",
+          "why": "Fewer stalls means no reason to ship an exit",
+          "how": "Regional cache expansion with per-chunk transfer telemetry"
+        }
+      },
+      {
+        "actor": "Release engineer, Unsloth model loading and transfer layer",
+        "job": "Maintaining the automatic Xet-to-HTTP fallback shipped in 2026.8.2, keeping stall recovery in the project that receives the file.",
+        "outcome": "A consuming library that recovers stalled pulls on its own, so the cross-protocol bail-out keeps living downstream of huggingface_hub.",
+        "motivation": "A project built to fit training on smaller hardware spent a release making a download finish, because its users cannot wait for upstream.",
+        "task": {
+          "who": "Unsloth maintainers working the model loading and download layer",
+          "what": "Harden the automatic Xet-to-HTTP fallback across weight pulls",
+          "where": "Unsloth model loading code and its PyPI release train",
+          "when": "September 2026",
+          "why": "Users need the pull to finish before upstream acts",
+          "how": "Stall timeout detection wrapping the huggingface_hub download call"
+        }
+      },
+      {
+        "actor": "Weight fetch maintainer, open-source inference serving runtime",
+        "job": "Wrapping the hub download call with the runtime's own retry and protocol switch so a model server can start after a stalled pull.",
+        "outcome": "Another shipped bail-out written by the receiver rather than the sender, which the prediction counts as confirmation rather than contradiction.",
+        "motivation": "A serving runtime whose weight fetch hangs is a runtime that will not boot, and it cannot make that someone else's release schedule.",
+        "task": {
+          "who": "Model loading and weight fetch maintainers of the serving runtime",
+          "what": "Add a caller-side retry and protocol switch",
+          "where": "The runtime's model weight fetch and startup path",
+          "when": "December 2026",
+          "why": "A hung fetch blocks the server from starting",
+          "how": "Caller-side exception handling around the hub download entry point"
+        }
+      },
+      {
+        "actor": "Model weight publishing lead, Alibaba Qwen release team",
+        "job": "Opening the Qwen3.8-Max weights and the smaller 27B sibling into Xet-backed repositories, putting terabyte-class artefacts onto the fast transfer path.",
+        "outcome": "Flagship-scale weights distributed through Xet, keeping the load that makes in-protocol recovery the fix Hugging Face invests in.",
+        "motivation": "An open-weights launch is only a launch if the shards actually arrive, so the publisher wants the hub's own path to carry them.",
+        "task": {
+          "who": "Alibaba Qwen model release and distribution engineers",
+          "what": "Publish the open Qwen3.8 weight shards to the hub",
+          "where": "Hugging Face model repositories backed by Xet storage",
+          "when": "August 2026",
+          "why": "Flagship weights only count once they download",
+          "how": "Sharded safetensors uploads through the standard hub client"
+        }
+      },
+      {
+        "actor": "Weight mirror operations engineer, regional model mirror service",
+        "job": "Fetching reference weights once over the hub's path and republishing smaller derived artefacts, absorbing the stall risk on behalf of downstream users.",
+        "outcome": "A mirror-side retry wrapper that finishes the fetch, adding one more receiver-written recovery instead of an upstream default.",
+        "motivation": "The intermediaries who pull once and republish are the population that actually eats hours-long transfers, and they cannot wait on a client release.",
+        "task": {
+          "who": "Mirror ingestion and republication operations engineers",
+          "what": "Wrap reference weight ingestion in a resumable job",
+          "where": "The mirror's ingestion pipeline and object storage",
+          "when": "November 2026",
+          "why": "Hours-long pulls drop and must restart cheaply",
+          "how": "Scheduled ingestion jobs with per-shard checkpointing"
+        }
+      }
+    ]
+  }
+}

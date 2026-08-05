@@ -1,0 +1,114 @@
+[
+  {
+    "actor": "Xet storage protocol engineer, Hugging Face Xet team",
+    "job": "Building stall recovery inside the Xet transfer path itself — tighter stall detection, chunk-level resume and retry — rather than an exit to HTTP.",
+    "outcome": "A stalled large-repository pull that resumes on the Xet path from its own partial chunks, with no cross-protocol handoff in the client default.",
+    "motivation": "Xet is the product Hugging Face built to replace a plain file pull; a default bail-out would concede in shipped code that it fails.",
+    "task": {
+      "who": "Hugging Face Xet transfer protocol and client integration engineers",
+      "what": "Ship chunk-level resume for interrupted Xet transfers",
+      "where": "The hf_xet transfer client and its chunk cache",
+      "when": "Q4 2026",
+      "why": "In-path resume removes the reason to leave Xet",
+      "how": "Content-defined chunking with cached partial-chunk reuse"
+    }
+  },
+  {
+    "actor": "Download path maintainer, huggingface_hub client library",
+    "job": "Maintaining the download entry point that selects the Xet getter or the HTTP getter once, before any bytes move, and keeping that structure.",
+    "outcome": "Released huggingface_hub versions where path selection stays a pre-transfer decision and no handler moves a live file between the two getters.",
+    "motivation": "A mid-flight handoff discards partial state and restarts a terabyte-class file on the slower route, so it stays out of the default.",
+    "task": {
+      "who": "huggingface_hub file-download and cache maintainers",
+      "what": "Keep getter selection a single pre-transfer decision",
+      "where": "The hf_hub_download path and its Xet availability check",
+      "when": "Q3 2026",
+      "why": "A mid-flight handoff would restart the whole file",
+      "how": "Existing hf_xet-present branch plus the HF_HUB_DISABLE_XET switch"
+    }
+  },
+  {
+    "actor": "Issue triage engineer, Hugging Face hub client and Xet support",
+    "job": "Working the open stalled-transfer reports and routing each to a Xet-side fix or a retry gap, rather than to a cross-protocol feature request.",
+    "outcome": "Closed stall reports whose fixes land inside Xet or in plain HTTP retry, leaving no shipped default that switches protocol mid-transfer.",
+    "motivation": "The still-open report of a plain HTTP pull dying at 17.3 of 42.5 gigabytes shows the escape hatch is not more reliable.",
+    "task": {
+      "who": "Hugging Face hub client issue triage and support engineers",
+      "what": "Resolve the open plain-HTTP no-retry download report",
+      "where": "The huggingface_hub GitHub issue tracker and download tests",
+      "when": "October 2026",
+      "why": "The escape route currently has no retry of its own",
+      "how": "Reproduction on multi-gigabyte pulls with cache-state inspection"
+    }
+  },
+  {
+    "actor": "Content delivery operations engineer, Hugging Face Xet delivery infrastructure",
+    "job": "Raising throughput and cutting stall rate on the Xet delivery tier so long multi-shard pulls finish on the fast path they started on.",
+    "outcome": "Measurably fewer stalled terabyte-class transfers, removing the operational pressure that would otherwise force a cross-protocol default into the client.",
+    "motivation": "Faster infrastructure inside Xet is the fix the storage layer can ship without admitting the transport it built cannot carry its own artefacts.",
+    "task": {
+      "who": "Hugging Face Xet delivery and storage reliability operations staff",
+      "what": "Cut stall rate on multi-shard weight transfers",
+      "where": "Xet content-addressed storage and its edge delivery tier",
+      "when": "Q1 2027",
+      "why": "Fewer stalls means no reason to ship an exit",
+      "how": "Regional cache expansion with per-chunk transfer telemetry"
+    }
+  },
+  {
+    "actor": "Release engineer, Unsloth model loading and transfer layer",
+    "job": "Maintaining the automatic Xet-to-HTTP fallback shipped in 2026.8.2, keeping stall recovery in the project that receives the file.",
+    "outcome": "A consuming library that recovers stalled pulls on its own, so the cross-protocol bail-out keeps living downstream of huggingface_hub.",
+    "motivation": "A project built to fit training on smaller hardware spent a release making a download finish, because its users cannot wait for upstream.",
+    "task": {
+      "who": "Unsloth maintainers working the model loading and download layer",
+      "what": "Harden the automatic Xet-to-HTTP fallback across weight pulls",
+      "where": "Unsloth model loading code and its PyPI release train",
+      "when": "September 2026",
+      "why": "Users need the pull to finish before upstream acts",
+      "how": "Stall timeout detection wrapping the huggingface_hub download call"
+    }
+  },
+  {
+    "actor": "Weight fetch maintainer, open-source inference serving runtime",
+    "job": "Wrapping the hub download call with the runtime's own retry and protocol switch so a model server can start after a stalled pull.",
+    "outcome": "Another shipped bail-out written by the receiver rather than the sender, which the prediction counts as confirmation rather than contradiction.",
+    "motivation": "A serving runtime whose weight fetch hangs is a runtime that will not boot, and it cannot make that someone else's release schedule.",
+    "task": {
+      "who": "Model loading and weight fetch maintainers of the serving runtime",
+      "what": "Add a caller-side retry and protocol switch",
+      "where": "The runtime's model weight fetch and startup path",
+      "when": "December 2026",
+      "why": "A hung fetch blocks the server from starting",
+      "how": "Caller-side exception handling around the hub download entry point"
+    }
+  },
+  {
+    "actor": "Model weight publishing lead, Alibaba Qwen release team",
+    "job": "Opening the Qwen3.8-Max weights and the smaller 27B sibling into Xet-backed repositories, putting terabyte-class artefacts onto the fast transfer path.",
+    "outcome": "Flagship-scale weights distributed through Xet, keeping the load that makes in-protocol recovery the fix Hugging Face invests in.",
+    "motivation": "An open-weights launch is only a launch if the shards actually arrive, so the publisher wants the hub's own path to carry them.",
+    "task": {
+      "who": "Alibaba Qwen model release and distribution engineers",
+      "what": "Publish the open Qwen3.8 weight shards to the hub",
+      "where": "Hugging Face model repositories backed by Xet storage",
+      "when": "August 2026",
+      "why": "Flagship weights only count once they download",
+      "how": "Sharded safetensors uploads through the standard hub client"
+    }
+  },
+  {
+    "actor": "Weight mirror operations engineer, regional model mirror service",
+    "job": "Fetching reference weights once over the hub's path and republishing smaller derived artefacts, absorbing the stall risk on behalf of downstream users.",
+    "outcome": "A mirror-side retry wrapper that finishes the fetch, adding one more receiver-written recovery instead of an upstream default.",
+    "motivation": "The intermediaries who pull once and republish are the population that actually eats hours-long transfers, and they cannot wait on a client release.",
+    "task": {
+      "who": "Mirror ingestion and republication operations engineers",
+      "what": "Wrap reference weight ingestion in a resumable job",
+      "where": "The mirror's ingestion pipeline and object storage",
+      "when": "November 2026",
+      "why": "Hours-long pulls drop and must restart cheaply",
+      "how": "Scheduled ingestion jobs with per-shard checkpointing"
+    }
+  }
+]

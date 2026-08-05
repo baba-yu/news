@@ -1,0 +1,114 @@
+[
+  {
+    "actor": "Inference benchmark working-group chair, MLCommons",
+    "job": "Running the MLPerf Inference submission rounds and the peer review that turns a vendor's own measurement into a consortium-published serving number.",
+    "outcome": "A published round holding end-to-end throughput for a non-NVIDIA part, with model, precision, batch size and sequence length disclosed.",
+    "motivation": "The consortium's whole value is that its disclosure rules and review belong to it rather than to whoever is selling the hardware.",
+    "task": {
+      "who": "MLCommons inference working group and its results review committee",
+      "what": "Admit machine-generated kernel stacks to a submission division",
+      "where": "MLPerf Inference rules repository and submission review calls",
+      "when": "Q4 2026",
+      "why": "Consortium review is what makes a submitter's number independent",
+      "how": "MLPerf Inference open division rules with mandatory configuration disclosure"
+    }
+  },
+  {
+    "actor": "MLPerf submission engineer, challenger inference accelerator vendor",
+    "job": "Preparing a full end-to-end serving submission for a non-NVIDIA part whose kernel layer was written by a code-generation agent.",
+    "outcome": "A reviewed submission stating the stack was machine-written, carrying tokens per second at a named model, precision and sequence length.",
+    "motivation": "Percent-of-peak stopped moving buyers, and a reviewed round is the cheapest way to publish a number the seller did not grade.",
+    "task": {
+      "who": "Vendor performance engineering and benchmark submission staff",
+      "what": "File an end-to-end serving result for review",
+      "where": "MLPerf Inference submission repository and the vendor's qualification cluster",
+      "when": "Q1 2027",
+      "why": "A graded round outranks any blog the vendor writes",
+      "how": "Reference serving harness run at fixed batch and context"
+    }
+  },
+  {
+    "actor": "Developer access and evaluation program manager, d-Matrix Corsair",
+    "job": "Putting Corsair parts and remote evaluation access into the hands of outside labs and buyers who run their own serving measurements.",
+    "outcome": "Unaffiliated evaluators holding enough Corsair time to measure a named model end to end and publish what they saw.",
+    "motivation": "A challenger part converts on outside numbers, and every figure in the current account is first-party.",
+    "task": {
+      "who": "d-Matrix developer relations and evaluation hardware allocation staff",
+      "what": "Grant outside evaluators standing Corsair cluster access",
+      "where": "Remote evaluation cluster and loaner card allocation queue",
+      "when": "October 2026",
+      "why": "Nobody unaffiliated can measure hardware they cannot reach",
+      "how": "Time-boxed remote tenancy plus loaner cards under evaluation agreements"
+    }
+  },
+  {
+    "actor": "Kernel generation platform engineering lead, Infinity Ignition team",
+    "job": "Pushing the agent-written stack past tensor-parallel matmul into the attention, key-value cache and sampling operators an end-to-end serve actually touches.",
+    "outcome": "A machine-written stack that serves a named model well enough for an outside party to benchmark and label as agent-generated.",
+    "motivation": "A stack can sit near peak on one kernel and still lose on tokens per second, and the seed round priced the stronger claim.",
+    "task": {
+      "who": "Infinity kernel generation, autotuning and correctness test engineers",
+      "what": "Extend generated coverage to attention and cache operators",
+      "where": "Ignition kernel generation, test and autotune pipeline",
+      "when": "November 2026",
+      "why": "Unbenchmarked operators are the ones that stall serving",
+      "how": "Agent-emitted Triton and MLIR kernels checked against reference outputs"
+    }
+  },
+  {
+    "actor": "Inference systems benchmarking researcher, university computer architecture lab",
+    "job": "Running named models end to end on challenger accelerators and publishing throughput with the full run configuration a reader would need.",
+    "outcome": "A preprint reporting tokens per second on a non-NVIDIA part with a machine-written kernel layer, model, precision and context stated.",
+    "motivation": "Agent-written kernel stacks are an open systems question, and the only numbers in circulation come from the companies selling them.",
+    "task": {
+      "who": "Graduate students and faculty in a systems performance group",
+      "what": "Measure end-to-end serving throughput on a challenger accelerator",
+      "where": "University cluster tenancy on loaned challenger accelerator hardware",
+      "when": "February 2027",
+      "why": "Every circulating figure still comes from the seller",
+      "how": "Open serving harness with per-run configuration logged in the artifact"
+    }
+  },
+  {
+    "actor": "Hardware backend plugin maintainer, vLLM project",
+    "job": "Keeping the out-of-tree accelerator backend interface stable so a non-NVIDIA part can be served by the harness evaluators already use.",
+    "outcome": "A serving path where a machine-written kernel layer plugs in and reports throughput comparable to runs on any other backend.",
+    "motivation": "A benchmark nobody can reproduce on a common harness stays a vendor claim, which is exactly what the project's users distrust.",
+    "task": {
+      "who": "vLLM hardware plugin and platform interface maintainers",
+      "what": "Hold the out-of-tree accelerator plugin interface stable",
+      "where": "vLLM platform plugin interface and its backend conformance tests",
+      "when": "Q3 2026",
+      "why": "Comparable numbers need one harness across every backend",
+      "how": "Versioned plugin API with per-run configuration in the benchmark output"
+    }
+  },
+  {
+    "actor": "Inference fleet capacity engineer at a metered hosted-inference vendor",
+    "job": "Qualifying non-NVIDIA accelerators against the incumbent fleet and writing up what the swap did to tokens per second and latency.",
+    "outcome": "A customer-authored engineering post reporting served throughput at a stated model, precision, concurrency and context on the challenger part.",
+    "motivation": "The buyer carries the cost of a bad port, so it measures for itself before committing capacity, and publishing costs nothing extra.",
+    "task": {
+      "who": "Fleet capacity planning and serving performance engineers",
+      "what": "Benchmark a challenger accelerator against the production fleet",
+      "where": "Staging serving tier alongside the live inference fleet",
+      "when": "December 2026",
+      "why": "A bad port lands on the buyer's margin",
+      "how": "Shadow traffic replay at fixed concurrency and sequence length"
+    }
+  },
+  {
+    "actor": "Independent inference benchmarking methodology lead, Artificial Analysis",
+    "job": "Publishing standardized throughput and latency measurements per endpoint, with the accelerator and run configuration named alongside the score.",
+    "outcome": "Coverage extended to endpoints served on non-NVIDIA silicon, each row carrying the hardware, the model and the measured serving rate.",
+    "motivation": "Their entire product is a number a reader did not have to take from the seller, and challenger silicon is an open gap.",
+    "task": {
+      "who": "Artificial Analysis benchmarking and methodology publication staff",
+      "what": "Add non-NVIDIA served endpoints to the comparison tables",
+      "where": "Artificial Analysis comparison pages and methodology documentation",
+      "when": "March 2027",
+      "why": "Challenger silicon is the gap in their coverage",
+      "how": "Standard endpoint harness at declared concurrency and output length"
+    }
+  }
+]
