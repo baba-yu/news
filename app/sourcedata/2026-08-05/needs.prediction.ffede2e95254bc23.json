@@ -1,0 +1,128 @@
+[
+  {
+    "actor": "CNA operational rules editor, CVE Program secretariat",
+    "job": "Rewriting the rules that govern what a CNA may publish, so an uncorroborated report cannot leave the queue carrying a critical severity.",
+    "outcome": "A published rule requiring vendor corroboration or record-keeper reproduction before a record carries a critical severity, in effect across the CNA network.",
+    "motivation": "Fabricated SQLite advisories reached critical listing with nothing on the path asking whether the code they blamed existed.",
+    "task": {
+      "who": "CVE Board working group members and programme rule editors",
+      "what": "Draft a corroboration precondition into the CNA rules",
+      "where": "CVE Board working groups and the published programme rules",
+      "when": "Q1 2027",
+      "why": "Nothing on the publication path checks the code exists",
+      "how": "Public council review of a numbered rules revision"
+    }
+  },
+  {
+    "actor": "Vulnerability analysis programme lead, NIST National Vulnerability Database",
+    "job": "Deciding what the database does with a report the vendor has not confirmed: publish it unscored, or hold it until corroboration arrives.",
+    "outcome": "A published analysis policy under which an uncorroborated record appears without a critical score rather than with one.",
+    "motivation": "The database published three of the six fabricated advisories as critical, and the automation downstream reads the score rather than the record.",
+    "task": {
+      "who": "NVD analysis staff and programme documentation owners",
+      "what": "Withhold the critical score until corroboration is on file",
+      "where": "NVD analysis workflow and the public programme policy page",
+      "when": "Q4 2026",
+      "why": "Automated patch cycles trigger on the score, not the text",
+      "how": "Vendor confirmation check recorded before enrichment completes"
+    }
+  },
+  {
+    "actor": "Enrichment decision owner, CISA vulnerability enrichment programme",
+    "job": "Setting when the enrichment programme concurs with a submitted severity, after it concurred with all six fabricated SQLite records.",
+    "outcome": "A published enrichment rule withholding concurrence with a critical severity until the affected vendor corroborates or the programme reproduces it.",
+    "motivation": "The same agency's exploited-vulnerabilities catalogue carries a binding deadline only because listing there requires evidence; enrichment carries no such requirement.",
+    "task": {
+      "who": "CISA enrichment analysts and programme policy staff",
+      "what": "Publish the corroboration test enrichment applies before concurring",
+      "where": "Enrichment programme documentation and its published decision records",
+      "when": "November 2026",
+      "why": "Concurrence is what turned a claim into a critical listing",
+      "how": "Decision criteria modelled on the exploited-vulnerabilities catalogue's evidence bar"
+    }
+  },
+  {
+    "actor": "Assignment triage lead, the CVE Program's CNA of last resort",
+    "job": "Screening requests that name a project with no vendor CNA, where a submitter's claimed severity currently passes through untested.",
+    "outcome": "A triage step that confirms the named function exists in the version cited before any severity leaves the queue.",
+    "motivation": "The functions blamed in the six advisories did not exist in the versions named, and nobody checked before publication.",
+    "task": {
+      "who": "Assignment triage analysts and queue tooling maintainers",
+      "what": "Verify the cited code exists in the named version",
+      "where": "The assignment request queue and its triage checklist",
+      "when": "October 2026",
+      "why": "A claimed severity currently reaches publication untested",
+      "how": "Source lookup against the project's released tags before assignment"
+    }
+  },
+  {
+    "actor": "Advisory database curation lead, GitHub Security Advisory Database",
+    "job": "Deciding what an advisory published from a newly created repository has to clear before it is ingested and surfaced to dependency scanners.",
+    "outcome": "Published ingest criteria under which a repository-published advisory carries no critical severity until the affected project or a curator corroborates it.",
+    "motivation": "A broader audit of 55 records from that one new account found 54 fabricated; the platform is where that volume originates.",
+    "task": {
+      "who": "Advisory database curators and platform abuse reviewers",
+      "what": "Hold repository-published advisories unscored pending curator corroboration",
+      "where": "Advisory database ingest pipeline and its published curation policy",
+      "when": "Q3 2026",
+      "why": "Bulk machine-generated advisories originate on the hosting platform",
+      "how": "Curation review triggered by repository age and submission volume"
+    }
+  },
+  {
+    "actor": "Vulnerability research lead, JFrog security research",
+    "job": "Publishing the per-record corroboration findings behind the 55-record count, and running the same test against other accounts submitting at volume.",
+    "outcome": "A public record showing this is standing throughput rather than one account, precise enough for a programme to write a rule against.",
+    "motivation": "The case was caught because one company chose to look, and one audited account does not show how wide the practice runs.",
+    "task": {
+      "who": "JFrog security research analysts and disclosure editors",
+      "what": "Publish the per-record corroboration findings behind the 55-record count, and the same test against other accounts submitting at volume",
+      "where": "JFrog security research blog and its advisory write-ups",
+      "when": "September 2026",
+      "why": "One examined project does not make a programme move",
+      "how": "Existence and reproduction checks published per record and extended beyond one account"
+    }
+  },
+  {
+    "actor": "Product security scoring lead, Red Hat Product Security",
+    "job": "Reworking how a severity is assigned before publication, after the team scored a fabricated record 10.0 and later lowered it to 7.6.",
+    "outcome": "A documented scoring gate requiring the cited code to be confirmed present before a severity is assigned, published alongside the rescore.",
+    "motivation": "A rescore corrects one case; the vendor's own scoring practice is what other CNAs copy and what a programme rule will codify.",
+    "task": {
+      "who": "Red Hat product security analysts and CVSS scoring reviewers",
+      "what": "Confirm the reported code exists before assigning severity",
+      "where": "Product security scoring workflow and published advisory pages",
+      "when": "December 2026",
+      "why": "A rescore fixes one record, not the practice",
+      "how": "Pre-score existence check recorded in the advisory's scoring rationale"
+    }
+  },
+  {
+    "actor": "Security response maintainer, the SQLite project",
+    "job": "Publishing an authoritative, machine-readable advisory list and a dispute route, so a record-keeper has something to check a claimed SQLite flaw against.",
+    "outcome": "A vendor corroboration source a programme can query automatically, making vendor confirmation a check rather than an email thread.",
+    "motivation": "None of the six fabricated issues appeared on the project's own advisory page, and that absence never reached the record-keepers.",
+    "task": {
+      "who": "SQLite maintainers and the project's security contact",
+      "what": "Publish advisories in a machine-readable, queryable feed",
+      "where": "The project's advisory page and its published security contact",
+      "when": "January 2027",
+      "why": "Absence from the vendor's own list reached nobody",
+      "how": "Signed advisory feed in a standard vulnerability record format"
+    }
+  },
+  {
+    "actor": "Remediation policy owner, an enterprise binding patch windows to CVSS bands",
+    "job": "Rewriting remediation clauses and questionnaires so the patch clock starts on exploitation evidence or vendor confirmation instead of a published number.",
+    "outcome": "Contract language triggering on the exploited-vulnerabilities catalogue or vendor confirmation, which is the pressure that makes restoring the severity field cheaper.",
+    "motivation": "A fabricated critical spends a real patch cycle and a real change window against code that does not exist.",
+    "task": {
+      "who": "Vendor risk, security operations and contract owners",
+      "what": "Retarget remediation clauses away from the published severity band",
+      "where": "Vendor security questionnaires and remediation clauses at renewal",
+      "when": "Q1 2027",
+      "why": "Clauses bound to CVSS 9.0 or above ask nothing about reality",
+      "how": "Clause rewrite tied to the exploited-vulnerabilities catalogue at contract renewal"
+    }
+  }
+]

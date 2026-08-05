@@ -1,0 +1,389 @@
+{
+  "date": "2026-08-05",
+  "by_prediction": {
+    "prediction.ffede2e95254bc23": [
+      {
+        "actor": "Editor de las reglas operativas de las CNA, secretaría del CVE Program",
+        "job": "Reescribir las reglas que gobiernan lo que puede publicar una CNA, de modo que un informe sin corroborar no pueda salir de la cola llevando severidad crítica.",
+        "outcome": "Una norma publicada que exija corroboración del proveedor o reproducción por parte de quien lleva el registro antes de que un registro lleve severidad crítica, en vigor en toda la red de CNA.",
+        "motivation": "Unos avisos inventados sobre SQLite llegaron a listarse como críticos sin que nada en el camino preguntara si existía el código al que culpaban.",
+        "task": {
+          "who": "Miembros del grupo de trabajo del CVE Board y editores de las reglas del programa",
+          "what": "Redactar una condición previa de corroboración dentro de las reglas de las CNA",
+          "where": "Los grupos de trabajo del CVE Board y las reglas publicadas del programa",
+          "when": "Q1 2027",
+          "why": "Nada en el camino de publicación comprueba que el código exista",
+          "how": "Revisión pública del consejo sobre una revisión numerada de las reglas"
+        }
+      },
+      {
+        "actor": "Responsable del programa de análisis de vulnerabilidades, National Vulnerability Database del NIST",
+        "job": "Decidir qué hace la base de datos con un informe que el proveedor no ha confirmado: publicarlo sin puntuación o retenerlo hasta que llegue la corroboración.",
+        "outcome": "Una política de análisis publicada según la cual un registro sin corroborar aparece sin puntuación crítica en lugar de con ella.",
+        "motivation": "La base de datos publicó como críticos tres de los seis avisos inventados, y la automatización aguas abajo lee la puntuación y no el registro.",
+        "task": {
+          "who": "Personal de análisis de la NVD y responsables de la documentación del programa",
+          "what": "Retener la puntuación crítica hasta que conste la corroboración",
+          "where": "El flujo de análisis de la NVD y la página pública de política del programa",
+          "when": "Q4 2026",
+          "why": "Los ciclos de parcheo automático se disparan con la puntuación, no con el texto",
+          "how": "Comprobación de confirmación del proveedor registrada antes de completar el enriquecimiento"
+        }
+      },
+      {
+        "actor": "Responsable de las decisiones de enriquecimiento, programa de enriquecimiento de vulnerabilidades de CISA",
+        "job": "Fijar cuándo el programa de enriquecimiento da su conformidad a una severidad enviada, después de haberla dado a los seis registros inventados de SQLite.",
+        "outcome": "Una norma de enriquecimiento publicada que retenga la conformidad con una severidad crítica hasta que el proveedor afectado corrobore o el programa reproduzca el fallo.",
+        "motivation": "El catálogo de vulnerabilidades explotadas de esa misma agencia lleva un plazo vinculante solo porque figurar allí exige pruebas; el enriquecimiento no lleva ese requisito.",
+        "task": {
+          "who": "Analistas de enriquecimiento de CISA y personal de política del programa",
+          "what": "Publicar la prueba de corroboración que aplica el enriquecimiento antes de dar su conformidad",
+          "where": "La documentación del programa de enriquecimiento y sus registros de decisión publicados",
+          "when": "Noviembre de 2026",
+          "why": "La conformidad es lo que convirtió una afirmación en un listado crítico",
+          "how": "Criterios de decisión calcados del listón de pruebas del catálogo de vulnerabilidades explotadas"
+        }
+      },
+      {
+        "actor": "Responsable del triaje de asignaciones, la CNA de último recurso del CVE Program",
+        "job": "Filtrar las peticiones que nombran un proyecto sin CNA de proveedor, donde hoy la severidad declarada por quien envía pasa sin comprobar.",
+        "outcome": "Un paso de triaje que confirme que la función nombrada existe en la versión citada antes de que ninguna severidad salga de la cola.",
+        "motivation": "Las funciones a las que culpaban los seis avisos no existían en las versiones nombradas, y nadie lo comprobó antes de publicar.",
+        "task": {
+          "who": "Analistas de triaje de asignaciones y mantenedores de las herramientas de la cola",
+          "what": "Verificar que el código citado existe en la versión nombrada",
+          "where": "La cola de peticiones de asignación y su lista de comprobación de triaje",
+          "when": "Octubre de 2026",
+          "why": "Hoy una severidad declarada llega a publicarse sin comprobar",
+          "how": "Consulta del código fuente contra las etiquetas publicadas del proyecto antes de asignar"
+        }
+      },
+      {
+        "actor": "Responsable de curación de la base de datos de avisos, GitHub Security Advisory Database",
+        "job": "Decidir qué tiene que superar un aviso publicado desde un repositorio recién creado antes de ingerirse y llegar a los escáneres de dependencias.",
+        "outcome": "Criterios de ingesta publicados según los cuales un aviso publicado desde un repositorio no lleva severidad crítica hasta que el proyecto afectado o un curador lo corrobora.",
+        "motivation": "Una auditoría más amplia de 55 registros de esa única cuenta nueva encontró 54 inventados; la plataforma es donde se origina ese volumen.",
+        "task": {
+          "who": "Curadores de la base de datos de avisos y revisores de abuso de la plataforma",
+          "what": "Mantener sin puntuación los avisos publicados desde repositorios, a la espera de corroboración de un curador",
+          "where": "La canalización de ingesta de la base de datos de avisos y su política de curación publicada",
+          "when": "Q3 2026",
+          "why": "Los avisos generados por máquina en volumen se originan en la plataforma de alojamiento",
+          "how": "Revisión de curación disparada por la antigüedad del repositorio y el volumen de envíos"
+        }
+      },
+      {
+        "actor": "Responsable de investigación de vulnerabilidades, investigación de seguridad de JFrog",
+        "job": "Publicar los hallazgos de corroboración registro a registro que hay detrás del recuento de 55, y aplicar la misma prueba a otras cuentas que envían en volumen.",
+        "outcome": "Un registro público que muestre que esto es producción sostenida y no una sola cuenta, lo bastante preciso para que un programa escriba una norma contra ello.",
+        "motivation": "El caso se detectó porque una empresa decidió mirar, y una sola cuenta auditada no muestra hasta dónde llega la práctica.",
+        "task": {
+          "who": "Analistas de investigación de seguridad de JFrog y editores de divulgación",
+          "what": "Publicar los hallazgos de corroboración registro a registro que hay detrás del recuento de 55, y la misma prueba contra otras cuentas que envían en volumen",
+          "where": "El blog de investigación de seguridad de JFrog y sus informes de avisos",
+          "when": "Septiembre de 2026",
+          "why": "Un solo proyecto examinado no mueve a un programa",
+          "how": "Comprobaciones de existencia y reproducción publicadas registro a registro y extendidas más allá de una cuenta"
+        }
+      },
+      {
+        "actor": "Responsable de puntuación de seguridad de producto, Red Hat Product Security",
+        "job": "Rehacer cómo se asigna una severidad antes de publicar, después de que el equipo puntuara con un 10,0 un registro inventado y luego lo bajara a 7,6.",
+        "outcome": "Una compuerta de puntuación documentada que exija confirmar que el código citado está presente antes de asignar una severidad, publicada junto a la nueva puntuación.",
+        "motivation": "Una nueva puntuación corrige un caso; la práctica de puntuación del propio proveedor es lo que copian otras CNA y lo que codificará una norma del programa.",
+        "task": {
+          "who": "Analistas de seguridad de producto de Red Hat y revisores de puntuación CVSS",
+          "what": "Confirmar que el código reportado existe antes de asignar severidad",
+          "where": "El flujo de puntuación de seguridad de producto y las páginas de avisos publicadas",
+          "when": "Diciembre de 2026",
+          "why": "Una nueva puntuación arregla un registro, no la práctica",
+          "how": "Comprobación de existencia previa a la puntuación, registrada en la justificación del aviso"
+        }
+      },
+      {
+        "actor": "Mantenedor de respuesta de seguridad, proyecto SQLite",
+        "job": "Publicar una lista de avisos autoritativa y legible por máquina y una vía de disputa, para que quien lleva un registro tenga con qué contrastar un supuesto fallo de SQLite.",
+        "outcome": "Una fuente de corroboración del proveedor que un programa pueda consultar automáticamente, convirtiendo la confirmación del proveedor en una comprobación y no en un hilo de correo.",
+        "motivation": "Ninguno de los seis problemas inventados aparecía en la propia página de avisos del proyecto, y esa ausencia no llegó nunca a quienes llevan los registros.",
+        "task": {
+          "who": "Mantenedores de SQLite y el contacto de seguridad del proyecto",
+          "what": "Publicar los avisos en un flujo consultable y legible por máquina",
+          "where": "La página de avisos del proyecto y su contacto de seguridad publicado",
+          "when": "Enero de 2027",
+          "why": "La ausencia de la propia lista del proveedor no llegó a nadie",
+          "how": "Flujo de avisos firmado en un formato estándar de registro de vulnerabilidades"
+        }
+      },
+      {
+        "actor": "Responsable de la política de remediación, empresa que ata sus ventanas de parcheo a bandas de CVSS",
+        "job": "Reescribir las cláusulas de remediación y los cuestionarios para que el reloj del parche arranque con pruebas de explotación o confirmación del proveedor, y no con un número publicado.",
+        "outcome": "Un articulado contractual que se dispare con el catálogo de vulnerabilidades explotadas o con la confirmación del proveedor, que es la presión que abarata restaurar el campo de severidad.",
+        "motivation": "Un crítico inventado gasta un ciclo de parcheo real y una ventana de cambio real contra código que no existe.",
+        "task": {
+          "who": "Responsables de riesgo de proveedores, operaciones de seguridad y contratos",
+          "what": "Reorientar las cláusulas de remediación fuera de la banda de severidad publicada",
+          "where": "Los cuestionarios de seguridad de proveedores y las cláusulas de remediación en la renovación",
+          "when": "Q1 2027",
+          "why": "Las cláusulas atadas a un CVSS de 9,0 o más no preguntan nada sobre la realidad",
+          "how": "Reescritura de cláusulas ligada al catálogo de vulnerabilidades explotadas en la renovación del contrato"
+        }
+      }
+    ],
+    "prediction.77d769798866cfc0": [
+      {
+        "actor": "Mantenedor de código abierto y responsable de versiones, proyecto Langflow de IBM",
+        "job": "Decidir si una instalación nueva arranca cerrada y, después, llevar esa decisión al camino de ejecución en lugar de a otro parche de inyección.",
+        "outcome": "Una versión etiquetada cuyas notas indiquen que una instalación por defecto exige autenticación antes de que se ejecute cualquier flujo o componente.",
+        "motivation": "Un listado de vulnerabilidades explotadas juzga el valor por defecto que envía el proyecto, y el parche que ya ha escrito no responde a eso.",
+        "task": {
+          "who": "Mantenedores del núcleo de Langflow responsables del servidor y de la rama de versiones",
+          "what": "Poner la ejecución de flujos y componentes detrás de autenticación por defecto",
+          "where": "El camino de peticiones del servidor de Langflow y su configuración enviada",
+          "when": "Q1 2027",
+          "why": "Un parche cierra una inyección, no el valor por defecto abierto",
+          "how": "Credencial generada al arrancar y obligatoria, sin alternativa permisiva"
+        }
+      },
+      {
+        "actor": "Diseñador de la incorporación y de la experiencia de primer arranque, proyecto Langflow de IBM",
+        "job": "Diseñar un primer arranque que genere y muestre una credencial en lugar de abrir un lienzo, para que la fricción añadida supere la revisión.",
+        "outcome": "Un camino de primer arranque que deja una instalación nueva autenticada sin que el operador haya tenido que encontrar antes una guía de fortalecimiento.",
+        "motivation": "El atractivo de un lienzo visual es que se abre y funciona, así que un valor por defecto cerrado tiene que costar segundos, no minutos.",
+        "task": {
+          "who": "Colaboradores de incorporación, interfaz y experiencia de desarrollo de Langflow",
+          "what": "Generar y mostrar una credencial en el primer arranque",
+          "where": "La salida por consola del arranque y la sesión inicial del navegador",
+          "when": "Noviembre de 2026",
+          "why": "Un valor por defecto que nadie tolera se revierte en dos versiones",
+          "how": "Credencial generada y escrita en los registros de arranque y en el estado local"
+        }
+      },
+      {
+        "actor": "Mantenedor de documentación y notas de versión, proyecto Langflow de IBM",
+        "job": "Escribir la nota de actualización que diga con claridad qué se niega ahora a hacer una instalación nueva hasta que exista una credencial.",
+        "outcome": "Notas de versión, changelog o notas de actualización que declaren el valor por defecto autenticado, para que el cambio de postura sea legible para cualquiera que las revise.",
+        "motivation": "Un valor por defecto que se envía como una línea de fortalecimiento sin comentar no lo lee nadie y se trata como si nunca hubiera ocurrido.",
+        "task": {
+          "who": "Mantenedores de documentación de Langflow y revisores de notas de versión",
+          "what": "Documentar el valor por defecto autenticado como un cambio con ruptura",
+          "where": "El changelog del repositorio y sus notas de actualización versionadas",
+          "when": "Febrero de 2027",
+          "why": "Un cambio de postura sin documentar se lee como fortalecimiento rutinario",
+          "how": "Notas de actualización con una sección de migración para despliegues existentes"
+        }
+      },
+      {
+        "actor": "Ingeniero de respuesta a incidentes de seguridad de producto, IBM PSIRT",
+        "job": "Cerrar el fallo catalogado de Langflow más allá de su parche, preguntando a qué puede llegar una petición sin autenticar y no a qué función llegó.",
+        "outcome": "Una conclusión de que la remediación es la superficie alcanzable de la instalación por defecto, y no la inyección concreta, trasladada al proyecto como trabajo de versión.",
+        "motivation": "Un plazo federal de remediación contra el nombre de un producto se responde una vez con una versión y de forma permanente con lo que esa versión deja abierto.",
+        "task": {
+          "who": "Personal de respuesta a incidentes y gestión de vulnerabilidades de seguridad de producto de IBM",
+          "what": "Revisar la superficie alcanzable sin autenticar de la instalación por defecto",
+          "where": "La revisión posterior al incidente de la vulnerabilidad catalogada",
+          "when": "Septiembre de 2026",
+          "why": "La exposición sobrevive a la única inyección que se parcheó",
+          "how": "Revisión posterior al incidente con hallazgos de postura por defecto seguidos hasta una versión"
+        }
+      },
+      {
+        "actor": "Mantenedor de imágenes de contenedor y charts de despliegue, distribución de Langflow",
+        "job": "Hacer que la imagen y el chart publicados arranquen cerrados, ya que la mayoría de instancias alcanzables son un contenedor que alguien ejecutó con el comando documentado.",
+        "outcome": "Imágenes y charts publicados que rechazan la ejecución de flujos hasta que existe una credencial, en línea con el valor por defecto que describen las notas de versión.",
+        "motivation": "El valor por defecto que decide la exposición es el que está dentro del comando de ejecución que se copia y pega, no el de un fichero de configuración que nadie abre.",
+        "task": {
+          "who": "Mantenedores de imágenes de contenedor, charts y empaquetado de Langflow",
+          "what": "Publicar imágenes que exijan una credencial antes de cualquier ejecución",
+          "where": "Las imágenes de contenedor y los charts de despliegue publicados",
+          "when": "Diciembre de 2026",
+          "why": "La mayoría de instancias alcanzables salen del comando de ejecución documentado",
+          "how": "Generación de credencial en el punto de entrada, sin valor por defecto permisivo"
+        }
+      },
+      {
+        "actor": "Analista del catálogo de vulnerabilidades explotadas conocidas, CISA",
+        "job": "Listar fallos con pruebas de explotación y plazos vinculantes de remediación, que es la presión que convierte el parche de un proyecto en una cuestión de postura.",
+        "outcome": "Un listado sostenido de fallos de ejecución sin autenticar en herramientas de agentes, que mantiene el coste de un valor por defecto abierto sobre la mesa del mantenedor.",
+        "motivation": "El catálogo solo puede llevar un plazo porque figurar en él exige pruebas de explotación, y esa es la señal sobre la que los defensores actúan sin discutir.",
+        "task": {
+          "who": "Analistas de gestión de vulnerabilidades de CISA que curan las adiciones al catálogo",
+          "what": "Listar fallos explotados de ejecución sin autenticar con plazos de remediación",
+          "where": "El catálogo de vulnerabilidades explotadas conocidas y sus fechas límite",
+          "when": "Q4 2026",
+          "why": "Un plazo vinculante es lo que hace que los mantenedores gasten capacidad",
+          "how": "Entradas de catálogo condicionadas a pruebas de explotación activa"
+        }
+      },
+      {
+        "actor": "Ingeniero de seguridad de plataforma, empresa que autoaloja un constructor de flujos de trabajo con agentes",
+        "job": "Inventariar las instancias alcanzables, poner autenticación delante de ellas y presentar aguas arriba la petición de que lo haga el valor por defecto.",
+        "outcome": "Una petición aguas arriba respaldada por despliegues concretos que pide autenticación antes de la ejecución, que es la demanda que un mantenedor puede señalar.",
+        "motivation": "Cada equipo que reconstruye el mismo proxy de autenticación está pagando por una decisión de valor por defecto que no controla y que no puede ver cambiar.",
+        "task": {
+          "who": "Personal interno de ingeniería de plataforma y seguridad de aplicaciones",
+          "what": "Poner autenticación delante de las instancias autoalojadas y pedir ese valor por defecto",
+          "where": "El inventario interno de despliegues y el gestor de incidencias del proyecto",
+          "when": "Q3 2026",
+          "why": "Los proxies reconstruidos son el coste corriente de un valor por defecto abierto",
+          "how": "Proxy consciente de la identidad por delante, más una petición de funcionalidad aguas arriba"
+        }
+      },
+      {
+        "actor": "Investigador de exposición en internet, empresa de escaneo de superficie de ataque",
+        "job": "Contar las instancias que responden sin credencial y publicar la cifra junto a la distribución de versiones que hay detrás.",
+        "outcome": "Un recuento publicado de despliegues alcanzables sin autenticar, la prueba de que un arreglo de versión no movió la exposición que se le atribuyó.",
+        "motivation": "Una curva de adopción de parches no dice nada sobre un servicio que sigue respondiendo a desconocidos, y solo un sondeo separa esas dos preguntas.",
+        "task": {
+          "who": "Personal de sondeos de exposición y de publicación de investigación en vulnerabilidades",
+          "what": "Publicar recuentos de despliegues alcanzables sin autenticar por versión",
+          "where": "Conjuntos de datos de sondeos a escala de internet y el informe de investigación de la empresa",
+          "when": "Octubre de 2026",
+          "why": "La adopción de parches no mide lo que sigue abiertamente alcanzable",
+          "how": "Identificación solo a nivel de banner, sin intentar autenticarse"
+        }
+      },
+      {
+        "actor": "Ingeniero de aplicación de políticas para agentes, Gatekeepers de Cloudflare OS",
+        "job": "Entregar una aplicación de políticas por servicio que se sitúe entre un agente y un sistema de registro, publicada de forma lo bastante abierta como para que otros proyectos copien la forma.",
+        "outcome": "Una referencia funcional para poner un control delante de la capacidad, lo que hace más difícil defender un valor por defecto abierto en la misma categoría.",
+        "motivation": "La alternativa es entregar al agente credenciales de larga duración y confiar en el prompt, y una entrega abierta es el argumento contra eso.",
+        "task": {
+          "who": "Ingenieros de Workers y de aplicación de políticas de Cloudflare OS",
+          "what": "Publicar una aplicación de políticas por servicio delante de los sistemas de registro",
+          "where": "El repositorio de Cloudflare OS liberado como código abierto y sus Workers",
+          "when": "Enero de 2027",
+          "why": "Un control copiable debilita el argumento a favor de los valores por defecto abiertos",
+          "how": "Workers por servicio que aplican política a lo largo de los flujos de datos observados"
+        }
+      }
+    ],
+    "prediction.f727ed88a9133fb3": [
+      {
+        "actor": "Responsable de la línea de producto de GPU para centro de datos, programa Instinct MI400 Series de AMD",
+        "job": "Llevar las piezas MI455X y MI430X lanzadas en el segundo trimestre a volumen enviado dentro de la ventana de reporte.",
+        "outcome": "Unos ingresos de centros de datos que sumen unos 1.100 millones de dólares respecto al trimestre anterior, la cantidad que supera el 60% contra la previsión de 13.000 millones.",
+        "motivation": "La composición se mueve con el crecimiento de centros de datos o no se mueve; gaming se encoge demasiado despacio para cargarla.",
+        "task": {
+          "who": "Gestión de la línea de producto Instinct y ventas de centro de datos de AMD",
+          "what": "Convertir los pedidos de lanzamiento de la MI400 Series en volumen enviado",
+          "where": "La cartera de pedidos de GPU de centro de datos y el plan trimestral de envíos",
+          "when": "Q3 2026",
+          "why": "Solo el crecimiento del segmento aporta los 1.100 millones necesarios",
+          "how": "Rampa de producción de MI455X y MI430X contra los compromisos de clientes"
+        }
+      },
+      {
+        "actor": "Director de reporte externo, control de gestión corporativo de AMD",
+        "job": "Preparar el desglose de ingresos por segmento que la nota de resultados trimestrales y el Form 10-Q publican para un solo trimestre.",
+        "outcome": "Una nota publicada que lleve los ingresos de centros de datos y los ingresos totales de un trimestre, calculables en el mismo documento.",
+        "motivation": "Solo la línea de segmento publicada resuelve la cuota; una caracterización en la conferencia de resultados no cuenta.",
+        "task": {
+          "who": "Personal de reporte externo y de presentación ante la SEC de AMD",
+          "what": "Publicar el desglose trimestral de ingresos por segmento",
+          "where": "La nota de resultados trimestrales y el Form 10-Q",
+          "when": "Q4 2026",
+          "why": "La afirmación lee líneas de segmento publicadas, no comentarios",
+          "how": "Desglose de segmentos reportables conforme a ASC 280 en la presentación"
+        }
+      },
+      {
+        "actor": "Presidente del comité de divulgación, reporte financiero de AMD",
+        "job": "Revisar si redibujar los segmentos reportables y dejar la frontera tal y como estaba en el trimestre presentado el 4 de agosto.",
+        "outcome": "Una definición de segmentos sin cambios, de modo que el 60% se calcule sobre la base contra la que se juzga la afirmación.",
+        "motivation": "Unos ingresos trasladados a la línea de centros de datos desde otro sitio harían ilegible la cuota frente al trimestre del 4 de agosto.",
+        "task": {
+          "who": "Miembros del control de gestión y del comité de divulgación de AMD",
+          "what": "Mantener sin cambios la definición de segmentos reportables",
+          "where": "La política de reporte por segmentos y los controles de divulgación",
+          "when": "Q4 2026",
+          "why": "Una frontera redibujada anula la base de comparación",
+          "how": "Paquete de reporte al máximo responsable de decisiones operativas dejado sin cambios"
+        }
+      },
+      {
+        "actor": "Responsable de operaciones de suministro, fabricación de GPU de centro de datos de AMD",
+        "job": "Asegurar capacidad de obleas y encapsulado avanzado para que el volumen de la MI400 Series pueda enviarse dentro de los trimestres que contiene la ventana.",
+        "outcome": "Unidades enviadas y no cartera de pedidos en el trimestre cuya tabla de segmentos sirve para leer la afirmación.",
+        "motivation": "La capacidad que llega tarde se convierte en ingresos de un trimestre posterior al cierre de la ventana.",
+        "task": {
+          "who": "Planificación de operaciones y gestión del programa de fundición de AMD",
+          "what": "Reservar capacidad de encapsulado y obleas para el volumen de la MI400",
+          "where": "Los compromisos de capacidad de fundición y ensamblado",
+          "when": "Q3 2026",
+          "why": "Solo el volumen enviado llega a la línea de segmento del trimestre",
+          "how": "Reservas de capacidad de largo plazo con la fundición externa"
+        }
+      },
+      {
+        "actor": "Director de grandes cuentas a hiperescala, ventas de centro de datos de AMD",
+        "job": "Cerrar pedidos de clústeres de la MI400 Series con fechas de entrega que sitúen los ingresos en un trimestre dentro de la ventana.",
+        "outcome": "Una entrada de pedidos que mantenga el segmento creciendo más rápido que la media de la compañía en términos secuenciales, y no solo interanuales.",
+        "motivation": "El segmento no tiene que acelerar; solo tiene que seguir corriendo por delante de la media de la compañía.",
+        "task": {
+          "who": "Equipos de ventas de campo y de cuentas de centro de datos de AMD",
+          "what": "Cerrar pedidos de clústeres de la MI400 Series con fechas de entrega",
+          "where": "Los acuerdos de compra con clientes y los calendarios de entrega",
+          "when": "Q3 2026",
+          "why": "La fecha de entrega decide qué línea de segmento trimestral cuenta",
+          "how": "Acuerdos de compra con entrega programada ligados a la rampa de producción"
+        }
+      },
+      {
+        "actor": "Responsable de la plataforma de software de IA, organización ROCm de AMD",
+        "job": "Dejar lista para producción la pila de software de la MI400 Series para que los despliegues de evaluación se conviertan en pedidos repetidos de volumen.",
+        "outcome": "Pedidos repetidos de centros de datos a lo largo de dos trimestres de reporte, y no compras únicas de evaluación.",
+        "motivation": "Un movimiento secuencial de en torno al 16% necesita clientes que repitan, no clientes que sigan evaluando.",
+        "task": {
+          "who": "Ingeniería de software de IA y habilitación de clientes de AMD",
+          "what": "Entregar soporte de frameworks para producción en las piezas MI400",
+          "where": "Las versiones de ROCm y el soporte de despliegue a clientes",
+          "when": "Q3 2026",
+          "why": "Los pedidos repetidos, y no las evaluaciones, sostienen el crecimiento secuencial del segmento",
+          "how": "Habilitación a nivel de framework con las principales pilas de entrenamiento e inferencia"
+        }
+      },
+      {
+        "actor": "Planificador de asignación de obleas, suministro corporativo de producto de AMD",
+        "job": "Priorizar el suministro limitado de obleas y encapsulado hacia las piezas de centro de datos, por delante de las de cliente, embebidos y gaming.",
+        "outcome": "Un trimestre en el que los ingresos de centros de datos suban mientras los otros tres segmentos siguen limitados por el suministro, inclinando la composición.",
+        "motivation": "Cliente creciendo un 23% empuja la composición en el sentido equivocado cuando se lleva el suministro que necesita el segmento.",
+        "task": {
+          "who": "Planificación de suministro corporativo y equipos de demanda de las unidades de negocio de AMD",
+          "what": "Priorizar las piezas de centro de datos en la asignación de suministro",
+          "where": "La revisión trimestral de asignación de oferta y demanda",
+          "when": "Q4 2026",
+          "why": "Un trimestre fuerte de cliente empuja la composición en sentido contrario",
+          "how": "Reglas de prioridad de demanda aplicadas en la revisión de asignación"
+        }
+      },
+      {
+        "actor": "Responsable de planificación financiera del segmento, finanzas de centro de datos de AMD",
+        "job": "Fijar el objetivo de ingresos de centros de datos sobre el punto medio de 13.000 millones, donde el 58% son 7.540 millones y el 60% son 7.800 millones.",
+        "outcome": "Un objetivo interno de segmento por encima de los 7.800 millones y no los 7.540 millones de cuota plana.",
+        "motivation": "Mantener la cuota plana suma unos 840 millones; superar el 60% necesita unos 1.100 millones.",
+        "task": {
+          "who": "Planificación financiera de segmento y finanzas de unidad de negocio de AMD",
+          "what": "Fijar el objetivo de centros de datos por encima del 60%",
+          "where": "El plan operativo trimestral y las revisiones de previsión",
+          "when": "Q3 2026",
+          "why": "Los dos puntos extra cuestan unos 260 millones",
+          "how": "Plan de segmento construido sobre la previsión de 13.000 millones de la compañía"
+        }
+      },
+      {
+        "actor": "Responsable de compras de infraestructura de IA, operador de nube a hiperescala",
+        "job": "Pedir aceleradores de la MI400 Series para despliegues de clúster con entrega programada dentro de la ventana de reporte.",
+        "outcome": "Un volumen de compra lo bastante grande como para aparecer como ingresos del segmento de centros de datos de AMD en un trimestre publicado.",
+        "motivation": "Una segunda fuente de aceleradores alivia la restricción de suministro de un solo proveedor sobre los calendarios de despliegue de clústeres.",
+        "task": {
+          "who": "Equipos de compras de infraestructura de nube y de planificación de capacidad",
+          "what": "Pedir aceleradores de la MI400 Series para despliegues de clúster",
+          "where": "Los planes de capacidad de centro de datos y las órdenes de compra a proveedores",
+          "when": "Q4 2026",
+          "why": "La segunda fuente alivia la restricción de suministro de aceleradores",
+          "how": "Compromisos de compra de aceleradores a varios trimestres con calendarios de entrega"
+        }
+      }
+    ]
+  }
+}

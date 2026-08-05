@@ -1,0 +1,389 @@
+{
+  "date": "2026-08-05",
+  "by_prediction": {
+    "prediction.77d769798866cfc0": [
+      {
+        "actor": "Open-source maintainer and release owner, IBM Langflow project",
+        "job": "Deciding whether a fresh install starts closed, then carrying that decision through the execution path rather than through another injection patch.",
+        "outcome": "A tagged release whose notes state that a default installation requires authentication before any flow or component runs.",
+        "motivation": "An exploited-vulnerabilities listing judges the default the project ships, and the patch it has already written does not answer that.",
+        "task": {
+          "who": "Langflow core maintainers owning the server and release branch",
+          "what": "Gate flow and component execution behind authentication by default",
+          "where": "The Langflow server request path and its shipped configuration",
+          "when": "Q1 2027",
+          "why": "A patch closes one injection, not the open default",
+          "how": "Startup-generated credential required, with no permissive fallback"
+        }
+      },
+      {
+        "actor": "Onboarding and first-run experience designer, IBM Langflow project",
+        "job": "Designing a first launch that mints and prints a credential instead of opening a canvas, so the added friction survives review.",
+        "outcome": "A first-run path that leaves a new install authenticated without the operator having found a hardening guide first.",
+        "motivation": "The appeal of a visual canvas is that it opens and works, so a closed default has to cost seconds, not minutes.",
+        "task": {
+          "who": "Langflow onboarding, interface and developer experience contributors",
+          "what": "Mint and print a credential on first launch",
+          "where": "The startup console output and the initial browser session",
+          "when": "November 2026",
+          "why": "A default nobody tolerates is reverted within two releases",
+          "how": "Generated credential written to startup logs and local state"
+        }
+      },
+      {
+        "actor": "Documentation and release notes maintainer, IBM Langflow project",
+        "job": "Writing the upgrade note that says plainly what a fresh install now refuses to do until a credential exists.",
+        "outcome": "Release notes, changelog or upgrade notes stating the authenticated default, so the posture change is legible to anyone scanning them.",
+        "motivation": "A default that ships as an unremarked hardening line is read by nobody and is treated as though it never happened.",
+        "task": {
+          "who": "Langflow documentation maintainers and release note reviewers",
+          "what": "Document the authenticated default as a breaking change",
+          "where": "The repository changelog and its versioned upgrade notes",
+          "when": "February 2027",
+          "why": "An undocumented posture change reads as routine hardening",
+          "how": "Upgrade notes carrying a migration section for existing deployments"
+        }
+      },
+      {
+        "actor": "Product security incident response engineer, IBM PSIRT",
+        "job": "Closing out the catalogued Langflow flaw past its patch, by asking what an unauthenticated request can reach rather than which function it reached.",
+        "outcome": "A finding that the default deployment's reachable surface, not the single injection, is the remediation, routed to the project as release work.",
+        "motivation": "A federal remediation deadline against a product name is answered once by a version and permanently by what that version ships open.",
+        "task": {
+          "who": "IBM product security incident response and vulnerability handling staff",
+          "what": "Review the default deployment's unauthenticated reachable surface",
+          "where": "The post-incident review for the catalogued vulnerability",
+          "when": "September 2026",
+          "why": "Exposure outlives the single injection that was patched",
+          "how": "Post-incident review with default-posture findings tracked to a release"
+        }
+      },
+      {
+        "actor": "Container image and deployment chart maintainer, Langflow distribution",
+        "job": "Making the published image and chart start closed, since most reachable instances are a container someone ran with the documented command.",
+        "outcome": "Published images and charts that refuse flow execution until a credential exists, matching the default the release notes describe.",
+        "motivation": "The default that decides exposure is the one inside the copy-pasted run command, not the one in a configuration file nobody opens.",
+        "task": {
+          "who": "Langflow container image, chart and packaging maintainers",
+          "what": "Ship images requiring a credential before any execution",
+          "where": "The published container images and deployment charts",
+          "when": "December 2026",
+          "why": "Most reachable instances come from the documented run command",
+          "how": "Entrypoint credential generation with no permissive default value"
+        }
+      },
+      {
+        "actor": "Known Exploited Vulnerabilities catalogue analyst, CISA",
+        "job": "Listing flaws with evidence of exploitation and binding remediation dates, which is the pressure that turns a project's patch into a posture question.",
+        "outcome": "Sustained listing of unauthenticated-execution flaws in agent tooling, keeping the cost of an open default on the maintainer's desk.",
+        "motivation": "The catalogue can carry a deadline only because listing requires evidence of exploitation, and that is the signal defenders act on without arguing.",
+        "task": {
+          "who": "CISA vulnerability management analysts curating catalogue additions",
+          "what": "List exploited unauthenticated-execution flaws with remediation deadlines",
+          "where": "The Known Exploited Vulnerabilities catalogue and its due dates",
+          "when": "Q4 2026",
+          "why": "A binding deadline is what makes maintainers spend capacity",
+          "how": "Catalogue entries gated on evidence of active exploitation"
+        }
+      },
+      {
+        "actor": "Platform security engineer, enterprise self-hosting an agent workflow builder",
+        "job": "Inventorying reachable instances, putting authentication in front of them, and filing the upstream request that the default do it instead.",
+        "outcome": "An upstream request backed by named deployments asking for authentication before execution, which is the demand a maintainer can point at.",
+        "motivation": "Every team rebuilding the same authenticating proxy is paying for a default decision it does not control and cannot see changed.",
+        "task": {
+          "who": "Internal platform engineering and application security staff",
+          "what": "Front self-hosted instances with authentication and request the default",
+          "where": "The internal deployment inventory and the project's issue tracker",
+          "when": "Q3 2026",
+          "why": "Rebuilt proxies are the running cost of an open default",
+          "how": "Identity-aware proxy in front, plus an upstream feature request"
+        }
+      },
+      {
+        "actor": "Internet exposure researcher, attack-surface scanning firm",
+        "job": "Counting instances that answer without a credential and publishing the number alongside the version distribution sitting behind it.",
+        "outcome": "A published count of unauthenticated reachable deployments, the evidence that a version fix did not move the exposure it was credited with.",
+        "motivation": "A patch adoption curve says nothing about a service that still answers strangers, and only a survey separates those two questions.",
+        "task": {
+          "who": "Exposure survey and vulnerability research publication staff",
+          "what": "Publish counts of unauthenticated reachable deployments by version",
+          "where": "Internet-wide survey datasets and the firm's research write-up",
+          "when": "October 2026",
+          "why": "Patch adoption does not measure what stays openly reachable",
+          "how": "Banner-level identification only, with no authentication attempted"
+        }
+      },
+      {
+        "actor": "Agent policy enforcement engineer, Cloudflare OS Gatekeepers",
+        "job": "Shipping per-service enforcement that sits between an agent and a system of record, released openly enough that other projects copy the shape.",
+        "outcome": "A working reference for standing a control in front of the capability, which makes an open default in the same category harder to defend.",
+        "motivation": "The alternative is handing an agent long-lived credentials and relying on the prompt, and an open release is the argument against that.",
+        "task": {
+          "who": "Cloudflare OS Workers and policy enforcement engineers",
+          "what": "Release per-service enforcement in front of systems of record",
+          "where": "The open-sourced Cloudflare OS repository and its Workers",
+          "when": "January 2027",
+          "why": "A copyable control weakens the case for open defaults",
+          "how": "Per-service Workers enforcing policy along observed data flows"
+        }
+      }
+    ],
+    "prediction.f727ed88a9133fb3": [
+      {
+        "actor": "Data centre GPU product line lead, AMD Instinct MI400 Series programme",
+        "job": "Ramping the MI455X and MI430X parts launched in the second quarter into shipped volume inside the reporting window.",
+        "outcome": "Data centre revenue adding roughly $1.1 billion sequentially, the amount that clears 60% against the $13 billion guide.",
+        "motivation": "The mix moves on data centre growth or not at all; gaming shrinks too slowly to carry it.",
+        "task": {
+          "who": "AMD Instinct product line management and data centre sales",
+          "what": "Convert MI400 Series launch orders into shipped volume",
+          "where": "Data centre GPU order book and quarterly ship plan",
+          "when": "Q3 2026",
+          "why": "Only segment growth adds the required $1.1 billion",
+          "how": "MI455X and MI430X production ramp against customer commitments"
+        }
+      },
+      {
+        "actor": "External reporting director, AMD corporate controllership",
+        "job": "Preparing the segment revenue breakout that the quarterly results release and Form 10-Q print for a single quarter.",
+        "outcome": "A published release carrying data centre revenue and total revenue for one quarter, computable in the same document.",
+        "motivation": "Only the printed segment line settles the share; an earnings-call characterisation does not count.",
+        "task": {
+          "who": "AMD external reporting and SEC filing staff",
+          "what": "Publish the quarterly segment revenue breakout",
+          "where": "Quarterly results release and Form 10-Q",
+          "when": "Q4 2026",
+          "why": "The claim reads printed segment lines, not commentary",
+          "how": "ASC 280 reportable-segment disclosure in the filing"
+        }
+      },
+      {
+        "actor": "Disclosure committee chair, AMD financial reporting",
+        "job": "Reviewing whether to redraw the reportable segments and leaving the boundary as it stood in the quarter reported August 4.",
+        "outcome": "An unchanged segment definition, so the 60% share is computed on the basis the claim is judged against.",
+        "motivation": "Revenue moved into the data centre line from elsewhere would make the share unreadable against the August 4 quarter.",
+        "task": {
+          "who": "AMD controllership and disclosure committee members",
+          "what": "Keep the reportable segment definition unchanged",
+          "where": "Segment reporting policy and disclosure controls",
+          "when": "Q4 2026",
+          "why": "A redrawn boundary voids the comparison basis",
+          "how": "Chief operating decision maker reporting package left unchanged"
+        }
+      },
+      {
+        "actor": "Supply operations lead, AMD data centre GPU manufacturing",
+        "job": "Securing wafer and advanced packaging capacity so MI400 Series volume can ship inside the quarters the window holds.",
+        "outcome": "Shipped units rather than backlog in the quarter whose segment table the claim is read from.",
+        "motivation": "Capacity that arrives late becomes revenue in a quarter after the window closes.",
+        "task": {
+          "who": "AMD operations planning and foundry programme management",
+          "what": "Reserve packaging and wafer capacity for MI400 volume",
+          "where": "Foundry and assembly capacity commitments",
+          "when": "Q3 2026",
+          "why": "Only shipped volume reaches the quarter's segment line",
+          "how": "Long-lead capacity reservations with the outsourced foundry"
+        }
+      },
+      {
+        "actor": "Hyperscale account director, AMD data centre sales",
+        "job": "Closing MI400 Series cluster orders with delivery dates that place the revenue in a quarter inside the window.",
+        "outcome": "Order intake keeping the segment growing faster than the company average sequentially, not only year over year.",
+        "motivation": "The segment does not have to accelerate; it only has to keep outrunning the company average.",
+        "task": {
+          "who": "AMD data centre field sales and account teams",
+          "what": "Close MI400 Series cluster orders with delivery dates",
+          "where": "Customer purchase agreements and delivery schedules",
+          "when": "Q3 2026",
+          "why": "Delivery date decides which quarter's segment line counts",
+          "how": "Delivery-scheduled purchase agreements tied to the production ramp"
+        }
+      },
+      {
+        "actor": "AI software platform lead, AMD ROCm organisation",
+        "job": "Making the MI400 Series software stack production-ready so evaluation deployments turn into repeat volume orders.",
+        "outcome": "Repeat data centre orders across two reporting quarters rather than single evaluation buys.",
+        "motivation": "A roughly 16% sequential move needs customers who reorder, not customers still evaluating.",
+        "task": {
+          "who": "AMD AI software engineering and customer enablement",
+          "what": "Ship production framework support for MI400 parts",
+          "where": "ROCm releases and customer deployment support",
+          "when": "Q3 2026",
+          "why": "Reorders, not evaluations, sustain sequential segment growth",
+          "how": "Framework-level enablement with major training and inference stacks"
+        }
+      },
+      {
+        "actor": "Wafer allocation planner, AMD corporate product supply",
+        "job": "Prioritising constrained wafer and packaging supply toward data centre parts ahead of client, embedded and gaming builds.",
+        "outcome": "A quarter where data centre revenue rises while the other three segments stay supply-limited, tilting the mix.",
+        "motivation": "Client growing 23% pushes the mix the wrong way when it takes supply the segment needs.",
+        "task": {
+          "who": "AMD corporate supply planning and business unit demand teams",
+          "what": "Prioritise data centre parts in supply allocation",
+          "where": "Quarterly supply and demand allocation review",
+          "when": "Q4 2026",
+          "why": "A hot client quarter pushes the mix wrong",
+          "how": "Demand-priority rules applied in the allocation review"
+        }
+      },
+      {
+        "actor": "Segment financial planning lead, AMD data centre finance",
+        "job": "Setting the data centre revenue target off the $13 billion midpoint, where 58% is $7.54 billion and 60% is $7.8 billion.",
+        "outcome": "An internal segment target above $7.8 billion rather than the flat-share $7.54 billion.",
+        "motivation": "Holding the share flat adds about $840 million; clearing 60% needs about $1.1 billion.",
+        "task": {
+          "who": "AMD segment financial planning and business unit finance",
+          "what": "Set the data centre target above 60%",
+          "where": "Quarterly operating plan and forecast reviews",
+          "when": "Q3 2026",
+          "why": "The extra two points cost about $260 million",
+          "how": "Segment plan built off the $13 billion company guide"
+        }
+      },
+      {
+        "actor": "AI infrastructure procurement lead, hyperscale cloud operator",
+        "job": "Ordering MI400 Series accelerators for cluster build-outs scheduled to take delivery inside the reporting window.",
+        "outcome": "Purchase volume large enough to appear as AMD data centre segment revenue in one printed quarter.",
+        "motivation": "A second accelerator source relieves the single-vendor supply constraint on cluster build-out schedules.",
+        "task": {
+          "who": "Cloud infrastructure procurement and capacity planning teams",
+          "what": "Order MI400 Series accelerators for cluster build-outs",
+          "where": "Data centre capacity plans and vendor purchase orders",
+          "when": "Q4 2026",
+          "why": "Second sourcing eases the accelerator supply constraint",
+          "how": "Multi-quarter accelerator purchase commitments with delivery schedules"
+        }
+      }
+    ],
+    "prediction.ffede2e95254bc23": [
+      {
+        "actor": "CNA operational rules editor, CVE Program secretariat",
+        "job": "Rewriting the rules that govern what a CNA may publish, so an uncorroborated report cannot leave the queue carrying a critical severity.",
+        "outcome": "A published rule requiring vendor corroboration or record-keeper reproduction before a record carries a critical severity, in effect across the CNA network.",
+        "motivation": "Fabricated SQLite advisories reached critical listing with nothing on the path asking whether the code they blamed existed.",
+        "task": {
+          "who": "CVE Board working group members and programme rule editors",
+          "what": "Draft a corroboration precondition into the CNA rules",
+          "where": "CVE Board working groups and the published programme rules",
+          "when": "Q1 2027",
+          "why": "Nothing on the publication path checks the code exists",
+          "how": "Public council review of a numbered rules revision"
+        }
+      },
+      {
+        "actor": "Vulnerability analysis programme lead, NIST National Vulnerability Database",
+        "job": "Deciding what the database does with a report the vendor has not confirmed: publish it unscored, or hold it until corroboration arrives.",
+        "outcome": "A published analysis policy under which an uncorroborated record appears without a critical score rather than with one.",
+        "motivation": "The database published three of the six fabricated advisories as critical, and the automation downstream reads the score rather than the record.",
+        "task": {
+          "who": "NVD analysis staff and programme documentation owners",
+          "what": "Withhold the critical score until corroboration is on file",
+          "where": "NVD analysis workflow and the public programme policy page",
+          "when": "Q4 2026",
+          "why": "Automated patch cycles trigger on the score, not the text",
+          "how": "Vendor confirmation check recorded before enrichment completes"
+        }
+      },
+      {
+        "actor": "Enrichment decision owner, CISA vulnerability enrichment programme",
+        "job": "Setting when the enrichment programme concurs with a submitted severity, after it concurred with all six fabricated SQLite records.",
+        "outcome": "A published enrichment rule withholding concurrence with a critical severity until the affected vendor corroborates or the programme reproduces it.",
+        "motivation": "The same agency's exploited-vulnerabilities catalogue carries a binding deadline only because listing there requires evidence; enrichment carries no such requirement.",
+        "task": {
+          "who": "CISA enrichment analysts and programme policy staff",
+          "what": "Publish the corroboration test enrichment applies before concurring",
+          "where": "Enrichment programme documentation and its published decision records",
+          "when": "November 2026",
+          "why": "Concurrence is what turned a claim into a critical listing",
+          "how": "Decision criteria modelled on the exploited-vulnerabilities catalogue's evidence bar"
+        }
+      },
+      {
+        "actor": "Assignment triage lead, the CVE Program's CNA of last resort",
+        "job": "Screening requests that name a project with no vendor CNA, where a submitter's claimed severity currently passes through untested.",
+        "outcome": "A triage step that confirms the named function exists in the version cited before any severity leaves the queue.",
+        "motivation": "The functions blamed in the six advisories did not exist in the versions named, and nobody checked before publication.",
+        "task": {
+          "who": "Assignment triage analysts and queue tooling maintainers",
+          "what": "Verify the cited code exists in the named version",
+          "where": "The assignment request queue and its triage checklist",
+          "when": "October 2026",
+          "why": "A claimed severity currently reaches publication untested",
+          "how": "Source lookup against the project's released tags before assignment"
+        }
+      },
+      {
+        "actor": "Advisory database curation lead, GitHub Security Advisory Database",
+        "job": "Deciding what an advisory published from a newly created repository has to clear before it is ingested and surfaced to dependency scanners.",
+        "outcome": "Published ingest criteria under which a repository-published advisory carries no critical severity until the affected project or a curator corroborates it.",
+        "motivation": "A broader audit of 55 records from that one new account found 54 fabricated; the platform is where that volume originates.",
+        "task": {
+          "who": "Advisory database curators and platform abuse reviewers",
+          "what": "Hold repository-published advisories unscored pending curator corroboration",
+          "where": "Advisory database ingest pipeline and its published curation policy",
+          "when": "Q3 2026",
+          "why": "Bulk machine-generated advisories originate on the hosting platform",
+          "how": "Curation review triggered by repository age and submission volume"
+        }
+      },
+      {
+        "actor": "Vulnerability research lead, JFrog security research",
+        "job": "Publishing the per-record corroboration findings behind the 55-record count, and running the same test against other accounts submitting at volume.",
+        "outcome": "A public record showing this is standing throughput rather than one account, precise enough for a programme to write a rule against.",
+        "motivation": "The case was caught because one company chose to look, and one audited account does not show how wide the practice runs.",
+        "task": {
+          "who": "JFrog security research analysts and disclosure editors",
+          "what": "Publish the per-record corroboration findings behind the 55-record count, and the same test against other accounts submitting at volume",
+          "where": "JFrog security research blog and its advisory write-ups",
+          "when": "September 2026",
+          "why": "One examined project does not make a programme move",
+          "how": "Existence and reproduction checks published per record and extended beyond one account"
+        }
+      },
+      {
+        "actor": "Product security scoring lead, Red Hat Product Security",
+        "job": "Reworking how a severity is assigned before publication, after the team scored a fabricated record 10.0 and later lowered it to 7.6.",
+        "outcome": "A documented scoring gate requiring the cited code to be confirmed present before a severity is assigned, published alongside the rescore.",
+        "motivation": "A rescore corrects one case; the vendor's own scoring practice is what other CNAs copy and what a programme rule will codify.",
+        "task": {
+          "who": "Red Hat product security analysts and CVSS scoring reviewers",
+          "what": "Confirm the reported code exists before assigning severity",
+          "where": "Product security scoring workflow and published advisory pages",
+          "when": "December 2026",
+          "why": "A rescore fixes one record, not the practice",
+          "how": "Pre-score existence check recorded in the advisory's scoring rationale"
+        }
+      },
+      {
+        "actor": "Security response maintainer, the SQLite project",
+        "job": "Publishing an authoritative, machine-readable advisory list and a dispute route, so a record-keeper has something to check a claimed SQLite flaw against.",
+        "outcome": "A vendor corroboration source a programme can query automatically, making vendor confirmation a check rather than an email thread.",
+        "motivation": "None of the six fabricated issues appeared on the project's own advisory page, and that absence never reached the record-keepers.",
+        "task": {
+          "who": "SQLite maintainers and the project's security contact",
+          "what": "Publish advisories in a machine-readable, queryable feed",
+          "where": "The project's advisory page and its published security contact",
+          "when": "January 2027",
+          "why": "Absence from the vendor's own list reached nobody",
+          "how": "Signed advisory feed in a standard vulnerability record format"
+        }
+      },
+      {
+        "actor": "Remediation policy owner, an enterprise binding patch windows to CVSS bands",
+        "job": "Rewriting remediation clauses and questionnaires so the patch clock starts on exploitation evidence or vendor confirmation instead of a published number.",
+        "outcome": "Contract language triggering on the exploited-vulnerabilities catalogue or vendor confirmation, which is the pressure that makes restoring the severity field cheaper.",
+        "motivation": "A fabricated critical spends a real patch cycle and a real change window against code that does not exist.",
+        "task": {
+          "who": "Vendor risk, security operations and contract owners",
+          "what": "Retarget remediation clauses away from the published severity band",
+          "where": "Vendor security questionnaires and remediation clauses at renewal",
+          "when": "Q1 2027",
+          "why": "Clauses bound to CVSS 9.0 or above ask nothing about reality",
+          "how": "Clause rewrite tied to the exploited-vulnerabilities catalogue at contract renewal"
+        }
+      }
+    ]
+  }
+}
