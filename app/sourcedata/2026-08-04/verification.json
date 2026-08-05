@@ -1,0 +1,143 @@
+{
+  "date": "2026-08-04",
+  "note": "No search_log.json exists for 2026-08-04, so search_log_alignment is assessed against news_section.json, reference/news-topics.md and the 2026-08-03 events floor only; there is no writer self-report available to over- or under-report, so every alignment is recorded as consistent.",
+  "verifications": [
+    {
+      "topic": "LLM Workflow",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No agent / workflow / pipeline orchestration platform news today. The only orchestration-ness in the file sits inside carried event-programme listings — AGNTCon and MCPCon on agent infrastructure and the Model Context Protocol, and the Ray Summit training day on multimodal data pipelines and Ray Serve — which reach the reader as calendar entries, not as workflow-platform state changes."
+    },
+    {
+      "topic": "Multi-profiling for Local LLM (e.g. Multica)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No bullet references Multica or any multi-profiling / per-profile local-LLM serving concept; a token scan returns zero hits. This is a news-driven-only topic and nothing today triggered it, so the absence is correct rather than a miss. Swiftlet's user-sized expert cache is a memory knob, not multi-profiling."
+    },
+    {
+      "topic": "Agent Harness (OpenClaw, NemoClaw, Hermes Agents, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A self-replicating npm worm takes over the keyv caching packages and leaves a start-up hook inside developers' agent configuration",
+        "An 80-billion-parameter Qwen runs on a Mac in 4.3 GB of memory by streaming its experts off the disk"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The npm worm bullet is coding-agent-ecosystem news at headline level: the poisoned repositories ship a .claude/settings.json session-start hook and a matching .vscode/tasks.json task, a second execution path that fires when a developer opens the project in an agent or editor rather than on install, gated only by workspace trust. It reaches the topic as a security story about the agentic-IDE surface rather than as a harness release; Swiftlet adds a passing note that it was written with a coding agent."
+    },
+    {
+      "topic": "Platform for Local LLM (vLLM, SGLang, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "An 80-billion-parameter Qwen runs on a Mac in 4.3 GB of memory by streaming its experts off the disk"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Swiftlet is a newly published Apache 2.0 Swift and Metal LLM inference runtime — the rubric's generic 'LLM inference engine', the same class it lists as llama.cpp serving — running Qwen3-Next-80B at 4.5 to 5 tokens a second by streaming routed experts from disk. Its centre of gravity is on-device, so it primarily serves the Embedded row and is counted here as an inference-engine release; vLLM appears only as the carried co-located conference listing."
+    },
+    {
+      "topic": "Ecosystems for Local LLM Embedded System (Foundry Local, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "An 80-billion-parameter Qwen runs on a Mac in 4.3 GB of memory by streaming its experts off the disk",
+        "Unsloth Studio takes on image and video generation, and adds LoRA training for image models"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Squarely on-device / edge runtime news. Swiftlet holds an 80B MoE inside 4.3 GB resident on an M5 Mac and a 35B inside about 2.5 GB on an iPhone 17, with the dense part pinned at four bits and experts streamed from storage. Unsloth adds Intel Arc, Iris, UHD and HD detection plus an XPU PyTorch install path with a bundled oneAPI runtime in the Windows installer — consumer-GPU on-device enablement."
+    },
+    {
+      "topic": "Local LLM Models",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "An 80-billion-parameter Qwen runs on a Mac in 4.3 GB of memory by streaming its experts off the disk",
+        "Unsloth Studio takes on image and video generation, and adds LoRA training for image models"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "No open-weight LLM release today. The Swiftlet bullet carries substantive open-weight model content — Qwen3-Next-80B at 42 GB of weights with roughly three billion parameters active per token, Qwen3.6 at 35B, Gated DeltaNet linear attention across three-quarters of the layers — but as substrate for a runtime rather than as a release, and Unsloth's GGUF quantisations are of image-generation models (Z-Image, Qwen-Image, FLUX, SDXL), not LLMs. Borderline rather than covered."
+    },
+    {
+      "topic": "Local LLM Optimization, Fine-tuning (Unsloth — every run)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Unsloth Studio takes on image and video generation, and adds LoRA training for image models"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The mandatory topic has its own bullet carrying a real, verified Aug 4 state change in the repository: the largest single Studio merge in some time adds an Images page — text-to-image on Unsloth's own GGUF quantisations, transform / inpaint / extend / upscale and instruction edits, text-to-video across five model families, and QLoRA training for image models with live metrics — at 79,151 lines added across 231 files, plus twenty-eight further same-day commits including Intel Arc detection and release-pipeline hardening (1 + 28 = the 29 commits reported). The bullet does NOT imply a release: it states explicitly that the Python library still sits at yesterday's 2026.8.2 on PyPI and the documentation changelog has not moved past July 29, so the change is visible only in the repository. That matches yesterday's bullet, which recorded 2026.8.2 shipping on Aug 3. Both citations are the two PRs themselves."
+    },
+    {
+      "topic": "Ecosystems for LLM on PaaS (AWS Bedrock, Azure AI Foundry, etc.)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No managed-inference / hosted-LLM-API news: no Bedrock, Azure AI Foundry, Vertex, OpenRouter, Together, Fireworks or equivalent, and no frontier-model API pricing item today. Palantir is enterprise AI software revenue, not hosted inference, and Unsloth Studio's one-click adapter deployment is local to the desktop app. Note the false friend: the 'Bedrock' in the carried Ray Summit keynote list is Bedrock the venture firm (Vincent Gonguet), not AWS Bedrock, and was not counted."
+    },
+    {
+      "topic": "AI Security",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A self-replicating npm worm takes over the keyv caching packages and leaves a start-up hook inside developers' agent configuration"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The npm worm is a textbook entry against the rubric's generic list: supply-chain attack, credential and token exfiltration, agent hijack. An account takeover of the keyv maintainer drove poisoned releases through the repository's own GitHub Actions workflow, so the compromised versions carried valid provenance signatures — the artefact an auditor checks to conclude a package is clean. Aikido counted at least 868 packages across 1,381 versions, the preinstall payload sweeps npm, GitHub, OIDC, AWS, Kubernetes, Vault, Stripe, Slack, SSH, Docker and Terraform secrets, and it self-republishes through any publish token it finds. The events bullets add the AI-security track (Black Hat AI Summit, BSides Las Vegas [un]prompted, DEF CON AI Village)."
+    },
+    {
+      "topic": "CVE update on score ≥ 8.0",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No CVE identifier, no CVSS score and no severity-rated advisory anywhere in the file; a self-anchored scan returns zero CVE-YYYY-N and zero CVSS hits. Judged against the rubric rather than by adjacency: today's npm worm is an active supply-chain incident driven by credential theft and a malicious publish, not a vulnerability disclosure with a scored CVE, so it belongs to AI Security and does not satisfy this topic."
+    },
+    {
+      "topic": "Hardware",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "HP, Asus and Acer start putting Chinese DRAM in laptops because there is not enough of anyone else's",
+        "Bay Area / SV AI meet-up events"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The CXMT bullet is memory-market hardware news: HP, Asus and Acer shipping ChangXin DRAM in non-US notebooks after qualifying the parts mid-year, framed explicitly as a supply decision rather than a cost one in a market the AI build-out has left tight, landing the morning FMS opened its twentieth edition in Santa Clara. The carried Hot Chips programme adds Rubin, Instinct MI400, Crescent Island, MTIA, Wafer Scale Engine, MAIA 200 and SN50 RDU, plus the AMD secure-computing SoC in the FPGA session — the AI-security-SoC standing watch. Unsloth's Intel Arc / XPU detection is software-side enablement, not counted here."
+    },
+    {
+      "topic": "Physical AI",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No robotics or embodied-AI state change today. The only robot-ness in the file is carried event-calendar material — IEEE-RAS Humanoids 2026's closed submission windows and decision calendar, the Waymo keynote and automotive session at Hot Chips, and the physical-AI tracks at Ray Summit and the AI Infra Summit — all of which belongs to the events bullet rather than to this topic. Same call as 2026-08-03 on the same shape of content."
+    },
+    {
+      "topic": "LLM-related research and papers",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No arXiv reference, paper or preprint discussion; a self-anchored scan returns zero arxiv.org hits. Swiftlet names Gated DeltaNet linear attention but as an implementation detail with no paper cited, and the paper and camera-ready deadlines listed for the 19th ACM AI-and-Security workshop and IEEE-RAS Humanoids are event-calendar entries."
+    },
+    {
+      "topic": "Stock prices and corporate activity",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Palantir prints 93 percent growth and the stock reprices about 20 percent when the market opens"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Palantir's Q2 print is the bullet's centre: 1.94 billion dollars of revenue up 93 percent against a 1.81 billion consensus, US commercial up 149 percent to 764 million against US government up 90 percent to 809 million, full-year guidance raised to 8.15-8.16 billion from 7.65-7.66 billion, shares opening around 152 dollars against Monday's 125.65 close. Analyst actions are named and quantified — Deutsche Bank to Buy with a target from 80 to 200 dollars, Citi to 245 from 200, DA Davidson to 200 from 175 — and AMD reporting after today's close is flagged as the next read."
+    },
+    {
+      "topic": "Bay Area / SV AI meet-up events",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Bay Area / SV AI meet-up events"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Five forward-looking events bullets covering all three mandatory sub-tracks: mainstream dev/data (Ai4, Ray Summit with the co-located vLLM Conference, GitHub Universe, re:Invent), AI-security (Black Hat Summit Day and its AI Summit, the new BSides Las Vegas [un]prompted track, DEF CON AI Village and HalCTF, SecurityWeek AI Risk Summit, Zenity, OWASP, SANS) and AI-chip (Hot Chips, FMS, AI Infra Summit, OCP, GTC Berlin). A token-level diff against the 2026-08-03 floor — 217 curated event names, sub-deadlines, venues, prices and speaker names, plus an automated date, money and named-entity sweep — found NO still-upcoming event or sub-deadline dropped. Every carried money and deadline step survives: the AI Risk Summit's 1,895 to 2,195 dollar step after Friday, August 7; Hot Chips' refund cutoff of Wednesday, August 19 less a 25 dollar fee; Zenity's talk deadlines of Monday, August 17 (London) and Friday, August 21 (New York); and SANS' 229 dollar room block closing October 9 with an October 14 refund cutoff. The standing disclosure that AI Tinkerers Palo Alto on Tuesday, August 18 remains unconfirmed is still present and still labelled unverified. The only material dropped is content whose date has passed — Ai4's Monday, August 3 pre-conference programme (Colorado State, General Assembly), the Columbus AI Tinkerers meetup of August 3, and DEF CON's 600 dollar late-pre-registration deadline of Friday, July 31, whose substance survives as 'pre-registration has closed'. Newly added today: BSides Las Vegas [un]prompted and Black Hat's full six-summit slate. All 56 distinct <Weekday>, <Month> <Day> claims in the file verify against the real 2026 calendar."
+    },
+    {
+      "topic": "Other standing-out topics",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "A self-replicating npm worm takes over the keyv caching packages and leaves a start-up hook inside developers' agent configuration",
+        "An 80-billion-parameter Qwen runs on a Mac in 4.3 GB of memory by streaming its experts off the disk"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The npm worm is the standing-out story of the day and does not sit cleanly inside one named topic: a registry-wide self-replicating compromise that defeats provenance signing and reaches developers through agent and editor workspace trust, with Deliveroo, Qlik and Picsart releases caught in the spread. Swiftlet is the other: reframing the memory ceiling on a phone or laptop as a scheduling problem, with throughput barely moving as the cache budget changes because the bottleneck sits in GPU dispatch rather than storage."
+    }
+  ]
+}

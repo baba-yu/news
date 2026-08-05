@@ -1,0 +1,94 @@
+{
+  "date": "2026-08-04",
+  "technical": [
+    {
+      "lead": "Nilason ng isang npm worm ang mga keyv package at nagtanim ng start-up hook sa editor",
+      "body": "Gumalaw sa npm registry ngayong araw ang isang worm na nagnanakaw ng credential, matapos agawin ng isang umaatake ang GitHub account ng maintainer ng keyv, isang caching library na kinukuha nang halos 127 milyong beses kada linggo. Ginamit niya ang mismong GitHub Actions workflow ng repository para maglabas ng mga nalasong release. Umabot ang mga malisyosong file sa main branch ng bawat proyekto bago pa man na-tag ang isang release, kaya may balidong provenance signature ang mga nakompromisong bersyon — mismong ang artefact na tinitingnan ng isang supply-chain auditor para masabing malinis ang isang package. Nakabilang ang Aikido ng hindi bababa sa 868 package sa 1,381 bersyon nang maagang hapon sa oras ng Gitnang Europa, at sinabi nilang nagbibilang pa rin sila. Kasama ng keyv ang flat-cache, file-entry-cache, cacheable-request at ang @cacheable scope ng parehong maintainer, kaya lumalampas sa dalawang bilyong install kada buwan ang lawak ng epekto, at nadamay sa pagkalat ang mga release na nakakabit sa Deliveroo, Qlik at Picsart. Tumatakbo ang payload sa oras ng install. Kinakalkal nito ang mga npm token, ang lahat ng uri ng GitHub credential kasama ang mga panandaliang OIDC token, mga AWS key at credential ng instance metadata, mga service-account token ng Kubernetes, mga key ng Vault, Stripe at Slack, mga SSH key, Docker config at Terraform state. Ini-encrypt nito ang mga ito at itinutulak sa mga repository na kontrolado ng umaatake. Muli nitong inilalathala ang sarili sa pamamagitan ng anumang publish token na makita nito, kaya nakita ng mga mananaliksik na lumilipat ito sa pagitan ng mga organisasyon kada dalawa hanggang pitong minuto. May pangalawang bagay na dapat tingnan ang sinumang nagpapatakbo ng coding agent. Nagpadala rin kasi ang nalasong repository ng isang session-start hook sa .claude/settings.json at isang folder-open task sa .vscode/tasks.json na parehong nakaturo sa iisang setup script — isang daan ng pagpapatakbo na gumagana kapag binuksan ng developer ang proyekto sa isang editor o agent, at hindi kapag ini-install nila ito. Kailangan ng pareho na pinagkakatiwalaan ang workspace, at prompt iyon na dinadaanan lamang ng karamihan. Lumalago pa rin ang listahan ng mga apektadong bersyon habang naglalathala ang Aikido, kaya gumagalaw na listahan ito at hindi isang nakapirming bilang.",
+      "citations": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised in Shai-Hulud attack",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ]
+    },
+    {
+      "lead": "Tumatakbo sa Mac ang isang 80B na Qwen sa loob ng 4.3 GB sa pamamagitan ng pag-stream ng mga expert nito mula sa disk",
+      "body": "Lumabas ngayong araw ang Swiftlet, isang runtime na nakasulat sa Swift at Metal, na may pahayag na madaling sabihin at mahirap pasubalian: ang Qwen3-Next-80B, 42 gigabyte ng weights sa disk, ay bumubuo ng 4.5 hanggang 5 token kada segundo sa isang M5 Mac habang umaabot lamang sa 4.3 gigabyte ang pinakamataas na resident memory. Ganito rin tumatakbo ang 35-bilyong-parameter na Qwen3.6 sa 2.6 gigabyte at 7 hanggang 11 token kada segundo, at sa isang iPhone 17 naman sa mga 2.5 gigabyte at humigit-kumulang isang token kada segundo. Nasa arkitektura ang mekanismo, hindi sa isang bagong quantisation. Mga sparse mixture-of-experts na modelo ang mga ito na mga tatlong bilyong parameter lamang ang ginagalaw kada token. Kaya pinapanatili ng runtime ang dense na bahagi — attention, embeddings, routers — na laging residente sa apat na bit, iniimpake ang mga routed expert sa mga fixed-stride na lalagyan na bawat isa ay makukuha sa isang basa lamang, at ini-stream ang kung sinong expert ang hingin ng router, habang hawak sa isang cache ang mga kamakailan at madalas gamitin. Ang laki ng cache na iyon ay itinatakda ng user gamit ang isang command-line flag. Pinipigilan naman ng Gated DeltaNet linear attention sa tatlong-kapat ng mga layer na kainin pabalik ng key-value cache ang natipid. Iniuulat ng may-akda ang cache hit rate na nasa 43 hanggang 70 porsyento depende sa dami ng memory na ibinibigay. Mas kawili-wili pa, halos hindi gumagalaw ang throughput habang nagbabago ang budget na iyon, dahil nasa GPU dispatch sa ngayon ang bottleneck at hindi sa pagbabasa mula sa storage. Iyon ang numerong dapat bantayan: sinasabi nitong may natitira pang puwang ang paraang streaming, at binabago nito ang tingin sa hangganan ng memory sa isang telepono o laptop — isa itong problema sa pag-iiskedyul at hindi sa kapasidad. Apache 2.0, walong commit, at isinulat kasama ang isang coding agent.",
+      "citations": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ]
+    },
+    {
+      "lead": "Nagdagdag ang Unsloth Studio ng image at video generation at ng QLoRA para sa mga image model",
+      "body": "Dumating ngayong araw ang pinakamalaking iisang merge ng Unsloth sa mahabang panahon, at hindi ito tungkol sa teksto. Nagdadagdag ang isang pull request laban sa desktop Studio ng isang Images page: text-to-image generation na tumatakbo sa sariling GGUF quantisations ng Unsloth para sa Z-Image, Qwen-Image, FLUX at mga bersyon ng SDXL; mga editing workflow na sumasaklaw sa transform, inpaint, extend, upscale at mga edit na batay sa instruksyon; text-to-video sa limang pamilya ng modelo na may kasabay na audio; at, ang bahaging mahalaga sa mga gumagawa ng fine-tuning, ang QLoRA training para sa mga image model na may live na metrics at isang-click na deployment ng nabuong adapter. May dalawang daan ng inference sa ilalim nito — ang native stable-diffusion.cpp at ang Diffusers — na naghahati ng GPU memory kasama ang chat backend sa halip na mag-agawan sa alokasyon, kasama ang batched na pag-render ng larawan na sinukat ng koponan sa sampu hanggang dalawampu't dalawang beses na mas mabilis kaysa sa serial na pag-render ng parehong mga larawan, at ang mga conditioning at compile cache. Ang diff ay 79,151 linyang naidagdag sa 231 file, na may mahigit walong daang backend unit test at mga end-to-end na pagsusuri sa antas ng browser. Dalawampu't walo pang commit ang pumasok sa parehong araw, kabilang na ang Intel Arc detection at isang daan ng pag-install ng XPU PyTorch sa Windows installer — kilala na ngayon ang Arc, Iris, UHD at HD graphics, at may sariling oneAPI runtime na kasama ang mga wheel kaya hindi na kailangan ng hiwalay na pag-install ng Intel toolkit — at isang serye ng pagpapatibay sa release pipeline: nilagdaan na ang mga plugin library ng installer at babagsak ang release sa anumang file na walang lagda, naka-embed na ang WebView2 bootstrapper sa halip na kunin pa, sinusuri na ng Defender ang mga Windows bundle bago ilathala, at inuulit ang stapling ng macOS disk image kapag nabigo. Wala sa mga ito ang dumating na may package release: nasa 2026.8.2 pa rin ang Python library, na inilathala kahapon sa PyPI, at hindi pa umuusad ang changelog ng dokumentasyon lampas sa Hulyo 29, kaya ang pagbabago ngayong araw ay nakikita lamang sa repository.",
+      "citations": [
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        },
+        {
+          "label": "GitHub - Add Intel Arc GPU detection and XPU PyTorch install to Windows installer",
+          "url": "https://github.com/unslothai/unsloth/pull/7706"
+        }
+      ]
+    },
+    {
+      "lead": "Nagsimula nang magpadala ang HP, Asus at Acer ng DRAM na Tsino dahil kapos ang suplay",
+      "body": "Iniulat ng Nikkei Asia ngayong araw na nagsimula nang magpadala ang HP, Asus at Acer ng maliliit na dami ng DRAM mula sa ChangXin Memory Technologies ng Tsina sa mga notebook na ibinebenta sa labas ng Estados Unidos, matapos makumpleto ang kwalipikasyon ng mga parte noong mga kalagitnaan ng taon. Limitado ang dami at sinadya ang lagayan — mga budget na modelo, mga merkadong labas ng US — habang nakalaan pa rin ang Samsung, SK Hynix at Micron para sa mga rehiyong mas mataas ang pagkakalantad sa regulasyon at heopolitika, at inilarawan ang HP na sinusuri pa lamang ang supplier sa halip na nakatali na rito. Ang dahilan ang nagpapahalaga rito. Hindi ito desisyon sa gastos; hindi minumurahan ng ChangXin ang mga nauna. Desisyon ito sa suplay, ginawa sa isang merkado ng memory na napahigpit ng build-out ng AI kaya kwalipikahan na ng mga gumagawa ng PC ang isang supplier na dati nilang iniwan. At dumating ito sa mismong umagang binuksan ng FMS, ang kumperensya sa memory at storage, ang ikadalawampung edisyon nito sa Santa Clara — ang iisang silid kung saan magkasamang naroroon ang mga nagpapasikip at ang mga sumasalo nito. Ang isang pangkaraniwang bahaging dating itinuturing na pare-pareho lamang ng mga notebook vendor ang siya na ngayong nagpapasya kung maipapadala ba ang isang makina o hindi.",
+      "citations": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Asia Business Outlook - HP, Asus and Acer turn to CXMT chips amid global memory shortage",
+          "url": "https://www.asiabusinessoutlook.com/news/hp-asus-and-acer-turn-to-cxmt-chips-amid-global-memory-shortage-nwid-12260.html"
+        }
+      ]
+    },
+    {
+      "lead": "Lumago ang Palantir ng 93 porsyento at nagbukas nang mga 20 porsyentong mas mataas",
+      "body": "Iniulat ng Palantir ang kita sa ikalawang kwarto na 1.94 bilyong dolyar matapos magsara ang merkado kahapon, mas mataas nang 93 porsyento kumpara sa nakaraang taon laban sa 1.81 bilyong konsensus, na may adjusted earnings na 41 sentimo laban sa inaasahang 34. Ang paghahati sa ilalim nito ang gumalaw sa stock: umakyat ng 149 porsyento tungong 764 milyong dolyar ang kita mula sa komersyal na panig ng Estados Unidos, habang lumago ng 90 porsyento tungong 809 milyon ang kita mula sa pamahalaan ng Estados Unidos. Ibig sabihin, halos kasinlaki na ng negosyong pampamahalaan — na matagal nang inakalang inaasahan ng kumpanya — ang komersyal na panig. Ang net income ay 1.06 bilyong dolyar at ang adjusted free cash flow ay 1.22 bilyon. Umangat ang gabay para sa buong taon tungo sa 8.15 hanggang 8.16 bilyong dolyar mula sa dating 7.65 hanggang 7.66 bilyon, itinaas ang target sa komersyal na panig ng Estados Unidos nang lampas sa 3.42 bilyon na nangangahulugan ng hindi bababa sa 134 porsyentong paglago, at inilagay sa humigit-kumulang 2.16 bilyon ang gabay para sa kita sa ikatlong kwarto. Nagbukas ang mga share ngayong umaga sa mga 152 dolyar, mga 20 porsyentong mas mataas kaysa sa pagsasara noong Lunes na 125.65. Iisa ang direksyon ng tugon ng mga analista ngunit malawak ang pagkakaiba sa laki: itinaas ng Deutsche Bank ang rating nito sa Buy at inilipat ang target sa 200 dolyar mula sa 80, umakyat ang Citi sa 245 mula sa 200, at ang DA Davidson sa 200 mula sa 175. Ang aral na lampas sa iisang ticker ay ang tanong na matagal nang iniikutan ng sektor — kung ang gastos sa enterprise AI software ay nagiging kinikilalang kita sa malaking sukat at hindi lamang mga pilot — at malinaw ang sagot dito para sa kahit isang vendor. Mag-uulat ang AMD matapos magsara ang merkado ngayong araw, na naglalapat ng parehong tanong sa panig ng silikon. Ang linya nito sa data center at ang anumang natutukoy na order para sa Helios rack-scale ang mga tiyak na dapat basahin.",
+      "citations": [
+        {
+          "label": "Business Wire - Palantir reports Q2 2026 revenue growth of 93 percent and raises FY 2026 guidance",
+          "url": "https://www.businesswire.com/news/home/20260802523449/en/Palantir-Reports-Q2-2026-U.S.-Comm-Revenue-Growth-of-149-YY-and-Revenue-Growth-of-93-YY-Raises-FY-2026-Revenue-Guidance-to-82-YY-Growth-and-U.S.-Comm-Revenue-Guidance-to-134-YY-Crushing-Consensus-Expectations"
+        },
+        {
+          "label": "Proactive Investors - Palantir Technologies shares surge after earnings beat",
+          "url": "https://www.proactiveinvestors.com/companies/news/1096513/palantir-technologies-shares-surge-after-earnings-beat-1096513.html"
+        },
+        {
+          "label": "Finbold - Wall Street analysts update Palantir stock price after blowout earnings",
+          "url": "https://finbold.com/wall-street-analysts-update-palantir-stock-price-after-blowout-earnings/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "May kumakalat na worm na tumama sa npm at nagnakaw ng mga key ng developer",
+    "Tumatakbo sa isang Mac sa loob ng 4.3 GB ang isang modelong may 80 bilyong parameter",
+    "Nagdagdag ang desktop app ng Unsloth ng image at video generation",
+    "Bumaling sa memory na Tsino ang mga gumagawa ng laptop habang kumukapos ang suplay",
+    "Umakyat ng 93 porsyento ang kita ng Palantir at tumalon ang stock"
+  ]
+}

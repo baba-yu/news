@@ -1,0 +1,761 @@
+{
+  "date": "2026-08-04",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.e17de6adc92dd6dc",
+        "short_label": "Disk-streamed 80B inference misses 4.5 tokens a second when retested by H2 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Lumitaw ngayong araw ang Swiftlet, isang runtime na Swift at Metal, na nag-uulat ng Qwen3-Next-80B - 42 gigabyte ng weights sa disk - na bumubuo sa 4.5 hanggang 5 token kada segundo sa isang M5 Mac habang umaabot sa pinakamataas na 4.3 gigabyte ng resident memory. Nasa 2.6 gigabyte at 7 hanggang 11 token kada segundo naman ang Qwen3.6 na may 35 bilyong parameter, at nasa mahigit-kumulang 2.5 gigabyte sa isang iPhone 17 ang parehong modelo sa humigit-kumulang isang token kada segundo. Arkitektura ang mekanismo at hindi bagong quantisation: mahigit-kumulang tatlong bilyong parameter lang kada token ang ginagalaw ng mga sparse mixture-of-experts na modelong ito, kaya permanenteng nakaresidente sa apat na bit ang attention, embeddings at routers, samantalang nakabalot sa mga fixed-stride na container ang mga routed expert, na bawat isa ay makukuha sa iisang read, at isina-stream sa isang cache na ang laki ay itinatakda ng gumagamit sa pamamagitan ng command-line flag. Pinipigilan ng Gated DeltaNet linear attention sa tatlong-kapat ng mga layer na lamunin ng key-value cache ang natipid. Ang hindi taglay ng bilang na ito ay ang mga kondisyong nagbibigay-kahulugan sa isang bilang ng throughput kapag nagsi-stream na ang weights: walang context length, walang batch size, walang hati sa pagitan ng prompt processing at decoding, at para lang sa dense na bahagi ang nakasaad na quantisation. Ayon sa sariling bilang ng may-akda, nasa 43 hanggang 70 porsyento ang hit rate ng expert cache depende sa dami ng memoryang ibinibigay, at halos hindi gumagalaw ang throughput sa saklaw na iyon dahil nasa GPU dispatch ang bottleneck at hindi sa pagbabasa mula sa storage. Kaya hindi ang badyet ng memorya ang nagtatakda ng rate, at ang kondisyong magtatakda nito ay siya mismong hindi binabanggit. Apache 2.0, walong commit, isinulat gamit ang isang coding agent, at wala pang sukat mula sa kahit sinong iba sa may-akda ngayong araw.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "narrative": "Halos walang ipinagbago sa throughput ang pagtaas ng hit rate ng expert cache mula 43 porsyento patungong 70, at inilalagay niyan ang hangganan sa GPU dispatch at hindi sa pagbabasa ng weights mula sa storage. Kaya hindi ang bilang ng memorya ang nagtatakda ng rate. Ang variable na magtatakda nito, ang context length, ang siyang bilang na hindi kailanman inilathala.",
+        "support_dimension": "given",
+        "coherence": 3,
+        "remaining_gap": "Wala pang ibang nagpatakbo nito maliban sa may-akda, at nakasaad na context length ang kailangan munang ilathala ng anumang maihahambing na muling pagsubok."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e02990b40c203acb",
+        "short_label": "ChangXin Memory stays off the US Entity List through Q4 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Iniulat ng Nikkei Asia ngayong umaga na nagsimula nang magpadala ang HP, Asus at Acer ng maliliit na dami ng DRAM mula sa ChangXin Memory Technologies ng Tsina sa mga notebook na ibinebenta sa labas ng Estados Unidos, matapos makumpleto ang qualification ng mga piyesa noong mga kalagitnaan ng taong ito, at parehong dinala ng Digitimes at Asia Business Outlook ang salaysay na ito sa parehong araw. Mabigat ang bawat pasubali: limitado ang dami, budget na modelo sa mga merkadong labas ng US ang pinaglalagyan, itinatabi ang Samsung, SK Hynix at Micron para sa mga rehiyong mas mataas ang panganib sa regulasyon at heopolitika, at inilalarawan ang HP bilang sinusuri pa lamang ang supplier sa halip na nakatali na rito. Suplay ang ibinigay na dahilan, hindi presyo - hindi nakikipagbarat ang ChangXin sa mga nakaupong supplier, at sapat nang naghigpit ang merkado dahil sa build-out ng AI para tanggapin ng mga gumagawa ng PC ang isang supplier na dati nilang hindi pinapansin. Ang naidudulot nito ay dalawang bill of materials, isa para sa Estados Unidos at isa para sa lahat ng iba pa, at walang batas na nag-uutos nito: walang pumipigil sa isang retailer na magbenta ng laptop na may memorya ng ChangXin sa loob, at walang nag-aatas na pangalanan sa kahon kung kaninong memorya iyon. Binuksan ng FMS ang ikadalawampung edisyon nito sa Santa Clara nang parehong umaga. Walang inilathala ngayong araw na humihipo sa mismong Entity List, at sa sariling salaysay ng hula tungkol sa naunang ulat nakasalalay ang kasaysayan ng export control at ng paglilista ng Pentagon, at hindi sa anumang pinagkunang binanggit ngayong araw.",
+      "reference_links": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Asia Business Outlook - HP, Asus and Acer turn to CXMT chips amid global memory shortage",
+          "url": "https://www.asiabusinessoutlook.com/news/hp-asus-and-acer-turn-to-cxmt-chips-amid-global-memory-shortage-nwid-12260.html"
+        },
+        {
+          "label": "Terrapinn - FMS: The Future of Memory and Storage 2026",
+          "url": "https://www.terrapinn.com/conference/future-memory-storage/index.stm"
+        }
+      ],
+      "bridge": {
+        "narrative": "Dala ng tatlong lathalain ang iisang salaysay: pumapasok ang kwalipikadong DRAM ng Tsina sa mga budget na notebook saanman maliban sa Estados Unidos, dahil sa kakapusan at hindi sa diskuwento, habang itinatabi ang Samsung, Micron at SK Hynix para sa mga merkadong mas mataas ang panganib. Isang pag-iingat ang hating iyon na hindi naman hinihingi ng anumang batas - pinepresyuhan ng mga mamimili ang isang paglilistang walang inilathala ngayong araw na naglapit man lang dito.",
+        "support_dimension": "because",
+        "coherence": 3,
+        "remaining_gap": "Maliit ang dami, inilalarawan ang HP na sinusuri pa lamang, at walang lumitaw na aksyon sa Federal Register ngayong araw sa kahit anong panig."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e01a8ed7a5221606",
+        "short_label": "Repository-supplied agent hooks get an approval of their own by Q2 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Gumalaw ngayong araw sa npm registry ang isang worm na nagnanakaw ng credential matapos agawin ng isang umaatake ang GitHub account ng maintainer ng keyv, isang caching library na hinihila nang mahigit-kumulang 127 milyong beses kada linggo, at ginamit nito ang sariling GitHub Actions workflow ng repositoryo para maglabas ng mga lasong release. Umabot sa hindi bababa sa 868 package sa 1,381 bersyon ang bilang ng Aikido bandang maagang hapon sa oras ng Gitnang Europa at sinabi nitong nagbibilang pa ito, kaya gumagalaw ang listahan ng mga apektadong bersyon at hindi ito nakapirmi. Kasama ng keyv ang flat-cache, file-entry-cache, cacheable-request at ang @cacheable scope ng parehong maintainer, na naglalagay sa lawak ng pinsala nang lampas sa dalawang bilyong install kada buwan, at naabot ng pagkalat ang mga release na nakaugnay sa Deliveroo, Qlik at Picsart. Dalawang detalye ang mahalaga. Nakarating sa main branch ng bawat proyekto ang mga malisyosong file bago pa na-tag ang isang release, kaya may balidong provenance signature ang mga nakompromisong bersyon. At nagpadala rin ang lasong repositoryo ng isang session-start hook sa .claude/settings.json at isang folder-open task sa .vscode/tasks.json na parehong nakaturo sa iisang setup script - isang daan ng pagpapatakbo na pumuputok kapag binuksan ng isang developer o ng isang agent ang proyekto at hindi kapag may ini-install, at isang dumadapo sa workstation na may hawak ng credential sa halip na sa isang build container na itatapon lang. Ang tanging kontrol na nakaharang dito ay iisang desisyon sa workspace trust, na minsan lang ginagawa, tungkol sa isang folder na sadyang kinlone ng developer. Walang inilathalang pagbabago sa default na iyon ang Anthropic o ang Microsoft ngayong araw. Katabi ang lugar ng linggong ito: tumakbo ngayong araw ang AI Summit ng Black Hat sa ikatlong taon nito tungkol sa agentic na panganib, at binuksan ng BSides Las Vegas ang kauna-unahang nakalaang track nito sa seguridad ng AI tungkol sa prompt injection, agentic na sistema, GitHub exploit at software supply chain.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        },
+        {
+          "label": "CybrSec Media - BSides Las Vegas adds a dedicated AI security track",
+          "url": "https://www.cybrsecmedia.com/bsideslv-adds-dedicated-ai-security-track-as-un-prompted-brings-practitioner-first-agenda-to-hacker-summer-camp/"
+        },
+        {
+          "label": "The AI Summit at Black Hat USA - returns in 2026 on August 4",
+          "url": "https://blackhat.theaisummit.com/the-ai-summit-at-black-hat-usa-returns-in-2026-august-4/"
+        }
+      ],
+      "bridge": {
+        "narrative": "Ang pag-install ang binabantayan ng bawat depensang itinayo laban sa lasong dependency - lockfile, naka-pin na bersyon, patay na script, itatapong builder. Nilalaktawan ng isang startup entry na kasama sa loob ng folder ang lahat ng iyon, at pumuputok ito kapag may nagbukas ng proyekto sa mismong makinang kinalalagyan ng kanyang mga susi. Iisang trust prompt, sinagot nang minsan tungkol sa direktoryong sila mismo ang pumiling i-clone, ang buong saklaw ng kontrol.",
+        "support_dimension": "given",
+        "coherence": 5,
+        "remaining_gap": "Walang binago ang Anthropic o ang Microsoft ngayong araw, kaya sa argumentong ito lang umiiral ang iminumungkahing pangalawang pag-apruba."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0594fdd206cf2981",
+        "short_label": "Coding agents make provenance-checked installs the default by H1 2027",
+        "prediction_date": "2026-07-22"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Dumaan mismo sa mekanismo ng provenance ang kompromiso ngayong araw sa halip na iwasan ito. Dahil napunta sa main branch ng bawat proyekto ang mga malisyosong file bago pa na-tag ang isang release, ang sariling GitHub Actions workflow ng repositoryo ang bumuo sa mga lasong bersyon ng npm, kaya may balidong provenance signature ang mga ito - siya mismong artifact na sinusuri ng isang auditor ng supply chain para masabing malinis ang isang package. Ang tinatala ng isang attestation ay nanggaling sa workflow ng isang repositoryo ang isang build, hindi na may bumasa sa laman ng repositoryo, at ngayong araw nagkabunga ang pagkakaibang iyon sa laki ng buong registry: hindi bababa sa 868 package sa 1,381 bersyon bandang maagang hapon sa oras ng Gitnang Europa, at nagbibilang pa, sa buong nasasakupan ng isang maintainer na lampas sa dalawang bilyong install kada buwan ang pinagsamang hila. Walang vendor ng coding agent ang nag-anunsyo ng default na provenance ngayong araw, at kabaligtaran ang itinuturo ng aral ng araw: papasa sa isang default na attestation lang ang sinusuri ang bawat isa sa mga bersyong ito. Ang pag-aayos na talagang isinasagawa ay ang pag-ikot ng credential sa mga publishing token, cloud key, cluster token at credential ng secret store sa bawat organisasyong nakahila ng lasong release.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ],
+      "bridge": {
+        "narrative": "Ang sariling build workflow ng proyekto ang naglabas ng mga lasong release matapos dumapo sa main ang mga malisyosong commit, kaya may balidong attestation ang bawat isa. Ang tinatala ng beripikasyon ay kung saan nanggaling ang isang artifact, hindi kung may bumasa man dito. Papapasukin ng isang tarangkahang tumatanggap ng package sa ganoong ebidensya lang ang bawat isa sa kanila.",
+        "support_dimension": "so_that",
+        "coherence": 4,
+        "remaining_gap": "Walang vendor ng agent ang nag-anunsyo ng ganoong default ngayong araw, at wala pang nagpapares sa beripikasyon ng pagsusuri sa nilalaman ng na-beripikang build."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Tumakbo ngayong araw sa laki ng buong registry ang sitwasyong pinapangalanan ng hulang ito, at hayag ang bahaging agent. Inagaw ng isang umaatake ang GitHub account ng maintainer ng keyv at ginamit ang sariling GitHub Actions workflow ng repositoryo para maglabas ng mga lasong release. Tumatakbo ang payload sa pag-install at hinahakot nito ang mga npm token, ang GitHub credential ng lahat ng uri pati na ang panandaliang OIDC token, ang AWS key at ang credential ng instance metadata, ang service-account token ng Kubernetes, ang key ng Vault, Stripe at Slack, ang SSH key, ang Docker config at ang Terraform state, ini-encrypt ang mga ito at itinutulak sa mga repositoryong hawak ng umaatake, saka muling naglalathala ng sarili sa pamamagitan ng anumang publish token na makita nito - kaya nakita ng mga mananaliksik na lumilipat ito sa pagitan ng mga organisasyon kada dalawa hanggang pitong minuto. Nakatutok sa mga gumagamit ng agent ang pangalawang daan: nagpadala rin ang lasong repositoryo ng session-start hook sa .claude/settings.json at folder-open task sa .vscode/tasks.json na nakaturo sa iisang setup script, kaya nagpapatakbo nito ang pagbukas ng proyekto sa isang editor o sa isang agent nang walang anumang na-install, sa isang workstation na may hawak ng mga credential na sulit nakawin. Umabot sa hindi bababa sa 868 package sa 1,381 bersyon ang bilang ng Aikido bandang maagang hapon sa oras ng Gitnang Europa at nagbibilang pa ito. Walang listahan ng panganib ang na-update ngayong araw, at wala ang CIS o ang OWASP kahit saan sa materyal ngayong araw.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ],
+      "bridge": {
+        "narrative": "Sa mismong kagamitan ng developer lumabas ang mga sikreto: cloud key, cluster token, materyal ng vault at ng bayad, inani at itinulak sa mga repositoryong hawak ng umaatake, at nakatabi sa daan ng pag-install ang isang trigger para sa editor at sa agent. Iyon ang kategoryang gustong maipangalan ng hulang ito, tumatakbo sa laki ng buong registry - dumarating na may dalawang buwan pang natitira sa taning at walang nagalaw na listahan.",
+        "support_dimension": "so_that",
+        "coherence": 4,
+        "remaining_gap": "Wala ang CIS o ang OWASP sa materyal ngayong araw, at kailangan pa ring ilathala ang isang tiyak na entry sa nangungunang listahan, hindi sapat na karapat-dapat ito."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.25bbb1fc4e3ce653",
+        "short_label": "Coding agents ship default-deny sandboxes for untrusted-repo audits by Q2 2027",
+        "prediction_date": "2026-07-11"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Ibinigay ng araw na ito ang dahilan para sa default at wala ni katiting sa mismong default. Nagpadala ang lasong repositoryo ng isang .claude/settings.json na may session-start hook at ng isang .vscode/tasks.json na task na nakatakdang pumutok kapag binuksan ang folder, na parehong nakaturo sa iisang setup script, kaya nangyayari ang pagpapatakbo kapag binuksan ng isang developer o ng isang agent ang proyekto - sa makinang may hawak ng credential at hindi sa isang build container na dinisenyong itapon. Nakaturo sa daan ng pag-install ang lahat ng itinayo ng ekosistema laban sa kompromiso sa supply chain: lockfile, naka-pin na bersyon, patay na install script, naka-sandbox na build agent, at ngayon ay provenance. Hindi dumadaan doon ang isang startup entry na galing sa repositoryo, at ang tanging kontrol na nakaharang dito ay iisang desisyon sa workspace trust na minsan lang ginagawa, sa sandaling sinusubukan ng isang tao na magsimulang magtrabaho, tungkol sa isang folder na sadya nilang kinlone. Walang vendor ng coding agent ang nagdokumento ng default na sandbox ngayong araw. Katabi ang lugar at hindi ito nagpapasya: binuksan ng BSides Las Vegas nitong linggo ang kauna-unahang nakalaang track nito sa seguridad ng AI tungkol sa prompt injection, agentic na sistema, GitHub exploit at software supply chain, na nakatutok sa mga praktisyoner sa nakasaad na palagay na may hawak nang credential at awtonomiya ang mga sistemang pinag-uusapan.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "CybrSec Media - BSides Las Vegas adds a dedicated AI security track",
+          "url": "https://www.cybrsecmedia.com/bsideslv-adds-dedicated-ai-security-track-as-un-prompted-brings-practitioner-first-agenda-to-hacker-summer-camp/"
+        }
+      ],
+      "bridge": {
+        "narrative": "Nahuli sana ito ng isang takbong nakahiwalay sa network at may tarangkahan ng pag-apruba - ngunit kung nakabukas lang ito, at bumubukas ang iminumungkahing default kapag ino-audit ang code na hindi mo pinagkakatiwalaan. Walang nag-a-audit sa sariling checkout. Dumapo ang panganib sa mga proyektong pinagpasyahan na ng developer na kanila, at doon mismo hindi titingin ang default na ipapadala.",
+        "support_dimension": "so_that",
+        "coherence": 3,
+        "remaining_gap": "Walang vendor ang nagdokumento ng default na sandbox ngayong araw, at walang nagsasabing lalawak ang kondisyon ng pagbukas nito lampas sa pagsusuri ng hindi pinagkakatiwalaang repositoryo."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.16c7b8053e39aa1f",
+        "short_label": "Disk-streaming expert offload ships in a mainstream local runtime by H1 2027",
+        "prediction_date": "2026-07-18"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Lumabas ang mekanismo ngayong araw, sa isang runtime na pampubliko na pero walong commit pa lang. Pinapanatiling permanenteng nakaresidente sa apat na bit ng Swiftlet, isang runtime na Swift at Metal na inilathala ngayong araw sa ilalim ng Apache 2.0, ang dense na bahagi - attention, embeddings at routers - binabalot nito ang mga routed expert sa mga fixed-stride na container na bawat isa ay makukuha sa iisang read, at isinasa-stream kung aling expert ang hingin ng router, habang hawak sa isang cache na ang laki ay itinatakda ng gumagamit sa pamamagitan ng flag ang mga kamakailan at madalas gamitin. Sa ganoong ayos, bumubuo ang Qwen3-Next-80B, na 42 gigabyte ng weights sa disk, sa 4.5 hanggang 5 token kada segundo sa isang M5 Mac habang umaabot sa pinakamataas na 4.3 gigabyte ng resident memory; tumatakbo sa 2.6 gigabyte at 7 hanggang 11 token kada segundo ang Qwen3.6 na 35 bilyon; at tumatakbo ang parehong modelo sa isang iPhone 17 sa mahigit-kumulang 2.5 gigabyte. Nasa 43 hanggang 70 porsyento ang iniulat na hit rate ng cache, at halos hindi gumagalaw ang throughput habang nagbabago ang badyet na iyon dahil nasa GPU dispatch sa ngayon ang bottleneck at hindi sa pagbabasa mula sa storage. Ang hindi ibinigay ngayong araw ay ang mainstream na kalahati ng hula: wala sa llama.cpp, Ollama, LM Studio o vLLM ang lumilitaw sa materyal ngayong araw na may pagbabago sa aksis na ito, at sa may-akda mismo galing ang mga bilang.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "narrative": "Nagpatakbo ang patunay ng parehong ayos noong kalagitnaan ng Hulyo ng isang modelong may 744 bilyong parameter sa isang bahagi lang ng token kada segundo - totoo, pero hindi ito pang-araw-araw na kasangkapan ninuman. Nag-uulat ang build para sa Apple silicon ngayong araw ng isang-digit na token kada segundo sa isang 80B, at iyon ang antas kung saan may dahilan na ang isang sikat na runtime para tanggapin ito at hindi lang pansinin ang diskarte.",
+        "support_dimension": "so_that",
+        "coherence": 4,
+        "remaining_gap": "Isang walumpung bilyong modelo pa rin sa hardware ng Apple, hindi ang klaseng limang daang bilyon, at walang gumalaw sa apat na pinangalanang runtime."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.dd9b863375b480dc",
+        "short_label": "Local-LLM fine-tuning stack ships CUDA/ROCm parity as the default by H2 2027",
+        "prediction_date": "2026-07-21"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Dumapo ngayong araw ang merge ng Unsloth na 79,151 linya sa 231 file, at lumawak ang aksis ng vendor sa direksyong hindi pinangalanan ng hulang ito. Kabilang sa dalawampu't walong iba pang commit sa parehong araw ang pagtukoy sa Intel Arc at isang install path ng XPU PyTorch sa Windows installer: kilala na ngayon ang Arc, Iris, UHD at HD graphics, at may sariling oneAPI runtime na kasama ang mga wheel kaya hindi na kailangan ng hiwalay na pag-install ng toolkit ng Intel. Ang pangunahing merge ay isang Images page sa desktop Studio - text-to-image sa sariling GGUF quantisation ng proyekto ng Z-Image, Qwen-Image, FLUX at mga variant ng SDXL, mga editing workflow para sa transform, inpaint, extend, upscale at mga edit na inuutos sa wika, text-to-video sa limang pamilya ng modelo na may kasabay na audio, at QLoRA training para sa mga modelo ng imahe na may buhay na metriko at isang-click na pag-deploy ng adapter - sa 79,151 linyang idinagdag sa 231 file, na may mahigit walong daang backend unit test at mga end-to-end na pagsusuri sa antas ng browser, at may dalawang inference path sa ilalim na kasalo ng chat backend sa GPU memory. Wala sa mga ito ang lumabas bilang release ng package: nasa 2026.8.2 pa rin ang Python library at hindi pa umuusad lampas sa Hulyo 29 ang changelog ng dokumentasyon, kaya walang makikita rito ngayong araw ang isang gumagamit na nag-i-install mula sa package index. Nilalagdaan ng trabaho sa release pipeline sa parehong araw ang mga plugin library ng installer, ibinabaon ang WebView2 bootstrapper sa halip na kunin ito, at sinusuri ang mga bundle ng Windows bago ilathala.",
+      "reference_links": [
+        {
+          "label": "GitHub - Add Intel Arc GPU detection and XPU PyTorch install to Windows installer",
+          "url": "https://github.com/unslothai/unsloth/pull/7706"
+        },
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        }
+      ],
+      "bridge": {
+        "narrative": "Dumating ang ikatlong vendor bilang tubero ng installer: pagtukoy sa graphics kasama ang katugmang install path, at nakabalot na ang runtime kaya walang maghahabol ng hiwalay na toolkit. Kung problema sa hardware ang lawak, isa sana iyong proyekto; isang araw na trabaho lang ito sa dalawampu't walong commit. Pagsisikap, hindi kailanman ang silikon, ang nagpanatiling hindi pantay sa isa't isa ang mga backend na ito.",
+        "support_dimension": "given",
+        "coherence": 3,
+        "remaining_gap": "Wala sa mga ito ang nakarating sa release ng package, hindi nagbago ang bilang ng toolkit sa aksis ng AMD, at hindi Intel ang vendor na pinag-uusapan."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.11fc575584e8e05b",
+        "short_label": "Agent-written accelerator stacks get an independent serving number by Q2 2027",
+        "prediction_date": "2026-08-03"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Isinulat ng agent ang artifact ngayong araw at may dala itong bilang sa serving, at sa may-akda pa rin galing ang mga iyon. Nag-uulat ang Swiftlet - Apache 2.0, walong commit, isinulat gamit ang isang coding agent - ng Qwen3-Next-80B sa 4.5 hanggang 5 token kada segundo sa isang M5 Mac sa loob ng 4.3 gigabyte ng resident memory, ng Qwen3.6 na 35 bilyon sa 7 hanggang 11 token kada segundo sa 2.6 gigabyte, at ng parehong modelo sa isang iPhone 17 sa humigit-kumulang isang token kada segundo. Ang ipinagkaiba nito sa salaysay ng isang tagapagtatag ay isa itong pampublikong repositoryong maaaring i-clone at muling sukatin ninuman, sa halip na ulat ng isang takbong hindi maaabot ng iba - at iyon ang paunang kailangan ng isang malayang bilang. Ang hindi pa rin nito ibinibigay ay ang mga kondisyong magpapahambing sa ganoong bilang: walang context length, walang batch size, walang hati sa pagitan ng prompt processing at decoding, at para lang sa dense na mga layer ang nakasaad na quantisation. Walang third party na naglathala ng sukat ngayong araw. May isang hangganang dapat tandaan: serving stack para sa katunggaling silikon ng accelerator ang puntirya rito, at Apple silicon sa pamamagitan ng Metal ang puntirya ng runtime ngayong araw.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "narrative": "Isa na namang runtime na isinulat ng makina, isa na namang hanay ng bilang na ang may-akda lang ang nasa likod. Ang ipinagkaiba nito sa salaysay ng isang tagapagtatag ay bukas na checkout ito: maaaring i-clone at muling patakbuhin ng sinumang nag-aalinlangan ang bagay na inaangkin, at iyon ang murang daan patungo sa panlabas na bilang na sinasabi ng argumentong ito na kailangang umiral.",
+        "support_dimension": "given",
+        "coherence": 2,
+        "remaining_gap": "Ibang-iba ang silikon - Apple sa pamamagitan ng Metal, hindi isang katunggaling piyesa - at walang lumitaw na malayang sukat sa alinman sa dalawang stack."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.69439c5e138d13eb",
+        "short_label": "Coding IDEs make workspace-confined agent file writes the default by Q1 2027",
+        "prediction_date": "2026-07-04"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Pinapatakbo ng insidente ngayong araw ang tanong ng pagkukulong sa kabilang direksyon: hindi ang agent na sumusulat sa labas ng workspace, kundi ang workspace na nagpapasya kung ano ang patatakbuhin ng agent. May dala ang lasong repositoryo ng sarili nitong session-start hook sa .claude/settings.json at folder-open task sa .vscode/tasks.json, na parehong nakaturo sa iisang setup script, at pinapangalanan ng ulat ang Claude Code at ang Visual Studio Code bilang ang dalawang produktong tinutumbok ng mga entry na iyon. Kailangan ng parehong daan na pagkatiwalaan ang workspace, na isang prompt na madalas dinadaanan na lang ng mga tao, at minsan lang ginagawa ang desisyon sa tiwala sa halip na kada entry. Hindi naaabot ito ng pagkukulong sa pagsulat: tumatakbo ang isang entry na galing sa repositoryo gamit ang anumang hawak na ng session ng developer, sa makinang kinalalagyan ng mga credential. Walang vendor ng IDE o ng agent ang nagdokumento ng pagbabago sa anumang default ngayong araw, at walang naglalarawan sa materyal ngayong araw ng isang setting ng saklaw na pagsulat na nakabukas bilang default.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        }
+      ],
+      "bridge": {
+        "narrative": "Ang dalawang produktong pinapangalanan dito ay ang dalawang tinutukoy ng hulang ito, at doon nagtatapos ang koneksyon. Ang pagkulong sa isinusulat ng isang agent sa loob ng checkout ay tumutukoy sa naaabot nito palabas; ang pagkabigo ngayong araw ay kung ano ang naaabot papasok at pinapatakbo ng checkout. Ibang hangganan, at walang epekto sa default ng pagsulat.",
+        "support_dimension": "none",
+        "coherence": 2,
+        "remaining_gap": "Walang vendor ng editor ang naglathala ng pagbabago sa default ngayong araw, at hindi binanggit sa alinman sa mga ito ang path traversal o ang paghawak sa symlink."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a7f3fc0d30769651",
+        "short_label": "Cyber-insurance carriers ship agentic-AI dev-tool endorsement tier by Q4 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Naghatid ang araw na ito ng magkakaugnay na pinsalang siyang pinepresyuhan ng ganitong uri ng endorsement. Isang pag-agaw sa account ng isang maintainer ang umabot sa hindi bababa sa 868 package sa 1,381 bersyon bandang maagang hapon sa oras ng Gitnang Europa at binibilang pa ito, saklaw ang keyv, flat-cache, file-entry-cache, cacheable-request at ang @cacheable scope, na lampas sa dalawang bilyong install kada buwan ang pinagsamang hila at naabot ng pagkalat ang mga release na nakaugnay sa Deliveroo, Qlik at Picsart. Hindi isang nakaseguro na insidente ang pinsala kundi isang sabay-sabay na pag-ikot ng credential sa bawat organisasyong nakahila ng lasong bersyon, sa mga publishing token, cloud key at credential ng instance metadata, cluster token at credential ng secret store - ang uri ng paglilinis na humihipo sa mga sistemang hindi maaaring ihinto ng isang kompanya. Walang denominador man lang ang panganib na dumaan sa editor at sa agent, dahil walang lockfile na nagtatala na may developer na nagbukas ng isang folder. Walang carrier, endorsement, sub-limit o muling pag-uuri ng aktwaryo ang lumilitaw sa ulat ngayong araw.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        }
+      ],
+      "bridge": {
+        "narrative": "Isang pag-agaw sa account ang naglagay sa bawat organisasyong nakahila ng lasong release sa iisang pag-ikot nang sabay-sabay, at magkakaugnay ang hugis na iyon - siyang nagpapasya kung magkakaroon ng sariling presyong baitang ang isang panganib o mapapasama ito sa mga hindi saklaw. Mas malala pa, walang nagtatala na may developer na nagbukas ng isang folder, kaya walang denominador ang panganib sa editor at hindi kayang presyuhan ng isang underwriter ang hindi binibilang ninuman.",
+        "support_dimension": "given",
+        "coherence": 3,
+        "remaining_gap": "Walang carrier, tala ng broker o sub-limit ang lumilitaw kahit saan sa ulat ngayong araw, at magsasara sa katapusan ng taon ang nakasaad na taning."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3ad27df38140f1ef",
+        "short_label": "SEC extends 8-K cyber materiality to agentic-AI dev-tool incidents by Q3 2026",
+        "prediction_date": "2026-05-26"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Ibinigay ng araw na ito ang mismong sitwasyon na may kasamang pangalan ng kompanya. Naabot ng pagkalat ng isang worm ang mga release na nakaugnay sa Deliveroo, Qlik at Picsart; hinakot nito ang mga publishing token, cloud key at credential ng instance metadata, service-account token ng Kubernetes, credential ng secret store, ng bayad at ng pagmemensahe, SSH key, Docker config at Terraform state, saka muling naglathala ng sarili sa pamamagitan ng anumang publish token na makita nito at lumipat sa pagitan ng mga organisasyon kada dalawa hanggang pitong minuto. Ang inilalarawang pag-aayos ay isang pag-ikot sa mga sistemang hindi maaaring ihinto ng isang organisasyon, at ang pangalawang daan ng paghahatid - mga entry na galing sa repositoryo na tumatakbo kapag binuksan ng isang developer o ng isang agent ang proyekto - ay umaabot sa isang populasyong walang may hawak na listahan. Hindi ito napigilan ng provenance: nakarating sa main branch ng bawat proyekto ang mga malisyosong file bago pa na-tag ang isang release, kaya may balidong attestation ang mga nakompromisong bersyon. Walang nanggaling sa SEC ngayong araw, at walang iniulat na paglalahad ng rehistrante o pagpapasya sa materyalidad.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ],
+      "bridge": {
+        "narrative": "May pangalan ang mga biktima, walang naihaing dokumento. Ikinakabit ng ulat ngayong araw ang tatlong pangalan ng kompanya sa pagkalat nang hindi pinatutunayang rehistrante sa US ang alinman sa mga ito, at walang lumitaw na paglalahad o pagpapasya sa materyalidad. Nakatakda sana ang pahayag ng staff na pinagbabatayan nito sa loob ng isang quarter na dalawang buwan na lang bago matapos, at walang lumitaw mula sa regulator ngayong araw.",
+        "support_dimension": "landing",
+        "coherence": 2,
+        "remaining_gap": "Hindi nakasaad kung may naghahain sa ilalim ng rehimeng US sa mga apektadong kompanya, at kailangan muna ng pagpapasya sa materyalidad bago tumakbo ang orasang apat na araw ng negosyo."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.d00edbd235697a37",
+        "short_label": "Autonomous incident response ships human-out-of-the-loop containment by H1 2027",
+        "prediction_date": "2026-07-21"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Itinakda ng araw na ito ang orasang pinagsusukatan ng hulang ito. Muling naglathala ang worm ng sarili sa pamamagitan ng anumang publish token na makita nito, kaya nakita ng mga mananaliksik na lumilipat ito sa pagitan ng mga organisasyon kada dalawa hanggang pitong minuto, at lumalaki pa ang listahan ng mga apektadong bersyon ng Aikido habang inilalathala nito - gumagalaw na listahan at hindi nakapirming bilang. Isang tugong naghihintay ng pag-apruba ng tao sa bawat hakbang ng pagpigil ang tatakbo laban sa isang agwat ng pagkalat na isang-digit na minuto at sa isang hanay ng puntiryang walang makakabilang habang gumagalaw ito. Kasinglawak nito ang kabilang kalahati ng tugon: pag-ikot ng credential sa mga publishing token, cloud key, cluster token at credential ng secret store sa bawat organisasyong nakahila ng lasong bersyon, kasama ang isang populasyon sa daan ng editor na walang lockfile na nagtatala. Walang vendor ang nag-anunsyo ng default na awtonomong pagpigil ngayong araw, at pagtuklas at pagbibilang ang inilalarawan ng ulat ngayong araw sa halip na awtomatikong tugon.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        }
+      ],
+      "bridge": {
+        "narrative": "Dalawa hanggang pitong minuto sa pagitan ng isang organisasyon at ng susunod, habang humahaba pa ang listahan ng mga apektadong build sa mismong oras na isinusulat ito. Talo sa karerang iyon ang anumang pagpigil na naghihintay na may bumasa ng isang ticket. Tumigil ngayong araw na maging hinuha ang argumento ng bilis dito at naging sinukat na agwat.",
+        "support_dimension": "given",
+        "coherence": 4,
+        "remaining_gap": "Hindi ang awtonomong umaatakeng inilalarawan ng hula ang isang code na muling naglalathala ng sarili, at walang vendor ng pagtuklas ang naglabas ng pagpigil na walang kamay ng tao ngayong araw."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a6622c9a35342f07",
+        "short_label": "Offensive-security eval sandboxes drop live package proxies by Q1 2027",
+        "prediction_date": "2026-07-29"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Ang registry mismo ang sasakyan ng paghahatid ngayong araw. Gumalaw sa npm ang isang worm na nagnanakaw ng credential matapos ang pag-agaw sa account ng isang maintainer, at kumukuha ang payload ng isang naka-compile na bundle sa pag-install saka muling naglalathala sa pamamagitan ng anumang publish token na makita nito, na lumilipat sa pagitan ng mga organisasyon kada dalawa hanggang pitong minuto. Nakahila sana ng lasong bersyon ang anumang harness na dumadaan sa live na pag-install ng package sa loob ng panahong nagbilang ang Aikido ng hindi bababa sa 868 package sa 1,381 bersyon at sinabing nagbibilang pa ito - lumalaki ang listahan ng mga apektadong bersyon habang inilalathala ito, at iyon mismo ang kondisyong inaalis ng isang naka-pin na mirror. Walang pinapangalanang eval harness, operator ng sandbox o laboratoryong nagbabago ng daan nito sa package sa ulat ngayong araw, at walang vendor na naglarawan ng pagputol ng live na proxy. Ang insidente ang presyon ngayong araw, hindi isang anunsyo.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ],
+      "bridge": {
+        "narrative": "Walang nirereswelbang bago ang isang imaheng binuo noong nakaraang linggo kaya hindi ito nagagalaw; nirereswelba naman ng isang sandbox na kumukuha mula sa upstream habang tumatakbo ang anumang nasa registry sa oras na iyon, at ngayong araw lason ang nilalamang iyon sa loob ng panahong wala pang nakakahangga. Iyon mismo ang binibili ng maagang pagpapapirmi sa buong hanay ng dependency.",
+        "support_dimension": "so_that",
+        "coherence": 3,
+        "remaining_gap": "Walang laboratoryo, tagapangalaga ng harness o operator ng sandbox ang naglarawan ng paghipo sa daan nito sa package ngayong araw, at hindi pa rin nababanggit ang pagharang sa papalabas."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.359ad701e052546c",
+        "short_label": "Kimi K3's full weights run on one 640GB node via expert offload by Q4 2026",
+        "prediction_date": "2026-07-25"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Nakakuha ng pampublikong implementasyon ngayong araw ang mekanismo ng offload na pinagbabatayan ng hulang ito, ilang baitang pababa mula sa klase ng node na pinag-uusapan. Pinapanatili ng Swiftlet na permanenteng nakaresidente sa apat na bit ang attention, embeddings at routers, binabalot ang mga routed expert sa mga fixed-stride na container na bawat isa ay makukuha sa iisang read, at isinasa-stream kung alin ang hingin ng router papunta sa isang cache na ang laki ay itinatakda ng gumagamit sa pamamagitan ng flag - at tumatakbo ang Qwen3-Next-80B, na 42 gigabyte ng weights sa disk, sa 4.3 gigabyte ng resident memory sa isang M5 Mac. Pareho ang aritmetika nito sa ginagamit ng argumento tungkol sa isang node na 640 gigabyte: mahigit-kumulang tatlong bilyong parameter lang kada token ang ginagalaw ng isang sparse mixture-of-experts na modelo, kaya isang bahagi ng file at hindi ang buong file ang kailangang igalaw kada token. Nasa 43 hanggang 70 porsyento ang iniulat na hit rate ng cache at halos hindi gumagalaw ang throughput kasabay ng badyet dahil nasa GPU dispatch ang bottleneck at hindi sa storage, at binabasa ito ng may-akda bilang natitirang puwang. Walang tungkol sa Kimi K3 o sa isang single-node na deployment sa ganoong laki ngayong araw, at walang lumilitaw na sukat ng ganoong konpigurasyon sa materyal ngayong araw.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ilang baitang pababa mula sa klase ng hardware na pinag-uusapan, tumakbo sa publiko ang aritmetika ng offload: nakapako sa apat na bit ang dense na mga layer, at kinukuha ang mga routed expert nang isang read kada isa mula sa disk. Talagang inaalis ng sparsity ang nakagapos na hadlang mula sa resident na kapasidad. Ngunit inilipat nito ito sa dispatch at hindi sa bandwidth ng host, at hindi iyon ang eksaktong palitang pinangalanan.",
+        "coherence": 3,
+        "remaining_gap": "Walang anuman sa laking 640 gigabyte, walang takbo ng Kimi K3, at hindi tatagal ang mga bilang ng cache hit mula sa isang laptop sa isang checkpoint na 1.56 terabyte."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3021db04ab2e2701",
+        "short_label": "SK Hynix defends its HBM bit allocation against rising DRAM prices by Q1 2027",
+        "prediction_date": "2026-07-29"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Lumitaw ngayong araw mula sa panig ng mamimili ang bunga sa panig ng demand ng isang ipinagtatanggol na alokasyon. Iniulat ng Nikkei Asia na nagpapadala ang HP, Asus at Acer ng maliliit na dami ng DRAM ng ChangXin sa mga notebook na ibinebenta sa labas ng Estados Unidos, matapos makumpleto ang qualification noong mga kalagitnaan ng taong ito, habang itinatabi ang Samsung, SK Hynix at Micron para sa mga rehiyong mas mataas ang panganib sa regulasyon at heopolitika. Malinaw sa salaysay ngayong araw na hindi ito desisyon sa gastos - hindi nakikipagbarat ang ChangXin sa mga nakaupong supplier - kundi desisyon sa suplay, na ginawa sa isang merkado ng memoryang sapat nang pinahigpit ng build-out ng AI para tanggapin ng mga gumagawa ng PC ang isang supplier na dati nilang hindi pinapansin. Ganito ang hitsura mula sa labas ng isang alokasyong itinatabi para sa mas mahahalagang bit: lumilipat sa iba ang mamimili ng commodity, at isang bahaging dating itinuturing na mapapalitan ng mga vendor ng notebook ang siya na ngayong nagpapasya kung makakalabas man ang isang makina. Binuksan ng FMS ang ikadalawampung edisyon nito sa Santa Clara nang parehong umaga, na may inaasahang mahigit 350 tagapagsalita, mahigit 100 exhibitor at 3,500 dadalo mula sa 1,500 organisasyon. Walang lumitaw ngayong araw na bilang ng alokasyon ng vendor, paglalahad ng bit mix o pahayag sa presyo.",
+      "reference_links": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Terrapinn - FMS: The Future of Memory and Storage 2026",
+          "url": "https://www.terrapinn.com/conference/future-memory-storage/index.stm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Hindi biro-birong tinatanggap ng mga gumagawa ng notebook ang isang bagong supplier ng memorya. Ginugol ng HP, Asus at Acer ang kalagitnaan ng taong ito sa pagpapatunay sa ChangXin at ipinapadala na nila ito ngayon sa labas ng Estados Unidos, dahil sa suplay at hindi sa presyo. Ang hitsura ng isang ipinagtatanggol na alokasyon mula sa panig ng mamimili ay hindi lang mahal kundi hindi makuha ang bit ng mga nakaupong supplier.",
+        "coherence": 4,
+        "remaining_gap": "Nakikita ito sa pamamagitan ng isang kliyente, na hindi saklaw ng sariling pagsubok ng hula; kailangan ng resolusyon na isaad mismo ng SK Hynix ang bit mix nito sa sariling ulat."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.660c1e111b88d9ec",
+        "short_label": "Exposed MCP tool endpoints become a named initial-access vector by H1 2027",
+        "prediction_date": "2026-07-30"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Dumating ngayong araw ang isang pinangalanang daan ng unang pagpasok, sa katabing bahagi at hindi sa isang ito. Nagpadala ang lasong repositoryo ng session-start hook sa .claude/settings.json at folder-open task sa .vscode/tasks.json na nakaturo sa iisang setup script, at itinuturing ito ng ulat ngayong araw bilang isang natatanging daan ng paghahatid na nakatutok sa mga gumagamit ng agent - isang daan ng pagpapatakbo na pumuputok kapag binuksan ng isang developer o ng isang agent ang proyekto at hindi kapag may ini-install, na iisang desisyon lang sa workspace trust ang nakaharang. Iyon ang hugis na balang araw ay papangalanan ng isang taksonomiya ng mga vector. Walang MCP server, tool endpoint o nakalantad na interface ng agent na lumilitaw kahit saan sa materyal ngayong araw, at walang nagkatalogo o nagbilang ng ganoong vector ngayong araw. May petsa pero wala pang naihahatid kung saan malamang mangyari ang pagpapangalan: binuksan ng BSides Las Vegas nitong linggo ang kauna-unahang nakalaang track nito sa seguridad ng AI tungkol sa prompt injection, agentic na sistema, GitHub exploit at software supply chain, at tumakbo ngayong araw ang AI Summit ng Black Hat tungkol sa agentic na panganib.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "CybrSec Media - BSides Las Vegas adds a dedicated AI security track",
+          "url": "https://www.cybrsecmedia.com/bsideslv-adds-dedicated-ai-security-track-as-un-prompted-brings-practitioner-first-agenda-to-hacker-summer-camp/"
+        },
+        {
+          "label": "The AI Summit at Black Hat USA - returns in 2026 on August 4",
+          "url": "https://blackhat.theaisummit.com/the-ai-summit-at-black-hat-usa-returns-in-2026-august-4/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "May dumating ngang pinangalanang daan ng paghahatid: mga session-start hook at folder-open task na galing sa repositoryo, na pumuputok kapag may nagbukas ng proyekto at hindi kapag may nag-install. Ngunit hindi kailangan ng daang iyon ng pag-scan, ng nakalantad na port o ng pagtalo sa isang login; nakasakay ito sa isang clone. Ito ang katunggaling vector at hindi ang isang ito, at walang tool endpoint na lumitaw kahit saan.",
+        "coherence": 2,
+        "remaining_gap": "Dalawang track ng kumperensya tungkol sa agentic na panganib ang bumukas nitong linggo, pero isang ulat ng insidente mula sa vendor na nagpapangalan sa isang bukas na endpoint bilang kumpirmadong pinasukan ang siyang mahalaga."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.115de052e8e787f4",
+        "short_label": "Open Secure AI Alliance binds agent operators, not model APIs, by H2 2027",
+        "prediction_date": "2026-07-27"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Nasa panig ng operator dumapo ang pinsala ngayong araw at doon din nakatutok ang programa ng linggong ito. Ang developer na nagpapatakbo ng isang agent ang tinutumbok ng pangalawang daan ng paghahatid ng worm at hindi ang kahit anong endpoint ng modelo: isang session-start hook at isang folder-open task na galing sa repositoryo, na tumatakbo sa isang workstation na may hawak nang credential, sa likod ng iisang click sa workspace trust. Tumakbo ngayong araw ang AI Summit ng Black Hat sa Mandalay Bay Convention Center sa ikatlong taon nito, isang isang-araw na programa tungkol sa pagseseguro ng mga sistema ng AI, sa agentic na panganib, sa pagprotekta sa imprastraktura ng cloud at GPU, at sa paggamit ng AI sa pag-atake at sa pagtatanggol. Binuksan ng BSides Las Vegas nitong linggo ang kauna-unahang nakalaang track nito sa seguridad ng AI tungkol sa prompt injection, agentic na sistema, GitHub exploit, software supply chain at defensive engineering, na nakatutok sa mga praktisyoner sa nakasaad na palagay na may hawak nang credential at awtonomiya ang mga sistemang pinag-uusapan. Walang alyansa, charter, listahan ng kasapi o depinisyon ng saklaw ang inilathala ngayong araw, at walang provider ng modelo ang nagbago ng obligasyon sa panig ng API.",
+      "reference_links": [
+        {
+          "label": "The AI Summit at Black Hat USA - returns in 2026 on August 4",
+          "url": "https://blackhat.theaisummit.com/the-ai-summit-at-black-hat-usa-returns-in-2026-august-4/"
+        },
+        {
+          "label": "CybrSec Media - BSides Las Vegas adds a dedicated AI security track",
+          "url": "https://www.cybrsecmedia.com/bsideslv-adds-dedicated-ai-security-track-as-un-prompted-brings-practitioner-first-agenda-to-hacker-summer-camp/"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Sumusunod ang pamamahala sa kung sino ang may hawak, at ngayong araw nasa developer ang hawak. Tumakbo ang pangalawang daan ng worm sa isang workstation na may hawak nang credential, sa likod ng iisang click ng tiwala, at malayo sa anumang endpoint ng modelo. Nakatutok kapwa ang AI Summit ng Black Hat at ang bagong track ng BSides sa kung sino ang nagpapatakbo ng makinang iyon. Kailangang may kapitan ang mga patakaran ng isang konsorsyo, at narito iyon.",
+        "coherence": 3,
+        "remaining_gap": "Walang charter, linya sa listahan o inilathalang profile ang gumalaw, at ang pagsali ng isang laboratoryo ang bahaging magpapasya nito."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c762a8078d707dee",
+        "short_label": "Durable ask-user checkpoints become a standard harness primitive by H1 2027",
+        "prediction_date": "2026-06-11"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ipinakita ng araw na ito ang halaga ng iisang desisyon ng pahintulot na hindi nananatili. Iisang pagpiling pagkatiwalaan ang workspace ang nakaharang sa mga entry na galing sa repositoryo na pumuputok sa pagsisimula ng session at sa pagbukas ng folder - minsan lang ito ginagawa, sa sandaling sinusubukan ng isang tao na magsimulang magtrabaho, tungkol sa isang folder na sadya nilang kinlone - at prangka ang salaysay ngayong araw na dinadaanan na lang ito ng mga tao dahil iyon mismo ang layunin ng produkto. Ang ipinapahiwatig nitong kailangan ng isang harness ay isang checkpoint na lumalampas sa unang click at bumabalik sa sandaling talagang tatakbo na ang isang entry, na naka-item at hindi pang-lahatan, o mga entry na nananatiling patay hanggang sadyang buksan. Wala sa dalawang produktong pinapangalanan sa ulat, ang Claude Code at ang Visual Studio Code, ang inilalarawang may anumang lampas sa desisyon ng tiwala, at walang harness na naglabas ng ganoong primitibo ngayong araw.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Iisang click, ginawa sa maling sandali, tungkol sa isang folder na sadyang kinlone ng isang tao, ang nagpahintulot sa lahat ng pumutok pagkatapos. Iyon mismo ang pagkabigong pinipigilan ng isang matibay na checkpoint: pahintulot na ibinigay nang minsan at lumipas na, sa halip na isang tanong na bumabalik kapag tatakbo na ang isang entry. Ipinakitang wala nang mas matibay pa roon ang dalawang pinangalanang harness.",
+        "coherence": 4,
+        "remaining_gap": "Mas mahigpit na sukatan ang makaligtas sa isang restart kaysa sa muling pagtatanong sa oras ng pagpapatakbo, at wala sa dalawang harness ang naglabas ng alinman sa dalawa."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.082b0a07077870dd",
+        "short_label": "GGUF supply chains gate uploads via signed cards + SSTI scans by Q3 2026",
+        "prediction_date": "2026-04-21"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Nasubok sa isang katabing registry ngayong araw ang kalahati ng hulang ito na tungkol sa paglagda at hindi ito tumagal. Dahil napunta sa main branch ng bawat proyekto ang mga malisyosong file bago pa na-tag ang isang release, ang sariling workflow ng repositoryo ang bumuo sa mga lasong bersyon at may balidong provenance signature ang mga ito - ang tinatala ng isang attestation ay nanggaling sa isang repositoryo ang isang build, hindi na may bumasa sa laman nito. Mamamana ng isang model registry na nagtatarangkahan sa upload batay sa nilagdaang card ang mismong limitasyong iyon, at isang gawang halimbawa ng puwang na ito ang araw ngayon. Walang tungkol sa mga upload ng GGUF, sa Hugging Face o sa library ng Ollama ngayong araw. Ang uri ng artifact na gumalaw ay ang sariling GGUF quantisation ng Unsloth ng Z-Image, Qwen-Image, FLUX at mga variant ng SDXL, na dumating sa loob ng isang merge sa desktop Studio at hindi bilang release ng package, kaya walang kontrol sa panig ng upload ang naisagawa o nailarawan.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "May kalakip na balidong lagda ang mga lasong build. Dahil napunta sa main ang mga pagbabago bago pa may na-tag, ang sariling workflow ng proyekto ang bumuo sa mga ito, at itinala ng provenance kung saan nanggaling ang isang build nang walang bumabasa sa ipinasok. Tarangkahan ang isang upload ng modelo batay sa nilagdaang card at pareho ang mabibili mo: pinagmulan, hindi kailanman pagsusuri.",
+        "coherence": 3,
+        "remaining_gap": "Bukas na ngayon ang bintana para dito at walang gumagalaw na hub; walang humipo ngayong araw sa mga upload ng GGUF o sa pag-scan ng template sa oras ng pagkarga."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.71c2ab8e3803590f",
+        "short_label": "Tailscale defaults reusable auth keys to a bounded node count by H1 2027",
+        "prediction_date": "2026-08-01"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang araw na ito ang pinakakongkretong anyo ng argumento tungkol sa lawak ng pinsala ng isang credential. Hinakot ng payload ang mga npm token, ang GitHub credential ng lahat ng uri pati na ang panandaliang OIDC token, ang AWS key at ang credential ng instance metadata, ang service-account token ng Kubernetes, ang key ng Vault, Stripe at Slack, ang SSH key, ang Docker config at ang Terraform state, saka muling naglathala ng sarili sa pamamagitan ng anumang publish token na makita nito - tumakbo ang pagkalat sa mga credential na walang hangganan kung ano ang magagawa nila pagkatapos, at kaya minuto at hindi araw ang sukat ng paglipat sa pagitan ng mga organisasyon. Pareho ang hugis ng pag-aayos: umiikot na ngayon ang bawat organisasyong nakahila ng lasong bersyon sa mga publishing token, cloud key, cluster token at credential ng secret store, isang paglilinis na humihipo sa mga sistemang hindi maaaring ihinto ng isang kompanya. Hindi binanggit ang Tailscale sa materyal ngayong araw, walang vendor ng networking ang nagbago ng default ng key, at walang tungkol sa limitasyon sa bilang ng node ngayong araw.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Minuto at hindi araw ang oras ng paglipat sa pagitan ng mga organisasyon, at mabilis ito dahil ang paghawak mismo ng isang credential ang buong pahintulot. Muling inilathala ng mga publish token ang worm; walang kisame sa sariling muling paggamit ang cloud, cluster at secret-store key. Walang humipo sa alinman sa mga ito ang pagsasaklaw sa dulo. Ang naglalabas lang ng bagay na ito ang makakahangga rito.",
+        "coherence": 4,
+        "remaining_gap": "Ibang klase ng credential, at walang vendor ng networking ang nagbago ng default; sa sariling dokumentasyon ng Tailscale ito dadapo o hindi."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5ef12dddaef42be2",
+        "short_label": "Disaggregated expert-parallel serving becomes the default for 2T MoE by H1 2027",
+        "prediction_date": "2026-07-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Kabaligtaran ang tinahak ng trabaho sa expert routing ngayong araw, na tumipon sa iisang device sa halip na kumalat sa marami. Nagpapatakbo ang isang runtime na Swift at Metal na inilathala ngayong araw ng mga sparse mixture-of-experts na modelong 35 bilyon at 80 bilyon sa iisang Mac, at ng modelong 35 bilyon sa isang iPhone, sa pamamagitan ng pagpapanatiling nakaresidente sa apat na bit ang dense na mga layer at pagsa-stream ng mga routed expert mula sa storage - parehong premisa ng sparsity na ginagamit ng disaggregation, mahigit-kumulang tatlong bilyong parameter na ginagalaw kada token, na inilapat sa kabilang dulo ng saklaw. Walang sinasabi ito tungkol sa kung paano ihahain ang isang checkpoint na trilyong parameter sa isang buong rack, at hindi muling isinaad ng vLLM o ng SGLang ang isang nakadokumentong default ngayong araw. May petsa pero wala pang naihahatid ang sariling lugar ng serving stack: kasama ng Ray Summit ang kauna-unahang vLLM Conference sa San Francisco Marriott Marquis simula Agosto 24, kasama sa bawat pass, na may mahigit dalawampung tagapagsalita tungkol sa imprastraktura ng vLLM, sa mga hardware backend at sa mga pattern ng deployment sa produksyon.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Anyscale - Ray Summit 2026 dates, pricing and the co-located vLLM Conference",
+          "url": "https://www.anyscale.com/ray-summit"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sa kabilang direksyon naisagawa ang sparsity: isang Mac, isang telepono, at lahat ay tumipon sa iisang device sa halip na kumalat sa isang rack. Pareho ang premisa, baligtad ang topolohiya, at walang naililipat nito sa kung paano hinahati ang isang checkpoint na trilyong parameter. Walang muling isinaad na nakadokumentong default ang alinman sa dalawang engine, at tatlong linggo pa bago ang kumperensyang maaaring pagtalunan ang isang sanggunian na recipe.",
+        "coherence": 2,
+        "remaining_gap": "Kailangang magbago ang isang inuupahang plataporma at ang default ng parehong engine; walang deployment sa laki ng rack kahit saan sa materyal ngayong araw."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c972282fc42c88b6",
+        "short_label": "Sub-2-bit quantization fits a second 20B-class model under 5 GB by Q2 2027",
+        "prediction_date": "2026-07-15"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Naabot ngayong araw ang puntirya sa memorya sa pamamagitan ng ibang mekanismo, sa apat na beses ng bilang ng parameter. Nag-uulat ang Swiftlet na ang Qwen3-Next-80B - 42 gigabyte ng weights sa disk - ay umaabot sa pinakamataas na 4.3 gigabyte ng resident memory sa isang M5 Mac, at ang Qwen3.6 na 35 bilyon sa 2.6 gigabyte, habang ang parehong modelo sa isang iPhone 17 ay nasa mahigit-kumulang 2.5 gigabyte. Naaabot nito ito hindi sa pamamagitan ng mas mahigpit na compression kundi sa pagpapanatiling nakaresidente sa apat na bit ng dense na bahagi lamang at sa pagsa-stream ng mga routed expert mula sa storage papunta sa isang cache na itinatakda ang laki ng gumagamit. Malinaw ang salaysay ngayong araw na arkitektura ang mekanismo at hindi bagong quantisation, at ang bit width na isinasaad nito ay para sa dense na mga layer lamang, na walang sinasabi tungkol sa kung paano iniimbak ang mga isinasa-stream na expert. Walang resultang wala pang dalawang bit, at walang modelong klaseng 20 bilyon na wala pang 5 gigabyte sa pamamagitan ng compression, ang lumilitaw sa materyal ngayong araw.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Bumagsak ang markang limang gigabyte sa maling daan. Walang mas hinigpitang compression; nagbago ang patakaran sa pagreresidente, hawak sa apat na bit ang dense na weights habang isinasa-stream ang mga routed expert kapag kailangan, at pumasok sa ilalim ng kisameng dapat sanang naaabot ng isang modelong 20 bilyon ang isang modelong 80 bilyon. Kung hindi lang bit kada weight ang tanging palanca, humihina ang insentibong habulin ang huling kalahating bit.",
+        "coherence": 3,
+        "remaining_gap": "Para sa dense na mga layer lang ang nakasaad na bit width, at hindi pareho ng trabaho ang isang rate na malapit sa limang token kada segundo at ang isang modelong madadala saanman."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.82599b6cfd05751b",
+        "short_label": "Consumer-GPU coding agents displace cloud-only APIs for 30% of devs by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Gumalaw ngayong araw ang panig ng kakayahan at hindi gumalaw ang panig ng paggamit. Nag-uulat ang isang runtime na Swift at Metal na inilathala ngayong araw ng isang sparse na modelong 80 bilyong parameter na bumubuo sa 4.5 hanggang 5 token kada segundo sa isang M5 Mac sa loob ng 4.3 gigabyte ng resident memory, ng isang modelong 35 bilyon sa 7 hanggang 11 token kada segundo sa 2.6 gigabyte, at ng parehong modelo sa isang iPhone 17 sa humigit-kumulang isang token kada segundo - mga klase ng modelong dating nangangahulugang inuupahang kapasidad, na nasa hardware na ngayon na pag-aari na ng developer, sa mga rate na nababasa at hindi interaktibo. Isinulat mismo ang runtime gamit ang isang coding agent, walong commit, Apache 2.0, at sarili nitong maliit na datos iyon tungkol sa kung saan nangyayari ang trabaho. Walang sumukat sa asal ng mga developer ngayong araw: walang survey, telemetriya, bilang mula sa vendor o tantiya ng bahagi ng lokal laban sa cloud ang lumilitaw sa materyal ngayong araw.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Natupad ang kalahati ng pinagsamang kondisyon. Tumatakbo na sa isang laptop na pag-aari na ng isang tao ang mga klase ng modelong dating nangangahulugang inuupahang kapasidad: 35 bilyong parameter sa pito hanggang labing-isang token kada segundo, 80 bilyon sa apat at kalahati hanggang lima. Nababasa lang at hindi interaktibo ang huling rate na iyon, kaya ang throughput ang terminong hindi pa rin nakakalampas sa sukatan.",
+        "coherence": 3,
+        "remaining_gap": "Walang lumitaw na survey, telemetriya o bilang ng bahagi mula sa vendor, at tumatakbo na ang quarter na dapat sanang dinapuan nito."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.fd7bdbc998adaac2",
+        "short_label": "US restrictions on Chinese open weights hit serving, not downloads, by H1 2027",
+        "prediction_date": "2026-07-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Ang kuwento ng memorya ngayong araw ay parehong tanong tungkol sa pagpili ng instrumento, sa ibang larangan. Nagsimula nang magpadala ang HP, Asus at Acer ng DRAM ng ChangXin sa mga notebook na ibinebenta sa labas ng Estados Unidos, at malinaw ang salaysay ngayong araw na walang patakaran ng US na pumipigil sa isang retailer na magbenta ng makinang may ganoong memorya sa loob at walang nag-aatas na pangalanan sa kahon ang supplier: isang pribadong paghatol sa panganib tungkol sa isang linyang inaasahan ng mga vendor ang paghahati sa dalawang bill of materials, at hindi isang linyang may nagguhit na. Kung aling instrumento ang aabutin ng isang gobyerno - isang restriksyon sa panig ng suplay, isang patakaran sa pagbili, isang taripa - ay siya mismong aksis na iniikutan ng hulang ito, at sa panig ng memorya nanatili itong hindi ginagamit ngayong araw habang gumagalaw pa rin ang komersyal na asal. Walang tungkol sa bukas na weights, sa pag-download ng modelo o sa restriksyon sa serving ngayong araw, at walang iniulat na paghahain, patakaran o aksyon ng pagpapatupad.",
+      "reference_links": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Asia Business Outlook - HP, Asus and Acer turn to CXMT chips amid global memory shortage",
+          "url": "https://www.asiabusinessoutlook.com/news/hp-asus-and-acer-turn-to-cxmt-chips-amid-global-memory-shortage-nwid-12260.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Ang hugis ang bantayan, hindi ang produkto: tahimik na hinati ng tatlong vendor ang kanilang bill of materials, na iniiwas ang memoryang Tsino sa mga istante sa Amerika habang ipinapadala ito kung saan mas mababa ang panganib sa regulasyon. Walang patakarang nag-uutos niyan. Pinepresyuhan nila ang isang linyang inaasahan nilang may magguguhit. Parehong maniobra sa ibang merkado ang isang pagtangging maghain ng modelong nada-download pa rin.",
+        "coherence": 3,
+        "remaining_gap": "Analohiya mula sa ibang merkado; walang iniulat ngayong araw na paghahain, patakaran o pagtanggi na humihipo sa bukas na weights."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.fd0660f0789c6e44",
+        "short_label": "Fortune 500 IT capex bundles AI-PC refresh into data-center spend by H2 2027",
+        "prediction_date": "2026-06-01"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Nagtagpo ngayong araw ang dalawang dulo ng linyang iyon ng capex, mula sa panig ng bahagi at hindi ng mamimili. Nagsimula nang magpadala ang HP, Asus at Acer ng maliliit na dami ng DRAM ng ChangXin sa mga notebook na ibinebenta sa labas ng Estados Unidos dahil sapat nang pinahigpit ng build-out ng AI ang merkado ng memorya para tanggapin ng mga gumagawa ng PC ang isang supplier na dati nilang hindi pinapansin - parehong kakapusan ang nagpepresyo ngayon ng memorya sa datacenter at nagpapasya kung makakalabas man ang isang notebook, at itinuturing ito ng mga pinagkunan ngayong araw bilang desisyon sa suplay at hindi sa gastos. Iyon ang pagkakabit na iginigiit ng hulang ito, na dumarating bilang bill of materials at hindi bilang linya sa accounting. Binuksan ng FMS ang ikadalawampung edisyon nito sa Santa Clara nang parehong umaga, na may inaasahang mahigit 350 tagapagsalita, mahigit 100 exhibitor, mahigit dalawampung stream ng nilalaman at 3,500 dadalo mula sa 1,500 organisasyon. Walang mamimiling pang-enterprise, paglalahad ng capex o desisyon sa pag-refresh ng fleet ang lumilitaw sa materyal ngayong araw.",
+      "reference_links": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Terrapinn - FMS: The Future of Memory and Storage 2026",
+          "url": "https://www.terrapinn.com/conference/future-memory-storage/index.stm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Lumitaw ang pagkakabit sa isang listahan ng piyesa. Ang memoryang sapat nang kakaunti para presyuhan ang mga build-out sa datacenter ang siya na ngayong nagpapasya kung makakalabas man ang mga notebook, at kaya nagpunta ang tatlong gumagawa ng PC para tanggapin ang ChangXin. Iisang mahigpit na input na ang hinuhugot ng badyet sa laptop at sa rack; tumatayo ang argumento tungkol sa channel, kahit na dumating ito sa pamamagitan ng pagbili at hindi sa pamamagitan ng accounting ninuman.",
+        "coherence": 3,
+        "remaining_gap": "Hindi magkaparehong linya ng badyet ang magkaparehong kakapusan; tatlong paglalahad ng Fortune 500 at isang template mula sa isang audit firm ang siyang magpapasya nito."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f7c9f65d995c2b30",
+        "short_label": "Meta breaks out AI compute revenue as its own reported line by Q3 2027",
+        "prediction_date": "2026-07-30"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Mula sa paghahati ng segment ng isang mas maliit na vendor nanggaling ang presyon sa paglalahad ngayong araw. Iniulat ng Palantir ang kita sa ikalawang quarter na 1.94 bilyong dolyar, tumaas nang 93 porsyento taon-sa-taon laban sa konsensus na 1.81 bilyon, na may adjusted earnings na 41 sentimo laban sa inaasahang 34, netong kita na 1.06 bilyon at adjusted free cash flow na 1.22 bilyon. Ang linyang nagpagalaw sa stock ay ang paghahati sa ilalim: tumaas nang 149 porsyento patungong 764 milyong dolyar ang komersyal na kita sa Estados Unidos laban sa kita mula sa pamahalaan ng Estados Unidos na tumaas nang 90 porsyento patungong 809 milyon, kaya halos kasinlaki na ng negosyo sa pamahalaan na matagal nang inaakalang inaasahan ng kompanya ang komersyal na panig. Umakyat ang gabay para sa buong taon sa pagitan ng 8.15 at 8.16 bilyon mula sa dating 7.65 hanggang 7.66 bilyon, itinaas ang puntirya sa komersyal na Estados Unidos nang lampas sa 3.42 bilyon, at bumukas ang shares sa mahigit-kumulang 152 dolyar laban sa 125.65 na pagsasara noong Lunes. Ang uri ng linya ng segment na sumasagot sa tanong ng pilot laban sa kinikilalang kita ang siyang ginagaya, pero walang hyperscaler na muling isinaad ang istruktura ng pag-uulat nito ngayong araw; mag-uulat ang AMD pagkasara, na naglalagay ng parehong tanong sa panig ng silikon.",
+      "reference_links": [
+        {
+          "label": "Business Wire - Palantir reports Q2 2026 revenue growth of 93 percent and raises FY 2026 guidance",
+          "url": "https://www.businesswire.com/news/home/20260802523449/en/Palantir-Reports-Q2-2026-U.S.-Comm-Revenue-Growth-of-149-YY-and-Revenue-Growth-of-93-YY-Raises-FY-2026-Revenue-Guidance-to-82-YY-Growth-and-U.S.-Comm-Revenue-Guidance-to-134-YY-Crushing-Consensus-Expectations"
+        },
+        {
+          "label": "Proactive Investors - Palantir Technologies shares surge after earnings beat",
+          "url": "https://www.proactiveinvestors.com/companies/news/1096513/palantir-technologies-shares-surge-after-earnings-beat-1096513.html"
+        },
+        {
+          "label": "Finbold - Wall Street analysts update Palantir stock price after blowout earnings",
+          "url": "https://finbold.com/wall-street-analysts-update-palantir-stock-price-after-blowout-earnings/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Ang paghahati ang nagpagalaw sa Palantir, hindi ang kabuuan. Nalampasan ng 93 porsyentong paglago ang konsensus, pero ang bilang na tinutukan ng mga analyst ay ang komersyal na US na 764 milyon laban sa pamahalaan na 809 milyon, isang timplang nakikita lang dahil pareho itong pinapangalanan ng ulat. Bumukas ang shares malapit sa 152 laban sa 125.65 na pagsasara noong Lunes. Sa paglalahad kumakapit ang isang muling pagpepresyo.",
+        "coherence": 3,
+        "remaining_gap": "Ang timpla ng paglago ang pinresyuhan ng muling pagpepresyo sa Palantir at hindi ang paggasta sa kapital, at walang hyperscaler na muling isinaad ang istruktura ng pag-uulat nito ngayong araw."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.ed22f8669ea280de",
+        "short_label": "Hugging Face's downloader ships no default XET-to-HTTP fallback by Q2 2027",
+        "prediction_date": "2026-08-03"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Tumagal ang premisa ngayong araw sa mas matalas na anyo, at hindi nahipo ang mismong daan ng pag-download. Dumapo sa repositoryo at hindi sa package index ang merge ng Unsloth na 79,151 linya sa 231 file: isang Images page sa desktop Studio na may text-to-image sa sariling GGUF quantisation ng proyekto, mga editing workflow, text-to-video sa limang pamilya ng modelo at QLoRA training para sa mga modelo ng imahe, sa 79,151 linyang idinagdag sa 231 file, kasama ang dalawampu't walong iba pang commit sa parehong araw. Wala sa mga ito ang lumabas bilang bersyon - nasa 2026.8.2 pa rin ang Python library at hindi pa umuusad lampas sa Hulyo 29 ang changelog ng dokumentasyon - kaya patuloy na dumadapo sa proyektong gumagamit ang trabahong umaabot sa mga tao, at hindi sa client na pinapanatili ng Hugging Face, at iyon ang istrukturang pinagbabatayan ng hula. Walang nagmasid ngayong araw sa sariling asal sa pag-download ng huggingface_hub, walang iniulat na pagbabago sa XET o sa transport sa alinmang panig, at tungkol sa paglikha at hindi sa pagkuha ng weights ang trabaho ng Unsloth ngayong araw.",
+      "reference_links": [
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        },
+        {
+          "label": "GitHub - Add Intel Arc GPU detection and XPU PyTorch install to Windows installer",
+          "url": "https://github.com/unslothai/unsloth/pull/7706"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Pumasok sa repositoryo at doon tumigil ang merge ng Unsloth na 79,151 linya sa 231 file: walang bersyong inilabas, at nasa 2026.8.2 pa rin ang library. Ang trabahong umaabot sa mga tao sa pamamagitan ng proyektong gumagamit ang siyang ayos na ipinapalagay ng hulang ito. Kagamitan din ito sa paglikha, na walang kinalaman sa kung paano bumababa ang isang file.",
+        "coherence": 2,
+        "remaining_gap": "Walang nagmasid sa daan ng pag-download ng huggingface_hub; isang default lang sa panig ng transport doon, na ipinadala nang walang env var, ang magpapasya nito."
+      }
+    }
+  ]
+}

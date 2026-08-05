@@ -1,0 +1,128 @@
+[
+  {
+    "actor": "Runtime author and Metal kernel maintainer, Swiftlet project",
+    "job": "Turning the August publication into something an outsider can install and rerun — documented cache-budget flag, reproducible build, and the settings behind the reported rate.",
+    "outcome": "A build a third party can run on their own M5 hardware, at a context length and cache budget they choose and can state.",
+    "motivation": "A runtime whose headline number nobody outside can reproduce is a demo, and the project wants the mechanism judged on its own terms.",
+    "task": {
+      "who": "Swiftlet's Swift and Metal runtime author working the public repository",
+      "what": "Document the expert-cache flag and build steps",
+      "where": "The Swiftlet GitHub repository and its README",
+      "when": "September 2026",
+      "why": "Outsiders cannot restate conditions they cannot set",
+      "how": "Command-line cache-budget flag with published build instructions"
+    }
+  },
+  {
+    "actor": "Independent benchmark author, Apple silicon local-inference testing publication",
+    "job": "Running the 80-billion-class streamed model across several context lengths and cache budgets, then publishing a table rather than a single throughput figure.",
+    "outcome": "A published decoding rate for an 80B sparse mixture-of-experts model under expert streaming, stated with the context length it was measured at.",
+    "motivation": "A number from the party that produced it is the weakest form of benchmark, and rerunning it is the cheapest way to test it.",
+    "task": {
+      "who": "Independent testers running local models on their own Apple hardware",
+      "what": "Sweep decoding rate across context and cache settings",
+      "where": "An M5-class Mac running the streaming runtime",
+      "when": "Q1 2027",
+      "why": "One figure cannot describe a streaming working set",
+      "how": "Repeated timed runs at fixed prompt lengths"
+    }
+  },
+  {
+    "actor": "Benchmark harness maintainer, open-source local inference benchmarking tool",
+    "job": "Adding context length and expert-cache budget to the fields a run must report, so a streamed throughput result cannot be published bare.",
+    "outcome": "A harness whose output carries the conditions alongside the tokens per second, making a condition-stated third-party measurement the default rather than an act of diligence.",
+    "motivation": "Once weights stream instead of sitting resident, a rate without its working set is not a measurement anyone else can check.",
+    "task": {
+      "who": "Maintainers of the harness result schema and reporting output",
+      "what": "Add cache-budget and context fields to results",
+      "where": "The harness result schema and its output format",
+      "when": "Q4 2026",
+      "why": "Bare rates are unreadable once experts stream",
+      "how": "Versioned result schema with required condition fields"
+    }
+  },
+  {
+    "actor": "Model release engineering lead, Alibaba Qwen3-Next team",
+    "job": "Publishing and maintaining the 80-billion-parameter sparse mixture-of-experts checkpoints, with the router and expert layout that make streaming from storage viable at all.",
+    "outcome": "An openly available 80B-class model outside testers can stream on consumer Apple hardware and measure without the runtime author's involvement.",
+    "motivation": "A sparse model that only its own tooling can run is a model nobody else publishes numbers for.",
+    "task": {
+      "who": "Qwen model release and open-weights distribution engineers",
+      "what": "Maintain open 80B sparse mixture-of-experts checkpoints",
+      "where": "Public model repositories and their conversion tooling",
+      "when": "October 2026",
+      "why": "Outside measurement needs openly available weights",
+      "how": "Sharded safetensors releases with documented expert layout"
+    }
+  },
+  {
+    "actor": "Framework engineer, Apple MLX machine learning research team",
+    "job": "Exposing the memory and storage primitives an expert-streaming runtime needs — wired memory limits, mapped weight reads — so a second implementation exists to measure.",
+    "outcome": "An independent path to run the same model class under streaming, giving outside testers a runtime the original author does not control.",
+    "motivation": "A framework that only serves resident models cedes the memory-constrained case to whoever is willing to write their own Metal kernels.",
+    "task": {
+      "who": "MLX core memory management and model loading engineers",
+      "what": "Expose wired-memory limits and mapped weight loading",
+      "where": "The MLX runtime and its language model library",
+      "when": "November 2026",
+      "why": "A second implementation makes the number checkable",
+      "how": "Memory-mapped weight loading with configurable residency limits"
+    }
+  },
+  {
+    "actor": "Quantization release engineer, Unsloth GGUF conversion team",
+    "job": "Shipping the quantized artifacts and a package release for them, so a measured speedup becomes something an outsider can install and time rather than read about.",
+    "outcome": "Installable quantizations of the model classes involved, with a release users can benchmark independently of the figures the team measured itself.",
+    "motivation": "The Studio merge shipped a ten-to-twenty-two-times batched-versus-serial rendering figure with no package release to test it against, and that gap invites the same doubt.",
+    "task": {
+      "who": "Unsloth quantization and package release engineers",
+      "what": "Cut a package release for the measured build",
+      "where": "The project's GGUF model repositories and release train",
+      "when": "Q3 2026",
+      "why": "An in-house figure needs an installable artifact",
+      "how": "Tagged releases paired with published quantization recipes"
+    }
+  },
+  {
+    "actor": "Hardware review editor, Mac silicon review publication",
+    "job": "Building a local-model section into M5 hardware reviews that reports what a memory-constrained machine actually decodes, at prompt lengths readers recognise.",
+    "outcome": "A review-desk throughput figure for a streamed 80B-class model on M5 hardware, published with the context length and memory budget it was taken at.",
+    "motivation": "Unified memory capacity is the buying decision on these machines, and a streamed model is the test that makes the capacity tiers legible.",
+    "task": {
+      "who": "Review desk staff running the local inference test suite",
+      "what": "Add streamed large-model decoding to review benchmarks",
+      "where": "The publication's Mac review test bench",
+      "when": "Q2 2027",
+      "why": "Memory tiers are the reader's actual decision",
+      "how": "Fixed prompt lengths across memory configurations"
+    }
+  },
+  {
+    "actor": "Local model runtime product manager, desktop LLM application vendor",
+    "job": "Shipping expert streaming with a user-visible cache budget setting, turning a hand-built runtime trick into something a large installed base runs and reports on.",
+    "outcome": "A population of users decoding 80B-class models on consumer Macs who can name the cache budget and context length behind whatever rate they see.",
+    "motivation": "Running a model larger than the machine's memory is what sells a desktop runner, and the setting has to be visible to be supportable.",
+    "task": {
+      "who": "Desktop application product and inference backend engineers",
+      "what": "Ship a user-facing expert cache budget control",
+      "where": "The desktop application's model loading settings",
+      "when": "December 2026",
+      "why": "Users can only report settings they can see",
+      "how": "Settings-panel control wired to the streaming backend"
+    }
+  },
+  {
+    "actor": "Artifact evaluation reviewer, systems and machine learning conference program committee",
+    "job": "Holding submitted inference throughput claims to stated measurement conditions, so a decoding rate arrives with its context length and residency budget attached.",
+    "outcome": "Published measurements of streamed sparse models that carry their own conditions, produced by parties with no stake in the runtime being measured.",
+    "motivation": "A throughput claim without a working set is unreviewable, and the artifact track is where that gets enforced before publication rather than after.",
+    "task": {
+      "who": "Artifact evaluation committee members reviewing inference submissions",
+      "what": "Require stated context and residency budget in submissions",
+      "where": "The conference artifact evaluation checklist and reviews",
+      "when": "March 2027",
+      "why": "Unstated conditions make a throughput claim unreviewable",
+      "how": "Artifact checklist requiring reported measurement conditions"
+    }
+  }
+]

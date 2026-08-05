@@ -1,0 +1,389 @@
+{
+  "date": "2026-08-04",
+  "by_prediction": {
+    "prediction.e01a8ed7a5221606": [
+      {
+        "actor": "Agent hook execution security engineer, Anthropic Claude Code",
+        "job": "Reworking how repository-supplied session-start hooks and settings files are loaded, so opening a cloned folder no longer executes them on the trust decision alone.",
+        "outcome": "A shipped default where a repository's session-start hook stays inert until approved in a step separate from trusting the workspace.",
+        "motivation": "The hook lands on a workstation holding live credentials, not in a throwaway build container, and no install-time defence ever sees it.",
+        "task": {
+          "who": "Claude Code settings loading and hook execution engineers",
+          "what": "Hold repository-supplied hooks inert until separately approved",
+          "where": "Claude Code settings resolution and hook dispatch path",
+          "when": "Q4 2026",
+          "why": "Workspace trust was never a decision about hooks",
+          "how": "Per-entry approval recorded in user-scope settings, keyed by digest"
+        }
+      },
+      {
+        "actor": "Workspace Trust maintainer, Microsoft Visual Studio Code",
+        "job": "Owning the trust prompt and the tasks that run on folder open, deciding whether trust alone stays sufficient to start a repository's own commands.",
+        "outcome": "A default build where a repository's folder-open task is listed and confirmed, or held inert, rather than started by the trust click.",
+        "motivation": "The one control in front of this path is a dialogue the product trained everyone to dismiss in order to start working.",
+        "task": {
+          "who": "Visual Studio Code workspace trust and task system maintainers",
+          "what": "Gate folder-open tasks behind a confirmation of their own",
+          "where": "Workspace trust subsystem and task runner in Insiders builds",
+          "when": "Q1 2027",
+          "why": "Trust answers a different question than auto-run does",
+          "how": "Itemised run list in the trust flow, entries inert by default"
+        }
+      },
+      {
+        "actor": "Iteration plan and release notes owner, Visual Studio Code",
+        "job": "Scheduling the auto-run change into a monthly milestone and writing it up where an ordinary user reads what changed in their install.",
+        "outcome": "Published release notes describing the new default for repository-supplied startup entries, shipped to stable rather than left behind a preview flag.",
+        "motivation": "A behaviour change nobody documents reaches nobody, and the milestone is also what stops the work slipping behind larger features.",
+        "task": {
+          "who": "Visual Studio Code release management and documentation staff",
+          "what": "Book the auto-run gate into a shipping milestone",
+          "where": "Monthly iteration plan and the published release notes",
+          "when": "February 2027",
+          "why": "Undocumented defaults reach nobody and slip behind bigger features",
+          "how": "Iteration plan issue tracking each milestone's release-note entries"
+        }
+      },
+      {
+        "actor": "Threat intelligence write-up lead, Aikido Security",
+        "job": "Documenting what the poisoned repositories carried beyond the install script, including the editor and agent startup entries most install-path defences never inspect.",
+        "outcome": "A public record naming repository-supplied startup entries as a distinct execution path, precise enough for the two vendors to act on.",
+        "motivation": "Their own count of affected packages is what made this legible, and the second path stays invisible unless someone keeps writing it down.",
+        "task": {
+          "who": "Aikido malware research and disclosure publication team",
+          "what": "Record repository-supplied startup entries in the incident write-ups",
+          "where": "Aikido research blog and its indicator feeds",
+          "when": "September 2026",
+          "why": "Vendors move on documented paths, not on anecdotes",
+          "how": "Static review of repository configuration files across affected releases"
+        }
+      },
+      {
+        "actor": "Coordinated vulnerability disclosure reporter, an independent application-security research firm",
+        "job": "Filing a structured report that a cloned repository's startup entries execute on the workspace-trust click alone, through the affected products' disclosure programmes.",
+        "outcome": "A tracked case each vendor has to answer, carrying a disclosure deadline that outlives any single news cycle.",
+        "motivation": "A report inside the vendor's own process carries a clock, and a conference talk or a blog post does not.",
+        "task": {
+          "who": "Product security researchers and disclosure coordinators at the firm",
+          "what": "File the trust-click execution gap under coordinated disclosure",
+          "where": "Vendor security response portals and their disclosure trackers",
+          "when": "October 2026",
+          "why": "A tracked case carries a deadline a blog post lacks",
+          "how": "Coordinated disclosure timeline agreed with both vendors' response teams"
+        }
+      },
+      {
+        "actor": "Secure development tooling architect, a regulated enterprise rolling out coding agents",
+        "job": "Setting the conditions under which the firm's developers may open unreviewed repositories with an agent attached, and taking those conditions to the vendors.",
+        "outcome": "A vendor requirement that the gate ships on by default for every install, not as an enterprise policy the firm alone can set.",
+        "motivation": "The firm just paid for a credential rotation it could not pause, and its developers clone repositories on machines it does not manage.",
+        "task": {
+          "who": "Developer platform security and third-party review staff",
+          "what": "Write the default-on requirement into vendor review",
+          "where": "Vendor security questionnaires and renewal negotiations",
+          "when": "January 2027",
+          "why": "A policy switch protects nobody outside the managed fleet",
+          "how": "Procurement review tied to the coding-agent renewal cycle"
+        }
+      },
+      {
+        "actor": "Supply-chain hardening working group lead, OpenSSF",
+        "job": "Extending the ecosystem's control guidance past install time, so editor and agent startup entries are named as an execution path of their own.",
+        "outcome": "A published control statement the vendors can point at when they change a default, and buyers can cite when they ask for one.",
+        "motivation": "Every existing control in the ecosystem's guidance stops at the install, which is the reason the open path had nobody watching it.",
+        "task": {
+          "who": "OpenSSF working group members and specification editors",
+          "what": "Add repository startup entries to the control guidance",
+          "where": "Working group drafts and public review calls",
+          "when": "Q3 2026",
+          "why": "Existing guidance stops at the package install boundary",
+          "how": "Consensus draft reviewed in the open on the group's repository"
+        }
+      },
+      {
+        "actor": "Developer experience researcher, Visual Studio Code workspace trust",
+        "job": "Measuring what the trust dialogue actually costs and whether an itemised approval step survives contact with someone trying to start work.",
+        "outcome": "Evidence that a per-entry step is affordable at the start of a session, which is what a default change has to clear internally.",
+        "motivation": "The standing objection is friction charged to everyone forever, and only measured click-through and completion numbers answer it.",
+        "task": {
+          "who": "Visual Studio Code user research and telemetry analysis staff",
+          "what": "Measure trust-dialogue click-through against an itemised approval prototype",
+          "where": "Insiders telemetry and moderated developer research sessions",
+          "when": "November 2026",
+          "why": "The friction objection only falls to measured numbers",
+          "how": "Prototype comparison in Insiders with opt-in usage telemetry"
+        }
+      },
+      {
+        "actor": "Repository maintainer, a widely cloned open-source project shipping agent hooks",
+        "job": "Moving the project's setup work out of entries that fire on open and into commands a contributor runs deliberately, and documenting what remains.",
+        "outcome": "A project whose contributors lose nothing when startup entries stop firing automatically, removing the breakage argument against a stricter default.",
+        "motivation": "Maintainers carry the reputational cost of a file that runs on clone, and reliance on auto-fire hooks is what stalls the change.",
+        "task": {
+          "who": "Project maintainers and contributor experience reviewers",
+          "what": "Replace auto-fire setup hooks with explicit contributor commands",
+          "where": "Repository configuration files and the contributing guide",
+          "when": "December 2026",
+          "why": "Ecosystem breakage is the argument against a stricter default",
+          "how": "Documented setup command replacing the session-start hook entry"
+        }
+      }
+    ],
+    "prediction.e02990b40c203acb": [
+      {
+        "actor": "Export administration policy officer, Bureau of Industry and Security End-User Review Committee",
+        "job": "Working the pending entity package on ChangXin, weighing the supply-impact record against the case for adding the company.",
+        "outcome": "No interagency decision that sends a ChangXin addition to the Federal Register for publication.",
+        "motivation": "The committee is asked to use an equipment control against a company whose output American brands now need.",
+        "task": {
+          "who": "BIS export administration staff supporting the review committee",
+          "what": "Reassess the pending ChangXin entity package",
+          "where": "Interagency End-User Review Committee record",
+          "when": "Q4 2026",
+          "why": "The instrument constrains buying, not the selling complained about",
+          "how": "Supply-impact memo circulated with the package"
+        }
+      },
+      {
+        "actor": "China trade negotiations lead, Office of the United States Trade Representative",
+        "job": "Running the negotiating rounds whose continuation is the stated reason the ChangXin listing recommendation was paused in June.",
+        "outcome": "A trade track live enough that new Entity List additions stay off the table.",
+        "motivation": "A listing announced mid-round costs the negotiation more than it gains on the export-control file.",
+        "task": {
+          "who": "USTR China office with Commerce and Treasury counterparts",
+          "what": "Schedule the next negotiating round with Beijing",
+          "where": "Bilateral trade talks and truce extension terms",
+          "when": "Q1 2027",
+          "why": "The pause was tied to the talks continuing",
+          "how": "Truce extension terms agreed before the current expiry"
+        }
+      },
+      {
+        "actor": "Memory commodity manager, HP notebook supply chain",
+        "job": "Allocating qualified ChangXin DRAM into budget notebooks for non-US markets while holding Samsung, SK Hynix and Micron elsewhere.",
+        "outcome": "Two live bills of materials, split by destination, that a listing would force HP to rebuild.",
+        "motivation": "There is not enough non-Chinese memory to build every machine the notebook line has to ship.",
+        "task": {
+          "who": "HP commodity purchasing and regional build planning teams",
+          "what": "Allocate ChangXin volume by destination market",
+          "where": "Notebook bill of materials and build plans",
+          "when": "Q3 2026",
+          "why": "Non-Chinese memory cannot cover the whole build",
+          "how": "Destination-coded sourcing rules in the planning system"
+        }
+      },
+      {
+        "actor": "Trade compliance counsel, Asus global supply chain",
+        "job": "Writing and enforcing the destination rule that keeps ChangXin parts out of United States shipments absent any law requiring it.",
+        "outcome": "A documented internal restriction, not a legal one, that keeps the split defensible if Washington asks.",
+        "motivation": "The company is drawing a line it expects rather than one it has been given.",
+        "task": {
+          "who": "Asus legal and trade compliance function",
+          "what": "Document the destination restriction on ChangXin parts",
+          "where": "Supplier approval records and shipment screening rules",
+          "when": "Q4 2026",
+          "why": "No published rule defines the line yet",
+          "how": "Supplier approval matrix keyed to ship-to country"
+        }
+      },
+      {
+        "actor": "Government affairs director, semiconductor industry trade association",
+        "job": "Filing the supply-impact case with Commerce so the cost of listing a working DRAM supplier sits on the record.",
+        "outcome": "Comments and briefings that put notebook build risk into the Entity List decision file.",
+        "motivation": "Members cannot price devices if a memory source disappears from the approved list mid-shortage.",
+        "task": {
+          "who": "Association policy staff and member company representatives",
+          "what": "Submit supply-impact comments to Commerce",
+          "where": "BIS rulemaking dockets and agency briefings",
+          "when": "Q4 2026",
+          "why": "The shortage cost must reach the decision record",
+          "how": "Member-sourced shortage data filed under the docket"
+        }
+      },
+      {
+        "actor": "Legislative counsel for export controls, House select committee on China staff",
+        "job": "Drafting the covered-semiconductor purchasing and tariff language the committee letters have started pointing at instead of an Entity List addition.",
+        "outcome": "A purchasing or tariff instrument moving through Congress rather than a Federal Register Entity List amendment.",
+        "motivation": "The Entity List cannot stop an American brand buying Chinese memory; a purchasing rule can.",
+        "task": {
+          "who": "Committee counsel with the legislative drafting service",
+          "what": "Draft covered-semiconductor purchasing restriction text",
+          "where": "Authorisation bill amendments and committee letters",
+          "when": "Q1 2027",
+          "why": "The Entity List reaches suppliers, not buyers",
+          "how": "Existing covered-semiconductor procurement statute as template"
+        }
+      },
+      {
+        "actor": "Acquisition policy analyst, federal procurement rule-writing council",
+        "job": "Turning the covered Chinese semiconductor prohibition into contract clauses that reach federal buyers rather than retail notebooks.",
+        "outcome": "A procurement rule that answers the security grievance without amending the Entity List.",
+        "motivation": "Federal purchasing is the reach the Pentagon listing already has, and the one agencies can enforce.",
+        "task": {
+          "who": "Civilian and defence acquisition regulation drafting staff",
+          "what": "Draft covered-semiconductor contract clauses",
+          "where": "Federal acquisition regulation rulemaking process",
+          "when": "Q2 2027",
+          "why": "Procurement reaches government buyers the list cannot",
+          "how": "Supplier representation and certification clause"
+        }
+      },
+      {
+        "actor": "Capacity planning lead, ChangXin Memory Technologies DRAM operations",
+        "job": "Converting the Shanghai listing proceeds into output volume steady enough for Western notebook programmes to keep scheduling around it.",
+        "outcome": "Sustained qualified supply that makes removing ChangXin from Western bills of materials expensive.",
+        "motivation": "Design wins only hold if the volume arrives every quarter the notebook programmes plan for.",
+        "task": {
+          "who": "ChangXin operations and customer programme management",
+          "what": "Commit quarterly DRAM volume to notebook customers",
+          "where": "Fab output planning and customer supply agreements",
+          "when": "Q1 2027",
+          "why": "Qualified volume is what makes the split costly",
+          "how": "Multi-quarter supply agreements with module buyers"
+        }
+      },
+      {
+        "actor": "Component qualification engineering lead, Acer notebook platform team",
+        "job": "Extending qualification of ChangXin parts across more budget platforms so the non-US bill of materials stops depending on one model.",
+        "outcome": "ChangXin DRAM qualified into enough platforms that the sourcing decision is structural rather than a trial.",
+        "motivation": "A supplier still being evaluated is easy to drop; one qualified across platforms is not.",
+        "task": {
+          "who": "Acer platform validation and component engineering",
+          "what": "Qualify ChangXin modules on additional platforms",
+          "where": "Platform validation labs and approved vendor list",
+          "when": "Q3 2026",
+          "why": "One-model sourcing is reversible; platform-wide sourcing is not",
+          "how": "Standard memory qualification and compatibility test suite"
+        }
+      }
+    ],
+    "prediction.e17de6adc92dd6dc": [
+      {
+        "actor": "Runtime author and Metal kernel maintainer, Swiftlet project",
+        "job": "Turning the August publication into something an outsider can install and rerun — documented cache-budget flag, reproducible build, and the settings behind the reported rate.",
+        "outcome": "A build a third party can run on their own M5 hardware, at a context length and cache budget they choose and can state.",
+        "motivation": "A runtime whose headline number nobody outside can reproduce is a demo, and the project wants the mechanism judged on its own terms.",
+        "task": {
+          "who": "Swiftlet's Swift and Metal runtime author working the public repository",
+          "what": "Document the expert-cache flag and build steps",
+          "where": "The Swiftlet GitHub repository and its README",
+          "when": "September 2026",
+          "why": "Outsiders cannot restate conditions they cannot set",
+          "how": "Command-line cache-budget flag with published build instructions"
+        }
+      },
+      {
+        "actor": "Independent benchmark author, Apple silicon local-inference testing publication",
+        "job": "Running the 80-billion-class streamed model across several context lengths and cache budgets, then publishing a table rather than a single throughput figure.",
+        "outcome": "A published decoding rate for an 80B sparse mixture-of-experts model under expert streaming, stated with the context length it was measured at.",
+        "motivation": "A number from the party that produced it is the weakest form of benchmark, and rerunning it is the cheapest way to test it.",
+        "task": {
+          "who": "Independent testers running local models on their own Apple hardware",
+          "what": "Sweep decoding rate across context and cache settings",
+          "where": "An M5-class Mac running the streaming runtime",
+          "when": "Q1 2027",
+          "why": "One figure cannot describe a streaming working set",
+          "how": "Repeated timed runs at fixed prompt lengths"
+        }
+      },
+      {
+        "actor": "Benchmark harness maintainer, open-source local inference benchmarking tool",
+        "job": "Adding context length and expert-cache budget to the fields a run must report, so a streamed throughput result cannot be published bare.",
+        "outcome": "A harness whose output carries the conditions alongside the tokens per second, making a condition-stated third-party measurement the default rather than an act of diligence.",
+        "motivation": "Once weights stream instead of sitting resident, a rate without its working set is not a measurement anyone else can check.",
+        "task": {
+          "who": "Maintainers of the harness result schema and reporting output",
+          "what": "Add cache-budget and context fields to results",
+          "where": "The harness result schema and its output format",
+          "when": "Q4 2026",
+          "why": "Bare rates are unreadable once experts stream",
+          "how": "Versioned result schema with required condition fields"
+        }
+      },
+      {
+        "actor": "Model release engineering lead, Alibaba Qwen3-Next team",
+        "job": "Publishing and maintaining the 80-billion-parameter sparse mixture-of-experts checkpoints, with the router and expert layout that make streaming from storage viable at all.",
+        "outcome": "An openly available 80B-class model outside testers can stream on consumer Apple hardware and measure without the runtime author's involvement.",
+        "motivation": "A sparse model that only its own tooling can run is a model nobody else publishes numbers for.",
+        "task": {
+          "who": "Qwen model release and open-weights distribution engineers",
+          "what": "Maintain open 80B sparse mixture-of-experts checkpoints",
+          "where": "Public model repositories and their conversion tooling",
+          "when": "October 2026",
+          "why": "Outside measurement needs openly available weights",
+          "how": "Sharded safetensors releases with documented expert layout"
+        }
+      },
+      {
+        "actor": "Framework engineer, Apple MLX machine learning research team",
+        "job": "Exposing the memory and storage primitives an expert-streaming runtime needs — wired memory limits, mapped weight reads — so a second implementation exists to measure.",
+        "outcome": "An independent path to run the same model class under streaming, giving outside testers a runtime the original author does not control.",
+        "motivation": "A framework that only serves resident models cedes the memory-constrained case to whoever is willing to write their own Metal kernels.",
+        "task": {
+          "who": "MLX core memory management and model loading engineers",
+          "what": "Expose wired-memory limits and mapped weight loading",
+          "where": "The MLX runtime and its language model library",
+          "when": "November 2026",
+          "why": "A second implementation makes the number checkable",
+          "how": "Memory-mapped weight loading with configurable residency limits"
+        }
+      },
+      {
+        "actor": "Quantization release engineer, Unsloth GGUF conversion team",
+        "job": "Shipping the quantized artifacts and a package release for them, so a measured speedup becomes something an outsider can install and time rather than read about.",
+        "outcome": "Installable quantizations of the model classes involved, with a release users can benchmark independently of the figures the team measured itself.",
+        "motivation": "The Studio merge shipped a ten-to-twenty-two-times batched-versus-serial rendering figure with no package release to test it against, and that gap invites the same doubt.",
+        "task": {
+          "who": "Unsloth quantization and package release engineers",
+          "what": "Cut a package release for the measured build",
+          "where": "The project's GGUF model repositories and release train",
+          "when": "Q3 2026",
+          "why": "An in-house figure needs an installable artifact",
+          "how": "Tagged releases paired with published quantization recipes"
+        }
+      },
+      {
+        "actor": "Hardware review editor, Mac silicon review publication",
+        "job": "Building a local-model section into M5 hardware reviews that reports what a memory-constrained machine actually decodes, at prompt lengths readers recognise.",
+        "outcome": "A review-desk throughput figure for a streamed 80B-class model on M5 hardware, published with the context length and memory budget it was taken at.",
+        "motivation": "Unified memory capacity is the buying decision on these machines, and a streamed model is the test that makes the capacity tiers legible.",
+        "task": {
+          "who": "Review desk staff running the local inference test suite",
+          "what": "Add streamed large-model decoding to review benchmarks",
+          "where": "The publication's Mac review test bench",
+          "when": "Q2 2027",
+          "why": "Memory tiers are the reader's actual decision",
+          "how": "Fixed prompt lengths across memory configurations"
+        }
+      },
+      {
+        "actor": "Local model runtime product manager, desktop LLM application vendor",
+        "job": "Shipping expert streaming with a user-visible cache budget setting, turning a hand-built runtime trick into something a large installed base runs and reports on.",
+        "outcome": "A population of users decoding 80B-class models on consumer Macs who can name the cache budget and context length behind whatever rate they see.",
+        "motivation": "Running a model larger than the machine's memory is what sells a desktop runner, and the setting has to be visible to be supportable.",
+        "task": {
+          "who": "Desktop application product and inference backend engineers",
+          "what": "Ship a user-facing expert cache budget control",
+          "where": "The desktop application's model loading settings",
+          "when": "December 2026",
+          "why": "Users can only report settings they can see",
+          "how": "Settings-panel control wired to the streaming backend"
+        }
+      },
+      {
+        "actor": "Artifact evaluation reviewer, systems and machine learning conference program committee",
+        "job": "Holding submitted inference throughput claims to stated measurement conditions, so a decoding rate arrives with its context length and residency budget attached.",
+        "outcome": "Published measurements of streamed sparse models that carry their own conditions, produced by parties with no stake in the runtime being measured.",
+        "motivation": "A throughput claim without a working set is unreviewable, and the artifact track is where that gets enforced before publication rather than after.",
+        "task": {
+          "who": "Artifact evaluation committee members reviewing inference submissions",
+          "what": "Require stated context and residency budget in submissions",
+          "where": "The conference artifact evaluation checklist and reviews",
+          "when": "March 2027",
+          "why": "Unstated conditions make a throughput claim unreviewable",
+          "how": "Artifact checklist requiring reported measurement conditions"
+        }
+      }
+    ]
+  }
+}

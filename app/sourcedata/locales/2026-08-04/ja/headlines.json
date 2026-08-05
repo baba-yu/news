@@ -1,0 +1,94 @@
+{
+  "date": "2026-08-04",
+  "technical": [
+    {
+      "lead": "npm のワームが keyv 系のパッケージを汚し、エディタの起動時に走るフックを仕込む",
+      "body": "資格情報を盗むワームが今日、npm のレジストリの中を動いた。攻撃者が keyv——週におよそ 1億2,700万回引かれるキャッシュのライブラリ——の維持者の GitHub のアカウントを乗っ取り、そのリポジトリ自身の GitHub Actions の流れを使って、汚された版を切り出したのである。悪意のあるファイルは、版の札が付く前に各企ての main の枝へ届いていた。だから汚された版は、正しい来歴の署名を持っている。供給網を検める者が、このパッケージは問題ないと結論づけるために確かめる、まさにその成果物である。Aikido は中央ヨーロッパ時間の昼過ぎまでに、1,381 の版にまたがる少なくとも 868 のパッケージを数え上げ、まだ数え続けていると述べた。同じ維持者の flat-cache、file-entry-cache、cacheable-request、そして @cacheable の名前空間も keyv と一緒に持って行かれており、及ぶ範囲は月あたり二十億回の導入を超える。Deliveroo、Qlik、Picsart に紐づく版も、広がりの中に巻き込まれた。仕込まれた中身は導入の時に走り、npm のトークン、短命な OIDC のトークンを含むあらゆる種類の GitHub の資格情報、AWS の鍵とインスタンスメタデータの資格情報、Kubernetes のサービスアカウントのトークン、Vault と Stripe と Slack の鍵、SSH の鍵、Docker の設定、Terraform の状態をさらい、暗号化して攻撃者の持つリポジトリへ押し出す。そのうえで、見つけた公開用のトークンを使って自分自身を公表し直す。研究者たちが、二分から七分ごとに組織から組織へ移っていくのを見ていたのは、そのためである。コードを書くエージェントを走らせている者には、確かめるべきものがもう一つある。汚されたリポジトリは、`.claude/settings.json` のセッション開始のフックと、`.vscode/tasks.json` のフォルダを開いたときの仕事も一緒に出しており、どちらも同じ setup の script を指していた。開発者が企てをエディタやエージェントで開いたときに火を吹く経路であって、導入したときではない。どちらもワークスペースを信頼していることが要るが、それは、たいていの人が読まずに押して通る問いかけである。影響を受けた版の一覧は、Aikido が公表した時点でまだ伸びていた。だからこれは定まった数ではなく、動いている一覧である。",
+      "citations": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised in Shai-Hulud attack",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ]
+    },
+    {
+      "lead": "80B の Qwen が、専門家をディスクから流し込んで Mac の 4.3 GB で動く",
+      "body": "Swift と Metal で書かれた実行環境の Swiftlet が今日公になり、述べるのは易しく、反論するのは厄介な主張を持ち込んだ。Qwen3-Next-80B、ディスクの上では 42 ギガバイトの重みが、M5 の Mac で毎秒 4.5 から 5 トークンを生み、常駐するメモリの山は 4.3 ギガバイトに収まる、というものである。350億パラメータの Qwen3.6 は同じやり方で 2.6 ギガバイトに収まり、毎秒 7 から 11 トークン。iPhone 17 の上ではおよそ 2.5 ギガバイトで、毎秒およそ 1 トークンである。仕掛けは新しい量子化ではなく、造りのほうにある。これらはトークン一つあたりおよそ 30億のパラメータにしか触れない疎な MoE のモデルなので、実行環境は密な部分——注意、埋め込み、振り分け役——を 4 ビットのまま常に載せておき、振り分けられる専門家のほうは、一度の読み出しで取り出せる決まった歩幅の入れ物に詰めておく。そして、振り分け役が求めた専門家だけを流し込み、近ごろのものとよく使うものを、利用者がコマンドラインの指定で大きさを決めるキャッシュに抱えておく。層の四分の三にわたる Gated DeltaNet の線形の注意が、鍵と値のキャッシュが節約分を食い返すのを止めている。書き手は、渡すメモリの量によってキャッシュの当たり率が 43% から 70% のあいだで動くと報せている。そしてより面白いのは、その持ち分が変わってもスループットはほとんど動かないという点だ。いまのところ詰まりは、記憶装置からの読み出しではなく、GPU への仕事の送り出しにあるからである。見ておくべきはその数字だ。流し込みという道にはまだ余地が残っていることを言っており、電話やノートパソコンの上のメモリの天井を、容量の問題ではなく段取りの問題として置き直すからである。許諾は Apache 2.0、commit は八つ、そしてコードを書くエージェントとともに書かれている。",
+      "citations": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ]
+    },
+    {
+      "lead": "Unsloth Studio が画像と動画の生成を加え、画像のモデルへの QLoRA も入れる",
+      "body": "Unsloth のここしばらくで最大となる一件の取り込みが今日降りた。しかも文章についてのものではない。デスクトップ版の Studio に向けたプルリクエストが、Images の頁を加える。Z-Image、Qwen-Image、FLUX、SDXL の派生について、Unsloth 自身の GGUF の量子化の上で走る、文章からの画像の生成。変形、描き足し、拡張、拡大、そして指示による手直しを覆う編集の流れ。音声を同期させた、五つのモデルの系統にまたがる文章からの動画。そして、微調整を追う読み手にとって効いてくる部分——画像のモデルへの QLoRA の学習で、その場で見える指標と、出来上がったアダプタの一押しでの配りが付く。その下には推論の経路が二つ——native の stable-diffusion.cpp と Diffusers——が座っており、GPU のメモリを会話の側の仕組みと取り合うのではなく分け合う。条件付けと組み上げのキャッシュとあわせて、画像をまとめて描き出すやり方を、チームは自ら、同じ画像を一枚ずつ順に描き出す場合より 10 倍から 22 倍速いと測っている。差分は 231 のファイルにわたる 79,151 行の追加で、八百を超える裏側の単体の試験と、browser の高さでの端から端までの確かめを運んでいる。同じ日にさらに 28 の commit が入った。その中には、Windows の導入器における Intel Arc の見分けと XPU 版 PyTorch の導入の経路がある——Arc、Iris、UHD、HD graphics がいま見分けられるようになり、wheel は自前の oneAPI の実行環境を同梱するので、Intel の道具一式を別に入れる必要はない——さらに、公表の流れを固める一連の仕事も入った。導入器のプラグインのライブラリには署名を付け、署名のないファイルが一つでもあれば公表は失敗する。WebView2 の起動用の部品は、取りに行くのではなく埋め込む。Windows の束は、公表の前に Defender で走査する。macOS のディスクイメージの綴じ付けは、失敗したらやり直す。そのどれにも、パッケージの公表は付いてこなかった。Python のライブラリはいまも、昨日 PyPI に出た 2026.8.2 のままで、説明書きの変更の記録は7月29日から動いていない。だから今日の変化が見えるのは、リポジトリの中だけである。",
+      "citations": [
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        },
+        {
+          "label": "GitHub - Add Intel Arc GPU detection and XPU PyTorch install to Windows installer",
+          "url": "https://github.com/unslothai/unsloth/pull/7706"
+        }
+      ]
+    },
+    {
+      "lead": "HP、Asus、Acer が、供給が足りないので中国製の DRAM を積み始める",
+      "body": "Nikkei Asia が今日、HP、Asus、Acer が、中国の ChangXin Memory Technologies の DRAM を少量ずつ、米国の外で売るノートパソコンに載せて出し始めたと報じた。部品の認定は、今年の半ばごろに終えていたという。量は限られており、置き所は狙って選ばれている——安い機種、米国以外の市場である。規制と地政学のさらされ方がより強い地域には、Samsung、SK Hynix、Micron が取ってある。HP については、この供給元に肚を決めたのではなく、まだ見定めている最中だと書かれている。書き留める値打ちがあるのは、その理由のほうだ。これは費えの決定ではない。ChangXin が先行する各社の値段を下回っているわけではないからである。これは供給の決定であり、AI の建て増しがメモリの市場を、PC を作る側がそれまで手を付けずにいた供給元を認定するほどに締め上げた、その中で下されている。しかもそれは、メモリと記憶装置の会議である FMS が Santa Clara で二十回目を開いたのと同じ朝に届いている。締め付けを起こしている側と、それを受け止めている側が、同じ一つの部屋にそろう場である。ノートパソコンを売る側が、どれでも同じだと扱ってきたありふれた部品が、いまや一台が出荷できるかどうかを決めるものになっている。",
+      "citations": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Asia Business Outlook - HP, Asus and Acer turn to CXMT chips amid global memory shortage",
+          "url": "https://www.asiabusinessoutlook.com/news/hp-asus-and-acer-turn-to-cxmt-chips-amid-global-memory-shortage-nwid-12260.html"
+        }
+      ]
+    },
+    {
+      "lead": "Palantir が 93% 伸び、寄り付きはおよそ 20% 高い",
+      "body": "Palantir が昨日の引けのあとに、第2四半期の売上高 19億4,000万ドルを報告した。前年同期比で 93% 増、市場の見込みの 18億1,000万ドルを上回る。調整後の一株利益は 41 セントで、見込みの 34 セントに対してである。株価を動かしたのは、その下の内訳だ。米国の民間向けの売上高が 149% 増の 7億6,400万ドル、米国の政府向けが 90% 増の 8億900万ドル。長らくこの会社が頼っていると見なされてきた政府の商いに、民間の側がほぼ並んだということである。純利益は 10億6,000万ドル、調整後のフリーキャッシュフローは 12億2,000万ドル。通期の見通しは、これまでの 76億5,000万から 76億6,000万ドルを、81億5,000万から 81億6,000万ドルへ引き上げた。米国の民間向けの目標は 34億2,000万ドル超へ上げられ、少なくとも 134% の伸びを含意する。第3四半期の売上高は、およそ 21億6,000万ドルと示された。株は今朝、およそ 152 ドルで寄り付いた。月曜の引け値 125.65 ドルをおよそ 20% 上回る。アナリストの反応は、向きは揃い、幅は大きく開いた。Deutsche Bank は Buy へ引き上げ、目標を 80 ドルから 200 ドルへ動かした。Citi は 200 から 245 へ、DA Davidson は 175 から 200 へである。一つの銘柄を越えて読み取れるのは、この分野がずっと回りを回っていた問いだ。企業の AI のソフトウェアへの支払いが、試しどまりではなく、まとまった額の売上として認識されるところまで来ているのか。少なくとも一社について、ここでの答えは紛れがない。AMD は今日の引けのあとに決算を出す。同じ問いが、こんどはシリコンの側へ向けられるということである。読むべきは、データセンター向けの品目と、Helios のラック規模の受注について数字の付いたものがあるかどうかだ。",
+      "citations": [
+        {
+          "label": "Business Wire - Palantir reports Q2 2026 revenue growth of 93 percent and raises FY 2026 guidance",
+          "url": "https://www.businesswire.com/news/home/20260802523449/en/Palantir-Reports-Q2-2026-U.S.-Comm-Revenue-Growth-of-149-YY-and-Revenue-Growth-of-93-YY-Raises-FY-2026-Revenue-Guidance-to-82-YY-Growth-and-U.S.-Comm-Revenue-Guidance-to-134-YY-Crushing-Consensus-Expectations"
+        },
+        {
+          "label": "Proactive Investors - Palantir Technologies shares surge after earnings beat",
+          "url": "https://www.proactiveinvestors.com/companies/news/1096513/palantir-technologies-shares-surge-after-earnings-beat-1096513.html"
+        },
+        {
+          "label": "Finbold - Wall Street analysts update Palantir stock price after blowout earnings",
+          "url": "https://finbold.com/wall-street-analysts-update-palantir-stock-price-after-blowout-earnings/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "自分で広がるワームが npm を襲い、開発者の鍵を盗む",
+    "800億パラメータのモデルが、Mac の 4.3 GB で動く",
+    "Unsloth のデスクトップの道具が、画像と動画の生成を加える",
+    "ノートパソコンを作る側が、供給不足で中国製のメモリへ向かう",
+    "Palantir の売上が 93% 伸び、株が跳ねる"
+  ]
+}

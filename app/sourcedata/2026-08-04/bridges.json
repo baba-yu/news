@@ -1,0 +1,761 @@
+{
+  "date": "2026-08-04",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.e17de6adc92dd6dc",
+        "short_label": "Disk-streamed 80B inference misses 4.5 tokens a second when retested by H2 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Swiftlet, a Swift and Metal runtime, went up today reporting Qwen3-Next-80B — 42 gigabytes of weights on disk — generating at 4.5 to 5 tokens a second on an M5 Mac while peaking at 4.3 gigabytes of resident memory, with a 35-billion-parameter Qwen3.6 at 2.6 gigabytes and 7 to 11 tokens a second, and the same model on an iPhone 17 in about 2.5 gigabytes at roughly one token a second. The mechanism is architectural rather than a new quantisation: these sparse mixture-of-experts models touch only around three billion parameters per token, so attention, embeddings and routers stay permanently resident at four bits while routed experts are packed into fixed-stride containers, each retrievable in a single read, and streamed into a cache the user sizes with a command-line flag. Gated DeltaNet linear attention across three-quarters of the layers keeps the key-value cache from eating the savings back. What the figure does not carry is the conditions that make a throughput number mean anything once weights stream: no context length, no batch size, no split between prompt processing and decoding, and the quantisation stated only for the dense part. The author's own numbers put expert-cache hit rates between 43 and 70 percent depending on how much memory is handed over, with throughput barely moving across that range because the bottleneck sits in GPU dispatch rather than in reading from storage — so the memory budget is not what sets the rate, and the condition that would is the unstated one. Apache 2.0, eight commits, written with a coding agent, and no measurement from anyone other than the author exists today.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "narrative": "Sweeping the expert cache from a 43 percent hit rate to 70 changed throughput hardly at all, which locates the ceiling in GPU dispatch rather than in reading weights off storage. So the memory figure is not what fixes the rate — and the variable that would, context length, is the one number never printed.",
+        "support_dimension": "given",
+        "coherence": 3,
+        "remaining_gap": "Nobody outside the author has run it, and a stated context length is what any comparable retest has to publish first."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e02990b40c203acb",
+        "short_label": "ChangXin Memory stays off the US Entity List through Q4 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Nikkei Asia reported this morning that HP, Asus and Acer have begun shipping small volumes of DRAM from China's ChangXin Memory Technologies in notebooks sold outside the United States, having completed qualification of the parts around the middle of this year, with Digitimes and Asia Business Outlook carrying the same account the same day. Every qualifier is load-bearing: the volumes are limited, the placement is budget models in non-US markets, Samsung, SK Hynix and Micron are kept for the regions where regulatory and geopolitical exposure runs higher, and HP is described as still evaluating the supplier rather than committed to it. The reason given is supply, not price — ChangXin is not undercutting the incumbents, and the AI build-out has left the market tight enough that PC makers will qualify a supplier they had previously left alone. What that produces is two bills of materials, one for the United States and one for everywhere else, with no law requiring the split: nothing stops a retailer selling a laptop with ChangXin memory inside, and nothing requires the box to name whose memory it is. FMS opened its twentieth edition in Santa Clara the same morning. Nothing published today touches the Entity List itself, and the export-control and Pentagon-listing history the claim rests on is carried by the prediction's own account of prior reporting rather than by any source cited today.",
+      "reference_links": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Asia Business Outlook - HP, Asus and Acer turn to CXMT chips amid global memory shortage",
+          "url": "https://www.asiabusinessoutlook.com/news/hp-asus-and-acer-turn-to-cxmt-chips-amid-global-memory-shortage-nwid-12260.html"
+        },
+        {
+          "label": "Terrapinn - FMS: The Future of Memory and Storage 2026",
+          "url": "https://www.terrapinn.com/conference/future-memory-storage/index.stm"
+        }
+      ],
+      "bridge": {
+        "narrative": "Three outlets carry the same account: qualified Chinese DRAM entering budget notebooks everywhere except the United States, on scarcity rather than discount, with Samsung, Micron and SK Hynix held back for markets where exposure runs higher. That split is a hedge no statute requires — buyers pricing a listing that nothing published today brings any closer.",
+        "support_dimension": "because",
+        "coherence": 3,
+        "remaining_gap": "Volumes are small, HP is described as still evaluating, and no Federal Register action either way appeared today."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e01a8ed7a5221606",
+        "short_label": "Repository-supplied agent hooks get an approval of their own by Q2 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "A credential-stealing worm moved through the npm registry today after an attacker took over the GitHub account of the maintainer behind keyv, a caching library pulled roughly 127 million times a week, and used the repository's own GitHub Actions workflow to cut poisoned releases. Aikido counted at least 868 packages across 1,381 versions by early afternoon Central European time and said it was still counting, so the affected-version list is moving rather than fixed; the same maintainer's flat-cache, file-entry-cache, cacheable-request and the @cacheable scope went with keyv, which puts the blast radius past two billion installs a month, and releases tied to Deliveroo, Qlik and Picsart were caught in the spread. Two details do the work. The malicious files reached each project's main branch before a release was tagged, so the compromised versions carry valid provenance signatures. And the poisoned repository also shipped a .claude/settings.json session-start hook and a .vscode/tasks.json folder-open task pointing at the same setup script — an execution path that fires when a developer or an agent opens the project rather than when anything is installed, and one that lands on a workstation holding credentials rather than in a disposable build container. The only control in front of it is a single workspace-trust decision, taken once, about a folder the developer cloned on purpose. Neither Anthropic nor Microsoft published any change to that default today. The week's venue is adjacent: Black Hat's AI Summit ran today in its third year on agentic risk, and BSides Las Vegas opened its first dedicated AI-security track on prompt injection, agentic systems, GitHub exploits and software supply chains.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        },
+        {
+          "label": "CybrSec Media - BSides Las Vegas adds a dedicated AI security track",
+          "url": "https://www.cybrsecmedia.com/bsideslv-adds-dedicated-ai-security-track-as-un-prompted-brings-practitioner-first-agenda-to-hacker-summer-camp/"
+        },
+        {
+          "label": "The AI Summit at Black Hat USA - returns in 2026 on August 4",
+          "url": "https://blackhat.theaisummit.com/the-ai-summit-at-black-hat-usa-returns-in-2026-august-4/"
+        }
+      ],
+      "bridge": {
+        "narrative": "Every defence built against poisoned dependencies watches installation — lockfiles, pinned versions, disabled scripts, disposable builders. A startup entry shipped inside the folder skips all of it, firing when someone opens the project on the machine where their keys live. One trust prompt, answered once about a directory they chose to clone, is the whole control surface.",
+        "support_dimension": "given",
+        "coherence": 5,
+        "remaining_gap": "Neither Anthropic nor Microsoft changed anything today, so the proposed second approval exists nowhere but in this argument."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0594fdd206cf2981",
+        "short_label": "Coding agents make provenance-checked installs the default by H1 2027",
+        "prediction_date": "2026-07-22"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Today's compromise ran through the provenance mechanism rather than around it. Because the malicious files went to each project's main branch before a release was tagged, the poisoned npm versions were built by the repository's own GitHub Actions workflow and therefore carry valid provenance signatures — the exact artefact a supply-chain auditor checks in order to conclude a package is clean. What an attestation records is that a build came out of a repository's workflow, not that anyone read what was in the repository, and today is the day that distinction had consequences at registry scale: at least 868 packages across 1,381 versions by early afternoon Central European time, still counting, across a maintainer estate whose combined pull runs past two billion installs a month. No coding-agent vendor announced a provenance default today, and the day's lesson points the other way: a default that checks attestation alone would have passed every one of these versions. The remediation that is actually under way is credential rotation across publishing tokens, cloud keys, cluster tokens and secret-store credentials at every organisation that pulled a poisoned release.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ],
+      "bridge": {
+        "narrative": "The poisoned releases were cut by the project's own build workflow after the malicious commits landed on main, so each one shipped a valid attestation. Verification records where an artefact came from, never whether anyone read it. A gate that admits packages on that evidence alone would have waved every one of them through.",
+        "support_dimension": "so_that",
+        "coherence": 4,
+        "remaining_gap": "No agent vendor announced such a default today, and nothing yet pairs verification with a check on what the verified build contains."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4ecb84808c9acc3f",
+        "short_label": "Agent-in-the-Loop Secret Exfiltration tops CIS / OWASP risk lists by Q3 2026",
+        "prediction_date": "2026-04-20"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "The scenario this claim names ran today at registry scale, with the agent half explicit. An attacker took over the GitHub account of the maintainer behind keyv and drove the repository's own GitHub Actions workflow to cut poisoned releases; the payload runs on install and sweeps npm tokens, GitHub credentials of every flavour including short-lived OIDC tokens, AWS keys and instance-metadata credentials, Kubernetes service-account tokens, Vault, Stripe and Slack keys, SSH keys, Docker configs and Terraform state, encrypts them and pushes them to attacker-controlled repositories, then republishes itself through any publish token it finds — which is why researchers watched it move between organisations every two to seven minutes. The second path is the one aimed at agent users: the poisoned repository also shipped a .claude/settings.json session-start hook and a .vscode/tasks.json folder-open task pointing at the same setup script, so opening the project in an editor or an agent executes it with no install involved, on a workstation holding the credentials worth taking. Aikido counted at least 868 packages across 1,381 versions by early afternoon Central European time and was still counting. No risk list was updated today, and neither CIS nor OWASP appears anywhere in today's material.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ],
+      "bridge": {
+        "narrative": "Secrets went out through the developer's own tooling: cloud keys, cluster tokens, vault and payment material, harvested and pushed to attacker-held repositories, with an editor and agent trigger sitting beside the install path. That is the category this claim wants named, running at registry scale — arriving with two months left on the deadline and no list touched.",
+        "support_dimension": "so_that",
+        "coherence": 4,
+        "remaining_gap": "Neither CIS nor OWASP appears in today's material, and a discrete top-list entry still has to be published, not merely deserved."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.25bbb1fc4e3ce653",
+        "short_label": "Coding agents ship default-deny sandboxes for untrusted-repo audits by Q2 2027",
+        "prediction_date": "2026-07-11"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Today produced the case for the default and none of the default. The poisoned repository shipped a .claude/settings.json carrying a session-start hook and a .vscode/tasks.json task set to fire when the folder opens, both pointing at the same setup script, so execution happens when a developer or an agent opens the project — on the machine holding credentials rather than in a build container designed to be thrown away. Everything the ecosystem has built against supply-chain compromise points at the install path: lockfiles, pinned versions, disabled install scripts, sandboxed build agents, and now provenance. A repository-supplied startup entry does not travel that path at all, and the only control standing in front of it is a single workspace-trust decision taken once, at the moment someone is trying to start work, about a folder they cloned on purpose. No coding-agent vendor documented a sandbox default today. The venue is adjacent rather than dispositive: BSides Las Vegas opened its first dedicated AI-security track this week on prompt injection, agentic systems, GitHub exploits and software supply chains, pitched at practitioners on the stated assumption that the systems under discussion already hold credentials and autonomy.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "CybrSec Media - BSides Las Vegas adds a dedicated AI security track",
+          "url": "https://www.cybrsecmedia.com/bsideslv-adds-dedicated-ai-security-track-as-un-prompted-brings-practitioner-first-agenda-to-hacker-summer-camp/"
+        }
+      ],
+      "bridge": {
+        "narrative": "A network-isolated, approval-gated run would have caught this — but only if it were switched on, and the proposed default turns on for auditing code you distrust. Nobody audits their own checkout. The exposure landed on projects developers had already decided were theirs, which is where the shipping default would not be looking.",
+        "support_dimension": "so_that",
+        "coherence": 3,
+        "remaining_gap": "No vendor documented a sandbox default today, and nothing indicates the trigger condition would widen past untrusted-repo review."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.16c7b8053e39aa1f",
+        "short_label": "Disk-streaming expert offload ships in a mainstream local runtime by H1 2027",
+        "prediction_date": "2026-07-18"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "The mechanism shipped today, in a runtime that is public but eight commits old. Swiftlet, a Swift and Metal runtime published today under Apache 2.0, keeps the dense part — attention, embeddings and routers — permanently resident at four bits, packs the routed experts into fixed-stride containers each retrievable in a single read, and streams whichever experts the router asks for, holding the recent and frequent ones in a cache the user sizes with a command-line flag. On that arrangement Qwen3-Next-80B, 42 gigabytes of weights on disk, generates at 4.5 to 5 tokens a second on an M5 Mac while peaking at 4.3 gigabytes of resident memory, a 35-billion Qwen3.6 runs in 2.6 gigabytes at 7 to 11 tokens a second, and the same model runs on an iPhone 17 in about 2.5 gigabytes. Reported cache hit rates run between 43 and 70 percent, and throughput barely moves as that budget changes because the bottleneck currently sits in GPU dispatch rather than in reading from storage. What today does not supply is the mainstream half of the claim: none of llama.cpp, Ollama, LM Studio or vLLM appears in today's material with a change on this axis, and the figures are the author's own.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "narrative": "Mid-July's proof of the same arrangement ran a 744-billion-parameter model at a fraction of a token per second — real, but nobody's daily driver. Today's Apple-silicon build reports single-digit tokens per second on an 80B, which is the threshold at which a popular runtime has a reason to adopt rather than merely note the trick.",
+        "support_dimension": "so_that",
+        "coherence": 4,
+        "remaining_gap": "Still an eighty-billion model on Apple hardware, not the five-hundred-billion class, and none of the four named runtimes moved."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.dd9b863375b480dc",
+        "short_label": "Local-LLM fine-tuning stack ships CUDA/ROCm parity as the default by H2 2027",
+        "prediction_date": "2026-07-21"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Unsloth's merge of 79,151 lines across 231 files landed today, and the vendor axis widened in a direction this claim did not name. Among twenty-eight further commits the same day are Intel Arc detection and an XPU PyTorch install path in the Windows installer: Arc, Iris, UHD and HD graphics are now recognised, and the wheels bundle their own oneAPI runtime so no separate Intel toolkit install is required. The main merge is a desktop Studio Images page — text-to-image on the project's own GGUF quantisations of Z-Image, Qwen-Image, FLUX and SDXL variants, editing workflows covering transform, inpaint, extend, upscale and instruction-driven edits, text-to-video across five model families with synchronised audio, and QLoRA training for image models with live metrics and one-click adapter deployment — carrying more than eight hundred backend unit tests and browser-level end-to-end checks, with two inference paths underneath sharing GPU memory with the chat backend. None of it shipped as a package release: the Python library still sits at 2026.8.2 and the documentation changelog has not moved past July 29, so a user installing from the package index sees none of this today. The same day's release-pipeline work signs installer plugin libraries, embeds the WebView2 bootstrapper rather than fetching it, and scans Windows bundles before publication.",
+      "reference_links": [
+        {
+          "label": "GitHub - Add Intel Arc GPU detection and XPU PyTorch install to Windows installer",
+          "url": "https://github.com/unslothai/unsloth/pull/7706"
+        },
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        }
+      ],
+      "bridge": {
+        "narrative": "A third vendor arrived as installer plumbing: graphics detection plus a matching install path, with the runtime bundled so nobody chases a separate toolkit. If breadth were a hardware problem that would be a project; it was a day's work among twenty-eight commits. Effort, never silicon, is what kept these backends unequal.",
+        "support_dimension": "given",
+        "coherence": 3,
+        "remaining_gap": "None of it reached a package release, the toolkit count on the AMD axis is unchanged, and Intel is not the vendor at issue."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.11fc575584e8e05b",
+        "short_label": "Agent-written accelerator stacks get an independent serving number by Q2 2027",
+        "prediction_date": "2026-08-03"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Today's artefact is agent-written and carries serving numbers, and they are still the author's own. Swiftlet — Apache 2.0, eight commits, written with a coding agent — reports Qwen3-Next-80B at 4.5 to 5 tokens a second on an M5 Mac inside 4.3 gigabytes of resident memory, a 35-billion Qwen3.6 at 7 to 11 tokens a second in 2.6 gigabytes, and the same model on an iPhone 17 at roughly one token a second. What separates it from a founder's account is that it is a public repository with numbers anyone can clone and re-measure rather than a report of a run nobody else can reach, which is the precondition an independent number needs. What it still withholds is the conditions that make such a number comparable: no context length, no batch size, no split between prompt processing and decoding, and the quantisation stated for the dense layers only. No third party published a measurement today. One boundary is worth keeping: the target here is a serving stack for rival accelerator silicon, and today's runtime targets Apple silicon through Metal.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "narrative": "Another machine-authored runtime, another set of figures with only its author behind them. What differs from a founder's account is that this one is an open checkout: the thing being claimed can be cloned and re-run by whoever doubts it, which is the cheap route to the outside number this argument says has to exist.",
+        "support_dimension": "given",
+        "coherence": 2,
+        "remaining_gap": "Different silicon entirely — Apple through Metal, not a challenger part — and no unaffiliated measurement of either stack appeared."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.69439c5e138d13eb",
+        "short_label": "Coding IDEs make workspace-confined agent file writes the default by Q1 2027",
+        "prediction_date": "2026-07-04"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Today's incident runs the confinement question in the other direction: not the agent writing outside the workspace, but the workspace deciding what the agent runs. A poisoned repository carried its own .claude/settings.json session-start hook and .vscode/tasks.json folder-open task, both pointing at the same setup script, and the reporting names Claude Code and Visual Studio Code as the two products those entries target. Both paths require the workspace to be trusted, which is a prompt most people click through, and the trust decision is taken once rather than per entry. Confinement of writes does not reach this: an entry the repository supplies executes with whatever the developer's session already holds, on the machine where the credentials live. No IDE or agent vendor documented a change to any default today, and nothing in today's material describes a scoped-write setting shipping on by default.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        }
+      ],
+      "bridge": {
+        "narrative": "The two products named here are the two this claim is about, which is as far as the connection goes. Confining an agent's writes to the checkout governs what it reaches on the way out; today's failure is what the checkout reaches in and executes. Different boundary, no bearing on the write default.",
+        "support_dimension": "none",
+        "coherence": 2,
+        "remaining_gap": "No editor vendor published a default change today, and path-traversal or symlink handling went unmentioned in any of it."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a7f3fc0d30769651",
+        "short_label": "Cyber-insurance carriers ship agentic-AI dev-tool endorsement tier by Q4 2026",
+        "prediction_date": "2026-05-27"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Today delivered the correlated-loss event this kind of endorsement is priced against. One maintainer-account takeover reached at least 868 packages across 1,381 versions by early afternoon Central European time and was still being counted, spanning keyv, flat-cache, file-entry-cache, cacheable-request and the @cacheable scope, with a combined pull past two billion installs a month and releases tied to Deliveroo, Qlik and Picsart caught in the spread. The loss is not one insured incident but a simultaneous rotation at every organisation that pulled a poisoned version, across publishing tokens, cloud and instance-metadata keys, cluster tokens and secret-store credentials — the sort of sweep that touches systems a company cannot pause. The exposure through the editor and agent path has no denominator at all, because no lockfile records that a developer opened a folder. No carrier, endorsement, sub-limit or actuarial reclassification appears in today's reporting.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        }
+      ],
+      "bridge": {
+        "narrative": "One account takeover put every organisation that pulled a poisoned release into the same rotation at once, the correlated shape that decides whether a peril gets its own priced tier or an exclusion. Worse, nothing records that a developer opened a folder, so the editor exposure carries no denominator and an underwriter cannot rate what nobody counts.",
+        "support_dimension": "given",
+        "coherence": 3,
+        "remaining_gap": "No carrier, broker note or sub-limit appears anywhere in today's reporting, with the stated window closing at year end."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3ad27df38140f1ef",
+        "short_label": "SEC extends 8-K cyber materiality to agentic-AI dev-tool incidents by Q3 2026",
+        "prediction_date": "2026-05-26"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Today supplied the fact pattern with company names attached. Releases tied to Deliveroo, Qlik and Picsart were caught in the spread of a worm that swept publishing tokens, cloud and instance-metadata keys, Kubernetes service-account tokens, secret-store, payment and messaging credentials, SSH keys, Docker configs and Terraform state, then republished itself through any publish token it found and moved between organisations every two to seven minutes. The remediation described is a rotation across the systems an organisation cannot pause, and the second delivery path — repository-supplied entries that execute when a developer or an agent opens the project — reaches a population nobody has a list of. Provenance did not contain it: the malicious files reached each project's main branch before a release was tagged, so the compromised versions carry valid attestations. Nothing today came from the SEC, and no registrant disclosure or materiality determination was reported.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ],
+      "bridge": {
+        "narrative": "Named victims, no filings. Today's reporting attaches three company names to the spread without establishing that any is a US registrant, and no disclosure or materiality call surfaced. The staff statement this rests on was due inside a quarter now two months from ending, and nothing from the regulator appeared today.",
+        "support_dimension": "landing",
+        "coherence": 2,
+        "remaining_gap": "Whether any affected company files under the US regime is unstated, and a four-business-day clock needs a materiality finding first."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.d00edbd235697a37",
+        "short_label": "Autonomous incident response ships human-out-of-the-loop containment by H1 2027",
+        "prediction_date": "2026-07-21"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Today set the clock this claim is measured against. The worm republished itself through any publish token it found, which is why researchers watched it move between organisations every two to seven minutes, and Aikido's affected-version list was still growing as it published — a moving list rather than a fixed number. A response that waits for a human to approve each containment step runs against a propagation interval in single-digit minutes and a target set nobody could enumerate while it was moving. The other half of the response is equally unbounded: credential rotation across publishing tokens, cloud keys, cluster tokens and secret-store credentials at every organisation that pulled a poisoned version, plus an editor-path population that no lockfile records. No vendor announced an autonomous containment default today, and today's reporting describes detection and counting rather than automated response.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        }
+      ],
+      "bridge": {
+        "narrative": "Two to seven minutes between one organisation and the next, while the list of affected builds was still lengthening as it was being written up. Any containment gated on somebody reading a ticket loses that race by construction. The speed argument here stopped being an inference today and became a measured interval.",
+        "support_dimension": "given",
+        "coherence": 4,
+        "remaining_gap": "Self-republishing code is not the autonomous attacker the claim describes, and no detection vendor shipped hands-off containment today."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a6622c9a35342f07",
+        "short_label": "Offensive-security eval sandboxes drop live package proxies by Q1 2027",
+        "prediction_date": "2026-07-29"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The registry itself was the delivery vehicle today. A credential-stealing worm moved through npm after a maintainer-account takeover, with the payload fetching a compiled bundle on install and republishing through any publish token it found, moving between organisations every two to seven minutes. Any harness that proxies live package installs would have pulled poisoned versions during the window in which Aikido counted at least 868 packages across 1,381 versions and said it was still counting — the affected-version list was growing as it published, which is precisely the condition a pinned mirror exists to remove. Nothing in today's reporting names an eval harness, a sandbox operator or a lab changing its package path, and no vendor described cutting a live proxy. The pressure today is the incident, not an announcement.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ],
+      "bridge": {
+        "narrative": "An image built last week resolves nothing and is therefore untouched; a sandbox that fetches from upstream at run time resolves whatever the registry held that hour, and today that content was poisoned for a window nobody had yet bounded. Freezing the closure ahead of time is exactly what that buys.",
+        "support_dimension": "so_that",
+        "coherence": 3,
+        "remaining_gap": "No lab, harness maintainer or sandbox operator described touching its package path today, and outbound denial remains unmentioned."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.359ad701e052546c",
+        "short_label": "Kimi K3's full weights run on one 640GB node via expert offload by Q4 2026",
+        "prediction_date": "2026-07-25"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The offload mechanism this claim rests on got a public implementation today, several tiers below the node class in question. Swiftlet holds attention, embeddings and routers permanently resident at four bits, packs routed experts into fixed-stride containers each retrievable in a single read, and streams whichever the router asks for into a cache the user sizes by flag — running Qwen3-Next-80B, 42 gigabytes of weights on disk, at 4.3 gigabytes of resident memory on an M5 Mac. The arithmetic is the same one a 640-gigabyte node argument uses: a sparse mixture-of-experts model touches only around three billion parameters per token, so what has to move per token is a fraction of the file rather than the file. Reported cache hit rates run 43 to 70 percent and throughput barely moves with the budget because the bottleneck sits in GPU dispatch rather than storage, which the author reads as headroom left. Nothing today concerns Kimi K3 or a single-node deployment at that scale, and no measurement of that configuration appears in today's material.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Several tiers below the hardware class at issue, the offload arithmetic ran in public: dense layers pinned at four bits, routed experts fetched one read at a time from disk. Sparsity really does move the binding constraint off resident capacity. It moved it onto dispatch, though, not host bandwidth, which is not quite the trade named.",
+        "coherence": 3,
+        "remaining_gap": "Nothing at 640-gigabyte scale, no Kimi K3 run, and cache-hit figures from a laptop do not survive a 1.56-terabyte checkpoint."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3021db04ab2e2701",
+        "short_label": "SK Hynix defends its HBM bit allocation against rising DRAM prices by Q1 2027",
+        "prediction_date": "2026-07-29"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "The demand-side consequence of a defended allocation showed up today from the buyer's end. Nikkei Asia reported HP, Asus and Acer shipping small volumes of ChangXin DRAM in notebooks sold outside the United States, having completed qualification around the middle of this year, with Samsung, SK Hynix and Micron kept for regions where regulatory and geopolitical exposure runs higher. Today's account is explicit that this is not a cost decision — ChangXin is not undercutting the incumbents — but a supply decision, taken in a memory market the AI build-out has left tight enough that PC makers will qualify a supplier they had previously left alone. That is what an allocation held for higher-value bits looks like from outside: the commodity buyer goes elsewhere, and a component notebook vendors used to treat as fungible now decides whether a machine ships at all. FMS opened its twentieth edition in Santa Clara the same morning, with more than 350 speakers, over 100 exhibitors and 3,500 attendees expected from 1,500 organisations. No vendor allocation figure, bit-mix disclosure or pricing statement appeared today.",
+      "reference_links": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Terrapinn - FMS: The Future of Memory and Storage 2026",
+          "url": "https://www.terrapinn.com/conference/future-memory-storage/index.stm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Notebook makers do not qualify a new memory supplier for sport. HP, Asus and Acer spent the middle of this year certifying ChangXin and now ship it outside the United States, on supply grounds rather than price. Incumbent bits being unobtainable rather than merely dear is how a defended allocation reads from the buyer's end.",
+        "coherence": 4,
+        "remaining_gap": "Seen through a customer, which the claim's own test excludes; resolution needs SK Hynix stating its bit mix in its own results."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.660c1e111b88d9ec",
+        "short_label": "Exposed MCP tool endpoints become a named initial-access vector by H1 2027",
+        "prediction_date": "2026-07-30"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "A named initial-access path arrived today, on a neighbouring surface rather than this one. The poisoned repository shipped a .claude/settings.json session-start hook and a .vscode/tasks.json folder-open task pointing at the same setup script, and today's reporting treats that as a distinct delivery route aimed at agent users — an execution path that fires when a developer or an agent opens the project rather than when anything is installed, gated only by a workspace-trust decision. That is the shape a vector taxonomy would eventually name. No MCP server, tool endpoint or exposed agent interface appears anywhere in today's material, and nothing today catalogued or numbered such a vector. Where a naming would plausibly happen is dated rather than delivered: BSides Las Vegas opened its first dedicated AI-security track this week covering prompt injection, agentic systems, GitHub exploits and software supply chains, and Black Hat's AI Summit ran today on agentic risk.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "CybrSec Media - BSides Las Vegas adds a dedicated AI security track",
+          "url": "https://www.cybrsecmedia.com/bsideslv-adds-dedicated-ai-security-track-as-un-prompted-brings-practitioner-first-agenda-to-hacker-summer-camp/"
+        },
+        {
+          "label": "The AI Summit at Black Hat USA - returns in 2026 on August 4",
+          "url": "https://blackhat.theaisummit.com/the-ai-summit-at-black-hat-usa-returns-in-2026-august-4/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "A named delivery route did arrive: repository-supplied session-start hooks and folder-open tasks, firing when someone opens a project rather than installs anything. But that path needs no scanning, no exposed port and no login to defeat; it rides a clone. It is the competing vector, not this one, and no tool endpoint featured anywhere.",
+        "coherence": 2,
+        "remaining_gap": "Two conference tracks on agentic risk opened this week, but a vendor incident report naming an open endpoint as confirmed entry is what counts."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.115de052e8e787f4",
+        "short_label": "Open Secure AI Alliance binds agent operators, not model APIs, by H2 2027",
+        "prediction_date": "2026-07-27"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The operator side is where today's damage landed and where the week's programme is pitched. The worm's second delivery path targets the developer running an agent rather than any model endpoint: a repository-supplied session-start hook and a folder-open task that execute on a workstation already holding credentials, behind a single workspace-trust click. Black Hat's AI Summit ran today at the Mandalay Bay Convention Center in its third year, a single-day programme covering securing AI systems, agentic risk, cloud and GPU infrastructure protection and the use of AI in both offence and defence. BSides Las Vegas opened its first dedicated AI-security track this week on prompt injection, agentic systems, GitHub exploits, software supply chains and defensive engineering, pitched at practitioners on the stated assumption that the systems under discussion already hold credentials and autonomy. No alliance, charter, membership list or scope definition was published today, and no model provider changed an API-side obligation.",
+      "reference_links": [
+        {
+          "label": "The AI Summit at Black Hat USA - returns in 2026 on August 4",
+          "url": "https://blackhat.theaisummit.com/the-ai-summit-at-black-hat-usa-returns-in-2026-august-4/"
+        },
+        {
+          "label": "CybrSec Media - BSides Las Vegas adds a dedicated AI security track",
+          "url": "https://www.cybrsecmedia.com/bsideslv-adds-dedicated-ai-security-track-as-un-prompted-brings-practitioner-first-agenda-to-hacker-summer-camp/"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Governability follows possession, and today possession sat with the developer. The worm's second path executed on a workstation already holding credentials, behind one trust click, nowhere near a model endpoint. Black Hat's AI Summit and the new BSides track are both addressed to whoever operates that machine. Consortium rules have to attach somewhere, and this is where.",
+        "coherence": 3,
+        "remaining_gap": "No charter, roster line or published profile moved, and a lab signing on is the part that settles it."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c762a8078d707dee",
+        "short_label": "Durable ask-user checkpoints become a standard harness primitive by H1 2027",
+        "prediction_date": "2026-06-11"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Today showed what a single, non-durable consent decision costs. The repository-supplied entries that fire on session start and folder open are gated by one workspace-trust choice, taken once, at the moment someone is trying to start work, about a folder they cloned on purpose — and today's account is blunt that people click through because clicking through is what the product is for. What that implies a harness would need is a checkpoint that survives past the first click and returns at the moment an entry would actually execute, itemised rather than blanket, or entries held inert until enabled deliberately. Neither of the two products named in the reporting, Claude Code and Visual Studio Code, is described as having anything beyond the trust decision, and no harness shipped such a primitive today.",
+      "reference_links": [
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "One click, taken at the wrong moment, about a folder someone cloned deliberately, authorised everything that fired later. That is precisely the failure a durable checkpoint exists to prevent: consent given once and gone, instead of a question returning when an entry is about to run. Two named harnesses were shown holding nothing sturdier.",
+        "coherence": 4,
+        "remaining_gap": "Surviving a restart is a stricter bar than re-asking at execution, and neither harness shipped either one."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.082b0a07077870dd",
+        "short_label": "GGUF supply chains gate uploads via signed cards + SSTI scans by Q3 2026",
+        "prediction_date": "2026-04-21"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The signing half of this claim was tested in a neighbouring registry today and did not hold. Because the malicious files went to each project's main branch before a release was tagged, the poisoned versions were built by the repository's own workflow and carry valid provenance signatures — an attestation records that a build came out of a repository, not that anyone read what was in it. A model registry that gates uploads on a signed card inherits exactly that limit, and today is a worked example of the gap. Nothing today concerned GGUF uploads, Hugging Face or the Ollama library. The artefact class that did move is Unsloth's own GGUF quantisations of Z-Image, Qwen-Image, FLUX and SDXL variants, which arrived inside a desktop Studio merge rather than as a package release, so no upload-side control was exercised or described.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Valid signatures came attached to the poisoned builds. Because the changes went to main before anything was tagged, the project's own workflow produced them, and provenance recorded where a build came from without anyone reading what went in. Gate a model upload on a signed card and you buy the identical guarantee: origin, never review.",
+        "coherence": 3,
+        "remaining_gap": "The window for this one is open now and no hub has moved; nothing today touched GGUF uploads or load-time template scanning."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.71c2ab8e3803590f",
+        "short_label": "Tailscale defaults reusable auth keys to a bounded node count by H1 2027",
+        "prediction_date": "2026-08-01"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Today is the credential-blast-radius argument in its most concrete form. The payload swept npm tokens, GitHub credentials of every flavour including short-lived OIDC tokens, AWS keys and instance-metadata credentials, Kubernetes service-account tokens, Vault, Stripe and Slack keys, SSH keys, Docker configs and Terraform state, then republished itself through any publish token it found — propagation ran on credentials that carried no bound on what they could do next, which is why the movement between organisations was measured in minutes rather than days. The remediation has the same shape: every organisation that pulled a poisoned version now rotates across publishing tokens, cloud keys, cluster tokens and secret-store credentials, a sweep that touches systems a company cannot pause. Tailscale is not mentioned in today's material, no networking vendor changed a key default, and nothing today concerned node-count limits specifically.",
+      "reference_links": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Minutes, not days, was the transit time between organisations, and it was fast because possession of a credential was the whole authorisation. Publish tokens republished the worm; cloud, cluster and secret-store keys carried no ceiling on their own reuse. Downstream scoping never touched any of it. Only whoever mints the thing can bound it.",
+        "coherence": 4,
+        "remaining_gap": "Different credential class, and no networking vendor changed a default; Tailscale's own docs are where this lands or does not."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.5ef12dddaef42be2",
+        "short_label": "Disaggregated expert-parallel serving becomes the default for 2T MoE by H1 2027",
+        "prediction_date": "2026-07-20"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Today's expert-routing work went the opposite way, collapsing onto one device instead of spreading across many. A Swift and Metal runtime published today runs 35-billion and 80-billion sparse mixture-of-experts models on a single Mac, and the 35-billion model on an iPhone, by keeping the dense layers resident at four bits and streaming routed experts off storage — the same sparsity premise disaggregation uses, roughly three billion parameters touched per token, applied at the far end of the scale. It says nothing about how a trillion-parameter checkpoint gets served across a rack, and neither vLLM nor SGLang restated a documented default today. The serving stack's own venue stays dated rather than delivered: the first vLLM Conference is co-located with Ray Summit at the San Francisco Marriott Marquis from August 24, included in every pass, with more than twenty speakers across vLLM infrastructure, hardware backends and production deployment patterns.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Anyscale - Ray Summit 2026 dates, pricing and the co-located vLLM Conference",
+          "url": "https://www.anyscale.com/ray-summit"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Sparsity got exercised in the opposite direction: one Mac, one phone, everything collapsed onto a single device instead of spread across a rack. Shared premise, inverted topology, and nothing that transfers to how a trillion-parameter checkpoint gets partitioned. Neither engine restated a documented default, and the conference where a reference recipe might be argued sits three weeks out.",
+        "coherence": 2,
+        "remaining_gap": "A rented platform and both engines have to change their defaults; today's material contains no rack-scale deployment at all."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c972282fc42c88b6",
+        "short_label": "Sub-2-bit quantization fits a second 20B-class model under 5 GB by Q2 2027",
+        "prediction_date": "2026-07-15"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The memory target was cleared today by a different mechanism, at four times the parameter count. Swiftlet reports Qwen3-Next-80B — 42 gigabytes of weights on disk — peaking at 4.3 gigabytes of resident memory on an M5 Mac, and a 35-billion Qwen3.6 at 2.6 gigabytes, with the same model on an iPhone 17 in about 2.5 gigabytes. It gets there not by compressing further but by keeping only the dense part resident at four bits and streaming routed experts off storage into a user-sized cache. Today's account is explicit that the mechanism is architectural rather than a new quantisation, and the bit width it does state covers the dense layers only, with nothing said about how the streamed experts are stored. No sub-2-bit result, and no 20-billion-class model under 5 gigabytes by compression, appears in today's material.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The five-gigabyte mark fell by the wrong route. Nothing was compressed harder; residency policy changed, dense weights held at four bits while routed experts stream on demand, and an 80-billion model sat under the ceiling a 20-billion model was supposed to reach. If bits per weight is not the only lever, the incentive to chase the last half-bit weakens.",
+        "coherence": 3,
+        "remaining_gap": "The stated bit width covers dense layers only, and a rate near five tokens a second is not the same job as a portable model."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.82599b6cfd05751b",
+        "short_label": "Consumer-GPU coding agents displace cloud-only APIs for 30% of devs by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The capability side moved today and the adoption side did not. A Swift and Metal runtime published today reports an 80-billion-parameter sparse model generating at 4.5 to 5 tokens a second on an M5 Mac inside 4.3 gigabytes of resident memory, a 35-billion model at 7 to 11 tokens a second in 2.6 gigabytes, and that same model on an iPhone 17 at roughly one token a second — model classes that previously implied rented capacity, now on hardware a developer already owns, at rates that are readable rather than interactive. The runtime was itself written with a coding agent, eight commits, Apache 2.0, which is its own small data point about where the work happens. Nothing today measured developer behaviour: no survey, telemetry, vendor figure or share estimate of local versus cloud usage appears in today's material.",
+      "reference_links": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Half of the conjunction held. Model classes that used to mean rented capacity now run on a laptop someone already owns: 35 billion parameters at seven to eleven tokens a second, 80 billion at four and a half to five. That last rate is readable, not interactive, so throughput is the term still failing to clear the bar.",
+        "coherence": 3,
+        "remaining_gap": "No survey, telemetry or vendor share figure appeared, and the quarter this was due to land in is already running."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.fd7bdbc998adaac2",
+        "short_label": "US restrictions on Chinese open weights hit serving, not downloads, by H1 2027",
+        "prediction_date": "2026-07-26"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Today's memory story is the same instrument-selection question posed in another domain. HP, Asus and Acer have begun shipping ChangXin DRAM in notebooks sold outside the United States, and today's account is explicit that no US rule stops a retailer selling a machine with that memory inside and none requires the box to name the supplier: the split into two bills of materials is a private risk judgement about a line the vendors expect rather than one anybody has drawn. Which instrument a government reaches for — a supply-side restriction, a purchasing rule, a tariff — is exactly the axis this claim turns on, and on the memory side it stayed unexercised today while commercial behaviour moved anyway. Nothing today concerned open weights, model downloads or serving restrictions, and no filing, rule or enforcement action was reported.",
+      "reference_links": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Asia Business Outlook - HP, Asus and Acer turn to CXMT chips amid global memory shortage",
+          "url": "https://www.asiabusinessoutlook.com/news/hp-asus-and-acer-turn-to-cxmt-chips-amid-global-memory-shortage-nwid-12260.html"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Watch the shape, not the commodity: three vendors have quietly split their bills of materials, keeping Chinese memory out of American shelves while shipping it where regulatory exposure is lower. No rule obliges that. They are pricing a line they expect somebody to draw. A serving refusal against a still-downloadable checkpoint would be the same manoeuvre in another market.",
+        "coherence": 3,
+        "remaining_gap": "Analogy from a different market; no filing, rule or refusal touching open weights was reported today."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.fd0660f0789c6e44",
+        "short_label": "Fortune 500 IT capex bundles AI-PC refresh into data-center spend by H2 2027",
+        "prediction_date": "2026-06-01"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The two ends of that capex line touched today, from the components side rather than the buyer's. HP, Asus and Acer have begun shipping small volumes of ChangXin DRAM in notebooks sold outside the United States because the AI build-out has left the memory market tight enough that PC makers will qualify a supplier they had previously left alone — the same scarcity that prices data-centre memory now decides whether a notebook ships at all, which today's sources frame as a supply decision rather than a cost one. That is the coupling this claim asserts, arriving as a bill of materials rather than as an accounting line. FMS opened its twentieth edition in Santa Clara the same morning, with more than 350 speakers, over 100 exhibitors, twenty-plus content streams and 3,500 attendees expected from 1,500 organisations. No enterprise buyer, capex disclosure or fleet-refresh decision appears in today's material.",
+      "reference_links": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Terrapinn - FMS: The Future of Memory and Storage 2026",
+          "url": "https://www.terrapinn.com/conference/future-memory-storage/index.stm"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "The coupling turned up in a parts list. Memory scarce enough to price data-centre buildouts is now deciding whether notebooks ship at all, which is why three PC makers went and qualified ChangXin. Laptop and rack budgets already draw on one constrained input; the channel argument holds, though it arrives through procurement rather than through anybody's accounting.",
+        "coherence": 3,
+        "remaining_gap": "Shared scarcity is not a shared budget line; three Fortune 500 disclosures and an audit-firm template are what resolve this."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f7c9f65d995c2b30",
+        "short_label": "Meta breaks out AI compute revenue as its own reported line by Q3 2027",
+        "prediction_date": "2026-07-30"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "The disclosure pressure came today from a smaller vendor's segment split. Palantir reported second-quarter revenue of 1.94 billion dollars, up 93 percent year over year against a 1.81 billion consensus, with adjusted earnings of 41 cents against 34 expected, net income of 1.06 billion and adjusted free cash flow of 1.22 billion. The line that moved the stock was the split underneath: United States commercial revenue up 149 percent to 764 million dollars against United States government revenue up 90 percent to 809 million, which leaves the commercial side nearly the size of the government business the company was long assumed to depend on. Full-year guidance went to between 8.15 and 8.16 billion from a prior 7.65 to 7.66 billion, the United States commercial target was lifted above 3.42 billion, and shares opened around 152 dollars against Monday's 125.65 close. A segment line that answers the pilots-versus-recognised-revenue question is the kind that gets copied, but no hyperscaler restated its reporting structure today; AMD reports after the close, which puts the same question to the silicon side.",
+      "reference_links": [
+        {
+          "label": "Business Wire - Palantir reports Q2 2026 revenue growth of 93 percent and raises FY 2026 guidance",
+          "url": "https://www.businesswire.com/news/home/20260802523449/en/Palantir-Reports-Q2-2026-U.S.-Comm-Revenue-Growth-of-149-YY-and-Revenue-Growth-of-93-YY-Raises-FY-2026-Revenue-Guidance-to-82-YY-Growth-and-U.S.-Comm-Revenue-Guidance-to-134-YY-Crushing-Consensus-Expectations"
+        },
+        {
+          "label": "Proactive Investors - Palantir Technologies shares surge after earnings beat",
+          "url": "https://www.proactiveinvestors.com/companies/news/1096513/palantir-technologies-shares-surge-after-earnings-beat-1096513.html"
+        },
+        {
+          "label": "Finbold - Wall Street analysts update Palantir stock price after blowout earnings",
+          "url": "https://finbold.com/wall-street-analysts-update-palantir-stock-price-after-blowout-earnings/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "What moved Palantir was the split, not the total. Ninety-three percent growth beat consensus, but the number analysts fixed on was US commercial at 764 million against government at 809 million, a mix visible only because the filing names both. Shares opened near 152 against Monday's 125.65 close. Disclosure is what a re-rating attaches to.",
+        "coherence": 3,
+        "remaining_gap": "Palantir's re-rating priced growth mix, not capital spending, and no hyperscaler restated its reporting structure today."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.ed22f8669ea280de",
+        "short_label": "Hugging Face's downloader ships no default XET-to-HTTP fallback by Q2 2027",
+        "prediction_date": "2026-08-03"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "The premise held today in a sharper form, and the download path itself went untouched. Unsloth's merge of 79,151 lines across 231 files landed in the repository and not on the package index: a desktop Studio Images page with text-to-image on the project's own GGUF quantisations, editing workflows, text-to-video across five model families and QLoRA training for image models, plus twenty-eight further commits the same day. None of it shipped as a version — the Python library still stands at 2026.8.2 and the documentation changelog has not moved past July 29 — so the work that reaches users keeps landing in the consuming project rather than in the client Hugging Face maintains, which is the structural point the claim rests on. Nothing today observed huggingface_hub's own download behaviour, no XET or transport change was reported on either side, and today's Unsloth work is about generation rather than getting weights down.",
+      "reference_links": [
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        },
+        {
+          "label": "GitHub - Add Intel Arc GPU detection and XPU PyTorch install to Windows installer",
+          "url": "https://github.com/unslothai/unsloth/pull/7706"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Unsloth's merge of 79,151 lines across 231 files went into the repository and stopped there: no version cut, the library still sitting at 2026.8.2. Work reaching users through the consuming project is the arrangement this claim assumes. It is also generation tooling, which has nothing to do with how a file comes down.",
+        "coherence": 2,
+        "remaining_gap": "Nothing observed huggingface_hub's download path; only a transport-side default there, shipped without an env var, settles it."
+      }
+    }
+  ]
+}

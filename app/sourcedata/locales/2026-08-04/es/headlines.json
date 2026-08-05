@@ -1,0 +1,94 @@
+{
+  "date": "2026-08-04",
+  "technical": [
+    {
+      "lead": "Un gusano de npm envenena los paquetes keyv y planta un hook de arranque en el editor",
+      "body": "Un gusano que roba credenciales recorrió hoy el registro de npm después de que un atacante se hiciera con la cuenta de GitHub del mantenedor de keyv, una biblioteca de caché que se descarga unos 127 millones de veces por semana, y usara el propio flujo de GitHub Actions del repositorio para publicar versiones envenenadas. Los archivos maliciosos llegaron a la rama principal de cada proyecto antes de que se etiquetara una versión, así que las versiones comprometidas llevan firmas de procedencia válidas: justo el artefacto que revisa un auditor de cadena de suministro para concluir que un paquete está limpio. Aikido contaba al menos 868 paquetes repartidos en 1.381 versiones a primera hora de la tarde en hora centroeuropea y decía que seguía contando. Con keyv se fueron flat-cache, file-entry-cache, cacheable-request y el ámbito @cacheable, todos del mismo mantenedor, lo que sitúa el radio de impacto por encima de los dos mil millones de instalaciones al mes; también quedaron atrapadas en la propagación versiones ligadas a Deliveroo, Qlik y Picsart. La carga se ejecuta al instalar y barre tokens de npm, credenciales de GitHub de todo tipo —incluidos tokens OIDC de vida corta—, claves de AWS y credenciales de metadatos de instancia, tokens de cuentas de servicio de Kubernetes, claves de Vault, Stripe y Slack, claves SSH, configuraciones de Docker y estado de Terraform; luego los cifra y los sube a repositorios controlados por el atacante. Después se vuelve a publicar a sí mismo con cualquier token de publicación que encuentre, y por eso los investigadores lo vieron pasar de una organización a otra cada dos a siete minutos. Quien tenga agentes de programación en marcha tiene una segunda cosa que revisar, porque el repositorio envenenado también traía un hook de arranque de sesión en .claude/settings.json y una tarea de apertura de carpeta en .vscode/tasks.json que apuntaban al mismo script de instalación: una vía de ejecución que se dispara cuando alguien abre el proyecto en un editor o en un agente, no cuando lo instala. Las dos necesitan que el espacio de trabajo esté marcado como de confianza, y ese es un aviso que la mayoría acepta sin leer. La lista de versiones afectadas seguía creciendo mientras Aikido publicaba, así que es una lista en movimiento y no una cifra cerrada.",
+      "citations": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised in Shai-Hulud attack",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ]
+    },
+    {
+      "lead": "Un Qwen de 80B corre en un Mac con 4,3 GB leyendo sus expertos del disco sobre la marcha",
+      "body": "Swiftlet, un runtime escrito en Swift y Metal, se publicó hoy con una afirmación fácil de enunciar e incómoda de rebatir: Qwen3-Next-80B, 42 gigabytes de pesos en disco, generando a entre 4,5 y 5 tokens por segundo en un Mac M5 con un pico de 4,3 gigabytes de memoria residente. El Qwen3.6 de 35.000 millones de parámetros funciona igual en 2,6 gigabytes a entre 7 y 11 tokens por segundo, y en un iPhone 17 en unos 2,5 gigabytes a alrededor de un token por segundo. El mecanismo es arquitectónico y no una cuantización nueva: son modelos dispersos de mezcla de expertos que solo tocan unos 3.000 millones de parámetros por token. Por eso el runtime mantiene la parte densa —atención, embeddings, enrutadores— siempre residente a cuatro bits, empaqueta los expertos enrutados en contenedores de paso fijo que se recuperan cada uno con una sola lectura, y va trayendo del disco los expertos que el enrutador pide, con una caché que guarda los recientes y frecuentes y cuyo tamaño fija el usuario mediante una opción de línea de comandos. La atención lineal Gated DeltaNet en tres cuartas partes de las capas evita que la caché de clave-valor se coma el ahorro. El autor reporta tasas de acierto de caché de entre el 43% y el 70% según cuánta memoria se le entregue y, más interesante todavía, un rendimiento que apenas se mueve cuando ese presupuesto cambia, porque el cuello de botella está hoy en el despacho de trabajo a la GPU y no en la lectura del almacenamiento. Esa es la cifra que conviene vigilar: dice que al enfoque de streaming le queda margen, y replantea el techo de memoria de un teléfono o un portátil como un problema de planificación y no de capacidad. Apache 2.0, ocho commits y escrito con un agente de programación.",
+      "citations": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ]
+    },
+    {
+      "lead": "Unsloth Studio suma generación de imagen y vídeo y QLoRA para modelos de imagen",
+      "body": "La mayor fusión individual de Unsloth en bastante tiempo aterrizó hoy, y no va de texto. Un pull request contra el Studio de escritorio añade una página de Imágenes: generación de texto a imagen sobre las cuantizaciones GGUF propias de Unsloth de Z-Image, Qwen-Image, FLUX y variantes de SDXL; flujos de edición que cubren transformación, inpaint, extensión, escalado y ediciones guiadas por instrucciones; texto a vídeo en cinco familias de modelos con audio sincronizado; y, la parte que importa al público del ajuste fino, entrenamiento QLoRA para modelos de imagen con métricas en vivo y despliegue en un clic del adaptador resultante. Debajo hay dos vías de inferencia —stable-diffusion.cpp nativo y Diffusers— que comparten memoria de GPU con el backend de chat en lugar de competir con él por la reserva, con un renderizado de imágenes por lotes que el propio equipo mide entre diez y veintidós veces más rápido que renderizar esas mismas imágenes en serie, además de cachés de condicionamiento y de compilación. El diff son 79.151 líneas añadidas en 231 archivos, con más de ochocientas pruebas unitarias de backend y comprobaciones de extremo a extremo a nivel de navegador. El mismo día entraron otros veintiocho commits, entre ellos la detección de Intel Arc y una vía de instalación de PyTorch para XPU en el instalador de Windows —ahora se reconocen Arc, Iris, UHD y HD graphics, y los wheels traen su propio runtime de oneAPI, así que no hace falta instalar por separado el toolkit de Intel—, más una tanda de endurecimiento del proceso de publicación: las bibliotecas de plugins del instalador se firman y la publicación falla ante cualquier archivo sin firmar, el bootstrapper de WebView2 va incrustado en lugar de descargarse, Defender analiza los paquetes de Windows antes de publicarlos y el sellado de la imagen de disco de macOS se reintenta si falla. Nada de esto llegó con una versión del paquete: la biblioteca de Python sigue en la 2026.8.2, publicada ayer en PyPI, y el changelog de la documentación no ha pasado del 29 de julio, así que el cambio de hoy solo se ve en el repositorio.",
+      "citations": [
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        },
+        {
+          "label": "GitHub - Add Intel Arc GPU detection and XPU PyTorch install to Windows installer",
+          "url": "https://github.com/unslothai/unsloth/pull/7706"
+        }
+      ]
+    },
+    {
+      "lead": "HP, Asus y Acer empiezan a enviar DRAM china porque el suministro escasea",
+      "body": "Nikkei Asia informó hoy de que HP, Asus y Acer han empezado a enviar pequeños volúmenes de DRAM de la china ChangXin Memory Technologies en portátiles vendidos fuera de Estados Unidos, tras completar la cualificación de las piezas hacia mediados de este año. Las cantidades son limitadas y la colocación es deliberada —modelos de gama baja, mercados fuera de Estados Unidos—, con Samsung, SK Hynix y Micron reservados para las regiones donde la exposición regulatoria y geopolítica es mayor, y con HP descrita como todavía evaluando al proveedor y no comprometida con él. Lo que lo hace digno de nota es el motivo. No es una decisión de coste; ChangXin no está bajando los precios de los proveedores establecidos. Es una decisión de suministro, tomada en un mercado de memoria que el despliegue de IA ha dejado tan tensionado que los fabricantes de PC cualifican a un proveedor al que hasta ahora habían dejado de lado. Y llega la misma mañana en que FMS, la conferencia de memoria y almacenamiento, abrió su vigésima edición en Santa Clara: la única sala donde coinciden quienes provocan la estrechez y quienes la absorben. Un componente básico que los fabricantes de portátiles trataban como intercambiable se ha convertido en lo que decide si una máquina llega a salir.",
+      "citations": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Asia Business Outlook - HP, Asus and Acer turn to CXMT chips amid global memory shortage",
+          "url": "https://www.asiabusinessoutlook.com/news/hp-asus-and-acer-turn-to-cxmt-chips-amid-global-memory-shortage-nwid-12260.html"
+        }
+      ]
+    },
+    {
+      "lead": "Palantir crece un 93% y abre alrededor de un 20% por encima",
+      "body": "Palantir declaró unos ingresos de 1.940 millones de dólares en el segundo trimestre tras el cierre de ayer, un 93% más interanual frente a un consenso de 1.810 millones, con un beneficio ajustado de 41 centavos frente a los 34 esperados. Lo que movió la acción es el desglose de debajo: los ingresos comerciales en Estados Unidos subieron un 149% hasta 764 millones de dólares, mientras que los ingresos con el Gobierno estadounidense crecieron un 90% hasta 809 millones, lo que deja al lado comercial casi del tamaño del negocio público del que durante mucho tiempo se dio por hecho que la compañía dependía. El beneficio neto fue de 1.060 millones de dólares y el flujo de caja libre ajustado, de 1.220 millones. La previsión para el año completo pasó a entre 8.150 y 8.160 millones de dólares desde los 7.650 a 7.660 millones anteriores, el objetivo comercial en Estados Unidos se elevó por encima de 3.420 millones —lo que implica un crecimiento de al menos el 134%— y los ingresos del tercer trimestre se guiaron hacia unos 2.160 millones. La acción abrió esta mañana en torno a 152 dólares, alrededor de un 20% por encima del cierre del lunes en 125,65. La respuesta de los analistas fue uniforme en la dirección y muy dispar en la magnitud: Deutsche Bank subió su recomendación a Buy y movió su precio objetivo a 200 dólares desde 80, Citi pasó a 245 desde 200 y DA Davidson a 200 desde 175. La lectura que va más allá de un solo valor es la pregunta que el sector lleva rondando —si el gasto empresarial en software de IA se está convirtiendo en ingresos reconocidos a escala en lugar de en pilotos—, y aquí la respuesta es inequívoca al menos para un proveedor. AMD presenta resultados tras el cierre de hoy, lo que traslada la misma pregunta al lado del silicio, con su línea de centro de datos y cualquier pedido cuantificado de racks Helios como los datos concretos que hay que leer.",
+      "citations": [
+        {
+          "label": "Business Wire - Palantir reports Q2 2026 revenue growth of 93 percent and raises FY 2026 guidance",
+          "url": "https://www.businesswire.com/news/home/20260802523449/en/Palantir-Reports-Q2-2026-U.S.-Comm-Revenue-Growth-of-149-YY-and-Revenue-Growth-of-93-YY-Raises-FY-2026-Revenue-Guidance-to-82-YY-Growth-and-U.S.-Comm-Revenue-Guidance-to-134-YY-Crushing-Consensus-Expectations"
+        },
+        {
+          "label": "Proactive Investors - Palantir Technologies shares surge after earnings beat",
+          "url": "https://www.proactiveinvestors.com/companies/news/1096513/palantir-technologies-shares-surge-after-earnings-beat-1096513.html"
+        },
+        {
+          "label": "Finbold - Wall Street analysts update Palantir stock price after blowout earnings",
+          "url": "https://finbold.com/wall-street-analysts-update-palantir-stock-price-after-blowout-earnings/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "Un gusano que se propaga solo golpeó npm y robó claves de desarrolladores",
+    "Un modelo de 80.000 millones de parámetros funciona en un Mac con 4,3 GB",
+    "La aplicación de escritorio de Unsloth añade generación de imagen y vídeo",
+    "Los fabricantes de portátiles recurren a la memoria china ante la escasez",
+    "Los ingresos de Palantir suben un 93% y la acción se dispara"
+  ]
+}

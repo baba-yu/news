@@ -1,0 +1,389 @@
+{
+  "date": "2026-08-04",
+  "by_prediction": {
+    "prediction.e01a8ed7a5221606": [
+      {
+        "actor": "Ingeniera de seguridad de ejecución de hooks de agente, Claude Code de Anthropic",
+        "job": "Rehacer cómo se cargan los hooks de arranque de sesión y los archivos de configuración que trae el repositorio, para que abrir una carpeta clonada ya no los ejecute solo con la decisión de confianza.",
+        "outcome": "Un comportamiento por defecto publicado en el que el hook de arranque de sesión de un repositorio queda inerte hasta que se aprueba en un paso separado del de confiar en el espacio de trabajo.",
+        "motivation": "El hook cae sobre una estación de trabajo con credenciales vivas, no en un contenedor de compilación desechable, y ninguna defensa del momento de instalación lo llega a ver.",
+        "task": {
+          "who": "Ingenieros de carga de configuración y ejecución de hooks de Claude Code",
+          "what": "Mantener inertes los hooks que trae el repositorio hasta que se aprueben aparte",
+          "where": "Resolución de configuración y vía de despacho de hooks de Claude Code",
+          "when": "Q4 2026",
+          "why": "La confianza en el espacio de trabajo nunca fue una decisión sobre hooks",
+          "how": "Aprobación por entrada registrada en la configuración de usuario, indexada por resumen criptográfico"
+        }
+      },
+      {
+        "actor": "Mantenedor de Workspace Trust, Visual Studio Code de Microsoft",
+        "job": "Hacerse cargo del aviso de confianza y de las tareas que se ejecutan al abrir la carpeta, y decidir si la confianza por sí sola sigue bastando para arrancar los comandos propios de un repositorio.",
+        "outcome": "Una compilación por defecto en la que la tarea de apertura de carpeta de un repositorio se lista y se confirma, o queda inerte, en lugar de arrancar con el clic de confianza.",
+        "motivation": "El único control delante de esta vía es un diálogo que el producto enseñó a todo el mundo a descartar para poder ponerse a trabajar.",
+        "task": {
+          "who": "Mantenedores del sistema de confianza del espacio de trabajo y de tareas de Visual Studio Code",
+          "what": "Poner las tareas de apertura de carpeta detrás de una confirmación propia",
+          "where": "Subsistema de confianza del espacio de trabajo y ejecutor de tareas en las compilaciones Insiders",
+          "when": "Q1 2027",
+          "why": "La confianza responde a una pregunta distinta de la de la ejecución automática",
+          "how": "Lista detallada de lo que se ejecutaría dentro del flujo de confianza, con las entradas inertes por defecto"
+        }
+      },
+      {
+        "actor": "Responsable del plan de iteración y de las notas de versión, Visual Studio Code",
+        "job": "Meter el cambio de ejecución automática en un hito mensual y describirlo donde un usuario corriente lee qué ha cambiado en su instalación.",
+        "outcome": "Notas de versión publicadas que describen el nuevo comportamiento por defecto para las entradas de arranque que trae el repositorio, llevado a la versión estable y no dejado tras una opción de vista previa.",
+        "motivation": "Un cambio de comportamiento que nadie documenta no llega a nadie, y el hito es además lo que evita que el trabajo se quede detrás de funciones más grandes.",
+        "task": {
+          "who": "Personal de gestión de versiones y documentación de Visual Studio Code",
+          "what": "Reservar la puerta de ejecución automática en un hito de publicación",
+          "where": "Plan de iteración mensual y notas de versión publicadas",
+          "when": "Febrero de 2027",
+          "why": "Los comportamientos por defecto sin documentar no llegan a nadie y se quedan detrás de funciones mayores",
+          "how": "Incidencia del plan de iteración que sigue las entradas de notas de versión de cada hito"
+        }
+      },
+      {
+        "actor": "Responsable de publicaciones de inteligencia de amenazas, Aikido Security",
+        "job": "Documentar qué llevaban los repositorios envenenados más allá del script de instalación, incluidas las entradas de arranque del editor y del agente que casi ninguna defensa de la vía de instalación inspecciona.",
+        "outcome": "Un registro público que nombra las entradas de arranque suministradas por el repositorio como una vía de ejecución propia, lo bastante precisa para que los dos fabricantes actúen.",
+        "motivation": "Su propio recuento de paquetes afectados es lo que hizo legible el caso, y la segunda vía sigue invisible mientras alguien no la ponga por escrito.",
+        "task": {
+          "who": "Equipo de investigación de malware y publicación de divulgaciones de Aikido",
+          "what": "Registrar las entradas de arranque del repositorio en los informes del incidente",
+          "where": "Blog de investigación de Aikido y sus feeds de indicadores",
+          "when": "Septiembre de 2026",
+          "why": "Los fabricantes se mueven con vías documentadas, no con anécdotas",
+          "how": "Revisión estática de los archivos de configuración del repositorio en las versiones afectadas"
+        }
+      },
+      {
+        "actor": "Responsable de divulgación coordinada de vulnerabilidades, una consultora independiente de seguridad de aplicaciones",
+        "job": "Presentar un informe estructurado según el cual las entradas de arranque de un repositorio clonado se ejecutan solo con el clic de confianza en el espacio de trabajo, a través de los programas de divulgación de los productos afectados.",
+        "outcome": "Un caso con seguimiento que cada fabricante tiene que responder, con un plazo de divulgación que sobrevive a cualquier ciclo de noticias.",
+        "motivation": "Un informe dentro del proceso del propio fabricante lleva un reloj, y una charla de conferencia o una entrada de blog no.",
+        "task": {
+          "who": "Investigadores de seguridad de producto y coordinadores de divulgación de la consultora",
+          "what": "Presentar el hueco de ejecución por clic de confianza bajo divulgación coordinada",
+          "where": "Portales de respuesta de seguridad de los fabricantes y sus sistemas de seguimiento",
+          "when": "Octubre de 2026",
+          "why": "Un caso con seguimiento lleva un plazo que una entrada de blog no tiene",
+          "how": "Calendario de divulgación coordinada acordado con los equipos de respuesta de ambos fabricantes"
+        }
+      },
+      {
+        "actor": "Arquitecto de herramientas de desarrollo seguro, una empresa regulada que despliega agentes de programación",
+        "job": "Fijar en qué condiciones sus desarrolladores pueden abrir repositorios sin revisar con un agente conectado, y llevar esas condiciones a los fabricantes.",
+        "outcome": "Un requisito hacia los fabricantes de que la puerta venga activada por defecto en cada instalación, y no como una política de empresa que solo la firma puede fijar.",
+        "motivation": "La empresa acaba de pagar una rotación de credenciales que no podía detener, y sus desarrolladores clonan repositorios en máquinas que ella no gestiona.",
+        "task": {
+          "who": "Personal de seguridad de la plataforma de desarrollo y de revisión de terceros",
+          "what": "Escribir el requisito de activado por defecto en la revisión de proveedores",
+          "where": "Cuestionarios de seguridad a proveedores y negociaciones de renovación",
+          "when": "Enero de 2027",
+          "why": "Un interruptor de política no protege a nadie fuera de la flota gestionada",
+          "how": "Revisión de compras ligada al ciclo de renovación del agente de programación"
+        }
+      },
+      {
+        "actor": "Responsable del grupo de trabajo de endurecimiento de la cadena de suministro, OpenSSF",
+        "job": "Extender la guía de controles del ecosistema más allá del momento de instalación, para que las entradas de arranque del editor y del agente queden nombradas como una vía de ejecución propia.",
+        "outcome": "Una declaración de control publicada a la que los fabricantes puedan apuntar cuando cambien un comportamiento por defecto, y que los compradores puedan citar cuando lo pidan.",
+        "motivation": "Todos los controles que hay hoy en la guía del ecosistema se detienen en la instalación, y por eso la vía de apertura no tenía a nadie vigilándola.",
+        "task": {
+          "who": "Miembros del grupo de trabajo y editores de especificaciones de OpenSSF",
+          "what": "Añadir las entradas de arranque del repositorio a la guía de controles",
+          "where": "Borradores del grupo de trabajo y rondas de revisión pública",
+          "when": "Q3 2026",
+          "why": "La guía existente se detiene en el límite de la instalación del paquete",
+          "how": "Borrador de consenso revisado en abierto en el repositorio del grupo"
+        }
+      },
+      {
+        "actor": "Investigadora de experiencia de desarrollo, confianza del espacio de trabajo de Visual Studio Code",
+        "job": "Medir cuánto cuesta en realidad el diálogo de confianza y si un paso de aprobación detallado sobrevive al contacto con alguien que intenta ponerse a trabajar.",
+        "outcome": "Evidencia de que un paso por entrada es asumible al principio de una sesión, que es lo que un cambio de comportamiento por defecto tiene que superar internamente.",
+        "motivation": "La objeción de siempre es la fricción cobrada a todo el mundo para siempre, y solo la responden cifras medidas de aceptación y de finalización.",
+        "task": {
+          "who": "Personal de investigación de usuarios y análisis de telemetría de Visual Studio Code",
+          "what": "Medir la aceptación del diálogo de confianza frente a un prototipo de aprobación detallada",
+          "where": "Telemetría de Insiders y sesiones moderadas de investigación con desarrolladores",
+          "when": "Noviembre de 2026",
+          "why": "La objeción de la fricción solo cae ante cifras medidas",
+          "how": "Comparación de prototipos en Insiders con telemetría de uso voluntaria"
+        }
+      },
+      {
+        "actor": "Mantenedor de repositorio, un proyecto de código abierto muy clonado que distribuye hooks de agente",
+        "job": "Sacar el trabajo de preparación del proyecto de las entradas que se disparan al abrir y llevarlo a comandos que quien contribuye ejecuta a propósito, documentando lo que quede.",
+        "outcome": "Un proyecto cuyos colaboradores no pierden nada cuando las entradas de arranque dejen de dispararse solas, lo que retira el argumento de la rotura frente a un comportamiento por defecto más estricto.",
+        "motivation": "Los mantenedores cargan con el coste reputacional de un archivo que se ejecuta al clonar, y depender de hooks que se disparan solos es lo que frena el cambio.",
+        "task": {
+          "who": "Mantenedores del proyecto y revisores de la experiencia de quien contribuye",
+          "what": "Sustituir los hooks de preparación automáticos por comandos explícitos para colaboradores",
+          "where": "Archivos de configuración del repositorio y guía de contribución",
+          "when": "Diciembre de 2026",
+          "why": "La rotura del ecosistema es el argumento en contra de un comportamiento por defecto más estricto",
+          "how": "Comando de preparación documentado que sustituye a la entrada del hook de arranque de sesión"
+        }
+      }
+    ],
+    "prediction.e02990b40c203acb": [
+      {
+        "actor": "Responsable de política de administración de exportaciones, Comité de Revisión de Usuarios Finales de la Oficina de Industria y Seguridad",
+        "job": "Trabajar el expediente pendiente sobre ChangXin, sopesando el registro de impacto en el suministro frente a los argumentos para añadir a la empresa.",
+        "outcome": "Ninguna decisión interagencial que envíe una adición de ChangXin al Federal Register para su publicación.",
+        "motivation": "Se pide al comité que use un control de equipos contra una empresa cuya producción necesitan ahora las marcas estadounidenses.",
+        "task": {
+          "who": "Personal de administración de exportaciones de la Oficina que asiste al comité de revisión",
+          "what": "Revaluar el expediente pendiente sobre ChangXin",
+          "where": "Registro del Comité interagencial de Revisión de Usuarios Finales",
+          "when": "Q4 2026",
+          "why": "El instrumento limita la compra, no la venta de la que se protesta",
+          "how": "Nota de impacto en el suministro circulada junto al expediente"
+        }
+      },
+      {
+        "actor": "Responsable de negociaciones comerciales con China, Oficina del Representante Comercial de Estados Unidos",
+        "job": "Llevar las rondas de negociación cuya continuidad es el motivo declarado por el que se congeló en junio la recomendación de incluir a ChangXin.",
+        "outcome": "Una vía comercial lo bastante viva como para que las nuevas adiciones a la Entity List sigan fuera de la mesa.",
+        "motivation": "Una inclusión anunciada a mitad de ronda le cuesta a la negociación más de lo que gana en el expediente de control de exportaciones.",
+        "task": {
+          "who": "Oficina de China del Representante Comercial con sus homólogos de Comercio y del Tesoro",
+          "what": "Programar la siguiente ronda de negociación con Pekín",
+          "where": "Conversaciones comerciales bilaterales y términos de prórroga de la tregua",
+          "when": "Q1 2027",
+          "why": "La pausa iba atada a que las conversaciones continuaran",
+          "how": "Términos de prórroga de la tregua acordados antes del vencimiento actual"
+        }
+      },
+      {
+        "actor": "Responsable de compras de memoria, cadena de suministro de portátiles de HP",
+        "job": "Repartir la DRAM cualificada de ChangXin en portátiles de gama baja para mercados fuera de Estados Unidos manteniendo a Samsung, SK Hynix y Micron en el resto.",
+        "outcome": "Dos listas de materiales vivas, separadas por destino, que una inclusión obligaría a HP a rehacer.",
+        "motivation": "No hay suficiente memoria no china para construir todas las máquinas que la línea de portátiles tiene que sacar.",
+        "task": {
+          "who": "Equipos de compras de componentes y de planificación regional de producción de HP",
+          "what": "Asignar el volumen de ChangXin por mercado de destino",
+          "where": "Lista de materiales y planes de producción de portátiles",
+          "when": "Q3 2026",
+          "why": "La memoria no china no puede cubrir toda la producción",
+          "how": "Reglas de aprovisionamiento codificadas por destino en el sistema de planificación"
+        }
+      },
+      {
+        "actor": "Asesor de cumplimiento comercial, cadena de suministro global de Asus",
+        "job": "Redactar y hacer cumplir la regla de destino que mantiene las piezas de ChangXin fuera de los envíos a Estados Unidos sin que ninguna ley lo exija.",
+        "outcome": "Una restricción interna documentada, no legal, que mantiene la separación defendible si Washington pregunta.",
+        "motivation": "La compañía está trazando una línea que espera y no una que se le haya dado.",
+        "task": {
+          "who": "Función jurídica y de cumplimiento comercial de Asus",
+          "what": "Documentar la restricción por destino sobre las piezas de ChangXin",
+          "where": "Registros de aprobación de proveedores y reglas de filtrado de envíos",
+          "when": "Q4 2026",
+          "why": "Ninguna norma publicada define todavía la línea",
+          "how": "Matriz de aprobación de proveedores indexada por país de envío"
+        }
+      },
+      {
+        "actor": "Director de asuntos públicos, asociación sectorial de semiconductores",
+        "job": "Presentar ante el Departamento de Comercio el argumento de impacto en el suministro para que el coste de incluir a un proveedor de DRAM en funcionamiento quede en el expediente.",
+        "outcome": "Alegaciones y reuniones informativas que meten el riesgo de producción de portátiles en el expediente de decisión de la Entity List.",
+        "motivation": "Los miembros no pueden poner precio a los dispositivos si una fuente de memoria desaparece de la lista aprobada en plena escasez.",
+        "task": {
+          "who": "Personal de políticas de la asociación y representantes de las empresas miembro",
+          "what": "Presentar alegaciones de impacto en el suministro ante Comercio",
+          "where": "Expedientes normativos de la Oficina de Industria y Seguridad y reuniones con la agencia",
+          "when": "Q4 2026",
+          "why": "El coste de la escasez tiene que llegar al expediente de decisión",
+          "how": "Datos de escasez aportados por los miembros y presentados en el expediente"
+        }
+      },
+      {
+        "actor": "Asesor legislativo para control de exportaciones, personal del comité selecto de la Cámara sobre China",
+        "job": "Redactar el texto de restricción de compras y de aranceles sobre semiconductores cubiertos hacia el que han empezado a apuntar las cartas del comité en lugar de hacia una adición a la Entity List.",
+        "outcome": "Un instrumento de compras o arancelario avanzando por el Congreso en lugar de una modificación de la Entity List en el Federal Register.",
+        "motivation": "La Entity List no puede impedir que una marca estadounidense compre memoria china; una norma de compras sí.",
+        "task": {
+          "who": "Asesores del comité junto al servicio de redacción legislativa",
+          "what": "Redactar el texto de restricción de compra de semiconductores cubiertos",
+          "where": "Enmiendas a la ley de autorización y cartas del comité",
+          "when": "Q1 2027",
+          "why": "La Entity List alcanza a los proveedores, no a los compradores",
+          "how": "El estatuto vigente de compras de semiconductores cubiertos como plantilla"
+        }
+      },
+      {
+        "actor": "Analista de política de adquisiciones, consejo federal de redacción de normas de compras",
+        "job": "Convertir la prohibición sobre semiconductores chinos cubiertos en cláusulas contractuales que alcancen a los compradores federales y no a los portátiles de venta al público.",
+        "outcome": "Una norma de compras que responde al agravio de seguridad sin modificar la Entity List.",
+        "motivation": "Las compras federales son el alcance que el listado del Pentágono ya tiene, y el que las agencias pueden hacer cumplir.",
+        "task": {
+          "who": "Personal de redacción de la regulación de adquisiciones civil y de defensa",
+          "what": "Redactar las cláusulas contractuales sobre semiconductores cubiertos",
+          "where": "Proceso normativo de la regulación federal de adquisiciones",
+          "when": "Q2 2027",
+          "why": "Las compras alcanzan a los compradores públicos a los que la lista no llega",
+          "how": "Cláusula de declaración y certificación del proveedor"
+        }
+      },
+      {
+        "actor": "Responsable de planificación de capacidad, operaciones de DRAM de ChangXin Memory Technologies",
+        "job": "Convertir los fondos captados en la salida a bolsa de Shanghái en un volumen de producción lo bastante estable como para que los programas de portátiles occidentales sigan planificando en torno a él.",
+        "outcome": "Un suministro cualificado sostenido que encarece sacar a ChangXin de las listas de materiales occidentales.",
+        "motivation": "Los diseños ganados solo se mantienen si el volumen llega cada trimestre que los programas de portátiles planifican.",
+        "task": {
+          "who": "Operaciones de ChangXin y gestión de programas con clientes",
+          "what": "Comprometer volumen trimestral de DRAM con los clientes de portátiles",
+          "where": "Planificación de producción de fábrica y acuerdos de suministro con clientes",
+          "when": "Q1 2027",
+          "why": "El volumen cualificado es lo que encarece la separación",
+          "how": "Acuerdos de suministro a varios trimestres con los compradores de módulos"
+        }
+      },
+      {
+        "actor": "Responsable de ingeniería de cualificación de componentes, equipo de plataformas de portátiles de Acer",
+        "job": "Extender la cualificación de las piezas de ChangXin a más plataformas de gama baja para que la lista de materiales de fuera de Estados Unidos deje de depender de un solo modelo.",
+        "outcome": "DRAM de ChangXin cualificada en plataformas suficientes como para que la decisión de aprovisionamiento sea estructural y no una prueba.",
+        "motivation": "Un proveedor que aún se está evaluando es fácil de descartar; uno cualificado en varias plataformas no lo es.",
+        "task": {
+          "who": "Validación de plataformas e ingeniería de componentes de Acer",
+          "what": "Cualificar módulos de ChangXin en plataformas adicionales",
+          "where": "Laboratorios de validación de plataformas y lista de proveedores aprobados",
+          "when": "Q3 2026",
+          "why": "El aprovisionamiento de un solo modelo es reversible; el de toda una plataforma no",
+          "how": "Conjunto estándar de pruebas de cualificación y compatibilidad de memoria"
+        }
+      }
+    ],
+    "prediction.e17de6adc92dd6dc": [
+      {
+        "actor": "Autor del runtime y mantenedor de los kernels de Metal, proyecto Swiftlet",
+        "job": "Convertir la publicación de agosto en algo que alguien de fuera pueda instalar y volver a ejecutar: opción de presupuesto de caché documentada, compilación reproducible y los ajustes detrás de la tasa reportada.",
+        "outcome": "Una compilación que un tercero pueda ejecutar en su propio hardware M5, con una longitud de contexto y un presupuesto de caché que elija y pueda indicar.",
+        "motivation": "Un runtime cuya cifra de titular nadie de fuera puede reproducir es una demo, y el proyecto quiere que el mecanismo se juzgue por sus propios méritos.",
+        "task": {
+          "who": "El autor del runtime en Swift y Metal de Swiftlet trabajando el repositorio público",
+          "what": "Documentar la opción de caché de expertos y los pasos de compilación",
+          "where": "El repositorio de Swiftlet en GitHub y su README",
+          "when": "Septiembre de 2026",
+          "why": "Nadie de fuera puede indicar condiciones que no puede fijar",
+          "how": "Opción de línea de comandos para el presupuesto de caché con instrucciones de compilación publicadas"
+        }
+      },
+      {
+        "actor": "Autor de benchmarks independiente, publicación de pruebas de inferencia local en silicio de Apple",
+        "job": "Ejecutar el modelo transmitido de la clase de 80.000 millones de parámetros con varias longitudes de contexto y presupuestos de caché, y publicar después una tabla en lugar de una sola cifra de rendimiento.",
+        "outcome": "Una tasa de descodificación publicada para un modelo disperso de mezcla de expertos de 80B con expertos transmitidos, indicada junto con la longitud de contexto con la que se midió.",
+        "motivation": "Una cifra de la parte que la produjo es la forma más débil de benchmark, y volver a ejecutarlo es la manera más barata de comprobarla.",
+        "task": {
+          "who": "Probadores independientes que ejecutan modelos locales en su propio hardware de Apple",
+          "what": "Barrer la tasa de descodificación variando contexto y ajustes de caché",
+          "where": "Un Mac de clase M5 ejecutando el runtime de streaming",
+          "when": "Q1 2027",
+          "why": "Una sola cifra no puede describir un conjunto de trabajo transmitido",
+          "how": "Ejecuciones cronometradas repetidas con longitudes de prompt fijas"
+        }
+      },
+      {
+        "actor": "Mantenedor del arnés de pruebas, herramienta de código abierto de benchmarking de inferencia local",
+        "job": "Añadir la longitud de contexto y el presupuesto de caché de expertos a los campos que toda ejecución debe reportar, para que un resultado de rendimiento con streaming no pueda publicarse desnudo.",
+        "outcome": "Un arnés cuya salida lleva las condiciones junto a los tokens por segundo, de modo que una medición de terceros con condiciones indicadas sea lo normal y no un acto de diligencia.",
+        "motivation": "En cuanto los pesos se transmiten en lugar de estar residentes, una tasa sin su conjunto de trabajo no es una medición que nadie más pueda comprobar.",
+        "task": {
+          "who": "Mantenedores del esquema de resultados y del formato de salida del arnés",
+          "what": "Añadir campos de presupuesto de caché y de contexto a los resultados",
+          "where": "El esquema de resultados del arnés y su formato de salida",
+          "when": "Q4 2026",
+          "why": "Las tasas desnudas son ilegibles en cuanto los expertos se transmiten",
+          "how": "Esquema de resultados versionado con campos de condiciones obligatorios"
+        }
+      },
+      {
+        "actor": "Responsable de ingeniería de publicación de modelos, equipo Qwen3-Next de Alibaba",
+        "job": "Publicar y mantener los checkpoints dispersos de mezcla de expertos de 80.000 millones de parámetros, con el enrutador y la disposición de expertos que hacen viable el streaming desde almacenamiento.",
+        "outcome": "Un modelo de la clase de 80B disponible en abierto que quienes prueben desde fuera puedan transmitir en hardware de Apple de consumo y medir sin que intervenga el autor del runtime.",
+        "motivation": "Un modelo disperso que solo puede ejecutar su propio herramental es un modelo del que nadie más publica cifras.",
+        "task": {
+          "who": "Ingenieros de publicación de modelos y distribución de pesos abiertos de Qwen",
+          "what": "Mantener abiertos los checkpoints dispersos de mezcla de expertos de 80B",
+          "where": "Repositorios públicos de modelos y su herramental de conversión",
+          "when": "Octubre de 2026",
+          "why": "La medición externa necesita pesos disponibles en abierto",
+          "how": "Publicaciones en safetensors fragmentados con la disposición de expertos documentada"
+        }
+      },
+      {
+        "actor": "Ingeniera de frameworks, equipo de investigación en aprendizaje automático de MLX de Apple",
+        "job": "Exponer las primitivas de memoria y almacenamiento que necesita un runtime de streaming de expertos —límites de memoria fijada, lecturas de pesos mapeadas— para que exista una segunda implementación con la que medir.",
+        "outcome": "Una vía independiente para ejecutar la misma clase de modelo con streaming, que dé a quienes prueban desde fuera un runtime que el autor original no controla.",
+        "motivation": "Un framework que solo sirve modelos residentes cede el caso de memoria limitada a quien esté dispuesto a escribir sus propios kernels de Metal.",
+        "task": {
+          "who": "Ingenieros de gestión de memoria y carga de modelos del núcleo de MLX",
+          "what": "Exponer los límites de memoria fijada y la carga de pesos mapeada",
+          "where": "El runtime de MLX y su biblioteca de modelos de lenguaje",
+          "when": "Noviembre de 2026",
+          "why": "Una segunda implementación hace comprobable la cifra",
+          "how": "Carga de pesos mapeada en memoria con límites de residencia configurables"
+        }
+      },
+      {
+        "actor": "Ingeniero de publicación de cuantizaciones, equipo de conversión a GGUF de Unsloth",
+        "job": "Publicar los artefactos cuantizados y una versión del paquete para ellos, de modo que una mejora de velocidad medida se convierta en algo que alguien de fuera pueda instalar y cronometrar en lugar de solo leerlo.",
+        "outcome": "Cuantizaciones instalables de las clases de modelo implicadas, con una versión que los usuarios puedan medir al margen de las cifras que el propio equipo midió.",
+        "motivation": "La fusión de Studio salió con una cifra de entre diez y veintidós veces de renderizado por lotes frente a renderizado en serie y sin versión del paquete con la que comprobarla, y ese hueco invita a la misma duda.",
+        "task": {
+          "who": "Ingenieros de cuantización y publicación de paquetes de Unsloth",
+          "what": "Sacar una versión del paquete para la compilación medida",
+          "where": "Los repositorios de modelos GGUF del proyecto y su tren de publicación",
+          "when": "Q3 2026",
+          "why": "Una cifra propia necesita un artefacto instalable",
+          "how": "Versiones etiquetadas emparejadas con recetas de cuantización publicadas"
+        }
+      },
+      {
+        "actor": "Editor de análisis de hardware, publicación de análisis de silicio de Mac",
+        "job": "Incorporar a los análisis de hardware M5 una sección de modelos locales que reporte qué descodifica de verdad una máquina con memoria limitada, con longitudes de prompt que el lector reconozca.",
+        "outcome": "Una cifra de rendimiento de mesa de análisis para un modelo transmitido de la clase de 80B en hardware M5, publicada con la longitud de contexto y el presupuesto de memoria con los que se tomó.",
+        "motivation": "La capacidad de memoria unificada es la decisión de compra en estas máquinas, y un modelo transmitido es la prueba que hace legibles los escalones de capacidad.",
+        "task": {
+          "who": "Personal de la mesa de análisis que ejecuta la batería de pruebas de inferencia local",
+          "what": "Añadir la descodificación de modelos grandes transmitidos a los benchmarks de análisis",
+          "where": "El banco de pruebas de Mac de la publicación",
+          "when": "Q2 2027",
+          "why": "Los escalones de memoria son la decisión real del lector",
+          "how": "Longitudes de prompt fijas en todas las configuraciones de memoria"
+        }
+      },
+      {
+        "actor": "Responsable de producto de runtimes de modelos locales, fabricante de aplicaciones de LLM de escritorio",
+        "job": "Sacar el streaming de expertos con un ajuste visible de presupuesto de caché, convirtiendo un truco artesanal de runtime en algo que una base instalada grande ejecuta y sobre lo que reporta.",
+        "outcome": "Una población de usuarios descodificando modelos de la clase de 80B en Mac de consumo que puedan nombrar el presupuesto de caché y la longitud de contexto detrás de la tasa que vean.",
+        "motivation": "Ejecutar un modelo más grande que la memoria de la máquina es lo que vende un ejecutor de escritorio, y el ajuste tiene que verse para poder darle soporte.",
+        "task": {
+          "who": "Producto de la aplicación de escritorio e ingenieros del backend de inferencia",
+          "what": "Sacar un control de presupuesto de caché de expertos visible para el usuario",
+          "where": "Los ajustes de carga de modelos de la aplicación de escritorio",
+          "when": "Diciembre de 2026",
+          "why": "Los usuarios solo pueden reportar ajustes que pueden ver",
+          "how": "Control en el panel de ajustes conectado al backend de streaming"
+        }
+      },
+      {
+        "actor": "Revisor de evaluación de artefactos, comité de programa de una conferencia de sistemas y aprendizaje automático",
+        "job": "Exigir a las afirmaciones de rendimiento de inferencia enviadas que indiquen sus condiciones de medición, para que una tasa de descodificación llegue con su longitud de contexto y su presupuesto de residencia adjuntos.",
+        "outcome": "Mediciones publicadas de modelos dispersos transmitidos que llevan sus propias condiciones, producidas por partes sin interés en el runtime que se mide.",
+        "motivation": "Una afirmación de rendimiento sin conjunto de trabajo no es revisable, y la línea de artefactos es donde eso se hace cumplir antes de publicar y no después.",
+        "task": {
+          "who": "Miembros del comité de evaluación de artefactos que revisan envíos de inferencia",
+          "what": "Exigir que el contexto y el presupuesto de residencia se indiquen en los envíos",
+          "where": "La lista de comprobación de evaluación de artefactos de la conferencia y sus revisiones",
+          "when": "Marzo de 2027",
+          "why": "Las condiciones no indicadas hacen que una afirmación de rendimiento no sea revisable",
+          "how": "Lista de comprobación de artefactos que exige reportar las condiciones de medición"
+        }
+      }
+    ]
+  }
+}

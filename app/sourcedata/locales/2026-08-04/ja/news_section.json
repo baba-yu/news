@@ -1,0 +1,112 @@
+{
+  "date": "2026-08-04",
+  "sections": [
+    {
+      "category": "自分を複製する npm のワームが keyv のキャッシュのパッケージを乗っ取り、開発者のエージェントの設定の中に起動時のフックを残す",
+      "bullets": [
+        {
+          "body": "資格情報を盗むワームが今日、npm のレジストリの中を駆け抜けた。攻撃者が keyv——週におよそ 1億2,700万回引かれるキャッシュのライブラリ——の維持者の GitHub のアカウントを乗っ取り、そのリポジトリ自身の GitHub Actions の流れを使って、汚された版を切り出したのである。悪意のあるファイルは、版の札が付く前に各企ての main の枝へまっすぐ入っていた。だから汚された版は、正しい来歴の署名を持っている。供給網を検める者が、このパッケージは問題ないと結論づけるために確かめる、まさにその成果物である。Aikido は中央ヨーロッパ時間の昼過ぎまでに、1,381 の版にまたがる少なくとも 868 のパッケージを数え上げ、まだ数え続けていた。同じ維持者の flat-cache、file-entry-cache、cacheable-request、そして @cacheable の名前空間も一緒に持って行かれており、及ぶ範囲は月あたり二十億回の導入を超える。仕込まれた中身は、組み上げ済みの束を取ってくる、導入の前に走る script である。npm のトークン、短命な OIDC のトークンを含むあらゆる種類の GitHub の資格情報、AWS の鍵とインスタンスメタデータの資格情報、Kubernetes のサービスアカウントのトークン、Vault と Stripe と Slack の鍵、SSH の鍵、Docker の設定、Terraform の状態をさらい、暗号化して攻撃者の持つリポジトリへ押し出す。その道が塞がれているときのための、控えの宛先も備えている。そのうえで、見つけた公開用のトークンを使って自分自身を公表し直す。研究者たちが、二分から七分ごとに組織から組織へ移っていくのを見ていたのは、そのためである。コードを書くエージェントを走らせている者にとって、立ち止まる値打ちがあるのはここだ。汚されたリポジトリは、`.claude/settings.json` に載せたセッション開始のフックと、フォルダを開いたときに火を吹く `.vscode/tasks.json` の仕事も一緒に出しており、どちらも同じ setup の script を指していた。開発者が企てをエディタやエージェントで開いたときに動き出す、二本目の実行の経路である。導入したときではない。どちらも利用者がワークスペースを信頼していることを要るが、それは、たいていの人が読まずに押して通る仕掛けである。Deliveroo、Qlik、Picsart に紐づく版も、広がりの中に巻き込まれた。",
+          "citations": [
+            {"label": "Aikido - Keyv and friends compromised in npm supply chain attack", "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"},
+            {"label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks", "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"},
+            {"label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised in Shai-Hulud attack", "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "800億パラメータの Qwen が、専門家をディスクから流し込んで、Mac の 4.3 GB のメモリで動く",
+      "bullets": [
+        {
+          "body": "Swift と Metal で書かれた Swiftlet という実行環境が今日公になり、述べるのは易しく、反論するのは厄介な主張を持ち込んだ。Qwen3-Next-80B、ディスクの上では 42 ギガバイトの重みが、M5 の Mac で毎秒 4.5 から 5 トークンを生み、常駐するメモリの山は 4.3 ギガバイトに収まる、というものである。350億パラメータの Qwen3.6 は同じやり方で 2.6 ギガバイトに収まり、毎秒 7 から 11 トークン。iPhone 17 の上ではおよそ 2.5 ギガバイトで、毎秒およそ 1 トークンである。仕掛けは新しい量子化ではなく、造りのほうにある。これらはトークン一つあたりおよそ 30億のパラメータにしか触れない疎な MoE のモデルなので、実行環境は密な部分——注意、埋め込み、振り分け役——を 4 ビットのまま常に載せておき、振り分けられる専門家のほうは、一度の読み出しで取り出せる決まった歩幅の入れ物に詰めておく。そして、振り分け役が求めた専門家だけを流し込み、近ごろのものとよく使うものを、利用者がコマンドラインの指定で大きさを決めるキャッシュに抱えておく。層の四分の三にわたる Gated DeltaNet の線形の注意が、鍵と値のキャッシュが節約分を食い返すのを止めている。書き手は、渡すメモリの量によってキャッシュの当たり率が 43% から 70% のあいだで動くと報せている。そしてより面白いのは、その持ち分が変わってもスループットはほとんど動かないという点だ。いまのところ詰まりは、記憶装置からの読み出しではなく、GPU への仕事の送り出しにあるからである。見ておくべきはその数字だ。流し込みという道にはまだ余地が残っていることを言っており、電話やノートパソコンの上のメモリの天井を、容量の問題ではなく段取りの問題として置き直すからである。許諾は Apache 2.0、commit は八つ、そしてコードを書くエージェントとともに書かれている。",
+          "citations": [
+            {"label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices", "url": "https://github.com/leonickson1/Swiftlet"},
+            {"label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone", "url": "https://news.ycombinator.com/item?id=49158333"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Unsloth Studio が画像と動画の生成に手を伸ばし、画像のモデルへの LoRA の学習も加える",
+      "bullets": [
+        {
+          "body": "Unsloth のここしばらくで最大となる一件の取り込みが今日降りた。しかも文章についてのものではない。デスクトップ版の Studio に向けたプルリクエストが、Images の頁を加える。Z-Image、Qwen-Image、FLUX、SDXL の派生について、Unsloth 自身の GGUF の量子化の上で走る、文章からの画像の生成。変形、描き足し、拡張、拡大、そして指示による手直しを覆う編集の流れ。音声を同期させた、五つのモデルの系統にまたがる文章からの動画。そして、微調整を追う読み手にとって効いてくる部分——画像のモデルへの QLoRA の学習で、その場で見える指標と、出来上がったアダプタの一押しでの配りが付く。その下には推論の経路が二つ——native の stable-diffusion.cpp と Diffusers——が座っており、GPU のメモリを会話の側の仕組みと取り合うのではなく分け合う。条件付けと組み上げのキャッシュとあわせて、画像をまとめて描き出すやり方を、チームは自ら、同じ画像を一枚ずつ順に描き出す場合より 10 倍から 22 倍速いと測っている。差分は 231 のファイルにわたる 79,151 行の追加で、八百を超える裏側の単体の試験と、browser の高さでの端から端までの確かめを運んでいる。同じ日にさらに 28 の commit が入った。その中には、Windows の導入器における Intel Arc の見分けと XPU 版 PyTorch の導入の経路がある——Arc、Iris、UHD、HD graphics がいま見分けられるようになり、wheel は自前の oneAPI の実行環境を同梱するので、Intel の道具一式を別に入れる必要はない——さらに、公表の流れを固める一連の仕事も入った。署名の付いた導入器のプラグインのライブラリ、署名のないファイルが一つでもあれば失敗する公表、取りに行くのではなく埋め込まれる WebView2 の起動用の部品、公表の前に Defender で走査される Windows の束、そして失敗したらやり直す macOS のディスクイメージの綴じ付けである。そのどれにも、パッケージの公表は付いてこなかった。Python のライブラリはいまも PyPI の、昨日の 2026.8.2 のままで、説明書きの変更の記録は7月29日から動いていない。だから今日の変化が見えるのは、リポジトリの中だけである。",
+          "citations": [
+            {"label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs", "url": "https://github.com/unslothai/unsloth/pull/6763"},
+            {"label": "GitHub - Add Intel Arc GPU detection and XPU PyTorch install to Windows installer", "url": "https://github.com/unslothai/unsloth/pull/7706"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "HP、Asus、Acer が、ほかのどこのものも足りないので、中国製の DRAM をノートパソコンに入れ始める",
+      "bullets": [
+        {
+          "body": "Nikkei Asia が今日、HP、Asus、Acer が、中国の ChangXin Memory Technologies の DRAM を少量ずつ、米国の外で売るノートパソコンに載せて出し始めたと報じた。部品の認定は、今年の半ばごろに終えていたという。量は限られており、置き所は狙って選ばれている——安い機種、米国以外の市場である。規制と地政学のさらされ方がより強い地域には、Samsung、SK Hynix、Micron が取ってある。HP については、この供給元に肚を決めたのではなく、まだ見定めている最中だと書かれている。書き留める値打ちがあるのは、その理由のほうだ。これは費えの決定ではない。ChangXin が先行する各社の値段を下回っているわけではないからである。これは供給の決定であり、AI の建て増しがメモリの市場を、PC を作る側がそれまで手を付けずにいた供給元を認定するほどに締め上げた、その中で下されている。しかもそれは、メモリと記憶装置の会議である FMS が Santa Clara で二十回目を開いたのと同じ朝に届いている。締め付けを起こしている側と、それを受け止めている側が、同じ一つの部屋にそろう場である。ノートパソコンを売る側が、どれでも同じだと扱ってきたありふれた部品が、いまや一台が出荷できるかどうかを決めるものになっている。",
+          "citations": [
+            {"label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage", "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"},
+            {"label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory", "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"},
+            {"label": "Asia Business Outlook - HP, Asus and Acer turn to CXMT chips amid global memory shortage", "url": "https://www.asiabusinessoutlook.com/news/hp-asus-and-acer-turn-to-cxmt-chips-amid-global-memory-shortage-nwid-12260.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Palantir が 93% の伸びを出し、寄り付きで株価がおよそ 20% 付け直される",
+      "bullets": [
+        {
+          "body": "Palantir が昨日の引けのあとに、第2四半期の売上高 19億4,000万ドルを報告した。前年同期比で 93% 増、市場の見込みの 18億1,000万ドルを上回る。調整後の一株利益は 41 セントで、見込みの 34 セントに対してである。株価を動かしたのは、その下の内訳だ。米国の民間向けの売上高が 149% 増の 7億6,400万ドル、米国の政府向けが 90% 増の 8億900万ドル。長らくこの会社が頼っていると見なされてきた政府の商いに、民間の側がほぼ並んだということである。純利益は 10億6,000万ドル、調整後のフリーキャッシュフローは 12億2,000万ドル。通期の見通しは、これまでの 76億5,000万から 76億6,000万ドルを、81億5,000万から 81億6,000万ドルへ引き上げた。米国の民間向けの目標は 34億2,000万ドル超へ上げられ、少なくとも 134% の伸びを含意する。第3四半期の売上高は、およそ 21億6,000万ドルと示された。株は今朝、およそ 152 ドルで寄り付いた。月曜の引け値 125.65 ドルをおよそ 20% 上回る。アナリストの反応は、向きは揃い、幅は大きく開いた。Deutsche Bank は Buy へ引き上げ、目標を 80 ドルから 200 ドルへ動かした。Citi は 200 から 245 へ、DA Davidson は 175 から 200 へである。一つの銘柄を越えて読み取れるのは、この分野がずっと回りを回っていた問いだ。企業の AI のソフトウェアへの支払いが、試しどまりではなく、まとまった額の売上として認識されるところまで来ているのか。少なくとも一社について、ここでの答えは紛れがない。AMD は今日の引けのあとに決算を出す。同じ問いが、こんどはシリコンの側へ向けられるということである。読むべきは、データセンター向けの品目と、Helios のラック規模の受注について数字の付いたものがあるかどうかだ。",
+          "citations": [
+            {"label": "Business Wire - Palantir reports Q2 2026 revenue growth of 93 percent and raises FY 2026 guidance", "url": "https://www.businesswire.com/news/home/20260802523449/en/Palantir-Reports-Q2-2026-U.S.-Comm-Revenue-Growth-of-149-YY-and-Revenue-Growth-of-93-YY-Raises-FY-2026-Revenue-Guidance-to-82-YY-Growth-and-U.S.-Comm-Revenue-Guidance-to-134-YY-Crushing-Consensus-Expectations"},
+            {"label": "Proactive Investors - Palantir Technologies shares surge after earnings beat", "url": "https://www.proactiveinvestors.com/companies/news/1096513/palantir-technologies-shares-surge-after-earnings-beat-1096513.html"},
+            {"label": "Finbold - Wall Street analysts update Palantir stock price after blowout earnings", "url": "https://finbold.com/wall-street-analysts-update-palantir-stock-price-after-blowout-earnings/"}
+          ]
+        }
+      ]
+    },
+    {
+      "category": "ベイエリア / シリコンバレーの AI の集まり",
+      "bullets": [
+        {
+          "body": "今週の場はラスベガスである。Black Hat USA 2026 は今日、8月4日火曜に Mandalay Bay Convention Center で Summit Day に届く。六つのサミットが並んで走る——Healthcare、CISO、AI、Financial Threat、Innovators and Investors、そして Omdia Analyst Summit である。AI Summit は三年目で、AI のしくみを守ること、エージェントの危うさ、クラウドと GPU の基盤の防護、そして攻めと守りの双方での AI の使い方を扱う一日ものの番組であり、資格を持つ参加者には継続教育の単位が五つ付く。8月1日土曜に始まった研修も今日で終わる。ブリーフィングと Business Hall は明日、8月5日水曜と8月6日木曜に続き、録画は8月14日から三十日のあいだ好きなときに見られる。今週あらたに書き留めるもの。BSides Las Vegas が、初めての AI のセキュリティ専門の流れ [un]prompted を、同じ名を持つ単体の会議とともに組んで走らせている。指示文への差し込み、エージェントの仕組み、GitHub の突き所、ソフトウェアの供給網、そして守りの工学を扱い、話に出るしくみはすでに資格情報と自律を握っているという前提で、実務者に向けて張られている。開いたのは昨日、8月3日月曜で、三日の日程だから、閉じるのは明日、8月5日水曜になる。Ai4 の本会議は今日 The Venetian で開き、8月6日木曜まで続く。参加者およそ 12,000、登壇者 1,000、出展者 400 が百万平方フィート近くに広がり、四つの基調の主題と、産業と技術の二十の流れが並ぶ。Geoffrey Hinton、Fei-Fei Li、Andrew Ng が同じ舞台に立ち、Waymo の Dmitri Dolgov と、Sebastian Thrun がその隣にいる。昨日の前哨の番組はもう閉じた。FMS: The Future of Memory and Storage は今日、Santa Clara Convention Center と Hyatt Regency で二十回目を開き、こちらも8月6日木曜まで。登壇者は 350 を超え、出展者は 100 以上、中身の流れは二十以上、参加者は 1,500 の組織から 3,500 が見込まれている。DEF CON 34 はそのあと、8月6日木曜から8月9日日曜まで LVCC の West Hall を取る。事前の登録は閉じたので、残っている入り方は当日払いの現金 $520 だけである。バッジは bunnie Huang の公開されている Baochip の上に組まれていて、終わったあともセキュリティのトークン、パスワードの管理、ハードウェアのセキュリティモジュールとして働き続ける。AI Village は8月6日から Level 1 の Room W603 を取り、競技、Creator Stage の講演、ポスターの発表、炉端の対話、実演を並べる。あわせて HalCTF——Hostile Autonomous Layer の旗取り——を回す。五人までの組が、2.5 GB までの OCI のコンテナとしてエージェントを送り込むか、用意された参照のエージェントを使い、隔てられた標的に当たる。20億から 1,200億パラメータまでの十三のモデルは主催の側が集めて置いてあるので、参加に要るのは GPU ではなくコードである。点は課題が解かれるほど減っていき、いちばん先に解いたものが最も重い。小さなモデルで勝った組には上乗せが付き、一位は DGX Spark を持ち帰る。",
+          "citations": [
+            {"label": "The AI Summit at Black Hat USA - returns in 2026 on August 4", "url": "https://blackhat.theaisummit.com/the-ai-summit-at-black-hat-usa-returns-in-2026-august-4/"},
+            {"label": "CybrSec Media - BSides Las Vegas adds a dedicated AI security track as [un]prompted comes to hacker summer camp", "url": "https://www.cybrsecmedia.com/bsideslv-adds-dedicated-ai-security-track-as-un-prompted-brings-practitioner-first-agenda-to-hacker-summer-camp/"},
+            {"label": "Ai4 - Ai4 2026 Las Vegas", "url": "https://ai4.io/"},
+            {"label": "Terrapinn - FMS: The Future of Memory and Storage 2026", "url": "https://www.terrapinn.com/conference/future-memory-storage/index.stm"},
+            {"label": "DEF CON - DEF CON 34", "url": "https://defcon.org/"},
+            {"label": "AI Village - HalCTF at DEF CON 34", "url": "https://aivillage.org/blog/halctf/"}
+          ]
+        },
+        {
+          "body": "セキュリティの筋でいちばん近いのは、SecurityWeek の AI Risk Summit である。来週の8月11日火曜と8月12日水曜、Half Moon Bay の Ritz-Carlton で開かれる。通しの札は $1,895 で、今週の8月7日金曜を過ぎると $2,195 に上がる。この一覧の中でいちばん近い、お金の期限である。札には、同じ場所で開かれる CISO Forum Summer Summit、8月10日月曜の歓迎の会、火曜の湾を見下ろす特別な晩餐、二日間の朝昼晩の食事、焚き火のそばの夜の交わり、閉会後の資料、そして空きがあれば割り引かれる部屋の料金が付く。8月13日木曜に Half Moon Bay Golf Links で開かれる SecurityWeek Golf Classic は、任意で、枠の限られた付け足しである。払うより話すほうがよいという者には、今月、二つの登壇の期限が効いてくる。Zenity の AI Agent Security Summit は、10月8日木曜のロンドンの回について8月17日月曜まで、10月21日水曜のニューヨークについて8月21日金曜まで、講演の応募を受ける。応募は、特定の売り手に寄らないことと、製品の売り込みではなく自前の研究、その場での実演、実際の事例に根ざしていることを求められる。選ばれた登壇者は無料で参加でき、$800 までの航空券と二泊分の宿が出て、合う都市のほうへ回されることもある。登壇の募集の頁は 2026年にあと二つのサミットがあると述べ、アジアの回は載せていない。一方で Zenity 自身の催事の頁は、都市も日付もないアジアへの広がりを相変わらず書いている。ここで何週にもわたって運ばれてきたのと同じ隙であり、9月に東京でと伝える第三者の記事は、その大元では裏が取れないままである。別に運営されている AI Security Summit は、サンフランシスコの回を10月15日木曜に開く。AI の危うさを負う側に向けた指導の流れと、しくみを作り、壊す側に向けた実務の流れの二本立てである。そのサンフランシスコの頁は、2026年の残りの寄港地としてロンドンの回とパリの講演の募集を挙げているが、どちらにも日付がない。以前ここで運んでいた北欧とシドニーの回は、いまもそこに現れない。その同じ10月15日木曜にぶつかるのが San Francisco AI Engineering and Infrastructure Summit である。名に反して場所は El Camino Real の Crowne Plaza Palo Alto、午前8時30分から午後3時30分まで、参加は無料、非公開で実務者が引っ張り、登壇者は公募ではなくすでに決まっている。先のほうでは、SANS が AI Cybersecurity Summit を11月2日月曜と11月3日火曜に Hilton Arlington Rosslyn で、対面と遠隔の両方で開く。サミットだけなら $525、$229 の部屋の枠は10月9日で閉じ、払い戻しの締めは10月14日である。OWASP Global AppSec USA は11月5日木曜と11月6日金曜に Hyatt Regency San Francisco を取り、11月2日から4日にかけて手を動かす研修が付く。そして第19回 ACM Workshop on Artificial Intelligence and Security は、11月15日日曜にハーグで、第33回 ACM Conference on Computer and Communications Security と並んで開かれる。論文の締め切りは7月24日にすでに閉じており、査読は9月7日、可否の知らせは9月9日、最終稿は9月16日である。",
+          "citations": [
+            {"label": "AI Risk Summit - dates, passes and price step", "url": "https://www.airisksummit.com/"},
+            {"label": "Sessionize - AI Agent Security Summit global series 2026 call for speakers", "url": "https://sessionize.com/ai-agent-security-summit-global-series-2026/"},
+            {"label": "Zenity - AI Agent Security Summit 2026 global series", "url": "https://zenity.io/resources/events/ai-agent-security-summit-2026"}
+          ]
+        },
+        {
+          "body": "シリコンの暦では、Hot Chips 2026 が8月23日日曜から8月25日火曜まで、Palo Alto の Stanford にある Memorial Auditorium で、対面と遠隔の両方で開かれる。早い時期の料金はもう切れているので、いま申し込む者は通常の料金を払う。遅い登録は会期そのものが終わるまで開いているが、対面の枠は埋まりうる。払い戻しは8月19日水曜の午後11時59分 PDT まで求められ、$25 の手数料が引かれる。遠隔の札には、チュートリアルの日と会議の日の両方について、動画、発表の PDF、Slack の部屋が付く。8月23日日曜がチュートリアルの日である。午前はメモリのチュートリアルで、HBM の土台のダイと先端の実装、生成の推論に向けた 3D DRAM の加速器、AI の計算のしくみの中の広帯域のフラッシュを扱う。午後は RISC-V のチュートリアルで、プロファイルとプラットフォーム、企業での公開の開発、NVIDIA の GPU との相互運用、そして自動車での使い方を扱う。会議の日は8月24日月曜と8月25日火曜である。CPU のセッションが二つあり、IBM の Z と LinuxONE のプロセッサ、Intel の Wildcat Lake Core Series 3 と Diamond Rapids Xeon、NVIDIA の Vera CPU、富士通の MONAKA、そして AI の仕事に向けた Arm のサーバ向けの部品にまたがる。自動運転についての Waymo の基調講演に加え、BOS Semiconductors の Eagle-N と Waymo のセンサ統合のプロセッサを並べた自動車のセッション。そして NVIDIA の Rubin、AMD の Instinct MI400 Series、Intel の Crescent Island を並べた GPU のセッションがある。火曜には FPGA のセッションが加わり、AMD が Versal RF と並べて安全な計算のシステムオンチップを見せる——セキュリティとシリコンの交わりを追う者には書き留める値打ちがある。あわせて、Samsung の LPDDR5X のメモリ内処理の部品と XCENA の MX1 CXL の機器を並べたメモリのセッション、Broadcom の Thor Ultra、NVIDIA の BlueField-4 と Spectrum-X、Mojo Vision の光の入出力を並べたネットワークのセッション、そして Meta の MTIA、NVIDIA の LPU の加速器、Cerebras の Wafer Scale Engine、Microsoft の MAIA 200、SambaNova の SN50 RDU、Google の TPU の系統、そして自らのチップ作りについて語る OpenAI を覆う、二つの加速器のセッションが並ぶ。そのあとは基盤の暦が続く。AI Infra Summit が9月15日火曜から9月17日木曜まで Santa Clara Convention Center で開かれ、主舞台に加えてデータとモデル、計算、データの移動、AI のデータセンター、物理の AI の流れ、二つの展示の劇場と実習にわたって、およそ 316 のセッションが並ぶ。Edge AI and Vision Innovation Forum が9月16日水曜にサンノゼで。OCP Global Summit が10月12日月曜から10月15日木曜までサンノゼで。NVIDIA の GTC Berlin が10月20日火曜から10月22日木曜までで、GTC がサンノゼへ戻るのは 2027年3月である。そして SC26 が11月15日日曜から11月20日金曜までシカゴで開かれる。",
+          "citations": [
+            {"label": "Hot Chips - Hot Chips 2026 programme and dates", "url": "https://www.hotchips.org/"},
+            {"label": "Hot Chips - registration, late rate and refund policy", "url": "https://www.hotchips.org/registration/"}
+          ]
+        },
+        {
+          "body": "Ray Summit は8月24日月曜から8月26日水曜まで、San Francisco Marriott Marquis で開かれる。月曜が研修の日で、そのあと二日が基調講演と分科である。札はサミットだけなら $400、研修込みで $450。五枚組は五枚まとめて $750 と示されており、定価の $2,250 に対してである。研修の日が扱うのは、多様な形式のデータの流し込み、土台のモデルの分散した学習、Ray Serve による本番の推論、物理の AI とロボット、その場での検索と推薦、そして事後の学習と提供である。第一回の vLLM Conference が同じ場所で、Inferact の主催で開かれ、Ray Summit のどの札にも含まれる。vLLM の基盤、ハードウェアの受け側、本番での配りの型、周辺との組み合わせにわたって二十を超える登壇者が並ぶ。vLLM を作り、中核を維持してきた Woosuk Kwon——いまは Inferact の最高技術責任者——と、中核の維持者で、いまは同社の最高経営責任者である Simon Mo、さらに NVIDIA、AMD、Google の TPU、Intel、Meta と PyTorch、Hugging Face、Red Hat からの寄与者が含まれる。Ray Summit 自身の基調講演は、Anyscale の共同創業者 Robert Nishihara と Ion Stoica、NVIDIA の Bryan Catanzaro、Torc の Felix Heide、Lila Sciences の Andrew Beam、Bedrock の Vincent Gonguet が務める。ACM AI Leadership Summit は8月30日日曜から9月2日水曜まで、アトランタで開かれる。サンフランシスコの四つの催しは、いまも9月の終わりにぶつかっている。CoreWeave の Fully Connected が9月29日火曜から10月1日木曜まで Moscone South で。早い時期の料金は切れたので、通常の札は以前の $899 に対して $1,299 である。AI の基盤、モデルの進み、エージェントの評価と見張りを覆う三つの流れがあり、基調の顔ぶれは CoreWeave の最高経営責任者 Mike Intrator と最高技術責任者 Peter Salanki、NVIDIA の Ian Buck、Stanford と World Labs の Fei-Fei Li、Conviction の Sarah Guo、Liquid AI の最高執行責任者 Jeffrey Li まで並ぶ。The AI Conference は同じ期間に Pier 48 の Sheds A と B で、五つの流れ、5,500 を超える参加者、120 を超える登壇者を集める。9月29日の実習と Hack Day は 350 で頭打ちになり、すでに売り切れた。二日通しの札を持つ者には、枠が開いたら最初に知らせると約束されている。OpenAI の DevDay は9月29日火曜に Fort Mason で、応募はすでに閉じた。そして Newcomer の Machine Earning AI Summit が同じ日にサンフランシスコで開かれ、こちらは応募が開いている。そのあとは、9月30日水曜の Runway AI Summit。10月7日水曜と10月8日木曜、アムステルダムの World Summit AI。10月20日火曜と10月21日水曜、サンノゼの PyTorch Conference。10月22日木曜と10月23日金曜、San Jose McEnery Convention Center で Linux Foundation の下に開かれる AGNTCon と MCPCon North America——Model Context Protocol、エージェントの基盤、そして本番のエージェントのしくみの安全と見通しのよさを軸に組まれており、提案の募集は6月7日から閉じているので、残っているのは参加である。10月28日水曜と10月29日木曜、Fort Mason の GitHub Universe。11月11日水曜から11月13日金曜まで、応募した者だけが入れるサンフランシスコの AI Engineer Code Summit——登壇の応募は10月11日で閉じる。11月12日木曜、サンフランシスコの Newcomer の Cerebral Valley AI Summit。11月30日月曜から12月4日金曜までの AWS re:Invent。12月の NeurIPS。そして12月9日水曜と12月10日木曜の The AI Summit New York である。",
+          "citations": [
+            {"label": "Anyscale - Ray Summit 2026 dates, pricing and the co-located vLLM Conference", "url": "https://www.anyscale.com/ray-summit"}
+          ]
+        },
+        {
+          "body": "ロボットの暦では、IEEE-RAS Humanoids 2026 が受付の窓をすべて閉じた。論文の締め切りは7月27日に、補足の動画は7月30日に過ぎ、ワークショップ、チュートリアル、競技の組の提案は昨日、8月3日月曜に、地球上のどこでも、という数え方で閉じた。残っているのは可否の暦である。競技の可否が9月21日、ワークショップとチュートリアルの可否が9月28日、論文の採否の知らせが10月6日、早期の登録が10月16日、最終稿が10月26日。そのあと会議そのものが、12月6日日曜から12月9日水曜まで Santa Clara Convention Center で開かれる。6日に公開の討論、7日にワークショップとチュートリアル、8日と9日に論文のセッションが並ぶ。AI Tinkerers では、今日、8月4日火曜に二つの回が走る。Paris.rb と組んだパリの回は AI とともにコードを書くことについてで、午後7時から10時 CEST。そしてシアトルの AI の開発の道具の流れが、午後6時から9時 PDT である。明日、8月5日水曜には、Redis と組んだシンガポールの回が現地の午後6時から9時、そして信頼と長く走るエージェントについてのシアトルの創業者の晩餐が午後6時から9時 PDT。8月6日木曜には、ロサンゼルスの作り手の集まりとその場での実演が午後6時から8時 PDT。8月7日金曜には、$1,000 の賞金が出るメデジンの音声エージェントの競い合いと、生の配信と公開のデータを扱うニューヨークの Vision Hack が午後4時から10時 EDT で、どちらも同じ日である。そして8月8日土曜には、モンバサの支部の立ち上げが午前9時から正午 EAT、ドバイの実演の日が現地の午前11時30分から午後3時に開かれる。8月11日には五都市の火曜が続く。バレンシアの売り出し方の解きほぐし、ニューヨーク州北部の作る夜、Cloudflare と PostHog と組んだシカゴ、ヒューストン、そして NVIDIA と Allen Institute for AI が加わるシアトルの AI と生物学の実演の夜である。そのあと8月12日水曜に三つ——バレンシア、エージェントによるソフトウェアの一生を扱うブリュッセル、そしてローリー。8月14日金曜にブレーメン。8月15日土曜には、第一回のダナンの集まりと、午後2時から5時 PKT のイスラマバードとラワルピンディの回が、どちらも開かれる。先のほうでは、暦はいまも8月19日水曜のオレンジ郡、9月3日木曜のボストン、9月7日月曜のコロンバスを運んでいる。昨日のコロンバスの集まりは終わった。サンフランシスコ、サンノゼ、プレザントンには日付が付いていない。8月18日火曜としてここで運ばれてきたパロアルトの集まりは、いまも確かめられない。世界の一覧には現れず、その支部自身の頁は何日も要求を拒み続けている。だから予定されたものとしてではなく、裏の取れていないものとして扱うのがよい。",
+          "citations": [
+            {"label": "IEEE-RAS Humanoids 2026 - important dates and conference schedule", "url": "https://2026.ieee-humanoids.org/"},
+            {"label": "AI Tinkerers - global event calendar", "url": "https://aitinkerers.org/events"}
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "date": "2026-08-04",
+  "technical": [
+    {
+      "lead": "An npm worm poisons the keyv packages and plants an editor start-up hook",
+      "body": "A credential-stealing worm moved through the npm registry today after an attacker took over the GitHub account of the maintainer behind keyv, a caching library pulled roughly 127 million times a week, and used the repository's own GitHub Actions workflow to cut poisoned releases. The malicious files reached each project's main branch before a release was tagged, so the compromised versions carry valid provenance signatures — the exact artefact a supply-chain auditor checks to conclude a package is clean. Aikido counted at least 868 packages across 1,381 versions by early afternoon Central European time and said it was still counting; the same maintainer's flat-cache, file-entry-cache, cacheable-request and the @cacheable scope went with keyv, which puts the blast radius past two billion installs a month, and releases tied to Deliveroo, Qlik and Picsart were caught in the spread. The payload runs on install and sweeps npm tokens, GitHub credentials of every flavour including short-lived OIDC tokens, AWS keys and instance-metadata credentials, Kubernetes service-account tokens, Vault, Stripe and Slack keys, SSH keys, Docker configs and Terraform state, encrypts them and pushes them to attacker-controlled repositories; it then republishes itself through any publish token it finds, which is why researchers watched it move between organisations every two to seven minutes. Anyone running coding agents has a second thing to check, because the poisoned repository also shipped a .claude/settings.json session-start hook and a .vscode/tasks.json folder-open task pointing at the same setup script — an execution path that fires when a developer opens the project in an editor or an agent rather than when they install it. Both need the workspace to be trusted, which is a prompt most people click through. The affected-version list was still growing as Aikido published, so it is a moving list rather than a fixed number.",
+      "citations": [
+        {
+          "label": "Aikido - Keyv and friends compromised in npm supply chain attack",
+          "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+        },
+        {
+          "label": "The Hacker News - Keyv-linked npm worm poisons hundreds of packages, plants Claude Code and VS Code hooks",
+          "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html"
+        },
+        {
+          "label": "Cybersecurity News - Keyv npm package with 127M weekly downloads compromised in Shai-Hulud attack",
+          "url": "https://cybersecuritynews.com/keyv-npm-package-compromised/"
+        }
+      ]
+    },
+    {
+      "lead": "An 80B Qwen runs on a Mac in 4.3 GB by streaming its experts off disk",
+      "body": "Swiftlet, a Swift and Metal runtime, went up today with a claim that is easy to state and awkward to argue with: Qwen3-Next-80B, 42 gigabytes of weights on disk, generating at 4.5 to 5 tokens a second on an M5 Mac while peaking at 4.3 gigabytes of resident memory. The 35-billion-parameter Qwen3.6 runs the same way in 2.6 gigabytes at 7 to 11 tokens a second, and on an iPhone 17 in about 2.5 gigabytes at roughly one token a second. The mechanism is architectural rather than a new quantisation: these are sparse mixture-of-experts models that touch only around three billion parameters per token, so the runtime keeps the dense part — attention, embeddings, routers — permanently resident at four bits, packs the routed experts into fixed-stride containers each retrievable in a single read, and streams whichever experts the router asks for, holding the recent and frequent ones in a cache the user sizes with a command-line flag. Gated DeltaNet linear attention across three-quarters of the layers stops the key-value cache from eating the savings back. The author reports cache hit rates between 43 and 70 percent depending on how much memory is handed over and, more interestingly, throughput that barely moves as that budget changes, because the bottleneck currently sits in GPU dispatch rather than in reading from storage. That is the number to watch: it says the streaming approach has headroom left, and it reframes the memory ceiling on a phone or a laptop as a scheduling problem rather than a capacity one. Apache 2.0, eight commits, and written with a coding agent.",
+      "citations": [
+        {
+          "label": "GitHub - Swiftlet, a Swift and Metal runtime for 35B and 80B Qwen on Apple devices",
+          "url": "https://github.com/leonickson1/Swiftlet"
+        },
+        {
+          "label": "Hacker News - Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+          "url": "https://news.ycombinator.com/item?id=49158333"
+        }
+      ]
+    },
+    {
+      "lead": "Unsloth Studio adds image and video generation and image-model QLoRA",
+      "body": "Unsloth's largest single merge in some time landed today, and it is not about text. A pull request against the desktop Studio adds an Images page: text-to-image generation running on Unsloth's own GGUF quantisations of Z-Image, Qwen-Image, FLUX and SDXL variants; editing workflows covering transform, inpaint, extend, upscale and instruction-driven edits; text-to-video across five model families with synchronised audio; and, the part that matters for the fine-tuning audience, QLoRA training for image models with live metrics and one-click deployment of the resulting adapter. Two inference paths sit underneath — native stable-diffusion.cpp and Diffusers — sharing GPU memory with the chat backend rather than competing with it for allocation, with batched image rendering the team measures at ten to twenty-two times faster than rendering the same images serially, alongside conditioning and compile caches. The diff is 79,151 lines added across 231 files, carrying more than eight hundred backend unit tests and browser-level end-to-end checks. Twenty-eight further commits went in the same day, among them Intel Arc detection and an XPU PyTorch install path in the Windows installer — Arc, Iris, UHD and HD graphics are now recognised, and the wheels bundle their own oneAPI runtime so no separate Intel toolkit install is required — plus a run of release-pipeline hardening: installer plugin libraries are signed with the release failing on any unsigned file, the WebView2 bootstrapper is embedded rather than fetched, Windows bundles are scanned by Defender before publication, and macOS disk-image stapling is retried on failure. None of it came with a package release: the Python library still sits at 2026.8.2, published yesterday on PyPI, and the documentation changelog has not moved past July 29, so today's change is visible only in the repository.",
+      "citations": [
+        {
+          "label": "GitHub - Studio: add image generation, editing workflows and LoRA training with Unsloth GGUFs",
+          "url": "https://github.com/unslothai/unsloth/pull/6763"
+        },
+        {
+          "label": "GitHub - Add Intel Arc GPU detection and XPU PyTorch install to Windows installer",
+          "url": "https://github.com/unslothai/unsloth/pull/7706"
+        }
+      ]
+    },
+    {
+      "lead": "HP, Asus and Acer start shipping Chinese DRAM because supply is short",
+      "body": "Nikkei Asia reported today that HP, Asus and Acer have begun shipping small volumes of DRAM from China's ChangXin Memory Technologies in notebooks sold outside the United States, having completed qualification of the parts around the middle of this year. The quantities are limited and the placement is deliberate — budget models, non-US markets — with Samsung, SK Hynix and Micron kept for regions where the regulatory and geopolitical exposure is higher, and HP described as still evaluating the supplier rather than committed to it. What makes it worth noting is the reason. This is not a cost decision; ChangXin is not undercutting the incumbents. It is a supply decision, taken in a memory market that the AI build-out has left tight enough that PC makers will qualify a supplier they had previously left alone, and it arrives on the same morning that FMS, the memory and storage conference, opened its twentieth edition in Santa Clara — the one room where the people causing the squeeze and the people absorbing it are both present. A commodity component that notebook vendors used to treat as fungible has become the thing that decides whether a machine ships at all.",
+      "citations": [
+        {
+          "label": "Nikkei Asia - HP, Asus and Acer begin using CXMT chips amid memory shortage",
+          "url": "https://asia.nikkei.com/business/china-tech/hp-asus-and-acer-begin-using-cxmt-chips-amid-memory-shortage"
+        },
+        {
+          "label": "Digitimes - HP, Asus and Acer reportedly turn to CXMT for laptop memory",
+          "url": "https://www.digitimes.com/news/a20260804VL211/cxmt-hp-asus-acer-nikkei.html"
+        },
+        {
+          "label": "Asia Business Outlook - HP, Asus and Acer turn to CXMT chips amid global memory shortage",
+          "url": "https://www.asiabusinessoutlook.com/news/hp-asus-and-acer-turn-to-cxmt-chips-amid-global-memory-shortage-nwid-12260.html"
+        }
+      ]
+    },
+    {
+      "lead": "Palantir grows 93 percent and opens about 20 percent higher",
+      "body": "Palantir reported second-quarter revenue of 1.94 billion dollars after yesterday's close, up 93 percent year over year against a 1.81 billion consensus, with adjusted earnings of 41 cents against 34 expected. The split underneath is what moved the stock: United States commercial revenue rose 149 percent to 764 million dollars while United States government revenue grew 90 percent to 809 million, which leaves the commercial side nearly the size of the government business the company was long assumed to depend on. Net income was 1.06 billion dollars and adjusted free cash flow 1.22 billion. Full-year guidance went to between 8.15 and 8.16 billion dollars from a prior 7.65 to 7.66 billion, the United States commercial target was lifted above 3.42 billion implying at least 134 percent growth, and third-quarter revenue was guided to roughly 2.16 billion. Shares opened this morning around 152 dollars, some 20 percent above Monday's close of 125.65. The analyst response was uniform in direction and wide in magnitude: Deutsche Bank upgraded to Buy and moved its target to 200 dollars from 80, Citi went to 245 from 200, and DA Davidson to 200 from 175. The read-through past one ticker is the question the sector has been circling — whether enterprise AI software spend is converting into recognised revenue at scale rather than into pilots — and the answer here is unambiguous for at least one vendor. AMD reports after the close today, which puts the same question to the silicon side, with its data-centre line and any quantified Helios rack-scale orders the specific things to read.",
+      "citations": [
+        {
+          "label": "Business Wire - Palantir reports Q2 2026 revenue growth of 93 percent and raises FY 2026 guidance",
+          "url": "https://www.businesswire.com/news/home/20260802523449/en/Palantir-Reports-Q2-2026-U.S.-Comm-Revenue-Growth-of-149-YY-and-Revenue-Growth-of-93-YY-Raises-FY-2026-Revenue-Guidance-to-82-YY-Growth-and-U.S.-Comm-Revenue-Guidance-to-134-YY-Crushing-Consensus-Expectations"
+        },
+        {
+          "label": "Proactive Investors - Palantir Technologies shares surge after earnings beat",
+          "url": "https://www.proactiveinvestors.com/companies/news/1096513/palantir-technologies-shares-surge-after-earnings-beat-1096513.html"
+        },
+        {
+          "label": "Finbold - Wall Street analysts update Palantir stock price after blowout earnings",
+          "url": "https://finbold.com/wall-street-analysts-update-palantir-stock-price-after-blowout-earnings/"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "A self-spreading worm hit npm and stole developer keys",
+    "An 80-billion-parameter model runs on a Mac in 4.3 GB",
+    "Unsloth's desktop app gains image and video generation in the repository, not yet in a release",
+    "Laptop makers turn to Chinese memory as supply runs short",
+    "Palantir revenue rises 93 percent and the stock jumps"
+  ]
+}

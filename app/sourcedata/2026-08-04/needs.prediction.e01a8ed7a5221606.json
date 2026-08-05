@@ -1,0 +1,128 @@
+[
+  {
+    "actor": "Agent hook execution security engineer, Anthropic Claude Code",
+    "job": "Reworking how repository-supplied session-start hooks and settings files are loaded, so opening a cloned folder no longer executes them on the trust decision alone.",
+    "outcome": "A shipped default where a repository's session-start hook stays inert until approved in a step separate from trusting the workspace.",
+    "motivation": "The hook lands on a workstation holding live credentials, not in a throwaway build container, and no install-time defence ever sees it.",
+    "task": {
+      "who": "Claude Code settings loading and hook execution engineers",
+      "what": "Hold repository-supplied hooks inert until separately approved",
+      "where": "Claude Code settings resolution and hook dispatch path",
+      "when": "Q4 2026",
+      "why": "Workspace trust was never a decision about hooks",
+      "how": "Per-entry approval recorded in user-scope settings, keyed by digest"
+    }
+  },
+  {
+    "actor": "Workspace Trust maintainer, Microsoft Visual Studio Code",
+    "job": "Owning the trust prompt and the tasks that run on folder open, deciding whether trust alone stays sufficient to start a repository's own commands.",
+    "outcome": "A default build where a repository's folder-open task is listed and confirmed, or held inert, rather than started by the trust click.",
+    "motivation": "The one control in front of this path is a dialogue the product trained everyone to dismiss in order to start working.",
+    "task": {
+      "who": "Visual Studio Code workspace trust and task system maintainers",
+      "what": "Gate folder-open tasks behind a confirmation of their own",
+      "where": "Workspace trust subsystem and task runner in Insiders builds",
+      "when": "Q1 2027",
+      "why": "Trust answers a different question than auto-run does",
+      "how": "Itemised run list in the trust flow, entries inert by default"
+    }
+  },
+  {
+    "actor": "Iteration plan and release notes owner, Visual Studio Code",
+    "job": "Scheduling the auto-run change into a monthly milestone and writing it up where an ordinary user reads what changed in their install.",
+    "outcome": "Published release notes describing the new default for repository-supplied startup entries, shipped to stable rather than left behind a preview flag.",
+    "motivation": "A behaviour change nobody documents reaches nobody, and the milestone is also what stops the work slipping behind larger features.",
+    "task": {
+      "who": "Visual Studio Code release management and documentation staff",
+      "what": "Book the auto-run gate into a shipping milestone",
+      "where": "Monthly iteration plan and the published release notes",
+      "when": "February 2027",
+      "why": "Undocumented defaults reach nobody and slip behind bigger features",
+      "how": "Iteration plan issue tracking each milestone's release-note entries"
+    }
+  },
+  {
+    "actor": "Threat intelligence write-up lead, Aikido Security",
+    "job": "Documenting what the poisoned repositories carried beyond the install script, including the editor and agent startup entries most install-path defences never inspect.",
+    "outcome": "A public record naming repository-supplied startup entries as a distinct execution path, precise enough for the two vendors to act on.",
+    "motivation": "Their own count of affected packages is what made this legible, and the second path stays invisible unless someone keeps writing it down.",
+    "task": {
+      "who": "Aikido malware research and disclosure publication team",
+      "what": "Record repository-supplied startup entries in the incident write-ups",
+      "where": "Aikido research blog and its indicator feeds",
+      "when": "September 2026",
+      "why": "Vendors move on documented paths, not on anecdotes",
+      "how": "Static review of repository configuration files across affected releases"
+    }
+  },
+  {
+    "actor": "Coordinated vulnerability disclosure reporter, an independent application-security research firm",
+    "job": "Filing a structured report that a cloned repository's startup entries execute on the workspace-trust click alone, through the affected products' disclosure programmes.",
+    "outcome": "A tracked case each vendor has to answer, carrying a disclosure deadline that outlives any single news cycle.",
+    "motivation": "A report inside the vendor's own process carries a clock, and a conference talk or a blog post does not.",
+    "task": {
+      "who": "Product security researchers and disclosure coordinators at the firm",
+      "what": "File the trust-click execution gap under coordinated disclosure",
+      "where": "Vendor security response portals and their disclosure trackers",
+      "when": "October 2026",
+      "why": "A tracked case carries a deadline a blog post lacks",
+      "how": "Coordinated disclosure timeline agreed with both vendors' response teams"
+    }
+  },
+  {
+    "actor": "Secure development tooling architect, a regulated enterprise rolling out coding agents",
+    "job": "Setting the conditions under which the firm's developers may open unreviewed repositories with an agent attached, and taking those conditions to the vendors.",
+    "outcome": "A vendor requirement that the gate ships on by default for every install, not as an enterprise policy the firm alone can set.",
+    "motivation": "The firm just paid for a credential rotation it could not pause, and its developers clone repositories on machines it does not manage.",
+    "task": {
+      "who": "Developer platform security and third-party review staff",
+      "what": "Write the default-on requirement into vendor review",
+      "where": "Vendor security questionnaires and renewal negotiations",
+      "when": "January 2027",
+      "why": "A policy switch protects nobody outside the managed fleet",
+      "how": "Procurement review tied to the coding-agent renewal cycle"
+    }
+  },
+  {
+    "actor": "Supply-chain hardening working group lead, OpenSSF",
+    "job": "Extending the ecosystem's control guidance past install time, so editor and agent startup entries are named as an execution path of their own.",
+    "outcome": "A published control statement the vendors can point at when they change a default, and buyers can cite when they ask for one.",
+    "motivation": "Every existing control in the ecosystem's guidance stops at the install, which is the reason the open path had nobody watching it.",
+    "task": {
+      "who": "OpenSSF working group members and specification editors",
+      "what": "Add repository startup entries to the control guidance",
+      "where": "Working group drafts and public review calls",
+      "when": "Q3 2026",
+      "why": "Existing guidance stops at the package install boundary",
+      "how": "Consensus draft reviewed in the open on the group's repository"
+    }
+  },
+  {
+    "actor": "Developer experience researcher, Visual Studio Code workspace trust",
+    "job": "Measuring what the trust dialogue actually costs and whether an itemised approval step survives contact with someone trying to start work.",
+    "outcome": "Evidence that a per-entry step is affordable at the start of a session, which is what a default change has to clear internally.",
+    "motivation": "The standing objection is friction charged to everyone forever, and only measured click-through and completion numbers answer it.",
+    "task": {
+      "who": "Visual Studio Code user research and telemetry analysis staff",
+      "what": "Measure trust-dialogue click-through against an itemised approval prototype",
+      "where": "Insiders telemetry and moderated developer research sessions",
+      "when": "November 2026",
+      "why": "The friction objection only falls to measured numbers",
+      "how": "Prototype comparison in Insiders with opt-in usage telemetry"
+    }
+  },
+  {
+    "actor": "Repository maintainer, a widely cloned open-source project shipping agent hooks",
+    "job": "Moving the project's setup work out of entries that fire on open and into commands a contributor runs deliberately, and documenting what remains.",
+    "outcome": "A project whose contributors lose nothing when startup entries stop firing automatically, removing the breakage argument against a stricter default.",
+    "motivation": "Maintainers carry the reputational cost of a file that runs on clone, and reliance on auto-fire hooks is what stalls the change.",
+    "task": {
+      "who": "Project maintainers and contributor experience reviewers",
+      "what": "Replace auto-fire setup hooks with explicit contributor commands",
+      "where": "Repository configuration files and the contributing guide",
+      "when": "December 2026",
+      "why": "Ecosystem breakage is the argument against a stricter default",
+      "how": "Documented setup command replacing the session-start hook entry"
+    }
+  }
+]
