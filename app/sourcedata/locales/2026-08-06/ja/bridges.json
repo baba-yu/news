@@ -1,0 +1,943 @@
+{
+  "date": "2026-08-06",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.f0524365b3e0d713",
+        "short_label": "LFM2.5-2.6B's under-2.5 GB claim gets a named context length by Q3 2027",
+        "prediction_date": "2026-08-06"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Liquid AI は8月4日火曜に LFM2.5-2.6B を公表した。26 億パラメータ、およそ 34 兆トークンでの事前学習、学習の途中で 128K まで広げた文脈窓を備え、外部の API へ往復せず端末の側で完結するエージェントの仕事に向けたものである。この公表は、記憶の上限と文脈の長さを別々の事実として述べ、両者を結び付けていない。2.5 GB 未満はモデルについての数字であり、128K はモデルが一度の対話をどれだけ抱えられるかについての数字である。8K で、32K で、あるいは掲げている 128K で占有量がいくらになるかを述べたものは、公表物のどこにもない。並べて示されているのは占有量ではなく速さのほうだ。Apple M5 Max で毎秒 220 トークン、AMD Ryzen AI Max+ 395 で毎秒 113 トークン、NVIDIA H100 一枚を高い同時実行で使って出力毎秒 15,000 トークン近く、いずれも同社自身の計測である。ToolSandbox では 77.83 を報告し、Gemma 4 E4B-it の 65.00、Gemma 4 E2B-it の 52.40 と並べている。Claw-Eval の英語平均は 62.85 である。公表時点での実行環境の対応は llama.cpp、MLX、vLLM、SGLang、そして transformers 5.0.0 以降の ONNX に及ぶ。これらの数字はすべて提供者自身のもので、モデルと同時に出されたものであり、第三者が再現したものではない。提供者以外がこの制約を運用上の単位として扱っている例が、隣に一つある。DEF CON 34 の AI Village が開く HalCTF では、提出するエージェントは 2.5 GB のコンテナに収めることが条件になっている。記憶の上限はすでに競技が予算として組む単位であり、そこで作り手が必要とするのは、モデルカードの数字ではなく負荷がかかったときの占有量の頂点である。",
+      "reference_links": [
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        },
+        {
+          "label": "AI Village - HalCTF at DEF CON 34",
+          "url": "https://aivillage.org/blog/halctf/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "公表は上限と文脈窓を別々の事実として述べ、両者を結び付けていない。この前提は推測ではなく、公表者自身の資料から立っている。今日足りないのは、その隙間を埋めさせる圧力のほうだ。条件の付かない数字はそのままで用を足しており、負荷の頂点を見込んで予算を組んでいる例は、エージェントを 2.5 GB に収めさせる競技のほかにない。",
+        "coherence": 3,
+        "remaining_gap": "自らの上限を悪く見せる数字を出せと提供者に強いるものはなく、長さを指定した占有量の独立した計測も、まだ存在しない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.d8856daf2cd8c30b",
+        "short_label": "Herdr publishes a paid tier above its Apache-2.0 runtime by Q2 2027",
+        "prediction_date": "2026-08-06"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Herdr は8月6日木曜、Y Combinator の F26 バッチに加わったことを述べ、同じ投稿で自社の実行環境の許諾を AGPL から Apache-2.0 へ移した。Herdr はコマンドラインのコーディングエージェントのための端末側の実行環境である。エージェントをペイン、タブ、プロジェクトへ整理し、一台の機械の上で動かし続ける。別々の機械どうしは、互いに切り離されたままである。告知に資金の額は出てこない。バッチへの採択は資金調達の回ではないので、ここで会社に数字が付くことはない。投稿が述べているのは切り分けのほうだ。今日みなが使っている実行環境は Apache-2.0 のまま無償で残り、商用の機能はその上に作る。候補として挙げられているのは、機械をまたぐ接続と、端末以外の利用画面の二つである。効いているのは許諾の一行だ。Herdr の上に建てたホスト型のサービスに、自らの源を公開させていたのは AGPL のネットワーク利用条項である。Apache-2.0 はその義務を外す。誰がこの実行環境を採り入れられるかは広がり、ホストの層は先んじていること以外に何にも守られなくなる。同じ週に、逆の向きからの圧力も出ている。Meta の研究部門が8月5日水曜に Muse Code を公表した。beta と明記された端末上のコーディングエージェントで、その下位エージェントは仕事ごとに立ち上がるのではなく一つの対話の間ずっと残り、モデルの呼び出し、ツールの実行、承認、編集のすべてが機械の内側の出来事の記録に書き足される。Meta はこれを、実行をそのまま再現でき、再起動にも耐えるものにするしくみだと述べている。一つの対話の間の持続と、再起動をまたぐ生存は、Herdr の実行環境が掲げている関心そのものであり、Meta の告知はそのどれにも値段を付けていない。今日の時点で、有償の階層は表明された意図にとどまり、計画も、頁も、数字も付いていない。",
+      "reference_links": [
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "ホストの層を守っていた条項が、いま外れた。そして投稿は、代わりに売るものとして機械をまたぐ接続と端末以外の利用画面を挙げている。上の層に値段を付ける構造上の理由はここにある。理由にとどまりもする。計画も、頁も、数字も、期限も、出典のどこにもない。",
+        "coherence": 3,
+        "remaining_gap": "寛容な許諾の計画は、収益化されないまま幾らでも続きうる。別の名前を持つホスト型の製品の内側に有償の層が抱き合わされれば、意図は満たされても、その頁は生まれない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2010d789e89c4a47",
+        "short_label": "Terminal coding agents refuse commands the operator approved by H1 2027",
+        "prediction_date": "2026-08-06"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Alex Wauters は8月5日水曜、Scale X のブログに一つの分析を公表した。題材は、遊ぶ人がコーディングエージェントの承認役に立ち、時間に追われながら一つ一つの命令を通すか拒むかを決める、ブラウザ上の対話的な遊びである。4万を超える実行、およそ 409,000 回の可否の判断にわたり、平均の正答率は 66.3% だった。平均よりもその形のほうが重い。見逃しの率は、明らかに破壊的な命令で 11.7%、居座り続ける改変の攻撃で 23.8%、持ち出しとコード実行で 33.4%、権限の範囲を越える行為で 35.0% と並ぶ。敵意ある命令が、人が恐れるよう仕込まれた姿から遠ざかるほど、確実に通されていく。すべての脅威を捉えた人は 35.2% いたが、安全な命令を止めた割合を五つに一つ以下に抑えたうえでそうできた人は 20.8% にとどまる。7% はすべてを通し、32.9% の一局は負の点で終わった。最も見逃された単独の命令は npm run analyze で、64.7% の割合で通された。悪意ある中身は、遊ぶ人が判断を求められた文字列ではなく履歴の記録のほうに現れていたにもかかわらずである。作者はこの設定が人工的であることを明言している。命令の 34% に脅威が現れており、これは現実のどんな仕事の量からも大きく外れる。そのうえで作者自身が導いた結論は、命令行しか見えない承認の求めの側ではなく、中身を検分できるツールの層に検査を置け、というものである。この圧力が向かう先を、ほかの二つの品目が描いている。Meta は8月5日水曜に Muse Code を公表した。beta と明記された端末上のコーディングエージェントで、その下位エージェントは非同期に走り、一つの対話の間ずっと残り、いつ本体に報告するかを自分で決める。承認は一つ残らず機械の内側の出来事の記録に書き足される。そこでも承認は明らかに残っており、命令行が一人の前に届く速さを決めているのは実行の割り振りのほうである。Herdr は8月6日木曜に自社の端末側の実行環境を説明し、エージェントをそれが載っている機械の上で動かし続けると述べている。そして中身を読む検査に対する費えの反論は、8月4日火曜に動いた。Liquid AI が LFM2.5-2.6B を公表したからである。計画、ツールの呼び出し、多段の仕事に向けた 26 億パラメータのモデルで、記憶 2.5 GB 未満に収まる。ただしこれは同社自身の、再現されていない数字による。運用者が通した命令を拒んだ実行環境は、今日の公表物のどこにも記されていない。",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        },
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "およそ 409,000 回の判断が、この前提に数字を与えた。敵意ある命令が敵意なく見えるほど見逃しは増え、権限の範囲を越える行為で 35.0% に達する。判断される文字列の下に中身が沈んでいるからである。beta の実行環境は、その文字列が届く速さを自らの割り振りで決め、承認を縛らずに記録するだけなので、条件をさらに悪くする。",
+        "coherence": 4,
+        "remaining_gap": "今日語られたどの実行環境も、運用者が通したものを拒みはしない。そして強い拒否は、問い合わせの一件を提供者の判断をめぐる論争へ変えてしまう機能である。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.ffede2e95254bc23",
+        "short_label": "Uncorroborated CVE reports stop reaching critical severity by H1 2027",
+        "prediction_date": "2026-08-05"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Cisco の製品セキュリティ対応チームは8月5日水曜、12 件の勧告を公表した。重大が 2 件、高が 4 件、中が 6 件で、対象は Catalyst SD-WAN Software、IOS XE、IOS、Integrated Management Controller、RoomOS、Terminal Services Agent に及ぶ。この一群は、この予測が扱う失敗の形のちょうど反対側にある。Catalyst SD-WAN のセキュリティ強化リリースは、点数の付いた五つの識別子を持つ。CVE-2026-20303、CVE-2026-20304、CVE-2026-20310 が CVSS 9.9、CVE-2026-20312 が 8.8、CVE-2026-20313 が 7.7 である。修正版として 20.9.10、20.12.8.1、20.15.6、20.18.4、26.1.2 が示され、影響を受ける系統は 20.9.1 より前から 20.18 まで、これに 26.1 が加わる。二つ目の重大な勧告は IOS XE のセキュリティ強化リリースで CVSS 9.8 である。裏付けの働きをしているのは三つの性質だ。Cisco は、この欠陥が機器の設定にかかわらず Catalyst SD-WAN Software に及ぶこと、そして回避策がないことを述べており、及ぶ範囲は読み手に委ねられず言明されている。Cisco は、公開された言及も悪用も把握していないと述べており、悪用の状況は不在ではなく公表された事実になっている。そしてこの勧告群は事案対応ではなく社内の試験から出たもので、7月29日水曜には公表日を前もって告げる事前通知が出ていた。提供者の名前、修正版、悪用の状況、前もって告げられた公表日を伴って届く重大な点数は、裏付けのない申告に対して厳しくした制度であっても、そのまま通す形である。",
+      "reference_links": [
+        {
+          "label": "Cisco - Catalyst SD-WAN Software security hardening release, August 2026",
+          "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-sdwan-faLcR3K"
+        },
+        {
+          "label": "Cisco - Advance notification for publication of August 5, 2026 security advisories",
+          "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-notice-L4XfJg8S"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "提供者の名前、五つの修正版の番号、言明された悪用の状況、一週間前に告げられた公表日を伴って届く点数付きの一群は、裏付けというものがすでに取っている形である。この予測が測る基準線を引きはするが、何も試さない。裏付けのない申告に対して厳しくした制度でも、この一群は手を触れずに通す。",
+        "coherence": 2,
+        "remaining_gap": "今日、採点の規則を変えた記録機関はない。この一群は裏付けの厚い側の極を示すだけで、裏付けのない側はまったく測られないまま残る。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f727ed88a9133fb3",
+        "short_label": "AMD data centre segment clears 60% of quarterly revenue by Q1 2027",
+        "prediction_date": "2026-08-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "AMD は8月6日木曜、Taalas を買収する確定契約に署名したと告知した。Taalas は 2023 年に設立されたトロントの会社で、モデルごとに設計された集積回路を作る。何も完了していない。価格は開示されず、取引には通例の完了条件と規制当局の承認が付き、完了日も示されていないので、この周期でそこに紐づく売上はいっさいなく、出荷の品揃えも変わらない。この告知が動かしているのは、データセンター部門の照準がどこを向くかのほうである。AMD の Artificial Intelligence Group を率いる上級副社長 Vamsi Boppana は、この買収を推論の性能と効率の差別化を足すものとして位置づけた。AMD は、この技術を自社のアクセラレータのロードマップへ取り込み、Instinct GPU、Helios のラック規模のシステム、EPYC CPU、ROCm と組み合わせたシステム水準の製品を作る意向だと述べている。この四つはいずれも、予測が追っている売上比率を持つ部門の内側にある。Taalas は 2026 年2月に Quiet Capital、Fidelity、Pierre Lamond から $169 million を調達し、調達の総額はおよそ $219 million になった。値動きを見ると、AMD は8月5日水曜に $482.05 で引け、この一日で 7.04% 下げた。続く8月6日木曜は $489.28 で、1.50% 上げている。木曜の動きについて、今日の出典は特定の理由を挙げていない。部門の数字も、見通しの修正も、売上構成についての言明も、今日の材料のどこにも現れないので、これは照準の表明であって、突き合わせる数字ではない。",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        },
+        {
+          "label": "StockAnalysis - AMD daily closing prices",
+          "url": "https://stockanalysis.com/stocks/amd/history/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "完了しておらず価格も付かない契約は、この期間の売上に何も足さない。部門の数字も今日はどこにも出ないので、計算そのものは動かない。動くのは意図のほうだ。取り込み先として挙げられた Instinct、Helios、EPYC、ROCm はいずれもこの部門の内側にあり、資本の向きを強めはするが、越えるべき比率は動かさない。",
+        "coherence": 2,
+        "remaining_gap": "期間の内側であと二回、四半期の部門別の表が出なければならない。そして規制当局の承認を待っている買収は、売上の行を足すよりずっと先に費えを足す。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.ed22f8669ea280de",
+        "short_label": "Hugging Face's downloader ships no default XET-to-HTTP fallback by Q2 2027",
+        "prediction_date": "2026-08-03"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "回避の仕組みは今、第三者の実行環境の側で出荷されている。これがこの予測の描く世界の状態である。Unsloth の Studio リリース、8月4日火曜の v0.1.524-beta には、ダウンロードが止まったときに XET から素の HTTP へ自動で切り替える仕組みが入る。実装されているのは転送を受け取る下流の道具の側であって、主張が対象としている上流のダウンローダの既定ではない。リリースノートはこれを、すでに 2026.8.2 に記されていたダウンロードの信頼性の作業の続きとして位置づけている。つまり単発の手当てではなく、Unsloth の内側で保たれている一本の流れである。その周りの公表の間隔が、労力の向かう先を示す。8月6日木曜に PyPI へ三つの版が出た。2026.8.5、2026.8.6、2026.8.7 である。その前には火曜の 2026.8.3 と水曜の 2026.8.4 があった。変更の記録は 2026.8.3 と 2026.8.6 を修正のみ、2026.8.4 を学習の修正、2026.8.5 を Windows での導入の修正としている。今日の材料のうち、Hugging Face が自らのダウンローダについて述べたものは、どちらの向きにも一つもない。証拠は、下流での埋め合わせが続いていることのほうにある。",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.3, released August 4, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.3/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.4, released August 5, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.4/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.5, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.5/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.6, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.6/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "埋め合わせは下流で保たれ続けている。第三者の実行環境が、停止したときの切り替えを自ら出荷し、そのリリースノートは以前の版に記された作業の続きだと述べる。その処理を受け手の側に置いたままにする版が一つ出るたび、上流は既定に手を触れない費えを負わずに済む。仕組みそのものが、一つ隔てた場所から見えている。",
+        "coherence": 3,
+        "remaining_gap": "今日の材料に、上流の公表者が自らのダウンローダについて述べたものは、どちらの向きにも一つもない。この主張は、受け手の振る舞いからの推論だけに載っている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3cb90b28e1d67e1b",
+        "short_label": "DeepSeek splits V4-Flash into a floating name and a pinned id by H1 2027",
+        "prediction_date": "2026-08-01"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "日付の付いた識別子は今、下流の道具が持ち歩く文字列になっている。Unsloth の 2026.8.7、8月6日木曜の公表は DeepSeek-V4 Flash 0731 への DSpark の対応を挙げ、8月4日火曜の Studio リリース v0.1.524-beta は DeepSeek-V4 Flash 0731 の量子化を、UD-IQ1_S の 83 GB から UD-Q8_K_XL の 162 GB まで出荷した。どちらの場所でも、モデルは素の製品名ではなく四桁の日付を添えて呼ばれている。これがこの予測の言う分割のうち、固定された識別子の側である。今日の材料に欠けているのは、もう一方の側と、公表者そのものだ。DeepSeek がこのモデルの名付けや版の扱いについて述べたものはなく、日付付きの名前に対応づけられた浮動の別名の文書もなく、両者が並んで存在することを示す接続先やモデルの一覧もない。証拠は、包装する側のリリースノートに見えた生態系の慣習である。下流で採られた慣習は、公表者がそれを約束することとは同じではない。",
+      "reference_links": [
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "日付の接尾辞は、包装する側が実際に持ち歩く文字列であり、量子化の一式にも対応の一行にも現れる。分割のうち固定された側は、すでに働いている慣習である。公表者の側は手つかずだ。日付付きの名前に対応づけられた浮動の別名の文書はなく、下流で採られた慣習は上流でなされた約束ではない。",
+        "coherence": 2,
+        "remaining_gap": "分割を作れるのは公表者だけである。浮動の名前と固定された識別子が並んで存在する接続先も、モデルの一覧も、文書の頁も、今日は示されていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8598785e784a209e",
+        "short_label": "Trillion-parameter open-weight MoE ships a first-party draft model by Q2 2027",
+        "prediction_date": "2026-08-02"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "今日の投機的復号の動きはすべて第三者の側にあり、これはこの予測が明示的に数に入れない場合である。Unsloth の 2026.8.7、8月6日木曜の公表は DeepSeek-V4 Flash 0731 への DSpark の対応を挙げる。DSpark 自体は8月4日火曜の Studio リリース v0.1.524-beta で届いており、そのノートは既定で有効になったと述べている。出荷しているのは包装と追加学習の道具であって、重みを公表した研究所ではない。今日の材料に、DeepSeek や Moonshot が自らの下書き用のモデルについて述べたものは一つもない。同じ Studio リリースは Moonshot の Kimi K3 への対応も足した。2.8 兆パラメータ、うち活性 1,040 億の混合エキスパートのモデルで、視覚を最初から備え、百万トークンの文脈窓を持つ。予測が対象とする規模の階級にあるモデルが、自前の下書き用モデルを添えずに届いたことになる。流れの向きは、加速の層が、モデルの公表者ではなく生態系の側から供給されている、というものである。",
+      "reference_links": [
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "今日の証拠は前提に逆らう。加速は包装の道具の側から、既定で有効な形で届いた。2.8 兆パラメータの混合エキスパートのモデルが同じ版に入り、対となる下書き用のモデルはどこにも挙げられていない。第三者の実装が使えるものになるたび、公表者が自前のものを出す理由は薄くなる。",
+        "coherence": 2,
+        "remaining_gap": "第三者の経路が、公表者自身の下書き用モデルを退けるほど良いかどうかは試されていない。両者を突き合わせた提供時の比較は、今日どこにも出ていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e01a8ed7a5221606",
+        "short_label": "Repository-supplied agent hooks get an approval of their own by Q2 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "8月5日水曜に公表された Scale X の分析は、区別のない一つの承認の求めで足りる、という前提の下に測定を置いた。4万を超える実行、およそ 409,000 回の可否の判断にわたり、平均の正答率は 66.3% で、敵意ある命令が敵意なく見えるほど見逃しは増えた。明らかに破壊的な命令で 11.7%、居座り続ける改変の攻撃で 23.8%、持ち出しとコード実行で 33.4%、権限の範囲を越える行為で 35.0% である。計画の側が供給する振る舞いに最も直に効く結果は、最も見逃された単独の命令だ。npm run analyze は 64.7% の割合で通され、悪意ある中身は、遊ぶ人が判断を求められた文字列ではなく履歴の記録のほうに座っていた。計画が供給する処理の名前が、それが実際に走らせるものの代わりに立っていたことになる。8月5日水曜に公表され beta と明記された Meta の Muse Code は、反対側を記録する。モデルの呼び出し、ツールの実行、承認、編集のすべてが機械の内側の出来事の記録に書き足され、承認は一様に記録される。計画が供給するものに対して別の区分は述べられていない。今日の公表物で、計画が供給する処理に固有の同意の段を与えたものはない。",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "意図せずではあるが、目的は正確に描かれている。計画が供給する処理の名前が 64.7% の割合で通され、中身は承認の求めが決して見せない記録の側に座っていた。何が走るかを決めているのは計画の側で、同意が付くのは名札だけである。今週出荷された実行環境は、すべての承認を区別のない一つの区分に記録する。",
+        "coherence": 3,
+        "remaining_gap": "計画が供給する振る舞いに、通常の命令とは別の同意の段を与えた実行環境はない。研究の側もコーディング補助を挙げていないので、この立論は類推にとどまる。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.11fc575584e8e05b",
+        "short_label": "Agent-written accelerator stacks get an independent serving number by Q2 2027",
+        "prediction_date": "2026-08-03"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "今日は新規のアクセラレータについての提供時の数字が出たが、この予測が求める二つの条件のどちらも満たさない。AMD は8月6日木曜、Taalas を買収する確定契約に署名したと告知した。この告知とともに動く数字は、Taalas の試作品 HC1 が、TSMC の 6 ナノメートルの工程で作られ、Meta の Llama 3.1 8B を毎秒およそ 17,000 トークンで提供した、というものである。この数字が読み手に届く経路は AMD 自身の広報記事と、それを扱った業界誌の記事であり、計測の枠組みも、まとめて処理する単位の設定も、第三者による再現も添えられていない。つまり独立した数字ではなく提供者の数字である。そしてその下にある積み重ねは、エージェントが書いたものでもない。Taalas が作るのはモデルごとの集積回路で、モデルの重みとデータの流れを、広帯域の記憶から流し出すのではなく回路の側へ埋め込む。およそ 100 層の部品を組み、モデルごとに作り分けるのは金属の 2 層だけで、試作までおよそ二か月とされる。これは生成されたソフトウェアの積み重ねではなく製造の手法である。関わりがあるのは、この予測が見ている領域が、再現されていない公表時の数字を出し続けている、という点である。",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "条件は保たれ、事例のほうが当てはまらない。毎秒およそ 17,000 トークンという公表時の数字は、買い手自身の広報を経て読み手に届き、計測の枠組みも、まとめて処理する単位の設定も、再現も添えられていない。前提のとおり、既定で再現されないままである。だがその下にある積み重ねは製造の手法であって、エージェントが書いたものではない。",
+        "coherence": 2,
+        "remaining_gap": "今日、エージェントが生成した演算核も提供の積み重ねもない。この主張が実際に試す領域は、独立した数字の候補を一つも出さなかった。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e17de6adc92dd6dc",
+        "short_label": "Disk-streamed 80B inference misses 4.5 tokens a second when retested by H2 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "今日の材料に再測定はなく、ディスクから流し込むモデルを毎秒のトークン数で測ったものもない。届いた局所での提供の材料は、この主張が扱う中間を避けて、規模の両端に座っている。Liquid AI は8月4日火曜に LFM2.5-2.6B を公表した。26 億パラメータで記憶 2.5 GB 未満、流し込むのではなく常駐させられる小ささであり、公表時点で llama.cpp、MLX、vLLM、SGLang、ONNX に対応する。もう一方の端では、Unsloth の8月4日火曜の Studio リリース v0.1.524-beta が DeepSeek-V4 Flash 0731 の量子化を、UD-IQ1_S の 83 GB から UD-Q8_K_XL の 162 GB まで出荷した。これはディスク上の成果物の大きさであって、提供の速さについては何も述べない。同じ版にある唯一の処理速度の主張は DSpark で、ノートは既定で有効になったこと、そして推論の速さを二倍にすることを述べている。比較の両側に毎秒のトークン数が出ていないので、この計画自身の材料からは確かめられず、この予測が試すものの計測にもなっていない。",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "今日、ディスクから流し込むモデルを測ったものは一つもない。局所での提供の材料は、この規模の階級を挟むだけで中には入らない。一方の端には常駐できるほど小さい 26 億パラメータのモデルがあり、もう一方にはディスク上の成果物の大きさがある。成果物の大きさは提供の速さではない。公表された唯一の処理速度の主張は、比較の両側に数字を持たない。",
+        "coherence": 1,
+        "remaining_gap": "再測定には、同じモデル、同じ流し込みの構成、そして公表された毎秒のトークン数が要る。この三つはどれも、今日の材料のどこにも現れない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.9eb6e9888959d4b6",
+        "short_label": "Local-LLM runtimes ship in-model speculative decoding on by default by Q2 2027",
+        "prediction_date": "2026-07-05"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "今週、出荷された追加学習の道具のビルドで既定が切り替わった。Unsloth の8月4日火曜の Studio リリース v0.1.524-beta は、DSpark が既定で有効になったと述べ、リリースノートはこれを推論の速さを二倍にするものと記す。比較の両側に毎秒のトークン数を出さずに公表された主張なので、伸びの大きさはこの計画自身の材料からは確かめられず、計測ではなく提供者の主張として扱うべきものである。対応範囲はそこで止まらず広がった。8月6日木曜に PyPI へ出た 2026.8.7 は、DeepSeek-V4 Flash 0731 への DSpark の対応を挙げる。汎用の切り替えとして置かれるのではなく、特定の大きな対象へ加速の経路が伸ばされたことになる。今日の材料が立てていないのは、主張のうちモデルの内側という部分である。下書きの予測がどこから来るのか、別の下書き用モデルが要るのか、仕組みが自己投機なのかを、リリースノートも変更の記録も述べていない。証拠は、既定での有効化と対応範囲の広がりには及ぶが、予測が掲げる構成には及ばない。",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "求められる条件の半分は、追加学習の道具の beta のビルドで満たされている。加速の仕組みは既定で有効だと述べられ、対応は汎用の切り替えにとどまらず特定の大きな対象へ伸びた。もう半分はまるごと欠けている。下書きの予測がどこから来るのかを述べたものはなく、速さの主張は比較の両側に計測を持たない。",
+        "coherence": 2,
+        "remaining_gap": "構成は述べられていない。そして追加学習の道具の beta のビルドは、主張が掲げる局所の実行環境という領域よりも狭いものである。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7e04ececc362f9bd",
+        "short_label": "Local fine-tuning toolkits absorb the model-serving layer by default by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "今週、追加学習の道具が推論の側の機能を既定で有効にした。これがこの予測の言う取り込みである。Unsloth の8月4日火曜の Studio リリース v0.1.524-beta は、DSpark が既定で有効になったと述べ、これを推論の速さを二倍にするものと記す。比較の両側に毎秒のトークン数がないまま公表されているので、この倍率は確かめられる計測ではなく提供者の主張である。その周りの提供側の面は、週を通して広がり続けた。8月6日木曜の 2026.8.7 は DeepSeek-V4 Flash 0731 への DSpark の対応と、学習の頁の全面的な作り直しを挙げる。同じ Studio リリースは、DeepSeek-V4 Flash 0731 の量子化を UD-IQ1_S の 83 GB から UD-Q8_K_XL の 162 GB まで出荷し、Moonshot の Kimi K3 に対応した。2.8 兆パラメータ、うち活性 1,040 億の混合エキスパートのモデルで、視覚を最初から備え、百万トークンの文脈窓を持つ。さらに、ダウンロードが止まったときに XET から素の HTTP へ自動で切り替える仕組みも入った。量子化した成果物の配布、ダウンロードの信頼性、既定で有効な復号の加速は、いずれも提供の側の関心であり、そのすべてが、変更の記録では学習の修正しか載っていない一つの包みの内側で出荷された。週にまたがる労力の配り方は、これを転換と読むことに逆らう。2026.8.3 と 2026.8.6 は修正のみ、2026.8.4 は学習の修正、2026.8.5 は Windows での導入の修正として記録されている。",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.3, released August 4, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.3/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.4, released August 5, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.4/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.5, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.5/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.6, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.6/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "提供の側の関心が三つ、一週間のうちに学習の包みの内側で出荷された。量子化した成果物の配布、ダウンロードの信頼性のための切り替え、そして既定で有効になった復号の加速である。選べる項目としてではなく既定として起きている取り込みであり、まさにこの仕組みそのものだ。それに伴って掲げられた速さの倍率には、裏付けとなる計測がない。",
+        "coherence": 4,
+        "remaining_gap": "この週の残る四つの包みは修正しか記録していない。労力の配り方は、提供への転換ではなく保守を語っている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.eca92ec7ee67c161",
+        "short_label": "Unsloth ships day-of fine-tuning for the next 1T+ open-weight release by Q1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Unsloth の8月4日火曜の Studio リリース v0.1.524-beta は、Moonshot の Kimi K3 への対応を足した。2.8 兆パラメータ、うち活性 1,040 億の混合エキスパートのモデルで、視覚を最初から備え、百万トークンの文脈窓を持つ。この予測が掲げる規模の階級に十分に収まるモデルである。だが主張が実際に懸かっている間隔は、今日の材料からは評価できない。Kimi K3 そのものがいつ公表されたかを述べたものが今日はどこにもなく、Unsloth の対応が公表日に届いたのか、それより前か後かを言う根拠がないからである。もう一方も手つかずだ。リリースノートが述べているのは Studio のビルドでの対応であり、提供や量子化ではなく追加学習がその重みに対して働くと述べたものはない。この週の残りの産物は、公表日に合わせた駆け込みからは遠い。三日で五つの包みが出た。火曜の 2026.8.3、水曜の 2026.8.4、そして8月6日木曜の 2026.8.5、2026.8.6、2026.8.7 である。変更の記録は、そのうち二つを修正のみ、一つを学習の修正、一つを Windows での導入の修正としており、新しい働きを備えるのは 2026.8.7 だけである。",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.3, released August 4, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.3/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.4, released August 5, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.4/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.5, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.5/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.6, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.6/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "規模の階級は合い、間隔は読めない。2.8 兆パラメータの混合エキスパートのモデルへの対応は Studio の版に現れるが、そのモデル自身がいつ公表されたかを今日の公表物は述べていない。対応が同日か、早いか、遅いかを言う根拠はない。追加学習がその重みに対して働くと述べたものもない。",
+        "coherence": 2,
+        "remaining_gap": "この主張は二つの日付の間隔に懸かっており、今日の材料はそのうち一つしか与えない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.98c20322cf3f2161",
+        "short_label": "Action-level guardrails become first-class agent-framework controls by H1 2027",
+        "prediction_date": "2026-07-14"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "8月5日水曜に公表された Scale X の分析は、統制を行為の水準まで下ろすことについての実証の根拠である。4万を超える実行、およそ 409,000 回の可否の判断にわたり、平均の正答率は 66.3%、見逃しの率は明らかに破壊的な命令で 11.7%、居座り続ける改変の攻撃で 23.8%、持ち出しとコード実行で 33.4%、権限の範囲を越える行為で 35.0% だった。失敗しているのは注意ではなく情報である。最も見逃された命令は npm run analyze で 64.7% の割合で通され、悪意ある中身は履歴の記録に見えていて、遊ぶ人が判断していた命令行にはなかった。作者自身の結論は、命令行しか見えない承認の求めの側ではなく、中身を検分できるツールの層に検査を置け、というものである。これは行為の水準の統制の説明にほかならない。今週、枠組みが実際に出荷したものはそこまで届いていない。Meta は8月5日水曜に Muse Code を公表した。beta と明記されており、モデルの呼び出し、ツールの実行、承認、編集のすべてが機械の内側の出来事の記録に書き足され、この記録が実行をそのまま再現でき再起動にも耐えるものにすると述べられている。それは記録のための面である。承認の完全な記録は方針が必要とする素材ではあるが、投稿は、行為が走る前にそれへ照らされる規則を何も述べていない。",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "統制を行為まで下ろす理由は、いま論じられるのではなく測られている。失敗は情報の側にあって注意の側ではなく、求めに含まれていない中身を、より明快な求めが直すことはない。実際に出荷されたのは記録のための面である。呼び出しと承認はすべて記録に書き足され、何かが走る前に照らされる規則はない。",
+        "coherence": 3,
+        "remaining_gap": "記録は方針が読む素材であって、方針そのものではない。今日、行為が実行される前にそれへ規則を照らす枠組みはない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.25bbb1fc4e3ce653",
+        "short_label": "Coding agents ship default-deny sandboxes for untrusted-repo audits by Q2 2027",
+        "prediction_date": "2026-07-11"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "8月5日水曜に公表された Scale X の分析は、既定で拒む隔離環境が置き換えるはずの統制を、そのまま測っている。4万を超える実行、およそ 409,000 回の可否の判断にわたり、平均の正答率は 66.3%、見逃しの率は偽装の度合いとともに上がった。明らかに破壊的な命令で 11.7%、居座り続ける改変の攻撃で 23.8%、持ち出しとコード実行で 33.4%、権限の範囲を越える行為で 35.0% である。最も見逃された命令は npm run analyze で、悪意ある中身が履歴の記録に見えていたにもかかわらず 64.7% の割合で通された。計画が供給する処理の名前で、その中身を承認する側は一度も見せられていない。信用できない計画を読む場合の縮図である。遊ぶ人の 7% は目の前のすべてを通し、32.9% の一局は負の点で終わった。これに対し、出荷されたのは既定では隔離しない実行環境だった。8月5日水曜に公表され beta と明記された Meta の Muse Code は、macOS と Linux では dev.meta.ai から導入用の処理を流し込んで入れるもので、大きな計画をまたいで変更を組み立て、コードを書き、結果を検証し、専門の下位エージェントをまとめる作りである。投稿が述べているのは承認が記録されることであって、実行が囲われることではない。",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "既定で拒む隔離環境が要るのは、見慣れない計画を読むことが、その中身を知る前にそれが供給するものを走らせることだからである。研究はそこに、持ち出しとコード実行で 33.4% の見逃し、全体で 66.3% の平均正答率という数字を置いた。今週出荷された beta の実行環境は大きな計画をまたいで働き、囲いについては何も述べていない。",
+        "coherence": 3,
+        "remaining_gap": "導入時の既定として囲いを出荷したコーディングエージェントはない。研究が測っているのも、特定の実行環境の利用者ではなく人一般である。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.04f4d9d539cf6341",
+        "short_label": "Coding-agent harnesses adopt default-deny toolset gating as standard by H1 2027",
+        "prediction_date": "2026-06-20"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "今日の品目のうち二つは、ツールの面が既定で開いており、関門が人である実行環境を描いている。Meta は8月5日水曜に Muse Code を公表した。beta と明記された端末上のコーディングエージェントで、その下位エージェントは非同期に走り、仕事ごとに立ち上がるのではなく一つの対話の間ずっと残り、いつ本体に報告するかを自分で決める。モデルの呼び出し、ツールの実行、承認、編集のすべてが機械の内側の出来事の記録に書き足され、この記録が実行をそのまま再現でき再起動にも耐えるものにすると述べられている。その説明のどこにも、既定で拒むツールの一式はない。承認は事前に縛られるのではなく記録され、往復の待ちをなくす割り振りが、一人の運用者に判断が届く速さも決めている。Herdr は8月6日木曜に自社の端末側の実行環境を説明し、コマンドラインのコーディングエージェントをペイン、タブ、プロジェクトへ整理して一台の機械の上で動かし続けると述べる。実行環境の許諾は AGPL から Apache-2.0 へ移ったが、関門についての振る舞いは投稿のどこにも書かれていない。8月5日水曜に公表された Scale X の分析は、そこに留め置くことへの反論を与える。およそ 409,000 回の可否の判断にわたり平均の正答率は 66.3%、権限の範囲を越える行為は 35.0% が見逃され、最も見逃された命令 npm run analyze は 64.7% の割合で通された。",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "この予測が覆さなければならない条件は、今週さらに固まった。ツールの面が開いたまま、人だけを関門とする実行環境が二つ出た。一方は非同期の下位エージェントを割り振り、いつ報告するかはそれ自身に決めさせる。他方はエージェントをそれ自身の機械の上で人手を離れて動かし続け、関門については何も述べない。どちらも既定では何も拒まない。",
+        "coherence": 2,
+        "remaining_gap": "標準とは大半の実行環境がそうである状態を指す。今日の二つはどちらも逆を向いており、それに対する論拠は、どちらの提供者も答える義務のない一つの研究から来ている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e3f72a21ed13fcec",
+        "short_label": "Agent-sandbox isolation becomes a named procurement requirement by H1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "今日、隔離は買い手が書き留めたものとしてではなく競技の規則として現れる。DEF CON 34 の AI Village が開く HalCTF では、最大五人の組がエージェントを 2.5 GB に収めたコンテナとして提出し、隔離された標的へ向ける。中央では 2.1B から 120B まで 13 のモデルが動かされる。参加の条件として述べられた隔離の境界であり、出どころは調達の文書ではなく催しの主催者である。需要の側の論拠は別に強まった。8月5日水曜に公表された Scale X の分析は、およそ 409,000 回の可否の判断にわたり平均の正答率 66.3%、権限の範囲を越える行為の 35.0% が見逃されたことを見いだしている。承認の求めが捉え損ねたときに隔離が受け止めるはずの、まさにその失敗の形である。供給の側では、8月5日水曜に公表され beta と明記された Meta の Muse Code が、dev.meta.ai から導入用の処理を流し込んで入れるもので、封じ込めの境界ではなく出来事の記録を述べている。今日の材料に、買い手も、枠組みも、標準化の団体も、隔離を取得の条件として挙げたものはない。",
+      "reference_links": [
+        {
+          "label": "AI Village - HalCTF at DEF CON 34",
+          "url": "https://aivillage.org/blog/halctf/"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "隔離は購入の条件ではなく参加の条件として現れる。競技は提出されたエージェントを 2.5 GB のコンテナに収めさせ、隔離された標的へ向けさせる。これは境界を、エージェントが包まれる単位として当たり前にする。調達の文言の手前に位置するが、それ自体ではない。主催者は買い手ではない。",
+        "coherence": 2,
+        "remaining_gap": "今日、買い手も、枠組みも、標準化の団体も、隔離を取得の条件として挙げなかった。供給の側が出荷したのも、境界ではなく出来事の記録である。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cac44f8530c87f6b",
+        "short_label": "Durable agent-execution substrate hardens into a standard primitive by H1 2027",
+        "prediction_date": "2026-06-12"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Meta は8月5日水曜に Muse Code を公表し、そこでは持続が実装の細部ではなく設計上の看板として掲げられている。モデルの呼び出し、ツールの実行、承認、編集のすべてが機械の内側の出来事の記録に書き足され、Meta はこれを、実行をそのまま再現でき再起動にも耐えるものにするしくみだと述べる。停止のあとは、作業木から状態を導き直すのではなく、止まった地点からそのまま続く。この予測が描く土台であり、大きな研究部門の自社の実行環境の内側で出荷されている。ただし条件は付く。Muse Code は一般提供ではなく beta と明記され、記録は機械の内側にとどまり、分散やホスト側での実行の保証は主張されていない。対となる設計上の選択が、その必要をさらに強めている。下位エージェントは非同期に走り、仕事ごとに立ち上がるのではなく一つの対話の間ずっと残り、いつ報告するかを自分で決める。つまり再起動が失うはずの、対話の範囲の状態がそこにある。Herdr は8月6日木曜に自社の端末側の実行環境を説明し、コマンドラインのコーディングエージェントをそれを載せている機械の上で動かし続け、ペイン、タブ、プロジェクトへ整理すると述べる。こちらは履歴の再現性ではなく処理そのものの持続である。一週間のうちに二つの製品が、中断をまたぐ生存を看板の性質として扱っているのは、標準化の早い段階の姿である。ただし、どちらも他社が採り入れられる共通の形式や接点を述べていない。",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "持続は実装の細部に委ねられず、設計上の看板として述べられている。呼び出し、実行、承認、編集のすべてが一つの記録に書き足され、その記録が実行をそのまま再現でき再起動にも耐えるものにする。対話の間ずっと残る下位エージェントが、失われるはずの状態を作り出している。同じ週にもう一つの製品が、同じ理屈で機械ごとの処理の持続を売っている。",
+        "coherence": 2,
+        "remaining_gap": "どちらも、他社が採り入れられる共通の形式や接点を述べていない。一方は beta であり、その記録は分散の保証ではなく機械の内側にとどまる。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0594fdd206cf2981",
+        "short_label": "Coding agents make provenance-checked installs the default by H1 2027",
+        "prediction_date": "2026-07-22"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "今日いちばん目立ったコーディングエージェントの公表は、この予測が退けられると見込む導入の経路を出荷している。8月5日水曜に公表され beta と明記された Meta の Muse Code は、macOS と Linux では dev.meta.ai から導入用の処理を流し込んで入れる。署名も、検査値も、パッケージ管理を通す経路も、網から実行までの間に置かれる確認の段も、告知のどこにも述べられていない。提供者は、それを公表する手立てを十分に持つ大きな研究部門である。補い合う証拠は使う側にある。8月5日水曜に公表された Scale X の分析では、およそ 409,000 回の可否の判断のうち最も見逃された命令は npm run analyze で、悪意ある中身が履歴の記録に見えていたにもかかわらず 64.7% の割合で通された。全体の平均正答率 66.3% に対し、何を取ってきて何を走らせるかを見ないまま、人がパッケージの処理名を通していたことになる。来歴の確認とは、名前と中身を同じものにする仕組みである。今日は、実行環境の導入の経路も、対話の中の命令の経路も、それをしていない。",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "導入の経路は逆を向いている。署名も、検査値も、パッケージ管理を通す経路も出せる大きな研究部門が、入口として文書に載せたのは URL から流し込む処理のほうだった。網から実行までの間に置かれる確認の段は述べられていない。この予測が退けられると見込む既定は、いま是認されたばかりの既定である。",
+        "coherence": 2,
+        "remaining_gap": "beta の公表が一つあるだけでは趨勢ではない。それでも今日、実行環境の導入の経路にも、対話の中の命令の経路にも、来歴へ向かう動きはない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.12a61d346692ed1f",
+        "short_label": "AMD Helios secures a disclosed hyperscaler capacity commitment by Q1 2027",
+        "prediction_date": "2026-07-21"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Helios の名は今日出るが、その出方は容量の約束のちょうど反対である。AMD は8月6日木曜、Taalas を買収する確定契約に署名したと告知し、この技術を自社のアクセラレータのロードマップへ取り込み、Instinct GPU、Helios のラック規模のシステム、EPYC CPU、ROCm と組み合わせたシステム水準の製品を作る意向だと述べた。ここでの Helios は、これから作る部品の取り込み先であって、注文の付いたシステムではない。顧客の名前も、ラックの台数も、ギガワットの数字も、金額も、告知のどこにも出てこない。取引そのものにも価格が付かず、完了もしていない。価格は開示されず、通例の完了条件と規制当局の承認が付き、完了日も示されていないので、記録に残る約束はロードマップの言明だけである。数字を伴ったのは値動きのほうだ。AMD は8月5日水曜に $482.05 で引け、この一日で 7.04% 下げ、8月6日木曜は $489.28 で 1.50% 上げた。木曜の動きについて、今日の出典は理由を挙げていない。この予測が必要とするのは買い手からの開示された約束であり、今日あるのは売り手からの表明された意図である。",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        },
+        {
+          "label": "StockAnalysis - AMD daily closing prices",
+          "url": "https://stockanalysis.com/stocks/amd/history/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Helios の名は出る。そしてその出方は、出荷の日付を持たない組み合わせの取り込み先としてであって、背後に注文のあるシステムとしてではない。顧客も、ラックの台数も、ギガワットの数字も、金額もない。この主張が必要とするのは買い手からの開示された約束であり、今日あるのは売り手からの表明された意図である。",
+        "coherence": 2,
+        "remaining_gap": "決着を付けられるのは、大規模事業者か AMD が署名済みの容量の数字を開示する場合だけである。提供者のロードマップの言葉は、積み上がっても閾値には届かない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a91f33b7684871df",
+        "short_label": "AI-accelerator equities re-rate lower on the next in-line ASIC print by Q4 2026",
+        "prediction_date": "2026-06-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "今日の材料に ASIC の決算の数字はない。どのアクセラレータの提供者からも、決算の公表も、見通しも、売上の数字も出ていないので、この予測が掲げる引き金は起きていない。値動きが記録しているのは、結果ではなく企業の行為をはさんだ二つの立会だ。AMD は8月5日水曜に $482.05 で引け、この一日で 7.04% 下げ、8月6日木曜は $489.28 で 1.50% 上げた。木曜の動きについて今日の出典は理由を挙げておらず、どちらの向きも、この日の告知への反応として読むべきではない。その告知とは、AMD が Taalas を買収する確定契約に署名したというもので、価格は開示されず、完了条件と規制当局の承認は残り、完了日も示されていない。対価の数字を持たない署名済みの契約は、市場に値を付け直す材料を何も与えない。欠けているのは予測が指定する仕組み、つまり期待外れの数字とそれに続く同業各社の評価の切り下げのほうであって、株価が逆へ動いたということではない。",
+      "reference_links": [
+        {
+          "label": "StockAnalysis - AMD daily closing prices",
+          "url": "https://stockanalysis.com/stocks/amd/history/"
+        },
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "条件となる出来事がない。今日、どのアクセラレータの提供者も数字を公表していないので、記録に残る二つの引け値、水曜の 7.04% の下げと木曜の 1.50% の上げは、同業各社がそれにどう応じるかという主張にとって何の情報も持たない。価格の付かない契約は、市場に値を付け直す材料を与えない。",
+        "coherence": 1,
+        "remaining_gap": "期間は Q4 2026 の終わりで閉じるが、引き金は引かれていない。評価の切り下げにはまず期待外れの数字が要り、その数字はまだ出ていない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.43bff01be9e1af7e",
+        "short_label": "Transformer-only inference ASICs gain a first-class serving-stack backend by H1 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] AMD は8月6日木曜、Taalas を買収する確定契約に署名したと告知した。Taalas は 2023 年に設立されたトロントの会社で、モデルの重みとデータの流れを、広帯域の記憶から流し出すのではなく回路の側へ埋め込む、モデルごとの集積回路を作る。AMD は、この技術を自社のアクセラレータのロードマップへ取り込み、Instinct GPU、Helios のラック規模のシステム、EPYC CPU、ROCm と組み合わせたシステム水準の製品を作る意向だと述べている。この予測に触れるのは ROCm を挙げた部分だ。固定機能の推論の部品を、専用の道具立ての隣にではなく、主流の提供者自身の提供用ソフトウェアの積み重ねの内側へ置くからである。留保は大きく、両方向に効く。何も完了していない。価格は開示されず、通例の完了条件と規制当局の承認が残り、完了日も示されていない。ロードマップの言明は意図であって、その裏に公表も、文書の頁も、対応バックエンドとしての記載もない。部品そのものも製品ではなく研究の成果物である。TSMC の 6 ナノメートルの工程で作られた試作 HC1 は、Meta の Llama 3.1 8B を毎秒およそ 17,000 トークンで提供したが、これは計測の枠組みの述べられていない提供者の数字である。Taalas がモデルごとに作り分けるのは、およそ 100 層の部品のうち金属の 2 層だけで、試作までおよそ二か月である。これは変換器一般ではなくモデルごとのものであり、共通のバックエンドが何を意味するのかという範囲を狭める。",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "仕組みは記録に届いた。自前の提供用の積み重ねを持つ主流の提供者が、固定機能の推論用の半導体を買う契約に署名し、その積み重ねを、周りに作るものの一つとして挙げている。少数派の部品が第一級のバックエンドを得るのは、こうした経路である。何も完了しておらず、モデルごとの半導体は、共通のバックエンドが何を意味するのかという範囲を狭める。",
+        "coherence": 3,
+        "remaining_gap": "価格も、完了日も、文書の頁も、対応バックエンドとしての記載もない。ロードマップの一文は、出荷された統合ではない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.286871c2ba1f3aa8",
+        "short_label": "Inference-ASIC challenger anchors a raise on a $1B+ order book by Q4 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] この領域で今日起きた資金の出来事は、逆を向いている。AMD は8月6日木曜、Taalas を買収する確定契約に署名したと告知した。告知とともに示された調達の履歴は、Taalas が 2026 年2月に Quiet Capital、Fidelity、Pierre Lamond から $169 million を集め、調達の総額がおよそ $219 million になった、というものである。取引の価格は開示されず、通例の完了条件と規制当局の承認が付き、完了日も示されていないので、評価額も記録に残らない。欠けているのは、この予測が対象とするものそのものだ。Taalas について、受注残も、残高も、署名済みの契約の金額も、先々の購入の約束も、告知のどこにも出てこない。この会社に付いた唯一の性能の数字は、試作 HC1 が TSMC の 6 ナノメートルの工程で Meta の Llama 3.1 8B を毎秒およそ 17,000 トークンで提供した、というものである。価格の開示されない買収は、契約された需要に支えられた資金調達とは別の出口であり、取引が完了すれば、この予測が必要とする開示を生み出しうる集団から挑戦者を一つ取り除くことになる。",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "この主張が待っている観測対象は、契約された需要に支えられた資金調達である。届いたのは別の出口だった。価格を開示しない買収の契約であり、その背後にあるのは 2026 年2月の $169 million と、総額およそ $219 million という調達の履歴だけである。受注残も、残高も、先々の約束も、どこにも現れない。",
+        "coherence": 2,
+        "remaining_gap": "取引が完了すれば、その集団から挑戦者が一つ抜けることになる。そして開示されないままの買収価格は、需要についても何も明かさない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6095c8445805dcf4",
+        "short_label": "Rival accelerator vendor buys a CUDA-agnostic inference compiler by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 競合するアクセラレータの提供者が今日、推論の層で動いた。AMD は8月6日木曜、Taalas を買収する確定契約に署名したと告知した。価格は開示されず、完了条件と規制当局の承認が残り、完了日も示されていない。一致が破れるのは対象のほうだ。Taalas はコンパイラの会社ではなく半導体の会社である。モデルの重みとデータの流れを、広帯域の記憶から流し出すのではなく回路の側へ埋め込む、モデルごとの集積回路を作る。およそ 100 層の部品を組み、モデルごとに作り分けるのは金属の 2 層だけで、試作までおよそ二か月である。固定機能の半導体を買うことは、持ち運べるコンパイラを買うことの逆の賭けである。一方は的を狭めて可搬性が問題でなくなるところまで持っていき、他方は複数の的をまたいで抽象する。AMD が挙げるソフトウェアの面は自社のものだ。この技術を自社のアクセラレータのロードマップへ取り込み、Instinct GPU、Helios のラック規模のシステム、EPYC CPU、ROCm と組み合わせたシステム水準の製品を作る意向だと述べている。AMD の Artificial Intelligence Group を率いる上級副社長 Vamsi Boppana は、この買収を推論の性能と効率の差別化を足すものとして位置づけた。これは可搬性ではなくハードウェアの論である。",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "買収する側は合い、対象が覆す。競合するアクセラレータの提供者は確かに推論の層で動いた。だが買うことで合意したものは、同じ問題に逆の向きから答える。複数の的をまたいで抽象するのではなく、可搬性が問題でなくなるところまで的を狭めるやり方である。隣に挙げられたソフトウェアは提供者自身の積み重ねであり、売り込みは性能であって、可搬性ではない。",
+        "coherence": 2,
+        "remaining_gap": "半導体に使われた買収の予算は、コンパイラに使われなかった予算である。もっとも、この主張が扱う囲い込みは手つかずのままで、ほかの提供者も残っている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c99c991b7d54c82a",
+        "short_label": "Subagent orchestration becomes a first-class frontier-API primitive by Q1 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] Meta の研究部門は8月5日水曜に Muse Code と Muse Spark 1.2 を公表し、下位エージェントの設計を看板の性質として述べている。下位エージェントは非同期に走り、仕事ごとに立ち上がるのではなく一つの対話の間ずっと残り、いつ本体に報告するかを自分で決める。これが多段の問題から往復の待ちを取り除く。Muse Spark 1.2 はその下にあるモデルで、Muse Code の内側と Meta Model API を通じて今すぐ使える。主張が満たされていないのは、まさにその最後の一節である。編成が置かれているのは Muse Code、beta と明記され dev.meta.ai から導入用の処理を流し込んで入れる端末上の実行環境であり、API が差し出しているのはモデルである。要求の水準の引数も、サーバ側での分配も、子エージェントを単位とする課金も、委譲についての課金の面も、告知のどこにも述べられていない。それらが揃ってはじめて、編成は一つの利用者向け製品の機能ではなく API の基本要素になる。告知は Terminal-Bench 2.1、DeepSWE 1.1、Meta 社内のコーディングの評価を比較対象として挙げるが点数は述べていないので、対話の間ずっと残る下位エージェントの設計が何をもたらすかについて、公表された数字はここにない。",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "編成は実在し、一つ手前の層で止まる。非同期に走り、一つの対話の間残り、いつ報告するかを自ら選ぶ下位エージェントは、beta の端末向け製品の看板の性質である。一方で提供者の接点が差し出しているのは、委譲ではなくその下のモデルである。要求の水準の引数も、サーバ側での分配も、子エージェントを単位とする課金も述べられていない。",
+        "coherence": 3,
+        "remaining_gap": "利用者向け製品の機能が接点の基本要素になるのは、第三者がそれを呼び出せるようになったときだけである。持続する設計が何をもたらすかを述べた公表された数字も、やはりない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c5fe8479ffcd7e16",
+        "short_label": "LLM client libraries ship a permission-gated coding-agent loop by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 今週二つの実行環境が届いたが、どちらもこの予測が描くライブラリ水準の基本要素ではない。Meta は8月5日水曜に Muse Code を公表した。beta と明記された端末上のコーディングエージェントで、macOS と Linux では dev.meta.ai から導入用の処理を流し込んで入れる。大きな計画をまたいで変更を組み立て、コードを書き、結果を検証し、専門の下位エージェントをまとめる。モデルの呼び出し、ツールの実行、承認、編集のすべてが機械の内側の出来事の記録に書き足され、この記録が実行をそのまま再現でき再起動にも耐えるものにすると述べられている。したがって承認は存在し記録もされるが、許可一覧も、権限の仕組みも、第三者が取り込めるライブラリの面も、投稿は述べていない。一つの提供者のモデルに結び付いた、出荷された製品である。Herdr は8月6日木曜、Y Combinator の F26 バッチに加わったこと、そして実行環境の許諾を AGPL から Apache-2.0 へ移したことを述べた。この実行環境はコマンドラインのコーディングエージェントをペイン、タブ、プロジェクトへ整理し、一台の機械の上で動かし続けるもので、関門を置いたツールの反復ではなく処理の管理である。もっとも、寛容な許諾への移行は、この予測が思い描く提供者から切り離された自前で動かせる土台を、他者が作りやすくはする。どちらもその判断を運用者に預けたままにしている。その関門こそ、8月5日水曜に公表された Scale X の分析が、およそ 409,000 回の可否の判断にわたり平均の正答率 66.3% と測ったものである。ライブラリの側に置かれた権限の関門付きの反復は、まさにその判断を運用者の手から取り上げる。",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "条件は保たれている。この反復は、取り込める部品としてではなく、出来上がった製品として出荷され続ける。一方は単一の提供者のモデルに結び付いた beta の端末向け製品で、許可一覧も権限の仕組みも述べない。他方は、他者が書いたエージェントのための処理の管理である。寛容な許諾への移行は、切り離された土台を作りやすくはする。",
+        "coherence": 2,
+        "remaining_gap": "今日、第三者が取り込めるライブラリは一つもない。作りやすくなったことと、作られたことの間には長い距離がある。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4c9f0a001afac89a",
+        "short_label": "Coding-agent frameworks ship goal-grounded completion verification by H1 2027",
+        "prediction_date": "2026-06-07"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 8月5日水曜に公表され beta と明記された Muse Code は、大きな計画をまたいで変更を組み立て、コードを書き、結果を検証し、専門の下位エージェントをまとめる作りである。結果を検証する、という一節がこの予測に触れる。そして証拠が止まるのもそこだ。検証が何に照らして走るのか、その検査が計画の本来の目標なのかエージェントが自ら書いたものなのか、失敗したときに何が起きるのかを、投稿は述べていない。告知が細かく指定している二つの性質は、正しさではなく持続についてのものである。一つの対話の間ずっと残り、いつ報告するかを自ら決める下位エージェント。そして、モデルの呼び出し、ツールの実行、承認、編集のすべてを捉え、実行をそのまま再現でき再起動にも耐えるものにする出来事の記録。再現できる記録が伝えるのはエージェントが何をしたかであって、頼まれた事柄がいま働いているかどうかではない。評価の節にも同じ隙間がある。告知は Terminal-Bench 2.1、DeepSWE 1.1、Meta 社内のコーディングの評価を比較対象として挙げるが点数を述べていないので、完了の正確さについて、ほかの実行環境と並べられる公表された数字はない。",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "結果を検証する、という言葉は説明の中にあり、その裏には何もない。検査が何に照らして走るのかも、目標が計画のものかエージェント自身が書いたものかも、失敗が何を引き起こすのかも示されない。細かく指定されているのは持続の側の性質であり、エージェントが何をしたかを再現できる記録は、その仕事が保つことの証拠ではない。",
+        "coherence": 2,
+        "remaining_gap": "挙げられた評価には点数が付いていない。この実行環境をほかのものと並べられる、完了についての公表された数字はない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b76fcb409546f23d",
+        "short_label": "AI coding assistants make symlink-aware write consent the default by H1 2027",
+        "prediction_date": "2026-07-12"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 8月5日水曜に公表された Scale X の分析は、同意の面が示すものと、その裏の行為が実際に届く先との隔たりを、symlink という語を使わずに測っている。4万を超える実行、およそ 409,000 回の可否の判断にわたり、平均の正答率は 66.3% だった。最も見逃された単独の命令は npm run analyze で、悪意ある中身が、遊ぶ人が判断を求められた文字列ではなく履歴の記録に見えていたにもかかわらず、64.7% の割合で通された。解決されていない連結の対象と同じ構造である。同意の面は名前を示し、効果はその一つ下の層に住み、名前を承認するよう求められた人は中身を検分できない。作者の結論は、命令行しか見えない承認の求めの側ではなく、中身を検分できるツールの層に検査を置け、というものである。この研究がしていないのは、コーディング補助や、ファイル系の振る舞いを具体的に挙げることだ。したがってこれは既定を求める論拠であって、その実例ではない。8月5日水曜に公表され beta と明記された Meta の Muse Code は、承認と編集のすべてを機械の内側の出来事の記録に残すが、同意の前に示される経路の解決については何も述べていない。",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "土台は移らないが、原因のほうは移る。名前を示しつつ効果がその一つ下の層に住む同意の面は、解決されていない連結の対象そのものである。この研究は、その構造が注意深い読み手をどれほどの頻度で破るかに数字を与えた。もっとも、コーディング補助も、ファイル系の振る舞いも、まったく挙げていない。",
+        "coherence": 2,
+        "remaining_gap": "既定を求める論拠は、その実例ではない。今日、書き込みの同意を求める前に解決済みの対象経路を示す補助はない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.69439c5e138d13eb",
+        "short_label": "Coding IDEs make workspace-confined agent file writes the default by Q1 2027",
+        "prediction_date": "2026-07-04"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 8月5日水曜に公表された Scale X の分析は、封じ込めの論拠にこれまでで最も鋭い数字を与える。およそ 409,000 回の可否の判断にわたって測られた四つの区分のうち、権限の範囲を越える行為の見逃しが 35.0% で最も高く、持ち出しとコード実行の 33.4%、居座り続ける改変の攻撃の 23.8%、明らかに破壊的な命令の 11.7% を上回った。全体の平均正答率は 66.3% である。権限の範囲を越える行為とは定義上、あるべき場所の外へ届く行為であり、人が最も捉えられなかった区分は、作業領域の境界が機械的に押さえる区分そのものだった。すべての脅威を捉えた人は 35.2% いたが、安全な命令を止めた割合を五つに一つ以下に抑えたうえでそうできた人は 20.8% にとどまる。境界を人に持たせることの費えの側である。今日与えられていないのは、その封じ込めを出荷した編集環境や実行環境だ。8月5日水曜に公表され beta と明記された Meta の Muse Code は、大きな計画をまたいで働くよう作られ、編集をすべて記録するが、書き込みの境界は述べていない。",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "測られた四つの区分のうち、権限の範囲を越える行為が最も捉えられず、35.0% だった。持ち出しとコード実行の 33.4% を上回る。権限の範囲を越える行為とは定義上、あるべき場所の外へ届く行為であり、作業領域の境界は誰にも尋ねずにそれを押さえる。尋ねることの費えは同じ資料に出ている。止めすぎずにすべてを捉えたのは 20.8% である。",
+        "coherence": 3,
+        "remaining_gap": "その封じ込めを出荷した編集環境も実行環境もない。期間は Q1 2027 の終わりで閉じるが、論はいまだ一方の側にしかない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.d974ad36e8d1e757",
+        "short_label": "On-device retrieval ships built-in by default in a local-LLM runtime by Q1 2027",
+        "prediction_date": "2026-06-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] 今日の公表は、この予測が追っている埋め込みと遅延相互作用の検索器と同じ公表者、同じモデルの系統から出ており、その系統の検索器の側ではなく生成の側である。Liquid AI は8月4日火曜に LFM2.5-2.6B を公表した。26 億パラメータ、およそ 34 兆の事前学習トークン、学習の途中で 128K まで広げた文脈、記憶 2.5 GB 未満で、外部の API へ往復せず端末の側で完結する計画、ツールの呼び出し、多段の仕事に向けたものである。公表時点での実行環境の対応は llama.cpp、MLX、vLLM、SGLang、そして transformers 5.0.0 以降の ONNX に及ぶので、検索の既定が同梱されるとしたら通るはずの配り先は同じである。だが、このモデルとともに公表されたものに、埋め込みのモデルも、索引も、検索の段も、ファイルの取り込みの働きも、挙げられたものはない。挙げられた実行環境のどれも、検索を既定で備えるとは述べられていない。この主張が必要とするのは、手を加えずに局所のファイルを索引化して答える実行環境である。今日与えられたのは、そうした実行環境の内側に収まるはずの部品がもう一つ、というものである。",
+      "reference_links": [
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "同梱された検索の既定が通るはずの配り先は同じであり、同じ公表者がそこへ出荷している。だがこの公表は生成の側の半分である。埋め込みのモデルも、索引も、検索の段も、ファイルの取り込みも挙げられず、挙げられた実行環境のどれも、既定で何かを索引化するとは述べられていない。",
+        "coherence": 2,
+        "remaining_gap": "この主張が必要とするのは、手を加えずに局所のファイルを索引化して答える実行環境である。今日足されたのは、そうした実行環境の内側に収まるはずの部品がもう一つ、というものだ。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8810bab3c28adac5",
+        "short_label": "On-device LLM silicon ships 1-PFLOP deskside + sandbox-runtime specs by H1 2027",
+        "prediction_date": "2026-06-01"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] この予測が挙げる対の両方の半分が今日どちらも現れ、しかも別々の出どころから、結び付けられないまま現れている。半導体の側では、Liquid AI の8月4日火曜の LFM2.5-2.6B の公表が、同社自身の端末での計測を伴う。Apple M5 Max で毎秒 220 トークン、AMD Ryzen AI Max+ 395 で毎秒 113 トークンで、公表時点の対応には MLX も含まれる。これらは実名の民生向けの部品での処理速度の数字であり、半導体の提供者ではなくモデルの提供者が公表したもので、どちらも机上機の演算能力の格付けではない。隔離環境の側では、DEF CON 34 の AI Village が開く HalCTF がある。提出するエージェントは 2.5 GB のコンテナに収めて隔離された標的へ向けられ、中央では 2.1B から 120B まで 13 のモデルが動かされ、一位には DGX Spark が贈られる。机上機は公表された仕様としてではなく賞品として現れている。欠けているのは、この予測が実際に求めているものだ。一つの半導体の提供者が、演算能力の数字と、隔離されたエージェントの実行環境の仕様を、同じ一つの文書で公表することである。",
+      "reference_links": [
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        },
+        {
+          "label": "AI Village - HalCTF at DEF CON 34",
+          "url": "https://aivillage.org/blog/halctf/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "両方の半分が現れ、そのどちらも求められている文書ではない。実名の民生向けの部品での処理速度の数字は、半導体の提供者ではなくモデルの提供者から来ており、演算能力の格付けではなく速さである。隔離環境の側は競技のコンテナの上限であり、机上機は公表された仕様としてではなく賞品として現れている。",
+        "coherence": 2,
+        "remaining_gap": "この主張が必要とするのは、一つの半導体の提供者が、演算能力の数字と隔離されたエージェントの実行環境の仕様を同じ文書で公表することである。今日の二つの半分は、互いに無関係な当事者から来ている。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.82599b6cfd05751b",
+        "short_label": "Consumer-GPU coding agents displace cloud-only APIs for 30% of devs by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] 今日の品目のうち三つが、この主張が座る局所と外部の境界を描いており、そのどれも採用の割合を与えない。Liquid AI は8月4日火曜に LFM2.5-2.6B を公表した。計画、ツールの呼び出し、多段の仕事に向けた 26 億パラメータのモデルで、記憶 2.5 GB 未満に収まり、同社自身の計測では Apple M5 Max で毎秒 220 トークン、AMD Ryzen AI Max+ 395 で毎秒 113 トークン、公表時点の実行環境の対応は llama.cpp、MLX、vLLM、SGLang、ONNX に及ぶ。コーディングエージェントが載せるモデルより小さい階級であり、数字は第三者が再現したものではなく同社自身のものである。今週出荷されたコーディングの実行環境は逆を向く。8月5日水曜に公表され beta と明記された Meta の Muse Code は Muse Spark 1.2 の上で走るが、これは Meta Model API からも届く外部のモデルである。8月6日木曜に説明された Herdr の端末側の実行環境は、コマンドラインのコーディングエージェントを整理するが、そのモデルがどこで走るかは指定しない。この予測が見ているのは開発者の割合であり、今日それを測ったものは何もない。",
+      "reference_links": [
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "期間は今四半期の終わりで閉じ、今日の証拠はそこから離れる向きを指す。公表されたコーディングの実行環境が対にしているのは、提供者自身の接点からも供される外部のモデルである。その隣の実行環境は、モデルがどこで走るかを一度も述べない。実際に出荷された局所向けの公表は、コーディングエージェントが使うものよりずっと小さい階級である。",
+        "coherence": 1,
+        "remaining_gap": "閾値は、いま数週間先まで迫った期日までの開発者の割合である。今日公表されたもののうち、何かの採用を測ったものは一つもない。"
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c762a8078d707dee",
+        "short_label": "Durable ask-user checkpoints become a standard harness primitive by H1 2027",
+        "prediction_date": "2026-06-11"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] 8月5日水曜に公表され beta と明記された Meta の Muse Code は、二つの材料を一つの実行環境に持ち込みながら、この予測が掲げる基本要素へは結び付けていない。承認は存在し記録される。モデルの呼び出し、ツールの実行、承認、編集のすべてが機械の内側の出来事の記録に書き足される。持続も存在する。Meta はこの記録を、実行をそのまま再現でき再起動にも耐えるものにするしくみだと述べており、停止のあとは作業木から状態を導き直すのではなく止まった地点からそのまま続く。告知が述べていないのは、中断して再開する検問所である。エージェントが実行の途中で問いに当たって止まり、その保留の状態を保ち、モデルに問い直すのではなく答えから続ける、という形だ。下位エージェントの設計はその形に逆らう。非同期に走り、仕事ごとに立ち上がるのではなく一つの対話の間ずっと残り、いつ報告するかを自分で決める。誰も待たずに済むよう作られた仕組みである。8月5日水曜に公表された Scale X の分析は、それでも止まることが要る理由を与える。時間に追われたおよそ 409,000 回の可否の判断にわたり、平均の正答率は 66.3% だった。",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "二つの材料は一つの beta の実行環境に収まり、離れたままである。承認は記録される。記録は実行をそのまま再現でき再起動にも耐えるものにする。だがどちらも、エージェントが問いに当たって止まり、その保留の状態を保ち、答えから続けることを述べていない。下位エージェントの設計は逆へ押す。非同期で、一つの対話の間ずっと残り、誰も待たずに済むように作られている。",
+        "coherence": 2,
+        "remaining_gap": "停止からの復旧は、中断して再開することではない。そして時間に追われたときに測られた 66.3% の正答率は、出荷された設計が取り除くよう作られているその停止を求めている。"
+      }
+    }
+  ]
+}

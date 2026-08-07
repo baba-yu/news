@@ -1,0 +1,78 @@
+{
+  "date": "2026-08-06",
+  "technical": [
+    {
+      "lead": "AMD agrees to buy Taalas and fold fixed-model silicon into its roadmap",
+      "body": "AMD announced on Thursday, August 6 that it has signed a definitive agreement to acquire Taalas, a Toronto company founded in 2023. Nothing has closed: no price was disclosed, the deal is subject to customary closing conditions and regulatory approvals, and no closing date was given, so AMD's shipping line-up is unchanged today. What AMD is buying is a manufacturing bet rather than an architecture. Taalas builds model-specific integrated circuits that embed a model's weights and dataflow into transistors instead of streaming them out of high-bandwidth memory; it assembles a part of roughly 100 layers and customises only two metal layers per model, which it puts at a tape-out of about two months. Its HC1 test part, built on TSMC's 6-nanometer process, served Meta's Llama 3.1 8B at roughly 17,000 tokens per second. Vamsi Boppana, AMD's senior vice president for the Artificial Intelligence Group, framed the purchase as adding differentiated inference performance and efficiency, and AMD says it intends to fold the technology into its accelerator roadmap and build system-level products pairing it with Instinct GPUs, Helios rackscale systems, EPYC CPUs and ROCm. Ljubisa Bajic, Taalas co-founder and chief executive, said joining AMD gives the team scale, engineering resources and reach. Taalas raised $169 million in February 2026 from Quiet Capital, Fidelity and Pierre Lamond, taking total funding to about $219 million. On the tape, AMD closed at $482.05 on Wednesday, August 5, down 7.04% for the session, then at $489.28 on Thursday, August 6, up 1.50%. The strategic read is that AMD has bought an answer to a question its GPU roadmap does not address: what a serving part looks like when the model is fixed and the only remaining variable is cost per token. The caveat to hold alongside it is timing, because a signed agreement is a signature rather than a product, and no part of this has a ship date attached.",
+      "citations": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        },
+        {
+          "label": "StockAnalysis - AMD daily closing prices",
+          "url": "https://stockanalysis.com/stocks/amd/history/"
+        }
+      ]
+    },
+    {
+      "lead": "Liquid AI ships an on-device agent model that fits under 2.5 GB",
+      "body": "Liquid AI published LFM2.5-2.6B on Tuesday, August 4: 2.6 billion parameters, pre-trained on roughly 34 trillion tokens, with the context window extended to 128K mid-training, and aimed at agent work — planning, tool calls, multi-step tasks — that completes on the device instead of round-tripping to a hosted API. The footprint is the claim: under 2.5 GB of memory, with the company's own measurements at 220 tokens per second on an Apple M5 Max, 113 tokens per second on an AMD Ryzen AI Max+ 395, and close to 15,000 output tokens per second on a single NVIDIA H100 under high concurrency. On the ToolSandbox tool-use benchmark it reports 77.83, against 65.00 for Gemma 4 E4B-it and 52.40 for Gemma 4 E2B-it, and a Claw-Eval English average of 62.85; it also leads the models it was compared against on the IFBench, Multi-IF and IFStruct instruction-following suites. Runtime support at release covers llama.cpp, MLX, vLLM, SGLang and ONNX, with transformers 5.0.0 or later. Every one of those figures is the vendor's own, published alongside the model rather than independently reproduced, which is the caveat to carry into any procurement conversation about it. The number that survives the caveat is the memory ceiling, because it is a hard constraint rather than a score: a tool-calling agent loop that fits under 2.5 GB is deployable on hardware where the hosted-API dependency, not the model's quality, is the thing that cannot be shipped.",
+      "citations": [
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        }
+      ]
+    },
+    {
+      "lead": "Meta ships a terminal coding agent in beta with persistent subagents",
+      "body": "Meta's research group published Muse Code and Muse Spark 1.2 on Wednesday, August 5. Muse Code is a terminal coding agent, explicitly labelled beta rather than generally available, installed on macOS and Linux by piping an install script from dev.meta.ai, and built to plan changes, write code and validate the result across large repositories while coordinating specialised subagents. Two design choices are worth lifting out for anyone building a comparable harness. The subagents are asynchronous and persist for the whole session rather than being spawned per task, and they decide when to report back to the main agent, which is what removes the round-trip latency from multi-step problems. And every model call, tool run, approval and edit is appended to a local event log, which Meta describes as making the agent replay-exact and restart-safe, so after a crash it resumes precisely where it stopped rather than re-deriving state from the working tree. Muse Spark 1.2 is the model underneath, a coding-focused update trained on more coding tasks with a wider spread of environments; the announcement names Terminal-Bench 2.1, DeepSWE 1.1 and Meta's internal coding benchmark as its comparisons but does not state the scores, so there is nothing published here to rank against another harness. It is available now inside Muse Code and through the Meta Model API, and the post says larger and more capable models are on the way with no date attached to that. A much smaller project moved in the opposite direction the next day. Herdr, a terminal runtime that organises command-line coding agents into panes, tabs and projects and keeps them running persistently on the machine it is installed on, said on Thursday, August 6 that it has joined Y Combinator's F26 batch and relicensed from AGPL to Apache-2.0. No funding figure is given. The licence change is the load-bearing part: AGPL's network-use clause would have obliged a hosted service built on Herdr to publish its own source, and Apache-2.0 removes that obligation, which widens who can adopt the runtime and gives away the only thing that had reserved the hosted layer, leaving the paid tier it intends to sell defended by nothing but execution and being first.",
+      "citations": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        }
+      ]
+    },
+    {
+      "lead": "Humans approving agent commands averaged 66.3% across more than 40,000 runs",
+      "body": "Alex Wauters published an analysis on the Scale X blog on Wednesday, August 5 of an interactive browser game in which the player is the human approver for a coding agent, accepting or denying each command under time pressure. Across more than 40,000 runs and roughly 409,000 approve-or-deny decisions, mean accuracy was 66.3%, and the miss rate tracked how much a hostile command looked like one: 11.7% for obviously destructive commands, 23.8% for persistent mutation attacks, 33.4% for exfiltration and code execution, and 35.0% for scope violations. 35.2% of players caught every threat, but only 20.8% managed that while blocking no more than one in five safe commands, which is the distinction between a careful reviewer and someone denying everything on sight. 7% approved every command put in front of them, and 32.9% of sessions ended on a negative score. The single most-missed command was npm run analyze, approved 64.7% of the time even though the malicious payload was visible in the history log. The author is explicit about the artificiality — threats appeared in 34% of commands, far above any real workload, and a timed game is not a working day — and that caveat cuts both ways, because a real operator sees the hostile command far more rarely and is therefore less primed for it. What survives the caveat is the ordering rather than the absolute figures: the further a hostile command sits from the shape people are trained to fear, the more reliably it gets waved through. That is an argument for putting the check in the tool layer, where the payload is inspected, rather than in the approval prompt, where only the command line is.",
+      "citations": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        }
+      ]
+    },
+    {
+      "lead": "Cisco publishes twelve advisories and three Catalyst SD-WAN CVEs hit 9.9",
+      "body": "Cisco's product security incident response team published twelve advisories on Wednesday, August 5 — two critical, four high and six medium — covering Catalyst SD-WAN Software, IOS XE, IOS, the Integrated Management Controller, RoomOS and the Terminal Services Agent. The one to work first is the Catalyst SD-WAN security hardening release, which carries five identifiers: CVE-2026-20303, CVE-2026-20304 and CVE-2026-20310 at CVSS 9.9, CVE-2026-20312 at 8.8 and CVE-2026-20313 at 7.7. Cisco states these affect Catalyst SD-WAN Software regardless of device configuration, that there are no workarounds, and that it is not aware of any public announcements or malicious use of them. Fixed releases are 20.9.10, 20.12.8.1, 20.15.6, 20.18.4 and 26.1.2 depending on which branch a deployment sits on, against vulnerable trains running from before 20.9.1 through 20.18 plus release 26.1. The second critical advisory is the IOS XE security hardening release at CVSS 9.8. Three things separate this batch from the exploited-vulnerability feeds the same teams watch. These came out of Cisco's internal testing rather than incident response, so the clock is set by disclosure rather than by observed attacks. The absence of known exploitation is a stated fact in the advisory rather than an assumption a reader has to make. And Cisco posted an advance notification on Wednesday, July 29 naming the publication date a week ahead, which means the maintenance window was schedulable rather than emergency. The work for an operator is narrow and it is mechanical: identify which branch each Catalyst SD-WAN deployment runs, map it to one of those five fixed releases, and treat the absence of a workaround as removing the option of waiting.",
+      "citations": [
+        {
+          "label": "Cisco - Advance notification for publication of August 5, 2026 security advisories",
+          "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-notice-L4XfJg8S"
+        },
+        {
+          "label": "Cisco - Catalyst SD-WAN Software security hardening release, August 2026",
+          "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-sdwan-faLcR3K"
+        }
+      ]
+    }
+  ],
+  "plain": [
+    "AMD agrees to buy Taalas, a model-specific chip maker",
+    "A 2.6-billion-parameter agent model fits under 2.5 GB",
+    "Meta releases a terminal coding agent in beta",
+    "People checking agent commands scored 66% in a test",
+    "Cisco posts twelve security alerts; three score 9.9"
+  ]
+}

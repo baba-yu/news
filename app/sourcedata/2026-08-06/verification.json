@@ -1,0 +1,154 @@
+{
+  "date": "2026-08-06",
+  "note": "No search_log.json exists for 2026-08-06, so search_log_alignment is assessed against news_section.json, reference/news-topics.md §Topic scope clarifications and the 2026-08-05 events floor only; there is no writer self-report available to over- or under-report, so alignment is recorded as consistent except where the events carry-forward rule was measurably breached against yesterday's bullet. Topic strings are copied verbatim from check_topic_coverage.py _ALL_TOPICS, not from the longer parenthesised forms in news-topics.md.",
+  "verifications": [
+    {
+      "topic": "LLM Workflow",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "Meta ships a terminal coding agent in beta while a smaller one relicenses to sell the layer above it"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Genuinely borderline, so recorded as such rather than resolved in either direction. Real orchestration-ness is present and it is the reported substance rather than incidental: Muse Code's subagents are asynchronous and persist for the whole session rather than being spawned per task and decide themselves when to report back, and every model call, tool run, approval and edit is appended to a local event log that Meta describes as making the agent replay-exact and restart-safe — which is the durable-execution property that the rubric's own named siblings Restate and Temporal exist to sell, and 'multi-step agent' is in the row's generic list. Herdr adds a second and distinctly weaker orchestration surface, a runtime that organises command-line agents into panes, tabs and projects and keeps them running persistently on whichever machine it is installed on, including a remote host it installs itself onto over ssh — but the post is explicit that those machines are disconnected from each other today, so the cross-machine orchestration that would have strengthened this row is a named future commercial feature rather than shipped behaviour. Against that, no workflow or pipeline platform shipped anything today — no n8n, Inngest, Prefect, Dust.tt, Flowise or Langflow state change — and both hits arrive as architecture inside coding-agent products whose primary row is Agent Harness. Orchestration-ness yes, workflow-platform-ness no."
+    },
+    {
+      "topic": "Multi-profiling for Local LLM (e.g. Multica)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "A token scan of every category, body, citation label and URL returns zero hits for Multica and zero for any profile or multi-profiling concept. This is the news-driven-only topic and nothing today triggers it. The one item considered and rejected is the Unsloth bullet's DeepSeek-V4 Flash 0731 quantisation ladder from 83 GB at UD-IQ1_S to 162 GB at UD-Q8_K_XL: that is a set of size-accuracy SKUs of a single model, which the rubric places under Local LLM Models as a quantization release, not per-profile model management or profile switching on local hardware. Absence is correct rather than a miss."
+    },
+    {
+      "topic": "Agent Harness (OpenClaw, NemoClaw, Hermes Agents, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Meta ships a terminal coding agent in beta while a smaller one relicenses to sell the layer above it",
+        "An experiment across more than 40,000 runs measures how well humans approve agent commands, and the answer scales with disguise"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The strongest coverage of the day and a direct hit on the row's generic scope of AI coding agent, agentic IDE and autonomous developer loop, with the rubric's clause about newly entering coding agents applying to both vendors even though neither is on the 2026 brand list. Muse Code is a terminal coding agent, explicitly in beta, installed on macOS and Linux from an install script, built to plan changes, write code and validate the result across large repositories while coordinating specialised subagents, with Muse Spark 1.2 as the coding-focused model underneath. Herdr is the harness layer above the harness: a terminal runtime for command-line coding agents that organises them into panes, tabs and projects and keeps them running persistently on whichever machine it is installed on, including a remote host it installs itself onto over ssh, though the post is explicit that those machines are disconnected from each other today; it was relicensed AGPL to Apache-2.0 on joining Y Combinator's F26 batch. The Scale X study reaches the topic secondarily from the operator side rather than the product side, since its subject is the approve-or-deny prompt that sits inside a coding agent's tool loop, with npm run analyze as the single most-missed command."
+    },
+    {
+      "topic": "Platform for Local LLM (vLLM, SGLang, etc.)",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No inference engine or serving stack shipped a state change today, and this is a category judgment rather than a brand-narrow one: nothing from vLLM, SGLang, TGI, TensorRT-LLM, LMDeploy, LiteLLM, BentoML, Triton or Ollama serving. The two places the brands appear are both something else. Liquid AI's release note that runtime support covers llama.cpp, MLX, vLLM, SGLang and ONNX is a compatibility list published by the model, so the news-ness is model-release-ness and the engines are the object rather than the subject; and the vLLM Conference co-located with Ray Summit is a calendar entry inside the events bullet. Neither is a serving-runtime release, router change or OpenAI-compatible-server development."
+    },
+    {
+      "topic": "Ecosystems for Local LLM Embedded System (Foundry Local, etc.)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Liquid AI ships a 2.6-billion-parameter agent model that runs in under 2.5 GB"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The row's generic scope is on-device inference, edge LLM and embedded LLM, and the Liquid AI bullet is about exactly that rather than about a model family: the stated purpose is agent work — planning, tool calls, multi-step tasks — that completes on the device instead of round-tripping to a hosted API, the headline constraint is a memory ceiling under 2.5 GB, the measurements are taken on client silicon at 220 tokens per second on an Apple M5 Max and 113 on an AMD Ryzen AI Max+ 395, and day-one runtime support names llama.cpp, MLX and ONNX, three of the edge runtimes the rubric lists by name. The bullet's own closing read is the embedded-systems argument stated plainly, that a tool-calling agent loop fitting under 2.5 GB is deployable on hardware where a hosted-API dependency is the thing that cannot be shipped. Unsloth's DSpark, described as doubling inference speed and now on by default in the local Studio build, is a secondary local-runtime item."
+    },
+    {
+      "topic": "Local LLM Models",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Liquid AI ships a 2.6-billion-parameter agent model that runs in under 2.5 GB",
+        "Unsloth stacks three package releases on Thursday after Tuesday's release made DSpark the default"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Two independent hits on the row. LFM2.5-2.6B is a model card publication on Hugging Face: 2.6 billion parameters, pre-trained on roughly 34 trillion tokens with the context window extended to 128K mid-training, published with a benchmark table reporting 77.83 on ToolSandbox against 65.00 and 52.40 for the two Gemma 4 comparisons, a Claw-Eval English average of 62.85, and claimed leads on IFBench, Multi-IF and IFStruct — all vendor-measured and not independently reproduced, which the bullet states. The Unsloth bullet carries the quantization-release half of the row, which the rubric lists as its own generic form: DeepSeek-V4 Flash 0731 quantisations from 83 GB at UD-IQ1_S to 162 GB at UD-Q8_K_XL, plus support for Moonshot's Kimi K3, a 2.8-trillion-parameter mixture-of-experts model with 104 billion active parameters, native vision and a one-million-token context window. Those quantisations are scored here rather than against the Unsloth optimisation row, per the rubric's category assignment."
+    },
+    {
+      "topic": "Local LLM Optimization, Fine-tuning (Unsloth — every run)",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Unsloth stacks three package releases on Thursday after Tuesday's release made DSpark the default"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The mandatory constant-coverage topic has a dedicated bullet today and it is carried by Unsloth's own tooling rather than by the models it happens to package, which is the distinction that matters for scoring this row rather than Local LLM Models. Three PyPI releases landed on Thursday, August 6 — 2026.8.5, 2026.8.6 and 2026.8.7 — after 2026.8.3 on Tuesday and 2026.8.4 on Wednesday, five packages in three days, with the changelog logging 2026.8.3 and 2026.8.6 as fixes only, 2026.8.4 as training fixes and 2026.8.5 as Windows installation fixes, and 2026.8.7 adding DSpark support for DeepSeek-V4 Flash 0731 plus a full rework of the training page. DSpark itself, on by default since the v0.1.524-beta Studio release on Tuesday, August 4, is an inference-optimisation change the bullet correctly refuses to size because no tokens-per-second figure is published on either side of the doubling claim. Training fixes and a training-page rework are fine-tuning-tooling news on their own merits; the bullet's own verdict that this is a maintenance cadence rather than a capability one does not make it uncovered."
+    },
+    {
+      "topic": "Ecosystems for LLM on PaaS (AWS Bedrock, Azure AI Foundry, etc.)",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "Meta ships a terminal coding agent in beta while a smaller one relicenses to sell the layer above it"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Borderline and recorded as such rather than inflated. In favour, the row's generic list includes frontier model API and hosted LLM API, and Muse Spark 1.2 is stated to be available now not only inside Muse Code but through the Meta Model API, which is a new model reaching a vendor's managed inference surface. Against, that is a single availability clause inside a coding-agent bullet whose subject is the harness, and no managed-inference platform shipped anything today: nothing from Bedrock, Azure AI Foundry, Vertex, OpenRouter, Together, Fireworks, Modal, Baseten or Mistral La Plateforme, no pricing, no region or capacity change, and no serverless-inference development. Hosted-API-ness in one clause, PaaS-ecosystem-ness nowhere."
+    },
+    {
+      "topic": "AI Security",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "An experiment across more than 40,000 runs measures how well humans approve agent commands, and the answer scales with disguise",
+        "Cisco publishes twelve advisories and three identifiers land at 9.9",
+        "Bay Area / SV AI meet-up events"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Judged on security-ness rather than on the vendor list, and the Scale X study is the centre: it measures the human approval gate in an agent's tool loop across more than 40,000 runs and roughly 409,000 approve-or-deny decisions, with mean accuracy 66.3% and a miss rate that rises the less a hostile command looks hostile — 11.7% for obviously destructive commands, 23.8% for persistent mutation, 33.4% for exfiltration and code execution, 35.0% for scope violations — with 7% of players approving everything. Those categories are the rubric's tool-call abuse, data exfiltration and agent-takeover concepts measured rather than described, and the conclusion that the check belongs in the tool layer where the payload is inspected rather than in the approval prompt where only the command line is, is the row's two sub-bullets stated almost literally: zero-trust access control for agentic AI, and monitoring and managing agent behaviour. Cisco's twelve advisories are product security carrying the same week's operational load, and the events bullet carries the AI-security track in depth including DEF CON's AI Village and HalCTF, an agentic security competition run as a containerised agent contest. The standing AI-security-SoC watch is honoured inside the events bullet, which flags the Hot Chips FPGA session from AMD as the one to watch on the security-silicon intersection."
+    },
+    {
+      "topic": "CVE update on score ≥ 8.0",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Cisco publishes twelve advisories and three identifiers land at 9.9"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Clears the threshold outright and with the operational detail the row exists for. Cisco's PSIRT published twelve advisories on Wednesday, August 5 — two critical, four high, six medium — and the Catalyst SD-WAN hardening release carries five identifiers of which four sit at or above 8.0: CVE-2026-20303, CVE-2026-20304 and CVE-2026-20310 at CVSS 9.9 and CVE-2026-20312 at 8.8, with CVE-2026-20313 at 7.7 below the bar and carried as context. The IOS XE hardening release adds a second critical at 9.8. The bullet states that the flaws affect Catalyst SD-WAN Software regardless of device configuration, that there are no workarounds, that Cisco is not aware of public announcement or malicious use, and it enumerates the fixed trains 20.9.10, 20.12.8.1, 20.15.6, 20.18.4 and 26.1.2 against vulnerable branches from before 20.9.1 through 20.18 plus release 26.1."
+    },
+    {
+      "topic": "Hardware",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "AMD agrees to buy Taalas and says it intends to fold model-specific silicon into the Instinct roadmap",
+        "Liquid AI ships a 2.6-billion-parameter agent model that runs in under 2.5 GB",
+        "Bay Area / SV AI meet-up events"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The lead bullet is chip-ness end to end and hits the row's specific SKUs and its generic concepts alike. AMD signed a definitive agreement to acquire Taalas, a 2023 Toronto fabless building model-specific integrated circuits that embed a model's weights and dataflow into transistors instead of streaming them from high-bandwidth memory, assembling roughly 100 layers and customising only two metal layers per model at a stated tape-out of about two months; the HC1 test part is on TSMC's 6-nanometer process and served Llama 3.1 8B at roughly 17,000 tokens per second. AMD says it intends to fold the technology into its accelerator roadmap and pair it with Instinct GPUs, Helios rackscale systems, EPYC CPUs and ROCm — tape-out, process node, fabless entrant, HBM avoidance and named SKU families all in one item. The Liquid AI bullet supplies client and data-centre measurements on Apple M5 Max, AMD Ryzen AI Max+ 395 and a single NVIDIA H100, and the events bullet carries the Hot Chips 2026 programme in detail across CPU, GPU, FPGA, memory, networking and accelerator sessions."
+    },
+    {
+      "topic": "Physical AI",
+      "semantic_verdict": "uncovered",
+      "matching_bullets": [],
+      "search_log_alignment": "consistent",
+      "reason": "No robotics or embodied-AI state change today, the same call as 2026-08-03, 2026-08-04 and 2026-08-05 on the same shape of content. Every robot-ness token in the file is carried event-calendar material sitting inside the events bullet: IEEE-RAS Humanoids 2026's decision calendar and its December dates at the Santa Clara Convention Center, the Waymo keynote and the automotive session at Hot Chips, the physical AI track among the AI Infra Summit's five tracks, and physical AI in the Ray Summit training-day afternoon. No humanoid, quadruped, VLA policy, manipulation, teleoperation or fleet-deployment news exists outside those calendar lines, and calendar entries belong to the events bullet rather than to this topic."
+    },
+    {
+      "topic": "LLM-related research and papers",
+      "semantic_verdict": "ambiguous",
+      "matching_bullets": [
+        "An experiment across more than 40,000 runs measures how well humans approve agent commands, and the answer scales with disguise",
+        "Liquid AI ships a 2.6-billion-parameter agent model that runs in under 2.5 GB"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Borderline and recorded as such, on the same reasoning applied to 2026-08-05. There is zero arXiv, preprint or conference-paper material in the file, and every occurrence of the word paper belongs to the events bullet as IEEE-RAS Humanoids notification and camera-ready dates or the ACM AISec workshop. But substantive empirical work does drive two of today's bullets. The Scale X analysis is a quantified study with a stated design and stated limits — more than 40,000 runs, roughly 409,000 decisions, accuracy and miss rates decomposed by attack class, the author explicit that threats appeared in 34% of commands against any real workload and that a timed game is not a working day — and the bullet extracts an ordering finding that survives the caveat. Liquid AI publishes a comparative benchmark table across ToolSandbox, IFBench, Multi-IF and IFStruct, and Meta's research group names Terminal-Bench 2.1 and DeepSWE 1.1 without stating scores. Empirical LLM findings, but published as a vendor blog analysis and two release posts rather than as papers, so short of covered."
+    },
+    {
+      "topic": "Stock prices and corporate activity",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "AMD agrees to buy Taalas and says it intends to fold model-specific silicon into the Instinct roadmap",
+        "Meta ships a terminal coding agent in beta while a smaller one relicenses to sell the layer above it"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Three of the row's listed coverage forms land in the lead bullet at once. M&A: AMD signed a definitive agreement to acquire Taalas with no price disclosed, subject to customary closing conditions and regulatory approvals and with no closing date given, so nothing has changed in the shipping line-up yet — a caveat the bullet states rather than eliding. Funding rounds: Taalas raised $169 million in February 2026 from Quiet Capital, Fidelity and Pierre Lamond, taking total funding to about $219 million. Stock prices: AMD closed at $482.05 on Wednesday, August 5, down 7.04% for the session, then at $489.28 on Thursday, August 6, up 1.50%, cited to a daily-close source. The Herdr item adds venture-side corporate activity, joining Y Combinator's F26 batch with no funding figure given and an open-core split disclosed — the Apache-2.0 runtime stays free while multi-machine connectivity and non-terminal clients are named as the commercial candidates."
+    },
+    {
+      "topic": "Bay Area / SV AI meet-up events",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "Bay Area / SV AI meet-up events"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "Recorded as consistent after re-verification: a carry-forward breach was found on the first pass and has since been remediated in news_section.json, and a second exact-string diff across 77 event anchors from the 2026-08-05 floor now shows no undisclosed drop of a still-upcoming item. The three restored entries are the separately-run AI Security Summit's San Francisco edition on Thursday, October 15 with its leadership and practitioner tracks; the San Francisco AI Engineering and Infrastructure Summit at the Crowne Plaza Palo Alto on El Camino Real that same Thursday, 8:30 AM to 3:30 PM, free, closed-door and practitioner-led; and the AI Tinkerers Los Angeles builder meetup and live demos tonight, Thursday, August 6, 6 to 8 PM PDT, which the bullet now carries with the honest note that it has rolled off the calendar's forward list because it starts today. Coverage itself was already strong and is unchanged, with the mandatory three-sub-track rule satisfied and the marquee conferences not crowding out the other two: mainstream dev/data (Ray Summit with the co-located first vLLM Conference, CoreWeave Fully Connected, The AI Conference, OpenAI DevDay, PyTorch, GitHub Universe, re:Invent, NeurIPS, The AI Summit New York), AI-security (DEF CON 34's AI Village and HalCTF in full detail, Black Hat, the AI Risk Summit, both AI Agent Security Summit speaking deadlines, SANS, OWASP Global AppSec, ACM AISec) and AI-chip (Hot Chips 2026 session by session, the AI Infra Summit, Edge AI and Vision, OCP, GTC Berlin, SC26). No past event is used as a bullet centre — Black Hat, Ai4 and FMS all close today and are correctly framed as still in front of the reader, while BSides Las Vegas and the Seattle VIP founders' dinner, both closed Wednesday, appear only as context or not at all. Today also self-heals a gap flagged against 2026-08-05, restoring SANS' $525 summit price, its $229 room rate closing Friday, October 9 and its Wednesday, October 14 refund cutoff. Three floor entries remain absent and are judged acceptable rather than a second breach, on the same reading given before the fix: the AI Tinkerers meetups at Orange County on August 19, Boston on September 3 and Columbus on September 7 were carried yesterday explicitly as unverified rather than scheduled, and today's bullet replaces them with the positive, checkable disclosure that August 18 is now the calendar's last dated entry, having re-checked and promoted Palo Alto on August 18 from unverified chapter page to listed session. The Medellin drop is likewise disclosed explicitly."
+    },
+    {
+      "topic": "Other standing-out topics",
+      "semantic_verdict": "covered",
+      "matching_bullets": [
+        "AMD agrees to buy Taalas and says it intends to fold model-specific silicon into the Instinct roadmap",
+        "An experiment across more than 40,000 runs measures how well humans approve agent commands, and the answer scales with disguise",
+        "Meta ships a terminal coding agent in beta while a smaller one relicenses to sell the layer above it"
+      ],
+      "search_log_alignment": "consistent",
+      "reason": "The AMD-Taalas deal is the standout of the day and does not sit cleanly in any one named row: a general-purpose GPU vendor buying the thesis that competes with general-purpose GPUs, where the model is burned into the transistors and the only remaining variable is cost per token, which is simultaneously chip news, M&A and a statement about where inference economics are heading. The Scale X study is the second, an unusually large measurement of the part of the agent loop that is a person rather than a model, whose transferable finding is an ordering — the further a hostile command sits from the shape people are trained to fear, the more reliably it gets waved through — and which points at the tool layer as the place to put the check. Herdr's AGPL to Apache-2.0 relicense is a third, a licensing move read for what it actually does: the network-use clause that would have obliged a hosted service to publish its source is removed, which both widens adoption of the runtime and reserves the hosted layer as the thing the company intends to sell."
+    }
+  ]
+}

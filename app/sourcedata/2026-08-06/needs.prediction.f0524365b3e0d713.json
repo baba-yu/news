@@ -1,0 +1,114 @@
+[
+  {
+    "actor": "Model card and documentation maintainer, Liquid AI",
+    "job": "Deciding whether the model card states what LFM2.5-2.6B holds at a named context length, rather than restating an unqualified ceiling.",
+    "outcome": "A published table pairing a memory figure with the context length it holds at, on the model's own card.",
+    "motivation": "Under 2.5 GB and 128K are printed on the same page and never in the same sentence.",
+    "task": {
+      "who": "Model card authors and repository documentation owners",
+      "what": "Add a memory-at-context table to the model card",
+      "where": "The LFM2.5-2.6B model card and its repository documentation",
+      "when": "Q2 2027",
+      "why": "Two numbers on one page never meet",
+      "how": "One row per context length, memory stated per row"
+    }
+  },
+  {
+    "actor": "On-device inference performance engineer, Liquid AI",
+    "job": "Measuring peak resident memory for a tool-calling session at 8K, 32K and 128K on the laptop and handset class the release targets.",
+    "outcome": "A measured memory curve across context lengths, the internal number a published figure can be quoted from.",
+    "motivation": "Throughput was published against named hardware; no published figure states footprint at any named context length.",
+    "task": {
+      "who": "Device performance and runtime benchmarking engineers",
+      "what": "Measure peak memory at 8K, 32K and 128K",
+      "where": "Apple silicon laptops, Ryzen AI hardware and embedded boards",
+      "when": "Q4 2026",
+      "why": "Tokens per second says nothing about what fits",
+      "how": "Instrumented llama.cpp and MLX runs recording peak resident memory"
+    }
+  },
+  {
+    "actor": "Developer relations engineer, Liquid AI",
+    "job": "Writing the deployment guide that answers whether an agent loop still fits late in a session, not only at its start.",
+    "outcome": "A follow-up post from the company stating a memory figure for a session run at a named context length.",
+    "motivation": "Developers choosing between on-device models ask what it holds when the session is deep, and the launch post never says.",
+    "task": {
+      "who": "Developer relations and technical content authors",
+      "what": "Publish a deployment guide sizing memory against context",
+      "where": "The company blog and its developer documentation site",
+      "when": "Q1 2027",
+      "why": "A ceiling without a length is unusable for sizing",
+      "how": "A worked example running a tool loop to 128K"
+    }
+  },
+  {
+    "actor": "Edge deployment solutions engineer, Liquid AI",
+    "job": "Fielding the recurring question of whether the model fits a handset or embedded board at depth, and routing it into published material.",
+    "outcome": "A documented request, backed by named deployments, for the memory figure at the context length those deployments actually run.",
+    "motivation": "On a board with a fixed memory ceiling, running out is a crash, so the answer cannot wait for a forum thread.",
+    "task": {
+      "who": "Field deployment and customer enablement engineers",
+      "what": "Collect deployment sizing questions into a documentation request",
+      "where": "Customer integration reviews and the internal documentation backlog",
+      "when": "Q3 2026",
+      "why": "Every integration re-asks the number nobody published",
+      "how": "Per-customer memory budgets measured against their target hardware"
+    }
+  },
+  {
+    "actor": "KV-cache and memory reporting maintainer, llama.cpp project",
+    "job": "Making the memory a session holds at a given context a printed number in the runtime rather than something a practitioner infers.",
+    "outcome": "Runtime output reporting memory per context length, which makes an unqualified ceiling look like a figure the vendor has not stated.",
+    "motivation": "A model advertised for on-device agents is judged on what it holds at depth, and the runtime is where that shows.",
+    "task": {
+      "who": "llama.cpp memory management and reporting contributors",
+      "what": "Report KV cache and peak memory per context",
+      "where": "The llama.cpp server and command-line runtime output",
+      "when": "September 2026",
+      "why": "Practitioners currently derive what a vendor could state",
+      "how": "Startup and per-request memory accounting printed by default"
+    }
+  },
+  {
+    "actor": "On-device model enablement engineer, an edge NPU silicon vendor",
+    "job": "Listing models in a deployment catalogue only when a memory budget at a named context length exists for the target part.",
+    "outcome": "A catalogue entry requirement that a model vendor can only satisfy by publishing memory against context.",
+    "motivation": "A part ships with fixed memory, so a model without a stated footprint at depth cannot be recommended on it.",
+    "task": {
+      "who": "Silicon vendor model enablement and ecosystem engineers",
+      "what": "Require a memory-at-context figure for catalogue listing",
+      "where": "The vendor's supported-model catalogue and enablement checklist",
+      "when": "February 2027",
+      "why": "Fixed on-part memory decides what can be recommended",
+      "how": "Checklist gate on a per-context memory budget submission"
+    }
+  },
+  {
+    "actor": "Independent on-device benchmark author, an edge inference evaluation publication",
+    "job": "Measuring and publishing what LFM2.5-2.6B actually holds at 8K, 32K and 128K, since the release states the cost at none of them.",
+    "outcome": "An external memory-against-context measurement that the vendor's own material either matches, corrects, or is read as avoiding.",
+    "motivation": "Every figure in the release is the vendor's own, and the one developers need for sizing is the one missing.",
+    "task": {
+      "who": "Independent evaluation authors and reproduction reviewers",
+      "what": "Publish measured memory across named context lengths",
+      "where": "A public benchmark write-up with its reproduction scripts",
+      "when": "November 2026",
+      "why": "Vendor figures are unreproduced and omit the sizing number",
+      "how": "Fixed hardware, released scripts, peak memory recorded per run"
+    }
+  },
+  {
+    "actor": "On-device agent runtime maintainer, an open-source local agent framework",
+    "job": "Budgeting a tool-loop transcript against device memory, which requires a per-context footprint the model's publisher has not stated.",
+    "outcome": "A model support entry that names the context length its memory figure holds at, and an upstream request when one is missing.",
+    "motivation": "An agent loop that dies mid-task on a laptop is blamed on the framework, not on the model card that omitted it.",
+    "task": {
+      "who": "Framework maintainers owning local model support",
+      "what": "Size tool-loop context against a per-model memory budget",
+      "where": "The framework's local model support matrix and issue tracker",
+      "when": "April 2027",
+      "why": "A loop that dies at depth is blamed here",
+      "how": "Context budget derived from measured per-length memory figures"
+    }
+  }
+]

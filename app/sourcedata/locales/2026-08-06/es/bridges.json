@@ -1,0 +1,943 @@
+{
+  "date": "2026-08-06",
+  "validation_rows": [
+    {
+      "prediction_ref": {
+        "id": "prediction.f0524365b3e0d713",
+        "short_label": "LFM2.5-2.6B's under-2.5 GB claim gets a named context length by Q3 2027",
+        "prediction_date": "2026-08-06"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Liquid AI publicó LFM2.5-2.6B el martes 4 de agosto: 2.600 millones de parámetros, preentrenado con unos 34 billones de tokens, con la ventana de contexto ampliada a 128K a mitad del entrenamiento y orientado al trabajo de agentes que se completa en el dispositivo en lugar de ir y volver a una API alojada. El lanzamiento presenta el techo de memoria y la longitud de contexto como dos hechos separados y nunca los une. Menos de 2,5 GB es una cifra sobre el modelo; 128K es una cifra sobre cuánto de una sesión puede sostener el modelo. Nada de lo publicado junto al lanzamiento dice cuál es la huella con 8K, con 32K o con los 128K que anuncia. Las cifras que sí aparecen juntas son de rendimiento y no de huella: mediciones de la propia empresa de 220 tokens por segundo en un Apple M5 Max, 113 tokens por segundo en un AMD Ryzen AI Max+ 395 y cerca de 15.000 tokens de salida por segundo en una sola NVIDIA H100 con alta concurrencia. En ToolSandbox declara 77,83 frente a 65,00 de Gemma 4 E4B-it y 52,40 de Gemma 4 E2B-it, además de una media en inglés de Claw-Eval de 62,85; el soporte de runtime en el lanzamiento cubre llama.cpp, MLX, vLLM, SGLang y ONNX con transformers 5.0.0 o posterior. Todas y cada una de esas cifras son del propio fabricante, publicadas junto al modelo y no reproducidas de forma independiente. Un dato contiguo muestra a alguien que no es el fabricante tratando la restricción como algo operativo: el AI Village de DEF CON 34 organiza HalCTF con cada agente presentado limitado a un contenedor de 2,5 GB. El techo de memoria ya es la unidad con la que presupuestan las competiciones, y lo que necesita quien construye ahí es la huella máxima bajo carga y no la cifra de la ficha del modelo.",
+      "reference_links": [
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        },
+        {
+          "label": "AI Village - HalCTF at DEF CON 34",
+          "url": "https://aivillage.org/blog/halctf/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El lanzamiento presenta el techo y la ventana de contexto como hechos separados y nunca los une: la premisa, establecida por el material de lanzamiento del propio editor y no deducida. Lo que hoy no aporta es presión para cerrar esa distancia. La cifra sin matizar está funcionando, y solo una competición que limita a los agentes a 2,5 GB enseña a alguien presupuestando contra la carga máxima.",
+        "coherence": 3,
+        "remaining_gap": "Nada obliga a un fabricante a publicar la cifra que empeora su propio techo, y todavía no existe ninguna medición independiente de la huella con una longitud concreta."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.d8856daf2cd8c30b",
+        "short_label": "Herdr publishes a paid tier above its Apache-2.0 runtime by Q2 2027",
+        "prediction_date": "2026-08-06"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Herdr dijo el jueves 6 de agosto que se ha incorporado al lote F26 de Y Combinator y, en el mismo post, ha cambiado la licencia de su runtime de AGPL a Apache-2.0. Herdr es un runtime de terminal para agentes de programación de línea de comandos: los organiza en paneles, pestañas y proyectos y los mantiene en ejecución de forma persistente en una sola máquina, con las máquinas distintas desconectadas entre sí. En el anuncio no aparece ninguna cifra de financiación, y entrar en un lote no es una ronda, así que aquí nada pone un número a la empresa. Lo que el post sí declara es un reparto: el runtime que la gente usa hoy sigue siendo gratuito bajo Apache-2.0 y las funciones comerciales se construyen encima, con la conectividad entre varias máquinas y los clientes más allá de la interfaz de terminal nombrados como las dos candidatas. La línea de la licencia es la que sostiene todo lo demás. La cláusula de uso en red de la AGPL es lo que habría obligado a un servicio alojado construido sobre Herdr a publicar su propio código fuente; Apache-2.0 elimina esa obligación, lo que amplía quién puede adoptar el runtime y deja la capa alojada reservada por nada salvo por llegar primero. La misma semana aporta presión desde la otra dirección. El grupo de investigación de Meta publicó Muse Code el miércoles 5 de agosto, un agente de programación de terminal explícitamente en beta cuyos subagentes persisten durante toda la sesión en lugar de crearse por tarea, y en el que cada llamada al modelo, cada ejecución de herramienta, cada aprobación y cada edición se añaden a un registro de eventos local que Meta describe como lo que hace al agente exacto en la reproducción y seguro ante reinicios. La persistencia a lo largo de una sesión y la supervivencia a un reinicio son las preocupaciones que anuncia el runtime de Herdr, y el anuncio de Meta no pone precio a nada de eso. A día de hoy el nivel de pago es una intención declarada sin plan, sin página y sin ninguna cifra asociada.",
+      "reference_links": [
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La cláusula que reservaba la capa alojada es justo la que acaba de desaparecer, y el post nombra la conectividad entre varias máquinas y un cliente que no sea el terminal como lo que se venderá en su lugar. Eso es una razón estructural para poner precio a la capa de arriba, y solo una razón: ni plan, ni página, ni cifra, ni reloj en ninguna parte de la fuente.",
+        "coherence": 3,
+        "remaining_gap": "Un proyecto con licencia permisiva puede quedarse sin monetizar indefinidamente, y una capa de pago metida dentro de un producto alojado con otro nombre cumpliría la intención sin llegar a producir la página."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.2010d789e89c4a47",
+        "short_label": "Terminal coding agents refuse commands the operator approved by H1 2027",
+        "prediction_date": "2026-08-06"
+      },
+      "today_relevance": 5,
+      "evidence_summary": "Alex Wauters publicó el miércoles 5 de agosto en el blog de Scale X un análisis de un juego interactivo de navegador en el que el jugador hace de aprobador humano de un agente de programación y acepta o deniega cada comando bajo presión de tiempo. A lo largo de más de 40.000 partidas y unas 409.000 decisiones de aprobar o denegar, el acierto medio fue del 66,3%. Importa más la forma que la media: las tasas de fallo fueron del 11,7% en comandos obviamente destructivos, del 23,8% en ataques de mutación persistente, del 33,4% en exfiltración y ejecución de código y del 35,0% en violaciones de alcance, de modo que cuanto más lejos está un comando hostil de aquello que a la gente se le enseña a temer, con más fiabilidad se le deja pasar. El 35,2% de los jugadores detectó todas las amenazas, pero solo el 20,8% lo consiguió bloqueando como mucho uno de cada cinco comandos seguros; un 7% aprobó todo y el 32,9% de las sesiones terminó con puntuación negativa. El comando que más veces se pasó por alto fue npm run analyze, aprobado el 64,7% de las veces aunque la carga maliciosa estaba a la vista en el registro del historial y no en la cadena que se pedía juzgar al jugador. El autor es explícito en que el montaje es artificial —las amenazas aparecían en el 34% de los comandos, muy por encima de cualquier carga de trabajo real— y su propia conclusión es poner la comprobación en la capa de herramientas, donde se inspecciona la carga, y no en el aviso de aprobación, donde solo está la línea de comandos. Otros dos asuntos describen la capa hacia la que eso empuja. Meta publicó Muse Code el miércoles 5 de agosto, un agente de programación de terminal explícitamente en beta cuyos subagentes son asíncronos, persisten durante toda la sesión y deciden ellos cuándo informar, con cada aprobación añadida a un registro de eventos local; ahí las aprobaciones siguen existiendo sin más, y el ritmo al que llegan las líneas de comandos delante de una sola persona lo marca un planificador. Herdr, que describió su runtime de terminal el jueves 6 de agosto, mantiene a los agentes en ejecución de forma persistente en la máquina en la que se asientan. Y la objeción de coste a una comprobación que lea la carga se movió el martes 4 de agosto, cuando Liquid AI publicó LFM2.5-2.6B, un modelo de 2.600 millones de parámetros para planificación, llamadas a herramientas y tareas de varios pasos que cabe en menos de 2,5 GB de memoria, según las cifras no reproducidas de la propia empresa. Nada de lo publicado hoy describe a ningún arnés rechazando un comando que su operador había aprobado.",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        },
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Unas 409.000 decisiones ponen un número a la premisa: la tasa de fallo sube a medida que un comando hostil parece menos hostil, hasta el 35,0% en violaciones de alcance, porque la carga está por debajo de la cadena que se juzga. Un arnés en beta cuyo planificador fija el ritmo de llegada de esas cadenas, y que registra las aprobaciones en lugar de restringirlas, empeora la condición.",
+        "coherence": 4,
+        "remaining_gap": "Ningún arnés descrito hoy rechaza nada que su operador haya aprobado, y una negativa dura es la función que convierte un ticket de soporte en una discusión sobre el criterio del fabricante."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.ffede2e95254bc23",
+        "short_label": "Uncorroborated CVE reports stop reaching critical severity by H1 2027",
+        "prediction_date": "2026-08-05"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "El equipo de respuesta a incidentes de seguridad de producto de Cisco publicó doce avisos el miércoles 5 de agosto —dos críticos, cuatro altos y seis medios— que cubren Catalyst SD-WAN Software, IOS XE, IOS, el Integrated Management Controller, RoomOS y el Terminal Services Agent. Este lote es el polo opuesto del modo de fallo del que trata la predicción. La versión de refuerzo de seguridad de Catalyst SD-WAN lleva cinco identificadores con puntuación asociada: CVE-2026-20303, CVE-2026-20304 y CVE-2026-20310 con CVSS 9,9, CVE-2026-20312 con 8,8 y CVE-2026-20313 con 7,7, frente a las versiones corregidas nombradas 20.9.10, 20.12.8.1, 20.15.6, 20.18.4 y 26.1.2 y a las ramas vulnerables nombradas, que van desde antes de la 20.9.1 hasta la 20.18 más la versión 26.1. El segundo aviso crítico es la versión de refuerzo de seguridad de IOS XE, con CVSS 9,8. Hay tres propiedades que hacen el trabajo de corroboración. Cisco afirma que los defectos afectan a Catalyst SD-WAN Software con independencia de la configuración del equipo y que no hay soluciones alternativas, así que el alcance queda afirmado y no se deja al criterio de quien lee. Cisco afirma que no tiene constancia de anuncios públicos ni de uso malicioso de ellos, lo que convierte el estado de explotación en un hecho publicado y no en una ausencia. Y los avisos salieron de las pruebas internas de Cisco y no de una respuesta a incidentes, con un aviso previo publicado el miércoles 29 de julio que anunciaba de antemano la fecha de publicación. Una puntuación crítica que llega con nombre de fabricante, versión corregida, estado de explotación declarado y fecha de publicación preanunciada es la forma que un régimen de puntuación endurecido contra los envíos sin corroborar seguiría dejando pasar sin cambios.",
+      "reference_links": [
+        {
+          "label": "Cisco - Catalyst SD-WAN Software security hardening release, August 2026",
+          "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-sdwan-faLcR3K"
+        },
+        {
+          "label": "Cisco - Advance notification for publication of August 5, 2026 security advisories",
+          "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-notice-L4XfJg8S"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Un lote puntuado que llega con nombre de fabricante, cinco números de versión corregida, un estado de explotación declarado y una fecha de publicación anunciada con una semana de antelación es lo que ya es la corroboración. Fija la referencia contra la que mide esta predicción, pero no pone nada a prueba: un régimen endurecido contra los envíos sin respaldo dejaría pasar este lote intacto.",
+        "coherence": 2,
+        "remaining_gap": "Ningún registrador cambió hoy una regla de puntuación; el lote demuestra el polo bien respaldado y deja el polo sin corroborar completamente sin medir."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.f727ed88a9133fb3",
+        "short_label": "AMD data centre segment clears 60% of quarterly revenue by Q1 2027",
+        "prediction_date": "2026-08-05"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "AMD anunció el jueves 6 de agosto que ha firmado un acuerdo definitivo para adquirir Taalas, una empresa de Toronto fundada en 2023 que construye circuitos integrados específicos por modelo. Nada se ha cerrado: no se reveló el precio, la operación queda sujeta a las condiciones de cierre habituales y a las aprobaciones regulatorias, y no se dio fecha de cierre, así que en este ciclo no hay ningún ingreso asociado y la línea de productos que se envía no cambia. Lo que el anuncio sí mueve es hacia dónde se apunta el segmento de centro de datos. Vamsi Boppana, vicepresidente sénior de AMD para el Artificial Intelligence Group, presentó la compra como una forma de sumar rendimiento y eficiencia diferenciados en inferencia, y AMD dice que tiene intención de incorporar la tecnología a su hoja de ruta de aceleradores y de construir productos a nivel de sistema que la combinen con GPU Instinct, sistemas rackscale Helios, CPU EPYC y ROCm, que son cuatro piezas situadas dentro del segmento cuya cuota de ingresos sigue la predicción. Taalas levantó 169 millones de dólares en febrero de 2026 de Quiet Capital, Fidelity y Pierre Lamond, con lo que la financiación total llega a unos 219 millones. En la sesión bursátil, AMD cerró a 482,05 dólares el miércoles 5 de agosto, un 7,04% menos en la jornada, y a 489,28 dólares el jueves 6 de agosto, un 1,50% más; las fuentes de hoy no atribuyen el movimiento del jueves a nada en particular. En el corpus de hoy no aparece ninguna cifra de segmento, ninguna revisión de previsiones ni ninguna declaración sobre la mezcla de ingresos, así que esto es un compromiso de dirección y no un número contra el que medir.",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        },
+        {
+          "label": "StockAnalysis - AMD daily closing prices",
+          "url": "https://stockanalysis.com/stocks/amd/history/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Un acuerdo sin cerrar y sin precio no aporta ingresos en la ventana, y hoy no aparece ninguna cifra de segmento, así que la aritmética queda intacta. Lo que sí se mueve es la intención: las piezas nombradas como destino de integración —Instinct, Helios, EPYC, ROCm— están todas dentro del segmento, lo que refuerza hacia dónde apunta el capital sin mover la cuota que hay que superar.",
+        "coherence": 2,
+        "remaining_gap": "Dentro de la ventana tienen que publicarse dos tablas de segmento trimestrales más, y una adquisición pendiente todavía de aprobación regulatoria suma coste mucho antes de sumar una línea de ingresos."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.ed22f8669ea280de",
+        "short_label": "Hugging Face's downloader ships no default XET-to-HTTP fallback by Q2 2027",
+        "prediction_date": "2026-08-03"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "La solución de compromiso se está entregando ahora en un runtime de terceros, que es el estado del mundo que describe esta predicción. La versión de Studio de Unsloth etiquetada v0.1.524-beta el martes 4 de agosto incluye un retorno automático de XET a HTTP simple cuando una descarga se atasca, implementado en la herramienta de destino que consume la transferencia y no en el descargador de origen sobre cuyo valor por defecto trata la afirmación. Las notas de la versión lo sitúan como continuación del mismo trabajo de fiabilidad de descargas ya registrado en la 2026.8.2, así que es una línea de esfuerzo mantenida dentro de Unsloth y no un parche suelto. El ritmo de paquetes a su alrededor enseña hacia dónde va ese esfuerzo: el jueves 6 de agosto llegaron tres versiones a PyPI —2026.8.5, 2026.8.6 y 2026.8.7— después de la 2026.8.3 el martes y la 2026.8.4 el miércoles, y el registro de cambios anota la 2026.8.3 y la 2026.8.6 solo como correcciones, la 2026.8.4 como correcciones de entrenamiento y la 2026.8.5 como correcciones de instalación en Windows. En el corpus de hoy no hay ninguna declaración de Hugging Face sobre su propio descargador, ni en un sentido ni en el otro; la evidencia es la persistencia de la compensación aguas abajo.",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.3, released August 4, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.3/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.4, released August 5, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.4/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.5, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.5/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.6, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.6/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La compensación se sigue manteniendo aguas abajo: un runtime de terceros entrega él mismo el retorno ante atascos, en unas notas de versión que continúan un trabajo ya registrado en un paquete anterior. Cada versión que deja esa lógica en el consumidor es una versión en la que el valor por defecto de origen no cuesta nada dejar como está: el mecanismo, observado a un paso de distancia.",
+        "coherence": 3,
+        "remaining_gap": "Hoy no hay ninguna declaración del editor de origen sobre su propio descargador en ninguna de las dos direcciones, así que la afirmación descansa por completo en lo que se deduce del comportamiento de un consumidor."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.3cb90b28e1d67e1b",
+        "short_label": "DeepSeek splits V4-Flash into a floating name and a pinned id by H1 2027",
+        "prediction_date": "2026-08-01"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "El identificador con fecha es ya la cadena que arrastra una herramienta de destino. La versión 2026.8.7 de Unsloth, del jueves 6 de agosto, lista soporte de DSpark para DeepSeek-V4 Flash 0731, y la versión de Studio etiquetada v0.1.524-beta del martes 4 de agosto trajo cuantizaciones de DeepSeek-V4 Flash 0731 que van de 83 GB en UD-IQ1_S a 162 GB en UD-Q8_K_XL. En los dos sitios el modelo aparece nombrado con un sufijo de fecha de cuatro dígitos y no como nombre de producto a secas, que es la mitad de identificador fijo de la división que describe esta predicción. Lo que no contiene el corpus de hoy es la otra mitad ni al editor: no hay ninguna declaración de DeepSeek sobre cómo nombra o versiona este modelo, ningún alias flotante documentado frente al que lleva fecha y ningún endpoint o lista de modelos donde se vea a los dos conviviendo. La evidencia es una convención del ecosistema observada en las notas de versión de un empaquetador, y una convención adoptada aguas abajo no es lo mismo que un editor comprometiéndose con ella.",
+      "reference_links": [
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "El sufijo con fecha es la cadena que un empaquetador arrastra de verdad, tanto en un juego de cuantizaciones como en una línea de soporte, así que la mitad fija de la división ya es convención en uso. El lado del editor queda intacto: ningún alias flotante documentado frente al nombre con fecha, y una convención adoptada aguas abajo no es un compromiso adquirido aguas arriba.",
+        "coherence": 2,
+        "remaining_gap": "Solo el editor puede crear la división; hoy nada muestra un endpoint, una lista de modelos o una página de documentación donde convivan un nombre flotante y un identificador fijo."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8598785e784a209e",
+        "short_label": "Trillion-parameter open-weight MoE ships a first-party draft model by Q2 2027",
+        "prediction_date": "2026-08-02"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "El movimiento de hoy en decodificación especulativa es enteramente de terceros, que es justo el caso que esta predicción no cuenta. La versión 2026.8.7 de Unsloth, del jueves 6 de agosto, lista soporte de DSpark para DeepSeek-V4 Flash 0731, y el propio DSpark llegó en la versión de Studio etiquetada v0.1.524-beta el martes 4 de agosto, donde las notas dicen que viene activado por defecto. Quien entrega es el kit de empaquetado y ajuste fino, no el laboratorio que publicó los pesos, y en el corpus de hoy no hay ninguna declaración de DeepSeek ni de Moonshot sobre un modelo borrador propio. Esa misma versión de Studio añadió soporte para Kimi K3 de Moonshot, descrito como un modelo de mezcla de expertos de 2,8 billones de parámetros con 104.000 millones de parámetros activos, visión nativa y una ventana de contexto de un millón de tokens: un modelo de la clase de tamaño de la que trata la predicción, que llega sin ningún modelo borrador de primera parte a su lado. La dirección del movimiento es que la capa de aceleración la está suministrando el ecosistema y no el editor del modelo.",
+      "reference_links": [
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La evidencia de hoy va contra la premisa. La aceleración llegó desde el kit de empaquetado, activada por defecto, y un modelo de mezcla de expertos de 2,8 billones de parámetros entró en la misma versión sin ningún modelo borrador que lo acompañara. Cada implementación de terceros que funciona reduce la razón por la que un editor entregaría uno propio.",
+        "coherence": 2,
+        "remaining_gap": "Está sin probar si la vía de terceros es lo bastante buena como para desplazar a un modelo borrador de primera parte; hoy no aparece por ninguna parte una comparación de servicio entre las dos."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e01a8ed7a5221606",
+        "short_label": "Repository-supplied agent hooks get an approval of their own by Q2 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "El análisis de Scale X publicado el miércoles 5 de agosto pone una medición debajo del supuesto de que un único aviso de aprobación indiferenciado es un control suficiente. A lo largo de más de 40.000 partidas y unas 409.000 decisiones de aprobar o denegar, el acierto medio fue del 66,3%, y la tasa de fallo subía a medida que un comando hostil parecía menos hostil: 11,7% en comandos obviamente destructivos, 23,8% en ataques de mutación persistente, 33,4% en exfiltración y ejecución de código y 35,0% en violaciones de alcance. El resultado que más directamente afecta al comportamiento suministrado por el repositorio es el comando que más veces se pasó por alto, npm run analyze, aprobado el 64,7% de las veces con la carga maliciosa en el registro del historial y no en la cadena que se pedía juzgar al jugador: un nombre de script del propio proyecto haciendo de sustituto de lo que realmente ejecuta. Muse Code de Meta, publicado el miércoles 5 de agosto y explícitamente en beta, registra el otro lado: cada llamada al modelo, cada ejecución de herramienta, cada aprobación y cada edición se añaden a un registro de eventos local, de modo que las aprobaciones quedan anotadas de manera uniforme y no se describe ninguna clase aparte para lo que suministra el repositorio. Nada de lo publicado hoy da a los hooks suministrados por el repositorio un paso de consentimiento propio.",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "El propósito queda ilustrado con precisión, aunque sea sin querer. Un nombre de script suministrado por el proyecto se aprobó el 64,7% de las veces con la carga en un registro que el aviso nunca enseñaba: un repositorio decidiendo qué se ejecuta mientras el consentimiento se agarra solo a una etiqueta. El arnés que llegó esta semana registra todas las aprobaciones en una sola clase indiferenciada.",
+        "coherence": 3,
+        "remaining_gap": "Ningún arnés da al comportamiento suministrado por el repositorio un paso de consentimiento distinto del de los comandos corrientes, y el estudio no nombra a ningún asistente de programación, así que el caso es analógico."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.11fc575584e8e05b",
+        "short_label": "Agent-written accelerator stacks get an independent serving number by Q2 2027",
+        "prediction_date": "2026-08-03"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "Hoy se produce una cifra de servicio para un acelerador novedoso, pero falla en las dos mitades de lo que pide esta predicción. AMD anunció el jueves 6 de agosto que ha firmado un acuerdo definitivo para adquirir Taalas, y la cifra que viaja con el anuncio es que la pieza de prueba HC1 de Taalas, fabricada en el proceso de 6 nanómetros de TSMC, sirvió el Llama 3.1 8B de Meta a unos 17.000 tokens por segundo. Ese número llega a quien lee a través del propio newsroom de AMD y de un artículo del sector que lo recoge, sin arnés, sin configuración de lote y sin reproducción independiente, así que es una cifra de fabricante y no una cifra independiente. Y la pila que hay debajo no la escribió ningún agente: Taalas construye circuitos integrados específicos por modelo que graban los pesos y el flujo de datos de un modelo en los transistores en lugar de sacarlos por streaming desde memoria de alto ancho de banda, ensamblando una pieza de unas 100 capas y personalizando solo dos capas de metal por modelo, con un tape-out de unos dos meses, que es un método de fabricación y no una pila de software generada. La relevancia está en que la categoría que vigila la predicción sigue produciendo cifras de lanzamiento sin reproducir.",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "La condición se cumple y el caso no encaja. Una cifra de lanzamiento de unos 17.000 tokens por segundo llega a quien lee a través del newsroom del propio comprador, sin arnés, sin configuración de lote y sin reproducción: sin reproducir por defecto, tal como se suponía. Pero la pila que hay debajo es un método de fabricación y no algo que haya escrito un agente.",
+        "coherence": 2,
+        "remaining_gap": "Hoy no hay ningún kernel ni ninguna pila de servicio generados por un agente, así que la categoría que la afirmación pone realmente a prueba no produjo ningún candidato para una cifra independiente."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e17de6adc92dd6dc",
+        "short_label": "Disk-streamed 80B inference misses 4.5 tokens a second when retested by H2 2027",
+        "prediction_date": "2026-08-04"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "En el corpus de hoy no aparece ninguna repetición de la prueba, y nada de lo publicado hoy mide un modelo servido por streaming desde disco frente a una cifra de tokens por segundo. El material de servicio local que sí llegó se sitúa en los dos extremos del rango de tamaño sin tocar el punto medio del que trata la afirmación. Liquid AI publicó LFM2.5-2.6B el martes 4 de agosto con 2.600 millones de parámetros y menos de 2,5 GB de memoria, lo bastante pequeño como para estar residente en lugar de llegar por streaming, con soporte de runtime en el lanzamiento para llama.cpp, MLX, vLLM, SGLang y ONNX. En el otro extremo, la versión de Studio de Unsloth etiquetada v0.1.524-beta del martes 4 de agosto trajo cuantizaciones de DeepSeek-V4 Flash 0731 que van de 83 GB en UD-IQ1_S a 162 GB en UD-Q8_K_XL: tamaños de artefacto en disco, que no dicen nada sobre el ritmo de servicio. La única reivindicación de rendimiento en esa misma versión es DSpark, descrito en las notas como activado por defecto y como algo que duplica la velocidad de inferencia, publicado sin ninguna cifra de tokens por segundo a ninguno de los dos lados de esa comparación, de modo que no se puede comprobar con el material del propio proyecto y no es una medición de nada de lo que esta predicción pone a prueba.",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Hoy no hay nada que mida un modelo servido por streaming desde disco. El material de servicio local rodea la clase de tamaño sin entrar en ella: un modelo de 2.600 millones de parámetros lo bastante pequeño como para quedarse residente en un extremo, y tamaños de artefacto en disco en el otro, y el tamaño de un artefacto no es un ritmo de servicio. La única reivindicación de rendimiento publicada no lleva cifra a ninguno de los dos lados.",
+        "coherence": 1,
+        "remaining_gap": "Una repetición de la prueba necesita el mismo modelo, el mismo montaje de streaming y una cifra de tokens por segundo publicada; en el material de hoy no aparece ninguna de las tres."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.9eb6e9888959d4b6",
+        "short_label": "Local-LLM runtimes ship in-model speculative decoding on by default by Q2 2027",
+        "prediction_date": "2026-07-05"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "El valor por defecto cambió esta semana en una compilación entregada de un kit de ajuste fino. La versión de Studio de Unsloth etiquetada v0.1.524-beta del martes 4 de agosto dice que DSpark viene ya activado por defecto, y las notas de la versión lo describen como algo que duplica la velocidad de inferencia: una reivindicación publicada sin ninguna cifra de tokens por segundo a ninguno de los dos lados de la comparación, de modo que el tamaño de la mejora no se puede comprobar con el material del propio proyecto y hay que tratarla como reivindicación de fabricante y no como medición. La cobertura se amplió después en lugar de estancarse: la 2026.8.7, publicada en PyPI el jueves 6 de agosto, lista soporte de DSpark para DeepSeek-V4 Flash 0731, que es la vía de aceleración extendida a un objetivo grande y concreto en lugar de quedarse como interruptor genérico. Lo que el material de hoy no establece es la parte de dentro del modelo. Nada en las notas de versión ni en el registro de cambios describe de dónde salen las predicciones borrador, si hace falta un modelo borrador aparte o si el mecanismo es autoespeculativo, así que la evidencia cubre el activado por defecto y el crecimiento de la cobertura, pero no la arquitectura que nombra la predicción.",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "La mitad del aterrizaje llega en una compilación en beta de un kit de ajuste fino: el acelerador se describe como activado por defecto, y la cobertura se extendió a un objetivo grande y concreto en lugar de quedarse en un interruptor genérico. La otra mitad falta por completo: nada dice de dónde salen las predicciones borrador, y la reivindicación de velocidad no lleva medición a ninguno de los dos lados.",
+        "coherence": 2,
+        "remaining_gap": "La arquitectura no se declara, y una compilación en beta de un kit de ajuste fino es algo más estrecho que la categoría de runtime local que nombra la afirmación."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.7e04ececc362f9bd",
+        "short_label": "Local fine-tuning toolkits absorb the model-serving layer by default by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Un kit de ajuste fino dejó esta semana activada por defecto una función del lado de la inferencia, que es la absorción que describe esta predicción. La versión de Studio de Unsloth etiquetada v0.1.524-beta del martes 4 de agosto dice que DSpark viene ya activado por defecto y lo describe como algo que duplica la velocidad de inferencia, publicado sin ninguna cifra de tokens por segundo a ninguno de los dos lados, así que el múltiplo es una reivindicación de fabricante y no una medición comprobable. La superficie del lado del servicio a su alrededor siguió creciendo a lo largo de la semana: la 2026.8.7, del jueves 6 de agosto, lista soporte de DSpark para DeepSeek-V4 Flash 0731 junto a una reescritura completa de la página de entrenamiento; esa misma versión de Studio trajo cuantizaciones de DeepSeek-V4 Flash 0731 de 83 GB en UD-IQ1_S a 162 GB en UD-Q8_K_XL, soporte para Kimi K3 de Moonshot —un modelo de mezcla de expertos de 2,8 billones de parámetros con 104.000 millones de parámetros activos, visión nativa y una ventana de contexto de un millón de tokens— y un retorno automático de XET a HTTP simple cuando una descarga se atasca. La distribución de artefactos cuantizados, la fiabilidad de descarga y un acelerador de decodificación activado por defecto son todos asuntos de servicio, y los tres llegaron dentro de un paquete cuyo registro de cambios anota por lo demás correcciones de entrenamiento. El reparto del esfuerzo a lo largo de los cinco paquetes de la semana desaconseja leer esto como un giro: la 2026.8.3 y la 2026.8.6 figuran solo como correcciones, la 2026.8.4 como correcciones de entrenamiento y la 2026.8.5 como correcciones de instalación en Windows.",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.3, released August 4, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.3/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.4, released August 5, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.4/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.5, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.5/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.6, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.6/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Tres asuntos de servicio distintos llegaron dentro de un paquete de entrenamiento en una sola semana: la distribución de artefactos cuantizados, un retorno ante atascos de descarga y un acelerador de decodificación activado por defecto. Eso es absorción ocurriendo como valor por defecto y no como opción, que es exactamente el mecanismo. El múltiplo de velocidad que vino con ello no tiene ninguna medición detrás.",
+        "coherence": 4,
+        "remaining_gap": "Los otros cuatro paquetes de la semana anotan solo correcciones, así que el reparto del esfuerzo apunta a mantenimiento y no a un giro hacia el servicio."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.eca92ec7ee67c161",
+        "short_label": "Unsloth ships day-of fine-tuning for the next 1T+ open-weight release by Q1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "La versión de Studio de Unsloth etiquetada v0.1.524-beta del martes 4 de agosto añadió soporte para Kimi K3 de Moonshot, descrito como un modelo de mezcla de expertos de 2,8 billones de parámetros con 104.000 millones de parámetros activos, visión nativa y una ventana de contexto de un millón de tokens: un modelo cómodamente dentro de la clase de tamaño que nombra esta predicción. El intervalo del que depende de verdad la afirmación no se puede evaluar con el corpus de hoy, porque nada de lo publicado hoy dice cuándo se lanzó el propio Kimi K3, así que no hay base para decir si el soporte de Unsloth llegó el mismo día del lanzamiento, antes o después. La otra mitad tampoco se aborda: las notas describen el soporte en la compilación de Studio, y nada dice que el ajuste fino en concreto funcione contra esos pesos en esa fecha, en lugar del servicio o la cuantización. El resto de lo que salió esta semana apunta en contra de una carrera contrarreloj de día de lanzamiento. Llegaron cinco paquetes en tres días —la 2026.8.3 el martes, la 2026.8.4 el miércoles y la 2026.8.5, la 2026.8.6 y la 2026.8.7 el jueves 6 de agosto— y el registro de cambios anota dos de ellos solo como correcciones, uno como correcciones de entrenamiento y otro como correcciones de instalación en Windows, con la 2026.8.7 como única entrada que lleva capacidad nueva.",
+      "reference_links": [
+        {
+          "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+          "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.7/"
+        },
+        {
+          "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+          "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.3, released August 4, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.3/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.4, released August 5, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.4/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.5, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.5/"
+        },
+        {
+          "label": "PyPI - unsloth 2026.8.6, released August 6, 2026",
+          "url": "https://pypi.org/project/unsloth/2026.8.6/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "La clase de tamaño encaja y el intervalo no se puede leer. El soporte para un modelo de mezcla de expertos de 2,8 billones de parámetros aparece en una versión de Studio, pero nada de lo publicado hoy dice cuándo se lanzó ese modelo, así que no hay base para llamar al soporte del mismo día, temprano o tardío. Y nada dice que el ajuste fino en concreto funcione contra esos pesos.",
+        "coherence": 2,
+        "remaining_gap": "La afirmación depende de un intervalo entre dos fechas, y el corpus de hoy aporta solo una de ellas."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.98c20322cf3f2161",
+        "short_label": "Action-level guardrails become first-class agent-framework controls by H1 2027",
+        "prediction_date": "2026-07-14"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "El análisis de Scale X publicado el miércoles 5 de agosto es el argumento empírico para bajar el control hasta la acción. A lo largo de más de 40.000 partidas y unas 409.000 decisiones de aprobar o denegar, el acierto medio fue del 66,3%, con tasas de fallo del 11,7% en comandos obviamente destructivos, del 23,8% en ataques de mutación persistente, del 33,4% en exfiltración y ejecución de código y del 35,0% en violaciones de alcance. El fallo no es de atención sino de información: el comando que más veces se pasó por alto fue npm run analyze, aprobado el 64,7% de las veces con la carga maliciosa visible en el registro del historial y no en la línea de comandos que el jugador juzgaba. La conclusión del propio autor es poner la comprobación en la capa de herramientas, donde se inspecciona la carga, y no en el aviso de aprobación, donde solo está la línea de comandos, que es la descripción de un control a nivel de acción. Lo que los marcos entregaron de verdad esta semana se queda corto. Meta publicó Muse Code el miércoles 5 de agosto, explícitamente en beta, donde cada llamada al modelo, cada ejecución de herramienta, cada aprobación y cada edición se añaden a un registro de eventos local descrito como lo que hace al agente exacto en la reproducción y seguro ante reinicios. Eso es una superficie de grabación, y un historial completo de aprobaciones es la materia prima que necesitaría una política, pero el post no describe ninguna regla evaluada contra una acción antes de que se ejecute.",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "La razón para bajar el control hasta la acción está ahora medida y no argumentada: el fallo es de información y no de atención, y ningún aviso más claro arregla una carga que el aviso no contiene. Lo que llegó de verdad es una superficie de grabación: cada llamada y cada aprobación añadidas a un historial, ninguna regla evaluada antes de que nada se ejecute.",
+        "coherence": 3,
+        "remaining_gap": "Un registro es la materia prima que leería una política, no la política; hoy ningún marco evalúa una regla contra una acción antes de que se ejecute."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.25bbb1fc4e3ce653",
+        "short_label": "Coding agents ship default-deny sandboxes for untrusted-repo audits by Q2 2027",
+        "prediction_date": "2026-07-11"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "El análisis de Scale X publicado el miércoles 5 de agosto mide exactamente el control al que sustituiría un entorno aislado con denegación por defecto. A lo largo de más de 40.000 partidas y unas 409.000 decisiones de aprobar o denegar, el acierto medio fue del 66,3%, y la tasa de fallo escalaba con el disfraz: 11,7% en comandos obviamente destructivos, 23,8% en ataques de mutación persistente, 33,4% en exfiltración y ejecución de código y 35,0% en violaciones de alcance. El comando que más veces se pasó por alto fue npm run analyze, aprobado el 64,7% de las veces aunque la carga maliciosa estaba a la vista en el registro del historial: un nombre de script suministrado por el repositorio cuyo contenido nunca se le enseñó a quien aprobaba, que es el caso del repositorio no fiable en miniatura. El 7% de los jugadores aprobó todos los comandos que se le pusieron delante y el 32,9% de las sesiones terminó con puntuación negativa. Frente a eso, lo que se entregó es un arnés que no aísla por defecto: Muse Code de Meta, publicado el miércoles 5 de agosto y explícitamente en beta, se instala en macOS y Linux canalizando un script de instalación desde dev.meta.ai y está construido para planificar cambios, escribir código y validar el resultado en repositorios grandes mientras coordina subagentes especializados. El post describe aprobaciones que se registran, no una ejecución que se confina.",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "Un entorno aislado con denegación por defecto existe porque leer un repositorio desconocido significa ejecutar lo que ese repositorio suministra antes de saber qué hace, y el estudio pone eso en una tasa de fallo del 33,4% en exfiltración y ejecución de código, frente a un acierto medio del 66,3%. El arnés en beta entregado esta semana funciona en repositorios grandes y no describe ningún confinamiento.",
+        "coherence": 3,
+        "remaining_gap": "Ningún agente de programación entregó el confinamiento como valor por defecto de instalación, y el estudio mide a personas y no a los usuarios de ningún arnés concreto."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.04f4d9d539cf6341",
+        "short_label": "Coding-agent harnesses adopt default-deny toolset gating as standard by H1 2027",
+        "prediction_date": "2026-06-20"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Dos de los asuntos de hoy describen arneses en los que la superficie de herramientas está abierta por defecto y la puerta es una persona. Meta publicó Muse Code el miércoles 5 de agosto, un agente de programación de terminal explícitamente en beta cuyos subagentes son asíncronos, persisten durante toda la sesión en lugar de crearse por tarea y deciden ellos cuándo informar al agente principal; cada llamada al modelo, cada ejecución de herramienta, cada aprobación y cada edición se añaden a un registro de eventos local descrito como lo que hace al agente exacto en la reproducción y seguro ante reinicios. Nada de esa descripción es un juego de herramientas denegado por defecto: las aprobaciones se anotan en lugar de restringirse de antemano, y la planificación que elimina la latencia de ida y vuelta marca también el ritmo al que las decisiones llegan a un solo operador. Herdr, que describió su runtime de terminal el jueves 6 de agosto, organiza a los agentes de programación de línea de comandos en paneles, pestañas y proyectos y los mantiene en ejecución de forma persistente en una sola máquina, con el runtime relicenciado de AGPL a Apache-2.0 y sin ningún comportamiento de control descrito en ninguna parte del post. El análisis de Scale X publicado el miércoles 5 de agosto aporta el argumento en contra de dejarlo así: un acierto medio del 66,3% a lo largo de unas 409.000 decisiones de aprobar o denegar, con el 35,0% de las violaciones de alcance pasadas por alto y el comando más fallado, npm run analyze, aprobado el 64,7% de las veces.",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "La condición que la predicción tiene que revertir se endureció esta semana. Llegaron dos arneses con la superficie de herramientas abierta y una persona como única puerta: uno planifica subagentes asíncronos que deciden ellos cuándo informar, el otro mantiene a los agentes en ejecución sin supervisión en su propia máquina y no describe ningún control en absoluto. Ninguno de los dos deniega nada por defecto.",
+        "coherence": 2,
+        "remaining_gap": "Estándar quiere decir la mayoría de los arneses; los dos de hoy apuntan en la dirección contraria, y el argumento en contra viene de un estudio que ninguno de los dos fabricantes está obligado a responder."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.e3f72a21ed13fcec",
+        "short_label": "Agent-sandbox isolation becomes a named procurement requirement by H1 2027",
+        "prediction_date": "2026-07-07"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "El aislamiento aparece hoy como regla de una competición y no como algo que haya escrito un comprador. El AI Village de DEF CON 34 organiza HalCTF, donde equipos de hasta cinco personas presentan un agente como contenedor limitado a 2,5 GB y lo apuntan contra objetivos en entorno aislado, con trece modelos de entre 2.100 y 120.000 millones de parámetros alojados de forma centralizada. Eso es un límite de aislamiento declarado como condición de entrada, y viene de la organización de un evento y no de un documento de compras. El argumento del lado de la demanda se reforzó por separado: el análisis de Scale X publicado el miércoles 5 de agosto encontró un acierto medio del 66,3% a lo largo de unas 409.000 decisiones de aprobar o denegar, con el 35,0% de las violaciones de alcance pasadas por alto, que es el modo de fallo que el aislamiento debería atrapar cuando el aviso de aprobación no lo hace. Y del lado de la oferta, Muse Code de Meta, publicado el miércoles 5 de agosto y explícitamente en beta, se instala canalizando un script de instalación desde dev.meta.ai y describe un registro de eventos y no un límite de contención. En el corpus de hoy no hay ningún comprador, marco ni organismo de normalización que nombre el aislamiento como condición de adquisición.",
+      "reference_links": [
+        {
+          "label": "AI Village - HalCTF at DEF CON 34",
+          "url": "https://aivillage.org/blog/halctf/"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "El aislamiento aparece como condición de entrada y no como condición de compra: una competición limita cada agente presentado a un contenedor de 2,5 GB y lo apunta contra objetivos en entorno aislado. Eso normaliza el límite como la unidad en la que se empaquetan los agentes, algo que queda antes del lenguaje de compras sin llegar a serlo. Quien organiza no es quien compra.",
+        "coherence": 2,
+        "remaining_gap": "Hoy ningún comprador, marco ni organismo de normalización nombró el aislamiento como condición de adquisición, y el lado de la oferta entregó un registro de eventos en lugar de un límite."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.cac44f8530c87f6b",
+        "short_label": "Durable agent-execution substrate hardens into a standard primitive by H1 2027",
+        "prediction_date": "2026-06-12"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "Meta publicó Muse Code el miércoles 5 de agosto con la durabilidad como propiedad de diseño declarada y no como detalle de implementación. Cada llamada al modelo, cada ejecución de herramienta, cada aprobación y cada edición se añaden a un registro de eventos local, que Meta describe como lo que hace al agente exacto en la reproducción y seguro ante reinicios: tras una caída retoma exactamente donde se detuvo en lugar de volver a deducir el estado a partir del árbol de trabajo. Ese es el sustrato que describe esta predicción, entregado dentro de un arnés de primera parte de un gran grupo de investigación, con la salvedad de que Muse Code está explícitamente en beta y no en disponibilidad general, y de que el registro es local a la máquina, sin ninguna garantía de ejecución distribuida ni alojada. Su decisión de diseño acompañante refuerza la necesidad: los subagentes son asíncronos y persisten durante toda la sesión en lugar de crearse por tarea, y deciden ellos cuándo informar, así que hay estado de sesión que un reinicio perdería en otro caso. Herdr, que describió su runtime de terminal el jueves 6 de agosto, mantiene a los agentes de programación de línea de comandos en ejecución de forma persistente en la máquina que los aloja y los organiza en paneles, pestañas y proyectos, lo que es persistencia del proceso y no reproducibilidad de su historial. Dos productos en una misma semana tratando la supervivencia a una interrupción como propiedad destacada es el aspecto que tiene la normalización en su fase temprana; ninguno de los dos describe un formato o una interfaz compartidos que otro fabricante pudiera adoptar.",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La durabilidad se declara como propiedad de diseño destacada en lugar de quedarse en detalle de implementación: cada llamada, cada ejecución, cada aprobación y cada edición añadidas a un registro que hace una ejecución exacta en la reproducción y segura ante reinicios, con subagentes que duran toda la sesión y crean el estado que en otro caso se perdería. Un segundo producto de la misma semana vende la persistencia del proceso por máquina con la misma lógica.",
+        "coherence": 2,
+        "remaining_gap": "Ninguno de los dos describe un formato o una interfaz compartidos que otro fabricante pudiera adoptar, y uno está en beta con un registro local a la máquina en lugar de una garantía distribuida."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.0594fdd206cf2981",
+        "short_label": "Coding agents make provenance-checked installs the default by H1 2027",
+        "prediction_date": "2026-07-22"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "El lanzamiento de agente de programación más destacado de hoy entrega justo la vía de instalación que esta predicción espera ver desplazada. Muse Code de Meta, publicado el miércoles 5 de agosto y explícitamente en beta, se instala en macOS y Linux canalizando un script de instalación desde dev.meta.ai. Nada en el anuncio describe una firma, una suma de verificación, una vía de gestor de paquetes ni ningún paso de verificación entre la red y la ejecución, y el fabricante es un gran grupo de investigación con medios de sobra para publicar uno. La evidencia complementaria está del lado del consumo. El análisis de Scale X publicado el miércoles 5 de agosto encontró que el comando más fallado a lo largo de unas 409.000 decisiones de aprobar o denegar fue npm run analyze, aprobado el 64,7% de las veces aunque la carga maliciosa estaba a la vista en el registro del historial: un nombre de script de paquete que una persona aprobó sin ver qué descargaba ni qué ejecutaba, frente a un acierto medio general del 66,3%. La comprobación de procedencia es lo que haría del nombre y de la carga un mismo objeto; hoy no lo hace ni la vía de instalación del arnés ni la vía de comandos dentro de la sesión.",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "La vía de instalación va en la dirección contraria. Un gran grupo de investigación con medios de sobra para publicar una firma, una suma de verificación o una vía de gestor de paquetes documenta en su lugar un script canalizado desde una URL como la manera de entrar, sin ningún paso de verificación descrito entre la red y la ejecución. El valor por defecto que esta predicción espera ver desplazado es justo el que acaba de recibir un respaldo.",
+        "coherence": 2,
+        "remaining_gap": "Una sola versión en beta no es una tendencia, pero hoy nada se mueve hacia la procedencia ni en la vía de instalación del arnés ni en la vía de comandos dentro de la sesión."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.12a61d346692ed1f",
+        "short_label": "AMD Helios secures a disclosed hyperscaler capacity commitment by Q1 2027",
+        "prediction_date": "2026-07-21"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "Helios se nombra hoy, y se nombra de una manera que es lo contrario de un compromiso de capacidad. AMD anunció el jueves 6 de agosto que ha firmado un acuerdo definitivo para adquirir Taalas, y dice que tiene intención de incorporar la tecnología a su hoja de ruta de aceleradores y de construir productos a nivel de sistema que la combinen con GPU Instinct, sistemas rackscale Helios, CPU EPYC y ROCm. Helios ahí es un destino de integración para una pieza futura, no un sistema con un pedido asociado: en el anuncio no aparece ningún cliente, ningún recuento de racks, ninguna cifra en gigavatios ni ningún valor en dólares. La propia operación está sin precio y sin cerrar —no se reveló el precio, queda sujeta a las condiciones de cierre habituales y a las aprobaciones regulatorias, y no se dio fecha de cierre—, así que la declaración de hoja de ruta es el único compromiso que consta. Lo que sí llevó números fue la sesión bursátil: AMD cerró a 482,05 dólares el miércoles 5 de agosto, un 7,04% menos en la jornada, y a 489,28 dólares el jueves 6 de agosto, un 1,50% más, con las fuentes de hoy declinando atribuir el movimiento del jueves. La predicción necesita un compromiso revelado por parte de un comprador; hoy aporta una intención declarada por parte del vendedor.",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        },
+        {
+          "label": "StockAnalysis - AMD daily closing prices",
+          "url": "https://stockanalysis.com/stocks/amd/history/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Helios se nombra, y se nombra como destino de integración para una combinación sin fecha de entrega asociada, no como un sistema con un pedido detrás. Ningún cliente, ningún recuento de racks, ninguna cifra en gigavatios, ningún valor en dólares. La afirmación necesita un compromiso revelado por parte de un comprador; hoy aporta una intención declarada por parte del vendedor.",
+        "coherence": 2,
+        "remaining_gap": "Esto solo se resuelve si un hiperescalador o AMD revelan una cifra de capacidad firmada; el lenguaje de hoja de ruta del fabricante se acumula sin llegar nunca al umbral."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.a91f33b7684871df",
+        "short_label": "AI-accelerator equities re-rate lower on the next in-line ASIC print by Q4 2026",
+        "prediction_date": "2026-06-07"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "En el corpus de hoy no hay ninguna cifra publicada de un ASIC —ni presentación de resultados, ni previsiones, ni ninguna cifra de ingresos de ningún fabricante de aceleradores—, así que el disparador que nombra esta predicción no se produjo. Lo que registra la sesión bursátil son dos jornadas alrededor de una operación corporativa y no alrededor de un resultado: AMD cerró a 482,05 dólares el miércoles 5 de agosto, un 7,04% menos en la jornada, y a 489,28 dólares el jueves 6 de agosto, un 1,50% más. Las fuentes de hoy no atribuyen el movimiento del jueves a nada en particular, y ninguna de las dos direcciones debería leerse como respuesta al anuncio del día, que fue la firma por parte de AMD de un acuerdo definitivo para adquirir Taalas sin precio revelado, con las condiciones de cierre y las aprobaciones regulatorias pendientes y sin fecha de cierre. Un acuerdo firmado que no lleva ninguna cifra de contraprestación no le da al mercado nada que revalorar. Lo que falta es el mecanismo que especifica la predicción —una cifra decepcionante seguida de una revaloración del grupo—, y no que la acción se haya movido en la dirección equivocada.",
+      "reference_links": [
+        {
+          "label": "StockAnalysis - AMD daily closing prices",
+          "url": "https://stockanalysis.com/stocks/amd/history/"
+        },
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "none",
+        "narrative": "Falta el acontecimiento que condiciona todo lo demás. Hoy ningún fabricante de aceleradores publicó cifra alguna, así que los dos cierres que constan —una caída del 7,04% en el cierre del miércoles y una subida del 1,50% en el del jueves— no aportan información a una afirmación sobre cómo responde un grupo a una de esas cifras. Un acuerdo sin precio no le da al mercado nada que revalorar.",
+        "coherence": 1,
+        "remaining_gap": "La ventana se cierra al final del cuarto trimestre de 2026 y el disparador no ha saltado; una revaloración necesita primero una cifra decepcionante, y no se ha publicado ninguna."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.43bff01be9e1af7e",
+        "short_label": "Transformer-only inference ASICs gain a first-class serving-stack backend by H1 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] AMD anunció el jueves 6 de agosto que ha firmado un acuerdo definitivo para adquirir Taalas, una empresa de Toronto fundada en 2023 que construye circuitos integrados específicos por modelo que graban los pesos y el flujo de datos de un modelo en los transistores en lugar de sacarlos por streaming desde memoria de alto ancho de banda. AMD dice que tiene intención de incorporar la tecnología a su hoja de ruta de aceleradores y de construir productos a nivel de sistema que la combinen con GPU Instinct, sistemas rackscale Helios, CPU EPYC y ROCm. Nombrar ROCm es la parte que toca a esta predicción: coloca una pieza de inferencia de función fija dentro de la propia pila de software de servicio de un fabricante generalista, y no al lado de una cadena de herramientas a medida. Las salvedades son grandes y cuentan en las dos direcciones. Nada se ha cerrado —sin precio revelado, con las condiciones de cierre habituales y las aprobaciones regulatorias pendientes y sin fecha de cierre—, y la declaración de hoja de ruta es una intención sin ninguna versión, ninguna página de documentación ni ninguna entrada de backend soportado detrás. La pieza en sí es un artefacto de investigación y no un producto: el chip de prueba HC1, fabricado en el proceso de 6 nanómetros de TSMC, sirvió el Llama 3.1 8B de Meta a unos 17.000 tokens por segundo, una cifra de fabricante sin arnés declarado. Taalas personaliza solo dos capas de metal por modelo sobre una pieza de unas 100 capas, con un tape-out de unos dos meses, lo que es específico por modelo y no genérico para transformers, y estrecha lo que significaría siquiera un backend compartido.",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El mecanismo llega a constar: un fabricante generalista con su propia pila de servicio ha firmado para comprar silicio de inferencia de función fija y nombra esa pila entre lo que construirá a su alrededor. Así es como una pieza de nicho consigue un backend de primer nivel. Nada se ha cerrado, y el silicio específico por modelo estrecha lo que significaría siquiera un backend compartido.",
+        "coherence": 3,
+        "remaining_gap": "Sin precio, sin fecha de cierre, sin página de documentación y sin entrada de backend soportado; una frase de hoja de ruta no es una integración entregada."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.286871c2ba1f3aa8",
+        "short_label": "Inference-ASIC challenger anchors a raise on a $1B+ order book by Q4 2027",
+        "prediction_date": "2026-07-06"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] El acontecimiento de financiación de esta categoría hoy va en la dirección contraria. AMD anunció el jueves 6 de agosto que ha firmado un acuerdo definitivo para adquirir Taalas, y la historia de financiación publicada con el anuncio es que Taalas levantó 169 millones de dólares en febrero de 2026 de Quiet Capital, Fidelity y Pierre Lamond, con lo que la financiación total llega a unos 219 millones. No se reveló ningún precio para la operación, que queda sujeta a las condiciones de cierre habituales y a las aprobaciones regulatorias y sin fecha de cierre, así que tampoco consta ninguna valoración. Lo que falta es aquello de lo que trata la predicción: en el anuncio no aparece por ninguna parte una cartera de pedidos, una cartera pendiente, una cifra de contratos firmados ni un compromiso de compra a futuro para Taalas, y el único número de rendimiento asociado a la empresa es su pieza de prueba HC1 sirviendo el Llama 3.1 8B de Meta a unos 17.000 tokens por segundo en el proceso de 6 nanómetros de TSMC. Un acuerdo de adquisición a precio no revelado es una salida distinta de una ronda anclada en demanda contratada y, si llega a cerrarse, retiraría a un aspirante del conjunto que podría producir la revelación que necesita esta predicción.",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Lo observable que espera esta afirmación es una ronda anclada en demanda contratada. Lo que llegó es una salida distinta: un acuerdo para ser adquirida a precio no revelado, frente a una historia de financiación de 169 millones de dólares en febrero de 2026 y unos 219 millones en total. No aparece por ninguna parte una cartera de pedidos, una cartera pendiente ni un compromiso a futuro.",
+        "coherence": 2,
+        "remaining_gap": "Un aspirante saldría de ese conjunto si la operación se cierra, y un precio de adquisición que se queda sin revelar tampoco dice nada sobre la demanda."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.6095c8445805dcf4",
+        "short_label": "Rival accelerator vendor buys a CUDA-agnostic inference compiler by Q1 2027",
+        "prediction_date": "2026-06-28"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Un fabricante rival de aceleradores se movió hoy en la capa de inferencia. AMD anunció el jueves 6 de agosto que ha firmado un acuerdo definitivo para adquirir Taalas, sin precio revelado, con las condiciones de cierre y las aprobaciones regulatorias pendientes y sin fecha de cierre. Donde se rompe la coincidencia es en el objeto. Taalas es una empresa de silicio y no una empresa de compiladores: construye circuitos integrados específicos por modelo que graban los pesos y el flujo de datos de un modelo en los transistores en lugar de sacarlos por streaming desde memoria de alto ancho de banda, ensamblando una pieza de unas 100 capas y personalizando solo dos capas de metal por modelo, con un tape-out de unos dos meses. Comprar silicio de función fija es la apuesta contraria a comprar un compilador portable: una estrecha el objetivo hasta que la portabilidad deja de ser el problema, la otra abstrae sobre varios objetivos. La superficie de software que AMD nombra es la suya propia: dice que tiene intención de incorporar la tecnología a su hoja de ruta de aceleradores y de construir productos a nivel de sistema que la combinen con GPU Instinct, sistemas rackscale Helios, CPU EPYC y ROCm. Vamsi Boppana, vicepresidente sénior de AMD para el Artificial Intelligence Group, presentó la compra como una forma de sumar rendimiento y eficiencia diferenciados en inferencia, que es un argumento de hardware y no de portabilidad.",
+      "reference_links": [
+        {
+          "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+        },
+        {
+          "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+          "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "El adquirente encaja y el objeto refuta. Un fabricante rival de aceleradores sí se movió en la capa de inferencia, y lo que ha acordado comprar responde al mismo problema de la manera contraria: estrechar el objetivo hasta que la portabilidad deje de importar, en lugar de abstraer sobre varios objetivos. El software nombrado a su lado es la propia pila del fabricante, y el argumento es de rendimiento, no de portabilidad.",
+        "coherence": 2,
+        "remaining_gap": "El presupuesto de adquisición destinado al silicio es presupuesto que no va a un compilador, aunque el bloqueo que aborda la afirmación queda intacto y quedan otros fabricantes."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c99c991b7d54c82a",
+        "short_label": "Subagent orchestration becomes a first-class frontier-API primitive by Q1 2027",
+        "prediction_date": "2026-07-10"
+      },
+      "today_relevance": 4,
+      "evidence_summary": "[REVIVED] El grupo de investigación de Meta publicó Muse Code y Muse Spark 1.2 el miércoles 5 de agosto, y el diseño de subagentes se declara como propiedad destacada: los subagentes son asíncronos, persisten durante toda la sesión en lugar de crearse por tarea y deciden ellos cuándo informar al agente principal, que es lo que elimina la latencia de ida y vuelta en los problemas de varios pasos. Muse Spark 1.2 es el modelo que hay debajo, disponible ya dentro de Muse Code y a través de la Meta Model API. Esa última cláusula es justo donde la afirmación todavía no se cumple. La orquestación vive en Muse Code, un arnés de terminal explícitamente en beta e instalado canalizando un script de instalación desde dev.meta.ai; la API expone el modelo. Nada en el anuncio describe un parámetro a nivel de petición, un reparto en el lado del servidor, una unidad de agente hijo con medición ni ninguna superficie de facturación para la delegación, que es lo que haría de la orquestación una primitiva de la API y no una función de un solo cliente. El anuncio nombra Terminal-Bench 2.1, DeepSWE 1.1 y el benchmark interno de programación de Meta como comparaciones, pero no da las puntuaciones, así que aquí no hay ningún número publicado sobre lo que aporta el diseño de subagentes persistentes.",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "La orquestación es real y aterriza una capa por debajo. Unos subagentes asíncronos que persisten durante una sesión y eligen cuándo informar son una propiedad destacada de un cliente de terminal en beta, mientras que la interfaz del fabricante expone el modelo que hay debajo y no la delegación. No se describe ningún parámetro a nivel de petición, ningún reparto en el lado del servidor ni ninguna unidad de agente hijo con medición.",
+        "coherence": 3,
+        "remaining_gap": "Una función de cliente se convierte en primitiva de interfaz solo cuando un tercero puede invocarla; tampoco hay ningún número publicado que diga qué aporta el diseño persistente."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c5fe8479ffcd7e16",
+        "short_label": "LLM client libraries ship a permission-gated coding-agent loop by H1 2027",
+        "prediction_date": "2026-07-08"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Esta semana llegaron dos arneses y ninguno de los dos es la primitiva a nivel de biblioteca que describe esta predicción. Meta publicó Muse Code el miércoles 5 de agosto, un agente de programación de terminal explícitamente en beta, instalado en macOS y Linux canalizando un script de instalación desde dev.meta.ai; planifica cambios, escribe código y valida el resultado en repositorios grandes mientras coordina subagentes especializados, y cada llamada al modelo, cada ejecución de herramienta, cada aprobación y cada edición se añaden a un registro de eventos local descrito como lo que hace al agente exacto en la reproducción y seguro ante reinicios. Las aprobaciones existen, por tanto, y quedan anotadas, pero el post no describe ninguna lista de permitidos, ningún modelo de permisos ni ninguna superficie de biblioteca que un tercero pudiera importar: es una aplicación entregada y atada al modelo de un solo fabricante. Herdr dijo el jueves 6 de agosto que se ha incorporado al lote F26 de Y Combinator y ha relicenciado su runtime de AGPL a Apache-2.0; el runtime organiza a los agentes de programación de línea de comandos en paneles, pestañas y proyectos y los mantiene en ejecución de forma persistente en una sola máquina, lo que es gestión de procesos y no un bucle de herramientas con puerta. El cambio a una licencia permisiva sí facilita que otro construya el sustrato desacoplado del fabricante y autoalojable que imagina la predicción. La puerta que los dos dejan en manos del operador es la que el análisis de Scale X publicado el miércoles 5 de agosto midió en un acierto medio del 66,3% a lo largo de unas 409.000 decisiones de aprobar o denegar, que es exactamente la decisión que un bucle con control de permisos dentro de una biblioteca le quitaría de las manos al operador.",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "La condición se mantiene: el bucle se sigue entregando como aplicación y no como algo importable. Uno es un producto de terminal en beta atado al modelo de un solo fabricante, que no describe ninguna lista de permitidos ni ningún modelo de permisos; el otro es gestión de procesos para agentes que escribió otro. Una relicencia permisiva sí facilita construir un sustrato desacoplado.",
+        "coherence": 2,
+        "remaining_gap": "Hoy no hay ninguna biblioteca que un tercero pudiera importar, y facilitar la construcción queda muy lejos de haberlo construido."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.4c9f0a001afac89a",
+        "short_label": "Coding-agent frameworks ship goal-grounded completion verification by H1 2027",
+        "prediction_date": "2026-06-07"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Muse Code, publicado el miércoles 5 de agosto y explícitamente en beta, está construido para planificar cambios, escribir código y validar el resultado en repositorios grandes mientras coordina subagentes especializados. Validar el resultado es la cláusula que toca a esta predicción, y es también donde se acaba la evidencia: el post no dice contra qué se ejecuta la validación, si la comprobación es el objetivo real del proyecto o uno que el agente se escribió a sí mismo, ni qué ocurre cuando la comprobación falla. Las dos propiedades que el anuncio sí detalla son de durabilidad y no de corrección: subagentes que persisten durante toda la sesión y deciden ellos cuándo informar, y un registro de eventos que captura cada llamada al modelo, cada ejecución de herramienta, cada aprobación y cada edición y que hace una ejecución exacta en la reproducción y segura ante reinicios. Un registro reproducible dice lo que hizo un agente, no si aquello que se le pidió hacer funciona ahora. La sección de benchmarks deja el mismo hueco: el anuncio nombra Terminal-Bench 2.1, DeepSWE 1.1 y el benchmark interno de programación de Meta como comparaciones, pero no da las puntuaciones, así que no hay ninguna cifra publicada de acierto en la finalización que enfrentar a ningún otro arnés.",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Validar el resultado está en la descripción sin nada detrás: ni contra qué se ejecuta la comprobación, ni si el objetivo es el del proyecto o uno que el agente se escribió, ni qué hace un fallo. Las propiedades que sí se detallan son de durabilidad, y un registro reproducible de lo que hizo un agente no es evidencia de que el trabajo se sostenga.",
+        "coherence": 2,
+        "remaining_gap": "Los benchmarks nombrados llegan sin puntuaciones, así que no hay ninguna cifra publicada de finalización con la que enfrentar este arnés a ningún otro."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.b76fcb409546f23d",
+        "short_label": "AI coding assistants make symlink-aware write consent the default by H1 2027",
+        "prediction_date": "2026-07-12"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] El análisis de Scale X publicado el miércoles 5 de agosto mide la distancia entre lo que enseña una superficie de consentimiento y lo que la acción que hay detrás alcanza en realidad, sin usar la palabra enlace simbólico. A lo largo de más de 40.000 partidas y unas 409.000 decisiones de aprobar o denegar, el acierto medio fue del 66,3%, y el comando que más veces se pasó por alto fue npm run analyze, aprobado el 64,7% de las veces aunque la carga maliciosa estaba a la vista en el registro del historial y no en la cadena que se pedía juzgar al jugador. Esa es la misma estructura que un destino de enlace sin resolver: la superficie de consentimiento enseña un nombre, el efecto vive una capa por debajo y quien tiene que aprobar el nombre no puede inspeccionar la carga. La conclusión del autor es poner la comprobación en la capa de herramientas, donde se inspecciona la carga, y no en el aviso de aprobación, donde solo está la línea de comandos. Lo que el estudio no hace es nombrar a ningún asistente de programación ni ningún comportamiento del sistema de archivos, así que es un argumento a favor del valor por defecto y no un caso concreto de él. Muse Code de Meta, publicado el miércoles 5 de agosto y explícitamente en beta, registra cada aprobación y cada edición en un registro de eventos local, pero no describe ninguna resolución de rutas mostrada antes del consentimiento.",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "because",
+        "narrative": "La causa se traslada aunque el sustrato no. Una superficie de consentimiento que enseña un nombre mientras el efecto vive una capa por debajo es exactamente lo que es un destino de enlace sin resolver, y el estudio pone un número a la frecuencia con la que esa estructura derrota a un lector cuidadoso. No nombra a ningún asistente de programación ni ningún comportamiento del sistema de archivos.",
+        "coherence": 2,
+        "remaining_gap": "Un argumento a favor del valor por defecto no es un caso concreto de él; hoy ningún asistente enseña una ruta de destino resuelta antes de pedir consentimiento de escritura."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.69439c5e138d13eb",
+        "short_label": "Coding IDEs make workspace-confined agent file writes the default by Q1 2027",
+        "prediction_date": "2026-07-04"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] El análisis de Scale X publicado el miércoles 5 de agosto da al argumento del confinamiento su número más definido hasta la fecha. De las cuatro categorías medidas a lo largo de unas 409.000 decisiones de aprobar o denegar, las violaciones de alcance tuvieron la tasa de fallo más alta, un 35,0%, por encima de la exfiltración y ejecución de código con un 33,4%, de los ataques de mutación persistente con un 23,8% y de los comandos obviamente destructivos con un 11,7%, frente a un acierto medio del 66,3%. Una violación de alcance es por definición una acción que llega fuera de donde le corresponde, así que la categoría que peor se detectó es precisamente la que un límite de espacio de trabajo aplica de forma mecánica. El 35,2% de los jugadores detectó todas las amenazas, pero solo el 20,8% lo consiguió bloqueando como mucho uno de cada cinco comandos seguros, que es el lado del coste de pedirle a una persona que sostenga el límite. Lo que hoy no aporta es ningún editor ni ningún arnés entregando el confinamiento: Muse Code de Meta, publicado el miércoles 5 de agosto y explícitamente en beta, está construido para trabajar en repositorios grandes y registra cada edición, sin ningún límite de escritura descrito.",
+      "reference_links": [
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "so_that",
+        "narrative": "Las violaciones de alcance fueron la categoría peor detectada de las cuatro medidas, con un 35,0% frente al 33,4% de la exfiltración y ejecución de código, y una violación de alcance es por definición una acción que llega fuera de donde le corresponde. Eso es lo que un límite de espacio de trabajo aplica sin pedírselo a nadie. El coste de pedirlo aparece en los mismos datos: el 20,8% lo detectó todo sin bloquear de más.",
+        "coherence": 3,
+        "remaining_gap": "Ningún editor ni ningún arnés entregó el confinamiento, y la ventana se cierra al final del primer trimestre de 2027 con el argumento todavía de un solo lado."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.d974ad36e8d1e757",
+        "short_label": "On-device retrieval ships built-in by default in a local-LLM runtime by Q1 2027",
+        "prediction_date": "2026-06-20"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] El lanzamiento de hoy viene del mismo editor y de la misma familia de modelos que los recuperadores de embeddings y de interacción tardía que sigue esta predicción, y es el lado generador de esa familia y no el recuperador. Liquid AI publicó LFM2.5-2.6B el martes 4 de agosto: 2.600 millones de parámetros, unos 34 billones de tokens de preentrenamiento, contexto ampliado a 128K a mitad del entrenamiento, menos de 2,5 GB de memoria y orientación a planificación, llamadas a herramientas y tareas de varios pasos que se completan en el dispositivo en lugar de ir y volver a una API alojada. El soporte de runtime en el lanzamiento cubre llama.cpp, MLX, vLLM, SGLang y ONNX con transformers 5.0.0 o posterior, así que el canal de distribución por el que tendría que viajar un valor por defecto de recuperación integrada es el mismo. Pero nada de lo publicado con este modelo nombra un modelo de embeddings, un índice, un paso de recuperación ni ninguna capacidad de ingesta de archivos, y de ninguno de esos runtimes se dice que traiga la recuperación activada por defecto. La afirmación necesita un runtime que indexe y responda sobre archivos locales de fábrica; hoy aporta un componente más de los que irían dentro de un runtime así.",
+      "reference_links": [
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "El canal de distribución es el mismo por el que viajaría un valor por defecto de recuperación integrada, y el mismo editor está entregando por él. Pero este lanzamiento es la mitad generadora: nada nombra un modelo de embeddings, un índice, un paso de recuperación ni ninguna ingesta de archivos, y de ninguno de los runtimes listados se dice que indexe nada por defecto.",
+        "coherence": 2,
+        "remaining_gap": "La afirmación necesita un runtime que indexe y responda sobre archivos locales de fábrica; hoy se suma un componente más de los que irían dentro de un runtime así."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.8810bab3c28adac5",
+        "short_label": "On-device LLM silicon ships 1-PFLOP deskside + sandbox-runtime specs by H1 2027",
+        "prediction_date": "2026-06-01"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Las dos mitades del emparejamiento que nombra esta predicción aparecen hoy, desde fuentes distintas y sin llegar a unirse. Del lado del silicio, el lanzamiento de LFM2.5-2.6B por parte de Liquid AI el martes 4 de agosto trae las mediciones en dispositivo de la propia empresa: 220 tokens por segundo en un Apple M5 Max y 113 tokens por segundo en un AMD Ryzen AI Max+ 395, con MLX entre los runtimes soportados en el lanzamiento. Esas son cifras de rendimiento sobre piezas de clase consumo nombradas, publicadas por el fabricante del modelo y no por el del silicio, y ninguna de las dos es una calificación de cómputo de sobremesa. Del lado del aislamiento, el AI Village de DEF CON 34 organiza HalCTF, donde cada agente presentado es un contenedor limitado a 2,5 GB apuntado contra objetivos en entorno aislado, con trece modelos de entre 2.100 y 120.000 millones de parámetros alojados de forma centralizada y un DGX Spark como primer premio: una máquina de sobremesa como trofeo y no como especificación publicada. Lo que falta es aquello que pide de verdad la predicción: un fabricante de silicio publicando una cifra de cómputo y una especificación de runtime de agentes aislado en un mismo documento.",
+      "reference_links": [
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        },
+        {
+          "label": "AI Village - HalCTF at DEF CON 34",
+          "url": "https://aivillage.org/blog/halctf/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "Aparecen las dos mitades y ninguna es el documento que hace falta. Las cifras de rendimiento en dispositivo sobre piezas de consumo nombradas vienen del fabricante del modelo y no del del silicio, y son un ritmo y no una calificación de cómputo. La mitad del aislamiento es el límite de contenedor de una competición, con una máquina de sobremesa apareciendo como premio y no como especificación publicada.",
+        "coherence": 2,
+        "remaining_gap": "La afirmación necesita a un fabricante de silicio publicando una cifra de cómputo y una especificación de runtime de agentes aislado en el mismo documento; las dos mitades de hoy vienen de partes sin relación entre sí."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.82599b6cfd05751b",
+        "short_label": "Consumer-GPU coding agents displace cloud-only APIs for 30% of devs by Q3 2026",
+        "prediction_date": "2026-04-26"
+      },
+      "today_relevance": 2,
+      "evidence_summary": "[REVIVED] Tres de los asuntos de hoy describen la frontera entre lo local y lo alojado sobre la que se apoya esta afirmación, y ninguno aporta una cuota de adopción. Liquid AI publicó LFM2.5-2.6B el martes 4 de agosto, un modelo de 2.600 millones de parámetros para planificación, llamadas a herramientas y tareas de varios pasos que cabe en menos de 2,5 GB de memoria, con mediciones de la propia empresa de 220 tokens por segundo en un Apple M5 Max y 113 tokens por segundo en un AMD Ryzen AI Max+ 395, y soporte de runtime en el lanzamiento para llama.cpp, MLX, vLLM, SGLang y ONNX. Esa es una clase de modelo más pequeña que la que ejecuta un agente de programación, y las cifras son del propio fabricante y no reproducidas de forma independiente. Los arneses de programación que llegaron esta semana apuntan en la dirección contraria: Muse Code de Meta, publicado el miércoles 5 de agosto y explícitamente en beta, funciona sobre Muse Spark 1.2, un modelo alojado al que también se llega a través de la Meta Model API, y el runtime de terminal de Herdr, descrito el jueves 6 de agosto, organiza a los agentes de programación de línea de comandos sin especificar dónde se ejecutan sus modelos. El horizonte de la predicción es una cuota de desarrolladores, y nada de lo publicado hoy mide ninguna.",
+      "reference_links": [
+        {
+          "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+        },
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Herdr - Herdr is joining Y Combinator",
+          "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "landing",
+        "narrative": "La ventana se cierra al final de este trimestre y la evidencia de hoy apunta lejos de ella. El arnés de programación que se lanzó va emparejado con un modelo que también se sirve a través de la propia interfaz del fabricante, el runtime que hay a su lado nunca dice dónde se ejecutan los modelos, y el lanzamiento local que sí llegó es de una clase mucho más pequeña que la que usa un agente de programación.",
+        "coherence": 1,
+        "remaining_gap": "El umbral es una cuota de desarrolladores para una fecha que queda a semanas, y nada de lo publicado hoy mide la adopción de nada."
+      }
+    },
+    {
+      "prediction_ref": {
+        "id": "prediction.c762a8078d707dee",
+        "short_label": "Durable ask-user checkpoints become a standard harness primitive by H1 2027",
+        "prediction_date": "2026-06-11"
+      },
+      "today_relevance": 3,
+      "evidence_summary": "[REVIVED] Muse Code de Meta, publicado el miércoles 5 de agosto y explícitamente en beta, reúne los dos ingredientes en un mismo arnés sin llegar a unirlos en la primitiva que nombra esta predicción. Las aprobaciones existen y quedan anotadas: cada llamada al modelo, cada ejecución de herramienta, cada aprobación y cada edición se añaden a un registro de eventos local. La durabilidad existe: Meta describe ese registro como lo que hace al agente exacto en la reproducción y seguro ante reinicios, de modo que tras una caída retoma exactamente donde se detuvo en lugar de volver a deducir el estado a partir del árbol de trabajo. Lo que el anuncio no describe es un punto de control de suspensión y reanudación: un agente que se detiene a mitad de ejecución con una pregunta, persiste ese estado pendiente y continúa a partir de la respuesta en lugar de volver a preguntar al modelo. El diseño de subagentes empuja en contra de esa forma: son asíncronos, persisten durante toda la sesión en lugar de crearse por tarea y deciden ellos cuándo informar, que es un modelo construido para no esperar a nadie. El análisis de Scale X publicado el miércoles 5 de agosto aporta la razón por la que la pausa importa igualmente, con un acierto medio del 66,3% a lo largo de unas 409.000 decisiones de aprobar o denegar tomadas bajo presión de tiempo.",
+      "reference_links": [
+        {
+          "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+          "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+        },
+        {
+          "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+          "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+        }
+      ],
+      "bridge": {
+        "support_dimension": "given",
+        "narrative": "Los dos ingredientes están en un mismo arnés en beta y siguen separados. Las aprobaciones quedan anotadas; el registro hace una ejecución exacta en la reproducción y segura ante reinicios. Ninguno de los dos describe a un agente que se detenga ante una pregunta, persista ese estado pendiente y reanude a partir de la respuesta. El diseño de subagentes empuja en la otra dirección: asíncrono, de sesión completa y construido justamente para no esperar a nadie.",
+        "coherence": 2,
+        "remaining_gap": "La recuperación tras una caída no es suspender y reanudar, y el 66,3% de acierto medido bajo presión de tiempo argumenta a favor de una pausa que el diseño entregado está pensado para eliminar."
+      }
+    }
+  ]
+}

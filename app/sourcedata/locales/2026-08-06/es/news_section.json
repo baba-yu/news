@@ -1,0 +1,216 @@
+{
+  "date": "2026-08-06",
+  "sections": [
+    {
+      "category": "AMD acuerda comprar Taalas y dice que tiene intención de incorporar el silicio específico por modelo a la hoja de ruta de Instinct",
+      "bullets": [
+        {
+          "body": "AMD anunció el jueves 6 de agosto que ha firmado un acuerdo definitivo para adquirir Taalas, una empresa de Toronto fundada en 2023 que construye chips diseñados en torno a un solo modelo y no en torno a un juego de instrucciones general. No se reveló el precio, la operación queda sujeta a las condiciones de cierre habituales y a las aprobaciones regulatorias, y no se dio fecha de cierre, así que por ahora nada ha cambiado en la línea de productos que AMD envía. Vamsi Boppana, vicepresidente sénior de AMD para el Artificial Intelligence Group, presentó la compra como una forma de sumar rendimiento y eficiencia diferenciados en inferencia; AMD dice que tiene intención de incorporar la tecnología a su hoja de ruta de aceleradores y de construir productos a nivel de sistema que la combinen con GPU Instinct, sistemas rackscale Helios, CPU EPYC y ROCm. Ljubisa Bajic, cofundador y consejero delegado de Taalas, dijo que unirse a AMD da al equipo escala, recursos de ingeniería y alcance. El argumento de ingeniería está en la fabricación y no en la arquitectura: Taalas construye circuitos integrados específicos por modelo que graban los pesos y el flujo de datos de un modelo en los transistores en lugar de sacarlos por streaming desde memoria de alto ancho de banda, ensamblando una pieza de unas 100 capas y personalizando solo dos capas de metal por modelo, lo que sitúa el tape-out en unos dos meses. Su pieza de prueba HC1, fabricada en el proceso de 6 nanómetros de TSMC, sirvió el Llama 3.1 8B de Meta a unos 17.000 tokens por segundo. Taalas levantó 169 millones de dólares en febrero de 2026 de Quiet Capital, Fidelity y Pierre Lamond, con lo que la financiación total llega a unos 219 millones. En la sesión bursátil, AMD cerró a 482,05 dólares el miércoles 5 de agosto, un 7,04% menos en la jornada, y a 489,28 dólares el jueves 6 de agosto, un 1,50% más. La lectura estratégica es que AMD ha comprado una respuesta a una pregunta que su hoja de ruta de GPU no aborda: qué aspecto tiene una pieza de servicio cuando el modelo es fijo y la única variable que queda es el coste por token.",
+          "citations": [
+            {
+              "label": "AMD Newsroom - AMD acquires Taalas to advance compute solutions for the AI inference market",
+              "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/"
+            },
+            {
+              "label": "SiliconANGLE - AMD acquires Taalas to hardwire AI models into silicon",
+              "url": "https://siliconangle.com/2026/08/06/amd-acquires-taalas-hardwire-ai-models-silicon/"
+            },
+            {
+              "label": "StockAnalysis - AMD daily closing prices",
+              "url": "https://stockanalysis.com/stocks/amd/history/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Liquid AI publica un modelo de agentes de 2.600 millones de parámetros que funciona en menos de 2,5 GB",
+      "bullets": [
+        {
+          "body": "Liquid AI publicó LFM2.5-2.6B el martes 4 de agosto: un modelo de 2.600 millones de parámetros preentrenado con unos 34 billones de tokens, con la ventana de contexto ampliada a 128K a mitad del entrenamiento, orientado al trabajo de agentes —planificación, llamadas a herramientas, tareas de varios pasos— que se completa en el dispositivo en lugar de ir y volver a una API alojada. La huella de memoria es lo que se reivindica: menos de 2,5 GB, con mediciones de la propia empresa de 220 tokens por segundo en un Apple M5 Max y 113 tokens por segundo en un AMD Ryzen AI Max+ 395, y cerca de 15.000 tokens de salida por segundo en una sola NVIDIA H100 con alta concurrencia. En la prueba de uso de herramientas ToolSandbox declara 77,83, frente a 65,00 de Gemma 4 E4B-it y 52,40 de Gemma 4 E2B-it, y una media en inglés de Claw-Eval de 62,85; también encabeza a los modelos con los que se comparó en las suites de seguimiento de instrucciones IFBench, Multi-IF e IFStruct. El soporte de runtime en el lanzamiento cubre llama.cpp, MLX, vLLM, SGLang y ONNX, con transformers 5.0.0 o posterior. Todas y cada una de esas cifras son del propio fabricante, publicadas junto al modelo y no reproducidas de forma independiente, así que la lectura honesta es que el número interesante es el techo de memoria: un bucle de agente con llamadas a herramientas que cabe en menos de 2,5 GB se puede desplegar en hardware donde lo que no se puede enviar es precisamente la dependencia de una API alojada.",
+          "citations": [
+            {
+              "label": "Liquid AI on Hugging Face - Deploy local agents everywhere with LFM2.5-2.6B",
+              "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Meta publica en beta un agente de programación de terminal mientras otro más pequeño cambia de licencia para vender la capa que hay encima",
+      "bullets": [
+        {
+          "body": "El grupo de investigación de Meta publicó Muse Code y Muse Spark 1.2 el miércoles 5 de agosto. Muse Code es un agente de programación de terminal, explícitamente en beta, que se instala en macOS y Linux canalizando un script de instalación desde dev.meta.ai, y está construido para planificar cambios, escribir código y validar el resultado en repositorios grandes mientras coordina subagentes especializados. Hay dos decisiones de diseño que merece la pena destacar para quien esté construyendo un arnés comparable. Los subagentes son asíncronos y persisten durante toda la sesión en lugar de crearse por tarea, y deciden ellos cuándo informar al agente principal, que es lo que elimina la latencia de ida y vuelta en los problemas de varios pasos. Y cada llamada al modelo, cada ejecución de herramienta, cada aprobación y cada edición se añaden a un registro de eventos local, que Meta describe como lo que hace al agente exacto en la reproducción y seguro ante reinicios: tras una caída retoma exactamente donde se detuvo en lugar de volver a deducir el estado a partir del árbol de trabajo. Muse Spark 1.2 es el modelo que hay debajo, una actualización centrada en programación entrenada con más tareas de código y con un abanico más amplio de entornos; el anuncio nombra Terminal-Bench 2.1, DeepSWE 1.1 y el benchmark interno de programación de Meta como comparaciones, pero no da las puntuaciones en el texto. Está disponible ya dentro de Muse Code y a través de la Meta Model API. El post dice que vienen modelos más grandes y más capaces, sin ninguna fecha asociada.",
+          "citations": [
+            {
+              "label": "Meta Research - Introducing Muse Code and Muse Spark 1.2",
+              "url": "https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2"
+            }
+          ]
+        },
+        {
+          "body": "En el otro extremo del rango de tamaño, Herdr dijo el jueves 6 de agosto que se ha incorporado al lote F26 de Y Combinator y, en el mismo post, ha cambiado la licencia de su runtime de AGPL a Apache-2.0. Herdr es un runtime de terminal para agentes de programación de línea de comandos: los organiza en paneles, pestañas y proyectos y los mantiene en ejecución de forma persistente en la máquina en la que esté instalado, incluida una máquina remota en la que él mismo se instala por ssh, aunque el post es explícito en que hoy esas máquinas están desconectadas entre sí. No se da ninguna cifra de financiación. El reparto que declara es que el runtime que la gente usa hoy sigue siendo gratuito bajo Apache-2.0 mientras las funciones comerciales se construyen encima, con la conectividad entre varias máquinas y los clientes más allá de la interfaz de terminal nombrados como las dos candidatas. El cambio de licencia es la parte que sostiene todo lo demás para quien ya lo tenga integrado. La cláusula de uso en red de la AGPL es lo que habría obligado a un servicio alojado construido sobre Herdr a publicar su propio código fuente; Apache-2.0 elimina esa obligación, lo que a la vez amplía quién puede adoptar el runtime y regala lo único que había reservado la capa alojada, con lo que el nivel de pago que piensa vender queda defendido por nada más que la ejecución y el haber llegado primero.",
+          "citations": [
+            {
+              "label": "Herdr - Herdr is joining Y Combinator",
+              "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Un experimento de más de 40.000 partidas mide con qué acierto aprueban las personas los comandos de un agente, y la respuesta depende de lo disfrazado que venga",
+      "bullets": [
+        {
+          "body": "Alex Wauters publicó el miércoles 5 de agosto en el blog de Scale X un análisis de un juego interactivo de navegador en el que el jugador hace de aprobador humano de un agente de programación y acepta o deniega cada comando bajo presión de tiempo. A lo largo de más de 40.000 partidas y unas 409.000 decisiones de aprobar o denegar, el acierto medio fue del 66,3%, y la tasa de fallos seguía a cuánto se parecía un comando hostil a lo que uno espera de un comando hostil: 11,7% en comandos obviamente destructivos, 23,8% en ataques de mutación persistente, 33,4% en exfiltración y ejecución de código, y 35,0% en violaciones de alcance. El 35,2% de los jugadores detectó todas las amenazas, pero solo el 20,8% lo consiguió bloqueando como mucho uno de cada cinco comandos seguros; un 7% aprobó todo lo que se le puso delante; y el 32,9% de las sesiones terminó con puntuación negativa. El comando que más veces se pasó por alto fue npm run analyze, aprobado el 64,7% de las veces aunque la carga maliciosa estaba a la vista en el registro del historial. El autor es explícito sobre lo artificial del montaje —las amenazas aparecían en el 34% de los comandos, muy por encima de cualquier carga de trabajo real, y un juego cronometrado no es una jornada laboral— y esa advertencia corta en los dos sentidos, porque un operador real se encuentra el comando hostil mucho más rara vez y por eso está menos preparado para él. Lo que sobrevive a la advertencia es el orden: cuanto más lejos está un comando hostil de la forma que a la gente se le enseña a temer, con más fiabilidad se le deja pasar. Ese es un argumento para poner la comprobación en la capa de herramientas, donde se inspecciona la carga, y no en el aviso de aprobación, donde solo está la línea de comandos.",
+          "citations": [
+            {
+              "label": "Scale X - Humans missed 1 in 3 threats approving AI agent commands",
+              "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Cisco publica doce avisos de seguridad y tres identificadores se sitúan en 9,9",
+      "bullets": [
+        {
+          "body": "El equipo de respuesta a incidentes de seguridad de producto de Cisco publicó doce avisos el miércoles 5 de agosto —dos críticos, cuatro altos y seis medios— que cubren Catalyst SD-WAN Software, IOS XE, IOS, el Integrated Management Controller, RoomOS y el Terminal Services Agent. El primero que hay que atender es la versión de refuerzo de seguridad de Catalyst SD-WAN, que lleva cinco identificadores: CVE-2026-20303, CVE-2026-20304 y CVE-2026-20310 con CVSS 9,9, CVE-2026-20312 con 8,8 y CVE-2026-20313 con 7,7. Cisco afirma que afectan a Catalyst SD-WAN Software con independencia de la configuración del equipo, que no hay soluciones alternativas y que no tiene constancia de anuncios públicos ni de uso malicioso de ninguno de ellos. Las versiones corregidas son 20.9.10, 20.12.8.1, 20.15.6, 20.18.4 y 26.1.2 según la rama en la que esté cada despliegue, frente a las ramas vulnerables que van desde antes de la 20.9.1 hasta la 20.18 más la versión 26.1. El segundo aviso crítico es la versión de refuerzo de seguridad de IOS XE, con CVSS 9,8. Dos cosas distinguen este lote del flujo de vulnerabilidades explotadas que vigilan estos mismos equipos: salieron de pruebas internas y no de una respuesta a incidentes, así que el reloj lo marca la divulgación y no unos ataques observados, y Cisco publicó el miércoles 29 de julio un aviso previo que anunciaba la fecha de publicación con una semana de antelación, lo que significa que la ventana de mantenimiento se pudo planificar en lugar de improvisar.",
+          "citations": [
+            {
+              "label": "Cisco - Advance notification for publication of August 5, 2026 security advisories",
+              "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-notice-L4XfJg8S"
+            },
+            {
+              "label": "Cisco - Catalyst SD-WAN Software security hardening release, August 2026",
+              "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-sdwan-faLcR3K"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Unsloth acumula tres versiones de paquete el jueves después de que la versión del martes dejara DSpark activado por defecto",
+      "bullets": [
+        {
+          "body": "Unsloth publicó tres versiones en PyPI el jueves 6 de agosto —2026.8.5, 2026.8.6 y 2026.8.7— después de la 2026.8.3 el martes y la 2026.8.4 el miércoles: cinco paquetes en tres días. El registro de cambios coloca casi todo bajo corrección de errores: la 2026.8.3 y la 2026.8.6 figuran solo como correcciones, la 2026.8.4 como correcciones de entrenamiento y la 2026.8.5 añade correcciones de instalación en Windows. La única entrada con algo de forma propia es la 2026.8.7, que lista soporte de DSpark para DeepSeek-V4 Flash 0731 y una reescritura completa de la página de entrenamiento. DSpark llegó antes esa misma semana, en la versión de Studio etiquetada v0.1.524-beta el martes 4 de agosto, donde las notas dicen que DSpark viene ya activado por defecto y lo describen como algo que duplica la velocidad de inferencia, sin publicar una cifra de tokens por segundo a ninguno de los dos lados de esa comparación, de modo que el tamaño de la mejora no se puede comprobar con el material del propio proyecto. Esa misma versión trajo cuantizaciones de DeepSeek-V4 Flash 0731 que van de 83 GB en UD-IQ1_S a 162 GB en UD-Q8_K_XL, soporte para Kimi K3 de Moonshot —un modelo de mezcla de expertos de 2,8 billones de parámetros con 104.000 millones de parámetros activos, visión nativa y una ventana de contexto de un millón de tokens— y un retorno automático de XET a HTTP simple cuando una descarga se atasca, que continúa el mismo trabajo de fiabilidad de descargas ya registrado en la 2026.8.2. Leído a lo largo de la semana, esto es un ritmo de mantenimiento y no de capacidad: la reescritura de la página de entrenamiento es el único cambio de forma que un usuario notaría, y el resto es el proyecto poniéndose al día con los modelos que añadió a finales de julio.",
+          "citations": [
+            {
+              "label": "PyPI - unsloth 2026.8.7, released August 6, 2026",
+              "url": "https://pypi.org/project/unsloth/2026.8.7/"
+            },
+            {
+              "label": "PyPI - unsloth 2026.8.5, released August 6, 2026",
+              "url": "https://pypi.org/project/unsloth/2026.8.5/"
+            },
+            {
+              "label": "PyPI - unsloth 2026.8.6, released August 6, 2026",
+              "url": "https://pypi.org/project/unsloth/2026.8.6/"
+            },
+            {
+              "label": "PyPI - unsloth 2026.8.3, released August 4, 2026",
+              "url": "https://pypi.org/project/unsloth/2026.8.3/"
+            },
+            {
+              "label": "PyPI - unsloth 2026.8.4, released August 5, 2026",
+              "url": "https://pypi.org/project/unsloth/2026.8.4/"
+            },
+            {
+              "label": "Unsloth - CHANGELOG.md at the August 6 revision",
+              "url": "https://github.com/unslothai/unsloth/blob/4ecb0c369f3e8c9ddcc7857f3a4a46991f38f4f7/CHANGELOG.md"
+            },
+            {
+              "label": "Unsloth - release v0.1.524-beta, DSpark and DeepSeek-V4 Flash 0731",
+              "url": "https://github.com/unslothai/unsloth/releases/tag/v0.1.524-beta"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Eventos y encuentros de IA en el área de la Bahía / Silicon Valley",
+      "bullets": [
+        {
+          "body": "Las Vegas cambia de turno hoy. Black Hat USA cierra sus seis días en el Mandalay Bay Convention Center el jueves 6 de agosto, en la segunda y última jornada de su conferencia principal de dos días; Ai4, en The Venetian, y FMS: The Future of Memory and Storage, en el Santa Clara Convention Center, también cierran hoy, y BSides Las Vegas, con su primer track dedicado a seguridad de IA, terminó el miércoles. Lo que queda en pie es DEF CON 34, que abre hoy en el LVCC West Hall y va hasta el domingo 9 de agosto. La entrada son ahora 520 dólares en efectivo en la puerta, en la cola que DEF CON llama LineCon; la acreditación es un diseño de código abierto construido sobre el Baochip de bunnie Huang y sigue sirviendo después como plataforma de seguridad inspeccionable. El AI Village está en LVCC L1 W603 y organiza HalCTF, una competición de seguridad con agentes en la que equipos de hasta cinco personas presentan un agente como contenedor limitado a 2,5 GB y lo apuntan contra objetivos en entorno aislado. Hay trece modelos de entre 2.100 y 120.000 millones de parámetros alojados de forma centralizada, así que el coste de entrada es código y no GPU; la puntuación decae de forma lineal a medida que más equipos resuelven un reto, hay puntos extra para los equipos que ganan con modelos más pequeños y el primer puesto se lleva un DGX Spark. Si hay que elegir entre las dos mitades de la semana, el AI Village es donde está de verdad el material de seguridad de agentes.",
+          "citations": [
+            {
+              "label": "DEF CON 34 - dates, venue and at-the-door registration",
+              "url": "https://defcon.org/"
+            },
+            {
+              "label": "AI Village - HalCTF at DEF CON 34",
+              "url": "https://aivillage.org/blog/halctf/"
+            },
+            {
+              "label": "ITSPmagazine - Black Hat USA 2026 dates and venue",
+              "url": "https://www.itspmagazine.com/cybersecurity-technology-society-events/black-hat-usa-2026"
+            }
+          ]
+        },
+        {
+          "body": "El plazo de dinero más cercano de esta lista vence mañana. El AI Risk Summit de SecurityWeek se celebra en el Ritz-Carlton de Half Moon Bay el martes 11 y el miércoles 12 de agosto, y el pase de experiencia completa cuesta 1.895 dólares hasta el viernes 7 de agosto y pasa a 2.195 dólares desde el sábado 8 de agosto. Incluye todas las sesiones, el CISO Forum Summer Summit celebrado en el mismo sitio, una recepción de bienvenida el lunes 10 de agosto, una cena VIP con vistas a la bahía el martes, desayuno, comida y cena los dos días, networking junto a la hoguera, materiales posteriores a la conferencia y una tarifa de habitación con descuento sujeta a disponibilidad; el Golf Classic del jueves 13 de agosto es un extra con plazas limitadas. Este mes vencen dos plazos para ponentes, para quien prefiera presentar antes que pagar: el AI Agent Security Summit admite propuestas hasta el lunes 17 de agosto para su edición de Londres del jueves 8 de octubre, y hasta el viernes 21 de agosto para la de Nueva York del miércoles 21 de octubre. Las charlas tienen que ser estrictamente independientes de fabricante y estar construidas sobre investigación original, demos en vivo o casos reales; los ponentes seleccionados asisten gratis, con el viaje y hasta dos noches de hotel cubiertos. Esas dos siguen siendo las únicas ediciones listadas como abiertas. El AI Security Summit, organizado por separado, celebra su edición de San Francisco el jueves 15 de octubre con un track de liderazgo y otro de práctica profesional. Ese mismo jueves choca con el San Francisco AI Engineering and Infrastructure Summit, que pese al nombre se celebra en el Crowne Plaza Palo Alto de El Camino Real, de 8:30 a 15:30, gratuito, a puerta cerrada y dirigido por profesionales, con los ponentes ya cerrados en lugar de una convocatoria abierta. Más adelante en la vía de seguridad, SANS celebra su AI Cybersecurity Summit el lunes 2 y el martes 3 de noviembre en el Hilton Arlington Rosslyn de Arlington (Virginia), presencial y en directo en línea, a 525 dólares solo la cumbre, con una tarifa de habitación de 229 dólares que cierra el viernes 9 de octubre y un límite para reembolsos el miércoles 14 de octubre; OWASP Global AppSec USA ocupa el Hyatt Regency San Francisco el jueves 5 y el viernes 6 de noviembre, con formación los tres días anteriores; y el 19.º ACM Workshop on Artificial Intelligence and Security se reúne el domingo 15 de noviembre en La Haya junto a ACM CCS, con su plazo de artículos cerrado desde hace tiempo.",
+          "citations": [
+            {
+              "label": "SecurityWeek AI Risk Summit - dates, venue and the August 7 price step",
+              "url": "https://www.airisksummit.com/"
+            },
+            {
+              "label": "Sessionize - AI Agent Security Summit global series 2026 call for speakers",
+              "url": "https://sessionize.com/ai-agent-security-summit-global-series-2026/"
+            },
+            {
+              "label": "SANS - AI Cybersecurity Summit Fall 2026",
+              "url": "https://www.sans.org/cyber-security-training-events/ai-summit-fall-2026"
+            }
+          ]
+        },
+        {
+          "body": "En el calendario del silicio, Hot Chips 2026 va del domingo 23 al martes 25 de agosto en el Memorial Auditorium de Stanford, en Palo Alto, en formato híbrido, con emisión en directo, diapositivas descargables y preguntas y respuestas para quienes asistan en remoto. Hay dos plazos cerca: el alojamiento en residencias del campus hay que reservarlo antes del domingo 16 de agosto, y las cancelaciones solo se atienden hasta el miércoles 19 de agosto. El domingo es la jornada de tutoriales: un tutorial de memoria que cubre la evolución de HBM, los aceleradores de DRAM 3D para inferencia generativa y las demandas de datos de la IA, y después un tutorial de RISC-V sobre estándares, adopción y uso empresarial. El lunes 24 de agosto trae charlas de CPU de IBM, Intel, NVIDIA, Fujitsu y Arm, una ponencia principal de Waymo sobre conducción autónoma con una sesión de automoción al lado, y una sesión de GPU de NVIDIA, AMD e Intel. El martes 25 de agosto trae una sesión de FPGA de AMD —la que hay que seguir si se rastrea el cruce entre seguridad y silicio—, una sesión de memoria con Samsung y XCENA, una sesión de redes con Broadcom, NVIDIA y Mojo Vision, y charlas de aceleradores de Meta, NVIDIA, Cerebras, Microsoft, SambaNova, Google y OpenAI. Después de eso, el calendario de infraestructura sigue así: el AI Infra Summit en el Santa Clara Convention Center del martes 15 al jueves 17 de septiembre, con cinco tracks sobre centros de datos de IA, computación, movimiento de datos, datos y modelos, e IA física, y con 8.000 asistentes, 400 ponentes y 250 socios esperados en ocho escenarios; el Edge AI and Vision Innovation Forum en San José el miércoles 16 de septiembre; el OCP Global Summit en el San Jose McEnery Convention Center del lunes 12 al jueves 15 de octubre; el GTC Berlín de NVIDIA del martes 20 al jueves 22 de octubre, con GTC sin volver a San José hasta marzo de 2027; y SC26 en Chicago del domingo 15 al viernes 20 de noviembre.",
+          "citations": [
+            {
+              "label": "Hot Chips 2026 - dates, venue and programme",
+              "url": "https://www.hotchips.org/"
+            },
+            {
+              "label": "AI Infra Summit 2026 - September 15 to 17, Santa Clara",
+              "url": "https://www.ai-infra-summit.com/"
+            }
+          ]
+        },
+        {
+          "body": "Ray Summit se celebra en el San Francisco Marriott Marquis del lunes 24 al miércoles 26 de agosto —una jornada de formación el lunes y luego dos días de ponencias principales y sesiones paralelas— a 400 dólares la cumbre y 450 dólares con formación, con un paquete de cinco pases del nivel de 450 dólares promocionado a 750 dólares por los cinco frente a su tarifa de referencia de 2.250 dólares. La jornada de formación cubre procesamiento de datos multimodales, entrenamiento distribuido de modelos fundacionales e inferencia en producción por la mañana, y después IA física, arquitecturas de recomendación y despliegue de LLM por la tarde. La primera vLLM Conference, organizada por Inferact, se celebra en el mismo sitio y todos los pases de Ray Summit la incluyen los tres días. El ACM AI Leadership Summit es en Atlanta del domingo 30 de agosto al miércoles 2 de septiembre. Hay cuatro eventos de San Francisco que siguen chocando a finales de septiembre. Fully Connected, de CoreWeave, es en Moscone South del martes 29 de septiembre al jueves 1 de octubre, con el pase anticipado de 899 dólares abierto hasta el sábado 29 de agosto y la tarifa normal de 1.299 dólares desde el domingo 30 de agosto; sus tres tracks cubren la construcción de infraestructura de IA adaptable, llevar los modelos más lejos, y evaluar y monitorizar agentes, con ponencias principales de Mike Intrator, Peter Salanki, Chen Goldberg, Lukas Biewald y Shawn Lewis, de CoreWeave, de Ian Buck, de NVIDIA, y de Fei-Fei Li, de Stanford, frente a más de 2.000 asistentes, más de 30 sesiones paralelas y más de cuatro laboratorios prácticos. The AI Conference ocupa esa misma ventana en los almacenes A y B del Pier 48, en Mission Rock, con cinco tracks sobre fronteras de la IA, quienes construyen con IA, la pila de IA, IA aplicada y estrategia de IA, y con 5.500 asistentes y más de 120 ponentes esperados, entre ellos Peter Norvig, de Stanford HAI, y Emmanuel Ameisen, de Anthropic; su jornada de talleres y hackathon del 29 de septiembre está agotada, con 350 plazas, y el pase de dos días del 30 de septiembre y el 1 de octubre sigue abierto. El DevDay de OpenAI es en Fort Mason el martes 29 de septiembre, con las solicitudes ya cerradas, y el Machine Earning AI Summit de Newcomer es en San Francisco ese mismo día. Después de eso: el Runway AI Summit el miércoles 30 de septiembre; World Summit AI en Ámsterdam el miércoles 7 y el jueves 8 de octubre; la PyTorch Conference en San José el martes 20 y el miércoles 21 de octubre; AGNTCon y MCPCon North America en el San Jose McEnery Convention Center el jueves 22 y el viernes 23 de octubre; GitHub Universe en Fort Mason el miércoles 28 y el jueves 29 de octubre; el AI Engineer Code Summit, solo por solicitud, en San Francisco del miércoles 11 al viernes 13 de noviembre; el Cerebral Valley AI Summit de Newcomer el jueves 12 de noviembre; AWS re:Invent del lunes 30 de noviembre al viernes 4 de diciembre; NeurIPS en diciembre; y The AI Summit New York el miércoles 9 y el jueves 10 de diciembre.",
+          "citations": [
+            {
+              "label": "Anyscale - Ray Summit 2026 dates, pricing and the co-located vLLM Conference",
+              "url": "https://www.anyscale.com/ray-summit"
+            },
+            {
+              "label": "CoreWeave - Fully Connected 2026 dates, tracks and pass pricing",
+              "url": "https://www.coreweave.com/fully-connected-2026"
+            },
+            {
+              "label": "The AI Conference 2026 - dates, tracks and pass status",
+              "url": "https://aiconference.com/"
+            }
+          ]
+        },
+        {
+          "body": "En el calendario de robótica, IEEE-RAS Humanoids 2026 ha cerrado todas sus ventanas de envío y ahora es puramente un calendario de decisiones: notificaciones de la competición el lunes 21 de septiembre, notificaciones de talleres y tutoriales el lunes 28 de septiembre, notificaciones de artículos el martes 6 de octubre, inscripción anticipada el viernes 16 de octubre y artículos en versión final el lunes 26 de octubre, antes de la conferencia en sí, en el Santa Clara Convention Center del domingo 6 al miércoles 9 de diciembre. En AI Tinkerers, el panorama local ha mejorado hoy: Palo Alto, el martes 18 de agosto de 18:30 a 21:00 PDT, ha pasado al calendario global como sesión listada y ya no como la página de capítulo sin verificar que era, y se han sumado otras dos entradas ese mismo martes: Manchester, en New Hampshire, de 17:30 a 19:45 EDT, y un track de constructoras Women in AI en Seattle, de 17:00 a 20:00 PDT, con demos relámpago y auditorías de código. El 18 de agosto es ahora la última entrada con fecha del calendario. La sesión de esta noche es el encuentro de creadores y demos en vivo de Los Ángeles, el jueves 6 de agosto de 18:00 a 20:00 PDT, que ya ha salido de la lista de próximas citas del calendario porque empieza hoy. Entre medias: el New York Vision Hack v.2 con Google Cloud y Roboflow mañana, viernes 7 de agosto, de 16:00 a 22:00 EDT; el lanzamiento del capítulo de Mombasa sobre IA en el borde, modelos pequeños locales y enjambres autónomos, de 9:00 a 12:00 EAT, y un demo day en Dubái, de 11:30 a 15:00 hora local, ambos el sábado 8 de agosto. Sigue un martes de cinco ciudades el 11 de agosto: un análisis de salida al mercado en Valencia de 18:00 a 21:00 CEST, una noche de construcción en el norte del estado de Nueva York de 18:00 a 20:30 EDT, Houston sobre flujos de trabajo con agentes de 17:30 a 20:00 CDT, Chicago con Cloudflare y PostHog de 17:30 a 20:00 CDT, y una noche de demos de IA y biología en Seattle con NVIDIA y el Allen Institute de 18:00 a 21:00 PDT. Después, el miércoles 12 de agosto trae una noche de fundadores en una azotea de Valencia, Bruselas sobre el ciclo de vida del software con agentes de 18:30 a 21:30 CEST y Raleigh de 17:30 a 19:30 EDT; Atlanta dentro de la ATL Tech Week el jueves 13 de agosto, de 13:45 a 15:45 EDT; Bremen el viernes 14 de agosto a las 18:00 CEST; y el sábado 15 de agosto el encuentro inaugural de Da Nang de 9:00 a 12:00 hora local, una sesión de Islamabad y Rawalpindi de 14:00 a 17:00 PKT y un taller de Claude Code en Riad de 13:30 a 16:30 hora local. El domingo 16 de agosto es el hackathon Agents vs Wall Street de Londres, de 9:00 a 20:00 BST. La sesión de Medellín que el calendario tenía antes para el 7 de agosto ya no aparece y hay que darla por no programada, y no hay nada con fecha en San Francisco, San José ni Pleasanton.",
+          "citations": [
+            {
+              "label": "IEEE-RAS Humanoids 2026 - important dates and conference schedule",
+              "url": "https://2026.ieee-humanoids.org/"
+            },
+            {
+              "label": "AI Tinkerers - global event calendar",
+              "url": "https://aitinkerers.org/events"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
